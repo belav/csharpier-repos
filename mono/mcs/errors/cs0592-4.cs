@@ -2,8 +2,8 @@
 // Line: 5
 
 using System;
-[assembly:TestAttribute ()]
+
+[assembly: TestAttribute()]
 
 [AttributeUsage(AttributeTargets.Constructor)]
-public class TestAttribute: Attribute {
-}
+public class TestAttribute : Attribute { }

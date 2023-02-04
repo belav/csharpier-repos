@@ -9,4 +9,3 @@ public class MainClass
         object d = (int?)null as int?;
     }
 }
-

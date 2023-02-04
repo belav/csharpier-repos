@@ -19,7 +19,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Formatting.Indentation
         {
             var code =
             #region very long sample code
- @"using System;
+                @"using System;
 using System.Collections.Generic;
 
 class Class1
@@ -2211,9 +2211,7 @@ class Program
 ";
             #endregion
 
-            AssertSmartIndent(
-                code,
-                expectedIndentation: 12);
+            AssertSmartIndent(code, expectedIndentation: 12);
         }
     }
 }

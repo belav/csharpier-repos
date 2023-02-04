@@ -20,10 +20,16 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                 SuggestedActionsSourceProvider owner,
                 ITextView textView,
                 ITextBuffer textBuffer,
-                ISuggestedActionCategoryRegistryService suggestedActionCategoryRegistry)
-                : base(threadingContext, globalOptions, owner, textView, textBuffer, suggestedActionCategoryRegistry)
-            {
-            }
+                ISuggestedActionCategoryRegistryService suggestedActionCategoryRegistry
+            )
+                : base(
+                    threadingContext,
+                    globalOptions,
+                    owner,
+                    textView,
+                    textBuffer,
+                    suggestedActionCategoryRegistry
+                ) { }
         }
     }
 }

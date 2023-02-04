@@ -1,34 +1,39 @@
 using System;
 using System.Reflection;
 
-class Tests {
-
-    public static int Main () {
-        return TestDriver.RunTests (typeof (Tests));
+class Tests
+{
+    public static int Main()
+    {
+        return TestDriver.RunTests(typeof(Tests));
     }
-    
-    static int test_0_beq () {
+
+    static int test_0_beq()
+    {
         double a = 2.0;
         if (a != 2.0)
             return 1;
         return 0;
     }
 
-    static int test_0_bne_un () {
+    static int test_0_bne_un()
+    {
         double a = 2.0;
         if (a == 1.0)
             return 1;
         return 0;
     }
 
-    static int test_0_conv_r8 () {
+    static int test_0_conv_r8()
+    {
         double a = 2;
         if (a != 2.0)
             return 1;
         return 0;
     }
 
-    static int test_0_conv_i () {
+    static int test_0_conv_i()
+    {
         double a = 2.0;
         int i = (int)a;
         if (i != 2)
@@ -48,66 +53,77 @@ class Tests {
         return 0;
     }
 
-    static int test_5_conv_r4 () {
+    static int test_5_conv_r4()
+    {
         int i = 5;
         float f = (float)i;
         return (int)f;
     }
 
-    static int test_5_double_conv_r4 () {
+    static int test_5_double_conv_r4()
+    {
         double d = 5.0;
         float f = (float)d;
         return (int)f;
     }
 
-    static int test_5_float_conv_r8 () {
+    static int test_5_float_conv_r8()
+    {
         float f = 5.0F;
         double d = (double)f;
         return (int)d;
     }
 
-    static int test_5_conv_r8 () {
+    static int test_5_conv_r8()
+    {
         int i = 5;
         double f = (double)i;
         return (int)f;
     }
 
-    static int test_5_add () {
+    static int test_5_add()
+    {
         double a = 2.0;
-        double b = 3.0;        
+        double b = 3.0;
         return (int)(a + b);
     }
 
-    static int test_5_sub () {
+    static int test_5_sub()
+    {
         double a = 8.0;
-        double b = 3.0;        
+        double b = 3.0;
         return (int)(a - b);
-    }    
+    }
 
-    static int test_24_mul () {
+    static int test_24_mul()
+    {
         double a = 8.0;
-        double b = 3.0;        
+        double b = 3.0;
         return (int)(a * b);
-    }    
+    }
 
-    static int test_4_div () {
+    static int test_4_div()
+    {
         double a = 8.0;
-        double b = 2.0;        
+        double b = 2.0;
         return (int)(a / b);
-    }    
+    }
 
-    static int test_2_rem () {
+    static int test_2_rem()
+    {
         double a = 8.0;
-        double b = 3.0;        
+        double b = 3.0;
         return (int)(a % b);
-    }    
+    }
 
-    static int test_2_neg () {
-        double a = -2.0;        
+    static int test_2_neg()
+    {
+        double a = -2.0;
         return (int)(-a);
     }
-    
-    static int test_46_float_add_spill () {
+
+    static int test_46_float_add_spill()
+    {
         // we overflow the FP stack
         double a = 1;
         double b = 2;
@@ -122,7 +138,8 @@ class Tests {
         return (int)(1.0 + (a + (b + (c + (d + (e + (f + (g + (h + i)))))))));
     }
 
-    static int test_362880_float_mul_spill () {
+    static int test_362880_float_mul_spill()
+    {
         // we overflow the FP stack
         double a = 1;
         double b = 2;
@@ -137,7 +154,8 @@ class Tests {
         return (int)(1.0 * (a * (b * (c * (d * (e * (f * (g * (h * i)))))))));
     }
 
-    static int test_4_long_cast () {
+    static int test_4_long_cast()
+    {
         long a = 1000;
         double d = (double)a;
         long b = (long)d;
@@ -167,12 +185,13 @@ class Tests {
     }
     */
 
-    static int test_16_float_cmp () {
+    static int test_16_float_cmp()
+    {
         double a = 2.0;
         double b = 1.0;
         int result = 0;
         bool val;
-        
+
         val = a == a;
         if (!val)
             return result;
@@ -256,12 +275,13 @@ class Tests {
         return result;
     }
 
-    static int test_15_float_cmp_un () {
+    static int test_15_float_cmp_un()
+    {
         double a = Double.NaN;
         double b = 1.0;
         int result = 0;
         bool val;
-        
+
         val = a == a;
         if (val)
             return result;
@@ -340,11 +360,12 @@ class Tests {
         return result;
     }
 
-    static int test_15_float_branch () {
+    static int test_15_float_branch()
+    {
         double a = 2.0;
         double b = 1.0;
         int result = 0;
-        
+
         if (!(a == a))
             return result;
         result++;
@@ -408,11 +429,12 @@ class Tests {
         return result;
     }
 
-    static int test_15_float_branch_un () {
+    static int test_15_float_branch_un()
+    {
         double a = Double.NaN;
         double b = 1.0;
         int result = 0;
-        
+
         if (a == a)
             return result;
         result++;
@@ -475,45 +497,59 @@ class Tests {
 
         return result;
     }
-
 }
 
-public class TestDriver {
-
-    static public int RunTests (Type type, string[] args) {
-        int failed = 0, ran = 0;
-        int result, expected, elen;
-        int i, j;
+public class TestDriver
+{
+    static public int RunTests(Type type, string[] args)
+    {
+        int failed = 0,
+            ran = 0;
+        int result,
+            expected,
+            elen;
+        int i,
+            j;
         string name;
         MethodInfo[] methods;
         bool do_timings = false;
         int tms = 0;
-        DateTime start, end = DateTime.Now;
+        DateTime start,
+            end = DateTime.Now;
 
-        if (args != null && args.Length > 0) {
-            for (j = 0; j < args.Length; j++) {
-                if (args [j] == "--time") {
+        if (args != null && args.Length > 0)
+        {
+            for (j = 0; j < args.Length; j++)
+            {
+                if (args[j] == "--time")
+                {
                     do_timings = true;
-                    string[] new_args = new string [args.Length - 1];
+                    string[] new_args = new string[args.Length - 1];
                     for (i = 0; i < j; ++i)
-                        new_args [i] = args [i];
+                        new_args[i] = args[i];
                     j++;
                     for (; j < args.Length; ++i, ++j)
-                        new_args [i] = args [j];
+                        new_args[i] = args[j];
                     args = new_args;
                     break;
                 }
             }
         }
-        methods = type.GetMethods (BindingFlags.Public|BindingFlags.NonPublic|BindingFlags.Static);
-        for (i = 0; i < methods.Length; ++i) {
-            name = methods [i].Name;
-            if (!name.StartsWith ("test_"))
+        methods = type.GetMethods(
+            BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static
+        );
+        for (i = 0; i < methods.Length; ++i)
+        {
+            name = methods[i].Name;
+            if (!name.StartsWith("test_"))
                 continue;
-            if (args != null && args.Length > 0) {
+            if (args != null && args.Length > 0)
+            {
                 bool found = false;
-                for (j = 0; j < args.Length; j++) {
-                    if (name.EndsWith (args [j])) {
+                for (j = 0; j < args.Length; j++)
+                {
+                    if (name.EndsWith(args[j]))
+                    {
                         found = true;
                         break;
                     }
@@ -522,34 +558,38 @@ public class TestDriver {
                     continue;
             }
             for (j = 5; j < name.Length; ++j)
-                if (!Char.IsDigit (name [j]))
+                if (!Char.IsDigit(name[j]))
                     break;
-            expected = Int32.Parse (name.Substring (5, j - 5));
+            expected = Int32.Parse(name.Substring(5, j - 5));
             start = DateTime.Now;
-            result = (int)methods [i].Invoke (null, null);
-            if (do_timings) {
+            result = (int)methods[i].Invoke(null, null);
+            if (do_timings)
+            {
                 end = DateTime.Now;
                 long tdiff = end.Ticks - start.Ticks;
-                int mdiff = (int)tdiff/10000;
+                int mdiff = (int)tdiff / 10000;
                 tms += mdiff;
-                Console.WriteLine ("{0} took {1} ms", name, mdiff);
+                Console.WriteLine("{0} took {1} ms", name, mdiff);
             }
             ran++;
-            if (result != expected) {
+            if (result != expected)
+            {
                 failed++;
-                Console.WriteLine ("{0} failed: got {1}, expected {2}", name, result, expected);
+                Console.WriteLine("{0} failed: got {1}, expected {2}", name, result, expected);
             }
         }
-        
-        if (do_timings) {
-            Console.WriteLine ("Total ms: {0}", tms);
+
+        if (do_timings)
+        {
+            Console.WriteLine("Total ms: {0}", tms);
         }
-        Console.WriteLine ("Regression tests: {0} ran, {1} failed in {2}", ran, failed, type);
+        Console.WriteLine("Regression tests: {0} ran, {1} failed in {2}", ran, failed, type);
         //Console.WriteLine ("Regression tests: {0} ran, {1} failed in [{2}]{3}", ran, failed, type.Assembly.GetName().Name, type);
         return failed;
     }
-    static public int RunTests (Type type) {
-        return RunTests (type, null);
+
+    static public int RunTests(Type type)
+    {
+        return RunTests(type, null);
     }
 }
-

@@ -33,46 +33,46 @@ namespace Mono.Security.Interface
     public enum AlertLevel : byte
     {
         Warning = 1,
-        Fatal    = 2
+        Fatal = 2
     }
 
     public enum AlertDescription : byte
     {
-        CloseNotify            = 0,
-        UnexpectedMessage        = 10,
-        BadRecordMAC            = 20,
-        DecryptionFailed_RESERVED    = 21,
-        RecordOverflow            = 22,
-        DecompressionFailure        = 30,
-        HandshakeFailure        = 40,
-        NoCertificate_RESERVED        = 41,    // should be used in SSL3
-        BadCertificate            = 42,
-        UnsupportedCertificate        = 43,
-        CertificateRevoked        = 44,
-        CertificateExpired        = 45,
-        CertificateUnknown        = 46,
-        IlegalParameter            = 47,
-        UnknownCA            = 48,
-        AccessDenied            = 49,
-        DecodeError            = 50,
-        DecryptError            = 51,
-        ExportRestriction        = 60,
-        ProtocolVersion            = 70,
-        InsuficientSecurity        = 71,
-        InternalError            = 80,
-        UserCancelled            = 90,
-        NoRenegotiation            = 100,
-        UnsupportedExtension        = 110
+        CloseNotify = 0,
+        UnexpectedMessage = 10,
+        BadRecordMAC = 20,
+        DecryptionFailed_RESERVED = 21,
+        RecordOverflow = 22,
+        DecompressionFailure = 30,
+        HandshakeFailure = 40,
+        NoCertificate_RESERVED = 41, // should be used in SSL3
+        BadCertificate = 42,
+        UnsupportedCertificate = 43,
+        CertificateRevoked = 44,
+        CertificateExpired = 45,
+        CertificateUnknown = 46,
+        IlegalParameter = 47,
+        UnknownCA = 48,
+        AccessDenied = 49,
+        DecodeError = 50,
+        DecryptError = 51,
+        ExportRestriction = 60,
+        ProtocolVersion = 70,
+        InsuficientSecurity = 71,
+        InternalError = 80,
+        UserCancelled = 90,
+        NoRenegotiation = 100,
+        UnsupportedExtension = 110
     }
 
     #endregion
-    
+
     public class Alert
     {
         #region Fields
 
-        private AlertLevel            level;
-        private AlertDescription    description;
+        private AlertLevel level;
+        private AlertDescription description;
 
         #endregion
 
@@ -109,8 +109,7 @@ namespace Mono.Security.Interface
         {
             get
             {
-                if (this.IsWarning &&
-                    this.description == AlertDescription.CloseNotify)
+                if (this.IsWarning && this.description == AlertDescription.CloseNotify)
                 {
                     return true;
                 }
@@ -129,12 +128,10 @@ namespace Mono.Security.Interface
             this.inferAlertLevel();
         }
 
-        public Alert(
-            AlertLevel            level,
-            AlertDescription    description)
+        public Alert(AlertLevel level, AlertDescription description)
         {
-            this.level            = level;
-            this.description    = description;
+            this.level = level;
+            this.description = description;
         }
 
         #endregion
@@ -177,19 +174,19 @@ namespace Mono.Security.Interface
                     break;
             }
         }
-        
+
         #endregion
 
-        public override string ToString ()
+        public override string ToString()
         {
-            return string.Format ("[Alert: {0}:{1}]", Level, Description);
+            return string.Format("[Alert: {0}:{1}]", Level, Description);
         }
 
         #region Static Methods
 
         public static string GetAlertMessage(AlertDescription description)
         {
-            #if (DEBUG)
+#if (DEBUG)
             switch (description)
             {
                 case AlertDescription.AccessDenied:
@@ -206,7 +203,7 @@ namespace Mono.Security.Interface
 
                 case AlertDescription.CertificateRevoked:
                     return "Certificate was revoked by its signer.";
-                    
+
                 case AlertDescription.CertificateUnknown:
                     return "Certificate Unknown.";
 
@@ -233,10 +230,10 @@ namespace Mono.Security.Interface
 
                 case AlertDescription.IlegalParameter:
                     return "A field in the handshake was out of range or inconsistent with other fields.";
-                    
+
                 case AlertDescription.InsuficientSecurity:
                     return "Negotiation has failed specifically because the server requires ciphers more secure than those supported by the client.";
-                    
+
                 case AlertDescription.InternalError:
                     return "Internal error unrelated to the peer or the correctness of the protocol makes it impossible to continue.";
 
@@ -267,9 +264,9 @@ namespace Mono.Security.Interface
                 default:
                     return "";
             }
-            #else
+#else
             return "The authentication or decryption has failed.";
-            #endif
+#endif
         }
 
         #endregion

@@ -12,11 +12,15 @@ class T30
     {
         try
         {
-            CompilationSection section = (CompilationSection)ConfigurationManager.GetSection ("system.web/compilation");
+            CompilationSection section = (CompilationSection)
+                ConfigurationManager.GetSection("system.web/compilation");
 
-            section = (CompilationSection)ConfigurationManager.GetSection ("system.web/compilation");
+            section = (CompilationSection)ConfigurationManager.GetSection("system.web/compilation");
 
-            Console.WriteLine ("there are {0} assemblies listed in the section", section.Assemblies.Count);
+            Console.WriteLine(
+                "there are {0} assemblies listed in the section",
+                section.Assemblies.Count
+            );
         }
         catch (Exception e)
         {

@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,82 +29,65 @@
 //
 using System;
 using System.ComponentModel;
+
 namespace System.Management
 {
     //[TypeConverter ("")]
     public class ManagementScope : ICloneable
     {
         [MonoTODO]
-        public ManagementScope ()
+        public ManagementScope() { }
+
+        [MonoTODO]
+        public ManagementScope(ManagementPath path) { }
+
+        [MonoTODO]
+        public ManagementScope(string path) { }
+
+        [MonoTODO]
+        public ManagementScope(string path, ConnectionOptions options) { }
+
+        [MonoTODO]
+        public ManagementScope(ManagementPath path, ConnectionOptions options) { }
+
+        [MonoTODO]
+        public ManagementScope Clone()
         {
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public ManagementScope (ManagementPath path)
+        public void Connect()
         {
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public ManagementScope (string path)
+        object ICloneable.Clone()
         {
+            throw new NotImplementedException();
         }
 
-        [MonoTODO]
-        public ManagementScope (string path, ConnectionOptions options)
+        public bool IsConnected
         {
-        }
-
-        [MonoTODO]
-        public ManagementScope (ManagementPath path, ConnectionOptions options)
-        {
-        }
-
-        [MonoTODO]
-        public ManagementScope Clone ()
-        {
-            throw new NotImplementedException ();
-        }
-
-        [MonoTODO]
-        public void Connect ()
-        {
-            throw new NotImplementedException ();
-        }
-
-        [MonoTODO]
-        object ICloneable.Clone ()
-        {
-            throw new NotImplementedException ();
-        }
-
-        public bool IsConnected {
             [MonoTODO]
-            get {
-                throw new NotImplementedException ();
-            }
+            get { throw new NotImplementedException(); }
         }
 
-        public ConnectionOptions Options {
+        public ConnectionOptions Options
+        {
             [MonoTODO]
-            get {
-                throw new NotImplementedException ();
-            }
+            get { throw new NotImplementedException(); }
             [MonoTODO]
-            set {
-                throw new NotImplementedException ();
-            }
+            set { throw new NotImplementedException(); }
         }
 
-        public ManagementPath Path {
+        public ManagementPath Path
+        {
             [MonoTODO]
-            get {
-                throw new NotImplementedException ();
-            }
+            get { throw new NotImplementedException(); }
             [MonoTODO]
-            set {
-                throw new NotImplementedException ();
-            }
+            set { throw new NotImplementedException(); }
         }
     }
 }
-

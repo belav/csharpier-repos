@@ -29,23 +29,28 @@ namespace Microsoft.WebAssembly.Diagnostics
                 if (host != null)
                     return hostTask;
 
-                host = WebHost.CreateDefaultBuilder()
+                host = WebHost
+                    .CreateDefaultBuilder()
                     .UseSetting("UseIISIntegration", false.ToString())
-                    .ConfigureAppConfiguration((hostingContext, config) =>
-                    {
-                        config.AddEnvironmentVariables(prefix: "WASM_TESTS_");
-                    })
-                    .ConfigureServices((ctx, services) =>
-                    {
-                        services.Configure<TestHarnessOptions>(ctx.Configuration);
-                        services.Configure<TestHarnessOptions>(options =>
+                    .ConfigureAppConfiguration(
+                        (hostingContext, config) =>
                         {
-                            options.ChromePath = options.ChromePath ?? chromePath;
-                            options.AppPath = appPath;
-                            options.PagePath = pagePath;
-                            options.DevToolsUrl = new Uri("http://localhost:0");
-                        });
-                    })
+                            config.AddEnvironmentVariables(prefix: "WASM_TESTS_");
+                        }
+                    )
+                    .ConfigureServices(
+                        (ctx, services) =>
+                        {
+                            services.Configure<TestHarnessOptions>(ctx.Configuration);
+                            services.Configure<TestHarnessOptions>(options =>
+                            {
+                                options.ChromePath = options.ChromePath ?? chromePath;
+                                options.AppPath = appPath;
+                                options.PagePath = pagePath;
+                                options.DevToolsUrl = new Uri("http://localhost:0");
+                            });
+                        }
+                    )
                     .UseStartup<TestHarnessStartup>()
                     .UseUrls(Endpoint.ToString())
                     .Build();

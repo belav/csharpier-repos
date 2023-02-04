@@ -12,6 +12,7 @@ namespace MonoTests.System.Data.SqlClient
     public class SqlParameter_set_DbType_D : GHTBase
     {
         private Exception exp;
+
         public static void Main()
         {
             SqlParameter_set_DbType_D tc = new SqlParameter_set_DbType_D();
@@ -22,7 +23,7 @@ namespace MonoTests.System.Data.SqlClient
                 tc.BeginTest("SqlParameter_set_DbType_D");
                 tc.run();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 tc.exp = ex;
             }
@@ -32,7 +33,7 @@ namespace MonoTests.System.Data.SqlClient
                 tc.EndTest(tc.exp);
             }
         }
- 
+
         public void run()
         {
             TestBug4689();
@@ -41,16 +42,24 @@ namespace MonoTests.System.Data.SqlClient
         [Test]
         public void TestBug4689()
         {
-            if (ConnectedDataProvider.GetDbType() != DataBaseServer.SQLServer) {
+            if (ConnectedDataProvider.GetDbType() != DataBaseServer.SQLServer)
+            {
                 //All tests in this class are only for MSSQLServer.
-                Log(string.Format("All tests in this class are only for MSSQLServer and cannot be tested on {0}", ConnectedDataProvider.GetDbType()));
+                Log(
+                    string.Format(
+                        "All tests in this class are only for MSSQLServer and cannot be tested on {0}",
+                        ConnectedDataProvider.GetDbType()
+                    )
+                );
                 return;
             }
 
             try
             {
                 // Every Sub Test must begin with BeginCase
-                BeginCase("Test Bug 4689 - Exception when adding System.Data.DbType.Date parameter");
+                BeginCase(
+                    "Test Bug 4689 - Exception when adding System.Data.DbType.Date parameter"
+                );
                 SqlCommand command = new SqlCommand();
                 SqlParameter param = command.CreateParameter();
                 param.ParameterName = "@EffectiveDate";
@@ -58,8 +67,8 @@ namespace MonoTests.System.Data.SqlClient
                 param.Value = DateTime.Now.Date;
                 command.Parameters.Add(param);
                 Pass("Addition of parameter didn't throw exception.");
-            } 
-            catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 exp = ex;
             }
@@ -70,6 +79,5 @@ namespace MonoTests.System.Data.SqlClient
                 exp = null;
             }
         }
-
     }
 }

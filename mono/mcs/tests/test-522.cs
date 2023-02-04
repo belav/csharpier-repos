@@ -5,6 +5,6 @@ using System.Reflection;
 class Const
 {
     internal const string Version = "0.1";
-    
-    public static void Main () {}
+
+    public static void Main() { }
 }

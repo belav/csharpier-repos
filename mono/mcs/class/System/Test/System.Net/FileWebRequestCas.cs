@@ -16,12 +16,12 @@ using System.Security;
 using System.Security.Permissions;
 using System.Threading;
 
-namespace MonoCasTests.System.Net {
-
+namespace MonoCasTests.System.Net
+{
     [TestFixture]
-    [Category ("CAS")]
-    public class FileWebRequestCas {
-
+    [Category("CAS")]
+    public class FileWebRequestCas
+    {
         private const int timeout = 30000;
 
         static ManualResetEvent reset;
@@ -30,96 +30,105 @@ namespace MonoCasTests.System.Net {
         private string file;
 
         [TestFixtureSetUp]
-        public void FixtureSetUp ()
+        public void FixtureSetUp()
         {
-            reset = new ManualResetEvent (false);
+            reset = new ManualResetEvent(false);
         }
 
         [TestFixtureTearDown]
-        public void FixtureTearDown ()
+        public void FixtureTearDown()
         {
-            reset.Close ();
+            reset.Close();
         }
 
         [SetUp]
-        public void SetUp ()
+        public void SetUp()
         {
             if (!SecurityManager.SecurityEnabled)
-                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+                Assert.Ignore("SecurityManager.SecurityEnabled is OFF");
 
             // unique uri for each test
-            file = Path.GetTempFileName ();
+            file = Path.GetTempFileName();
             // to please both Windows and Unix file systems
-            uri = ((file [0] == '/') ? "file://" : "file:///") + file.Replace ('\\', '/');
+            uri = ((file[0] == '/') ? "file://" : "file:///") + file.Replace('\\', '/');
         }
 
         // async tests (for stack propagation)
 
-        private void GetRequestStreamCallback (IAsyncResult ar)
+        private void GetRequestStreamCallback(IAsyncResult ar)
         {
             FileWebRequest fwr = (FileWebRequest)ar.AsyncState;
-            fwr.EndGetRequestStream (ar);
-            try {
+            fwr.EndGetRequestStream(ar);
+            try
+            {
                 // can we do something bad here ?
-                Assert.IsNotNull (Environment.GetEnvironmentVariable ("USERNAME"));
+                Assert.IsNotNull(Environment.GetEnvironmentVariable("USERNAME"));
                 message = "Expected a SecurityException";
             }
-            catch (SecurityException) {
+            catch (SecurityException)
+            {
                 message = null;
-                reset.Set ();
+                reset.Set();
             }
-            catch (Exception e) {
-                message = e.ToString ();
+            catch (Exception e)
+            {
+                message = e.ToString();
             }
         }
 
         [Test]
-        [EnvironmentPermission (SecurityAction.Deny, Read = "USERNAME")]
-        public void AsyncGetRequestStream ()
+        [EnvironmentPermission(SecurityAction.Deny, Read = "USERNAME")]
+        public void AsyncGetRequestStream()
         {
-            if (File.Exists (file))
-                File.Delete (file);
-            FileWebRequest w = (FileWebRequest)WebRequest.Create (uri);
+            if (File.Exists(file))
+                File.Delete(file);
+            FileWebRequest w = (FileWebRequest)WebRequest.Create(uri);
             w.Method = "PUT";
             message = "AsyncGetRequestStream";
-            reset.Reset ();
-            IAsyncResult r = w.BeginGetRequestStream (new AsyncCallback (GetRequestStreamCallback), w);
-            Assert.IsNotNull (r, "IAsyncResult");
-            if (!reset.WaitOne (timeout, true))
-                Assert.Ignore ("Timeout");
-            Assert.IsNull (message, message);
+            reset.Reset();
+            IAsyncResult r = w.BeginGetRequestStream(
+                new AsyncCallback(GetRequestStreamCallback),
+                w
+            );
+            Assert.IsNotNull(r, "IAsyncResult");
+            if (!reset.WaitOne(timeout, true))
+                Assert.Ignore("Timeout");
+            Assert.IsNull(message, message);
         }
 
-        private void GetResponseCallback (IAsyncResult ar)
+        private void GetResponseCallback(IAsyncResult ar)
         {
             FileWebRequest fwr = (FileWebRequest)ar.AsyncState;
-            fwr.EndGetResponse (ar);
-            try {
+            fwr.EndGetResponse(ar);
+            try
+            {
                 // can we do something bad here ?
-                Assert.IsNotNull (Environment.GetEnvironmentVariable ("USERNAME"));
+                Assert.IsNotNull(Environment.GetEnvironmentVariable("USERNAME"));
                 message = "Expected a SecurityException";
             }
-            catch (SecurityException) {
+            catch (SecurityException)
+            {
                 message = null;
-                reset.Set ();
+                reset.Set();
             }
-            catch (Exception e) {
-                message = e.ToString ();
+            catch (Exception e)
+            {
+                message = e.ToString();
             }
         }
 
         [Test]
-        [EnvironmentPermission (SecurityAction.Deny, Read = "USERNAME")]
-        public void AsyncGetResponse ()
+        [EnvironmentPermission(SecurityAction.Deny, Read = "USERNAME")]
+        public void AsyncGetResponse()
         {
-            FileWebRequest w = (FileWebRequest)WebRequest.Create (uri);
+            FileWebRequest w = (FileWebRequest)WebRequest.Create(uri);
             message = "AsyncGetResponse";
-            reset.Reset ();
-            IAsyncResult r = w.BeginGetResponse (new AsyncCallback (GetResponseCallback), w);
-            Assert.IsNotNull (r, "IAsyncResult");
-            if (!reset.WaitOne (timeout, true))
-                Assert.Ignore ("Timeout");
-            Assert.IsNull (message, message);
+            reset.Reset();
+            IAsyncResult r = w.BeginGetResponse(new AsyncCallback(GetResponseCallback), w);
+            Assert.IsNotNull(r, "IAsyncResult");
+            if (!reset.WaitOne(timeout, true))
+                Assert.Ignore("Timeout");
+            Assert.IsNull(message, message);
         }
     }
 }

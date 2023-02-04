@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -37,25 +37,25 @@ namespace System.ServiceModel.Description
     [MonoTODO]
     public class OperationContractGenerationContext
     {
-        public OperationContractGenerationContext (
+        public OperationContractGenerationContext(
             ServiceContractGenerator serviceContractGenerator,
             ServiceContractGenerationContext contract,
             OperationDescription operation,
             CodeTypeDeclaration declaringType,
-            CodeMemberMethod method)
-            : this (serviceContractGenerator, contract, operation,
-                declaringType, method, null, null)
-        {
-        }
+            CodeMemberMethod method
+        )
+            : this(serviceContractGenerator, contract, operation, declaringType, method, null, null)
+        { }
 
-        public OperationContractGenerationContext (
+        public OperationContractGenerationContext(
             ServiceContractGenerator serviceContractGenerator,
             ServiceContractGenerationContext contract,
             OperationDescription operation,
             CodeTypeDeclaration declaringType,
             CodeMemberMethod syncMethod,
             CodeMemberMethod beginMethod,
-            CodeMemberMethod endMethod)
+            CodeMemberMethod endMethod
+        )
         {
             generator = serviceContractGenerator;
             this.contract = contract;
@@ -70,30 +70,40 @@ namespace System.ServiceModel.Description
         ServiceContractGenerationContext contract;
         OperationDescription operation;
         CodeTypeDeclaration declaring_type;
-        CodeMemberMethod method, begin_method, end_method;
+        CodeMemberMethod method,
+            begin_method,
+            end_method;
 
-        public ServiceContractGenerator ServiceContractGenerator {
+        public ServiceContractGenerator ServiceContractGenerator
+        {
             get { return generator; }
         }
-        public ServiceContractGenerationContext Contract {
+        public ServiceContractGenerationContext Contract
+        {
             get { return contract; }
         }
-        public OperationDescription Operation {
+        public OperationDescription Operation
+        {
             get { return operation; }
         }
-        public CodeTypeDeclaration DeclaringType {
+        public CodeTypeDeclaration DeclaringType
+        {
             get { return declaring_type; }
         }
-        public CodeMemberMethod SyncMethod {
+        public CodeMemberMethod SyncMethod
+        {
             get { return method; }
         }
-        public CodeMemberMethod BeginMethod {
+        public CodeMemberMethod BeginMethod
+        {
             get { return begin_method; }
         }
-        public CodeMemberMethod EndMethod {
+        public CodeMemberMethod EndMethod
+        {
             get { return end_method; }
         }
-        public bool IsAsync {
+        public bool IsAsync
+        {
             get { return begin_method != null; }
         }
     }

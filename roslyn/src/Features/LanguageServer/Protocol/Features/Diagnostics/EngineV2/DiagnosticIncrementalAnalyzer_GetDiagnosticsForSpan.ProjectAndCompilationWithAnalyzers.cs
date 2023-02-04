@@ -25,7 +25,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
             public Project Project { get; }
             public CompilationWithAnalyzers? CompilationWithAnalyzers { get; }
 
-            public ProjectAndCompilationWithAnalyzers(Project project, CompilationWithAnalyzers? compilationWithAnalyzers)
+            public ProjectAndCompilationWithAnalyzers(
+                Project project,
+                CompilationWithAnalyzers? compilationWithAnalyzers
+            )
             {
                 Project = project;
                 CompilationWithAnalyzers = compilationWithAnalyzers;

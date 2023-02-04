@@ -2,7 +2,7 @@
 // Line: 0
 // Compiler options: -target:unknown
 
-class ClassMain {
-        public static void Main () {}
+class ClassMain
+{
+    public static void Main() { }
 }
-

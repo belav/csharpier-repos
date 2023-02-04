@@ -29,54 +29,63 @@ namespace System.DirectoryServices.ActiveDirectory
     public class ActiveDirectoryObjectNotFoundException : Exception, ISerializable
     {
         [MonoTODO]
-        public ActiveDirectoryObjectNotFoundException (string message, Type type, string name) : base(message)
+        public ActiveDirectoryObjectNotFoundException(string message, Type type, string name)
+            : base(message)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public ActiveDirectoryObjectNotFoundException (string message, Exception inner) : base(message, inner)
+        public ActiveDirectoryObjectNotFoundException(string message, Exception inner)
+            : base(message, inner)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public ActiveDirectoryObjectNotFoundException (string message) : base(message)
+        public ActiveDirectoryObjectNotFoundException(string message)
+            : base(message)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public ActiveDirectoryObjectNotFoundException () : base("DSUnknownFailure")
+        public ActiveDirectoryObjectNotFoundException()
+            : base("DSUnknownFailure")
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        protected ActiveDirectoryObjectNotFoundException (SerializationInfo info, StreamingContext context) : base(info, context)
+        protected ActiveDirectoryObjectNotFoundException(
+            SerializationInfo info,
+            StreamingContext context
+        )
+            : base(info, context)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [SecurityPermission(SecurityAction.Demand, SerializationFormatter = true)]
         [MonoTODO]
-        public override void GetObjectData (SerializationInfo serializationInfo, StreamingContext streamingContext)
+        public override void GetObjectData(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public string Name {
+        public string Name
+        {
             [MonoTODO]
-            get {
-                throw new NotImplementedException ();
-            }
+            get { throw new NotImplementedException(); }
         }
 
-        public Type Type {
+        public Type Type
+        {
             [MonoTODO]
-            get {
-                throw new NotImplementedException ();
-            }
+            get { throw new NotImplementedException(); }
         }
     }
 }

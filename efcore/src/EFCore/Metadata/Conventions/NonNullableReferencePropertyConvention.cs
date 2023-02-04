@@ -11,23 +11,26 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 /// <remarks>
 ///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for more information and examples.
 /// </remarks>
-public class NonNullableReferencePropertyConvention : NonNullableConventionBase,
-    IPropertyAddedConvention,
-    IPropertyFieldChangedConvention
+public class NonNullableReferencePropertyConvention
+    : NonNullableConventionBase,
+        IPropertyAddedConvention,
+        IPropertyFieldChangedConvention
 {
     /// <summary>
     ///     Creates a new instance of <see cref="NonNullableReferencePropertyConvention" />.
     /// </summary>
     /// <param name="dependencies">Parameter object containing dependencies for this convention.</param>
-    public NonNullableReferencePropertyConvention(ProviderConventionSetBuilderDependencies dependencies)
-        : base(dependencies)
-    {
-    }
+    public NonNullableReferencePropertyConvention(
+        ProviderConventionSetBuilderDependencies dependencies
+    )
+        : base(dependencies) { }
 
     private void Process(IConventionPropertyBuilder propertyBuilder)
     {
-        if (propertyBuilder.Metadata.GetIdentifyingMemberInfo() is MemberInfo memberInfo
-            && IsNonNullableReferenceType(propertyBuilder.ModelBuilder, memberInfo))
+        if (
+            propertyBuilder.Metadata.GetIdentifyingMemberInfo() is MemberInfo memberInfo
+            && IsNonNullableReferenceType(propertyBuilder.ModelBuilder, memberInfo)
+        )
         {
             propertyBuilder.IsRequired(true);
         }
@@ -40,8 +43,8 @@ public class NonNullableReferencePropertyConvention : NonNullableConventionBase,
     /// <param name="context">Additional information associated with convention execution.</param>
     public virtual void ProcessPropertyAdded(
         IConventionPropertyBuilder propertyBuilder,
-        IConventionContext<IConventionPropertyBuilder> context)
-        => Process(propertyBuilder);
+        IConventionContext<IConventionPropertyBuilder> context
+    ) => Process(propertyBuilder);
 
     /// <summary>
     ///     Called after the backing field for a property is changed.
@@ -54,6 +57,6 @@ public class NonNullableReferencePropertyConvention : NonNullableConventionBase,
         IConventionPropertyBuilder propertyBuilder,
         FieldInfo? newFieldInfo,
         FieldInfo? oldFieldInfo,
-        IConventionContext<FieldInfo> context)
-        => Process(propertyBuilder);
+        IConventionContext<FieldInfo> context
+    ) => Process(propertyBuilder);
 }

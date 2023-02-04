@@ -23,10 +23,17 @@ namespace System.ServiceModel.Activities.Presentation.Factories
 
         public Activity Create(DependencyObject target)
         {
-            string correlationHandleName = ActivityDesignerHelper.GenerateUniqueVariableNameForContext(target, correlationHandleNamePrefix);
+            string correlationHandleName =
+                ActivityDesignerHelper.GenerateUniqueVariableNameForContext(
+                    target,
+                    correlationHandleNamePrefix
+                );
 
-            Variable<CorrelationHandle> requestReplyCorrelation = new Variable<CorrelationHandle> { Name = correlationHandleName };
-           
+            Variable<CorrelationHandle> requestReplyCorrelation = new Variable<CorrelationHandle>
+            {
+                Name = correlationHandleName
+            };
+
             Send send = new Send
             {
                 OperationName = "Operation1",
@@ -35,7 +42,10 @@ namespace System.ServiceModel.Activities.Presentation.Factories
                 {
                     new RequestReplyCorrelationInitializer
                     {
-                        CorrelationHandle = new VariableValue<CorrelationHandle> { Variable = requestReplyCorrelation }
+                        CorrelationHandle = new VariableValue<CorrelationHandle>
+                        {
+                            Variable = requestReplyCorrelation
+                        }
                     }
                 }
             };
@@ -46,11 +56,7 @@ namespace System.ServiceModel.Activities.Presentation.Factories
                 Activities =
                 {
                     send,
-                    new ReceiveReply
-                    {      
-                        DisplayName = "ReceiveReplyForSend",
-                        Request = send,
-                    },
+                    new ReceiveReply { DisplayName = "ReceiveReplyForSend", Request = send, },
                 }
             };
             return sequence;

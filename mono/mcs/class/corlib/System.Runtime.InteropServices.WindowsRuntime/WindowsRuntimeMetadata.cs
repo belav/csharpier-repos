@@ -32,20 +32,26 @@ namespace System.Runtime.InteropServices.WindowsRuntime
     [MonoTODO]
     public static class WindowsRuntimeMetadata
     {
-        public static IEnumerable<string> ResolveNamespace (string namespaceName, IEnumerable<string> packageGraphFilePaths)
+        public static IEnumerable<string> ResolveNamespace(
+            string namespaceName,
+            IEnumerable<string> packageGraphFilePaths
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public static IEnumerable<string> ResolveNamespace (string namespaceName, string windowsSdkFilePath, IEnumerable<string> packageGraphFilePaths)
+        public static IEnumerable<string> ResolveNamespace(
+            string namespaceName,
+            string windowsSdkFilePath,
+            IEnumerable<string> packageGraphFilePaths
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
-        
+
 #pragma warning disable 0067
         public static event EventHandler<DesignerNamespaceResolveEventArgs> DesignerNamespaceResolve;
         public static event EventHandler<NamespaceResolveEventArgs> ReflectionOnlyNamespaceResolve;
 #pragma warning restore 0067
     }
 }
-

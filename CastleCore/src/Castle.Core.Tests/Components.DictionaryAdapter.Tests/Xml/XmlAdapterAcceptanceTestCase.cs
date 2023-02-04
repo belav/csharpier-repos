@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -60,7 +60,11 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
                         <ZipCode>{3}</ZipCode>
                      </Address>
                   </Season>",
-                line1, city, state, zipCode);
+                line1,
+                city,
+                state,
+                zipCode
+            );
 
             XmlDocument document = null;
             var season = CreateXmlAdapter<ISeason>(xml, ref document);
@@ -91,7 +95,11 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
                         <ZipCode>{3}</ZipCode>
                      </Address>
                   </Season>",
-                line1, city, state, zipCode);
+                line1,
+                city,
+                state,
+                zipCode
+            );
 
             XmlDocument document = null;
             var address = CreateXmlAdapter<IAddress>(xml, ref document);
@@ -164,17 +172,30 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
                         <LicenseNo>{22}</LicenseNo>
                      </ExtraStuff>
                   </Season>",
-                name, minAge, division,
+                name,
+                minAge,
+                division,
                 XmlConvert.ToString(startsOn, XmlDateTimeSerializationMode.Local),
                 XmlConvert.ToString(endsOn, XmlDateTimeSerializationMode.Local),
-                line1, city, state, zipCode,
-                team1Name, XmlConvert.ToString(team1Balance),
-                team1Player1FirstName, team1Player1LastName,
-                team1Player2FirstName, team1Player2LastName,
-                team2Name, XmlConvert.ToString(team2Balance),
-                team2Player1FirstName, team2Player1LastName,
-                tags[0], tags[1], tags[2],
-                licenseNo);
+                line1,
+                city,
+                state,
+                zipCode,
+                team1Name,
+                XmlConvert.ToString(team1Balance),
+                team1Player1FirstName,
+                team1Player1LastName,
+                team1Player2FirstName,
+                team1Player2LastName,
+                team2Name,
+                XmlConvert.ToString(team2Balance),
+                team2Player1FirstName,
+                team2Player1LastName,
+                tags[0],
+                tags[1],
+                tags[2],
+                licenseNo
+            );
 
             XmlDocument document = null;
             var season = CreateXmlAdapter<ISeason>(xml, ref document);
@@ -232,6 +253,7 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
         public interface IBar
         {
             IFoo Foo { get; set; }
+
             [XPath("b:Foo/@Name")]
             string FooName { get; }
         }
@@ -274,7 +296,8 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
                      </ExtraStuff>
                   </Season>",
                 XmlConvert.ToString(new DateTime(2010, 7, 19), XmlDateTimeSerializationMode.Local),
-                XmlConvert.ToString(new DateTime(2010, 9, 20), XmlDateTimeSerializationMode.Local));
+                XmlConvert.ToString(new DateTime(2010, 9, 20), XmlDateTimeSerializationMode.Local)
+            );
 
             XmlDocument document = null;
             var season = CreateXmlAdapter<ISeason>(xml, ref document);
@@ -356,7 +379,8 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
                      </ExtraStuff>
                   </Season>",
                 XmlConvert.ToString(new DateTime(2010, 7, 19), XmlDateTimeSerializationMode.Local),
-                XmlConvert.ToString(new DateTime(2010, 9, 20), XmlDateTimeSerializationMode.Local));
+                XmlConvert.ToString(new DateTime(2010, 9, 20), XmlDateTimeSerializationMode.Local)
+            );
 
             XmlDocument document1 = null;
             XmlDocument document2 = null;
@@ -365,7 +389,7 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
             season2.Location = season1.Location;
             season2.Tags = season1.Tags;
             season2.Teams = season1.Teams;
-                var player = season2.Teams[1].Players.AddNew();
+            var player = season2.Teams[1].Players.AddNew();
             player.FirstName = "Dave";
             player.LastName = "O'Hara";
             season1.Teams[0].Players[1] = player;
@@ -383,8 +407,14 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
             Assert.AreEqual(season2.Teams[0].Name, season1.Teams[0].Name);
             Assert.AreEqual(season2.Teams[0].Balance, season1.Teams[0].Balance);
             Assert.AreEqual(season2.Teams[0].Players.Count, season2.Teams[0].Players.Count);
-            Assert.AreEqual(season2.Teams[0].Players[0].FirstName, season1.Teams[0].Players[0].FirstName);
-            Assert.AreEqual(season2.Teams[0].Players[0].LastName, season1.Teams[0].Players[0].LastName);
+            Assert.AreEqual(
+                season2.Teams[0].Players[0].FirstName,
+                season1.Teams[0].Players[0].FirstName
+            );
+            Assert.AreEqual(
+                season2.Teams[0].Players[0].LastName,
+                season1.Teams[0].Players[0].LastName
+            );
             Assert.AreEqual(season2.Teams[1].Name, season1.Teams[1].Name);
             Assert.AreEqual(season2.Teams[1].Balance, season1.Teams[1].Balance);
             Assert.AreEqual(player.FirstName, season1.Teams[0].Players[1].FirstName);
@@ -398,7 +428,8 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
         [Test]
         public void Will_Ignore_If_Reassigned_Same_Component()
         {
-            var xml = @"<Season xmlns='RISE' xmlns:rise='RISE'>
+            var xml =
+                @"<Season xmlns='RISE' xmlns:rise='RISE'>
                          <Address xmlns='Common'>
                             <Line1>2922 South Highway 205</Line1>
                             <City>Rockwall</City>
@@ -416,7 +447,8 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
         [Test]
         public void Adapter_OnXml_CanCreate_Other_Adapter()
         {
-            var xml = @"<Season xmlns='RISE' xmlns:rise='RISE'>
+            var xml =
+                @"<Season xmlns='RISE' xmlns:rise='RISE'>
                      <Name>Soccer Adult Spring II 2010</Name>
                      <MinimumAge>16</MinimumAge>
                      <Division>Male</Division>
@@ -482,7 +514,8 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
         [Test]
         public void Can_Remove_From_Collections()
         {
-            var xml = @"<Season xmlns='RISE' xmlns:rise='RISE'>
+            var xml =
+                @"<Season xmlns='RISE' xmlns:rise='RISE'>
                      <Name>Soccer Adult Spring II 2010</Name>
                      <MinimumAge>16</MinimumAge>
                      <Division>Male</Division>
@@ -513,7 +546,8 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
         [Test]
         public void Can_Remove_Collections_With_Nil()
         {
-            var xml = @"<Season xmlns='RISE' xmlns:rise='RISE'>
+            var xml =
+                @"<Season xmlns='RISE' xmlns:rise='RISE'>
                         <League>
                             <Team name='Hit And Run'>
                                 <Roster>
@@ -545,7 +579,8 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
         [Test]
         public void Can_Clear_Collections()
         {
-            var xml = @"<Season xmlns='RISE' xmlns:rise='RISE'>
+            var xml =
+                @"<Season xmlns='RISE' xmlns:rise='RISE'>
                      <Name>Soccer Adult Spring II 2010</Name>
                      <MinimumAge>16</MinimumAge>
                      <Division>Male</Division>
@@ -570,7 +605,8 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
         [Test]
         public void Can_Clear_Empty_Collections()
         {
-            var xml = @"<Season xmlns='RISE' xmlns:rise='RISE'>
+            var xml =
+                @"<Season xmlns='RISE' xmlns:rise='RISE'>
                      <Name>Soccer Adult Spring II 2010</Name>
                      <MinimumAge>16</MinimumAge>
                      <Division>Male</Division>
@@ -586,7 +622,8 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
         [Test]
         public void Can_Clear_Collections_With_Nil()
         {
-                var xml = @"<Season xmlns='RISE' xmlns:rise='RISE'>
+            var xml =
+                @"<Season xmlns='RISE' xmlns:rise='RISE'>
                         <League>
                             <Team name='Hit And Run'>
                                 <Roster>
@@ -615,7 +652,8 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
         [Test]
         public void Can_Read_Nullable_Attribute()
         {
-            var xml = @"<Season xmlns='RISE' xmlns:rise='RISE'>
+            var xml =
+                @"<Season xmlns='RISE' xmlns:rise='RISE'>
                      <Name>Soccer Adult Spring II 2010</Name>
                      <MinimumAge>16</MinimumAge>
                      <Division>Male</Division>
@@ -638,7 +676,8 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
         [Test]
         public void Can_Read_Nullable_Element()
         {
-            var xml = @"<Season xmlns='RISE' xmlns:rise='RISE'>
+            var xml =
+                @"<Season xmlns='RISE' xmlns:rise='RISE'>
                      <Name>Soccer Adult Spring II 2010</Name>
                      <MinimumAge>16</MinimumAge>
                      <Division>Male</Division>
@@ -662,7 +701,8 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
         [Test]
         public void Can_Write_Nullable_Attribute()
         {
-            var xml = @"<Season xmlns='RISE' xmlns:rise='RISE'>
+            var xml =
+                @"<Season xmlns='RISE' xmlns:rise='RISE'>
                      <Name>Soccer Adult Spring II 2010</Name>
                      <MinimumAge>16</MinimumAge>
                      <Division>Male</Division>
@@ -686,7 +726,8 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
         [Test]
         public void Can_Write_Nullable_Element()
         {
-            var xml = @"<Season xmlns='RISE' xmlns:rise='RISE'>
+            var xml =
+                @"<Season xmlns='RISE' xmlns:rise='RISE'>
                      <Name>Soccer Adult Spring II 2010</Name>
                      <MinimumAge>16</MinimumAge>
                      <Division>Male</Division>
@@ -733,7 +774,8 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
         [Test]
         public void Can_Coerce_Xml_With_Namespace()
         {
-            var xml = @"<Season xmlns='RISE'>
+            var xml =
+                @"<Season xmlns='RISE'>
                      <Address xmlns='Common'>
                         <Line1>2922 South Highway 205</Line1>
                      </Address>
@@ -768,7 +810,8 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
         [Test]
         public void Can_Determine_If_Property_Defined_In_Xml()
         {
-            var xml = @"<Season xmlns='RISE'>
+            var xml =
+                @"<Season xmlns='RISE'>
                      <Address xmlns='Common'>
                         <Line1>2922 South Highway 205</Line1>
                      </Address>
@@ -783,7 +826,8 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
         [Test]
         public void Can_Determine_If_Collection_Defined_In_Xml()
         {
-            var xml = @"<Season xmlns='RISE' xmlns:rise='RISE'>
+            var xml =
+                @"<Season xmlns='RISE' xmlns:rise='RISE'>
                      <League>
                         <Team name='Hit And Run'>
                            <AmountDue>100.50</AmountDue>
@@ -801,7 +845,7 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
             // TODO: Ask Craig what he wants to do about this
             // In my POV, XmlElementBehavior means that collections are ALWAYS defined
             //   since there is not an element representing the collection itself.
-//            Assert.IsFalse(XmlAdapter.IsPropertyDefined("Tags", season));
+            //            Assert.IsFalse(XmlAdapter.IsPropertyDefined("Tags", season));
             Assert.IsTrue(XmlAdapter.IsPropertyDefined("Tags", season));
         }
 
@@ -818,7 +862,8 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
         [Test]
         public void Can_Reassign_Lists()
         {
-            var xml = @"<Season xmlns='RISE' xmlns:rise='RISE'>
+            var xml =
+                @"<Season xmlns='RISE' xmlns:rise='RISE'>
                      <League>
                         <Team name='Hit And Run'>
                            <AmountDue>100.50</AmountDue>
@@ -829,7 +874,8 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
                      </League>
                   </Season>";
 
-            XmlDocument document = null, teamDoc = null;
+            XmlDocument document = null,
+                teamDoc = null;
             var season = CreateXmlAdapter<ISeason>(xml, ref document);
             var team = CreateXmlAdapter<ITeam>(null, ref teamDoc);
             team.Name = "Turfmonsters";
@@ -842,7 +888,8 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
         [Test]
         public void Can_Remove_Properties()
         {
-            var xml = @"<Season xmlns='RISE' xmlns:rise='RISE'>
+            var xml =
+                @"<Season xmlns='RISE' xmlns:rise='RISE'>
                           <Name>Soccer Adult Spring II 2010</Name>
                         </Season>";
 
@@ -867,17 +914,21 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
                 "Star Wars: The Clone Wars"
             };
 
-            var books = starWars.Select((title, i) =>
-            {
-                XmlDocument bookDoc = null;
-                var book = CreateXmlAdapter<IBook>(null, ref bookDoc);
-                book.Title = title;
-                book.DDC.Category = 8;
-                book.DDC.SubCategory = 1;
-                book.DDC.SubDivision = i;
-                book.Printed = i % 2 == 0;
-                return book;
-            }).ToList();
+            var books = starWars
+                .Select(
+                    (title, i) =>
+                    {
+                        XmlDocument bookDoc = null;
+                        var book = CreateXmlAdapter<IBook>(null, ref bookDoc);
+                        book.Title = title;
+                        book.DDC.Category = 8;
+                        book.DDC.SubCategory = 1;
+                        book.DDC.SubDivision = i;
+                        book.Printed = i % 2 == 0;
+                        return book;
+                    }
+                )
+                .ToList();
 
             foreach (var book in books)
             {
@@ -903,9 +954,11 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
             Coed
         }
 
-        [XmlNamespace("Common", "c", Root = true),
-         XmlNamespace("RISE", "r"),
-         XPath("r:Season/c:Address")]
+        [
+            XmlNamespace("Common", "c", Root = true),
+            XmlNamespace("RISE", "r"),
+            XPath("r:Season/c:Address")
+        ]
         public interface IAddress
         {
             [Volatile]
@@ -932,18 +985,23 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
         {
             [XmlAttribute]
             string Name { get; set; }
+
             [XmlAttribute]
             int? GamesPlayed { get; set; }
             int? MaxPlayers { get; set; }
+
             [XmlElement("AmountDue")]
             decimal Balance { get; set; }
+
             [XmlArray("Roster", IsNullable = true), XmlArrayItem("Participant"), RemoveIfEmpty]
             IBindingList<IPlayer> Players { get; }
         }
 
-        [XmlRoot("Season", Namespace = "RISE"),
-         XmlNamespace("RISE", "rise", Default = true),
-         XmlNamespace("Common", "c", Root = true)]
+        [
+            XmlRoot("Season", Namespace = "RISE"),
+            XmlNamespace("RISE", "rise", Default = true),
+            XmlNamespace("Common", "c", Root = true)
+        ]
         public interface ISeason : IDictionaryAdapter
         {
             [RemoveIf("")]
@@ -952,18 +1010,25 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
             Division Division { get; set; }
             DateTime StartsOn { get; set; }
             DateTime EndsOn { get; set; }
+
             [XPath("sum(rise:League/rise:Team/rise:AmountDue)")]
             decimal Balance { get; }
+
             [XmlElement("Address", Namespace = "Common")]
             IAddress Location { get; set; }
+
             [Key("League"), XmlArrayItem("Team")]
             IBindingList<ITeam> Teams { get; set; }
+
             [XPath("rise:League/rise:Team")]
             ITeam[] TeamsArray { get; }
+
             [XPath("rise:League/rise:Team[position()=1]/@Name")]
             string FirstTeamName { get; }
+
             [XPath("Documentation/Notes")]
             string Notes { get; set; }
+
             [XmlElement("Tag")]
             string[] Tags { get; set; }
             XmlElement ExtraStuff { get; set; }
@@ -984,9 +1049,11 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
             string LastName { get; set; }
         }
 
-        [XmlDefaults(Qualified = true),
-         XmlNamespace("urn:www.castle.org:tags", "tags"),
-         XmlType(Namespace = "urn:www.castle.org:tags")]
+        [
+            XmlDefaults(Qualified = true),
+            XmlNamespace("urn:www.castle.org:tags", "tags"),
+            XmlType(Namespace = "urn:www.castle.org:tags")
+        ]
         public interface ITagged
         {
             string[] Tags { get; set; }
@@ -1064,11 +1131,7 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
         public void Can_Read_Nillables_From_Standard_Xml_Serialization()
         {
             var manager = new Manager { Name = "Craig", Level = 1 };
-            var group = new Group
-            {
-                Id = 2,
-                Employees = new Employee[] { null, manager }
-            };
+            var group = new Group { Id = 2, Employees = new Employee[] { null, manager } };
 
             using (var stream = new MemoryStream())
             {
@@ -1091,7 +1154,9 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
         [Test, Ignore("Need to opt in or out of reference tracking for this to work.")]
         public void Can_Write_To_Standard_Xml_Serialization()
         {
-            XmlDocument document = null, mgr = null, emp = null;
+            XmlDocument document = null,
+                mgr = null,
+                emp = null;
             var manager = CreateXmlAdapter<IManager>(null, ref mgr);
             manager.Name = "Craig";
             manager.Level = 1;
@@ -1099,11 +1164,7 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
             var employee = CreateXmlAdapter<IEmployee>(null, ref emp);
             employee.Name = "Dave";
             employee.Supervisor = manager;
-            employee.Job = new Employment
-            {
-                Title = "Consultant",
-                Salary = 100000M
-            };
+            employee.Job = new Employment { Title = "Consultant", Salary = 100000M };
             employee.Metadata = new Metadata { Tag = "Cool!" };
             employee.Key = new byte[] { 0x01, 0x02, 0x03 };
 
@@ -1157,7 +1218,8 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
         [Test]
         public void Can_Write_Nillables_To_Standard_Xml_Serialization()
         {
-            XmlDocument document = null, mgr = null;
+            XmlDocument document = null,
+                mgr = null;
             var manager = CreateXmlAdapter<IManager>(null, ref mgr);
             manager.Name = "Craig";
             manager.Level = 1;
@@ -1190,8 +1252,10 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
 
     #region DA Serialization Model
 
-    [XmlType(TypeName = "Groupy", Namespace = "Yum"),
-     XmlRoot(ElementName = "GroupRoot", Namespace = "Arg")]
+    [
+        XmlType(TypeName = "Groupy", Namespace = "Yum"),
+        XmlRoot(ElementName = "GroupRoot", Namespace = "Arg")
+    ]
     public interface IGroup
     {
         int Id { get; set; }
@@ -1199,8 +1263,10 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
         [XmlElement(IsNullable = true)]
         IEmployee Owner { get; set; }
 
-        [XmlArrayItem("Dude", Type = typeof(IEmployee), IsNullable = true),
-         XmlArrayItem(Type = typeof(IManager), IsNullable = true)]
+        [
+            XmlArrayItem("Dude", Type = typeof(IEmployee), IsNullable = true),
+            XmlArrayItem(Type = typeof(IManager), IsNullable = true)
+        ]
         IEmployee[] Employees { get; set; }
 
         string[] Tags { get; set; }
@@ -1210,19 +1276,21 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
         [XmlIgnore]
         string Comment { get; set; }
 
-        [XmlArray(IsNullable = true),
-         XmlArrayItem(typeof(int), ElementName = "MyNumber"),
-         XmlArrayItem(typeof(string), ElementName = "MyString"),
-         XmlArrayItem(typeof(IManager))]
+        [
+            XmlArray(IsNullable = true),
+            XmlArrayItem(typeof(int), ElementName = "MyNumber"),
+            XmlArrayItem(typeof(string), ElementName = "MyString"),
+            XmlArrayItem(typeof(IManager))
+        ]
         object[] ExtraInfo { get; set; }
     }
 
     //[XmlRoot(ElementName = "FooRoot")]
-    [XmlType(TypeName = "Foo", Namespace = "Something"),
-     XmlInclude(typeof(IManager))]
+    [XmlType(TypeName = "Foo", Namespace = "Something"), XmlInclude(typeof(IManager))]
     public interface IEmployee
     {
         string Name { get; set; }
+
         [IfExists]
         IEmployee Supervisor { get; set; }
         Employment Job { get; set; }
@@ -1241,8 +1309,10 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
 
     #region Xml Serialization Model
 
-    [XmlType(TypeName = "Groupy", Namespace = "Yum"),
-     XmlRoot(ElementName = "GroupRoot", Namespace = "Arg")]
+    [
+        XmlType(TypeName = "Groupy", Namespace = "Yum"),
+        XmlRoot(ElementName = "GroupRoot", Namespace = "Arg")
+    ]
     public class Group
     {
         public int Id;
@@ -1250,8 +1320,10 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
         [XmlElement(IsNullable = true)]
         public Employee Owner;
 
-        [XmlArrayItem("Dude", Type = typeof(Employee), IsNullable = true),
-         XmlArrayItem(Type = typeof(Manager), IsNullable = true)]
+        [
+            XmlArrayItem("Dude", Type = typeof(Employee), IsNullable = true),
+            XmlArrayItem(Type = typeof(Manager), IsNullable = true)
+        ]
         public Employee[] Employees;
 
         public string[] Tags;
@@ -1261,16 +1333,17 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
         [XmlIgnore]
         public string Comment;
 
-        [XmlArray(IsNullable = true),
-         XmlArrayItem(typeof(int), ElementName = "MyNumber"),
-         XmlArrayItem(typeof(string), ElementName = "MyString"),
-         XmlArrayItem(typeof(Manager))]
+        [
+            XmlArray(IsNullable = true),
+            XmlArrayItem(typeof(int), ElementName = "MyNumber"),
+            XmlArrayItem(typeof(string), ElementName = "MyString"),
+            XmlArrayItem(typeof(Manager))
+        ]
         public object[] ExtraInfo;
     }
 
     //[XmlRoot(ElementName = "FooRoot")]
-    [XmlType(TypeName="Foo", Namespace = "Something"),
-     XmlInclude(typeof(Manager))]
+    [XmlType(TypeName = "Foo", Namespace = "Something"), XmlInclude(typeof(Manager))]
     public class Employee
     {
         public string Name;
@@ -1287,8 +1360,7 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
         public int Level;
     }
 
-    [XmlType(Namespace = "Potato"),
-     XmlRoot(Namespace = "Pickle")]
+    [XmlType(Namespace = "Potato"), XmlRoot(Namespace = "Pickle")]
     public class Employment
     {
         public string Title { get; set; }

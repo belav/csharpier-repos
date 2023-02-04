@@ -5,8 +5,7 @@ public class Generic<P>
 {
     public class Status : Status
     {
-        Status (Foo foo) : base (foo)
-        {
-        }
+        Status(Foo foo)
+            : base(foo) { }
     }
 }

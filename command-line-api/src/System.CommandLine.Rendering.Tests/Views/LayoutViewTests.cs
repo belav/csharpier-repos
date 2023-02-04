@@ -71,27 +71,25 @@ namespace System.CommandLine.Rendering.Tests.Views
             layout.Remove(view2);
 
             layout.Clear();
-            
+
             layout.Children.Should().BeEmpty();
         }
 
         [Fact]
         public void Layout_view_adds_children_with_collection_initializer()
         {
-            var layout = new TestLayout
-            {
-                new TestView(),
-                new TestView()
-            };
+            var layout = new TestLayout { new TestView(), new TestView() };
 
             layout.Children.Count.Should().Be(2);
         }
 
         private class TestView : View
         {
-            public override void Render(ConsoleRenderer renderer, Region region) => throw new NotImplementedException();
+            public override void Render(ConsoleRenderer renderer, Region region) =>
+                throw new NotImplementedException();
 
-            public override Size Measure(ConsoleRenderer renderer, Size maxSize) => throw new NotImplementedException();
+            public override Size Measure(ConsoleRenderer renderer, Size maxSize) =>
+                throw new NotImplementedException();
 
             public void RaiseUpdated() => OnUpdated();
         }
@@ -109,6 +107,7 @@ namespace System.CommandLine.Rendering.Tests.Views
             }
 
             public int OnChildUpdatedInvocationCount { get; set; }
+
             protected override void OnChildUpdated(object sender, EventArgs e)
             {
                 OnChildUpdatedInvocationCount++;

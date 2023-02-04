@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,49 +30,58 @@ using System.Net.Security;
 
 namespace System.ServiceModel
 {
-    [AttributeUsage (AttributeTargets.Class | AttributeTargets.Interface, Inherited = false)]
+    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Interface, Inherited = false)]
     public sealed class ServiceContractAttribute : Attribute
     {
         Type callback_contract;
-        string name, ns;
+        string name,
+            ns;
         SessionMode session;
         ProtectionLevel protection_level;
         bool has_protection_level;
         string _configurationName;
 
-        public Type CallbackContract {
+        public Type CallbackContract
+        {
             get { return callback_contract; }
             set { callback_contract = value; }
         }
 
-        public string Name {
+        public string Name
+        {
             get { return name; }
             set { name = value; }
         }
 
-        public string Namespace {
+        public string Namespace
+        {
             get { return ns; }
             set { ns = value; }
         }
 
-        public bool HasProtectionLevel {
+        public bool HasProtectionLevel
+        {
             get { return has_protection_level; }
         }
 
-        public ProtectionLevel ProtectionLevel {
+        public ProtectionLevel ProtectionLevel
+        {
             get { return protection_level; }
-            set {
+            set
+            {
                 protection_level = value;
                 has_protection_level = true;
             }
         }
 
-        public SessionMode SessionMode {
+        public SessionMode SessionMode
+        {
             get { return session; }
             set { session = value; }
         }
 
-        public string ConfigurationName {
+        public string ConfigurationName
+        {
             get { return _configurationName; }
             set { _configurationName = value; }
         }

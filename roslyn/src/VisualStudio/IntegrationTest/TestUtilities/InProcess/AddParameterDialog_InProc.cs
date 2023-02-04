@@ -8,22 +8,26 @@ using Microsoft.VisualStudio.Threading;
 
 namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 {
-    internal class AddParameterDialog_InProc : AbstractCodeRefactorDialog_InProc<AddParameterDialog, AddParameterDialog.TestAccessor>
+    internal class AddParameterDialog_InProc
+        : AbstractCodeRefactorDialog_InProc<AddParameterDialog, AddParameterDialog.TestAccessor>
     {
-        private AddParameterDialog_InProc()
-        {
-        }
+        private AddParameterDialog_InProc() { }
 
-        public static AddParameterDialog_InProc Create()
-            => new AddParameterDialog_InProc();
+        public static AddParameterDialog_InProc Create() => new AddParameterDialog_InProc();
 
         public void FillCallSiteField(string callSiteValue)
         {
-            using (var cancellationTokenSource = new CancellationTokenSource(Helper.HangMitigatingTimeout))
+            using (
+                var cancellationTokenSource = new CancellationTokenSource(
+                    Helper.HangMitigatingTimeout
+                )
+            )
             {
                 JoinableTaskFactory.Run(async () =>
                 {
-                    await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationTokenSource.Token);
+                    await JoinableTaskFactory.SwitchToMainThreadAsync(
+                        cancellationTokenSource.Token
+                    );
                     var dialog = await GetDialogAsync(cancellationTokenSource.Token);
                     dialog.CallsiteValueTextBox.Focus();
                     dialog.CallsiteValueTextBox.Text = callSiteValue;
@@ -33,11 +37,17 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 
         public void FillNameField(string parameterName)
         {
-            using (var cancellationTokenSource = new CancellationTokenSource(Helper.HangMitigatingTimeout))
+            using (
+                var cancellationTokenSource = new CancellationTokenSource(
+                    Helper.HangMitigatingTimeout
+                )
+            )
             {
                 JoinableTaskFactory.Run(async () =>
                 {
-                    await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationTokenSource.Token);
+                    await JoinableTaskFactory.SwitchToMainThreadAsync(
+                        cancellationTokenSource.Token
+                    );
                     var dialog = await GetDialogAsync(cancellationTokenSource.Token);
                     dialog.NameContentControl.Focus();
                     dialog.NameContentControl.Text = parameterName;
@@ -47,11 +57,17 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 
         public void SetCallSiteTodo()
         {
-            using (var cancellationTokenSource = new CancellationTokenSource(Helper.HangMitigatingTimeout))
+            using (
+                var cancellationTokenSource = new CancellationTokenSource(
+                    Helper.HangMitigatingTimeout
+                )
+            )
             {
                 JoinableTaskFactory.Run(async () =>
                 {
-                    await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationTokenSource.Token);
+                    await JoinableTaskFactory.SwitchToMainThreadAsync(
+                        cancellationTokenSource.Token
+                    );
                     var dialog = await GetDialogAsync(cancellationTokenSource.Token);
                     dialog.IntroduceErrorRadioButton.Focus();
                     dialog.IntroduceErrorRadioButton.IsChecked = true;
@@ -61,11 +77,17 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 
         public void FillTypeField(string typeName)
         {
-            using (var cancellationTokenSource = new CancellationTokenSource(Helper.HangMitigatingTimeout))
+            using (
+                var cancellationTokenSource = new CancellationTokenSource(
+                    Helper.HangMitigatingTimeout
+                )
+            )
             {
                 JoinableTaskFactory.Run(async () =>
                 {
-                    await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationTokenSource.Token);
+                    await JoinableTaskFactory.SwitchToMainThreadAsync(
+                        cancellationTokenSource.Token
+                    );
                     var dialog = await GetDialogAsync(cancellationTokenSource.Token);
                     dialog.TypeContentControl.Focus();
                     dialog.TypeContentControl.Text = typeName;
@@ -75,25 +97,52 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 
         public void ClickOK()
         {
-            using (var cancellationTokenSource = new CancellationTokenSource(Helper.HangMitigatingTimeout))
+            using (
+                var cancellationTokenSource = new CancellationTokenSource(
+                    Helper.HangMitigatingTimeout
+                )
+            )
             {
-                JoinableTaskFactory.Run(() => ClickAsync(testAccessor => testAccessor.OKButton, cancellationTokenSource.Token));
+                JoinableTaskFactory.Run(
+                    () =>
+                        ClickAsync(
+                            testAccessor => testAccessor.OKButton,
+                            cancellationTokenSource.Token
+                        )
+                );
             }
         }
 
         public void ClickCancel()
         {
-            using (var cancellationTokenSource = new CancellationTokenSource(Helper.HangMitigatingTimeout))
+            using (
+                var cancellationTokenSource = new CancellationTokenSource(
+                    Helper.HangMitigatingTimeout
+                )
+            )
             {
-                JoinableTaskFactory.Run(() => ClickAsync(testAccessor => testAccessor.CancelButton, cancellationTokenSource.Token));
+                JoinableTaskFactory.Run(
+                    () =>
+                        ClickAsync(
+                            testAccessor => testAccessor.CancelButton,
+                            cancellationTokenSource.Token
+                        )
+                );
             }
         }
 
         public bool CloseWindow()
         {
-            using (var cancellationTokenSource = new CancellationTokenSource(Helper.HangMitigatingTimeout))
+            using (
+                var cancellationTokenSource = new CancellationTokenSource(
+                    Helper.HangMitigatingTimeout
+                )
+            )
             {
-                if (JoinableTaskFactory.Run(() => TryGetDialogAsync(cancellationTokenSource.Token)) is null)
+                if (
+                    JoinableTaskFactory.Run(() => TryGetDialogAsync(cancellationTokenSource.Token))
+                    is null
+                )
                 {
                     return false;
                 }
@@ -103,6 +152,7 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             return true;
         }
 
-        protected override AddParameterDialog.TestAccessor GetAccessor(AddParameterDialog dialog) => dialog.GetTestAccessor();
+        protected override AddParameterDialog.TestAccessor GetAccessor(AddParameterDialog dialog) =>
+            dialog.GetTestAccessor();
     }
 }

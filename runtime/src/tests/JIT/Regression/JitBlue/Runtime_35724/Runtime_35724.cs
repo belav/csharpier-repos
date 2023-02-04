@@ -20,7 +20,7 @@ public class Runtime_35724
         Console.WriteLine(c.X + d.Y);
         return a / b;
     }
-    
+
     public static int Main()
     {
         Test();

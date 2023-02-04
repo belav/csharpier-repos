@@ -13,6 +13,6 @@ namespace ILCompiler.Reflection.ReadyToRun
     {
         PEReader ImageReader { get; }
 
-        MetadataReader MetadataReader { get;  }
+        MetadataReader MetadataReader { get; }
     }
 }

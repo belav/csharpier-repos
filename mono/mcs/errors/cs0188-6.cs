@@ -5,13 +5,11 @@ struct B
 {
     public int a;
 
-    public B (int foo)
+    public B(int foo)
     {
-        Test (this);
+        Test(this);
         a = 1;
     }
 
-    static void Test (B b)
-    {
-    }
+    static void Test(B b) { }
 }

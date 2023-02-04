@@ -4,46 +4,34 @@ namespace Mono.Linker.Tests.Cases.Inheritance.Interfaces.OnReferenceType.NoKeptC
 {
     public class InterfaceOnMultipleBases
     {
-        public static void Main ()
+        public static void Main()
         {
             Foo f = null;
-            Helper (f);
+            Helper(f);
         }
 
         [Kept]
-        static void Helper (IFoo f)
-        {
-        }
+        static void Helper(IFoo f) { }
 
         [Kept]
-        [KeptInterface (typeof (IFoo))]
-        class Base : IFoo
-        {
-        }
+        [KeptInterface(typeof(IFoo))]
+        class Base : IFoo { }
 
         [Kept]
-        [KeptBaseType (typeof (Base))]
-        [KeptInterface (typeof (IFoo))]
-        class Base2 : Base, IFoo
-        {
-        }
+        [KeptBaseType(typeof(Base))]
+        [KeptInterface(typeof(IFoo))]
+        class Base2 : Base, IFoo { }
 
         [Kept]
-        [KeptBaseType (typeof (Base2))]
-        class Base3 : Base2
-        {
-        }
+        [KeptBaseType(typeof(Base2))]
+        class Base3 : Base2 { }
 
         [Kept]
-        [KeptBaseType (typeof (Base3))]
-        [KeptInterface (typeof (IFoo))]
-        class Foo : Base3, IFoo
-        {
-        }
+        [KeptBaseType(typeof(Base3))]
+        [KeptInterface(typeof(IFoo))]
+        class Foo : Base3, IFoo { }
 
         [Kept]
-        interface IFoo
-        {
-        }
+        interface IFoo { }
     }
 }

@@ -5,13 +5,13 @@ using System;
 
 public class Foo<T>
 {
-    public void DoSomething<U> (Func<U, T> valueExpression) { }
+    public void DoSomething<U>(Func<U, T> valueExpression) { }
 }
 
 public class Bar
 {
-    protected void DoAnything<T, U> (U value)
+    protected void DoAnything<T, U>(U value)
     {
-        new Foo<U> ().DoSomething (value);
+        new Foo<U>().DoSomething(value);
     }
 }

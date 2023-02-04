@@ -32,18 +32,19 @@ namespace xbuild.tests
         /// Tests TeamCity style xbuild integration.
         /// </summary>
         [Test]
-        public void TeamCityStyleResponseFile ()
+        public void TeamCityStyleResponseFile()
         {
-            var responseFile = Path.GetTempFileName ();
-            var contents = 
-                    "/p:idea_build_agent_port=\"9090\" " +
-                    "/p:idea_build_server_build_id=\"13852\" " +
-                    "/p:path_separator=\":\"";
-            File.WriteAllText (responseFile, contents);
-            var parameters = new Parameters ("bin");
-            parameters.ParseArguments (
-                new [] { "/noautorsp", string.Format ("@\"{0}\"", responseFile), "\"project.xml\""});
-            
+            var responseFile = Path.GetTempFileName();
+            var contents =
+                "/p:idea_build_agent_port=\"9090\" "
+                + "/p:idea_build_server_build_id=\"13852\" "
+                + "/p:path_separator=\":\"";
+            File.WriteAllText(responseFile, contents);
+            var parameters = new Parameters("bin");
+            parameters.ParseArguments(
+                new[] { "/noautorsp", string.Format("@\"{0}\"", responseFile), "\"project.xml\"" }
+            );
+
             var properties = parameters.Properties;
             Assert.AreEqual(3, properties.Count);
             Assert.AreEqual("9090", properties["idea_build_agent_port"].Value);
@@ -52,5 +53,3 @@ namespace xbuild.tests
         }
     }
 }
-
-

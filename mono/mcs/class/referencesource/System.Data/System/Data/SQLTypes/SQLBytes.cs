@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // <copyright file="SQLBytes.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-//  </copyright>                                                                
+//  </copyright>
 // <owner current="true" primary="true">junfang</owner>
 // <owner current="true" primary="false">Microsoft</owner>
 // <owner current="true" primary="false">Microsoft</owner>
@@ -20,14 +20,14 @@
 //        the data into the same instance, and avoid allocation per row.
 //        It is also used to construct a UDT from on-disk binary value.
 //
-// Notes: 
-//    
+// Notes:
+//
 // History:
 //
 //     @Version: Yukon
 //     120214 JXF  09/23/02 SqlBytes/SqlChars class indexer
 //     112296 AZA  07/06/02 Seal SqlAccess classes.
-//     107151 AZA  04/18/02 Track byte array buffer as well as SqlBytes in 
+//     107151 AZA  04/18/02 Track byte array buffer as well as SqlBytes in
 //                          sqlaccess.
 //     107216 JXF  04/17/02 Bug 514927
 //     106854 JXF  04/15/02 Fix http suites due to SqlChars
@@ -41,7 +41,8 @@
 // @EndHeader@
 //**************************************************************************
 
-namespace System.Data.SqlTypes {
+namespace System.Data.SqlTypes
+{
     using System;
     using System.Diagnostics;
     using System.Data.Common;
@@ -57,15 +58,18 @@ namespace System.Data.SqlTypes {
     using System.Xml.Serialization;
 
     [Serializable]
-    internal enum SqlBytesCharsState {
+    internal enum SqlBytesCharsState
+    {
         Null = 0,
         Buffer = 1,
+
         //IntPtr = 2,
         Stream = 3,
     }
 
-    [Serializable,XmlSchemaProvider("GetXsdType")]
-    public sealed class SqlBytes : System.Data.SqlTypes.INullable, IXmlSerializable, ISerializable {
+    [Serializable, XmlSchemaProvider("GetXsdType")]
+    public sealed class SqlBytes : System.Data.SqlTypes.INullable, IXmlSerializable, ISerializable
+    {
         // --------------------------------------------------------------
         //      Data members
         // --------------------------------------------------------------
@@ -73,7 +77,7 @@ namespace System.Data.SqlTypes {
         // SqlBytes has five possible states
         // 1) SqlBytes is Null
         //        - m_stream must be null, m_lCuLen must be x_lNull.
-        // 2) SqlBytes contains a valid buffer, 
+        // 2) SqlBytes contains a valid buffer,
         //        - m_rgbBuf must not be null,m_stream must be null
         // 3) SqlBytes contains a valid pointer
         //        - m_rgbBuf could be null or not,
@@ -85,36 +89,40 @@ namespace System.Data.SqlTypes {
         //        - m_lCurLen must be x_lNull.
         // 5) SqlBytes contains a Lazy Materialized Blob (ie, StorageState.Delayed)
         //
-        internal byte[]                m_rgbBuf;    // Data buffer
-        private  long                m_lCurLen;    // Current data length
-        internal Stream             m_stream;
-        private  SqlBytesCharsState m_state;
+        internal byte[] m_rgbBuf; // Data buffer
+        private long m_lCurLen; // Current data length
+        internal Stream m_stream;
+        private SqlBytesCharsState m_state;
 
-        private  byte[]                m_rgbWorkBuf;    // A 1-byte work buffer.
+        private byte[] m_rgbWorkBuf; // A 1-byte work buffer.
 
         // The max data length that we support at this time.
-        private  const long x_lMaxLen = (long)System.Int32.MaxValue;
+        private const long x_lMaxLen = (long)System.Int32.MaxValue;
 
-        private  const long x_lNull = -1L;
+        private const long x_lNull = -1L;
 
         // --------------------------------------------------------------
         //      Constructor(s)
         // --------------------------------------------------------------
 
         // Public default constructor used for XML serialization
-        public SqlBytes() {
+        public SqlBytes()
+        {
             SetNull();
         }
 
         // Create a SqlBytes with an in-memory buffer
-        public SqlBytes(byte[] buffer) {
+        public SqlBytes(byte[] buffer)
+        {
             m_rgbBuf = buffer;
             m_stream = null;
-            if (m_rgbBuf == null) {
+            if (m_rgbBuf == null)
+            {
                 m_state = SqlBytesCharsState.Null;
                 m_lCurLen = x_lNull;
             }
-            else {
+            else
+            {
                 m_state = SqlBytesCharsState.Buffer;
                 m_lCurLen = (long)m_rgbBuf.Length;
             }
@@ -125,10 +133,11 @@ namespace System.Data.SqlTypes {
         }
 
         // Create a SqlBytes from a SqlBinary
-        public SqlBytes(SqlBinary value) : this(value.IsNull ? (byte[])null : value.Value)    {
-        }
+        public SqlBytes(SqlBinary value)
+            : this(value.IsNull ? (byte[])null : value.Value) { }
 
-        public SqlBytes(Stream s) {
+        public SqlBytes(Stream s)
+        {
             // Create a SqlBytes from a Stream
             m_rgbBuf = null;
             m_lCurLen = x_lNull;
@@ -143,42 +152,43 @@ namespace System.Data.SqlTypes {
         // Constructor required for serialization. Deserializes as a Buffer. If the bits have been tampered with
         // then this will throw a SerializationException or a InvalidCastException.
         private SqlBytes(SerializationInfo info, StreamingContext context)
-            {
+        {
             m_stream = null;
             m_rgbWorkBuf = null;
 
             if (info.GetBoolean("IsNull"))
-                {
+            {
                 m_state = SqlBytesCharsState.Null;
                 m_rgbBuf = null;
-                }
+            }
             else
-                {
+            {
                 m_state = SqlBytesCharsState.Buffer;
-                m_rgbBuf = (byte[]) info.GetValue("data", typeof(byte[]));
+                m_rgbBuf = (byte[])info.GetValue("data", typeof(byte[]));
                 m_lCurLen = m_rgbBuf.Length;
-                }
-
-            AssertValid();
             }
 
+            AssertValid();
+        }
 
         // --------------------------------------------------------------
         //      Public properties
         // --------------------------------------------------------------
 
         // INullable
-        public bool IsNull {
-            get {
-                return m_state == SqlBytesCharsState.Null; 
-            }
+        public bool IsNull
+        {
+            get { return m_state == SqlBytesCharsState.Null; }
         }
 
         // Property: the in-memory buffer of SqlBytes
         //        Return Buffer even if SqlBytes is Null.
-        public byte[] Buffer {
-            get {
-                if (FStream())    {
+        public byte[] Buffer
+        {
+            get
+            {
+                if (FStream())
+                {
                     CopyStreamToBuffer();
                 }
                 return m_rgbBuf;
@@ -186,10 +196,13 @@ namespace System.Data.SqlTypes {
         }
 
         // Property: the actual length of the data
-        public long Length {
-            get {
-                switch (m_state) {
-                    case SqlBytesCharsState.Null: 
+        public long Length
+        {
+            get
+            {
+                switch (m_state)
+                {
+                    case SqlBytesCharsState.Null:
                         throw new SqlNullValueException();
 
                     case SqlBytesCharsState.Stream:
@@ -205,9 +218,12 @@ namespace System.Data.SqlTypes {
         //        Return MaxLength even if SqlBytes is Null.
         //        When the buffer is also null, return -1.
         //        If containing a Stream, return -1.
-        public long MaxLength {
-            get {
-                switch (m_state) {
+        public long MaxLength
+        {
+            get
+            {
+                switch (m_state)
+                {
                     case SqlBytesCharsState.Stream:
                         return -1L;
 
@@ -218,17 +234,22 @@ namespace System.Data.SqlTypes {
         }
 
         // Property: get a copy of the data in a new byte[] array.
-        public byte[] Value {
-            get {
+        public byte[] Value
+        {
+            get
+            {
                 byte[] buffer;
 
-                switch (m_state) {
-                    case SqlBytesCharsState.Null: 
+                switch (m_state)
+                {
+                    case SqlBytesCharsState.Null:
                         throw new SqlNullValueException();
 
                     case SqlBytesCharsState.Stream:
                         if (m_stream.Length > x_lMaxLen)
-                                            throw new SqlTypeException(Res.GetString(Res.SqlMisc_BufferInsufficientMessage));       
+                            throw new SqlTypeException(
+                                Res.GetString(Res.SqlMisc_BufferInsufficientMessage)
+                            );
                         buffer = new byte[m_stream.Length];
                         if (m_stream.Position != 0)
                             m_stream.Seek(0, SeekOrigin.Begin);
@@ -246,8 +267,10 @@ namespace System.Data.SqlTypes {
         }
 
         // class indexer
-        public byte this[long offset] {
-            get {
+        public byte this[long offset]
+        {
+            get
+            {
                 if (offset < 0 || offset >= this.Length)
                     throw new ArgumentOutOfRangeException("offset");
 
@@ -257,7 +280,8 @@ namespace System.Data.SqlTypes {
                 Read(offset, m_rgbWorkBuf, 0, 1);
                 return m_rgbWorkBuf[0];
             }
-            set {
+            set
+            {
                 if (m_rgbWorkBuf == null)
                     m_rgbWorkBuf = new byte[1];
                 m_rgbWorkBuf[0] = value;
@@ -265,10 +289,13 @@ namespace System.Data.SqlTypes {
             }
         }
 
-        public StorageState Storage {
-            get {
-                switch (m_state) {
-                    case SqlBytesCharsState.Null: 
+        public StorageState Storage
+        {
+            get
+            {
+                switch (m_state)
+                {
+                    case SqlBytesCharsState.Null:
                         throw new SqlNullValueException();
                     case SqlBytesCharsState.Stream:
                         return StorageState.Stream;
@@ -282,11 +309,11 @@ namespace System.Data.SqlTypes {
             }
         }
 
-        public Stream Stream {
-            get {
-                return FStream() ? m_stream : new StreamOnSqlBytes(this);
-            }
-            set {
+        public Stream Stream
+        {
+            get { return FStream() ? m_stream : new StreamOnSqlBytes(this); }
+            set
+            {
                 m_lCurLen = x_lNull;
                 m_stream = value;
                 m_state = (value == null) ? SqlBytesCharsState.Null : SqlBytesCharsState.Stream;
@@ -298,7 +325,8 @@ namespace System.Data.SqlTypes {
         //      Public methods
         // --------------------------------------------------------------
 
-        public void SetNull() {
+        public void SetNull()
+        {
             m_lCurLen = x_lNull;
             m_stream = null;
             m_state = SqlBytesCharsState.Null;
@@ -308,14 +336,17 @@ namespace System.Data.SqlTypes {
 
         // Set the current length of the data
         // If the SqlBytes is Null, setLength will make it non-Null.
-        public void SetLength(long value) {
+        public void SetLength(long value)
+        {
             if (value < 0)
                 throw new ArgumentOutOfRangeException("value");
 
-            if (FStream()) { 
+            if (FStream())
+            {
                 m_stream.SetLength(value);
             }
-            else {
+            else
+            {
                 // If there is a buffer, even the value of SqlBytes is Null,
                 // still allow setting length to zero, which will make it not Null.
                 // If the buffer is null, raise exception
@@ -325,7 +356,6 @@ namespace System.Data.SqlTypes {
 
                 if (value > (long)m_rgbBuf.Length)
                     throw new ArgumentOutOfRangeException("value");
-
                 else if (IsNull)
                     // At this point we know that value is small enough
                     // Go back in buffer mode
@@ -338,7 +368,8 @@ namespace System.Data.SqlTypes {
         }
 
         // Read data of specified length from specified offset into a buffer
-        public long Read(long offset, byte[] buffer, int offsetInBuffer, int count) {
+        public long Read(long offset, byte[] buffer, int offsetInBuffer, int count)
+        {
             if (IsNull)
                 throw new SqlNullValueException();
 
@@ -359,8 +390,10 @@ namespace System.Data.SqlTypes {
             if (count > this.Length - offset)
                 count = (int)(this.Length - offset);
 
-            if (count != 0)    {
-                switch (m_state) {
+            if (count != 0)
+            {
+                switch (m_state)
+                {
                     case SqlBytesCharsState.Stream:
                         if (m_stream.Position != offset)
                             m_stream.Seek(offset, SeekOrigin.Begin);
@@ -376,13 +409,16 @@ namespace System.Data.SqlTypes {
         }
 
         // Write data of specified length into the SqlBytes from specified offset
-        public void Write(long offset, byte[] buffer, int offsetInBuffer, int count) {
-            if (FStream()) {
+        public void Write(long offset, byte[] buffer, int offsetInBuffer, int count)
+        {
+            if (FStream())
+            {
                 if (m_stream.Position != offset)
                     m_stream.Seek(offset, SeekOrigin.Begin);
                 m_stream.Write(buffer, offsetInBuffer, count);
             }
-            else {
+            else
+            {
                 // Validate the arguments
                 if (buffer == null)
                     throw new ArgumentNullException("buffer");
@@ -393,7 +429,9 @@ namespace System.Data.SqlTypes {
                 if (offset < 0)
                     throw new ArgumentOutOfRangeException("offset");
                 if (offset > m_rgbBuf.Length)
-                                    throw new SqlTypeException(Res.GetString(Res.SqlMisc_BufferInsufficientMessage));
+                    throw new SqlTypeException(
+                        Res.GetString(Res.SqlMisc_BufferInsufficientMessage)
+                    );
 
                 if (offsetInBuffer < 0 || offsetInBuffer > buffer.Length)
                     throw new ArgumentOutOfRangeException("offsetInBuffer");
@@ -402,14 +440,19 @@ namespace System.Data.SqlTypes {
                     throw new ArgumentOutOfRangeException("count");
 
                 if (count > m_rgbBuf.Length - offset)
-                    throw new SqlTypeException(Res.GetString(Res.SqlMisc_BufferInsufficientMessage));
+                    throw new SqlTypeException(
+                        Res.GetString(Res.SqlMisc_BufferInsufficientMessage)
+                    );
 
-                if (IsNull) {
-                    // If NULL and there is buffer inside, we only allow writing from 
+                if (IsNull)
+                {
+                    // If NULL and there is buffer inside, we only allow writing from
                     // offset zero.
                     //
                     if (offset != 0)
-                        throw new SqlTypeException(Res.GetString(Res.SqlMisc_WriteNonZeroOffsetOnNullMessage)); 
+                        throw new SqlTypeException(
+                            Res.GetString(Res.SqlMisc_WriteNonZeroOffsetOnNullMessage)
+                        );
 
                     // treat as if our current length is zero.
                     // Note this has to be done after all inputs are validated, so that
@@ -418,14 +461,18 @@ namespace System.Data.SqlTypes {
                     m_lCurLen = 0;
                     m_state = SqlBytesCharsState.Buffer;
                 }
-                else if (offset > m_lCurLen) {
+                else if (offset > m_lCurLen)
+                {
                     // Don't allow writing from an offset that this larger than current length.
                     // It would leave uninitialized data in the buffer.
                     //
-                    throw new SqlTypeException(Res.GetString(Res.SqlMisc_WriteOffsetLargerThanLenMessage));
+                    throw new SqlTypeException(
+                        Res.GetString(Res.SqlMisc_WriteOffsetLargerThanLenMessage)
+                    );
                 }
 
-                if (count != 0)    {
+                if (count != 0)
+                {
                     Array.Copy(buffer, offsetInBuffer, m_rgbBuf, offset, count);
 
                     // If the last position that has been written is after
@@ -438,7 +485,8 @@ namespace System.Data.SqlTypes {
             AssertValid();
         }
 
-        public SqlBinary ToSqlBinary() {
+        public SqlBinary ToSqlBinary()
+        {
             return IsNull ? SqlBinary.Null : new SqlBinary(Value);
         }
 
@@ -447,12 +495,14 @@ namespace System.Data.SqlTypes {
         // --------------------------------------------------------------
 
         // Alternative method: ToSqlBinary()
-        public static explicit operator SqlBinary(SqlBytes value) {
+        public static explicit operator SqlBinary(SqlBytes value)
+        {
             return value.ToSqlBinary();
         }
 
         // Alternative method: constructor SqlBytes(SqlBinary)
-        public static explicit operator SqlBytes(SqlBinary value) {
+        public static explicit operator SqlBytes(SqlBinary value)
+        {
             return new SqlBytes(value);
         }
 
@@ -460,13 +510,16 @@ namespace System.Data.SqlTypes {
         //      Private utility functions
         // --------------------------------------------------------------
 
-        [System.Diagnostics.Conditional("DEBUG")] 
-        private void AssertValid() {
-            Debug.Assert(m_state >= SqlBytesCharsState.Null && m_state <= SqlBytesCharsState.Stream);
+        [System.Diagnostics.Conditional("DEBUG")]
+        private void AssertValid()
+        {
+            Debug.Assert(
+                m_state >= SqlBytesCharsState.Null && m_state <= SqlBytesCharsState.Stream
+            );
 
-            if (IsNull) {
-            }
-            else {
+            if (IsNull) { }
+            else
+            {
                 Debug.Assert((m_lCurLen >= 0 && m_lCurLen <= x_lMaxLen) || FStream());
                 Debug.Assert(FStream() || (m_rgbBuf != null && m_lCurLen <= m_rgbBuf.Length));
                 Debug.Assert(!FStream() || (m_lCurLen == x_lNull));
@@ -477,12 +530,15 @@ namespace System.Data.SqlTypes {
         // Copy the data from the Stream to the array buffer.
         // If the SqlBytes doesn't hold a buffer or the buffer
         // is not big enough, allocate new byte array.
-        private void CopyStreamToBuffer() {
+        private void CopyStreamToBuffer()
+        {
             Debug.Assert(FStream());
 
             long lStreamLen = m_stream.Length;
             if (lStreamLen >= x_lMaxLen)
-                           throw new SqlTypeException(Res.GetString(Res.SqlMisc_WriteOffsetLargerThanLenMessage));
+                throw new SqlTypeException(
+                    Res.GetString(Res.SqlMisc_WriteOffsetLargerThanLenMessage)
+                );
 
             if (m_rgbBuf == null || m_rgbBuf.Length < lStreamLen)
                 m_rgbBuf = new byte[lStreamLen];
@@ -500,11 +556,13 @@ namespace System.Data.SqlTypes {
 
         // whether the SqlBytes contains a pointer
         // whether the SqlBytes contains a Stream
-        internal bool FStream()    {
+        internal bool FStream()
+        {
             return m_state == SqlBytesCharsState.Stream;
         }
 
-        private void SetBuffer(byte[] buffer) {
+        private void SetBuffer(byte[] buffer)
+        {
             m_rgbBuf = buffer;
             m_lCurLen = (m_rgbBuf == null) ? x_lNull : (long)m_rgbBuf.Length;
             m_stream = null;
@@ -517,51 +575,60 @@ namespace System.Data.SqlTypes {
         //         XML Serialization
         // --------------------------------------------------------------
 
-        XmlSchema IXmlSerializable.GetSchema() { 
-            return null; 
+        XmlSchema IXmlSerializable.GetSchema()
+        {
+            return null;
         }
-        
-        void IXmlSerializable.ReadXml(XmlReader r) {
+
+        void IXmlSerializable.ReadXml(XmlReader r)
+        {
             byte[] value = null;
-            
-             string isNull = r.GetAttribute("nil", XmlSchema.InstanceNamespace);
-             
-            if (isNull != null && XmlConvert.ToBoolean(isNull)) {
+
+            string isNull = r.GetAttribute("nil", XmlSchema.InstanceNamespace);
+
+            if (isNull != null && XmlConvert.ToBoolean(isNull))
+            {
                 // VSTFDevDiv# 479603 - SqlTypes read null value infinitely and never read the next value. Fix - Read the next value.
                 r.ReadElementString();
                 SetNull();
             }
-            else {
+            else
+            {
                 string base64 = r.ReadElementString();
-                if (base64 == null) {
+                if (base64 == null)
+                {
                     value = new byte[0];
                 }
-                else {
+                else
+                {
                     base64 = base64.Trim();
-                    if (base64.Length == 0) 
+                    if (base64.Length == 0)
                         value = new byte[0];
-                    else 
+                    else
                         value = Convert.FromBase64String(base64);
                 }
             }
-            
+
             SetBuffer(value);
         }
 
-        void IXmlSerializable.WriteXml(XmlWriter writer) {
-            if (IsNull) {
+        void IXmlSerializable.WriteXml(XmlWriter writer)
+        {
+            if (IsNull)
+            {
                 writer.WriteAttributeString("xsi", "nil", XmlSchema.InstanceNamespace, "true");
             }
-            else {
+            else
+            {
                 byte[] value = this.Buffer;
                 writer.WriteString(Convert.ToBase64String(value, 0, (int)(this.Length)));
             }
         }
 
-        public static XmlQualifiedName GetXsdType(XmlSchemaSet schemaSet) {
+        public static XmlQualifiedName GetXsdType(XmlSchemaSet schemaSet)
+        {
             return new XmlQualifiedName("base64Binary", XmlSchema.Namespace);
         }
-
 
         // --------------------------------------------------------------
         //         Serialization using ISerializable
@@ -569,8 +636,8 @@ namespace System.Data.SqlTypes {
 
         // State information is not saved. The current state is converted to Buffer and only the underlying
         // array is serialized, except for Null, in which case this state is kept.
-        [SecurityPermissionAttribute(SecurityAction.LinkDemand,SerializationFormatter=true)]
-        void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context) 
+        [SecurityPermissionAttribute(SecurityAction.LinkDemand, SerializationFormatter = true)]
+        void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
         {
             switch (m_state)
             {
@@ -590,7 +657,6 @@ namespace System.Data.SqlTypes {
                 default:
                     Debug.Assert(false);
                     goto case SqlBytesCharsState.Null;
-                    
             }
         }
 
@@ -598,12 +664,11 @@ namespace System.Data.SqlTypes {
         //      Static fields, properties
         // --------------------------------------------------------------
 
-        // Get a Null instance. 
+        // Get a Null instance.
         // Since SqlBytes is mutable, have to be property and create a new one each time.
-        public static SqlBytes Null {
-            get    {
-                return new SqlBytes((byte[])null);
-            }
+        public static SqlBytes Null
+        {
+            get { return new SqlBytes((byte[])null); }
         }
     } // class SqlBytes
 
@@ -613,19 +678,20 @@ namespace System.Data.SqlTypes {
     // SqlBytes, users could create a BinaryReader/BinaryWriter object
     // to easily read and write primitive types.
     internal sealed class StreamOnSqlBytes : Stream
-        {
+    {
         // --------------------------------------------------------------
         //      Data members
         // --------------------------------------------------------------
 
-        private SqlBytes    m_sb;        // the SqlBytes object 
-        private long        m_lPosition;
+        private SqlBytes m_sb; // the SqlBytes object
+        private long m_lPosition;
 
         // --------------------------------------------------------------
         //      Constructor(s)
         // --------------------------------------------------------------
 
-        internal StreamOnSqlBytes(SqlBytes sb) {
+        internal StreamOnSqlBytes(SqlBytes sb)
+        {
             m_sb = sb;
             m_lPosition = 0;
         }
@@ -634,40 +700,42 @@ namespace System.Data.SqlTypes {
         //      Public properties
         // --------------------------------------------------------------
 
-        // Always can read/write/seek, unless sb is null, 
+        // Always can read/write/seek, unless sb is null,
         // which means the stream has been closed.
 
-        public override bool CanRead {
-            get    {
-                return m_sb != null && !m_sb.IsNull;
-            }
+        public override bool CanRead
+        {
+            get { return m_sb != null && !m_sb.IsNull; }
         }
 
-        public override bool CanSeek {
-            get {
-                return m_sb != null;
-            }
+        public override bool CanSeek
+        {
+            get { return m_sb != null; }
         }
 
-        public override bool CanWrite {
-            get    {
-                return m_sb != null && (!m_sb.IsNull || m_sb.m_rgbBuf != null);
-            }
+        public override bool CanWrite
+        {
+            get { return m_sb != null && (!m_sb.IsNull || m_sb.m_rgbBuf != null); }
         }
 
-        public override long Length    {
-            get    {
+        public override long Length
+        {
+            get
+            {
                 CheckIfStreamClosed("get_Length");
                 return m_sb.Length;
             }
         }
 
-        public override long Position {
-            get    {
+        public override long Position
+        {
+            get
+            {
                 CheckIfStreamClosed("get_Position");
                 return m_lPosition;
             }
-            set    {
+            set
+            {
                 CheckIfStreamClosed("set_Position");
                 if (value < 0 || value > m_sb.Length)
                     throw new ArgumentOutOfRangeException("value");
@@ -680,44 +748,47 @@ namespace System.Data.SqlTypes {
         //      Public methods
         // --------------------------------------------------------------
 
-        public override long Seek(long offset, SeekOrigin origin) {
+        public override long Seek(long offset, SeekOrigin origin)
+        {
             CheckIfStreamClosed("Seek");
 
             long lPosition = 0;
 
-            switch(origin) {
+            switch (origin)
+            {
                 case SeekOrigin.Begin:
                     if (offset < 0 || offset > m_sb.Length)
                         throw new ArgumentOutOfRangeException("offset");
                     m_lPosition = offset;
                     break;
-                    
+
                 case SeekOrigin.Current:
                     lPosition = m_lPosition + offset;
                     if (lPosition < 0 || lPosition > m_sb.Length)
                         throw new ArgumentOutOfRangeException("offset");
                     m_lPosition = lPosition;
                     break;
-                    
+
                 case SeekOrigin.End:
                     lPosition = m_sb.Length + offset;
                     if (lPosition < 0 || lPosition > m_sb.Length)
                         throw new ArgumentOutOfRangeException("offset");
                     m_lPosition = lPosition;
                     break;
-                    
+
                 default:
-                                throw ADP.InvalidSeekOrigin("offset");
+                    throw ADP.InvalidSeekOrigin("offset");
             }
 
             return m_lPosition;
         }
 
         // The Read/Write/ReadByte/WriteByte simply delegates to SqlBytes
-        public override int Read(byte[] buffer, int offset, int count) {
+        public override int Read(byte[] buffer, int offset, int count)
+        {
             CheckIfStreamClosed("Read");
 
-            if (buffer==null)
+            if (buffer == null)
                 throw new ArgumentNullException("buffer");
             if (offset < 0 || offset > buffer.Length)
                 throw new ArgumentOutOfRangeException("offset");
@@ -730,10 +801,11 @@ namespace System.Data.SqlTypes {
             return iBytesRead;
         }
 
-        public override void Write(byte[] buffer, int offset, int count) {
+        public override void Write(byte[] buffer, int offset, int count)
+        {
             CheckIfStreamClosed("Write");
 
-            if (buffer==null)
+            if (buffer == null)
                 throw new ArgumentNullException("buffer");
             if (offset < 0 || offset > buffer.Length)
                 throw new ArgumentOutOfRangeException("offset");
@@ -744,7 +816,8 @@ namespace System.Data.SqlTypes {
             m_lPosition += count;
         }
 
-        public override int ReadByte() {
+        public override int ReadByte()
+        {
             CheckIfStreamClosed("ReadByte");
 
             // If at the end of stream, return -1, rather than call SqlBytes.ReadByte,
@@ -754,18 +827,20 @@ namespace System.Data.SqlTypes {
                 return -1;
 
             int ret = m_sb[m_lPosition];
-            m_lPosition ++;
+            m_lPosition++;
             return ret;
         }
 
-        public override void WriteByte(byte value) {
+        public override void WriteByte(byte value)
+        {
             CheckIfStreamClosed("WriteByte");
 
             m_sb[m_lPosition] = value;
-            m_lPosition ++;
+            m_lPosition++;
         }
 
-        public override void SetLength(long value) {
+        public override void SetLength(long value)
+        {
             CheckIfStreamClosed("SetLength");
 
             m_sb.SetLength(value);
@@ -774,19 +849,23 @@ namespace System.Data.SqlTypes {
         }
 
         // Flush is a no-op for stream on SqlBytes, because they are all in memory
-        public override void Flush() {
+        public override void Flush()
+        {
             if (m_sb.FStream())
                 m_sb.m_stream.Flush();
         }
 
-        protected override void Dispose(bool disposing) {
+        protected override void Dispose(bool disposing)
+        {
             // When m_sb is null, it means the stream has been closed, and
             // any opearation in the future should fail.
             // This is the only case that m_sb is null.
-            try {
-            m_sb = null;
-        }
-            finally {
+            try
+            {
+                m_sb = null;
+            }
+            finally
+            {
                 base.Dispose(disposing);
             }
         }
@@ -795,11 +874,13 @@ namespace System.Data.SqlTypes {
         //      Private utility functions
         // --------------------------------------------------------------
 
-        private bool FClosed() {
+        private bool FClosed()
+        {
             return m_sb == null;
         }
 
-        private void CheckIfStreamClosed(string methodname) {
+        private void CheckIfStreamClosed(string methodname)
+        {
             if (FClosed())
                 throw ADP.StreamClosed(methodname);
         }

@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -62,107 +62,122 @@ namespace MonoTests.System.Web.DynamicData
     {
         static MetaModel defaultModel;
 
-        static MetaModelTest ()
+        static MetaModelTest()
         {
-            defaultModel = new MetaModel ();
+            defaultModel = new MetaModel();
         }
 
         [Test]
-        public void DefaultValues ()
+        public void DefaultValues()
         {
-            var model = new MetaModel ();
+            var model = new MetaModel();
 
-            Assert.IsNotNull (MetaModel.Default, "#A1");
+            Assert.IsNotNull(MetaModel.Default, "#A1");
 
             // We can't be sure which model will be the default one when running under Nunit
             //Assert.IsTrue (MetaModel.Default == defaultModel, "#A2");
-            Assert.IsNotNull (model.Tables, "#A3");
-            Assert.IsNotNull (model.VisibleTables, "#A4");
-            Assert.IsNotNull (model.FieldTemplateFactory, "#A5");
-            Assert.AreEqual ("~/DynamicData/", model.DynamicDataFolderVirtualPath, "#A6");
+            Assert.IsNotNull(model.Tables, "#A3");
+            Assert.IsNotNull(model.VisibleTables, "#A4");
+            Assert.IsNotNull(model.FieldTemplateFactory, "#A5");
+            Assert.AreEqual("~/DynamicData/", model.DynamicDataFolderVirtualPath, "#A6");
 
-            Assert.AreEqual (0, model.VisibleTables.Count, "#B1");
-            Assert.AreEqual (0, model.Tables.Count, "#B2");
-            Assert.AreEqual (typeof (FieldTemplateFactory), model.FieldTemplateFactory.GetType (), "#B3");
+            Assert.AreEqual(0, model.VisibleTables.Count, "#B1");
+            Assert.AreEqual(0, model.Tables.Count, "#B2");
+            Assert.AreEqual(
+                typeof(FieldTemplateFactory),
+                model.FieldTemplateFactory.GetType(),
+                "#B3"
+            );
         }
 
         [Test]
-        public void DynamicDataFolderVirtualPath ()
+        public void DynamicDataFolderVirtualPath()
         {
-            var model = new MetaModel ();
+            var model = new MetaModel();
 
-            Assert.AreEqual ("~/DynamicData/", model.DynamicDataFolderVirtualPath, "#A1");
+            Assert.AreEqual("~/DynamicData/", model.DynamicDataFolderVirtualPath, "#A1");
             model.DynamicDataFolderVirtualPath = null;
-            Assert.AreEqual ("~/DynamicData/", model.DynamicDataFolderVirtualPath, "#A2");
+            Assert.AreEqual("~/DynamicData/", model.DynamicDataFolderVirtualPath, "#A2");
             model.DynamicDataFolderVirtualPath = String.Empty;
-            Assert.AreEqual (String.Empty, model.DynamicDataFolderVirtualPath, "#A3");
+            Assert.AreEqual(String.Empty, model.DynamicDataFolderVirtualPath, "#A3");
             model.DynamicDataFolderVirtualPath = "~/FolderNoTrailingSlash";
-            Assert.AreEqual ("~/FolderNoTrailingSlash/", model.DynamicDataFolderVirtualPath, "#A4");
+            Assert.AreEqual("~/FolderNoTrailingSlash/", model.DynamicDataFolderVirtualPath, "#A4");
             model.DynamicDataFolderVirtualPath = "AnotherFolder";
-            Assert.AreEqual ("AnotherFolder/", model.DynamicDataFolderVirtualPath, "#A5");
+            Assert.AreEqual("AnotherFolder/", model.DynamicDataFolderVirtualPath, "#A5");
             model.DynamicDataFolderVirtualPath = "/YetAnotherFolder";
-            Assert.AreEqual ("/YetAnotherFolder/", model.DynamicDataFolderVirtualPath, "#A6");
+            Assert.AreEqual("/YetAnotherFolder/", model.DynamicDataFolderVirtualPath, "#A6");
             model.DynamicDataFolderVirtualPath = null;
-            Assert.AreEqual ("~/DynamicData/", model.DynamicDataFolderVirtualPath, "#A7");
+            Assert.AreEqual("~/DynamicData/", model.DynamicDataFolderVirtualPath, "#A7");
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void GetTableNull ()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void GetTableNull()
         {
-            new MetaModel ().GetTable ((Type) null);
+            new MetaModel().GetTable((Type)null);
         }
 
         [Test]
-        public void RegisterContext ()
+        public void RegisterContext()
         {
-            var m = new MetaModel ();
-            try {
-                m.RegisterContext (typeof (Foo));
-                Assert.Fail ("#1");
-            } catch (TargetInvocationException ex) {
-                Assert.AreEqual ("ERROR", ex.InnerException.Message, "#2");
-            } finally {
-                MetaModel.ResetRegistrationException ();
+            var m = new MetaModel();
+            try
+            {
+                m.RegisterContext(typeof(Foo));
+                Assert.Fail("#1");
+            }
+            catch (TargetInvocationException ex)
+            {
+                Assert.AreEqual("ERROR", ex.InnerException.Message, "#2");
+            }
+            finally
+            {
+                MetaModel.ResetRegistrationException();
             }
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentException))]
-        public void RegisterContext2 ()
+        [ExpectedException(typeof(ArgumentException))]
+        public void RegisterContext2()
         {
-            try {
-                var m = new MetaModel ();
-                m.RegisterContext (typeof (Bar)); // not supported
-            } finally {
-                MetaModel.ResetRegistrationException ();
+            try
+            {
+                var m = new MetaModel();
+                m.RegisterContext(typeof(Bar)); // not supported
+            }
+            finally
+            {
+                MetaModel.ResetRegistrationException();
             }
         }
 
         [Test]
-        [ExpectedException (typeof (MissingMethodException))]
-        public void RegisterContext3 ()
+        [ExpectedException(typeof(MissingMethodException))]
+        public void RegisterContext3()
         {
-            var m = new MetaModel ();
-            try {
+            var m = new MetaModel();
+            try
+            {
                 // no public constructor
-                m.RegisterContext (typeof (DataContext));
-            } finally {
-                MetaModel.ResetRegistrationException ();
+                m.RegisterContext(typeof(DataContext));
+            }
+            finally
+            {
+                MetaModel.ResetRegistrationException();
             }
         }
 
         [Test]
-        public void RegisterContext4 ()
+        public void RegisterContext4()
         {
-            MetaModel m = Utils.GetModel<MyDataContext1> ();
-            Assert.AreEqual (0, m.Tables.Count, "#1-1");
-            Assert.AreEqual (0, m.VisibleTables.Count, "#1-2");
-            Assert.IsNotNull (MetaModel.GetModel (typeof (MyDataContext1)), "#2");
+            MetaModel m = Utils.GetModel<MyDataContext1>();
+            Assert.AreEqual(0, m.Tables.Count, "#1-1");
+            Assert.AreEqual(0, m.VisibleTables.Count, "#1-2");
+            Assert.IsNotNull(MetaModel.GetModel(typeof(MyDataContext1)), "#2");
         }
 
         [Test]
-        public void RegisterContext5 ()
+        public void RegisterContext5()
         {
             // In the process of several experiments (as the docs lack any good explanation),
             // I determined that this test needs the following for succesful completion:
@@ -177,122 +192,139 @@ namespace MonoTests.System.Web.DynamicData
             //    HttpRequest.QueryString collection with one null item, and .NET's DynamicData will happily
             //    assume any entry in that collection is not null (it seems null checks aren't very popular
             //    in DynamicData code)
-            var req = new FakeHttpWorkerRequest ();
-            var ctx = new HttpContext (req);
+            var req = new FakeHttpWorkerRequest();
+            var ctx = new HttpContext(req);
             HttpContext.Current = ctx;
-            MetaModel m = Utils.GetModel<MyDataContext2> ();
+            MetaModel m = Utils.GetModel<MyDataContext2>();
 
-            RouteTable.Routes.Add (
-                new DynamicDataRoute ("{table}/{action}.aspx") {
-                    Constraints = new RouteValueDictionary (new { action = "List|Details|Edit|Insert" }),
+            RouteTable.Routes.Add(
+                new DynamicDataRoute("{table}/{action}.aspx")
+                {
+                    Constraints = new RouteValueDictionary(
+                        new { action = "List|Details|Edit|Insert" }
+                    ),
                     Model = m,
-                    RouteHandler = new MyDynamicDataRouteHandler ()
-                });
+                    RouteHandler = new MyDynamicDataRouteHandler()
+                }
+            );
 
             MetaTable t = m.Tables[0];
 
-            Assert.AreEqual (1, m.Tables.Count, "#1-1");
-            Assert.AreEqual (1, m.VisibleTables.Count, "#1-2");
-            Assert.AreEqual (typeof (Foo), t.EntityType, "#1-3");
+            Assert.AreEqual(1, m.Tables.Count, "#1-1");
+            Assert.AreEqual(1, m.VisibleTables.Count, "#1-2");
+            Assert.AreEqual(typeof(Foo), t.EntityType, "#1-3");
 
             // Those names are only the last part before '.' (i.e. without schema name).
-            Assert.AreEqual ("FooTable", t.Name, "#2-1");
-            Assert.AreEqual ("FooTable", t.DisplayName, "#2-2");
-            Assert.AreEqual ("FooTable", t.DataContextPropertyName, "#2-3");
-            Assert.AreEqual ("/FooTable/List.aspx", t.ListActionPath, "#2-4");
+            Assert.AreEqual("FooTable", t.Name, "#2-1");
+            Assert.AreEqual("FooTable", t.DisplayName, "#2-2");
+            Assert.AreEqual("FooTable", t.DataContextPropertyName, "#2-3");
+            Assert.AreEqual("/FooTable/List.aspx", t.ListActionPath, "#2-4");
 
-            Assert.AreEqual ("FooTable", t.Provider.Name, "#3-1");
+            Assert.AreEqual("FooTable", t.Provider.Name, "#3-1");
         }
 
         [Test]
-        public void ResetRegistrationException ()
+        public void ResetRegistrationException()
         {
-            MetaModel.ResetRegistrationException ();
+            MetaModel.ResetRegistrationException();
 
-            var m = new MetaModel ();
-            try {
-                m.RegisterContext (typeof (Foo));
-                Assert.Fail ("#1");
-            } catch (TargetInvocationException) {
+            var m = new MetaModel();
+            try
+            {
+                m.RegisterContext(typeof(Foo));
+                Assert.Fail("#1");
             }
+            catch (TargetInvocationException) { }
 
-            try {
-                m.RegisterContext (typeof (MyDataContext1));
-                Assert.Fail ("#2");
-            } catch (InvalidOperationException) {
-            } finally {
-                MetaModel.ResetRegistrationException ();
+            try
+            {
+                m.RegisterContext(typeof(MyDataContext1));
+                Assert.Fail("#2");
+            }
+            catch (InvalidOperationException) { }
+            finally
+            {
+                MetaModel.ResetRegistrationException();
             }
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentException))]
-        public void GetTableObject ()
+        [ExpectedException(typeof(ArgumentException))]
+        public void GetTableObject()
         {
             // entity type 'System.Object' not found.
-            new MetaModel ().GetTable (typeof (object));
+            new MetaModel().GetTable(typeof(object));
         }
 
         [Test]
-        public void GetModel ()
+        public void GetModel()
         {
-            Utils.GetModel<UseOnlyInGetModelTestDataContext> ();
-            Assert.Throws<ArgumentNullException> (() => MetaModel.GetModel (null), "#A1");
-            Assert.Throws<InvalidOperationException> (() => MetaModel.GetModel (typeof (object)), "#A2");
-            Assert.IsNotNull (MetaModel.GetModel (typeof (UseOnlyInGetModelTestDataContext)));
+            Utils.GetModel<UseOnlyInGetModelTestDataContext>();
+            Assert.Throws<ArgumentNullException>(() => MetaModel.GetModel(null), "#A1");
+            Assert.Throws<InvalidOperationException>(
+                () => MetaModel.GetModel(typeof(object)),
+                "#A2"
+            );
+            Assert.IsNotNull(MetaModel.GetModel(typeof(UseOnlyInGetModelTestDataContext)));
         }
 
         [Test]
-        public void TryGetTable ()
+        public void TryGetTable()
         {
-            MetaModel m = Utils.GetModel<MyDataContext2> ();
+            MetaModel m = Utils.GetModel<MyDataContext2>();
             MetaTable t;
 
-            Assert.Throws<ArgumentNullException> (() => m.TryGetTable (null, out t), "#A1");
+            Assert.Throws<ArgumentNullException>(() => m.TryGetTable(null, out t), "#A1");
 
-            Assert.IsTrue (m.TryGetTable ("FooTable", out t), "#B1");
-            Assert.IsNotNull (t, "#B2");
-            Assert.AreEqual (typeof (Foo), t.EntityType, "#B3");
+            Assert.IsTrue(m.TryGetTable("FooTable", out t), "#B1");
+            Assert.IsNotNull(t, "#B2");
+            Assert.AreEqual(typeof(Foo), t.EntityType, "#B3");
 
-            Assert.IsFalse (m.TryGetTable (String.Empty, out t), "#C1");
-            Assert.IsNull (t, "#C2");
-            Assert.IsFalse (m.TryGetTable ("NoSuchTable", out t), "#C3");
-            Assert.IsNull (t, "#C4");
+            Assert.IsFalse(m.TryGetTable(String.Empty, out t), "#C1");
+            Assert.IsNull(t, "#C2");
+            Assert.IsFalse(m.TryGetTable("NoSuchTable", out t), "#C3");
+            Assert.IsNull(t, "#C4");
         }
 
         [Test]
-        public void GetTable ()
+        public void GetTable()
         {
-            MetaModel m = Utils.GetModel<MyDataContext2> ();
+            MetaModel m = Utils.GetModel<MyDataContext2>();
             MetaTable t;
             string str = null;
             Type type = null;
 
-            Assert.Throws<ArgumentNullException> (() => t = m.GetTable (str), "#A1");
-            Assert.Throws<ArgumentNullException> (() => t = m.GetTable (type), "#A2");
-            Assert.Throws<ArgumentNullException> (() => t = m.GetTable (null, null), "#A3");
-            Assert.Throws<ArgumentNullException> (() => t = m.GetTable (null, typeof (Foo)), "#A4");
-            Assert.Throws<ArgumentNullException> (() => t = m.GetTable ("FooTable", null), "#A5");
+            Assert.Throws<ArgumentNullException>(() => t = m.GetTable(str), "#A1");
+            Assert.Throws<ArgumentNullException>(() => t = m.GetTable(type), "#A2");
+            Assert.Throws<ArgumentNullException>(() => t = m.GetTable(null, null), "#A3");
+            Assert.Throws<ArgumentNullException>(() => t = m.GetTable(null, typeof(Foo)), "#A4");
+            Assert.Throws<ArgumentNullException>(() => t = m.GetTable("FooTable", null), "#A5");
 
-            Assert.Throws<ArgumentException> (() => t = m.GetTable (String.Empty), "#B1");
-            Assert.Throws<ArgumentException> (() => t = m.GetTable ("NoSuchName"), "#B2");
-            Assert.Throws<ArgumentException> (() => t = m.GetTable (typeof (object)), "#B3");
-            Assert.Throws<ArgumentException> (() => t = m.GetTable ("FooTable", typeof (object)), "#B4");
-            Assert.Throws<ArgumentException> (() => t = m.GetTable ("NoSuchTable", typeof (object)), "#B5");
+            Assert.Throws<ArgumentException>(() => t = m.GetTable(String.Empty), "#B1");
+            Assert.Throws<ArgumentException>(() => t = m.GetTable("NoSuchName"), "#B2");
+            Assert.Throws<ArgumentException>(() => t = m.GetTable(typeof(object)), "#B3");
+            Assert.Throws<ArgumentException>(
+                () => t = m.GetTable("FooTable", typeof(object)),
+                "#B4"
+            );
+            Assert.Throws<ArgumentException>(
+                () => t = m.GetTable("NoSuchTable", typeof(object)),
+                "#B5"
+            );
 
-            Assert.IsNotNull (t = m.GetTable ("FooTable"), "#C1");
-            Assert.AreEqual (typeof (Foo), t.EntityType, "#C2");
-            Assert.IsNotNull (t = m.GetTable (typeof (Foo)), "#C3");
-            Assert.AreEqual (typeof (Foo), t.EntityType, "#C4");
-            Assert.IsNotNull (t = m.GetTable ("FooTable", typeof (MyDataContext2)), "#C5");
-            Assert.AreEqual (typeof (Foo), t.EntityType, "#C6");
+            Assert.IsNotNull(t = m.GetTable("FooTable"), "#C1");
+            Assert.AreEqual(typeof(Foo), t.EntityType, "#C2");
+            Assert.IsNotNull(t = m.GetTable(typeof(Foo)), "#C3");
+            Assert.AreEqual(typeof(Foo), t.EntityType, "#C4");
+            Assert.IsNotNull(t = m.GetTable("FooTable", typeof(MyDataContext2)), "#C5");
+            Assert.AreEqual(typeof(Foo), t.EntityType, "#C6");
         }
 
         [Test]
-        public void GetActionPath ()
+        public void GetActionPath()
         {
-            var foo = new Foo (true);
-            MetaModel m = Utils.GetModel<MyDataContext2> ();
+            var foo = new Foo(true);
+            MetaModel m = Utils.GetModel<MyDataContext2>();
 
             // None of those are thrown from GetTable - it seems this method performs NO checks at all, sigh...
             //
@@ -304,31 +336,45 @@ namespace MonoTests.System.Web.DynamicData
         }
 
         [Test]
-        public void GetActionPath2 ()
+        public void GetActionPath2()
         {
-            var foo = new Foo (true);
-            var req = new FakeHttpWorkerRequest ();
-            var ctx = new HttpContext (req);
+            var foo = new Foo(true);
+            var req = new FakeHttpWorkerRequest();
+            var ctx = new HttpContext(req);
             HttpContext.Current = ctx;
-            MetaModel m = Utils.GetModel<MyDataContext2> ();
+            MetaModel m = Utils.GetModel<MyDataContext2>();
 
-            RouteTable.Routes.Add (
-                new DynamicDataRoute ("{table}/{action}.aspx") {
-                    Constraints = new RouteValueDictionary (new { action = "List|Details|Edit|Insert" }),
+            RouteTable.Routes.Add(
+                new DynamicDataRoute("{table}/{action}.aspx")
+                {
+                    Constraints = new RouteValueDictionary(
+                        new { action = "List|Details|Edit|Insert" }
+                    ),
                     Model = m,
-                    RouteHandler = new MyDynamicDataRouteHandler ()
-                });
+                    RouteHandler = new MyDynamicDataRouteHandler()
+                }
+            );
 
             // .NET stacktrace:
             //
             // at System.Web.DynamicData.MetaModel.TryGetTable(String uniqueTableName, MetaTable& table)
             // at System.Web.DynamicData.MetaModel.GetTable(String uniqueTableName)
-            Assert.Throws<ArgumentNullException> (() => m.GetActionPath (null, PageAction.List, foo), "#A1");
-            Assert.AreEqual (String.Empty, m.GetActionPath ("FooTable", null, foo), "#A2");
-            Assert.AreEqual ("/FooTable/List.aspx", m.GetActionPath ("FooTable", PageAction.List, null), "#A3");
-            Assert.Throws<ArgumentException> (() => m.GetActionPath ("NoSuchTable", PageAction.List, foo), "#A4");
+            Assert.Throws<ArgumentNullException>(
+                () => m.GetActionPath(null, PageAction.List, foo),
+                "#A1"
+            );
+            Assert.AreEqual(String.Empty, m.GetActionPath("FooTable", null, foo), "#A2");
+            Assert.AreEqual(
+                "/FooTable/List.aspx",
+                m.GetActionPath("FooTable", PageAction.List, null),
+                "#A3"
+            );
+            Assert.Throws<ArgumentException>(
+                () => m.GetActionPath("NoSuchTable", PageAction.List, foo),
+                "#A4"
+            );
 
-            Assert.AreEqual ("/FooTable/List.aspx", m.GetActionPath ("FooTable", "List", foo), "#B1");
+            Assert.AreEqual("/FooTable/List.aspx", m.GetActionPath("FooTable", "List", foo), "#B1");
         }
     }
 }

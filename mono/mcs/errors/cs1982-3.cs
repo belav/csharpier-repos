@@ -3,10 +3,8 @@
 
 using System;
 
-[A(typeof (dynamic[]))]
+[A(typeof(dynamic[]))]
 public class A : Attribute
 {
-    public A (object arg)
-    {
-    }
+    public A(object arg) { }
 }

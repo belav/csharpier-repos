@@ -1,5 +1,5 @@
 //
-// SoapAttributes.cs: 
+// SoapAttributes.cs:
 //
 // Author:
 //   John Donagher (john@webmeta.com)
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -46,93 +46,96 @@ namespace System.Xml.Serialization
         private bool soapIgnore;
         private SoapTypeAttribute soapType;
 
-        public SoapAttributes ()
-        {
-        }
-        
-        public SoapAttributes (ICustomAttributeProvider provider)
+        public SoapAttributes() { }
+
+        public SoapAttributes(ICustomAttributeProvider provider)
         {
             object[] attributes = provider.GetCustomAttributes(false);
-            foreach(object obj in attributes)
+            foreach (object obj in attributes)
             {
-                if(obj is SoapAttributeAttribute)
-                    soapAttribute = (SoapAttributeAttribute) obj;
-                else if(obj is DefaultValueAttribute)
-                    soapDefaultValue = ((DefaultValueAttribute) obj).Value;
-                else if(obj is SoapElementAttribute)
-                    soapElement = (SoapElementAttribute) obj;
-                else if(obj is SoapEnumAttribute)
-                    soapEnum = (SoapEnumAttribute) obj;
-                else if(obj is SoapIgnoreAttribute)
+                if (obj is SoapAttributeAttribute)
+                    soapAttribute = (SoapAttributeAttribute)obj;
+                else if (obj is DefaultValueAttribute)
+                    soapDefaultValue = ((DefaultValueAttribute)obj).Value;
+                else if (obj is SoapElementAttribute)
+                    soapElement = (SoapElementAttribute)obj;
+                else if (obj is SoapEnumAttribute)
+                    soapEnum = (SoapEnumAttribute)obj;
+                else if (obj is SoapIgnoreAttribute)
                     soapIgnore = true;
-                else if(obj is SoapTypeAttribute)
-                    soapType = (SoapTypeAttribute) obj;
+                else if (obj is SoapTypeAttribute)
+                    soapType = (SoapTypeAttribute)obj;
             }
         }
 
-        public SoapAttributeAttribute SoapAttribute 
+        public SoapAttributeAttribute SoapAttribute
         {
-            get { return  soapAttribute; } 
+            get { return soapAttribute; }
             set { soapAttribute = value; }
         }
 
-        public object SoapDefaultValue 
+        public object SoapDefaultValue
         {
-            get { return  soapDefaultValue; } 
+            get { return soapDefaultValue; }
             set { soapDefaultValue = value; }
         }
 
-        public SoapElementAttribute SoapElement 
+        public SoapElementAttribute SoapElement
         {
-            get { return  soapElement; } 
+            get { return soapElement; }
             set { soapElement = value; }
         }
 
-        public SoapEnumAttribute SoapEnum 
+        public SoapEnumAttribute SoapEnum
         {
-            get { return  soapEnum; } 
+            get { return soapEnum; }
             set { soapEnum = value; }
         }
 
         public bool SoapIgnore
         {
-            get { return  soapIgnore; } 
+            get { return soapIgnore; }
             set { soapIgnore = value; }
         }
 
-        public SoapTypeAttribute SoapType 
+        public SoapTypeAttribute SoapType
         {
-            get { return  soapType; } 
+            get { return soapType; }
             set { soapType = value; }
         }
-        
-        internal void AddKeyHash (System.Text.StringBuilder sb)
+
+        internal void AddKeyHash(System.Text.StringBuilder sb)
         {
-            sb.Append ("SA ");
-            
-            if (soapIgnore) 
-                sb.Append ('i');
-                
+            sb.Append("SA ");
+
+            if (soapIgnore)
+                sb.Append('i');
+
             if (soapAttribute != null)
-                soapAttribute.AddKeyHash (sb);
-                
+                soapAttribute.AddKeyHash(sb);
+
             if (soapElement != null)
-                soapElement.AddKeyHash (sb);
-                
+                soapElement.AddKeyHash(sb);
+
             if (soapEnum != null)
-                soapEnum.AddKeyHash (sb);
-                
+                soapEnum.AddKeyHash(sb);
+
             if (soapType != null)
-                soapType.AddKeyHash (sb);
-                
-            if (soapDefaultValue == null) {
-                sb.Append ("n");
+                soapType.AddKeyHash(sb);
+
+            if (soapDefaultValue == null)
+            {
+                sb.Append("n");
             }
-            else if (!(soapDefaultValue is System.DBNull)) {
-                string v = XmlCustomFormatter.ToXmlString (TypeTranslator.GetTypeData (soapDefaultValue.GetType()), soapDefaultValue);
-                sb.Append ("v" + v);
+            else if (!(soapDefaultValue is System.DBNull))
+            {
+                string v = XmlCustomFormatter.ToXmlString(
+                    TypeTranslator.GetTypeData(soapDefaultValue.GetType()),
+                    soapDefaultValue
+                );
+                sb.Append("v" + v);
             }
-            sb.Append ("|");
-        }    
+            sb.Append("|");
+        }
     }
 }

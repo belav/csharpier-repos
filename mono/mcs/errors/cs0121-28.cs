@@ -5,25 +5,22 @@ using System;
 
 public static class Program
 {
-    public static void Main ()
+    public static void Main()
     {
-        Foo (Bar);
+        Foo(Bar);
     }
 
-    public static dynamic Bar (string s1)
+    public static dynamic Bar(string s1)
     {
         return 1;
     }
-    
-    public static object Bar () {
-        return  2;
+
+    public static object Bar()
+    {
+        return 2;
     }
 
-    public static void Foo (Func<string, dynamic> input)
-    {
-    }
+    public static void Foo(Func<string, dynamic> input) { }
 
-    public static void Foo (Func<object> input)
-    {
-    }
+    public static void Foo(Func<object> input) { }
 }

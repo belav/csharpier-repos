@@ -46,6 +46,7 @@ namespace projs
         {
             return new double[4] { 5.1, 5.2, 5.3, 5.4 };
         }
+
         internal static double[] GenerateSource2()
         {
             return new double[4] { 6.1, 6.2, 6.3, 6.4 };

@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,26 +29,28 @@
 
 using System.Runtime.InteropServices;
 
-namespace System.Security.Permissions {
-
+namespace System.Security.Permissions
+{
     [Serializable]
-    [ComVisible (true)]
-    public sealed class IsolatedStorageFilePermission : IsolatedStoragePermission, IBuiltInPermission {
-
+    [ComVisible(true)]
+    public sealed class IsolatedStorageFilePermission
+        : IsolatedStoragePermission,
+            IBuiltInPermission
+    {
         // Constructors
 
-        public IsolatedStorageFilePermission (PermissionState state)
-            : base (state)
-        {
-        }
+        public IsolatedStorageFilePermission(PermissionState state)
+            : base(state) { }
 
         // Properties
 
         // Methods
 
-        public override IPermission Copy () 
+        public override IPermission Copy()
         {
-            IsolatedStorageFilePermission p = new IsolatedStorageFilePermission (PermissionState.None);
+            IsolatedStorageFilePermission p = new IsolatedStorageFilePermission(
+                PermissionState.None
+            );
             p.m_userQuota = m_userQuota;
             p.m_machineQuota = m_machineQuota;
             p.m_expirationDays = m_expirationDays;
@@ -57,30 +59,36 @@ namespace System.Security.Permissions {
             return p;
         }
 
-        public override IPermission Intersect (IPermission target) 
+        public override IPermission Intersect(IPermission target)
         {
-            IsolatedStorageFilePermission isfp = Cast (target);
+            IsolatedStorageFilePermission isfp = Cast(target);
             if (isfp == null)
                 return null;
-            if (IsEmpty () && isfp.IsEmpty ())
+            if (IsEmpty() && isfp.IsEmpty())
                 return null;
 
-            IsolatedStorageFilePermission p = new IsolatedStorageFilePermission (PermissionState.None);
+            IsolatedStorageFilePermission p = new IsolatedStorageFilePermission(
+                PermissionState.None
+            );
             p.m_userQuota = (m_userQuota < isfp.m_userQuota) ? m_userQuota : isfp.m_userQuota;
-            p.m_machineQuota = (m_machineQuota < isfp.m_machineQuota) ? m_machineQuota : isfp.m_machineQuota;
-            p.m_expirationDays = (m_expirationDays < isfp.m_expirationDays) ? m_expirationDays : isfp.m_expirationDays;
+            p.m_machineQuota =
+                (m_machineQuota < isfp.m_machineQuota) ? m_machineQuota : isfp.m_machineQuota;
+            p.m_expirationDays =
+                (m_expirationDays < isfp.m_expirationDays)
+                    ? m_expirationDays
+                    : isfp.m_expirationDays;
             p.m_permanentData = (m_permanentData && isfp.m_permanentData);
             // UsageAllowed == Unrestricted is a special case handled by the property
             p.UsageAllowed = (m_allowed < isfp.m_allowed) ? m_allowed : isfp.m_allowed;
             return p;
         }
 
-        public override bool IsSubsetOf (IPermission target) 
+        public override bool IsSubsetOf(IPermission target)
         {
-            IsolatedStorageFilePermission isfp = Cast (target);
+            IsolatedStorageFilePermission isfp = Cast(target);
             if (isfp == null)
-                return IsEmpty ();
-            if (isfp.IsUnrestricted ())
+                return IsEmpty();
+            if (isfp.IsUnrestricted())
                 return true;
 
             if (m_userQuota > isfp.m_userQuota)
@@ -96,45 +104,52 @@ namespace System.Security.Permissions {
             return true;
         }
 
-        public override IPermission Union (IPermission target)
+        public override IPermission Union(IPermission target)
         {
-            IsolatedStorageFilePermission isfp = Cast (target);
+            IsolatedStorageFilePermission isfp = Cast(target);
             if (isfp == null)
-                return Copy ();
+                return Copy();
 
-            IsolatedStorageFilePermission p = new IsolatedStorageFilePermission (PermissionState.None);
+            IsolatedStorageFilePermission p = new IsolatedStorageFilePermission(
+                PermissionState.None
+            );
             p.m_userQuota = (m_userQuota > isfp.m_userQuota) ? m_userQuota : isfp.m_userQuota;
-            p.m_machineQuota = (m_machineQuota > isfp.m_machineQuota) ? m_machineQuota : isfp.m_machineQuota;
-            p.m_expirationDays = (m_expirationDays > isfp.m_expirationDays) ? m_expirationDays : isfp.m_expirationDays;
+            p.m_machineQuota =
+                (m_machineQuota > isfp.m_machineQuota) ? m_machineQuota : isfp.m_machineQuota;
+            p.m_expirationDays =
+                (m_expirationDays > isfp.m_expirationDays)
+                    ? m_expirationDays
+                    : isfp.m_expirationDays;
             p.m_permanentData = (m_permanentData || isfp.m_permanentData);
             // UsageAllowed == Unrestricted is a special case handled by the property
             p.UsageAllowed = (m_allowed > isfp.m_allowed) ? m_allowed : isfp.m_allowed;
             return p;
         }
 
-        [MonoTODO ("(2.0) new override - something must have been added ???")]
-        [ComVisible (false)]
-        public override SecurityElement ToXml ()
+        [MonoTODO("(2.0) new override - something must have been added ???")]
+        [ComVisible(false)]
+        public override SecurityElement ToXml()
         {
-            return base.ToXml ();
+            return base.ToXml();
         }
 
         // IBuiltInPermission
-        int IBuiltInPermission.GetTokenIndex ()
+        int IBuiltInPermission.GetTokenIndex()
         {
-            return (int) BuiltInToken.IsolatedStorageFile;
+            return (int)BuiltInToken.IsolatedStorageFile;
         }
 
         // helpers
 
-        private IsolatedStorageFilePermission Cast (IPermission target)
+        private IsolatedStorageFilePermission Cast(IPermission target)
         {
             if (target == null)
                 return null;
 
             IsolatedStorageFilePermission isfp = (target as IsolatedStorageFilePermission);
-            if (isfp == null) {
-                ThrowInvalidPermission (target, typeof (IsolatedStorageFilePermission));
+            if (isfp == null)
+            {
+                ThrowInvalidPermission(target, typeof(IsolatedStorageFilePermission));
             }
 
             return isfp;

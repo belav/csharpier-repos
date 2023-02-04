@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -27,7 +27,10 @@ namespace Castle.DynamicProxy.Contributors
         private readonly GetTargetExpressionDelegate getTargetExpression;
         protected bool canChangeTarget = false;
 
-        public InterfaceProxyWithoutTargetContributor(INamingScope namingScope, GetTargetExpressionDelegate getTarget)
+        public InterfaceProxyWithoutTargetContributor(
+            INamingScope namingScope,
+            GetTargetExpressionDelegate getTarget
+        )
             : base(namingScope)
         {
             getTargetExpression = getTarget;
@@ -42,8 +45,11 @@ namespace Castle.DynamicProxy.Contributors
             }
         }
 
-        protected override MethodGenerator GetMethodGenerator(MetaMethod method, ClassEmitter @class,
-                                                              OverrideMethodDelegate overrideMethod)
+        protected override MethodGenerator GetMethodGenerator(
+            MetaMethod method,
+            ClassEmitter @class,
+            OverrideMethodDelegate overrideMethod
+        )
         {
             if (!method.Proxyable)
             {
@@ -51,12 +57,14 @@ namespace Castle.DynamicProxy.Contributors
             }
 
             var invocation = GetInvocationType(method, @class);
-            return new MethodWithInvocationGenerator(method,
-                                                     @class.GetField("__interceptors"),
-                                                     invocation,
-                                                     getTargetExpression,
-                                                     overrideMethod,
-                                                     null);
+            return new MethodWithInvocationGenerator(
+                method,
+                @class.GetField("__interceptors"),
+                invocation,
+                getTargetExpression,
+                overrideMethod,
+                null
+            );
         }
 
         private Type GetInvocationType(MetaMethod method, ClassEmitter emitter)
@@ -80,18 +88,28 @@ namespace Castle.DynamicProxy.Contributors
             {
                 invocationInterfaces = new[] { typeof(IInvocation) };
             }
-            var key = new CacheKey(methodInfo, CompositionInvocationTypeGenerator.BaseType, invocationInterfaces, null);
+            var key = new CacheKey(
+                methodInfo,
+                CompositionInvocationTypeGenerator.BaseType,
+                invocationInterfaces,
+                null
+            );
 
             // no locking required as we're already within a lock
 
-            return scope.TypeCache.GetOrAddWithoutTakingLock(key, _ =>
-                new CompositionInvocationTypeGenerator(methodInfo.DeclaringType,
-                                                       method,
-                                                       methodInfo,
-                                                       canChangeTarget,
-                                                       null)
-                .Generate(emitter, namingScope)
-                .BuildType());
+            return scope.TypeCache.GetOrAddWithoutTakingLock(
+                key,
+                _ =>
+                    new CompositionInvocationTypeGenerator(
+                        methodInfo.DeclaringType,
+                        method,
+                        methodInfo,
+                        canChangeTarget,
+                        null
+                    )
+                        .Generate(emitter, namingScope)
+                        .BuildType()
+            );
         }
     }
 }

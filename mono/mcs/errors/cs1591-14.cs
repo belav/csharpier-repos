@@ -11,7 +11,7 @@ namespace Testing
     /// </summary>
     public class Test
     {
-        public static bool operator ! (Test t)
+        public static bool operator !(Test t)
         {
             return false;
         }

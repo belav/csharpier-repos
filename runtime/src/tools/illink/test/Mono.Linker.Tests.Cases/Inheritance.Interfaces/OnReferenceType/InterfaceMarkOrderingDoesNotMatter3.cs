@@ -3,51 +3,51 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 
 namespace Mono.Linker.Tests.Cases.Inheritance.Interfaces.OnReferenceType
 {
-    [SetupLinkerDescriptorFile ("InterfaceMarkOrderingDoesNotMatter3.xml")]
+    [SetupLinkerDescriptorFile("InterfaceMarkOrderingDoesNotMatter3.xml")]
     public class InterfaceMarkOrderingDoesNotMatter3
     {
-        public static void Main ()
+        public static void Main()
         {
-            CauseAToBeMarked ().AMethod ();
-            CauseZToBeMarked ().ZMethod ();
-            CauseBToBeMarked ().BMethod ();
-            CauseYToBeMarked ().YMethod ();
-            CauseFToBeMarked ().FMethod ();
-            var c = CauseCToBeMarked ();
+            CauseAToBeMarked().AMethod();
+            CauseZToBeMarked().ZMethod();
+            CauseBToBeMarked().BMethod();
+            CauseYToBeMarked().YMethod();
+            CauseFToBeMarked().FMethod();
+            var c = CauseCToBeMarked();
         }
 
         [Kept]
-        static A CauseAToBeMarked ()
-        {
-            return null;
-        }
-
-        [Kept]
-        static Z CauseZToBeMarked ()
+        static A CauseAToBeMarked()
         {
             return null;
         }
 
         [Kept]
-        static B CauseBToBeMarked ()
+        static Z CauseZToBeMarked()
         {
             return null;
         }
 
         [Kept]
-        static Y CauseYToBeMarked ()
+        static B CauseBToBeMarked()
         {
             return null;
         }
 
         [Kept]
-        static Nested.F CauseFToBeMarked ()
+        static Y CauseYToBeMarked()
         {
             return null;
         }
 
         [Kept]
-        static C CauseCToBeMarked ()
+        static Nested.F CauseFToBeMarked()
+        {
+            return null;
+        }
+
+        [Kept]
+        static C CauseCToBeMarked()
         {
             return null;
         }
@@ -56,68 +56,52 @@ namespace Mono.Linker.Tests.Cases.Inheritance.Interfaces.OnReferenceType
         interface A
         {
             [Kept]
-            void AMethod ();
+            void AMethod();
         }
 
         [Kept]
         interface Z
         {
             [Kept]
-            void ZMethod ();
+            void ZMethod();
         }
 
         [Kept]
         interface C
         {
-            void CMethod ();
+            void CMethod();
         }
 
         [Kept]
-        [KeptMember (".ctor()")]
-        [KeptInterface (typeof (A))]
-        [KeptInterface (typeof (B))]
-        [KeptInterface (typeof (C))]
-        [KeptInterface (typeof (Nested.F))]
-        [KeptInterface (typeof (Y))]
-        [KeptInterface (typeof (Z))]
+        [KeptMember(".ctor()")]
+        [KeptInterface(typeof(A))]
+        [KeptInterface(typeof(B))]
+        [KeptInterface(typeof(C))]
+        [KeptInterface(typeof(Nested.F))]
+        [KeptInterface(typeof(Y))]
+        [KeptInterface(typeof(Z))]
         class MMarked : A, B, Y, Z, C, D, Nested.F, E
         {
             [Kept]
-            public void AMethod ()
-            {
-            }
+            public void AMethod() { }
 
             [Kept]
-            public void BMethod ()
-            {
-            }
+            public void BMethod() { }
 
             [Kept]
-            public void YMethod ()
-            {
-            }
+            public void YMethod() { }
 
             [Kept]
-            public void ZMethod ()
-            {
-            }
+            public void ZMethod() { }
 
-            public void CMethod ()
-            {
-            }
+            public void CMethod() { }
 
-            public void DMethod ()
-            {
-            }
+            public void DMethod() { }
 
             [Kept]
-            public void FMethod ()
-            {
-            }
+            public void FMethod() { }
 
-            public void EMethod ()
-            {
-            }
+            public void EMethod() { }
         }
 
         [Kept]
@@ -127,7 +111,7 @@ namespace Mono.Linker.Tests.Cases.Inheritance.Interfaces.OnReferenceType
             public interface F
             {
                 [Kept]
-                void FMethod ();
+                void FMethod();
             }
         }
 
@@ -135,24 +119,24 @@ namespace Mono.Linker.Tests.Cases.Inheritance.Interfaces.OnReferenceType
         interface B
         {
             [Kept]
-            void BMethod ();
+            void BMethod();
         }
 
         [Kept]
         interface Y
         {
             [Kept]
-            void YMethod ();
+            void YMethod();
         }
 
         interface D
         {
-            void DMethod ();
+            void DMethod();
         }
 
         interface E
         {
-            void EMethod ();
+            void EMethod();
         }
     }
 }

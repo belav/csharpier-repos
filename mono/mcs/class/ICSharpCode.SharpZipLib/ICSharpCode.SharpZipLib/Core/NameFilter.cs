@@ -20,7 +20,7 @@
 // making a combined work based on this library.  Thus, the terms and
 // conditions of the GNU General Public License cover the whole
 // combination.
-// 
+//
 // As a special exception, the copyright holders of this library give you
 // permission to link this library with independent modules to produce an
 // executable, regardless of the license terms of these independent
@@ -46,11 +46,13 @@ namespace ICSharpCode.SharpZipLib.Core
     /// A filter is a sequence of independant <see cref="Regex"></see> regular expressions separated by semi-colons ';'
     /// Each expression can be prefixed by a plus '+' sign or a minus '-' sign to denote the expression
     /// is intended to include or exclude names.  If neither a plus or minus sign is found include is the default
-    /// A given name is tested for inclusion before checking exclusions.  Only names matching an include spec 
+    /// A given name is tested for inclusion before checking exclusions.  Only names matching an include spec
     /// and not matching an exclude spec are deemed to match the filter.
     /// An empty filter matches any name.
     /// </summary>
-    [System.ObsoleteAttribute("This assembly has been deprecated. Please use https://www.nuget.org/packages/SharpZipLib/ instead.")]
+    [System.ObsoleteAttribute(
+        "This assembly has been deprecated. Please use https://www.nuget.org/packages/SharpZipLib/ instead."
+    )]
     public class NameFilter
     {
         /// <summary>
@@ -73,10 +75,12 @@ namespace ICSharpCode.SharpZipLib.Core
         public static bool IsValidExpression(string e)
         {
             bool result = true;
-            try {
+            try
+            {
                 Regex exp = new Regex(e, RegexOptions.IgnoreCase | RegexOptions.Singleline);
             }
-            catch {
+            catch
+            {
                 result = false;
             }
             return result;
@@ -90,29 +94,35 @@ namespace ICSharpCode.SharpZipLib.Core
         public static bool IsValidFilterExpression(string toTest)
         {
             bool result = true;
-        
+
             try
             {
                 string[] items = toTest.Split(';');
-                for (int i = 0; i < items.Length; ++i) {
-                    if (items[i] != null && items[i].Length > 0) {
+                for (int i = 0; i < items.Length; ++i)
+                {
+                    if (items[i] != null && items[i].Length > 0)
+                    {
                         string toCompile;
-            
+
                         if (items[i][0] == '+')
                             toCompile = items[i].Substring(1, items[i].Length - 1);
                         else if (items[i][0] == '-')
                             toCompile = items[i].Substring(1, items[i].Length - 1);
                         else
                             toCompile = items[i];
-            
-                        Regex testRE = new Regex(toCompile, RegexOptions.IgnoreCase | RegexOptions.Singleline);
+
+                        Regex testRE = new Regex(
+                            toCompile,
+                            RegexOptions.IgnoreCase | RegexOptions.Singleline
+                        );
                     }
                 }
             }
-            catch (Exception) {
+            catch (Exception)
+            {
                 result = false;
-             }
-        
+            }
+
             return result;
         }
 
@@ -124,7 +134,7 @@ namespace ICSharpCode.SharpZipLib.Core
         {
             return filter;
         }
-        
+
         /// <summary>
         /// Test a value to see if it is included by the filter.
         /// </summary>
@@ -135,9 +145,12 @@ namespace ICSharpCode.SharpZipLib.Core
             bool result = false;
             if (inclusions.Count == 0)
                 result = true;
-            else {
-                foreach (Regex r in inclusions) {
-                    if (r.IsMatch(testValue)) {
+            else
+            {
+                foreach (Regex r in inclusions)
+                {
+                    if (r.IsMatch(testValue))
+                    {
                         result = true;
                         break;
                     }
@@ -154,8 +167,10 @@ namespace ICSharpCode.SharpZipLib.Core
         public bool IsExcluded(string testValue)
         {
             bool result = false;
-            foreach (Regex r in exclusions) {
-                if (r.IsMatch(testValue)) {
+            foreach (Regex r in exclusions)
+            {
+                if (r.IsMatch(testValue))
+                {
                     result = true;
                     break;
                 }
@@ -182,8 +197,10 @@ namespace ICSharpCode.SharpZipLib.Core
                 return;
 
             string[] items = filter.Split(';');
-            for (int i = 0; i < items.Length; ++i) {
-                if (items[i] != null && items[i].Length > 0) {
+            for (int i = 0; i < items.Length; ++i)
+            {
+                if (items[i] != null && items[i].Length > 0)
+                {
                     bool include = items[i][0] != '-';
                     string toCompile;
 
@@ -198,17 +215,31 @@ namespace ICSharpCode.SharpZipLib.Core
                     // these are left unhandled here as the caller is responsible for ensuring all is valid.
                     // several functions IsValidFilterExpression and IsValidExpression are provided for such checking
                     if (include)
-                        inclusions.Add(new Regex(toCompile, RegexOptions.IgnoreCase | RegexOptions.Compiled | RegexOptions.Singleline));
+                        inclusions.Add(
+                            new Regex(
+                                toCompile,
+                                RegexOptions.IgnoreCase
+                                    | RegexOptions.Compiled
+                                    | RegexOptions.Singleline
+                            )
+                        );
                     else
-                        exclusions.Add(new Regex(toCompile, RegexOptions.IgnoreCase | RegexOptions.Compiled | RegexOptions.Singleline));
+                        exclusions.Add(
+                            new Regex(
+                                toCompile,
+                                RegexOptions.IgnoreCase
+                                    | RegexOptions.Compiled
+                                    | RegexOptions.Singleline
+                            )
+                        );
                 }
             }
         }
 
         #region Instance Fields
-            string filter;
-            ArrayList inclusions;
-            ArrayList exclusions;
+        string filter;
+        ArrayList inclusions;
+        ArrayList exclusions;
         #endregion
     }
 }

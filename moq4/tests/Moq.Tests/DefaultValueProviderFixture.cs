@@ -14,7 +14,9 @@ namespace Moq.Tests
     public class DefaultValueProviderFixture
     {
         private static MethodInfo fooActionMethod = typeof(IFoo).GetMethod(nameof(IFoo.Action));
-        private static ParameterInfo fooActionMethodParameter = typeof(IFoo).GetMethod(nameof(IFoo.Action)).GetParameters()[0];
+        private static ParameterInfo fooActionMethodParameter = typeof(IFoo)
+            .GetMethod(nameof(IFoo.Action))
+            .GetParameters()[0];
         private static MethodInfo fooFuncMethod = typeof(IFoo).GetMethod(nameof(IFoo.Func));
 
         private DefaultValueProvider defaultValueProvider;

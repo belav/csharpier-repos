@@ -7,13 +7,13 @@ internal class C<TFirst>
     {
         public readonly T Value;
 
-        public VSlot (T value)
+        public VSlot(T value)
         {
             Value = value;
         }
     }
 
-    internal IEnumerable<V> GetEnumerable<V> (IEnumerable<VSlot<V>> input)
+    internal IEnumerable<V> GetEnumerable<V>(IEnumerable<VSlot<V>> input)
     {
         foreach (var v in input)
             yield return v.Value;
@@ -22,11 +22,12 @@ internal class C<TFirst>
 
 class C
 {
-    public static int Main ()
+    public static int Main()
     {
-        var c = new C<long> ();
+        var c = new C<long>();
         string value = null;
-        foreach (var v in c.GetEnumerable (new[] { new C<long>.VSlot<string> ("foo") })) {
+        foreach (var v in c.GetEnumerable(new[] { new C<long>.VSlot<string>("foo") }))
+        {
             value = v;
         }
 

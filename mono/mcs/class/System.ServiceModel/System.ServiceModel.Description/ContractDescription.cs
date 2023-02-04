@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -40,192 +40,214 @@ using System.ServiceModel.Dispatcher;
 
 namespace System.ServiceModel.Description
 {
-
-    [DebuggerDisplay ("Name={name}, Namespace={ns}, ContractType={contractType}")]
+    [DebuggerDisplay("Name={name}, Namespace={ns}, ContractType={contractType}")]
     public class ContractDescription
-    {        
-        public static ContractDescription GetContract (
-            Type contractType)
+    {
+        public static ContractDescription GetContract(Type contractType)
         {
             if (contractType == null)
-                throw new ArgumentNullException ("contractType");
-            return ContractDescriptionGenerator.GetContract (contractType);
+                throw new ArgumentNullException("contractType");
+            return ContractDescriptionGenerator.GetContract(contractType);
         }
 
-        public static ContractDescription GetContract (
-            Type contractType, object serviceImplementation)
+        public static ContractDescription GetContract(
+            Type contractType,
+            object serviceImplementation
+        )
         {
             if (contractType == null)
-                throw new ArgumentNullException ("contractType");
+                throw new ArgumentNullException("contractType");
             if (serviceImplementation == null)
-                throw new ArgumentNullException ("serviceImplementation");
-            return ContractDescriptionGenerator.GetContract (contractType, serviceImplementation);
+                throw new ArgumentNullException("serviceImplementation");
+            return ContractDescriptionGenerator.GetContract(contractType, serviceImplementation);
         }
 
-        public static ContractDescription GetContract (
-            Type contractType, Type serviceType)
+        public static ContractDescription GetContract(Type contractType, Type serviceType)
         {
             if (contractType == null)
-                throw new ArgumentNullException ("contractType");
+                throw new ArgumentNullException("contractType");
             if (serviceType == null)
-                throw new ArgumentNullException ("serviceType");
-            return ContractDescriptionGenerator.GetContract (contractType, serviceType);
+                throw new ArgumentNullException("serviceType");
+            return ContractDescriptionGenerator.GetContract(contractType, serviceType);
         }
 
         OperationDescriptionCollection operations;
         KeyedByTypeCollection<IContractBehavior> behaviors;
-        Type callback_contract_type, contract_type;
-        string name, ns, config_name;
+        Type callback_contract_type,
+            contract_type;
+        string name,
+            ns,
+            config_name;
         ProtectionLevel protection_level;
         bool has_protection_level;
         SessionMode session;
 
-        public ContractDescription (string name)
-            : this (name, null)
-        {
-        }
+        public ContractDescription(string name)
+            : this(name, null) { }
 
-        public ContractDescription (string name, string ns)
+        public ContractDescription(string name, string ns)
         {
             if (name == null)
-                throw new ArgumentNullException ("name");
+                throw new ArgumentNullException("name");
             if (name.Length == 0)
-                throw new ArgumentOutOfRangeException ("ContractDescription's Name must be a non-empty string.");
+                throw new ArgumentOutOfRangeException(
+                    "ContractDescription's Name must be a non-empty string."
+                );
             if (ns == null)
                 ns = "http://tempuri.org/";
 
             this.name = name;
             this.ns = ns;
-            behaviors = new KeyedByTypeCollection<IContractBehavior>  ();
-            operations = new OperationDescriptionCollection ();
+            behaviors = new KeyedByTypeCollection<IContractBehavior>();
+            operations = new OperationDescriptionCollection();
         }
 
-        public KeyedByTypeCollection<IContractBehavior> Behaviors {
+        public KeyedByTypeCollection<IContractBehavior> Behaviors
+        {
             get { return behaviors; }
         }
 
         [MonoTODO]
-        public KeyedCollection<Type,IContractBehavior> ContractBehaviors {
-            get { throw new NotImplementedException (); }
+        public KeyedCollection<Type, IContractBehavior> ContractBehaviors
+        {
+            get { throw new NotImplementedException(); }
         }
 
-        public Type CallbackContractType {
+        public Type CallbackContractType
+        {
             get { return callback_contract_type; }
             set { callback_contract_type = value; }
         }
 
-        public string ConfigurationName {
+        public string ConfigurationName
+        {
             get { return config_name; }
             set { config_name = value; }
         }
 
-        public Type ContractType {
+        public Type ContractType
+        {
             get { return contract_type; }
             set { contract_type = value; }
         }
 
-        public bool HasProtectionLevel {
+        public bool HasProtectionLevel
+        {
             get { return has_protection_level; }
         }
 
-        public ProtectionLevel ProtectionLevel {
+        public ProtectionLevel ProtectionLevel
+        {
             get { return protection_level; }
-            set {
+            set
+            {
                 protection_level = value;
                 has_protection_level = true;
             }
         }
 
-        public string Name {
+        public string Name
+        {
             get { return name; }
             set { name = value; }
         }
 
-        public string Namespace {
+        public string Namespace
+        {
             get { return ns; }
             set { ns = value; }
         }
 
-        public OperationDescriptionCollection Operations {
+        public OperationDescriptionCollection Operations
+        {
             get { return operations; }
         }
 
-        public SessionMode SessionMode {
+        public SessionMode SessionMode
+        {
             get { return session; }
             set { session = value; }
         }
 
-        public Collection<ContractDescription> GetInheritedContracts ()
+        public Collection<ContractDescription> GetInheritedContracts()
         {
-            var ret = new Collection<ContractDescription> ();
-            foreach (var it in ContractType.GetInterfaces ()) {
-                var icd = ContractDescriptionGenerator.GetContractInternal (it, null, null);
+            var ret = new Collection<ContractDescription>();
+            foreach (var it in ContractType.GetInterfaces())
+            {
+                var icd = ContractDescriptionGenerator.GetContractInternal(it, null, null);
                 if (icd != null)
-                    ret.Add (icd);
+                    ret.Add(icd);
             }
             return ret;
         }
 
-        internal ClientRuntime CreateClientRuntime (object callbackDispatchRuntime)
+        internal ClientRuntime CreateClientRuntime(object callbackDispatchRuntime)
         {
-            ClientRuntime proxy = new ClientRuntime (Name, Namespace, callbackDispatchRuntime) {ContractClientType = ContractType, CallbackClientType = CallbackContractType};
-            FillClientOperations (proxy, false);
+            ClientRuntime proxy = new ClientRuntime(Name, Namespace, callbackDispatchRuntime)
+            {
+                ContractClientType = ContractType,
+                CallbackClientType = CallbackContractType
+            };
+            FillClientOperations(proxy, false);
             return proxy;
         }
 
-        internal void FillClientOperations (ClientRuntime proxy, bool isCallback)
+        internal void FillClientOperations(ClientRuntime proxy, bool isCallback)
         {
-            foreach (OperationDescription od in Operations) {
+            foreach (OperationDescription od in Operations)
+            {
                 if (!(isCallback && od.InCallbackContract || !isCallback && od.InOrdinalContract))
                     continue; // not in the contract in use.
 
-                if (!proxy.Operations.Contains (od.Name))
-                    PopulateClientOperation (proxy, od, isCallback);
+                if (!proxy.Operations.Contains(od.Name))
+                    PopulateClientOperation(proxy, od, isCallback);
                 foreach (IOperationBehavior ob in od.Behaviors)
-                    ob.ApplyClientBehavior (od, proxy.Operations [od.Name]);
+                    ob.ApplyClientBehavior(od, proxy.Operations[od.Name]);
             }
         }
 
-        void PopulateClientOperation (ClientRuntime proxy, OperationDescription od, bool isCallback)
+        void PopulateClientOperation(ClientRuntime proxy, OperationDescription od, bool isCallback)
         {
-            string reqA = null, resA = null;
-            foreach (MessageDescription m in od.Messages) {
+            string reqA = null,
+                resA = null;
+            foreach (MessageDescription m in od.Messages)
+            {
                 bool isReq = m.Direction == MessageDirection.Input ^ isCallback;
                 if (isReq)
                     reqA = m.Action;
                 else
                     resA = m.Action;
             }
-            ClientOperation o =
-                od.IsOneWay ?
-                new ClientOperation (proxy, od.Name, reqA) :
-                new ClientOperation (proxy, od.Name, reqA, resA);
-            foreach (MessageDescription md in od.Messages) {
+            ClientOperation o = od.IsOneWay
+                ? new ClientOperation(proxy, od.Name, reqA)
+                : new ClientOperation(proxy, od.Name, reqA, resA);
+            foreach (MessageDescription md in od.Messages)
+            {
                 bool isReq = md.Direction == MessageDirection.Input ^ isCallback;
-                if (isReq &&
-                    md.Body.Parts.Count == 1 &&
-                    md.Body.Parts [0].Type == typeof (Message))
+                if (isReq && md.Body.Parts.Count == 1 && md.Body.Parts[0].Type == typeof(Message))
                     o.SerializeRequest = false;
-                if (!isReq &&
-                    md.Body.ReturnValue != null &&
-                    md.Body.ReturnValue.Type == typeof (Message))
+                if (
+                    !isReq
+                    && md.Body.ReturnValue != null
+                    && md.Body.ReturnValue.Type == typeof(Message)
+                )
                     o.DeserializeReply = false;
             }
             foreach (var fd in od.Faults)
-                o.FaultContractInfos.Add (new FaultContractInfo (fd.Action, fd.DetailType));
+                o.FaultContractInfos.Add(new FaultContractInfo(fd.Action, fd.DetailType));
 
             o.BeginMethod = od.BeginMethod;
             o.EndMethod = od.EndMethod;
 
-            // FIXME: at initialization time it does not seem to 
+            // FIXME: at initialization time it does not seem to
             // fill default formatter. It should be filled after
             // applying all behaviors. (Tthat causes regression, so
             // I don't care little compatibility difference so far)
             //
             // FIXME: pass correct isRpc, isEncoded
-            o.Formatter = new OperationFormatter (od, false, false);
+            o.Formatter = new OperationFormatter(od, false, false);
 
-            proxy.Operations.Add (o);
+            proxy.Operations.Add(o);
         }
     }
 }

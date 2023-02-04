@@ -3,7 +3,7 @@
  * User: Marek
  * Date: 2006-03-12
  * Time: 00:06
- * 
+ *
  * To change this template use Tools | Options | Coding | Edit Standard Headers.
  */
 using System;

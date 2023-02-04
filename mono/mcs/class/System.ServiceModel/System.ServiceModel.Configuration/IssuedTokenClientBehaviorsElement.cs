@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -55,65 +55,71 @@ using System.Xml;
 namespace System.ServiceModel.Configuration
 {
     [MonoTODO]
-    public sealed partial class IssuedTokenClientBehaviorsElement
-         : ConfigurationElement
+    public sealed partial class IssuedTokenClientBehaviorsElement : ConfigurationElement
     {
         // Static Fields
         static ConfigurationPropertyCollection properties;
         static ConfigurationProperty behavior_configuration;
         static ConfigurationProperty issuer_address;
 
-        static IssuedTokenClientBehaviorsElement ()
+        static IssuedTokenClientBehaviorsElement()
         {
-            properties = new ConfigurationPropertyCollection ();
-            behavior_configuration = new ConfigurationProperty ("behaviorConfiguration",
-                typeof (string), "", new StringConverter (), null,
-                ConfigurationPropertyOptions.None);
+            properties = new ConfigurationPropertyCollection();
+            behavior_configuration = new ConfigurationProperty(
+                "behaviorConfiguration",
+                typeof(string),
+                "",
+                new StringConverter(),
+                null,
+                ConfigurationPropertyOptions.None
+            );
 
-            issuer_address = new ConfigurationProperty ("issuerAddress",
-                typeof (string), "", new StringConverter (), null,
-                ConfigurationPropertyOptions.IsRequired| ConfigurationPropertyOptions.IsKey);
+            issuer_address = new ConfigurationProperty(
+                "issuerAddress",
+                typeof(string),
+                "",
+                new StringConverter(),
+                null,
+                ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey
+            );
 
-            properties.Add (behavior_configuration);
-            properties.Add (issuer_address);
+            properties.Add(behavior_configuration);
+            properties.Add(issuer_address);
         }
 
-        public IssuedTokenClientBehaviorsElement ()
-        {
-        }
-
+        public IssuedTokenClientBehaviorsElement() { }
 
         // Properties
 
-        [ConfigurationProperty ("behaviorConfiguration",
-             Options = ConfigurationPropertyOptions.None,
-             DefaultValue = "")]
-        [StringValidator ( MinLength = 0,
-            MaxLength = int.MaxValue,
-             InvalidCharacters = null)]
-        public string BehaviorConfiguration {
-            get { return (string) base [behavior_configuration]; }
-            set { base [behavior_configuration] = value; }
+        [ConfigurationProperty(
+            "behaviorConfiguration",
+            Options = ConfigurationPropertyOptions.None,
+            DefaultValue = ""
+        )]
+        [StringValidator(MinLength = 0, MaxLength = int.MaxValue, InvalidCharacters = null)]
+        public string BehaviorConfiguration
+        {
+            get { return (string)base[behavior_configuration]; }
+            set { base[behavior_configuration] = value; }
         }
 
-        [StringValidator ( MinLength = 0,
-            MaxLength = int.MaxValue,
-             InvalidCharacters = null)]
-        [ConfigurationProperty ("issuerAddress",
-             Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey,
-             DefaultValue = "",
+        [StringValidator(MinLength = 0, MaxLength = int.MaxValue, InvalidCharacters = null)]
+        [ConfigurationProperty(
+            "issuerAddress",
+            Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey,
+            DefaultValue = "",
             IsRequired = true,
-            IsKey = true)]
-        public string IssuerAddress {
-            get { return (string) base [issuer_address]; }
-            set { base [issuer_address] = value; }
+            IsKey = true
+        )]
+        public string IssuerAddress
+        {
+            get { return (string)base[issuer_address]; }
+            set { base[issuer_address] = value; }
         }
 
-        protected override ConfigurationPropertyCollection Properties {
+        protected override ConfigurationPropertyCollection Properties
+        {
             get { return properties; }
         }
-
-
     }
-
 }

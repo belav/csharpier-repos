@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -55,48 +55,53 @@ using System.Xml;
 namespace System.ServiceModel.Configuration
 {
     public sealed partial class StandardBindingOptionalReliableSessionElement
-         : StandardBindingReliableSessionElement
+        : StandardBindingReliableSessionElement
     {
         // Static Fields
         static ConfigurationPropertyCollection properties;
         static ConfigurationProperty enabled;
 
-        static StandardBindingOptionalReliableSessionElement ()
+        static StandardBindingOptionalReliableSessionElement()
         {
-            properties = StandardBindingReliableSessionElement.CreateBaseProperties ();
-            enabled = new ConfigurationProperty ("enabled",
-                typeof (bool), "false", new BooleanConverter (), null,
-                ConfigurationPropertyOptions.None);
+            properties = StandardBindingReliableSessionElement.CreateBaseProperties();
+            enabled = new ConfigurationProperty(
+                "enabled",
+                typeof(bool),
+                "false",
+                new BooleanConverter(),
+                null,
+                ConfigurationPropertyOptions.None
+            );
 
-            properties.Add (enabled);
+            properties.Add(enabled);
         }
 
-        public StandardBindingOptionalReliableSessionElement ()
-        {
-        }
-
+        public StandardBindingOptionalReliableSessionElement() { }
 
         // Properties
 
-        [ConfigurationProperty ("enabled",
-             Options = ConfigurationPropertyOptions.None,
-            DefaultValue = false)]
-        public bool Enabled {
-            get { return (bool) base [enabled]; }
-            set { base [enabled] = value; }
+        [ConfigurationProperty(
+            "enabled",
+            Options = ConfigurationPropertyOptions.None,
+            DefaultValue = false
+        )]
+        public bool Enabled
+        {
+            get { return (bool)base[enabled]; }
+            set { base[enabled] = value; }
         }
 
-        protected override ConfigurationPropertyCollection Properties {
+        protected override ConfigurationPropertyCollection Properties
+        {
             get { return properties; }
         }
 
         // Methods
 
-        public void ApplyConfiguration (OptionalReliableSession optionalReliableSession)
+        public void ApplyConfiguration(OptionalReliableSession optionalReliableSession)
         {
-            base.ApplyConfiguration (optionalReliableSession);
+            base.ApplyConfiguration(optionalReliableSession);
             optionalReliableSession.Enabled = this.Enabled;
         }
     }
-
 }

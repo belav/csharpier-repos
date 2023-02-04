@@ -128,7 +128,9 @@ public class Simple
         {
             string input = "stringToScale";
             string expectedBaseValue = string.Concat(Enumerable.Repeat(input, baseScale));
-            string expectedDerivedValue = string.Concat(Enumerable.Repeat(expectedBaseValue, derivedScale));
+            string expectedDerivedValue = string.Concat(
+                Enumerable.Repeat(expectedBaseValue, derivedScale)
+            );
 
             Assert.Equal(expectedBaseValue, baseInterface.ScaleString(input));
             Assert.Equal(expectedDerivedValue, derivedBase.ScaleString(input));
@@ -139,7 +141,9 @@ public class Simple
     {
         Console.WriteLine($"{nameof(CallSparseInterface)}");
 
-        int sparseTypeMethodCount = typeof(ISparseType).GetMethods(BindingFlags.Public | BindingFlags.Instance).Length;
+        int sparseTypeMethodCount = typeof(ISparseType)
+            .GetMethods(BindingFlags.Public | BindingFlags.Instance)
+            .Length;
         Assert.Equal(2, sparseTypeMethodCount);
 
         var sparseType = (ISparseType)SparseTest.Create();
@@ -159,12 +163,30 @@ public class Simple
         Type inAsmInterfaceType = inAsm.GetType().GetInterface(nameof(IEmptyType));
         Type otherAsmInterfaceType = otherAsm.GetType().GetInterface(nameof(IEmptyType));
 
-        Assert.True(inAsmInterfaceType.MakeArrayType().IsEquivalentTo(otherAsmInterfaceType.MakeArrayType()));
-        Assert.True(inAsmInterfaceType.MakeArrayType(1).IsEquivalentTo(otherAsmInterfaceType.MakeArrayType(1)));
-        Assert.True(inAsmInterfaceType.MakeArrayType(2).IsEquivalentTo(otherAsmInterfaceType.MakeArrayType(2)));
+        Assert.True(
+            inAsmInterfaceType.MakeArrayType().IsEquivalentTo(otherAsmInterfaceType.MakeArrayType())
+        );
+        Assert.True(
+            inAsmInterfaceType
+                .MakeArrayType(1)
+                .IsEquivalentTo(otherAsmInterfaceType.MakeArrayType(1))
+        );
+        Assert.True(
+            inAsmInterfaceType
+                .MakeArrayType(2)
+                .IsEquivalentTo(otherAsmInterfaceType.MakeArrayType(2))
+        );
 
-        Assert.False(inAsmInterfaceType.MakeArrayType().IsEquivalentTo(otherAsmInterfaceType.MakeArrayType(1)));
-        Assert.False(inAsmInterfaceType.MakeArrayType(1).IsEquivalentTo(otherAsmInterfaceType.MakeArrayType(2)));
+        Assert.False(
+            inAsmInterfaceType
+                .MakeArrayType()
+                .IsEquivalentTo(otherAsmInterfaceType.MakeArrayType(1))
+        );
+        Assert.False(
+            inAsmInterfaceType
+                .MakeArrayType(1)
+                .IsEquivalentTo(otherAsmInterfaceType.MakeArrayType(2))
+        );
     }
 
     private static void TestByRefEquivalence()
@@ -176,7 +198,9 @@ public class Simple
         Type inAsmInterfaceType = inAsm.GetType().GetInterface(nameof(IEmptyType));
         Type otherAsmInterfaceType = otherAsm.GetType().GetInterface(nameof(IEmptyType));
 
-        Assert.True(inAsmInterfaceType.MakeByRefType().IsEquivalentTo(otherAsmInterfaceType.MakeByRefType()));
+        Assert.True(
+            inAsmInterfaceType.MakeByRefType().IsEquivalentTo(otherAsmInterfaceType.MakeByRefType())
+        );
     }
 
     interface IGeneric<in T>
@@ -186,9 +210,7 @@ public class Simple
 
     class Generic<V> : IGeneric<V>
     {
-        public void Method(V input)
-        {
-        }
+        public void Method(V input) { }
     }
 
     private static void TestGenericClassNonEquivalence()
@@ -200,7 +222,11 @@ public class Simple
         Type inAsmInterfaceType = inAsm.GetType().GetInterface(nameof(IEmptyType));
         Type otherAsmInterfaceType = otherAsm.GetType().GetInterface(nameof(IEmptyType));
 
-        Assert.False(typeof(Generic<>).MakeGenericType(inAsmInterfaceType).IsEquivalentTo(typeof(Generic<>).MakeGenericType(otherAsmInterfaceType)));
+        Assert.False(
+            typeof(Generic<>)
+                .MakeGenericType(inAsmInterfaceType)
+                .IsEquivalentTo(typeof(Generic<>).MakeGenericType(otherAsmInterfaceType))
+        );
     }
 
     private static void TestGenericInterfaceEquivalence()
@@ -212,7 +238,11 @@ public class Simple
         Type inAsmInterfaceType = inAsm.GetType().GetInterface(nameof(IEmptyType));
         Type otherAsmInterfaceType = otherAsm.GetType().GetInterface(nameof(IEmptyType));
 
-        Assert.True(typeof(IGeneric<>).MakeGenericType(inAsmInterfaceType).IsEquivalentTo(typeof(IGeneric<>).MakeGenericType(otherAsmInterfaceType)));
+        Assert.True(
+            typeof(IGeneric<>)
+                .MakeGenericType(inAsmInterfaceType)
+                .IsEquivalentTo(typeof(IGeneric<>).MakeGenericType(otherAsmInterfaceType))
+        );
     }
 
     private static unsafe void TestTypeEquivalenceWithTypePunning()
@@ -221,12 +251,11 @@ public class Simple
 
         {
             Console.WriteLine($"-- GetFunctionPointer()");
-            IntPtr fptr = typeof(CreateFunctionPointer).GetMethod("For_1").MethodHandle.GetFunctionPointer();
+            IntPtr fptr = typeof(CreateFunctionPointer)
+                .GetMethod("For_1")
+                .MethodHandle.GetFunctionPointer();
             Assert.NotEqual(IntPtr.Zero, fptr);
-            var s = new OnlyLoadOnce_1()
-            {
-                Field = 0x11
-            };
+            var s = new OnlyLoadOnce_1() { Field = 0x11 };
             int res = ((delegate* <OnlyLoadOnce_1, int>)fptr)(s);
             Assert.Equal(s.Field, res);
         }
@@ -234,10 +263,7 @@ public class Simple
             Console.WriteLine($"-- Ldftn");
             IntPtr fptr = CreateFunctionPointer.For_2_Ldftn();
             Assert.NotEqual(IntPtr.Zero, fptr);
-            var s = new OnlyLoadOnce_2()
-            {
-                Field = 0x22
-            };
+            var s = new OnlyLoadOnce_2() { Field = 0x22 };
             int res = ((delegate* <OnlyLoadOnce_2, int>)fptr)(s);
             Assert.Equal(s.Field, res);
         }
@@ -245,24 +271,21 @@ public class Simple
             Console.WriteLine($"-- Ldvirtftn");
             IntPtr fptr = CreateFunctionPointer.For_3_Ldvirtftn(out object inst);
             Assert.NotEqual(IntPtr.Zero, fptr);
-            var s = new OnlyLoadOnce_3()
-            {
-                Field = 0x33
-            };
+            var s = new OnlyLoadOnce_3() { Field = 0x33 };
             int res = ((delegate* <object, OnlyLoadOnce_3, int>)fptr)(inst, s);
             Assert.Equal(s.Field, res);
         }
     }
 
-    [MethodImpl (MethodImplOptions.NoInlining)]
-    private static void TestLoadingValueTypesWithMethod() 
+    [MethodImpl(MethodImplOptions.NoInlining)]
+    private static void TestLoadingValueTypesWithMethod()
     {
         Console.WriteLine($"{nameof(TestLoadingValueTypesWithMethod)}");
         Console.WriteLine($"-- {typeof(ValueTypeWithStaticMethod).Name}");
         Assert.Throws<TypeLoadException>(() => LoadInvalidType());
     }
 
-    [MethodImpl (MethodImplOptions.NoInlining)]
+    [MethodImpl(MethodImplOptions.NoInlining)]
     private static void LoadInvalidType()
     {
         Console.WriteLine($"-- {typeof(ValueTypeWithInstanceMethod).Name}");

@@ -35,11 +35,7 @@ namespace System.IdentityModel.Protocols.WSTrust
         /// </summary>
         public string Code
         {
-            get
-            {
-                return _code;
-            }
-
+            get { return _code; }
             set
             {
                 if (string.IsNullOrEmpty(value))
@@ -56,15 +52,8 @@ namespace System.IdentityModel.Protocols.WSTrust
         /// </summary>
         public string Reason
         {
-            get
-            {
-                return _reason;
-            }
-
-            set
-            {
-                _reason = value;
-            }
+            get { return _reason; }
+            set { _reason = value; }
         }
     }
 }

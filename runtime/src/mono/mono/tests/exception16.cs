@@ -1,36 +1,42 @@
 using System;
 
-public class TestTryFinally 
+public class TestTryFinally
 {
     static int result = 0;
-    
-    public static void TrivialMain() 
+
+    public static void TrivialMain()
     {
         int i = 123;
         string s = "Some string";
         object o = s;
 
-        try {
+        try
+        {
             // Illegal conversion; o contains a string not an int
-            i = (int) o;   
+            i = (int)o;
         }
-        finally {
+        finally
+        {
             Console.WriteLine("i = {0}", i);
             result = i;
         }
     }
 
-    public static int Main() 
+    public static int Main()
     {
-        try {
-            try {
+        try
+        {
+            try
+            {
                 TrivialMain();
             }
-            finally {
+            finally
+            {
                 Console.WriteLine("cleaning up");
             }
         }
-        catch(Exception) {
+        catch (Exception)
+        {
             Console.WriteLine("catch expected exception");
             result += 1;
         }
@@ -41,4 +47,3 @@ public class TestTryFinally
         return 0;
     }
 }
-

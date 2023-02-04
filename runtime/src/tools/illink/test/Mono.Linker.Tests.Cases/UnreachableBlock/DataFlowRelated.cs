@@ -11,31 +11,35 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 
 namespace Mono.Linker.Tests.Cases.UnreachableBlock
 {
-    [SetupLinkerArgument ("--enable-opt", "ipconstprop")]
+    [SetupLinkerArgument("--enable-opt", "ipconstprop")]
     [SkipKeptItemsValidation]
     public class DataFlowRelated
     {
-        public static void Main ()
+        public static void Main()
         {
-            RemovedLambdaUsage ();
+            RemovedLambdaUsage();
         }
 
         static bool AlwaysFalse => false;
 
         // This test cases a Debug.Assert - which has been temporarily disabled (search for the issue number in the codebase)
         // https://github.com/dotnet/linker/issues/2845
-        static Func<int, int> RemovedLambdaUsage (int param = 0)
+        static Func<int, int> RemovedLambdaUsage(int param = 0)
         {
             // Trigger data flow in this method
-            typeof (TestType).GetProperties ();
+            typeof(TestType).GetProperties();
 
-            if (param == 0) {
+            if (param == 0)
+            {
                 return (a) => a + 1;
             }
 
-            if (AlwaysFalse) {
+            if (AlwaysFalse)
+            {
                 return (a) => a + 2;
-            } else {
+            }
+            else
+            {
                 return (a) => a + 3;
             }
         }

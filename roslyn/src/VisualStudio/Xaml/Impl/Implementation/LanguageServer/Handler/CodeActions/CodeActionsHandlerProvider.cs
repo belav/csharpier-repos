@@ -27,9 +27,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
         public XamlCodeActionsHandler(
             ICodeFixService codeFixService,
             ICodeRefactoringService codeRefactoringService,
-            IGlobalOptionService globalOptions) : base(codeFixService, codeRefactoringService, globalOptions)
-        {
-        }
+            IGlobalOptionService globalOptions
+        )
+            : base(codeFixService, codeRefactoringService, globalOptions) { }
     }
 
     [ExportStatelessXamlLspService(typeof(CodeActionResolveHandler)), Shared]
@@ -40,8 +40,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
         public XamlCodeActionResolveHandler(
             ICodeFixService codeFixService,
             ICodeRefactoringService codeRefactoringService,
-            IGlobalOptionService globalOptions) : base(codeFixService, codeRefactoringService, globalOptions)
-        {
-        }
+            IGlobalOptionService globalOptions
+        )
+            : base(codeFixService, codeRefactoringService, globalOptions) { }
     }
 }

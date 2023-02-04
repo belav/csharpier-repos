@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -87,84 +87,72 @@ namespace MonoTests.System.Web.DynamicData
             return 2020;
         }
 
-        public override void SendStatus(int s, string x)
-        {
-        }
+        public override void SendStatus(int s, string x) { }
 
-        public override void SendKnownResponseHeader(int x, string j)
-        {
-        }
+        public override void SendKnownResponseHeader(int x, string j) { }
 
-        public override void SendUnknownResponseHeader(string a, string b)
-        {
-        }
+        public override void SendUnknownResponseHeader(string a, string b) { }
 
-        public override void SendResponseFromMemory(byte[] arr, int x)
-        {
-        }
+        public override void SendResponseFromMemory(byte[] arr, int x) { }
 
-        public override void SendResponseFromFile(string a, long b, long c)
-        {
-        }
+        public override void SendResponseFromFile(string a, long b, long c) { }
 
-        public override void SendResponseFromFile(IntPtr a, long b, long c)
-        {
-        }
+        public override void SendResponseFromFile(IntPtr a, long b, long c) { }
 
-        public override void FlushResponse(bool x)
-        {
-        }
+        public override void FlushResponse(bool x) { }
 
-        public override void EndOfRequest()
-        {
-        }
+        public override void EndOfRequest() { }
     }
-    
+
     [TestFixture]
     public class DynamicDataExtensionsTest
     {
         [Test]
-        public void ConvertEditedValue ()
+        public void ConvertEditedValue()
         {
             FieldFormattingOptions fld = null;
 
-            Assert.Throws<NullReferenceException> (() => {
-                fld.ConvertEditedValue (null);
-            }, "#A1");
+            Assert.Throws<NullReferenceException>(
+                () =>
+                {
+                    fld.ConvertEditedValue(null);
+                },
+                "#A1"
+            );
 
-            fld = new FieldFormattingOptions ();
-            fld.SetProperty ("ConvertEmptyStringToNull", false);
-            Assert.AreEqual (null, fld.ConvertEditedValue (null), "#A2");
-            Assert.AreEqual (String.Empty, fld.ConvertEditedValue (String.Empty), "#A2-1");
-            Assert.AreEqual ("stuff", fld.ConvertEditedValue ("stuff"), "#A2-2");
+            fld = new FieldFormattingOptions();
+            fld.SetProperty("ConvertEmptyStringToNull", false);
+            Assert.AreEqual(null, fld.ConvertEditedValue(null), "#A2");
+            Assert.AreEqual(String.Empty, fld.ConvertEditedValue(String.Empty), "#A2-1");
+            Assert.AreEqual("stuff", fld.ConvertEditedValue("stuff"), "#A2-2");
 
-            fld.SetProperty ("ConvertEmptyStringToNull", true);
-            Assert.AreEqual (null, fld.ConvertEditedValue (null), "#A3");
-            Assert.AreEqual (null, fld.ConvertEditedValue (String.Empty), "#A3-1");
-            Assert.AreEqual ("stuff", fld.ConvertEditedValue ("stuff"), "#A3-2");
+            fld.SetProperty("ConvertEmptyStringToNull", true);
+            Assert.AreEqual(null, fld.ConvertEditedValue(null), "#A3");
+            Assert.AreEqual(null, fld.ConvertEditedValue(String.Empty), "#A3-1");
+            Assert.AreEqual("stuff", fld.ConvertEditedValue("stuff"), "#A3-2");
 
-            fld.SetProperty ("ConvertEmptyStringToNull", false);
-            fld.SetProperty ("NullDisplayText", "NULL");
-            Assert.AreEqual (null, fld.ConvertEditedValue (null), "#A4");
-            Assert.AreEqual (String.Empty, fld.ConvertEditedValue (String.Empty), "#A4-1");
-            Assert.AreEqual (null, fld.ConvertEditedValue ("NULL"), "#A4-2");
-            Assert.AreEqual ("stuff", fld.ConvertEditedValue ("stuff"), "#A4-3");
+            fld.SetProperty("ConvertEmptyStringToNull", false);
+            fld.SetProperty("NullDisplayText", "NULL");
+            Assert.AreEqual(null, fld.ConvertEditedValue(null), "#A4");
+            Assert.AreEqual(String.Empty, fld.ConvertEditedValue(String.Empty), "#A4-1");
+            Assert.AreEqual(null, fld.ConvertEditedValue("NULL"), "#A4-2");
+            Assert.AreEqual("stuff", fld.ConvertEditedValue("stuff"), "#A4-3");
 
-            fld.SetProperty ("ConvertEmptyStringToNull", false);
-            fld.SetProperty ("NullDisplayText", String.Empty);
-            Assert.AreEqual (String.Empty, fld.ConvertEditedValue (String.Empty), "#A5");
+            fld.SetProperty("ConvertEmptyStringToNull", false);
+            fld.SetProperty("NullDisplayText", String.Empty);
+            Assert.AreEqual(String.Empty, fld.ConvertEditedValue(String.Empty), "#A5");
         }
 
         [Test]
-        public void DynamicDataExtensions_GetTable_Test ()
+        public void DynamicDataExtensions_GetTable_Test()
         {
             IDynamicDataSource dds = null;
 
-            dds.GetTable ();
+            dds.GetTable();
         }
 
         [Test]
-        [ExpectedException (typeof (InvalidOperationException))]
+        [ExpectedException(typeof(InvalidOperationException))]
         public void DynamicDataExtensions_GetTable_Test2()
         {
             HttpContext.Current = new HttpContext(new FakeWorkerRequest());

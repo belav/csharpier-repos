@@ -2,13 +2,14 @@ using System.Runtime.InteropServices;
 
 public struct CONNECTDATA
 {
-    [MarshalAs (10)]
+    [MarshalAs(10)]
     public object pUnk;
-    [MarshalAs (UnmanagedType.BStr)]
+
+    [MarshalAs(UnmanagedType.BStr)]
     public int dwCookie;
 }
 
 public class C
 {
-    public static void Main () {}
+    public static void Main() { }
 }

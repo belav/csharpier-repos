@@ -11,9 +11,7 @@ namespace Microsoft.Cci
     /// <summary>
     /// An object corresponding to a metadata entity such as a type or a field.
     /// </summary>
-    internal interface IDefinition : IReference
-    {
-    }
+    internal interface IDefinition : IReference { }
 
     /// <summary>
     /// An object corresponding to reference to a metadata entity such as a type or a field.
@@ -33,7 +31,7 @@ namespace Microsoft.Cci
         void Dispatch(MetadataVisitor visitor);
 
         /// <summary>
-        /// Gets the definition object corresponding to this reference within the given context, 
+        /// Gets the definition object corresponding to this reference within the given context,
         /// or null if the referenced entity isn't defined in the context.
         /// </summary>
         IDefinition? AsDefinition(EmitContext context);

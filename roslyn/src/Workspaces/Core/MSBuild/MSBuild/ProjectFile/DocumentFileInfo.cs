@@ -22,7 +22,7 @@ namespace Microsoft.CodeAnalysis.MSBuild
         public string LogicalPath { get; }
 
         /// <summary>
-        /// True if the document has a logical path that differs from its 
+        /// True if the document has a logical path that differs from its
         /// absolute file path.
         /// </summary>
         public bool IsLinked { get; }
@@ -37,7 +37,13 @@ namespace Microsoft.CodeAnalysis.MSBuild
         /// </summary>
         public SourceCodeKind SourceCodeKind { get; }
 
-        public DocumentFileInfo(string filePath, string logicalPath, bool isLinked, bool isGenerated, SourceCodeKind sourceCodeKind)
+        public DocumentFileInfo(
+            string filePath,
+            string logicalPath,
+            bool isLinked,
+            bool isGenerated,
+            SourceCodeKind sourceCodeKind
+        )
         {
             this.FilePath = filePath;
             this.LogicalPath = logicalPath;

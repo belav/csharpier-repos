@@ -10,8 +10,14 @@ namespace System.Text.Json.Serialization.Tests
 {
     public static partial class ReferenceHandlerTests
     {
-        private static readonly JsonSerializerOptions s_serializerOptionsPreserve = new JsonSerializerOptions { ReferenceHandler = ReferenceHandler.Preserve };
-        private static readonly JsonSerializerSettings s_newtonsoftSerializerSettingsPreserve = new JsonSerializerSettings { PreserveReferencesHandling = PreserveReferencesHandling.All, ReferenceLoopHandling = ReferenceLoopHandling.Serialize };
+        private static readonly JsonSerializerOptions s_serializerOptionsPreserve =
+            new JsonSerializerOptions { ReferenceHandler = ReferenceHandler.Preserve };
+        private static readonly JsonSerializerSettings s_newtonsoftSerializerSettingsPreserve =
+            new JsonSerializerSettings
+            {
+                PreserveReferencesHandling = PreserveReferencesHandling.All,
+                ReferenceLoopHandling = ReferenceLoopHandling.Serialize
+            };
 
         private class Employee
         {
@@ -25,7 +31,8 @@ namespace System.Text.Json.Serialization.Tests
 
             //Properties with default value to verify they get overwritten when deserializing into them.
             public List<string> SubordinatesString { get; set; } = new List<string> { "Bob" };
-            public Dictionary<string, string> ContactsString { get; set; } = new Dictionary<string, string>() { { "Bob", "555-5555" } };
+            public Dictionary<string, string> ContactsString { get; set; } =
+                new Dictionary<string, string>() { { "Bob", "555-5555" } };
         }
 
         [Fact]
@@ -36,7 +43,6 @@ namespace System.Text.Json.Serialization.Tests
             EmployeeExtensionData angela = new EmployeeExtensionData
             {
                 Name = "Angela",
-
                 Manager = bob
             };
             bob.Subordinates = new List<Employee> { angela };
@@ -51,7 +57,10 @@ namespace System.Text.Json.Serialization.Tests
 
             angela.ExtensionData = extensionData;
 
-            string expected = JsonConvert.SerializeObject(angela, s_newtonsoftSerializerSettingsPreserve);
+            string expected = JsonConvert.SerializeObject(
+                angela,
+                s_newtonsoftSerializerSettingsPreserve
+            );
             string actual = JsonSerializer.Serialize(angela, s_serializerOptionsPreserve);
 
             Assert.Equal(expected, actual);
@@ -83,27 +92,18 @@ namespace System.Text.Json.Serialization.Tests
             {
                 Name = "Angela",
                 //Struct as property.
-                Job = new JobStruct
-                {
-                    Title = "Software Engineer"
-                },
+                Job = new JobStruct { Title = "Software Engineer" },
                 //ImmutableArray<T> as property.
-                Roles =
-                    ImmutableArray.Create(
-                        new RoleStruct
-                        {
-                            Description = "Contributor"
-                        },
-                        new RoleStruct
-                        {
-                            Description = "Infrastructure"
-                        })
+                Roles = ImmutableArray.Create(
+                    new RoleStruct { Description = "Contributor" },
+                    new RoleStruct { Description = "Infrastructure" }
+                )
             };
 
             //ImmutableArray<T> as root.
             ImmutableArray<EmployeeStruct> array =
-                //Struct as array element (same as struct being root).
-                ImmutableArray.Create(employee);
+            //Struct as array element (same as struct being root).
+            ImmutableArray.Create(employee);
 
             // Regardless of using preserve, do not emit $id to value types; that is why we compare against default.
             string actual = JsonSerializer.Serialize(array, s_serializerOptionsPreserve);
@@ -140,7 +140,10 @@ namespace System.Text.Json.Serialization.Tests
                 ["$object"] = new ClassWithExtensionData { Hello = "World" }
             };
             json = JsonSerializer.Serialize(dictionary, s_serializerOptionsPreserve);
-            Assert.Equal(@"{""$id"":""1"",""\u0024object"":{""$id"":""2"",""Hello"":""World""}}", json);
+            Assert.Equal(
+                @"{""$id"":""1"",""\u0024object"":{""$id"":""2"",""Hello"":""World""}}",
+                json
+            );
 
             //$ Key in ExtensionData dictionary
             var poco = new ClassWithExtensionData
@@ -148,14 +151,14 @@ namespace System.Text.Json.Serialization.Tests
                 ExtensionData =
                 {
                     ["$string"] = "Hello world",
-                    ["$object"] = new ClassWithExtensionData
-                    {
-                        Hello = "World"
-                    }
+                    ["$object"] = new ClassWithExtensionData { Hello = "World" }
                 }
             };
             json = JsonSerializer.Serialize(poco, s_serializerOptionsPreserve);
-            Assert.Equal(@"{""$id"":""1"",""\u0024string"":""Hello world"",""\u0024object"":{""$id"":""2"",""Hello"":""World""}}", json);
+            Assert.Equal(
+                @"{""$id"":""1"",""\u0024string"":""Hello world"",""\u0024object"":{""$id"":""2"",""Hello"":""World""}}",
+                json
+            );
 
             //TODO:
             //Extend the scenarios to also cover CLR and F# properties with a leading $.
@@ -183,13 +186,25 @@ namespace System.Text.Json.Serialization.Tests
             };
             JsonSerializer.Serialize(root, s_serializerOptionsPreserve);
 
-            ImmutableArray<List<int>> immutablArraytOfLists = new List<List<int>> { list }.ToImmutableArray();
+            ImmutableArray<List<int>> immutablArraytOfLists = new List<List<int>>
+            {
+                list
+            }.ToImmutableArray();
             JsonSerializer.Serialize(immutablArraytOfLists, s_serializerOptionsPreserve);
 
-            List<ImmutableArray<int>> listOfImmutableArrays = new List<ImmutableArray<int>> { immutableArr };
+            List<ImmutableArray<int>> listOfImmutableArrays = new List<ImmutableArray<int>>
+            {
+                immutableArr
+            };
             JsonSerializer.Serialize(listOfImmutableArrays, s_serializerOptionsPreserve);
 
-            List<object> mixedListOfLists = new List<object> { list, immutableArr, list, immutableArr };
+            List<object> mixedListOfLists = new List<object>
+            {
+                list,
+                immutableArr,
+                list,
+                immutableArr
+            };
             JsonSerializer.Serialize(mixedListOfLists, s_serializerOptionsPreserve);
         }
 
@@ -209,16 +224,14 @@ namespace System.Text.Json.Serialization.Tests
         {
             // Test that POCO's implementation of GetHashCode is always used.
             ClassIncorrectHashCode elem = new ClassIncorrectHashCode();
-            List<ClassIncorrectHashCode> list = new List<ClassIncorrectHashCode>()
-            {
-                elem,
-                elem,
-            };
+            List<ClassIncorrectHashCode> list = new List<ClassIncorrectHashCode>() { elem, elem, };
 
             string json = JsonSerializer.Serialize(list, s_serializerOptionsPreserve);
             Assert.Equal(@"{""$id"":""1"",""$values"":[{""$id"":""2""},{""$ref"":""2""}]}", json);
 
-            List<ClassIncorrectHashCode> listCopy = JsonSerializer.Deserialize<List<ClassIncorrectHashCode>>(json, s_serializerOptionsPreserve);
+            List<ClassIncorrectHashCode> listCopy = JsonSerializer.Deserialize<
+                List<ClassIncorrectHashCode>
+            >(json, s_serializerOptionsPreserve);
             // Make sure that our DefaultReferenceResolver calls the ReferenceEqualityComparer that implements RuntimeHelpers.GetHashCode, and never object.GetHashCode,
             // otherwise objects would not be correctly identified when searching for them in the dictionary.
             Assert.Same(listCopy[0], listCopy[1]);

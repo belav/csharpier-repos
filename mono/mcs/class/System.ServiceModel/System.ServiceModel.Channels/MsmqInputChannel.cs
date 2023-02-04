@@ -12,10 +12,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,97 +36,118 @@ namespace System.ServiceModel.Channels
         EndpointAddress local_address;
 
         // FIXME: handle timeout
-        public MsmqInputChannel (MsmqChannelListener<IInputChannel> listener, TimeSpan timeout)
-            : base (listener)
+        public MsmqInputChannel(MsmqChannelListener<IInputChannel> listener, TimeSpan timeout)
+            : base(listener)
         {
             this.listener = listener;
         }
 
         // FIXME: how is it set?
-        public override EndpointAddress LocalAddress {
+        public override EndpointAddress LocalAddress
+        {
             get { return local_address; }
         }
 
-        public override IAsyncResult BeginReceive (TimeSpan timeout, AsyncCallback callback, object state)
+        public override IAsyncResult BeginReceive(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public override IAsyncResult BeginTryReceive (TimeSpan timeout, AsyncCallback callback, object state)
+        public override IAsyncResult BeginTryReceive(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public override IAsyncResult BeginWaitForMessage (TimeSpan timeout, AsyncCallback callback, object state)
+        public override IAsyncResult BeginWaitForMessage(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public override Message EndReceive (IAsyncResult result)
+        public override Message EndReceive(IAsyncResult result)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public override bool EndTryReceive (IAsyncResult result, out Message message)
+        public override bool EndTryReceive(IAsyncResult result, out Message message)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public override bool EndWaitForMessage (IAsyncResult result)
+        public override bool EndWaitForMessage(IAsyncResult result)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public override Message Receive (TimeSpan timeout)
+        public override Message Receive(TimeSpan timeout)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public override bool TryReceive (TimeSpan timeout, out Message message)
+        public override bool TryReceive(TimeSpan timeout, out Message message)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public override bool WaitForMessage (TimeSpan timeout)
+        public override bool WaitForMessage(TimeSpan timeout)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         // ChannelBase
 
-        protected override void OnAbort ()
+        protected override void OnAbort()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        protected override void OnClose (TimeSpan timeout)
+        protected override void OnClose(TimeSpan timeout)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        protected override void OnOpen (TimeSpan timeout)
+        protected override void OnOpen(TimeSpan timeout)
         {
             // nothing to do
         }
 
-        protected override IAsyncResult OnBeginOpen (TimeSpan timeout, AsyncCallback callback, object sender)
+        protected override IAsyncResult OnBeginOpen(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object sender
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        protected override void OnEndOpen (IAsyncResult result)
+        protected override void OnEndOpen(IAsyncResult result)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        protected override IAsyncResult OnBeginClose (TimeSpan timeout, AsyncCallback callback, object sender)
+        protected override IAsyncResult OnBeginClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object sender
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        protected override void OnEndClose (IAsyncResult result)
+        protected override void OnEndClose(IAsyncResult result)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
     }
 }

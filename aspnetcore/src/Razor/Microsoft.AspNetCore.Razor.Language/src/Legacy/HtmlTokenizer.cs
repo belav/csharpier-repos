@@ -35,7 +35,11 @@ internal class HtmlTokenizer : Tokenizer
         get { return SyntaxKind.RazorCommentStar; }
     }
 
-    protected override SyntaxToken CreateToken(string content, SyntaxKind type, RazorDiagnostic[] errors)
+    protected override SyntaxToken CreateToken(
+        string content,
+        SyntaxKind type,
+        RazorDiagnostic[] errors
+    )
     {
         return SyntaxFactory.Token(type, content, errors);
     }
@@ -138,14 +142,16 @@ internal class HtmlTokenizer : Tokenizer
             {
                 return Transition(
                     HtmlTokenizerState.AfterRazorCommentTransition,
-                    EndToken(SyntaxKind.RazorCommentTransition));
+                    EndToken(SyntaxKind.RazorCommentTransition)
+                );
             }
             else if (CurrentCharacter == '@')
             {
                 // Could be escaped comment transition
                 return Transition(
                     HtmlTokenizerState.EscapedRazorCommentTransition,
-                    EndToken(SyntaxKind.Transition));
+                    EndToken(SyntaxKind.Transition)
+                );
             }
 
             return Stay(EndToken(SyntaxKind.Transition));
@@ -169,9 +175,14 @@ internal class HtmlTokenizer : Tokenizer
     private StateResult Text()
     {
         var prev = '\0';
-        while (!EndOfFile &&
-            !(ParserHelpers.IsWhitespace(CurrentCharacter) || ParserHelpers.IsNewLine(CurrentCharacter)) &&
-            !AtToken())
+        while (
+            !EndOfFile
+            && !(
+                ParserHelpers.IsWhitespace(CurrentCharacter)
+                || ParserHelpers.IsNewLine(CurrentCharacter)
+            )
+            && !AtToken()
+        )
         {
             prev = CurrentCharacter;
             TakeCurrent();
@@ -180,8 +191,10 @@ internal class HtmlTokenizer : Tokenizer
         if (CurrentCharacter == '@')
         {
             var next = Peek();
-            if ((ParserHelpers.IsLetter(prev) || ParserHelpers.IsDecimalDigit(prev)) &&
-                (ParserHelpers.IsLetter(next) || ParserHelpers.IsDecimalDigit(next)))
+            if (
+                (ParserHelpers.IsLetter(prev) || ParserHelpers.IsDecimalDigit(prev))
+                && (ParserHelpers.IsLetter(next) || ParserHelpers.IsDecimalDigit(next))
+            )
             {
                 TakeCurrent(); // Take the "@"
                 return Stay(); // Stay in the Text state

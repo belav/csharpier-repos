@@ -2,27 +2,24 @@
 
 public struct TestMain
 {
-    public static void Main () => Test.MainMethod();
+    public static void Main() => Test.MainMethod();
 }
 
 public readonly ref partial struct Test
 {
-    public static void MainMethod ()
+    public static void MainMethod()
     {
-        var m = new Test ();
-        m.Method ();
+        var m = new Test();
+        m.Method();
     }
 
-    Test Method ()
+    Test Method()
     {
-        return new Test ();
+        return new Test();
     }
 }
 
-ref partial struct Test
-{
-
-}
+ref partial struct Test { }
 
 ref struct Second
 {

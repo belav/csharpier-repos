@@ -17,8 +17,9 @@ namespace Mono.Linker
         AssemblyAction = 1, // assembly action -> entry assembly
         RootAssembly = 2, // assembly -> entry type
         XmlDescriptor = 3, // xml document -> entry member
-                           // Attributes on assemblies are marked whether or not we keep
-                           // the assembly, so mark these as entry points.
+
+        // Attributes on assemblies are marked whether or not we keep
+        // the assembly, so mark these as entry points.
         AssemblyOrModuleAttribute = 4, // assembly/module -> entry attribute
 
         // Membership and containment relationships
@@ -63,7 +64,8 @@ namespace Mono.Linker
         PropertyOfPropertyMethod = 32, // property method -> its property
         EventOfEventMethod = 33, // event method -> its event
         EventMethod = 34, // event -> its event methods
-                          // PropertyMethod doesn't exist because property methods aren't always marked for a property
+
+        // PropertyMethod doesn't exist because property methods aren't always marked for a property
 
         // Interface implementations
         InterfaceImplementationInterfaceType = 35, // interfaceimpl -> interface type
@@ -94,7 +96,8 @@ namespace Mono.Linker
 
         // Dependencies of custom attributes
         AttributeConstructor = 54, // attribute -> its ctor
-                                   // used for security attributes, where we mark the type/properties directly
+
+        // used for security attributes, where we mark the type/properties directly
         AttributeType = 55, // attribute -> attribute type
         AttributeProperty = 56, // attribute -> attribute property
         CustomAttributeArgumentType = 57, // attribute -> type of an argument to the attribute ctor
@@ -149,14 +152,29 @@ namespace Mono.Linker
     {
         public DependencyKind Kind { get; }
         public object? Source { get; }
-        public DependencyInfo (DependencyKind kind, object? source) => (Kind, Source) = (kind, source);
-        public static readonly DependencyInfo Unspecified = new DependencyInfo (DependencyKind.Unspecified, null);
-        public static readonly DependencyInfo AlreadyMarked = new DependencyInfo (DependencyKind.AlreadyMarked, null);
-        public static readonly DependencyInfo DisablePrivateReflectionRequirement = new DependencyInfo (DependencyKind.DisablePrivateReflectionRequirement, null);
-        public bool Equals (DependencyInfo other) => (Kind, Source) == (other.Kind, other.Source);
-        public override bool Equals (Object? obj) => obj is DependencyInfo info && this.Equals (info);
-        public override int GetHashCode () => (Kind, Source).GetHashCode ();
-        public static bool operator == (DependencyInfo lhs, DependencyInfo rhs) => lhs.Equals (rhs);
-        public static bool operator != (DependencyInfo lhs, DependencyInfo rhs) => !lhs.Equals (rhs);
+
+        public DependencyInfo(DependencyKind kind, object? source) =>
+            (Kind, Source) = (kind, source);
+
+        public static readonly DependencyInfo Unspecified = new DependencyInfo(
+            DependencyKind.Unspecified,
+            null
+        );
+        public static readonly DependencyInfo AlreadyMarked = new DependencyInfo(
+            DependencyKind.AlreadyMarked,
+            null
+        );
+        public static readonly DependencyInfo DisablePrivateReflectionRequirement =
+            new DependencyInfo(DependencyKind.DisablePrivateReflectionRequirement, null);
+
+        public bool Equals(DependencyInfo other) => (Kind, Source) == (other.Kind, other.Source);
+
+        public override bool Equals(Object? obj) => obj is DependencyInfo info && this.Equals(info);
+
+        public override int GetHashCode() => (Kind, Source).GetHashCode();
+
+        public static bool operator ==(DependencyInfo lhs, DependencyInfo rhs) => lhs.Equals(rhs);
+
+        public static bool operator !=(DependencyInfo lhs, DependencyInfo rhs) => !lhs.Equals(rhs);
     }
 }

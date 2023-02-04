@@ -12,8 +12,7 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
     {
         public static Shell_InProc Create() => new Shell_InProc();
 
-        public IntPtr GetHWnd()
-            => GetDTE().MainWindow.HWnd;
+        public IntPtr GetHWnd() => GetDTE().MainWindow.HWnd;
 
         public bool IsUIContextActive(Guid context)
         {
@@ -25,7 +24,10 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             return InvokeOnUIThread(cancellationToken =>
             {
                 var shell = GetGlobalService<SVsShell, IVsShell>();
-                shell.GetProperty((int)__VSSPROPID5.VSSPROPID_ReleaseVersion, out var versionProperty);
+                shell.GetProperty(
+                    (int)__VSSPROPID5.VSSPROPID_ReleaseVersion,
+                    out var versionProperty
+                );
 
                 var fullVersion = versionProperty?.ToString() ?? string.Empty;
                 var firstSpace = fullVersion.IndexOf(' ');

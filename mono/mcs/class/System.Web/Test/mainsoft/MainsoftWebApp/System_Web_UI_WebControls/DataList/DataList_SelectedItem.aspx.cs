@@ -35,11 +35,10 @@ using System.Web.UI.HtmlControls;
 
 namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
 {
-    public class DataList_SelectedItem
-        : GHTBaseWeb 
+    public class DataList_SelectedItem : GHTBaseWeb
     {
         #region Web Form Designer generated code
-        override protected void OnInit(EventArgs e) 
+        override protected void OnInit(EventArgs e)
         {
             //
             // CODEGEN: This call is required by the ASP.NET Web Form Designer.
@@ -47,15 +46,14 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             InitializeComponent();
             base.OnInit(e);
         }
-        
+
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent() 
-        {    
+        private void InitializeComponent()
+        {
             this.Load += new System.EventHandler(this.Page_Load);
-
         }
         #endregion
 
@@ -63,17 +61,27 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
         protected System.Web.UI.WebControls.DataList DataList1;
         protected GHTWebControls.GHTSubTest GHTSubTest2;
         protected System.Web.UI.WebControls.DataList DataList2;
-        protected static string [] m_data = new String[] {"aaa", "bbb", "ccc", "ddd", "eee", "fff", "ggg"};
-
-        private void Page_Load(object sender, System.EventArgs e) 
+        protected static string[] m_data = new String[]
         {
-            HtmlForm frm  = (HtmlForm)FindControl("Form1");
+            "aaa",
+            "bbb",
+            "ccc",
+            "ddd",
+            "eee",
+            "fff",
+            "ggg"
+        };
+
+        private void Page_Load(object sender, System.EventArgs e)
+        {
+            HtmlForm frm = (HtmlForm)FindControl("Form1");
             GHTTestBegin(frm);
 
             GHTActiveSubTest = GHTSubTest1;
-            try 
+            try
             {
-                DataList1.DataBind();;
+                DataList1.DataBind();
+                ;
                 if (DataList1.SelectedItem == null)
                 {
                     GHTSubTestAddResult("Test Passed.");
@@ -85,18 +93,18 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
                     GHTSubTestAddResult("Result: " + DataList1.SelectedItem.ToString());
                 }
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }
 
             GHTActiveSubTest = GHTSubTest2;
-            try 
+            try
             {
                 DataList2.DataBind();
                 Compare(DataList2.SelectedItem, DataList2.Items[3]);
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }

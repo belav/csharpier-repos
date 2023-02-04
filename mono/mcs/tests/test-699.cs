@@ -4,7 +4,7 @@ public class D : C
 {
     string _message = "";
 
-    public D (string msg)
+    public D(string msg)
     {
         _message = msg;
     }
@@ -14,7 +14,5 @@ public class D : C
         get { return _message; }
     }
 
-    public static void Main ()
-    {
-    }
+    public static void Main() { }
 }

@@ -4,9 +4,7 @@
 
 class A
 {
-    public abstract class Adapter
-    {
-    }
+    public abstract class Adapter { }
 }
 
 class B : A

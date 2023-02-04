@@ -24,13 +24,18 @@ public class StatusCodePagesOptions
         {
             var statusCode = context.HttpContext.Response.StatusCode;
 
-            if (context.HttpContext.RequestServices.GetService<IProblemDetailsService>() is { } problemDetailsService)
+            if (
+                context.HttpContext.RequestServices.GetService<IProblemDetailsService>() is
+                { } problemDetailsService
+            )
             {
-                await problemDetailsService.WriteAsync(new ()
-                {
-                    HttpContext = context.HttpContext,
-                    ProblemDetails = { Status = statusCode }
-                });
+                await problemDetailsService.WriteAsync(
+                    new()
+                    {
+                        HttpContext = context.HttpContext,
+                        ProblemDetails = { Status = statusCode }
+                    }
+                );
             }
 
             // TODO: Render with a pre-compiled html razor view.
@@ -51,11 +56,14 @@ public class StatusCodePagesOptions
 
         var reasonPhrase = ReasonPhrases.GetReasonPhrase(httpStatusCode);
 
-        return string.Format(CultureInfo.InvariantCulture, "Status Code: {0}{1}{2}{3}",
-                                                                httpStatusCode,
-                                                                string.IsNullOrWhiteSpace(reasonPhrase) ? "" : "; ",
-                                                                reasonPhrase,
-                                                                internetExplorerWorkaround);
+        return string.Format(
+            CultureInfo.InvariantCulture,
+            "Status Code: {0}{1}{2}{3}",
+            httpStatusCode,
+            string.IsNullOrWhiteSpace(reasonPhrase) ? "" : "; ",
+            reasonPhrase,
+            internetExplorerWorkaround
+        );
     }
 
     /// <summary>

@@ -2,6 +2,4 @@
 // Line: 5
 // Compiler options: -langversion:7
 
-ref struct S
-{
-}
+ref struct S { }

@@ -38,9 +38,7 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         /// </summary>
         public IEnumerable<ReferenceLocation> Locations => LocationsArray;
 
-        internal ReferencedSymbol(
-            ISymbol definition,
-            ImmutableArray<ReferenceLocation> locations)
+        internal ReferencedSymbol(ISymbol definition, ImmutableArray<ReferenceLocation> locations)
         {
             this.Definition = definition;
             this.LocationsArray = locations.NullToEmpty();
@@ -49,21 +47,24 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         private string GetDebuggerDisplay()
         {
             var count = this.Locations.Count();
-            return string.Format("{0}, {1} {2}", this.Definition.Name, count, count == 1 ? "ref" : "refs");
+            return string.Format(
+                "{0}, {1} {2}",
+                this.Definition.Name,
+                count,
+                count == 1 ? "ref" : "refs"
+            );
         }
 
-        internal TestAccessor GetTestAccessor()
-            => new(this);
+        internal TestAccessor GetTestAccessor() => new(this);
 
         internal readonly struct TestAccessor
         {
             private readonly ReferencedSymbol _referencedSymbol;
 
-            public TestAccessor(ReferencedSymbol referencedSymbol)
-                => _referencedSymbol = referencedSymbol;
+            public TestAccessor(ReferencedSymbol referencedSymbol) =>
+                _referencedSymbol = referencedSymbol;
 
-            internal string GetDebuggerDisplay()
-                => _referencedSymbol.GetDebuggerDisplay();
+            internal string GetDebuggerDisplay() => _referencedSymbol.GetDebuggerDisplay();
         }
     }
 }

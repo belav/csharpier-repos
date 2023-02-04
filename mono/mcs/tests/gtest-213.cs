@@ -6,7 +6,8 @@ public interface SomeInterface
 public struct SomeStruct : SomeInterface
 {
     int x;
-    public int Foo {
+    public int Foo
+    {
         get { return x; }
         set { x = value; }
     }
@@ -14,17 +15,17 @@ public struct SomeStruct : SomeInterface
 
 public class Test
 {
-    public static void Fun<T> (T t)
+    public static void Fun<T>(T t)
         where T : SomeInterface
     {
         if (++t.Foo != 1)
-            throw new System.Exception ("not 1");
+            throw new System.Exception("not 1");
         if (t.Foo != 1)
-            throw new System.Exception ("didn't update 't'");
+            throw new System.Exception("didn't update 't'");
     }
 
     public static void Main()
     {
-        Fun (new SomeStruct ());
+        Fun(new SomeStruct());
     }
 }

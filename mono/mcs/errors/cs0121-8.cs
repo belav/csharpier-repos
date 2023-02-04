@@ -3,18 +3,18 @@
 
 class C
 {
-    static int Foo (byte b = 9)
+    static int Foo(byte b = 9)
     {
         return 4;
     }
-    
-    static int Foo (int i = 8)
+
+    static int Foo(int i = 8)
     {
         return 2;
     }
-    
-    public static void Main ()
+
+    public static void Main()
     {
-        Foo ();
+        Foo();
     }
 }

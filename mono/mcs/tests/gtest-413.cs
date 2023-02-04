@@ -2,7 +2,7 @@ using System;
 
 struct S
 {
-    public static long operator + (S f, long n)
+    public static long operator +(S f, long n)
     {
         return n;
     }
@@ -10,10 +10,10 @@ struct S
 
 class Test
 {
-    public static int Main ()
+    public static int Main()
     {
         int? n = 1;
-        S f = new S ();
+        S f = new S();
 
         return (f + n) != 1 ? 1 : 0;
     }

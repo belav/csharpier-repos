@@ -37,148 +37,152 @@ namespace MonoTests.System.Threading.Tasks
     {
         class LazyCatScheduler : TaskScheduler
         {
-            public TaskStatus ExecuteInlineStatus
+            public TaskStatus ExecuteInlineStatus { get; set; }
+
+            protected override void QueueTask(Task task)
             {
-                get;
-                set;
+                throw new NotImplementedException();
             }
 
-            protected override void QueueTask (Task task)
+            protected override bool TryDequeue(Task task)
             {
-                throw new NotImplementedException ();
+                throw new NotImplementedException();
             }
 
-            protected override bool TryDequeue (Task task)
-            {
-                throw new NotImplementedException ();
-            }
-
-            protected override bool TryExecuteTaskInline (Task task, bool taskWasPreviouslyQueued)
+            protected override bool TryExecuteTaskInline(Task task, bool taskWasPreviouslyQueued)
             {
                 ExecuteInlineStatus = task.Status;
                 return true;
             }
 
-            protected override IEnumerable<Task> GetScheduledTasks ()
+            protected override IEnumerable<Task> GetScheduledTasks()
             {
-                throw new NotImplementedException ();
+                throw new NotImplementedException();
             }
         }
 
         class DefaultScheduler : TaskScheduler
         {
-            protected override IEnumerable<Task> GetScheduledTasks ()
+            protected override IEnumerable<Task> GetScheduledTasks()
             {
-                throw new NotImplementedException ();
+                throw new NotImplementedException();
             }
 
-            protected override void QueueTask (Task task)
+            protected override void QueueTask(Task task)
             {
-                throw new NotImplementedException ();
+                throw new NotImplementedException();
             }
 
-            protected override bool TryExecuteTaskInline (Task task, bool taskWasPreviouslyQueued)
+            protected override bool TryExecuteTaskInline(Task task, bool taskWasPreviouslyQueued)
             {
-                throw new NotImplementedException ();
+                throw new NotImplementedException();
             }
 
-            public void TestDefaultMethod ()
+            public void TestDefaultMethod()
             {
-                Assert.IsFalse (TryDequeue (null), "#1");
+                Assert.IsFalse(TryDequeue(null), "#1");
             }
         }
 
-        class UserSynchronizationContext : SynchronizationContext
-        {
-            
-        }
+        class UserSynchronizationContext : SynchronizationContext { }
 
         [Test]
         public void FromCurrentSynchronizationContextTest_Invalid()
         {
             var c = SynchronizationContext.Current;
-            try {
-                SynchronizationContext.SetSynchronizationContext (null);
-                TaskScheduler.FromCurrentSynchronizationContext ();
-                Assert.Fail ("#1");
-            } catch (InvalidOperationException) {
-            } finally {
-                SynchronizationContext.SetSynchronizationContext (c);
+            try
+            {
+                SynchronizationContext.SetSynchronizationContext(null);
+                TaskScheduler.FromCurrentSynchronizationContext();
+                Assert.Fail("#1");
+            }
+            catch (InvalidOperationException) { }
+            finally
+            {
+                SynchronizationContext.SetSynchronizationContext(c);
             }
         }
 
         [Test]
-        public void FromUserSynchronizationContext ()
+        public void FromUserSynchronizationContext()
         {
             var c = SynchronizationContext.Current;
-            try {
-                SynchronizationContext.SetSynchronizationContext (new UserSynchronizationContext ());
-                var ts = TaskScheduler.FromCurrentSynchronizationContext ();
-                Assert.AreEqual (1, ts.MaximumConcurrencyLevel, "#1");
-            } finally {
-                SynchronizationContext.SetSynchronizationContext (c);
+            try
+            {
+                SynchronizationContext.SetSynchronizationContext(new UserSynchronizationContext());
+                var ts = TaskScheduler.FromCurrentSynchronizationContext();
+                Assert.AreEqual(1, ts.MaximumConcurrencyLevel, "#1");
+            }
+            finally
+            {
+                SynchronizationContext.SetSynchronizationContext(c);
             }
         }
 
         [Test]
-        public void BasicRunSynchronouslyTest ()
+        public void BasicRunSynchronouslyTest()
         {
             bool ran = false;
-            var t = new Task (() => ran = true);
+            var t = new Task(() => ran = true);
 
-            t.RunSynchronously ();
-            Assert.IsTrue (t.IsCompleted);
-            Assert.IsFalse (t.IsFaulted);
-            Assert.IsFalse (t.IsCanceled);
-            Assert.IsTrue (ran);
+            t.RunSynchronously();
+            Assert.IsTrue(t.IsCompleted);
+            Assert.IsFalse(t.IsFaulted);
+            Assert.IsFalse(t.IsCanceled);
+            Assert.IsTrue(ran);
         }
 
         [Test]
-        public void RunSynchronouslyButNoExecutionTest ()
+        public void RunSynchronouslyButNoExecutionTest()
         {
             TaskSchedulerException ex = null;
 
-            var ts = new LazyCatScheduler ();
-            Task t = new Task (() => {});
+            var ts = new LazyCatScheduler();
+            Task t = new Task(() => { });
 
-            try {
-                t.RunSynchronously (ts);
-            } catch (TaskSchedulerException e) {
+            try
+            {
+                t.RunSynchronously(ts);
+            }
+            catch (TaskSchedulerException e)
+            {
                 ex = e;
             }
 
-            Assert.IsNotNull (ex);
-            Assert.IsNotNull (ex.InnerException);
-            Assert.That (ex.InnerException, Is.TypeOf (typeof (InvalidOperationException)));
+            Assert.IsNotNull(ex);
+            Assert.IsNotNull(ex.InnerException);
+            Assert.That(ex.InnerException, Is.TypeOf(typeof(InvalidOperationException)));
         }
 
         [Test]
-        public void RunSynchronouslyTaskStatusTest ()
+        public void RunSynchronouslyTaskStatusTest()
         {
-            var ts = new LazyCatScheduler ();
-            var t = new Task (() => { });
+            var ts = new LazyCatScheduler();
+            var t = new Task(() => { });
 
-            try {
-                t.RunSynchronously (ts);
-            } catch {}
-            Assert.AreEqual (TaskStatus.WaitingToRun, ts.ExecuteInlineStatus);
+            try
+            {
+                t.RunSynchronously(ts);
+            }
+            catch { }
+            Assert.AreEqual(TaskStatus.WaitingToRun, ts.ExecuteInlineStatus);
         }
 
         static int finalizerThreadId = -1;
-    
+
         class FinalizerCatcher
         {
-            ~FinalizerCatcher ()
+            ~FinalizerCatcher()
             {
                 finalizerThreadId = Thread.CurrentThread.ManagedThreadId;
             }
         }
 
         [Test]
-        public void DefaultBehaviourTest ()
+        public void DefaultBehaviourTest()
         {
-            var s = new DefaultScheduler ();
-            s.TestDefaultMethod ();
+            var s = new DefaultScheduler();
+            s.TestDefaultMethod();
         }
 
         // This test doesn't work if the GC uses multiple finalizer thread.
@@ -186,69 +190,75 @@ namespace MonoTests.System.Threading.Tasks
         [Test]
         // Depends on objects getting GCd plus installs an EH handler which catches
         // exceptions thrown by other tasks
-        [Category ("NotWorking")]
-        public void UnobservedTaskExceptionOnFinalizerThreadTest ()
+        [Category("NotWorking")]
+        public void UnobservedTaskExceptionOnFinalizerThreadTest()
         {
-            var foo = new FinalizerCatcher ();
+            var foo = new FinalizerCatcher();
             foo = null;
-            GC.Collect ();
-            GC.WaitForPendingFinalizers ();
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
             // Same than following test, if GC didn't run don't execute the rest of this test
             if (finalizerThreadId == -1)
                 return;
 
             int evtThreadId = -2;
-            TaskScheduler.UnobservedTaskException += delegate {
+            TaskScheduler.UnobservedTaskException += delegate
+            {
                 evtThreadId = Thread.CurrentThread.ManagedThreadId;
             };
-            var evt = new ManualResetEventSlim ();
-            CreateAndForgetFaultedTask (evt);
-             evt.Wait (500);
-            Thread.Sleep (100);
-            GC.Collect ();
-            GC.WaitForPendingFinalizers ();
-            Assert.AreEqual (finalizerThreadId, evtThreadId, "Should be ran on finalizer thread");
+            var evt = new ManualResetEventSlim();
+            CreateAndForgetFaultedTask(evt);
+            evt.Wait(500);
+            Thread.Sleep(100);
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+            Assert.AreEqual(finalizerThreadId, evtThreadId, "Should be ran on finalizer thread");
         }
 
         [Test]
         // Depends on objects getting GCd plus installs an EH handler which catches
         // exceptions thrown by other tasks
-        [Category ("NotWorking")]
-        public void UnobservedTaskExceptionArgumentTest ()
+        [Category("NotWorking")]
+        public void UnobservedTaskExceptionArgumentTest()
         {
             bool ran = false;
             bool senderIsRight = false;
             UnobservedTaskExceptionEventArgs args = null;
 
-            TaskScheduler.UnobservedTaskException += (o, a) => {
-                senderIsRight = o.GetType ().ToString () == "System.Threading.Tasks.Task";
+            TaskScheduler.UnobservedTaskException += (o, a) =>
+            {
+                senderIsRight = o.GetType().ToString() == "System.Threading.Tasks.Task";
                 args = a;
                 ran = true;
             };
 
-            var evt = new ManualResetEventSlim ();
-            CreateAndForgetFaultedTask (evt);
-            evt.Wait (500);
-            Thread.Sleep (100);
-            GC.Collect ();
-            GC.WaitForPendingFinalizers ();
+            var evt = new ManualResetEventSlim();
+            CreateAndForgetFaultedTask(evt);
+            evt.Wait(500);
+            Thread.Sleep(100);
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
 
             // GC is too unreliable for some reason in that test, so backoff if finalizer wasn't ran
             // it needs to be run for the above test to work though (♥)
             if (!ran)
                 return;
 
-            Assert.IsNotNull (args.Exception);
-            Assert.IsNotNull (args.Exception.InnerException);
-            Assert.AreEqual ("foo", args.Exception.InnerException.Message);
-            Assert.IsFalse (args.Observed);
-            Assert.IsTrue (senderIsRight, "Sender is a task");
+            Assert.IsNotNull(args.Exception);
+            Assert.IsNotNull(args.Exception.InnerException);
+            Assert.AreEqual("foo", args.Exception.InnerException.Message);
+            Assert.IsFalse(args.Observed);
+            Assert.IsTrue(senderIsRight, "Sender is a task");
         }
 
         // We use this intermediary method to improve chances of GC kicking
-        static void CreateAndForgetFaultedTask (ManualResetEventSlim evt)
+        static void CreateAndForgetFaultedTask(ManualResetEventSlim evt)
         {
-            Task.Factory.StartNew (() => { evt.Set (); throw new Exception ("foo"); });
+            Task.Factory.StartNew(() =>
+            {
+                evt.Set();
+                throw new Exception("foo");
+            });
         }
     }
 }

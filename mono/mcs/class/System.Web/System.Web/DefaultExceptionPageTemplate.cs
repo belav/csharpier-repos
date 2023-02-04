@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,14 +33,17 @@ namespace System.Web
 {
     sealed class DefaultExceptionPageTemplate : ExceptionPageTemplate
     {
-        public override void Init ()
+        public override void Init()
         {
-            List <ExceptionPageTemplateFragment> fragments = Fragments;
-            
-            fragments.Add (new ExceptionPageTemplateFragment {
+            List<ExceptionPageTemplateFragment> fragments = Fragments;
+
+            fragments.Add(
+                new ExceptionPageTemplateFragment
+                {
                     Name = Template_PageTopName,
                     ResourceName = "ErrorTemplateCommon_Top.html",
-                    MacroNames = new List <string> {
+                    MacroNames = new List<string>
+                    {
                         "Title",
                         "ExceptionType",
                         "ExceptionMessage",
@@ -50,28 +53,33 @@ namespace System.Web
                 }
             );
 
-            fragments.Add (new ExceptionPageTemplateFragment {
+            fragments.Add(
+                new ExceptionPageTemplateFragment
+                {
                     Name = Template_PageCustomErrorDefaultName,
                     ResourceName = "DefaultErrorTemplate_CustomErrorDefault.html",
                     ValidForPageType = ExceptionPageTemplateType.CustomErrorDefault
                 }
             );
 
-            fragments.Add (new ExceptionPageTemplateFragment {
+            fragments.Add(
+                new ExceptionPageTemplateFragment
+                {
                     Name = Template_PageStandardName,
                     ResourceName = "DefaultErrorTemplate_StandardPage.html",
                     ValidForPageType = ExceptionPageTemplateType.Standard,
-                    MacroNames = new List <string> {
-                        "StackTrace"
-                    }
+                    MacroNames = new List<string> { "StackTrace" }
                 }
             );
 
-            fragments.Add (new ExceptionPageTemplateFragment {
+            fragments.Add(
+                new ExceptionPageTemplateFragment
+                {
                     Name = Template_PageHtmlizedExceptionName,
                     ResourceName = "HtmlizedExceptionPage_Top.html",
                     ValidForPageType = ExceptionPageTemplateType.Htmlized,
-                    MacroNames = new List <string> {
+                    MacroNames = new List<string>
+                    {
                         "StackTrace",
                         "HtmlizedExceptionOrigin",
                         "HtmlizedExceptionSourceFile"
@@ -79,11 +87,14 @@ namespace System.Web
                 }
             );
 
-            fragments.Add (new ExceptionPageTemplateFragment {
+            fragments.Add(
+                new ExceptionPageTemplateFragment
+                {
                     Name = "File Short Source",
                     ResourceName = "HtmlizedExceptionPage_FileShortSource.html",
                     ValidForPageType = ExceptionPageTemplateType.SourceError,
-                    MacroNames = new List <string> {
+                    MacroNames = new List<string>
+                    {
                         "HtmlizedExceptionShortSource",
                         "HtmlizedExceptionSourceFile",
                         "HtmlizedExceptionErrorLines"
@@ -91,40 +102,45 @@ namespace System.Web
                 }
             );
 
-            fragments.Add (new ExceptionPageTemplateFragment {
+            fragments.Add(
+                new ExceptionPageTemplateFragment
+                {
                     Name = "File Long Source",
                     ResourceName = "HtmlizedExceptionPage_FileLongSource.html",
                     ValidForPageType = ExceptionPageTemplateType.SourceError,
-                    MacroNames = new List <string> {
+                    MacroNames = new List<string>
+                    {
                         "HtmlizedExceptionLongSource",
                         "HtmlizedExceptionSourceFile",
                         "HtmlizedExceptionErrorLines"
                     },
-                    RequiredMacros = new List <string> {
-                        "HtmlizedExceptionLongSource"
-                    }
+                    RequiredMacros = new List<string> { "HtmlizedExceptionLongSource" }
                 }
             );
 
-            fragments.Add (new ExceptionPageTemplateFragment {
+            fragments.Add(
+                new ExceptionPageTemplateFragment
+                {
                     Name = "Compiler Output",
                     ResourceName = "HtmlizedExceptionPage_CompilerOutput.html",
                     ValidForPageType = ExceptionPageTemplateType.SourceError,
-                    MacroNames = new List <string> {
+                    MacroNames = new List<string>
+                    {
                         "HtmlizedExceptionCompilerOutput",
                         "HtmlizedExceptionSourceFile",
                         "HtmlizedExceptionErrorLines"
                     },
-                    RequiredMacros = new List <string> {
-                        "HtmlizedExceptionCompilerOutput"
-                    }
+                    RequiredMacros = new List<string> { "HtmlizedExceptionCompilerOutput" }
                 }
             );
-            
-            fragments.Add (new ExceptionPageTemplateFragment {
+
+            fragments.Add(
+                new ExceptionPageTemplateFragment
+                {
                     Name = Template_PageBottomName,
                     ResourceName = "ErrorTemplateCommon_Bottom.html",
-                    MacroNames = new List <string> {
+                    MacroNames = new List<string>
+                    {
                         "RuntimeVersionInformation",
                         "AspNetVersionInformation",
                         "FullStackTrace"

@@ -35,7 +35,7 @@ using System.Web.UI.HtmlControls;
 
 namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
 {
-    public class ListBox_ToolTip : GHTBaseWeb 
+    public class ListBox_ToolTip : GHTBaseWeb
     {
         protected System.Web.UI.WebControls.ListBox ListBox1;
         protected GHTWebControls.GHTSubTest GHTSubTest1;
@@ -43,8 +43,9 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
         protected GHTWebControls.GHTSubTest GHTSubTest2;
         protected System.Web.UI.WebControls.ListBox ListBox3;
         protected GHTWebControls.GHTSubTest GHTSubTest3;
+
         #region Web Form Designer generated code
-        override protected void OnInit(EventArgs e) 
+        override protected void OnInit(EventArgs e)
         {
             //
             // CODEGEN: This call is required by the ASP.NET Web Form Designer.
@@ -52,57 +53,65 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             InitializeComponent();
             base.OnInit(e);
         }
-        
+
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent() 
-        {    
+        private void InitializeComponent()
+        {
             this.Load += new System.EventHandler(this.Page_Load);
-
         }
         #endregion
 
-        private void Page_Load(object sender, System.EventArgs e) 
+        private void Page_Load(object sender, System.EventArgs e)
         {
             // Subtest1 - Simple text:
-            try 
+            try
             {
                 ListBox1.ToolTip = "ToolTip text";
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
-                GHTSubTestAddResult(GHTSubTest1, "Unexpected exception was caught, type: " + 
-                    ex.GetType().ToString() + 
-                    " Message: " + 
-                    ex.Message);
+                GHTSubTestAddResult(
+                    GHTSubTest1,
+                    "Unexpected exception was caught, type: "
+                        + ex.GetType().ToString()
+                        + " Message: "
+                        + ex.Message
+                );
             }
 
             // Subtest2 - String.Empty:
-            try 
+            try
             {
                 ListBox2.ToolTip = String.Empty;
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
-                GHTSubTestAddResult(GHTSubTest2, "Unexpected exception was caught, type: " + 
-                    ex.GetType().ToString() + 
-                    " Message: " + 
-                    ex.Message);
+                GHTSubTestAddResult(
+                    GHTSubTest2,
+                    "Unexpected exception was caught, type: "
+                        + ex.GetType().ToString()
+                        + " Message: "
+                        + ex.Message
+                );
             }
 
             // Subtest3 - Non alphnumeric charachters:
-            try 
+            try
             {
                 ListBox3.ToolTip = @"`1234567890-=[]\;',./~!@#$%^&*()_+{}|:<>?";
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
-                GHTSubTestAddResult(GHTSubTest3, "Unexpected exception was caught, type: " + 
-                    ex.GetType().ToString() + 
-                    " Message: " + 
-                    ex.Message);
+                GHTSubTestAddResult(
+                    GHTSubTest3,
+                    "Unexpected exception was caught, type: "
+                        + ex.GetType().ToString()
+                        + " Message: "
+                        + ex.Message
+                );
             }
         }
     }

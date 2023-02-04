@@ -13,22 +13,17 @@ namespace System.Net.Http
     public class MockMultipartFormDataStreamProvider : MultipartFormDataStreamProvider
     {
         public MockMultipartFormDataStreamProvider()
-            : base(Path.GetTempPath())
-        {
-        }
+            : base(Path.GetTempPath()) { }
 
         public MockMultipartFormDataStreamProvider(string rootPath)
-            : base(rootPath)
-        {
-        }
+            : base(rootPath) { }
 
         public MockMultipartFormDataStreamProvider(string rootPath, int bufferSize)
-            : base(rootPath, bufferSize)
-        {
-        }
+            : base(rootPath, bufferSize) { }
     }
 
-    public class MultipartFormDataStreamProviderTests : MultipartStreamProviderTestBase<MockMultipartFormDataStreamProvider>
+    public class MultipartFormDataStreamProviderTests
+        : MultipartStreamProviderTestBase<MockMultipartFormDataStreamProvider>
     {
         private const int ValidBufferSize = 0x111;
         private const string ValidPath = @"c:\some\path";
@@ -36,18 +31,26 @@ namespace System.Net.Http
         [Fact]
         public void FormData_IsEmpty()
         {
-            MultipartFormDataStreamProvider provider = new MultipartFormDataStreamProvider(ValidPath, ValidBufferSize);
+            MultipartFormDataStreamProvider provider = new MultipartFormDataStreamProvider(
+                ValidPath,
+                ValidBufferSize
+            );
             Assert.Empty(provider.FormData);
         }
 
         [Fact]
         public void GetStream_ThrowsOnNoContentDisposition()
         {
-            MultipartFormDataStreamProvider provider = new MultipartFormDataStreamProvider(ValidPath);
+            MultipartFormDataStreamProvider provider = new MultipartFormDataStreamProvider(
+                ValidPath
+            );
             HttpContent content = new StringContent(String.Empty);
             HttpContentHeaders headers = FormattingUtilities.CreateEmptyContentHeaders();
 
-            Assert.Throws<InvalidOperationException>(() => { provider.GetStream(content, headers); });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                provider.GetStream(content, headers);
+            });
         }
 
         [Fact]
@@ -63,7 +66,9 @@ namespace System.Net.Http
                 content.Add(new StringContent("Content 1"), "NoFile");
                 content.Add(new StringContent("Content 2"), "File", "Filename");
 
-                MultipartFormDataStreamProvider provider = new MultipartFormDataStreamProvider(tempPath);
+                MultipartFormDataStreamProvider provider = new MultipartFormDataStreamProvider(
+                    tempPath
+                );
                 stream0 = provider.GetStream(content, content.ElementAt(0).Headers);
                 stream1 = provider.GetStream(content, content.ElementAt(1).Headers);
 
@@ -74,7 +79,10 @@ namespace System.Net.Http
                 string partialFileName = String.Format("{0}BodyPart_", tempPath);
                 Assert.Contains(partialFileName, fileData.LocalFileName);
 
-                Assert.Same(content.ElementAt(1).Headers.ContentDisposition, fileData.Headers.ContentDisposition);
+                Assert.Same(
+                    content.ElementAt(1).Headers.ContentDisposition,
+                    fileData.Headers.ContentDisposition
+                );
             }
             finally
             {
@@ -107,7 +115,9 @@ namespace System.Net.Http
                 multipartContent.Add(new StringContent(content), formName);
             }
 
-            MultipartFormDataStreamProvider provider = new MultipartFormDataStreamProvider(ValidPath);
+            MultipartFormDataStreamProvider provider = new MultipartFormDataStreamProvider(
+                ValidPath
+            );
             foreach (HttpContent content in multipartContent)
             {
                 provider.Contents.Add(content);
@@ -145,7 +155,7 @@ namespace System.Net.Http
             {
                 string content = String.Format(contentFormat, index);
                 string formName = String.Format(formNameFormat, index);
-                if (index < maxContents/2)
+                if (index < maxContents / 2)
                 {
                     multipartContent.Add(new StringContent(content), formName);
                 }
@@ -194,7 +204,8 @@ namespace System.Net.Http
         {
             // Arrange
             MultipartFormDataContent multipartContent = new MultipartFormDataContent();
-            Mock<MultipartFormDataStreamProvider> mockProvider = new Mock<MultipartFormDataStreamProvider>(ValidPath);
+            Mock<MultipartFormDataStreamProvider> mockProvider =
+                new Mock<MultipartFormDataStreamProvider>(ValidPath);
             mockProvider.CallBase = true;
 
             // Act
@@ -207,14 +218,10 @@ namespace System.Net.Http
         private class CustomMultipartFormDataStreamProvider : MultipartFormDataStreamProvider
         {
             public CustomMultipartFormDataStreamProvider(string rootPath)
-                : base(rootPath)
-            {
-            }
+                : base(rootPath) { }
 
             public CustomMultipartFormDataStreamProvider(string rootPath, int bufferSize)
-                : base(rootPath, bufferSize)
-            {
-            }
+                : base(rootPath, bufferSize) { }
 
             public override Stream GetStream(HttpContent parent, HttpContentHeaders headers)
             {

@@ -4,8 +4,5 @@
 
 class C
 {
-    public extern char this[int index]
-    {
-        get;
-    }
+    public extern char this[int index] { get; }
 }

@@ -1,5 +1,5 @@
 public class Program
-{    
+{
     public static void Main()
     {
         new Program<object>();
@@ -8,11 +8,7 @@ public class Program
 
 public class Program<T>
 {
-    public Program(Generic<T> generic = null)
-    {
-    }
+    public Program(Generic<T> generic = null) { }
 }
 
-public class Generic<T>
-{    
-}
+public class Generic<T> { }

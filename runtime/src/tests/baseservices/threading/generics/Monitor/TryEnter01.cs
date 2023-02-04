@@ -3,11 +3,11 @@
 using System;
 using System.Threading;
 
+public struct ValX1<T> { }
 
-public struct ValX1<T> {}
-public class RefX1<T> {}
+public class RefX1<T> { }
 
-class Gen<T> 
+class Gen<T>
 {
     public static void TryEnterTest()
     {
@@ -16,8 +16,8 @@ class Gen<T>
         TestHelper myHelper = new TestHelper(Test_TryEnter01.nThreads);
         // MonitorDelegateTS[] consumer = new MonitorDelegateTS[Test.nThreads];
         // for(int i=0;i<consumer.Length;i++){
-            // consumer[i] = new MonitorDelegateTS(myHelper.ConsumerTryEnter);
-            // consumer[i].BeginInvoke(monitor,100,null,null);
+        // consumer[i] = new MonitorDelegateTS(myHelper.ConsumerTryEnter);
+        // consumer[i].BeginInvoke(monitor,100,null,null);
         // }
 
         for (int i = 0; i < Test_TryEnter01.nThreads; i++)
@@ -28,14 +28,15 @@ class Gen<T>
             });
         }
 
-        for(int i=0;i<6;i++){
-            if(myHelper.m_Event.WaitOne(10000))//,true))
+        for (int i = 0; i < 6; i++)
+        {
+            if (myHelper.m_Event.WaitOne(10000)) //,true))
                 break;
-            if(myHelper.Error == true)
+            if (myHelper.Error == true)
                 break;
         }
         Test_TryEnter01.Eval(!myHelper.Error);
-    }    
+    }
 }
 
 public class Test_TryEnter01
@@ -44,6 +45,7 @@ public class Test_TryEnter01
     public static int counter = 0;
     public static int Xcounter = 0;
     public static bool result = true;
+
     public static void Eval(bool exp)
     {
         counter++;
@@ -52,12 +54,11 @@ public class Test_TryEnter01
             result = exp;
             Console.WriteLine("Test Failed at location: " + counter);
         }
-    
     }
-    
+
     public static int Main()
     {
-        Gen<int>.TryEnterTest();    
+        Gen<int>.TryEnterTest();
         Gen<double>.TryEnterTest();
         Gen<string>.TryEnterTest();
         Gen<object>.TryEnterTest();
@@ -92,6 +93,4 @@ public class Test_TryEnter01
             return 1;
         }
     }
-}        
-
-
+}

@@ -36,23 +36,24 @@ using System.Collections;
 
 namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
 {
-    public class WebControl_TableStyle_BackImageUrl
-        : GHTWebControlBase
+    public class WebControl_TableStyle_BackImageUrl : GHTWebControlBase
     {
         #region Web Form Designer generated code
-        override protected void OnInit(EventArgs e) {
+        override protected void OnInit(EventArgs e)
+        {
             //
             // CODEGEN: This call is required by the ASP.NET Web Form Designer.
             //
             InitializeComponent();
             base.OnInit(e);
         }
-        
+
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent() {    
+        private void InitializeComponent()
+        {
             this.Load += new System.EventHandler(this.Page_Load);
         }
         #endregion
@@ -69,12 +70,10 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             base.m_derivedTypes.Add(typeof(DataList));
             base.m_derivedTypes.Add(typeof(Table));
         }
- 
 
-
-        private void Page_Load(object sender, System.EventArgs e) 
+        private void Page_Load(object sender, System.EventArgs e)
         {
-            HtmlForm frm  = (HtmlForm)FindControl("Form1");
+            HtmlForm frm = (HtmlForm)FindControl("Form1");
             GHTTestBegin(frm);
             foreach (Type currentType in TypesToTest)
             {
@@ -89,7 +88,7 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             try
             {
                 this.GHTSubTestBegin(ctrlType, "Relative path");
-                TableStyle style1 = (TableStyle) this.TestedControl.ControlStyle;
+                TableStyle style1 = (TableStyle)this.TestedControl.ControlStyle;
                 style1.BackImageUrl = "cat.jpg";
             }
             catch (Exception exception8)
@@ -103,8 +102,9 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             try
             {
                 this.GHTSubTestBegin(ctrlType, "absolute path");
-                TableStyle style2 = (TableStyle) this.TestedControl.ControlStyle;
-                style2.BackImageUrl = "http://localhost:/System_Web_dll/System_Web_UI_WebControls/WebControl/cat.jpg";
+                TableStyle style2 = (TableStyle)this.TestedControl.ControlStyle;
+                style2.BackImageUrl =
+                    "http://localhost:/System_Web_dll/System_Web_UI_WebControls/WebControl/cat.jpg";
             }
             catch (Exception exception9)
             {
@@ -117,7 +117,7 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             try
             {
                 this.GHTSubTestBegin(ctrlType, "Defied only in CssClass");
-                TableStyle style3 = (TableStyle) this.TestedControl.ControlStyle;
+                TableStyle style3 = (TableStyle)this.TestedControl.ControlStyle;
                 style3.CssClass = "CssClass1";
             }
             catch (Exception exception10)
@@ -131,9 +131,10 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             try
             {
                 this.GHTSubTestBegin(ctrlType, "Defied only in CssClass");
-                TableStyle style4 = (TableStyle) this.TestedControl.ControlStyle;
+                TableStyle style4 = (TableStyle)this.TestedControl.ControlStyle;
                 style4.CssClass = "CssClass1";
-                style4.BackImageUrl = "http://localhost:/System_Web_dll/System_Web_UI_WebControls/WebControl/dog.jpg";
+                style4.BackImageUrl =
+                    "http://localhost:/System_Web_dll/System_Web_UI_WebControls/WebControl/dog.jpg";
             }
             catch (Exception exception11)
             {
@@ -146,7 +147,7 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             try
             {
                 this.GHTSubTestBegin(ctrlType, "Default value");
-                TableStyle style5 = (TableStyle) this.TestedControl.ControlStyle;
+                TableStyle style5 = (TableStyle)this.TestedControl.ControlStyle;
                 this.GHTSubTestAddResult(style5.BackImageUrl);
             }
             catch (Exception exception12)
@@ -160,7 +161,7 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             try
             {
                 this.GHTSubTestBegin(ctrlType, "Throws exception on null value");
-                TableStyle style6 = (TableStyle) this.TestedControl.ControlStyle;
+                TableStyle style6 = (TableStyle)this.TestedControl.ControlStyle;
                 style6.BackImageUrl = null;
                 this.GHTSubTestExpectedExceptionNotCaught("ArgumentNullException");
             }
@@ -180,6 +181,5 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             }
             this.GHTSubTestEnd();
         }
- 
     }
 }

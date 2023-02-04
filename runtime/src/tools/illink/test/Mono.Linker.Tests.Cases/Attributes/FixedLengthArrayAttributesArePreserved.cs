@@ -8,36 +8,34 @@ namespace Mono.Linker.Tests.Cases.Attributes
     /// <summary>
     /// The purpose of this test is mainly to provide coverage on the `KeptAttributeOnFixedBufferType` attribute
     /// </summary>
-    [SetupCompileArgument ("/unsafe")]
+    [SetupCompileArgument("/unsafe")]
     // Can't verify because the test contains unsafe code
     [SkipPeVerify]
     public class FixedLengthArrayAttributesArePreserved
     {
-        public static void Main ()
+        public static void Main()
         {
-            Helper ();
+            Helper();
         }
 
         [Kept]
-        static unsafe void Helper ()
+        static unsafe void Helper()
         {
-            var tmp = new WithFixedArrayField ();
+            var tmp = new WithFixedArrayField();
             var v = tmp.Values;
-            AMethodToUseTheReturnValue (v);
+            AMethodToUseTheReturnValue(v);
         }
 
         [Kept]
-        static unsafe void AMethodToUseTheReturnValue (int* ptr)
-        {
-        }
+        static unsafe void AMethodToUseTheReturnValue(int* ptr) { }
 
         [Kept]
         public unsafe struct WithFixedArrayField
         {
             [Kept]
             [KeptFixedBuffer]
-            [KeptAttributeOnFixedBufferType (typeof (UnsafeValueTypeAttribute))]
-            [KeptAttributeAttribute (typeof (FixedBufferAttribute))]
+            [KeptAttributeOnFixedBufferType(typeof(UnsafeValueTypeAttribute))]
+            [KeptAttributeAttribute(typeof(FixedBufferAttribute))]
             public fixed int Values[10];
         }
     }

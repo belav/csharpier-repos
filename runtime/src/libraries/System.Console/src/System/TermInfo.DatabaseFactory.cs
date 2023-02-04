@@ -15,7 +15,8 @@ internal static partial class TermInfo
         /// The default locations in which to search for terminfo databases.
         /// This is the ordering of well-known locations used by ncurses.
         /// </summary>
-        internal static readonly string[] s_terminfoLocations = {
+        internal static readonly string[] s_terminfoLocations =
+        {
             "/etc/terminfo",
             "/lib/terminfo",
             "/usr/share/terminfo",
@@ -48,7 +49,10 @@ internal static partial class TermInfo
 
             // Then try in the user's home directory.
             string? home = PersistedFiles.GetHomeDirectory();
-            if (!string.IsNullOrWhiteSpace(home) && (db = ReadDatabase(term, home + "/.terminfo")) != null)
+            if (
+                !string.IsNullOrWhiteSpace(home)
+                && (db = ReadDatabase(term, home + "/.terminfo")) != null
+            )
             {
                 return db;
             }
@@ -72,7 +76,11 @@ internal static partial class TermInfo
         /// <returns>true if the file was successfully opened; otherwise, false.</returns>
         private static bool TryOpen(string filePath, [NotNullWhen(true)] out SafeFileHandle? fd)
         {
-            fd = Interop.Sys.Open(filePath, Interop.Sys.OpenFlags.O_RDONLY | Interop.Sys.OpenFlags.O_CLOEXEC, 0);
+            fd = Interop.Sys.Open(
+                filePath,
+                Interop.Sys.OpenFlags.O_RDONLY | Interop.Sys.OpenFlags.O_CLOEXEC,
+                0
+            );
             if (fd.IsInvalid)
             {
                 // Don't throw in this case, as we'll be polling multiple locations looking for the file.
@@ -97,8 +105,17 @@ internal static partial class TermInfo
 
             Span<char> stackBuffer = stackalloc char[256];
             SafeFileHandle? fd;
-            if (!TryOpen(string.Create(null, stackBuffer, $"{directoryPath}/{term[0]}/{term}"), out fd) &&       // /directory/termFirstLetter/term      (Linux)
-                !TryOpen(string.Create(null, stackBuffer, $"{directoryPath}/{(int)term[0]:X}/{term}"), out fd))  // /directory/termFirstLetterAsHex/term (Mac)
+            if (
+                !TryOpen(
+                    string.Create(null, stackBuffer, $"{directoryPath}/{term[0]}/{term}"),
+                    out fd
+                )
+                && // /directory/termFirstLetter/term      (Linux)
+                !TryOpen(
+                    string.Create(null, stackBuffer, $"{directoryPath}/{(int)term[0]:X}/{term}"),
+                    out fd
+                )
+            ) // /directory/termFirstLetterAsHex/term (Mac)
             {
                 return null;
             }
@@ -118,7 +135,11 @@ internal static partial class TermInfo
                 long fileOffset = 0;
                 do
                 {
-                    int bytesRead = RandomAccess.Read(fd, new Span<byte>(data, (int)fileOffset, (int)(termInfoLength - fileOffset)), fileOffset);
+                    int bytesRead = RandomAccess.Read(
+                        fd,
+                        new Span<byte>(data, (int)fileOffset, (int)(termInfoLength - fileOffset)),
+                        fileOffset
+                    );
                     if (bytesRead == 0)
                     {
                         throw new InvalidOperationException(SR.IO_TermInfoInvalid);

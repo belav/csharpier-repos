@@ -78,7 +78,10 @@ namespace System.Net.Http
         [Fact]
         public void IsFormData_ThrowsOnNull()
         {
-            Assert.ThrowsArgumentNull(() => HttpContentFormDataExtensions.IsFormData(null), "content");
+            Assert.ThrowsArgumentNull(
+                () => HttpContentFormDataExtensions.IsFormData(null),
+                "content"
+            );
         }
 
         [Fact]
@@ -110,7 +113,10 @@ namespace System.Net.Http
         [Fact]
         public void ReadAsFormDataAsync_ThrowsOnNull()
         {
-            Assert.ThrowsArgumentNull(() => HttpContentFormDataExtensions.ReadAsFormDataAsync(null), "content");
+            Assert.ThrowsArgumentNull(
+                () => HttpContentFormDataExtensions.ReadAsFormDataAsync(null),
+                "content"
+            );
         }
 
         [Fact]
@@ -121,7 +127,9 @@ namespace System.Net.Http
             HttpContent content = new StringContent("");
             content.Headers.ContentType = MediaTypeConstants.ApplicationFormUrlEncodedMediaType;
 
-            await Assert.ThrowsAsync<OperationCanceledException>(() => content.ReadAsFormDataAsync(cts.Token));
+            await Assert.ThrowsAsync<OperationCanceledException>(
+                () => content.ReadAsFormDataAsync(cts.Token)
+            );
         }
 
         [Theory]
@@ -174,7 +182,9 @@ namespace System.Net.Http
         public Task ReadAsFormDataAsync_HandlesNonFormData()
         {
             HttpContent content = new StringContent("{}", Encoding.UTF8, "test/unknown");
-            return Assert.ThrowsAsync<UnsupportedMediaTypeException>(() => content.ReadAsFormDataAsync());
+            return Assert.ThrowsAsync<UnsupportedMediaTypeException>(
+                () => content.ReadAsFormDataAsync()
+            );
         }
     }
 }

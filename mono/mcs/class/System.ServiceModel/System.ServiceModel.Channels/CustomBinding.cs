@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -43,22 +43,19 @@ namespace System.ServiceModel.Channels
         ISecurityCapabilities security;
         string scheme = "";
 
-        public CustomBinding (string configurationName)
-            : this (configurationName, default_ns)
-        {
-        }
+        public CustomBinding(string configurationName)
+            : this(configurationName, default_ns) { }
 
-        public CustomBinding ()
-            : base ()
+        public CustomBinding()
+            : base()
         {
-            elements = new BindingElementCollection ();
+            elements = new BindingElementCollection();
         }
 
         // Binding passed to .ctor() seems to have nothing to do
         // with the properties on this class.
-        public CustomBinding (Binding binding)
-            : this (binding.CreateBindingElements (),
-                binding.Name, binding.Namespace)
+        public CustomBinding(Binding binding)
+            : this(binding.CreateBindingElements(), binding.Name, binding.Namespace)
         {
             OpenTimeout = binding.OpenTimeout;
             CloseTimeout = binding.CloseTimeout;
@@ -68,28 +65,25 @@ namespace System.ServiceModel.Channels
             security = binding as ISecurityCapabilities;
         }
 
-        public CustomBinding (params BindingElement [] bindingElementsInTopDownChannelStackOrder)
-            : this ("CustomBinding", default_ns, bindingElementsInTopDownChannelStackOrder)
-        {
-        }
+        public CustomBinding(params BindingElement[] bindingElementsInTopDownChannelStackOrder)
+            : this("CustomBinding", default_ns, bindingElementsInTopDownChannelStackOrder) { }
 
-        public CustomBinding (IEnumerable<BindingElement> bindingElementsInTopDownChannelStackOrder)
-            : this (bindingElementsInTopDownChannelStackOrder, "CustomBinding", default_ns)
-        {
-        }
+        public CustomBinding(IEnumerable<BindingElement> bindingElementsInTopDownChannelStackOrder)
+            : this(bindingElementsInTopDownChannelStackOrder, "CustomBinding", default_ns) { }
 
-        public CustomBinding (string name, string ns,
-            params BindingElement [] bindingElementsInTopDownChannelStackOrder)
-            : this (bindingElementsInTopDownChannelStackOrder, name, ns)
-        {
-        }
+        public CustomBinding(
+            string name,
+            string ns,
+            params BindingElement[] bindingElementsInTopDownChannelStackOrder
+        )
+            : this(bindingElementsInTopDownChannelStackOrder, name, ns) { }
 
-        private CustomBinding (IEnumerable<BindingElement> binding,
-            string name, string ns)
-            : base (name, ns)
+        private CustomBinding(IEnumerable<BindingElement> binding, string name, string ns)
+            : base(name, ns)
         {
-            elements = new BindingElementCollection (binding);
-            foreach (BindingElement be in elements) {
+            elements = new BindingElementCollection(binding);
+            foreach (BindingElement be in elements)
+            {
                 TransportBindingElement tbe = be as TransportBindingElement;
                 if (tbe == null)
                     continue;
@@ -98,17 +92,19 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        public BindingElementCollection Elements {
+        public BindingElementCollection Elements
+        {
             get { return elements; }
         }
 
-        public override string Scheme {
+        public override string Scheme
+        {
             get { return scheme; }
         }
 
-        public override BindingElementCollection CreateBindingElements ()
+        public override BindingElementCollection CreateBindingElements()
         {
-            return elements.Clone ();
+            return elements.Clone();
         }
     }
 }

@@ -34,6 +34,7 @@ namespace hello_trythrowcatch_basics_cs
         {
             Console.WriteLine("In catch");
         }
+
         static public void inFinally() { }
 
         [Fact]

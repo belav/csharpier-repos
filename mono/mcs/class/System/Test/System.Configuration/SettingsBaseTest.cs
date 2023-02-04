@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -46,16 +46,18 @@ namespace MonoTests.System.Configuration
         class MySettings : SettingsBase
         {
             [UserScopedSetting] // ignored in non-ApplicationSettingsBase
-            public int Foo {
-                get { return (int) this ["Foo"]; }
-                set { this ["Foo"] = value; }
+            public int Foo
+            {
+                get { return (int)this["Foo"]; }
+                set { this["Foo"] = value; }
             }
 
             [UserScopedSetting] // ignored in non-ApplicationSettingsBase
-            [DefaultSettingValue ("20")]
-            public int Bar {
-                get { return (int) this ["Bar"]; }
-                set { this ["Bar"] = value; }
+            [DefaultSettingValue("20")]
+            public int Bar
+            {
+                get { return (int)this["Bar"]; }
+                set { this["Bar"] = value; }
             }
         }
 
@@ -64,210 +66,304 @@ namespace MonoTests.System.Configuration
             int foo;
 
             [UserScopedSetting] // ignored in non-ApplicationSettingsBase
-            public int Foo {
-                get { return (int) this ["Foo"]; }
-                set { this ["Foo"] = value; }
+            public int Foo
+            {
+                get { return (int)this["Foo"]; }
+                set { this["Foo"] = value; }
             }
 
-            public override SettingsPropertyCollection Properties {
+            public override SettingsPropertyCollection Properties
+            {
                 get { return null; }
             }
 
-            public SettingsPropertyCollection BaseProperties {
+            public SettingsPropertyCollection BaseProperties
+            {
                 get { return base.Properties; }
             }
         }
 
         [Test]
-        public void PropertyDefaults ()
+        public void PropertyDefaults()
         {
-            MySettings s = new MySettings ();
-            Assert.IsNull (s.Properties, "#1");
-            Assert.IsNull (s.Providers, "#2");
-            Assert.IsNull (s.Context, "#3");
-            Assert.AreEqual (0, s.PropertyValues.Count, "#4");
-            Assert.IsNull (s.Properties, "#5");
-            Assert.IsNull (s.Providers, "#6");
-            Assert.IsNull (s.Context, "#7");
-            s.Initialize (s.Context, s.Properties, s.Providers);
+            MySettings s = new MySettings();
+            Assert.IsNull(s.Properties, "#1");
+            Assert.IsNull(s.Providers, "#2");
+            Assert.IsNull(s.Context, "#3");
+            Assert.AreEqual(0, s.PropertyValues.Count, "#4");
+            Assert.IsNull(s.Properties, "#5");
+            Assert.IsNull(s.Providers, "#6");
+            Assert.IsNull(s.Context, "#7");
+            s.Initialize(s.Context, s.Properties, s.Providers);
         }
 
         [Test]
-        public void PropertiesOverriden ()
+        public void PropertiesOverriden()
         {
-            MySettings2 s = new MySettings2 ();
-            s.Initialize (s.Context, new SettingsPropertyCollection (), s.Providers);
-            Assert.IsNull (s.Properties, "#1");
-            Assert.IsNotNull (s.BaseProperties, "#2");
-            Assert.AreEqual (0, s.PropertyValues.Count, "#3");
+            MySettings2 s = new MySettings2();
+            s.Initialize(s.Context, new SettingsPropertyCollection(), s.Providers);
+            Assert.IsNull(s.Properties, "#1");
+            Assert.IsNotNull(s.BaseProperties, "#2");
+            Assert.AreEqual(0, s.PropertyValues.Count, "#3");
         }
 
         [Test]
-        public void PropertyValuesInstance ()
+        public void PropertyValuesInstance()
         {
-            SettingsPropertyCollection props = new SettingsPropertyCollection ();
-            SettingsProviderCollection provs = new SettingsProviderCollection ();
+            SettingsPropertyCollection props = new SettingsPropertyCollection();
+            SettingsProviderCollection provs = new SettingsProviderCollection();
 
-            MyProvider p = new MyProvider ();
-            MySettings s = new MySettings ();
+            MyProvider p = new MyProvider();
+            MySettings s = new MySettings();
 
-            props.Add (new SettingsProperty ("Foo", typeof (string), p, false, 10, SettingsSerializeAs.String, null, true, true));
-            provs.Add (p);
+            props.Add(
+                new SettingsProperty(
+                    "Foo",
+                    typeof(string),
+                    p,
+                    false,
+                    10,
+                    SettingsSerializeAs.String,
+                    null,
+                    true,
+                    true
+                )
+            );
+            provs.Add(p);
 
-            s.Initialize (new SettingsContext (), props, provs);
-            Assert.AreEqual (s.PropertyValues, s.PropertyValues);
+            s.Initialize(new SettingsContext(), props, provs);
+            Assert.AreEqual(s.PropertyValues, s.PropertyValues);
         }
 
         [Test]
-        public void PropertyValuesUninitialized ()
+        public void PropertyValuesUninitialized()
         {
-            MySettings s = new MySettings ();
-            s.Initialize (new SettingsContext (), new SettingsPropertyCollection (), new SettingsProviderCollection ());
-            s.Properties.Add (new SettingsProperty ("Foo"));
+            MySettings s = new MySettings();
+            s.Initialize(
+                new SettingsContext(),
+                new SettingsPropertyCollection(),
+                new SettingsProviderCollection()
+            );
+            s.Properties.Add(new SettingsProperty("Foo"));
             // values are filled only at initialization phase.
-            Assert.AreEqual (0, s.PropertyValues.Count, "#1");
+            Assert.AreEqual(0, s.PropertyValues.Count, "#1");
         }
 
         [Test]
-        public void PropertyValuesInitialized ()
+        public void PropertyValuesInitialized()
         {
-            SettingsPropertyCollection props = new SettingsPropertyCollection ();
-            SettingsProviderCollection provs = new SettingsProviderCollection ();
+            SettingsPropertyCollection props = new SettingsPropertyCollection();
+            SettingsProviderCollection provs = new SettingsProviderCollection();
 
-            MyProvider p = new MyProvider ();
-            MySettings s = new MySettings ();
+            MyProvider p = new MyProvider();
+            MySettings s = new MySettings();
             int i;
 
-            try {
+            try
+            {
                 i = s.Foo;
-                Assert.Fail ("#1-2");
-            } catch (SettingsPropertyNotFoundException) {
+                Assert.Fail("#1-2");
             }
+            catch (SettingsPropertyNotFoundException) { }
 
-            s.Initialize (new SettingsContext (), props, provs);
-            Assert.AreEqual (0, s.PropertyValues.Count, "#2-1");
-            Assert.AreEqual (0, s.Context.Count, "#2-2");
+            s.Initialize(new SettingsContext(), props, provs);
+            Assert.AreEqual(0, s.PropertyValues.Count, "#2-1");
+            Assert.AreEqual(0, s.Context.Count, "#2-2");
 
-            props.Add (new SettingsProperty ("Foo", typeof (int), p, false, 10, SettingsSerializeAs.String, null, true, true));
+            props.Add(
+                new SettingsProperty(
+                    "Foo",
+                    typeof(int),
+                    p,
+                    false,
+                    10,
+                    SettingsSerializeAs.String,
+                    null,
+                    true,
+                    true
+                )
+            );
             // initialize w/o the provider
-            s.Initialize (new SettingsContext (), props, provs);
-            Assert.AreEqual (0, s.PropertyValues.Count, "#3-0");
-            Assert.AreEqual (100, s.Foo, "#3-1");
+            s.Initialize(new SettingsContext(), props, provs);
+            Assert.AreEqual(0, s.PropertyValues.Count, "#3-0");
+            Assert.AreEqual(100, s.Foo, "#3-1");
             // ... !!!
-            Assert.AreEqual (1, s.PropertyValues.Count, "#3-2");
-            SettingsPropertyValue v = s.PropertyValues ["Foo"];
-            Assert.AreEqual (100, v.PropertyValue, "#3-3");
-            Assert.AreEqual (0, s.Context.Count, "#3-4");
+            Assert.AreEqual(1, s.PropertyValues.Count, "#3-2");
+            SettingsPropertyValue v = s.PropertyValues["Foo"];
+            Assert.AreEqual(100, v.PropertyValue, "#3-3");
+            Assert.AreEqual(0, s.Context.Count, "#3-4");
 
             // initialize w/ the provider
-            provs.Add (p);
-            provs.Add (new MyProvider2 ("Bar", 25));
-            props.Add (new SettingsProperty ("Bar", typeof (int), provs ["MyProvider2"], false, 10, SettingsSerializeAs.String, null, true, true));
-            s.Initialize (new SettingsContext (), props, provs);
-            Assert.AreEqual (1, s.PropertyValues.Count, "#4-1");
-            Assert.AreEqual (100, s.Foo, "#4-2");
-            Assert.AreEqual (25, s.Bar, "#4-3");
+            provs.Add(p);
+            provs.Add(new MyProvider2("Bar", 25));
+            props.Add(
+                new SettingsProperty(
+                    "Bar",
+                    typeof(int),
+                    provs["MyProvider2"],
+                    false,
+                    10,
+                    SettingsSerializeAs.String,
+                    null,
+                    true,
+                    true
+                )
+            );
+            s.Initialize(new SettingsContext(), props, provs);
+            Assert.AreEqual(1, s.PropertyValues.Count, "#4-1");
+            Assert.AreEqual(100, s.Foo, "#4-2");
+            Assert.AreEqual(25, s.Bar, "#4-3");
             // ... !!!
-            Assert.AreEqual (2, s.PropertyValues.Count, "#4-3-2");
-            Assert.AreEqual (0, s.Context.Count, "#4-4");
+            Assert.AreEqual(2, s.PropertyValues.Count, "#4-3-2");
+            Assert.AreEqual(0, s.Context.Count, "#4-4");
 
             // wrong provider
-            props.Remove ("Bar");
-            props.Add (new SettingsProperty ("Bar", typeof (int), provs ["MyProvider"], false, 10, SettingsSerializeAs.String, null, true, true));
-            s = new MySettings ();
-            s.Initialize (new SettingsContext (), props, provs);
-            Assert.AreEqual (0, s.PropertyValues.Count, "#5-1");
-            Assert.AreEqual (100, s.Foo, "#5-2");
-            Assert.AreEqual (10, s.Bar, "#5-3");
+            props.Remove("Bar");
+            props.Add(
+                new SettingsProperty(
+                    "Bar",
+                    typeof(int),
+                    provs["MyProvider"],
+                    false,
+                    10,
+                    SettingsSerializeAs.String,
+                    null,
+                    true,
+                    true
+                )
+            );
+            s = new MySettings();
+            s.Initialize(new SettingsContext(), props, provs);
+            Assert.AreEqual(0, s.PropertyValues.Count, "#5-1");
+            Assert.AreEqual(100, s.Foo, "#5-2");
+            Assert.AreEqual(10, s.Bar, "#5-3");
         }
 
         [Test]
-        public void AddPropertyTypeMismatch ()
+        public void AddPropertyTypeMismatch()
         {
-            SettingsPropertyCollection props = new SettingsPropertyCollection ();
-            SettingsProviderCollection provs = new SettingsProviderCollection ();
+            SettingsPropertyCollection props = new SettingsPropertyCollection();
+            SettingsProviderCollection provs = new SettingsProviderCollection();
 
-            MyProvider p = new MyProvider ();
-            MySettings s = new MySettings ();
+            MyProvider p = new MyProvider();
+            MySettings s = new MySettings();
 
-            props.Add (new SettingsProperty ("Foo", typeof (string), p, false, 10, SettingsSerializeAs.String, null, true, true));
-            provs.Add (p);
+            props.Add(
+                new SettingsProperty(
+                    "Foo",
+                    typeof(string),
+                    p,
+                    false,
+                    10,
+                    SettingsSerializeAs.String,
+                    null,
+                    true,
+                    true
+                )
+            );
+            provs.Add(p);
 
-            s.Initialize (new SettingsContext (), props, provs);
+            s.Initialize(new SettingsContext(), props, provs);
             int i = s.Foo; // it still works as int, regardless of the settings property type...
         }
 
         [Test]
-        [Ignore (".NET throws NRE, which means that it is not well designed.")]
-        public void AddPropertyNoProviderButInProviders ()
+        [Ignore(".NET throws NRE, which means that it is not well designed.")]
+        public void AddPropertyNoProviderButInProviders()
         {
-            SettingsPropertyCollection props = new SettingsPropertyCollection ();
-            SettingsProviderCollection provs = new SettingsProviderCollection ();
+            SettingsPropertyCollection props = new SettingsPropertyCollection();
+            SettingsProviderCollection provs = new SettingsProviderCollection();
 
-            MyProvider p = new MyProvider ();
-            MySettings s = new MySettings ();
+            MyProvider p = new MyProvider();
+            MySettings s = new MySettings();
 
-            props.Add (new SettingsProperty ("Foo", typeof (string), null, false, 10, SettingsSerializeAs.String, null, true, true));
-            provs.Add (p);
+            props.Add(
+                new SettingsProperty(
+                    "Foo",
+                    typeof(string),
+                    null,
+                    false,
+                    10,
+                    SettingsSerializeAs.String,
+                    null,
+                    true,
+                    true
+                )
+            );
+            provs.Add(p);
 
-            s.Initialize (new SettingsContext (), props, provs);
-            Assert.AreEqual (100, s.Foo);
+            s.Initialize(new SettingsContext(), props, provs);
+            Assert.AreEqual(100, s.Foo);
         }
 
         [Test]
-        public void ExceptionalGetPropertyValues ()
+        public void ExceptionalGetPropertyValues()
         {
-            SettingsPropertyCollection props = new SettingsPropertyCollection ();
-            SettingsProviderCollection provs = new SettingsProviderCollection ();
+            SettingsPropertyCollection props = new SettingsPropertyCollection();
+            SettingsProviderCollection provs = new SettingsProviderCollection();
 
-            MyProvider3 p = new MyProvider3 ();
-            MySettings s = new MySettings ();
+            MyProvider3 p = new MyProvider3();
+            MySettings s = new MySettings();
 
-            props.Add (new SettingsProperty ("Foo", typeof (string), p, false, 10, SettingsSerializeAs.String, null, true, true));
-            provs.Add (p);
+            props.Add(
+                new SettingsProperty(
+                    "Foo",
+                    typeof(string),
+                    p,
+                    false,
+                    10,
+                    SettingsSerializeAs.String,
+                    null,
+                    true,
+                    true
+                )
+            );
+            provs.Add(p);
 
-            s.Initialize (new SettingsContext (), props, provs);
-            Assert.AreEqual (0, s.Context.Count, "#0");
-            try {
-                Assert.AreEqual (100, s.Foo, "#1");
-                Assert.Fail ("#2");
-            } catch (Win32Exception) {
+            s.Initialize(new SettingsContext(), props, provs);
+            Assert.AreEqual(0, s.Context.Count, "#0");
+            try
+            {
+                Assert.AreEqual(100, s.Foo, "#1");
+                Assert.Fail("#2");
             }
+            catch (Win32Exception) { }
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentException))]
-        public void ProviderCollectionAddNameless ()
+        [ExpectedException(typeof(ArgumentException))]
+        public void ProviderCollectionAddNameless()
         {
-            new SettingsProviderCollection ().Add (
-                new MyProvider (true));
+            new SettingsProviderCollection().Add(new MyProvider(true));
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentException))]
-        public void ProviderCollectionAddDuplicate ()
+        [ExpectedException(typeof(ArgumentException))]
+        public void ProviderCollectionAddDuplicate()
         {
-            SettingsProviderCollection c = new SettingsProviderCollection ();
-            c.Add (new MyProvider ());
-            c.Add (new MyProvider ());
+            SettingsProviderCollection c = new SettingsProviderCollection();
+            c.Add(new MyProvider());
+            c.Add(new MyProvider());
         }
 
         class MyProvider3 : MyProvider
         {
-            public override SettingsPropertyValueCollection GetPropertyValues (SettingsContext context, SettingsPropertyCollection props)
+            public override SettingsPropertyValueCollection GetPropertyValues(
+                SettingsContext context,
+                SettingsPropertyCollection props
+            )
             {
-                throw new Win32Exception (); // unlikely thrown otherwise.
+                throw new Win32Exception(); // unlikely thrown otherwise.
             }
         }
 
         class MyProvider2 : MyProvider
         {
-            public MyProvider2 (string item, object value)
-                : base (item, value)
-            {
-            }
+            public MyProvider2(string item, object value)
+                : base(item, value) { }
 
-            public override string Name {
+            public override string Name
+            {
                 get { return "MyProvider2"; }
             }
         }
@@ -278,53 +374,58 @@ namespace MonoTests.System.Configuration
             string item;
             object default_value;
 
-            public MyProvider ()
-                : this (false)
-            {
-            }
+            public MyProvider()
+                : this(false) { }
 
-            public MyProvider (bool bogus)
+            public MyProvider(bool bogus)
             {
                 this.item = "Foo";
                 default_value = 100;
                 this.bogus = bogus;
             }
 
-            public MyProvider (string item, object value)
+            public MyProvider(string item, object value)
             {
                 this.item = item;
                 this.default_value = value;
             }
 
-            public override string Name {
+            public override string Name
+            {
                 get { return bogus ? null : "MyProvider"; }
             }
 
             string app;
-            public override string ApplicationName {
+            public override string ApplicationName
+            {
                 get { return app; }
                 set { app = value; }
             }
 
-            public override SettingsPropertyValueCollection GetPropertyValues (SettingsContext context, SettingsPropertyCollection props)
+            public override SettingsPropertyValueCollection GetPropertyValues(
+                SettingsContext context,
+                SettingsPropertyCollection props
+            )
             {
-                SettingsPropertyValueCollection vals =
-                    new SettingsPropertyValueCollection ();
+                SettingsPropertyValueCollection vals = new SettingsPropertyValueCollection();
                 foreach (SettingsProperty p in props)
-                    if (p.Provider == this) {
-                        SettingsPropertyValue pv = new SettingsPropertyValue (p);
+                    if (p.Provider == this)
+                    {
+                        SettingsPropertyValue pv = new SettingsPropertyValue(p);
                         if (pv.Name == item)
                             pv.PropertyValue = default_value;
-                        vals.Add (pv);
+                        vals.Add(pv);
                     }
                 return vals;
             }
 
-            public override void SetPropertyValues (SettingsContext context, SettingsPropertyValueCollection collection)
+            public override void SetPropertyValues(
+                SettingsContext context,
+                SettingsPropertyValueCollection collection
+            )
             {
-                throw new Exception ();
+                throw new Exception();
             }
         }
     }
 }
-

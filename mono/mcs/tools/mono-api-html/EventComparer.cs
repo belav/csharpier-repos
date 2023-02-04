@@ -1,9 +1,9 @@
-// 
+//
 // Authors
 //    Sebastien Pouliot  <sebastien@xamarin.com>
 //
 // Copyright 2013 Xamarin Inc. http://www.xamarin.com
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
 // "Software"), to deal in the Software without restriction, including
@@ -28,53 +28,56 @@ using System;
 using System.Text;
 using System.Xml.Linq;
 
-namespace Mono.ApiTools {
+namespace Mono.ApiTools
+{
+    class EventComparer : MemberComparer
+    {
+        public EventComparer(State state)
+            : base(state) { }
 
-    class EventComparer : MemberComparer {
-
-        public EventComparer (State state)
-            : base (state)
+        public override string GroupName
         {
-        }
-
-        public override string GroupName {
             get { return "events"; }
         }
 
-        public override string ElementName {
+        public override string ElementName
+        {
             get { return "event"; }
         }
 
-        public override bool Equals (XElement source, XElement target, ApiChanges changes)
+        public override bool Equals(XElement source, XElement target, ApiChanges changes)
         {
-            if (base.Equals (source, target, changes))
+            if (base.Equals(source, target, changes))
                 return true;
 
-            var change = new ApiChange (GetDescription (source), State);
+            var change = new ApiChange(GetDescription(source), State);
             change.Header = "Modified " + GroupName;
-            change.Append ("public event ");
+            change.Append("public event ");
 
-            var srcEventType = source.GetTypeName ("eventtype", State);
-            var tgtEventType = target.GetTypeName ("eventtype", State);
+            var srcEventType = source.GetTypeName("eventtype", State);
+            var tgtEventType = target.GetTypeName("eventtype", State);
 
-            if (srcEventType != tgtEventType) {
-                change.AppendModified (srcEventType, tgtEventType, true);
-            } else {
-                change.Append (srcEventType);
+            if (srcEventType != tgtEventType)
+            {
+                change.AppendModified(srcEventType, tgtEventType, true);
             }
-            change.Append (" ");
-            change.Append (source.GetAttribute ("name")).Append (";");
+            else
+            {
+                change.Append(srcEventType);
+            }
+            change.Append(" ");
+            change.Append(source.GetAttribute("name")).Append(";");
             return false;
         }
 
-        public override string GetDescription (XElement e)
+        public override string GetDescription(XElement e)
         {
-            StringBuilder sb = new StringBuilder ();
+            StringBuilder sb = new StringBuilder();
             // TODO: attribs
-            sb.Append ("public event ");
-            sb.Append (e.GetTypeName ("eventtype", State)).Append (' ');
-            sb.Append (e.GetAttribute ("name")).Append (';');
-            return sb.ToString ();
+            sb.Append("public event ");
+            sb.Append(e.GetTypeName("eventtype", State)).Append(' ');
+            sb.Append(e.GetAttribute("name")).Append(';');
+            return sb.ToString();
         }
     }
 }

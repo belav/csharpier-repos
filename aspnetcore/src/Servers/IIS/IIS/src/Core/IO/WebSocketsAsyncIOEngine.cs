@@ -120,16 +120,16 @@ internal sealed partial class WebSocketsAsyncIOEngine : IAsyncIOEngine
     }
 
     private WebSocketReadOperation GetReadOperation() =>
-        Interlocked.Exchange(ref _cachedWebSocketReadOperation, null) ??
-        new WebSocketReadOperation(this);
+        Interlocked.Exchange(ref _cachedWebSocketReadOperation, null)
+        ?? new WebSocketReadOperation(this);
 
     private WebSocketWriteOperation GetWriteOperation() =>
-        Interlocked.Exchange(ref _cachedWebSocketWriteOperation, null) ??
-        new WebSocketWriteOperation(this);
+        Interlocked.Exchange(ref _cachedWebSocketWriteOperation, null)
+        ?? new WebSocketWriteOperation(this);
 
     private AsyncInitializeOperation GetInitializeOperation() =>
-        Interlocked.Exchange(ref _cachedAsyncInitializeOperation, null) ??
-        new AsyncInitializeOperation(this);
+        Interlocked.Exchange(ref _cachedAsyncInitializeOperation, null)
+        ?? new AsyncInitializeOperation(this);
 
     private void ReturnOperation(AsyncInitializeOperation operation) =>
         Volatile.Write(ref _cachedAsyncInitializeOperation, operation);

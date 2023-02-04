@@ -7,15 +7,15 @@ using System.Diagnostics;
 
 class Program
 {
-    static void Main ()
+    static void Main()
     {
-        var workItems = new PerformanceCounter ("Mono Threadpool", "Work Items Added");
+        var workItems = new PerformanceCounter("Mono Threadpool", "Work Items Added");
         var t1 = DateTime.Now;
 
         int N = 100 * 100 * 100;
 
         for (var i = 0; i < N; i++)
-            ThreadPool.QueueUserWorkItem (_ => {});
+            ThreadPool.QueueUserWorkItem(_ => { });
 
         var t2 = DateTime.Now;
         var d0 = t2 - t1;

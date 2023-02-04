@@ -6,54 +6,57 @@
 
 using System;
 
-public class Enumerator {
-
+public class Enumerator
+{
     int counter;
 
-    public Enumerator () {
+    public Enumerator()
+    {
         counter = 3;
     }
 
-    public bool MoveNext () {
-        return (counter -- > 0);
+    public bool MoveNext()
+    {
+        return (counter-- > 0);
     }
 
-    public char Current {
-        get {
-            return 'a';
-        }
+    public char Current
+    {
+        get { return 'a'; }
     }
 }
 
-class RealEnumerator : Enumerator, IDisposable {
-
+class RealEnumerator : Enumerator, IDisposable
+{
     Coll c;
 
-    public RealEnumerator (Coll c) {
+    public RealEnumerator(Coll c)
+    {
         this.c = c;
     }
 
-    public void Dispose () {
+    public void Dispose()
+    {
         c.disposed = true;
     }
 }
 
-public class Coll {
-
+public class Coll
+{
     public bool disposed;
 
-    public Enumerator GetEnumerator () {
-        return new RealEnumerator (this);
+    public Enumerator GetEnumerator()
+    {
+        return new RealEnumerator(this);
     }
 }
 
-class Test {
-
+class Test
+{
     public static int Main(String[] args)
     {
-        Coll coll = new Coll ();
-        foreach (char c in coll) {
-        }
+        Coll coll = new Coll();
+        foreach (char c in coll) { }
         return (coll.disposed ? 0 : 1);
     }
 }

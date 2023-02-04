@@ -1,2 +1,1 @@
-public interface ITest {}
-
+public interface ITest { }

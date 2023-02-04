@@ -19,13 +19,19 @@ namespace System.Collections.Generic
                     "test",
                     new string[] { "A", "B", "C" },
                     8,
-                    new List<int> {1, 2, 3},
+                    new List<int> { 1, 2, 3 },
                     1D,
-                    (IEnumerable<double>)new List<double> { 1D, 2D, 3D },
+                    (IEnumerable<double>)
+                        new List<double> { 1D, 2D, 3D },
                     new Uri("http://some.host"),
                     Guid.NewGuid(),
                     HttpStatusCode.NotImplemented,
-                    new HttpStatusCode[] { HttpStatusCode.Accepted, HttpStatusCode.Ambiguous, HttpStatusCode.BadGateway }
+                    new HttpStatusCode[]
+                    {
+                        HttpStatusCode.Accepted,
+                        HttpStatusCode.Ambiguous,
+                        HttpStatusCode.BadGateway
+                    }
                 };
             }
         }
@@ -33,7 +39,10 @@ namespace System.Collections.Generic
         [Fact]
         public void IsCorrectType()
         {
-            Assert.Type.HasProperties(typeof(DictionaryExtensions), TypeAssert.TypeProperties.IsStatic | TypeAssert.TypeProperties.IsClass);
+            Assert.Type.HasProperties(
+                typeof(DictionaryExtensions),
+                TypeAssert.TypeProperties.IsStatic | TypeAssert.TypeProperties.IsClass
+            );
         }
 
         [Fact]
@@ -49,7 +58,9 @@ namespace System.Collections.Generic
             dictionary.Add(object3, 3);
             dictionary.Add(object4, 4);
 
-            Func<KeyValuePair<object, int>, bool> removeAction = (KeyValuePair<object, int> entry) =>
+            Func<KeyValuePair<object, int>, bool> removeAction = (
+                KeyValuePair<object, int> entry
+            ) =>
             {
                 // remove even values
                 return (entry.Value % 2) == 0;
@@ -77,7 +88,10 @@ namespace System.Collections.Generic
             dictionary.Add(object4, 4);
             object expectedArgument = new object();
 
-            Func<KeyValuePair<object, int>, object, bool> removeAction = (KeyValuePair<object, int> entry, object arg) =>
+            Func<KeyValuePair<object, int>, object, bool> removeAction = (
+                KeyValuePair<object, int> entry,
+                object arg
+            ) =>
             {
                 Assert.Equal(expectedArgument, arg);
                 // remove even values
@@ -125,7 +139,6 @@ namespace System.Collections.Generic
                 { "key", value }
             };
 
-
             // Act
             T resultValue;
             bool result = DictionaryExtensions.TryGetValue(dict, "key", out resultValue);
@@ -149,7 +162,10 @@ namespace System.Collections.Generic
             };
 
             // Act
-            List<int> results = DictionaryExtensions.FindKeysWithPrefix<int>(dict, "").Select(kvp => kvp.Value).ToList();
+            List<int> results = DictionaryExtensions
+                .FindKeysWithPrefix<int>(dict, "")
+                .Select(kvp => kvp.Value)
+                .ToList();
 
             // Assert
             Assert.Equal(4, results.Count);

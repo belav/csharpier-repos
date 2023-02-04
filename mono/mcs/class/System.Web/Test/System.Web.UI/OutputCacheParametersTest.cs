@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -39,19 +39,19 @@ namespace MonoTests.System.Web.UI
     public class OutputCacheParametersTest
     {
         [Test]
-        public void InitialValues () {
-            OutputCacheParameters o = new OutputCacheParameters ();
-            Assert.IsNull (o.CacheProfile, "CacheProfile");
-            Assert.IsTrue (o.Duration == 0, "Duration");
-            Assert.IsTrue (o.Enabled, "Enabled");
-            Assert.IsTrue (o.Location == OutputCacheLocation.Any, "OutputCacheLocation");
-            Assert.IsFalse (o.NoStore, "NoStore");
-            Assert.IsNull (o.SqlDependency, "SqlDependency");
-            Assert.IsNull (o.VaryByControl, "VaryByControl");
-            Assert.IsNull (o.VaryByCustom, "VaryByCustom");
-            Assert.IsNull (o.VaryByHeader, "VaryByHeader");
-            Assert.IsNull (o.VaryByParam, "VaryByParam");
+        public void InitialValues()
+        {
+            OutputCacheParameters o = new OutputCacheParameters();
+            Assert.IsNull(o.CacheProfile, "CacheProfile");
+            Assert.IsTrue(o.Duration == 0, "Duration");
+            Assert.IsTrue(o.Enabled, "Enabled");
+            Assert.IsTrue(o.Location == OutputCacheLocation.Any, "OutputCacheLocation");
+            Assert.IsFalse(o.NoStore, "NoStore");
+            Assert.IsNull(o.SqlDependency, "SqlDependency");
+            Assert.IsNull(o.VaryByControl, "VaryByControl");
+            Assert.IsNull(o.VaryByCustom, "VaryByCustom");
+            Assert.IsNull(o.VaryByHeader, "VaryByHeader");
+            Assert.IsNull(o.VaryByParam, "VaryByParam");
         }
     }
 }
-

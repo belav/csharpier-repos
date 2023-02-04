@@ -4,9 +4,7 @@ namespace ConsoleApplication1
     {
         protected abstract class SuperInnerAbstractClass
         {
-            protected class SuperInnerInnerClass
-            {
-            }
+            protected class SuperInnerInnerClass { }
         }
     }
 
@@ -22,7 +20,7 @@ namespace ConsoleApplication1
             var childInnerClass = new ChildInnerClass();
         }
     }
-    
+
     internal class Program
     {
         public static int Main(string[] args)
@@ -33,4 +31,3 @@ namespace ConsoleApplication1
         }
     }
 }
-

@@ -46,18 +46,28 @@ public class CompositeThree
             return false;
         }
 
-        return ReferenceEquals(this, obj) ? true : obj.GetType() == GetType() && Equals((CompositeThree)obj);
+        return ReferenceEquals(this, obj)
+            ? true
+            : obj.GetType() == GetType() && Equals((CompositeThree)obj);
     }
 
-    protected bool Equals(CompositeThree other)
-        => Id1 == other.Id1
-            && Id2 == other.Id2
-            && string.Equals(Name, other.Name)
-            && Level2_Required_Id1 == other.Level2_Required_Id1
-            && Level2_Required_Id2 == other.Level2_Required_Id2
-            && Level2_Optional_Id1 == other.Level2_Optional_Id1
-            && Level2_Optional_Id2 == other.Level2_Optional_Id2;
+    protected bool Equals(CompositeThree other) =>
+        Id1 == other.Id1
+        && Id2 == other.Id2
+        && string.Equals(Name, other.Name)
+        && Level2_Required_Id1 == other.Level2_Required_Id1
+        && Level2_Required_Id2 == other.Level2_Required_Id2
+        && Level2_Optional_Id1 == other.Level2_Optional_Id1
+        && Level2_Optional_Id2 == other.Level2_Optional_Id2;
 
-    public override int GetHashCode()
-        => HashCode.Combine(Id1, Id2, Name, Level2_Required_Id1, Level2_Required_Id2, Level2_Optional_Id1, Level2_Optional_Id2);
+    public override int GetHashCode() =>
+        HashCode.Combine(
+            Id1,
+            Id2,
+            Name,
+            Level2_Required_Id1,
+            Level2_Required_Id2,
+            Level2_Optional_Id1,
+            Level2_Optional_Id2
+        );
 }

@@ -1,6 +1,6 @@
-// 
-// OciExecuteMode.cs 
-//  
+//
+// OciExecuteMode.cs
+//
 // Part of managed C#/.NET library System.Data.OracleClient.dll
 //
 // Part of the Mono class libraries at
@@ -8,18 +8,20 @@
 //
 // Assembly: System.Data.OracleClient.dll
 // Namespace: System.Data.OracleClient.Oci
-// 
-// Author: 
+//
+// Author:
 //     Tim Coleman <tim@timcoleman.com>
-//         
+//
 // Copyright (C) Tim Coleman, 2003
-// 
+//
 
 using System;
 
-namespace System.Data.OracleClient.Oci {
+namespace System.Data.OracleClient.Oci
+{
     [Flags]
-    internal enum OciExecuteMode {
+    internal enum OciExecuteMode
+    {
         Default = 0x00,
         BatchMode = 0x01,
         ExactFetch = 0x02,

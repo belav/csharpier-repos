@@ -37,130 +37,146 @@ namespace Microsoft.Build.Execution
 {
     public class BuildManager
     {
-        static BuildManager default_manager = new BuildManager ();
+        static BuildManager default_manager = new BuildManager();
 
-        public static BuildManager DefaultBuildManager {
+        public static BuildManager DefaultBuildManager
+        {
             get { return default_manager; }
         }
-        
-        public BuildManager ()
+
+        public BuildManager() { }
+
+        public BuildManager(string hostName)
         {
+            throw new NotImplementedException();
         }
 
-        public BuildManager (string hostName)
-        {
-            throw new NotImplementedException ();
-        }
-        
-        public void Dispose ()
+        public void Dispose()
         {
             if (submissions.Count > 0)
-                WaitHandle.WaitAll (submissions.Select (s => s.WaitHandle).ToArray ());
-            BuildNodeManager.Stop ();
+                WaitHandle.WaitAll(submissions.Select(s => s.WaitHandle).ToArray());
+            BuildNodeManager.Stop();
         }
 
-        ~BuildManager ()
+        ~BuildManager()
         {
             // maybe processes created by out-of-process nodes should be signaled.
         }
 
-        readonly List<BuildSubmission> submissions = new List<BuildSubmission> ();
-        
+        readonly List<BuildSubmission> submissions = new List<BuildSubmission>();
+
         BuildParameters ongoing_build_parameters;
-        
-        internal BuildParameters OngoingBuildParameters {
+
+        internal BuildParameters OngoingBuildParameters
+        {
             get { return ongoing_build_parameters; }
         }
 
-        public void BeginBuild (BuildParameters parameters)
+        public void BeginBuild(BuildParameters parameters)
         {
             if (ongoing_build_parameters != null)
-                throw new InvalidOperationException ("There is already ongoing build");
-            ongoing_build_parameters = parameters.Clone ();
+                throw new InvalidOperationException("There is already ongoing build");
+            ongoing_build_parameters = parameters.Clone();
         }
 
-        public BuildResult Build (BuildParameters parameters, BuildRequestData requestData)
+        public BuildResult Build(BuildParameters parameters, BuildRequestData requestData)
         {
-            BeginBuild (parameters);
-            var ret = BuildRequest (requestData);
-            EndBuild ();
+            BeginBuild(parameters);
+            var ret = BuildRequest(requestData);
+            EndBuild();
             return ret;
         }
 
-        public BuildResult BuildRequest (BuildRequestData requestData)
+        public BuildResult BuildRequest(BuildRequestData requestData)
         {
-            var sub = PendBuildRequest (requestData);
-            sub.Execute ();
+            var sub = PendBuildRequest(requestData);
+            sub.Execute();
             return sub.BuildResult;
         }
-        
-        public void CancelAllSubmissions ()
+
+        public void CancelAllSubmissions()
         {
-            foreach (var sub in submissions) {
-                try {
+            foreach (var sub in submissions)
+            {
+                try
+                {
                     if (!sub.IsCompleted)
-                        sub.Cancel ();
-                } catch (InvalidOperationException) {
+                        sub.Cancel();
+                }
+                catch (InvalidOperationException)
+                {
                     // some submissions could be already done during this iteration. Ignore that.
                 }
             }
-            submissions.Clear ();
+            submissions.Clear();
         }
 
-        public void EndBuild ()
+        public void EndBuild()
         {
             if (ongoing_build_parameters == null)
-                throw new InvalidOperationException ("Build has not started");
+                throw new InvalidOperationException("Build has not started");
             if (submissions.Count > 0)
-                WaitHandle.WaitAll (submissions.Select (s => s.WaitHandle).ToArray ());
+                WaitHandle.WaitAll(submissions.Select(s => s.WaitHandle).ToArray());
             ongoing_build_parameters = null;
         }
-        
-        Dictionary<Project,ProjectInstance> instances = new Dictionary<Project, ProjectInstance> ();
 
-        public ProjectInstance GetProjectInstanceForBuild (Project project)
+        Dictionary<Project, ProjectInstance> instances = new Dictionary<Project, ProjectInstance>();
+
+        public ProjectInstance GetProjectInstanceForBuild(Project project)
         {
             if (project == null)
-                throw new ArgumentNullException ("project");
+                throw new ArgumentNullException("project");
             if (project.FullPath == null)
-                throw new ArgumentNullException ("project", "FullPath parameter in the project cannot be null.");
+                throw new ArgumentNullException(
+                    "project",
+                    "FullPath parameter in the project cannot be null."
+                );
             if (project.FullPath == string.Empty)
-                throw new ArgumentException ("FullPath parameter in the project cannot be empty.", "project");
+                throw new ArgumentException(
+                    "FullPath parameter in the project cannot be empty.",
+                    "project"
+                );
             // other than that, any invalid path character is accepted...
-            
-            return GetProjectInstanceForBuildInternal (project);
-        }
-            
-        internal ProjectInstance GetProjectInstanceForBuildInternal (Project project)
-        {
-            if (!instances.ContainsKey (project))
-                instances [project] = project.CreateProjectInstance ();
-            return instances [project];
+
+            return GetProjectInstanceForBuildInternal(project);
         }
 
-        public BuildSubmission PendBuildRequest (BuildRequestData requestData)
+        internal ProjectInstance GetProjectInstanceForBuildInternal(Project project)
+        {
+            if (!instances.ContainsKey(project))
+                instances[project] = project.CreateProjectInstance();
+            return instances[project];
+        }
+
+        public BuildSubmission PendBuildRequest(BuildRequestData requestData)
         {
             if (ongoing_build_parameters == null)
-                throw new InvalidOperationException ("This method cannot be called before calling BeginBuild method.");
-            var sub = new BuildSubmission (this, requestData);
-            submissions.Add (sub);
+                throw new InvalidOperationException(
+                    "This method cannot be called before calling BeginBuild method."
+                );
+            var sub = new BuildSubmission(this, requestData);
+            submissions.Add(sub);
             return sub;
         }
 
-        public void ResetCaches ()
+        public void ResetCaches()
         {
             if (OngoingBuildParameters != null)
-                throw new InvalidOperationException ("Cannot reset caches while builds are in progress.");
-            
-            BuildNodeManager.ResetCaches ();
+                throw new InvalidOperationException(
+                    "Cannot reset caches while builds are in progress."
+                );
+
+            BuildNodeManager.ResetCaches();
         }
-        
+
         BuildNodeManager build_node_manager;
-        
-        internal BuildNodeManager BuildNodeManager {
-            get {
+
+        internal BuildNodeManager BuildNodeManager
+        {
+            get
+            {
                 if (build_node_manager == null)
-                        build_node_manager = new BuildNodeManager (this);
+                    build_node_manager = new BuildNodeManager(this);
                 return build_node_manager;
             }
         }

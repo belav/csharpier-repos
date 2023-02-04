@@ -7,14 +7,14 @@ public abstract class Base<U>
 {
     public abstract T Function<T>(T i);
 }
+
 public class FooInt : Base<int>
 {
     public override T Function<T>(T i)
     {
         return i;
-    }    
+    }
 }
-
 
 public class FooObject : Base<object>
 {
@@ -22,7 +22,6 @@ public class FooObject : Base<object>
     {
         return i;
     }
-        
 }
 
 public class FooString : Base<string>
@@ -31,13 +30,13 @@ public class FooString : Base<string>
     {
         return i;
     }
-        
 }
 
 public class Test_method001i
 {
     public static int counter = 0;
     public static bool result = true;
+
     public static void Eval(bool exp)
     {
         counter++;
@@ -46,9 +45,8 @@ public class Test_method001i
             result = exp;
             Console.WriteLine("Test Failed at location: " + counter);
         }
-    
     }
-    
+
     public static int Main()
     {
         Base<int> fInt = new FooInt();
@@ -58,12 +56,11 @@ public class Test_method001i
         Base<object> fObject = new FooObject();
         Eval(fObject.Function<int>(1).Equals(1));
         Eval(fObject.Function<string>("string").Equals("string"));
-        
+
         Base<string> fString = new FooString();
         Eval(fString.Function<int>(1).Equals(1));
         Eval(fString.Function<string>("string").Equals("string"));
 
-        
         if (result)
         {
             Console.WriteLine("Test Passed");
@@ -74,6 +71,5 @@ public class Test_method001i
             Console.WriteLine("Test Failed");
             return 1;
         }
-        
     }
 }

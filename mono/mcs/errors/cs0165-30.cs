@@ -3,9 +3,10 @@
 
 using System;
 
-class Test {
-    
-    static void Main () {
+class Test
+{
+    static void Main()
+    {
         Action a = () => a();
     }
 }

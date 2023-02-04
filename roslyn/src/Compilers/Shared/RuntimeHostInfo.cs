@@ -12,7 +12,7 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis
 {
     /// <summary>
-    /// This type provides information about the runtime which is hosting application. It must be included in a concrete 
+    /// This type provides information about the runtime which is hosting application. It must be included in a concrete
     /// target framework to be used.
     /// </summary>
     internal static class RuntimeHostInfo
@@ -23,12 +23,19 @@ namespace Microsoft.CodeAnalysis
         private static string NativeToolSuffix => PlatformInformation.IsWindows ? ".exe" : "";
 
         /// <summary>
-        /// This gets information about invoking a tool on the current runtime. This will attempt to 
+        /// This gets information about invoking a tool on the current runtime. This will attempt to
         /// execute a tool as an EXE when on desktop and using dotnet when on CoreClr.
         /// </summary>
-        internal static (string processFilePath, string commandLineArguments, string toolFilePath) GetProcessInfo(string toolFilePathWithoutExtension, string commandLineArguments)
+        internal static (
+            string processFilePath,
+            string commandLineArguments,
+            string toolFilePath
+        ) GetProcessInfo(string toolFilePathWithoutExtension, string commandLineArguments)
         {
-            Debug.Assert(!toolFilePathWithoutExtension.EndsWith(".dll") && !toolFilePathWithoutExtension.EndsWith(".exe"));
+            Debug.Assert(
+                !toolFilePathWithoutExtension.EndsWith(".dll")
+                    && !toolFilePathWithoutExtension.EndsWith(".exe")
+            );
 
             var nativeToolFilePath = $"{toolFilePathWithoutExtension}{NativeToolSuffix}";
             if (IsCoreClrRuntime && File.Exists(nativeToolFilePath))
@@ -56,8 +63,12 @@ namespace Microsoft.CodeAnalysis
             return false;
         }
 
-        internal static NamedPipeClientStream CreateNamedPipeClient(string serverName, string pipeName, PipeDirection direction, PipeOptions options) =>
-            new NamedPipeClientStream(serverName, pipeName, direction, options);
+        internal static NamedPipeClientStream CreateNamedPipeClient(
+            string serverName,
+            string pipeName,
+            PipeDirection direction,
+            PipeOptions options
+        ) => new NamedPipeClientStream(serverName, pipeName, direction, options);
 
 #elif NETCOREAPP
         internal static bool IsDesktopRuntime => false;

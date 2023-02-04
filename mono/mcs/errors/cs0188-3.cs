@@ -6,11 +6,12 @@ struct Foo
     public int bar;
     public int baz;
 
-    public int Bar {
+    public int Bar
+    {
         get { return bar; }
     }
 
-    public Foo (int baz)
+    public Foo(int baz)
     {
         this.baz = baz;
         bar = Bar - 1;

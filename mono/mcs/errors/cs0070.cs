@@ -3,28 +3,23 @@
 
 using System;
 
-public delegate void EventHandler (int i, int j);
+public delegate void EventHandler(int i, int j);
 
-public class Button {
-
+public class Button
+{
     public event EventHandler Click;
-
 }
 
-public class Blah {
+public class Blah
+{
+    Button Button1 = new Button();
 
-    Button Button1 = new Button ();
-
-    public void Connect ()
+    public void Connect()
     {
-        Button1.Click = new EventHandler (Button1_Click);
+        Button1.Click = new EventHandler(Button1_Click);
     }
 
-    public void Button1_Click (int i, int j)
-    {
-    }
-    
-    public static void Main ()
-    {
-    }
+    public void Button1_Click(int i, int j) { }
+
+    public static void Main() { }
 }

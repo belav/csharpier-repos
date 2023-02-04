@@ -58,8 +58,8 @@ namespace System.IO.Ports
         // ---------- members for internal support ---------*
         private SerialStream _internalSerialStream;
         private byte[] _inBuffer = new byte[DefaultBufferSize];
-        private int _readPos;    // position of next byte to read in the read buffer.  readPos <= readLen
-        private int _readLen;    // position of first unreadable byte => CachedBytesToRead is the number of readable bytes left.
+        private int _readPos; // position of next byte to read in the read buffer.  readPos <= readLen
+        private int _readLen; // position of first unreadable byte => CachedBytesToRead is the number of readable bytes left.
         private readonly char[] _oneChar = new char[1];
         private char[] _singleCharBuffer;
 
@@ -124,7 +124,10 @@ namespace System.IO.Ports
             set
             {
                 if (value <= 0)
-                    throw new ArgumentOutOfRangeException(nameof(BaudRate), SR.ArgumentOutOfRange_NeedPosNum);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(BaudRate),
+                        SR.ArgumentOutOfRange_NeedPosNum
+                    );
 
                 if (IsOpen)
                     _internalSerialStream.BaudRate = value;
@@ -174,10 +177,7 @@ namespace System.IO.Ports
 
         private int CachedBytesToRead
         {
-            get
-            {
-                return _readLen - _readPos;
-            }
+            get { return _readLen - _readPos; }
         }
 
         public bool CDHolding
@@ -202,12 +202,18 @@ namespace System.IO.Ports
 
         public int DataBits
         {
-            get
-            { return _dataBits; }
+            get { return _dataBits; }
             set
             {
                 if (value < MinDataBits || value > MaxDataBits)
-                    throw new ArgumentOutOfRangeException(nameof(DataBits), SR.Format(SR.ArgumentOutOfRange_Bounds_Lower_Upper, MinDataBits, MaxDataBits));
+                    throw new ArgumentOutOfRangeException(
+                        nameof(DataBits),
+                        SR.Format(
+                            SR.ArgumentOutOfRange_Bounds_Lower_Upper,
+                            MinDataBits,
+                            MaxDataBits
+                        )
+                    );
 
                 if (IsOpen)
                     _internalSerialStream.DataBits = value;
@@ -217,10 +223,7 @@ namespace System.IO.Ports
 
         public bool DiscardNull
         {
-            get
-            {
-                return _discardNull;
-            }
+            get { return _discardNull; }
             set
             {
                 if (IsOpen)
@@ -261,10 +264,7 @@ namespace System.IO.Ports
         // is the standard text encoding for modem commands and most of serial communication.
         public Encoding Encoding
         {
-            get
-            {
-                return _encoding;
-            }
+            get { return _encoding; }
             set
             {
                 if (value == null)
@@ -272,10 +272,21 @@ namespace System.IO.Ports
 
                 // Limit the encodings we support to some known ones.  The code pages < 50000 represent all of the single-byte
                 // and double-byte code pages.  Code page 54936 is GB18030.
-                if (!(value is ASCIIEncoding || value is UTF8Encoding || value is UnicodeEncoding || value is UTF32Encoding ||
-                      value.CodePage < 50000 || value.CodePage == 54936))
+                if (
+                    !(
+                        value is ASCIIEncoding
+                        || value is UTF8Encoding
+                        || value is UnicodeEncoding
+                        || value is UTF32Encoding
+                        || value.CodePage < 50000
+                        || value.CodePage == 54936
+                    )
+                )
                 {
-                    throw new ArgumentException(SR.Format(SR.NotSupportedEncoding, value.WebName), nameof(Encoding));
+                    throw new ArgumentException(
+                        SR.Format(SR.NotSupportedEncoding, value.WebName),
+                        nameof(Encoding)
+                    );
                 }
 
                 _encoding = value;
@@ -289,14 +300,14 @@ namespace System.IO.Ports
 
         public Handshake Handshake
         {
-            get
-            {
-                return _handshake;
-            }
+            get { return _handshake; }
             set
             {
                 if (value < Handshake.None || value > Handshake.RequestToSendXOnXOff)
-                    throw new ArgumentOutOfRangeException(nameof(Handshake), SR.ArgumentOutOfRange_Enum);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(Handshake),
+                        SR.ArgumentOutOfRange_Enum
+                    );
 
                 if (IsOpen)
                     _internalSerialStream.Handshake = value;
@@ -318,7 +329,10 @@ namespace System.IO.Ports
                 if (value == null)
                     throw new ArgumentNullException(nameof(NewLine));
                 if (value.Length == 0)
-                    throw new ArgumentException(SR.Format(SR.InvalidNullEmptyArgument, nameof(NewLine)), nameof(NewLine));
+                    throw new ArgumentException(
+                        SR.Format(SR.InvalidNullEmptyArgument, nameof(NewLine)),
+                        nameof(NewLine)
+                    );
 
                 _newLine = value;
             }
@@ -326,14 +340,14 @@ namespace System.IO.Ports
 
         public Parity Parity
         {
-            get
-            {
-                return _parity;
-            }
+            get { return _parity; }
             set
             {
                 if (value < Parity.None || value > Parity.Space)
-                    throw new ArgumentOutOfRangeException(nameof(Parity), SR.ArgumentOutOfRange_Enum);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(Parity),
+                        SR.ArgumentOutOfRange_Enum
+                    );
 
                 if (IsOpen)
                     _internalSerialStream.Parity = value;
@@ -356,10 +370,7 @@ namespace System.IO.Ports
         // and so once set by the constructor becomes read-only.
         public string PortName
         {
-            get
-            {
-                return _portName;
-            }
+            get { return _portName; }
             set
             {
                 if (value == null)
@@ -368,24 +379,25 @@ namespace System.IO.Ports
                     throw new ArgumentException(SR.PortNameEmpty_String, nameof(PortName));
 
                 if (IsOpen)
-                    throw new InvalidOperationException(SR.Format(SR.Cant_be_set_when_open, nameof(PortName)));
+                    throw new InvalidOperationException(
+                        SR.Format(SR.Cant_be_set_when_open, nameof(PortName))
+                    );
                 _portName = value;
             }
         }
 
         public int ReadBufferSize
         {
-            get
-            {
-                return _readBufferSize;
-            }
+            get { return _readBufferSize; }
             set
             {
                 if (value <= 0)
                     throw new ArgumentOutOfRangeException(nameof(ReadBufferSize));
 
                 if (IsOpen)
-                    throw new InvalidOperationException(SR.Format(SR.Cant_be_set_when_open, nameof(ReadBufferSize)));
+                    throw new InvalidOperationException(
+                        SR.Format(SR.Cant_be_set_when_open, nameof(ReadBufferSize))
+                    );
 
                 _readBufferSize = value;
             }
@@ -394,14 +406,14 @@ namespace System.IO.Ports
         // timeout for all read operations.  May be set to SerialPort.InfiniteTimeout, 0, or any positive value
         public int ReadTimeout
         {
-            get
-            {
-                return _readTimeout;
-            }
+            get { return _readTimeout; }
             set
             {
                 if (value < 0 && value != InfiniteTimeout)
-                    throw new ArgumentOutOfRangeException(nameof(ReadTimeout), SR.ArgumentOutOfRange_Timeout);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(ReadTimeout),
+                        SR.ArgumentOutOfRange_Timeout
+                    );
 
                 if (IsOpen)
                     _internalSerialStream.ReadTimeout = value;
@@ -414,14 +426,14 @@ namespace System.IO.Ports
         // packets and can only act when we have this many, etc.
         public int ReceivedBytesThreshold
         {
-            get
-            {
-                return _receivedBytesThreshold;
-            }
+            get { return _receivedBytesThreshold; }
             set
             {
                 if (value <= 0)
-                    throw new ArgumentOutOfRangeException(nameof(ReceivedBytesThreshold), SR.ArgumentOutOfRange_NeedPosNum);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(ReceivedBytesThreshold),
+                        SR.ArgumentOutOfRange_NeedPosNum
+                    );
 
                 _receivedBytesThreshold = value;
 
@@ -429,7 +441,9 @@ namespace System.IO.Ports
                 {
                     // fake the call to our event handler in case the threshold has been set lower
                     // than how many bytes we currently have.
-                    SerialDataReceivedEventArgs args = new SerialDataReceivedEventArgs(SerialData.Chars);
+                    SerialDataReceivedEventArgs args = new SerialDataReceivedEventArgs(
+                        SerialData.Chars
+                    );
                     CatchReceivedEvents(this, args);
                 }
             }
@@ -455,15 +469,15 @@ namespace System.IO.Ports
         // StopBits represented in C# as StopBits enum type and in Win32 as an integer 1, 2, or 3.
         public StopBits StopBits
         {
-            get
-            {
-                return _stopBits;
-            }
+            get { return _stopBits; }
             set
             {
                 // this range check looks wrong, but it really is correct.  One = 1, Two = 2, and OnePointFive = 3
                 if (value < StopBits.One || value > StopBits.OnePointFive)
-                    throw new ArgumentOutOfRangeException(nameof(StopBits), SR.ArgumentOutOfRange_Enum);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(StopBits),
+                        SR.ArgumentOutOfRange_Enum
+                    );
 
                 if (IsOpen)
                     _internalSerialStream.StopBits = value;
@@ -473,17 +487,16 @@ namespace System.IO.Ports
 
         public int WriteBufferSize
         {
-            get
-            {
-                return _writeBufferSize;
-            }
+            get { return _writeBufferSize; }
             set
             {
                 if (value <= 0)
                     throw new ArgumentOutOfRangeException(nameof(WriteBufferSize));
 
                 if (IsOpen)
-                    throw new InvalidOperationException(SR.Format(SR.Cant_be_set_when_open, nameof(WriteBufferSize)));
+                    throw new InvalidOperationException(
+                        SR.Format(SR.Cant_be_set_when_open, nameof(WriteBufferSize))
+                    );
 
                 _writeBufferSize = value;
             }
@@ -492,14 +505,14 @@ namespace System.IO.Ports
         // timeout for all write operations.  May be set to SerialPort.InfiniteTimeout or any positive value
         public int WriteTimeout
         {
-            get
-            {
-                return _writeTimeout;
-            }
+            get { return _writeTimeout; }
             set
             {
                 if (value <= 0 && value != InfiniteTimeout)
-                    throw new ArgumentOutOfRangeException(nameof(WriteTimeout), SR.ArgumentOutOfRange_WriteTimeout);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(WriteTimeout),
+                        SR.ArgumentOutOfRange_WriteTimeout
+                    );
 
                 if (IsOpen)
                     _internalSerialStream.WriteTimeout = value;
@@ -513,7 +526,8 @@ namespace System.IO.Ports
             _dataReceivedHandler = new SerialDataReceivedEventHandler(CatchReceivedEvents);
         }
 
-        public SerialPort(IContainer container) : this()
+        public SerialPort(IContainer container)
+            : this()
         {
             // Required for Windows.Forms Class Composition Designer support
             container.Add(this);
@@ -522,26 +536,29 @@ namespace System.IO.Ports
         // Non-design SerialPort constructors here chain, using default values for members left unspecified by parameters
         // Note: Calling SerialPort() does not open a port connection but merely instantiates an object.
         //     : A connection must be made using SerialPort's Open() method.
-        public SerialPort(string portName) : this(portName, DefaultBaudRate, DefaultParity, DefaultDataBits, DefaultStopBits)
-        {
-        }
+        public SerialPort(string portName)
+            : this(portName, DefaultBaudRate, DefaultParity, DefaultDataBits, DefaultStopBits) { }
 
-        public SerialPort(string portName, int baudRate) : this(portName, baudRate, DefaultParity, DefaultDataBits, DefaultStopBits)
-        {
-        }
+        public SerialPort(string portName, int baudRate)
+            : this(portName, baudRate, DefaultParity, DefaultDataBits, DefaultStopBits) { }
 
-        public SerialPort(string portName, int baudRate, Parity parity) : this(portName, baudRate, parity, DefaultDataBits, DefaultStopBits)
-        {
-        }
+        public SerialPort(string portName, int baudRate, Parity parity)
+            : this(portName, baudRate, parity, DefaultDataBits, DefaultStopBits) { }
 
-        public SerialPort(string portName, int baudRate, Parity parity, int dataBits) : this(portName, baudRate, parity, dataBits, DefaultStopBits)
-        {
-        }
+        public SerialPort(string portName, int baudRate, Parity parity, int dataBits)
+            : this(portName, baudRate, parity, dataBits, DefaultStopBits) { }
 
         // all the magic happens in the call to the instance's .Open() method.
         // Internally, the SerialStream constructor opens the file handle, sets the device
         // control block and associated Win32 structures, and begins the event-watching cycle.
-        public SerialPort(string portName, int baudRate, Parity parity, int dataBits, StopBits stopBits) : this()
+        public SerialPort(
+            string portName,
+            int baudRate,
+            Parity parity,
+            int dataBits,
+            StopBits stopBits
+        )
+            : this()
         {
             PortName = portName;
             BaudRate = baudRate;
@@ -595,13 +612,29 @@ namespace System.IO.Ports
             if (IsOpen)
                 throw new InvalidOperationException(SR.Port_already_open);
 
-            _internalSerialStream = new SerialStream(_portName, _baudRate, _parity, _dataBits, _stopBits, _readTimeout,
-                _writeTimeout, _handshake, _dtrEnable, _rtsEnable, _discardNull, _parityReplace);
+            _internalSerialStream = new SerialStream(
+                _portName,
+                _baudRate,
+                _parity,
+                _dataBits,
+                _stopBits,
+                _readTimeout,
+                _writeTimeout,
+                _handshake,
+                _dtrEnable,
+                _rtsEnable,
+                _discardNull,
+                _parityReplace
+            );
 
             _internalSerialStream.SetBufferSizes(_readBufferSize, _writeBufferSize);
 
-            _internalSerialStream.ErrorReceived += new SerialErrorReceivedEventHandler(CatchErrorEvents);
-            _internalSerialStream.PinChanged += new SerialPinChangedEventHandler(CatchPinChangedEvents);
+            _internalSerialStream.ErrorReceived += new SerialErrorReceivedEventHandler(
+                CatchErrorEvents
+            );
+            _internalSerialStream.PinChanged += new SerialPinChangedEventHandler(
+                CatchPinChangedEvents
+            );
 
             if (_dataReceived != null)
             {
@@ -625,9 +658,15 @@ namespace System.IO.Ports
             if (buffer == null)
                 throw new ArgumentNullException(nameof(buffer));
             if (offset < 0)
-                throw new ArgumentOutOfRangeException(nameof(offset), SR.ArgumentOutOfRange_NeedNonNegNumRequired);
+                throw new ArgumentOutOfRangeException(
+                    nameof(offset),
+                    SR.ArgumentOutOfRange_NeedNonNegNumRequired
+                );
             if (count < 0)
-                throw new ArgumentOutOfRangeException(nameof(count), SR.ArgumentOutOfRange_NeedNonNegNumRequired);
+                throw new ArgumentOutOfRangeException(
+                    nameof(count),
+                    SR.ArgumentOutOfRange_NeedNonNegNumRequired
+                );
             if (buffer.Length - offset < count)
                 throw new ArgumentException(SR.Argument_InvalidOffLen);
             int bytesReadToBuffer = 0;
@@ -640,7 +679,8 @@ namespace System.IO.Ports
                 _readPos += bytesReadToBuffer;
                 if (bytesReadToBuffer == count)
                 {
-                    if (_readPos == _readLen) _readPos = _readLen = 0;  // just a check to see if we can reset buffer
+                    if (_readPos == _readLen)
+                        _readPos = _readLen = 0; // just a check to see if we can reset buffer
                     return count;
                 }
 
@@ -649,14 +689,21 @@ namespace System.IO.Ports
                     return bytesReadToBuffer;
             }
 
-            Debug.Assert(CachedBytesToRead == 0, "there should be nothing left in our internal buffer");
+            Debug.Assert(
+                CachedBytesToRead == 0,
+                "there should be nothing left in our internal buffer"
+            );
             _readLen = _readPos = 0;
 
             int bytesLeftToRead = count - bytesReadToBuffer;
 
             // request to read the requested number of bytes to fulfill the contract,
             // doesn't matter if we time out.  We still return all the data we have available.
-            bytesReadToBuffer += _internalSerialStream.Read(buffer, offset + bytesReadToBuffer, bytesLeftToRead);
+            bytesReadToBuffer += _internalSerialStream.Read(
+                buffer,
+                offset + bytesReadToBuffer,
+                bytesLeftToRead
+            );
 
             _decoder.Reset();
             return bytesReadToBuffer;
@@ -691,15 +738,22 @@ namespace System.IO.Ports
                 do
                 {
                     _readPos++;
-                } while (_decoder.GetCharCount(_inBuffer, beginReadPos, _readPos - beginReadPos) < 1);
+                } while (
+                    _decoder.GetCharCount(_inBuffer, beginReadPos, _readPos - beginReadPos) < 1
+                );
 
                 try
                 {
-                    _decoder.GetChars(_inBuffer, beginReadPos, _readPos - beginReadPos, _oneChar, 0);
+                    _decoder.GetChars(
+                        _inBuffer,
+                        beginReadPos,
+                        _readPos - beginReadPos,
+                        _oneChar,
+                        0
+                    );
                 }
                 catch
                 {
-
                     // Handle surrogate chars correctly, restore readPos
                     _readPos = beginReadPos;
                     throw;
@@ -708,7 +762,6 @@ namespace System.IO.Ports
             }
             else
             {
-
                 // need to return immediately.
                 if (timeout == 0)
                 {
@@ -745,7 +798,7 @@ namespace System.IO.Ports
                         throw new TimeoutException();
 
                     MaybeResizeBuffer(1);
-                    _inBuffer[_readLen++] = (byte)nextByte;  // we must add to the end of the buffer
+                    _inBuffer[_readLen++] = (byte)nextByte; // we must add to the end of the buffer
                 } while (_decoder.GetCharCount(_inBuffer, _readPos, _readLen - _readPos) < 1);
             }
 
@@ -766,16 +819,28 @@ namespace System.IO.Ports
             if (buffer == null)
                 throw new ArgumentNullException(nameof(buffer));
             if (offset < 0)
-                throw new ArgumentOutOfRangeException(nameof(offset), SR.ArgumentOutOfRange_NeedNonNegNumRequired);
+                throw new ArgumentOutOfRangeException(
+                    nameof(offset),
+                    SR.ArgumentOutOfRange_NeedNonNegNumRequired
+                );
             if (count < 0)
-                throw new ArgumentOutOfRangeException(nameof(count), SR.ArgumentOutOfRange_NeedNonNegNumRequired);
+                throw new ArgumentOutOfRangeException(
+                    nameof(count),
+                    SR.ArgumentOutOfRange_NeedNonNegNumRequired
+                );
             if (buffer.Length - offset < count)
                 throw new ArgumentException(SR.Argument_InvalidOffLen);
 
             return InternalRead(buffer, offset, count, _readTimeout, false);
         }
 
-        private int InternalRead(char[] buffer, int offset, int count, int timeout, bool countMultiByteCharsAsOne)
+        private int InternalRead(
+            char[] buffer,
+            int offset,
+            int count,
+            int timeout,
+            bool countMultiByteCharsAsOne
+        )
         {
             Debug.Assert(IsOpen, "port not open!");
             Debug.Assert(buffer != null, "invalid buffer!");
@@ -783,7 +848,8 @@ namespace System.IO.Ports
             Debug.Assert(count >= 0, "invalid count!");
             Debug.Assert(buffer.Length - offset >= count, "invalid offset/count!");
 
-            if (count == 0) return 0;   // immediately return on zero chars desired.  This simplifies things later.
+            if (count == 0)
+                return 0; // immediately return on zero chars desired.  This simplifies things later.
 
             // Get the startticks before we read the underlying stream
             int startTicks = Environment.TickCount;
@@ -791,7 +857,7 @@ namespace System.IO.Ports
             // read everything else into internal buffer, which we know we can do instantly, and see if we NOW have enough.
             int bytesInStream = _internalSerialStream.BytesToRead;
             MaybeResizeBuffer(bytesInStream);
-            _readLen += _internalSerialStream.Read(_inBuffer, _readLen, bytesInStream);    // should execute instantaneously.
+            _readLen += _internalSerialStream.Read(_inBuffer, _readLen, bytesInStream); // should execute instantaneously.
 
             int charsWeAlreadyHave = _decoder.GetCharCount(_inBuffer, _readPos, CachedBytesToRead); // full chars already in our buffer
             if (charsWeAlreadyHave > 0)
@@ -836,7 +902,10 @@ namespace System.IO.Ports
                 {
                     return justRead;
                 }
-            } while (timeout == InfiniteTimeout || (timeout - GetElapsedTime(Environment.TickCount, startTicks) > 0));
+            } while (
+                timeout == InfiniteTimeout
+                || (timeout - GetElapsedTime(Environment.TickCount, startTicks) > 0)
+            );
 
             // must've timed out w/o getting a character.
             throw new TimeoutException();
@@ -847,24 +916,38 @@ namespace System.IO.Ports
         // This does not call any stream Reads, and so takes "no time".
         // If the buffer specified is insufficient to accommodate surrogate characters
         // the call to underlying Decoder.GetChars will throw argexc.
-        private int ReadBufferIntoChars(char[] buffer, int offset, int count, bool countMultiByteCharsAsOne)
+        private int ReadBufferIntoChars(
+            char[] buffer,
+            int offset,
+            int count,
+            bool countMultiByteCharsAsOne
+        )
         {
-            Debug.Assert(count != 0, "Count should never be zero.  We will probably see bugs further down if count is 0.");
+            Debug.Assert(
+                count != 0,
+                "Count should never be zero.  We will probably see bugs further down if count is 0."
+            );
 
             int bytesToRead = Math.Min(count, CachedBytesToRead);
 
             // There are lots of checks to determine if this really is a single byte encoding with no
             // funky fallbacks that would make it not single byte
-            DecoderReplacementFallback fallback = _encoding.DecoderFallback as DecoderReplacementFallback;
-            if (_encoding.IsSingleByte && _encoding.GetMaxCharCount(bytesToRead) == bytesToRead &&
-                fallback != null && fallback.MaxCharCount == 1)
+            DecoderReplacementFallback fallback =
+                _encoding.DecoderFallback as DecoderReplacementFallback;
+            if (
+                _encoding.IsSingleByte
+                && _encoding.GetMaxCharCount(bytesToRead) == bytesToRead
+                && fallback != null
+                && fallback.MaxCharCount == 1
+            )
             {
                 // kill ASCII/ANSI encoding easily.
                 // read at least one and at most *count* characters
                 _decoder.GetChars(_inBuffer, _readPos, bytesToRead, buffer, offset);
 
                 _readPos += bytesToRead;
-                if (_readPos == _readLen) _readPos = _readLen = 0;
+                if (_readPos == _readLen)
+                    _readPos = _readLen = 0;
                 return bytesToRead;
             }
             else
@@ -876,14 +959,17 @@ namespace System.IO.Ports
                 //    they occupy.  lastFullCharPos points to the end of the full chars.
                 // 3) if we don't have enough chars for the buffer, goto #1
 
-                int totalBytesExamined = 0;     // total number of Bytes in inBuffer we've looked at
-                int totalCharsFound = 0;        // total number of chars we've found in inBuffer, totalCharsFound <= totalBytesExamined
-                int currentBytesToExamine;      // the number of additional bytes to examine for characters
-                int currentCharsFound;          // the number of additional chars found after examining currentBytesToExamine extra bytes
+                int totalBytesExamined = 0; // total number of Bytes in inBuffer we've looked at
+                int totalCharsFound = 0; // total number of chars we've found in inBuffer, totalCharsFound <= totalBytesExamined
+                int currentBytesToExamine; // the number of additional bytes to examine for characters
+                int currentCharsFound; // the number of additional chars found after examining currentBytesToExamine extra bytes
                 int lastFullCharPos = _readPos; // first index AFTER last full char read, capped at ReadLen.
                 do
                 {
-                    currentBytesToExamine = Math.Min(count - totalCharsFound, _readLen - _readPos - totalBytesExamined);
+                    currentBytesToExamine = Math.Min(
+                        count - totalCharsFound,
+                        _readLen - _readPos - totalBytesExamined
+                    );
                     if (currentBytesToExamine <= 0)
                         break;
 
@@ -893,9 +979,16 @@ namespace System.IO.Ports
                     currentBytesToExamine = _readPos + totalBytesExamined - lastFullCharPos;
 
                     // make sure we don't go beyond the end of the valid data that we have.
-                    Debug.Assert((lastFullCharPos + currentBytesToExamine) <= _readLen, "We should never be attempting to read more bytes than we have");
+                    Debug.Assert(
+                        (lastFullCharPos + currentBytesToExamine) <= _readLen,
+                        "We should never be attempting to read more bytes than we have"
+                    );
 
-                    currentCharsFound = _decoder.GetCharCount(_inBuffer, lastFullCharPos, currentBytesToExamine);
+                    currentCharsFound = _decoder.GetCharCount(
+                        _inBuffer,
+                        lastFullCharPos,
+                        currentBytesToExamine
+                    );
 
                     if (currentCharsFound > 0)
                     {
@@ -911,7 +1004,10 @@ namespace System.IO.Ports
                             // If we are here it is from ReadTo which attempts to read one logical character
                             // at a time. The supplied singleCharBuffer should be large enough to accommodate
                             // this multi-byte char
-                            Debug.Assert((buffer.Length - offset - totalCharsFound) >= currentCharsFound, "internal buffer to read one full unicode char sequence is not sufficient!");
+                            Debug.Assert(
+                                (buffer.Length - offset - totalCharsFound) >= currentCharsFound,
+                                "internal buffer to read one full unicode char sequence is not sufficient!"
+                            );
                         }
 
                         // go backwards until we know we have a full set of currentCharsFound bytes with no extra lead-bytes.
@@ -919,13 +1015,22 @@ namespace System.IO.Ports
                         do
                         {
                             foundCharsByteLength--;
-                        } while (_decoder.GetCharCount(_inBuffer, lastFullCharPos, foundCharsByteLength) == currentCharsFound);
+                        } while (
+                            _decoder.GetCharCount(_inBuffer, lastFullCharPos, foundCharsByteLength)
+                            == currentCharsFound
+                        );
 
                         // Fill into destination buffer all the COMPLETE characters we've read.
                         // If the buffer specified is insufficient to accommodate surrogate character
                         // the call to underlying Decoder.GetChars will throw argexc. We need not
                         // deal with this exc because we have not altered readPos yet.
-                        _decoder.GetChars(_inBuffer, lastFullCharPos, foundCharsByteLength + 1, buffer, offset + totalCharsFound);
+                        _decoder.GetChars(
+                            _inBuffer,
+                            lastFullCharPos,
+                            foundCharsByteLength + 1,
+                            buffer,
+                            offset + totalCharsFound
+                        );
                         lastFullCharPos = lastFullCharPos + foundCharsByteLength + 1; // update the end position of last known char.
                     }
 
@@ -934,7 +1039,8 @@ namespace System.IO.Ports
 
                 _readPos = lastFullCharPos;
 
-                if (_readPos == _readLen) _readPos = _readLen = 0;
+                if (_readPos == _readLen)
+                    _readPos = _readLen = 0;
                 return totalCharsFound;
             }
         }
@@ -943,7 +1049,7 @@ namespace System.IO.Ports
         {
             if (!IsOpen)
                 throw new InvalidOperationException(SR.Port_not_open);
-            if (_readLen != _readPos)                // stuff left in buffer, so we can read from it
+            if (_readLen != _readPos) // stuff left in buffer, so we can read from it
                 return _inBuffer[_readPos++];
 
             _decoder.Reset();
@@ -963,7 +1069,11 @@ namespace System.IO.Ports
                 Buffer.BlockCopy(_inBuffer, _readPos, bytesReceived, 0, CachedBytesToRead);
             }
 
-            _internalSerialStream.Read(bytesReceived, CachedBytesToRead, bytesReceived.Length - (CachedBytesToRead));    // get everything
+            _internalSerialStream.Read(
+                bytesReceived,
+                CachedBytesToRead,
+                bytesReceived.Length - (CachedBytesToRead)
+            ); // get everything
 
             // Read full characters and leave partial input in the buffer. Encoding.GetCharCount doesn't work because
             // it returns fallback characters on partial input, meaning that it overcounts. Instead, we use
@@ -972,7 +1082,11 @@ namespace System.IO.Ports
             // preserving state and then call Reset in between calls. This uses a local decoder instead of the class
             // member decoder because that one may preserve state across SerialPort method calls.
             Decoder localDecoder = Encoding.GetDecoder();
-            int numCharsReceived = localDecoder.GetCharCount(bytesReceived, 0, bytesReceived.Length);
+            int numCharsReceived = localDecoder.GetCharCount(
+                bytesReceived,
+                0,
+                bytesReceived.Length
+            );
             int lastFullCharIndex = bytesReceived.Length;
 
             if (numCharsReceived == 0)
@@ -988,12 +1102,20 @@ namespace System.IO.Ports
             {
                 localDecoder.Reset();
                 lastFullCharIndex--;
-            } while (localDecoder.GetCharCount(bytesReceived, 0, lastFullCharIndex) == numCharsReceived);
+            } while (
+                localDecoder.GetCharCount(bytesReceived, 0, lastFullCharIndex) == numCharsReceived
+            );
 
             _readPos = 0;
             _readLen = bytesReceived.Length - (lastFullCharIndex + 1);
 
-            Buffer.BlockCopy(bytesReceived, lastFullCharIndex + 1, _inBuffer, 0, bytesReceived.Length - (lastFullCharIndex + 1));
+            Buffer.BlockCopy(
+                bytesReceived,
+                lastFullCharIndex + 1,
+                _inBuffer,
+                0,
+                bytesReceived.Length - (lastFullCharIndex + 1)
+            );
             return Encoding.GetString(bytesReceived, 0, lastFullCharIndex + 1);
         }
 
@@ -1009,7 +1131,10 @@ namespace System.IO.Ports
             if (value == null)
                 throw new ArgumentNullException(nameof(value));
             if (value.Length == 0)
-                throw new ArgumentException(SR.Format(SR.InvalidNullEmptyArgument, nameof(value)), nameof(value));
+                throw new ArgumentException(
+                    SR.Format(SR.InvalidNullEmptyArgument, nameof(value)),
+                    nameof(value)
+                );
 
             int numCharsRead;
             int timeUsed = 0;
@@ -1038,7 +1163,13 @@ namespace System.IO.Ports
                     else if (_readTimeout - timeUsed >= 0)
                     {
                         timeNow = Environment.TickCount;
-                        numCharsRead = InternalRead(_singleCharBuffer, 0, 1, _readTimeout - timeUsed, true);
+                        numCharsRead = InternalRead(
+                            _singleCharBuffer,
+                            0,
+                            1,
+                            _readTimeout - timeUsed,
+                            true
+                        );
                         timeUsed += Environment.TickCount - timeNow;
                     }
                     else
@@ -1048,13 +1179,22 @@ namespace System.IO.Ports
                     if (numCharsRead > 1)
                     {
                         for (int i = 0; i < numCharsRead; i++)
-                            Debug.Assert((char.IsSurrogate(_singleCharBuffer[i])), "number of chars read should be more than one only for surrogate characters!");
+                            Debug.Assert(
+                                (char.IsSurrogate(_singleCharBuffer[i])),
+                                "number of chars read should be more than one only for surrogate characters!"
+                            );
                     }
 #endif
-                    Debug.Assert((numCharsRead > 0), "possible bug in ReadBufferIntoChars, reading surrogate char?");
+                    Debug.Assert(
+                        (numCharsRead > 0),
+                        "possible bug in ReadBufferIntoChars, reading surrogate char?"
+                    );
                     currentLine.Append(_singleCharBuffer, 0, numCharsRead);
 
-                    if (lastValueChar == (char)_singleCharBuffer[numCharsRead - 1] && (currentLine.Length >= value.Length))
+                    if (
+                        lastValueChar == (char)_singleCharBuffer[numCharsRead - 1]
+                        && (currentLine.Length >= value.Length)
+                    )
                     {
                         // we found the last char in the value string.  See if the rest is there.  No need to
                         // recompare the last char of the value string.
@@ -1072,7 +1212,8 @@ namespace System.IO.Ports
                         {
                             // we found the search string.  Exclude it from the return string.
                             string ret = currentLine.ToString(0, currentLine.Length - value.Length);
-                            if (_readPos == _readLen) _readPos = _readLen = 0;
+                            if (_readPos == _readLen)
+                                _readPos = _readLen = 0;
                             return ret;
                         }
                     }
@@ -1126,7 +1267,8 @@ namespace System.IO.Ports
                 throw new InvalidOperationException(SR.Port_not_open);
             if (text == null)
                 throw new ArgumentNullException(nameof(text));
-            if (text.Length == 0) return;
+            if (text.Length == 0)
+                return;
             byte[] bytesToWrite;
 
             bytesToWrite = _encoding.GetBytes(text);
@@ -1143,13 +1285,20 @@ namespace System.IO.Ports
             if (buffer == null)
                 throw new ArgumentNullException(nameof(buffer));
             if (offset < 0)
-                throw new ArgumentOutOfRangeException(nameof(offset), SR.ArgumentOutOfRange_NeedNonNegNumRequired);
+                throw new ArgumentOutOfRangeException(
+                    nameof(offset),
+                    SR.ArgumentOutOfRange_NeedNonNegNumRequired
+                );
             if (count < 0)
-                throw new ArgumentOutOfRangeException(nameof(count), SR.ArgumentOutOfRange_NeedNonNegNumRequired);
+                throw new ArgumentOutOfRangeException(
+                    nameof(count),
+                    SR.ArgumentOutOfRange_NeedNonNegNumRequired
+                );
             if (buffer.Length - offset < count)
                 throw new ArgumentException(SR.Argument_InvalidOffLen);
 
-            if (buffer.Length == 0) return;
+            if (buffer.Length == 0)
+                return;
 
             byte[] byteArray = Encoding.GetBytes(buffer, offset, count);
             Write(byteArray, 0, byteArray.Length);
@@ -1163,12 +1312,19 @@ namespace System.IO.Ports
             if (buffer == null)
                 throw new ArgumentNullException(nameof(buffer));
             if (offset < 0)
-                throw new ArgumentOutOfRangeException(nameof(offset), SR.ArgumentOutOfRange_NeedNonNegNumRequired);
+                throw new ArgumentOutOfRangeException(
+                    nameof(offset),
+                    SR.ArgumentOutOfRange_NeedNonNegNumRequired
+                );
             if (count < 0)
-                throw new ArgumentOutOfRangeException(nameof(count), SR.ArgumentOutOfRange_NeedNonNegNumRequired);
+                throw new ArgumentOutOfRangeException(
+                    nameof(count),
+                    SR.ArgumentOutOfRange_NeedNonNegNumRequired
+                );
             if (buffer.Length - offset < count)
                 throw new ArgumentException(SR.Argument_InvalidOffLen);
-            if (buffer.Length == 0) return;
+            if (buffer.Length == 0)
+                return;
 
             _internalSerialStream.Write(buffer, offset, count, _writeTimeout);
         }
@@ -1229,7 +1385,12 @@ namespace System.IO.Ports
                     bool raiseEvent = false;
                     try
                     {
-                        raiseEvent = stream.IsOpen && (SerialData.Eof == e.EventType || BytesToRead >= _receivedBytesThreshold);
+                        raiseEvent =
+                            stream.IsOpen
+                            && (
+                                SerialData.Eof == e.EventType
+                                || BytesToRead >= _receivedBytesThreshold
+                            );
                     }
                     catch
                     {
@@ -1244,7 +1405,7 @@ namespace System.IO.Ports
                         //        we virtually can get 2 events when 8th byte arrives
                         //        I.e. we might want to add total bytes available as internal field in the args event
                         if (raiseEvent)
-                            eventHandler(this, e);  // here, do your reading, etc.
+                            eventHandler(this, e); // here, do your reading, etc.
                     }
                 }
             }
@@ -1276,9 +1437,15 @@ namespace System.IO.Ports
             else
             {
                 // Case 3.  Create a new buffer
-                int newLength = Math.Max(CachedBytesToRead + additionalByteLength, _inBuffer.Length * 2);
+                int newLength = Math.Max(
+                    CachedBytesToRead + additionalByteLength,
+                    _inBuffer.Length * 2
+                );
 
-                Debug.Assert(_inBuffer.Length >= _readLen, "ResizeBuffer - readLen > inBuffer.Length");
+                Debug.Assert(
+                    _inBuffer.Length >= _readLen,
+                    "ResizeBuffer - readLen > inBuffer.Length"
+                );
                 byte[] newBuffer = new byte[newLength];
                 // only copy the valid data from inBuffer, and put it at the beginning of newBuffer.
                 Buffer.BlockCopy(_inBuffer, _readPos, newBuffer, 0, CachedBytesToRead);

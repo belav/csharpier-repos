@@ -17,10 +17,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -42,64 +42,74 @@ namespace System.Net.Configuration
 {
     class NetConfigurationHandler : IConfigurationSectionHandler
     {
-        public virtual object Create (object parent, object configContext, XmlNode section)
+        public virtual object Create(object parent, object configContext, XmlNode section)
         {
-            NetConfig config = new NetConfig ();
+            NetConfig config = new NetConfig();
 #if (XML_DEP)
             if (section.Attributes != null && section.Attributes.Count != 0)
-                HandlersUtil.ThrowException ("Unrecognized attribute", section);
+                HandlersUtil.ThrowException("Unrecognized attribute", section);
 
             XmlNodeList reqHandlers = section.ChildNodes;
-            foreach (XmlNode child in reqHandlers) {
+            foreach (XmlNode child in reqHandlers)
+            {
                 XmlNodeType ntype = child.NodeType;
                 if (ntype == XmlNodeType.Whitespace || ntype == XmlNodeType.Comment)
                     continue;
 
                 if (ntype != XmlNodeType.Element)
-                    HandlersUtil.ThrowException ("Only elements allowed", child);
-                
+                    HandlersUtil.ThrowException("Only elements allowed", child);
+
                 string name = child.Name;
-                if (name == "ipv6") {
-                    string enabled = HandlersUtil.ExtractAttributeValue ("enabled", child, false);
+                if (name == "ipv6")
+                {
+                    string enabled = HandlersUtil.ExtractAttributeValue("enabled", child, false);
                     if (child.Attributes != null && child.Attributes.Count != 0)
-                        HandlersUtil.ThrowException ("Unrecognized attribute", child);
+                        HandlersUtil.ThrowException("Unrecognized attribute", child);
 
                     if (enabled == "true")
                         config.ipv6Enabled = true;
                     else if (enabled != "false")
-                        HandlersUtil.ThrowException ("Invalid boolean value", child);
-                        
+                        HandlersUtil.ThrowException("Invalid boolean value", child);
+
                     continue;
                 }
 
-                if (name == "httpWebRequest") {
-                    string max = HandlersUtil.ExtractAttributeValue
-                                ("maximumResponseHeadersLength", child, true);
+                if (name == "httpWebRequest")
+                {
+                    string max = HandlersUtil.ExtractAttributeValue(
+                        "maximumResponseHeadersLength",
+                        child,
+                        true
+                    );
 
                     // this one is just ignored
-                    HandlersUtil.ExtractAttributeValue ("useUnsafeHeaderParsing", child, true);
+                    HandlersUtil.ExtractAttributeValue("useUnsafeHeaderParsing", child, true);
 
                     if (child.Attributes != null && child.Attributes.Count != 0)
-                        HandlersUtil.ThrowException ("Unrecognized attribute", child);
+                        HandlersUtil.ThrowException("Unrecognized attribute", child);
 
-                    try {
-                        if (max != null) {
-                            int val = Int32.Parse (max.Trim ());
+                    try
+                    {
+                        if (max != null)
+                        {
+                            int val = Int32.Parse(max.Trim());
                             if (val < -1)
-                                HandlersUtil.ThrowException ("Must be -1 or >= 0", child);
+                                HandlersUtil.ThrowException("Must be -1 or >= 0", child);
 
                             config.MaxResponseHeadersLength = val;
                         }
-                    } catch {
-                        HandlersUtil.ThrowException ("Invalid int value", child);
+                    }
+                    catch
+                    {
+                        HandlersUtil.ThrowException("Invalid int value", child);
                     }
 
                     continue;
                 }
 
-                HandlersUtil.ThrowException ("Unexpected element", child);
+                HandlersUtil.ThrowException("Unexpected element", child);
             }
-#endif            
+#endif
 
             return config;
         }

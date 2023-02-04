@@ -6,19 +6,19 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 
 namespace Mono.Linker.Tests.Cases.Serialization
 {
-    [Reference ("System.Xml.ReaderWriter.dll")]
-    [Reference ("System.Xml.XmlSerializer.dll")]
-    [SetupCompileArgument ("/unsafe")]
-    [SetupLinkerArgument ("--enable-serialization-discovery")]
+    [Reference("System.Xml.ReaderWriter.dll")]
+    [Reference("System.Xml.XmlSerializer.dll")]
+    [SetupCompileArgument("/unsafe")]
+    [SetupLinkerArgument("--enable-serialization-discovery")]
     public class SerializationTypeRecursion
     {
-        public static void Main ()
+        public static void Main()
         {
             // Reference the root type to ensure it is scanned for attributes.
-            Type t = typeof (RootTypeRecursive);
+            Type t = typeof(RootTypeRecursive);
 
             // Construct a serializer to activate the logic
-            var ser = new XmlSerializer (typeof (SerializerArgumentType));
+            var ser = new XmlSerializer(typeof(SerializerArgumentType));
         }
     }
 
@@ -30,15 +30,13 @@ namespace Mono.Linker.Tests.Cases.Serialization
     }
 
     [Kept]
-    [KeptMember (".ctor()")]
-    [KeptAttributeAttribute (typeof (XmlRootAttribute))]
+    [KeptMember(".ctor()")]
+    [KeptAttributeAttribute(typeof(XmlRootAttribute))]
     [XmlRoot]
     public class RootTypeRecursive
     {
         // removed
-        class UnusedNestedType
-        {
-        }
+        class UnusedNestedType { }
 
         [Kept]
         public FieldType f1;
@@ -51,22 +49,44 @@ namespace Mono.Linker.Tests.Cases.Serialization
 
         [Kept]
         [KeptBackingField]
-        public GetPropertyType p1 { [Kept] get; }
+        public GetPropertyType p1
+        {
+            [Kept]
+            get;
+        }
 
         [Kept]
         [KeptBackingField]
-        public GetSetPropertyType p2 { [Kept] get; [Kept] set; }
+        public GetSetPropertyType p2
+        {
+            [Kept]
+            get;
+            [Kept]
+            set;
+        }
 
         // removed
         PrivatePropertyType p3 { get; set; }
 
         [Kept]
         [KeptBackingField]
-        public PublicGetPrivateSetPropertyType p4 { [Kept] get; [Kept] private set; }
+        public PublicGetPrivateSetPropertyType p4
+        {
+            [Kept]
+            get;
+            [Kept]
+            private set;
+        }
 
         [Kept]
         [KeptBackingField]
-        public PrivateGetPublicSetPropertyType p5 { [Kept] private get; [Kept] set; }
+        public PrivateGetPublicSetPropertyType p5
+        {
+            [Kept]
+            private get;
+            [Kept]
+            set;
+        }
 
         [Kept]
         public RecursiveType f4;
@@ -103,58 +123,41 @@ namespace Mono.Linker.Tests.Cases.Serialization
     }
 
     [Kept]
-    [KeptMember (".ctor()")]
-    public class FieldType
-    {
-    }
+    [KeptMember(".ctor()")]
+    public class FieldType { }
 
     // removed
-    public class PrivateFieldType
-    {
-    }
+    public class PrivateFieldType { }
 
     [Kept]
-    [KeptMember (".ctor()")]
-    public struct FieldValueType
-    {
-    }
+    [KeptMember(".ctor()")]
+    public struct FieldValueType { }
 
     [Kept]
-    [KeptMember (".ctor()")]
-    public class GetPropertyType
-    {
-    }
+    [KeptMember(".ctor()")]
+    public class GetPropertyType { }
 
     [Kept]
-    [KeptMember (".ctor()")]
-    public class GetSetPropertyType
-    {
-    }
+    [KeptMember(".ctor()")]
+    public class GetSetPropertyType { }
 
     // removed
-    class PrivatePropertyType
-    {
-    }
+    class PrivatePropertyType { }
 
     [Kept]
-    [KeptMember (".ctor()")]
-    public class PublicGetPrivateSetPropertyType
-    {
-    }
+    [KeptMember(".ctor()")]
+    public class PublicGetPrivateSetPropertyType { }
 
     [Kept]
-    [KeptMember (".ctor()")]
-    public class PrivateGetPublicSetPropertyType
-    {
-    }
+    [KeptMember(".ctor()")]
+    public class PrivateGetPublicSetPropertyType { }
 
     [Kept]
-    [KeptMember (".ctor()")]
+    [KeptMember(".ctor()")]
     public class RecursiveType
     {
-
         [Kept]
-        [KeptMember (".ctor()")]
+        [KeptMember(".ctor()")]
         public class RecursiveFieldType
         {
             [Kept]
@@ -172,7 +175,7 @@ namespace Mono.Linker.Tests.Cases.Serialization
     }
 
     [Kept]
-    [KeptMember (".ctor()")]
+    [KeptMember(".ctor()")]
     public class BaseType
     {
         [Kept]
@@ -180,8 +183,8 @@ namespace Mono.Linker.Tests.Cases.Serialization
     }
 
     [Kept]
-    [KeptMember (".ctor()")]
-    [KeptBaseType (typeof (BaseType))]
+    [KeptMember(".ctor()")]
+    [KeptBaseType(typeof(BaseType))]
     public class DerivedType : BaseType
     {
         [Kept]
@@ -196,13 +199,17 @@ namespace Mono.Linker.Tests.Cases.Serialization
     }
 
     [Kept]
-    [KeptMember (".ctor()")]
+    [KeptMember(".ctor()")]
     // removed interface implementation
     public class InterfaceImplementingType : InterfaceType
     {
         [Kept]
         [KeptBackingField]
-        public int P1 { [Kept] get; }
+        public int P1
+        {
+            [Kept]
+            get;
+        }
 
         [Kept]
         public int f1;
@@ -212,34 +219,28 @@ namespace Mono.Linker.Tests.Cases.Serialization
     public class NonDefaultCtorType
     {
         // removed
-        public NonDefaultCtorType (int i)
-        {
-        }
+        public NonDefaultCtorType(int i) { }
     }
 
     [Kept]
     public class PrivateCtorType
     {
         // removed
-        PrivateCtorType ()
-        {
-        }
+        PrivateCtorType() { }
     }
 
     [Kept]
-    [KeptMember (".ctor()")]
+    [KeptMember(".ctor()")]
     public class CctorType
     {
         // Explicit cctors are kept for every marked type,
         // regardless of whether serializers require it.
         [Kept]
-        static CctorType ()
-        {
-        }
+        static CctorType() { }
     }
 
     [Kept]
-    [KeptMember (".ctor()")]
+    [KeptMember(".ctor()")]
     // removed cctor
     public class BeforeFieldInitCctorType
     {
@@ -248,7 +249,7 @@ namespace Mono.Linker.Tests.Cases.Serialization
     }
 
     [Kept]
-    [KeptMember (".ctor()")]
+    [KeptMember(".ctor()")]
     public class MethodType
     {
         // removed
@@ -256,75 +257,89 @@ namespace Mono.Linker.Tests.Cases.Serialization
         {
             public int f1;
         }
+
         // removed
-        static void StaticMethod (StaticMethodParameterType p1) { }
+        static void StaticMethod(StaticMethodParameterType p1) { }
+
         // removed
         class InstanceMethodParameterType
         {
             public int f1;
         }
+
         // removed
-        void InstanceMethod1 (InstanceMethodParameterType p1) { }
+        void InstanceMethod1(InstanceMethodParameterType p1) { }
+
         // removed
         class ReturnType
         {
             public int f1;
         }
+
         // removed
-        ReturnType InstanceMethod2 () => null;
+        ReturnType InstanceMethod2() => null;
     }
 
     [Kept]
-    [KeptMember (".ctor()")]
+    [KeptMember(".ctor()")]
     public class GenericMembersType
     {
         [Kept]
-        [KeptMember (".ctor()")]
+        [KeptMember(".ctor()")]
         public class GenericFieldType<T> { }
 
         [Kept]
-        [KeptMember (".ctor()")]
+        [KeptMember(".ctor()")]
         public class GenericFieldParameterType { }
 
         [Kept]
         public GenericFieldType<GenericFieldParameterType> f1;
 
         [Kept]
-        [KeptMember (".ctor()")]
+        [KeptMember(".ctor()")]
         public class GenericPropertyType<T> { }
 
         [Kept]
-        [KeptMember (".ctor()")]
+        [KeptMember(".ctor()")]
         public class GenericPropertyParameterType { }
 
         [Kept]
         [KeptBackingField]
-        public GenericPropertyType<GenericPropertyParameterType> p1 { [Kept] get; }
+        public GenericPropertyType<GenericPropertyParameterType> p1
+        {
+            [Kept]
+            get;
+        }
 
         [Kept]
-        [KeptMember (".ctor()")]
+        [KeptMember(".ctor()")]
         public class GenericTypeWithMembers<T, U>
         {
             [Kept]
             public T f1;
+
             [Kept]
             [KeptBackingField]
-            public U p1 { [Kept] get; }
+            public U p1
+            {
+                [Kept]
+                get;
+            }
         }
 
         [Kept]
-        [KeptMember (".ctor()")]
+        [KeptMember(".ctor()")]
         public class GenericParameter1 { }
 
         [Kept]
-        [KeptMember (".ctor()")]
+        [KeptMember(".ctor()")]
         public class GenericParameter2 { }
 
         [Kept]
         public GenericTypeWithMembers<GenericParameter1, GenericParameter2> f2;
 
         [Kept]
-        [KeptMember (".ctor()")]
+        [KeptMember(".ctor()")]
         public class GenericBaseType<T, U, V>
         {
             [Kept]
@@ -332,37 +347,48 @@ namespace Mono.Linker.Tests.Cases.Serialization
 
             [Kept]
             [KeptBackingField]
-            public U p1 { [Kept] get; }
+            public U p1
+            {
+                [Kept]
+                get;
+            }
 
             [Kept]
             public V f2;
         }
 
         [Kept]
-        [KeptMember (".ctor()")]
+        [KeptMember(".ctor()")]
         public class GenericParameter3 { }
+
         [Kept]
-        [KeptMember (".ctor()")]
+        [KeptMember(".ctor()")]
         public class GenericParameter4 { }
 
         [Kept]
-        [KeptMember (".ctor()")]
-        [KeptBaseType (typeof (GenericBaseType<,,>), typeof (GenericParameter3), typeof (GenericParameter4), "T")]
-        public class DerivedFromGenericType<T> : GenericBaseType<GenericParameter3, GenericParameter4, T>
+        [KeptMember(".ctor()")]
+        [KeptBaseType(
+            typeof(GenericBaseType<,,>),
+            typeof(GenericParameter3),
+            typeof(GenericParameter4),
+            "T"
+        )]
+        public class DerivedFromGenericType<T>
+            : GenericBaseType<GenericParameter3, GenericParameter4, T>
         {
             [Kept]
             public T f1;
         }
 
         [Kept]
-        [KeptMember (".ctor()")]
+        [KeptMember(".ctor()")]
         public class GenericParameter5 { }
 
         [Kept]
         public DerivedFromGenericType<GenericParameter5> f3;
 
         [Kept]
-        [KeptMember (".ctor()")]
+        [KeptMember(".ctor()")]
         public class ArrayItemType
         {
             [Kept]
@@ -383,7 +409,7 @@ namespace Mono.Linker.Tests.Cases.Serialization
         public unsafe PointerType* f5;
 
         [Kept]
-        [StructLayout (LayoutKind.Auto)]
+        [StructLayout(LayoutKind.Auto)]
         public struct FunctionPointerParameterType
         {
             // removed
@@ -391,7 +417,7 @@ namespace Mono.Linker.Tests.Cases.Serialization
         }
 
         [Kept]
-        [StructLayout (LayoutKind.Auto)]
+        [StructLayout(LayoutKind.Auto)]
         // Use auto layout to prevent automatic marking of field types,
         // to demonstrate an edge case where function pointers aren't
         // kept recursively.
@@ -402,11 +428,11 @@ namespace Mono.Linker.Tests.Cases.Serialization
         }
 
         [Kept]
-        public unsafe delegate*<FunctionPointerParameterType, FunctionPointerReturnType> f6;
+        public unsafe delegate* <FunctionPointerParameterType, FunctionPointerReturnType> f6;
     }
 
     [Kept]
-    [KeptMember (".ctor()")]
+    [KeptMember(".ctor()")]
     public class StaticMembersType
     {
         // removed
@@ -414,19 +440,22 @@ namespace Mono.Linker.Tests.Cases.Serialization
         {
             public int f1;
         }
+
         // removed
         public static StaticFieldType sf1;
+
         // removed
         public class StaticPropertyType
         {
             public int f1;
         }
+
         // removed
         public static StaticPropertyType sp1 { get; }
     }
 
     [Kept]
-    [KeptMember (".ctor()")]
+    [KeptMember(".ctor()")]
     public class MethodsType
     {
         // removed
@@ -434,15 +463,18 @@ namespace Mono.Linker.Tests.Cases.Serialization
         {
             public int f1;
         }
+
         // removed
-        public void MethodWithParameter (ParameterType p1) { }
+        public void MethodWithParameter(ParameterType p1) { }
+
         // removed
         public class ReturnType
         {
             public int f1;
         }
+
         // removed
-        public ReturnType MethodWithReturnType () => null;
+        public ReturnType MethodWithReturnType() => null;
 
         // removed
         public class StaticParameterType
@@ -451,13 +483,15 @@ namespace Mono.Linker.Tests.Cases.Serialization
         }
 
         // removed
-        public static void StaticMethodWithParameter (StaticParameterType p1) { }
+        public static void StaticMethodWithParameter(StaticParameterType p1) { }
+
         // removed
         public class StaticReturnType
         {
             public int f1;
         }
+
         // removed
-        public static StaticReturnType StaticMethodWithReturnType () => null;
+        public static StaticReturnType StaticMethodWithReturnType() => null;
     }
 }

@@ -39,7 +39,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.QuickInfo
             IAsynchronousOperationListenerProvider listenerProvider,
             Lazy<IStreamingFindUsagesPresenter> streamingPresenter,
             EditorOptionsService editorOptionsService,
-            IInlineRenameService inlineRenameService)
+            IInlineRenameService inlineRenameService
+        )
         {
             _threadingContext = threadingContext;
             _operationExecutor = operationExecutor;
@@ -55,7 +56,14 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.QuickInfo
                 return null;
 
             return new QuickInfoSource(
-                textBuffer, _threadingContext, _operationExecutor, _listener, _streamingPresenter, _editorOptionsService, _inlineRenameService);
+                textBuffer,
+                _threadingContext,
+                _operationExecutor,
+                _listener,
+                _streamingPresenter,
+                _editorOptionsService,
+                _inlineRenameService
+            );
         }
     }
 }

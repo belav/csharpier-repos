@@ -31,59 +31,77 @@ using System.Data.Services;
 using System.Linq.Expressions;
 using NUnit.Framework;
 
-namespace MonoTests.System.Data.Services {
+namespace MonoTests.System.Data.Services
+{
     [TestFixture]
-    public class ExpandSegmentTests {
+    public class ExpandSegmentTests
+    {
         [Test]
         public void CtorName()
         {
-            var s = new ExpandSegment ("name", null);
-            Assert.AreEqual ("name", s.Name);
-            Assert.AreEqual (null, s.Filter);
-            Assert.IsFalse (s.HasFilter);
+            var s = new ExpandSegment("name", null);
+            Assert.AreEqual("name", s.Name);
+            Assert.AreEqual(null, s.Filter);
+            Assert.IsFalse(s.HasFilter);
         }
 
         [Test]
         public void CtorFilter()
         {
-            var param = Expression.Parameter (typeof (bool), "b");
-            var filter = Expression.Lambda (param, param);
-            var s = new ExpandSegment ("name", filter);
+            var param = Expression.Parameter(typeof(bool), "b");
+            var filter = Expression.Lambda(param, param);
+            var s = new ExpandSegment("name", filter);
 
-            Assert.AreEqual ("name", s.Name);
-            Assert.AreEqual (filter, s.Filter);
-            Assert.IsTrue (s.HasFilter);
+            Assert.AreEqual("name", s.Name);
+            Assert.AreEqual(filter, s.Filter);
+            Assert.IsTrue(s.HasFilter);
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
+        [ExpectedException(typeof(ArgumentNullException))]
         public void CtorNullName()
         {
-            new ExpandSegment (null, null);
+            new ExpandSegment(null, null);
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
+        [ExpectedException(typeof(ArgumentNullException))]
         public void PathHasFilterException()
         {
-            ExpandSegment.PathHasFilter (null);
+            ExpandSegment.PathHasFilter(null);
         }
 
         [Test]
         public void PathHasFilter()
         {
-            var param = Expression.Parameter (typeof (bool), "b");
-            var filter = Expression.Lambda (param, param);
+            var param = Expression.Parameter(typeof(bool), "b");
+            var filter = Expression.Lambda(param, param);
 
-            Assert.IsTrue (ExpandSegment.PathHasFilter (new []
-            { new ExpandSegment ("first", null), new ExpandSegment ("second", filter), new ExpandSegment ("third", null) }));
+            Assert.IsTrue(
+                ExpandSegment.PathHasFilter(
+                    new[]
+                    {
+                        new ExpandSegment("first", null),
+                        new ExpandSegment("second", filter),
+                        new ExpandSegment("third", null)
+                    }
+                )
+            );
         }
 
         [Test]
         public void PathDoesntHaveFilter()
         {
-            Assert.IsFalse (ExpandSegment.PathHasFilter (new []
-            { new ExpandSegment ("first", null), new ExpandSegment ("second", null), new ExpandSegment ("third", null) }));
+            Assert.IsFalse(
+                ExpandSegment.PathHasFilter(
+                    new[]
+                    {
+                        new ExpandSegment("first", null),
+                        new ExpandSegment("second", null),
+                        new ExpandSegment("third", null)
+                    }
+                )
+            );
         }
     }
 }

@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,33 +36,34 @@ namespace System.ComponentModel.Design.Data
 {
     public abstract class DesignerDataTableBase
     {
-        string name, owner;
+        string name,
+            owner;
 
-        protected DesignerDataTableBase (string name)
-            : this (name, null)
-        {
-        }
+        protected DesignerDataTableBase(string name)
+            : this(name, null) { }
 
-        protected DesignerDataTableBase (string name, string owner)
+        protected DesignerDataTableBase(string name, string owner)
         {
             this.name = name;
             this.owner = owner;
         }
 
-        public string Name {
+        public string Name
+        {
             get { return name; }
         }
 
-        public string Owner {
+        public string Owner
+        {
             get { return owner; }
         }
 
         [MonoTODO]
-        public ICollection Columns {
-            get { throw new NotImplementedException (); }
+        public ICollection Columns
+        {
+            get { throw new NotImplementedException(); }
         }
 
-        protected abstract ICollection CreateColumns ();
+        protected abstract ICollection CreateColumns();
     }
 }
-

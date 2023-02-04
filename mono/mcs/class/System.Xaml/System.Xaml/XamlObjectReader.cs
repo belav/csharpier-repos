@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -57,62 +57,80 @@ namespace System.Xaml
 {
     public class XamlObjectReader : XamlReader
     {
-        public XamlObjectReader (object instance)
-            : this (instance, new XamlSchemaContext (null, null), null)
-        {
-        }
+        public XamlObjectReader(object instance)
+            : this(instance, new XamlSchemaContext(null, null), null) { }
 
-        public XamlObjectReader (object instance, XamlObjectReaderSettings settings)
-            : this (instance, new XamlSchemaContext (null, null), settings)
-        {
-        }
+        public XamlObjectReader(object instance, XamlObjectReaderSettings settings)
+            : this(instance, new XamlSchemaContext(null, null), settings) { }
 
-        public XamlObjectReader (object instance, XamlSchemaContext schemaContext)
-            : this (instance, schemaContext, null)
-        {
-        }
+        public XamlObjectReader(object instance, XamlSchemaContext schemaContext)
+            : this(instance, schemaContext, null) { }
 
-        public XamlObjectReader (object instance, XamlSchemaContext schemaContext, XamlObjectReaderSettings settings)
+        public XamlObjectReader(
+            object instance,
+            XamlSchemaContext schemaContext,
+            XamlObjectReaderSettings settings
+        )
         {
             if (schemaContext == null)
-                throw new ArgumentNullException ("schemaContext");
+                throw new ArgumentNullException("schemaContext");
             // FIXME: special case? or can it be generalized? In .NET, For Type instance Instance returns TypeExtension at root StartObject, while for Array it remains to return Array.
             if (instance is Type)
-                instance = new TypeExtension ((Type) instance);
+                instance = new TypeExtension((Type)instance);
 
             // See also Instance property for this weirdness.
             this.root_raw = instance;
-            instance = TypeExtensionMethods.GetExtensionWrapped (instance);
+            instance = TypeExtensionMethods.GetExtensionWrapped(instance);
             this.root = instance;
 
             sctx = schemaContext;
-//            this.settings = settings;
+            //            this.settings = settings;
 
             // check type validity. Note that some checks also needs done at Read() phase. (it is likely FIXME:)
-            if (instance != null) {
-                var type = new InstanceContext (instance).GetRawValue ().GetType ();
+            if (instance != null)
+            {
+                var type = new InstanceContext(instance).GetRawValue().GetType();
                 if (!type.IsPublic)
-                    throw new XamlObjectReaderException (String.Format ("instance type '{0}' must be public and non-nested.", type));
-                var xt = SchemaContext.GetXamlType (type);
-                if (xt.ConstructionRequiresArguments && !xt.GetConstructorArguments ().Any () && xt.TypeConverter == null)
-                    throw new XamlObjectReaderException (String.Format ("instance type '{0}' has no default constructor.", type));
+                    throw new XamlObjectReaderException(
+                        String.Format("instance type '{0}' must be public and non-nested.", type)
+                    );
+                var xt = SchemaContext.GetXamlType(type);
+                if (
+                    xt.ConstructionRequiresArguments
+                    && !xt.GetConstructorArguments().Any()
+                    && xt.TypeConverter == null
+                )
+                    throw new XamlObjectReaderException(
+                        String.Format("instance type '{0}' has no default constructor.", type)
+                    );
             }
 
-            value_serializer_context = new ValueSerializerContext (new PrefixLookup (sctx), sctx, null);
-            new XamlObjectNodeIterator (instance, sctx, value_serializer_context).PrepareReading ();
+            value_serializer_context = new ValueSerializerContext(
+                new PrefixLookup(sctx),
+                sctx,
+                null
+            );
+            new XamlObjectNodeIterator(instance, sctx, value_serializer_context).PrepareReading();
         }
-        
+
         bool is_eof;
-        object root, root_raw;
+        object root,
+            root_raw;
         XamlSchemaContext sctx;
-//        XamlObjectReaderSettings settings;
+
+        //        XamlObjectReaderSettings settings;
         IValueSerializerContext value_serializer_context;
 
         IEnumerator<NamespaceDeclaration> ns_iterator;
         IEnumerator<XamlNodeInfo> nodes;
 
-        PrefixLookup PrefixLookup {
-            get { return (PrefixLookup) value_serializer_context.GetService (typeof (INamespacePrefixLookup)); }
+        PrefixLookup PrefixLookup
+        {
+            get
+            {
+                return (PrefixLookup)
+                    value_serializer_context.GetService(typeof(INamespacePrefixLookup));
+            }
         }
 
         // This property value is weird.
@@ -120,27 +138,47 @@ namespace System.Xaml
         // - For root Array it returns Array.
         // - For non-root Type it returns Type.
         // - For IXmlSerializable, it does not either return the raw IXmlSerializable or interpreted XData (it just returns null).
-        public virtual object Instance {
-            get {
-                var cur = NodeType == XamlNodeType.StartObject ? nodes.Current.Object.GetRawValue () : null;
-                return cur == root ? root_raw : cur is XData ? null : cur;
+        public virtual object Instance
+        {
+            get
+            {
+                var cur =
+                    NodeType == XamlNodeType.StartObject
+                        ? nodes.Current.Object.GetRawValue()
+                        : null;
+                return cur == root
+                    ? root_raw
+                    : cur is XData
+                        ? null
+                        : cur;
             }
         }
 
-        public override bool IsEof {
+        public override bool IsEof
+        {
             get { return is_eof; }
         }
 
-        public override XamlMember Member {
-            get { return NodeType == XamlNodeType.StartMember ? nodes.Current.Member.Member : null; }
+        public override XamlMember Member
+        {
+            get
+            {
+                return NodeType == XamlNodeType.StartMember ? nodes.Current.Member.Member : null;
+            }
         }
 
-        public override NamespaceDeclaration Namespace {
-            get { return NodeType == XamlNodeType.NamespaceDeclaration ? ns_iterator.Current : null; }
+        public override NamespaceDeclaration Namespace
+        {
+            get
+            {
+                return NodeType == XamlNodeType.NamespaceDeclaration ? ns_iterator.Current : null;
+            }
         }
 
-        public override XamlNodeType NodeType {
-            get {
+        public override XamlNodeType NodeType
+        {
+            get
+            {
                 if (is_eof)
                     return XamlNodeType.None;
                 else if (nodes != null)
@@ -152,36 +190,42 @@ namespace System.Xaml
             }
         }
 
-        public override XamlSchemaContext SchemaContext {
+        public override XamlSchemaContext SchemaContext
+        {
             get { return sctx; }
         }
 
-        public override XamlType Type {
+        public override XamlType Type
+        {
             get { return NodeType == XamlNodeType.StartObject ? nodes.Current.Object.Type : null; }
         }
 
-        public override object Value {
-            get {
+        public override object Value
+        {
+            get
+            {
                 if (NodeType != XamlNodeType.Value)
                     return null;
                 return nodes.Current.Value;
             }
         }
 
-        public override bool Read ()
+        public override bool Read()
         {
             if (IsDisposed)
-                throw new ObjectDisposedException ("reader");
+                throw new ObjectDisposedException("reader");
             if (IsEof)
                 return false;
-            
+
             if (ns_iterator == null)
-                ns_iterator = PrefixLookup.Namespaces.GetEnumerator ();
-            if (ns_iterator.MoveNext ())
+                ns_iterator = PrefixLookup.Namespaces.GetEnumerator();
+            if (ns_iterator.MoveNext())
                 return true;
             if (nodes == null)
-                nodes = new XamlObjectNodeIterator (root, sctx, value_serializer_context).GetNodes ().GetEnumerator ();
-            if (nodes.MoveNext ())
+                nodes = new XamlObjectNodeIterator(root, sctx, value_serializer_context)
+                    .GetNodes()
+                    .GetEnumerator();
+            if (nodes.MoveNext())
                 return true;
             if (!is_eof)
                 is_eof = true;

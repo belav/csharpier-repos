@@ -4,12 +4,10 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 
 namespace Mono.Linker.Tests.Cases.LinkXml
 {
-    [SetupLinkerDescriptorFile ("UnusedFieldPreservedByLinkXmlIsKept.xml")]
+    [SetupLinkerDescriptorFile("UnusedFieldPreservedByLinkXmlIsKept.xml")]
     class UnusedFieldPreservedByLinkXmlIsKept
     {
-        public static void Main ()
-        {
-        }
+        public static void Main() { }
 
         [Kept]
         class Unused

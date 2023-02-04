@@ -3,12 +3,15 @@
 // Compiler options: -warnaserror
 
 using System;
-[assembly:CLSCompliant(true)]
 
-public class CLSClass {
-        static public implicit operator CLSClass(byte value) {
-               return new CLSClass();
-        }
-    
-        public void op_implicit () {}
+[assembly: CLSCompliant(true)]
+
+public class CLSClass
+{
+    static public implicit operator CLSClass(byte value)
+    {
+        return new CLSClass();
+    }
+
+    public void op_implicit() { }
 }

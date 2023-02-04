@@ -26,9 +26,10 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil.Binary {
-
-    internal enum SubSystem : ushort {
+namespace Mono.Cecil.Binary
+{
+    internal enum SubSystem : ushort
+    {
         Unknown = 0x0,
         Native = 0x1,
         WindowsGui = 0x2,

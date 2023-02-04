@@ -19,12 +19,14 @@ namespace System.Speech.Recognition.SrgsGrammar
         {
             _elements = new SrgsElementList();
         }
+
         public SrgsRule(string id)
             : this()
         {
             XmlParser.ValidateRuleId(id);
             Id = id;
         }
+
         public SrgsRule(string id, params SrgsElement[] elements)
             : this()
         {
@@ -37,7 +39,10 @@ namespace System.Speech.Recognition.SrgsGrammar
             {
                 if (elements[iElement] == null)
                 {
-                    throw new ArgumentNullException(nameof(elements), SR.Get(SRID.ParamsEntryNullIllegal));
+                    throw new ArgumentNullException(
+                        nameof(elements),
+                        SR.Get(SRID.ParamsEntryNullIllegal)
+                    );
                 }
                 _elements.Add(elements[iElement]);
             }
@@ -58,17 +63,11 @@ namespace System.Speech.Recognition.SrgsGrammar
         #region public Properties
         public Collection<SrgsElement> Elements
         {
-            get
-            {
-                return _elements;
-            }
+            get { return _elements; }
         }
         public string Id
         {
-            get
-            {
-                return _id;
-            }
+            get { return _id; }
             set
             {
                 XmlParser.ValidateRuleId(value);
@@ -77,10 +76,7 @@ namespace System.Speech.Recognition.SrgsGrammar
         }
         public SrgsRuleScope Scope
         {
-            get
-            {
-                return _scope;
-            }
+            get { return _scope; }
             set
             {
                 _scope = value;
@@ -93,10 +89,7 @@ namespace System.Speech.Recognition.SrgsGrammar
         /// </summary>
         public string BaseClass
         {
-            get
-            {
-                return _baseclass;
-            }
+            get { return _baseclass; }
             set
             {
                 // base value can be null
@@ -111,10 +104,7 @@ namespace System.Speech.Recognition.SrgsGrammar
         /// </summary>
         public string Script
         {
-            get
-            {
-                return _script;
-            }
+            get { return _script; }
             set
             {
                 Helpers.ThrowIfEmptyOrNull(value, nameof(value));
@@ -127,10 +117,7 @@ namespace System.Speech.Recognition.SrgsGrammar
         /// </summary>
         public string OnInit
         {
-            get
-            {
-                return _onInit;
-            }
+            get { return _onInit; }
             set
             {
                 ValidateIdentifier(value);
@@ -143,10 +130,7 @@ namespace System.Speech.Recognition.SrgsGrammar
         /// </summary>
         public string OnParse
         {
-            get
-            {
-                return _onParse;
-            }
+            get { return _onParse; }
             set
             {
                 ValidateIdentifier(value);
@@ -159,10 +143,7 @@ namespace System.Speech.Recognition.SrgsGrammar
         /// </summary>
         public string OnError
         {
-            get
-            {
-                return _onError;
-            }
+            get { return _onError; }
             set
             {
                 ValidateIdentifier(value);
@@ -175,10 +156,7 @@ namespace System.Speech.Recognition.SrgsGrammar
         /// </summary>
         public string OnRecognition
         {
-            get
-            {
-                return _onRecognition;
-            }
+            get { return _onRecognition; }
             set
             {
                 ValidateIdentifier(value);
@@ -217,12 +195,22 @@ namespace System.Speech.Recognition.SrgsGrammar
             // Write the 'baseclass' attribute
             if (_baseclass != null)
             {
-                writer.WriteAttributeString("sapi", "baseclass", XmlParser.sapiNamespace, _baseclass);
+                writer.WriteAttributeString(
+                    "sapi",
+                    "baseclass",
+                    XmlParser.sapiNamespace,
+                    _baseclass
+                );
             }
             // Write <rule id="MyRule" sapi:dynamic="true">
             if (_dynamic != RuleDynamic.NotSet)
             {
-                writer.WriteAttributeString("sapi", "dynamic", XmlParser.sapiNamespace, _dynamic == RuleDynamic.True ? "true" : "false");
+                writer.WriteAttributeString(
+                    "sapi",
+                    "dynamic",
+                    XmlParser.sapiNamespace,
+                    _dynamic == RuleDynamic.True ? "true" : "false"
+                );
             }
 
             // Write the 'onInit' code snippet
@@ -246,7 +234,12 @@ namespace System.Speech.Recognition.SrgsGrammar
             // Write <rule onRecognition="symbol">
             if (OnRecognition != null)
             {
-                writer.WriteAttributeString("sapi", "onRecognition", XmlParser.sapiNamespace, OnRecognition);
+                writer.WriteAttributeString(
+                    "sapi",
+                    "onRecognition",
+                    XmlParser.sapiNamespace,
+                    OnRecognition
+                );
             }
             // Write <rule> body and footer.
             Type previousElementType = null;
@@ -282,7 +275,13 @@ namespace System.Speech.Recognition.SrgsGrammar
         /// </summary>
         internal void Validate(SrgsGrammar grammar)
         {
-            bool fScript = HasCode || _onInit != null || _onParse != null || _onError != null || _onRecognition != null || _baseclass != null;
+            bool fScript =
+                HasCode
+                || _onInit != null
+                || _onParse != null
+                || _onError != null
+                || _onRecognition != null
+                || _baseclass != null;
             grammar._fContainsCode |= fScript;
             grammar.HasSapiExtension |= fScript;
 
@@ -344,22 +343,13 @@ namespace System.Speech.Recognition.SrgsGrammar
         #region Internal Properties
         internal RuleDynamic Dynamic
         {
-            get
-            {
-                return _dynamic;
-            }
-            set
-            {
-                _dynamic = value;
-            }
+            get { return _dynamic; }
+            set { _dynamic = value; }
         }
 
         internal bool HasCode
         {
-            get
-            {
-                return _script.Length > 0;
-            }
+            get { return _script.Length > 0; }
         }
 
         #endregion
@@ -416,7 +406,32 @@ namespace System.Speech.Recognition.SrgsGrammar
         private string _onError;
 
         private string _onRecognition;
-        private static readonly char[] s_invalidChars = new char[] { '?', '*', '+', '|', '(', ')', '^', '$', '/', ';', '.', '=', '<', '>', '[', ']', '{', '}', '\\', ' ', '\t', '\r', '\n' };
+        private static readonly char[] s_invalidChars = new char[]
+        {
+            '?',
+            '*',
+            '+',
+            '|',
+            '(',
+            ')',
+            '^',
+            '$',
+            '/',
+            ';',
+            '.',
+            '=',
+            '<',
+            '>',
+            '[',
+            ']',
+            '{',
+            '}',
+            '\\',
+            ' ',
+            '\t',
+            '\r',
+            '\n'
+        };
 
         #endregion
 
@@ -432,75 +447,49 @@ namespace System.Speech.Recognition.SrgsGrammar
 
             public object Id
             {
-                get
-                {
-                    return _rule.Id;
-                }
+                get { return _rule.Id; }
             }
 
             public object Scope
             {
-                get
-                {
-                    return _rule.Scope;
-                }
+                get { return _rule.Scope; }
             }
 
             public object BaseClass
             {
-                get
-                {
-                    return _rule.BaseClass;
-                }
+                get { return _rule.BaseClass; }
             }
 
             public object Script
             {
-                get
-                {
-                    return _rule.Script;
-                }
+                get { return _rule.Script; }
             }
 
             public object OnInit
             {
-                get
-                {
-                    return _rule.OnInit;
-                }
+                get { return _rule.OnInit; }
             }
 
             public object OnParse
             {
-                get
-                {
-                    return _rule.OnParse;
-                }
+                get { return _rule.OnParse; }
             }
 
             public object OnError
             {
-                get
-                {
-                    return _rule.OnError;
-                }
+                get { return _rule.OnError; }
             }
 
             public object OnRecognition
             {
-                get
-                {
-                    return _rule.OnRecognition;
-                }
+                get { return _rule.OnRecognition; }
             }
 
             public object Count
             {
-                get
-                {
-                    return _rule._elements.Count;
-                }
+                get { return _rule._elements.Count; }
             }
+
             [DebuggerBrowsable(DebuggerBrowsableState.RootHidden)]
             public SrgsElement[] AKeys
             {
@@ -529,6 +518,7 @@ namespace System.Speech.Recognition.SrgsGrammar
     {
         // Public rules can be both activated as well as referenced by rules in other grammars
         Public,
+
         // Private rules can not be activated, but they can be referenced by rules in the same grammar
         Private
     };

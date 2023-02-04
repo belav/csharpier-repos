@@ -24,13 +24,12 @@
 //
 //
 
-namespace System.Windows.Forms 
+namespace System.Windows.Forms
 {
-    public enum DrawMode 
+    public enum DrawMode
     {
         Normal = 0,
         OwnerDrawFixed = 1,
         OwnerDrawVariable = 2,
     }
 }
-

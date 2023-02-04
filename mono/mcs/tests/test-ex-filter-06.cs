@@ -4,24 +4,29 @@ using System.Collections.Generic;
 
 class C
 {
-    static int Test<T> () where T : Exception
+    static int Test<T>()
+        where T : Exception
     {
-        try {
+        try
+        {
             throw null;
-        } catch (T t) when (t.Message != null) {
+        }
+        catch (T t) when (t.Message != null)
+        {
             return 0;
         }
     }
- 
+
     static int Main()
     {
-        try {
-            Test<ApplicationException> ();
+        try
+        {
+            Test<ApplicationException>();
             return 1;
-        } catch {
         }
+        catch { }
 
-        if (Test<NullReferenceException> () != 0)
+        if (Test<NullReferenceException>() != 0)
             return 2;
 
         return 0;

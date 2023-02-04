@@ -26,16 +26,19 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil {
-
+namespace Mono.Cecil
+{
     using System;
     using System.Collections;
 
     using Mono.Cecil.Metadata;
 
-    internal class AssemblyDefinition : ICustomAttributeProvider,
-        IHasSecurity, IAnnotationProvider, IReflectionStructureVisitable {
-
+    internal class AssemblyDefinition
+        : ICustomAttributeProvider,
+            IHasSecurity,
+            IAnnotationProvider,
+            IReflectionStructureVisitable
+    {
         MetadataToken m_token;
         AssemblyNameDefinition m_asmName;
         ModuleDefinitionCollection m_modules;
@@ -51,65 +54,82 @@ namespace Mono.Cecil {
         IAssemblyResolver m_resolver;
         IDictionary m_annotations;
 
-        public MetadataToken MetadataToken {
+        public MetadataToken MetadataToken
+        {
             get { return m_token; }
             set { m_token = value; }
         }
 
-        public AssemblyNameDefinition Name {
+        public AssemblyNameDefinition Name
+        {
             get { return m_asmName; }
         }
 
-        public ModuleDefinitionCollection Modules {
+        public ModuleDefinitionCollection Modules
+        {
             get { return m_modules; }
         }
 
-        public bool HasSecurityDeclarations {
+        public bool HasSecurityDeclarations
+        {
             get { return (m_secDecls == null) ? false : (m_secDecls.Count > 0); }
         }
 
-        public SecurityDeclarationCollection SecurityDeclarations {
-            get {
+        public SecurityDeclarationCollection SecurityDeclarations
+        {
+            get
+            {
                 if (m_secDecls == null)
-                    m_secDecls = new SecurityDeclarationCollection (this);
+                    m_secDecls = new SecurityDeclarationCollection(this);
 
                 return m_secDecls;
             }
         }
 
-        public bool HasCustomAttributes {
+        public bool HasCustomAttributes
+        {
             get { return (m_customAttrs == null) ? false : (m_customAttrs.Count > 0); }
         }
 
-        public CustomAttributeCollection CustomAttributes {
-            get {
+        public CustomAttributeCollection CustomAttributes
+        {
+            get
+            {
                 if (m_customAttrs == null)
-                    m_customAttrs = new CustomAttributeCollection (this);
+                    m_customAttrs = new CustomAttributeCollection(this);
 
                 return m_customAttrs;
             }
         }
 
-        public MethodDefinition EntryPoint {
+        public MethodDefinition EntryPoint
+        {
             get { return m_ep; }
             set { m_ep = value; }
         }
 
-        public TargetRuntime Runtime {
+        public TargetRuntime Runtime
+        {
             get { return m_runtime; }
             set { m_runtime = value; }
         }
 
-        public AssemblyKind Kind {
+        public AssemblyKind Kind
+        {
             get { return m_kind; }
             set { m_kind = value; }
         }
 
-        public ModuleDefinition MainModule {
-            get {
-                if (m_mainModule == null) {
-                    foreach (ModuleDefinition module in m_modules) {
-                        if (module.Main) {
+        public ModuleDefinition MainModule
+        {
+            get
+            {
+                if (m_mainModule == null)
+                {
+                    foreach (ModuleDefinition module in m_modules)
+                    {
+                        if (module.Main)
+                        {
                             m_mainModule = module;
                             break;
                         }
@@ -119,49 +139,54 @@ namespace Mono.Cecil {
             }
         }
 
-        internal StructureReader Reader {
+        internal StructureReader Reader
+        {
             get { return m_reader; }
         }
 
-        public IAssemblyResolver Resolver {
+        public IAssemblyResolver Resolver
+        {
             get { return m_resolver; }
             set { m_resolver = value; }
         }
 
-        IDictionary IAnnotationProvider.Annotations {
-            get {
+        IDictionary IAnnotationProvider.Annotations
+        {
+            get
+            {
                 if (m_annotations == null)
-                    m_annotations = new Hashtable ();
+                    m_annotations = new Hashtable();
                 return m_annotations;
             }
         }
 
-        internal AssemblyDefinition (AssemblyNameDefinition name)
+        internal AssemblyDefinition(AssemblyNameDefinition name)
         {
             if (name == null)
-                throw new ArgumentNullException ("name");
+                throw new ArgumentNullException("name");
 
             m_asmName = name;
-            m_modules = new ModuleDefinitionCollection (this);
-            m_resolver = new DefaultAssemblyResolver ();
+            m_modules = new ModuleDefinitionCollection(this);
+            m_resolver = new DefaultAssemblyResolver();
         }
 
-        internal AssemblyDefinition (AssemblyNameDefinition name, StructureReader reader) : this (name)
+        internal AssemblyDefinition(AssemblyNameDefinition name, StructureReader reader)
+            : this(name)
         {
             m_reader = reader;
         }
 
-        public void Accept (IReflectionStructureVisitor visitor)
+        public void Accept(IReflectionStructureVisitor visitor)
         {
-            visitor.VisitAssemblyDefinition (this);
+            visitor.VisitAssemblyDefinition(this);
 
-            m_asmName.Accept (visitor);
-            m_modules.Accept (visitor);
+            m_asmName.Accept(visitor);
+            m_modules.Accept(visitor);
 
-            visitor.TerminateAssemblyDefinition (this);
+            visitor.TerminateAssemblyDefinition(this);
         }
 
-        public override string ToString ()
+        public override string ToString()
         {
             return m_asmName.FullName;
         }

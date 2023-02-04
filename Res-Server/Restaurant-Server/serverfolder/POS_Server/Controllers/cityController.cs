@@ -16,57 +16,49 @@ namespace POS_Server.Controllers
     public class cityController : ApiController
     {
         CountriesController coctrlr = new CountriesController();
-      
+
         [HttpPost]
         [Route("Get")]
-       public string Get(string token)
+        public string Get(string token)
         {
-
-
             // public ResponseVM GetPurinv(string token)
 
             //long mainBranchId, long userId    DateTime? date=new DateTime?();
-           
-            
-            
-          token = TokenManager.readToken(HttpContext.Current.Request); 
- var strP = TokenManager.GetPrincipal(token);
+
+
+
+            token = TokenManager.readToken(HttpContext.Current.Request);
+            var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
                 return TokenManager.GenerateToken(strP);
             }
             else
             {
-
                 try
                 {
-
-
                     using (incposdbEntities entity = new incposdbEntities())
                     {
-
                         var list = entity.cities
-
-                   .Select(c => new
-                   {
-                       c.cityId,
-                       c.cityCode,
-                       c.countryId
-                   })
-                   .ToList();
-
+                            .Select(
+                                c =>
+                                    new
+                                    {
+                                        c.cityId,
+                                        c.cityCode,
+                                        c.countryId
+                                    }
+                            )
+                            .ToList();
 
                         return TokenManager.GenerateToken(list);
                     }
-
                 }
                 catch
                 {
                     return TokenManager.GenerateToken("0");
                 }
-
             }
-
 
             //var re = Request;
             //
@@ -83,9 +75,9 @@ namespace POS_Server.Controllers
             //    using (incposdbEntities entity = new incposdbEntities())
             //    {
             //        var cityList = entity.cities
-                  
+
             //       .Select(c => new {
-            //        c.cityId,   
+            //        c.cityId,
             //        c.cityCode,
             //        c.countryId
             //       })
@@ -100,9 +92,5 @@ namespace POS_Server.Controllers
             ////else
             //    return NotFound();
         }
-
-
-
-       
     }
 }

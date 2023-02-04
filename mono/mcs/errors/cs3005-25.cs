@@ -3,10 +3,13 @@
 // Compiler options: -warnaserror
 
 using System;
+
 [assembly: CLSCompliant(false)]
 
 [CLSCompliant(true)]
-public class Foo {
-    public static void Main () {}
-    public static void main () {}
+public class Foo
+{
+    public static void Main() { }
+
+    public static void main() { }
 }

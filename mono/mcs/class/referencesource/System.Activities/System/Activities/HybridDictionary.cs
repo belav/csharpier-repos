@@ -19,7 +19,7 @@ namespace System.Activities
 
         public int Count
         {
-            get 
+            get
             {
                 if (this.singleItemKey != null)
                 {
@@ -36,10 +36,7 @@ namespace System.Activities
 
         public bool IsReadOnly
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public ICollection<TValue> Values
@@ -48,7 +45,9 @@ namespace System.Activities
             {
                 if (this.singleItemKey != null)
                 {
-                    return new ReadOnlyCollection<TValue>(new List<TValue>() { this.singleItemValue });
+                    return new ReadOnlyCollection<TValue>(
+                        new List<TValue>() { this.singleItemValue }
+                    );
                 }
                 else if (this.dictionary != null)
                 {
@@ -91,11 +90,7 @@ namespace System.Activities
 
                 return null;
             }
-
-            set
-            {
-                this.Add(key, value);
-            }
+            set { this.Add(key, value); }
         }
 
         public void Add(TKey key, TValue value)
@@ -105,7 +100,11 @@ namespace System.Activities
                 throw FxTrace.Exception.ArgumentNull("key");
             }
 
-            if (this.singleItemKey == null && this.singleItemValue == null && this.dictionary == null)
+            if (
+                this.singleItemKey == null
+                && this.singleItemValue == null
+                && this.dictionary == null
+            )
             {
                 this.singleItemKey = key;
                 this.singleItemValue = value;
@@ -124,7 +123,10 @@ namespace System.Activities
             }
             else
             {
-                Fx.Assert(this.dictionary != null, "We should always have a dictionary at this point");
+                Fx.Assert(
+                    this.dictionary != null,
+                    "We should always have a dictionary at this point"
+                );
 
                 this.dictionary.Add(key, value);
             }
@@ -219,7 +221,10 @@ namespace System.Activities
         {
             if (this.singleItemKey != null)
             {
-                array[arrayIndex] = new KeyValuePair<TKey, TValue>(this.singleItemKey, this.singleItemValue);
+                array[arrayIndex] = new KeyValuePair<TKey, TValue>(
+                    this.singleItemKey,
+                    this.singleItemValue
+                );
             }
             else if (this.dictionary != null)
             {
@@ -236,7 +241,10 @@ namespace System.Activities
         {
             if (this.singleItemKey != null)
             {
-                yield return new KeyValuePair<TKey, TValue>(this.singleItemKey, this.singleItemValue);
+                yield return new KeyValuePair<TKey, TValue>(
+                    this.singleItemKey,
+                    this.singleItemValue
+                );
             }
             else if (this.dictionary != null)
             {

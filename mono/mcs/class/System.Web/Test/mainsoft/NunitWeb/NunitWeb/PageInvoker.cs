@@ -16,19 +16,20 @@ namespace MonoTests.SystemWeb.Framework
     /// <seealso cref="CreateOnInit"/>
     /// <seealso cref="CreateOnLoad"/>
     [Serializable]
-    public class PageInvoker:BaseInvoker
+    public class PageInvoker : BaseInvoker
     {
         /// <summary>
         /// The constructor method.
         /// </summary>
         /// <param name="delegates">Value which initializes <see cref="Delegates"/> property.</param>
         /// <seealso cref="Delegates"/>
-        public PageInvoker (PageDelegates delegates)
+        public PageInvoker(PageDelegates delegates)
         {
             Delegates = delegates;
         }
 
         PageDelegates _delegates;
+
         /// <summary>
         /// Set or get the <see cref="PageDelegates"/> collection.
         /// </summary>
@@ -45,11 +46,11 @@ namespace MonoTests.SystemWeb.Framework
         /// </summary>
         /// <param name="callback">The user callback.</param>
         /// <returns>A new <see cref="PageInvoker"/> instance.</returns>
-        public static PageInvoker CreateOnPreInit (PageDelegate callback)
+        public static PageInvoker CreateOnPreInit(PageDelegate callback)
         {
-            PageDelegates pd = new PageDelegates ();
+            PageDelegates pd = new PageDelegates();
             pd.PreInit = callback;
-            PageInvoker pi = new PageInvoker (pd);
+            PageInvoker pi = new PageInvoker(pd);
             return pi;
         }
 
@@ -59,11 +60,11 @@ namespace MonoTests.SystemWeb.Framework
         /// </summary>
         /// <param name="callback">The user callback.</param>
         /// <returns>A new <see cref="PageInvoker"/> instance.</returns>
-        public static PageInvoker CreateOnInit (PageDelegate callback)
+        public static PageInvoker CreateOnInit(PageDelegate callback)
         {
-            PageDelegates pd = new PageDelegates ();
+            PageDelegates pd = new PageDelegates();
             pd.Init = callback;
-            PageInvoker pi = new PageInvoker (pd);
+            PageInvoker pi = new PageInvoker(pd);
             return pi;
         }
 
@@ -73,11 +74,11 @@ namespace MonoTests.SystemWeb.Framework
         /// </summary>
         /// <param name="callback">The user callback.</param>
         /// <returns>A new <see cref="PageInvoker"/> instance.</returns>
-        public static PageInvoker CreateOnLoad (PageDelegate callback)
+        public static PageInvoker CreateOnLoad(PageDelegate callback)
         {
-            PageDelegates pd = new PageDelegates ();
+            PageDelegates pd = new PageDelegates();
             pd.Load = callback;
-            PageInvoker pi = new PageInvoker (pd);
+            PageInvoker pi = new PageInvoker(pd);
             return pi;
         }
 
@@ -91,30 +92,32 @@ namespace MonoTests.SystemWeb.Framework
         /// <param name="parameters">Must contain one parameter of type
         /// <see cref="System.Web.UI.Page"/></param>
         /// <seealso cref="Delegates"/>
-        public override void DoInvoke (params object [] parameters)
+        public override void DoInvoke(params object[] parameters)
         {
-            base.DoInvoke (parameters);
+            base.DoInvoke(parameters);
             if (parameters.Length != 1 || !(parameters[0] is Page))
-                throw new ArgumentException ("A single parameter with type System.Web.UI.Page is expected");
+                throw new ArgumentException(
+                    "A single parameter with type System.Web.UI.Page is expected"
+                );
 
-            _page = (Page) parameters[0];
+            _page = (Page)parameters[0];
 
-            OnPreInit (null, null);
+            OnPreInit(null, null);
 
             _page.LoadComplete += OnLoadComplete;
             _page.PreLoad += OnPreLoad;
             _page.PreRenderComplete += OnPreRenderComplete;
             _page.InitComplete += OnInitComplete;
             _page.SaveStateComplete += OnSaveStateComplete;
-            _page.CommitTransaction += new EventHandler (OnCommitTransaction);
-            _page.AbortTransaction += new EventHandler (OnAbortTransaction);
-            _page.Error += new EventHandler (OnError);
-            _page.Disposed += new EventHandler (OnDisposed);
-            _page.DataBinding += new EventHandler (OnDataBinding);
-            _page.Init += new EventHandler (OnInit);
-            _page.Load += new EventHandler (OnLoad);
-            _page.PreRender += new EventHandler (OnPreRender);
-            _page.Unload += new EventHandler (OnUnload);
+            _page.CommitTransaction += new EventHandler(OnCommitTransaction);
+            _page.AbortTransaction += new EventHandler(OnAbortTransaction);
+            _page.Error += new EventHandler(OnError);
+            _page.Disposed += new EventHandler(OnDisposed);
+            _page.DataBinding += new EventHandler(OnDataBinding);
+            _page.Init += new EventHandler(OnInit);
+            _page.Load += new EventHandler(OnLoad);
+            _page.PreRender += new EventHandler(OnPreRender);
+            _page.Unload += new EventHandler(OnUnload);
         }
 
         #region Handlers
@@ -124,146 +127,162 @@ namespace MonoTests.SystemWeb.Framework
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="a"></param>
-        public void OnLoadComplete (object sender, EventArgs a)
+        public void OnLoadComplete(object sender, EventArgs a)
         {
-            Invoke (Delegates.LoadComplete);
+            Invoke(Delegates.LoadComplete);
         }
+
         /// <summary>
         /// This must be made private as soon as Mono allows using private methods for delegates
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="a"></param>
-        public void OnPreInit (object sender, EventArgs a)
+        public void OnPreInit(object sender, EventArgs a)
         {
-            Invoke (Delegates.PreInit);
+            Invoke(Delegates.PreInit);
         }
+
         /// <summary>
         /// This must be made private as soon as Mono allows using private methods for delegates
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="a"></param>
-        public void OnPreLoad (object sender, EventArgs a)
+        public void OnPreLoad(object sender, EventArgs a)
         {
-            Invoke (Delegates.PreLoad);
+            Invoke(Delegates.PreLoad);
         }
+
         /// <summary>
         /// This must be made private as soon as Mono allows using private methods for delegates
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="a"></param>
-        public void OnPreRenderComplete (object sender, EventArgs a)
+        public void OnPreRenderComplete(object sender, EventArgs a)
         {
-            Invoke (Delegates.PreRenderComplete);
+            Invoke(Delegates.PreRenderComplete);
         }
+
         /// <summary>
         /// This must be made private as soon as Mono allows using private methods for delegates
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="a"></param>
-        public void OnInitComplete (object sender, EventArgs a)
+        public void OnInitComplete(object sender, EventArgs a)
         {
-            Invoke (Delegates.InitComplete);
+            Invoke(Delegates.InitComplete);
         }
+
         /// <summary>
         /// This must be made private as soon as Mono allows using private methods for delegates
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="a"></param>
-        public void OnSaveStateComplete (object sender, EventArgs a)
+        public void OnSaveStateComplete(object sender, EventArgs a)
         {
-            Invoke (Delegates.SaveStateComplete);
+            Invoke(Delegates.SaveStateComplete);
         }
+
         /// <summary>
         /// This must be made private as soon as Mono allows using private methods for delegates
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="a"></param>
-        public void OnCommitTransaction (object sender, EventArgs a)
+        public void OnCommitTransaction(object sender, EventArgs a)
         {
-            Invoke (Delegates.CommitTransaction);
+            Invoke(Delegates.CommitTransaction);
         }
+
         /// <summary>
         /// This must be made private as soon as Mono allows using private methods for delegates
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="a"></param>
-        public void OnAbortTransaction (object sender, EventArgs a)
+        public void OnAbortTransaction(object sender, EventArgs a)
         {
-            Invoke (Delegates.AbortTransaction);
+            Invoke(Delegates.AbortTransaction);
         }
+
         /// <summary>
         /// This must be made private as soon as Mono allows using private methods for delegates
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="a"></param>
-        public void OnError (object sender, EventArgs a)
+        public void OnError(object sender, EventArgs a)
         {
-            Invoke (Delegates.Error);
+            Invoke(Delegates.Error);
         }
+
         /// <summary>
         /// This must be made private as soon as Mono allows using private methods for delegates
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="a"></param>
-        public void OnDisposed (object sender, EventArgs a)
+        public void OnDisposed(object sender, EventArgs a)
         {
-            Invoke (Delegates.Disposed);
+            Invoke(Delegates.Disposed);
         }
+
         /// <summary>
         /// This must be made private as soon as Mono allows using private methods for delegates
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="a"></param>
-        public void OnDataBinding (object sender, EventArgs a)
+        public void OnDataBinding(object sender, EventArgs a)
         {
-            Invoke (Delegates.DataBinding);
+            Invoke(Delegates.DataBinding);
         }
+
         /// <summary>
         /// This must be made private as soon as Mono allows using private methods for delegates
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="a"></param>
-        public void OnInit (object sender, EventArgs a)
+        public void OnInit(object sender, EventArgs a)
         {
-            Invoke (Delegates.Init);
+            Invoke(Delegates.Init);
         }
+
         /// <summary>
         /// This must be made private as soon as Mono allows using private methods for delegates
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="a"></param>
-        public void OnLoad (object sender, EventArgs a)
+        public void OnLoad(object sender, EventArgs a)
         {
-            Invoke (Delegates.Load);
+            Invoke(Delegates.Load);
         }
+
         /// <summary>
         /// This must be made private as soon as Mono allows using private methods for delegates
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="a"></param>
-        public void OnPreRender (object sender, EventArgs a)
+        public void OnPreRender(object sender, EventArgs a)
         {
-            Invoke (Delegates.PreRender);
+            Invoke(Delegates.PreRender);
         }
+
         /// <summary>
         /// This must be made private as soon as Mono allows using private methods for delegates
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="a"></param>
-        public void OnUnload (object sender, EventArgs a)
+        public void OnUnload(object sender, EventArgs a)
         {
-            Invoke (Delegates.Unload);
+            Invoke(Delegates.Unload);
         }
         #endregion
 
-        void Invoke (PageDelegate callback)
+        void Invoke(PageDelegate callback)
         {
-            try {
+            try
+            {
                 if (callback != null)
-                    callback (_page);
+                    callback(_page);
             }
-            catch (Exception e) {
-                WebTest.RegisterException (e);
+            catch (Exception e)
+            {
+                WebTest.RegisterException(e);
                 throw;
             }
         }
@@ -272,7 +291,7 @@ namespace MonoTests.SystemWeb.Framework
         /// Returns the URL of a generic empty page.
         /// </summary>
         /// <returns>The default URL.</returns>
-        public override string GetDefaultUrl ()
+        public override string GetDefaultUrl()
         {
             return StandardUrl.EMPTY_PAGE;
         }

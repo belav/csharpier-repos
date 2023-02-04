@@ -19,9 +19,16 @@ namespace Microsoft.CodeAnalysis.Serialization
         private const byte ChecksumKind = 0;
         private const byte ChecksumWithChildrenKind = 1;
 
-        private static readonly ImmutableDictionary<WellKnownSynchronizationKind, Func<ImmutableArray<object>, ChecksumWithChildren>> s_creatorMap = CreateCreatorMap();
+        private static readonly ImmutableDictionary<
+            WellKnownSynchronizationKind,
+            Func<ImmutableArray<object>, ChecksumWithChildren>
+        > s_creatorMap = CreateCreatorMap();
 
-        public void SerializeChecksumWithChildren(ChecksumWithChildren checksums, ObjectWriter writer, CancellationToken cancellationToken)
+        public void SerializeChecksumWithChildren(
+            ChecksumWithChildren checksums,
+            ObjectWriter writer,
+            CancellationToken cancellationToken
+        )
         {
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -40,7 +47,11 @@ namespace Microsoft.CodeAnalysis.Serialization
                         continue;
                     case ChecksumCollection checksumCollection:
                         writer.WriteByte(ChecksumWithChildrenKind);
-                        SerializeChecksumWithChildren(checksumCollection, writer, cancellationToken);
+                        SerializeChecksumWithChildren(
+                            checksumCollection,
+                            writer,
+                            cancellationToken
+                        );
                         continue;
                 }
 
@@ -48,7 +59,10 @@ namespace Microsoft.CodeAnalysis.Serialization
             }
         }
 
-        private ChecksumWithChildren DeserializeChecksumWithChildren(ObjectReader reader, CancellationToken cancellationToken)
+        private ChecksumWithChildren DeserializeChecksumWithChildren(
+            ObjectReader reader,
+            CancellationToken cancellationToken
+        )
         {
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -81,13 +95,31 @@ namespace Microsoft.CodeAnalysis.Serialization
             return checksums;
         }
 
-        private static ImmutableDictionary<WellKnownSynchronizationKind, Func<ImmutableArray<object>, ChecksumWithChildren>> CreateCreatorMap()
+        private static ImmutableDictionary<
+            WellKnownSynchronizationKind,
+            Func<ImmutableArray<object>, ChecksumWithChildren>
+        > CreateCreatorMap()
         {
-            return ImmutableDictionary<WellKnownSynchronizationKind, Func<ImmutableArray<object>, ChecksumWithChildren>>.Empty
-                .Add(WellKnownSynchronizationKind.SolutionState, children => new SolutionStateChecksums(children))
-                .Add(WellKnownSynchronizationKind.ProjectState, children => new ProjectStateChecksums(children))
-                .Add(WellKnownSynchronizationKind.DocumentState, children => new DocumentStateChecksums(children))
-                .Add(WellKnownSynchronizationKind.ChecksumCollection, children => new ChecksumCollection(children));
+            return ImmutableDictionary<
+                WellKnownSynchronizationKind,
+                Func<ImmutableArray<object>, ChecksumWithChildren>
+            >.Empty
+                .Add(
+                    WellKnownSynchronizationKind.SolutionState,
+                    children => new SolutionStateChecksums(children)
+                )
+                .Add(
+                    WellKnownSynchronizationKind.ProjectState,
+                    children => new ProjectStateChecksums(children)
+                )
+                .Add(
+                    WellKnownSynchronizationKind.DocumentState,
+                    children => new DocumentStateChecksums(children)
+                )
+                .Add(
+                    WellKnownSynchronizationKind.ChecksumCollection,
+                    children => new ChecksumCollection(children)
+                );
         }
     }
 }

@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,15 +33,16 @@ using System.Text;
 using Mono.CodeContracts.Rewrite.Ast;
 using Mono.Cecil.Cil;
 
-namespace Mono.CodeContracts.Rewrite.AstVisitors {
-    class SourcePositionVisitor : ExprVisitor {
+namespace Mono.CodeContracts.Rewrite.AstVisitors
+{
+    class SourcePositionVisitor : ExprVisitor
+    {
+        public struct CodePosition
+        {
+            public static readonly CodePosition Empty = new CodePosition();
 
-        public struct CodePosition {
-
-            public static readonly CodePosition Empty = new CodePosition ();
-
-            public CodePosition (int line, int column)
-                : this ()
+            public CodePosition(int line, int column)
+                : this()
             {
                 this.Line = line;
                 this.Column = column;
@@ -50,37 +51,39 @@ namespace Mono.CodeContracts.Rewrite.AstVisitors {
             public int Line { get; private set; }
             public int Column { get; private set; }
 
-            public bool IsEmpty {
-                get {
-                    return this.Line == 0 && this.Column == 0;
-                }
+            public bool IsEmpty
+            {
+                get { return this.Line == 0 && this.Column == 0; }
             }
 
-            public static bool operator < (CodePosition a, CodePosition b)
+            public static bool operator <(CodePosition a, CodePosition b)
             {
-                if (a.Line < b.Line) {
+                if (a.Line < b.Line)
+                {
                     return true;
                 }
-                if (a.Line > b.Line) {
+                if (a.Line > b.Line)
+                {
                     return false;
                 }
                 return a.Column < b.Column;
             }
 
-            public static bool operator > (CodePosition a, CodePosition b)
+            public static bool operator >(CodePosition a, CodePosition b)
             {
-                if (a.Line > b.Line) {
+                if (a.Line > b.Line)
+                {
                     return true;
                 }
-                if (a.Line < b.Line) {
+                if (a.Line < b.Line)
+                {
                     return false;
                 }
                 return a.Column > b.Column;
             }
-
         }
 
-        public SourcePositionVisitor (Dictionary<Expr, Instruction> instructionLookup)
+        public SourcePositionVisitor(Dictionary<Expr, Instruction> instructionLookup)
         {
             this.instructionLookup = instructionLookup;
             this.SourceCodeFileName = null;
@@ -94,7 +97,7 @@ namespace Mono.CodeContracts.Rewrite.AstVisitors {
         public CodePosition StartPosition { get; private set; }
         public CodePosition EndPosition { get; private set; }
 
-        public override Expr Visit (Expr e)
+        public override Expr Visit(Expr e)
         {
             /*
             Instruction inst;
@@ -113,9 +116,8 @@ namespace Mono.CodeContracts.Rewrite.AstVisitors {
                 }
             }
             */
-            
-            return base.Visit (e);
-        }
 
+            return base.Visit(e);
+        }
     }
 }

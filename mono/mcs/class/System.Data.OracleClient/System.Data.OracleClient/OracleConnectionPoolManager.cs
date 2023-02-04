@@ -1,5 +1,5 @@
 //
-// OracleConnectionPoolManager.cs 
+// OracleConnectionPoolManager.cs
 //
 // Part of the Mono class libraries at
 // mcs/class/System.Data.OracleClient/System.Data.OracleClient
@@ -7,9 +7,9 @@
 // Assembly: System.Data.OracleClient.dll
 // Namespace: System.Data.OracleClient
 //
-// Authors: 
+// Authors:
 //    Hubert FONGARNAND <informatique.internet@fiducial.fr>
-//   
+//
 // (C) Copyright Hubert FONGARNAND, 2005
 //
 //
@@ -27,51 +27,54 @@ using System.EnterpriseServices;
 using System.Text;
 using System.Threading;
 
-namespace System.Data.OracleClient 
+namespace System.Data.OracleClient
 {
-    internal class OracleConnectionPoolManager 
+    internal class OracleConnectionPoolManager
     {
         Hashtable pools = new Hashtable();
-        
-        public OracleConnectionPoolManager () 
+
+        public OracleConnectionPoolManager() { }
+
+        public OracleConnectionPool GetConnectionPool(
+            OracleConnectionInfo info,
+            int minPoolSize,
+            int maxPoolSize
+        )
         {
-        }
-        
-        public OracleConnectionPool GetConnectionPool (OracleConnectionInfo info, int minPoolSize, int maxPoolSize) 
-        {
-            lock (pools) {
-                
-                OracleConnectionPool pool = (OracleConnectionPool) pools [info.ConnectionString];
-                if (pool == null) {
-                    pool = new OracleConnectionPool (this, info, minPoolSize, maxPoolSize);
-                    pools [info.ConnectionString] = pool;
+            lock (pools)
+            {
+                OracleConnectionPool pool = (OracleConnectionPool)pools[info.ConnectionString];
+                if (pool == null)
+                {
+                    pool = new OracleConnectionPool(this, info, minPoolSize, maxPoolSize);
+                    pools[info.ConnectionString] = pool;
                 }
                 return pool;
             }
         }
-        
-        public virtual OciGlue CreateConnection (OracleConnectionInfo info) 
+
+        public virtual OciGlue CreateConnection(OracleConnectionInfo info)
         {
             OciGlue oci;
-            oci = new OciGlue ();
-            oci.CreateConnection (info);
+            oci = new OciGlue();
+            oci.CreateConnection(info);
             return oci;
         }
 
-        public void Dispose () 
+        public void Dispose()
         {
-            if (pools != null) {
+            if (pools != null)
+            {
                 foreach (OracleConnectionPool pool in pools)
-                    pool.Dispose ();
-                pools.Clear ();
+                    pool.Dispose();
+                pools.Clear();
                 pools = null;
             }
         }
 
-        ~OracleConnectionPoolManager () 
+        ~OracleConnectionPoolManager()
         {
-            Dispose ();
+            Dispose();
         }
     }
 }
-

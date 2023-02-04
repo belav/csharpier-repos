@@ -4,10 +4,7 @@ class C
     {
         object o = 1;
         dynamic d = 1;
-        
-        var a = new[] {
-            new { X = o },
-            new { X = d }
-        };
+
+        var a = new[] { new { X = o }, new { X = d } };
     }
 }

@@ -24,9 +24,7 @@ namespace System.Activities.DurableInstancing
         Dictionary<Guid, IDictionary<XName, InstanceValue>> keyMetadataChanges;
 
         public SaveWorkflowCommand()
-            : base(InstancePersistence.ActivitiesCommandNamespace.GetName("SaveWorkflow"))
-        {
-        }
+            : base(InstancePersistence.ActivitiesCommandNamespace.GetName("SaveWorkflow")) { }
 
         public bool UnlockInstance { get; set; }
         public bool CompleteInstance { get; set; }
@@ -37,7 +35,8 @@ namespace System.Activities.DurableInstancing
             {
                 if (this.keysToAssociate == null)
                 {
-                    this.keysToAssociate = new Dictionary<Guid, IDictionary<XName, InstanceValue>>();
+                    this.keysToAssociate =
+                        new Dictionary<Guid, IDictionary<XName, InstanceValue>>();
                 }
                 return this.keysToAssociate;
             }
@@ -85,7 +84,8 @@ namespace System.Activities.DurableInstancing
             {
                 if (this.keyMetadataChanges == null)
                 {
-                    this.keyMetadataChanges = new Dictionary<Guid, IDictionary<XName, InstanceValue>>();
+                    this.keyMetadataChanges =
+                        new Dictionary<Guid, IDictionary<XName, InstanceValue>>();
                 }
                 return this.keyMetadataChanges;
             }
@@ -107,39 +107,48 @@ namespace System.Activities.DurableInstancing
         {
             get
             {
-                return !CompleteInstance &&
-                    (this.instanceData == null || this.instanceData.Count == 0) &&
-                    (this.keyMetadataChanges == null || this.keyMetadataChanges.Count == 0) &&
-                    (this.instanceMetadataChanges == null || this.instanceMetadataChanges.Count == 0) &&
-                    (this.keysToFree == null || this.keysToFree.Count == 0) &&
-                    (this.keysToComplete == null || this.keysToComplete.Count == 0) &&
-                    (this.keysToAssociate == null || this.keysToAssociate.Count == 0);
+                return !CompleteInstance
+                    && (this.instanceData == null || this.instanceData.Count == 0)
+                    && (this.keyMetadataChanges == null || this.keyMetadataChanges.Count == 0)
+                    && (
+                        this.instanceMetadataChanges == null
+                        || this.instanceMetadataChanges.Count == 0
+                    )
+                    && (this.keysToFree == null || this.keysToFree.Count == 0)
+                    && (this.keysToComplete == null || this.keysToComplete.Count == 0)
+                    && (this.keysToAssociate == null || this.keysToAssociate.Count == 0);
             }
         }
 
         protected internal override bool AutomaticallyAcquiringLock
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         protected internal override void Validate(InstanceView view)
         {
             if (!view.IsBoundToInstance)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SRCore.InstanceRequired));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SRCore.InstanceRequired)
+                );
             }
 
             if (!view.IsBoundToInstanceOwner)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SRCore.OwnerRequired));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SRCore.OwnerRequired)
+                );
             }
 
             if (this.keysToAssociate != null)
             {
-                foreach (KeyValuePair<Guid, IDictionary<XName, InstanceValue>> key in this.keysToAssociate)
+                foreach (
+                    KeyValuePair<
+                        Guid,
+                        IDictionary<XName, InstanceValue>
+                    > key in this.keysToAssociate
+                )
                 {
                     InstancePersistence.ValidatePropertyBag(key.Value);
                 }
@@ -147,7 +156,12 @@ namespace System.Activities.DurableInstancing
 
             if (this.keyMetadataChanges != null)
             {
-                foreach (KeyValuePair<Guid, IDictionary<XName, InstanceValue>> key in this.keyMetadataChanges)
+                foreach (
+                    KeyValuePair<
+                        Guid,
+                        IDictionary<XName, InstanceValue>
+                    > key in this.keyMetadataChanges
+                )
                 {
                     InstancePersistence.ValidatePropertyBag(key.Value, true);
                 }
@@ -155,9 +169,11 @@ namespace System.Activities.DurableInstancing
 
             if (this.CompleteInstance && !this.UnlockInstance)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SRCore.ValidateUnlockInstance));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SRCore.ValidateUnlockInstance)
+                );
             }
-            
+
             InstancePersistence.ValidatePropertyBag(this.instanceMetadataChanges, true);
             InstancePersistence.ValidatePropertyBag(this.instanceData);
         }

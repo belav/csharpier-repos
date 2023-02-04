@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -37,7 +37,11 @@ namespace Commons.Xml.Relaxng
 {
     public abstract class RelaxngDatatypeProvider
     {
-        public abstract RelaxngDatatype GetDatatype (string name, string ns, RelaxngParamList parameters);
+        public abstract RelaxngDatatype GetDatatype(
+            string name,
+            string ns,
+            RelaxngParamList parameters
+        );
     }
 
     internal class RelaxngNamespaceDatatypeProvider : RelaxngDatatypeProvider
@@ -46,29 +50,35 @@ namespace Commons.Xml.Relaxng
         static RelaxngDatatype stringType = RelaxngString.Instance;
         static RelaxngDatatype tokenType = RelaxngToken.Instance;
 
-        static RelaxngNamespaceDatatypeProvider ()
+        static RelaxngNamespaceDatatypeProvider()
         {
-            instance = new RelaxngNamespaceDatatypeProvider ();
+            instance = new RelaxngNamespaceDatatypeProvider();
         }
 
-        public static RelaxngNamespaceDatatypeProvider Instance {
+        public static RelaxngNamespaceDatatypeProvider Instance
+        {
             get { return instance; }
         }
 
-        private RelaxngNamespaceDatatypeProvider () {}
+        private RelaxngNamespaceDatatypeProvider() { }
 
-        public override RelaxngDatatype GetDatatype (string name, string ns, RelaxngParamList parameters)
+        public override RelaxngDatatype GetDatatype(
+            string name,
+            string ns,
+            RelaxngParamList parameters
+        )
         {
             if (ns != String.Empty)
-                throw new RelaxngException ("Not supported data type URI");
+                throw new RelaxngException("Not supported data type URI");
             if (parameters != null && parameters.Count > 0)
-                throw new RelaxngException ("Parameter is not allowed for this datatype: " + name);
+                throw new RelaxngException("Parameter is not allowed for this datatype: " + name);
 
-            switch (name) {
-            case "string":
-                return stringType;
-            case "token":
-                return tokenType;
+            switch (name)
+            {
+                case "string":
+                    return stringType;
+                case "token":
+                    return tokenType;
             }
             return null;
         }

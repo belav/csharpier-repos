@@ -1,6 +1,6 @@
 //-------------------------------------------------------------
-// <copyright company=’Microsoft Corporation’>
-//   Copyright © Microsoft Corporation. All Rights Reserved.
+// <copyright company=ï¿½Microsoft Corporationï¿½>
+//   Copyright ï¿½ Microsoft Corporation. All Rights Reserved.
 // </copyright>
 //-------------------------------------------------------------
 // @owner=alexgor, deliant
@@ -30,22 +30,22 @@ using System.Globalization;
 using System.Reflection;
 
 #if Microsoft_CONTROL
-    using System.Windows.Forms.DataVisualization.Charting;
+using System.Windows.Forms.DataVisualization.Charting;
 #else
-    using System.Web;
-    using System.Web.UI;
-    using System.Web.UI.DataVisualization.Charting;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.DataVisualization.Charting;
 
-    using System.Web.UI.DataVisualization.Charting.Data;
-    using System.Web.UI.DataVisualization.Charting.ChartTypes;
+using System.Web.UI.DataVisualization.Charting.Data;
+using System.Web.UI.DataVisualization.Charting.ChartTypes;
 #endif
 
 #endregion
 
 #if Microsoft_CONTROL
-    namespace System.Windows.Forms.DataVisualization.Charting
+namespace System.Windows.Forms.DataVisualization.Charting
 #else
-    namespace System.Web.UI.DataVisualization.Charting
+namespace System.Web.UI.DataVisualization.Charting
 #endif
 {
     /// <summary>
@@ -63,43 +63,51 @@ using System.Reflection;
         /// <param name="value">Value to convert.</param>
         /// <param name="destinationType">Convertion destination type.</param>
         /// <returns>Converted object.</returns>
-        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType) 
-        {  
+        public override object ConvertTo(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value,
+            Type destinationType
+        )
+        {
             if (context != null && context.Instance != null)
             {
                 // Convert to string
-                if (destinationType == typeof(string)) 
+                if (destinationType == typeof(string))
                 {
-                    DateTimeIntervalType    intervalType = DateTimeIntervalType.Auto;
-                    double                    interval = 0;
+                    DateTimeIntervalType intervalType = DateTimeIntervalType.Auto;
+                    double interval = 0;
 
                     // Get IntervalType property using reflection
-                    PropertyInfo    propertyInfo = context.Instance.GetType().GetProperty("IntervalType");
-                    if(propertyInfo != null)
+                    PropertyInfo propertyInfo = context.Instance
+                        .GetType()
+                        .GetProperty("IntervalType");
+                    if (propertyInfo != null)
                     {
-                        intervalType = (DateTimeIntervalType)propertyInfo.GetValue(context.Instance, null);
+                        intervalType = (DateTimeIntervalType)
+                            propertyInfo.GetValue(context.Instance, null);
                     }
 
                     // Get Interval property using reflection
                     propertyInfo = context.Instance.GetType().GetProperty("Interval");
-                    if(propertyInfo != null)
+                    if (propertyInfo != null)
                     {
                         interval = (double)propertyInfo.GetValue(context.Instance, null);
                     }
 
                     // Try to get interval information from the axis
-                    if(intervalType == DateTimeIntervalType.Auto) 
+                    if (intervalType == DateTimeIntervalType.Auto)
                     {
                         // Get object's axis
-                        Axis    axis = null;
-                        if(context.Instance is Axis)
+                        Axis axis = null;
+                        if (context.Instance is Axis)
                         {
                             axis = (Axis)context.Instance;
                         }
                         else
                         {
-                            MethodInfo    methodInfo = context.Instance.GetType().GetMethod("GetAxis");
-                            if(methodInfo != null)
+                            MethodInfo methodInfo = context.Instance.GetType().GetMethod("GetAxis");
+                            if (methodInfo != null)
                             {
                                 // Get axis object
                                 axis = (Axis)methodInfo.Invoke(context.Instance, null);
@@ -107,23 +115,28 @@ using System.Reflection;
                         }
 
                         // Get axis value type
-                        if(axis != null)
+                        if (axis != null)
                         {
                             intervalType = axis.GetAxisIntervalType();
                         }
                     }
-                        
+
                     // Convert value to date/time string
-                    if(context.Instance.GetType() != typeof(StripLine) || interval == 0)
+                    if (context.Instance.GetType() != typeof(StripLine) || interval == 0)
                     {
-                        if(intervalType != DateTimeIntervalType.Number && intervalType != DateTimeIntervalType.Auto) 
+                        if (
+                            intervalType != DateTimeIntervalType.Number
+                            && intervalType != DateTimeIntervalType.Auto
+                        )
                         {
                             // Covert value to date/time
-                            if(intervalType < DateTimeIntervalType.Hours)
+                            if (intervalType < DateTimeIntervalType.Hours)
                             {
                                 return DateTime.FromOADate((double)value).ToShortDateString();
                             }
-                            return DateTime.FromOADate((double)value).ToString("g", System.Globalization.CultureInfo.CurrentCulture);
+                            return DateTime
+                                .FromOADate((double)value)
+                                .ToString("g", System.Globalization.CultureInfo.CurrentCulture);
                         }
                     }
                 }
@@ -138,10 +151,14 @@ using System.Reflection;
         /// <param name="culture">Culture information.</param>
         /// <param name="value">Value to convert from.</param>
         /// <returns>Converted object.</returns>
-        public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
+        public override object ConvertFrom(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value
+        )
         {
-            object    result = null;
-            bool    convertFromDate = false;
+            object result = null;
+            bool convertFromDate = false;
             string stringValue = value as string;
 
             // If context interface provided check if we are dealing with DateTime values
@@ -150,25 +167,26 @@ using System.Reflection;
                 DateTimeIntervalType intervalType = DateTimeIntervalType.Auto;
 
                 // Get intervalType property using reflection
-                PropertyInfo    propertyInfo = context.Instance.GetType().GetProperty("intervalType");
-                if(propertyInfo != null)
+                PropertyInfo propertyInfo = context.Instance.GetType().GetProperty("intervalType");
+                if (propertyInfo != null)
                 {
-                    intervalType = (DateTimeIntervalType)propertyInfo.GetValue(context.Instance, null);
+                    intervalType = (DateTimeIntervalType)
+                        propertyInfo.GetValue(context.Instance, null);
                 }
-                
+
                 // Try to get interval information from the axis
-                if(intervalType == DateTimeIntervalType.Auto) 
+                if (intervalType == DateTimeIntervalType.Auto)
                 {
                     // Get object's axis
-                    Axis    axis = null;
-                    if(context.Instance is Axis)
+                    Axis axis = null;
+                    if (context.Instance is Axis)
                     {
                         axis = (Axis)context.Instance;
                     }
                     else
                     {
-                        MethodInfo    methodInfo = context.Instance.GetType().GetMethod("GetAxis");
-                        if(methodInfo != null)
+                        MethodInfo methodInfo = context.Instance.GetType().GetMethod("GetAxis");
+                        if (methodInfo != null)
                         {
                             // Get axis object
                             axis = (Axis)methodInfo.Invoke(context.Instance, null);
@@ -176,17 +194,20 @@ using System.Reflection;
                     }
 
                     // Get axis value type
-                    if(axis != null)
+                    if (axis != null)
                     {
                         intervalType = axis.GetAxisIntervalType();
                     }
                 }
 
-                if (stringValue != null && intervalType != DateTimeIntervalType.Number && intervalType != DateTimeIntervalType.Auto) 
+                if (
+                    stringValue != null
+                    && intervalType != DateTimeIntervalType.Number
+                    && intervalType != DateTimeIntervalType.Auto
+                )
                 {
                     convertFromDate = true;
                 }
-
             }
 
             // Try to convert from double string
@@ -207,7 +228,12 @@ using System.Reflection;
             if (stringValue != null && (convertFromDate || result == null))
             {
                 DateTime valueAsDate;
-                bool parseSucceed = DateTime.TryParse(stringValue, CultureInfo.InvariantCulture, DateTimeStyles.None, out valueAsDate);
+                bool parseSucceed = DateTime.TryParse(
+                    stringValue,
+                    CultureInfo.InvariantCulture,
+                    DateTimeStyles.None,
+                    out valueAsDate
+                );
 
                 if (parseSucceed)
                 {
@@ -224,7 +250,7 @@ using System.Reflection;
     }
 
     /// <summary>
-    /// Converts crossing property of the axis. 
+    /// Converts crossing property of the axis.
     /// Possible values: double, date, "Auto", "Min", "Max"
     /// </summary>
     internal class AxisCrossingValueConverter : AxisMinMaxValueConverter
@@ -274,20 +300,25 @@ using System.Reflection;
         /// <param name="value">Value to convert.</param>
         /// <param name="destinationType">Convertion destination type.</param>
         /// <returns>Converted object.</returns>
-        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType) 
-        {  
-            double    doubleValue = (double)value;
+        public override object ConvertTo(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value,
+            Type destinationType
+        )
+        {
+            double doubleValue = (double)value;
             if (destinationType == typeof(string))
             {
-                if(Double.IsNaN(doubleValue))
+                if (Double.IsNaN(doubleValue))
                 {
                     return Constants.AutoValue;
                 }
-                else if(doubleValue == Double.MinValue)
+                else if (doubleValue == Double.MinValue)
                 {
                     return Constants.MinValue;
                 }
-                else if(doubleValue == Double.MaxValue)
+                else if (doubleValue == Double.MaxValue)
                 {
                     return Constants.MaxValue;
                 }
@@ -304,33 +335,55 @@ using System.Reflection;
         /// <param name="culture">Culture information.</param>
         /// <param name="value">Value to convert from.</param>
         /// <returns>Converted object.</returns>
-        public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
+        public override object ConvertFrom(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value
+        )
         {
             // If converting from string value
             string crossingValue = value as string;
             if (crossingValue != null)
             {
-                if (String.Compare(crossingValue, Constants.AutoValue, StringComparison.OrdinalIgnoreCase) == 0)
+                if (
+                    String.Compare(
+                        crossingValue,
+                        Constants.AutoValue,
+                        StringComparison.OrdinalIgnoreCase
+                    ) == 0
+                )
                 {
                     return Double.NaN;
                 }
-                else if (String.Compare(crossingValue, Constants.MinValue, StringComparison.OrdinalIgnoreCase) == 0)
+                else if (
+                    String.Compare(
+                        crossingValue,
+                        Constants.MinValue,
+                        StringComparison.OrdinalIgnoreCase
+                    ) == 0
+                )
                 {
                     return Double.MinValue;
                 }
-                else if (String.Compare(crossingValue, Constants.MaxValue, StringComparison.OrdinalIgnoreCase) == 0)
+                else if (
+                    String.Compare(
+                        crossingValue,
+                        Constants.MaxValue,
+                        StringComparison.OrdinalIgnoreCase
+                    ) == 0
+                )
                 {
                     return Double.MaxValue;
                 }
             }
-                
+
             // Call base converter
             return base.ConvertFrom(context, culture, value);
         }
 
         #endregion
     }
-    
+
     /// <summary>
     /// Converts min and max properties of the axis depending on the values type
     /// </summary>
@@ -346,8 +399,13 @@ using System.Reflection;
         /// <param name="value">Value to convert.</param>
         /// <param name="destinationType">Convertion destination type.</param>
         /// <returns>Converted object.</returns>
-        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType) 
-        {  
+        public override object ConvertTo(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value,
+            Type destinationType
+        )
+        {
             if (context != null && context.Instance != null && context.Instance is Axis)
             {
                 Axis axis = (Axis)context.Instance;
@@ -356,7 +414,8 @@ using System.Reflection;
                     string strValue = DoubleDateNanValueConverter.ConvertDateTimeToString(
                         (double)value,
                         axis.GetAxisValuesType(),
-                        axis.InternalIntervalType);
+                        axis.InternalIntervalType
+                    );
 
                     if (strValue != null)
                         return strValue;
@@ -372,7 +431,11 @@ using System.Reflection;
         /// <param name="culture">Culture information.</param>
         /// <param name="value">Value to convert from.</param>
         /// <returns>Converted object.</returns>
-        public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
+        public override object ConvertFrom(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value
+        )
         {
             object result = null;
             bool convertFromDate = false;
@@ -387,10 +450,12 @@ using System.Reflection;
                 {
                     if (axis.InternalIntervalType == DateTimeIntervalType.Auto)
                     {
-                        if (axis.GetAxisValuesType() == ChartValueType.DateTime ||
-                            axis.GetAxisValuesType() == ChartValueType.Date ||
-                            axis.GetAxisValuesType() == ChartValueType.Time ||
-                            axis.GetAxisValuesType() == ChartValueType.DateTimeOffset)
+                        if (
+                            axis.GetAxisValuesType() == ChartValueType.DateTime
+                            || axis.GetAxisValuesType() == ChartValueType.Date
+                            || axis.GetAxisValuesType() == ChartValueType.Time
+                            || axis.GetAxisValuesType() == ChartValueType.DateTimeOffset
+                        )
                         {
                             convertFromDate = true;
                         }
@@ -423,7 +488,12 @@ using System.Reflection;
             if (stringValue != null && (convertFromDate || result == null))
             {
                 DateTime valueAsDate;
-                bool parseSucceed = DateTime.TryParse(stringValue, CultureInfo.CurrentCulture, DateTimeStyles.None, out valueAsDate);
+                bool parseSucceed = DateTime.TryParse(
+                    stringValue,
+                    CultureInfo.CurrentCulture,
+                    DateTimeStyles.None,
+                    out valueAsDate
+                );
 
                 if (parseSucceed)
                 {
@@ -434,12 +504,12 @@ using System.Reflection;
             // Call base converter
             return base.ConvertFrom(context, culture, value);
         }
-        
+
         #endregion
     }
 
     /// <summary>
-    /// Converts maximum and minimum property of the axis. 
+    /// Converts maximum and minimum property of the axis.
     /// Possible values: double, date, "Auto",
     /// </summary>
     internal class AxisMinMaxAutoValueConverter : AxisMinMaxValueConverter
@@ -474,7 +544,7 @@ using System.Reflection;
         {
             ArrayList values = new ArrayList();
             values.Add(Double.NaN);
-            
+
             return new StandardValuesCollection(values);
         }
 
@@ -486,12 +556,17 @@ using System.Reflection;
         /// <param name="value">Value to convert.</param>
         /// <param name="destinationType">Convertion destination type.</param>
         /// <returns>Converted object.</returns>
-        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType) 
-        {  
-            double    doubleValue = (double)value;
+        public override object ConvertTo(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value,
+            Type destinationType
+        )
+        {
+            double doubleValue = (double)value;
             if (destinationType == typeof(string))
             {
-                if(Double.IsNaN(doubleValue))
+                if (Double.IsNaN(doubleValue))
                 {
                     return Constants.AutoValue;
                 }
@@ -504,18 +579,28 @@ using System.Reflection;
         /// <summary>
         /// Convert minimum or maximum values from string
         /// </summary>
-        public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
+        public override object ConvertFrom(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value
+        )
         {
             // If converting from string value
             string crossingValue = value as string;
             if (crossingValue != null)
             {
-                if (String.Compare(crossingValue, Constants.AutoValue, StringComparison.OrdinalIgnoreCase) == 0)
+                if (
+                    String.Compare(
+                        crossingValue,
+                        Constants.AutoValue,
+                        StringComparison.OrdinalIgnoreCase
+                    ) == 0
+                )
                 {
                     return Double.NaN;
                 }
             }
-                
+
             // Call base converter
             return base.ConvertFrom(context, culture, value);
         }
@@ -579,7 +664,7 @@ using System.Reflection;
         /// <summary>
         /// Inicates that "NotSet" option is available
         /// </summary>
-        internal    bool    hideNotSet = true;
+        internal bool hideNotSet = true;
 
         /// <summary>
         /// Standart values supported - return true.
@@ -609,7 +694,7 @@ using System.Reflection;
         public override StandardValuesCollection GetStandardValues(ITypeDescriptorContext context)
         {
             ArrayList values = new ArrayList();
-            if(!hideNotSet)
+            if (!hideNotSet)
             {
                 values.Add(Double.NaN);
             }
@@ -626,16 +711,21 @@ using System.Reflection;
         /// <param name="value">Value to convert.</param>
         /// <param name="destinationType">Convertion destination type.</param>
         /// <returns>Converted object.</returns>
-        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType) 
-        {  
-            double    doubleValue = (double)value;
+        public override object ConvertTo(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value,
+            Type destinationType
+        )
+        {
+            double doubleValue = (double)value;
             if (destinationType == typeof(string))
             {
-                if(Double.IsNaN(doubleValue))
+                if (Double.IsNaN(doubleValue))
                 {
                     return Constants.NotSetValue;
                 }
-                else if(doubleValue == 0.0)
+                else if (doubleValue == 0.0)
                 {
                     return Constants.AutoValue;
                 }
@@ -652,22 +742,38 @@ using System.Reflection;
         /// <param name="culture">Culture information.</param>
         /// <param name="value">Value to convert from.</param>
         /// <returns>Converted object.</returns>
-        public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
+        public override object ConvertFrom(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value
+        )
         {
             // If converting from string value
             string crossingValue = value as string;
             if (crossingValue != null)
             {
-                if (String.Compare(crossingValue, Constants.AutoValue, StringComparison.OrdinalIgnoreCase) == 0)
+                if (
+                    String.Compare(
+                        crossingValue,
+                        Constants.AutoValue,
+                        StringComparison.OrdinalIgnoreCase
+                    ) == 0
+                )
                 {
                     return 0.0;
                 }
-                else if (String.Compare(crossingValue, Constants.NotSetValue, StringComparison.OrdinalIgnoreCase) == 0)
+                else if (
+                    String.Compare(
+                        crossingValue,
+                        Constants.NotSetValue,
+                        StringComparison.OrdinalIgnoreCase
+                    ) == 0
+                )
                 {
                     return Double.NaN;
                 }
             }
-            
+
             // Call base converter
             return base.ConvertFrom(context, culture, value);
         }

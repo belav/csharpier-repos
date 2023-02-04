@@ -19,20 +19,107 @@ namespace Microsoft.CodeAnalysis.UnitTests
         [Fact]
         public void Equality()
         {
-            var id1 = new AssemblyIdentity("Goo", new Version(1, 0, 0, 0), "", RoPublicKey1, hasPublicKey: true, isRetargetable: false);
-            var id11 = new AssemblyIdentity("Goo", new Version(1, 0, 0, 0), "", RoPublicKey1, hasPublicKey: true, isRetargetable: false);
-            var id2 = new AssemblyIdentity("Goo", new Version(1, 0, 0, 0), "", RoPublicKeyToken1, hasPublicKey: false, isRetargetable: false);
-            var id22 = new AssemblyIdentity("Goo", new Version(1, 0, 0, 0), "", RoPublicKeyToken1, hasPublicKey: false, isRetargetable: false);
+            var id1 = new AssemblyIdentity(
+                "Goo",
+                new Version(1, 0, 0, 0),
+                "",
+                RoPublicKey1,
+                hasPublicKey: true,
+                isRetargetable: false
+            );
+            var id11 = new AssemblyIdentity(
+                "Goo",
+                new Version(1, 0, 0, 0),
+                "",
+                RoPublicKey1,
+                hasPublicKey: true,
+                isRetargetable: false
+            );
+            var id2 = new AssemblyIdentity(
+                "Goo",
+                new Version(1, 0, 0, 0),
+                "",
+                RoPublicKeyToken1,
+                hasPublicKey: false,
+                isRetargetable: false
+            );
+            var id22 = new AssemblyIdentity(
+                "Goo",
+                new Version(1, 0, 0, 0),
+                "",
+                RoPublicKeyToken1,
+                hasPublicKey: false,
+                isRetargetable: false
+            );
 
-            var id3 = new AssemblyIdentity("Goo!", new Version(1, 0, 0, 0), "", RoPublicKeyToken1, hasPublicKey: false, isRetargetable: false);
-            var id4 = new AssemblyIdentity("Goo", new Version(1, 0, 1, 0), "", RoPublicKeyToken1, hasPublicKey: false, isRetargetable: false);
-            var id5 = new AssemblyIdentity("Goo", new Version(1, 0, 0, 0), "en-US", RoPublicKeyToken1, hasPublicKey: false, isRetargetable: false);
-            var id6 = new AssemblyIdentity("Goo", new Version(1, 0, 0, 0), "", default(ImmutableArray<byte>), hasPublicKey: false, isRetargetable: false);
-            var id7 = new AssemblyIdentity("Goo", new Version(1, 0, 0, 0), "", RoPublicKey1, hasPublicKey: true, isRetargetable: true);
+            var id3 = new AssemblyIdentity(
+                "Goo!",
+                new Version(1, 0, 0, 0),
+                "",
+                RoPublicKeyToken1,
+                hasPublicKey: false,
+                isRetargetable: false
+            );
+            var id4 = new AssemblyIdentity(
+                "Goo",
+                new Version(1, 0, 1, 0),
+                "",
+                RoPublicKeyToken1,
+                hasPublicKey: false,
+                isRetargetable: false
+            );
+            var id5 = new AssemblyIdentity(
+                "Goo",
+                new Version(1, 0, 0, 0),
+                "en-US",
+                RoPublicKeyToken1,
+                hasPublicKey: false,
+                isRetargetable: false
+            );
+            var id6 = new AssemblyIdentity(
+                "Goo",
+                new Version(1, 0, 0, 0),
+                "",
+                default(ImmutableArray<byte>),
+                hasPublicKey: false,
+                isRetargetable: false
+            );
+            var id7 = new AssemblyIdentity(
+                "Goo",
+                new Version(1, 0, 0, 0),
+                "",
+                RoPublicKey1,
+                hasPublicKey: true,
+                isRetargetable: true
+            );
 
-            var win1 = new AssemblyIdentity("Goo", new Version(1, 0, 0, 0), "", RoPublicKey1, hasPublicKey: true, isRetargetable: false, contentType: AssemblyContentType.WindowsRuntime);
-            var win2 = new AssemblyIdentity("Bar", new Version(1, 0, 0, 0), "", RoPublicKey1, hasPublicKey: true, isRetargetable: false, contentType: AssemblyContentType.WindowsRuntime);
-            var win3 = new AssemblyIdentity("Goo", new Version(1, 0, 0, 0), "", RoPublicKey1, hasPublicKey: true, isRetargetable: false, contentType: AssemblyContentType.WindowsRuntime);
+            var win1 = new AssemblyIdentity(
+                "Goo",
+                new Version(1, 0, 0, 0),
+                "",
+                RoPublicKey1,
+                hasPublicKey: true,
+                isRetargetable: false,
+                contentType: AssemblyContentType.WindowsRuntime
+            );
+            var win2 = new AssemblyIdentity(
+                "Bar",
+                new Version(1, 0, 0, 0),
+                "",
+                RoPublicKey1,
+                hasPublicKey: true,
+                isRetargetable: false,
+                contentType: AssemblyContentType.WindowsRuntime
+            );
+            var win3 = new AssemblyIdentity(
+                "Goo",
+                new Version(1, 0, 0, 0),
+                "",
+                RoPublicKey1,
+                hasPublicKey: true,
+                isRetargetable: false,
+                contentType: AssemblyContentType.WindowsRuntime
+            );
 
             Assert.True(id1.Equals(id1));
             Assert.True(id1.Equals(id2));
@@ -64,10 +151,38 @@ namespace Microsoft.CodeAnalysis.UnitTests
         [Fact]
         public void Equality_InvariantCulture()
         {
-            var neutral1 = new AssemblyIdentity("Goo", new Version(1, 0, 0, 0), "NEUtral", RoPublicKeyToken1, hasPublicKey: false, isRetargetable: false);
-            var neutral2 = new AssemblyIdentity("Goo", new Version(1, 0, 0, 0), null, RoPublicKeyToken1, hasPublicKey: false, isRetargetable: false);
-            var neutral3 = new AssemblyIdentity("Goo", new Version(1, 0, 0, 0), "neutral", RoPublicKeyToken1, hasPublicKey: false, isRetargetable: false);
-            var invariant = new AssemblyIdentity("Goo", new Version(1, 0, 0, 0), "", RoPublicKeyToken1, hasPublicKey: false, isRetargetable: false);
+            var neutral1 = new AssemblyIdentity(
+                "Goo",
+                new Version(1, 0, 0, 0),
+                "NEUtral",
+                RoPublicKeyToken1,
+                hasPublicKey: false,
+                isRetargetable: false
+            );
+            var neutral2 = new AssemblyIdentity(
+                "Goo",
+                new Version(1, 0, 0, 0),
+                null,
+                RoPublicKeyToken1,
+                hasPublicKey: false,
+                isRetargetable: false
+            );
+            var neutral3 = new AssemblyIdentity(
+                "Goo",
+                new Version(1, 0, 0, 0),
+                "neutral",
+                RoPublicKeyToken1,
+                hasPublicKey: false,
+                isRetargetable: false
+            );
+            var invariant = new AssemblyIdentity(
+                "Goo",
+                new Version(1, 0, 0, 0),
+                "",
+                RoPublicKeyToken1,
+                hasPublicKey: false,
+                isRetargetable: false
+            );
 
             Assert.True(neutral1.Equals(invariant));
             Assert.True(neutral2.Equals(invariant));
@@ -78,14 +193,21 @@ namespace Microsoft.CodeAnalysis.UnitTests
         public void FromAssemblyDefinitionInvalidParameters()
         {
             Assembly asm = null;
-            Assert.Throws<ArgumentNullException>(() => { AssemblyIdentity.FromAssemblyDefinition(asm); });
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                AssemblyIdentity.FromAssemblyDefinition(asm);
+            });
         }
 
         [Fact]
         public void FromAssemblyDefinition()
         {
             var name = new AssemblyName("goo");
-            name.Flags = AssemblyNameFlags.Retargetable | AssemblyNameFlags.PublicKey | AssemblyNameFlags.EnableJITcompileOptimizer | AssemblyNameFlags.EnableJITcompileTracking;
+            name.Flags =
+                AssemblyNameFlags.Retargetable
+                | AssemblyNameFlags.PublicKey
+                | AssemblyNameFlags.EnableJITcompileOptimizer
+                | AssemblyNameFlags.EnableJITcompileTracking;
             name.CultureInfo = new CultureInfo("en-US", useUserOverride: false);
             name.ContentType = AssemblyContentType.Default;
             name.Version = new Version(1, 2, 3, 4);
@@ -151,7 +273,12 @@ namespace Microsoft.CodeAnalysis.UnitTests
             Assert.Equal(0, id.PublicKeyToken.Length);
             Assert.Equal(AssemblyContentType.Default, id.ContentType);
 
-            id = new AssemblyIdentity("Goo", publicKeyOrToken: RoPublicKey1, hasPublicKey: true, isRetargetable: false);
+            id = new AssemblyIdentity(
+                "Goo",
+                publicKeyOrToken: RoPublicKey1,
+                hasPublicKey: true,
+                isRetargetable: false
+            );
             Assert.Equal("Goo", id.Name);
             Assert.Equal(new Version(0, 0, 0, 0), id.Version);
             Assert.Equal(AssemblyNameFlags.PublicKey, id.Flags);
@@ -162,7 +289,12 @@ namespace Microsoft.CodeAnalysis.UnitTests
             AssertEx.Equal(PublicKeyToken1, id.PublicKeyToken);
             Assert.Equal(AssemblyContentType.Default, id.ContentType);
 
-            id = new AssemblyIdentity("Goo", publicKeyOrToken: RoPublicKeyToken1, hasPublicKey: false, isRetargetable: true);
+            id = new AssemblyIdentity(
+                "Goo",
+                publicKeyOrToken: RoPublicKeyToken1,
+                hasPublicKey: false,
+                isRetargetable: true
+            );
             Assert.Equal("Goo", id.Name);
             Assert.Equal(new Version(0, 0, 0, 0), id.Version);
             Assert.Equal(AssemblyNameFlags.Retargetable, id.Flags);
@@ -173,7 +305,12 @@ namespace Microsoft.CodeAnalysis.UnitTests
             AssertEx.Equal(PublicKeyToken1, id.PublicKeyToken);
             Assert.Equal(AssemblyContentType.Default, id.ContentType);
 
-            id = new AssemblyIdentity("Goo", publicKeyOrToken: RoPublicKey1, hasPublicKey: true, isRetargetable: true);
+            id = new AssemblyIdentity(
+                "Goo",
+                publicKeyOrToken: RoPublicKey1,
+                hasPublicKey: true,
+                isRetargetable: true
+            );
             Assert.Equal("Goo", id.Name);
             Assert.Equal(new Version(0, 0, 0, 0), id.Version);
             Assert.Equal(AssemblyNameFlags.PublicKey | AssemblyNameFlags.Retargetable, id.Flags);
@@ -184,7 +321,12 @@ namespace Microsoft.CodeAnalysis.UnitTests
             AssertEx.Equal(PublicKeyToken1, id.PublicKeyToken);
             Assert.Equal(AssemblyContentType.Default, id.ContentType);
 
-            id = new AssemblyIdentity("Goo", publicKeyOrToken: RoPublicKey1, hasPublicKey: true, contentType: AssemblyContentType.WindowsRuntime);
+            id = new AssemblyIdentity(
+                "Goo",
+                publicKeyOrToken: RoPublicKey1,
+                hasPublicKey: true,
+                contentType: AssemblyContentType.WindowsRuntime
+            );
             Assert.Equal("Goo", id.Name);
             Assert.Equal(new Version(0, 0, 0, 0), id.Version);
             Assert.Equal(AssemblyNameFlags.PublicKey, id.Flags);
@@ -199,21 +341,58 @@ namespace Microsoft.CodeAnalysis.UnitTests
         [Fact]
         public void IsStrongName()
         {
-            var id1 = new AssemblyIdentity("Goo", new Version(1, 0, 0, 0), "", RoPublicKey1, hasPublicKey: true, isRetargetable: false);
+            var id1 = new AssemblyIdentity(
+                "Goo",
+                new Version(1, 0, 0, 0),
+                "",
+                RoPublicKey1,
+                hasPublicKey: true,
+                isRetargetable: false
+            );
             Assert.True(id1.IsStrongName);
 
-            var id2 = new AssemblyIdentity("Goo", new Version(1, 0, 0, 0), "", RoPublicKeyToken1, hasPublicKey: false, isRetargetable: false);
+            var id2 = new AssemblyIdentity(
+                "Goo",
+                new Version(1, 0, 0, 0),
+                "",
+                RoPublicKeyToken1,
+                hasPublicKey: false,
+                isRetargetable: false
+            );
             Assert.True(id2.IsStrongName);
 
-            var id3 = new AssemblyIdentity("Goo", new Version(1, 0, 0, 0), "", ImmutableArray<byte>.Empty, hasPublicKey: false, isRetargetable: false);
+            var id3 = new AssemblyIdentity(
+                "Goo",
+                new Version(1, 0, 0, 0),
+                "",
+                ImmutableArray<byte>.Empty,
+                hasPublicKey: false,
+                isRetargetable: false
+            );
             Assert.False(id3.IsStrongName);
 
             // for WinRT references "strong name" doesn't make sense:
 
-            var id4 = new AssemblyIdentity("Goo", new Version(1, 0, 0, 0), "", ImmutableArray<byte>.Empty, hasPublicKey: false, isRetargetable: false, contentType: AssemblyContentType.WindowsRuntime);
+            var id4 = new AssemblyIdentity(
+                "Goo",
+                new Version(1, 0, 0, 0),
+                "",
+                ImmutableArray<byte>.Empty,
+                hasPublicKey: false,
+                isRetargetable: false,
+                contentType: AssemblyContentType.WindowsRuntime
+            );
             Assert.False(id4.IsStrongName);
 
-            var id5 = new AssemblyIdentity("Goo", new Version(1, 0, 0, 0), "", RoPublicKeyToken1, hasPublicKey: false, isRetargetable: false, contentType: AssemblyContentType.WindowsRuntime);
+            var id5 = new AssemblyIdentity(
+                "Goo",
+                new Version(1, 0, 0, 0),
+                "",
+                RoPublicKeyToken1,
+                hasPublicKey: false,
+                isRetargetable: false,
+                contentType: AssemblyContentType.WindowsRuntime
+            );
             Assert.True(id5.IsStrongName);
         }
 
@@ -225,37 +404,79 @@ namespace Microsoft.CodeAnalysis.UnitTests
             Assert.Throws<ArgumentException>(() => new AssemblyIdentity(null));
 
             Assert.Throws<ArgumentException>(
-                () => new AssemblyIdentity("Goo", new Version(1, 0, 0, 0), "", ImmutableArray<byte>.Empty, hasPublicKey: true, isRetargetable: false, contentType: AssemblyContentType.Default));
+                () =>
+                    new AssemblyIdentity(
+                        "Goo",
+                        new Version(1, 0, 0, 0),
+                        "",
+                        ImmutableArray<byte>.Empty,
+                        hasPublicKey: true,
+                        isRetargetable: false,
+                        contentType: AssemblyContentType.Default
+                    )
+            );
 
             Assert.Throws<ArgumentException>(
-                () => new AssemblyIdentity("Goo", new Version(1, 0, 0, 0), "", new byte[] { 1, 2, 3 }.AsImmutableOrNull(), hasPublicKey: false, isRetargetable: false, contentType: AssemblyContentType.Default));
+                () =>
+                    new AssemblyIdentity(
+                        "Goo",
+                        new Version(1, 0, 0, 0),
+                        "",
+                        new byte[] { 1, 2, 3 }.AsImmutableOrNull(),
+                        hasPublicKey: false,
+                        isRetargetable: false,
+                        contentType: AssemblyContentType.Default
+                    )
+            );
 
-            foreach (var v in new Version[]
-            {
-                new Version(),
-                new Version(0, 0),
-                new Version(0, 0, 0),
-                new Version(int.MaxValue, 0, 0, 0),
-                new Version(0, int.MaxValue, 0, 0),
-                new Version(0, 0, int.MaxValue, 0),
-                new Version(0, 0, 0, int.MaxValue),
-            })
+            foreach (
+                var v in new Version[]
+                {
+                    new Version(),
+                    new Version(0, 0),
+                    new Version(0, 0, 0),
+                    new Version(int.MaxValue, 0, 0, 0),
+                    new Version(0, int.MaxValue, 0, 0),
+                    new Version(0, 0, int.MaxValue, 0),
+                    new Version(0, 0, 0, int.MaxValue),
+                }
+            )
             {
                 Assert.Throws<ArgumentOutOfRangeException>(() => new AssemblyIdentity("Goo", v));
             }
 
-            Assert.Throws<ArgumentOutOfRangeException>(() => new AssemblyIdentity("Goo", contentType: (AssemblyContentType)(-1)));
-            Assert.Throws<ArgumentOutOfRangeException>(() => new AssemblyIdentity("Goo", contentType: (AssemblyContentType)int.MaxValue));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new AssemblyIdentity("Goo", contentType: (AssemblyContentType)(-1))
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new AssemblyIdentity("Goo", contentType: (AssemblyContentType)int.MaxValue)
+            );
 
-            Assert.Throws<ArgumentException>(() =>
-                new AssemblyIdentity("Goo", publicKeyOrToken: RoPublicKey1, hasPublicKey: true, isRetargetable: true, contentType: AssemblyContentType.WindowsRuntime));
+            Assert.Throws<ArgumentException>(
+                () =>
+                    new AssemblyIdentity(
+                        "Goo",
+                        publicKeyOrToken: RoPublicKey1,
+                        hasPublicKey: true,
+                        isRetargetable: true,
+                        contentType: AssemblyContentType.WindowsRuntime
+                    )
+            );
         }
 
         [Fact]
         public void MetadataConstructor()
         {
-            var id = new AssemblyIdentity(/*noThrow:*/true, "Goo", new Version(1, 2, 3, 4), "en-US", RoPublicKey1,
-                hasPublicKey: true, isRetargetable: true, contentType: AssemblyContentType.Default);
+            var id = new AssemblyIdentity( /*noThrow:*/
+                true,
+                "Goo",
+                new Version(1, 2, 3, 4),
+                "en-US",
+                RoPublicKey1,
+                hasPublicKey: true,
+                isRetargetable: true,
+                contentType: AssemblyContentType.Default
+            );
             Assert.Equal("Goo", id.Name);
             Assert.Equal(new Version(1, 2, 3, 4), id.Version);
             Assert.Equal(AssemblyNameFlags.PublicKey | AssemblyNameFlags.Retargetable, id.Flags);
@@ -267,8 +488,16 @@ namespace Microsoft.CodeAnalysis.UnitTests
             Assert.Equal(AssemblyContentType.Default, id.ContentType);
 
             // invalid content type:
-            id = new AssemblyIdentity(/*noThrow:*/true, "Goo", new Version(1, 2, 3, 4), null, ImmutableArray<byte>.Empty,
-                hasPublicKey: false, isRetargetable: false, contentType: (AssemblyContentType)2);
+            id = new AssemblyIdentity( /*noThrow:*/
+                true,
+                "Goo",
+                new Version(1, 2, 3, 4),
+                null,
+                ImmutableArray<byte>.Empty,
+                hasPublicKey: false,
+                isRetargetable: false,
+                contentType: (AssemblyContentType)2
+            );
             Assert.Equal(AssemblyNameFlags.None, id.Flags);
             Assert.Equal("", id.CultureName);
             Assert.False(id.HasPublicKey);
@@ -277,8 +506,16 @@ namespace Microsoft.CodeAnalysis.UnitTests
             Assert.Equal(AssemblyContentType.Default, id.ContentType);
 
             // default Retargetable=No if content type is WinRT
-            id = new AssemblyIdentity(/*noThrow:*/true, "Goo", new Version(1, 2, 3, 4), null, ImmutableArray<byte>.Empty,
-                hasPublicKey: false, isRetargetable: true, contentType: AssemblyContentType.WindowsRuntime);
+            id = new AssemblyIdentity( /*noThrow:*/
+                true,
+                "Goo",
+                new Version(1, 2, 3, 4),
+                null,
+                ImmutableArray<byte>.Empty,
+                hasPublicKey: false,
+                isRetargetable: true,
+                contentType: AssemblyContentType.WindowsRuntime
+            );
             Assert.Equal("Goo", id.Name);
             Assert.Equal(new Version(1, 2, 3, 4), id.Version);
             Assert.Equal(AssemblyNameFlags.None, id.Flags);
@@ -288,18 +525,42 @@ namespace Microsoft.CodeAnalysis.UnitTests
             Assert.Equal(AssemblyContentType.WindowsRuntime, id.ContentType);
 
             // invalid culture:
-            // The native compiler doesn't enforce that the culture be anything in particular. 
+            // The native compiler doesn't enforce that the culture be anything in particular.
             // AssemblyIdentity should preserve user input even if it is of dubious utility.
-            id = new AssemblyIdentity(/*noThrow:*/true, "Goo", new Version(1, 2, 3, 4), "blah,", ImmutableArray<byte>.Empty,
-                hasPublicKey: false, isRetargetable: false, contentType: AssemblyContentType.Default);
+            id = new AssemblyIdentity( /*noThrow:*/
+                true,
+                "Goo",
+                new Version(1, 2, 3, 4),
+                "blah,",
+                ImmutableArray<byte>.Empty,
+                hasPublicKey: false,
+                isRetargetable: false,
+                contentType: AssemblyContentType.Default
+            );
             Assert.Equal("blah,", id.CultureName);
 
-            id = new AssemblyIdentity(/*noThrow:*/true, "Goo", new Version(1, 2, 3, 4), "*", ImmutableArray<byte>.Empty,
-                hasPublicKey: false, isRetargetable: false, contentType: AssemblyContentType.Default);
+            id = new AssemblyIdentity( /*noThrow:*/
+                true,
+                "Goo",
+                new Version(1, 2, 3, 4),
+                "*",
+                ImmutableArray<byte>.Empty,
+                hasPublicKey: false,
+                isRetargetable: false,
+                contentType: AssemblyContentType.Default
+            );
             Assert.Equal("*", id.CultureName);
 
-            id = new AssemblyIdentity(/*noThrow:*/true, "Goo", new Version(1, 2, 3, 4), "neutral", ImmutableArray<byte>.Empty,
-                hasPublicKey: false, isRetargetable: false, contentType: AssemblyContentType.Default);
+            id = new AssemblyIdentity( /*noThrow:*/
+                true,
+                "Goo",
+                new Version(1, 2, 3, 4),
+                "neutral",
+                ImmutableArray<byte>.Empty,
+                hasPublicKey: false,
+                isRetargetable: false,
+                contentType: AssemblyContentType.Default
+            );
             Assert.Equal("", id.CultureName);
         }
 
@@ -319,9 +580,14 @@ namespace Microsoft.CodeAnalysis.UnitTests
             Assert.Null(an.CodeBase);
 #pragma warning restore SYSLIB0044
 
-            ai = new AssemblyIdentity("goo", new Version(1, 2, 3, 4), "en-US", RoPublicKey1,
+            ai = new AssemblyIdentity(
+                "goo",
+                new Version(1, 2, 3, 4),
+                "en-US",
+                RoPublicKey1,
                 hasPublicKey: true,
-                isRetargetable: true);
+                isRetargetable: true
+            );
 
             an = ai.ToAssemblyName();
             Assert.Equal("goo", an.Name);
@@ -352,7 +618,10 @@ namespace Microsoft.CodeAnalysis.UnitTests
             }
         }
 
-        [ConditionalFact(typeof(DesktopOnly), Reason = ConditionalSkipReason.TestExecutionNeedsDesktopTypes)]
+        [ConditionalFact(
+            typeof(DesktopOnly),
+            Reason = ConditionalSkipReason.TestExecutionNeedsDesktopTypes
+        )]
         public void ToAssemblyName_Errors()
         {
             var ai = new AssemblyIdentity("goo", cultureName: "*");
@@ -372,26 +641,51 @@ namespace Microsoft.CodeAnalysis.UnitTests
             AssertEx.Equal(PublicKeyToken1, aiPkt);
         }
 
-        [ConditionalFact(typeof(WindowsDesktopOnly), Reason = ConditionalSkipReason.TestExecutionNeedsFusion)]
+        [ConditionalFact(
+            typeof(WindowsDesktopOnly),
+            Reason = ConditionalSkipReason.TestExecutionNeedsFusion
+        )]
         public void FullKeyAndToken()
         {
-            string displayPkt = "Goo, Version=1.0.0.0, Culture=neutral, PublicKeyToken=" + StrPublicKeyToken1;
+            string displayPkt =
+                "Goo, Version=1.0.0.0, Culture=neutral, PublicKeyToken=" + StrPublicKeyToken1;
             string displayPk = "Goo, Version=1.0.0.0, Culture=neutral, PublicKey=" + StrPublicKey1;
 
             bool equivalent;
             FusionAssemblyIdentityComparer.AssemblyComparisonResult result;
-            int hr = FusionAssemblyIdentityComparer.DefaultModelCompareAssemblyIdentity(displayPkt, false, displayPk, false, out equivalent, out result, IntPtr.Zero);
+            int hr = FusionAssemblyIdentityComparer.DefaultModelCompareAssemblyIdentity(
+                displayPkt,
+                false,
+                displayPk,
+                false,
+                out equivalent,
+                out result,
+                IntPtr.Zero
+            );
 
             Assert.Equal(0, hr);
             Assert.True(equivalent, "Expected equivalent");
-            Assert.Equal(FusionAssemblyIdentityComparer.AssemblyComparisonResult.EquivalentFullMatch, result);
+            Assert.Equal(
+                FusionAssemblyIdentityComparer.AssemblyComparisonResult.EquivalentFullMatch,
+                result
+            );
 
-            hr = FusionAssemblyIdentityComparer.DefaultModelCompareAssemblyIdentity(displayPk, false, displayPkt, false, out equivalent, out result, IntPtr.Zero);
+            hr = FusionAssemblyIdentityComparer.DefaultModelCompareAssemblyIdentity(
+                displayPk,
+                false,
+                displayPkt,
+                false,
+                out equivalent,
+                out result,
+                IntPtr.Zero
+            );
 
             Assert.Equal(0, hr);
             Assert.True(equivalent, "Expected equivalent");
-            Assert.Equal(FusionAssemblyIdentityComparer.AssemblyComparisonResult.EquivalentFullMatch, result);
+            Assert.Equal(
+                FusionAssemblyIdentityComparer.AssemblyComparisonResult.EquivalentFullMatch,
+                result
+            );
         }
     }
 }
-

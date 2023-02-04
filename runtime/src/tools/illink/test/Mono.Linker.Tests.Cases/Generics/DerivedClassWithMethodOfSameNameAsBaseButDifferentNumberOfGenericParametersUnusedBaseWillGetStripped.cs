@@ -4,28 +4,28 @@ namespace Mono.Linker.Tests.Cases.Generics
 {
     class DerivedClassWithMethodOfSameNameAsBaseButDifferentNumberOfGenericParametersUnusedBaseWillGetStripped
     {
-        public static void Main (string[] args)
+        public static void Main(string[] args)
         {
-            MyDerived obj = new MyDerived ();
-            obj.Method<int, int> (1);
+            MyDerived obj = new MyDerived();
+            obj.Method<int, int>(1);
         }
 
         [Kept]
-        [KeptMember (".ctor()")]
+        [KeptMember(".ctor()")]
         class MyBase
         {
-            public virtual T Method<T> (T arg1)
+            public virtual T Method<T>(T arg1)
             {
                 return arg1;
             }
         }
 
-        [KeptMember (".ctor()")]
-        [KeptBaseType (typeof (MyBase))]
+        [KeptMember(".ctor()")]
+        [KeptBaseType(typeof(MyBase))]
         class MyDerived : MyBase
         {
             [Kept]
-            public virtual T Method<T, K> (T arg1)
+            public virtual T Method<T, K>(T arg1)
             {
                 return arg1;
             }

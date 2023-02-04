@@ -26,35 +26,40 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil.Cil {
-
-    internal sealed class VariableDefinition : VariableReference {
-
+namespace Mono.Cecil.Cil
+{
+    internal sealed class VariableDefinition : VariableReference
+    {
         MethodDefinition m_method;
 
-        public MethodDefinition Method {
+        public MethodDefinition Method
+        {
             get { return m_method; }
             set { m_method = value; }
         }
 
-        public VariableDefinition (TypeReference variableType) : base (variableType)
-        {
-        }
+        public VariableDefinition(TypeReference variableType)
+            : base(variableType) { }
 
-        public VariableDefinition (string name, int index, MethodDefinition method, TypeReference variableType) :
-            base (name, index, variableType)
+        public VariableDefinition(
+            string name,
+            int index,
+            MethodDefinition method,
+            TypeReference variableType
+        )
+            : base(name, index, variableType)
         {
             m_method = method;
         }
 
-        public override VariableDefinition Resolve ()
+        public override VariableDefinition Resolve()
         {
             return this;
         }
 
-        public override void Accept (ICodeVisitor visitor)
+        public override void Accept(ICodeVisitor visitor)
         {
-            visitor.VisitVariableDefinition (this);
+            visitor.VisitVariableDefinition(this);
         }
     }
 }

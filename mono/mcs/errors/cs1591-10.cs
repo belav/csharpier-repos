@@ -11,8 +11,6 @@ namespace Testing
     /// </summary>
     public class Test
     {
-        public static void Foo ()
-        {
-        }
+        public static void Foo() { }
     }
 }

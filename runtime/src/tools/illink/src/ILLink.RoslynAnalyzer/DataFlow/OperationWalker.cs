@@ -11,29 +11,33 @@ namespace ILLink.RoslynAnalyzer.DataFlow
     {
         private int _recursionDepth;
 
-        private void VisitChildOperations (IOperation operation, TArgument argument)
+        private void VisitChildOperations(IOperation operation, TArgument argument)
         {
             foreach (var child in operation.ChildOperations)
-                Visit (child, argument);
+                Visit(child, argument);
         }
 
-        public override TResult? Visit (IOperation? operation, TArgument argument)
+        public override TResult? Visit(IOperation? operation, TArgument argument)
         {
-            if (operation != null) {
+            if (operation != null)
+            {
                 _recursionDepth++;
-                try {
-                    StackGuard.EnsureSufficientExecutionStack (_recursionDepth);
-                    return operation.Accept (this, argument);
-                } finally {
+                try
+                {
+                    StackGuard.EnsureSufficientExecutionStack(_recursionDepth);
+                    return operation.Accept(this, argument);
+                }
+                finally
+                {
                     _recursionDepth--;
                 }
             }
             return default;
         }
 
-        public override TResult? DefaultVisit (IOperation operation, TArgument argument)
+        public override TResult? DefaultVisit(IOperation operation, TArgument argument)
         {
-            VisitChildOperations (operation, argument);
+            VisitChildOperations(operation, argument);
             return default;
         }
     }

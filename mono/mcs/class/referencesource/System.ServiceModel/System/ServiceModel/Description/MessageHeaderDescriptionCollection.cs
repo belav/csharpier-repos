@@ -12,12 +12,11 @@ namespace System.ServiceModel.Description
     using System.Xml;
     using System.Runtime.Serialization;
 
-    public class MessageHeaderDescriptionCollection : KeyedCollection<XmlQualifiedName, MessageHeaderDescription>
+    public class MessageHeaderDescriptionCollection
+        : KeyedCollection<XmlQualifiedName, MessageHeaderDescription>
     {
-        internal MessageHeaderDescriptionCollection() : base(null, 4)
-        {
-
-        }
+        internal MessageHeaderDescriptionCollection()
+            : base(null, 4) { }
 
         protected override XmlQualifiedName GetKeyForItem(MessageHeaderDescription item)
         {

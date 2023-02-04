@@ -11,22 +11,25 @@ using MonoTests.Common;
 
 namespace MonoTests.ModelProviders
 {
-    public class DynamicDataContainerModelProvider <TContext> : DataModelProvider
+    public class DynamicDataContainerModelProvider<TContext> : DataModelProvider
     {
-        IDynamicDataContainer <TContext> container;
+        IDynamicDataContainer<TContext> container;
         Type containerType;
         ReadOnlyCollection<TableProvider> tables;
 
-        public IDynamicDataContainer <TContext> Container
+        public IDynamicDataContainer<TContext> Container
         {
             get
             {
                 if (container != null)
                     return container;
 
-                container = Activator.CreateInstance (containerType) as IDynamicDataContainer <TContext>;
+                container =
+                    Activator.CreateInstance(containerType) as IDynamicDataContainer<TContext>;
                 if (container == null)
-                    throw new InvalidOperationException ("Failed to create an instance of container type '" + ContextType + "'.");
+                    throw new InvalidOperationException(
+                        "Failed to create an instance of container type '" + ContextType + "'."
+                    );
 
                 return container;
             }
@@ -34,33 +37,32 @@ namespace MonoTests.ModelProviders
 
         public override Type ContextType
         {
-            get
-            {
-                return typeof (TContext);
-            }
+            get { return typeof(TContext); }
             protected set
             {
-                throw new InvalidOperationException ("Setting the context type on this provider is not supported.");
+                throw new InvalidOperationException(
+                    "Setting the context type on this provider is not supported."
+                );
             }
         }
 
-        public DynamicDataContainerModelProvider ()
+        public DynamicDataContainerModelProvider()
         {
-            Type genType = typeof (TestDataContainer<>).GetGenericTypeDefinition ();
-            this.containerType = genType.MakeGenericType (new Type[] { ContextType });
+            Type genType = typeof(TestDataContainer<>).GetGenericTypeDefinition();
+            this.containerType = genType.MakeGenericType(new Type[] { ContextType });
         }
 
-        public DynamicDataContainerModelProvider (IDynamicDataContainer <TContext> container)
+        public DynamicDataContainerModelProvider(IDynamicDataContainer<TContext> container)
         {
             if (container == null)
-                throw new ArgumentNullException ("container");
+                throw new ArgumentNullException("container");
 
             this.container = container;
         }
 
-        public override object CreateContext ()
+        public override object CreateContext()
         {
-            return Activator.CreateInstance (ContextType);
+            return Activator.CreateInstance(ContextType);
         }
 
         public override ReadOnlyCollection<TableProvider> Tables
@@ -69,34 +71,35 @@ namespace MonoTests.ModelProviders
             {
                 if (tables != null)
                     return tables;
-                tables = LoadTables ();
+                tables = LoadTables();
 
                 return tables;
             }
         }
 
-        public void ResolveAssociations ()
+        public void ResolveAssociations()
         {
-            foreach (var t in Tables) {
-                var table = t as DynamicDataContainerTableProvider <TContext>;
+            foreach (var t in Tables)
+            {
+                var table = t as DynamicDataContainerTableProvider<TContext>;
                 if (t == null)
                     continue;
-                table.ResolveAssociations ();
+                table.ResolveAssociations();
             }
         }
 
-        ReadOnlyCollection<TableProvider> LoadTables ()
+        ReadOnlyCollection<TableProvider> LoadTables()
         {
-            List<DynamicDataTable> containerTables = Container.GetTables ();
+            List<DynamicDataTable> containerTables = Container.GetTables();
 
             if (containerTables == null || containerTables.Count == 0)
-                return new ReadOnlyCollection<TableProvider> (new List<TableProvider> ());
+                return new ReadOnlyCollection<TableProvider>(new List<TableProvider>());
 
-            var tables = new List<TableProvider> ();
+            var tables = new List<TableProvider>();
             foreach (var table in containerTables)
-                tables.Add (new DynamicDataContainerTableProvider <TContext>(this, table));
+                tables.Add(new DynamicDataContainerTableProvider<TContext>(this, table));
 
-            return new ReadOnlyCollection<TableProvider> (tables);
+            return new ReadOnlyCollection<TableProvider>(tables);
         }
     }
 }

@@ -3,7 +3,7 @@
 
 class C
 {
-    public static void Main ()
+    public static void Main()
     {
         const string s3 = null + null;
     }

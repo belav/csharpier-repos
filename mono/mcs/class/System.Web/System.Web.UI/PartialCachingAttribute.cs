@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,12 +28,15 @@
 
 using System.Security.Permissions;
 
-namespace System.Web.UI {
-
+namespace System.Web.UI
+{
     // CAS - no InheritanceDemand here as the class is sealed
-    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
     // attributes
-    [AttributeUsage (AttributeTargets.Class)]
+    [AttributeUsage(AttributeTargets.Class)]
     public sealed class PartialCachingAttribute : Attribute
     {
         int duration;
@@ -42,14 +45,18 @@ namespace System.Web.UI {
         string varyByParams;
         bool shared;
         string sqlDependency;
-        
-        public PartialCachingAttribute (int duration)
+
+        public PartialCachingAttribute(int duration)
         {
             this.duration = duration;
         }
 
-        public PartialCachingAttribute (int duration, string varyByParams,
-                        string varyByControls, string varyByCustom)
+        public PartialCachingAttribute(
+            int duration,
+            string varyByParams,
+            string varyByControls,
+            string varyByCustom
+        )
         {
             this.duration = duration;
             this.varyByParams = varyByParams;
@@ -57,8 +64,13 @@ namespace System.Web.UI {
             this.varyByCustom = varyByCustom;
         }
 
-        public PartialCachingAttribute (int duration, string varyByParams, string varyByControls,
-                        string varyByCustom, bool shared)
+        public PartialCachingAttribute(
+            int duration,
+            string varyByParams,
+            string varyByControls,
+            string varyByCustom,
+            bool shared
+        )
         {
             this.duration = duration;
             this.varyByParams = varyByParams;
@@ -67,8 +79,14 @@ namespace System.Web.UI {
             this.shared = shared;
         }
 
-        public PartialCachingAttribute (int duration, string varyByParams, string varyByControls,
-                        string varyByCustom, string sqlDependency, bool shared)
+        public PartialCachingAttribute(
+            int duration,
+            string varyByParams,
+            string varyByControls,
+            string varyByCustom,
+            string sqlDependency,
+            bool shared
+        )
         {
             this.duration = duration;
             this.varyByParams = varyByParams;
@@ -78,29 +96,33 @@ namespace System.Web.UI {
             this.shared = shared;
         }
 
-        public int Duration {
+        public int Duration
+        {
             get { return duration; }
         }
-        public string ProviderName {
-            get; set;
-        }
-        public string VaryByParams {
+        public string ProviderName { get; set; }
+        public string VaryByParams
+        {
             get { return varyByParams; }
         }
 
-        public string VaryByControls {
+        public string VaryByControls
+        {
             get { return varyByControls; }
         }
 
-        public string VaryByCustom {
+        public string VaryByCustom
+        {
             get { return varyByCustom; }
         }
 
-        public bool Shared {
+        public bool Shared
+        {
             get { return shared; }
         }
 
-        public string SqlDependency {
+        public string SqlDependency
+        {
             get { return sqlDependency; }
         }
     }

@@ -37,139 +37,137 @@ namespace MonoTests.System.Linq.Expressions
 {
     public class OpClass
     {
-        public static OpClass operator + (OpClass a, OpClass b)
+        public static OpClass operator +(OpClass a, OpClass b)
         {
             return a;
         }
 
-        public static OpClass operator - (OpClass a, OpClass b)
+        public static OpClass operator -(OpClass a, OpClass b)
         {
             return a;
         }
 
-        public static OpClass operator * (OpClass a, OpClass b)
+        public static OpClass operator *(OpClass a, OpClass b)
         {
             return a;
         }
 
-        public static OpClass operator / (OpClass a, OpClass b)
+        public static OpClass operator /(OpClass a, OpClass b)
         {
             return a;
         }
 
-        public static OpClass operator % (OpClass a, OpClass b)
+        public static OpClass operator %(OpClass a, OpClass b)
         {
             return a;
         }
 
-        public static OpClass operator & (OpClass a, OpClass b)
+        public static OpClass operator &(OpClass a, OpClass b)
         {
             return a;
         }
 
-        public static OpClass operator | (OpClass a, OpClass b)
+        public static OpClass operator |(OpClass a, OpClass b)
         {
             return a;
         }
 
-        public static OpClass operator ^ (OpClass a, OpClass b)
+        public static OpClass operator ^(OpClass a, OpClass b)
         {
             return a;
         }
 
-        public static OpClass operator >> (OpClass a, int b)
+        public static OpClass operator >>(OpClass a, int b)
         {
             return a;
         }
 
-        public static OpClass operator << (OpClass a, int b)
+        public static OpClass operator <<(OpClass a, int b)
         {
             return a;
         }
 
-        public static bool operator true (OpClass a)
+        public static bool operator true(OpClass a)
         {
             return false;
         }
 
-        public static bool operator false (OpClass a)
+        public static bool operator false(OpClass a)
         {
             return false;
         }
 
-        public static bool operator > (OpClass a, OpClass b)
+        public static bool operator >(OpClass a, OpClass b)
         {
             return false;
         }
 
-        public static bool operator < (OpClass a, OpClass b)
+        public static bool operator <(OpClass a, OpClass b)
         {
             return false;
         }
 
-        public static bool operator >= (OpClass a, OpClass b)
+        public static bool operator >=(OpClass a, OpClass b)
         {
             return false;
         }
 
-        public static bool operator <= (OpClass a, OpClass b)
+        public static bool operator <=(OpClass a, OpClass b)
         {
             return false;
         }
 
-        public static OpClass operator + (OpClass a)
+        public static OpClass operator +(OpClass a)
         {
             return a;
         }
 
-        public static OpClass operator - (OpClass a)
+        public static OpClass operator -(OpClass a)
         {
             return a;
         }
 
-        public static OpClass operator ! (OpClass a)
+        public static OpClass operator !(OpClass a)
         {
             return a;
         }
 
-        public static OpClass operator ~ (OpClass a)
+        public static OpClass operator ~(OpClass a)
         {
             return a;
         }
 
-        public static void WrongUnaryReturnVoid (OpClass a)
-        {
-        }
+        public static void WrongUnaryReturnVoid(OpClass a) { }
 
-        public static OpClass WrongUnaryParameterCount (OpClass a, OpClass b)
+        public static OpClass WrongUnaryParameterCount(OpClass a, OpClass b)
         {
             return a;
         }
 
-        public OpClass WrongUnaryNotStatic (OpClass a)
+        public OpClass WrongUnaryNotStatic(OpClass a)
         {
             return a;
         }
 
-        public static bool operator == (OpClass a, OpClass b)
+        public static bool operator ==(OpClass a, OpClass b)
         {
-            return ((object) a) == ((object) b);
+            return ((object)a) == ((object)b);
         }
 
-        public static bool operator != (OpClass a, OpClass b)
+        public static bool operator !=(OpClass a, OpClass b)
         {
-            return ((object) a) != ((object) b);
+            return ((object)a) != ((object)b);
         }
 
         //
         // Required when you have == or !=
         //
-        public override bool Equals (object o)
+        public override bool Equals(object o)
         {
             return ((object)this) == o;
         }
 
-        public override int GetHashCode ()
+        public override int GetHashCode()
         {
             return 1;
         }
@@ -184,15 +182,30 @@ namespace MonoTests.System.Linq.Expressions
     {
         public int TestField1 = 0;
         public readonly int TestField2 = 1;
-        public int TestProperty1 { get { return TestField1; }}
-        public int TestProperty2 { get { return TestField1; } set { TestField1 = value; }}
-        public int TestMethod (int i) { return TestField1 + i; }
-        public T TestGenericMethod<T> (T arg) { return arg; }
+        public int TestProperty1
+        {
+            get { return TestField1; }
+        }
+        public int TestProperty2
+        {
+            get { return TestField1; }
+            set { TestField1 = value; }
+        }
+
+        public int TestMethod(int i)
+        {
+            return TestField1 + i;
+        }
+
+        public T TestGenericMethod<T>(T arg)
+        {
+            return arg;
+        }
 
         public delegate int TestDelegate(int i);
         public event TestDelegate TestEvent;
 
-        public void DoNothing ()
+        public void DoNothing()
         {
             // Just to avoid a compiler warning
             if (TestEvent != null)
@@ -200,125 +213,145 @@ namespace MonoTests.System.Linq.Expressions
         }
 
         public static int StaticField = 0;
-        public static int StaticProperty { get { return StaticField; } set { StaticField = value; }}
-        public static int StaticMethod (int i) { return 1 + i; }
-        public static T StaticGenericMethod<T> (T arg) { return arg; }
-
-        public static MethodInfo GetMethodInfo ()
+        public static int StaticProperty
         {
-            return typeof (MemberClass).GetMethod ("TestMethod");
+            get { return StaticField; }
+            set { StaticField = value; }
         }
 
-        public static FieldInfo GetRoFieldInfo ()
+        public static int StaticMethod(int i)
         {
-            return typeof (MemberClass).GetField ("TestField1");
+            return 1 + i;
         }
 
-        public static FieldInfo GetRwFieldInfo ()
+        public static T StaticGenericMethod<T>(T arg)
         {
-            return typeof (MemberClass).GetField ("TestField2");
+            return arg;
         }
 
-        public static PropertyInfo GetRoPropertyInfo ()
+        public static MethodInfo GetMethodInfo()
         {
-            return typeof (MemberClass).GetProperty ("TestProperty1");
+            return typeof(MemberClass).GetMethod("TestMethod");
         }
 
-        public static PropertyInfo GetRwPropertyInfo ()
+        public static FieldInfo GetRoFieldInfo()
         {
-            return typeof (MemberClass).GetProperty ("TestProperty2");
+            return typeof(MemberClass).GetField("TestField1");
         }
 
-        public static EventInfo GetEventInfo ()
+        public static FieldInfo GetRwFieldInfo()
         {
-            return typeof (MemberClass).GetEvent ("TestEvent");
+            return typeof(MemberClass).GetField("TestField2");
         }
 
-        public static FieldInfo GetStaticFieldInfo ()
+        public static PropertyInfo GetRoPropertyInfo()
         {
-            return typeof (MemberClass).GetField ("StaticField");
+            return typeof(MemberClass).GetProperty("TestProperty1");
         }
 
-        public static PropertyInfo GetStaticPropertyInfo ()
+        public static PropertyInfo GetRwPropertyInfo()
         {
-            return typeof (MemberClass).GetProperty ("StaticProperty");
+            return typeof(MemberClass).GetProperty("TestProperty2");
         }
 
+        public static EventInfo GetEventInfo()
+        {
+            return typeof(MemberClass).GetEvent("TestEvent");
+        }
+
+        public static FieldInfo GetStaticFieldInfo()
+        {
+            return typeof(MemberClass).GetField("StaticField");
+        }
+
+        public static PropertyInfo GetStaticPropertyInfo()
+        {
+            return typeof(MemberClass).GetProperty("StaticProperty");
+        }
     }
 
     public struct OpStruct
     {
-        public static OpStruct operator + (OpStruct a, OpStruct b)
+        public static OpStruct operator +(OpStruct a, OpStruct b)
         {
             return a;
         }
 
-        public static OpStruct operator - (OpStruct a, OpStruct b)
+        public static OpStruct operator -(OpStruct a, OpStruct b)
         {
             return a;
         }
 
-        public static OpStruct operator * (OpStruct a, OpStruct b)
+        public static OpStruct operator *(OpStruct a, OpStruct b)
         {
             return a;
         }
 
-        public static OpStruct operator & (OpStruct a, OpStruct b)
+        public static OpStruct operator &(OpStruct a, OpStruct b)
         {
             return a;
         }
     }
 
-    static class ExpressionExtensions {
-
-        public static ConstantExpression ToConstant<T> (this T t)
+    static class ExpressionExtensions
+    {
+        public static ConstantExpression ToConstant<T>(this T t)
         {
-            return Expression.Constant (t);
+            return Expression.Constant(t);
         }
 
-        public static void AssertThrows (this Action action, Type type)
+        public static void AssertThrows(this Action action, Type type)
         {
-            try {
-                action ();
-                Assert.Fail ();
-            } catch (Exception e) {
-                if (e.GetType () != type)
-                    Assert.Fail ();
+            try
+            {
+                action();
+                Assert.Fail();
+            }
+            catch (Exception e)
+            {
+                if (e.GetType() != type)
+                    Assert.Fail();
             }
         }
     }
 
-    class Item<T> {
-
+    class Item<T>
+    {
         bool left_called;
         T left;
 
-        public T Left {
-            get {
+        public T Left
+        {
+            get
+            {
                 left_called = true;
                 return left;
             }
         }
 
-        public bool LeftCalled {
+        public bool LeftCalled
+        {
             get { return left_called; }
         }
 
         bool right_called;
         T right;
 
-        public T Right {
-            get {
+        public T Right
+        {
+            get
+            {
                 right_called = true;
                 return right;
             }
         }
 
-        public bool RightCalled {
+        public bool RightCalled
+        {
             get { return right_called; }
         }
 
-        public Item (T left, T right)
+        public Item(T left, T right)
         {
             this.left = left;
             this.right = right;

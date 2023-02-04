@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -44,22 +44,26 @@ namespace System.Web.UI
         bool performValidation;
         string validationGroup;
 
-        public PostBackOptions (Control targetControl)
-            : this (targetControl, null, null, false, false, false, true, false, null)
-        {
-        }
+        public PostBackOptions(Control targetControl)
+            : this(targetControl, null, null, false, false, false, true, false, null) { }
 
-        public PostBackOptions (Control targetControl, string argument)
-            : this (targetControl, argument, null, false, false, false, true, false, null)
-        {
-        }
+        public PostBackOptions(Control targetControl, string argument)
+            : this(targetControl, argument, null, false, false, false, true, false, null) { }
 
-        public PostBackOptions (Control targetControl, string argument, string actionUrl, bool autoPostBack,
-                    bool requiresJavaScriptProtocol, bool trackFocus, bool clientSubmit,
-                    bool performValidation, string validationGroup)
+        public PostBackOptions(
+            Control targetControl,
+            string argument,
+            string actionUrl,
+            bool autoPostBack,
+            bool requiresJavaScriptProtocol,
+            bool trackFocus,
+            bool clientSubmit,
+            bool performValidation,
+            string validationGroup
+        )
         {
             if (targetControl == null)
-                throw new ArgumentNullException ("targetControl");
+                throw new ArgumentNullException("targetControl");
             this.control = targetControl;
             this.argument = argument;
             this.actionUrl = actionUrl;
@@ -71,71 +75,82 @@ namespace System.Web.UI
             this.validationGroup = validationGroup;
         }
 
-        [DefaultValue ("")]
-        public string ActionUrl {
-            get { return actionUrl;    }
+        [DefaultValue("")]
+        public string ActionUrl
+        {
+            get { return actionUrl; }
             set { actionUrl = value; }
         }
 
-        [DefaultValue ("")]
-        public string Argument {
-            get { return  argument;    }
+        [DefaultValue("")]
+        public string Argument
+        {
+            get { return argument; }
             set { argument = value; }
         }
 
-        [MonoTODO ("Implement support for this in Page")]
-        [DefaultValue (false)]
-        public bool AutoPostBack {
+        [MonoTODO("Implement support for this in Page")]
+        [DefaultValue(false)]
+        public bool AutoPostBack
+        {
             get { return autoPostBack; }
             set { autoPostBack = value; }
         }
 
-        [DefaultValue (true)]
-        public bool ClientSubmit {
+        [DefaultValue(true)]
+        public bool ClientSubmit
+        {
             get { return clientSubmit; }
             set { clientSubmit = value; }
         }
-        
-        [DefaultValue (false)]
-        public bool PerformValidation {
-            get { return performValidation;    }
+
+        [DefaultValue(false)]
+        public bool PerformValidation
+        {
+            get { return performValidation; }
             set { performValidation = value; }
         }
 
-        [DefaultValue (true)]
-        public bool RequiresJavaScriptProtocol {
+        [DefaultValue(true)]
+        public bool RequiresJavaScriptProtocol
+        {
             get { return requiresJavaScriptProtocol; }
             set { requiresJavaScriptProtocol = value; }
         }
 
-        [DefaultValue (null)]
-        public Control TargetControl {
+        [DefaultValue(null)]
+        public Control TargetControl
+        {
             get { return control; }
         }
 
-        [MonoTODO ("Implement support for this in Page")]
-        [DefaultValue (false)]
-        public bool TrackFocus {
+        [MonoTODO("Implement support for this in Page")]
+        [DefaultValue(false)]
+        public bool TrackFocus
+        {
             get { return trackFocus; }
             set { trackFocus = value; }
         }
 
-        [MonoTODO ("Implement support for this in Page")]
-        [DefaultValue ("")]
-        public string ValidationGroup {
+        [MonoTODO("Implement support for this in Page")]
+        [DefaultValue("")]
+        public string ValidationGroup
+        {
             get { return validationGroup; }
             set { validationGroup = value; }
         }
-        
+
         // Returns true if some of these options must be handled by
         // client script.
-        internal bool RequiresSpecialPostBack {
-            get { 
-                return actionUrl != null || 
-                        validationGroup != null || 
-                        trackFocus || 
-                        autoPostBack || 
-                        argument != null;
+        internal bool RequiresSpecialPostBack
+        {
+            get
+            {
+                return actionUrl != null
+                    || validationGroup != null
+                    || trackFocus
+                    || autoPostBack
+                    || argument != null;
             }
         }
     }

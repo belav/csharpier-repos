@@ -3,15 +3,13 @@
 
 public abstract class A
 {
-        public abstract int Foobar { set; }
+    public abstract int Foobar { set; }
 }
 
-public class B: A
+public class B : A
 {
-        public override int Foobar  {
-            set {
-                base.Foobar = value;
-            }
-        }
+    public override int Foobar
+    {
+        set { base.Foobar = value; }
+    }
 }
-

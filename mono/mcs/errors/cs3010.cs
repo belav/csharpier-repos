@@ -3,12 +3,14 @@
 // Compiler options: -warnaserror -warn:1
 
 using System;
-[assembly:CLSCompliant (true)]
 
-public interface I {
-        [CLSCompliant (true)]
-        void Valid (bool arg);
-    
-        [CLSCompliant (false)]
-        event AssemblyLoadEventHandler Error;
+[assembly: CLSCompliant(true)]
+
+public interface I
+{
+    [CLSCompliant(true)]
+    void Valid(bool arg);
+
+    [CLSCompliant(false)]
+    event AssemblyLoadEventHandler Error;
 }

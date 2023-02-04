@@ -3,7 +3,7 @@
 
 public class C
 {
-    public static void Main ()
+    public static void Main()
     {
         const int x = y;
         const int y = 1;

@@ -15,29 +15,27 @@ namespace MonoTests.Controls
 
     public class EnumConverterTestValuesConverter : EnumConverter
     {
-        public EnumConverterTestValuesConverter (Type type)
-            : base (type)
-        { }
+        public EnumConverterTestValuesConverter(Type type)
+            : base(type) { }
     }
 
     public class EnumConverterTextBox : TextBox
     {
         EnumConverterTestValues values;
 
-        [TypeConverter (typeof (EnumConverterTestValuesConverter))]
-        public EnumConverterTestValues Values {
+        [TypeConverter(typeof(EnumConverterTestValuesConverter))]
+        public EnumConverterTestValues Values
+        {
             get { return values; }
             set { values = value; }
         }
 
-        public EnumConverterTextBox ()
-        {
-        }
+        public EnumConverterTextBox() { }
 
-        protected override void OnInit (EventArgs e)
+        protected override void OnInit(EventArgs e)
         {
-            base.OnInit (e);
-            Text = values.ToString ();
+            base.OnInit(e);
+            Text = values.ToString();
         }
     }
 }

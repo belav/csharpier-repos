@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -40,161 +40,200 @@ using System.Web.UI;
 
 namespace System.Web.ClientServices.Providers
 {
-    public class ClientFormsAuthenticationMembershipProvider : System.Web.Security.MembershipProvider
+    public class ClientFormsAuthenticationMembershipProvider
+        : System.Web.Security.MembershipProvider
     {
 #pragma warning disable 67
-        public event EventHandler <UserValidatedEventArgs> UserValidated;
+        public event EventHandler<UserValidatedEventArgs> UserValidated;
 #pragma warning restore 67
-        
-        public override string ApplicationName {
-            get { throw new NotImplementedException (); }
-            set { throw new NotImplementedException (); }
+
+        public override string ApplicationName
+        {
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
         }
 
-        public override bool EnablePasswordReset {
-            get { throw new NotImplementedException (); }
+        public override bool EnablePasswordReset
+        {
+            get { throw new NotImplementedException(); }
         }
-        
-        public override bool EnablePasswordRetrieval {
-            get { throw new NotImplementedException (); }
-        }
-        
-        public override int MaxInvalidPasswordAttempts {
-            get { throw new NotImplementedException (); }
-        }
-        
-        public override int MinRequiredNonAlphanumericCharacters {
-            get { throw new NotImplementedException (); }
-        }
-        
-        public override int MinRequiredPasswordLength {
-            get { throw new NotImplementedException (); }
-        }        
 
-        public override int PasswordAttemptWindow {
-            get { throw new NotImplementedException (); }
-        }
-        
-        public override MembershipPasswordFormat PasswordFormat {
-            get { throw new NotImplementedException (); }
-        }
-        
-        public override string PasswordStrengthRegularExpression {
-            get { throw new NotImplementedException (); }
-        }
-        
-        public override bool RequiresQuestionAndAnswer {
-            get { throw new NotImplementedException (); }
-        }
-        
-        public override bool RequiresUniqueEmail {
-            get { throw new NotImplementedException (); }
-        }
-        
-        public ClientFormsAuthenticationMembershipProvider ()
+        public override bool EnablePasswordRetrieval
         {
-            throw new NotImplementedException ();
+            get { throw new NotImplementedException(); }
         }
-        
-        public static bool ValidateUser (string username, string password, string serviceUri)
+
+        public override int MaxInvalidPasswordAttempts
         {
-            throw new NotImplementedException ();
+            get { throw new NotImplementedException(); }
         }
-        
-        public override bool ChangePassword (string username, string oldPassword, string newPassword)
+
+        public override int MinRequiredNonAlphanumericCharacters
         {
-            throw new NotImplementedException ();
+            get { throw new NotImplementedException(); }
         }
-        
-        public override bool ChangePasswordQuestionAndAnswer (string username, string password, string newPasswordQuestion, string newPasswordAnswer)
+
+        public override int MinRequiredPasswordLength
         {
-            throw new NotImplementedException ();
+            get { throw new NotImplementedException(); }
         }
-        
-        public override MembershipUser CreateUser (string username, string password, string email, string passwordQuestion, string passwordAnswer, bool isApproved,
-                               object providerUserKey, out MembershipCreateStatus status)
+
+        public override int PasswordAttemptWindow
         {
-            throw new NotImplementedException ();
+            get { throw new NotImplementedException(); }
         }
-        
-        public override bool DeleteUser (string username, bool deleteAllRelatedData)
+
+        public override MembershipPasswordFormat PasswordFormat
         {
-            throw new NotImplementedException ();
+            get { throw new NotImplementedException(); }
         }
-        
-        public override MembershipUserCollection FindUsersByEmail (string emailToMatch, int pageIndex, int pageSize, out int totalRecords)
+
+        public override string PasswordStrengthRegularExpression
         {
-            throw new NotImplementedException ();
+            get { throw new NotImplementedException(); }
         }
-        
-        public override MembershipUserCollection FindUsersByName (string usernameToMatch, int pageIndex, int pageSize, out int totalRecords)
+
+        public override bool RequiresQuestionAndAnswer
         {
-            throw new NotImplementedException ();
+            get { throw new NotImplementedException(); }
         }
-        
-        public override MembershipUserCollection GetAllUsers (int pageIndex, int pageSize, out int totalRecords)
+
+        public override bool RequiresUniqueEmail
         {
-            throw new NotImplementedException ();
+            get { throw new NotImplementedException(); }
         }
-        
-        public override int GetNumberOfUsersOnline ()
+
+        public ClientFormsAuthenticationMembershipProvider()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
-        
-        public override string GetPassword (string username, string answer)
+
+        public static bool ValidateUser(string username, string password, string serviceUri)
         {
-            throw new NotImplementedException ();
-        }        
-        
-        public override MembershipUser GetUser (object providerUserKey, bool userIsOnline)
-        {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
-        
-        public override MembershipUser GetUser (string username, bool userIsOnline)
+
+        public override bool ChangePassword(string username, string oldPassword, string newPassword)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
-        
-        public override string GetUserNameByEmail (string email)
+
+        public override bool ChangePasswordQuestionAndAnswer(
+            string username,
+            string password,
+            string newPasswordQuestion,
+            string newPasswordAnswer
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
-        
-        public override void Initialize (string name, NameValueCollection config)
+
+        public override MembershipUser CreateUser(
+            string username,
+            string password,
+            string email,
+            string passwordQuestion,
+            string passwordAnswer,
+            bool isApproved,
+            object providerUserKey,
+            out MembershipCreateStatus status
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
-        
-        public void Logout ()
+
+        public override bool DeleteUser(string username, bool deleteAllRelatedData)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
-        
-        public override string ResetPassword (string username, string answer)
+
+        public override MembershipUserCollection FindUsersByEmail(
+            string emailToMatch,
+            int pageIndex,
+            int pageSize,
+            out int totalRecords
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
-        
-        public override bool UnlockUser (string username)
+
+        public override MembershipUserCollection FindUsersByName(
+            string usernameToMatch,
+            int pageIndex,
+            int pageSize,
+            out int totalRecords
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
-        
-        public override void UpdateUser (System.Web.Security.MembershipUser user)
+
+        public override MembershipUserCollection GetAllUsers(
+            int pageIndex,
+            int pageSize,
+            out int totalRecords
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
-        
-        public override bool ValidateUser (string username, string password)
+
+        public override int GetNumberOfUsersOnline()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
-        
-        public bool ValidateUser (string username, string password, bool rememberMe)
+
+        public override string GetPassword(string username, string answer)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
+        }
+
+        public override MembershipUser GetUser(object providerUserKey, bool userIsOnline)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override MembershipUser GetUser(string username, bool userIsOnline)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override string GetUserNameByEmail(string email)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Initialize(string name, NameValueCollection config)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Logout()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override string ResetPassword(string username, string answer)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override bool UnlockUser(string username)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void UpdateUser(System.Web.Security.MembershipUser user)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override bool ValidateUser(string username, string password)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool ValidateUser(string username, string password, bool rememberMe)
+        {
+            throw new NotImplementedException();
         }
     }
 }

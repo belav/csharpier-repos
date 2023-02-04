@@ -15,1516 +15,1961 @@ namespace Mono.Linker.Tests.Cases.RequiresCapability
     [ExpectedNoWarnings]
     public class RequiresInCompilerGeneratedCode
     {
-        public static void Main ()
+        public static void Main()
         {
-            WarnInIteratorBody.Test ();
-            SuppressInIteratorBody.Test ();
+            WarnInIteratorBody.Test();
+            SuppressInIteratorBody.Test();
 
-            WarnInAsyncBody.Test ();
-            SuppressInAsyncBody.Test ();
+            WarnInAsyncBody.Test();
+            SuppressInAsyncBody.Test();
 
-            WarnInAsyncIteratorBody.Test ();
-            SuppressInAsyncIteratorBody.Test ();
+            WarnInAsyncIteratorBody.Test();
+            SuppressInAsyncIteratorBody.Test();
 
-            WarnInLocalFunction.Test ();
-            SuppressInLocalFunction.Test ();
-            WarnInNonNestedLocalFunctionTest ();
-            SuppressInNonNestedLocalFunctionTest ();
+            WarnInLocalFunction.Test();
+            SuppressInLocalFunction.Test();
+            WarnInNonNestedLocalFunctionTest();
+            SuppressInNonNestedLocalFunctionTest();
 
-            WarnInLambda.Test ();
-            SuppressInLambda.Test ();
+            WarnInLambda.Test();
+            SuppressInLambda.Test();
 
-            WarnInComplex.Test ();
-            SuppressInComplex.Test ();
+            WarnInComplex.Test();
+            SuppressInComplex.Test();
 
-            StateMachinesOnlyReferencedViaReflection.Test ();
-            LocalFunctionsReferencedViaReflection.Test ();
-            LambdasReferencedViaReflection.Test ();
+            StateMachinesOnlyReferencedViaReflection.Test();
+            LocalFunctionsReferencedViaReflection.Test();
+            LambdasReferencedViaReflection.Test();
 
-            ComplexCases.AsyncBodyCallingMethodWithRequires.Test ();
-            ComplexCases.GenericAsyncBodyCallingMethodWithRequires.Test ();
-            ComplexCases.GenericAsyncEnumerableBodyCallingRequiresWithAnnotations.Test ();
+            ComplexCases.AsyncBodyCallingMethodWithRequires.Test();
+            ComplexCases.GenericAsyncBodyCallingMethodWithRequires.Test();
+            ComplexCases.GenericAsyncEnumerableBodyCallingRequiresWithAnnotations.Test();
         }
 
         class WarnInIteratorBody
         {
-            [ExpectedWarning ("IL2026", "--MethodWithRequires--", CompilerGeneratedCode = true)]
-            [ExpectedWarning ("IL3002", "--MethodWithRequires--", ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot, CompilerGeneratedCode = true)]
-            [ExpectedWarning ("IL3050", "--MethodWithRequires--", ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot, CompilerGeneratedCode = true)]
-            static IEnumerable<int> TestCallBeforeYieldReturn ()
+            [ExpectedWarning("IL2026", "--MethodWithRequires--", CompilerGeneratedCode = true)]
+            [ExpectedWarning(
+                "IL3002",
+                "--MethodWithRequires--",
+                ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot,
+                CompilerGeneratedCode = true
+            )]
+            [ExpectedWarning(
+                "IL3050",
+                "--MethodWithRequires--",
+                ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot,
+                CompilerGeneratedCode = true
+            )]
+            static IEnumerable<int> TestCallBeforeYieldReturn()
             {
-                MethodWithRequires ();
+                MethodWithRequires();
                 yield return 0;
             }
 
-            [ExpectedWarning ("IL2026", "--MethodWithRequires--", CompilerGeneratedCode = true)]
-            [ExpectedWarning ("IL3002", "--MethodWithRequires--", ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot, CompilerGeneratedCode = true)]
-            [ExpectedWarning ("IL3050", "--MethodWithRequires--", ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot, CompilerGeneratedCode = true)]
-            static IEnumerable<int> TestCallAfterYieldReturn ()
+            [ExpectedWarning("IL2026", "--MethodWithRequires--", CompilerGeneratedCode = true)]
+            [ExpectedWarning(
+                "IL3002",
+                "--MethodWithRequires--",
+                ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot,
+                CompilerGeneratedCode = true
+            )]
+            [ExpectedWarning(
+                "IL3050",
+                "--MethodWithRequires--",
+                ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot,
+                CompilerGeneratedCode = true
+            )]
+            static IEnumerable<int> TestCallAfterYieldReturn()
             {
                 yield return 0;
-                MethodWithRequires ();
+                MethodWithRequires();
             }
 
-            [ExpectedWarning ("IL2026", "--MethodWithRequires--", CompilerGeneratedCode = true)]
-            static IEnumerable<int> TestReflectionAccess ()
+            [ExpectedWarning("IL2026", "--MethodWithRequires--", CompilerGeneratedCode = true)]
+            static IEnumerable<int> TestReflectionAccess()
             {
                 yield return 0;
-                typeof (RequiresInCompilerGeneratedCode)
-                    .GetMethod ("MethodWithRequires", System.Reflection.BindingFlags.NonPublic)
-                    .Invoke (null, new object[] { });
+                typeof(RequiresInCompilerGeneratedCode)
+                    .GetMethod("MethodWithRequires", System.Reflection.BindingFlags.NonPublic)
+                    .Invoke(null, new object[] { });
                 yield return 1;
             }
 
 #if !RELEASE
             // NativeAot is missing ldftn detection: https://github.com/dotnet/runtime/issues/68786
-            [ExpectedWarning ("IL2026", "--MethodWithRequires--", CompilerGeneratedCode = true, ProducedBy = ProducedBy.Trimmer)]
+            [ExpectedWarning(
+                "IL2026",
+                "--MethodWithRequires--",
+                CompilerGeneratedCode = true,
+                ProducedBy = ProducedBy.Trimmer
+            )]
 #else
             // In release mode, the compiler optimizes away the unused Action (and reference to MethodWithRequires)
 #endif
-            [ExpectedWarning ("IL2026", "--MethodWithRequires--", ProducedBy = ProducedBy.Analyzer)]
-            [ExpectedWarning ("IL3002", "--MethodWithRequires--", ProducedBy = ProducedBy.Analyzer)]
-            [ExpectedWarning ("IL3050", "--MethodWithRequires--", ProducedBy = ProducedBy.Analyzer)]
-            static IEnumerable<int> TestLdftn ()
+            [ExpectedWarning("IL2026", "--MethodWithRequires--", ProducedBy = ProducedBy.Analyzer)]
+            [ExpectedWarning("IL3002", "--MethodWithRequires--", ProducedBy = ProducedBy.Analyzer)]
+            [ExpectedWarning("IL3050", "--MethodWithRequires--", ProducedBy = ProducedBy.Analyzer)]
+            static IEnumerable<int> TestLdftn()
             {
                 yield return 0;
                 yield return 1;
-                var action = new Action (MethodWithRequires);
+                var action = new Action(MethodWithRequires);
             }
 
             // Cannot annotate fields either with RUC nor RAF therefore the warning persists
             // NativeAot is missing ldftn detection: https://github.com/dotnet/runtime/issues/68786
-            [ExpectedWarning ("IL2026", "Message from --MethodWithRequiresAndReturns--", CompilerGeneratedCode = true, ProducedBy = ProducedBy.Trimmer | ProducedBy.Analyzer)]
-            [ExpectedWarning ("IL3002", "Message from --MethodWithRequiresAndReturns--", ProducedBy = ProducedBy.Analyzer)]
-            [ExpectedWarning ("IL3050", "Message from --MethodWithRequiresAndReturns--", ProducedBy = ProducedBy.Analyzer)]
-            public static Lazy<string> _default = new Lazy<string> (MethodWithRequiresAndReturns);
+            [ExpectedWarning(
+                "IL2026",
+                "Message from --MethodWithRequiresAndReturns--",
+                CompilerGeneratedCode = true,
+                ProducedBy = ProducedBy.Trimmer | ProducedBy.Analyzer
+            )]
+            [ExpectedWarning(
+                "IL3002",
+                "Message from --MethodWithRequiresAndReturns--",
+                ProducedBy = ProducedBy.Analyzer
+            )]
+            [ExpectedWarning(
+                "IL3050",
+                "Message from --MethodWithRequiresAndReturns--",
+                ProducedBy = ProducedBy.Analyzer
+            )]
+            public static Lazy<string> _default = new Lazy<string>(MethodWithRequiresAndReturns);
 
-            static IEnumerable<int> TestLazyDelegate ()
+            static IEnumerable<int> TestLazyDelegate()
             {
                 yield return 0;
                 yield return 1;
                 _ = _default.Value;
             }
 
-            [ExpectedWarning ("IL2026", "--TypeWithMethodWithRequires.MethodWithRequires--", CompilerGeneratedCode = true)]
-            static IEnumerable<int> TestDynamicallyAccessedMethod ()
+            [ExpectedWarning(
+                "IL2026",
+                "--TypeWithMethodWithRequires.MethodWithRequires--",
+                CompilerGeneratedCode = true
+            )]
+            static IEnumerable<int> TestDynamicallyAccessedMethod()
             {
-                typeof (TypeWithMethodWithRequires).RequiresNonPublicMethods ();
+                typeof(TypeWithMethodWithRequires).RequiresNonPublicMethods();
                 yield return 0;
                 yield return 1;
             }
 
-            public static void Test ()
+            public static void Test()
             {
-                TestCallBeforeYieldReturn ();
-                TestCallAfterYieldReturn ();
-                TestReflectionAccess ();
-                TestLdftn ();
-                TestLazyDelegate ();
-                TestDynamicallyAccessedMethod ();
+                TestCallBeforeYieldReturn();
+                TestCallAfterYieldReturn();
+                TestReflectionAccess();
+                TestLdftn();
+                TestLazyDelegate();
+                TestDynamicallyAccessedMethod();
             }
         }
 
         class SuppressInIteratorBody
         {
-            [RequiresUnreferencedCode ("Suppress in body")]
-            [RequiresAssemblyFiles ("Suppress in body")]
-            [RequiresDynamicCode ("Suppress in body")]
-            static IEnumerable<int> TestCall ()
+            [RequiresUnreferencedCode("Suppress in body")]
+            [RequiresAssemblyFiles("Suppress in body")]
+            [RequiresDynamicCode("Suppress in body")]
+            static IEnumerable<int> TestCall()
             {
-                MethodWithRequires ();
+                MethodWithRequires();
                 yield return 0;
-                MethodWithRequires ();
+                MethodWithRequires();
                 yield return 1;
             }
 
-            [RequiresUnreferencedCode ("Suppress in body")]
-            [RequiresAssemblyFiles ("Suppress in body")]
-            [RequiresDynamicCode ("Suppress in body")]
-            static IEnumerable<int> TestReflectionAccess ()
+            [RequiresUnreferencedCode("Suppress in body")]
+            [RequiresAssemblyFiles("Suppress in body")]
+            [RequiresDynamicCode("Suppress in body")]
+            static IEnumerable<int> TestReflectionAccess()
             {
                 yield return 0;
-                typeof (RequiresInCompilerGeneratedCode)
-                    .GetMethod ("MethodWithRequires", System.Reflection.BindingFlags.NonPublic)
-                    .Invoke (null, new object[] { });
+                typeof(RequiresInCompilerGeneratedCode)
+                    .GetMethod("MethodWithRequires", System.Reflection.BindingFlags.NonPublic)
+                    .Invoke(null, new object[] { });
                 yield return 1;
             }
 
-            [RequiresUnreferencedCode ("Suppress in body")]
-            [RequiresAssemblyFiles ("Suppress in body")]
-            [RequiresDynamicCode ("Suppress in body")]
-            static IEnumerable<int> TestLdftn ()
+            [RequiresUnreferencedCode("Suppress in body")]
+            [RequiresAssemblyFiles("Suppress in body")]
+            [RequiresDynamicCode("Suppress in body")]
+            static IEnumerable<int> TestLdftn()
             {
                 yield return 0;
                 yield return 1;
-                var action = new Action (MethodWithRequires);
+                var action = new Action(MethodWithRequires);
             }
 
             // Cannot annotate fields either with RUC nor RAF therefore the warning persists
             // NativeAot is missing ldftn detection: https://github.com/dotnet/runtime/issues/68786
-            [ExpectedWarning ("IL2026", "Message from --MethodWithRequiresAndReturns--", CompilerGeneratedCode = true, ProducedBy = ProducedBy.Trimmer | ProducedBy.Analyzer)]
-            [ExpectedWarning ("IL3002", "Message from --MethodWithRequiresAndReturns--", ProducedBy = ProducedBy.Analyzer)]
-            [ExpectedWarning ("IL3050", "Message from --MethodWithRequiresAndReturns--", ProducedBy = ProducedBy.Analyzer)]
-            public static Lazy<string> _default = new Lazy<string> (MethodWithRequiresAndReturns);
+            [ExpectedWarning(
+                "IL2026",
+                "Message from --MethodWithRequiresAndReturns--",
+                CompilerGeneratedCode = true,
+                ProducedBy = ProducedBy.Trimmer | ProducedBy.Analyzer
+            )]
+            [ExpectedWarning(
+                "IL3002",
+                "Message from --MethodWithRequiresAndReturns--",
+                ProducedBy = ProducedBy.Analyzer
+            )]
+            [ExpectedWarning(
+                "IL3050",
+                "Message from --MethodWithRequiresAndReturns--",
+                ProducedBy = ProducedBy.Analyzer
+            )]
+            public static Lazy<string> _default = new Lazy<string>(MethodWithRequiresAndReturns);
 
-            static IEnumerable<int> TestLazyDelegate ()
+            static IEnumerable<int> TestLazyDelegate()
             {
                 yield return 0;
                 yield return 1;
                 _ = _default.Value;
             }
 
-            [RequiresUnreferencedCode ("Suppress in body")]
-            [RequiresAssemblyFiles ("Suppress in body")]
-            [RequiresDynamicCode ("Suppress in body")]
-            static IEnumerable<int> TestDynamicallyAccessedMethod ()
+            [RequiresUnreferencedCode("Suppress in body")]
+            [RequiresAssemblyFiles("Suppress in body")]
+            [RequiresDynamicCode("Suppress in body")]
+            static IEnumerable<int> TestDynamicallyAccessedMethod()
             {
-                typeof (TypeWithMethodWithRequires).RequiresNonPublicMethods ();
+                typeof(TypeWithMethodWithRequires).RequiresNonPublicMethods();
                 yield return 0;
                 yield return 1;
             }
 
-            [RequiresUnreferencedCode ("Suppress in body")]
-            [RequiresAssemblyFiles ("Suppress in body")]
-            [RequiresDynamicCode ("Suppress in body")]
-            static IEnumerable<int> TestMethodParameterWithRequirements (Type unknownType = null)
+            [RequiresUnreferencedCode("Suppress in body")]
+            [RequiresAssemblyFiles("Suppress in body")]
+            [RequiresDynamicCode("Suppress in body")]
+            static IEnumerable<int> TestMethodParameterWithRequirements(Type unknownType = null)
             {
-                unknownType.RequiresNonPublicMethods ();
+                unknownType.RequiresNonPublicMethods();
                 yield return 0;
             }
 
             // https://github.com/dotnet/runtime/issues/68688
             // This test passes on NativeAot even without the Requires* attributes.
-            [RequiresUnreferencedCode ("Suppress in body")]
-            [RequiresAssemblyFiles ("Suppress in body")]
-            [RequiresDynamicCode ("Suppress in body")]
-            static IEnumerable<int> TestGenericMethodParameterRequirement<TUnknown> ()
+            [RequiresUnreferencedCode("Suppress in body")]
+            [RequiresAssemblyFiles("Suppress in body")]
+            [RequiresDynamicCode("Suppress in body")]
+            static IEnumerable<int> TestGenericMethodParameterRequirement<TUnknown>()
             {
-                MethodWithGenericWhichRequiresMethods<TUnknown> ();
+                MethodWithGenericWhichRequiresMethods<TUnknown>();
                 yield return 0;
             }
 
             // https://github.com/dotnet/runtime/issues/68688
             // This test passes on NativeAot even without the Requires* attributes.
-            [RequiresUnreferencedCode ("Suppress in body")]
-            [RequiresAssemblyFiles ("Suppress in body")]
-            [RequiresDynamicCode ("Suppress in body")]
-            static IEnumerable<int> TestGenericTypeParameterRequirement<TUnknown> ()
+            [RequiresUnreferencedCode("Suppress in body")]
+            [RequiresAssemblyFiles("Suppress in body")]
+            [RequiresDynamicCode("Suppress in body")]
+            static IEnumerable<int> TestGenericTypeParameterRequirement<TUnknown>()
             {
-                new TypeWithGenericWhichRequiresNonPublicFields<TUnknown> ();
+                new TypeWithGenericWhichRequiresNonPublicFields<TUnknown>();
                 yield return 0;
             }
 
-            [UnconditionalSuppressMessage ("Trimming", "IL2026")]
-            [UnconditionalSuppressMessage ("SingleFile", "IL3002")]
-            [UnconditionalSuppressMessage ("AOT", "IL3050")]
-            public static void Test ()
+            [UnconditionalSuppressMessage("Trimming", "IL2026")]
+            [UnconditionalSuppressMessage("SingleFile", "IL3002")]
+            [UnconditionalSuppressMessage("AOT", "IL3050")]
+            public static void Test()
             {
-                TestCall ();
-                TestReflectionAccess ();
-                TestLdftn ();
-                TestLazyDelegate ();
-                TestDynamicallyAccessedMethod ();
-                TestMethodParameterWithRequirements ();
-                TestGenericMethodParameterRequirement<TestType> ();
-                TestGenericTypeParameterRequirement<TestType> ();
+                TestCall();
+                TestReflectionAccess();
+                TestLdftn();
+                TestLazyDelegate();
+                TestDynamicallyAccessedMethod();
+                TestMethodParameterWithRequirements();
+                TestGenericMethodParameterRequirement<TestType>();
+                TestGenericTypeParameterRequirement<TestType>();
             }
         }
 
         class WarnInAsyncBody
         {
-            [ExpectedWarning ("IL2026", "--MethodWithRequires--", CompilerGeneratedCode = true)]
-            [ExpectedWarning ("IL3002", "--MethodWithRequires--", ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot, CompilerGeneratedCode = true)]
-            [ExpectedWarning ("IL3050", "--MethodWithRequires--", ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot, CompilerGeneratedCode = true)]
-            static async void TestCallBeforeYieldReturn ()
+            [ExpectedWarning("IL2026", "--MethodWithRequires--", CompilerGeneratedCode = true)]
+            [ExpectedWarning(
+                "IL3002",
+                "--MethodWithRequires--",
+                ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot,
+                CompilerGeneratedCode = true
+            )]
+            [ExpectedWarning(
+                "IL3050",
+                "--MethodWithRequires--",
+                ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot,
+                CompilerGeneratedCode = true
+            )]
+            static async void TestCallBeforeYieldReturn()
             {
-                MethodWithRequires ();
-                await MethodAsync ();
+                MethodWithRequires();
+                await MethodAsync();
             }
 
-            [ExpectedWarning ("IL2026", "--MethodWithRequires--", CompilerGeneratedCode = true)]
-            [ExpectedWarning ("IL3002", "--MethodWithRequires--", ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot, CompilerGeneratedCode = true)]
-            [ExpectedWarning ("IL3050", "--MethodWithRequires--", ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot, CompilerGeneratedCode = true)]
-            static async void TestCallAfterYieldReturn ()
+            [ExpectedWarning("IL2026", "--MethodWithRequires--", CompilerGeneratedCode = true)]
+            [ExpectedWarning(
+                "IL3002",
+                "--MethodWithRequires--",
+                ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot,
+                CompilerGeneratedCode = true
+            )]
+            [ExpectedWarning(
+                "IL3050",
+                "--MethodWithRequires--",
+                ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot,
+                CompilerGeneratedCode = true
+            )]
+            static async void TestCallAfterYieldReturn()
             {
-                await MethodAsync ();
-                MethodWithRequires ();
+                await MethodAsync();
+                MethodWithRequires();
             }
 
-            [ExpectedWarning ("IL2026", "--MethodWithRequires--", CompilerGeneratedCode = true)]
-            static async void TestReflectionAccess ()
+            [ExpectedWarning("IL2026", "--MethodWithRequires--", CompilerGeneratedCode = true)]
+            static async void TestReflectionAccess()
             {
-                await MethodAsync ();
-                typeof (RequiresInCompilerGeneratedCode)
-                    .GetMethod ("MethodWithRequires", System.Reflection.BindingFlags.NonPublic)
-                    .Invoke (null, new object[] { });
-                await MethodAsync ();
+                await MethodAsync();
+                typeof(RequiresInCompilerGeneratedCode)
+                    .GetMethod("MethodWithRequires", System.Reflection.BindingFlags.NonPublic)
+                    .Invoke(null, new object[] { });
+                await MethodAsync();
             }
 
 #if !RELEASE
             // NativeAot is missing ldftn detection: https://github.com/dotnet/runtime/issues/68786
-            [ExpectedWarning ("IL2026", "--MethodWithRequires--", CompilerGeneratedCode = true, ProducedBy = ProducedBy.Trimmer)]
+            [ExpectedWarning(
+                "IL2026",
+                "--MethodWithRequires--",
+                CompilerGeneratedCode = true,
+                ProducedBy = ProducedBy.Trimmer
+            )]
 #endif
-            [ExpectedWarning ("IL2026", "--MethodWithRequires--", ProducedBy = ProducedBy.Analyzer)]
-            [ExpectedWarning ("IL3002", "--MethodWithRequires--", ProducedBy = ProducedBy.Analyzer)]
-            [ExpectedWarning ("IL3050", "--MethodWithRequires--", ProducedBy = ProducedBy.Analyzer)]
-            static async void TestLdftn ()
+            [ExpectedWarning("IL2026", "--MethodWithRequires--", ProducedBy = ProducedBy.Analyzer)]
+            [ExpectedWarning("IL3002", "--MethodWithRequires--", ProducedBy = ProducedBy.Analyzer)]
+            [ExpectedWarning("IL3050", "--MethodWithRequires--", ProducedBy = ProducedBy.Analyzer)]
+            static async void TestLdftn()
             {
-                await MethodAsync ();
-                var action = new Action (MethodWithRequires);
+                await MethodAsync();
+                var action = new Action(MethodWithRequires);
             }
 
             // NativeAot is missing ldftn detection: https://github.com/dotnet/runtime/issues/68786
-            [ExpectedWarning ("IL2026", "Message from --MethodWithRequiresAndReturns--", CompilerGeneratedCode = true, ProducedBy = ProducedBy.Trimmer | ProducedBy.Analyzer)]
-            [ExpectedWarning ("IL3002", "Message from --MethodWithRequiresAndReturns--", ProducedBy = ProducedBy.Analyzer)]
-            [ExpectedWarning ("IL3050", "Message from --MethodWithRequiresAndReturns--", ProducedBy = ProducedBy.Analyzer)]
-            public static Lazy<string> _default = new Lazy<string> (MethodWithRequiresAndReturns);
+            [ExpectedWarning(
+                "IL2026",
+                "Message from --MethodWithRequiresAndReturns--",
+                CompilerGeneratedCode = true,
+                ProducedBy = ProducedBy.Trimmer | ProducedBy.Analyzer
+            )]
+            [ExpectedWarning(
+                "IL3002",
+                "Message from --MethodWithRequiresAndReturns--",
+                ProducedBy = ProducedBy.Analyzer
+            )]
+            [ExpectedWarning(
+                "IL3050",
+                "Message from --MethodWithRequiresAndReturns--",
+                ProducedBy = ProducedBy.Analyzer
+            )]
+            public static Lazy<string> _default = new Lazy<string>(MethodWithRequiresAndReturns);
 
-            static async void TestLazyDelegate ()
+            static async void TestLazyDelegate()
             {
-                await MethodAsync ();
+                await MethodAsync();
                 _ = _default.Value;
             }
 
-            [ExpectedWarning ("IL2026", "--TypeWithMethodWithRequires.MethodWithRequires--", CompilerGeneratedCode = true)]
-            static async void TestDynamicallyAccessedMethod ()
+            [ExpectedWarning(
+                "IL2026",
+                "--TypeWithMethodWithRequires.MethodWithRequires--",
+                CompilerGeneratedCode = true
+            )]
+            static async void TestDynamicallyAccessedMethod()
             {
-                typeof (TypeWithMethodWithRequires).RequiresNonPublicMethods ();
-                await MethodAsync ();
+                typeof(TypeWithMethodWithRequires).RequiresNonPublicMethods();
+                await MethodAsync();
             }
 
-            public static void Test ()
+            public static void Test()
             {
-                TestCallBeforeYieldReturn ();
-                TestCallAfterYieldReturn ();
-                TestReflectionAccess ();
-                TestLdftn ();
-                TestLazyDelegate ();
-                TestDynamicallyAccessedMethod ();
+                TestCallBeforeYieldReturn();
+                TestCallAfterYieldReturn();
+                TestReflectionAccess();
+                TestLdftn();
+                TestLazyDelegate();
+                TestDynamicallyAccessedMethod();
             }
         }
 
         class SuppressInAsyncBody
         {
-            [RequiresUnreferencedCode ("Suppress in body")]
-            [RequiresAssemblyFiles ("Suppress in body")]
-            [RequiresDynamicCode ("Suppress in body")]
-            static async void TestCall ()
+            [RequiresUnreferencedCode("Suppress in body")]
+            [RequiresAssemblyFiles("Suppress in body")]
+            [RequiresDynamicCode("Suppress in body")]
+            static async void TestCall()
             {
-                MethodWithRequires ();
-                await MethodAsync ();
-                MethodWithRequires ();
-                await MethodAsync ();
+                MethodWithRequires();
+                await MethodAsync();
+                MethodWithRequires();
+                await MethodAsync();
             }
 
-            [RequiresUnreferencedCode ("Suppress in body")]
-            [RequiresAssemblyFiles ("Suppress in body")]
-            [RequiresDynamicCode ("Suppress in body")]
-            static async void TestReflectionAccess ()
+            [RequiresUnreferencedCode("Suppress in body")]
+            [RequiresAssemblyFiles("Suppress in body")]
+            [RequiresDynamicCode("Suppress in body")]
+            static async void TestReflectionAccess()
             {
-                await MethodAsync ();
-                typeof (RequiresInCompilerGeneratedCode)
-                    .GetMethod ("MethodWithRequires", System.Reflection.BindingFlags.NonPublic)
-                    .Invoke (null, new object[] { });
-                await MethodAsync ();
+                await MethodAsync();
+                typeof(RequiresInCompilerGeneratedCode)
+                    .GetMethod("MethodWithRequires", System.Reflection.BindingFlags.NonPublic)
+                    .Invoke(null, new object[] { });
+                await MethodAsync();
             }
 
-            [RequiresUnreferencedCode ("Suppress in body")]
-            [RequiresAssemblyFiles ("Suppress in body")]
-            [RequiresDynamicCode ("Suppress in body")]
-            static async void TestLdftn ()
+            [RequiresUnreferencedCode("Suppress in body")]
+            [RequiresAssemblyFiles("Suppress in body")]
+            [RequiresDynamicCode("Suppress in body")]
+            static async void TestLdftn()
             {
-                await MethodAsync ();
-                var action = new Action (MethodWithRequires);
+                await MethodAsync();
+                var action = new Action(MethodWithRequires);
             }
 
             // Cannot annotate fields either with RUC nor RAF therefore the warning persists
             // NativeAot is missing ldftn detection: https://github.com/dotnet/runtime/issues/68786
-            [ExpectedWarning ("IL2026", "Message from --MethodWithRequiresAndReturns--", CompilerGeneratedCode = true, ProducedBy = ProducedBy.Trimmer | ProducedBy.Analyzer)]
-            [ExpectedWarning ("IL3002", "Message from --MethodWithRequiresAndReturns--", ProducedBy = ProducedBy.Analyzer)]
-            [ExpectedWarning ("IL3050", "Message from --MethodWithRequiresAndReturns--", ProducedBy = ProducedBy.Analyzer)]
-            public static Lazy<string> _default = new Lazy<string> (MethodWithRequiresAndReturns);
+            [ExpectedWarning(
+                "IL2026",
+                "Message from --MethodWithRequiresAndReturns--",
+                CompilerGeneratedCode = true,
+                ProducedBy = ProducedBy.Trimmer | ProducedBy.Analyzer
+            )]
+            [ExpectedWarning(
+                "IL3002",
+                "Message from --MethodWithRequiresAndReturns--",
+                ProducedBy = ProducedBy.Analyzer
+            )]
+            [ExpectedWarning(
+                "IL3050",
+                "Message from --MethodWithRequiresAndReturns--",
+                ProducedBy = ProducedBy.Analyzer
+            )]
+            public static Lazy<string> _default = new Lazy<string>(MethodWithRequiresAndReturns);
 
-            static async void TestLazyDelegate ()
+            static async void TestLazyDelegate()
             {
-                await MethodAsync ();
+                await MethodAsync();
                 _ = _default.Value;
             }
 
-            [RequiresUnreferencedCode ("Suppress in body")]
-            [RequiresAssemblyFiles ("Suppress in body")]
-            [RequiresDynamicCode ("Suppress in body")]
-            static async void TestDynamicallyAccessedMethod ()
+            [RequiresUnreferencedCode("Suppress in body")]
+            [RequiresAssemblyFiles("Suppress in body")]
+            [RequiresDynamicCode("Suppress in body")]
+            static async void TestDynamicallyAccessedMethod()
             {
-                typeof (TypeWithMethodWithRequires).RequiresNonPublicMethods ();
-                await MethodAsync ();
+                typeof(TypeWithMethodWithRequires).RequiresNonPublicMethods();
+                await MethodAsync();
             }
 
-            [RequiresUnreferencedCode ("Suppress in body")]
-            [RequiresAssemblyFiles ("Suppress in body")]
-            [RequiresDynamicCode ("Suppress in body")]
-            static async void TestMethodParameterWithRequirements (Type unknownType = null)
+            [RequiresUnreferencedCode("Suppress in body")]
+            [RequiresAssemblyFiles("Suppress in body")]
+            [RequiresDynamicCode("Suppress in body")]
+            static async void TestMethodParameterWithRequirements(Type unknownType = null)
             {
-                unknownType.RequiresNonPublicMethods ();
-                await MethodAsync ();
-            }
-
-            // https://github.com/dotnet/runtime/issues/68688
-            // This test passes on NativeAot even without the Requires* attributes.
-            [RequiresUnreferencedCode ("Suppress in body")]
-            [RequiresAssemblyFiles ("Suppress in body")]
-            [RequiresDynamicCode ("Suppress in body")]
-            static async void TestGenericMethodParameterRequirement<TUnknown> ()
-            {
-                MethodWithGenericWhichRequiresMethods<TUnknown> ();
-                await MethodAsync ();
+                unknownType.RequiresNonPublicMethods();
+                await MethodAsync();
             }
 
             // https://github.com/dotnet/runtime/issues/68688
             // This test passes on NativeAot even without the Requires* attributes.
-            [RequiresUnreferencedCode ("Suppress in body")]
-            [RequiresAssemblyFiles ("Suppress in body")]
-            [RequiresDynamicCode ("Suppress in body")]
-            static async void TestGenericTypeParameterRequirement<TUnknown> ()
+            [RequiresUnreferencedCode("Suppress in body")]
+            [RequiresAssemblyFiles("Suppress in body")]
+            [RequiresDynamicCode("Suppress in body")]
+            static async void TestGenericMethodParameterRequirement<TUnknown>()
             {
-                new TypeWithGenericWhichRequiresNonPublicFields<TUnknown> ();
-                await MethodAsync ();
+                MethodWithGenericWhichRequiresMethods<TUnknown>();
+                await MethodAsync();
             }
 
-            [UnconditionalSuppressMessage ("Trimming", "IL2026")]
-            [UnconditionalSuppressMessage ("SingleFile", "IL3002")]
-            [UnconditionalSuppressMessage ("AOT", "IL3050")]
-            public static void Test ()
+            // https://github.com/dotnet/runtime/issues/68688
+            // This test passes on NativeAot even without the Requires* attributes.
+            [RequiresUnreferencedCode("Suppress in body")]
+            [RequiresAssemblyFiles("Suppress in body")]
+            [RequiresDynamicCode("Suppress in body")]
+            static async void TestGenericTypeParameterRequirement<TUnknown>()
             {
-                TestCall ();
-                TestReflectionAccess ();
-                TestLdftn ();
-                TestLazyDelegate ();
-                TestDynamicallyAccessedMethod ();
-                TestMethodParameterWithRequirements ();
-                TestGenericMethodParameterRequirement<TestType> ();
-                TestGenericTypeParameterRequirement<TestType> ();
+                new TypeWithGenericWhichRequiresNonPublicFields<TUnknown>();
+                await MethodAsync();
+            }
+
+            [UnconditionalSuppressMessage("Trimming", "IL2026")]
+            [UnconditionalSuppressMessage("SingleFile", "IL3002")]
+            [UnconditionalSuppressMessage("AOT", "IL3050")]
+            public static void Test()
+            {
+                TestCall();
+                TestReflectionAccess();
+                TestLdftn();
+                TestLazyDelegate();
+                TestDynamicallyAccessedMethod();
+                TestMethodParameterWithRequirements();
+                TestGenericMethodParameterRequirement<TestType>();
+                TestGenericTypeParameterRequirement<TestType>();
             }
         }
 
         class WarnInAsyncIteratorBody
         {
-            [ExpectedWarning ("IL2026", "--MethodWithRequires--", CompilerGeneratedCode = true)]
-            [ExpectedWarning ("IL3002", "--MethodWithRequires--", ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot, CompilerGeneratedCode = true)]
-            [ExpectedWarning ("IL3050", "--MethodWithRequires--", ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot, CompilerGeneratedCode = true)]
-            static async IAsyncEnumerable<int> TestCallBeforeYieldReturn ()
+            [ExpectedWarning("IL2026", "--MethodWithRequires--", CompilerGeneratedCode = true)]
+            [ExpectedWarning(
+                "IL3002",
+                "--MethodWithRequires--",
+                ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot,
+                CompilerGeneratedCode = true
+            )]
+            [ExpectedWarning(
+                "IL3050",
+                "--MethodWithRequires--",
+                ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot,
+                CompilerGeneratedCode = true
+            )]
+            static async IAsyncEnumerable<int> TestCallBeforeYieldReturn()
             {
-                await MethodAsync ();
-                MethodWithRequires ();
+                await MethodAsync();
+                MethodWithRequires();
                 yield return 0;
             }
 
-            [ExpectedWarning ("IL2026", "--MethodWithRequires--", CompilerGeneratedCode = true)]
-            [ExpectedWarning ("IL3002", "--MethodWithRequires--", ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot, CompilerGeneratedCode = true)]
-            [ExpectedWarning ("IL3050", "--MethodWithRequires--", ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot, CompilerGeneratedCode = true)]
-            static async IAsyncEnumerable<int> TestCallAfterYieldReturn ()
+            [ExpectedWarning("IL2026", "--MethodWithRequires--", CompilerGeneratedCode = true)]
+            [ExpectedWarning(
+                "IL3002",
+                "--MethodWithRequires--",
+                ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot,
+                CompilerGeneratedCode = true
+            )]
+            [ExpectedWarning(
+                "IL3050",
+                "--MethodWithRequires--",
+                ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot,
+                CompilerGeneratedCode = true
+            )]
+            static async IAsyncEnumerable<int> TestCallAfterYieldReturn()
             {
                 yield return 0;
-                MethodWithRequires ();
-                await MethodAsync ();
+                MethodWithRequires();
+                await MethodAsync();
             }
 
-            [ExpectedWarning ("IL2026", "--MethodWithRequires--", CompilerGeneratedCode = true)]
-            static async IAsyncEnumerable<int> TestReflectionAccess ()
+            [ExpectedWarning("IL2026", "--MethodWithRequires--", CompilerGeneratedCode = true)]
+            static async IAsyncEnumerable<int> TestReflectionAccess()
             {
                 yield return 0;
-                await MethodAsync ();
-                typeof (RequiresInCompilerGeneratedCode)
-                    .GetMethod ("MethodWithRequires", System.Reflection.BindingFlags.NonPublic)
-                    .Invoke (null, new object[] { });
-                await MethodAsync ();
+                await MethodAsync();
+                typeof(RequiresInCompilerGeneratedCode)
+                    .GetMethod("MethodWithRequires", System.Reflection.BindingFlags.NonPublic)
+                    .Invoke(null, new object[] { });
+                await MethodAsync();
                 yield return 1;
             }
 
 #if !RELEASE
             // NativeAot is missing ldftn detection: https://github.com/dotnet/runtime/issues/68786
-            [ExpectedWarning ("IL2026", "--MethodWithRequires--", ProducedBy = ProducedBy.Trimmer, CompilerGeneratedCode = true)]
+            [ExpectedWarning(
+                "IL2026",
+                "--MethodWithRequires--",
+                ProducedBy = ProducedBy.Trimmer,
+                CompilerGeneratedCode = true
+            )]
 #endif
-            [ExpectedWarning ("IL2026", "--MethodWithRequires--", ProducedBy = ProducedBy.Analyzer)]
-            [ExpectedWarning ("IL3002", "--MethodWithRequires--", ProducedBy = ProducedBy.Analyzer)]
-            [ExpectedWarning ("IL3050", "--MethodWithRequires--", ProducedBy = ProducedBy.Analyzer)]
-            static async IAsyncEnumerable<int> TestLdftn ()
+            [ExpectedWarning("IL2026", "--MethodWithRequires--", ProducedBy = ProducedBy.Analyzer)]
+            [ExpectedWarning("IL3002", "--MethodWithRequires--", ProducedBy = ProducedBy.Analyzer)]
+            [ExpectedWarning("IL3050", "--MethodWithRequires--", ProducedBy = ProducedBy.Analyzer)]
+            static async IAsyncEnumerable<int> TestLdftn()
             {
-                await MethodAsync ();
+                await MethodAsync();
                 yield return 0;
-                var action = new Action (MethodWithRequires);
+                var action = new Action(MethodWithRequires);
             }
 
             // NativeAot is missing ldftn detection: https://github.com/dotnet/runtime/issues/68786
-            [ExpectedWarning ("IL2026", "Message from --MethodWithRequiresAndReturns--", CompilerGeneratedCode = true, ProducedBy = ProducedBy.Trimmer | ProducedBy.Analyzer)]
-            [ExpectedWarning ("IL3002", "Message from --MethodWithRequiresAndReturns--", ProducedBy = ProducedBy.Analyzer)]
-            [ExpectedWarning ("IL3050", "Message from --MethodWithRequiresAndReturns--", ProducedBy = ProducedBy.Analyzer)]
-            public static Lazy<string> _default = new Lazy<string> (MethodWithRequiresAndReturns);
+            [ExpectedWarning(
+                "IL2026",
+                "Message from --MethodWithRequiresAndReturns--",
+                CompilerGeneratedCode = true,
+                ProducedBy = ProducedBy.Trimmer | ProducedBy.Analyzer
+            )]
+            [ExpectedWarning(
+                "IL3002",
+                "Message from --MethodWithRequiresAndReturns--",
+                ProducedBy = ProducedBy.Analyzer
+            )]
+            [ExpectedWarning(
+                "IL3050",
+                "Message from --MethodWithRequiresAndReturns--",
+                ProducedBy = ProducedBy.Analyzer
+            )]
+            public static Lazy<string> _default = new Lazy<string>(MethodWithRequiresAndReturns);
 
-            static async IAsyncEnumerable<int> TestLazyDelegate ()
+            static async IAsyncEnumerable<int> TestLazyDelegate()
             {
-                await MethodAsync ();
+                await MethodAsync();
                 yield return 0;
                 _ = _default.Value;
             }
 
-            [ExpectedWarning ("IL2026", "--TypeWithMethodWithRequires.MethodWithRequires--", CompilerGeneratedCode = true)]
-            static async IAsyncEnumerable<int> TestDynamicallyAccessedMethod ()
+            [ExpectedWarning(
+                "IL2026",
+                "--TypeWithMethodWithRequires.MethodWithRequires--",
+                CompilerGeneratedCode = true
+            )]
+            static async IAsyncEnumerable<int> TestDynamicallyAccessedMethod()
             {
-                typeof (TypeWithMethodWithRequires).RequiresNonPublicMethods ();
+                typeof(TypeWithMethodWithRequires).RequiresNonPublicMethods();
                 yield return 0;
-                await MethodAsync ();
+                await MethodAsync();
             }
 
-            public static void Test ()
+            public static void Test()
             {
-                TestCallBeforeYieldReturn ();
-                TestCallAfterYieldReturn ();
-                TestReflectionAccess ();
-                TestLdftn ();
-                TestLazyDelegate ();
-                TestDynamicallyAccessedMethod ();
+                TestCallBeforeYieldReturn();
+                TestCallAfterYieldReturn();
+                TestReflectionAccess();
+                TestLdftn();
+                TestLazyDelegate();
+                TestDynamicallyAccessedMethod();
             }
         }
 
         class SuppressInAsyncIteratorBody
         {
-            [RequiresUnreferencedCode ("Suppress in body")]
-            [RequiresAssemblyFiles ("Suppress in body")]
-            [RequiresDynamicCode ("Suppress in body")]
-            static async IAsyncEnumerable<int> TestCall ()
+            [RequiresUnreferencedCode("Suppress in body")]
+            [RequiresAssemblyFiles("Suppress in body")]
+            [RequiresDynamicCode("Suppress in body")]
+            static async IAsyncEnumerable<int> TestCall()
             {
-                MethodWithRequires ();
-                await MethodAsync ();
+                MethodWithRequires();
+                await MethodAsync();
                 yield return 0;
-                MethodWithRequires ();
-                await MethodAsync ();
+                MethodWithRequires();
+                await MethodAsync();
             }
 
-            [RequiresUnreferencedCode ("Suppress in body")]
-            [RequiresAssemblyFiles ("Suppress in body")]
-            [RequiresDynamicCode ("Suppress in body")]
-            static async IAsyncEnumerable<int> TestReflectionAccess ()
+            [RequiresUnreferencedCode("Suppress in body")]
+            [RequiresAssemblyFiles("Suppress in body")]
+            [RequiresDynamicCode("Suppress in body")]
+            static async IAsyncEnumerable<int> TestReflectionAccess()
             {
-                await MethodAsync ();
+                await MethodAsync();
                 yield return 0;
-                typeof (RequiresInCompilerGeneratedCode)
-                    .GetMethod ("MethodWithRequires", System.Reflection.BindingFlags.NonPublic)
-                    .Invoke (null, new object[] { });
-                await MethodAsync ();
+                typeof(RequiresInCompilerGeneratedCode)
+                    .GetMethod("MethodWithRequires", System.Reflection.BindingFlags.NonPublic)
+                    .Invoke(null, new object[] { });
+                await MethodAsync();
                 yield return 0;
             }
 
-            [RequiresUnreferencedCode ("Suppress in body")]
-            [RequiresAssemblyFiles ("Suppress in body")]
-            [RequiresDynamicCode ("Suppress in body")]
-            static async IAsyncEnumerable<int> TestLdftn ()
+            [RequiresUnreferencedCode("Suppress in body")]
+            [RequiresAssemblyFiles("Suppress in body")]
+            [RequiresDynamicCode("Suppress in body")]
+            static async IAsyncEnumerable<int> TestLdftn()
             {
-                await MethodAsync ();
-                var action = new Action (MethodWithRequires);
+                await MethodAsync();
+                var action = new Action(MethodWithRequires);
                 yield return 0;
             }
 
             // Cannot annotate fields either with RUC nor RAF therefore the warning persists
             // NativeAot is missing ldftn detection: https://github.com/dotnet/runtime/issues/68786
-            [ExpectedWarning ("IL2026", "Message from --MethodWithRequiresAndReturns--", CompilerGeneratedCode = true, ProducedBy = ProducedBy.Trimmer | ProducedBy.Analyzer)]
-            [ExpectedWarning ("IL3002", "Message from --MethodWithRequiresAndReturns--", ProducedBy = ProducedBy.Analyzer)]
-            [ExpectedWarning ("IL3050", "Message from --MethodWithRequiresAndReturns--", ProducedBy = ProducedBy.Analyzer)]
-            public static Lazy<string> _default = new Lazy<string> (MethodWithRequiresAndReturns);
+            [ExpectedWarning(
+                "IL2026",
+                "Message from --MethodWithRequiresAndReturns--",
+                CompilerGeneratedCode = true,
+                ProducedBy = ProducedBy.Trimmer | ProducedBy.Analyzer
+            )]
+            [ExpectedWarning(
+                "IL3002",
+                "Message from --MethodWithRequiresAndReturns--",
+                ProducedBy = ProducedBy.Analyzer
+            )]
+            [ExpectedWarning(
+                "IL3050",
+                "Message from --MethodWithRequiresAndReturns--",
+                ProducedBy = ProducedBy.Analyzer
+            )]
+            public static Lazy<string> _default = new Lazy<string>(MethodWithRequiresAndReturns);
 
-            static async IAsyncEnumerable<int> TestLazyDelegate ()
+            static async IAsyncEnumerable<int> TestLazyDelegate()
             {
-                await MethodAsync ();
+                await MethodAsync();
                 yield return 0;
                 _ = _default.Value;
             }
 
-            [RequiresUnreferencedCode ("Suppress in body")]
-            [RequiresAssemblyFiles ("Suppress in body")]
-            [RequiresDynamicCode ("Suppress in body")]
-            static async IAsyncEnumerable<int> TestDynamicallyAccessedMethod ()
+            [RequiresUnreferencedCode("Suppress in body")]
+            [RequiresAssemblyFiles("Suppress in body")]
+            [RequiresDynamicCode("Suppress in body")]
+            static async IAsyncEnumerable<int> TestDynamicallyAccessedMethod()
             {
-                typeof (TypeWithMethodWithRequires).RequiresNonPublicMethods ();
+                typeof(TypeWithMethodWithRequires).RequiresNonPublicMethods();
                 yield return 0;
-                await MethodAsync ();
+                await MethodAsync();
             }
 
-            [RequiresUnreferencedCode ("Suppress in body")]
-            [RequiresAssemblyFiles ("Suppress in body")]
-            [RequiresDynamicCode ("Suppress in body")]
-            static async IAsyncEnumerable<int> TestMethodParameterWithRequirements (Type unknownType = null)
+            [RequiresUnreferencedCode("Suppress in body")]
+            [RequiresAssemblyFiles("Suppress in body")]
+            [RequiresDynamicCode("Suppress in body")]
+            static async IAsyncEnumerable<int> TestMethodParameterWithRequirements(
+                Type unknownType = null
+            )
             {
-                unknownType.RequiresNonPublicMethods ();
-                await MethodAsync ();
+                unknownType.RequiresNonPublicMethods();
+                await MethodAsync();
                 yield return 0;
-            }
-
-            // https://github.com/dotnet/runtime/issues/68688
-            // This test passes on NativeAot even without the Requires* attributes.
-            [RequiresUnreferencedCode ("Suppress in body")]
-            [RequiresAssemblyFiles ("Suppress in body")]
-            [RequiresDynamicCode ("Suppress in body")]
-            static async IAsyncEnumerable<int> TestGenericMethodParameterRequirement<TUnknown> ()
-            {
-                yield return 0;
-                MethodWithGenericWhichRequiresMethods<TUnknown> ();
-                await MethodAsync ();
             }
 
             // https://github.com/dotnet/runtime/issues/68688
             // This test passes on NativeAot even without the Requires* attributes.
-            [RequiresUnreferencedCode ("Suppress in body")]
-            [RequiresAssemblyFiles ("Suppress in body")]
-            [RequiresDynamicCode ("Suppress in body")]
-            static async IAsyncEnumerable<int> TestGenericTypeParameterRequirement<TUnknown> ()
+            [RequiresUnreferencedCode("Suppress in body")]
+            [RequiresAssemblyFiles("Suppress in body")]
+            [RequiresDynamicCode("Suppress in body")]
+            static async IAsyncEnumerable<int> TestGenericMethodParameterRequirement<TUnknown>()
             {
-                new TypeWithGenericWhichRequiresNonPublicFields<TUnknown> ();
                 yield return 0;
-                await MethodAsync ();
+                MethodWithGenericWhichRequiresMethods<TUnknown>();
+                await MethodAsync();
             }
 
-            [UnconditionalSuppressMessage ("Trimming", "IL2026")]
-            [UnconditionalSuppressMessage ("SingleFile", "IL3002")]
-            [UnconditionalSuppressMessage ("AOT", "IL3050")]
-            public static void Test ()
+            // https://github.com/dotnet/runtime/issues/68688
+            // This test passes on NativeAot even without the Requires* attributes.
+            [RequiresUnreferencedCode("Suppress in body")]
+            [RequiresAssemblyFiles("Suppress in body")]
+            [RequiresDynamicCode("Suppress in body")]
+            static async IAsyncEnumerable<int> TestGenericTypeParameterRequirement<TUnknown>()
             {
-                TestCall ();
-                TestReflectionAccess ();
-                TestLdftn ();
-                TestLazyDelegate ();
-                TestDynamicallyAccessedMethod ();
-                TestMethodParameterWithRequirements ();
-                TestGenericMethodParameterRequirement<TestType> ();
-                TestGenericTypeParameterRequirement<TestType> ();
+                new TypeWithGenericWhichRequiresNonPublicFields<TUnknown>();
+                yield return 0;
+                await MethodAsync();
+            }
+
+            [UnconditionalSuppressMessage("Trimming", "IL2026")]
+            [UnconditionalSuppressMessage("SingleFile", "IL3002")]
+            [UnconditionalSuppressMessage("AOT", "IL3050")]
+            public static void Test()
+            {
+                TestCall();
+                TestReflectionAccess();
+                TestLdftn();
+                TestLazyDelegate();
+                TestDynamicallyAccessedMethod();
+                TestMethodParameterWithRequirements();
+                TestGenericMethodParameterRequirement<TestType>();
+                TestGenericTypeParameterRequirement<TestType>();
             }
         }
 
         class WarnInLocalFunction
         {
-            static void TestCall ()
+            static void TestCall()
             {
-                LocalFunction ();
+                LocalFunction();
 
-                [ExpectedWarning ("IL2026", "--MethodWithRequires--")]
-                [ExpectedWarning ("IL3002", "--MethodWithRequires--", ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot)]
-                [ExpectedWarning ("IL3050", "--MethodWithRequires--", ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot)]
-                void LocalFunction () => MethodWithRequires ();
+                [ExpectedWarning("IL2026", "--MethodWithRequires--")]
+                [ExpectedWarning(
+                    "IL3002",
+                    "--MethodWithRequires--",
+                    ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot
+                )]
+                [ExpectedWarning(
+                    "IL3050",
+                    "--MethodWithRequires--",
+                    ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot
+                )]
+                void LocalFunction() => MethodWithRequires();
             }
 
-            [ExpectedWarning ("IL2026", "--LocalFunctionWithRequires--")]
-            [ExpectedWarning ("IL3002", "--LocalFunctionWithRequires--", ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot)]
-            [ExpectedWarning ("IL3050", "--LocalFunctionWithRequires--", ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot)]
-            static void TestLocalFunctionWithRequires ()
+            [ExpectedWarning("IL2026", "--LocalFunctionWithRequires--")]
+            [ExpectedWarning(
+                "IL3002",
+                "--LocalFunctionWithRequires--",
+                ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot
+            )]
+            [ExpectedWarning(
+                "IL3050",
+                "--LocalFunctionWithRequires--",
+                ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot
+            )]
+            static void TestLocalFunctionWithRequires()
             {
-                LocalFunction ();
+                LocalFunction();
 
-                [RequiresUnreferencedCode ("--LocalFunctionWithRequires--")]
-                [RequiresAssemblyFiles ("--LocalFunctionWithRequires--")]
-                [RequiresDynamicCode ("--LocalFunctionWithRequires--")]
-                void LocalFunction () => MethodWithRequires ();
+                [RequiresUnreferencedCode("--LocalFunctionWithRequires--")]
+                [RequiresAssemblyFiles("--LocalFunctionWithRequires--")]
+                [RequiresDynamicCode("--LocalFunctionWithRequires--")]
+                void LocalFunction() => MethodWithRequires();
             }
 
-            static void TestCallUnused ()
+            static void TestCallUnused()
             {
                 // Analyzer emits warnings for code in unused local functions.
-                [ExpectedWarning ("IL2026", "--MethodWithRequires--", ProducedBy = ProducedBy.Analyzer)]
-                [ExpectedWarning ("IL3002", "--MethodWithRequires--", ProducedBy = ProducedBy.Analyzer)]
-                [ExpectedWarning ("IL3050", "--MethodWithRequires--", ProducedBy = ProducedBy.Analyzer)]
-                void LocalFunction () => MethodWithRequires ();
+                [ExpectedWarning(
+                    "IL2026",
+                    "--MethodWithRequires--",
+                    ProducedBy = ProducedBy.Analyzer
+                )]
+                [ExpectedWarning(
+                    "IL3002",
+                    "--MethodWithRequires--",
+                    ProducedBy = ProducedBy.Analyzer
+                )]
+                [ExpectedWarning(
+                    "IL3050",
+                    "--MethodWithRequires--",
+                    ProducedBy = ProducedBy.Analyzer
+                )]
+                void LocalFunction() => MethodWithRequires();
             }
 
-            static void TestCallWithClosure (int p = 0)
+            static void TestCallWithClosure(int p = 0)
             {
-                LocalFunction ();
+                LocalFunction();
 
-                [ExpectedWarning ("IL2026", "--MethodWithRequires--")]
-                [ExpectedWarning ("IL3002", "--MethodWithRequires--", ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot)]
-                [ExpectedWarning ("IL3050", "--MethodWithRequires--", ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot)]
-                void LocalFunction ()
+                [ExpectedWarning("IL2026", "--MethodWithRequires--")]
+                [ExpectedWarning(
+                    "IL3002",
+                    "--MethodWithRequires--",
+                    ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot
+                )]
+                [ExpectedWarning(
+                    "IL3050",
+                    "--MethodWithRequires--",
+                    ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot
+                )]
+                void LocalFunction()
                 {
                     p++;
-                    MethodWithRequires ();
+                    MethodWithRequires();
                 }
             }
 
-            static void TestCallWithClosureUnused (int p = 0)
+            static void TestCallWithClosureUnused(int p = 0)
             {
                 // Analyzer emits warnings for code in unused local functions.
-                [ExpectedWarning ("IL2026", "--MethodWithRequires--", ProducedBy = ProducedBy.Analyzer)]
-                [ExpectedWarning ("IL3002", "--MethodWithRequires--", ProducedBy = ProducedBy.Analyzer)]
-                [ExpectedWarning ("IL3050", "--MethodWithRequires--", ProducedBy = ProducedBy.Analyzer)]
-                void LocalFunction ()
+                [ExpectedWarning(
+                    "IL2026",
+                    "--MethodWithRequires--",
+                    ProducedBy = ProducedBy.Analyzer
+                )]
+                [ExpectedWarning(
+                    "IL3002",
+                    "--MethodWithRequires--",
+                    ProducedBy = ProducedBy.Analyzer
+                )]
+                [ExpectedWarning(
+                    "IL3050",
+                    "--MethodWithRequires--",
+                    ProducedBy = ProducedBy.Analyzer
+                )]
+                void LocalFunction()
                 {
                     p++;
-                    MethodWithRequires ();
+                    MethodWithRequires();
                 }
             }
 
-            static void TestReflectionAccess ()
+            static void TestReflectionAccess()
             {
-                LocalFunction ();
+                LocalFunction();
 
-                [ExpectedWarning ("IL2026", "--MethodWithRequires--")]
-                void LocalFunction () => typeof (RequiresInCompilerGeneratedCode)
-                    .GetMethod ("MethodWithRequires", System.Reflection.BindingFlags.NonPublic)
-                    .Invoke (null, new object[] { });
+                [ExpectedWarning("IL2026", "--MethodWithRequires--")]
+                void LocalFunction() =>
+                    typeof(RequiresInCompilerGeneratedCode)
+                        .GetMethod("MethodWithRequires", System.Reflection.BindingFlags.NonPublic)
+                        .Invoke(null, new object[] { });
             }
 
-            static void TestLdftn ()
+            static void TestLdftn()
             {
-                LocalFunction ();
+                LocalFunction();
 
 #if !RELEASE
                 // NativeAot is missing ldftn detection: https://github.com/dotnet/runtime/issues/68786
-                [ExpectedWarning ("IL2026", "--MethodWithRequires--", ProducedBy = ProducedBy.Trimmer)]
+                [ExpectedWarning(
+                    "IL2026",
+                    "--MethodWithRequires--",
+                    ProducedBy = ProducedBy.Trimmer
+                )]
 #endif
-                [ExpectedWarning ("IL2026", "--MethodWithRequires--", ProducedBy = ProducedBy.Analyzer)]
-                [ExpectedWarning ("IL3002", "--MethodWithRequires--", ProducedBy = ProducedBy.Analyzer)]
-                [ExpectedWarning ("IL3050", "--MethodWithRequires--", ProducedBy = ProducedBy.Analyzer)]
-                void LocalFunction ()
+                [ExpectedWarning(
+                    "IL2026",
+                    "--MethodWithRequires--",
+                    ProducedBy = ProducedBy.Analyzer
+                )]
+                [ExpectedWarning(
+                    "IL3002",
+                    "--MethodWithRequires--",
+                    ProducedBy = ProducedBy.Analyzer
+                )]
+                [ExpectedWarning(
+                    "IL3050",
+                    "--MethodWithRequires--",
+                    ProducedBy = ProducedBy.Analyzer
+                )]
+                void LocalFunction()
                 {
-                    var action = new Action (MethodWithRequires);
+                    var action = new Action(MethodWithRequires);
                 }
             }
 
             // NativeAot is missing ldftn detection: https://github.com/dotnet/runtime/issues/68786
-            [ExpectedWarning ("IL2026", "Message from --MethodWithRequiresAndReturns--", CompilerGeneratedCode = true, ProducedBy = ProducedBy.Trimmer | ProducedBy.Analyzer)]
-            [ExpectedWarning ("IL3002", "Message from --MethodWithRequiresAndReturns--", ProducedBy = ProducedBy.Analyzer)]
-            [ExpectedWarning ("IL3050", "Message from --MethodWithRequiresAndReturns--", ProducedBy = ProducedBy.Analyzer)]
-            public static Lazy<string> _default = new Lazy<string> (MethodWithRequiresAndReturns);
+            [ExpectedWarning(
+                "IL2026",
+                "Message from --MethodWithRequiresAndReturns--",
+                CompilerGeneratedCode = true,
+                ProducedBy = ProducedBy.Trimmer | ProducedBy.Analyzer
+            )]
+            [ExpectedWarning(
+                "IL3002",
+                "Message from --MethodWithRequiresAndReturns--",
+                ProducedBy = ProducedBy.Analyzer
+            )]
+            [ExpectedWarning(
+                "IL3050",
+                "Message from --MethodWithRequiresAndReturns--",
+                ProducedBy = ProducedBy.Analyzer
+            )]
+            public static Lazy<string> _default = new Lazy<string>(MethodWithRequiresAndReturns);
 
-            static void TestLazyDelegate ()
+            static void TestLazyDelegate()
             {
-                LocalFunction ();
+                LocalFunction();
 
-                void LocalFunction ()
+                void LocalFunction()
                 {
                     _ = _default.Value;
                 }
             }
 
-            static void TestDynamicallyAccessedMethod ()
+            static void TestDynamicallyAccessedMethod()
             {
-                LocalFunction ();
+                LocalFunction();
 
-                [ExpectedWarning ("IL2026", "--TypeWithMethodWithRequires.MethodWithRequires--")]
-                void LocalFunction () => typeof (TypeWithMethodWithRequires).RequiresNonPublicMethods ();
+                [ExpectedWarning("IL2026", "--TypeWithMethodWithRequires.MethodWithRequires--")]
+                void LocalFunction() =>
+                    typeof(TypeWithMethodWithRequires).RequiresNonPublicMethods();
             }
 
-            public static void Test ()
+            public static void Test()
             {
-                TestCall ();
-                TestLocalFunctionWithRequires ();
-                TestCallUnused ();
-                TestCallWithClosure ();
-                TestCallWithClosureUnused ();
-                TestReflectionAccess ();
-                TestLdftn ();
-                TestLazyDelegate ();
-                TestDynamicallyAccessedMethod ();
+                TestCall();
+                TestLocalFunctionWithRequires();
+                TestCallUnused();
+                TestCallWithClosure();
+                TestCallWithClosureUnused();
+                TestReflectionAccess();
+                TestLdftn();
+                TestLazyDelegate();
+                TestDynamicallyAccessedMethod();
             }
         }
 
         class SuppressInLocalFunction
         {
-            [RequiresUnreferencedCode ("Suppress in body")]
-            [RequiresAssemblyFiles ("Suppress in body")]
-            [RequiresDynamicCode ("Suppress in body")]
-            static void TestCall ()
+            [RequiresUnreferencedCode("Suppress in body")]
+            [RequiresAssemblyFiles("Suppress in body")]
+            [RequiresDynamicCode("Suppress in body")]
+            static void TestCall()
             {
-                LocalFunction ();
+                LocalFunction();
 
-                void LocalFunction () => MethodWithRequires ();
+                void LocalFunction() => MethodWithRequires();
             }
 
-            [RequiresUnreferencedCode ("Suppress in body")]
-            [RequiresAssemblyFiles ("Suppress in body")]
-            [RequiresDynamicCode ("Suppress in body")]
-            static void TestCallFromNestedLocalFunction ()
+            [RequiresUnreferencedCode("Suppress in body")]
+            [RequiresAssemblyFiles("Suppress in body")]
+            [RequiresDynamicCode("Suppress in body")]
+            static void TestCallFromNestedLocalFunction()
             {
-                LocalFunction ();
+                LocalFunction();
 
-                void LocalFunction ()
+                void LocalFunction()
                 {
-                    NestedLocalFunction ();
+                    NestedLocalFunction();
 
-                    void NestedLocalFunction () => MethodWithRequires ();
+                    void NestedLocalFunction() => MethodWithRequires();
                 }
             }
 
-            [RequiresUnreferencedCode ("Suppress in body")]
-            [RequiresAssemblyFiles ("Suppress in body")]
-            [RequiresDynamicCode ("Suppress in body")]
-            static void TestCallWithClosure (int p = 0)
+            [RequiresUnreferencedCode("Suppress in body")]
+            [RequiresAssemblyFiles("Suppress in body")]
+            [RequiresDynamicCode("Suppress in body")]
+            static void TestCallWithClosure(int p = 0)
             {
-                LocalFunction ();
+                LocalFunction();
 
-                void LocalFunction ()
+                void LocalFunction()
                 {
                     p++;
-                    MethodWithRequires ();
+                    MethodWithRequires();
                 }
             }
 
-            [RequiresUnreferencedCode ("Suppress in body")]
-            [RequiresAssemblyFiles ("Suppress in body")]
-            [RequiresDynamicCode ("Suppress in body")]
-            static async void TestReflectionAccess ()
+            [RequiresUnreferencedCode("Suppress in body")]
+            [RequiresAssemblyFiles("Suppress in body")]
+            [RequiresDynamicCode("Suppress in body")]
+            static async void TestReflectionAccess()
             {
-                LocalFunction ();
+                LocalFunction();
 
-                void LocalFunction () => typeof (RequiresInCompilerGeneratedCode)
-                    .GetMethod ("MethodWithRequires", System.Reflection.BindingFlags.NonPublic)
-                    .Invoke (null, new object[] { });
+                void LocalFunction() =>
+                    typeof(RequiresInCompilerGeneratedCode)
+                        .GetMethod("MethodWithRequires", System.Reflection.BindingFlags.NonPublic)
+                        .Invoke(null, new object[] { });
             }
 
-            [RequiresUnreferencedCode ("Suppress in body")]
-            [RequiresAssemblyFiles ("Suppress in body")]
-            [RequiresDynamicCode ("Suppress in body")]
-            static async void TestLdftn ()
+            [RequiresUnreferencedCode("Suppress in body")]
+            [RequiresAssemblyFiles("Suppress in body")]
+            [RequiresDynamicCode("Suppress in body")]
+            static async void TestLdftn()
             {
-                LocalFunction ();
+                LocalFunction();
 
-                void LocalFunction ()
+                void LocalFunction()
                 {
-                    var action = new Action (MethodWithRequires);
+                    var action = new Action(MethodWithRequires);
                 }
             }
 
             // NativeAot is missing ldftn detection: https://github.com/dotnet/runtime/issues/68786
-            [ExpectedWarning ("IL2026", "Message from --MethodWithRequiresAndReturns--", CompilerGeneratedCode = true, ProducedBy = ProducedBy.Trimmer | ProducedBy.Analyzer)]
-            [ExpectedWarning ("IL3002", "Message from --MethodWithRequiresAndReturns--", ProducedBy = ProducedBy.Analyzer)]
-            [ExpectedWarning ("IL3050", "Message from --MethodWithRequiresAndReturns--", ProducedBy = ProducedBy.Analyzer)]
-            public static Lazy<string> _default = new Lazy<string> (MethodWithRequiresAndReturns);
+            [ExpectedWarning(
+                "IL2026",
+                "Message from --MethodWithRequiresAndReturns--",
+                CompilerGeneratedCode = true,
+                ProducedBy = ProducedBy.Trimmer | ProducedBy.Analyzer
+            )]
+            [ExpectedWarning(
+                "IL3002",
+                "Message from --MethodWithRequiresAndReturns--",
+                ProducedBy = ProducedBy.Analyzer
+            )]
+            [ExpectedWarning(
+                "IL3050",
+                "Message from --MethodWithRequiresAndReturns--",
+                ProducedBy = ProducedBy.Analyzer
+            )]
+            public static Lazy<string> _default = new Lazy<string>(MethodWithRequiresAndReturns);
 
-            static void TestLazyDelegate ()
+            static void TestLazyDelegate()
             {
-                LocalFunction ();
+                LocalFunction();
 
-                void LocalFunction ()
+                void LocalFunction()
                 {
                     _ = _default.Value;
                 }
             }
 
-            [RequiresUnreferencedCode ("Suppress in body")]
-            [RequiresAssemblyFiles ("Suppress in body")]
-            [RequiresDynamicCode ("Suppress in body")]
-            static async void TestDynamicallyAccessedMethod ()
+            [RequiresUnreferencedCode("Suppress in body")]
+            [RequiresAssemblyFiles("Suppress in body")]
+            [RequiresDynamicCode("Suppress in body")]
+            static async void TestDynamicallyAccessedMethod()
             {
-                LocalFunction ();
+                LocalFunction();
 
-                void LocalFunction () => typeof (TypeWithMethodWithRequires).RequiresNonPublicMethods ();
+                void LocalFunction() =>
+                    typeof(TypeWithMethodWithRequires).RequiresNonPublicMethods();
             }
 
-            [RequiresUnreferencedCode ("Suppress in body")]
-            [RequiresAssemblyFiles ("Suppress in body")]
-            [RequiresDynamicCode ("Suppress in body")]
-            static async void TestMethodParameterWithRequirements (Type unknownType = null)
+            [RequiresUnreferencedCode("Suppress in body")]
+            [RequiresAssemblyFiles("Suppress in body")]
+            [RequiresDynamicCode("Suppress in body")]
+            static async void TestMethodParameterWithRequirements(Type unknownType = null)
             {
-                LocalFunction ();
+                LocalFunction();
 
-                void LocalFunction () => unknownType.RequiresNonPublicMethods ();
+                void LocalFunction() => unknownType.RequiresNonPublicMethods();
             }
 
-            [RequiresUnreferencedCode ("Suppress in body")]
-            [RequiresAssemblyFiles ("Suppress in body")]
-            [RequiresDynamicCode ("Suppress in body")]
-            static void TestGenericMethodParameterRequirement<TUnknown> ()
+            [RequiresUnreferencedCode("Suppress in body")]
+            [RequiresAssemblyFiles("Suppress in body")]
+            [RequiresDynamicCode("Suppress in body")]
+            static void TestGenericMethodParameterRequirement<TUnknown>()
             {
-                LocalFunction ();
+                LocalFunction();
 
-                void LocalFunction () => MethodWithGenericWhichRequiresMethods<TUnknown> ();
+                void LocalFunction() => MethodWithGenericWhichRequiresMethods<TUnknown>();
             }
 
-            [RequiresUnreferencedCode ("Suppress in body")]
-            [RequiresAssemblyFiles ("Suppress in body")]
-            [RequiresDynamicCode ("Suppress in body")]
-            static void TestGenericTypeParameterRequirement<TUnknown> ()
+            [RequiresUnreferencedCode("Suppress in body")]
+            [RequiresAssemblyFiles("Suppress in body")]
+            [RequiresDynamicCode("Suppress in body")]
+            static void TestGenericTypeParameterRequirement<TUnknown>()
             {
-                LocalFunction ();
+                LocalFunction();
 
-                void LocalFunction () => new TypeWithGenericWhichRequiresNonPublicFields<TUnknown> ();
+                void LocalFunction() => new TypeWithGenericWhichRequiresNonPublicFields<TUnknown>();
             }
 
-            [RequiresUnreferencedCode ("Suppress in body")]
-            [RequiresAssemblyFiles ("Suppress in body")]
-            [RequiresDynamicCode ("Suppress in body")]
-            static void TestGenericLocalFunction<TUnknown> ()
+            [RequiresUnreferencedCode("Suppress in body")]
+            [RequiresAssemblyFiles("Suppress in body")]
+            [RequiresDynamicCode("Suppress in body")]
+            static void TestGenericLocalFunction<TUnknown>()
             {
-                LocalFunction<TUnknown> ();
+                LocalFunction<TUnknown>();
 
-                void LocalFunction<[DynamicallyAccessedMembers (DynamicallyAccessedMemberTypes.PublicMethods)] T> ()
+                void LocalFunction<
+                    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)] T
+                >()
                 {
-                    typeof (T).RequiresPublicMethods ();
+                    typeof(T).RequiresPublicMethods();
                 }
             }
 
-            [RequiresUnreferencedCode ("Suppress in body")]
-            [RequiresAssemblyFiles ("Suppress in body")]
-            [RequiresDynamicCode ("Suppress in body")]
-            static void TestGenericLocalFunctionInner<TUnknown> ()
+            [RequiresUnreferencedCode("Suppress in body")]
+            [RequiresAssemblyFiles("Suppress in body")]
+            [RequiresDynamicCode("Suppress in body")]
+            static void TestGenericLocalFunctionInner<TUnknown>()
             {
-                LocalFunction<TUnknown> ();
+                LocalFunction<TUnknown>();
 
-                void LocalFunction<TSecond> ()
+                void LocalFunction<TSecond>()
                 {
-                    typeof (TUnknown).RequiresPublicMethods ();
-                    typeof (TSecond).RequiresPublicMethods ();
+                    typeof(TUnknown).RequiresPublicMethods();
+                    typeof(TSecond).RequiresPublicMethods();
                 }
             }
 
-            static void TestGenericLocalFunctionWithAnnotations<[DynamicallyAccessedMembers (DynamicallyAccessedMemberTypes.PublicMethods)] TPublicMethods> ()
+            static void TestGenericLocalFunctionWithAnnotations<
+                [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
+                    TPublicMethods
+            >()
             {
-                LocalFunction<TPublicMethods> ();
+                LocalFunction<TPublicMethods>();
 
-                void LocalFunction<[DynamicallyAccessedMembers (DynamicallyAccessedMemberTypes.PublicMethods)] TInnerPublicMethods> ()
+                void LocalFunction<
+                    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
+                        TInnerPublicMethods
+                >()
                 {
-                    typeof (TPublicMethods).RequiresPublicMethods ();
-                    typeof (TInnerPublicMethods).RequiresPublicMethods ();
+                    typeof(TPublicMethods).RequiresPublicMethods();
+                    typeof(TInnerPublicMethods).RequiresPublicMethods();
                 }
             }
 
-            static void TestGenericLocalFunctionWithAnnotationsAndClosure<[DynamicallyAccessedMembers (DynamicallyAccessedMemberTypes.PublicMethods)] TPublicMethods> (int p = 0)
+            static void TestGenericLocalFunctionWithAnnotationsAndClosure<
+                [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
+                    TPublicMethods
+            >(int p = 0)
             {
-                LocalFunction<TPublicMethods> ();
+                LocalFunction<TPublicMethods>();
 
-                void LocalFunction<[DynamicallyAccessedMembers (DynamicallyAccessedMemberTypes.PublicMethods)] TInnerPublicMethods> ()
+                void LocalFunction<
+                    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
+                        TInnerPublicMethods
+                >()
                 {
                     p++;
-                    typeof (TPublicMethods).RequiresPublicMethods ();
-                    typeof (TInnerPublicMethods).RequiresPublicMethods ();
+                    typeof(TPublicMethods).RequiresPublicMethods();
+                    typeof(TInnerPublicMethods).RequiresPublicMethods();
                 }
             }
 
-            [RequiresUnreferencedCode ("Suppress in body")]
-            [RequiresAssemblyFiles ("Suppress in body")]
-            [RequiresDynamicCode ("Suppress in body")]
-            static void TestCallMethodWithRequiresInLtftnLocalFunction ()
+            [RequiresUnreferencedCode("Suppress in body")]
+            [RequiresAssemblyFiles("Suppress in body")]
+            [RequiresDynamicCode("Suppress in body")]
+            static void TestCallMethodWithRequiresInLtftnLocalFunction()
             {
-                var _ = new Action (LocalFunction);
+                var _ = new Action(LocalFunction);
 
-                void LocalFunction () => MethodWithRequires ();
+                void LocalFunction() => MethodWithRequires();
             }
 
             class DynamicallyAccessedLocalFunction
             {
-                [RequiresUnreferencedCode ("Suppress in body")]
-                [RequiresAssemblyFiles ("Suppress in body")]
-                [RequiresDynamicCode ("Suppress in body")]
-                public static void TestCallMethodWithRequiresInDynamicallyAccessedLocalFunction ()
+                [RequiresUnreferencedCode("Suppress in body")]
+                [RequiresAssemblyFiles("Suppress in body")]
+                [RequiresDynamicCode("Suppress in body")]
+                public static void TestCallMethodWithRequiresInDynamicallyAccessedLocalFunction()
                 {
-                    typeof (DynamicallyAccessedLocalFunction).RequiresNonPublicMethods ();
+                    typeof(DynamicallyAccessedLocalFunction).RequiresNonPublicMethods();
 
-                    LocalFunction ();
+                    LocalFunction();
 
-                    void LocalFunction () => MethodWithRequires ();
+                    void LocalFunction() => MethodWithRequires();
                 }
             }
 
             class DynamicallyAccessedLocalFunctionUnusedShouldWarn
             {
                 // https://github.com/dotnet/runtime/issues/68786
-                [ExpectedWarning ("IL2118", nameof (TestCallMethodWithRequiresInDynamicallyAccessedLocalFunction), "LocalFunction", ProducedBy = ProducedBy.Trimmer)]
-                public static void TestCallMethodWithRequiresInDynamicallyAccessedLocalFunction ()
+                [ExpectedWarning(
+                    "IL2118",
+                    nameof(TestCallMethodWithRequiresInDynamicallyAccessedLocalFunction),
+                    "LocalFunction",
+                    ProducedBy = ProducedBy.Trimmer
+                )]
+                public static void TestCallMethodWithRequiresInDynamicallyAccessedLocalFunction()
                 {
-                    typeof (DynamicallyAccessedLocalFunctionUnusedShouldWarn).RequiresNonPublicMethods ();
+                    typeof(DynamicallyAccessedLocalFunctionUnusedShouldWarn).RequiresNonPublicMethods();
 
                     // The linker isn't able to figure out which user method this local function
                     // belongs to, but it doesn't warn because it is only accessed via reflection.
                     // Instead this warns on the reflection access.
-                    [ExpectedWarning ("IL2026", "--MethodWithRequires--",
-                        ProducedBy = ProducedBy.Analyzer)]
-                    [ExpectedWarning ("IL3002", "--MethodWithRequires--",
-                        ProducedBy = ProducedBy.Analyzer)]
-                    [ExpectedWarning ("IL3050", "--MethodWithRequires--",
-                        ProducedBy = ProducedBy.Analyzer)]
-                    void LocalFunction () => MethodWithRequires ();
+                    [ExpectedWarning(
+                        "IL2026",
+                        "--MethodWithRequires--",
+                        ProducedBy = ProducedBy.Analyzer
+                    )]
+                    [ExpectedWarning(
+                        "IL3002",
+                        "--MethodWithRequires--",
+                        ProducedBy = ProducedBy.Analyzer
+                    )]
+                    [ExpectedWarning(
+                        "IL3050",
+                        "--MethodWithRequires--",
+                        ProducedBy = ProducedBy.Analyzer
+                    )]
+                    void LocalFunction() => MethodWithRequires();
                 }
             }
 
             class DynamicallyAccessedLocalFunctionUnusedShouldSuppress
             {
-                [RequiresUnreferencedCode ("Suppress in body")]
-                [RequiresAssemblyFiles ("Suppress in body")]
-                [RequiresDynamicCode ("Suppress in body")]
-                public static void TestCallMethodWithRequiresInDynamicallyAccessedLocalFunction ()
+                [RequiresUnreferencedCode("Suppress in body")]
+                [RequiresAssemblyFiles("Suppress in body")]
+                [RequiresDynamicCode("Suppress in body")]
+                public static void TestCallMethodWithRequiresInDynamicallyAccessedLocalFunction()
                 {
-                    typeof (DynamicallyAccessedLocalFunctionUnusedShouldSuppress).RequiresNonPublicMethods ();
+                    typeof(DynamicallyAccessedLocalFunctionUnusedShouldSuppress).RequiresNonPublicMethods();
 
                     // The linker isn't able to figure out which user method this local function
                     // belongs to, but it doesn't warn because it is only accessed via reflection,
                     // in a RUC scope.
-                    void LocalFunction () => MethodWithRequires ();
+                    void LocalFunction() => MethodWithRequires();
                 }
             }
 
-            [ExpectedWarning ("IL2026")]
-            [ExpectedWarning ("IL3002", ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot)]
-            [ExpectedWarning ("IL3050", ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot)]
-            static void TestSuppressionOnLocalFunction ()
+            [ExpectedWarning("IL2026")]
+            [ExpectedWarning("IL3002", ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot)]
+            [ExpectedWarning("IL3050", ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot)]
+            static void TestSuppressionOnLocalFunction()
             {
-                LocalFunction (); // This will produce a warning since the local function has Requires on it
+                LocalFunction(); // This will produce a warning since the local function has Requires on it
 
-                [RequiresUnreferencedCode ("Suppress in body")]
-                [RequiresAssemblyFiles ("Suppress in body")]
-                [RequiresDynamicCode ("Suppress in body")]
-                void LocalFunction (Type unknownType = null)
+                [RequiresUnreferencedCode("Suppress in body")]
+                [RequiresAssemblyFiles("Suppress in body")]
+                [RequiresDynamicCode("Suppress in body")]
+                void LocalFunction(Type unknownType = null)
                 {
-                    MethodWithRequires ();
-                    unknownType.RequiresNonPublicMethods ();
+                    MethodWithRequires();
+                    unknownType.RequiresNonPublicMethods();
                 }
             }
 
-            [ExpectedWarning ("IL2026")]
-            [ExpectedWarning ("IL3002", ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot)]
-            [ExpectedWarning ("IL3050", ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot)]
-            static void TestSuppressionOnLocalFunctionWithAssignment ()
+            [ExpectedWarning("IL2026")]
+            [ExpectedWarning("IL3002", ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot)]
+            [ExpectedWarning("IL3050", ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot)]
+            static void TestSuppressionOnLocalFunctionWithAssignment()
             {
-                LocalFunction (); // This will produce a warning since the local function has Requires on it
+                LocalFunction(); // This will produce a warning since the local function has Requires on it
 
-                [RequiresUnreferencedCode ("Suppress in body")]
-                [RequiresAssemblyFiles ("Suppress in body")]
-                [RequiresDynamicCode ("Suppress in body")]
-                void LocalFunction (Type unknownType = null)
+                [RequiresUnreferencedCode("Suppress in body")]
+                [RequiresAssemblyFiles("Suppress in body")]
+                [RequiresDynamicCode("Suppress in body")]
+                void LocalFunction(Type unknownType = null)
                 {
-                    MethodWithRequires ();
+                    MethodWithRequires();
                     typeWithNonPublicMethods = unknownType;
                 }
             }
 
-            [DynamicallyAccessedMembers (DynamicallyAccessedMemberTypes.NonPublicMethods)]
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.NonPublicMethods)]
             static Type typeWithNonPublicMethods;
 
-            [ExpectedWarning ("IL2026")]
-            [ExpectedWarning ("IL3002", ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot)]
-            [ExpectedWarning ("IL3050", ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot)]
-            static void TestSuppressionOnLocalFunctionWithNestedLocalFunction ()
+            [ExpectedWarning("IL2026")]
+            [ExpectedWarning("IL3002", ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot)]
+            [ExpectedWarning("IL3050", ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot)]
+            static void TestSuppressionOnLocalFunctionWithNestedLocalFunction()
             {
-                LocalFunction (); // This will produce a warning since the local function has Requires on it
+                LocalFunction(); // This will produce a warning since the local function has Requires on it
 
-                [RequiresUnreferencedCode ("Suppress in body")]
-                [RequiresAssemblyFiles ("Suppress in body")]
-                [RequiresDynamicCode ("Suppress in body")]
-                void LocalFunction ()
+                [RequiresUnreferencedCode("Suppress in body")]
+                [RequiresAssemblyFiles("Suppress in body")]
+                [RequiresDynamicCode("Suppress in body")]
+                void LocalFunction()
                 {
-                    NestedLocalFunction ();
+                    NestedLocalFunction();
 
                     // The linker doesn't have enough information to associate the Requires on LocalFunction
                     // with this nested local function.
-                    [ExpectedWarning ("IL2026", ProducedBy = ProducedBy.Trimmer | ProducedBy.NativeAot)]
-                    [ExpectedWarning ("IL3002", ProducedBy = ProducedBy.NativeAot)]
-                    [ExpectedWarning ("IL3050", ProducedBy = ProducedBy.NativeAot)]
-                    void NestedLocalFunction () => MethodWithRequires ();
+                    [ExpectedWarning(
+                        "IL2026",
+                        ProducedBy = ProducedBy.Trimmer | ProducedBy.NativeAot
+                    )]
+                    [ExpectedWarning("IL3002", ProducedBy = ProducedBy.NativeAot)]
+                    [ExpectedWarning("IL3050", ProducedBy = ProducedBy.NativeAot)]
+                    void NestedLocalFunction() => MethodWithRequires();
                 }
             }
 
-            [RequiresUnreferencedCode ("Suppress in body")]
-            [RequiresAssemblyFiles ("Suppress in body")]
-            [RequiresDynamicCode ("Suppress in body")]
-            static void TestSuppressionOnOuterAndLocalFunction ()
+            [RequiresUnreferencedCode("Suppress in body")]
+            [RequiresAssemblyFiles("Suppress in body")]
+            [RequiresDynamicCode("Suppress in body")]
+            static void TestSuppressionOnOuterAndLocalFunction()
             {
-                LocalFunction ();
+                LocalFunction();
 
-                [RequiresUnreferencedCode ("Suppress in body")]
-                [RequiresAssemblyFiles ("Suppress in body")]
-                [RequiresDynamicCode ("Suppress in body")]
-                void LocalFunction (Type unknownType = null)
+                [RequiresUnreferencedCode("Suppress in body")]
+                [RequiresAssemblyFiles("Suppress in body")]
+                [RequiresDynamicCode("Suppress in body")]
+                void LocalFunction(Type unknownType = null)
                 {
-                    MethodWithRequires ();
-                    unknownType.RequiresNonPublicMethods ();
+                    MethodWithRequires();
+                    unknownType.RequiresNonPublicMethods();
                 }
             }
 
             class TestSuppressionOnOuterWithSameName
             {
-                [ExpectedWarning ("IL2026", nameof (Outer) + "()")]
-                [ExpectedWarning ("IL3002", nameof (Outer) + "()", ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot)]
-                [ExpectedWarning ("IL3050", nameof (Outer) + "()", ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot)]
-                public static void Test ()
+                [ExpectedWarning("IL2026", nameof(Outer) + "()")]
+                [ExpectedWarning(
+                    "IL3002",
+                    nameof(Outer) + "()",
+                    ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot
+                )]
+                [ExpectedWarning(
+                    "IL3050",
+                    nameof(Outer) + "()",
+                    ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot
+                )]
+                public static void Test()
                 {
-                    Outer ();
-                    Outer (0);
+                    Outer();
+                    Outer(0);
                 }
 
-                [RequiresUnreferencedCode ("Suppress in body")]
-                [RequiresAssemblyFiles ("Suppress in body")]
-                [RequiresDynamicCode ("Suppress in body")]
-                static void Outer ()
+                [RequiresUnreferencedCode("Suppress in body")]
+                [RequiresAssemblyFiles("Suppress in body")]
+                [RequiresDynamicCode("Suppress in body")]
+                static void Outer()
                 {
                     // Even though this method has the same name as Outer(int i),
                     // it should not suppress warnings originating from compiler-generated
                     // code for the lambda contained in Outer(int i).
                 }
 
-                static void Outer (int i)
+                static void Outer(int i)
                 {
-                    LocalFunction ();
+                    LocalFunction();
 
-                    [ExpectedWarning ("IL2026", "--MethodWithRequires--")]
-                    [ExpectedWarning ("IL3002", ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot)]
-                    [ExpectedWarning ("IL3050", ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot)]
-                    void LocalFunction () => MethodWithRequires ();
+                    [ExpectedWarning("IL2026", "--MethodWithRequires--")]
+                    [ExpectedWarning(
+                        "IL3002",
+                        ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot
+                    )]
+                    [ExpectedWarning(
+                        "IL3050",
+                        ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot
+                    )]
+                    void LocalFunction() => MethodWithRequires();
                 }
             }
 
-            [UnconditionalSuppressMessage ("Trimming", "IL2026")]
-            [UnconditionalSuppressMessage ("SingleFile", "IL3002")]
-            [UnconditionalSuppressMessage ("AOT", "IL3050")]
-            public static void Test ()
+            [UnconditionalSuppressMessage("Trimming", "IL2026")]
+            [UnconditionalSuppressMessage("SingleFile", "IL3002")]
+            [UnconditionalSuppressMessage("AOT", "IL3050")]
+            public static void Test()
             {
-                TestCall ();
-                TestCallFromNestedLocalFunction ();
-                TestCallWithClosure ();
-                TestReflectionAccess ();
-                TestLdftn ();
-                TestLazyDelegate ();
-                TestMethodParameterWithRequirements ();
-                TestDynamicallyAccessedMethod ();
-                TestGenericMethodParameterRequirement<TestType> ();
-                TestGenericTypeParameterRequirement<TestType> ();
-                TestGenericLocalFunction<TestType> ();
-                TestGenericLocalFunctionInner<TestType> ();
-                TestGenericLocalFunctionWithAnnotations<TestType> ();
-                TestGenericLocalFunctionWithAnnotationsAndClosure<TestType> ();
-                TestCallMethodWithRequiresInLtftnLocalFunction ();
-                DynamicallyAccessedLocalFunction.TestCallMethodWithRequiresInDynamicallyAccessedLocalFunction ();
-                DynamicallyAccessedLocalFunctionUnusedShouldWarn.TestCallMethodWithRequiresInDynamicallyAccessedLocalFunction ();
-                DynamicallyAccessedLocalFunctionUnusedShouldSuppress.TestCallMethodWithRequiresInDynamicallyAccessedLocalFunction ();
-                TestSuppressionOnLocalFunction ();
-                TestSuppressionOnLocalFunctionWithAssignment ();
-                TestSuppressionOnLocalFunctionWithNestedLocalFunction ();
-                TestSuppressionOnOuterAndLocalFunction ();
-                TestSuppressionOnOuterWithSameName.Test ();
+                TestCall();
+                TestCallFromNestedLocalFunction();
+                TestCallWithClosure();
+                TestReflectionAccess();
+                TestLdftn();
+                TestLazyDelegate();
+                TestMethodParameterWithRequirements();
+                TestDynamicallyAccessedMethod();
+                TestGenericMethodParameterRequirement<TestType>();
+                TestGenericTypeParameterRequirement<TestType>();
+                TestGenericLocalFunction<TestType>();
+                TestGenericLocalFunctionInner<TestType>();
+                TestGenericLocalFunctionWithAnnotations<TestType>();
+                TestGenericLocalFunctionWithAnnotationsAndClosure<TestType>();
+                TestCallMethodWithRequiresInLtftnLocalFunction();
+                DynamicallyAccessedLocalFunction.TestCallMethodWithRequiresInDynamicallyAccessedLocalFunction();
+                DynamicallyAccessedLocalFunctionUnusedShouldWarn.TestCallMethodWithRequiresInDynamicallyAccessedLocalFunction();
+                DynamicallyAccessedLocalFunctionUnusedShouldSuppress.TestCallMethodWithRequiresInDynamicallyAccessedLocalFunction();
+                TestSuppressionOnLocalFunction();
+                TestSuppressionOnLocalFunctionWithAssignment();
+                TestSuppressionOnLocalFunctionWithNestedLocalFunction();
+                TestSuppressionOnOuterAndLocalFunction();
+                TestSuppressionOnOuterWithSameName.Test();
             }
         }
 
-        static void WarnInNonNestedLocalFunctionTest ()
+        static void WarnInNonNestedLocalFunctionTest()
         {
-            LocalFunction ();
+            LocalFunction();
 
-            [ExpectedWarning ("IL2026", "--MethodWithRequires--")]
-            [ExpectedWarning ("IL3002", "--MethodWithRequires--", ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot)]
-            [ExpectedWarning ("IL3050", "--MethodWithRequires--", ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot)]
-            static void LocalFunction () => MethodWithRequires ();
+            [ExpectedWarning("IL2026", "--MethodWithRequires--")]
+            [ExpectedWarning(
+                "IL3002",
+                "--MethodWithRequires--",
+                ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot
+            )]
+            [ExpectedWarning(
+                "IL3050",
+                "--MethodWithRequires--",
+                ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot
+            )]
+            static void LocalFunction() => MethodWithRequires();
         }
 
-        [ExpectedWarning ("IL2026", "--MethodWithNonNestedLocalFunction--")]
-        [ExpectedWarning ("IL3002", "--MethodWithNonNestedLocalFunction--", ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot)]
-        [ExpectedWarning ("IL3050", "--MethodWithNonNestedLocalFunction--", ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot)]
-        static void SuppressInNonNestedLocalFunctionTest ()
+        [ExpectedWarning("IL2026", "--MethodWithNonNestedLocalFunction--")]
+        [ExpectedWarning(
+            "IL3002",
+            "--MethodWithNonNestedLocalFunction--",
+            ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot
+        )]
+        [ExpectedWarning(
+            "IL3050",
+            "--MethodWithNonNestedLocalFunction--",
+            ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot
+        )]
+        static void SuppressInNonNestedLocalFunctionTest()
         {
-            MethodWithNonNestedLocalFunction ();
+            MethodWithNonNestedLocalFunction();
         }
 
-        [RequiresUnreferencedCode ("--MethodWithNonNestedLocalFunction--")]
-        [RequiresAssemblyFiles ("--MethodWithNonNestedLocalFunction--")]
-        [RequiresDynamicCode ("--MethodWithNonNestedLocalFunction--")]
-        static void MethodWithNonNestedLocalFunction ()
+        [RequiresUnreferencedCode("--MethodWithNonNestedLocalFunction--")]
+        [RequiresAssemblyFiles("--MethodWithNonNestedLocalFunction--")]
+        [RequiresDynamicCode("--MethodWithNonNestedLocalFunction--")]
+        static void MethodWithNonNestedLocalFunction()
         {
-            LocalFunction ();
+            LocalFunction();
 
-            static void LocalFunction () => MethodWithRequires ();
+            static void LocalFunction() => MethodWithRequires();
         }
 
         class WarnInLambda
         {
-            static void TestCall ()
+            static void TestCall()
             {
-                Action lambda =
-                [ExpectedWarning ("IL2026", "--MethodWithRequires--")]
-                [ExpectedWarning ("IL3002", "--MethodWithRequires--", ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot)]
-                [ExpectedWarning ("IL3050", "--MethodWithRequires--", ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot)]
-                () => MethodWithRequires ();
+                Action lambda = [ExpectedWarning("IL2026", "--MethodWithRequires--")]
+                [ExpectedWarning(
+                    "IL3002",
+                    "--MethodWithRequires--",
+                    ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot
+                )]
+                [ExpectedWarning(
+                    "IL3050",
+                    "--MethodWithRequires--",
+                    ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot
+                )]
+                () => MethodWithRequires();
 
-                lambda ();
+                lambda();
             }
 
             // NativeAot is missing ldftn detection: https://github.com/dotnet/runtime/issues/68786
-            [ExpectedWarning ("IL2026", "--LambdaWithRequires--", ProducedBy = ProducedBy.Trimmer | ProducedBy.Analyzer)]
-            [ExpectedWarning ("IL3002", "--LambdaWithRequires--", ProducedBy = ProducedBy.Analyzer)]
-            [ExpectedWarning ("IL3050", "--LambdaWithRequires--", ProducedBy = ProducedBy.Analyzer)]
-            static void TestLambdaWithRequires ()
+            [ExpectedWarning(
+                "IL2026",
+                "--LambdaWithRequires--",
+                ProducedBy = ProducedBy.Trimmer | ProducedBy.Analyzer
+            )]
+            [ExpectedWarning("IL3002", "--LambdaWithRequires--", ProducedBy = ProducedBy.Analyzer)]
+            [ExpectedWarning("IL3050", "--LambdaWithRequires--", ProducedBy = ProducedBy.Analyzer)]
+            static void TestLambdaWithRequires()
             {
-                Action lambda =
-                    [RequiresUnreferencedCodeAttribute ("--LambdaWithRequires--")]
-                [RequiresAssemblyFiles ("--LambdaWithRequires--")]
-                [RequiresDynamicCode ("--LambdaWithRequires--")]
-                () => MethodWithRequires ();
+                Action lambda = [RequiresUnreferencedCodeAttribute("--LambdaWithRequires--")]
+                [RequiresAssemblyFiles("--LambdaWithRequires--")]
+                [RequiresDynamicCode("--LambdaWithRequires--")]
+                () => MethodWithRequires();
 
-                lambda ();
+                lambda();
             }
 
-            static void TestCallUnused ()
+            static void TestCallUnused()
             {
-                Action _ =
-                [ExpectedWarning ("IL2026", "--MethodWithRequires--")]
-                [ExpectedWarning ("IL3002", "--MethodWithRequires--", ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot)]
-                [ExpectedWarning ("IL3050", "--MethodWithRequires--", ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot)]
-                () => MethodWithRequires ();
+                Action _ = [ExpectedWarning("IL2026", "--MethodWithRequires--")]
+                [ExpectedWarning(
+                    "IL3002",
+                    "--MethodWithRequires--",
+                    ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot
+                )]
+                [ExpectedWarning(
+                    "IL3050",
+                    "--MethodWithRequires--",
+                    ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot
+                )]
+                () => MethodWithRequires();
             }
 
             // NativeAot is missing ldftn detection: https://github.com/dotnet/runtime/issues/68786
-            [ExpectedWarning ("IL2026", "--LambdaWithRequires--", ProducedBy = ProducedBy.Trimmer | ProducedBy.Analyzer)]
-            [ExpectedWarning ("IL3002", "--LambdaWithRequires--", ProducedBy = ProducedBy.Analyzer)]
-            [ExpectedWarning ("IL3050", "--LambdaWithRequires--", ProducedBy = ProducedBy.Analyzer)]
-            static void TestLambdaWithRequiresUnused ()
+            [ExpectedWarning(
+                "IL2026",
+                "--LambdaWithRequires--",
+                ProducedBy = ProducedBy.Trimmer | ProducedBy.Analyzer
+            )]
+            [ExpectedWarning("IL3002", "--LambdaWithRequires--", ProducedBy = ProducedBy.Analyzer)]
+            [ExpectedWarning("IL3050", "--LambdaWithRequires--", ProducedBy = ProducedBy.Analyzer)]
+            static void TestLambdaWithRequiresUnused()
             {
-                Action _ =
-                    [RequiresUnreferencedCode ("--LambdaWithRequires--")]
-                [RequiresAssemblyFiles ("--LambdaWithRequires--")]
-                [RequiresDynamicCode ("--LambdaWithRequires--")]
-                () => MethodWithRequires ();
+                Action _ = [RequiresUnreferencedCode("--LambdaWithRequires--")]
+                [RequiresAssemblyFiles("--LambdaWithRequires--")]
+                [RequiresDynamicCode("--LambdaWithRequires--")]
+                () => MethodWithRequires();
             }
 
-            static void TestCallWithClosure (int p = 0)
+            static void TestCallWithClosure(int p = 0)
             {
-                Action lambda =
-                [ExpectedWarning ("IL2026", "--MethodWithRequires--")]
-                [ExpectedWarning ("IL3002", "--MethodWithRequires--", ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot)]
-                [ExpectedWarning ("IL3050", "--MethodWithRequires--", ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot)]
-                () => {
+                Action lambda = [ExpectedWarning("IL2026", "--MethodWithRequires--")]
+                [ExpectedWarning(
+                    "IL3002",
+                    "--MethodWithRequires--",
+                    ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot
+                )]
+                [ExpectedWarning(
+                    "IL3050",
+                    "--MethodWithRequires--",
+                    ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot
+                )]
+                () =>
+                {
                     p++;
-                    MethodWithRequires ();
+                    MethodWithRequires();
                 };
 
-                lambda ();
+                lambda();
             }
 
-            static void TestCallWithClosureUnused (int p = 0)
+            static void TestCallWithClosureUnused(int p = 0)
             {
                 Action _ =
 #if !RELEASE
-                [ExpectedWarning ("IL2026", "--MethodWithRequires--", ProducedBy = ProducedBy.Trimmer | ProducedBy.NativeAot)]
-                [ExpectedWarning ("IL3002", "--MethodWithRequires--", ProducedBy = ProducedBy.NativeAot)]
-                [ExpectedWarning ("IL3050", "--MethodWithRequires--", ProducedBy = ProducedBy.NativeAot)]
+                [ExpectedWarning(
+                    "IL2026",
+                    "--MethodWithRequires--",
+                    ProducedBy = ProducedBy.Trimmer | ProducedBy.NativeAot
+                )]
+                [ExpectedWarning(
+                    "IL3002",
+                    "--MethodWithRequires--",
+                    ProducedBy = ProducedBy.NativeAot
+                )]
+                [ExpectedWarning(
+                    "IL3050",
+                    "--MethodWithRequires--",
+                    ProducedBy = ProducedBy.NativeAot
+                )]
 #endif
-                [ExpectedWarning ("IL2026", "--MethodWithRequires--", ProducedBy = ProducedBy.Analyzer)]
-                [ExpectedWarning ("IL3002", "--MethodWithRequires--", ProducedBy = ProducedBy.Analyzer)]
-                [ExpectedWarning ("IL3050", "--MethodWithRequires--", ProducedBy = ProducedBy.Analyzer)]
-                () => {
+                [ExpectedWarning(
+                    "IL2026",
+                    "--MethodWithRequires--",
+                    ProducedBy = ProducedBy.Analyzer
+                )]
+                [ExpectedWarning(
+                    "IL3002",
+                    "--MethodWithRequires--",
+                    ProducedBy = ProducedBy.Analyzer
+                )]
+                [ExpectedWarning(
+                    "IL3050",
+                    "--MethodWithRequires--",
+                    ProducedBy = ProducedBy.Analyzer
+                )]
+                () =>
+                {
                     p++;
-                    MethodWithRequires ();
+                    MethodWithRequires();
                 };
             }
 
-            static void TestReflectionAccess ()
+            static void TestReflectionAccess()
             {
-                Action _ =
-                [ExpectedWarning ("IL2026", "--MethodWithRequires--")]
-                () => {
-                    typeof (RequiresInCompilerGeneratedCode)
-                        .GetMethod ("MethodWithRequires", System.Reflection.BindingFlags.NonPublic)
-                        .Invoke (null, new object[] { });
+                Action _ = [ExpectedWarning("IL2026", "--MethodWithRequires--")]
+                () =>
+                {
+                    typeof(RequiresInCompilerGeneratedCode)
+                        .GetMethod("MethodWithRequires", System.Reflection.BindingFlags.NonPublic)
+                        .Invoke(null, new object[] { });
                 };
             }
 
-            static void TestLdftn ()
+            static void TestLdftn()
             {
                 Action _ =
 #if !RELEASE
                 // NativeAot is missing ldftn detection: https://github.com/dotnet/runtime/issues/68786
-                [ExpectedWarning ("IL2026", "--MethodWithRequires--", ProducedBy = ProducedBy.Trimmer)]
+                [ExpectedWarning(
+                    "IL2026",
+                    "--MethodWithRequires--",
+                    ProducedBy = ProducedBy.Trimmer
+                )]
 #endif
-                [ExpectedWarning ("IL2026", "--MethodWithRequires--", ProducedBy = ProducedBy.Analyzer)]
-                [ExpectedWarning ("IL3002", "--MethodWithRequires--", ProducedBy = ProducedBy.Analyzer)]
-                [ExpectedWarning ("IL3050", "--MethodWithRequires--", ProducedBy = ProducedBy.Analyzer)]
-                () => {
-                    var action = new Action (MethodWithRequires);
+                [ExpectedWarning(
+                    "IL2026",
+                    "--MethodWithRequires--",
+                    ProducedBy = ProducedBy.Analyzer
+                )]
+                [ExpectedWarning(
+                    "IL3002",
+                    "--MethodWithRequires--",
+                    ProducedBy = ProducedBy.Analyzer
+                )]
+                [ExpectedWarning(
+                    "IL3050",
+                    "--MethodWithRequires--",
+                    ProducedBy = ProducedBy.Analyzer
+                )]
+                () =>
+                {
+                    var action = new Action(MethodWithRequires);
                 };
             }
 
             // NativeAot is missing ldftn detection: https://github.com/dotnet/runtime/issues/68786
-            [ExpectedWarning ("IL2026", "--MethodWithRequiresAndReturns--", CompilerGeneratedCode = true, ProducedBy = ProducedBy.Trimmer | ProducedBy.Analyzer)]
-            [ExpectedWarning ("IL3002", "--MethodWithRequiresAndReturns--", ProducedBy = ProducedBy.Analyzer)]
-            [ExpectedWarning ("IL3050", "--MethodWithRequiresAndReturns--", ProducedBy = ProducedBy.Analyzer)]
-            public static Lazy<string> _default = new Lazy<string> (MethodWithRequiresAndReturns);
+            [ExpectedWarning(
+                "IL2026",
+                "--MethodWithRequiresAndReturns--",
+                CompilerGeneratedCode = true,
+                ProducedBy = ProducedBy.Trimmer | ProducedBy.Analyzer
+            )]
+            [ExpectedWarning(
+                "IL3002",
+                "--MethodWithRequiresAndReturns--",
+                ProducedBy = ProducedBy.Analyzer
+            )]
+            [ExpectedWarning(
+                "IL3050",
+                "--MethodWithRequiresAndReturns--",
+                ProducedBy = ProducedBy.Analyzer
+            )]
+            public static Lazy<string> _default = new Lazy<string>(MethodWithRequiresAndReturns);
 
-            static void TestLazyDelegate ()
+            static void TestLazyDelegate()
             {
-                Action _ = () => {
+                Action _ = () =>
+                {
                     var action = _default.Value;
                 };
             }
 
-            static void TestDynamicallyAccessedMethod ()
+            static void TestDynamicallyAccessedMethod()
             {
-                Action _ =
-                [ExpectedWarning ("IL2026", "--TypeWithMethodWithRequires.MethodWithRequires--")]
-                () => {
-                    typeof (TypeWithMethodWithRequires).RequiresNonPublicMethods ();
+                Action _ = [ExpectedWarning(
+                    "IL2026",
+                    "--TypeWithMethodWithRequires.MethodWithRequires--"
+                )]
+                () =>
+                {
+                    typeof(TypeWithMethodWithRequires).RequiresNonPublicMethods();
                 };
             }
 
-            public static void Test ()
+            public static void Test()
             {
-                TestCall ();
-                TestCallUnused ();
-                TestLambdaWithRequires ();
-                TestLambdaWithRequiresUnused ();
-                TestCallWithClosure ();
-                TestCallWithClosureUnused ();
-                TestReflectionAccess ();
-                TestLdftn ();
-                TestLazyDelegate ();
-                TestDynamicallyAccessedMethod ();
+                TestCall();
+                TestCallUnused();
+                TestLambdaWithRequires();
+                TestLambdaWithRequiresUnused();
+                TestCallWithClosure();
+                TestCallWithClosureUnused();
+                TestReflectionAccess();
+                TestLdftn();
+                TestLazyDelegate();
+                TestDynamicallyAccessedMethod();
             }
         }
 
         class SuppressInLambda
         {
-            [RequiresUnreferencedCode ("Suppress in body")]
-            [RequiresAssemblyFiles ("Suppress in body")]
-            [RequiresDynamicCode ("Suppress in body")]
-            static void TestCall ()
+            [RequiresUnreferencedCode("Suppress in body")]
+            [RequiresAssemblyFiles("Suppress in body")]
+            [RequiresDynamicCode("Suppress in body")]
+            static void TestCall()
             {
-                Action _ =
-                () => MethodWithRequires ();
+                Action _ = () => MethodWithRequires();
             }
 
-            [RequiresUnreferencedCode ("Suppress in body")]
-            [RequiresAssemblyFiles ("Suppress in body")]
-            [RequiresDynamicCode ("Suppress in body")]
-            static void TestCallFromNestedLambda ()
+            [RequiresUnreferencedCode("Suppress in body")]
+            [RequiresAssemblyFiles("Suppress in body")]
+            [RequiresDynamicCode("Suppress in body")]
+            static void TestCallFromNestedLambda()
             {
-                Action lambda = () => {
-                    Action nestedLambda = () => MethodWithRequires ();
+                Action lambda = () =>
+                {
+                    Action nestedLambda = () => MethodWithRequires();
                 };
             }
 
-            [RequiresUnreferencedCode ("Suppress in body")]
-            [RequiresAssemblyFiles ("Suppress in body")]
-            [RequiresDynamicCode ("Suppress in body")]
-            static void TestCallWithReflectionAnalysisWarning ()
+            [RequiresUnreferencedCode("Suppress in body")]
+            [RequiresAssemblyFiles("Suppress in body")]
+            [RequiresDynamicCode("Suppress in body")]
+            static void TestCallWithReflectionAnalysisWarning()
             {
                 // This should not produce warning because the Requires
-                Action<Type> _ =
-                (t) => t.RequiresPublicMethods ();
+                Action<Type> _ = (t) => t.RequiresPublicMethods();
             }
 
-            [RequiresUnreferencedCode ("Suppress in body")]
-            [RequiresAssemblyFiles ("Suppress in body")]
-            [RequiresDynamicCode ("Suppress in body")]
-            static void TestCallWithClosure (int p = 0)
+            [RequiresUnreferencedCode("Suppress in body")]
+            [RequiresAssemblyFiles("Suppress in body")]
+            [RequiresDynamicCode("Suppress in body")]
+            static void TestCallWithClosure(int p = 0)
             {
-                Action _ =
-                () => {
+                Action _ = () =>
+                {
                     p++;
-                    MethodWithRequires ();
+                    MethodWithRequires();
                 };
             }
 
-            [RequiresUnreferencedCode ("Suppress in body")]
-            [RequiresAssemblyFiles ("Suppress in body")]
-            [RequiresDynamicCode ("Suppress in body")]
-            static void TestReflectionAccess ()
+            [RequiresUnreferencedCode("Suppress in body")]
+            [RequiresAssemblyFiles("Suppress in body")]
+            [RequiresDynamicCode("Suppress in body")]
+            static void TestReflectionAccess()
             {
-                Action _ =
-                () => {
-                    typeof (RequiresInCompilerGeneratedCode)
-                        .GetMethod ("MethodWithRequires", System.Reflection.BindingFlags.NonPublic)
-                        .Invoke (null, new object[] { });
+                Action _ = () =>
+                {
+                    typeof(RequiresInCompilerGeneratedCode)
+                        .GetMethod("MethodWithRequires", System.Reflection.BindingFlags.NonPublic)
+                        .Invoke(null, new object[] { });
                 };
             }
 
-            [RequiresUnreferencedCode ("Suppress in body")]
-            [RequiresAssemblyFiles ("Suppress in body")]
-            [RequiresDynamicCode ("Suppress in body")]
-            static void TestLdftn ()
+            [RequiresUnreferencedCode("Suppress in body")]
+            [RequiresAssemblyFiles("Suppress in body")]
+            [RequiresDynamicCode("Suppress in body")]
+            static void TestLdftn()
             {
-                Action _ =
-                () => {
-                    var action = new Action (MethodWithRequires);
+                Action _ = () =>
+                {
+                    var action = new Action(MethodWithRequires);
                 };
             }
 
             // NativeAot is missing ldftn detection: https://github.com/dotnet/runtime/issues/68786
-            [ExpectedWarning ("IL2026", "--MethodWithRequiresAndReturns--", CompilerGeneratedCode = true, ProducedBy = ProducedBy.Trimmer | ProducedBy.Analyzer)]
-            [ExpectedWarning ("IL3002", "--MethodWithRequiresAndReturns--", ProducedBy = ProducedBy.Analyzer)]
-            [ExpectedWarning ("IL3050", "--MethodWithRequiresAndReturns--", ProducedBy = ProducedBy.Analyzer)]
-            public static Lazy<string> _default = new Lazy<string> (MethodWithRequiresAndReturns);
+            [ExpectedWarning(
+                "IL2026",
+                "--MethodWithRequiresAndReturns--",
+                CompilerGeneratedCode = true,
+                ProducedBy = ProducedBy.Trimmer | ProducedBy.Analyzer
+            )]
+            [ExpectedWarning(
+                "IL3002",
+                "--MethodWithRequiresAndReturns--",
+                ProducedBy = ProducedBy.Analyzer
+            )]
+            [ExpectedWarning(
+                "IL3050",
+                "--MethodWithRequiresAndReturns--",
+                ProducedBy = ProducedBy.Analyzer
+            )]
+            public static Lazy<string> _default = new Lazy<string>(MethodWithRequiresAndReturns);
 
-            static void TestLazyDelegate ()
+            static void TestLazyDelegate()
             {
-                Action _ = () => {
+                Action _ = () =>
+                {
                     var action = _default.Value;
                 };
             }
 
-            [RequiresUnreferencedCode ("Suppress in body")]
-            [RequiresAssemblyFiles ("Suppress in body")]
-            [RequiresDynamicCode ("Suppress in body")]
-            static void TestDynamicallyAccessedMethod ()
+            [RequiresUnreferencedCode("Suppress in body")]
+            [RequiresAssemblyFiles("Suppress in body")]
+            [RequiresDynamicCode("Suppress in body")]
+            static void TestDynamicallyAccessedMethod()
             {
-                Action _ =
-                () => {
-                    typeof (TypeWithMethodWithRequires).RequiresNonPublicMethods ();
+                Action _ = () =>
+                {
+                    typeof(TypeWithMethodWithRequires).RequiresNonPublicMethods();
                 };
             }
 
-            [RequiresUnreferencedCode ("Suppress in body")]
-            [RequiresAssemblyFiles ("Suppress in body")]
-            [RequiresDynamicCode ("Suppress in body")]
-            static async void TestMethodParameterWithRequirements (Type unknownType = null)
+            [RequiresUnreferencedCode("Suppress in body")]
+            [RequiresAssemblyFiles("Suppress in body")]
+            [RequiresDynamicCode("Suppress in body")]
+            static async void TestMethodParameterWithRequirements(Type unknownType = null)
             {
-                Action _ =
-                () => unknownType.RequiresNonPublicMethods ();
+                Action _ = () => unknownType.RequiresNonPublicMethods();
             }
 
             // https://github.com/dotnet/runtime/issues/68688
             // This test passes on NativeAot even without the Requires* attributes.
-            [RequiresUnreferencedCode ("Suppress in body")]
-            [RequiresAssemblyFiles ("Suppress in body")]
-            [RequiresDynamicCode ("Suppress in body")]
-            static void TestGenericMethodParameterRequirement<TUnknown> ()
+            [RequiresUnreferencedCode("Suppress in body")]
+            [RequiresAssemblyFiles("Suppress in body")]
+            [RequiresDynamicCode("Suppress in body")]
+            static void TestGenericMethodParameterRequirement<TUnknown>()
             {
-                Action _ =
-                () => {
-                    MethodWithGenericWhichRequiresMethods<TUnknown> ();
+                Action _ = () =>
+                {
+                    MethodWithGenericWhichRequiresMethods<TUnknown>();
                 };
             }
 
             // https://github.com/dotnet/runtime/issues/68688
             // This test passes on NativeAot even without the Requires* attributes.
-            [RequiresUnreferencedCode ("Suppress in body")]
-            [RequiresAssemblyFiles ("Suppress in body")]
-            [RequiresDynamicCode ("Suppress in body")]
-            static void TestGenericTypeParameterRequirement<TUnknown> ()
+            [RequiresUnreferencedCode("Suppress in body")]
+            [RequiresAssemblyFiles("Suppress in body")]
+            [RequiresDynamicCode("Suppress in body")]
+            static void TestGenericTypeParameterRequirement<TUnknown>()
             {
-                Action _ = () => {
-                    new TypeWithGenericWhichRequiresNonPublicFields<TUnknown> ();
+                Action _ = () =>
+                {
+                    new TypeWithGenericWhichRequiresNonPublicFields<TUnknown>();
                 };
             }
 
             // NativeAot is missing ldftn detection: https://github.com/dotnet/runtime/issues/68786
-            [ExpectedWarning ("IL2026", ProducedBy = ProducedBy.Trimmer | ProducedBy.Analyzer)]
-            [ExpectedWarning ("IL3002", ProducedBy = ProducedBy.Analyzer)]
-            [ExpectedWarning ("IL3050", ProducedBy = ProducedBy.Analyzer)]
-            static void TestSuppressionOnLambda ()
+            [ExpectedWarning("IL2026", ProducedBy = ProducedBy.Trimmer | ProducedBy.Analyzer)]
+            [ExpectedWarning("IL3002", ProducedBy = ProducedBy.Analyzer)]
+            [ExpectedWarning("IL3050", ProducedBy = ProducedBy.Analyzer)]
+            static void TestSuppressionOnLambda()
             {
-                var lambda =
-                [RequiresUnreferencedCode ("Suppress in body")]
-                [RequiresAssemblyFiles ("Suppress in body")]
-                [RequiresDynamicCode ("Suppress in body")]
-                () => MethodWithRequires ();
+                var lambda = [RequiresUnreferencedCode("Suppress in body")]
+                [RequiresAssemblyFiles("Suppress in body")]
+                [RequiresDynamicCode("Suppress in body")]
+                () => MethodWithRequires();
 
-                lambda (); // This will produce a warning since the lambda has Requires on it
+                lambda(); // This will produce a warning since the lambda has Requires on it
             }
 
             // NativeAot is missing ldftn detection: https://github.com/dotnet/runtime/issues/68786
-            [ExpectedWarning ("IL2026", ProducedBy = ProducedBy.Trimmer | ProducedBy.Analyzer)]
-            [ExpectedWarning ("IL3002", ProducedBy = ProducedBy.Analyzer)]
-            [ExpectedWarning ("IL3050", ProducedBy = ProducedBy.Analyzer)]
-            static void TestSuppressionOnLambdaWithNestedLambda ()
+            [ExpectedWarning("IL2026", ProducedBy = ProducedBy.Trimmer | ProducedBy.Analyzer)]
+            [ExpectedWarning("IL3002", ProducedBy = ProducedBy.Analyzer)]
+            [ExpectedWarning("IL3050", ProducedBy = ProducedBy.Analyzer)]
+            static void TestSuppressionOnLambdaWithNestedLambda()
             {
-                var lambda =
-                [RequiresUnreferencedCode ("Suppress in body")]
-                [RequiresAssemblyFiles ("Suppress in body")]
-                [RequiresDynamicCode ("Suppress in body")]
-                () => {
+                var lambda = [RequiresUnreferencedCode("Suppress in body")]
+                [RequiresAssemblyFiles("Suppress in body")]
+                [RequiresDynamicCode("Suppress in body")]
+                () =>
+                {
                     // The linker doesn't try to associate the Requires on lambda with this nested
                     // lambda. It would be possible to do this because the declaration site will contain
                     // an IL reference to the generated lambda method, unlike local functions.
                     // However, we don't make this association, for consistency with local functions.
-                    var nestedLambda =
-                    [ExpectedWarning ("IL2026", ProducedBy = ProducedBy.Trimmer | ProducedBy.NativeAot)]
-                    [ExpectedWarning ("IL3002", ProducedBy = ProducedBy.NativeAot)]
-                    [ExpectedWarning ("IL3050", ProducedBy = ProducedBy.NativeAot)]
-                    () => MethodWithRequires ();
+                    var nestedLambda = [ExpectedWarning(
+                        "IL2026",
+                        ProducedBy = ProducedBy.Trimmer | ProducedBy.NativeAot
+                    )]
+                    [ExpectedWarning("IL3002", ProducedBy = ProducedBy.NativeAot)]
+                    [ExpectedWarning("IL3050", ProducedBy = ProducedBy.NativeAot)]
+                    () => MethodWithRequires();
                 };
 
-                lambda (); // This will produce a warning since the lambda has Requires on it
+                lambda(); // This will produce a warning since the lambda has Requires on it
             }
 
-            [RequiresUnreferencedCode ("Suppress in body")]
-            [RequiresAssemblyFiles ("Suppress in body")]
-            [RequiresDynamicCode ("Suppress in body")]
-            static void TestSuppressionOnOuterAndLambda ()
+            [RequiresUnreferencedCode("Suppress in body")]
+            [RequiresAssemblyFiles("Suppress in body")]
+            [RequiresDynamicCode("Suppress in body")]
+            static void TestSuppressionOnOuterAndLambda()
             {
-                var lambda =
-                [RequiresUnreferencedCode ("Suppress in body")]
-                [RequiresAssemblyFiles ("Suppress in body")]
-                [RequiresDynamicCode ("Suppress in body")]
-                (Type unknownType) => {
-                    MethodWithRequires ();
-                    unknownType.RequiresNonPublicMethods ();
+                var lambda = [RequiresUnreferencedCode("Suppress in body")]
+                [RequiresAssemblyFiles("Suppress in body")]
+                [RequiresDynamicCode("Suppress in body")]
+                (Type unknownType) =>
+                {
+                    MethodWithRequires();
+                    unknownType.RequiresNonPublicMethods();
                 };
 
-                lambda (null);
+                lambda(null);
             }
 
             class TestSuppressionOnOuterWithSameName
             {
-                [ExpectedWarning ("IL2026", nameof (Outer) + "()")]
-                [ExpectedWarning ("IL3002", nameof (Outer) + "()", ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot)]
-                [ExpectedWarning ("IL3050", nameof (Outer) + "()", ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot)]
-                public static void Test ()
+                [ExpectedWarning("IL2026", nameof(Outer) + "()")]
+                [ExpectedWarning(
+                    "IL3002",
+                    nameof(Outer) + "()",
+                    ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot
+                )]
+                [ExpectedWarning(
+                    "IL3050",
+                    nameof(Outer) + "()",
+                    ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot
+                )]
+                public static void Test()
                 {
-                    Outer ();
-                    Outer (0);
+                    Outer();
+                    Outer(0);
                 }
 
-                [RequiresUnreferencedCode ("Suppress in body")]
-                [RequiresAssemblyFiles ("Suppress in body")]
-                [RequiresDynamicCode ("Suppress in body")]
-                static void Outer ()
+                [RequiresUnreferencedCode("Suppress in body")]
+                [RequiresAssemblyFiles("Suppress in body")]
+                [RequiresDynamicCode("Suppress in body")]
+                static void Outer()
                 {
                     // Even though this method has the same name as Outer(int i),
                     // it should not suppress warnings originating from compiler-generated
                     // code for the lambda contained in Outer(int i).
                 }
 
-                static void Outer (int i)
+                static void Outer(int i)
                 {
-                    var lambda =
-                    [ExpectedWarning ("IL2026", "--MethodWithRequires--")]
-                    [ExpectedWarning ("IL3002", ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot)]
-                    [ExpectedWarning ("IL3050", ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot)]
-                    () => MethodWithRequires ();
+                    var lambda = [ExpectedWarning("IL2026", "--MethodWithRequires--")]
+                    [ExpectedWarning(
+                        "IL3002",
+                        ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot
+                    )]
+                    [ExpectedWarning(
+                        "IL3050",
+                        ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot
+                    )]
+                    () => MethodWithRequires();
 
-                    lambda ();
+                    lambda();
                 }
             }
 
-
-            [UnconditionalSuppressMessage ("Trimming", "IL2026")]
-            [UnconditionalSuppressMessage ("SingleFile", "IL3002")]
-            [UnconditionalSuppressMessage ("AOT", "IL3050")]
-            public static void Test ()
+            [UnconditionalSuppressMessage("Trimming", "IL2026")]
+            [UnconditionalSuppressMessage("SingleFile", "IL3002")]
+            [UnconditionalSuppressMessage("AOT", "IL3050")]
+            public static void Test()
             {
-                TestCall ();
-                TestCallFromNestedLambda ();
-                TestCallWithReflectionAnalysisWarning ();
-                TestCallWithClosure ();
-                TestReflectionAccess ();
-                TestLdftn ();
-                TestLazyDelegate ();
-                TestDynamicallyAccessedMethod ();
-                TestMethodParameterWithRequirements ();
-                TestGenericMethodParameterRequirement<TestType> ();
-                TestGenericTypeParameterRequirement<TestType> ();
-                TestSuppressionOnLambda ();
-                TestSuppressionOnLambdaWithNestedLambda ();
-                TestSuppressionOnOuterAndLambda ();
-                TestSuppressionOnOuterWithSameName.Test ();
+                TestCall();
+                TestCallFromNestedLambda();
+                TestCallWithReflectionAnalysisWarning();
+                TestCallWithClosure();
+                TestReflectionAccess();
+                TestLdftn();
+                TestLazyDelegate();
+                TestDynamicallyAccessedMethod();
+                TestMethodParameterWithRequirements();
+                TestGenericMethodParameterRequirement<TestType>();
+                TestGenericTypeParameterRequirement<TestType>();
+                TestSuppressionOnLambda();
+                TestSuppressionOnLambdaWithNestedLambda();
+                TestSuppressionOnOuterAndLambda();
+                TestSuppressionOnOuterWithSameName.Test();
             }
         }
 
         class WarnInComplex
         {
-            static async void TestIteratorLocalFunctionInAsync ()
+            static async void TestIteratorLocalFunctionInAsync()
             {
-                await MethodAsync ();
-                LocalFunction ();
-                await MethodAsync ();
+                await MethodAsync();
+                LocalFunction();
+                await MethodAsync();
 
-                [ExpectedWarning ("IL2026", "--MethodWithRequires--", CompilerGeneratedCode = true)]
-                [ExpectedWarning ("IL3002", "--MethodWithRequires--", ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot, CompilerGeneratedCode = true)]
-                [ExpectedWarning ("IL3050", "--MethodWithRequires--", ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot, CompilerGeneratedCode = true)]
-                IEnumerable<int> LocalFunction ()
+                [ExpectedWarning("IL2026", "--MethodWithRequires--", CompilerGeneratedCode = true)]
+                [ExpectedWarning(
+                    "IL3002",
+                    "--MethodWithRequires--",
+                    ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot,
+                    CompilerGeneratedCode = true
+                )]
+                [ExpectedWarning(
+                    "IL3050",
+                    "--MethodWithRequires--",
+                    ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot,
+                    CompilerGeneratedCode = true
+                )]
+                IEnumerable<int> LocalFunction()
                 {
                     yield return 0;
-                    MethodWithRequires ();
+                    MethodWithRequires();
                     yield return 1;
                 }
             }
@@ -1533,224 +1978,250 @@ namespace Mono.Linker.Tests.Cases.RequiresCapability
             // BUG: https://github.com/dotnet/runtime/issues/77455
             // NativeAot produces an incorrect warning pointing to the InstantiatedMethod, which isn't associated
             // with the calling context.
-            [ExpectedWarning ("IL2026", "--TypeWithMethodWithRequires.MethodWithRequires--", CompilerGeneratedCode = true)]
-            static IEnumerable<int> TestDynamicallyAccessedMethodViaGenericMethodParameterInIterator ()
+            [ExpectedWarning(
+                "IL2026",
+                "--TypeWithMethodWithRequires.MethodWithRequires--",
+                CompilerGeneratedCode = true
+            )]
+            static IEnumerable<int> TestDynamicallyAccessedMethodViaGenericMethodParameterInIterator()
             {
                 yield return 1;
-                MethodWithGenericWhichRequiresMethods<TypeWithMethodWithRequires> ();
+                MethodWithGenericWhichRequiresMethods<TypeWithMethodWithRequires>();
             }
 
-            [ExpectedWarning ("IL2026", "--TypeWithMethodWithRequires.MethodWithRequires--", CompilerGeneratedCode = true)]
-            static IEnumerable<int> TestDynamicallyAccessedMethodViaGenericTypeParameterInIterator ()
+            [ExpectedWarning(
+                "IL2026",
+                "--TypeWithMethodWithRequires.MethodWithRequires--",
+                CompilerGeneratedCode = true
+            )]
+            static IEnumerable<int> TestDynamicallyAccessedMethodViaGenericTypeParameterInIterator()
             {
                 yield return 1;
-                new TypeWithGenericWhichRequiresMethods<TypeWithMethodWithRequires> ();
+                new TypeWithGenericWhichRequiresMethods<TypeWithMethodWithRequires>();
             }
 #endif
 
-            static void TestLocalFunctionInIteratorLocalFunction ()
+            static void TestLocalFunctionInIteratorLocalFunction()
             {
-                IteratorLocalFunction ();
+                IteratorLocalFunction();
 
-                IEnumerable<int> IteratorLocalFunction ()
+                IEnumerable<int> IteratorLocalFunction()
                 {
                     yield return 0;
-                    LocalFunction ();
+                    LocalFunction();
                     yield return 1;
 
-                    [ExpectedWarning ("IL2026", "--MethodWithRequires--")]
-                    [ExpectedWarning ("IL3002", "--MethodWithRequires--", ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot)]
-                    [ExpectedWarning ("IL3050", "--MethodWithRequires--", ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot)]
-                    void LocalFunction () => MethodWithRequires ();
+                    [ExpectedWarning("IL2026", "--MethodWithRequires--")]
+                    [ExpectedWarning(
+                        "IL3002",
+                        "--MethodWithRequires--",
+                        ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot
+                    )]
+                    [ExpectedWarning(
+                        "IL3050",
+                        "--MethodWithRequires--",
+                        ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot
+                    )]
+                    void LocalFunction() => MethodWithRequires();
                 }
             }
 
-            static void TestLocalFunctionCalledFromIteratorLocalFunctionAndMethod ()
+            static void TestLocalFunctionCalledFromIteratorLocalFunctionAndMethod()
             {
-                IteratorLocalFunction ();
+                IteratorLocalFunction();
 
-                IEnumerable<int> IteratorLocalFunction ()
+                IEnumerable<int> IteratorLocalFunction()
                 {
                     yield return 0;
-                    LocalFunction ();
+                    LocalFunction();
                     yield return 1;
                 }
 
-                [ExpectedWarning ("IL2026", "--MethodWithRequires--")]
-                [ExpectedWarning ("IL3002", "--MethodWithRequires--", ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot)]
-                [ExpectedWarning ("IL3050", "--MethodWithRequires--", ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot)]
-                void LocalFunction () => MethodWithRequires ();
+                [ExpectedWarning("IL2026", "--MethodWithRequires--")]
+                [ExpectedWarning(
+                    "IL3002",
+                    "--MethodWithRequires--",
+                    ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot
+                )]
+                [ExpectedWarning(
+                    "IL3050",
+                    "--MethodWithRequires--",
+                    ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot
+                )]
+                void LocalFunction() => MethodWithRequires();
             }
 
-            public static void Test ()
+            public static void Test()
             {
-                TestIteratorLocalFunctionInAsync ();
+                TestIteratorLocalFunctionInAsync();
 #if !NATIVEAOT
-                TestDynamicallyAccessedMethodViaGenericMethodParameterInIterator ();
-                TestDynamicallyAccessedMethodViaGenericTypeParameterInIterator ();
+                TestDynamicallyAccessedMethodViaGenericMethodParameterInIterator();
+                TestDynamicallyAccessedMethodViaGenericTypeParameterInIterator();
 #endif
-                TestLocalFunctionInIteratorLocalFunction ();
-                TestLocalFunctionCalledFromIteratorLocalFunctionAndMethod ();
+                TestLocalFunctionInIteratorLocalFunction();
+                TestLocalFunctionCalledFromIteratorLocalFunctionAndMethod();
             }
         }
 
         class SuppressInComplex
         {
-
-            [RequiresUnreferencedCode ("Suppress in body")]
-            [RequiresAssemblyFiles ("Suppress in body")]
-            [RequiresDynamicCode ("Suppress in body")]
-            static void TestIteratorLocalFunction ()
+            [RequiresUnreferencedCode("Suppress in body")]
+            [RequiresAssemblyFiles("Suppress in body")]
+            [RequiresDynamicCode("Suppress in body")]
+            static void TestIteratorLocalFunction()
             {
-                LocalFunction ();
+                LocalFunction();
 
-                IEnumerable<int> LocalFunction ()
+                IEnumerable<int> LocalFunction()
                 {
                     yield return 0;
-                    MethodWithRequires ();
+                    MethodWithRequires();
                     yield return 1;
                 }
             }
 
-            [RequiresUnreferencedCode ("Suppress in body")]
-            [RequiresAssemblyFiles ("Suppress in body")]
-            [RequiresDynamicCode ("Suppress in body")]
-            static void TestAsyncLocalFunction ()
+            [RequiresUnreferencedCode("Suppress in body")]
+            [RequiresAssemblyFiles("Suppress in body")]
+            [RequiresDynamicCode("Suppress in body")]
+            static void TestAsyncLocalFunction()
             {
-                LocalFunction ();
+                LocalFunction();
 
-                async Task<int> LocalFunction ()
+                async Task<int> LocalFunction()
                 {
-                    await MethodAsync ();
-                    MethodWithRequires ();
+                    await MethodAsync();
+                    MethodWithRequires();
                     return 1;
                 }
             }
 
-            [RequiresUnreferencedCode ("Suppress in body")]
-            [RequiresAssemblyFiles ("Suppress in body")]
-            [RequiresDynamicCode ("Suppress in body")]
-            static void TestIteratorLocalFunctionWithClosure (int p = 0)
+            [RequiresUnreferencedCode("Suppress in body")]
+            [RequiresAssemblyFiles("Suppress in body")]
+            [RequiresDynamicCode("Suppress in body")]
+            static void TestIteratorLocalFunctionWithClosure(int p = 0)
             {
-                LocalFunction ();
+                LocalFunction();
 
-                IEnumerable<int> LocalFunction ()
+                IEnumerable<int> LocalFunction()
                 {
                     p++;
                     yield return 0;
-                    MethodWithRequires ();
+                    MethodWithRequires();
                     yield return 1;
                 }
             }
 
-            [RequiresUnreferencedCode ("Suppress in body")]
-            [RequiresAssemblyFiles ("Suppress in body")]
-            [RequiresDynamicCode ("Suppress in body")]
-            static void TestAsyncLocalFunctionWithClosure (int p = 0)
+            [RequiresUnreferencedCode("Suppress in body")]
+            [RequiresAssemblyFiles("Suppress in body")]
+            [RequiresDynamicCode("Suppress in body")]
+            static void TestAsyncLocalFunctionWithClosure(int p = 0)
             {
-                LocalFunction ();
+                LocalFunction();
 
-                async Task<int> LocalFunction ()
+                async Task<int> LocalFunction()
                 {
                     p++;
-                    await MethodAsync ();
-                    MethodWithRequires ();
+                    await MethodAsync();
+                    MethodWithRequires();
                     return 1;
                 }
             }
 
-            [RequiresUnreferencedCode ("Suppress in body")]
-            [RequiresAssemblyFiles ("Suppress in body")]
-            [RequiresDynamicCode ("Suppress in body")]
-            static void TestCallToLocalFunctionInIteratorLocalFunctionWithClosure (int p = 0)
+            [RequiresUnreferencedCode("Suppress in body")]
+            [RequiresAssemblyFiles("Suppress in body")]
+            [RequiresDynamicCode("Suppress in body")]
+            static void TestCallToLocalFunctionInIteratorLocalFunctionWithClosure(int p = 0)
             {
-                LocalFunction ();
+                LocalFunction();
 
-                IEnumerable<int> LocalFunction ()
+                IEnumerable<int> LocalFunction()
                 {
                     p++;
                     yield return 0;
-                    LocalFunction2 ();
+                    LocalFunction2();
                     yield return 1;
 
-                    void LocalFunction2 ()
+                    void LocalFunction2()
                     {
-                        MethodWithRequires ();
+                        MethodWithRequires();
                     }
                 }
             }
 
-            [RequiresUnreferencedCode ("Suppress in body")]
-            [RequiresAssemblyFiles ("Suppress in body")]
-            [RequiresDynamicCode ("Suppress in body")]
-            static void TestAsyncLambda ()
+            [RequiresUnreferencedCode("Suppress in body")]
+            [RequiresAssemblyFiles("Suppress in body")]
+            [RequiresDynamicCode("Suppress in body")]
+            static void TestAsyncLambda()
             {
-                Func<Task<int>> _ = async Task<int> () => {
-                    await MethodAsync ();
-                    MethodWithRequires ();
+                Func<Task<int>> _ = async Task<int> () =>
+                {
+                    await MethodAsync();
+                    MethodWithRequires();
                     return 1;
                 };
             }
 
-            [RequiresUnreferencedCode ("Suppress in body")]
-            [RequiresAssemblyFiles ("Suppress in body")]
-            [RequiresDynamicCode ("Suppress in body")]
-            static void TestAsyncLambdaWithClosure (int p = 0)
+            [RequiresUnreferencedCode("Suppress in body")]
+            [RequiresAssemblyFiles("Suppress in body")]
+            [RequiresDynamicCode("Suppress in body")]
+            static void TestAsyncLambdaWithClosure(int p = 0)
             {
-                Func<Task<int>> _ = async Task<int> () => {
+                Func<Task<int>> _ = async Task<int> () =>
+                {
                     p++;
-                    await MethodAsync ();
-                    MethodWithRequires ();
+                    await MethodAsync();
+                    MethodWithRequires();
                     return 1;
                 };
             }
 
-            [RequiresUnreferencedCode ("Suppress in body")]
-            [RequiresAssemblyFiles ("Suppress in body")]
-            [RequiresDynamicCode ("Suppress in body")]
-            static void TestLambdaInAsyncLambdaWithClosure (int p = 0)
+            [RequiresUnreferencedCode("Suppress in body")]
+            [RequiresAssemblyFiles("Suppress in body")]
+            [RequiresDynamicCode("Suppress in body")]
+            static void TestLambdaInAsyncLambdaWithClosure(int p = 0)
             {
-                Func<Task<int>> _ = async Task<int> () => {
+                Func<Task<int>> _ = async Task<int> () =>
+                {
                     p++;
-                    await MethodAsync ();
-                    var lambda = () => MethodWithRequires ();
+                    await MethodAsync();
+                    var lambda = () => MethodWithRequires();
                     return 1;
                 };
             }
 
-            [RequiresUnreferencedCode ("Suppress in body")]
-            [RequiresAssemblyFiles ("Suppress in body")]
-            [RequiresDynamicCode ("Suppress in body")]
-            static async void TestIteratorLocalFunctionInAsync ()
+            [RequiresUnreferencedCode("Suppress in body")]
+            [RequiresAssemblyFiles("Suppress in body")]
+            [RequiresDynamicCode("Suppress in body")]
+            static async void TestIteratorLocalFunctionInAsync()
             {
-                await MethodAsync ();
-                LocalFunction ();
-                await MethodAsync ();
+                await MethodAsync();
+                LocalFunction();
+                await MethodAsync();
 
-                [RequiresUnreferencedCode ("Suppress in local function")]
-                [RequiresAssemblyFiles ("Suppress in local function")]
-                [RequiresDynamicCode ("Suppress in local function")]
-                IEnumerable<int> LocalFunction ()
+                [RequiresUnreferencedCode("Suppress in local function")]
+                [RequiresAssemblyFiles("Suppress in local function")]
+                [RequiresDynamicCode("Suppress in local function")]
+                IEnumerable<int> LocalFunction()
                 {
                     yield return 0;
-                    MethodWithRequires ();
+                    MethodWithRequires();
                     yield return 1;
                 }
             }
 
-            [RequiresUnreferencedCode ("Suppress in body")]
-            [RequiresAssemblyFiles ("Suppress in body")]
-            [RequiresDynamicCode ("Suppress in body")]
-            static async void TestIteratorLocalFunctionInAsyncWithoutInner ()
+            [RequiresUnreferencedCode("Suppress in body")]
+            [RequiresAssemblyFiles("Suppress in body")]
+            [RequiresDynamicCode("Suppress in body")]
+            static async void TestIteratorLocalFunctionInAsyncWithoutInner()
             {
-                await MethodAsync ();
-                LocalFunction ();
-                await MethodAsync ();
+                await MethodAsync();
+                LocalFunction();
+                await MethodAsync();
 
-                IEnumerable<int> LocalFunction ()
+                IEnumerable<int> LocalFunction()
                 {
                     yield return 0;
-                    MethodWithRequires ();
+                    MethodWithRequires();
                     yield return 1;
                 }
             }
@@ -1759,134 +2230,206 @@ namespace Mono.Linker.Tests.Cases.RequiresCapability
             // BUG: https://github.com/dotnet/runtime/issues/77455
             // NativeAot produces an incorrect warning pointing to the InstantiatedMethod, which isn't associated
             // with the calling context.
-            [RequiresUnreferencedCode ("Suppress in body")]
-            [RequiresAssemblyFiles ("Suppress in body")]
-            [RequiresDynamicCode ("Suppress in body")]
-            static IEnumerable<int> TestDynamicallyAccessedMethodViaGenericMethodParameterInIterator ()
+            [RequiresUnreferencedCode("Suppress in body")]
+            [RequiresAssemblyFiles("Suppress in body")]
+            [RequiresDynamicCode("Suppress in body")]
+            static IEnumerable<int> TestDynamicallyAccessedMethodViaGenericMethodParameterInIterator()
             {
-                MethodWithGenericWhichRequiresMethods<TypeWithMethodWithRequires> ();
+                MethodWithGenericWhichRequiresMethods<TypeWithMethodWithRequires>();
                 yield return 0;
             }
 #endif
 
-            [ExpectedWarning ("IL2026", "--IteratorLocalFunction--")]
-            [ExpectedWarning ("IL3002", "--IteratorLocalFunction--", ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot)]
-            [ExpectedWarning ("IL3050", "--IteratorLocalFunction--", ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot)]
-            static void TestLocalFunctionInIteratorLocalFunction ()
+            [ExpectedWarning("IL2026", "--IteratorLocalFunction--")]
+            [ExpectedWarning(
+                "IL3002",
+                "--IteratorLocalFunction--",
+                ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot
+            )]
+            [ExpectedWarning(
+                "IL3050",
+                "--IteratorLocalFunction--",
+                ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot
+            )]
+            static void TestLocalFunctionInIteratorLocalFunction()
             {
-                IteratorLocalFunction ();
+                IteratorLocalFunction();
 
-                [RequiresUnreferencedCode ("--IteratorLocalFunction--")]
-                [RequiresAssemblyFiles ("--IteratorLocalFunction--")]
-                [RequiresDynamicCode ("--IteratorLocalFunction--")]
-                IEnumerable<int> IteratorLocalFunction ()
+                [RequiresUnreferencedCode("--IteratorLocalFunction--")]
+                [RequiresAssemblyFiles("--IteratorLocalFunction--")]
+                [RequiresDynamicCode("--IteratorLocalFunction--")]
+                IEnumerable<int> IteratorLocalFunction()
                 {
                     yield return 0;
-                    LocalFunction ();
-                    MethodWithRequires ();
+                    LocalFunction();
+                    MethodWithRequires();
                     yield return 1;
 
                     // Trimmer doesn't try to associate LocalFunction with IteratorLocalFunction
-                    [ExpectedWarning ("IL2026", "--MethodWithRequires--", ProducedBy = ProducedBy.Trimmer | ProducedBy.NativeAot)]
-                    [ExpectedWarning ("IL3002", "--MethodWithRequires--", ProducedBy = ProducedBy.NativeAot)]
-                    [ExpectedWarning ("IL3050", "--MethodWithRequires--", ProducedBy = ProducedBy.NativeAot)]
-                    void LocalFunction () => MethodWithRequires ();
+                    [ExpectedWarning(
+                        "IL2026",
+                        "--MethodWithRequires--",
+                        ProducedBy = ProducedBy.Trimmer | ProducedBy.NativeAot
+                    )]
+                    [ExpectedWarning(
+                        "IL3002",
+                        "--MethodWithRequires--",
+                        ProducedBy = ProducedBy.NativeAot
+                    )]
+                    [ExpectedWarning(
+                        "IL3050",
+                        "--MethodWithRequires--",
+                        ProducedBy = ProducedBy.NativeAot
+                    )]
+                    void LocalFunction() => MethodWithRequires();
                 }
             }
 
-            [ExpectedWarning ("IL2026", "--IteratorLocalFunction--")]
-            [ExpectedWarning ("IL3002", "--IteratorLocalFunction--", ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot)]
-            [ExpectedWarning ("IL3050", "--IteratorLocalFunction--", ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot)]
-            static void TestLocalFunctionCalledFromIteratorLocalFunctionAndMethod ()
+            [ExpectedWarning("IL2026", "--IteratorLocalFunction--")]
+            [ExpectedWarning(
+                "IL3002",
+                "--IteratorLocalFunction--",
+                ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot
+            )]
+            [ExpectedWarning(
+                "IL3050",
+                "--IteratorLocalFunction--",
+                ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot
+            )]
+            static void TestLocalFunctionCalledFromIteratorLocalFunctionAndMethod()
             {
-                IteratorLocalFunction ();
-                LocalFunction ();
+                IteratorLocalFunction();
+                LocalFunction();
 
-                [RequiresUnreferencedCode ("--IteratorLocalFunction--")]
-                [RequiresAssemblyFiles ("--IteratorLocalFunction--")]
-                [RequiresDynamicCode ("--IteratorLocalFunction--")]
-                IEnumerable<int> IteratorLocalFunction ()
+                [RequiresUnreferencedCode("--IteratorLocalFunction--")]
+                [RequiresAssemblyFiles("--IteratorLocalFunction--")]
+                [RequiresDynamicCode("--IteratorLocalFunction--")]
+                IEnumerable<int> IteratorLocalFunction()
                 {
                     yield return 0;
-                    LocalFunction ();
-                    MethodWithRequires ();
+                    LocalFunction();
+                    MethodWithRequires();
                     yield return 1;
                 }
 
-                [ExpectedWarning ("IL2026", "--MethodWithRequires--")]
-                [ExpectedWarning ("IL3002", "--MethodWithRequires--", ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot)]
-                [ExpectedWarning ("IL3050", "--MethodWithRequires--", ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot)]
-                void LocalFunction () => MethodWithRequires ();
+                [ExpectedWarning("IL2026", "--MethodWithRequires--")]
+                [ExpectedWarning(
+                    "IL3002",
+                    "--MethodWithRequires--",
+                    ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot
+                )]
+                [ExpectedWarning(
+                    "IL3050",
+                    "--MethodWithRequires--",
+                    ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot
+                )]
+                void LocalFunction() => MethodWithRequires();
             }
 
-            [UnconditionalSuppressMessage ("Trimming", "IL2026")]
-            [UnconditionalSuppressMessage ("SingleFile", "IL3002")]
-            [UnconditionalSuppressMessage ("AOT", "IL3050")]
-            public static void Test ()
+            [UnconditionalSuppressMessage("Trimming", "IL2026")]
+            [UnconditionalSuppressMessage("SingleFile", "IL3002")]
+            [UnconditionalSuppressMessage("AOT", "IL3050")]
+            public static void Test()
             {
-                TestIteratorLocalFunction ();
-                TestAsyncLocalFunction ();
-                TestIteratorLocalFunctionWithClosure ();
-                TestAsyncLocalFunctionWithClosure ();
-                TestCallToLocalFunctionInIteratorLocalFunctionWithClosure ();
-                TestAsyncLambda ();
-                TestAsyncLambdaWithClosure ();
-                TestLambdaInAsyncLambdaWithClosure ();
-                TestIteratorLocalFunctionInAsync ();
-                TestIteratorLocalFunctionInAsyncWithoutInner ();
+                TestIteratorLocalFunction();
+                TestAsyncLocalFunction();
+                TestIteratorLocalFunctionWithClosure();
+                TestAsyncLocalFunctionWithClosure();
+                TestCallToLocalFunctionInIteratorLocalFunctionWithClosure();
+                TestAsyncLambda();
+                TestAsyncLambdaWithClosure();
+                TestLambdaInAsyncLambdaWithClosure();
+                TestIteratorLocalFunctionInAsync();
+                TestIteratorLocalFunctionInAsyncWithoutInner();
 #if !NATIVEAOT
-                TestDynamicallyAccessedMethodViaGenericMethodParameterInIterator ();
+                TestDynamicallyAccessedMethodViaGenericMethodParameterInIterator();
 #endif
-                TestLocalFunctionInIteratorLocalFunction ();
-                TestLocalFunctionCalledFromIteratorLocalFunctionAndMethod ();
+                TestLocalFunctionInIteratorLocalFunction();
+                TestLocalFunctionCalledFromIteratorLocalFunctionAndMethod();
             }
         }
 
         class StateMachinesOnlyReferencedViaReflection
         {
-            [RequiresUnreferencedCode ("--TestIteratorOnlyReferencedViaReflectionWhichShouldSuppress--")]
-            [RequiresAssemblyFiles ("--TestIteratorOnlyReferencedViaReflectionWhichShouldSuppress--")]
-            [RequiresDynamicCode ("--TestIteratorOnlyReferencedViaReflectionWhichShouldSuppress--")]
-            static IEnumerable<int> TestIteratorOnlyReferencedViaReflectionWhichShouldSuppress ()
+            [RequiresUnreferencedCode(
+                "--TestIteratorOnlyReferencedViaReflectionWhichShouldSuppress--"
+            )]
+            [RequiresAssemblyFiles(
+                "--TestIteratorOnlyReferencedViaReflectionWhichShouldSuppress--"
+            )]
+            [RequiresDynamicCode("--TestIteratorOnlyReferencedViaReflectionWhichShouldSuppress--")]
+            static IEnumerable<int> TestIteratorOnlyReferencedViaReflectionWhichShouldSuppress()
             {
                 yield return 0;
-                MethodWithRequires ();
+                MethodWithRequires();
             }
 
-            [RequiresUnreferencedCode ("--TestAsyncOnlyReferencedViaReflectionWhichShouldSuppress--")]
-            [RequiresAssemblyFiles ("--TestAsyncOnlyReferencedViaReflectionWhichShouldSuppress--")]
-            [RequiresDynamicCode ("--TestAsyncOnlyReferencedViaReflectionWhichShouldSuppress--")]
-            static async void TestAsyncOnlyReferencedViaReflectionWhichShouldSuppress ()
+            [RequiresUnreferencedCode(
+                "--TestAsyncOnlyReferencedViaReflectionWhichShouldSuppress--"
+            )]
+            [RequiresAssemblyFiles("--TestAsyncOnlyReferencedViaReflectionWhichShouldSuppress--")]
+            [RequiresDynamicCode("--TestAsyncOnlyReferencedViaReflectionWhichShouldSuppress--")]
+            static async void TestAsyncOnlyReferencedViaReflectionWhichShouldSuppress()
             {
-                await MethodAsync ();
-                MethodWithRequires ();
+                await MethodAsync();
+                MethodWithRequires();
             }
 
-            [ExpectedWarning ("IL2026", CompilerGeneratedCode = true)]
-            [ExpectedWarning ("IL3002", ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot, CompilerGeneratedCode = true)]
-            [ExpectedWarning ("IL3050", ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot, CompilerGeneratedCode = true)]
-            static IEnumerable<int> TestIteratorOnlyReferencedViaReflectionWhichShouldWarn ()
+            [ExpectedWarning("IL2026", CompilerGeneratedCode = true)]
+            [ExpectedWarning(
+                "IL3002",
+                ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot,
+                CompilerGeneratedCode = true
+            )]
+            [ExpectedWarning(
+                "IL3050",
+                ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot,
+                CompilerGeneratedCode = true
+            )]
+            static IEnumerable<int> TestIteratorOnlyReferencedViaReflectionWhichShouldWarn()
             {
                 yield return 0;
-                MethodWithRequires ();
+                MethodWithRequires();
             }
 
-            [ExpectedWarning ("IL2026", CompilerGeneratedCode = true)]
-            [ExpectedWarning ("IL3002", ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot, CompilerGeneratedCode = true)]
-            [ExpectedWarning ("IL3050", ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot, CompilerGeneratedCode = true)]
-            static async void TestAsyncOnlyReferencedViaReflectionWhichShouldWarn ()
+            [ExpectedWarning("IL2026", CompilerGeneratedCode = true)]
+            [ExpectedWarning(
+                "IL3002",
+                ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot,
+                CompilerGeneratedCode = true
+            )]
+            [ExpectedWarning(
+                "IL3050",
+                ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot,
+                CompilerGeneratedCode = true
+            )]
+            static async void TestAsyncOnlyReferencedViaReflectionWhichShouldWarn()
             {
-                await MethodAsync ();
-                MethodWithRequires ();
+                await MethodAsync();
+                MethodWithRequires();
             }
 
-            [ExpectedWarning ("IL2026", "--TestIteratorOnlyReferencedViaReflectionWhichShouldSuppress--")]
-            [ExpectedWarning ("IL2026", "--TestAsyncOnlyReferencedViaReflectionWhichShouldSuppress--")]
+            [ExpectedWarning(
+                "IL2026",
+                "--TestIteratorOnlyReferencedViaReflectionWhichShouldSuppress--"
+            )]
+            [ExpectedWarning(
+                "IL2026",
+                "--TestAsyncOnlyReferencedViaReflectionWhichShouldSuppress--"
+            )]
             // Analyzer doesn't emit additional warnings about reflection access to the compiler-generated
             // state machine members.
-            [ExpectedWarning ("IL2026", "--TestIteratorOnlyReferencedViaReflectionWhichShouldSuppress--", ProducedBy = ProducedBy.Trimmer)]
+            [ExpectedWarning(
+                "IL2026",
+                "--TestIteratorOnlyReferencedViaReflectionWhichShouldSuppress--",
+                ProducedBy = ProducedBy.Trimmer
+            )]
 #if !RELEASE
-            [ExpectedWarning ("IL2026", "--TestAsyncOnlyReferencedViaReflectionWhichShouldSuppress--", ProducedBy = ProducedBy.Trimmer)]
+            [ExpectedWarning(
+                "IL2026",
+                "--TestAsyncOnlyReferencedViaReflectionWhichShouldSuppress--",
+                ProducedBy = ProducedBy.Trimmer
+            )]
             // In debug mode, the async state machine is a class with a constructor, so a warning is emitted for the constructor.
             // The MoveNext method is virtual, so doesn't warn either way.
 #else
@@ -1894,243 +2437,371 @@ namespace Mono.Linker.Tests.Cases.RequiresCapability
 #endif
             // Linker warns about reflection access to compiler-generated state machine members.
             // https://github.com/dotnet/runtime/issues/68786
-            [ExpectedWarning ("IL2118", nameof (StateMachinesOnlyReferencedViaReflection), "<" + nameof (TestAsyncOnlyReferencedViaReflectionWhichShouldWarn) + ">", "MoveNext()",
-                ProducedBy = ProducedBy.Trimmer)]
-            [ExpectedWarning ("IL2118", nameof (StateMachinesOnlyReferencedViaReflection), "<" + nameof (TestIteratorOnlyReferencedViaReflectionWhichShouldWarn) + ">", "MoveNext()",
-                ProducedBy = ProducedBy.Trimmer)]
-            static void TestAll ()
+            [ExpectedWarning(
+                "IL2118",
+                nameof(StateMachinesOnlyReferencedViaReflection),
+                "<" + nameof(TestAsyncOnlyReferencedViaReflectionWhichShouldWarn) + ">",
+                "MoveNext()",
+                ProducedBy = ProducedBy.Trimmer
+            )]
+            [ExpectedWarning(
+                "IL2118",
+                nameof(StateMachinesOnlyReferencedViaReflection),
+                "<" + nameof(TestIteratorOnlyReferencedViaReflectionWhichShouldWarn) + ">",
+                "MoveNext()",
+                ProducedBy = ProducedBy.Trimmer
+            )]
+            static void TestAll()
             {
-                typeof (StateMachinesOnlyReferencedViaReflection).RequiresAll ();
+                typeof(StateMachinesOnlyReferencedViaReflection).RequiresAll();
             }
 
-            [ExpectedWarning ("IL2026", "--TestIteratorOnlyReferencedViaReflectionWhichShouldSuppress--")]
-            [ExpectedWarning ("IL2026", "--TestAsyncOnlyReferencedViaReflectionWhichShouldSuppress--")]
+            [ExpectedWarning(
+                "IL2026",
+                "--TestIteratorOnlyReferencedViaReflectionWhichShouldSuppress--"
+            )]
+            [ExpectedWarning(
+                "IL2026",
+                "--TestAsyncOnlyReferencedViaReflectionWhichShouldSuppress--"
+            )]
             // NonPublicMethods doesn't warn for members emitted into compiler-generated state machine types.
-            static void TestNonPublicMethods ()
+            static void TestNonPublicMethods()
             {
-                typeof (StateMachinesOnlyReferencedViaReflection).RequiresNonPublicMethods ();
+                typeof(StateMachinesOnlyReferencedViaReflection).RequiresNonPublicMethods();
             }
 
-            public static void Test ()
+            public static void Test()
             {
-                TestAll ();
-                TestNonPublicMethods ();
+                TestAll();
+                TestNonPublicMethods();
             }
         }
 
         class LocalFunctionsReferencedViaReflection
         {
-            [ExpectedWarning ("IL2026", "--TestLocalFunctionWithRequires--")]
-            [ExpectedWarning ("IL3002", "--TestLocalFunctionWithRequires--", ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot)]
-            [ExpectedWarning ("IL3050", "--TestLocalFunctionWithRequires--", ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot)]
-            static void TestLocalFunctionWithRequires ()
+            [ExpectedWarning("IL2026", "--TestLocalFunctionWithRequires--")]
+            [ExpectedWarning(
+                "IL3002",
+                "--TestLocalFunctionWithRequires--",
+                ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot
+            )]
+            [ExpectedWarning(
+                "IL3050",
+                "--TestLocalFunctionWithRequires--",
+                ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot
+            )]
+            static void TestLocalFunctionWithRequires()
             {
-                LocalFunction ();
+                LocalFunction();
 
-                [RequiresUnreferencedCode ("--TestLocalFunctionWithRequires--")]
-                [RequiresAssemblyFiles ("--TestLocalFunctionWithRequires--")]
-                [RequiresDynamicCode ("--TestLocalFunctionWithRequires--")]
-                void LocalFunction () => MethodWithRequires ();
+                [RequiresUnreferencedCode("--TestLocalFunctionWithRequires--")]
+                [RequiresAssemblyFiles("--TestLocalFunctionWithRequires--")]
+                [RequiresDynamicCode("--TestLocalFunctionWithRequires--")]
+                void LocalFunction() => MethodWithRequires();
             }
 
-            static void TestLocalFunctionWithRequiresOnlyAccessedViaReflection ()
+            static void TestLocalFunctionWithRequiresOnlyAccessedViaReflection()
             {
-                [RequiresUnreferencedCode ("--TestLocalFunctionWithRequiresOnlyAccessedViaReflection--")]
-                [RequiresAssemblyFiles ("--TestLocalFunctionWithRequiresOnlyAccessedViaReflection--")]
-                [RequiresDynamicCode ("--TestLocalFunctionWithRequiresOnlyAccessedViaReflection--")]
-                void LocalFunction () => MethodWithRequires ();
+                [RequiresUnreferencedCode(
+                    "--TestLocalFunctionWithRequiresOnlyAccessedViaReflection--"
+                )]
+                [RequiresAssemblyFiles(
+                    "--TestLocalFunctionWithRequiresOnlyAccessedViaReflection--"
+                )]
+                [RequiresDynamicCode("--TestLocalFunctionWithRequiresOnlyAccessedViaReflection--")]
+                void LocalFunction() => MethodWithRequires();
             }
 
-            [ExpectedWarning ("IL2026", "LocalFunction")]
-            [ExpectedWarning ("IL3002", "LocalFunction", ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot)]
-            [ExpectedWarning ("IL3050", "LocalFunction", ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot)]
-            static void TestLocalFunctionWithClosureWithRequires (int p = 0)
+            [ExpectedWarning("IL2026", "LocalFunction")]
+            [ExpectedWarning(
+                "IL3002",
+                "LocalFunction",
+                ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot
+            )]
+            [ExpectedWarning(
+                "IL3050",
+                "LocalFunction",
+                ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot
+            )]
+            static void TestLocalFunctionWithClosureWithRequires(int p = 0)
             {
-                LocalFunction ();
+                LocalFunction();
 
-                [RequiresUnreferencedCode ("--TestLocalFunctionWithClosureWithRequires--")]
-                [RequiresAssemblyFiles ("--TestLocalFunctionWithClosureWithRequires--")]
-                [RequiresDynamicCode ("--TestLocalFunctionWithClosureWithRequires--")]
-                void LocalFunction ()
+                [RequiresUnreferencedCode("--TestLocalFunctionWithClosureWithRequires--")]
+                [RequiresAssemblyFiles("--TestLocalFunctionWithClosureWithRequires--")]
+                [RequiresDynamicCode("--TestLocalFunctionWithClosureWithRequires--")]
+                void LocalFunction()
                 {
                     p++;
-                    MethodWithRequires ();
+                    MethodWithRequires();
                 }
             }
 
-            [RequiresUnreferencedCode ("--TestLocalFunctionInMethodWithRequires--")]
-            [RequiresAssemblyFiles ("--TestLocalFunctionInMethodWithRequires--")]
-            [RequiresDynamicCode ("--TestLocalFunctionInMethodWithRequires--")]
-            static void TestLocalFunctionInMethodWithRequires ()
+            [RequiresUnreferencedCode("--TestLocalFunctionInMethodWithRequires--")]
+            [RequiresAssemblyFiles("--TestLocalFunctionInMethodWithRequires--")]
+            [RequiresDynamicCode("--TestLocalFunctionInMethodWithRequires--")]
+            static void TestLocalFunctionInMethodWithRequires()
             {
-                LocalFunction ();
+                LocalFunction();
 
-                void LocalFunction () => MethodWithRequires ();
+                void LocalFunction() => MethodWithRequires();
             }
 
-            [RequiresUnreferencedCode ("--TestLocalFunctionInMethodWithRequiresOnlyAccessedViaReflection--")]
-            [RequiresAssemblyFiles ("--TestLocalFunctionInMethodWithRequiresOnlyAccessedViaReflection--")]
-            [RequiresDynamicCode ("--TestLocalFunctionInMethodWithRequiresOnlyAccessedViaReflection--")]
-            static void TestLocalFunctionInMethodWithRequiresOnlyAccessedViaReflection ()
+            [RequiresUnreferencedCode(
+                "--TestLocalFunctionInMethodWithRequiresOnlyAccessedViaReflection--"
+            )]
+            [RequiresAssemblyFiles(
+                "--TestLocalFunctionInMethodWithRequiresOnlyAccessedViaReflection--"
+            )]
+            [RequiresDynamicCode(
+                "--TestLocalFunctionInMethodWithRequiresOnlyAccessedViaReflection--"
+            )]
+            static void TestLocalFunctionInMethodWithRequiresOnlyAccessedViaReflection()
             {
                 // This is unused, except for the reflection access. Don't warn about MethodWithRequires
                 // because the reflection access will warn about accessing compiler-generated code.
-                void LocalFunction () => MethodWithRequires ();
+                void LocalFunction() => MethodWithRequires();
             }
 
-            [RequiresUnreferencedCode ("--TestLocalFunctionWithClosureInMethodWithRequires--")]
-            [RequiresAssemblyFiles ("--TestLocalFunctionWithClosureInMethodWithRequires--")]
-            [RequiresDynamicCode ("--TestLocalFunctionWithClosureInMethodWithRequires--")]
-            static void TestLocalFunctionWithClosureInMethodWithRequires (int p = 0)
+            [RequiresUnreferencedCode("--TestLocalFunctionWithClosureInMethodWithRequires--")]
+            [RequiresAssemblyFiles("--TestLocalFunctionWithClosureInMethodWithRequires--")]
+            [RequiresDynamicCode("--TestLocalFunctionWithClosureInMethodWithRequires--")]
+            static void TestLocalFunctionWithClosureInMethodWithRequires(int p = 0)
             {
-                LocalFunction ();
+                LocalFunction();
 
-                void LocalFunction ()
+                void LocalFunction()
                 {
                     p++;
-                    MethodWithRequires ();
+                    MethodWithRequires();
                 }
             }
 
             // Warnings for Reflection access to methods with Requires
-            [ExpectedWarning ("IL2026", "--TestLocalFunctionInMethodWithRequires--")]
-            [ExpectedWarning ("IL2026", "--TestLocalFunctionWithClosureInMethodWithRequires--")]
-            [ExpectedWarning ("IL2026", "--TestLocalFunctionInMethodWithRequiresOnlyAccessedViaReflection--")]
+            [ExpectedWarning("IL2026", "--TestLocalFunctionInMethodWithRequires--")]
+            [ExpectedWarning("IL2026", "--TestLocalFunctionWithClosureInMethodWithRequires--")]
+            [ExpectedWarning(
+                "IL2026",
+                "--TestLocalFunctionInMethodWithRequiresOnlyAccessedViaReflection--"
+            )]
             // The linker correctly emits warnings about reflection access to local functions with Requires
             // or which inherit Requires from the containing method. The analyzer doesn't bind to local functions
             // so does not warn here.
-            [ExpectedWarning ("IL2026", "--TestLocalFunctionWithRequires--", ProducedBy = ProducedBy.Trimmer | ProducedBy.NativeAot)]
-            [ExpectedWarning ("IL2026", "--TestLocalFunctionWithRequiresOnlyAccessedViaReflection--", ProducedBy = ProducedBy.Trimmer | ProducedBy.NativeAot)]
-            [ExpectedWarning ("IL2026", "--TestLocalFunctionWithClosureWithRequires--", ProducedBy = ProducedBy.Trimmer | ProducedBy.NativeAot)]
+            [ExpectedWarning(
+                "IL2026",
+                "--TestLocalFunctionWithRequires--",
+                ProducedBy = ProducedBy.Trimmer | ProducedBy.NativeAot
+            )]
+            [ExpectedWarning(
+                "IL2026",
+                "--TestLocalFunctionWithRequiresOnlyAccessedViaReflection--",
+                ProducedBy = ProducedBy.Trimmer | ProducedBy.NativeAot
+            )]
+            [ExpectedWarning(
+                "IL2026",
+                "--TestLocalFunctionWithClosureWithRequires--",
+                ProducedBy = ProducedBy.Trimmer | ProducedBy.NativeAot
+            )]
             // BUG: https://github.com/dotnet/runtime/issues/68786
             // NativeAot doesn't associate Requires on method with the local functions it contains.
-            [ExpectedWarning ("IL2026", "--TestLocalFunctionInMethodWithRequires--", ProducedBy = ProducedBy.Trimmer)]
-            [ExpectedWarning ("IL2026", "--TestLocalFunctionWithClosureInMethodWithRequires--", ProducedBy = ProducedBy.Trimmer)]
+            [ExpectedWarning(
+                "IL2026",
+                "--TestLocalFunctionInMethodWithRequires--",
+                ProducedBy = ProducedBy.Trimmer
+            )]
+            [ExpectedWarning(
+                "IL2026",
+                "--TestLocalFunctionWithClosureInMethodWithRequires--",
+                ProducedBy = ProducedBy.Trimmer
+            )]
             // Linker warns about reflection access to compiler-generated code
             // https://github.com/dotnet/runtime/issues/68786
-            [ExpectedWarning ("IL2118", nameof (LocalFunctionsReferencedViaReflection), nameof (TestLocalFunctionInMethodWithRequiresOnlyAccessedViaReflection),
-                ProducedBy = ProducedBy.Trimmer)]
-            static void TestAll ()
+            [ExpectedWarning(
+                "IL2118",
+                nameof(LocalFunctionsReferencedViaReflection),
+                nameof(TestLocalFunctionInMethodWithRequiresOnlyAccessedViaReflection),
+                ProducedBy = ProducedBy.Trimmer
+            )]
+            static void TestAll()
             {
-                typeof (LocalFunctionsReferencedViaReflection).RequiresAll ();
+                typeof(LocalFunctionsReferencedViaReflection).RequiresAll();
             }
 
             // Warnings for Reflection access to methods with Requires
-            [ExpectedWarning ("IL2026", "--TestLocalFunctionInMethodWithRequires--")]
-            [ExpectedWarning ("IL2026", "--TestLocalFunctionWithClosureInMethodWithRequires--")]
-            [ExpectedWarning ("IL2026", "--TestLocalFunctionInMethodWithRequiresOnlyAccessedViaReflection--")]
+            [ExpectedWarning("IL2026", "--TestLocalFunctionInMethodWithRequires--")]
+            [ExpectedWarning("IL2026", "--TestLocalFunctionWithClosureInMethodWithRequires--")]
+            [ExpectedWarning(
+                "IL2026",
+                "--TestLocalFunctionInMethodWithRequiresOnlyAccessedViaReflection--"
+            )]
             // NonPublicMethods warns for local functions not emitted into display classes.
-            [ExpectedWarning ("IL2026", "--TestLocalFunctionWithRequires--", ProducedBy = ProducedBy.Trimmer | ProducedBy.NativeAot)]
-            [ExpectedWarning ("IL2026", "--TestLocalFunctionWithRequiresOnlyAccessedViaReflection--", ProducedBy = ProducedBy.Trimmer | ProducedBy.NativeAot)]
-            [ExpectedWarning ("IL2026", "--TestLocalFunctionWithClosureWithRequires--", ProducedBy = ProducedBy.Trimmer | ProducedBy.NativeAot)]
+            [ExpectedWarning(
+                "IL2026",
+                "--TestLocalFunctionWithRequires--",
+                ProducedBy = ProducedBy.Trimmer | ProducedBy.NativeAot
+            )]
+            [ExpectedWarning(
+                "IL2026",
+                "--TestLocalFunctionWithRequiresOnlyAccessedViaReflection--",
+                ProducedBy = ProducedBy.Trimmer | ProducedBy.NativeAot
+            )]
+            [ExpectedWarning(
+                "IL2026",
+                "--TestLocalFunctionWithClosureWithRequires--",
+                ProducedBy = ProducedBy.Trimmer | ProducedBy.NativeAot
+            )]
             // BUG: https://github.com/dotnet/runtime/issues/68786
             // NativeAot doesn't associate Requires on method with the local functions it contains.
-            [ExpectedWarning ("IL2026", "--TestLocalFunctionInMethodWithRequires--", ProducedBy = ProducedBy.Trimmer)]
-            [ExpectedWarning ("IL2026", "--TestLocalFunctionWithClosureInMethodWithRequires--", ProducedBy = ProducedBy.Trimmer)]
+            [ExpectedWarning(
+                "IL2026",
+                "--TestLocalFunctionInMethodWithRequires--",
+                ProducedBy = ProducedBy.Trimmer
+            )]
+            [ExpectedWarning(
+                "IL2026",
+                "--TestLocalFunctionWithClosureInMethodWithRequires--",
+                ProducedBy = ProducedBy.Trimmer
+            )]
             // Linker warns about reflection access to compiler-generated code
             // https://github.com/dotnet/runtime/issues/68786
-            [ExpectedWarning ("IL2118", nameof (LocalFunctionsReferencedViaReflection), "<" + nameof (TestLocalFunctionInMethodWithRequiresOnlyAccessedViaReflection) + ">",
-                ProducedBy = ProducedBy.Trimmer)]
-            static void TestNonPublicMethods ()
+            [ExpectedWarning(
+                "IL2118",
+                nameof(LocalFunctionsReferencedViaReflection),
+                "<" + nameof(TestLocalFunctionInMethodWithRequiresOnlyAccessedViaReflection) + ">",
+                ProducedBy = ProducedBy.Trimmer
+            )]
+            static void TestNonPublicMethods()
             {
-                typeof (LocalFunctionsReferencedViaReflection).RequiresNonPublicMethods ();
+                typeof(LocalFunctionsReferencedViaReflection).RequiresNonPublicMethods();
             }
 
-            public static void Test ()
+            public static void Test()
             {
-                TestAll ();
-                TestNonPublicMethods ();
+                TestAll();
+                TestNonPublicMethods();
             }
         }
 
         class LambdasReferencedViaReflection
         {
             // NativeAot is missing ldftn detection: https://github.com/dotnet/runtime/issues/68786
-            [ExpectedWarning ("IL2026", "--TestLambdaWithRequires--", ProducedBy = ProducedBy.Trimmer | ProducedBy.Analyzer)]
-            [ExpectedWarning ("IL3002", "--TestLambdaWithRequires--", ProducedBy = ProducedBy.Analyzer)]
-            [ExpectedWarning ("IL3050", "--TestLambdaWithRequires--", ProducedBy = ProducedBy.Analyzer)]
-            static void TestLambdaWithRequires ()
+            [ExpectedWarning(
+                "IL2026",
+                "--TestLambdaWithRequires--",
+                ProducedBy = ProducedBy.Trimmer | ProducedBy.Analyzer
+            )]
+            [ExpectedWarning(
+                "IL3002",
+                "--TestLambdaWithRequires--",
+                ProducedBy = ProducedBy.Analyzer
+            )]
+            [ExpectedWarning(
+                "IL3050",
+                "--TestLambdaWithRequires--",
+                ProducedBy = ProducedBy.Analyzer
+            )]
+            static void TestLambdaWithRequires()
             {
-                var lambda =
-                [RequiresUnreferencedCode ("--TestLambdaWithRequires--")]
-                [RequiresAssemblyFiles ("--TestLambdaWithRequires--")]
-                [RequiresDynamicCode ("--TestLambdaWithRequires--")]
-                () => MethodWithRequires ();
+                var lambda = [RequiresUnreferencedCode("--TestLambdaWithRequires--")]
+                [RequiresAssemblyFiles("--TestLambdaWithRequires--")]
+                [RequiresDynamicCode("--TestLambdaWithRequires--")]
+                () => MethodWithRequires();
 
-                lambda ();
+                lambda();
             }
 
             // NativeAot is missing ldftn detection: https://github.com/dotnet/runtime/issues/68786
-            [ExpectedWarning ("IL2026", "Lambda", ProducedBy = ProducedBy.Trimmer | ProducedBy.Analyzer)]
-            [ExpectedWarning ("IL3002", "Lambda", ProducedBy = ProducedBy.Analyzer)]
-            [ExpectedWarning ("IL3050", "Lambda", ProducedBy = ProducedBy.Analyzer)]
-            static void TestLambdaWithClosureWithRequires (int p = 0)
+            [ExpectedWarning(
+                "IL2026",
+                "Lambda",
+                ProducedBy = ProducedBy.Trimmer | ProducedBy.Analyzer
+            )]
+            [ExpectedWarning("IL3002", "Lambda", ProducedBy = ProducedBy.Analyzer)]
+            [ExpectedWarning("IL3050", "Lambda", ProducedBy = ProducedBy.Analyzer)]
+            static void TestLambdaWithClosureWithRequires(int p = 0)
             {
-                var lambda =
-                [RequiresUnreferencedCode ("--TestLambdaWithClosureWithRequires--")]
-                [RequiresAssemblyFiles ("--TestLambdaWithClosureWithRequires--")]
-                [RequiresDynamicCode ("--TestLambdaWithClosureWithRequires--")]
-                () => {
+                var lambda = [RequiresUnreferencedCode("--TestLambdaWithClosureWithRequires--")]
+                [RequiresAssemblyFiles("--TestLambdaWithClosureWithRequires--")]
+                [RequiresDynamicCode("--TestLambdaWithClosureWithRequires--")]
+                () =>
+                {
                     p++;
-                    MethodWithRequires ();
+                    MethodWithRequires();
                 };
 
-                lambda ();
+                lambda();
             }
 
-            [RequiresUnreferencedCode ("--TestLambdaInMethodWithRequires--")]
-            [RequiresAssemblyFiles ("--TestLambdaInMethodWithRequires--")]
-            [RequiresDynamicCode ("--TestLambdaInMethodWithRequires--")]
-            static void TestLambdaInMethodWithRequires ()
+            [RequiresUnreferencedCode("--TestLambdaInMethodWithRequires--")]
+            [RequiresAssemblyFiles("--TestLambdaInMethodWithRequires--")]
+            [RequiresDynamicCode("--TestLambdaInMethodWithRequires--")]
+            static void TestLambdaInMethodWithRequires()
             {
-                var lambda = () => MethodWithRequires ();
+                var lambda = () => MethodWithRequires();
 
-                lambda ();
+                lambda();
             }
 
-            [RequiresUnreferencedCode ("--TestLambdaWithClosureInMethodWithRequires--")]
-            [RequiresAssemblyFiles ("--TestLambdaWithClosureInMethodWithRequires--")]
-            [RequiresDynamicCode ("--TestLambdaWithClosureInMethodWithRequires--")]
-            static void TestLambdaWithClosureInMethodWithRequires (int p = 0)
+            [RequiresUnreferencedCode("--TestLambdaWithClosureInMethodWithRequires--")]
+            [RequiresAssemblyFiles("--TestLambdaWithClosureInMethodWithRequires--")]
+            [RequiresDynamicCode("--TestLambdaWithClosureInMethodWithRequires--")]
+            static void TestLambdaWithClosureInMethodWithRequires(int p = 0)
             {
-                var lambda = () => {
+                var lambda = () =>
+                {
                     p++;
-                    MethodWithRequires ();
+                    MethodWithRequires();
                 };
 
-                lambda ();
+                lambda();
             }
 
             // Warnings for Reflection access to methods with Requires
-            [ExpectedWarning ("IL2026", "--TestLambdaInMethodWithRequires--")]
-            [ExpectedWarning ("IL2026", "--TestLambdaWithClosureInMethodWithRequires--")]
+            [ExpectedWarning("IL2026", "--TestLambdaInMethodWithRequires--")]
+            [ExpectedWarning("IL2026", "--TestLambdaWithClosureInMethodWithRequires--")]
             // The linker correctly emits warnings about reflection access to lambdas with Requires
             // or which inherit Requires from the containing method. The analyzer doesn't bind to lambdas
             // so does not warn here.
-            [ExpectedWarning ("IL2026", "--TestLambdaWithRequires--", ProducedBy = ProducedBy.Trimmer | ProducedBy.NativeAot)]
-            [ExpectedWarning ("IL2026", "--TestLambdaWithClosureWithRequires--", ProducedBy = ProducedBy.Trimmer | ProducedBy.NativeAot)]
+            [ExpectedWarning(
+                "IL2026",
+                "--TestLambdaWithRequires--",
+                ProducedBy = ProducedBy.Trimmer | ProducedBy.NativeAot
+            )]
+            [ExpectedWarning(
+                "IL2026",
+                "--TestLambdaWithClosureWithRequires--",
+                ProducedBy = ProducedBy.Trimmer | ProducedBy.NativeAot
+            )]
             // BUG: https://github.com/dotnet/runtime/issues/68786
             // NativeAot doesn't associate Requires on method with the lambdas it contains.
-            [ExpectedWarning ("IL2026", "--TestLambdaInMethodWithRequires--", ProducedBy = ProducedBy.Trimmer)]
-            [ExpectedWarning ("IL2026", "--TestLambdaWithClosureInMethodWithRequires--", ProducedBy = ProducedBy.Trimmer)]
-            static void TestAll ()
+            [ExpectedWarning(
+                "IL2026",
+                "--TestLambdaInMethodWithRequires--",
+                ProducedBy = ProducedBy.Trimmer
+            )]
+            [ExpectedWarning(
+                "IL2026",
+                "--TestLambdaWithClosureInMethodWithRequires--",
+                ProducedBy = ProducedBy.Trimmer
+            )]
+            static void TestAll()
             {
-                typeof (LambdasReferencedViaReflection).RequiresAll ();
+                typeof(LambdasReferencedViaReflection).RequiresAll();
             }
 
             // Warnings for Reflection access to methods with Requires
-            [ExpectedWarning ("IL2026", "--TestLambdaInMethodWithRequires--")]
-            [ExpectedWarning ("IL2026", "--TestLambdaWithClosureInMethodWithRequires--")]
+            [ExpectedWarning("IL2026", "--TestLambdaInMethodWithRequires--")]
+            [ExpectedWarning("IL2026", "--TestLambdaWithClosureInMethodWithRequires--")]
             // NonPublicMethods doesn't warn for lambdas emitted into display class types.
-            static void TestNonPublicMethods ()
+            static void TestNonPublicMethods()
             {
-                typeof (LambdasReferencedViaReflection).RequiresNonPublicMethods ();
+                typeof(LambdasReferencedViaReflection).RequiresNonPublicMethods();
             }
 
-            public static void Test ()
+            public static void Test()
             {
-                TestAll ();
-                TestNonPublicMethods ();
+                TestAll();
+                TestNonPublicMethods();
             }
         }
 
@@ -2138,59 +2809,77 @@ namespace Mono.Linker.Tests.Cases.RequiresCapability
         {
             public class AsyncBodyCallingMethodWithRequires
             {
-                [RequiresUnreferencedCode ("")]
-                [RequiresAssemblyFiles ("")]
-                [RequiresDynamicCode ("")]
-                static Task<object> MethodWithRequiresAsync (Type type)
+                [RequiresUnreferencedCode("")]
+                [RequiresAssemblyFiles("")]
+                [RequiresDynamicCode("")]
+                static Task<object> MethodWithRequiresAsync(Type type)
                 {
-                    return Task.FromResult (new object ());
+                    return Task.FromResult(new object());
                 }
 
-                [RequiresUnreferencedCode ("ParentSuppression")]
-                [RequiresAssemblyFiles ("ParentSuppression")]
-                [RequiresDynamicCode ("ParentSuppression")]
-                static async Task<object> AsyncMethodCallingRequires (Type type)
+                [RequiresUnreferencedCode("ParentSuppression")]
+                [RequiresAssemblyFiles("ParentSuppression")]
+                [RequiresDynamicCode("ParentSuppression")]
+                static async Task<object> AsyncMethodCallingRequires(Type type)
                 {
-                    using (var diposable = await GetDisposableAsync ()) {
-                        return await MethodWithRequiresAsync (type);
+                    using (var diposable = await GetDisposableAsync())
+                    {
+                        return await MethodWithRequiresAsync(type);
                     }
                 }
 
-                [ExpectedWarning ("IL2026", "ParentSuppression")]
-                [ExpectedWarning ("IL3002", "ParentSuppression", ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot)]
-                [ExpectedWarning ("IL3050", "ParentSuppression", ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot)]
-                public static void Test ()
+                [ExpectedWarning("IL2026", "ParentSuppression")]
+                [ExpectedWarning(
+                    "IL3002",
+                    "ParentSuppression",
+                    ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot
+                )]
+                [ExpectedWarning(
+                    "IL3050",
+                    "ParentSuppression",
+                    ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot
+                )]
+                public static void Test()
                 {
-                    AsyncMethodCallingRequires (typeof (object));
+                    AsyncMethodCallingRequires(typeof(object));
                 }
             }
 
             public class GenericAsyncBodyCallingMethodWithRequires
             {
-                [RequiresUnreferencedCode ("")]
-                [RequiresAssemblyFiles ("")]
-                [RequiresDynamicCode ("")]
-                static ValueTask<TValue> MethodWithRequiresAsync<TValue> ()
+                [RequiresUnreferencedCode("")]
+                [RequiresAssemblyFiles("")]
+                [RequiresDynamicCode("")]
+                static ValueTask<TValue> MethodWithRequiresAsync<TValue>()
                 {
-                    return ValueTask.FromResult (default (TValue));
+                    return ValueTask.FromResult(default(TValue));
                 }
 
-                [RequiresUnreferencedCode ("ParentSuppression")]
-                [RequiresAssemblyFiles ("ParentSuppression")]
-                [RequiresDynamicCode ("ParentSuppression")]
-                static async Task<T> AsyncMethodCallingRequires<T> ()
+                [RequiresUnreferencedCode("ParentSuppression")]
+                [RequiresAssemblyFiles("ParentSuppression")]
+                [RequiresDynamicCode("ParentSuppression")]
+                static async Task<T> AsyncMethodCallingRequires<T>()
                 {
-                    using (var disposable = await GetDisposableAsync ()) {
-                        return await MethodWithRequiresAsync<T> ();
+                    using (var disposable = await GetDisposableAsync())
+                    {
+                        return await MethodWithRequiresAsync<T>();
                     }
                 }
 
-                [ExpectedWarning ("IL2026", "ParentSuppression")]
-                [ExpectedWarning ("IL3002", "ParentSuppression", ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot)]
-                [ExpectedWarning ("IL3050", "ParentSuppression", ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot)]
-                public static void Test ()
+                [ExpectedWarning("IL2026", "ParentSuppression")]
+                [ExpectedWarning(
+                    "IL3002",
+                    "ParentSuppression",
+                    ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot
+                )]
+                [ExpectedWarning(
+                    "IL3050",
+                    "ParentSuppression",
+                    ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot
+                )]
+                public static void Test()
                 {
-                    AsyncMethodCallingRequires<object> ();
+                    AsyncMethodCallingRequires<object>();
                 }
             }
 
@@ -2198,86 +2887,98 @@ namespace Mono.Linker.Tests.Cases.RequiresCapability
             {
                 class RequiresOnCtor
                 {
-                    [RequiresUnreferencedCode ("")]
-                    [RequiresAssemblyFiles ("")]
-                    [RequiresDynamicCode ("")]
-                    public RequiresOnCtor ()
-                    {
-                    }
+                    [RequiresUnreferencedCode("")]
+                    [RequiresAssemblyFiles("")]
+                    [RequiresDynamicCode("")]
+                    public RequiresOnCtor() { }
                 }
 
-                [RequiresUnreferencedCode ("ParentSuppression")]
-                [RequiresAssemblyFiles ("ParentSuppression")]
-                [RequiresDynamicCode ("ParentSuppression")]
+                [RequiresUnreferencedCode("ParentSuppression")]
+                [RequiresAssemblyFiles("ParentSuppression")]
+                [RequiresDynamicCode("ParentSuppression")]
                 static IAsyncEnumerable<TValue> AsyncEnumMethodCallingRequires<
-                    [DynamicallyAccessedMembers (DynamicallyAccessedMemberTypes.PublicProperties)] TValue> ()
+                    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)]
+                        TValue
+                >()
                 {
-                    return CreateAsync ();
+                    return CreateAsync();
 
-                    [RequiresUnreferencedCode ("")]
+                    [RequiresUnreferencedCode("")]
                     [RequiresAssemblyFiles]
-                    [RequiresDynamicCode ("")]
-                    static async IAsyncEnumerable<TValue> CreateAsync ()
+                    [RequiresDynamicCode("")]
+                    static async IAsyncEnumerable<TValue> CreateAsync()
                     {
-                        await MethodAsync ();
-                        new RequiresOnCtor ();
-                        yield return default (TValue);
+                        await MethodAsync();
+                        new RequiresOnCtor();
+                        yield return default(TValue);
                     }
                 }
 
-                [ExpectedWarning ("IL2026", "ParentSuppression")]
-                [ExpectedWarning ("IL3002", "ParentSuppression", ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot)]
-                [ExpectedWarning ("IL3050", "ParentSuppression", ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot)]
-                public static void Test ()
+                [ExpectedWarning("IL2026", "ParentSuppression")]
+                [ExpectedWarning(
+                    "IL3002",
+                    "ParentSuppression",
+                    ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot
+                )]
+                [ExpectedWarning(
+                    "IL3050",
+                    "ParentSuppression",
+                    ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot
+                )]
+                public static void Test()
                 {
-                    AsyncEnumMethodCallingRequires<object> ();
+                    AsyncEnumMethodCallingRequires<object>();
                 }
             }
 
-            class Disposable : IDisposable { public void Dispose () { } }
+            class Disposable : IDisposable
+            {
+                public void Dispose() { }
+            }
 
-            static Task<Disposable> GetDisposableAsync () { return Task.FromResult (new Disposable ()); }
+            static Task<Disposable> GetDisposableAsync()
+            {
+                return Task.FromResult(new Disposable());
+            }
         }
 
-        static async Task<int> MethodAsync ()
+        static async Task<int> MethodAsync()
         {
-            return await Task.FromResult (0);
+            return await Task.FromResult(0);
         }
 
-        [RequiresUnreferencedCode ("--MethodWithRequires--")]
-        [RequiresAssemblyFiles ("--MethodWithRequires--")]
-        [RequiresDynamicCode ("--MethodWithRequires--")]
-        static void MethodWithRequires ()
-        {
-        }
+        [RequiresUnreferencedCode("--MethodWithRequires--")]
+        [RequiresAssemblyFiles("--MethodWithRequires--")]
+        [RequiresDynamicCode("--MethodWithRequires--")]
+        static void MethodWithRequires() { }
 
         class TypeWithMethodWithRequires
         {
-            [RequiresUnreferencedCode ("--TypeWithMethodWithRequires.MethodWithRequires--")]
-            [RequiresAssemblyFiles ("--TypeWithMethodWithRequires.MethodWithRequires--")]
-            [RequiresDynamicCode ("--TypeWithMethodWithRequires.MethodWithRequires--")]
-            static void MethodWithRequires ()
-            {
-            }
+            [RequiresUnreferencedCode("--TypeWithMethodWithRequires.MethodWithRequires--")]
+            [RequiresAssemblyFiles("--TypeWithMethodWithRequires.MethodWithRequires--")]
+            [RequiresDynamicCode("--TypeWithMethodWithRequires.MethodWithRequires--")]
+            static void MethodWithRequires() { }
         }
 
-        [RequiresUnreferencedCode ("Message from --MethodWithRequiresAndReturns--")]
-        [RequiresAssemblyFiles ("Message from --MethodWithRequiresAndReturns--")]
-        [RequiresDynamicCode ("Message from --MethodWithRequiresAndReturns--")]
-        public static string MethodWithRequiresAndReturns ()
+        [RequiresUnreferencedCode("Message from --MethodWithRequiresAndReturns--")]
+        [RequiresAssemblyFiles("Message from --MethodWithRequiresAndReturns--")]
+        [RequiresDynamicCode("Message from --MethodWithRequiresAndReturns--")]
+        public static string MethodWithRequiresAndReturns()
         {
             return "string";
         }
 
-        static void MethodWithGenericWhichRequiresMethods<[DynamicallyAccessedMembers (DynamicallyAccessedMemberTypes.NonPublicMethods)] T> ()
-        {
-        }
+        static void MethodWithGenericWhichRequiresMethods<
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.NonPublicMethods)] T
+        >() { }
 
-        class TypeWithGenericWhichRequiresMethods<[DynamicallyAccessedMembers (DynamicallyAccessedMemberTypes.NonPublicMethods)] T>
-        {
-        }
+        class TypeWithGenericWhichRequiresMethods<
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.NonPublicMethods)] T
+        > { }
 
-        class TypeWithGenericWhichRequiresNonPublicFields<[DynamicallyAccessedMembers (DynamicallyAccessedMemberTypes.NonPublicFields)] T> { }
+        class TypeWithGenericWhichRequiresNonPublicFields<
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.NonPublicFields)] T
+        > { }
 
         class TestType { }
     }

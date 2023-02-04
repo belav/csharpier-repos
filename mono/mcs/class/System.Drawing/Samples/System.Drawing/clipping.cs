@@ -32,72 +32,71 @@ using System;
 
 namespace MyFormProject
 {
-
-
     class MainForm : System.Windows.Forms.Form
     {
         class ourLabelTwoAreas : Label
         {
-            public ourLabelTwoAreas ()
-            {
+            public ourLabelTwoAreas() { }
 
-            }
-            protected override void OnPaint (PaintEventArgs pevent)
+            protected override void OnPaint(PaintEventArgs pevent)
             {
-                Console.WriteLine ("ourLabelTwoAreas pevents {0}, pos {1} - size {2}", pevent.ClipRectangle,
-                    Location, Size);
+                Console.WriteLine(
+                    "ourLabelTwoAreas pevents {0}, pos {1} - size {2}",
+                    pevent.ClipRectangle,
+                    Location,
+                    Size
+                );
 
-                Region reg = new Region (new Rectangle (20, 20, 10, 10));
-                reg.Union (new Rectangle (5, 5, 10, 10));
-                pevent.Graphics.Clip  = reg;
-                pevent.Graphics.FillRectangle (Brushes.Red, pevent.ClipRectangle);
+                Region reg = new Region(new Rectangle(20, 20, 10, 10));
+                reg.Union(new Rectangle(5, 5, 10, 10));
+                pevent.Graphics.Clip = reg;
+                pevent.Graphics.FillRectangle(Brushes.Red, pevent.ClipRectangle);
             }
         }
 
         class ourLabelOverflows : Label
         {
-            public ourLabelOverflows ()
-            {
+            public ourLabelOverflows() { }
 
-            }
-            protected override void OnPaint (PaintEventArgs pevent)
+            protected override void OnPaint(PaintEventArgs pevent)
             {
-                Console.WriteLine ("ourLabelOverflows pevents {0}, pos {1} - size {2}", pevent.ClipRectangle,
-                    Location, Size);
+                Console.WriteLine(
+                    "ourLabelOverflows pevents {0}, pos {1} - size {2}",
+                    pevent.ClipRectangle,
+                    Location,
+                    Size
+                );
 
-                pevent.Graphics.FillRectangle (Brushes.Yellow,
-                    new Rectangle (0,0, 1000, 1000));
+                pevent.Graphics.FillRectangle(Brushes.Yellow, new Rectangle(0, 0, 1000, 1000));
             }
         }
 
-        protected override void OnPaint (PaintEventArgs pevent)
+        protected override void OnPaint(PaintEventArgs pevent)
         {
-            pevent.Graphics.FillRectangle (Brushes.Green, pevent.ClipRectangle);
+            pevent.Graphics.FillRectangle(Brushes.Green, pevent.ClipRectangle);
         }
 
-        static private ourLabelTwoAreas label = new ourLabelTwoAreas ();
-        static private ourLabelOverflows label2 = new ourLabelOverflows ();
+        static private ourLabelTwoAreas label = new ourLabelTwoAreas();
+        static private ourLabelOverflows label2 = new ourLabelOverflows();
 
-        public MainForm ()
+        public MainForm()
         {
-            label.Location = new Point (20, 20);
-            label.Size = new Size (50, 80);
+            label.Location = new Point(20, 20);
+            label.Size = new Size(50, 80);
             label.Text = "Hola";
-            Controls.Add (label);
+            Controls.Add(label);
 
-            label2.Location = new Point (100, 100);
-            label2.Size = new Size (50, 80);
+            label2.Location = new Point(100, 100);
+            label2.Size = new Size(50, 80);
             label2.Text = "Hola";
-            Controls.Add (label2);
+            Controls.Add(label2);
 
-            ClientSize = new Size (400, 400);
+            ClientSize = new Size(400, 400);
         }
 
         public static void Main(string[] args)
         {
-            Application.Run (new MainForm ());
+            Application.Run(new MainForm());
         }
     }
-
 }
-

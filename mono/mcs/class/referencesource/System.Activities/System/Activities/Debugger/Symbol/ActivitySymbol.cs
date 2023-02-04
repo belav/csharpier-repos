@@ -15,6 +15,7 @@ namespace System.Activities.Debugger.Symbol
         public int StartColumn { get; internal set; }
         public int EndLine { get; internal set; }
         public int EndColumn { get; internal set; }
+
         // Internal representation of QualifiedId.
         internal byte[] QualifiedId { get; set; }
         string id;
@@ -71,14 +72,19 @@ namespace System.Activities.Debugger.Symbol
             }
         }
 
-        internal ActivitySymbol()
-        {
-        }
+        internal ActivitySymbol() { }
 
         public override string ToString()
         {
-            return string.Format(CultureInfo.InvariantCulture, "{0},{1},{2},{3},{4}", this.Id, this.StartLine, this.StartColumn, this.EndLine, this.EndColumn);
+            return string.Format(
+                CultureInfo.InvariantCulture,
+                "{0},{1},{2},{3},{4}",
+                this.Id,
+                this.StartLine,
+                this.StartColumn,
+                this.EndLine,
+                this.EndColumn
+            );
         }
     }
-
 }

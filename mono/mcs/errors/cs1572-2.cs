@@ -7,8 +7,9 @@ namespace Testing
     class Test
     {
         /// <param name='mismatch'>mismatch</param>
-        public int this[int i] {
-            set {}
+        public int this[int i]
+        {
+            set { }
         }
     }
 }

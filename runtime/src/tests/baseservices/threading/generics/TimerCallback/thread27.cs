@@ -3,33 +3,33 @@
 using System;
 using System.Threading;
 
-class Gen<T> 
+class Gen<T>
 {
     public static void Target<U>(object p)
-    {            
+    {
         //dummy line to avoid warnings
-        Test_thread27.Eval(typeof(U)!=p.GetType());
-        if (Test_thread27.Xcounter>=Test_thread27.nThreads)
+        Test_thread27.Eval(typeof(U) != p.GetType());
+        if (Test_thread27.Xcounter >= Test_thread27.nThreads)
         {
-            ManualResetEvent evt = (ManualResetEvent) p;    
+            ManualResetEvent evt = (ManualResetEvent)p;
             evt.Set();
         }
         else
         {
-            Interlocked.Increment(ref Test_thread27.Xcounter);    
+            Interlocked.Increment(ref Test_thread27.Xcounter);
         }
     }
-    
+
     public static void ThreadPoolTest<U>()
     {
-        ManualResetEvent evt = new ManualResetEvent(false);        
+        ManualResetEvent evt = new ManualResetEvent(false);
 
         TimerCallback tcb = new TimerCallback(Gen<T>.Target<U>);
-        Timer timer = new Timer(tcb,evt,Test_thread27.delay,Test_thread27.period);
-    
+        Timer timer = new Timer(tcb, evt, Test_thread27.delay, Test_thread27.period);
+
         evt.WaitOne();
         timer.Dispose();
-        Test_thread27.Eval(Test_thread27.Xcounter>=Test_thread27.nThreads);
+        Test_thread27.Eval(Test_thread27.Xcounter >= Test_thread27.nThreads);
         Test_thread27.Xcounter = 0;
     }
 }
@@ -42,6 +42,7 @@ public class Test_thread27
     public static int counter = 0;
     public static int Xcounter = 0;
     public static bool result = true;
+
     public static void Eval(bool exp)
     {
         counter++;
@@ -50,16 +51,15 @@ public class Test_thread27
             result = exp;
             Console.WriteLine("Test Failed at location: " + counter);
         }
-    
     }
-    
+
     public static int Main()
     {
         Gen<int>.ThreadPoolTest<object>();
         Gen<double>.ThreadPoolTest<string>();
         Gen<string>.ThreadPoolTest<Guid>();
-        Gen<object>.ThreadPoolTest<int>(); 
-        Gen<Guid>.ThreadPoolTest<double>(); 
+        Gen<object>.ThreadPoolTest<int>();
+        Gen<Guid>.ThreadPoolTest<double>();
 
         if (result)
         {
@@ -72,6 +72,4 @@ public class Test_thread27
             return 1;
         }
     }
-}        
-
-
+}

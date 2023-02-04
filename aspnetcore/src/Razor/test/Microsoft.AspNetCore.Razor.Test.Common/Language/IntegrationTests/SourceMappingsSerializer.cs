@@ -7,7 +7,10 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests;
 
 public static class SourceMappingsSerializer
 {
-    public static string Serialize(RazorCSharpDocument csharpDocument, RazorSourceDocument sourceDocument)
+    public static string Serialize(
+        RazorCSharpDocument csharpDocument,
+        RazorSourceDocument sourceDocument
+    )
     {
         var builder = new StringBuilder();
         var charBuffer = new char[sourceDocument.Length];
@@ -22,7 +25,11 @@ public static class SourceMappingsSerializer
             AppendMappingLocation(builder, sourceMapping.OriginalSpan, sourceContent);
 
             builder.Append("Generated Location: ");
-            AppendMappingLocation(builder, sourceMapping.GeneratedSpan, csharpDocument.GeneratedCode);
+            AppendMappingLocation(
+                builder,
+                sourceMapping.GeneratedSpan,
+                csharpDocument.GeneratedCode
+            );
 
             builder.AppendLine();
         }
@@ -30,11 +37,13 @@ public static class SourceMappingsSerializer
         return builder.ToString();
     }
 
-    private static void AppendMappingLocation(StringBuilder builder, SourceSpan location, string content)
+    private static void AppendMappingLocation(
+        StringBuilder builder,
+        SourceSpan location,
+        string content
+    )
     {
-        builder
-            .AppendLine(location.ToString())
-            .Append("|");
+        builder.AppendLine(location.ToString()).Append("|");
 
         for (var i = 0; i < location.Length; i++)
         {

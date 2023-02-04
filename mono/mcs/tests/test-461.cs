@@ -1,39 +1,39 @@
 using System;
 
-public enum ArrowType {
+public enum ArrowType
+{
     Up,
     Down,
     Left,
     Right,
 }
 
-public struct Value {
-    public Value (object obj) {
+public struct Value
+{
+    public Value(object obj) { }
+
+    public object Val
+    {
+        get { return ArrowType.Left; }
     }
-    
-    public object Val {
-        get {
-            return ArrowType.Left;
-        }
-    }
-    
-    public Enum Val2 {
-        get {
-            return ArrowType.Down;
-        }
+
+    public Enum Val2
+    {
+        get { return ArrowType.Down; }
     }
 }
-    
-public class Valtest {
-    public static int Main () {
+
+public class Valtest
+{
+    public static int Main()
+    {
         Value val;
         ArrowType i = (ArrowType)val.Val2;
-        
+
         if ((ArrowType)(Enum)val.Val != ArrowType.Left)
             return 1;
 
-        Console.WriteLine ("OK");
+        Console.WriteLine("OK");
         return 0;
     }
 }
-

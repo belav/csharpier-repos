@@ -18,6 +18,5 @@ namespace POS_Server.Models
 
         public int customersCount { get; set; }
         public decimal balance { get; set; }
-
     }
 }

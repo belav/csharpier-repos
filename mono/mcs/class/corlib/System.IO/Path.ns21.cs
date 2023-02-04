@@ -11,24 +11,36 @@ namespace System.IO
 {
     partial class Path
     {
-        public static ReadOnlySpan<char> GetExtension (ReadOnlySpan<char> path) => GetExtension (path.ToString ()).AsSpan ();
+        public static ReadOnlySpan<char> GetExtension(ReadOnlySpan<char> path) =>
+            GetExtension(path.ToString()).AsSpan();
 
-        public static ReadOnlySpan<char> GetFileNameWithoutExtension (ReadOnlySpan<char> path) => GetFileNameWithoutExtension (path.ToString ()).AsSpan ();
+        public static ReadOnlySpan<char> GetFileNameWithoutExtension(ReadOnlySpan<char> path) =>
+            GetFileNameWithoutExtension(path.ToString()).AsSpan();
 
-        public static ReadOnlySpan<char> GetPathRoot (ReadOnlySpan<char> path) => GetPathRoot (path.ToString ()).AsSpan ();
+        public static ReadOnlySpan<char> GetPathRoot(ReadOnlySpan<char> path) =>
+            GetPathRoot(path.ToString()).AsSpan();
 
-        public static bool HasExtension (ReadOnlySpan<char> path) => HasExtension (path.ToString ());
+        public static bool HasExtension(ReadOnlySpan<char> path) => HasExtension(path.ToString());
 
         public static string GetRelativePath(string relativeTo, string path)
         {
             return GetRelativePath(relativeTo, path, StringComparison);
         }
 
-        private static string GetRelativePath(string relativeTo, string path, StringComparison comparisonType)
+        private static string GetRelativePath(
+            string relativeTo,
+            string path,
+            StringComparison comparisonType
+        )
         {
-            if (string.IsNullOrEmpty(relativeTo)) throw new ArgumentNullException(nameof(relativeTo));
-            if (PathInternal.IsEffectivelyEmpty(path.AsSpan())) throw new ArgumentNullException(nameof(path));
-            Debug.Assert(comparisonType == StringComparison.Ordinal || comparisonType == StringComparison.OrdinalIgnoreCase);
+            if (string.IsNullOrEmpty(relativeTo))
+                throw new ArgumentNullException(nameof(relativeTo));
+            if (PathInternal.IsEffectivelyEmpty(path.AsSpan()))
+                throw new ArgumentNullException(nameof(path));
+            Debug.Assert(
+                comparisonType == StringComparison.Ordinal
+                    || comparisonType == StringComparison.OrdinalIgnoreCase
+            );
 
             relativeTo = GetFullPath(relativeTo);
             path = GetFullPath(path);
@@ -37,7 +49,11 @@ namespace System.IO
             if (!PathInternal.AreRootsEqual(relativeTo, path, comparisonType))
                 return path;
 
-            int commonLength = PathInternal.GetCommonPathLength(relativeTo, path, ignoreCase: comparisonType == StringComparison.OrdinalIgnoreCase);
+            int commonLength = PathInternal.GetCommonPathLength(
+                relativeTo,
+                path,
+                ignoreCase: comparisonType == StringComparison.OrdinalIgnoreCase
+            );
 
             // If there is nothing in common they can't share the same root, return the "to" path as is.
             if (commonLength == 0)
@@ -54,7 +70,8 @@ namespace System.IO
                 pathLength--;
 
             // If we have effectively the same path, return "."
-            if (relativeToLength == pathLength && commonLength >= relativeToLength) return ".";
+            if (relativeToLength == pathLength && commonLength >= relativeToLength)
+                return ".";
 
             // We have the same root, we need to calculate the difference now using the
             // common Length and Segment count past the length.
@@ -112,9 +129,9 @@ namespace System.IO
         {
             get
             {
-                return IsCaseSensitive ?
-                    StringComparison.Ordinal :
-                    StringComparison.OrdinalIgnoreCase;
+                return IsCaseSensitive
+                    ? StringComparison.Ordinal
+                    : StringComparison.OrdinalIgnoreCase;
             }
         }
 
@@ -125,10 +142,13 @@ namespace System.IO
             get
             {
                 PlatformID platform = Environment.OSVersion.Platform;
-                if (platform == PlatformID.Win32S ||
-                    platform == PlatformID.Win32Windows ||
-                    platform == PlatformID.Win32NT ||
-                    platform == PlatformID.WinCE) {
+                if (
+                    platform == PlatformID.Win32S
+                    || platform == PlatformID.Win32Windows
+                    || platform == PlatformID.Win32NT
+                    || platform == PlatformID.WinCE
+                )
+                {
                     return true;
                 }
                 return false;

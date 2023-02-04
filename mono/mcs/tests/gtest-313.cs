@@ -2,11 +2,16 @@ using System;
 
 class Foo<T>
 {
-    public enum TestEnum { One, Two, Three }
+    public enum TestEnum
+    {
+        One,
+        Two,
+        Three
+    }
 
     public TestEnum Test;
 
-    public Foo (TestEnum test)
+    public Foo(TestEnum test)
     {
         this.Test = test;
     }
@@ -14,12 +19,12 @@ class Foo<T>
 
 class X
 {
-    public static void Main ()
+    public static void Main()
     {
         Foo<int>.TestEnum e = Foo<int>.TestEnum.One;
-        Console.WriteLine (e);
+        Console.WriteLine(e);
 
-        Foo<int> foo = new Foo<int> (e);
+        Foo<int> foo = new Foo<int>(e);
         foo.Test = e;
     }
 }

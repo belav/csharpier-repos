@@ -6,13 +6,11 @@ using System.Collections;
 
 public class Test
 {
-    static void Main ()
+    static void Main()
     {
-        Hashtable ht = new Hashtable ();
-        ht ["a"] = Run ("Appointments");
+        Hashtable ht = new Hashtable();
+        ht["a"] = Run("Appointments");
     }
 
-    public static void Run (string unit)
-    {
-    }
+    public static void Run(string unit) { }
 }

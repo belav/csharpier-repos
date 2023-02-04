@@ -3,7 +3,7 @@
 
 class C
 {
-    public static void Main ()
+    public static void Main()
     {
         var (t, u, v) = (1, 2);
     }

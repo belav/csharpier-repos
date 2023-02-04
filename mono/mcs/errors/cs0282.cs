@@ -2,10 +2,14 @@
 // Line: 8
 // Compiler options: -warn:4 -warnaserror
 
-partial struct S {
+partial struct S
+{
     int x;
 }
-partial struct S {
+
+partial struct S
+{
     int y;
-    static void Main () {}
+
+    static void Main() { }
 }

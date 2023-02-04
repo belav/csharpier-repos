@@ -12,9 +12,7 @@ namespace MonoTests.SystemWeb.Framework
         /// <summary>
         /// Default constructor; does nothing.
         /// </summary>
-        public BaseControl ()
-        {
-        }
+        public BaseControl() { }
 
         /// <summary>
         /// Creates a <see cref="BaseControl"/> instance, initializing the
@@ -25,13 +23,14 @@ namespace MonoTests.SystemWeb.Framework
         /// <param name="value">The value of the control.</param>
         /// <seealso cref="Name"/>
         /// <seealso cref="Value"/>
-        public BaseControl (string name, string value)
+        public BaseControl(string name, string value)
         {
             _name = name;
             _value = value;
         }
 
         string _name;
+
         /// <summary>
         /// The name of the control.
         /// </summary>
@@ -42,6 +41,7 @@ namespace MonoTests.SystemWeb.Framework
         }
 
         string _value;
+
         /// <summary>
         /// The string value of the control.
         /// </summary>
@@ -52,11 +52,11 @@ namespace MonoTests.SystemWeb.Framework
         }
 
         /// <summary>
-        /// Returns <c>true</c>, if the control is valid for submission. Override this method 
+        /// Returns <c>true</c>, if the control is valid for submission. Override this method
         /// to implement validation of different controls. See
         /// <see href="http://www.w3.org/TR/REC-html40/interact/forms.html#successful-controls"/>
         /// </summary>
-        public virtual bool IsSuccessful () 
+        public virtual bool IsSuccessful()
         {
             return true;
         }

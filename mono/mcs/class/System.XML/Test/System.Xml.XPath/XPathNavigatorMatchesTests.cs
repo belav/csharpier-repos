@@ -20,136 +20,137 @@ namespace MonoTests.System.Xml
     [TestFixture]
     public class XPathNavigatorMatchesTests
     {
-        private XPathNavigator CreateNavigator (string xml)
+        private XPathNavigator CreateNavigator(string xml)
         {
-            XmlDocument document = new XmlDocument ();
-            document.LoadXml (xml);
-            return document.CreateNavigator ();
+            XmlDocument document = new XmlDocument();
+            document.LoadXml(xml);
+            return document.CreateNavigator();
         }
 
         [Test]
-        public void MatchRoot ()
+        public void MatchRoot()
         {
-            XPathNavigator navigator = CreateNavigator ("<foo />");
-            Assert.IsTrue (navigator.Matches ("/"));
+            XPathNavigator navigator = CreateNavigator("<foo />");
+            Assert.IsTrue(navigator.Matches("/"));
         }
 
         [Test]
-        public void FalseMatchRoot ()
+        public void FalseMatchRoot()
         {
-            XPathNavigator navigator = CreateNavigator ("<foo />");
-            Assert.IsTrue (!navigator.Matches ("foo"));
+            XPathNavigator navigator = CreateNavigator("<foo />");
+            Assert.IsTrue(!navigator.Matches("foo"));
         }
 
         [Test]
-        public void MatchDocumentElement ()
+        public void MatchDocumentElement()
         {
-            XmlDocument document = new XmlDocument ();
-            document.LoadXml ("<foo />");
-            XPathNavigator navigator = document.DocumentElement.CreateNavigator ();
+            XmlDocument document = new XmlDocument();
+            document.LoadXml("<foo />");
+            XPathNavigator navigator = document.DocumentElement.CreateNavigator();
 
-            Assert.IsTrue (navigator.Matches ("foo"));
+            Assert.IsTrue(navigator.Matches("foo"));
         }
 
         [Test]
-        public void MatchAbsoluteDocumentElement ()
+        public void MatchAbsoluteDocumentElement()
         {
-            XmlDocument document = new XmlDocument ();
-            document.LoadXml ("<foo />");
-            XPathNavigator navigator = document.DocumentElement.CreateNavigator ();
+            XmlDocument document = new XmlDocument();
+            document.LoadXml("<foo />");
+            XPathNavigator navigator = document.DocumentElement.CreateNavigator();
 
-            Assert.IsTrue (navigator.Matches ("/foo"));
+            Assert.IsTrue(navigator.Matches("/foo"));
         }
 
         [Test]
-        public void MatchDocumentElementChild ()
+        public void MatchDocumentElementChild()
         {
-            XmlDocument document = new XmlDocument ();
-            document.LoadXml ("<foo><bar /></foo>");
-            XPathNavigator navigator = document.DocumentElement.FirstChild.CreateNavigator ();
+            XmlDocument document = new XmlDocument();
+            document.LoadXml("<foo><bar /></foo>");
+            XPathNavigator navigator = document.DocumentElement.FirstChild.CreateNavigator();
 
-            Assert.IsTrue (navigator.Matches ("bar"));
-            Assert.IsTrue (navigator.Matches ("foo/bar"));
+            Assert.IsTrue(navigator.Matches("bar"));
+            Assert.IsTrue(navigator.Matches("foo/bar"));
         }
 
         [Test]
-        public void MatchAttribute ()
+        public void MatchAttribute()
         {
-            XmlDocument document = new XmlDocument ();
-            document.LoadXml ("<foo bar='baz' />");
-            XPathNavigator navigator = document.DocumentElement.Attributes[0].CreateNavigator ();
+            XmlDocument document = new XmlDocument();
+            document.LoadXml("<foo bar='baz' />");
+            XPathNavigator navigator = document.DocumentElement.Attributes[0].CreateNavigator();
 
-            Assert.IsTrue (navigator.Matches ("@bar"));
-            Assert.IsTrue (navigator.Matches ("foo/@bar"));
+            Assert.IsTrue(navigator.Matches("@bar"));
+            Assert.IsTrue(navigator.Matches("foo/@bar"));
         }
 
         [Test]
-        public void SlashSlash ()
+        public void SlashSlash()
         {
-            XmlDocument document = new XmlDocument ();
-            document.LoadXml ("<foo><bar><baz/></bar></foo>");
-            XPathNavigator navigator = document.DocumentElement.FirstChild.FirstChild.CreateNavigator ();
+            XmlDocument document = new XmlDocument();
+            document.LoadXml("<foo><bar><baz/></bar></foo>");
+            XPathNavigator navigator =
+                document.DocumentElement.FirstChild.FirstChild.CreateNavigator();
 
-            Assert.IsTrue (navigator.Matches ("foo//baz"));
+            Assert.IsTrue(navigator.Matches("foo//baz"));
         }
 
         [Test]
-        public void AbsoluteSlashSlash ()
+        public void AbsoluteSlashSlash()
         {
-            XmlDocument document = new XmlDocument ();
-            document.LoadXml ("<foo><bar><baz/></bar></foo>");
-            XPathNavigator navigator = document.DocumentElement.FirstChild.FirstChild.CreateNavigator ();
+            XmlDocument document = new XmlDocument();
+            document.LoadXml("<foo><bar><baz/></bar></foo>");
+            XPathNavigator navigator =
+                document.DocumentElement.FirstChild.FirstChild.CreateNavigator();
 
-            Assert.IsTrue (navigator.Matches ("//baz"));
+            Assert.IsTrue(navigator.Matches("//baz"));
         }
 
         [Test]
-        public void MatchDocumentElementWithPredicate ()
+        public void MatchDocumentElementWithPredicate()
         {
-            XmlDocument document = new XmlDocument ();
-            document.LoadXml ("<foo><bar /></foo>");
-            XPathNavigator navigator = document.DocumentElement.CreateNavigator ();
+            XmlDocument document = new XmlDocument();
+            document.LoadXml("<foo><bar /></foo>");
+            XPathNavigator navigator = document.DocumentElement.CreateNavigator();
 
-            Assert.IsTrue (navigator.Matches ("foo[bar]"));
+            Assert.IsTrue(navigator.Matches("foo[bar]"));
         }
 
         [Test]
-        public void FalseMatchDocumentElementWithPredicate ()
+        public void FalseMatchDocumentElementWithPredicate()
         {
-            XmlDocument document = new XmlDocument ();
-            document.LoadXml ("<foo><bar /></foo>");
-            XPathNavigator navigator = document.DocumentElement.CreateNavigator ();
+            XmlDocument document = new XmlDocument();
+            document.LoadXml("<foo><bar /></foo>");
+            XPathNavigator navigator = document.DocumentElement.CreateNavigator();
 
-            Assert.IsTrue (!navigator.Matches ("foo[baz]"));
+            Assert.IsTrue(!navigator.Matches("foo[baz]"));
         }
 
         [Test]
-        public void MatchesAncestorsButNotCurrent ()
+        public void MatchesAncestorsButNotCurrent()
         {
-            XPathNavigator nav = CreateNavigator ("<foo><bar><baz/></bar></foo>");
-            nav.MoveToFirstChild (); // foo
-            nav.MoveToFirstChild (); // bar
-            nav.MoveToFirstChild (); // baz
-            Assert.IsTrue (nav.Matches ("baz"));
-            Assert.IsTrue (nav.Matches ("bar/baz"));
-            Assert.IsTrue (!nav.Matches ("foo/bar"));
+            XPathNavigator nav = CreateNavigator("<foo><bar><baz/></bar></foo>");
+            nav.MoveToFirstChild(); // foo
+            nav.MoveToFirstChild(); // bar
+            nav.MoveToFirstChild(); // baz
+            Assert.IsTrue(nav.Matches("baz"));
+            Assert.IsTrue(nav.Matches("bar/baz"));
+            Assert.IsTrue(!nav.Matches("foo/bar"));
         }
 
         [Test]
-        [ExpectedException (typeof (XPathException))]
-        public void MatchesParentAxis ()
+        [ExpectedException(typeof(XPathException))]
+        public void MatchesParentAxis()
         {
-            XPathNavigator nav = CreateNavigator ("<foo/>");
-            nav.Matches ("..");
+            XPathNavigator nav = CreateNavigator("<foo/>");
+            nav.Matches("..");
         }
 
         [Test]
-        [ExpectedException (typeof (XPathException))]
-        public void MatchesPredicatedParentAxis ()
+        [ExpectedException(typeof(XPathException))]
+        public void MatchesPredicatedParentAxis()
         {
-            XPathNavigator nav = CreateNavigator ("<foo/>");
-            nav.Matches ("..[1]");
+            XPathNavigator nav = CreateNavigator("<foo/>");
+            nav.Matches("..[1]");
         }
     }
 }
-

@@ -4,18 +4,18 @@
 
 class A
 {
-        int i;
+    int i;
 
-        int prop
-        {
-                set { i = value; }
-        }
+    int prop
+    {
+        set { i = value; }
+    }
 }
 
 class B : A
 {
-        void M ()
-        {
-                prop = 2;
-        }
+    void M()
+    {
+        prop = 2;
+    }
 }

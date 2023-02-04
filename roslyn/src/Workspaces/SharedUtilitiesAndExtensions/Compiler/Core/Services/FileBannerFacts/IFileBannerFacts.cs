@@ -11,17 +11,35 @@ namespace Microsoft.CodeAnalysis.LanguageService
     {
         ImmutableArray<SyntaxTrivia> GetFileBanner(SyntaxNode root);
         ImmutableArray<SyntaxTrivia> GetFileBanner(SyntaxToken firstToken);
-        string GetBannerText(SyntaxNode? documentationCommentTriviaSyntax, int maxBannerLength, CancellationToken cancellationToken);
+        string GetBannerText(
+            SyntaxNode? documentationCommentTriviaSyntax,
+            int maxBannerLength,
+            CancellationToken cancellationToken
+        );
 
         ImmutableArray<SyntaxTrivia> GetLeadingBlankLines(SyntaxNode node);
 
-        TSyntaxNode GetNodeWithoutLeadingBlankLines<TSyntaxNode>(TSyntaxNode node) where TSyntaxNode : SyntaxNode;
+        TSyntaxNode GetNodeWithoutLeadingBlankLines<TSyntaxNode>(TSyntaxNode node)
+            where TSyntaxNode : SyntaxNode;
         TSyntaxNode GetNodeWithoutLeadingBlankLines<TSyntaxNode>(
-            TSyntaxNode node, out ImmutableArray<SyntaxTrivia> strippedTrivia) where TSyntaxNode : SyntaxNode;
+            TSyntaxNode node,
+            out ImmutableArray<SyntaxTrivia> strippedTrivia
+        )
+            where TSyntaxNode : SyntaxNode;
 
-        ImmutableArray<SyntaxTrivia> GetLeadingBannerAndPreprocessorDirectives<TSyntaxNode>(TSyntaxNode node) where TSyntaxNode : SyntaxNode;
+        ImmutableArray<SyntaxTrivia> GetLeadingBannerAndPreprocessorDirectives<TSyntaxNode>(
+            TSyntaxNode node
+        )
+            where TSyntaxNode : SyntaxNode;
 
-        TSyntaxNode GetNodeWithoutLeadingBannerAndPreprocessorDirectives<TSyntaxNode>(TSyntaxNode node) where TSyntaxNode : SyntaxNode;
-        TSyntaxNode GetNodeWithoutLeadingBannerAndPreprocessorDirectives<TSyntaxNode>(TSyntaxNode node, out ImmutableArray<SyntaxTrivia> strippedTrivia) where TSyntaxNode : SyntaxNode;
+        TSyntaxNode GetNodeWithoutLeadingBannerAndPreprocessorDirectives<TSyntaxNode>(
+            TSyntaxNode node
+        )
+            where TSyntaxNode : SyntaxNode;
+        TSyntaxNode GetNodeWithoutLeadingBannerAndPreprocessorDirectives<TSyntaxNode>(
+            TSyntaxNode node,
+            out ImmutableArray<SyntaxTrivia> strippedTrivia
+        )
+            where TSyntaxNode : SyntaxNode;
     }
 }

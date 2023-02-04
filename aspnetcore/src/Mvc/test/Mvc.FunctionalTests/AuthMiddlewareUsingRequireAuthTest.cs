@@ -7,11 +7,16 @@ using Microsoft.AspNetCore.Hosting;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
-public class AuthMiddlewareUsingRequireAuthTest : IClassFixture<MvcTestFixture<SecurityWebSite.StartupWithRequireAuth>>
+public class AuthMiddlewareUsingRequireAuthTest
+    : IClassFixture<MvcTestFixture<SecurityWebSite.StartupWithRequireAuth>>
 {
-    public AuthMiddlewareUsingRequireAuthTest(MvcTestFixture<SecurityWebSite.StartupWithRequireAuth> fixture)
+    public AuthMiddlewareUsingRequireAuthTest(
+        MvcTestFixture<SecurityWebSite.StartupWithRequireAuth> fixture
+    )
     {
-        var factory = fixture.Factories.FirstOrDefault() ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
+        var factory =
+            fixture.Factories.FirstOrDefault()
+            ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
         Client = factory.CreateDefaultClient();
     }
 
@@ -73,4 +78,3 @@ public class AuthMiddlewareUsingRequireAuthTest : IClassFixture<MvcTestFixture<S
         return response.Headers.GetValues("Set-Cookie").FirstOrDefault();
     }
 }
-

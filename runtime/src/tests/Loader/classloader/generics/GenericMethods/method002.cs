@@ -5,17 +5,17 @@ using System;
 
 class Foo<U>
 {
-    public string Function<T>(U u,T t)
+    public string Function<T>(U u, T t)
     {
-        return u.ToString()+t.ToString();
+        return u.ToString() + t.ToString();
     }
-        
 }
 
 public class Test_method002
 {
     public static int counter = 0;
     public static bool result = true;
+
     public static void Eval(bool exp)
     {
         counter++;
@@ -24,17 +24,15 @@ public class Test_method002
             result = exp;
             Console.WriteLine("Test Failed at location: " + counter);
         }
-    
     }
-    
+
     public static int Main()
     {
+        Eval(new Foo<int>().Function<int>(1, 1).Equals("11"));
+        Eval(new Foo<string>().Function<int>("string", 1).Equals("string1"));
+        Eval(new Foo<int>().Function<string>(1, "string").Equals("1string"));
+        Eval(new Foo<string>().Function<string>("string1", "string2").Equals("string1string2"));
 
-        Eval(new Foo<int>().Function<int>(1,1).Equals("11"));
-        Eval(new Foo<string>().Function<int>("string",1).Equals("string1"));
-        Eval(new Foo<int>().Function<string>(1,"string").Equals("1string"));
-        Eval(new Foo<string>().Function<string>("string1","string2").Equals("string1string2"));
-        
         if (result)
         {
             Console.WriteLine("Test Passed");
@@ -45,6 +43,5 @@ public class Test_method002
             Console.WriteLine("Test Failed");
             return 1;
         }
-        
     }
 }

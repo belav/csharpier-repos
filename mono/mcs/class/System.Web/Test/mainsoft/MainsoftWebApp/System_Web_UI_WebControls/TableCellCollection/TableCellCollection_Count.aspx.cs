@@ -35,12 +35,12 @@ using System.Web.UI.HtmlControls;
 
 namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
 {
-    public class TableCellCollection_Count
-        : GHTBaseWeb 
+    public class TableCellCollection_Count : GHTBaseWeb
     {
         protected GHTWebControls.GHTSubTest GHTSubTest1;
+
         #region Web Form Designer generated code
-        override protected void OnInit(EventArgs e) 
+        override protected void OnInit(EventArgs e)
         {
             //
             // CODEGEN: This call is required by the ASP.NET Web Form Designer.
@@ -48,19 +48,18 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             InitializeComponent();
             base.OnInit(e);
         }
-        
+
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent() 
-        {    
+        private void InitializeComponent()
+        {
             this.Load += new System.EventHandler(this.Page_Load);
-
         }
         #endregion
 
-        private void Page_Load(object sender, System.EventArgs e) 
+        private void Page_Load(object sender, System.EventArgs e)
         {
             //Put user code to initialize the page here
             //Put user code to initialize the page here
@@ -77,15 +76,18 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             tbl.Rows[0].Cells[0].Text = "111";
             tbl.Rows[0].Cells[1].Text = "222";
 
-        
-            try 
+            try
             {
                 base.GHTSubTestBegin("Count");
                 base.GHTActiveSubTest.Controls.Add(tbl);
-                base.GHTSubTestAddResult("Rows(0).Cells.Count=" + tbl.Rows[0].Cells.Count.ToString());
-                base.GHTSubTestAddResult("Rows(1).Cells.Count=" + tbl.Rows[1].Cells.Count.ToString());
+                base.GHTSubTestAddResult(
+                    "Rows(0).Cells.Count=" + tbl.Rows[0].Cells.Count.ToString()
+                );
+                base.GHTSubTestAddResult(
+                    "Rows(1).Cells.Count=" + tbl.Rows[1].Cells.Count.ToString()
+                );
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 base.GHTSubTestUnexpectedExceptionCaught(ex);
             }

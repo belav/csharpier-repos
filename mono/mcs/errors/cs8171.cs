@@ -5,7 +5,7 @@ class Test
 {
     int field;
 
-    void Foo ()
+    void Foo()
     {
         int l = ref field;
     }

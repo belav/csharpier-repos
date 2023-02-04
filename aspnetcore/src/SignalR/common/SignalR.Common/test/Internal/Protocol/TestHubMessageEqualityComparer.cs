@@ -10,7 +10,8 @@ namespace Microsoft.AspNetCore.SignalR.Common.Tests.Internal.Protocol;
 
 public class TestHubMessageEqualityComparer : IEqualityComparer<HubMessage>
 {
-    public static readonly TestHubMessageEqualityComparer Instance = new TestHubMessageEqualityComparer();
+    public static readonly TestHubMessageEqualityComparer Instance =
+        new TestHubMessageEqualityComparer();
 
     private TestHubMessageEqualityComparer() { }
 
@@ -31,16 +32,25 @@ public class TestHubMessageEqualityComparer : IEqualityComparer<HubMessage>
             case CompletionMessage completionMessage:
                 return CompletionMessagesEqual(completionMessage, (CompletionMessage)y);
             case StreamInvocationMessage streamInvocationMessage:
-                return StreamInvocationMessagesEqual(streamInvocationMessage, (StreamInvocationMessage)y);
+                return StreamInvocationMessagesEqual(
+                    streamInvocationMessage,
+                    (StreamInvocationMessage)y
+                );
             case CancelInvocationMessage cancelItemMessage:
-                return string.Equals(cancelItemMessage.InvocationId, ((CancelInvocationMessage)y).InvocationId, StringComparison.Ordinal);
+                return string.Equals(
+                    cancelItemMessage.InvocationId,
+                    ((CancelInvocationMessage)y).InvocationId,
+                    StringComparison.Ordinal
+                );
             case PingMessage _:
                 // If the types are equal (above), then we're done.
                 return true;
             case CloseMessage closeMessage:
                 return string.Equals(closeMessage.Error, ((CloseMessage)y).Error);
             default:
-                throw new InvalidOperationException($"Unknown message type: {x.GetType().FullName}");
+                throw new InvalidOperationException(
+                    $"Unknown message type: {x.GetType().FullName}"
+                );
         }
     }
 
@@ -118,7 +128,11 @@ public class TestHubMessageEqualityComparer : IEqualityComparer<HubMessage>
         var rightEnumerator = rightEnumerable.GetEnumerator();
         var leftMoved = leftEnumerator.MoveNext();
         var rightMoved = rightEnumerator.MoveNext();
-        for (; leftMoved && rightMoved; leftMoved = leftEnumerator.MoveNext(), rightMoved = rightEnumerator.MoveNext())
+        for (
+            ;
+            leftMoved && rightMoved;
+            leftMoved = leftEnumerator.MoveNext(), rightMoved = rightEnumerator.MoveNext()
+        )
         {
             if (!Equals(leftEnumerator.Current, rightEnumerator.Current))
             {

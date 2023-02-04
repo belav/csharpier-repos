@@ -18,6 +18,7 @@ internal static partial class Interop
             IntPtr pvReserved,
             IntPtr pPromptStruct,
             CryptProtectDataFlags dwFlags,
-            out DATA_BLOB pDataOut);
+            out DATA_BLOB pDataOut
+        );
     }
 }

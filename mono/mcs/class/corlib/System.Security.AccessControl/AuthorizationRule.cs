@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,7 +29,8 @@
 
 using System.Security.Principal;
 
-namespace System.Security.AccessControl {
+namespace System.Security.AccessControl
+{
     public abstract class AuthorizationRule
     {
         IdentityReference identity;
@@ -37,34 +38,49 @@ namespace System.Security.AccessControl {
         bool isInherited;
         InheritanceFlags inheritanceFlags;
         PropagationFlags propagationFlags;
-        
-        internal AuthorizationRule ()
+
+        internal AuthorizationRule()
         {
             /* Give it a 0-param constructor */
         }
-        
-        protected internal AuthorizationRule (IdentityReference identity,
-                              int accessMask, bool isInherited,
-                              InheritanceFlags inheritanceFlags,
-                              PropagationFlags propagationFlags)
+
+        protected internal AuthorizationRule(
+            IdentityReference identity,
+            int accessMask,
+            bool isInherited,
+            InheritanceFlags inheritanceFlags,
+            PropagationFlags propagationFlags
+        )
         {
             if (null == identity)
-                throw new ArgumentNullException ("identity");
-                
+                throw new ArgumentNullException("identity");
+
             if (!(identity is SecurityIdentifier) && !(identity is NTAccount))
-                throw new ArgumentException ("identity");
+                throw new ArgumentException("identity");
 
             // Unit testing showed that MS.NET 4.0 actually throws ArgumentException
-            // for accessMask == 0, not the ArgumentOutOfRangeException specified.            
+            // for accessMask == 0, not the ArgumentOutOfRangeException specified.
             if (accessMask == 0)
-                throw new ArgumentException ("accessMask");
+                throw new ArgumentException("accessMask");
 
-            if (0 != (inheritanceFlags & ~(InheritanceFlags.ContainerInherit|InheritanceFlags.ObjectInherit)))
-                throw new ArgumentOutOfRangeException ();
+            if (
+                0
+                != (
+                    inheritanceFlags
+                    & ~(InheritanceFlags.ContainerInherit | InheritanceFlags.ObjectInherit)
+                )
+            )
+                throw new ArgumentOutOfRangeException();
 
-            if (0 != (propagationFlags & ~(PropagationFlags.NoPropagateInherit|PropagationFlags.InheritOnly)))
-                throw new ArgumentOutOfRangeException ();
-            
+            if (
+                0
+                != (
+                    propagationFlags
+                    & ~(PropagationFlags.NoPropagateInherit | PropagationFlags.InheritOnly)
+                )
+            )
+                throw new ArgumentOutOfRangeException();
+
             this.identity = identity;
             this.accessMask = accessMask;
             this.isInherited = isInherited;
@@ -74,38 +90,27 @@ namespace System.Security.AccessControl {
 
         public IdentityReference IdentityReference
         {
-            get {
-                return(identity);
-            }
+            get { return (identity); }
         }
-        
+
         public InheritanceFlags InheritanceFlags
         {
-            get {
-                return(inheritanceFlags);
-            }
+            get { return (inheritanceFlags); }
         }
 
         public bool IsInherited
         {
-            get {
-                return(isInherited);
-            }
+            get { return (isInherited); }
         }
 
         public PropagationFlags PropagationFlags
         {
-            get {
-                return(propagationFlags);
-            }
+            get { return (propagationFlags); }
         }
 
         protected internal int AccessMask
         {
-            get {
-                return(accessMask);
-            }
+            get { return (accessMask); }
         }
     }
 }
-

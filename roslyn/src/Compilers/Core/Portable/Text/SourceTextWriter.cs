@@ -11,7 +11,11 @@ namespace Microsoft.CodeAnalysis.Text
     {
         public abstract SourceText ToSourceText();
 
-        public static SourceTextWriter Create(Encoding? encoding, SourceHashAlgorithm checksumAlgorithm, int length)
+        public static SourceTextWriter Create(
+            Encoding? encoding,
+            SourceHashAlgorithm checksumAlgorithm,
+            int length
+        )
         {
             if (length < SourceText.LargeObjectHeapLimitInChars)
             {

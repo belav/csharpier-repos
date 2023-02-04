@@ -11,9 +11,7 @@ namespace Mono.Linker.Tests.Cases.LinkAttributes.Dependencies
 
         private object _field;
 
-        private class NestedType
-        {
-        }
+        private class NestedType { }
 
         private int TestProperty { get; }
 

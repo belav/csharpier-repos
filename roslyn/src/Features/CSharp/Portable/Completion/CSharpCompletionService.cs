@@ -29,21 +29,25 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion
             }
 
             [Obsolete(MefConstruction.FactoryMethodMessage, error: true)]
-            public ILanguageService CreateLanguageService(HostLanguageServices languageServices)
-                => new CSharpCompletionService(languageServices.LanguageServices.SolutionServices, _listenerProvider);
+            public ILanguageService CreateLanguageService(HostLanguageServices languageServices) =>
+                new CSharpCompletionService(
+                    languageServices.LanguageServices.SolutionServices,
+                    _listenerProvider
+                );
         }
 
         private CompletionRules _latestRules = CompletionRules.Default;
 
-        private CSharpCompletionService(SolutionServices services, IAsynchronousOperationListenerProvider listenerProvider)
-            : base(services, listenerProvider)
-        {
-        }
+        private CSharpCompletionService(
+            SolutionServices services,
+            IAsynchronousOperationListenerProvider listenerProvider
+        )
+            : base(services, listenerProvider) { }
 
         public override string Language => LanguageNames.CSharp;
 
-        public override TextSpan GetDefaultCompletionListSpan(SourceText text, int caretPosition)
-            => CompletionUtilities.GetCompletionItemSpan(text, caretPosition);
+        public override TextSpan GetDefaultCompletionListSpan(SourceText text, int caretPosition) =>
+            CompletionUtilities.GetCompletionItemSpan(text, caretPosition);
 
         internal override CompletionRules GetRules(CompletionOptions options)
         {
@@ -63,8 +67,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion
             }
 
             // use interlocked + stored rules to reduce # of times this gets created when option is different than default
-            var newRules = _latestRules.WithDefaultEnterKeyRule(enterRule)
-                                       .WithSnippetsRule(snippetRule);
+            var newRules = _latestRules
+                .WithDefaultEnterKeyRule(enterRule)
+                .WithSnippetsRule(snippetRule);
 
             Interlocked.Exchange(ref _latestRules, newRules);
 

@@ -1,5 +1,6 @@
 // Licensed to the .NET Foundation under one or more agreements.
 using Xunit;
+
 // The .NET Foundation licenses this file to you under the MIT license.
 
 namespace SinCalc_against_sinlib_il
@@ -14,7 +15,8 @@ namespace SinCalc_against_sinlib_il
         {
             object i;
             object Angle;
-            object Result1, Result2;
+            object Result1,
+                Result2;
             object[] testresults = new object[10];
             testresults[0] = 0.000000000d;
             testresults[1] = 0.309016994d;
@@ -57,7 +59,6 @@ namespace SinCalc_against_sinlib_il
                     Console.WriteLine("ERROR, our version isnt right!");
                     return 1;
                 }
-
             }
             Console.WriteLine("Yippie, all correct");
             return 100;

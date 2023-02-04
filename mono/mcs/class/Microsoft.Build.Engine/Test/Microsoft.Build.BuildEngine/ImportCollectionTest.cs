@@ -34,137 +34,159 @@ using NUnit.Framework;
 
 using MonoTests.Helpers;
 
-namespace MonoTests.Microsoft.Build.BuildEngine {
+namespace MonoTests.Microsoft.Build.BuildEngine
+{
     [TestFixture]
-    public class ImportCollectionTest {
-        
-        Engine            engine;
-        Project            project;
-        
+    public class ImportCollectionTest
+    {
+        Engine engine;
+        Project project;
+
         [Test]
-        [ExpectedException (typeof (InvalidProjectFileException))]
-        public void TestAdd1 ()
+        [ExpectedException(typeof(InvalidProjectFileException))]
+        public void TestAdd1()
         {
-                        string documentString = @"
+            string documentString =
+                @"
                                 <Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
                     <Import Project='project_that_doesnt_exist'/>
                                 </Project>
                         ";
 
-                        engine = new Engine (Consts.BinPath);
+            engine = new Engine(Consts.BinPath);
 
-                        project = engine.CreateNewProject ();
-                        project.LoadXml (documentString);
+            project = engine.CreateNewProject();
+            project.LoadXml(documentString);
         }
 
         [Test]
-        public void TestAdd2 ()
+        public void TestAdd2()
         {
-                        string documentString = @"
+            string documentString =
+                @"
                                 <Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
-                    <Import Project='" + TestResourceHelper.GetFullPathOfResource ("Test/resources/Import.csproj") + @"'/>
-                    <Import Project='" + TestResourceHelper.GetFullPathOfResource ("Test/resources/Import.csproj") + @"'/>
+                    <Import Project='"
+                + TestResourceHelper.GetFullPathOfResource("Test/resources/Import.csproj")
+                + @"'/>
+                    <Import Project='"
+                + TestResourceHelper.GetFullPathOfResource("Test/resources/Import.csproj")
+                + @"'/>
                                 </Project>
                         ";
 
-                        engine = new Engine (Consts.BinPath);
+            engine = new Engine(Consts.BinPath);
 
-                        project = engine.CreateNewProject ();
-                        project.LoadXml (documentString);
+            project = engine.CreateNewProject();
+            project.LoadXml(documentString);
 
-            Assert.AreEqual (1, project.Imports.Count, "A1");
-            Assert.AreEqual (false, project.Imports.IsSynchronized, "A2");
+            Assert.AreEqual(1, project.Imports.Count, "A1");
+            Assert.AreEqual(false, project.Imports.IsSynchronized, "A2");
         }
 
         [Test]
-        [Category ("NotDotNet")]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void TestCopyTo1 ()
+        [Category("NotDotNet")]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void TestCopyTo1()
         {
-                        string documentString = @"
+            string documentString =
+                @"
                                 <Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
-                    <Import Project='" + TestResourceHelper.GetFullPathOfResource ("Test/resources/Import.csproj") + @"'/>
+                    <Import Project='"
+                + TestResourceHelper.GetFullPathOfResource("Test/resources/Import.csproj")
+                + @"'/>
                                 </Project>
                         ";
 
-                        engine = new Engine (Consts.BinPath);
+            engine = new Engine(Consts.BinPath);
 
-                        project = engine.CreateNewProject ();
-                        project.LoadXml (documentString);
+            project = engine.CreateNewProject();
+            project.LoadXml(documentString);
 
-            project.Imports.CopyTo (null, 0);
+            project.Imports.CopyTo(null, 0);
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentOutOfRangeException))]
-        public void TestCopyTo2 ()
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void TestCopyTo2()
         {
-                        string documentString = @"
+            string documentString =
+                @"
                                 <Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
-                    <Import Project='" + TestResourceHelper.GetFullPathOfResource ("Test/resources/Import.csproj") + @"'/>
+                    <Import Project='"
+                + TestResourceHelper.GetFullPathOfResource("Test/resources/Import.csproj")
+                + @"'/>
                                 </Project>
                         ";
 
-                        engine = new Engine (Consts.BinPath);
+            engine = new Engine(Consts.BinPath);
 
-                        project = engine.CreateNewProject ();
-                        project.LoadXml (documentString);
+            project = engine.CreateNewProject();
+            project.LoadXml(documentString);
 
-            project.Imports.CopyTo (new Import [1], -1);
+            project.Imports.CopyTo(new Import[1], -1);
         }
 
         [Test]
-        [ExpectedException (typeof (InvalidCastException))]
-        public void TestCopyTo3 ()
+        [ExpectedException(typeof(InvalidCastException))]
+        public void TestCopyTo3()
         {
-                        string documentString = @"
+            string documentString =
+                @"
                                 <Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
-                    <Import Project='" + TestResourceHelper.GetFullPathOfResource ("Test/resources/Import.csproj") + @"'/>
+                    <Import Project='"
+                + TestResourceHelper.GetFullPathOfResource("Test/resources/Import.csproj")
+                + @"'/>
                                 </Project>
                         ";
 
-                        engine = new Engine (Consts.BinPath);
+            engine = new Engine(Consts.BinPath);
 
-                        project = engine.CreateNewProject ();
-                        project.LoadXml (documentString);
+            project = engine.CreateNewProject();
+            project.LoadXml(documentString);
 
-            project.Imports.CopyTo (new Import [][] { new Import [] { null } }, 0);
+            project.Imports.CopyTo(new Import[][] { new Import[] { null } }, 0);
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentException))]
-        public void TestCopyTo4 ()
+        [ExpectedException(typeof(ArgumentException))]
+        public void TestCopyTo4()
         {
-                        string documentString = @"
+            string documentString =
+                @"
                                 <Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
-                    <Import Project='" + TestResourceHelper.GetFullPathOfResource ("Test/resources/Import.csproj") + @"'/>
+                    <Import Project='"
+                + TestResourceHelper.GetFullPathOfResource("Test/resources/Import.csproj")
+                + @"'/>
                                 </Project>
                         ";
 
-                        engine = new Engine (Consts.BinPath);
+            engine = new Engine(Consts.BinPath);
 
-                        project = engine.CreateNewProject ();
-                        project.LoadXml (documentString);
+            project = engine.CreateNewProject();
+            project.LoadXml(documentString);
 
-            project.Imports.CopyTo (new Import [1], 2);
+            project.Imports.CopyTo(new Import[1], 2);
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentException))]
-        public void TestCopyTo5 ()
+        [ExpectedException(typeof(ArgumentException))]
+        public void TestCopyTo5()
         {
-                        string documentString = @"
+            string documentString =
+                @"
                                 <Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
-                    <Import Project='" + TestResourceHelper.GetFullPathOfResource ("Test/resources/Import.csproj") + @"'/>
+                    <Import Project='"
+                + TestResourceHelper.GetFullPathOfResource("Test/resources/Import.csproj")
+                + @"'/>
                                 </Project>
                         ";
 
-                        engine = new Engine (Consts.BinPath);
+            engine = new Engine(Consts.BinPath);
 
-                        project = engine.CreateNewProject ();
-                        project.LoadXml (documentString);
+            project = engine.CreateNewProject();
+            project.LoadXml(documentString);
 
-            project.Imports.CopyTo (new Import [1], 1);
+            project.Imports.CopyTo(new Import[1], 1);
         }
     }
 }

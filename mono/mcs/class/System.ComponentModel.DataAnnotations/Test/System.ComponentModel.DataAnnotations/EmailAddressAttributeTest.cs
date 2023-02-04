@@ -2,10 +2,10 @@
 // EmailAddressAttributeTest.cs
 //
 // Authors:
-//      Pablo Ruiz García <pablo.ruiz@gmail.com>
+//      Pablo Ruiz Garcï¿½a <pablo.ruiz@gmail.com>
 //
 // Copyright (C) 2010 Novell, Inc. (http://novell.com/)
-// Copyright (C) 2013 Pablo Ruiz García
+// Copyright (C) 2013 Pablo Ruiz Garcï¿½a
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -38,7 +38,8 @@ namespace MonoTests.System.ComponentModel.DataAnnotations
     [TestFixture]
     public class EmailAddressAttributeTest
     {
-        static readonly object[] ValidAddresses = new object[] {
+        static readonly object[] ValidAddresses = new object[]
+        {
             null,
             "\"Abc\\@def\"@example.com",
             "\"Fred Bloggs\"@example.com",
@@ -50,7 +51,8 @@ namespace MonoTests.System.ComponentModel.DataAnnotations
             "_somename@example.com",
         };
 
-        static readonly object[] InvalidAddresses = new object[] {
+        static readonly object[] InvalidAddresses = new object[]
+        {
             "",
             123,
             DateTime.Now,
@@ -62,7 +64,6 @@ namespace MonoTests.System.ComponentModel.DataAnnotations
             "invalid@[127.0.0.1.]",
             "invalid@[127.0.0.1].",
             "invalid@[127.0.0.1]x",
-
             "valid.ipv4.addr@[123.1.72.10]",
             "valid.ipv6.addr@[IPv6:0::1]",
             "valid.ipv6.addr@[IPv6:2607:f0d0:1002:51::4]",
@@ -71,15 +72,15 @@ namespace MonoTests.System.ComponentModel.DataAnnotations
         };
 
         [Test]
-        public void IsValid ()
+        public void IsValid()
         {
-            var sla = new EmailAddressAttribute ();
+            var sla = new EmailAddressAttribute();
 
             for (int i = 0; i < ValidAddresses.Length; i++)
-                Assert.IsTrue (sla.IsValid (ValidAddresses[i]), "#A1-{0}", i);
+                Assert.IsTrue(sla.IsValid(ValidAddresses[i]), "#A1-{0}", i);
 
             for (int i = 0; i < InvalidAddresses.Length; i++)
-                Assert.IsFalse (sla.IsValid (InvalidAddresses[i]), "#B1-{0}", i);
+                Assert.IsFalse(sla.IsValid(InvalidAddresses[i]), "#B1-{0}", i);
         }
     }
 }

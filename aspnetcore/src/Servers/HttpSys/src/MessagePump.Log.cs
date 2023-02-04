@@ -11,13 +11,28 @@ internal partial class MessagePump
 {
     private static partial class Log
     {
-        [LoggerMessage(LoggerEventIds.AcceptError, LogLevel.Error, "Failed to accept a request.", EventName = "AcceptError")]
+        [LoggerMessage(
+            LoggerEventIds.AcceptError,
+            LogLevel.Error,
+            "Failed to accept a request.",
+            EventName = "AcceptError"
+        )]
         public static partial void AcceptError(ILogger logger, Exception exception);
 
-        [LoggerMessage(LoggerEventIds.AcceptErrorStopping, LogLevel.Debug, "Failed to accept a request, the server is stopping.", EventName = "AcceptErrorStopping")]
+        [LoggerMessage(
+            LoggerEventIds.AcceptErrorStopping,
+            LogLevel.Debug,
+            "Failed to accept a request, the server is stopping.",
+            EventName = "AcceptErrorStopping"
+        )]
         public static partial void AcceptErrorStopping(ILogger logger, Exception exception);
 
-        [LoggerMessage(LoggerEventIds.BindingToDefault, LogLevel.Debug, $"No listening endpoints were configured. Binding to {Constants.DefaultServerAddress} by default.", EventName = "BindingToDefault")]
+        [LoggerMessage(
+            LoggerEventIds.BindingToDefault,
+            LogLevel.Debug,
+            $"No listening endpoints were configured. Binding to {Constants.DefaultServerAddress} by default.",
+            EventName = "BindingToDefault"
+        )]
         public static partial void BindingToDefault(ILogger logger);
 
         public static void ClearedAddresses(ILogger logger, ICollection<string> serverAddresses)
@@ -28,10 +43,13 @@ internal partial class MessagePump
             }
         }
 
-        [LoggerMessage(LoggerEventIds.ClearedAddresses, LogLevel.Warning,
+        [LoggerMessage(
+            LoggerEventIds.ClearedAddresses,
+            LogLevel.Warning,
             $"Overriding address(es) '{{ServerAddresses}}'. Binding to endpoints added to {nameof(HttpSysOptions.UrlPrefixes)} instead.",
             EventName = "ClearedAddresses",
-            SkipEnabledCheck = true)]
+            SkipEnabledCheck = true
+        )]
         private static partial void ClearedAddressesCore(ILogger logger, string serverAddresses);
 
         public static void ClearedPrefixes(ILogger logger, ICollection<string> serverAddresses)
@@ -42,19 +60,40 @@ internal partial class MessagePump
             }
         }
 
-        [LoggerMessage(LoggerEventIds.ClearedPrefixes, LogLevel.Warning,
+        [LoggerMessage(
+            LoggerEventIds.ClearedPrefixes,
+            LogLevel.Warning,
             $"Overriding endpoints added to {nameof(HttpSysOptions.UrlPrefixes)} since {nameof(IServerAddressesFeature.PreferHostingUrls)} is set to true. Binding to address(es) '{{ServerAddresses}}' instead.",
             EventName = "ClearedPrefixes",
-            SkipEnabledCheck = true)]
+            SkipEnabledCheck = true
+        )]
         private static partial void ClearedPrefixesCore(ILogger logger, string serverAddresses);
 
-        [LoggerMessage(LoggerEventIds.RequestListenerProcessError, LogLevel.Error, "ProcessRequestAsync", EventName = "RequestListenerProcessError")]
+        [LoggerMessage(
+            LoggerEventIds.RequestListenerProcessError,
+            LogLevel.Error,
+            "ProcessRequestAsync",
+            EventName = "RequestListenerProcessError"
+        )]
         public static partial void RequestListenerProcessError(ILogger logger, Exception exception);
 
-        [LoggerMessage(LoggerEventIds.StopCancelled, LogLevel.Information, "Canceled, terminating {OutstandingRequests} request(s).", EventName = "StopCancelled")]
+        [LoggerMessage(
+            LoggerEventIds.StopCancelled,
+            LogLevel.Information,
+            "Canceled, terminating {OutstandingRequests} request(s).",
+            EventName = "StopCancelled"
+        )]
         public static partial void StopCancelled(ILogger logger, int outstandingRequests);
 
-        [LoggerMessage(LoggerEventIds.WaitingForRequestsToDrain, LogLevel.Information, "Stopping, waiting for {OutstandingRequests} request(s) to drain.", EventName = "WaitingForRequestsToDrain")]
-        public static partial void WaitingForRequestsToDrain(ILogger logger, int outstandingRequests);
+        [LoggerMessage(
+            LoggerEventIds.WaitingForRequestsToDrain,
+            LogLevel.Information,
+            "Stopping, waiting for {OutstandingRequests} request(s) to drain.",
+            EventName = "WaitingForRequestsToDrain"
+        )]
+        public static partial void WaitingForRequestsToDrain(
+            ILogger logger,
+            int outstandingRequests
+        );
     }
 }

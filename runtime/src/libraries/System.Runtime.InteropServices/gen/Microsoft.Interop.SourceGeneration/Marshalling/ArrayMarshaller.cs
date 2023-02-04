@@ -15,7 +15,11 @@ namespace Microsoft.Interop
         private readonly TypePositionInfo _elementInfo;
         private readonly bool _enablePinning;
 
-        public ArrayMarshaller(IMarshallingGenerator manualMarshallingGenerator, TypePositionInfo elementInfo, bool enablePinning)
+        public ArrayMarshaller(
+            IMarshallingGenerator manualMarshallingGenerator,
+            TypePositionInfo elementInfo,
+            bool enablePinning
+        )
         {
             _manualMarshallingGenerator = manualMarshallingGenerator;
             _elementInfo = elementInfo;
@@ -27,7 +31,10 @@ namespace Microsoft.Interop
             return target is TargetFramework.Net && version.Major >= 7;
         }
 
-        public ValueBoundaryBehavior GetValueBoundaryBehavior(TypePositionInfo info, StubCodeContext context)
+        public ValueBoundaryBehavior GetValueBoundaryBehavior(
+            TypePositionInfo info,
+            StubCodeContext context
+        )
         {
             if (IsPinningPathSupported(info, context))
             {
@@ -55,15 +62,22 @@ namespace Microsoft.Interop
             return _manualMarshallingGenerator.Generate(info, context);
         }
 
-        public bool SupportsByValueMarshalKind(ByValueContentsMarshalKind marshalKind, StubCodeContext context)
+        public bool SupportsByValueMarshalKind(
+            ByValueContentsMarshalKind marshalKind,
+            StubCodeContext context
+        )
         {
             if (context.SingleFrameSpansNativeContext && _enablePinning)
             {
                 // Only report no support for by-value contents when element is strictly blittable, such that
                 // the status remains the same regardless of whether or not runtime marshalling is enabled
-                if (_elementInfo.MarshallingAttributeInfo is NoMarshallingInfo
-                    || _elementInfo.MarshallingAttributeInfo is UnmanagedBlittableMarshallingInfo { IsStrictlyBlittable: true }
-                    || _elementInfo.MarshallingAttributeInfo is NativeMarshallingAttributeInfo { IsStrictlyBlittable: true })
+                if (
+                    _elementInfo.MarshallingAttributeInfo is NoMarshallingInfo
+                    || _elementInfo.MarshallingAttributeInfo
+                        is UnmanagedBlittableMarshallingInfo { IsStrictlyBlittable: true }
+                    || _elementInfo.MarshallingAttributeInfo
+                        is NativeMarshallingAttributeInfo { IsStrictlyBlittable: true }
+                )
                 {
                     return false;
                 }
@@ -82,18 +96,28 @@ namespace Microsoft.Interop
 
         private bool IsPinningPathSupported(TypePositionInfo info, StubCodeContext context)
         {
-            return context.SingleFrameSpansNativeContext && _enablePinning && !info.IsByRef && !info.IsManagedReturnPosition;
+            return context.SingleFrameSpansNativeContext
+                && _enablePinning
+                && !info.IsByRef
+                && !info.IsManagedReturnPosition;
         }
 
-        private IEnumerable<StatementSyntax> GeneratePinningPath(TypePositionInfo info, StubCodeContext context)
+        private IEnumerable<StatementSyntax> GeneratePinningPath(
+            TypePositionInfo info,
+            StubCodeContext context
+        )
         {
             (string managedIdentifer, string nativeIdentifier) = context.GetIdentifiers(info);
             string byRefIdentifier = $"__byref_{managedIdentifer}";
 
             // The element type here is used only for refs/pointers. In the pointer array case, we use byte as the basic placeholder type,
             // since we can't use pointer types in generic type parameters.
-            bool isPointerArray = info.ManagedType is SzArrayType arrayType && arrayType.ElementTypeInfo is PointerTypeInfo;
-            TypeSyntax arrayElementType = isPointerArray ? PredefinedType(Token(SyntaxKind.ByteKeyword)) : _elementInfo.ManagedType.Syntax;
+            bool isPointerArray =
+                info.ManagedType is SzArrayType arrayType
+                && arrayType.ElementTypeInfo is PointerTypeInfo;
+            TypeSyntax arrayElementType = isPointerArray
+                ? PredefinedType(Token(SyntaxKind.ByteKeyword))
+                : _elementInfo.ManagedType.Syntax;
             if (context.CurrentStage == StubCodeContext.Stage.Marshal)
             {
                 // [COMPAT] We use explicit byref calculations here instead of just using a fixed statement
@@ -105,36 +129,50 @@ namespace Microsoft.Interop
                 // for single-dimensional zero-based arrays.
 
                 // ref <elementType> <byRefIdentifier> = ref <managedIdentifer> == null ? ref *(<elementType>*)0 : ref MemoryMarshal.GetArrayDataReference(<managedIdentifer>);
-                PrefixUnaryExpressionSyntax nullRef =
-                    PrefixUnaryExpression(SyntaxKind.PointerIndirectionExpression,
-                        CastExpression(
-                            PointerType(arrayElementType),
-                            LiteralExpression(SyntaxKind.NumericLiteralExpression, Literal(0))));
+                PrefixUnaryExpressionSyntax nullRef = PrefixUnaryExpression(
+                    SyntaxKind.PointerIndirectionExpression,
+                    CastExpression(
+                        PointerType(arrayElementType),
+                        LiteralExpression(SyntaxKind.NumericLiteralExpression, Literal(0))
+                    )
+                );
 
-                InvocationExpressionSyntax getArrayDataReference =
-                    InvocationExpression(
-                        MemberAccessExpression(
-                            SyntaxKind.SimpleMemberAccessExpression,
-                            ParseTypeName(TypeNames.System_Runtime_InteropServices_MemoryMarshal),
-                            IdentifierName("GetArrayDataReference")),
-                        ArgumentList(SingletonSeparatedList(
-                            Argument(IdentifierName(managedIdentifer)))));
+                InvocationExpressionSyntax getArrayDataReference = InvocationExpression(
+                    MemberAccessExpression(
+                        SyntaxKind.SimpleMemberAccessExpression,
+                        ParseTypeName(TypeNames.System_Runtime_InteropServices_MemoryMarshal),
+                        IdentifierName("GetArrayDataReference")
+                    ),
+                    ArgumentList(SingletonSeparatedList(Argument(IdentifierName(managedIdentifer))))
+                );
 
                 yield return LocalDeclarationStatement(
-                    VariableDeclaration(
-                        RefType(arrayElementType))
-                    .WithVariables(SingletonSeparatedList(
-                        VariableDeclarator(Identifier(byRefIdentifier))
-                        .WithInitializer(EqualsValueClause(
-                            RefExpression(ParenthesizedExpression(
-                                ConditionalExpression(
-                                    BinaryExpression(
-                                        SyntaxKind.EqualsExpression,
-                                        IdentifierName(managedIdentifer),
-                                        LiteralExpression(
-                                            SyntaxKind.NullLiteralExpression)),
-                                    RefExpression(nullRef),
-                                    RefExpression(getArrayDataReference)))))))));
+                    VariableDeclaration(RefType(arrayElementType))
+                        .WithVariables(
+                            SingletonSeparatedList(
+                                VariableDeclarator(Identifier(byRefIdentifier))
+                                    .WithInitializer(
+                                        EqualsValueClause(
+                                            RefExpression(
+                                                ParenthesizedExpression(
+                                                    ConditionalExpression(
+                                                        BinaryExpression(
+                                                            SyntaxKind.EqualsExpression,
+                                                            IdentifierName(managedIdentifer),
+                                                            LiteralExpression(
+                                                                SyntaxKind.NullLiteralExpression
+                                                            )
+                                                        ),
+                                                        RefExpression(nullRef),
+                                                        RefExpression(getArrayDataReference)
+                                                    )
+                                                )
+                                            )
+                                        )
+                                    )
+                            )
+                        )
+                );
             }
             if (context.CurrentStage == StubCodeContext.Stage.Pin)
             {
@@ -144,26 +182,44 @@ namespace Microsoft.Interop
                 // &<byrefIdentifier>
                 // or
                 // &Unsafe.As<elementType, nativeElementType>(ref <byrefIdentifier>)
-                TypeSyntax nativeElementType = nativeType is PointerTypeSyntax pointerType ? pointerType.ElementType : nativeType;
+                TypeSyntax nativeElementType = nativeType is PointerTypeSyntax pointerType
+                    ? pointerType.ElementType
+                    : nativeType;
                 var initializer = arrayElementType.IsEquivalentTo(nativeElementType, topLevel: true)
-                    ? PrefixUnaryExpression(SyntaxKind.AddressOfExpression, IdentifierName(byRefIdentifier))
-                    : PrefixUnaryExpression(SyntaxKind.AddressOfExpression,
+                    ? PrefixUnaryExpression(
+                        SyntaxKind.AddressOfExpression,
+                        IdentifierName(byRefIdentifier)
+                    )
+                    : PrefixUnaryExpression(
+                        SyntaxKind.AddressOfExpression,
                         InvocationExpression(
-                            MemberAccessExpression(SyntaxKind.SimpleMemberAccessExpression,
-                                ParseTypeName(TypeNames.System_Runtime_CompilerServices_Unsafe),
-                                GenericName("As").AddTypeArgumentListArguments(
-                                    arrayElementType,
-                                    nativeElementType)))
+                                MemberAccessExpression(
+                                    SyntaxKind.SimpleMemberAccessExpression,
+                                    ParseTypeName(TypeNames.System_Runtime_CompilerServices_Unsafe),
+                                    GenericName("As")
+                                        .AddTypeArgumentListArguments(
+                                            arrayElementType,
+                                            nativeElementType
+                                        )
+                                )
+                            )
                             .AddArgumentListArguments(
                                 Argument(IdentifierName(byRefIdentifier))
-                                    .WithRefKindKeyword(Token(SyntaxKind.RefKeyword))));
+                                    .WithRefKindKeyword(Token(SyntaxKind.RefKeyword))
+                            )
+                    );
 
                 // fixed (<nativeType> <nativeIdentifier> = <initializer>)
                 yield return FixedStatement(
-                    VariableDeclaration(nativeType, SingletonSeparatedList(
-                        VariableDeclarator(nativeIdentifier)
-                            .WithInitializer(EqualsValueClause(initializer)))),
-                    EmptyStatement());
+                    VariableDeclaration(
+                        nativeType,
+                        SingletonSeparatedList(
+                            VariableDeclarator(nativeIdentifier)
+                                .WithInitializer(EqualsValueClause(initializer))
+                        )
+                    ),
+                    EmptyStatement()
+                );
             }
         }
     }

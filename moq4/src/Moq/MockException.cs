@@ -40,14 +40,22 @@ namespace Moq
         /// <summary>
         ///   Returns the exception to be thrown when a setup has been invoked an incorrect (unexpected) number of times.
         /// </summary>
-        internal static MockException IncorrectNumberOfCalls(MethodCall setup, Times times, int invocationCount)
+        internal static MockException IncorrectNumberOfCalls(
+            MethodCall setup,
+            Times times,
+            int invocationCount
+        )
         {
             var message = new StringBuilder();
-            message.AppendLine(setup.FailMessage ?? "")
-                   .Append(times.GetExceptionMessage(invocationCount))
-                   .AppendLine(setup.Expression.ToStringFixed());
+            message
+                .AppendLine(setup.FailMessage ?? "")
+                .Append(times.GetExceptionMessage(invocationCount))
+                .AppendLine(setup.Expression.ToStringFixed());
 
-            return new MockException(MockExceptionReasons.IncorrectNumberOfCalls, message.ToString());
+            return new MockException(
+                MockExceptionReasons.IncorrectNumberOfCalls,
+                message.ToString()
+            );
         }
 
         /// <summary>
@@ -58,15 +66,17 @@ namespace Moq
             LambdaExpression expression,
             string failMessage,
             Times times,
-            int callCount)
+            int callCount
+        )
         {
             var message = new StringBuilder();
-            message.AppendLine(failMessage ?? "")
-                   .Append(times.GetExceptionMessage(callCount))
-                   .AppendLine(expression.PartialMatcherAwareEval().ToStringFixed())
-                   .AppendLine()
-                   .AppendLine(Resources.PerformedInvocations)
-                   .AppendLine();
+            message
+                .AppendLine(failMessage ?? "")
+                .Append(times.GetExceptionMessage(callCount))
+                .AppendLine(expression.PartialMatcherAwareEval().ToStringFixed())
+                .AppendLine()
+                .AppendLine(Resources.PerformedInvocations)
+                .AppendLine();
 
             var visitedMocks = new HashSet<Mock>();
 
@@ -77,11 +87,15 @@ namespace Moq
             {
                 var mock = mocks.Dequeue();
 
-                if (visitedMocks.Contains(mock)) continue;
+                if (visitedMocks.Contains(mock))
+                    continue;
                 visitedMocks.Add(mock);
 
-                message.AppendLine(mock == rootMock ? $"   {mock} ({expression.Parameters[0].Name}):"
-                                                    : $"   {mock}:");
+                message.AppendLine(
+                    mock == rootMock
+                        ? $"   {mock} ({expression.Parameters[0].Name}):"
+                        : $"   {mock}:"
+                );
 
                 var invocations = mock.MutableInvocations.ToArray();
                 if (invocations.Any())
@@ -91,7 +105,11 @@ namespace Moq
                     {
                         message.Append($"      {invocation}");
 
-                        if (invocation.Method.ReturnType != typeof(void) && Awaitable.TryGetResultRecursive(invocation.ReturnValue) is IMocked mocked)
+                        if (
+                            invocation.Method.ReturnType != typeof(void)
+                            && Awaitable.TryGetResultRecursive(invocation.ReturnValue)
+                                is IMocked mocked
+                        )
                         {
                             var innerMock = mocked.Mock;
                             mocks.Enqueue(innerMock);
@@ -109,7 +127,10 @@ namespace Moq
                 message.AppendLine();
             }
 
-            return new MockException(MockExceptionReasons.NoMatchingCalls, message.TrimEnd().AppendLine().ToString());
+            return new MockException(
+                MockExceptionReasons.NoMatchingCalls,
+                message.TrimEnd().AppendLine().ToString()
+            );
         }
 
         /// <summary>
@@ -124,7 +145,9 @@ namespace Moq
                     Resources.MockExceptionMessage,
                     invocation.ToString(),
                     MockBehavior.Strict,
-                    Resources.NoSetup));
+                    Resources.NoSetup
+                )
+            );
         }
 
         /// <summary>
@@ -139,7 +162,9 @@ namespace Moq
                     Resources.MockExceptionMessage,
                     invocation.ToString(),
                     MockBehavior.Strict,
-                    Resources.ReturnValueRequired));
+                    Resources.ReturnValueRequired
+                )
+            );
         }
 
         /// <summary>
@@ -149,18 +174,25 @@ namespace Moq
         {
             return new MockException(
                 MockExceptionReasons.UnmatchedSetup,
-                string.Format(
-                    CultureInfo.CurrentCulture,
-                    Resources.UnmatchedSetup,
-                    setup));
+                string.Format(CultureInfo.CurrentCulture, Resources.UnmatchedSetup, setup)
+            );
         }
 
         internal static MockException FromInnerMockOf(ISetup setup, MockException error)
         {
             var message = new StringBuilder();
 
-            message.AppendLine(string.Format(CultureInfo.CurrentCulture, Resources.VerificationErrorsOfInnerMock, setup)).TrimEnd().AppendLine()
-                   .AppendLine();
+            message
+                .AppendLine(
+                    string.Format(
+                        CultureInfo.CurrentCulture,
+                        Resources.VerificationErrorsOfInnerMock,
+                        setup
+                    )
+                )
+                .TrimEnd()
+                .AppendLine()
+                .AppendLine();
 
             message.AppendIndented(error.Message, count: 3);
 
@@ -182,15 +214,13 @@ namespace Moq
 
             if (preamble != null)
             {
-                message.Append(preamble).TrimEnd().AppendLine()
-                       .AppendLine();
+                message.Append(preamble).TrimEnd().AppendLine().AppendLine();
             }
 
             foreach (var error in errors)
             {
                 reasons |= error.Reasons;
-                message.AppendIndented(error.Message, count: 3).TrimEnd().AppendLine()
-                       .AppendLine();
+                message.AppendIndented(error.Message, count: 3).TrimEnd().AppendLine().AppendLine();
             }
 
             return new MockException(reasons, message.TrimEnd().ToString());
@@ -199,19 +229,30 @@ namespace Moq
         /// <summary>
         ///   Returns the exception to be thrown when <see cref="Mock.VerifyNoOtherCalls(Mock)"/> finds invocations that have not been verified.
         /// </summary>
-        internal static MockException UnverifiedInvocations(Mock mock, IEnumerable<Invocation> invocations)
+        internal static MockException UnverifiedInvocations(
+            Mock mock,
+            IEnumerable<Invocation> invocations
+        )
         {
             var message = new StringBuilder();
 
-            message.AppendLine(string.Format(CultureInfo.CurrentCulture, Resources.UnverifiedInvocations, mock)).TrimEnd().AppendLine()
-                   .AppendLine();
+            message
+                .AppendLine(
+                    string.Format(CultureInfo.CurrentCulture, Resources.UnverifiedInvocations, mock)
+                )
+                .TrimEnd()
+                .AppendLine()
+                .AppendLine();
 
             foreach (var invocation in invocations)
             {
                 message.AppendIndented(invocation.ToString(), count: 3).TrimEnd().AppendLine();
             }
 
-            return new MockException(MockExceptionReasons.UnverifiedInvocations, message.TrimEnd().ToString());
+            return new MockException(
+                MockExceptionReasons.UnverifiedInvocations,
+                message.TrimEnd().ToString()
+            );
         }
 
         private readonly MockExceptionReasons reasons;
@@ -231,9 +272,10 @@ namespace Moq
         {
             get
             {
-                const MockExceptionReasons verificationErrorMask = MockExceptionReasons.NoMatchingCalls
-                                                                 | MockExceptionReasons.UnmatchedSetup
-                                                                 | MockExceptionReasons.UnverifiedInvocations;
+                const MockExceptionReasons verificationErrorMask =
+                    MockExceptionReasons.NoMatchingCalls
+                    | MockExceptionReasons.UnmatchedSetup
+                    | MockExceptionReasons.UnverifiedInvocations;
                 return (this.reasons & verificationErrorMask) != 0;
             }
         }
@@ -244,11 +286,13 @@ namespace Moq
         /// <param name="info">Serialization information.</param>
         /// <param name="context">Streaming context.</param>
         protected MockException(
-          System.Runtime.Serialization.SerializationInfo info,
-          System.Runtime.Serialization.StreamingContext context)
+            System.Runtime.Serialization.SerializationInfo info,
+            System.Runtime.Serialization.StreamingContext context
+        )
             : base(info, context)
         {
-            this.reasons = (MockExceptionReasons)info.GetValue(nameof(this.reasons), typeof(MockExceptionReasons));
+            this.reasons = (MockExceptionReasons)
+                info.GetValue(nameof(this.reasons), typeof(MockExceptionReasons));
         }
 
         /// <summary>

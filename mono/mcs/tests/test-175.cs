@@ -1,19 +1,20 @@
 using System;
 
-struct RVA {
+struct RVA
+{
     public uint value;
 
-    public RVA (uint val)
+    public RVA(uint val)
     {
         value = val;
     }
 
-    public static implicit operator RVA (uint val)
+    public static implicit operator RVA(uint val)
     {
-        return new RVA (val);
+        return new RVA(val);
     }
 
-    public static implicit operator uint (RVA rva)
+    public static implicit operator uint(RVA rva)
     {
         return rva.value;
     }
@@ -21,7 +22,7 @@ struct RVA {
 
 class X
 {
-    public static int Main ()
+    public static int Main()
     {
         RVA a = 10;
         RVA b = 20;

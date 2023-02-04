@@ -17,14 +17,12 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
     {
         private readonly SafeHandle? _handle;
 
-        internal SafeHandleLease(SafeHandle handle)
-            => _handle = handle;
+        internal SafeHandleLease(SafeHandle handle) => _handle = handle;
 
         /// <summary>
         /// Releases the <see cref="SafeHandle"/> lease. The behavior of this method is unspecified if called more than
         /// once.
         /// </summary>
-        public void Dispose()
-            => _handle?.DangerousRelease();
+        public void Dispose() => _handle?.DangerousRelease();
     }
 }

@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -24,17 +24,19 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
     public class XmlReferenceManager
     {
-        private readonly        Dictionary<int,    Entry> entriesById;
+        private readonly Dictionary<int, Entry> entriesById;
         private readonly WeakKeyDictionary<object, Entry> entriesByValue;
         private readonly IXmlReferenceFormat format;
         private int nextId;
 
         public XmlReferenceManager(IXmlNode root, IXmlReferenceFormat format)
         {
-            entriesById    = new        Dictionary<int,    Entry>();
-            entriesByValue = new WeakKeyDictionary<object, Entry>(ReferenceEqualityComparer<object>.Instance);
-            this.format    = format;
-            this.nextId    = 1;
+            entriesById = new Dictionary<int, Entry>();
+            entriesByValue = new WeakKeyDictionary<object, Entry>(
+                ReferenceEqualityComparer<object>.Instance
+            );
+            this.format = format;
+            this.nextId = 1;
 
             Populate(root);
         }
@@ -44,7 +46,7 @@ namespace Castle.Components.DictionaryAdapter.Xml
         private void Populate(IXmlNode node)
         {
             var references = new List<Reference>();
-            var iterator   = node.SelectSubtree();
+            var iterator = node.SelectSubtree();
 
             while (iterator.MoveNext())
                 PopulateFromNode(iterator, references);
@@ -132,7 +134,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
                 if (!TryGetEntry(node, out entry, out reference))
                     entry = new Entry(node);
             }
-            else return;
+            else
+                return;
 
             AddValueCore(entry, type, newValue, isInGraph);
         }
@@ -144,15 +147,21 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
             var type = node.ClrType;
             if (ShouldExclude(type))
-                { token = null; return true; }
+            {
+                token = null;
+                return true;
+            }
 
             if (!TryGetEntry(node, out entry, out isReference))
-                { token = CreateEntryToken; return true; }
+            {
+                token = CreateEntryToken;
+                return true;
+            }
 
             if (isReference)
                 RedirectNode(ref node, entry);
 
-            var proceed = ! TryGetCompatibleValue(entry, node.ClrType, ref value);
+            var proceed = !TryGetCompatibleValue(entry, node.ClrType, ref value);
 
             token = proceed ? entry : null;
             return proceed;
@@ -170,9 +179,7 @@ namespace Castle.Components.DictionaryAdapter.Xml
             if (entriesByValue.ContainsKey(value))
                 return;
 
-            var entry = (token == CreateEntryToken)
-                ? new Entry(node)
-                : token as Entry;
+            var entry = (token == CreateEntryToken) ? new Entry(node) : token as Entry;
             if (entry == null)
                 return;
 
@@ -181,14 +188,23 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
         public bool OnAssigningNull(IXmlNode node, object oldValue)
         {
-            object token, newValue = null;
+            object token,
+                newValue = null;
             return OnAssigningValue(node, oldValue, ref newValue, out token);
         }
 
-        public bool OnAssigningValue(IXmlNode node, object oldValue, ref object newValue, out object token)
+        public bool OnAssigningValue(
+            IXmlNode node,
+            object oldValue,
+            ref object newValue,
+            out object token
+        )
         {
             if (newValue == oldValue && newValue != null)
-                { token = null; return false; }
+            {
+                token = null;
+                return false;
+            }
 
             var oldEntry = OnReplacingValue(node, oldValue);
 
@@ -214,7 +230,7 @@ namespace Castle.Components.DictionaryAdapter.Xml
                 // Value not present in graph; add as primary
                 newEntry = oldEntry ?? new Entry(node);
                 AddValue(newEntry, type, newValue, xmlAdapter);
-                format.ClearIdentity (node);
+                format.ClearIdentity(node);
                 format.ClearReference(node);
                 token = newEntry;
             }
@@ -226,7 +242,7 @@ namespace Castle.Components.DictionaryAdapter.Xml
             if (oldEntry != null && oldEntry != newEntry && oldEntry.Id > 0)
                 entriesById.Remove(oldEntry.Id); // Didn't reuse old entry; delete it
 
-            return token    != null  // Expecting callback with a token, so proceed with set
+            return token != null // Expecting callback with a token, so proceed with set
                 || newEntry == null; // No reference tracking for this value; don't prevent assignment
         }
 
@@ -273,7 +289,12 @@ namespace Castle.Components.DictionaryAdapter.Xml
             }
         }
 
-        public void OnAssignedValue(IXmlNode node, object givenValue, object storedValue, object token)
+        public void OnAssignedValue(
+            IXmlNode node,
+            object givenValue,
+            object storedValue,
+            object token
+        )
         {
             var entry = token as Entry;
             if (entry == null)
@@ -421,8 +442,7 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
         private static bool ShouldExclude(Type type)
         {
-            return type.IsValueType
-                || type == StringType;
+            return type.IsValueType || type == StringType;
         }
 
         private static void SetNotInGraphCore(Entry entry, object value)
@@ -430,7 +450,7 @@ namespace Castle.Components.DictionaryAdapter.Xml
             var values = entry.Values;
             for (int index = 0; index < values.Count; index++)
             {
-                var item      = values[index];
+                var item = values[index];
                 var candidate = item.Value.Target;
 
                 if (ReferenceEquals(candidate, value))
@@ -467,26 +487,28 @@ namespace Castle.Components.DictionaryAdapter.Xml
                     foreach (var otherValue in otherEntry.Value.Values)
                     {
                         var otherTarget = otherValue.Value.Target;
-                        if (otherTarget == null           ||
-                            otherTarget == otherEntry.Key ||
-                            entriesByValue.ContainsKey(otherTarget))
-                            { continue; }
+                        if (
+                            otherTarget == null
+                            || otherTarget == otherEntry.Key
+                            || entriesByValue.ContainsKey(otherTarget)
+                        )
+                        {
+                            continue;
+                        }
                         AddValueCore(thisEntry, otherValue.Type, otherTarget, false);
                     }
                 }
             }
         }
 
-        private static readonly Type
-            StringType = typeof(string);
+        private static readonly Type StringType = typeof(string);
 
-        private static readonly object
-            CreateEntryToken = new object();
+        private static readonly object CreateEntryToken = new object();
 
         private class Entry
         {
             public int Id;
-            public IXmlNode  Node;
+            public IXmlNode Node;
             private List<IXmlNode> references;
             private List<EntryValue> values;
 
@@ -495,7 +517,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
                 Node = node.Save();
             }
 
-            public Entry(int id, IXmlNode node) : this(node)
+            public Entry(int id, IXmlNode node)
+                : this(node)
             {
                 Id = id;
             }
@@ -544,37 +567,36 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
         private struct Reference
         {
-            public readonly int      Id;
+            public readonly int Id;
             public readonly IXmlNode Node;
 
             public Reference(int id, IXmlNode node)
             {
-                Id   = id;
+                Id = id;
                 Node = node;
             }
         }
 
         private struct EntryValue
         {
-            public readonly Type          Type;
+            public readonly Type Type;
             public readonly WeakReference Value;
-            public readonly    bool          IsInGraph;
+            public readonly bool IsInGraph;
 
             public EntryValue(Type type, object value, bool isInGraph)
                 : this(type, new WeakReference(value), isInGraph) { }
 
             public EntryValue(Type type, WeakReference value, bool isInGraph)
             {
-                Type      = type;
-                Value     = value;
+                Type = type;
+                Value = value;
                 IsInGraph = isInGraph;
             }
         }
 
         private static Exception IdNotFoundError(int id)
         {
-            var message = string.Format
-            (
+            var message = string.Format(
                 "The given ID ({0}) was not present in the underlying data.",
                 id
             );

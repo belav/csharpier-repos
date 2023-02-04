@@ -11,10 +11,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -43,12 +43,13 @@ namespace System.Web.UI
         string _varByHeader;
         string _varByParam;
         string _varyByContentEncoding;
-        
+
         #endregion
 
         #region Constructors
 
-        public OutputCacheParameters () {
+        public OutputCacheParameters()
+        {
             Duration = 0;
             Enabled = true;
             Location = OutputCacheLocation.Any;
@@ -59,57 +60,68 @@ namespace System.Web.UI
 
         #region Properties
 
-        public string CacheProfile {
+        public string CacheProfile
+        {
             get { return _cacheProfile; }
             set { _cacheProfile = value; }
         }
 
-        public int Duration {
+        public int Duration
+        {
             get { return _duration; }
             set { _duration = value; }
         }
 
-        public bool Enabled {
+        public bool Enabled
+        {
             get { return _enabled; }
             set { _enabled = value; }
         }
 
-        public OutputCacheLocation Location {
+        public OutputCacheLocation Location
+        {
             get { return _location; }
             set { _location = value; }
         }
 
-        public bool NoStore {
+        public bool NoStore
+        {
             get { return _noStore; }
             set { _noStore = value; }
         }
 
-        public string SqlDependency {
+        public string SqlDependency
+        {
             get { return _sqlDependency; }
             set { _sqlDependency = value; }
         }
 
-        public string VaryByContentEncoding {
+        public string VaryByContentEncoding
+        {
             get { return _varyByContentEncoding; }
             set { _varyByContentEncoding = value; }
         }
-        
-        public string VaryByControl {
+
+        public string VaryByControl
+        {
             get { return _varByControl; }
             set { _varByControl = value; }
         }
 
-        public string VaryByCustom {
+        public string VaryByCustom
+        {
             get { return _varByCustom; }
             set { _varByCustom = value; }
         }
 
-        public string VaryByHeader {
+        public string VaryByHeader
+        {
             get { return _varByHeader; }
             set { _varByHeader = value; }
         }
 
-        public string VaryByParam {
+        public string VaryByParam
+        {
             get { return _varByParam; }
             set { _varByParam = value; }
         }

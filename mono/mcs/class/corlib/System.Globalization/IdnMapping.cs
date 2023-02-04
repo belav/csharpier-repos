@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -58,124 +58,140 @@ namespace System.Globalization
 {
     public sealed class IdnMapping
     {
-        bool allow_unassigned, use_std3;
-        Punycode puny = new Punycode ();
+        bool allow_unassigned,
+            use_std3;
+        Punycode puny = new Punycode();
 
-        public IdnMapping ()
+        public IdnMapping() { }
+
+        public bool AllowUnassigned
         {
-        }
-
-        public bool AllowUnassigned {
             get { return allow_unassigned; }
             set { allow_unassigned = value; }
         }
 
-        public bool UseStd3AsciiRules {
+        public bool UseStd3AsciiRules
+        {
             get { return use_std3; }
             set { use_std3 = value; }
         }
 
-        public override bool Equals (object obj)
+        public override bool Equals(object obj)
         {
             IdnMapping other = obj as IdnMapping;
-            return other != null &&
-                   allow_unassigned == other.allow_unassigned &&
-                   use_std3 == other.use_std3;
+            return other != null
+                && allow_unassigned == other.allow_unassigned
+                && use_std3 == other.use_std3;
         }
 
-        public override int GetHashCode ()
+        public override int GetHashCode()
         {
             return (allow_unassigned ? 2 : 0) + (use_std3 ? 1 : 0);
         }
 
         #region GetAscii
 
-        public string GetAscii (string unicode)
+        public string GetAscii(string unicode)
         {
             if (unicode == null)
-                throw new ArgumentNullException ("unicode");
-            return GetAscii (unicode, 0, unicode.Length);
+                throw new ArgumentNullException("unicode");
+            return GetAscii(unicode, 0, unicode.Length);
         }
 
-        public string GetAscii (string unicode, int index)
+        public string GetAscii(string unicode, int index)
         {
             if (unicode == null)
-                throw new ArgumentNullException ("unicode");
-            return GetAscii (unicode, index, unicode.Length - index);
+                throw new ArgumentNullException("unicode");
+            return GetAscii(unicode, index, unicode.Length - index);
         }
 
-        public string GetAscii (string unicode, int index, int count)
+        public string GetAscii(string unicode, int index, int count)
         {
             if (unicode == null)
-                throw new ArgumentNullException ("unicode");
+                throw new ArgumentNullException("unicode");
             if (index < 0)
-                throw new ArgumentOutOfRangeException ("index must be non-negative value");
+                throw new ArgumentOutOfRangeException("index must be non-negative value");
             if (count < 0 || index + count > unicode.Length)
-                throw new ArgumentOutOfRangeException ("index + count must point inside the argument unicode string");
+                throw new ArgumentOutOfRangeException(
+                    "index + count must point inside the argument unicode string"
+                );
 
-            return Convert (unicode, index, count, true);
+            return Convert(unicode, index, count, true);
         }
 
-        string Convert (string input, int index, int count, bool toAscii)
+        string Convert(string input, int index, int count, bool toAscii)
         {
-            string s = input.Substring (index, count);
+            string s = input.Substring(index, count);
 
             // Actually lowering string is done as part of
             // Nameprep(), but it is much easier to do it in prior.
             for (int i = 0; i < s.Length; i++)
-                if (s [i] >= '\x80') {
-                    s = s.ToLower (CultureInfo.InvariantCulture);
+                if (s[i] >= '\x80')
+                {
+                    s = s.ToLower(CultureInfo.InvariantCulture);
                     break;
                 }
 
             // RFC 3490 section 4. and 4.1
             // 1) -> done as AllowUnassigned property
             // 2) split the input
-            string [] labels = s.Split ('.', '\u3002', '\uFF0E', '\uFF61');
+            string[] labels = s.Split('.', '\u3002', '\uFF0E', '\uFF61');
             int iter = 0;
-            for (int i = 0; i < labels.Length; iter += labels [i].Length, i++) {
+            for (int i = 0; i < labels.Length; iter += labels[i].Length, i++)
+            {
                 // 3) -> done as UseStd3AsciiRules property
                 // 4) ToAscii
-                if (labels [i].Length == 0 && i + 1 == labels.Length)
+                if (labels[i].Length == 0 && i + 1 == labels.Length)
                     // If the input ends with '.', Split()
                     // adds another empty string. In that
                     // case, we have to ignore it.
                     continue;
                 if (toAscii)
-                    labels [i] = ToAscii (labels [i], iter);
+                    labels[i] = ToAscii(labels[i], iter);
                 else
-                    labels [i] = ToUnicode (labels [i], iter);
+                    labels[i] = ToUnicode(labels[i], iter);
             }
             // 5) join them
-            return String.Join (".", labels);
+            return String.Join(".", labels);
         }
 
-        string ToAscii (string s, int offset)
+        string ToAscii(string s, int offset)
         {
             // 1.
-            for (int i = 0; i < s.Length; i++) {
+            for (int i = 0; i < s.Length; i++)
+            {
                 // I wonder if this check is really RFC-conformant
-                if (s [i] < '\x20' || s [i] == '\x7F')
-                    throw new ArgumentException (String.Format ("Not allowed character was found, at {0}", offset + i));
-                if (s [i] >= 0x80) {
+                if (s[i] < '\x20' || s[i] == '\x7F')
+                    throw new ArgumentException(
+                        String.Format("Not allowed character was found, at {0}", offset + i)
+                    );
+                if (s[i] >= 0x80)
+                {
                     // 2.
-                    s = NamePrep (s, offset);
+                    s = NamePrep(s, offset);
                     break;
                 }
             }
 
             // 3.
             if (use_std3)
-                VerifyStd3AsciiRules (s, offset);
+                VerifyStd3AsciiRules(s, offset);
 
             // 4.
-            for (int i = 0; i < s.Length; i++) {
-                if (s [i] >= 0x80) {
+            for (int i = 0; i < s.Length; i++)
+            {
+                if (s[i] >= 0x80)
+                {
                     // 5. check ACE.
-                    if (s.StartsWith ("xn--", StringComparison.OrdinalIgnoreCase))
-                        throw new ArgumentException (String.Format ("The input string must not start with ACE (xn--), at {0}", offset + i));
+                    if (s.StartsWith("xn--", StringComparison.OrdinalIgnoreCase))
+                        throw new ArgumentException(
+                            String.Format(
+                                "The input string must not start with ACE (xn--), at {0}",
+                                offset + i
+                            )
+                        );
                     // 6. Punycode it.
-                    s = puny.Encode (s, offset);
+                    s = puny.Encode(s, offset);
                     // 7. prepend ACE.
                     s = "xn--" + s;
                     break;
@@ -183,157 +199,218 @@ namespace System.Globalization
             }
 
             // 8.
-            VerifyLength (s, offset);
+            VerifyLength(s, offset);
 
             return s;
         }
 
-        void VerifyLength (string s, int offset)
+        void VerifyLength(string s, int offset)
         {
             if (s.Length == 0)
-                throw new ArgumentException (String.Format ("A label in the input string resulted in an invalid zero-length string, at {0}", offset));
+                throw new ArgumentException(
+                    String.Format(
+                        "A label in the input string resulted in an invalid zero-length string, at {0}",
+                        offset
+                    )
+                );
             if (s.Length > 63)
-                throw new ArgumentException (String.Format ("A label in the input string exceeded the length in ASCII representation, at {0}", offset));
+                throw new ArgumentException(
+                    String.Format(
+                        "A label in the input string exceeded the length in ASCII representation, at {0}",
+                        offset
+                    )
+                );
         }
 
-        string NamePrep (string s, int offset)
+        string NamePrep(string s, int offset)
         {
-            s = s.Normalize (NormalizationForm.FormKC);
-            VerifyProhibitedCharacters (s, offset);
+            s = s.Normalize(NormalizationForm.FormKC);
+            VerifyProhibitedCharacters(s, offset);
             // FIXME: check BIDI
 
-            if (!allow_unassigned) {
+            if (!allow_unassigned)
+            {
                 for (int i = 0; i < s.Length; i++)
-                    if (Char.GetUnicodeCategory (s, i) == UnicodeCategory.OtherNotAssigned)
-                        throw new ArgumentException (String.Format ("Use of unassigned Unicode characer is prohibited in this IdnMapping, at {0}", offset + i));
+                    if (Char.GetUnicodeCategory(s, i) == UnicodeCategory.OtherNotAssigned)
+                        throw new ArgumentException(
+                            String.Format(
+                                "Use of unassigned Unicode characer is prohibited in this IdnMapping, at {0}",
+                                offset + i
+                            )
+                        );
             }
             return s;
         }
 
-        void VerifyProhibitedCharacters (string s, int offset)
+        void VerifyProhibitedCharacters(string s, int offset)
         {
-            for (int i = 0; i < s.Length; i++) {
-                switch (Char.GetUnicodeCategory (s, i)) {
-                case UnicodeCategory.SpaceSeparator:
-                    if (s [i] < '\x80')
-                        continue; // valid
-                    break;
-                case UnicodeCategory.Control:
-                    if (s [i] != '\x0' && s [i] < '\x80')
-                        continue; // valid
-                    break;
-                case UnicodeCategory.PrivateUse:
-                case UnicodeCategory.Surrogate:
-                    break;
-                default:
-                    char c = s [i];
-                    if (// C.4
-                        '\uFDDF' <= c && c <= '\uFDEF' ||
-                        ((int) c & 0xFFFF) == 0xFFFE ||
-                        // C.6
-                        '\uFFF9' <= c && c <= '\uFFFD' ||
-                        // C.7
-                        '\u2FF0' <= c && c <= '\u2FFB' ||
-                        // C.8
-                        '\u202A' <= c && c <= '\u202E' ||
-                        '\u206A' <= c && c <= '\u206F')
+            for (int i = 0; i < s.Length; i++)
+            {
+                switch (Char.GetUnicodeCategory(s, i))
+                {
+                    case UnicodeCategory.SpaceSeparator:
+                        if (s[i] < '\x80')
+                            continue; // valid
                         break;
-                    switch (c) {
-                    // C.8
-                    case '\u0340':
-                    case '\u0341':
-                    case '\u200E':
-                    case '\u200F':
-                    // C.2.2
-                    case '\u2028':
-                    case '\u2029':
+                    case UnicodeCategory.Control:
+                        if (s[i] != '\x0' && s[i] < '\x80')
+                            continue; // valid
+                        break;
+                    case UnicodeCategory.PrivateUse:
+                    case UnicodeCategory.Surrogate:
                         break;
                     default:
-                        continue;
-                    }
-                    break;
+                        char c = s[i];
+                        if ( // C.4
+                            '\uFDDF' <= c && c <= '\uFDEF'
+                            || ((int)c & 0xFFFF) == 0xFFFE
+                            ||
+                            // C.6
+                            '\uFFF9' <= c
+                                && c <= '\uFFFD'
+                            ||
+                            // C.7
+                            '\u2FF0' <= c
+                                && c <= '\u2FFB'
+                            ||
+                            // C.8
+                            '\u202A' <= c
+                                && c <= '\u202E'
+                            || '\u206A' <= c && c <= '\u206F'
+                        )
+                            break;
+                        switch (c)
+                        {
+                            // C.8
+                            case '\u0340':
+                            case '\u0341':
+                            case '\u200E':
+                            case '\u200F':
+                            // C.2.2
+                            case '\u2028':
+                            case '\u2029':
+                                break;
+                            default:
+                                continue;
+                        }
+                        break;
                 }
-                throw new ArgumentException (String.Format ("Not allowed character was in the input string, at {0}", offset + i));
+                throw new ArgumentException(
+                    String.Format(
+                        "Not allowed character was in the input string, at {0}",
+                        offset + i
+                    )
+                );
             }
         }
 
-        void VerifyStd3AsciiRules (string s, int offset)
+        void VerifyStd3AsciiRules(string s, int offset)
         {
-            if (s.Length > 0 && s [0] == '-')
-                throw new ArgumentException (String.Format ("'-' is not allowed at head of a sequence in STD3 mode, found at {0}", offset));
-            if (s.Length > 0 && s [s.Length - 1] == '-')
-                throw new ArgumentException (String.Format ("'-' is not allowed at tail of a sequence in STD3 mode, found at {0}", offset + s.Length - 1));
+            if (s.Length > 0 && s[0] == '-')
+                throw new ArgumentException(
+                    String.Format(
+                        "'-' is not allowed at head of a sequence in STD3 mode, found at {0}",
+                        offset
+                    )
+                );
+            if (s.Length > 0 && s[s.Length - 1] == '-')
+                throw new ArgumentException(
+                    String.Format(
+                        "'-' is not allowed at tail of a sequence in STD3 mode, found at {0}",
+                        offset + s.Length - 1
+                    )
+                );
 
-            for (int i = 0; i < s.Length; i++) {
-                char c = s [i];
+            for (int i = 0; i < s.Length; i++)
+            {
+                char c = s[i];
                 if (c == '-')
                     continue;
-                if (c <= '\x2F' || '\x3A' <= c && c <= '\x40' || '\x5B' <= c && c <= '\x60' || '\x7B' <= c && c <= '\x7F')
-                    throw new ArgumentException (String.Format ("Not allowed character in STD3 mode, found at {0}", offset + i));
+                if (
+                    c <= '\x2F'
+                    || '\x3A' <= c && c <= '\x40'
+                    || '\x5B' <= c && c <= '\x60'
+                    || '\x7B' <= c && c <= '\x7F'
+                )
+                    throw new ArgumentException(
+                        String.Format(
+                            "Not allowed character in STD3 mode, found at {0}",
+                            offset + i
+                        )
+                    );
             }
         }
 
         #endregion
 
-        public string GetUnicode (string ascii)
+        public string GetUnicode(string ascii)
         {
             if (ascii == null)
-                throw new ArgumentNullException ("ascii");
-            return GetUnicode (ascii, 0, ascii.Length);
+                throw new ArgumentNullException("ascii");
+            return GetUnicode(ascii, 0, ascii.Length);
         }
 
-        public string GetUnicode (string ascii, int index)
+        public string GetUnicode(string ascii, int index)
         {
             if (ascii == null)
-                throw new ArgumentNullException ("ascii");
-            return GetUnicode (ascii, index, ascii.Length - index);
+                throw new ArgumentNullException("ascii");
+            return GetUnicode(ascii, index, ascii.Length - index);
         }
 
-        public string GetUnicode (string ascii, int index, int count)
+        public string GetUnicode(string ascii, int index, int count)
         {
             if (ascii == null)
-                throw new ArgumentNullException ("ascii");
+                throw new ArgumentNullException("ascii");
             if (index < 0)
-                throw new ArgumentOutOfRangeException ("index must be non-negative value");
+                throw new ArgumentOutOfRangeException("index must be non-negative value");
             if (count < 0 || index + count > ascii.Length)
-                throw new ArgumentOutOfRangeException ("index + count must point inside the argument ascii string");
+                throw new ArgumentOutOfRangeException(
+                    "index + count must point inside the argument ascii string"
+                );
 
-            return Convert (ascii, index, count, false);
+            return Convert(ascii, index, count, false);
         }
 
-        string ToUnicode (string s, int offset)
+        string ToUnicode(string s, int offset)
         {
             // 1.
-            for (int i = 0; i < s.Length; i++) {
-                if (s [i] >= 0x80) {
+            for (int i = 0; i < s.Length; i++)
+            {
+                if (s[i] >= 0x80)
+                {
                     // 2.
-                    s = NamePrep (s, offset);
+                    s = NamePrep(s, offset);
                     break;
                 }
             }
 
             // 3.
-            if (!s.StartsWith ("xn--", StringComparison.OrdinalIgnoreCase))
+            if (!s.StartsWith("xn--", StringComparison.OrdinalIgnoreCase))
                 return s; // failure = return the input string as is.
             // Actually lowering string is done as part of
             // Nameprep(), but it is much easier to do it in prior.
-            s = s.ToLower (CultureInfo.InvariantCulture);
+            s = s.ToLower(CultureInfo.InvariantCulture);
 
             string at3 = s;
 
             // 4.
-            s = s.Substring (4);
+            s = s.Substring(4);
 
             // 5.
-            s = puny.Decode (s, offset);
+            s = puny.Decode(s, offset);
             string at5 = s;
 
             // 6.
-            s = ToAscii (s, offset);
+            s = ToAscii(s, offset);
 
             // 7.
-            if (String.Compare (at3, s, StringComparison.OrdinalIgnoreCase) != 0)
-                throw new ArgumentException (String.Format ("ToUnicode() failed at verifying the result, at label part from {0}", offset));
+            if (String.Compare(at3, s, StringComparison.OrdinalIgnoreCase) != 0)
+                throw new ArgumentException(
+                    String.Format(
+                        "ToUnicode() failed at verifying the result, at label part from {0}",
+                        offset
+                    )
+                );
 
             // 8.
             return at5;
@@ -343,12 +420,24 @@ namespace System.Globalization
     class Bootstring
     {
         readonly char delimiter;
-        readonly int base_num, tmin, tmax, skew, damp, initial_bias, initial_n;
-        
-        public Bootstring (char delimiter,
-                 int baseNum, int tmin, int tmax,
-                 int skew, int damp,
-                 int initialBias, int initialN)
+        readonly int base_num,
+            tmin,
+            tmax,
+            skew,
+            damp,
+            initial_bias,
+            initial_n;
+
+        public Bootstring(
+            char delimiter,
+            int baseNum,
+            int tmin,
+            int tmax,
+            int skew,
+            int damp,
+            int initialBias,
+            int initialN
+        )
         {
             this.delimiter = delimiter;
             base_num = baseNum;
@@ -360,45 +449,58 @@ namespace System.Globalization
             initial_n = initialN;
         }
 
-        public string Encode (string s, int offset)
+        public string Encode(string s, int offset)
         {
             int n = initial_n;
             int delta = 0;
             int bias = initial_bias;
-            int b = 0, h = 0;
-            StringBuilder sb = new StringBuilder ();
+            int b = 0,
+                h = 0;
+            StringBuilder sb = new StringBuilder();
             for (int i = 0; i < s.Length; i++)
-                if (s [i] < '\x80')
-                    sb.Append (s [i]);
+                if (s[i] < '\x80')
+                    sb.Append(s[i]);
             b = h = sb.Length;
             if (b > 0)
-                sb.Append (delimiter);
+                sb.Append(delimiter);
 
-            while (h < s.Length) {
+            while (h < s.Length)
+            {
                 int m = int.MaxValue;
                 for (int i = 0; i < s.Length; i++)
-                    if (s [i] >= n && s [i] < m)
-                        m = s [i];
-                checked { delta += (m - n) * (h + 1); }
+                    if (s[i] >= n && s[i] < m)
+                        m = s[i];
+                checked
+                {
+                    delta += (m - n) * (h + 1);
+                }
                 n = m;
-                for (int i = 0; i < s.Length; i++) {
-                    char c = s [i];
+                for (int i = 0; i < s.Length; i++)
+                {
+                    char c = s[i];
                     if (c < n || c < '\x80')
-                        checked { delta++; }
-                    if (c == n) {
+                        checked
+                        {
+                            delta++;
+                        }
+                    if (c == n)
+                    {
                         int q = delta;
-                        for (int k = base_num; ;k += base_num) {
+                        for (int k = base_num; ; k += base_num)
+                        {
                             int t =
-                                k <= bias + tmin ? tmin :
-                                k >= bias + tmax ? tmax :
-                                k - bias;
+                                k <= bias + tmin
+                                    ? tmin
+                                    : k >= bias + tmax
+                                        ? tmax
+                                        : k - bias;
                             if (q < t)
                                 break;
-                            sb.Append (EncodeDigit (t + (q - t) % (base_num - t)));
+                            sb.Append(EncodeDigit(t + (q - t) % (base_num - t)));
                             q = (q - t) / (base_num - t);
                         }
-                        sb.Append (EncodeDigit (q));
-                        bias = Adapt (delta, h + 1, h == b);
+                        sb.Append(EncodeDigit(q));
+                        bias = Adapt(delta, h + 1, h == b);
                         delta = 0;
                         h++;
                     }
@@ -407,25 +509,29 @@ namespace System.Globalization
                 n++;
             }
 
-            return sb.ToString ();
+            return sb.ToString();
         }
 
         // 41..5A (A-Z) = 0-25
         // 61..7A (a-z) = 0-25
         // 30..39 (0-9) = 26-35
-        char EncodeDigit (int d)
+        char EncodeDigit(int d)
         {
-            return (char) (d < 26 ? d + 'a' : d - 26 + '0');
+            return (char)(d < 26 ? d + 'a' : d - 26 + '0');
         }
 
-        int DecodeDigit (char c)
+        int DecodeDigit(char c)
         {
-            return  c - '0' < 10 ? c - 22 :
-                c - 'A' < 26 ? c - 'A' :
-                c - 'a' < 26 ? c - 'a' : base_num;
+            return c - '0' < 10
+                ? c - 22
+                : c - 'A' < 26
+                    ? c - 'A'
+                    : c - 'a' < 26
+                        ? c - 'a'
+                        : base_num;
         }
 
-        int Adapt (int delta, int numPoints, bool firstTime)
+        int Adapt(int delta, int numPoints, bool firstTime)
         {
             if (firstTime)
                 delta = delta / damp;
@@ -433,60 +539,67 @@ namespace System.Globalization
                 delta = delta / 2;
             delta = delta + (delta / numPoints);
             int k = 0;
-            while (delta > ((base_num - tmin) * tmax) / 2) {
+            while (delta > ((base_num - tmin) * tmax) / 2)
+            {
                 delta = delta / (base_num - tmin);
                 k += base_num;
             }
             return k + (((base_num - tmin + 1) * delta) / (delta + skew));
         }
 
-        public string Decode (string s, int offset)
+        public string Decode(string s, int offset)
         {
             int n = initial_n;
             int i = 0;
             int bias = initial_bias;
             int b = 0;
-            StringBuilder sb = new StringBuilder ();
+            StringBuilder sb = new StringBuilder();
 
-            for (int j = 0; j < s.Length; j++) {
-                if (s [j] == delimiter)
+            for (int j = 0; j < s.Length; j++)
+            {
+                if (s[j] == delimiter)
                     b = j;
             }
             if (b < 0)
                 return s;
-            sb.Append (s, 0, b);
+            sb.Append(s, 0, b);
 
-            for (int z = b > 0 ? b + 1 : 0; z < s.Length; ) {
+            for (int z = b > 0 ? b + 1 : 0; z < s.Length; )
+            {
                 int old_i = i;
                 int w = 1;
-                for (int k = base_num; ; k += base_num) {
-                    int digit = DecodeDigit (s [z++]);
+                for (int k = base_num; ; k += base_num)
+                {
+                    int digit = DecodeDigit(s[z++]);
                     i = i + digit * w;
-                    int t = k <= bias + tmin ? tmin :
-                        k >= bias + tmax ? tmax :
-                        k - bias;
+                    int t =
+                        k <= bias + tmin
+                            ? tmin
+                            : k >= bias + tmax
+                                ? tmax
+                                : k - bias;
                     if (digit < t)
                         break;
                     w = w * (base_num - t);
                 }
-                bias = Adapt (i - old_i, sb.Length + 1, old_i == 0);
+                bias = Adapt(i - old_i, sb.Length + 1, old_i == 0);
                 n = n + i / (sb.Length + 1);
                 i = i % (sb.Length + 1);
                 if (n < '\x80')
-                    throw new ArgumentException (String.Format ("Invalid Bootstring decode result, at {0}", offset + z));
-                sb.Insert (i, (char) n);
+                    throw new ArgumentException(
+                        String.Format("Invalid Bootstring decode result, at {0}", offset + z)
+                    );
+                sb.Insert(i, (char)n);
                 i++;
             }
 
-            return sb.ToString ();
+            return sb.ToString();
         }
     }
 
     class Punycode : Bootstring
     {
-        public Punycode ()
-            : base ('-', 36, 1, 26, 38, 700, 72, 0x80)
-        {
-        }
+        public Punycode()
+            : base('-', 36, 1, 26, 38, 700, 72, 0x80) { }
     }
 }

@@ -3,7 +3,7 @@
 
 class X
 {
-    static void Main ()
+    static void Main()
     {
         const int b = true ? 1 : b;
     }

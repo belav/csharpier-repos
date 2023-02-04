@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -38,11 +38,9 @@ using System.Collections.Generic;
 namespace System.Security.Policy
 {
     [Serializable]
-    [ComVisible (true)]
-    public sealed class ApplicationTrust :
-        EvidenceBase,
-        ISecurityEncodable {
-
+    [ComVisible(true)]
+    public sealed class ApplicationTrust : EvidenceBase, ISecurityEncodable
+    {
         private ApplicationIdentity _appid;
         private PolicyStatement _defaultPolicy;
         private object _xtranfo;
@@ -50,176 +48,197 @@ namespace System.Security.Policy
         private bool _persist;
         IList<StrongName> fullTrustAssemblies;
 
-        public ApplicationTrust ()
+        public ApplicationTrust()
         {
-            fullTrustAssemblies = new List<StrongName> (0);
+            fullTrustAssemblies = new List<StrongName>(0);
         }
 
-        public ApplicationTrust (ApplicationIdentity applicationIdentity)
-            : this ()
+        public ApplicationTrust(ApplicationIdentity applicationIdentity)
+            : this()
         {
             if (applicationIdentity == null)
-                throw new ArgumentNullException ("applicationIdentity");
+                throw new ArgumentNullException("applicationIdentity");
             _appid = applicationIdentity;
         }
-        
-        public
-        ApplicationTrust (PermissionSet defaultGrantSet, IEnumerable<StrongName> fullTrustAssemblies)
+
+        public ApplicationTrust(
+            PermissionSet defaultGrantSet,
+            IEnumerable<StrongName> fullTrustAssemblies
+        )
         {
             if (defaultGrantSet == null)
-                throw new ArgumentNullException ("defaultGrantSet");
+                throw new ArgumentNullException("defaultGrantSet");
 
-            _defaultPolicy = new PolicyStatement (defaultGrantSet);
+            _defaultPolicy = new PolicyStatement(defaultGrantSet);
 
             if (fullTrustAssemblies == null)
-                throw new ArgumentNullException ("fullTrustAssemblies");
+                throw new ArgumentNullException("fullTrustAssemblies");
 
-            this.fullTrustAssemblies = new List<StrongName> ();
-            foreach (var a in fullTrustAssemblies) {
+            this.fullTrustAssemblies = new List<StrongName>();
+            foreach (var a in fullTrustAssemblies)
+            {
                 if (a == null)
-                    throw new ArgumentException ("fullTrustAssemblies contains an assembly that does not have a StrongName");
+                    throw new ArgumentException(
+                        "fullTrustAssemblies contains an assembly that does not have a StrongName"
+                    );
 
-                this.fullTrustAssemblies.Add ((StrongName) a.Copy ());
+                this.fullTrustAssemblies.Add((StrongName)a.Copy());
             }
         }
 
-        public ApplicationIdentity ApplicationIdentity {
+        public ApplicationIdentity ApplicationIdentity
+        {
             get { return _appid; }
-            set {
+            set
+            {
                 if (value == null)
-                    throw new ArgumentNullException ("ApplicationIdentity");
+                    throw new ArgumentNullException("ApplicationIdentity");
                 _appid = value;
             }
         }
 
-        public PolicyStatement DefaultGrantSet {
-            get {
+        public PolicyStatement DefaultGrantSet
+        {
+            get
+            {
                 if (_defaultPolicy == null)
-                    _defaultPolicy = GetDefaultGrantSet ();
+                    _defaultPolicy = GetDefaultGrantSet();
 
                 return _defaultPolicy;
             }
             set { _defaultPolicy = value; }
         }
 
-        public object ExtraInfo {
+        public object ExtraInfo
+        {
             get { return _xtranfo; }
             set { _xtranfo = value; }
         }
 
-        public bool IsApplicationTrustedToRun {
+        public bool IsApplicationTrustedToRun
+        {
             get { return _trustrun; }
             set { _trustrun = value; }
         }
 
-        public bool Persist {
+        public bool Persist
+        {
             get { return _persist; }
             set { _persist = value; }
         }
 
-        public void FromXml (SecurityElement element) 
+        public void FromXml(SecurityElement element)
         {
 #if DISABLE_SECURITY
-            throw new PlatformNotSupportedException ();
+            throw new PlatformNotSupportedException();
 #else
             if (element == null)
-                throw new ArgumentNullException ("element");
+                throw new ArgumentNullException("element");
 
             if (element.Tag != "ApplicationTrust")
-                throw new ArgumentException ("element");
+                throw new ArgumentException("element");
 
-            string s = element.Attribute ("FullName");
+            string s = element.Attribute("FullName");
             if (s != null)
-                _appid = new ApplicationIdentity (s);
+                _appid = new ApplicationIdentity(s);
             else
                 _appid = null;
 
             _defaultPolicy = null;
-            SecurityElement defaultGrant = element.SearchForChildByTag ("DefaultGrant");
-            if (defaultGrant != null) {
-                for (int i=0; i < defaultGrant.Children.Count; i++) {
-                    SecurityElement se = (defaultGrant.Children [i] as SecurityElement);
-                    if (se.Tag == "PolicyStatement") {
-                        DefaultGrantSet.FromXml (se, null);
+            SecurityElement defaultGrant = element.SearchForChildByTag("DefaultGrant");
+            if (defaultGrant != null)
+            {
+                for (int i = 0; i < defaultGrant.Children.Count; i++)
+                {
+                    SecurityElement se = (defaultGrant.Children[i] as SecurityElement);
+                    if (se.Tag == "PolicyStatement")
+                    {
+                        DefaultGrantSet.FromXml(se, null);
                         break;
                     }
                 }
             }
 
-            if (!Boolean.TryParse (element.Attribute ("TrustedToRun"), out _trustrun))
+            if (!Boolean.TryParse(element.Attribute("TrustedToRun"), out _trustrun))
                 _trustrun = false;
 
-            if (!Boolean.TryParse (element.Attribute ("Persist"), out _persist))
+            if (!Boolean.TryParse(element.Attribute("Persist"), out _persist))
                 _persist = false;
 
             _xtranfo = null;
-            SecurityElement xtra = element.SearchForChildByTag ("ExtraInfo");
-            if (xtra != null) {
-                s = xtra.Attribute ("Data");
-                if (s != null) {
-                    byte[] data = CryptoConvert.FromHex (s);
-                    using (MemoryStream ms = new MemoryStream (data)) {
-                        BinaryFormatter bf = new BinaryFormatter ();
-                        _xtranfo = bf.Deserialize (ms);
+            SecurityElement xtra = element.SearchForChildByTag("ExtraInfo");
+            if (xtra != null)
+            {
+                s = xtra.Attribute("Data");
+                if (s != null)
+                {
+                    byte[] data = CryptoConvert.FromHex(s);
+                    using (MemoryStream ms = new MemoryStream(data))
+                    {
+                        BinaryFormatter bf = new BinaryFormatter();
+                        _xtranfo = bf.Deserialize(ms);
                     }
                 }
             }
 #endif
         }
 
-        public SecurityElement ToXml () 
+        public SecurityElement ToXml()
         {
 #if DISABLE_SECURITY
-            throw new PlatformNotSupportedException ();
+            throw new PlatformNotSupportedException();
 #else
-            SecurityElement se = new SecurityElement ("ApplicationTrust");
-            se.AddAttribute ("version", "1");
+            SecurityElement se = new SecurityElement("ApplicationTrust");
+            se.AddAttribute("version", "1");
 
-            if (_appid != null) {
-                se.AddAttribute ("FullName", _appid.FullName);
+            if (_appid != null)
+            {
+                se.AddAttribute("FullName", _appid.FullName);
             }
 
-            if (_trustrun) {
-                se.AddAttribute ("TrustedToRun", "true");
+            if (_trustrun)
+            {
+                se.AddAttribute("TrustedToRun", "true");
             }
 
-            if (_persist) {
-                se.AddAttribute ("Persist", "true");
+            if (_persist)
+            {
+                se.AddAttribute("Persist", "true");
             }
 
-            SecurityElement defaultGrant = new SecurityElement ("DefaultGrant");
-            defaultGrant.AddChild (DefaultGrantSet.ToXml ());
-            se.AddChild (defaultGrant);
+            SecurityElement defaultGrant = new SecurityElement("DefaultGrant");
+            defaultGrant.AddChild(DefaultGrantSet.ToXml());
+            se.AddChild(defaultGrant);
 
-            if (_xtranfo != null) {
+            if (_xtranfo != null)
+            {
                 byte[] data = null;
-                using (MemoryStream ms = new MemoryStream ()) {
-                    BinaryFormatter bf = new BinaryFormatter ();
-                    bf.Serialize (ms, _xtranfo);
-                    data = ms.ToArray ();
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    BinaryFormatter bf = new BinaryFormatter();
+                    bf.Serialize(ms, _xtranfo);
+                    data = ms.ToArray();
                 }
-                SecurityElement xtra = new SecurityElement ("ExtraInfo");
-                xtra.AddAttribute ("Data", CryptoConvert.ToHex (data));
-                se.AddChild (xtra);
+                SecurityElement xtra = new SecurityElement("ExtraInfo");
+                xtra.AddAttribute("Data", CryptoConvert.ToHex(data));
+                se.AddChild(xtra);
             }
 
             return se;
 #endif
         }
-        
-        public IList<StrongName> FullTrustAssemblies {
-            get {
-                return fullTrustAssemblies;
-            }
+
+        public IList<StrongName> FullTrustAssemblies
+        {
+            get { return fullTrustAssemblies; }
         }
 
         // internal stuff
 
-        private PolicyStatement GetDefaultGrantSet ()
+        private PolicyStatement GetDefaultGrantSet()
         {
-            PermissionSet ps = new PermissionSet (PermissionState.None);
-            return new PolicyStatement (ps);
+            PermissionSet ps = new PermissionSet(PermissionState.None);
+            return new PolicyStatement(ps);
         }
     }
 }
-

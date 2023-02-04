@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,98 +32,98 @@
 using System.Runtime.InteropServices;
 using System.Security.Permissions;
 
-namespace System.Security {
-
-    [ComVisible (true)]
+namespace System.Security
+{
+    [ComVisible(true)]
     [Serializable]
-    public sealed class NamedPermissionSet : PermissionSet {
-
+    public sealed class NamedPermissionSet : PermissionSet
+    {
         private string name;
         private string description;
 
         // for PolicyLevel (to avoid validation duplication)
-        internal NamedPermissionSet ()
-            : base ()
-        {
-        }
+        internal NamedPermissionSet()
+            : base() { }
 
-        public NamedPermissionSet (string name, PermissionSet permSet) 
-            : base (permSet) 
+        public NamedPermissionSet(string name, PermissionSet permSet)
+            : base(permSet)
         {
             Name = name;
         }
 
-        public NamedPermissionSet (string name, PermissionState state) 
-            : base (state) 
+        public NamedPermissionSet(string name, PermissionState state)
+            : base(state)
         {
             Name = name;
         }
 
-        public NamedPermissionSet (NamedPermissionSet permSet) 
-            : base (permSet)
+        public NamedPermissionSet(NamedPermissionSet permSet)
+            : base(permSet)
         {
             name = permSet.name; // name can be null here
             description = permSet.description;
         }
 
-        public NamedPermissionSet (string name) 
-            : this (name, PermissionState.Unrestricted)
-        {
-        }
+        public NamedPermissionSet(string name)
+            : this(name, PermissionState.Unrestricted) { }
 
         // properties
 
-        public string Description {
+        public string Description
+        {
             get { return description; }
             set { description = value; }
         }
 
-        public string Name {
+        public string Name
+        {
             get { return name; }
-            set { 
-                if ((value == null) || (value == String.Empty)) {
-                    throw new ArgumentException (Locale.GetText ("invalid name"));
+            set
+            {
+                if ((value == null) || (value == String.Empty))
+                {
+                    throw new ArgumentException(Locale.GetText("invalid name"));
                 }
-                name = value; 
+                name = value;
             }
         }
 
         // methods
 
-        public override PermissionSet Copy () 
+        public override PermissionSet Copy()
         {
-            return new NamedPermissionSet (this);
+            return new NamedPermissionSet(this);
         }
 
-        public NamedPermissionSet Copy (string name) 
+        public NamedPermissionSet Copy(string name)
         {
-            NamedPermissionSet nps = new NamedPermissionSet (this);
-            nps.Name = name;        // get the new name
+            NamedPermissionSet nps = new NamedPermissionSet(this);
+            nps.Name = name; // get the new name
             return nps;
         }
 
-        public override void FromXml (SecurityElement et) 
+        public override void FromXml(SecurityElement et)
         {
-            base.FromXml (et);
+            base.FromXml(et);
             // strangely it can import a null Name (bypassing property setter)
-            name = et.Attribute ("Name");
-            description = et.Attribute ("Description");
+            name = et.Attribute("Name");
+            description = et.Attribute("Description");
             if (description == null)
                 description = String.Empty;
         }
 
-        public override SecurityElement ToXml () 
+        public override SecurityElement ToXml()
         {
-            SecurityElement se = base.ToXml ();
+            SecurityElement se = base.ToXml();
             if (name != null)
-                se.AddAttribute ("Name", name);
+                se.AddAttribute("Name", name);
             if (description != null)
-                se.AddAttribute ("Description", description);
+                se.AddAttribute("Description", description);
             return se;
         }
 
-        [ComVisible (false)]
-        public override bool Equals (object obj)
+        [ComVisible(false)]
+        public override bool Equals(object obj)
         {
             if (obj == null)
                 return false;
@@ -131,16 +131,16 @@ namespace System.Security {
             if (nps == null)
                 return false;
             // description isn't part of the comparaison
-            return ((name == nps.Name) && base.Equals (obj));
+            return ((name == nps.Name) && base.Equals(obj));
         }
 
-        [ComVisible (false)]
-        public override int GetHashCode ()
+        [ComVisible(false)]
+        public override int GetHashCode()
         {
-            int hc = base.GetHashCode ();
+            int hc = base.GetHashCode();
             // name is part of the hash code (except when null)
             if (name != null)
-                hc ^= name.GetHashCode ();
+                hc ^= name.GetHashCode();
             // description is never part of the hash code
             return hc;
         }

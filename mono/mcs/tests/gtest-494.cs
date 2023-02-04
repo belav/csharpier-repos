@@ -1,18 +1,16 @@
 public class Grid<CT>
-        where CT : Grid<CT>.GPD.GC, new ()
+    where CT : Grid<CT>.GPD.GC, new()
 {
     public abstract class GPD
     {
-        public GPD ()
+        public GPD()
         {
-            ctInst = new CT ();
+            ctInst = new CT();
         }
 
         public readonly CT ctInst;
 
-        public abstract class GC
-        {
-        }
+        public abstract class GC { }
     }
 }
 
@@ -28,8 +26,8 @@ public class H : Grid<H.MyCT>.GPD
 
 public class TheTest
 {
-    public static void Main (string[] args)
+    public static void Main(string[] args)
     {
-        new H ();
+        new H();
     }
 }

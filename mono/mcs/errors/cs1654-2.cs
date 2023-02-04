@@ -3,20 +3,26 @@
 
 using System.Collections;
 
-struct P {
+struct P
+{
     public int x;
 }
 
-struct Q {
+struct Q
+{
     public P p;
 }
 
-class Test {
-    static IEnumerable foo () { return null; }
-
-    static void Main ()
+class Test
+{
+    static IEnumerable foo()
     {
-        IEnumerable f = foo ();
+        return null;
+    }
+
+    static void Main()
+    {
+        IEnumerable f = foo();
         if (f != null)
             foreach (Q q in f)
                 q.p.x = 0;

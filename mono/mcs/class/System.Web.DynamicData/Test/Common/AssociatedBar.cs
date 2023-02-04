@@ -12,7 +12,7 @@ namespace MonoTests.Common
         public string Column3 { get; set; }
         public int Column4 { get; set; }
 
-        public AssociatedBar ()
+        public AssociatedBar()
         {
             Column1 = "Column 1";
             Column2 = 123;

@@ -20,7 +20,9 @@ namespace System.ServiceModel.Security
         public SecurityProtocolCorrelationState(SecurityToken token)
         {
             this.token = token;
-            this.activity = DiagnosticUtility.ShouldUseActivity ? ServiceModelActivity.Current : null;
+            this.activity = DiagnosticUtility.ShouldUseActivity
+                ? ServiceModelActivity.Current
+                : null;
         }
 
         public SecurityToken Token

@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -40,7 +40,7 @@ using Microsoft.CSharp;
 
 namespace System.Runtime.Remoting.MetadataServices
 {
-    public class MetaData 
+    public class MetaData
     {
         internal const string WsdlNamespace = "http://schemas.xmlsoap.org/wsdl/";
         internal const string XmlnsNamespace = "http://www.w3.org/2000/xmlns/";
@@ -49,155 +49,197 @@ namespace System.Runtime.Remoting.MetadataServices
         internal const string SudsNamespace = "http://www.w3.org/2000/wsdl/suds";
         internal const string SoapEncodingNamespace = "http://schemas.xmlsoap.org/soap/encoding/";
         internal const string SoapNamespace = "http://schemas.xmlsoap.org/wsdl/soap/";
-        
-        public MetaData() 
-        {
-        }
 
-        [MonoTODO ("strong name")]
-        public static void ConvertCodeSourceFileToAssemblyFile (
-                   string codePath,
-                   string assemblyPath,
-                   string strongNameFilename)
+        public MetaData() { }
+
+        [MonoTODO("strong name")]
+        public static void ConvertCodeSourceFileToAssemblyFile(
+            string codePath,
+            string assemblyPath,
+            string strongNameFilename
+        )
         {
-            CSharpCodeProvider prov = new CSharpCodeProvider ();
-            ICodeCompiler comp = prov.CreateCompiler ();
-            CompilerParameters pars = new CompilerParameters ();
+            CSharpCodeProvider prov = new CSharpCodeProvider();
+            ICodeCompiler comp = prov.CreateCompiler();
+            CompilerParameters pars = new CompilerParameters();
             pars.OutputAssembly = assemblyPath;
             CompilerResults cr = comp.CompileAssemblyFromFile(pars, codePath);
-            CheckResult (cr);
+            CheckResult(cr);
         }
 
-        [MonoTODO ("strong name")]
-        public static void ConvertCodeSourceStreamToAssemblyFile (
-                   ArrayList outCodeStreamList,
-                   string assemblyPath,
-                   string strongNameFilename)
+        [MonoTODO("strong name")]
+        public static void ConvertCodeSourceStreamToAssemblyFile(
+            ArrayList outCodeStreamList,
+            string assemblyPath,
+            string strongNameFilename
+        )
         {
-            CSharpCodeProvider prov = new CSharpCodeProvider ();
-            ICodeCompiler comp = prov.CreateCompiler ();
-            CompilerParameters pars = new CompilerParameters ();
+            CSharpCodeProvider prov = new CSharpCodeProvider();
+            ICodeCompiler comp = prov.CreateCompiler();
+            CompilerParameters pars = new CompilerParameters();
             pars.OutputAssembly = assemblyPath;
-            CompilerResults cr  = comp.CompileAssemblyFromFileBatch (pars, (string[]) outCodeStreamList.ToArray(typeof(string)));
-            CheckResult (cr);
+            CompilerResults cr = comp.CompileAssemblyFromFileBatch(
+                pars,
+                (string[])outCodeStreamList.ToArray(typeof(string))
+            );
+            CheckResult(cr);
         }
-        
-        static void CheckResult (CompilerResults cr)
+
+        static void CheckResult(CompilerResults cr)
         {
             if (cr.Errors.Count > 0)
             {
                 foreach (string s in cr.Output)
-                    Console.WriteLine (s);
-                    
+                    Console.WriteLine(s);
+
                 string errs = "";
                 foreach (CompilerError error in cr.Errors)
                     if (error.FileName != "")
-                        errs += error.ToString () + "\n";
-                throw new Exception ("There where errors during compilation of the assembly:\n" + errs);
+                        errs += error.ToString() + "\n";
+                throw new Exception(
+                    "There where errors during compilation of the assembly:\n" + errs
+                );
             }
         }
-        public static void ConvertSchemaStreamToCodeSourceStream (
-                   bool clientProxy, 
-                   string outputDirectory, 
-                   Stream inputStream, 
-                   ArrayList outCodeStreamList)
+
+        public static void ConvertSchemaStreamToCodeSourceStream(
+            bool clientProxy,
+            string outputDirectory,
+            Stream inputStream,
+            ArrayList outCodeStreamList
+        )
         {
-            ConvertSchemaStreamToCodeSourceStream (clientProxy, outputDirectory, inputStream, outCodeStreamList, null, null);
+            ConvertSchemaStreamToCodeSourceStream(
+                clientProxy,
+                outputDirectory,
+                inputStream,
+                outCodeStreamList,
+                null,
+                null
+            );
         }
 
-        public static void ConvertSchemaStreamToCodeSourceStream (
-                   bool clientProxy, 
-                   string outputDirectory, 
-                   Stream inputStream, 
-                   ArrayList outCodeStreamList, 
-                   string proxyUrl)
+        public static void ConvertSchemaStreamToCodeSourceStream(
+            bool clientProxy,
+            string outputDirectory,
+            Stream inputStream,
+            ArrayList outCodeStreamList,
+            string proxyUrl
+        )
         {
-            ConvertSchemaStreamToCodeSourceStream (clientProxy, outputDirectory, inputStream, outCodeStreamList, proxyUrl, null);
+            ConvertSchemaStreamToCodeSourceStream(
+                clientProxy,
+                outputDirectory,
+                inputStream,
+                outCodeStreamList,
+                proxyUrl,
+                null
+            );
         }
 
-        public static void ConvertSchemaStreamToCodeSourceStream (
-                   bool clientProxy, 
-                   string outputDirectory, 
-                   Stream inputStream, 
-                   ArrayList outCodeStreamList, 
-                   string proxyUrl, 
-                   string proxyNamespace)
+        public static void ConvertSchemaStreamToCodeSourceStream(
+            bool clientProxy,
+            string outputDirectory,
+            Stream inputStream,
+            ArrayList outCodeStreamList,
+            string proxyUrl,
+            string proxyNamespace
+        )
         {
-            MetaDataCodeGenerator cg = new MetaDataCodeGenerator ();
-            
-            MemoryStream memStream = new MemoryStream ();
-            CopyStream (inputStream, memStream);
+            MetaDataCodeGenerator cg = new MetaDataCodeGenerator();
+
+            MemoryStream memStream = new MemoryStream();
+            CopyStream(inputStream, memStream);
             memStream.Position = 0;
-            cg.GenerateCode (clientProxy, outputDirectory, memStream, outCodeStreamList, proxyUrl, proxyNamespace);
+            cg.GenerateCode(
+                clientProxy,
+                outputDirectory,
+                memStream,
+                outCodeStreamList,
+                proxyUrl,
+                proxyNamespace
+            );
         }
 
-        public static void ConvertTypesToSchemaToFile (ServiceType [] types, SdlType sdlType, string path)
+        public static void ConvertTypesToSchemaToFile(
+            ServiceType[] types,
+            SdlType sdlType,
+            string path
+        )
         {
-            FileStream fs = new FileStream (path, FileMode.Create, FileAccess.Write);
-            ConvertTypesToSchemaToStream (types, sdlType, fs);
-            fs.Close ();
+            FileStream fs = new FileStream(path, FileMode.Create, FileAccess.Write);
+            ConvertTypesToSchemaToStream(types, sdlType, fs);
+            fs.Close();
         }
 
-        public static void ConvertTypesToSchemaToFile (Type [] types, SdlType sdlType, string path)
+        public static void ConvertTypesToSchemaToFile(Type[] types, SdlType sdlType, string path)
         {
-            FileStream fs = new FileStream (path, FileMode.Create, FileAccess.Write);
-            ConvertTypesToSchemaToStream (types, sdlType, fs);
-            fs.Close ();
+            FileStream fs = new FileStream(path, FileMode.Create, FileAccess.Write);
+            ConvertTypesToSchemaToStream(types, sdlType, fs);
+            fs.Close();
         }
 
-        public static void ConvertTypesToSchemaToStream (Type [] types, SdlType sdlType, Stream outputStream)
+        public static void ConvertTypesToSchemaToStream(
+            Type[] types,
+            SdlType sdlType,
+            Stream outputStream
+        )
         {
-            ServiceType[] st = new ServiceType [types.Length];
-            for (int n=0; n<types.Length; n++)
-                st [n] = new ServiceType (types[n]);
+            ServiceType[] st = new ServiceType[types.Length];
+            for (int n = 0; n < types.Length; n++)
+                st[n] = new ServiceType(types[n]);
 
-            ConvertTypesToSchemaToStream (st, sdlType, outputStream);
+            ConvertTypesToSchemaToStream(st, sdlType, outputStream);
         }
 
-        public static void ConvertTypesToSchemaToStream (ServiceType [] serviceTypes, SdlType sdlType, Stream outputStream)
+        public static void ConvertTypesToSchemaToStream(
+            ServiceType[] serviceTypes,
+            SdlType sdlType,
+            Stream outputStream
+        )
         {
-            MetaDataExporter exporter = new MetaDataExporter ();
-            MemoryStream memStream = new MemoryStream ();
-            
-            StreamWriter sw = new StreamWriter (memStream);
-            XmlTextWriter tw = new XmlTextWriter (sw);
+            MetaDataExporter exporter = new MetaDataExporter();
+            MemoryStream memStream = new MemoryStream();
 
-            exporter.ExportTypes (serviceTypes, sdlType, tw);
-            tw.Flush ();
-            
+            StreamWriter sw = new StreamWriter(memStream);
+            XmlTextWriter tw = new XmlTextWriter(sw);
+
+            exporter.ExportTypes(serviceTypes, sdlType, tw);
+            tw.Flush();
+
             memStream.Position = 0;
-            CopyStream (memStream, outputStream);
-        }
-        
-        public static void RetrieveSchemaFromUrlToFile (string url, string path)
-        {
-            FileStream fs = new FileStream (path, FileMode.Create, FileAccess.Write);
-            RetrieveSchemaFromUrlToStream (url, fs);
-            fs.Close ();
+            CopyStream(memStream, outputStream);
         }
 
-        public static void RetrieveSchemaFromUrlToStream (string url, Stream outputStream)
+        public static void RetrieveSchemaFromUrlToFile(string url, string path)
         {
-            WebRequest req = WebRequest.Create (url);
+            FileStream fs = new FileStream(path, FileMode.Create, FileAccess.Write);
+            RetrieveSchemaFromUrlToStream(url, fs);
+            fs.Close();
+        }
+
+        public static void RetrieveSchemaFromUrlToStream(string url, Stream outputStream)
+        {
+            WebRequest req = WebRequest.Create(url);
             Stream st = req.GetResponse().GetResponseStream();
-            CopyStream (st, outputStream);
-            st.Close ();
+            CopyStream(st, outputStream);
+            st.Close();
         }
 
-        public static void SaveStreamToFile (Stream inputStream, string path)
+        public static void SaveStreamToFile(Stream inputStream, string path)
         {
-            FileStream fs = new FileStream (path, FileMode.Create, FileAccess.Write);
-            CopyStream (inputStream, fs);
-            fs.Close ();
+            FileStream fs = new FileStream(path, FileMode.Create, FileAccess.Write);
+            CopyStream(inputStream, fs);
+            fs.Close();
         }
-        
-        static void CopyStream (Stream inputStream, Stream outputStream)
+
+        static void CopyStream(Stream inputStream, Stream outputStream)
         {
-            byte[] buffer = new byte [1024*5];
+            byte[] buffer = new byte[1024 * 5];
             int nr = 0;
-            
-            while ((nr = inputStream.Read (buffer, 0, buffer.Length)) > 0)
-                outputStream.Write (buffer, 0, nr);
+
+            while ((nr = inputStream.Read(buffer, 0, buffer.Length)) > 0)
+                outputStream.Write(buffer, 0, nr);
         }
     }
 }

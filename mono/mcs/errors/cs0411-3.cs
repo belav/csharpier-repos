@@ -3,12 +3,10 @@
 
 class C
 {
-    static void X ()
+    static void X() { }
+
+    static void Foo<T>(T t)
     {
-    }
-    
-    static void Foo<T> (T t)
-    {
-        Foo(X ());
+        Foo(X());
     }
 }

@@ -39,86 +39,102 @@ namespace System.Windows.Forms
 {
     public class CursorConverter : TypeConverter
     {
-        public CursorConverter ()
-        {
-        }
+        public CursorConverter() { }
 
-        public override bool CanConvertFrom (ITypeDescriptorContext context, Type sourceType)
+        public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
         {
-            if (sourceType == typeof (byte []))
+            if (sourceType == typeof(byte[]))
                 return true;
-            return base.CanConvertFrom (context, sourceType);
+            return base.CanConvertFrom(context, sourceType);
         }
 
-        public override bool CanConvertTo (ITypeDescriptorContext context, Type destinationType)
+        public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
         {
-            if (destinationType == typeof (byte []) || destinationType == typeof (InstanceDescriptor))
+            if (destinationType == typeof(byte[]) || destinationType == typeof(InstanceDescriptor))
                 return true;
-            return base.CanConvertTo (context, destinationType);
+            return base.CanConvertTo(context, destinationType);
         }
 
-        public override object ConvertFrom (ITypeDescriptorContext context,
-                CultureInfo culture, object value)
+        public override object ConvertFrom(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value
+        )
         {
-            byte [] val = value as byte [];
+            byte[] val = value as byte[];
             if (val == null)
-                return base.ConvertFrom (context, culture, value);
+                return base.ConvertFrom(context, culture, value);
 
-            using (MemoryStream s = new MemoryStream (val)) {
-                return new Cursor (s);
+            using (MemoryStream s = new MemoryStream(val))
+            {
+                return new Cursor(s);
             }
         }
 
-        public override object ConvertTo (ITypeDescriptorContext context, CultureInfo culture,
-                object value, Type destinationType)
+        public override object ConvertTo(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value,
+            Type destinationType
+        )
         {
             if (destinationType == null)
-                throw new ArgumentNullException ("destinationType");
+                throw new ArgumentNullException("destinationType");
 
-            if (value == null && destinationType == typeof (string))
+            if (value == null && destinationType == typeof(string))
                 return "(none)";
 
-            if ( !(value is Cursor))
+            if (!(value is Cursor))
                 throw new ArgumentException("object must be of class Cursor", "value");
 
-            if (destinationType == typeof (byte [])) {
-                Cursor            c;
-                SerializationInfo    si;
+            if (destinationType == typeof(byte[]))
+            {
+                Cursor c;
+                SerializationInfo si;
 
-                if (value == null) {
-                    return new byte [0];
+                if (value == null)
+                {
+                    return new byte[0];
                 }
 
                 c = (Cursor)value;
 
                 si = new SerializationInfo(typeof(Cursor), new FormatterConverter());
-                ((ISerializable)c).GetObjectData(si, new StreamingContext(StreamingContextStates.Remoting));
+                ((ISerializable)c).GetObjectData(
+                    si,
+                    new StreamingContext(StreamingContextStates.Remoting)
+                );
 
                 return (byte[])si.GetValue("CursorData", typeof(byte[]));
-            } else if (destinationType == typeof (InstanceDescriptor)) {
-                PropertyInfo[] properties = typeof (Cursors).GetProperties ();
-                foreach (PropertyInfo propInfo in properties) {
-                    if (propInfo.GetValue (null, null) == value) {
-                        return new InstanceDescriptor (propInfo, null);
+            }
+            else if (destinationType == typeof(InstanceDescriptor))
+            {
+                PropertyInfo[] properties = typeof(Cursors).GetProperties();
+                foreach (PropertyInfo propInfo in properties)
+                {
+                    if (propInfo.GetValue(null, null) == value)
+                    {
+                        return new InstanceDescriptor(propInfo, null);
                     }
                 }
             }
-            return base.ConvertTo (context, culture, value, destinationType);
+            return base.ConvertTo(context, culture, value, destinationType);
         }
 
-        public override StandardValuesCollection GetStandardValues (ITypeDescriptorContext context)
+        public override StandardValuesCollection GetStandardValues(ITypeDescriptorContext context)
         {
-            PropertyInfo[] props = typeof (Cursors).GetProperties();
-            
-            ArrayList vals = new ArrayList ();
+            PropertyInfo[] props = typeof(Cursors).GetProperties();
 
-            for (int i = 0; i < props.Length; i++) {
-                vals.Add (props [i].GetValue (null, null));
+            ArrayList vals = new ArrayList();
+
+            for (int i = 0; i < props.Length; i++)
+            {
+                vals.Add(props[i].GetValue(null, null));
             }
-            return new StandardValuesCollection (vals);
+            return new StandardValuesCollection(vals);
         }
 
-        public override bool GetStandardValuesSupported (ITypeDescriptorContext context)
+        public override bool GetStandardValuesSupported(ITypeDescriptorContext context)
         {
             return true;
         }

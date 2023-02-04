@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,38 +32,37 @@ namespace Mono.WebBrowser.DOM
     {
         bool CanGoBack { get; }
         bool CanGoForward { get; }
-        bool Back ();
-        bool Forward ();
-        void Home ();
-        void Reload ();
-        void Reload (ReloadOption option);
-        void Stop ();
+        bool Back();
+        bool Forward();
+        void Home();
+        void Reload();
+        void Reload(ReloadOption option);
+        void Stop();
 
         /// <summary>
         /// Navigate to the page in the history, by index.
         /// </summary>
         /// <param name="index">
-        /// A <see cref="System.Int32"/> representing an absolute index in the 
+        /// A <see cref="System.Int32"/> representing an absolute index in the
         /// history (that is, > -1 and < history length
         /// </param>
-        void Go (int index);
-        
+        void Go(int index);
+
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="index">
-        /// A <see cref="System.Int32"/> representing an index in the 
+        /// A <see cref="System.Int32"/> representing an index in the
         /// history, that can be relative or absolute depending on the relative argument
         /// </param>
         /// <param name="relative">
-        /// A <see cref="System.Boolean"/> indicating whether the index is relative to 
+        /// A <see cref="System.Boolean"/> indicating whether the index is relative to
         /// the current place in history or not (i.e., if relative = true, index can be
         /// positive or negative, and index=-1 means load the previous page in the history.
         /// if relative = false, index must be > -1, and index = 0 means load the first
         /// page of the history.
         /// </param>
-        void Go (int index, bool relative);
-        
+        void Go(int index, bool relative);
 
         /// <summary>
         /// Navigate to an Url. Uses default loading flags, so the page might come
@@ -71,11 +70,11 @@ namespace Mono.WebBrowser.DOM
         /// </summary>
         /// <param name="url">
         /// A <see cref="System.String"/> representing an Url
-        /// </param>        
-        void Go (string url);
-        
+        /// </param>
+        void Go(string url);
+
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="url">
         /// A <see cref="System.String"/> representing an Url.
@@ -83,13 +82,14 @@ namespace Mono.WebBrowser.DOM
         /// <param name="flags">
         /// A <see cref="LoadFlags"/> that control if the page comes from cache or not.
         /// </param>
-        void Go (string url, LoadFlags flags);
+        void Go(string url, LoadFlags flags);
 
         int HistoryCount { get; }
     }
-    
+
     [Flags]
-    public enum LoadFlags : uint {
+    public enum LoadFlags : uint
+    {
         None = 0x0000,
         AsMetaRefresh = 0x0010,
         AsLinkClick = 0x0020,

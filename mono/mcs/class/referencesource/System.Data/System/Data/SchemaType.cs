@@ -6,10 +6,10 @@
 // <owner current="true" primary="false">laled</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Data {
-
-    public enum SchemaType {
-
+namespace System.Data
+{
+    public enum SchemaType
+    {
         Source = 1,
 
         Mapped = 2

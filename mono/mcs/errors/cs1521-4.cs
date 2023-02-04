@@ -1,11 +1,6 @@
 // CS1521: Invalid base type `C?'
 // Line: 8
 
-struct C
-{
-}
+struct C { }
 
-class C2: C?
-{
-}
-
+class C2 : C? { }

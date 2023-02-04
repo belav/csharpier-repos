@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -39,16 +39,17 @@ namespace Mono.Xml.XPath
 #else
     internal
 #endif
-        class DTMXPathDocument : IXPathNavigable
+    class DTMXPathDocument : IXPathNavigable
     {
-
 #region ctor.
 
-        public DTMXPathDocument (XmlNameTable nameTable,
-            DTMXPathLinkedNode [] nodes,
-            DTMXPathAttributeNode [] attributes,
-            DTMXPathNamespaceNode [] namespaces,
-            Hashtable idTable)
+        public DTMXPathDocument(
+            XmlNameTable nameTable,
+            DTMXPathLinkedNode[] nodes,
+            DTMXPathAttributeNode[] attributes,
+            DTMXPathNamespaceNode[] namespaces,
+            Hashtable idTable
+        )
         {
             this.nameTable = nameTable;
             this.nodes = nodes;
@@ -61,17 +62,20 @@ namespace Mono.Xml.XPath
 
 
 #region Methods
-        public XPathNavigator CreateNavigator ()
+        public XPathNavigator CreateNavigator()
         {
-            if (root == null) {
-                root = new DTMXPathNavigator (this,
+            if (root == null)
+            {
+                root = new DTMXPathNavigator(
+                    this,
                     nameTable,
                     nodes,
                     attributes,
                     namespaces,
-                    idTable);
+                    idTable
+                );
             }
-            return root.Clone ();
+            return root.Clone();
         }
 
 #endregion
@@ -83,15 +87,13 @@ namespace Mono.Xml.XPath
 
 #region Immutable tree fields
 
-        DTMXPathLinkedNode [] nodes = new DTMXPathLinkedNode [0];
-        DTMXPathAttributeNode [] attributes = new DTMXPathAttributeNode [0];
-        DTMXPathNamespaceNode [] namespaces = new DTMXPathNamespaceNode [0];
+        DTMXPathLinkedNode[] nodes = new DTMXPathLinkedNode[0];
+        DTMXPathAttributeNode[] attributes = new DTMXPathAttributeNode[0];
+        DTMXPathNamespaceNode[] namespaces = new DTMXPathNamespaceNode[0];
 
         // idTable [string value] -> int nodeId
         readonly Hashtable idTable;
 
 #endregion
-
     }
 }
-

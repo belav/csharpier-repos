@@ -12,12 +12,10 @@ public class GenClass<T>
     public T fld;
 }
 
-public class PropsArIList  
+public class PropsArIList
 {
-
-    public static int Main()  
+    public static int Main()
     {
-
         int result = 0;
         int i;
         try
@@ -28,55 +26,55 @@ public class PropsArIList
             GenClass<int> obj1;
             obj1 = new GenClass<int>();
             obj1.fld = 3;
-            Console.WriteLine (obj1.fld);
+            Console.WriteLine(obj1.fld);
 
             GenClass<int>[] arGen;
             arGen = new GenClass<int>[5];
-            
-            for (i=0;i<5;i++) 
+
+            for (i = 0; i < 5; i++)
             {
                 arGen[i] = new GenClass<int>();
                 arGen[i].fld = i;
-                Console.Write (arGen[i].fld + "\t");
+                Console.Write(arGen[i].fld + "\t");
             }
             Console.WriteLine();
 
-            IList interf1 = (IList) arGen;
+            IList interf1 = (IList)arGen;
 
-            try 
+            try
             {
                 interf1.Add(obj1);
-            } 
-            catch (NotSupportedException e)
-            {
-                Console.WriteLine ("expected: " + e);
             }
-
-            try 
-            {
-                interf1.Insert(1, obj1);
-            } 
             catch (NotSupportedException e)
             {
-                Console.WriteLine ("expected: " + e);
-            }
-
-            try 
-            {
-                interf1.Remove(arGen[0]);
-            } 
-            catch (NotSupportedException e)
-            {
-                Console.WriteLine ("expected: " + e);
+                Console.WriteLine("expected: " + e);
             }
 
             try
             {
-                interf1.RemoveAt (1);
+                interf1.Insert(1, obj1);
             }
             catch (NotSupportedException e)
             {
-                Console.WriteLine ("expected: " + e);
+                Console.WriteLine("expected: " + e);
+            }
+
+            try
+            {
+                interf1.Remove(arGen[0]);
+            }
+            catch (NotSupportedException e)
+            {
+                Console.WriteLine("expected: " + e);
+            }
+
+            try
+            {
+                interf1.RemoveAt(1);
+            }
+            catch (NotSupportedException e)
+            {
+                Console.WriteLine("expected: " + e);
             }
 
             //Part 2 - GenClass <string>
@@ -85,73 +83,73 @@ public class PropsArIList
             GenClass<string> obj2;
             obj2 = new GenClass<string>();
             obj2.fld = "name";
-            Console.WriteLine (obj2.fld);
+            Console.WriteLine(obj2.fld);
 
             GenClass<string>[] arGenS;
             arGenS = new GenClass<string>[5];
             string aux = "none";
-            for (i=0;i<5;i++) 
+            for (i = 0; i < 5; i++)
             {
                 arGenS[i] = new GenClass<string>();
                 aux = Convert.ToString(i);
                 arGenS[i].fld = aux;
-                Console.Write (arGenS[i].fld + "\t");
+                Console.Write(arGenS[i].fld + "\t");
             }
             Console.WriteLine();
 
-            IList interf2 = (IList) arGenS;
+            IList interf2 = (IList)arGenS;
 
-            try 
+            try
             {
                 interf2.Add(obj2);
-            } 
-            catch (NotSupportedException e)
-            {
-                Console.WriteLine ("expected: " + e);
             }
-
-            try 
-            {
-                interf2.Insert(1, obj2);
-            } 
             catch (NotSupportedException e)
             {
-                Console.WriteLine ("expected: " + e);
-            }
-
-            try 
-            {
-                interf2.Remove(arGenS[0]);
-            } 
-            catch (NotSupportedException e)
-            {
-                Console.WriteLine ("expected: " + e);
+                Console.WriteLine("expected: " + e);
             }
 
             try
             {
-                interf2.RemoveAt (1);
+                interf2.Insert(1, obj2);
             }
             catch (NotSupportedException e)
             {
-                Console.WriteLine ("expected: " + e);
+                Console.WriteLine("expected: " + e);
+            }
+
+            try
+            {
+                interf2.Remove(arGenS[0]);
+            }
+            catch (NotSupportedException e)
+            {
+                Console.WriteLine("expected: " + e);
+            }
+
+            try
+            {
+                interf2.RemoveAt(1);
+            }
+            catch (NotSupportedException e)
+            {
+                Console.WriteLine("expected: " + e);
             }
 
             result = 100; //pass
-    
         }
         catch (Exception e)
         {
-            Console.WriteLine ("unexpected exception..");
-            Console.WriteLine (e); 
-            Console.WriteLine ("test failed");
+            Console.WriteLine("unexpected exception..");
+            Console.WriteLine(e);
+            Console.WriteLine("test failed");
             return 101;
         }
 
-        if (result==100) Console.WriteLine ("test passed");
-        else Console.WriteLine ("test failed");
+        if (result == 100)
+            Console.WriteLine("test passed");
+        else
+            Console.WriteLine("test failed");
 
         return result;
     }
 }
-    

@@ -3,12 +3,14 @@
 
 using System.Collections;
 
-struct P {
+struct P
+{
     public int x { get; set; }
 }
 
-class Test {
-    static void Foo (IEnumerable f)
+class Test
+{
+    static void Foo(IEnumerable f)
     {
         foreach (P p in f)
             p.x += 2;

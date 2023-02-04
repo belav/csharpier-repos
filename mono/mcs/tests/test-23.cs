@@ -3,25 +3,22 @@
 //
 using System;
 
-class X {
+class X
+{
     static int v;
 
-    static X ()
+    static X()
     {
         v = 10;
     }
 
-    public static int Value {
-        get {
-            return v;
-        }
-
-        set {
-            v = value;
-        }
+    public static int Value
+    {
+        get { return v; }
+        set { v = value; }
     }
 
-    public static int Main ()
+    public static int Main()
     {
         if (Value != 10)
             return 1;
@@ -31,7 +28,7 @@ class X {
         if (Value != 4)
             return 2;
 
-        Y y = new Y ("hello");
+        Y y = new Y("hello");
 
         if (y.Value != "hello")
             return 3;
@@ -40,7 +37,7 @@ class X {
         if (y.Value != "goodbye")
             return 4;
 
-        Z z = new Z ();
+        Z z = new Z();
 
         if (Z.IVal != 4)
             return 5;
@@ -55,52 +52,42 @@ class X {
         return 0;
     }
 }
-    
-class Y {
+
+class Y
+{
     string init;
-    
-    public Y (string s)
+
+    public Y(string s)
     {
         init = s;
     }
 
-    public string Value {
-        get {
-            return init;
-        }
-
-        set {
-            init = value;
-        }
+    public string Value
+    {
+        get { return init; }
+        set { init = value; }
     }
 }
 
-struct Z {
+struct Z
+{
     static int val;
     int xval;
-    
-    static Z ()
+
+    static Z()
     {
         val = 4;
     }
 
-    static public int IVal {
-        get {
-            return val;
-        }
-
-        set {
-            val= value;
-        }
+    static public int IVal
+    {
+        get { return val; }
+        set { val = value; }
     }
 
-    public int XVal {
-        get {
-            return xval;
-        }
-
-        set {
-            xval = value;
-        }
+    public int XVal
+    {
+        get { return xval; }
+        set { xval = value; }
     }
 }

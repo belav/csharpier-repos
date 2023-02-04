@@ -4,7 +4,7 @@
 using System;
 using System.Linq.Expressions;
 
-public delegate void EventHandler (int i, int j);
+public delegate void EventHandler(int i, int j);
 
 public class Button
 {
@@ -13,13 +13,11 @@ public class Button
 
 public class Blah
 {
-    public static void Main ()
+    public static void Main()
     {
-        Button b = new Button ();
-        Expression<Action> e = () => b.Click += new EventHandler (Button1_Click);
+        Button b = new Button();
+        Expression<Action> e = () => b.Click += new EventHandler(Button1_Click);
     }
 
-    public static void Button1_Click (int i, int j)
-    {
-    }
+    public static void Button1_Click(int i, int j) { }
 }

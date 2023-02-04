@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -42,7 +42,10 @@ namespace Castle
         };
 
         [Test]
-        [Platform(Exclude = "Mono", Reason = "On Mono, the FrameworkDisplayNameAttribute isn't populated")]
+        [Platform(
+            Exclude = "Mono",
+            Reason = "On Mono, the FrameworkDisplayNameAttribute isn't populated"
+        )]
         public void PublicApi()
         {
             // Determine if we are in write (developer) or compare (CI server) mode
@@ -56,7 +59,9 @@ namespace Castle
             string testContainingDirectory = Path.GetDirectoryName(testAssemblyPath);
 
             string configuration = new DirectoryInfo(testContainingDirectory).Parent.Name;
-            string rootDir = Path.GetFullPath(Path.Combine(testContainingDirectory, "../../../../.."));
+            string rootDir = Path.GetFullPath(
+                Path.Combine(testContainingDirectory, "../../../../..")
+            );
 
             // Ensure reference source directory exists and is empty
             string refDir = Path.Combine(rootDir, "ref");
@@ -85,10 +90,20 @@ namespace Castle
 
                     if (compare)
                     {
-                        Assert.IsTrue(File.Exists(assemblyRefPath), $"ref/{assemblyName}-{framework}.cs does not exist");
+                        Assert.IsTrue(
+                            File.Exists(assemblyRefPath),
+                            $"ref/{assemblyName}-{framework}.cs does not exist"
+                        );
 
-                        string expectedPublicApi = string.Join(Environment.NewLine, File.ReadAllLines(assemblyRefPath));
-                        Assert.AreEqual(expectedPublicApi, publicApi, $"ref/{assemblyName}-{framework}.cs does not match {assemblyName}.dll");
+                        string expectedPublicApi = string.Join(
+                            Environment.NewLine,
+                            File.ReadAllLines(assemblyRefPath)
+                        );
+                        Assert.AreEqual(
+                            expectedPublicApi,
+                            publicApi,
+                            $"ref/{assemblyName}-{framework}.cs does not match {assemblyName}.dll"
+                        );
                     }
                     else
                     {

@@ -16,35 +16,60 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
 {
     internal static class ImportCompletionProviderHelper
     {
-        private record class CacheEntry(DocumentId? GlobalUsingsDocumentId, Checksum GlobalUsingsDocumentChecksum, ImmutableArray<string> GlobalUsings)
+        private record class CacheEntry(
+            DocumentId? GlobalUsingsDocumentId,
+            Checksum GlobalUsingsDocumentChecksum,
+            ImmutableArray<string> GlobalUsings
+        )
         {
-            public static CacheEntry Default { get; } = new(null, Checksum.Null, ImmutableArray<string>.Empty);
+            public static CacheEntry Default { get; } =
+                new(null, Checksum.Null, ImmutableArray<string>.Empty);
         }
 
-        private static readonly ConcurrentDictionary<ProjectId, CacheEntry> _sdkGlobalUsingsCache = new();
+        private static readonly ConcurrentDictionary<ProjectId, CacheEntry> _sdkGlobalUsingsCache =
+            new();
 
-        public static async Task<ImmutableArray<string>> GetImportedNamespacesAsync(SyntaxContext context, CancellationToken cancellationToken)
+        public static async Task<ImmutableArray<string>> GetImportedNamespacesAsync(
+            SyntaxContext context,
+            CancellationToken cancellationToken
+        )
         {
             // The location is the containing node of the LeftToken, or the compilation unit itself if LeftToken
             // indicates the beginning of the document (i.e. no parent).
-            var location = context.LeftToken.Parent ?? context.SyntaxTree.GetRoot(cancellationToken);
-            var usingsFromCurrentDocument = context.SemanticModel.GetUsingNamespacesInScope(location).SelectAsArray(GetNamespaceName);
+            var location =
+                context.LeftToken.Parent ?? context.SyntaxTree.GetRoot(cancellationToken);
+            var usingsFromCurrentDocument = context.SemanticModel
+                .GetUsingNamespacesInScope(location)
+                .SelectAsArray(GetNamespaceName);
 
             if (_sdkGlobalUsingsCache.TryGetValue(context.Document.Project.Id, out var cacheEntry))
             {
                 // Just return whatever was cached last time. It'd be very rare for this file to change. To minimize impact on completion perf,
                 // we'd tolerate temporarily staled results. A background task is created to refresh it if necessary.
-                _ = GetGlobalUsingsAsync(context.Document.Project, cacheEntry, CancellationToken.None);
+                _ = GetGlobalUsingsAsync(
+                    context.Document.Project,
+                    cacheEntry,
+                    CancellationToken.None
+                );
                 return usingsFromCurrentDocument.Concat(cacheEntry.GlobalUsings);
             }
             else
             {
                 // cache miss, we have to calculate it now.
-                var globalUsings = await GetGlobalUsingsAsync(context.Document.Project, CacheEntry.Default, cancellationToken).ConfigureAwait(false);
+                var globalUsings = await GetGlobalUsingsAsync(
+                        context.Document.Project,
+                        CacheEntry.Default,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
                 return usingsFromCurrentDocument.Concat(globalUsings);
             }
 
-            static async Task<ImmutableArray<string>> GetGlobalUsingsAsync(Project project, CacheEntry cacheEntry, CancellationToken cancellationToken)
+            static async Task<ImmutableArray<string>> GetGlobalUsingsAsync(
+                Project project,
+                CacheEntry cacheEntry,
+                CancellationToken cancellationToken
+            )
             {
                 // Since we don't have a compiler API to easily get all global usings yet, hardcode the the name of SDK auto-generated
                 // global using file (which is a constant) for now as a temporary workaround.
@@ -53,7 +78,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
 
                 var globalUsingDocument = cacheEntry.GlobalUsingsDocumentId is null
                     ? project.Documents.FirstOrDefault(d => d.Name.Equals(fileName))
-                    : await project.GetDocumentAsync(cacheEntry.GlobalUsingsDocumentId, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    : await project
+                        .GetDocumentAsync(
+                            cacheEntry.GlobalUsingsDocumentId,
+                            cancellationToken: cancellationToken
+                        )
+                        .ConfigureAwait(false);
 
                 if (globalUsingDocument is null)
                 {
@@ -62,20 +92,32 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 }
 
                 // We only checksum off of the contents of the file.
-                var checksum = await globalUsingDocument.State.GetChecksumAsync(cancellationToken).ConfigureAwait(false);
+                var checksum = await globalUsingDocument.State
+                    .GetChecksumAsync(cancellationToken)
+                    .ConfigureAwait(false);
                 if (checksum == cacheEntry.GlobalUsingsDocumentChecksum)
                     return cacheEntry.GlobalUsings;
 
-                var root = await globalUsingDocument.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
-                var model = await globalUsingDocument.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
-                var globalUsings = model.GetUsingNamespacesInScope(root).SelectAsArray(GetNamespaceName);
+                var root = await globalUsingDocument
+                    .GetRequiredSyntaxRootAsync(cancellationToken)
+                    .ConfigureAwait(false);
+                var model = await globalUsingDocument
+                    .GetRequiredSemanticModelAsync(cancellationToken)
+                    .ConfigureAwait(false);
+                var globalUsings = model
+                    .GetUsingNamespacesInScope(root)
+                    .SelectAsArray(GetNamespaceName);
 
-                _sdkGlobalUsingsCache[project.Id] = new(globalUsingDocument.Id, checksum, globalUsings);
+                _sdkGlobalUsingsCache[project.Id] = new(
+                    globalUsingDocument.Id,
+                    checksum,
+                    globalUsings
+                );
                 return globalUsings;
             }
 
-            static string GetNamespaceName(INamespaceSymbol symbol)
-                => symbol.ToDisplayString(SymbolDisplayFormats.NameFormat);
+            static string GetNamespaceName(INamespaceSymbol symbol) =>
+                symbol.ToDisplayString(SymbolDisplayFormats.NameFormat);
         }
     }
 }

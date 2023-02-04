@@ -3,7 +3,8 @@
 using System;
 using System.Runtime.CompilerServices;
 
-public interface IA {
+public interface IA
+{
     [SpecialName]
-    int GetLength ();
+    int GetLength();
 }

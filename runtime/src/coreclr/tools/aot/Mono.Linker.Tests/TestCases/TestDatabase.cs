@@ -14,68 +14,77 @@ namespace Mono.Linker.Tests.TestCases
     {
         private static TestCase[]? _cachedAllCases;
 
-        public static IEnumerable<object[]> DataFlow ()
+        public static IEnumerable<object[]> DataFlow()
         {
-            return TestNamesBySuiteName ();
+            return TestNamesBySuiteName();
         }
 
-        public static IEnumerable<object[]> DynamicDependencies ()
+        public static IEnumerable<object[]> DynamicDependencies()
         {
-            return TestNamesBySuiteName ();
+            return TestNamesBySuiteName();
         }
 
-        public static IEnumerable<object[]> Repro ()
+        public static IEnumerable<object[]> Repro()
         {
-            return TestNamesBySuiteName ();
+            return TestNamesBySuiteName();
         }
 
-        public static IEnumerable<object[]> RequiresCapability ()
+        public static IEnumerable<object[]> RequiresCapability()
         {
-            return TestNamesBySuiteName ();
+            return TestNamesBySuiteName();
         }
 
-        public static TestCaseCollector CreateCollector ()
+        public static TestCaseCollector CreateCollector()
         {
-            GetDirectoryPaths (out string rootSourceDirectory, out string testCaseAssemblyPath);
-            return new TestCaseCollector (rootSourceDirectory, testCaseAssemblyPath);
+            GetDirectoryPaths(out string rootSourceDirectory, out string testCaseAssemblyPath);
+            return new TestCaseCollector(rootSourceDirectory, testCaseAssemblyPath);
         }
 
-        public static NPath TestCasesRootDirectory {
-            get {
-                GetDirectoryPaths (out string rootSourceDirectory, out string _);
-                return rootSourceDirectory.ToNPath ();
+        public static NPath TestCasesRootDirectory
+        {
+            get
+            {
+                GetDirectoryPaths(out string rootSourceDirectory, out string _);
+                return rootSourceDirectory.ToNPath();
             }
         }
 
-        private static IEnumerable<TestCase> AllCases ()
+        private static IEnumerable<TestCase> AllCases()
         {
-            _cachedAllCases ??= CreateCollector ()
-                    .Collect ()
-                    .Where (c => c != null)
-                    .OrderBy (c => c.DisplayName)
-                    .ToArray ();
+            _cachedAllCases ??= CreateCollector()
+                .Collect()
+                .Where(c => c != null)
+                .OrderBy(c => c.DisplayName)
+                .ToArray();
 
             return _cachedAllCases;
         }
 
-        public static TestCase? GetTestCaseFromName (string name)
+        public static TestCase? GetTestCaseFromName(string name)
         {
-            return AllCases ().FirstOrDefault (c => c.Name == name);
+            return AllCases().FirstOrDefault(c => c.Name == name);
         }
 
-        private static IEnumerable<object[]> TestNamesBySuiteName ([CallerMemberName] string suiteName = "")
+        private static IEnumerable<object[]> TestNamesBySuiteName(
+            [CallerMemberName] string suiteName = ""
+        )
         {
-            return AllCases ()
-                .Where (c => c.TestSuiteDirectory.FileName == suiteName)
-                .Select (c => c.DisplayName)
-                .OrderBy (c => c)
-                .Select (c => new object[] { c });
+            return AllCases()
+                .Where(c => c.TestSuiteDirectory.FileName == suiteName)
+                .Select(c => c.DisplayName)
+                .OrderBy(c => c)
+                .Select(c => new object[] { c });
         }
 
-        private static void GetDirectoryPaths (out string rootSourceDirectory, out string testCaseAssemblyPath)
+        private static void GetDirectoryPaths(
+            out string rootSourceDirectory,
+            out string testCaseAssemblyPath
+        )
         {
-            rootSourceDirectory = Path.GetFullPath (Path.Combine (PathUtilities.GetTestsSourceRootDirectory (), "Mono.Linker.Tests.Cases"));
-            testCaseAssemblyPath = PathUtilities.GetTestAssemblyPath ("Mono.Linker.Tests.Cases");
+            rootSourceDirectory = Path.GetFullPath(
+                Path.Combine(PathUtilities.GetTestsSourceRootDirectory(), "Mono.Linker.Tests.Cases")
+            );
+            testCaseAssemblyPath = PathUtilities.GetTestAssemblyPath("Mono.Linker.Tests.Cases");
         }
     }
 }

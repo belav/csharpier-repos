@@ -3,10 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 
-public class TZDTest {
+public class TZDTest
+{
     static TimeZoneInfo _timeZoneInstance;
     static string _timeZone;
-    public static void Main (String [] args)
+
+    public static void Main(String[] args)
     {
         var local = TimeZoneInfo.Local;
         Console.WriteLine($"TimeZone: {local}");
@@ -20,25 +22,31 @@ public class TZDTest {
 
         DateTime localDate = DateTime.Now;
         DateTime utcDate = DateTime.UtcNow;
-        String[] cultureNames = { "en-US", "en-GB", "fr-FR",
-                                "de-DE", "ru-RU" } ;
+        String[] cultureNames = { "en-US", "en-GB", "fr-FR", "de-DE", "ru-RU" };
 
-        foreach (var cultureName in cultureNames) {
+        foreach (var cultureName in cultureNames)
+        {
             var culture = new CultureInfo(cultureName);
             Console.WriteLine("{0}:", culture.NativeName);
-            Console.WriteLine("   Local date and time: {0}, {1:G}",
-                            localDate.ToString(culture), localDate.Kind);
-            Console.WriteLine("   UTC date and time: {0}, {1:G}\n",
-                            utcDate.ToString(culture), utcDate.Kind);
+            Console.WriteLine(
+                "   Local date and time: {0}, {1:G}",
+                localDate.ToString(culture),
+                localDate.Kind
+            );
+            Console.WriteLine(
+                "   UTC date and time: {0}, {1:G}\n",
+                utcDate.ToString(culture),
+                utcDate.Kind
+            );
         }
 
         var tzd = TimeZoneInfo.FindSystemTimeZoneById("US/Eastern");
         Console.WriteLine($"TimeZone: {tzd}");
 
         Console.WriteLine($"TimeZone: {TimeZoneInfo.FindSystemTimeZoneById("Pacific/Honolulu")}");
-        
+
         var tzs = TimeZoneInfo.GetSystemTimeZones();
-        foreach(var tzi in tzs)
+        foreach (var tzi in tzs)
         {
             Console.WriteLine(tzi);
         }
@@ -53,19 +61,19 @@ public class TZDTest {
     public static DateTime GetUserTime(DateTime? utcTime = null)
     {
         if (utcTime == null)
-            utcTime = DateTime.UtcNow;        
-            
+            utcTime = DateTime.UtcNow;
+
         return TimeZoneInfo.ConvertTimeFromUtc(utcTime.Value, TimeZoneInstance);
     }
 
     /// <summary>
     /// Converts local server time to the user's timezone and
     /// returns the UTC date.
-    /// 
+    ///
     /// Use this to convert user captured date inputs and convert
-    /// them to UTC.  
-    /// 
-    /// User input (their local time) comes in as local server time 
+    /// them to UTC.
+    ///
+    /// User input (their local time) comes in as local server time
     /// -> convert to user's timezone from server time
     /// -> convert to UTC
     /// </summary>
@@ -77,7 +85,7 @@ public class TZDTest {
             localServerTime = DateTime.Now;
 
         return TimeZoneInfo.ConvertTime(localServerTime.Value, TimeZoneInstance).ToUniversalTime();
-    }    
+    }
 
     /// <summary>
     /// The users TimeZone using .NET TimeZoneNames
@@ -89,7 +97,7 @@ public class TZDTest {
         {
             TimeZoneInstance = null;
             _timeZone = value;
-        } 
+        }
     }
     public static TimeZoneInfo TimeZoneInstance
     {

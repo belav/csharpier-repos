@@ -16,38 +16,33 @@ namespace System.Activities.Statements
     [ContentProperty("Text")]
     public sealed class WriteLine : CodeActivity
     {
-        public WriteLine()
-        {
-        }
+        public WriteLine() { }
 
         [DefaultValue(null)]
-        public InArgument<TextWriter> TextWriter 
-        {
-            get;
-            set;
-        }
+        public InArgument<TextWriter> TextWriter { get; set; }
 
         [DefaultValue(null)]
-        public InArgument<string> Text 
-        {
-            get;
-            set;
-        }
+        public InArgument<string> Text { get; set; }
 
         protected override void CacheMetadata(CodeActivityMetadata metadata)
         {
-            RuntimeArgument textArgument = new RuntimeArgument("Text", typeof(string), ArgumentDirection.In);
+            RuntimeArgument textArgument = new RuntimeArgument(
+                "Text",
+                typeof(string),
+                ArgumentDirection.In
+            );
             metadata.Bind(this.Text, textArgument);
 
-            RuntimeArgument textWriterArgument = new RuntimeArgument("TextWriter", typeof(TextWriter), ArgumentDirection.In);
+            RuntimeArgument textWriterArgument = new RuntimeArgument(
+                "TextWriter",
+                typeof(TextWriter),
+                ArgumentDirection.In
+            );
             metadata.Bind(this.TextWriter, textWriterArgument);
 
             metadata.SetArgumentsCollection(
-                new Collection<RuntimeArgument>
-                {
-                    textArgument,
-                    textWriterArgument
-                });
+                new Collection<RuntimeArgument> { textArgument, textWriterArgument }
+            );
         }
 
         protected override void Execute(CodeActivityContext context)

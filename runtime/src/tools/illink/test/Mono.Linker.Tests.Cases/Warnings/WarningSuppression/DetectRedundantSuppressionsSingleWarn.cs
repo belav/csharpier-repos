@@ -6,22 +6,21 @@ using System.Diagnostics.CodeAnalysis;
 using Mono.Linker.Tests.Cases.Expectations.Assertions;
 using Mono.Linker.Tests.Cases.Expectations.Metadata;
 
-
 namespace Mono.Linker.Tests.Cases.Warnings.WarningSuppression
 {
     [SkipKeptItemsValidation]
-    [SetupLinkerArgument ("--singlewarn")]
-    [LogContains ("warning IL2104: Assembly 'test' produced trim warnings")]
-    [LogDoesNotContain ("IL2121")]
+    [SetupLinkerArgument("--singlewarn")]
+    [LogContains("warning IL2104: Assembly 'test' produced trim warnings")]
+    [LogDoesNotContain("IL2121")]
     class DetectRedundantSuppressionsSingleWarn
     {
-        public static void Main ()
+        public static void Main()
         {
-            TrimmerCompatibleMethod ();
+            TrimmerCompatibleMethod();
         }
 
-        [UnconditionalSuppressMessage ("test", "IL2072")]
-        public static string TrimmerCompatibleMethod ()
+        [UnconditionalSuppressMessage("test", "IL2072")]
+        public static string TrimmerCompatibleMethod()
         {
             return "test";
         }

@@ -15,7 +15,10 @@ namespace System.ServiceModel.Security
         SecurityToken token;
         ReadOnlyCollection<IAuthorizationPolicy> tokenPolicies;
 
-        public SecurityTokenSpecification(SecurityToken token, ReadOnlyCollection<IAuthorizationPolicy> tokenPolicies)
+        public SecurityTokenSpecification(
+            SecurityToken token,
+            ReadOnlyCollection<IAuthorizationPolicy> tokenPolicies
+        )
         {
             this.token = token;
             if (tokenPolicies == null)
@@ -25,7 +28,7 @@ namespace System.ServiceModel.Security
             this.tokenPolicies = tokenPolicies;
         }
 
-        public SecurityToken SecurityToken 
+        public SecurityToken SecurityToken
         {
             get { return this.token; }
         }

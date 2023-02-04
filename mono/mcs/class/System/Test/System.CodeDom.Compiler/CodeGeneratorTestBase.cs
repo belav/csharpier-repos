@@ -21,15 +21,12 @@ namespace MonoTests.System.CodeDom.Compiler
         private CodeGeneratorOptions _options;
 
         [SetUp]
-        public virtual void SetUp ()
+        public virtual void SetUp()
         {
-            _options = new CodeGeneratorOptions ();
+            _options = new CodeGeneratorOptions();
         }
 
-        protected abstract ICodeGenerator CodeGenerator
-        {
-            get;
-        }
+        protected abstract ICodeGenerator CodeGenerator { get; }
 
         protected virtual string NewLine
         {
@@ -41,18 +38,22 @@ namespace MonoTests.System.CodeDom.Compiler
             get { return _options; }
         }
 
-        protected string GenerateCodeFromType (CodeTypeDeclaration type)
+        protected string GenerateCodeFromType(CodeTypeDeclaration type)
         {
-            return GenerateCodeFromType (type, _options);
+            return GenerateCodeFromType(type, _options);
         }
 
-        protected virtual string GenerateCodeFromType (CodeTypeDeclaration type, CodeGeneratorOptions options)
+        protected virtual string GenerateCodeFromType(
+            CodeTypeDeclaration type,
+            CodeGeneratorOptions options
+        )
         {
-            using (StringWriter writer = new StringWriter ()) {
+            using (StringWriter writer = new StringWriter())
+            {
                 writer.NewLine = NewLine;
-                CodeGenerator.GenerateCodeFromType (type, writer, options);
-                writer.Close ();
-                return writer.ToString ();
+                CodeGenerator.GenerateCodeFromType(type, writer, options);
+                writer.Close();
+                return writer.ToString();
             }
         }
     }

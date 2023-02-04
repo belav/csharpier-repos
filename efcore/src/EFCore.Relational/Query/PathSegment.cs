@@ -61,15 +61,16 @@ public readonly struct PathSegment
     }
 
     /// <inheritdoc />
-    public override bool Equals(object? obj)
-        => obj is PathSegment pathSegment && Equals(pathSegment);
+    public override bool Equals(object? obj) =>
+        obj is PathSegment pathSegment && Equals(pathSegment);
 
-    private bool Equals(PathSegment pathSegment)
-        => PropertyName == pathSegment.PropertyName
-            && ((ArrayIndex == null && pathSegment.ArrayIndex == null)
-                || (ArrayIndex != null && ArrayIndex.Equals(pathSegment.ArrayIndex)));
+    private bool Equals(PathSegment pathSegment) =>
+        PropertyName == pathSegment.PropertyName
+        && (
+            (ArrayIndex == null && pathSegment.ArrayIndex == null)
+            || (ArrayIndex != null && ArrayIndex.Equals(pathSegment.ArrayIndex))
+        );
 
     /// <inheritdoc />
-    public override int GetHashCode()
-        => HashCode.Combine(PropertyName, ArrayIndex);
+    public override int GetHashCode() => HashCode.Combine(PropertyName, ArrayIndex);
 }

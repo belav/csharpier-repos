@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,34 +35,33 @@ namespace System.ServiceModel.Description
     {
         bool include_exception;
 
-        public CallbackDebugBehavior (bool includeExceptionDetailInFaults)
+        public CallbackDebugBehavior(bool includeExceptionDetailInFaults)
         {
             this.include_exception = includeExceptionDetailInFaults;
         }
 
-        public bool IncludeExceptionDetailInFaults {
+        public bool IncludeExceptionDetailInFaults
+        {
             get { return include_exception; }
             set { include_exception = value; }
         }
 
-        void IEndpointBehavior.AddBindingParameters (ServiceEndpoint endpoint,
-            BindingParameterCollection parameters)
+        void IEndpointBehavior.AddBindingParameters(
+            ServiceEndpoint endpoint,
+            BindingParameterCollection parameters
+        ) { }
+
+        void IEndpointBehavior.ApplyDispatchBehavior(
+            ServiceEndpoint endpoint,
+            EndpointDispatcher dispatcher
+        ) { }
+
+        void IEndpointBehavior.ApplyClientBehavior(ServiceEndpoint endpoint, ClientRuntime behavior)
         {
+            behavior.CallbackDispatchRuntime.ChannelDispatcher.IncludeExceptionDetailInFaults =
+                IncludeExceptionDetailInFaults;
         }
 
-        void IEndpointBehavior.ApplyDispatchBehavior (ServiceEndpoint endpoint,
-            EndpointDispatcher dispatcher)
-        {
-        }
-
-        void IEndpointBehavior.ApplyClientBehavior (
-            ServiceEndpoint endpoint, ClientRuntime behavior)
-        {
-            behavior.CallbackDispatchRuntime.ChannelDispatcher.IncludeExceptionDetailInFaults = IncludeExceptionDetailInFaults;
-        }
-
-        void IEndpointBehavior.Validate (ServiceEndpoint endpoint)
-        {
-        }
+        void IEndpointBehavior.Validate(ServiceEndpoint endpoint) { }
     }
 }

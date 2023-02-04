@@ -17,6 +17,7 @@ namespace POS_Server.Controllers
     public class BondsController : ApiController
     {
         CountriesController coctrlr = new CountriesController();
+
         // GET api/<controller> get all bonds
         [HttpPost]
         [Route("Get")]
@@ -27,8 +28,8 @@ namespace POS_Server.Controllers
 
 
 
-          token = TokenManager.readToken(HttpContext.Current.Request); 
- var strP = TokenManager.GetPrincipal(token);
+            token = TokenManager.readToken(HttpContext.Current.Request);
+            var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
                 return TokenManager.GenerateToken(strP);
@@ -58,99 +59,95 @@ namespace POS_Server.Controllers
                     bool canDelete = false;
                     List<BondsModel> listb = new List<BondsModel>();
                     List<BondsModel> list = new List<BondsModel>();
-                 
+
                     using (incposdbEntities entity = new incposdbEntities())
                     {
-                        listb = (// from C in entity.cashTransfer
-                           from bo in entity.bondes
-                           from C in entity.cashTransfer.Where(c => c.bondId == bo.bondId)
-                               // join C in entity.cashTransfer on bo.bondId equals C.bondId into jc
-                           join b in entity.banks on C.bankId equals b.bankId into jb
-                           join a in entity.agents on C.agentId equals a.agentId into ja
-                           join p in entity.pos on C.posId equals p.posId into jp
-                           join pc in entity.pos on C.posIdCreator equals pc.posId into jpcr
-                           join u in entity.users on C.userId equals u.userId into ju
-                           join uc in entity.users on C.createUserId equals uc.userId into juc
-                           join cr in entity.cards on C.cardId equals cr.cardId into jcr
-                           join sh in entity.shippingCompanies on C.shippingCompanyId equals sh.shippingCompanyId into jsh
+                        listb = ( // from C in entity.cashTransfer
+                            from bo in entity.bondes
+                            from C in entity.cashTransfer.Where(c => c.bondId == bo.bondId)
+                            // join C in entity.cashTransfer on bo.bondId equals C.bondId into jc
+                            join b in entity.banks on C.bankId equals b.bankId into jb
+                            join a in entity.agents on C.agentId equals a.agentId into ja
+                            join p in entity.pos on C.posId equals p.posId into jp
+                            join pc in entity.pos on C.posIdCreator equals pc.posId into jpcr
+                            join u in entity.users on C.userId equals u.userId into ju
+                            join uc in entity.users on C.createUserId equals uc.userId into juc
+                            join cr in entity.cards on C.cardId equals cr.cardId into jcr
+                            join sh in entity.shippingCompanies
+                                on C.shippingCompanyId equals sh.shippingCompanyId
+                                into jsh
+                            //  join b in entity.bondes on C.bondId  equals b.bondId  into jb
 
-                           //  join b in entity.bondes on C.bondId  equals b.bondId  into jb
 
+                            from jbb in jb.DefaultIfEmpty()
+                            from jaa in ja.DefaultIfEmpty()
+                            from jpp in jp.DefaultIfEmpty()
+                            from juu in ju.DefaultIfEmpty()
+                            from jpcc in jpcr.DefaultIfEmpty()
+                            from jucc in juc.DefaultIfEmpty()
+                            from jcrd in jcr.DefaultIfEmpty()
+                            from jshd in jsh.DefaultIfEmpty()
+                            where (C.side != "bnd")
+                            // from jc in C.DefaultIfEmpty()
+                            //   where C.bondId==jbbo.bondId
+                            orderby bo.bondId
+                            select new BondsModel
+                            {
+                                bondId = bo.bondId,
+                                number = bo.number,
+                                amount = bo.amount,
+                                deserveDate = bo.deserveDate,
+                                type = bo.type,
+                                isRecieved = bo.isRecieved,
+                                notes = bo.notes,
+                                createDate = bo.createDate,
+                                updateDate = bo.updateDate,
+                                createUserId = bo.createUserId,
+                                updateUserId = bo.updateUserId,
+                                isActive = bo.isActive,
+                                cashTransId = bo.cashTransId,
+                                // cash trans
 
-                           from jbb in jb.DefaultIfEmpty()
-                           from jaa in ja.DefaultIfEmpty()
-                           from jpp in jp.DefaultIfEmpty()
-                           from juu in ju.DefaultIfEmpty()
-                           from jpcc in jpcr.DefaultIfEmpty()
-                           from jucc in juc.DefaultIfEmpty()
-                           from jcrd in jcr.DefaultIfEmpty()
-                           from jshd in jsh.DefaultIfEmpty()
-                           where (C.side != "bnd")
-                           // from jc in C.DefaultIfEmpty()
-                           //   where C.bondId==jbbo.bondId 
-                           orderby bo.bondId
-                           select new BondsModel
-                           {
+                                ctcashTransId = C.cashTransId,
+                                cttransType = C.transType,
+                                ctposId = C.posId,
+                                ctuserId = C.userId,
+                                ctagentId = C.agentId,
+                                ctinvId = C.invId,
+                                cttransNum = C.transNum,
+                                ctcreateDate = C.createDate,
+                                ctupdateDate = C.updateDate,
+                                ctcash = C.cash,
+                                ctupdateUserId = C.updateUserId,
+                                ctcreateUserId = C.createUserId,
+                                ctnotes = C.notes,
+                                ctposIdCreator = C.posIdCreator,
+                                ctisConfirm = C.isConfirm,
+                                ctcashTransIdSource = C.cashTransIdSource,
+                                ctside = C.side,
+                                ctdocName = C.docName,
+                                ctdocNum = C.docNum,
+                                ctdocImage = C.docImage,
+                                ctbankId = C.bankId,
+                                ctprocessType = C.processType,
+                                ctcardId = C.cardId,
+                                ctbondId = C.bondId,
+                                // other tables
 
-                               bondId = bo.bondId,
-                               number = bo.number,
-                               amount = bo.amount,
-                               deserveDate = bo.deserveDate,
-                               type = bo.type,
-                               isRecieved = bo.isRecieved,
-                               notes = bo.notes,
-
-                               createDate = bo.createDate,
-                               updateDate = bo.updateDate,
-                               createUserId = bo.createUserId,
-                               updateUserId = bo.updateUserId,
-                               isActive = bo.isActive,
-                               cashTransId = bo.cashTransId,
-                               // cash trans
-
-                               ctcashTransId = C.cashTransId,
-                               cttransType = C.transType,
-                               ctposId = C.posId,
-                               ctuserId = C.userId,
-                               ctagentId = C.agentId,
-                               ctinvId = C.invId,
-                               cttransNum = C.transNum,
-                               ctcreateDate = C.createDate,
-                               ctupdateDate = C.updateDate,
-                               ctcash = C.cash,
-                               ctupdateUserId = C.updateUserId,
-                               ctcreateUserId = C.createUserId,
-                               ctnotes = C.notes,
-                               ctposIdCreator = C.posIdCreator,
-                               ctisConfirm = C.isConfirm,
-                               ctcashTransIdSource = C.cashTransIdSource,
-                               ctside = C.side,
-                               ctdocName = C.docName,
-                               ctdocNum = C.docNum,
-                               ctdocImage = C.docImage,
-                               ctbankId = C.bankId,
-
-                               ctprocessType = C.processType,
-                               ctcardId = C.cardId,
-                               ctbondId = C.bondId,
-                               // other tables
-
-                               ctbankName = jbb.name,
-                               ctagentName = jaa.name,
-                               ctusersName = juu.name,
-                               ctusersLName = juu.lastname,
-                               ctposName = jpp.name,
-                               ctposCreatorName = jpcc.name,
-
-                               ctcreateUserName = jucc.name,
-                               ctcreateUserJob = jucc.job,
-                               ctcreateUserLName = jucc.lastname,
-                               ctcardName = jcrd.name,
-
-                               ctshippingCompanyId = jshd.shippingCompanyId,
-                               ctshippingCompanyName = jshd.name
-                           }).ToList();
-
+                                ctbankName = jbb.name,
+                                ctagentName = jaa.name,
+                                ctusersName = juu.name,
+                                ctusersLName = juu.lastname,
+                                ctposName = jpp.name,
+                                ctposCreatorName = jpcc.name,
+                                ctcreateUserName = jucc.name,
+                                ctcreateUserJob = jucc.job,
+                                ctcreateUserLName = jucc.lastname,
+                                ctcardName = jcrd.name,
+                                ctshippingCompanyId = jshd.shippingCompanyId,
+                                ctshippingCompanyName = jshd.name
+                            }
+                        ).ToList();
 
                         // can delet or not
                         if (listb.Count > 0)
@@ -161,7 +158,10 @@ namespace POS_Server.Controllers
                                 if (bonditem.isActive == 1)
                                 {
                                     long cId = (long)bonditem.bondId;
-                                    var casht = entity.cashTransfer.Where(x => x.bondId == cId).Select(x => new { x.bondId }).FirstOrDefault();
+                                    var casht = entity.cashTransfer
+                                        .Where(x => x.bondId == cId)
+                                        .Select(x => new { x.bondId })
+                                        .FirstOrDefault();
 
                                     if ((casht is null))
                                         canDelete = true;
@@ -169,72 +169,75 @@ namespace POS_Server.Controllers
                                 bonditem.canDelete = canDelete;
                             }
 
-                            list = listb.GroupBy(X => X.bondId).Select(x => new BondsModel
-                            {
-                                bondId = x.FirstOrDefault().bondId,
-                                number = x.FirstOrDefault().number,
-                                amount = x.FirstOrDefault().amount,
-                                deserveDate = x.FirstOrDefault().deserveDate,
-                                type = x.FirstOrDefault().type,
-                                isRecieved = x.FirstOrDefault().isRecieved,
-                                notes = x.FirstOrDefault().notes,
+                            list = listb
+                                .GroupBy(X => X.bondId)
+                                .Select(
+                                    x =>
+                                        new BondsModel
+                                        {
+                                            bondId = x.FirstOrDefault().bondId,
+                                            number = x.FirstOrDefault().number,
+                                            amount = x.FirstOrDefault().amount,
+                                            deserveDate = x.FirstOrDefault().deserveDate,
+                                            type = x.FirstOrDefault().type,
+                                            isRecieved = x.FirstOrDefault().isRecieved,
+                                            notes = x.FirstOrDefault().notes,
+                                            createDate = x.FirstOrDefault().createDate,
+                                            updateDate = x.FirstOrDefault().updateDate,
+                                            createUserId = x.FirstOrDefault().createUserId,
+                                            updateUserId = x.FirstOrDefault().updateUserId,
+                                            isActive = x.FirstOrDefault().isActive,
+                                            cashTransId = x.FirstOrDefault().cashTransId,
+                                            // cash trans
 
-                                createDate = x.FirstOrDefault().createDate,
-                                updateDate = x.FirstOrDefault().updateDate,
-                                createUserId = x.FirstOrDefault().createUserId,
-                                updateUserId = x.FirstOrDefault().updateUserId,
-                                isActive = x.FirstOrDefault().isActive,
-                                cashTransId = x.FirstOrDefault().cashTransId,
-                                // cash trans
+                                            ctcashTransId = x.FirstOrDefault().ctcashTransId,
+                                            cttransType = x.FirstOrDefault().cttransType,
+                                            ctposId = x.FirstOrDefault().ctposId,
+                                            ctuserId = x.FirstOrDefault().ctuserId,
+                                            ctagentId = x.FirstOrDefault().ctagentId,
+                                            ctinvId = x.FirstOrDefault().ctinvId,
+                                            cttransNum = x.FirstOrDefault().cttransNum,
+                                            ctcreateDate = x.FirstOrDefault().ctcreateDate,
+                                            ctupdateDate = x.FirstOrDefault().ctupdateDate,
+                                            ctcash = x.FirstOrDefault().ctcash,
+                                            ctupdateUserId = x.FirstOrDefault().ctupdateUserId,
+                                            ctcreateUserId = x.FirstOrDefault().ctcreateUserId,
+                                            ctnotes = x.FirstOrDefault().ctnotes,
+                                            ctposIdCreator = x.FirstOrDefault().ctposIdCreator,
+                                            ctisConfirm = x.FirstOrDefault().ctisConfirm,
+                                            ctcashTransIdSource =
+                                                x.FirstOrDefault().ctcashTransIdSource,
+                                            ctside = x.FirstOrDefault().ctside,
+                                            ctdocName = x.FirstOrDefault().ctdocName,
+                                            ctdocNum = x.FirstOrDefault().ctdocNum,
+                                            ctdocImage = x.FirstOrDefault().ctdocImage,
+                                            ctbankId = x.FirstOrDefault().ctbankId,
+                                            ctprocessType = x.FirstOrDefault().ctprocessType,
+                                            ctcardId = x.FirstOrDefault().ctcardId,
+                                            ctbondId = x.FirstOrDefault().ctbondId,
+                                            // other tables
 
-                                ctcashTransId = x.FirstOrDefault().ctcashTransId,
-                                cttransType = x.FirstOrDefault().cttransType,
-                                ctposId = x.FirstOrDefault().ctposId,
-                                ctuserId = x.FirstOrDefault().ctuserId,
-                                ctagentId = x.FirstOrDefault().ctagentId,
-                                ctinvId = x.FirstOrDefault().ctinvId,
-                                cttransNum = x.FirstOrDefault().cttransNum,
-                                ctcreateDate = x.FirstOrDefault().ctcreateDate,
-                                ctupdateDate = x.FirstOrDefault().ctupdateDate,
-                                ctcash = x.FirstOrDefault().ctcash,
-                                ctupdateUserId = x.FirstOrDefault().ctupdateUserId,
-                                ctcreateUserId = x.FirstOrDefault().ctcreateUserId,
-                                ctnotes = x.FirstOrDefault().ctnotes,
-                                ctposIdCreator = x.FirstOrDefault().ctposIdCreator,
-                                ctisConfirm = x.FirstOrDefault().ctisConfirm,
-                                ctcashTransIdSource = x.FirstOrDefault().ctcashTransIdSource,
-                                ctside = x.FirstOrDefault().ctside,
-                                ctdocName = x.FirstOrDefault().ctdocName,
-                                ctdocNum = x.FirstOrDefault().ctdocNum,
-                                ctdocImage = x.FirstOrDefault().ctdocImage,
-                                ctbankId = x.FirstOrDefault().ctbankId,
-
-                                ctprocessType = x.FirstOrDefault().ctprocessType,
-                                ctcardId = x.FirstOrDefault().ctcardId,
-                                ctbondId = x.FirstOrDefault().ctbondId,
-                                // other tables
-
-                                ctbankName = x.FirstOrDefault().ctbankName,
-                                ctagentName = x.FirstOrDefault().ctagentName,
-                                ctusersName = x.FirstOrDefault().ctusersName,
-                                ctusersLName = x.FirstOrDefault().ctusersLName,
-                                ctposName = x.FirstOrDefault().ctposName,
-                                ctposCreatorName = x.FirstOrDefault().ctposCreatorName,
-
-                                ctcreateUserName = x.FirstOrDefault().ctcreateUserName,
-                                ctcreateUserJob = x.FirstOrDefault().ctcreateUserJob,
-                                ctcreateUserLName = x.FirstOrDefault().ctcreateUserLName,
-                                ctcardName = x.FirstOrDefault().ctcardName,
-                                ctshippingCompanyId = x.FirstOrDefault().ctshippingCompanyId,
-                                ctshippingCompanyName = x.FirstOrDefault().ctshippingCompanyName
-
-                            }).ToList();
+                                            ctbankName = x.FirstOrDefault().ctbankName,
+                                            ctagentName = x.FirstOrDefault().ctagentName,
+                                            ctusersName = x.FirstOrDefault().ctusersName,
+                                            ctusersLName = x.FirstOrDefault().ctusersLName,
+                                            ctposName = x.FirstOrDefault().ctposName,
+                                            ctposCreatorName = x.FirstOrDefault().ctposCreatorName,
+                                            ctcreateUserName = x.FirstOrDefault().ctcreateUserName,
+                                            ctcreateUserJob = x.FirstOrDefault().ctcreateUserJob,
+                                            ctcreateUserLName =
+                                                x.FirstOrDefault().ctcreateUserLName,
+                                            ctcardName = x.FirstOrDefault().ctcardName,
+                                            ctshippingCompanyId =
+                                                x.FirstOrDefault().ctshippingCompanyId,
+                                            ctshippingCompanyName =
+                                                x.FirstOrDefault().ctshippingCompanyName
+                                        }
+                                )
+                                .ToList();
                         }
-
-
                     }
                     return TokenManager.GenerateToken(list);
-
                 }
                 catch
                 {
@@ -285,7 +288,7 @@ namespace POS_Server.Controllers
             //           from jshd in jsh.DefaultIfEmpty()
             //           where (C.side != "bnd")
             //       // from jc in C.DefaultIfEmpty()
-            //       //   where C.bondId==jbbo.bondId 
+            //       //   where C.bondId==jbbo.bondId
             //       orderby bo.bondId
             //           select new BondsModel
             //           {
@@ -444,17 +447,15 @@ namespace POS_Server.Controllers
             //    return NotFound();
         }
 
-
-
-        // GET api/<controller>  Get card By ID 
+        // GET api/<controller>  Get card By ID
         [HttpPost]
         [Route("GetbondByID")]
         public string GetbondByID(string token)
         {
             // public ResponseVM GetPurinv(string token)Id
 
-          token = TokenManager.readToken(HttpContext.Current.Request); 
- var strP = TokenManager.GetPrincipal(token);
+            token = TokenManager.readToken(HttpContext.Current.Request);
+            var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
                 return TokenManager.GenerateToken(strP);
@@ -463,7 +464,6 @@ namespace POS_Server.Controllers
             {
                 long Id = 0;
 
-
                 IEnumerable<Claim> claims = TokenManager.getTokenClaims(token);
                 foreach (Claim c in claims)
                 {
@@ -471,50 +471,44 @@ namespace POS_Server.Controllers
                     {
                         Id = long.Parse(c.Value);
                     }
-
-
                 }
 
                 // DateTime cmpdate = DateTime.Now.AddDays(newdays);
                 try
                 {
-
-
                     using (incposdbEntities entity = new incposdbEntities())
                     {
                         var item = entity.bondes
-                       .Where(c => c.bondId == Id)
-                       .Select(c => new
-                       {
-                           c.bondId,
-                           c.number,
-                           c.amount,
-                           c.deserveDate,
-                           c.type,
-                           c.isRecieved,
-                           c.notes,
-                           c.createDate,
-                           c.updateDate,
-                           c.createUserId,
-                           c.updateUserId,
-                           c.isActive,
-                           c.cashTransId,
-
-                       })
-                       .FirstOrDefault();
+                            .Where(c => c.bondId == Id)
+                            .Select(
+                                c =>
+                                    new
+                                    {
+                                        c.bondId,
+                                        c.number,
+                                        c.amount,
+                                        c.deserveDate,
+                                        c.type,
+                                        c.isRecieved,
+                                        c.notes,
+                                        c.createDate,
+                                        c.updateDate,
+                                        c.createUserId,
+                                        c.updateUserId,
+                                        c.isActive,
+                                        c.cashTransId,
+                                    }
+                            )
+                            .FirstOrDefault();
 
                         return TokenManager.GenerateToken(item);
-
                     }
-
                 }
                 catch
                 {
                     return TokenManager.GenerateToken("0");
                 }
-
             }
-
 
             //var re = Request;
             //var headers = re.Headers;
@@ -568,18 +562,13 @@ namespace POS_Server.Controllers
             //    return NotFound();
         }
 
-
-
-
-
         // GET api/<controller>  Get card By is active
         [HttpPost]
         [Route("GetByisActive")]
         public string GetByisActive(string token)
         {
-
-          token = TokenManager.readToken(HttpContext.Current.Request); 
- var strP = TokenManager.GetPrincipal(token);
+            token = TokenManager.readToken(HttpContext.Current.Request);
+            var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
                 return TokenManager.GenerateToken(strP);
@@ -588,7 +577,6 @@ namespace POS_Server.Controllers
             {
                 byte isActive = 0;
 
-
                 IEnumerable<Claim> claims = TokenManager.getTokenClaims(token);
                 foreach (Claim c in claims)
                 {
@@ -596,48 +584,43 @@ namespace POS_Server.Controllers
                     {
                         isActive = byte.Parse(c.Value);
                     }
-
-
                 }
 
                 // DateTime cmpdate = DateTime.Now.AddDays(newdays);
                 try
                 {
-
-
                     using (incposdbEntities entity = new incposdbEntities())
                     {
                         var list = entity.bondes
-                       .Where(c => c.isActive == isActive)
-                       .Select(c => new
-                       {
-                           c.bondId,
-                           c.number,
-                           c.amount,
-                           c.deserveDate,
-                           c.type,
-                           c.isRecieved,
-                           c.notes,
-                           c.createDate,
-                           c.updateDate,
-                           c.createUserId,
-                           c.updateUserId,
-                           c.isActive,
-                           c.cashTransId,
-                       })
-                       .ToList();
+                            .Where(c => c.isActive == isActive)
+                            .Select(
+                                c =>
+                                    new
+                                    {
+                                        c.bondId,
+                                        c.number,
+                                        c.amount,
+                                        c.deserveDate,
+                                        c.type,
+                                        c.isRecieved,
+                                        c.notes,
+                                        c.createDate,
+                                        c.updateDate,
+                                        c.createUserId,
+                                        c.updateUserId,
+                                        c.isActive,
+                                        c.cashTransId,
+                                    }
+                            )
+                            .ToList();
 
-                   
-                    return TokenManager.GenerateToken(list);
-
+                        return TokenManager.GenerateToken(list);
                     }
-
                 }
                 catch
                 {
                     return TokenManager.GenerateToken("0");
                 }
-
             }
             //    var re = Request;
             //    var headers = re.Headers;
@@ -685,20 +668,16 @@ namespace POS_Server.Controllers
             //        return NotFound();
         }
 
-
-        // add or update card 
+        // add or update card
         [HttpPost]
         [Route("Save")]
         public string Save(string token)
         {
-
             //string Object
             string message = "";
 
-
-
-          token = TokenManager.readToken(HttpContext.Current.Request); 
- var strP = TokenManager.GetPrincipal(token);
+            token = TokenManager.readToken(HttpContext.Current.Request);
+            var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
                 return TokenManager.GenerateToken(strP);
@@ -714,16 +693,16 @@ namespace POS_Server.Controllers
                     {
                         Object = c.Value.Replace("\\", string.Empty);
                         Object = Object.Trim('"');
-                        newObject = JsonConvert.DeserializeObject<bondes>(Object, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        newObject = JsonConvert.DeserializeObject<bondes>(
+                            Object,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                         break;
                     }
                 }
                 if (newObject != null)
                 {
-
-
                     bondes tmpObject = null;
-
 
                     try
                     {
@@ -732,9 +711,8 @@ namespace POS_Server.Controllers
                             var bondEntity = entity.Set<bondes>();
                             if (newObject.bondId == 0 || newObject.bondId == null)
                             {
-
-                                newObject.createDate =  coctrlr.AddOffsetTodate(DateTime.Now);
-                                newObject.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                                newObject.createDate = coctrlr.AddOffsetTodate(DateTime.Now);
+                                newObject.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                                 newObject.updateUserId = newObject.createUserId;
                                 bondEntity.Add(newObject);
                                 entity.SaveChanges();
@@ -742,8 +720,9 @@ namespace POS_Server.Controllers
                             }
                             else
                             {
-
-                                var tmpbond = entity.bondes.Where(p => p.bondId == newObject.bondId).FirstOrDefault();
+                                var tmpbond = entity.bondes
+                                    .Where(p => p.bondId == newObject.bondId)
+                                    .FirstOrDefault();
 
                                 tmpbond.bondId = newObject.bondId;
                                 tmpbond.number = newObject.number;
@@ -753,7 +732,7 @@ namespace POS_Server.Controllers
                                 tmpbond.isRecieved = newObject.isRecieved;
                                 tmpbond.notes = newObject.notes;
                                 tmpbond.createDate = newObject.createDate;
-                                tmpbond.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);// server current date;
+                                tmpbond.updateDate = coctrlr.AddOffsetTodate(DateTime.Now); // server current date;
                                 tmpbond.createUserId = newObject.createUserId;
                                 tmpbond.updateUserId = newObject.updateUserId;
                                 tmpbond.isActive = newObject.isActive;
@@ -762,28 +741,20 @@ namespace POS_Server.Controllers
                                 //message = "card Is Updated Successfully";
                                 entity.SaveChanges();
                                 message = tmpbond.bondId.ToString();
-
                             }
-
-
-                    }
+                        }
 
                         return TokenManager.GenerateToken(message);
-
                     }
                     catch
                     {
                         message = "0";
                         return TokenManager.GenerateToken(message);
                     }
-
-
                 }
 
                 return TokenManager.GenerateToken(message);
-
             }
-
 
             //var re = Request;
             //var headers = re.Headers;
@@ -857,17 +828,14 @@ namespace POS_Server.Controllers
 
         [HttpPost]
         [Route("Delete")]
-        public string  Delete(string token)
+        public string Delete(string token)
         {
-
             // int bondId, long userId, Boolean final
             //long Id, long userId
             string message = "";
 
-
-
-          token = TokenManager.readToken(HttpContext.Current.Request); 
- var strP = TokenManager.GetPrincipal(token);
+            token = TokenManager.readToken(HttpContext.Current.Request);
+            var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
                 return TokenManager.GenerateToken(strP);
@@ -877,7 +845,7 @@ namespace POS_Server.Controllers
                 long bondId = 0;
                 long userId = 0;
                 bool final = false;
-             
+
                 IEnumerable<Claim> claims = TokenManager.getTokenClaims(token);
                 foreach (Claim c in claims)
                 {
@@ -893,53 +861,48 @@ namespace POS_Server.Controllers
                     {
                         final = bool.Parse(c.Value);
                     }
-
                 }
 
-               
-                    if (final)
+                if (final)
+                {
+                    try
                     {
-                        try
+                        using (incposdbEntities entity = new incposdbEntities())
                         {
-                            using (incposdbEntities entity = new incposdbEntities())
-                            {
-                                bondes bondObj = entity.bondes.Find(bondId);
+                            bondes bondObj = entity.bondes.Find(bondId);
 
-                                entity.bondes.Remove(bondObj);
+                            entity.bondes.Remove(bondObj);
                             message = entity.SaveChanges().ToString();
                             return TokenManager.GenerateToken(message);
                         }
-                        }
-                        catch
-                        {
+                    }
+                    catch
+                    {
                         return TokenManager.GenerateToken("0");
                     }
-                    }
-                    else
+                }
+                else
+                {
+                    try
                     {
-                        try
+                        using (incposdbEntities entity = new incposdbEntities())
                         {
-                            using (incposdbEntities entity = new incposdbEntities())
-                            {
-                                bondes Obj = entity.bondes.Find(bondId);
+                            bondes Obj = entity.bondes.Find(bondId);
 
-                                Obj.isActive = 0;
-                                Obj.updateUserId = userId;
-                                Obj.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
-                              message=  entity.SaveChanges().ToString();
+                            Obj.isActive = 0;
+                            Obj.updateUserId = userId;
+                            Obj.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
+                            message = entity.SaveChanges().ToString();
 
                             return TokenManager.GenerateToken(message);
                         }
-                        }
-                        catch
-                        {
-                            return TokenManager.GenerateToken("0");
-                        }
                     }
-                
-
+                    catch
+                    {
+                        return TokenManager.GenerateToken("0");
+                    }
+                }
             }
-
 
             //var re = Request;
             //var headers = re.Headers;

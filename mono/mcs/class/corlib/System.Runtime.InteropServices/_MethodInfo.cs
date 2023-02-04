@@ -11,20 +11,34 @@ using System.Reflection;
 
 namespace System.Runtime.InteropServices
 {
-    [CLSCompliant (false)]
-    [InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-    [Guid ("FFCC1B5D-ECB8-38DD-9B01-3DC8ABC2AA5F")]
+    [CLSCompliant(false)]
+    [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+    [Guid("FFCC1B5D-ECB8-38DD-9B01-3DC8ABC2AA5F")]
 #if !FULL_AOT_RUNTIME
-    [TypeLibImportClass (typeof (MethodInfo))]
+    [TypeLibImportClass(typeof(MethodInfo))]
 #endif
-    [ComVisible (true)]
+    [ComVisible(true)]
     public interface _MethodInfo
     {
         void GetTypeInfoCount(out uint pcTInfo);
         void GetTypeInfo(uint iTInfo, uint lcid, IntPtr ppTInfo);
-        void GetIDsOfNames([In] ref Guid riid, IntPtr rgszNames, uint cNames, uint lcid, IntPtr rgDispId);
-        void Invoke(uint dispIdMember, [In] ref Guid riid, uint lcid, short wFlags, IntPtr pDispParams,
-            IntPtr pVarResult, IntPtr pExcepInfo, IntPtr puArgErr);
+        void GetIDsOfNames(
+            [In] ref Guid riid,
+            IntPtr rgszNames,
+            uint cNames,
+            uint lcid,
+            IntPtr rgDispId
+        );
+        void Invoke(
+            uint dispIdMember,
+            [In] ref Guid riid,
+            uint lcid,
+            short wFlags,
+            IntPtr pDispParams,
+            IntPtr pVarResult,
+            IntPtr pExcepInfo,
+            IntPtr puArgErr
+        );
 
         String ToString();
         bool Equals(Object other);
@@ -44,7 +58,13 @@ namespace System.Runtime.InteropServices
         RuntimeMethodHandle MethodHandle { get; }
         MethodAttributes Attributes { get; }
         CallingConventions CallingConvention { get; }
-        Object Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture);
+        Object Invoke(
+            Object obj,
+            BindingFlags invokeAttr,
+            Binder binder,
+            Object[] parameters,
+            CultureInfo culture
+        );
         bool IsPublic { get; }
         bool IsPrivate { get; }
         bool IsFamily { get; }

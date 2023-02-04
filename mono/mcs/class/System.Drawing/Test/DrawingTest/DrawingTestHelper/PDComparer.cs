@@ -10,49 +10,48 @@ namespace DrawingTestHelper
     public class PDComparer
     {
         static int SearchRectSize = 10;
-        static double [,] ltDistances = new double[SearchRectSize,SearchRectSize];
-
+        static double[,] ltDistances = new double[SearchRectSize, SearchRectSize];
 
         static PDComparer()
         {
             for (int x = 0; x < SearchRectSize; x++)
                 for (int y = 0; y < SearchRectSize; y++)
                 {
-                    ltDistances[x,y] = Math.Sqrt(x*x + y*y);
+                    ltDistances[x, y] = Math.Sqrt(x * x + y * y);
                 }
         }
 
-        public PDComparer()
-        {
-        }
-        
+        public PDComparer() { }
+
         static int j;
+
         public static double Compare(Bitmap b1, Bitmap b2)
         {
-            b1.Save ("/tmp/fo" + j + ".jpg");
-            b2.Save ("/tmp/so" + j + ".jpg");
+            b1.Save("/tmp/fo" + j + ".jpg");
+            b2.Save("/tmp/so" + j + ".jpg");
             j++;
-            Point [] shapePoints = GetPointFromImage(b1);
-            double [] pointsDistance = new double[ shapePoints.Length ];
+            Point[] shapePoints = GetPointFromImage(b1);
+            double[] pointsDistance = new double[shapePoints.Length];
 
             for (int i = 0; i < shapePoints.Length; i++)
             {
-                pointsDistance[i] = DistanceToClosestPoint( shapePoints[i], b2 );
+                pointsDistance[i] = DistanceToClosestPoint(shapePoints[i], b2);
             }
 
-            return Max( pointsDistance );
+            return Max(pointsDistance);
         }
 
         private static double DistanceToClosestPoint(Point p, Bitmap b)
         {
-            if (IsPixelExist( b.GetPixel(p.X, p.Y) ))
+            if (IsPixelExist(b.GetPixel(p.X, p.Y)))
                 return 0;
 
             Rectangle r = new Rectangle(
                 p.X - SearchRectSize / 2,
                 p.Y - SearchRectSize / 2,
                 SearchRectSize,
-                SearchRectSize);
+                SearchRectSize
+            );
 
             double min_distance = SearchRectSize;
 
@@ -60,7 +59,7 @@ namespace DrawingTestHelper
                 for (int y = r.Y; y < r.Y + SearchRectSize; y++)
                     if ((x < b.Width) && (y < b.Height) && (x >= 0) && (y >= 0))
                     {
-                        if ( IsPixelExist( b.GetPixel(x, y) ) )
+                        if (IsPixelExist(b.GetPixel(x, y)))
                         {
                             double d = CalculateDistance(p.X, p.Y, x, y);
                             if (d < min_distance)
@@ -83,7 +82,7 @@ namespace DrawingTestHelper
             return ltDistances[delta_x, delta_y];
         }
 
-        private static double Max(double [] a)
+        private static double Max(double[] a)
         {
             double max = 0;
 
@@ -92,17 +91,17 @@ namespace DrawingTestHelper
                     max = a[i];
             return max;
         }
-        
-        private static Point [] GetPointFromImage(Bitmap b)
+
+        private static Point[] GetPointFromImage(Bitmap b)
         {
             ArrayList points = new ArrayList();
-            
-            for(int x = 0; x < b.Width; x++)
-                for(int y = 0; y < b.Height; y++)
-                    if (IsPixelExist ( b.GetPixel(x, y) ))
-                        points.Add( new Point(x, y) );
 
-            return (Point [])points.ToArray( typeof(Point) );
+            for (int x = 0; x < b.Width; x++)
+                for (int y = 0; y < b.Height; y++)
+                    if (IsPixelExist(b.GetPixel(x, y)))
+                        points.Add(new Point(x, y));
+
+            return (Point[])points.ToArray(typeof(Point));
         }
 
         private static bool IsPixelExist(Color c)

@@ -33,10 +33,10 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Pythia.Api
             set => _globalOptions.SetGlobalOption(s_removeRecommendationLimitOption, value);
         }
 
-        private static readonly Option2<bool> s_showDebugInfoOption = new(
-            "InternalFeatureOnOffOptions_ShowDebugInfo", defaultValue: false);
+        private static readonly Option2<bool> s_showDebugInfoOption =
+            new("InternalFeatureOnOffOptions_ShowDebugInfo", defaultValue: false);
 
-        private static readonly Option2<bool> s_removeRecommendationLimitOption = new(
-            "InternalFeatureOnOffOptions_RemoveRecommendationLimit", defaultValue: false);
+        private static readonly Option2<bool> s_removeRecommendationLimitOption =
+            new("InternalFeatureOnOffOptions_RemoveRecommendationLimit", defaultValue: false);
     }
 }

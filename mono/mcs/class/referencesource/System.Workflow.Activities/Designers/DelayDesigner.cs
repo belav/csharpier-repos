@@ -13,9 +13,7 @@ namespace System.Workflow.Activities
 
     #region Class DelayDesigner
     [ActivityDesignerTheme(typeof(DelayDesignerTheme))]
-    internal sealed class DelayDesigner : ActivityDesigner
-    {
-    }
+    internal sealed class DelayDesigner : ActivityDesigner { }
     #endregion
 
     #region DelayDesignerTheme

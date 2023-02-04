@@ -40,41 +40,50 @@ public class Finally
     public bool PosTest1()
     {
         bool retVal = true;
-        int  stage  = 0;
+        int stage = 0;
 
         TestLibrary.TestFramework.LogInformation("PosTest1: Outer finally");
 
         try
         {
-            stage++;    //1
+            stage++; //1
             try
             {
-                stage++;    //2
+                stage++; //2
                 throw new ArgumentException();
             }
             catch (ArgumentException)
             {
                 if (2 != stage)
                 {
-                    TestLibrary.TestFramework.LogError("000", "Catch block executed in wrong order: Expected(2) Actual("+stage+")");
+                    TestLibrary.TestFramework.LogError(
+                        "000",
+                        "Catch block executed in wrong order: Expected(2) Actual(" + stage + ")"
+                    );
                     retVal = false;
                 }
-                stage++;    //3
+                stage++; //3
             }
         }
         finally
         {
             if (3 != stage)
             {
-                TestLibrary.TestFramework.LogError("000", "Finally block executed in wrong order: Expected(3) Actual("+stage+")");
+                TestLibrary.TestFramework.LogError(
+                    "000",
+                    "Finally block executed in wrong order: Expected(3) Actual(" + stage + ")"
+                );
                 retVal = false;
             }
-            stage++;    //4
+            stage++; //4
         }
 
         if (4 != stage)
         {
-            TestLibrary.TestFramework.LogError("000", "Finally/Catch block executed too many times: Expected(4) Actual("+stage+")");
+            TestLibrary.TestFramework.LogError(
+                "000",
+                "Finally/Catch block executed too many times: Expected(4) Actual(" + stage + ")"
+            );
             retVal = false;
         }
 
@@ -84,37 +93,46 @@ public class Finally
     public bool PosTest2()
     {
         bool retVal = true;
-        int  stage  = 0;
+        int stage = 0;
 
         TestLibrary.TestFramework.LogInformation("PosTest2: Cascade finally");
 
         try
         {
-            stage++;    //1
+            stage++; //1
             throw new ArgumentException();
         }
         catch (ArgumentException)
         {
             if (1 != stage)
             {
-                TestLibrary.TestFramework.LogError("000", "Catch block executed in wrong order: Expected(1) Actual("+stage+")");
+                TestLibrary.TestFramework.LogError(
+                    "000",
+                    "Catch block executed in wrong order: Expected(1) Actual(" + stage + ")"
+                );
                 retVal = false;
             }
-            stage++;    //2
+            stage++; //2
         }
         finally
         {
             if (2 != stage)
             {
-                TestLibrary.TestFramework.LogError("000", "Finally block executed in wrong order: Expected(2) Actual("+stage+")");
+                TestLibrary.TestFramework.LogError(
+                    "000",
+                    "Finally block executed in wrong order: Expected(2) Actual(" + stage + ")"
+                );
                 retVal = false;
             }
-            stage++;    //3
+            stage++; //3
         }
 
         if (3 != stage)
         {
-            TestLibrary.TestFramework.LogError("000", "Finally/Catch block executed too many times: Expected(3) Actual("+stage+")");
+            TestLibrary.TestFramework.LogError(
+                "000",
+                "Finally/Catch block executed too many times: Expected(3) Actual(" + stage + ")"
+            );
             retVal = false;
         }
 
@@ -124,61 +142,76 @@ public class Finally
     public bool PosTest3()
     {
         bool retVal = true;
-        int  stage  = 0;
+        int stage = 0;
 
         TestLibrary.TestFramework.LogInformation("PosTest2: Nested finally");
 
         try
         {
-            stage++;    //1
+            stage++; //1
             throw new ArgumentException();
         }
         catch (ArgumentException)
         {
             if (1 != stage)
             {
-                TestLibrary.TestFramework.LogError("000", "Catch block executed in wrong order: Expected(1) Actual("+stage+")");
+                TestLibrary.TestFramework.LogError(
+                    "000",
+                    "Catch block executed in wrong order: Expected(1) Actual(" + stage + ")"
+                );
                 retVal = false;
             }
-            stage++;    //2
+            stage++; //2
 
             try
             {
-                stage++;    //3
+                stage++; //3
                 throw new ArgumentException();
             }
             catch (ArgumentException)
             {
                 if (3 != stage)
                 {
-                    TestLibrary.TestFramework.LogError("000", "Catch block executed in wrong order: Expected(3) Actual("+stage+")");
+                    TestLibrary.TestFramework.LogError(
+                        "000",
+                        "Catch block executed in wrong order: Expected(3) Actual(" + stage + ")"
+                    );
                     retVal = false;
                 }
-                stage++;    //4
+                stage++; //4
             }
             finally
             {
                 if (4 != stage)
                 {
-                    TestLibrary.TestFramework.LogError("000", "Finally block executed in wrong order: Expected(4) Actual("+stage+")");
+                    TestLibrary.TestFramework.LogError(
+                        "000",
+                        "Finally block executed in wrong order: Expected(4) Actual(" + stage + ")"
+                    );
                     retVal = false;
                 }
-                stage++;    //5
+                stage++; //5
             }
         }
         finally
         {
             if (5 != stage)
             {
-                TestLibrary.TestFramework.LogError("000", "Finally block executed in wrong order: Expected(5) Actual("+stage+")");
+                TestLibrary.TestFramework.LogError(
+                    "000",
+                    "Finally block executed in wrong order: Expected(5) Actual(" + stage + ")"
+                );
                 retVal = false;
             }
-            stage++;    //6
+            stage++; //6
         }
 
         if (6 != stage)
         {
-            TestLibrary.TestFramework.LogError("000", "Finally/Catch block executed too many times: Expected(6) Actual("+stage+")");
+            TestLibrary.TestFramework.LogError(
+                "000",
+                "Finally/Catch block executed too many times: Expected(6) Actual(" + stage + ")"
+            );
             retVal = false;
         }
 

@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -37,7 +37,7 @@ namespace System.Runtime.Remoting.Channels.Http
         ArrayList _values;
         ArrayList _keys;
 
-        public AggregateDictionary (IDictionary[] dics)
+        public AggregateDictionary(IDictionary[] dics)
         {
             dictionaries = dics;
         }
@@ -57,14 +57,14 @@ namespace System.Runtime.Remoting.Channels.Http
             get
             {
                 foreach (IDictionary dic in dictionaries)
-                    if (dic.Contains (key)) return dic[key];
+                    if (dic.Contains(key))
+                        return dic[key];
                 return null;
             }
-
             set
             {
                 foreach (IDictionary dic in dictionaries)
-                    if (dic.Contains (key))
+                    if (dic.Contains(key))
                         dic[key] = value;
             }
         }
@@ -73,11 +73,12 @@ namespace System.Runtime.Remoting.Channels.Http
         {
             get
             {
-                if (_keys != null) return _keys;
+                if (_keys != null)
+                    return _keys;
 
-                _keys = new ArrayList ();
+                _keys = new ArrayList();
                 foreach (IDictionary dic in dictionaries)
-                    _keys.AddRange (dic.Keys);
+                    _keys.AddRange(dic.Keys);
                 return _keys;
             }
         }
@@ -86,51 +87,53 @@ namespace System.Runtime.Remoting.Channels.Http
         {
             get
             {
-                if (_values != null) return _values;
+                if (_values != null)
+                    return _values;
 
-                _values = new ArrayList ();
+                _values = new ArrayList();
                 foreach (IDictionary dic in dictionaries)
-                    _values.AddRange (dic.Values);
+                    _values.AddRange(dic.Values);
                 return _values;
             }
         }
 
-        public void Add (object key, object value)
+        public void Add(object key, object value)
         {
-            throw new NotSupportedException ();
+            throw new NotSupportedException();
         }
 
-        public void Clear ()
+        public void Clear()
         {
-            throw new NotSupportedException ();
+            throw new NotSupportedException();
         }
 
-        public bool Contains (object ob)
+        public bool Contains(object ob)
         {
             foreach (IDictionary dic in dictionaries)
-                if (dic.Contains (ob)) return true;
+                if (dic.Contains(ob))
+                    return true;
             return false;
         }
 
-        public IDictionaryEnumerator GetEnumerator ()
+        public IDictionaryEnumerator GetEnumerator()
         {
-            return new AggregateEnumerator (dictionaries);
+            return new AggregateEnumerator(dictionaries);
         }
 
-        IEnumerator IEnumerable.GetEnumerator ()
+        IEnumerator IEnumerable.GetEnumerator()
         {
-            return new AggregateEnumerator (dictionaries);
+            return new AggregateEnumerator(dictionaries);
         }
 
-        public void Remove (object ob)
+        public void Remove(object ob)
         {
-            throw new NotSupportedException ();
+            throw new NotSupportedException();
         }
 
-        public void CopyTo (Array array, int index)
+        public void CopyTo(Array array, int index)
         {
             foreach (object ob in this)
-                array.SetValue (ob, index++);
+                array.SetValue(ob, index++);
         }
 
         public int Count
@@ -161,10 +164,10 @@ namespace System.Runtime.Remoting.Channels.Http
         int pos = 0;
         IDictionaryEnumerator currente;
 
-        public AggregateEnumerator (IDictionary[] dics)
+        public AggregateEnumerator(IDictionary[] dics)
         {
             dictionaries = dics;
-            Reset ();
+            Reset();
         }
 
         public DictionaryEntry Entry
@@ -187,25 +190,28 @@ namespace System.Runtime.Remoting.Channels.Http
             get { return currente.Current; }
         }
 
-        public bool MoveNext ()
+        public bool MoveNext()
         {
-            if (pos >= dictionaries.Length) return false;
+            if (pos >= dictionaries.Length)
+                return false;
 
-            if (!currente.MoveNext ()) {
+            if (!currente.MoveNext())
+            {
                 pos++;
-                if (pos >= dictionaries.Length) return false;
-                currente = dictionaries[pos].GetEnumerator ();
-                return MoveNext ();
+                if (pos >= dictionaries.Length)
+                    return false;
+                currente = dictionaries[pos].GetEnumerator();
+                return MoveNext();
             }
 
             return true;
         }
 
-        public void Reset ()
+        public void Reset()
         {
             pos = 0;
             if (dictionaries.Length > 0)
-                currente = dictionaries[0].GetEnumerator ();
+                currente = dictionaries[0].GetEnumerator();
         }
     }
 }

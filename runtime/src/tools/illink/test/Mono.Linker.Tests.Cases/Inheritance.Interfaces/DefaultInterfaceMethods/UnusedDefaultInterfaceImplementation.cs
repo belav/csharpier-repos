@@ -5,13 +5,16 @@ using Mono.Linker.Tests.Cases.Expectations.Assertions;
 
 namespace Mono.Linker.Tests.Cases.Inheritance.Interfaces.DefaultInterfaceMethods
 {
-    [TestCaseRequirements (TestRunCharacteristics.SupportsDefaultInterfaceMethods, "Requires support for default interface methods")]
+    [TestCaseRequirements(
+        TestRunCharacteristics.SupportsDefaultInterfaceMethods,
+        "Requires support for default interface methods"
+    )]
     class UnusedDefaultInterfaceImplementation
     {
-        public static void Main ()
+        public static void Main()
         {
 #if SUPPORTS_DEFAULT_INTERFACE_METHODS
-            ((IFoo) new Foo ()).InterfaceMethod ();
+            ((IFoo)new Foo()).InterfaceMethod();
 #endif
         }
 
@@ -20,27 +23,23 @@ namespace Mono.Linker.Tests.Cases.Inheritance.Interfaces.DefaultInterfaceMethods
         interface IFoo
         {
             [Kept]
-            void InterfaceMethod ();
+            void InterfaceMethod();
         }
 
         interface IDefaultImpl : IFoo
         {
-            void IFoo.InterfaceMethod ()
-            {
-            }
+            void IFoo.InterfaceMethod() { }
         }
 
         [Kept]
-        [KeptInterface (typeof (IFoo))]
+        [KeptInterface(typeof(IFoo))]
         class Foo : IDefaultImpl
         {
             [Kept]
-            public Foo () { }
+            public Foo() { }
 
             [Kept]
-            public void InterfaceMethod ()
-            {
-            }
+            public void InterfaceMethod() { }
         }
 #endif
     }

@@ -3,18 +3,13 @@
 
 class B
 {
-    public B (object o)
-    {
-    }
+    public B(object o) { }
 }
 
 class C : B
 {
     int i;
-    
-    public C ()
-        : base (i)
-    {
-    }
-}
 
+    public C()
+        : base(i) { }
+}

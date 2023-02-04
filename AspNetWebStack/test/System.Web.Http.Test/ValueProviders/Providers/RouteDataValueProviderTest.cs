@@ -18,10 +18,14 @@ namespace System.Web.Http.ValueProviders.Providers
             routeData.Values.Add("key2", "value2");
 
             // Act
-            IEnumerable<KeyValuePair<string, string>> result = RouteDataValueProvider.GetRouteValues(routeData);
+            IEnumerable<KeyValuePair<string, string>> result =
+                RouteDataValueProvider.GetRouteValues(routeData);
 
             // Assert
-            Assert.Equal(result, new Dictionary<string, string> { { "key1", "value1" }, { "key2", "value2" } });
+            Assert.Equal(
+                result,
+                new Dictionary<string, string> { { "key1", "value1" }, { "key2", "value2" } }
+            );
         }
 
         [Fact]
@@ -32,7 +36,8 @@ namespace System.Web.Http.ValueProviders.Providers
             routeData.Values.Add("key", null);
 
             // Act
-            IEnumerable<KeyValuePair<string, string>> result = RouteDataValueProvider.GetRouteValues(routeData);
+            IEnumerable<KeyValuePair<string, string>> result =
+                RouteDataValueProvider.GetRouteValues(routeData);
 
             // Assert
             Assert.Equal(result, new[] { new KeyValuePair<string, string>("key", null) });

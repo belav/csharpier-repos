@@ -7,14 +7,13 @@ using Microsoft.VisualStudio.Text.Editor.Commanding.Commands;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
 {
-    internal abstract partial class AbstractRenameCommandHandler :
-        ICommandHandler<UndoCommandArgs>, ICommandHandler<RedoCommandArgs>
+    internal abstract partial class AbstractRenameCommandHandler
+        : ICommandHandler<UndoCommandArgs>,
+            ICommandHandler<RedoCommandArgs>
     {
-        public CommandState GetCommandState(UndoCommandArgs args)
-            => GetCommandState();
+        public CommandState GetCommandState(UndoCommandArgs args) => GetCommandState();
 
-        public CommandState GetCommandState(RedoCommandArgs args)
-            => GetCommandState();
+        public CommandState GetCommandState(RedoCommandArgs args) => GetCommandState();
 
         public bool ExecuteCommand(UndoCommandArgs args, CommandExecutionContext context)
         {

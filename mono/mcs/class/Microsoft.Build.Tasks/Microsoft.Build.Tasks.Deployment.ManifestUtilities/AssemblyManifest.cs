@@ -30,28 +30,29 @@ using System;
 using System.Runtime.InteropServices;
 using Microsoft.Build.Framework;
 
-namespace Microsoft.Build.Tasks.Deployment.ManifestUtilities {
-    
-    [ComVisible (false)]
-    public class AssemblyManifest : Manifest {
-    
-        ProxyStub[]    externalProxyStubs;
-        ProxyStub[]    xmlExternalProxyStubs;
-    
+namespace Microsoft.Build.Tasks.Deployment.ManifestUtilities
+{
+    [ComVisible(false)]
+    public class AssemblyManifest : Manifest
+    {
+        ProxyStub[] externalProxyStubs;
+        ProxyStub[] xmlExternalProxyStubs;
+
         [MonoTODO]
-        public AssemblyManifest ()
+        public AssemblyManifest()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
-        
-        public ProxyStub[] ExternalProxyStubs {
+
+        public ProxyStub[] ExternalProxyStubs
+        {
             get { return externalProxyStubs; }
         }
-        
-        public ProxyStub[] XmlExternalProxyStubs {
+
+        public ProxyStub[] XmlExternalProxyStubs
+        {
             get { return xmlExternalProxyStubs; }
             set { xmlExternalProxyStubs = value; }
         }
     }
 }
-

@@ -10,7 +10,17 @@ namespace Runtime_49489
     public class Program
     {
         [MethodImpl(MethodImplOptions.NoInlining)]
-        static int Callee(float fltRef0, float fltRef1, float fltReg2, float fltReg3, float fltReg4, float fltReg5, float fltReg6, float fltReg7, Vector2 simd8)
+        static int Callee(
+            float fltRef0,
+            float fltRef1,
+            float fltReg2,
+            float fltReg3,
+            float fltReg4,
+            float fltReg5,
+            float fltReg6,
+            float fltReg7,
+            Vector2 simd8
+        )
         {
             const double eps = 1E-10;
             Debug.Assert(Math.Abs(simd8.X) <= eps);
@@ -25,7 +35,6 @@ namespace Runtime_49489
             simd8.X = 0;
             simd8.Y = 1;
             return Callee(0, 0, 0, 0, 0, 0, 0, 0, simd8);
-
         }
 
         public static int Main()

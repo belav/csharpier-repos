@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -45,7 +45,12 @@ namespace System.ServiceModel.Description
         Port port;
         WSBinding wsdl_binding;
 
-        internal WsdlEndpointConversionContext (WsdlContractConversionContext context, ServiceEndpoint endpoint, Port port, WSBinding wsdlBinding)
+        internal WsdlEndpointConversionContext(
+            WsdlContractConversionContext context,
+            ServiceEndpoint endpoint,
+            Port port,
+            WSBinding wsdlBinding
+        )
         {
             this.context = context;
             this.endpoint = endpoint;
@@ -53,44 +58,44 @@ namespace System.ServiceModel.Description
             this.wsdl_binding = wsdlBinding;
         }
 
-        public WsdlContractConversionContext ContractConversionContext {
+        public WsdlContractConversionContext ContractConversionContext
+        {
             get { return context; }
         }
 
-        public ServiceEndpoint Endpoint {
+        public ServiceEndpoint Endpoint
+        {
             get { return endpoint; }
         }
 
-        public WSBinding WsdlBinding {
+        public WSBinding WsdlBinding
+        {
             get { return wsdl_binding; }
         }
 
-        public Port WsdlPort {
+        public Port WsdlPort
+        {
             get { return port; }
         }
 
-        public MessageBinding GetMessageBinding (
-            MessageDescription message)
+        public MessageBinding GetMessageBinding(MessageDescription message)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public MessageDescription GetMessageDescription (
-            MessageBinding messageBinding)
+        public MessageDescription GetMessageDescription(MessageBinding messageBinding)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public OperationBinding GetOperationBinding (
-            OperationDescription operation)
+        public OperationBinding GetOperationBinding(OperationDescription operation)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public OperationDescription GetOperationDescription (
-            OperationBinding operationBinding)
+        public OperationDescription GetOperationDescription(OperationBinding operationBinding)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
     }
 }

@@ -25,12 +25,11 @@ namespace System.ServiceModel.Channels
         CodeDomProvider codeProvider;
         string clrNamespace;
         WsdlNS.WebReferenceOptions webReferenceOptions;
-        static CodeGenerationOptions defaultCodeGenerationOptions = CodeGenerationOptions.GenerateProperties | CodeGenerationOptions.GenerateOrder;
+        static CodeGenerationOptions defaultCodeGenerationOptions =
+            CodeGenerationOptions.GenerateProperties | CodeGenerationOptions.GenerateOrder;
 
         public XmlSerializerImportOptions()
-            : this(new CodeCompileUnit())
-        {
-        }
+            : this(new CodeCompileUnit()) { }
 
         public XmlSerializerImportOptions(CodeCompileUnit codeCompileUnit)
         {

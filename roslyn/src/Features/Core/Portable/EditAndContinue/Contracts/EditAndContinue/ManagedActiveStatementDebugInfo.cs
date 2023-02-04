@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.Contracts
             ManagedInstructionId activeInstruction,
             string? documentName,
             SourceSpan sourceSpan,
-            ActiveStatementFlags flags)
+            ActiveStatementFlags flags
+        )
         {
             ActiveInstruction = activeInstruction;
             DocumentName = documentName;
@@ -43,7 +44,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.Contracts
         public string? DocumentName { get; }
 
         /// <summary>
-        /// Location of the closest non-hidden sequence point retrieved from the PDB, 
+        /// Location of the closest non-hidden sequence point retrieved from the PDB,
         /// or default(<see cref="SourceSpan"/>) if the debugger can't determine the location of the active statement.
         /// </summary>
         [DataMember(Name = "sourceSpan")]

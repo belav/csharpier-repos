@@ -22,7 +22,17 @@ namespace Microsoft.CodeAnalysis
 
         internal TypedConstantValue(object? value)
         {
-            Debug.Assert(value == null || value is string || value.GetType().GetTypeInfo().IsEnum || (value.GetType().GetTypeInfo().IsPrimitive && !(value is System.IntPtr) && !(value is System.UIntPtr)) || value is ITypeSymbol);
+            Debug.Assert(
+                value == null
+                    || value is string
+                    || value.GetType().GetTypeInfo().IsEnum
+                    || (
+                        value.GetType().GetTypeInfo().IsPrimitive
+                        && !(value is System.IntPtr)
+                        && !(value is System.UIntPtr)
+                    )
+                    || value is ITypeSymbol
+            );
             _value = value;
         }
 
@@ -36,17 +46,16 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         public bool IsNull
         {
-            get
-            {
-                return _value == null;
-            }
+            get { return _value == null; }
         }
 
         public ImmutableArray<TypedConstant> Array
         {
             get
             {
-                return _value == null ? default(ImmutableArray<TypedConstant>) : (ImmutableArray<TypedConstant>)_value;
+                return _value == null
+                    ? default(ImmutableArray<TypedConstant>)
+                    : (ImmutableArray<TypedConstant>)_value;
             }
         }
 

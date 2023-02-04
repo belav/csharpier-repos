@@ -21,7 +21,7 @@ namespace MonoTests.System.Data.SqlClient
                 tc.BeginTest("SqlParameter_ctor_SO");
                 tc.run();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 tc.exp = ex;
             }
@@ -38,12 +38,18 @@ namespace MonoTests.System.Data.SqlClient
             CreateParamWithTypeBoolFalse();
         }
 
-        [Test(Description="Create an SqlParameter with value of type bool (true)")]
+        [Test(Description = "Create an SqlParameter with value of type bool (true)")]
         public void CreateParamWithTypeBoolTrue()
         {
-            if (ConnectedDataProvider.GetDbType() != DataBaseServer.SQLServer) {
+            if (ConnectedDataProvider.GetDbType() != DataBaseServer.SQLServer)
+            {
                 //All tests in this class are only for MSSQLServer.
-                Log(string.Format("All tests in this class are only for MSSQLServer and cannot be tested on {0}", ConnectedDataProvider.GetDbType()));
+                Log(
+                    string.Format(
+                        "All tests in this class are only for MSSQLServer and cannot be tested on {0}",
+                        ConnectedDataProvider.GetDbType()
+                    )
+                );
                 return;
             }
             exp = null;
@@ -55,8 +61,8 @@ namespace MonoTests.System.Data.SqlClient
                 Compare(p.Value.GetType(), typeof(bool));
                 Compare(p.DbType, DbType.Boolean);
                 Compare(p.SqlDbType, SqlDbType.Bit);
-            } 
-            catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 exp = ex;
             }
@@ -67,12 +73,18 @@ namespace MonoTests.System.Data.SqlClient
             }
         }
 
-        [Test(Description="Create an SqlParameter with value of type bool (false)")]
+        [Test(Description = "Create an SqlParameter with value of type bool (false)")]
         public void CreateParamWithTypeBoolFalse()
         {
-            if (ConnectedDataProvider.GetDbType() != DataBaseServer.SQLServer) {
+            if (ConnectedDataProvider.GetDbType() != DataBaseServer.SQLServer)
+            {
                 //All tests in this class are only for MSSQLServer.
-                Log(string.Format("All tests in this class are only for MSSQLServer and cannot be tested on {0}", ConnectedDataProvider.GetDbType()));
+                Log(
+                    string.Format(
+                        "All tests in this class are only for MSSQLServer and cannot be tested on {0}",
+                        ConnectedDataProvider.GetDbType()
+                    )
+                );
                 return;
             }
             exp = null;
@@ -84,8 +96,8 @@ namespace MonoTests.System.Data.SqlClient
                 Compare(p.Value.GetType(), typeof(bool));
                 Compare(p.DbType, DbType.Boolean);
                 Compare(p.SqlDbType, SqlDbType.Bit);
-            } 
-            catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 exp = ex;
             }

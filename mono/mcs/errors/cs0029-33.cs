@@ -9,9 +9,9 @@ unsafe struct MyStruct
 
 unsafe class MainClass
 {
-    public static void Main ()
+    public static void Main()
     {
-        var str = new MyStruct ();
-        str.Name = default (char);
+        var str = new MyStruct();
+        str.Name = default(char);
     }
 }

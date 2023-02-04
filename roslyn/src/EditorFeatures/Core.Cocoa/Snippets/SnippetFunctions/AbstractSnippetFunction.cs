@@ -16,7 +16,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
 
         protected AbstractSnippetExpansionClient _snippetExpansionClient;
 
-        public AbstractSnippetFunction(AbstractSnippetExpansionClient snippetExpansionClient, ITextBuffer subjectBuffer)
+        public AbstractSnippetFunction(
+            AbstractSnippetExpansionClient snippetExpansionClient,
+            ITextBuffer subjectBuffer
+        )
         {
             _snippetExpansionClient = snippetExpansionClient;
             _subjectBuffer = subjectBuffer;
@@ -28,13 +31,21 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
             return document != null;
         }
 
-        protected virtual void GetDefaultValue(CancellationToken cancellationToken, out string value, out bool hasDefaultValue)
+        protected virtual void GetDefaultValue(
+            CancellationToken cancellationToken,
+            out string value,
+            out bool hasDefaultValue
+        )
         {
             value = string.Empty;
             hasDefaultValue = false;
         }
 
-        protected virtual void GetCurrentValue(CancellationToken cancellationToken, out string value, out bool hasCurrentValue)
+        protected virtual void GetCurrentValue(
+            CancellationToken cancellationToken,
+            out string value,
+            out bool hasCurrentValue
+        )
         {
             value = string.Empty;
             hasCurrentValue = false;

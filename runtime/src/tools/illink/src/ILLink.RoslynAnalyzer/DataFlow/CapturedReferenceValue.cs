@@ -11,40 +11,43 @@ namespace ILLink.RoslynAnalyzer.DataFlow
     {
         public readonly IOperation? Reference;
 
-        public CapturedReferenceValue (IOperation operation)
+        public CapturedReferenceValue(IOperation operation)
         {
-            switch (operation.Kind) {
-            case OperationKind.PropertyReference:
-            case OperationKind.LocalReference:
-            case OperationKind.FieldReference:
-            case OperationKind.ParameterReference:
-            case OperationKind.ArrayElementReference:
-            case OperationKind.ImplicitIndexerReference:
-                break;
-            case OperationKind.None:
-            case OperationKind.InstanceReference:
-            case OperationKind.Invocation:
-            case OperationKind.EventReference:
-            case OperationKind.Invalid:
-                // These will just be ignored when referenced later.
-                break;
-            default:
-                throw new NotImplementedException (operation.Kind.ToString ());
+            switch (operation.Kind)
+            {
+                case OperationKind.PropertyReference:
+                case OperationKind.LocalReference:
+                case OperationKind.FieldReference:
+                case OperationKind.ParameterReference:
+                case OperationKind.ArrayElementReference:
+                case OperationKind.ImplicitIndexerReference:
+                    break;
+                case OperationKind.None:
+                case OperationKind.InstanceReference:
+                case OperationKind.Invocation:
+                case OperationKind.EventReference:
+                case OperationKind.Invalid:
+                    // These will just be ignored when referenced later.
+                    break;
+                default:
+                    throw new NotImplementedException(operation.Kind.ToString());
             }
             Reference = operation;
         }
 
-        public bool Equals (CapturedReferenceValue other) => Reference == other.Reference;
+        public bool Equals(CapturedReferenceValue other) => Reference == other.Reference;
     }
-
 
     public struct CapturedReferenceLattice : ILattice<CapturedReferenceValue>
     {
-        public CapturedReferenceValue Top => new CapturedReferenceValue ();
+        public CapturedReferenceValue Top => new CapturedReferenceValue();
 
-        public CapturedReferenceValue Meet (CapturedReferenceValue left, CapturedReferenceValue right)
+        public CapturedReferenceValue Meet(
+            CapturedReferenceValue left,
+            CapturedReferenceValue right
+        )
         {
-            if (left.Equals (right))
+            if (left.Equals(right))
                 return left;
             if (left.Reference == null)
                 return right;
@@ -52,7 +55,7 @@ namespace ILLink.RoslynAnalyzer.DataFlow
                 return left;
             // Both non-null and different shouldn't happen.
             // We assume that a flow capture can capture only a single property.
-            throw new InvalidOperationException ();
+            throw new InvalidOperationException();
         }
     }
 }

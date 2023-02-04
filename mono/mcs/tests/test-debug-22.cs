@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 class A
 {
-    public virtual int Foo ()
+    public virtual int Foo()
     {
         return 4;
     }
@@ -11,17 +11,15 @@ class A
 
 class C : A
 {
-    public IEnumerable<int> GetIter ()
+    public IEnumerable<int> GetIter()
     {
-        yield return base.Foo ();
+        yield return base.Foo();
     }
 
-    public override int Foo ()
+    public override int Foo()
     {
-        throw new ApplicationException ();
+        throw new ApplicationException();
     }
 
-    public static void Main ()
-    {
-    }
+    public static void Main() { }
 }

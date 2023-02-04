@@ -11,7 +11,8 @@ internal class DefaultRazorCodeDocument : RazorCodeDocument
 {
     public DefaultRazorCodeDocument(
         RazorSourceDocument source,
-        IEnumerable<RazorSourceDocument> imports)
+        IEnumerable<RazorSourceDocument> imports
+    )
     {
         if (source == null)
         {

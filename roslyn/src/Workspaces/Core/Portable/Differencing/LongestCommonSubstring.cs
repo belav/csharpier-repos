@@ -15,17 +15,19 @@ namespace Microsoft.CodeAnalysis.Differencing
     {
         private static readonly LongestCommonSubstring s_instance = new();
 
-        private LongestCommonSubstring()
-        {
-        }
+        private LongestCommonSubstring() { }
 
-        protected override bool ItemsEqual(string oldSequence, int oldIndex, string newSequence, int newIndex)
-            => oldSequence[oldIndex] == newSequence[newIndex];
+        protected override bool ItemsEqual(
+            string oldSequence,
+            int oldIndex,
+            string newSequence,
+            int newIndex
+        ) => oldSequence[oldIndex] == newSequence[newIndex];
 
-        public static double ComputeDistance(string oldValue, string newValue)
-            => s_instance.ComputeDistance(oldValue, oldValue.Length, newValue, newValue.Length);
+        public static double ComputeDistance(string oldValue, string newValue) =>
+            s_instance.ComputeDistance(oldValue, oldValue.Length, newValue, newValue.Length);
 
-        public static IEnumerable<SequenceEdit> GetEdits(string oldValue, string newValue)
-            => s_instance.GetEdits(oldValue, oldValue.Length, newValue, newValue.Length);
+        public static IEnumerable<SequenceEdit> GetEdits(string oldValue, string newValue) =>
+            s_instance.GetEdits(oldValue, oldValue.Length, newValue, newValue.Length);
     }
 }

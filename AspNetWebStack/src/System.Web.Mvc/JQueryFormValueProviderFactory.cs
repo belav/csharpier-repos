@@ -14,15 +14,16 @@ namespace System.Web.Mvc
         /// Constructs a new instance of the factory which provides JQuery form ValueProviders.
         /// </summary>
         public JQueryFormValueProviderFactory()
-            : this(unvalidatedValuesAccessor: null)
-        {
-        }
+            : this(unvalidatedValuesAccessor: null) { }
 
         // For unit testing
-        internal JQueryFormValueProviderFactory(UnvalidatedRequestValuesAccessor unvalidatedValuesAccessor)
+        internal JQueryFormValueProviderFactory(
+            UnvalidatedRequestValuesAccessor unvalidatedValuesAccessor
+        )
         {
-            _unvalidatedValuesAccessor = unvalidatedValuesAccessor ??
-                                       (cc => new UnvalidatedRequestValuesWrapper(cc.HttpContext.Request.Unvalidated));
+            _unvalidatedValuesAccessor =
+                unvalidatedValuesAccessor
+                ?? (cc => new UnvalidatedRequestValuesWrapper(cc.HttpContext.Request.Unvalidated));
         }
 
         /// <summary>
@@ -37,7 +38,10 @@ namespace System.Web.Mvc
                 throw new ArgumentNullException("controllerContext");
             }
 
-            return new JQueryFormValueProvider(controllerContext, _unvalidatedValuesAccessor(controllerContext));
+            return new JQueryFormValueProvider(
+                controllerContext,
+                _unvalidatedValuesAccessor(controllerContext)
+            );
         }
     }
 }

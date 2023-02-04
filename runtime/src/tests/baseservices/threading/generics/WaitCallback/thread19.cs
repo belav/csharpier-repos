@@ -3,7 +3,6 @@
 using System;
 using System.Threading;
 
-
 interface IGen<T>
 {
     void Target<U>(object p);
@@ -12,47 +11,52 @@ interface IGen<T>
 
 class Gen<T> : IGen<T>
 {
-    public T Dummy(T t) {return t;}
+    public T Dummy(T t)
+    {
+        return t;
+    }
 
     public void Target<U>(object p)
-    {        
-            //dummy line to avoid warnings
-            Test_thread19.Eval(typeof(U)!=p.GetType());
-            ManualResetEvent evt = (ManualResetEvent) p;
-            Interlocked.Increment(ref Test_thread19.Xcounter);
-            evt.Set();
+    {
+        //dummy line to avoid warnings
+        Test_thread19.Eval(typeof(U) != p.GetType());
+        ManualResetEvent evt = (ManualResetEvent)p;
+        Interlocked.Increment(ref Test_thread19.Xcounter);
+        evt.Set();
     }
+
     public static void ThreadPoolTest<U>()
     {
         ManualResetEvent[] evts = new ManualResetEvent[Test_thread19.nThreads];
         WaitHandle[] hdls = new WaitHandle[Test_thread19.nThreads];
 
-        for (int i=0; i<Test_thread19.nThreads; i++)
+        for (int i = 0; i < Test_thread19.nThreads; i++)
         {
             evts[i] = new ManualResetEvent(false);
-            hdls[i] = (WaitHandle) evts[i];
+            hdls[i] = (WaitHandle)evts[i];
         }
 
         IGen<T> obj = new Gen<T>();
 
         for (int i = 0; i < Test_thread19.nThreads; i++)
-        {    
+        {
             WaitCallback cb = new WaitCallback(obj.Target<U>);
-            ThreadPool.QueueUserWorkItem(cb,evts[i]);
+            ThreadPool.QueueUserWorkItem(cb, evts[i]);
         }
 
         WaitHandle.WaitAll(hdls);
-        Test_thread19.Eval(Test_thread19.Xcounter==Test_thread19.nThreads);
+        Test_thread19.Eval(Test_thread19.Xcounter == Test_thread19.nThreads);
         Test_thread19.Xcounter = 0;
     }
 }
 
 public class Test_thread19
 {
-    public static int nThreads =50;
+    public static int nThreads = 50;
     public static int counter = 0;
     public static int Xcounter = 0;
     public static bool result = true;
+
     public static void Eval(bool exp)
     {
         counter++;
@@ -61,16 +65,15 @@ public class Test_thread19
             result = exp;
             Console.WriteLine("Test Failed at location: " + counter);
         }
-    
     }
-    
+
     public static int Main()
     {
         Gen<int>.ThreadPoolTest<object>();
         Gen<double>.ThreadPoolTest<string>();
         Gen<string>.ThreadPoolTest<Guid>();
-        Gen<object>.ThreadPoolTest<int>(); 
-        Gen<Guid>.ThreadPoolTest<double>(); 
+        Gen<object>.ThreadPoolTest<int>();
+        Gen<Guid>.ThreadPoolTest<double>();
 
         if (result)
         {
@@ -83,6 +86,4 @@ public class Test_thread19
             return 1;
         }
     }
-}        
-
-
+}

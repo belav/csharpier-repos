@@ -12,7 +12,9 @@ namespace System.ComponentModel
     /// The exception that is thrown for a Win32 error code.
     /// </summary>
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public partial class Win32Exception : ExternalException, ISerializable
     {
         private const int E_FAIL = unchecked((int)0x80004005);
@@ -21,21 +23,21 @@ namespace System.ComponentModel
         /// Initializes a new instance of the <see cref='System.ComponentModel.Win32Exception'/> class with the last Win32 error
         /// that occurred.
         /// </summary>
-        public Win32Exception() : this(Marshal.GetLastWin32Error())
-        {
-        }
+        public Win32Exception()
+            : this(Marshal.GetLastWin32Error()) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref='System.ComponentModel.Win32Exception'/> class with the specified error.
         /// </summary>
-        public Win32Exception(int error) : this(error, GetErrorMessage(error))
-        {
-        }
+        public Win32Exception(int error)
+            : this(error, GetErrorMessage(error)) { }
+
         /// <summary>
         /// Initializes a new instance of the <see cref='System.ComponentModel.Win32Exception'/> class with the specified error and the
         /// specified detailed description.
         /// </summary>
-        public Win32Exception(int error, string? message) : base(message)
+        public Win32Exception(int error, string? message)
+            : base(message)
         {
             NativeErrorCode = error;
         }
@@ -43,20 +45,21 @@ namespace System.ComponentModel
         /// <summary>
         /// Initializes a new instance of the Exception class with a specified error message.
         /// </summary>
-        public Win32Exception(string? message) : this(Marshal.GetLastWin32Error(), message)
-        {
-        }
+        public Win32Exception(string? message)
+            : this(Marshal.GetLastWin32Error(), message) { }
 
         /// <summary>
         /// Initializes a new instance of the Exception class with a specified error message and a
         /// reference to the inner exception that is the cause of this exception.
         /// </summary>
-        public Win32Exception(string? message, Exception? innerException) : base(message, innerException)
+        public Win32Exception(string? message, Exception? innerException)
+            : base(message, innerException)
         {
             NativeErrorCode = Marshal.GetLastWin32Error();
         }
 
-        protected Win32Exception(SerializationInfo info, StreamingContext context) : base(info, context)
+        protected Win32Exception(SerializationInfo info, StreamingContext context)
+            : base(info, context)
         {
             NativeErrorCode = info.GetInt32(nameof(NativeErrorCode));
         }
@@ -86,16 +89,22 @@ namespace System.ComponentModel
             string message = Message;
             string className = GetType().ToString();
             StringBuilder s = new StringBuilder(className);
-            string nativeErrorString = NativeErrorCode < 0
-                ? $"0x{NativeErrorCode:X8}"
-                : NativeErrorCode.ToString(CultureInfo.InvariantCulture);
+            string nativeErrorString =
+                NativeErrorCode < 0
+                    ? $"0x{NativeErrorCode:X8}"
+                    : NativeErrorCode.ToString(CultureInfo.InvariantCulture);
             if (HResult == E_FAIL)
             {
                 s.AppendFormat(CultureInfo.InvariantCulture, " ({0})", nativeErrorString);
             }
             else
             {
-                s.AppendFormat(CultureInfo.InvariantCulture, " ({0:X8}, {1})", HResult, nativeErrorString);
+                s.AppendFormat(
+                    CultureInfo.InvariantCulture,
+                    " ({0:X8}, {1})",
+                    HResult,
+                    nativeErrorString
+                );
             }
 
             if (!(string.IsNullOrEmpty(message)))

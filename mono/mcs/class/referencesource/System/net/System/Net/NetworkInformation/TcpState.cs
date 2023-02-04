@@ -1,4 +1,3 @@
-
 using System;
 
 namespace System.Net.NetworkInformation
@@ -20,5 +19,4 @@ namespace System.Net.NetworkInformation
         TimeWait,
         DeleteTcb
     }
- }
-
+}

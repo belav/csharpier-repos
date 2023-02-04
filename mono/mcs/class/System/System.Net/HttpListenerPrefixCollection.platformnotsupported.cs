@@ -29,65 +29,71 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace System.Net {
-    public class HttpListenerPrefixCollection : ICollection<string>, IEnumerable<string>, IEnumerable
+namespace System.Net
+{
+    public class HttpListenerPrefixCollection
+        : ICollection<string>,
+            IEnumerable<string>,
+            IEnumerable
     {
-        const string EXCEPTION_MESSAGE = "System.Net.HttpListenerPrefixCollection is not supported on the current platform.";
+        const string EXCEPTION_MESSAGE =
+            "System.Net.HttpListenerPrefixCollection is not supported on the current platform.";
 
-        HttpListenerPrefixCollection ()
+        HttpListenerPrefixCollection() { }
+
+        public int Count
         {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
         }
 
-        public int Count {
-            get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-        }
-
-        public bool IsReadOnly {
-            get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-        }
-
-        public bool IsSynchronized {
-            get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-        }
-
-        public void Add (string uriPrefix)
+        public bool IsReadOnly
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
         }
 
-        public void Clear ()
+        public bool IsSynchronized
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
         }
 
-        public bool Contains (string uriPrefix)
+        public void Add(string uriPrefix)
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
         }
 
-        public void CopyTo (string [] array, int offset)
+        public void Clear()
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
         }
 
-        public void CopyTo (Array array, int offset)
+        public bool Contains(string uriPrefix)
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
         }
 
-        public IEnumerator<string> GetEnumerator ()
+        public void CopyTo(string[] array, int offset)
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
         }
 
-        IEnumerator IEnumerable.GetEnumerator ()
+        public void CopyTo(Array array, int offset)
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
         }
 
-        public bool Remove (string uriPrefix)
+        public IEnumerator<string> GetEnumerator()
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
+        }
+
+        public bool Remove(string uriPrefix)
+        {
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
         }
     }
 }

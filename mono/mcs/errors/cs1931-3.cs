@@ -8,7 +8,7 @@ using System.Linq;
 
 class Test
 {
-    public static void Main ()
+    public static void Main()
     {
         int[] int_array = null;
         int ii = 0;

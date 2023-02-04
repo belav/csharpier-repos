@@ -5,14 +5,14 @@ class XValue
 
 class A
 {
-    public dynamic X = new XValue ();
-    
+    public dynamic X = new XValue();
+
     public static int Main()
     {
         var v = new A { X = { Y = 467 } };
         if (v.X.Y != 467)
             return 1;
-        
+
         return 0;
     }
 }

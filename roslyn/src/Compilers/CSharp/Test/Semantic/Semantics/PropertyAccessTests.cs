@@ -22,7 +22,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.Semantics
         public void SetArrayLength()
         {
             var text =
-@"class Test
+                @"class Test
 {
     void M()
     {
@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.Semantics
 }";
             var comp = CreateEmptyCompilation(
                 source: new[] { Parse(text) },
-                references: new[] { AacorlibRef });
+                references: new[] { AacorlibRef }
+            );
 
             comp.VerifyEmitDiagnostics();
         }

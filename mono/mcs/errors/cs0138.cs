@@ -6,8 +6,8 @@ using System.Console;
 
 class A
 {
-    static void Main ()
+    static void Main()
     {
-        Console.WriteLine ("Test CS0138");
+        Console.WriteLine("Test CS0138");
     }
 }

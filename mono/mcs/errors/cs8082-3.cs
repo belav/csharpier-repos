@@ -3,8 +3,8 @@
 
 class C
 {
-    void Foo ()
+    void Foo()
     {
-        var v = nameof (this?.Equals);
+        var v = nameof(this?.Equals);
     }
 }

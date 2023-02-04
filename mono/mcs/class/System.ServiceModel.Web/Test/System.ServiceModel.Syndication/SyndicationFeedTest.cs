@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -44,17 +44,20 @@ namespace MonoTests.System.ServiceModel.Syndication
     public class SyndicationFeedTest
     {
         [Test]
-        public void ConstructorItemsNull ()
+        public void ConstructorItemsNull()
         {
-            Assert.IsNotNull (new SyndicationFeed (null).Items, "#1");
-            Assert.IsNotNull (new SyndicationFeed (null, null, null, null).Items, "#2");
-            Assert.IsNotNull (new SyndicationFeed (null, null, null, null, default (DateTimeOffset), null).Items, "#3");
+            Assert.IsNotNull(new SyndicationFeed(null).Items, "#1");
+            Assert.IsNotNull(new SyndicationFeed(null, null, null, null).Items, "#2");
+            Assert.IsNotNull(
+                new SyndicationFeed(null, null, null, null, default(DateTimeOffset), null).Items,
+                "#3"
+            );
         }
 
         [Test]
-        public void SetNullForProperties ()
+        public void SetNullForProperties()
         {
-            SyndicationFeed feed = new SyndicationFeed ();
+            SyndicationFeed feed = new SyndicationFeed();
             feed.BaseUri = null;
             feed.Copyright = null;
             feed.Id = null;
@@ -66,20 +69,20 @@ namespace MonoTests.System.ServiceModel.Syndication
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void SetItemsNull ()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void SetItemsNull()
         {
-            SyndicationFeed feed = new SyndicationFeed ();
+            SyndicationFeed feed = new SyndicationFeed();
             feed.Items = null;
         }
 
         [Test]
-        public void Items ()
+        public void Items()
         {
-            SyndicationFeed feed = new SyndicationFeed ();
-            Assert.IsNotNull (feed.Items, "#1");
-            feed.Items = new SyndicationItem  [] {new SyndicationItem ()};
-            Assert.IsTrue (feed.Items.GetEnumerator ().MoveNext (), "#2");
+            SyndicationFeed feed = new SyndicationFeed();
+            Assert.IsNotNull(feed.Items, "#1");
+            feed.Items = new SyndicationItem[] { new SyndicationItem() };
+            Assert.IsTrue(feed.Items.GetEnumerator().MoveNext(), "#2");
             /*
             feed.Items = null;
             // even after setting null, it autofills a collection.
@@ -89,17 +92,25 @@ namespace MonoTests.System.ServiceModel.Syndication
         }
 
         [Test]
-        public void LoadFeed ()
+        public void LoadFeed()
         {
-            SyndicationFeed.Load (XmlReader.Create (new StringReader ("<feed xmlns=\"http://www.w3.org/2005/Atom\"></feed>")));
+            SyndicationFeed.Load(
+                XmlReader.Create(
+                    new StringReader("<feed xmlns=\"http://www.w3.org/2005/Atom\"></feed>")
+                )
+            );
         }
 
         [Test]
-        [ExpectedException (typeof (XmlException))]
-        public void LoadEntry ()
+        [ExpectedException(typeof(XmlException))]
+        public void LoadEntry()
         {
             // entry is not allowed.
-            SyndicationFeed.Load (XmlReader.Create (new StringReader ("<entry xmlns=\"http://www.w3.org/2005/Atom\"></entry>")));
+            SyndicationFeed.Load(
+                XmlReader.Create(
+                    new StringReader("<entry xmlns=\"http://www.w3.org/2005/Atom\"></entry>")
+                )
+            );
         }
     }
 }

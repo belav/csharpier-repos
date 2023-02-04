@@ -28,28 +28,28 @@ namespace MonoTests.System.Web.Services.Description
         [Test]
         public void TestDefaultProperties()
         {
-            Assert.AreEqual (String.Empty, sbb.Encoding);
-            Assert.IsNull (sbb.Parts);
-            Assert.IsNull (sbb.PartsString);
-            Assert.AreEqual (String.Empty, sbb.Namespace);
-            Assert.AreEqual (SoapBindingUse.Default, sbb.Use);
+            Assert.AreEqual(String.Empty, sbb.Encoding);
+            Assert.IsNull(sbb.Parts);
+            Assert.IsNull(sbb.PartsString);
+            Assert.AreEqual(String.Empty, sbb.Namespace);
+            Assert.AreEqual(SoapBindingUse.Default, sbb.Use);
         }
-        
+
         [Test]
         public void TestAssignNullPartsString()
         {
             sbb.PartsString = null;
-            Assert.IsNull (sbb.Parts);
-            Assert.AreEqual (null, sbb.PartsString);
+            Assert.IsNull(sbb.Parts);
+            Assert.AreEqual(null, sbb.PartsString);
         }
 
         [Test]
         public void TestAssignEmptyPartsString()
         {
             sbb.PartsString = String.Empty;
-            Assert.IsNotNull (sbb.Parts);
-            Assert.AreEqual (1, sbb.Parts.Length);
-            Assert.AreEqual (String.Empty, sbb.PartsString);
+            Assert.IsNotNull(sbb.Parts);
+            Assert.AreEqual(1, sbb.Parts.Length);
+            Assert.AreEqual(String.Empty, sbb.PartsString);
         }
 
         [Test]
@@ -57,26 +57,26 @@ namespace MonoTests.System.Web.Services.Description
         {
             const string Spaces = " ";
             sbb.PartsString = Spaces;
-            Assert.IsNotNull (sbb.Parts);
-            Assert.AreEqual (2, sbb.Parts.Length);
-            Assert.AreEqual (Spaces, sbb.PartsString);
+            Assert.IsNotNull(sbb.Parts);
+            Assert.AreEqual(2, sbb.Parts.Length);
+            Assert.AreEqual(Spaces, sbb.PartsString);
         }
 
         [Test]
         public void TestAssignNullParts()
         {
             sbb.Parts = null;
-            Assert.IsNull (sbb.Parts);
-            Assert.IsNull (sbb.PartsString);
+            Assert.IsNull(sbb.Parts);
+            Assert.IsNull(sbb.PartsString);
         }
 
         [Test]
         public void TestAssignValueParts()
         {
-            string[] vals = {"a", "b"};
+            string[] vals = { "a", "b" };
             sbb.Parts = vals;
-            Assert.IsNotNull (sbb.Parts);
-            Assert.AreEqual ("a b", sbb.PartsString);
+            Assert.IsNotNull(sbb.Parts);
+            Assert.AreEqual("a b", sbb.PartsString);
         }
     }
 }

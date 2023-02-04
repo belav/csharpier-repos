@@ -4,13 +4,11 @@
 
 extern alias R1;
 
-public class B
-{
-}
+public class B { }
 
 public class C
 {
-    public static void Main ()
+    public static void Main()
     {
         B b1 = null;
         R1::B b2 = b1;

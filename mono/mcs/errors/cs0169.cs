@@ -2,8 +2,9 @@
 // Line: 4
 // Compiler options: -warnaserror -warn:4
 
-class X {
+class X
+{
     int x;
 
-    static void Main () {}
+    static void Main() { }
 }

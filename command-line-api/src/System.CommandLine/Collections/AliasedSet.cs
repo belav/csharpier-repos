@@ -19,7 +19,7 @@ namespace System.CommandLine.Collections
         private protected List<T> Items { get; } = new();
 
         private protected HashSet<T> DirtyItems { get; } = new();
-        
+
         /// <inheritdoc/>
         public int Count => Items.Count;
 

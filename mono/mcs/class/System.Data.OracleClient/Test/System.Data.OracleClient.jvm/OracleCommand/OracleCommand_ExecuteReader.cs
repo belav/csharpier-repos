@@ -1,6 +1,6 @@
-// 
+//
 // Copyright (c) 2006 Mainsoft Co.
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
 // "Software"), to deal in the Software without restriction, including
@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -24,10 +24,9 @@
 using System;
 using System.Text;
 using System.Data;
-using System.Data.OracleClient ;
+using System.Data.OracleClient;
 
 using MonoTests.System.Data.Utils;
-
 
 using NUnit.Framework;
 #if DAAB
@@ -39,9 +38,9 @@ namespace MonoTests.System.Data.OracleClient
     [TestFixture]
     public class OracleCommand_ExecuteReader : ADONetTesterClass
     {
-        OracleConnection    con;
+        OracleConnection con;
         OracleCommand cmd;
-        
+
         [SetUp]
         public void SetUp()
         {
@@ -49,13 +48,22 @@ namespace MonoTests.System.Data.OracleClient
             BeginCase("Setup");
             try
             {
-                con = new OracleConnection(MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString);
+                con = new OracleConnection(
+                    MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString
+                );
                 cmd = new OracleCommand("", con);
                 con.Open();
                 this.Pass("Setup.");
             }
-            catch(Exception ex)    {exp = ex;}
-            finally    {EndCase(exp); exp = null;}
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                EndCase(exp);
+                exp = null;
+            }
         }
 
         [TearDown]
@@ -63,7 +71,8 @@ namespace MonoTests.System.Data.OracleClient
         {
             if (con != null)
             {
-                if (con.State == ConnectionState.Open) con.Close();
+                if (con.State == ConnectionState.Open)
+                    con.Close();
             }
         }
 
@@ -78,8 +87,14 @@ namespace MonoTests.System.Data.OracleClient
                 tc.run();
                 tc.TearDown();
             }
-            catch(Exception ex){exp = ex;}
-            finally    {tc.EndTest(exp);}
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                tc.EndTest(exp);
+            }
         }
 
         [Test]
@@ -87,11 +102,11 @@ namespace MonoTests.System.Data.OracleClient
         {
             Exception exp = null;
             bool RecordsExists = false;
-            OracleDataReader rdr =null;
+            OracleDataReader rdr = null;
 
-//            testBug3965();
-//            TestMultipleResultsets();
-//            TestCompoundVariable();
+            //            testBug3965();
+            //            TestMultipleResultsets();
+            //            TestCompoundVariable();
 
             cmd.CommandText = "Select FirstName,City From Employees";
             if (con.State != ConnectionState.Open)
@@ -103,12 +118,16 @@ namespace MonoTests.System.Data.OracleClient
             {
                 BeginCase("check reader is null");
                 rdr = cmd.ExecuteReader();
-                Compare(rdr==null, false);
-            } 
-            catch(Exception ex){exp = ex;}
+                Compare(rdr == null, false);
+            }
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
             finally
             {
-                if (rdr != null) rdr.Close();
+                if (rdr != null)
+                    rdr.Close();
                 EndCase(exp);
                 exp = null;
             }
@@ -118,13 +137,17 @@ namespace MonoTests.System.Data.OracleClient
                 BeginCase("check reader.read");
                 rdr = cmd.ExecuteReader();
                 RecordsExists = rdr.Read();
-                Compare(RecordsExists ,true);
-            } 
-            catch(Exception ex){exp = ex;}
+                Compare(RecordsExists, true);
+            }
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
             finally
             {
-                if (rdr != null) rdr.Close();
-                EndCase(exp); 
+                if (rdr != null)
+                    rdr.Close();
+                EndCase(exp);
                 exp = null;
             }
 
@@ -132,13 +155,17 @@ namespace MonoTests.System.Data.OracleClient
             {
                 BeginCase("execute reader again ");
                 rdr = cmd.ExecuteReader();
-                Compare(rdr==null, false);
-            } 
-            catch(Exception ex){exp = ex;}
+                Compare(rdr == null, false);
+            }
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
             finally
             {
-                if (rdr != null) rdr.Close();
-                EndCase(exp); 
+                if (rdr != null)
+                    rdr.Close();
+                EndCase(exp);
                 exp = null;
             }
 
@@ -146,45 +173,60 @@ namespace MonoTests.System.Data.OracleClient
             {
                 BeginCase("Test compound SQL statement");
                 //Build a compund SQL command.
-                string[] sqlStatements = new string[] {
-                                                          "INSERT INTO Categories (CategoryName, Description) VALUES('__TEST_RECORD__', 'Inserted')",
-                                                          "UPDATE Categories  SET Description='Updated' WHERE CategoryName='__TEST_RECORD__'",
-                                                          "DELETE FROM Categories WHERE CategoryName='__TEST_RECORD__'" ,
+                string[] sqlStatements = new string[]
+                {
+                    "INSERT INTO Categories (CategoryName, Description) VALUES('__TEST_RECORD__', 'Inserted')",
+                    "UPDATE Categories  SET Description='Updated' WHERE CategoryName='__TEST_RECORD__'",
+                    "DELETE FROM Categories WHERE CategoryName='__TEST_RECORD__'",
                 };
-                cmd.CommandText = CreateCompundSqlStatement(sqlStatements, ConnectedDataProvider.GetDbType());
+                cmd.CommandText = CreateCompundSqlStatement(
+                    sqlStatements,
+                    ConnectedDataProvider.GetDbType()
+                );
                 rdr = cmd.ExecuteReader();
                 Compare(rdr.Read(), false);
-            } 
-            catch(Exception ex){exp = ex;}
+            }
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
             finally
             {
-                if (rdr != null) rdr.Close();
-                EndCase(exp); 
+                if (rdr != null)
+                    rdr.Close();
+                EndCase(exp);
                 exp = null;
             }
-
 
             if (ConnectedDataProvider.GetDbType() != DataBaseServer.Oracle)
             {
                 try
                 {
-                    BeginCase("Check that in a compound SQL statement, resultsets are returned only for SELECT statements. (bug #3358)");
+                    BeginCase(
+                        "Check that in a compound SQL statement, resultsets are returned only for SELECT statements. (bug #3358)"
+                    );
                     //prepare db:
-                    OracleCommand prepare = new OracleCommand("DELETE FROM Categories WHERE CategoryName='__TEST_RECORD__'", con);
+                    OracleCommand prepare = new OracleCommand(
+                        "DELETE FROM Categories WHERE CategoryName='__TEST_RECORD__'",
+                        con
+                    );
                     prepare.ExecuteNonQuery();
 
-
                     //Test body
-                    int resultSetCount ;
+                    int resultSetCount;
 
                     //Build a compund SQL command that contains only one select statement.
-                    string[] sqlStatements = new string[] {
-                                                              "INSERT INTO Categories (CategoryName, Description) VALUES('__TEST_RECORD__', 'Inserted')",
-                                                              "UPDATE Categories  SET Description='Updated' WHERE CategoryName='__TEST_RECORD__'",
-                                                              "DELETE FROM Categories WHERE CategoryName='__TEST_RECORD__'" ,
-                                                              "SELECT * FROM Categories "
-                                                          };
-                    string insertCmdTxt = CreateCompundSqlStatement(sqlStatements, ConnectedDataProvider.GetDbType());
+                    string[] sqlStatements = new string[]
+                    {
+                        "INSERT INTO Categories (CategoryName, Description) VALUES('__TEST_RECORD__', 'Inserted')",
+                        "UPDATE Categories  SET Description='Updated' WHERE CategoryName='__TEST_RECORD__'",
+                        "DELETE FROM Categories WHERE CategoryName='__TEST_RECORD__'",
+                        "SELECT * FROM Categories "
+                    };
+                    string insertCmdTxt = CreateCompundSqlStatement(
+                        sqlStatements,
+                        ConnectedDataProvider.GetDbType()
+                    );
                     //this.Log(insertCmdTxt);
                     OracleCommand InsertCmd = new OracleCommand(insertCmdTxt, con);
                     rdr = InsertCmd.ExecuteReader();
@@ -194,24 +236,30 @@ namespace MonoTests.System.Data.OracleClient
                     do
                     {
                         resultSetCount++;
-                    }while (rdr.NextResult());
+                    } while (rdr.NextResult());
 
                     //Test that there is only one result set.
                     Compare(resultSetCount, 1);
-                } 
-                catch(Exception ex){exp = ex;}
+                }
+                catch (Exception ex)
+                {
+                    exp = ex;
+                }
                 finally
                 {
-                    if (rdr != null) rdr.Close();
-                    EndCase(exp); 
+                    if (rdr != null)
+                        rdr.Close();
+                    EndCase(exp);
                     exp = null;
                     //cleanup db:
-                    OracleCommand cleanup = new OracleCommand("DELETE FROM Categories WHERE CategoryName='__TEST_RECORD__'", con);
+                    OracleCommand cleanup = new OracleCommand(
+                        "DELETE FROM Categories WHERE CategoryName='__TEST_RECORD__'",
+                        con
+                    );
                     cleanup.ExecuteNonQuery();
                 }
             }
         }
-
 
         //Create the compund sql statement according to the dbserver.
         private string CreateCompundSqlStatement(string[] sqlStatements, DataBaseServer dbServer)
@@ -220,7 +268,12 @@ namespace MonoTests.System.Data.OracleClient
             string endStatement;
             string commandDelimiter;
 
-            GetDBSpecificSyntax(dbServer, out beginStatement, out endStatement, out commandDelimiter);
+            GetDBSpecificSyntax(
+                dbServer,
+                out beginStatement,
+                out endStatement,
+                out commandDelimiter
+            );
 
             StringBuilder cmdBuilder = new StringBuilder();
             cmdBuilder.Append(beginStatement);
@@ -236,7 +289,12 @@ namespace MonoTests.System.Data.OracleClient
             return cmdBuilder.ToString();
         }
 
-        private void GetDBSpecificSyntax(DataBaseServer dbServer, out string beginStatement, out string endStatement, out string commandDelimiter)
+        private void GetDBSpecificSyntax(
+            DataBaseServer dbServer,
+            out string beginStatement,
+            out string endStatement,
+            out string commandDelimiter
+        )
         {
             switch (dbServer)
             {
@@ -270,7 +328,6 @@ namespace MonoTests.System.Data.OracleClient
             }
         }
 
-
         [Test]
         public void TestMultipleResultsets()
         {
@@ -295,7 +352,6 @@ namespace MonoTests.System.Data.OracleClient
             Exception exp = null;
             BeginCase("Test multi result set from stored procedure");
 
-                
             OracleDataReader reader = null;
             OracleTransaction tr = null;
 
@@ -306,7 +362,7 @@ namespace MonoTests.System.Data.OracleClient
                 {
                     con.Open();
                 }
-                    
+
                 // transaction use was add for PostgreSQL
                 tr = con.BeginTransaction();
                 OracleCommand cmd1 = new OracleCommand("GHSP_TYPES_SIMPLE_4", con, tr);
@@ -317,53 +373,57 @@ namespace MonoTests.System.Data.OracleClient
                 param.Value = string.Format("13268_{0}", this.TestCaseNumber);
                 param.OracleType = OracleType.VarChar;
                 cmd1.Parameters.Add(param);
-                cmd1.Parameters.Add(new OracleParameter("RESULT", OracleType.Cursor)).Direction = ParameterDirection.Output;
-                cmd1.Parameters.Add(new OracleParameter("RESULT1", OracleType.Cursor)).Direction = ParameterDirection.Output;
-                cmd1.Parameters.Add(new OracleParameter("RESULT2", OracleType.Cursor)).Direction = ParameterDirection.Output;
-
+                cmd1.Parameters.Add(new OracleParameter("RESULT", OracleType.Cursor)).Direction =
+                    ParameterDirection.Output;
+                cmd1.Parameters.Add(new OracleParameter("RESULT1", OracleType.Cursor)).Direction =
+                    ParameterDirection.Output;
+                cmd1.Parameters.Add(new OracleParameter("RESULT2", OracleType.Cursor)).Direction =
+                    ParameterDirection.Output;
 
                 reader = cmd1.ExecuteReader();
-                
+
                 //Count the number of result sets.
                 int resultSetCount = 0;
                 //Count the number of the records
-                int recordCounter=0;
+                int recordCounter = 0;
 
                 do
                 {
                     //this.Log(string.Format("resultSetCount:{0}",resultSetCount));
-                while (reader.Read())
-                {
-                    recordCounter++;
-                }
+                    while (reader.Read())
+                    {
+                        recordCounter++;
+                    }
                     //this.Log(string.Format("recordCounter:{0}",recordCounter));
                     if (resultSetCount != 2)
                     {
-                        Compare(recordCounter,1); //Insert + update 
+                        Compare(recordCounter, 1); //Insert + update
                     }
                     else
                     {
-                        Compare(recordCounter,0); //Delete 
+                        Compare(recordCounter, 0); //Delete
                     }
 
-                    recordCounter=0;
+                    recordCounter = 0;
                     resultSetCount++;
-                }while (reader.NextResult());
+                } while (reader.NextResult());
 
-                Compare(resultSetCount,3);
+                Compare(resultSetCount, 3);
             }
             catch (Exception ex)
             {
-                exp=ex;
+                exp = ex;
             }
             finally
             {
                 EndCase(exp);
-                if (reader != null) reader.Close();
+                if (reader != null)
+                    reader.Close();
                 tr.Commit();
                 con.Close();
             }
         }
+
         [Test]
         public void TestCompoundVariable()
         {
@@ -404,20 +464,28 @@ namespace MonoTests.System.Data.OracleClient
                         sqlTxt = "";
                         break;
                     default:
-                        throw new ApplicationException(string.Format("GHT: Unknown DataBaseServer '{0}'", ConnectedDataProvider.GetDbType(cmd.Connection)));
+                        throw new ApplicationException(
+                            string.Format(
+                                "GHT: Unknown DataBaseServer '{0}'",
+                                ConnectedDataProvider.GetDbType(cmd.Connection)
+                            )
+                        );
                 }
                 cmd.CommandText = sqlTxt;
                 rdr = cmd.ExecuteReader();
                 Compare(rdr.Read(), false);
-            } 
-            catch(Exception ex){exp = ex;}
+            }
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
             finally
             {
-                if (rdr != null) rdr.Close();
-                EndCase(exp); 
+                if (rdr != null)
+                    rdr.Close();
+                EndCase(exp);
                 exp = null;
             }
         }
     }
-
 }

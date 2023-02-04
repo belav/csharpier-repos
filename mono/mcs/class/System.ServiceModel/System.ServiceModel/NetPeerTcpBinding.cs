@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -42,88 +42,99 @@ namespace System.ServiceModel
     public class NetPeerTcpBinding : Binding, IBindingRuntimePreferences
     {
         // We don't support PNRP
-        public static bool IsPnrpAvailable {
+        public static bool IsPnrpAvailable
+        {
             get { return false; }
         }
 
-        XmlDictionaryReaderQuotas reader_quotas = new XmlDictionaryReaderQuotas ();
-        PeerResolverSettings resolver = new PeerResolverSettings ();
-        PeerSecuritySettings security = new PeerSecuritySettings ();
-        PeerTransportBindingElement transport = new PeerTransportBindingElement ();
+        XmlDictionaryReaderQuotas reader_quotas = new XmlDictionaryReaderQuotas();
+        PeerResolverSettings resolver = new PeerResolverSettings();
+        PeerSecuritySettings security = new PeerSecuritySettings();
+        PeerTransportBindingElement transport = new PeerTransportBindingElement();
 
-        public NetPeerTcpBinding ()
+        public NetPeerTcpBinding() { }
+
+        [MonoTODO]
+        public NetPeerTcpBinding(string configurationName)
         {
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public NetPeerTcpBinding (string configurationName)
+        public IPAddress ListenIPAddress
         {
-            throw new NotImplementedException ();
-        }
-
-        [MonoTODO]
-        public IPAddress ListenIPAddress {
             get { return transport.ListenIPAddress; }
             set { transport.ListenIPAddress = value; }
         }
 
         [MonoTODO]
-        public long MaxBufferPoolSize {
+        public long MaxBufferPoolSize
+        {
             get { return transport.MaxBufferPoolSize; }
             set { transport.MaxBufferPoolSize = value; }
         }
 
         [MonoTODO]
-        public long MaxReceivedMessageSize {
+        public long MaxReceivedMessageSize
+        {
             get { return transport.MaxReceivedMessageSize; }
             set { transport.MaxReceivedMessageSize = value; }
         }
 
-        public int Port {
+        public int Port
+        {
             get { return transport.Port; }
             set { transport.Port = value; }
         }
 
-        public PeerResolverSettings Resolver {
+        public PeerResolverSettings Resolver
+        {
             get { return resolver; }
         }
 
-        public XmlDictionaryReaderQuotas ReaderQuotas {
+        public XmlDictionaryReaderQuotas ReaderQuotas
+        {
             get { return reader_quotas; }
-            set {
+            set
+            {
                 if (value == null)
-                    throw new ArgumentNullException ("value");
+                    throw new ArgumentNullException("value");
                 reader_quotas = value;
             }
         }
 
-        public override string Scheme {
+        public override string Scheme
+        {
             get { return "net.p2p"; }
         }
-        
-        public PeerSecuritySettings Security {
+
+        public PeerSecuritySettings Security
+        {
             get { return security; }
         }
 
-        public EnvelopeVersion EnvelopeVersion {
+        public EnvelopeVersion EnvelopeVersion
+        {
             get { return EnvelopeVersion.Soap12; }
         }
 
-        public override BindingElementCollection
-            CreateBindingElements ()
+        public override BindingElementCollection CreateBindingElements()
         {
-            var mbe = new BinaryMessageEncodingBindingElement ();
+            var mbe = new BinaryMessageEncodingBindingElement();
             if (ReaderQuotas != null)
-                ReaderQuotas.CopyTo (mbe.ReaderQuotas);
+                ReaderQuotas.CopyTo(mbe.ReaderQuotas);
 
-            var prbe = Resolver.CreateBinding ();
+            var prbe = Resolver.CreateBinding();
 
-            return new BindingElementCollection (new BindingElement [] { mbe, prbe, transport.Clone () });
+            return new BindingElementCollection(
+                new BindingElement[] { mbe, prbe, transport.Clone() }
+            );
         }
 
         // explicit interface implementations
 
-        bool IBindingRuntimePreferences.ReceiveSynchronously {
+        bool IBindingRuntimePreferences.ReceiveSynchronously
+        {
             get { return false; }
         }
     }

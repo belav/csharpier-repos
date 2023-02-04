@@ -10,10 +10,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -46,55 +46,69 @@ namespace MonoTests.System.ServiceModel.Discovery
         public bool ClientBehaviorApplied { get; set; }
         public bool DispatchBehaviorApplied { get; set; }
 
-        public void AddBindingParameters (ServiceEndpoint endpoint, BindingParameterCollection bindingParameters)
-        {
-        }
-        
-        public void ApplyClientBehavior (ServiceEndpoint endpoint, ClientRuntime clientRuntime)
+        public void AddBindingParameters(
+            ServiceEndpoint endpoint,
+            BindingParameterCollection bindingParameters
+        ) { }
+
+        public void ApplyClientBehavior(ServiceEndpoint endpoint, ClientRuntime clientRuntime)
         {
             ClientBehaviorApplied = true;
 
-            var inspector = new MessageInspector ();
-            inspector.RequestSending += delegate (ref Message message, IClientChannel channel) {
+            var inspector = new MessageInspector();
+            inspector.RequestSending += delegate(ref Message message, IClientChannel channel)
+            {
                 if (RequestSending != null)
-                    return RequestSending (ref message, channel);
+                    return RequestSending(ref message, channel);
                 else
                     return null;
             };
-            inspector.ReplyReceived += delegate (ref Message reply, object correlationState) {
+            inspector.ReplyReceived += delegate(ref Message reply, object correlationState)
+            {
                 if (ReplyReceived != null)
-                    ReplyReceived (ref reply, correlationState);
+                    ReplyReceived(ref reply, correlationState);
             };
-            clientRuntime.MessageInspectors.Add (inspector);
+            clientRuntime.MessageInspectors.Add(inspector);
         }
-        
-        public void ApplyDispatchBehavior (ServiceEndpoint endpoint, EndpointDispatcher endpointDispatcher)
+
+        public void ApplyDispatchBehavior(
+            ServiceEndpoint endpoint,
+            EndpointDispatcher endpointDispatcher
+        )
         {
             DispatchBehaviorApplied = true;
 
-            var inspector = new MessageInspector ();
-            inspector.RequestReceived += delegate (ref Message message, IClientChannel channel, InstanceContext instanceContext) {
+            var inspector = new MessageInspector();
+            inspector.RequestReceived += delegate(
+                ref Message message,
+                IClientChannel channel,
+                InstanceContext instanceContext
+            )
+            {
                 if (RequestReceived != null)
-                    return RequestReceived (ref message, channel, instanceContext);
+                    return RequestReceived(ref message, channel, instanceContext);
                 else
                     return null;
             };
-            inspector.ReplySending += delegate (ref Message reply, object correlationState) {
+            inspector.ReplySending += delegate(ref Message reply, object correlationState)
+            {
                 if (ReplySending != null)
-                    ReplySending (ref reply, correlationState);
+                    ReplySending(ref reply, correlationState);
             };
-            endpointDispatcher.DispatchRuntime.MessageInspectors.Add (inspector);
+            endpointDispatcher.DispatchRuntime.MessageInspectors.Add(inspector);
         }
-        
-        public void Validate (ServiceEndpoint endpoint)
-        {
-        }
+
+        public void Validate(ServiceEndpoint endpoint) { }
     }
-    
-    delegate object PostDispatchMessageReceiveHandler (ref Message request, IClientChannel channel, InstanceContext instanceContext);
-    delegate void PreDispatchMessageSendHandler (ref Message request,object correleationState);
-    delegate object PreClientMessageSendHandler (ref Message request, IClientChannel channel);
-    delegate void PostClientMessageReceiveHandler (ref Message request,object correleationState);
+
+    delegate object PostDispatchMessageReceiveHandler(
+        ref Message request,
+        IClientChannel channel,
+        InstanceContext instanceContext
+    );
+    delegate void PreDispatchMessageSendHandler(ref Message request, object correleationState);
+    delegate object PreClientMessageSendHandler(ref Message request, IClientChannel channel);
+    delegate void PostClientMessageReceiveHandler(ref Message request, object correleationState);
 
     class MessageInspector : IDispatchMessageInspector, IClientMessageInspector
     {
@@ -103,32 +117,36 @@ namespace MonoTests.System.ServiceModel.Discovery
         public event PostDispatchMessageReceiveHandler RequestReceived;
         public event PreDispatchMessageSendHandler ReplySending;
 
-        public object BeforeSendRequest (ref Message request, IClientChannel channel)
+        public object BeforeSendRequest(ref Message request, IClientChannel channel)
         {
             if (RequestSending != null)
-                return RequestSending (ref request, channel);
+                return RequestSending(ref request, channel);
             else
                 return null;
         }
 
-        public void AfterReceiveReply (ref Message reply, object correlationState)
+        public void AfterReceiveReply(ref Message reply, object correlationState)
         {
             if (ReplyReceived != null)
-                ReplyReceived (ref reply, correlationState);
+                ReplyReceived(ref reply, correlationState);
         }
 
-        public object AfterReceiveRequest (ref Message request, IClientChannel channel, InstanceContext instanceContext)
+        public object AfterReceiveRequest(
+            ref Message request,
+            IClientChannel channel,
+            InstanceContext instanceContext
+        )
         {
             if (RequestReceived != null)
-                return RequestReceived (ref request, channel, instanceContext);
+                return RequestReceived(ref request, channel, instanceContext);
             else
                 return null;
         }
 
-        public void BeforeSendReply (ref Message reply, object correlationState)
+        public void BeforeSendReply(ref Message reply, object correlationState)
         {
             if (ReplySending != null)
-                ReplySending (ref reply, correlationState);
+                ReplySending(ref reply, correlationState);
         }
     }
 }

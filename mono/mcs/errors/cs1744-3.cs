@@ -3,16 +3,12 @@
 
 internal class Program
 {
-    public static void Main ()
+    public static void Main()
     {
-        Method (1, 2, p1: 3);
+        Method(1, 2, p1: 3);
     }
-    
-    static void Method (int p1, int paramNamed, int p2)
-    {
-    }
-    
-    static void Method (int p1, int p2, object paramNamed)
-    {
-    }
+
+    static void Method(int p1, int paramNamed, int p2) { }
+
+    static void Method(int p1, int p2, object paramNamed) { }
 }

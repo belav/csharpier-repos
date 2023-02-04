@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -39,62 +39,62 @@ namespace MonoTests.System.Windows.Markup
     public class ReferenceTest
     {
         [Test]
-        public void ConstructorNullName ()
+        public void ConstructorNullName()
         {
-            new Reference ((string) null); // it is somehow allowed
+            new Reference((string)null); // it is somehow allowed
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void ProvideValueWithoutTypeOrName ()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void ProvideValueWithoutTypeOrName()
         {
-            new Reference ().ProvideValue (null);
+            new Reference().ProvideValue(null);
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void ProvideValueWithNameWithoutResolver ()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void ProvideValueWithNameWithoutResolver()
         {
-            var x = new Reference ("X");
-            x.ProvideValue (null); // serviceProvider is required.
+            var x = new Reference("X");
+            x.ProvideValue(null); // serviceProvider is required.
         }
 
         [Test]
-        [ExpectedException (typeof (InvalidOperationException))]
-        public void ProvideValueWithNameWithProviderNoResolver ()
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void ProvideValueWithNameWithProviderNoResolver()
         {
-            var x = new Reference ("X");
-            x.ProvideValue (new NameServiceProvider (false, false));
+            var x = new Reference("X");
+            x.ProvideValue(new NameServiceProvider(false, false));
         }
 
         [Test]
-        public void ProvideValueWithNameWithProviderResolveFail ()
+        public void ProvideValueWithNameWithProviderResolveFail()
         {
-            var x = new Reference ("X");
-            var r = new NameServiceProvider (true, false);
-            Assert.AreEqual ("BAR", x.ProvideValue (r), "#1");
+            var x = new Reference("X");
+            var r = new NameServiceProvider(true, false);
+            Assert.AreEqual("BAR", x.ProvideValue(r), "#1");
         }
 
         [Test]
-        public void ProvideValueWithNameWithProviderResolveSuccess ()
+        public void ProvideValueWithNameWithProviderResolveSuccess()
         {
-            var x = new Reference ("Y");
-            var r = new NameServiceProvider (true, true);
-            Assert.AreEqual ("FOO", x.ProvideValue (r), "#1");
+            var x = new Reference("Y");
+            var r = new NameServiceProvider(true, true);
+            Assert.AreEqual("FOO", x.ProvideValue(r), "#1");
         }
 
         class NameServiceProvider : IServiceProvider
         {
             Resolver resolver;
 
-            public NameServiceProvider (bool worksFine, bool resolvesFine)
+            public NameServiceProvider(bool worksFine, bool resolvesFine)
             {
-                resolver = worksFine ? new Resolver (resolvesFine) : null;
+                resolver = worksFine ? new Resolver(resolvesFine) : null;
             }
 
-            public object GetService (Type serviceType)
+            public object GetService(Type serviceType)
             {
-                Assert.AreEqual (typeof (IXamlNameResolver), serviceType, "TypeToResolve");
+                Assert.AreEqual(typeof(IXamlNameResolver), serviceType, "TypeToResolve");
                 return resolver;
             }
         }
@@ -103,45 +103,46 @@ namespace MonoTests.System.Windows.Markup
         {
             bool resolves;
 
-            public Resolver (bool resolvesFine)
+            public Resolver(bool resolvesFine)
             {
                 resolves = resolvesFine;
             }
 
-            public IEnumerable<KeyValuePair<string, object>> GetAllNamesAndValuesInScope ()
+            public IEnumerable<KeyValuePair<string, object>> GetAllNamesAndValuesInScope()
             {
-                throw new Exception ();
+                throw new Exception();
             }
-            
-            public object GetFixupToken (IEnumerable<string> names)
+
+            public object GetFixupToken(IEnumerable<string> names)
             {
-                throw new NotImplementedException ();
+                throw new NotImplementedException();
             }
-            
+
             // only X (which 'failed' to resolve) calls this
-            public object GetFixupToken (IEnumerable<string> names, bool canAssignDirectly)
+            public object GetFixupToken(IEnumerable<string> names, bool canAssignDirectly)
             {
-                Assert.IsTrue (canAssignDirectly, "canAssignDirectly");
-                Assert.AreEqual (1, names.Count (), "Count");
-                Assert.AreEqual ("X", names.First (), "name0");
+                Assert.IsTrue(canAssignDirectly, "canAssignDirectly");
+                Assert.AreEqual(1, names.Count(), "Count");
+                Assert.AreEqual("X", names.First(), "name0");
                 return "BAR";
             }
-            
-            public bool IsFixupTokenAvailable {
-                get { throw new NotImplementedException (); }
+
+            public bool IsFixupTokenAvailable
+            {
+                get { throw new NotImplementedException(); }
             }
-            
+
             public event EventHandler OnNameScopeInitializationComplete;
 
             // both X and Y calls this.
-            public object Resolve (string name)
+            public object Resolve(string name)
             {
                 return resolves ? "FOO" : null;
             }
 
-            public object Resolve (string name, out bool isFullyInitialized)
+            public object Resolve(string name, out bool isFullyInitialized)
             {
-                throw new NotImplementedException ();
+                throw new NotImplementedException();
             }
         }
     }

@@ -28,7 +28,14 @@ namespace Microsoft.CodeAnalysis.CompilerServer
         public string? LibDirectory { get; }
         public string[] Arguments { get; }
 
-        public RunRequest(Guid requestId, string language, string? workingDirectory, string? tempDirectory, string? libDirectory, string[] arguments)
+        public RunRequest(
+            Guid requestId,
+            string language,
+            string? workingDirectory,
+            string? tempDirectory,
+            string? libDirectory,
+            string[] arguments
+        )
         {
             RequestId = requestId;
             Language = language;
@@ -41,17 +48,29 @@ namespace Microsoft.CodeAnalysis.CompilerServer
 
     internal sealed class CompilerServerHost : ICompilerServerHost
     {
-        public IAnalyzerAssemblyLoader AnalyzerAssemblyLoader { get; } = new ShadowCopyAnalyzerAssemblyLoader(Path.Combine(Path.GetTempPath(), "VBCSCompiler", "AnalyzerAssemblyLoader"));
+        public IAnalyzerAssemblyLoader AnalyzerAssemblyLoader { get; } =
+            new ShadowCopyAnalyzerAssemblyLoader(
+                Path.Combine(Path.GetTempPath(), "VBCSCompiler", "AnalyzerAssemblyLoader")
+            );
 
-        public static Func<string, MetadataReferenceProperties, PortableExecutableReference> SharedAssemblyReferenceProvider { get; } = (path, properties) => new CachingMetadataReference(path, properties);
+        public static Func<
+            string,
+            MetadataReferenceProperties,
+            PortableExecutableReference
+        > SharedAssemblyReferenceProvider { get; } =
+            (path, properties) => new CachingMetadataReference(path, properties);
 
         /// <summary>
         /// The caching metadata provider used by the C# and VB compilers
         /// </summary>
-        private Func<string, MetadataReferenceProperties, PortableExecutableReference> AssemblyReferenceProvider { get; } = SharedAssemblyReferenceProvider;
+        private Func<
+            string,
+            MetadataReferenceProperties,
+            PortableExecutableReference
+        > AssemblyReferenceProvider { get; } = SharedAssemblyReferenceProvider;
 
         /// <summary>
-        /// Directory that contains the compiler executables and the response files. 
+        /// Directory that contains the compiler executables and the response files.
         /// </summary>
         private string ClientDirectory { get; }
 
@@ -67,14 +86,22 @@ namespace Microsoft.CodeAnalysis.CompilerServer
         /// </summary>
         private readonly GeneratorDriverCache _driverCache = new GeneratorDriverCache();
 
-        internal CompilerServerHost(string clientDirectory, string sdkDirectory, ICompilerServerLogger logger)
+        internal CompilerServerHost(
+            string clientDirectory,
+            string sdkDirectory,
+            ICompilerServerLogger logger
+        )
         {
             ClientDirectory = clientDirectory;
             SdkDirectory = sdkDirectory;
             Logger = logger;
         }
 
-        public bool TryCreateCompiler(in RunRequest request, BuildPaths buildPaths, [NotNullWhen(true)] out CommonCompiler? compiler)
+        public bool TryCreateCompiler(
+            in RunRequest request,
+            BuildPaths buildPaths,
+            [NotNullWhen(true)] out CommonCompiler? compiler
+        )
         {
             switch (request.Language)
             {
@@ -85,7 +112,8 @@ namespace Microsoft.CodeAnalysis.CompilerServer
                         buildPaths: buildPaths,
                         libDirectory: request.LibDirectory,
                         analyzerLoader: AnalyzerAssemblyLoader,
-                        _driverCache);
+                        _driverCache
+                    );
                     return true;
                 case LanguageNames.VisualBasic:
                     compiler = new VisualBasicCompilerServer(
@@ -94,7 +122,8 @@ namespace Microsoft.CodeAnalysis.CompilerServer
                         buildPaths: buildPaths,
                         libDirectory: request.LibDirectory,
                         analyzerLoader: AnalyzerAssemblyLoader,
-                        _driverCache);
+                        _driverCache
+                    );
                     return true;
                 default:
                     compiler = null;
@@ -102,15 +131,20 @@ namespace Microsoft.CodeAnalysis.CompilerServer
             }
         }
 
-        public BuildResponse RunCompilation(in RunRequest request, CancellationToken cancellationToken)
+        public BuildResponse RunCompilation(
+            in RunRequest request,
+            CancellationToken cancellationToken
+        )
         {
-            Logger.Log($@"
+            Logger.Log(
+                $@"
 Run Compilation for {request.RequestId}
   Language = {request.Language}
   CurrentDirectory = '{request.WorkingDirectory}
-  LIB = '{request.LibDirectory}'");
+  LIB = '{request.LibDirectory}'"
+            );
 
-            // Compiler server must be provided with a valid current directory in order to correctly 
+            // Compiler server must be provided with a valid current directory in order to correctly
             // resolve files in the compilation
             if (string.IsNullOrEmpty(request.WorkingDirectory))
             {
@@ -128,7 +162,12 @@ Run Compilation for {request.RequestId}
                 return new RejectedBuildResponse(message);
             }
 
-            var buildPaths = new BuildPaths(ClientDirectory, request.WorkingDirectory, SdkDirectory, request.TempDirectory);
+            var buildPaths = new BuildPaths(
+                ClientDirectory,
+                request.WorkingDirectory,
+                SdkDirectory,
+                request.TempDirectory
+            );
             if (!TryCreateCompiler(request, buildPaths, out CommonCompiler? compiler))
             {
                 var message = $"Cannot create compiler for language id {request.Language}";
@@ -137,10 +176,22 @@ Run Compilation for {request.RequestId}
             }
 
 #if NETFRAMEWORK
-            if (!AnalyzerConsistencyChecker.Check(request.WorkingDirectory, compiler.Arguments.AnalyzerReferences, AnalyzerAssemblyLoader, Logger, out List<string?> errorMessages))
+            if (
+                !AnalyzerConsistencyChecker.Check(
+                    request.WorkingDirectory,
+                    compiler.Arguments.AnalyzerReferences,
+                    AnalyzerAssemblyLoader,
+                    Logger,
+                    out List<string?> errorMessages
+                )
+            )
             {
-                Logger.Log($"Rejected: {request.RequestId}: for analyzer load issues {string.Join(";", errorMessages)}");
-                return new AnalyzerInconsistencyBuildResponse(new ReadOnlyCollection<string>(errorMessages));
+                Logger.Log(
+                    $"Rejected: {request.RequestId}: for analyzer load issues {string.Join(";", errorMessages)}"
+                );
+                return new AnalyzerInconsistencyBuildResponse(
+                    new ReadOnlyCollection<string>(errorMessages)
+                );
             }
 #endif
 
@@ -151,10 +202,12 @@ Run Compilation for {request.RequestId}
                 TextWriter output = new StringWriter(CultureInfo.InvariantCulture);
                 int returnCode = compiler.Run(output, cancellationToken);
                 var outputString = output.ToString();
-                Logger.Log(@$"End {request.RequestId} {request.Language} compiler run
+                Logger.Log(
+                    @$"End {request.RequestId} {request.Language} compiler run
 Return code: {returnCode}
 Output:
-{outputString}");
+{outputString}"
+                );
                 return new CompletedBuildResponse(returnCode, utf8output, outputString);
             }
             catch (Exception ex)

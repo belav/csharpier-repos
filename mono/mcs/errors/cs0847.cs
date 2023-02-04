@@ -3,8 +3,8 @@
 
 class M
 {
-    public static void Main ()
+    public static void Main()
     {
-        int[] i = new int [1] { 2, 3 };
+        int[] i = new int[1] { 2, 3 };
     }
 }

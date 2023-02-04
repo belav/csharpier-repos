@@ -34,6 +34,5 @@ namespace ILCompiler.Reflection.ReadyToRun
         public PEReader ImageReader => _peReader;
 
         public MetadataReader MetadataReader => _metadataReader;
-
     }
 }

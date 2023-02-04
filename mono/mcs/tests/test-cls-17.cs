@@ -16,5 +16,6 @@ public enum E
 public class Foo
 {
     public E e;
-    public static void Main () {}
+
+    public static void Main() { }
 }

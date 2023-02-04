@@ -5,13 +5,17 @@
 //
 using System;
 
-class X {
-
-    public static int Main ()
+class X
+{
+    public static int Main()
     {
-        int i, j, t, k;
-        
-        for (i = 0; i < 10; i++){
+        int i,
+            j,
+            t,
+            k;
+
+        for (i = 0; i < 10; i++)
+        {
             if (i == 5)
                 break;
         }
@@ -21,8 +25,10 @@ class X {
 
         t = 0;
         k = 0;
-        for (i = 0; i < 10; i++){
-            for (j = 0; j < 10; j++){
+        for (i = 0; i < 10; i++)
+        {
+            for (j = 0; j < 10; j++)
+            {
                 if (j > 3)
                     break;
                 t++;
@@ -39,9 +45,9 @@ class X {
         if (k != 10)
             return 3;
 
-
         t = 0;
-        do {
+        do
+        {
             if (k == 5)
                 continue;
             t++;
@@ -51,7 +57,8 @@ class X {
             return 4;
 
         t = 0;
-        do {
+        do
+        {
             t++;
             if (t == 5)
                 break;

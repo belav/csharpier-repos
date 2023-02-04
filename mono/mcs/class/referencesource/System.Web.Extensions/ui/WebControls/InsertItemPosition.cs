@@ -6,8 +6,10 @@
 
 using System;
 
-namespace System.Web.UI.WebControls {
-    public enum InsertItemPosition {
+namespace System.Web.UI.WebControls
+{
+    public enum InsertItemPosition
+    {
         None,
         FirstItem,
         LastItem

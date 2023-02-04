@@ -3,15 +3,13 @@
 
 static class S
 {
-    public static void Foo (this uint i)
-    {
-    }
+    public static void Foo(this uint i) { }
 }
 
 class B
 {
-    static void Main ()
+    static void Main()
     {
-        55.Foo ();
+        55.Foo();
     }
 }

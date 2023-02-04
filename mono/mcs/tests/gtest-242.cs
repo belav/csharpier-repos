@@ -2,15 +2,13 @@
 using System;
 
 public class Container<T>
-    where T : IComparable<T>
-{
-}
+    where T : IComparable<T> { }
 
 public class ReferenceType : IComparable<ReferenceType>
 {
     public int value;
 
-    public int CompareTo (ReferenceType obj)
+    public int CompareTo(ReferenceType obj)
     {
         return 0;
     }
@@ -20,7 +18,7 @@ public struct MyValueType : IComparable<MyValueType>
 {
     public int value;
 
-    public int CompareTo (MyValueType obj)
+    public int CompareTo(MyValueType obj)
     {
         return 0;
     }
@@ -28,13 +26,13 @@ public struct MyValueType : IComparable<MyValueType>
 
 public class Test
 {
-    public static void Main ()
+    public static void Main()
     {
         // Compilation succeeds, constraint satisfied
-        new Container<ReferenceType> ();
+        new Container<ReferenceType>();
 
         // Compilation fails, constraint not satisfied according to mcs,
         // the unmodified testcase compiles successfully with csc
-        new Container<MyValueType> ();
+        new Container<MyValueType>();
     }
 };

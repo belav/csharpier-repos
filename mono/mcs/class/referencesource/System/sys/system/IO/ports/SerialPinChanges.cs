@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*============================================================
 **
@@ -24,22 +24,23 @@ namespace System.IO.Ports
         DsrChanged = NativeMethods.EV_DSR,
         CDChanged = NativeMethods.EV_RLSD,
         Ring = NativeMethods.EV_RING,
-        Break = NativeMethods.EV_BREAK, 
+        Break = NativeMethods.EV_BREAK,
     }
 
-    public class SerialPinChangedEventArgs : EventArgs 
+    public class SerialPinChangedEventArgs : EventArgs
     {
         private SerialPinChange pinChanged;
-        
-        internal SerialPinChangedEventArgs (SerialPinChange eventCode) {
+
+        internal SerialPinChangedEventArgs(SerialPinChange eventCode)
+        {
             pinChanged = eventCode;
         }
 
-        public SerialPinChange EventType { 
+        public SerialPinChange EventType
+        {
             get { return pinChanged; }
         }
     }
 
     public delegate void SerialPinChangedEventHandler(object sender, SerialPinChangedEventArgs e);
 }
-

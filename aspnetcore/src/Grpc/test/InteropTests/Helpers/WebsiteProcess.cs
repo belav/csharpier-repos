@@ -17,7 +17,9 @@ public class WebsiteProcess : IDisposable
     private readonly Process _process;
     private readonly ProcessEx _processEx;
     private readonly TaskCompletionSource<object> _startTcs;
-    private static readonly Regex NowListeningRegex = new Regex(@"^\s*Now listening on: .*:(?<port>\d*)$");
+    private static readonly Regex NowListeningRegex = new Regex(
+        @"^\s*Now listening on: .*:(?<port>\d*)$"
+    );
     private readonly StringBuilder _output;
     private readonly object _outputLock = new object();
 
@@ -43,7 +45,9 @@ public class WebsiteProcess : IDisposable
 
         _processEx = new ProcessEx(output, _process, Timeout.InfiniteTimeSpan);
 
-        _startTcs = new TaskCompletionSource<object>(TaskCreationOptions.RunContinuationsAsynchronously);
+        _startTcs = new TaskCompletionSource<object>(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
     }
 
     public string GetOutput()

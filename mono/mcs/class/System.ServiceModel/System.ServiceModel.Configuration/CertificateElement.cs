@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -55,46 +55,46 @@ using System.Xml;
 namespace System.ServiceModel.Configuration
 {
     [MonoTODO]
-    public sealed partial class CertificateElement
-         : ConfigurationElement
+    public sealed partial class CertificateElement : ConfigurationElement
     {
         // Static Fields
         static ConfigurationPropertyCollection properties;
         static ConfigurationProperty encoded_value;
 
-        static CertificateElement ()
+        static CertificateElement()
         {
-            properties = new ConfigurationPropertyCollection ();
-            encoded_value = new ConfigurationProperty ("encodedValue",
-                typeof (string), "", new StringConverter (), null,
-                ConfigurationPropertyOptions.None);
+            properties = new ConfigurationPropertyCollection();
+            encoded_value = new ConfigurationProperty(
+                "encodedValue",
+                typeof(string),
+                "",
+                new StringConverter(),
+                null,
+                ConfigurationPropertyOptions.None
+            );
 
-            properties.Add (encoded_value);
+            properties.Add(encoded_value);
         }
 
-        public CertificateElement ()
-        {
-        }
-
+        public CertificateElement() { }
 
         // Properties
 
-        [ConfigurationProperty ("encodedValue",
-             DefaultValue = "",
-             Options = ConfigurationPropertyOptions.None)]
-        [StringValidator ( MinLength = 0,
-            MaxLength = int.MaxValue,
-             InvalidCharacters = null)]
-        public string EncodedValue {
-            get { return (string) base [encoded_value]; }
-            set { base [encoded_value] = value; }
+        [ConfigurationProperty(
+            "encodedValue",
+            DefaultValue = "",
+            Options = ConfigurationPropertyOptions.None
+        )]
+        [StringValidator(MinLength = 0, MaxLength = int.MaxValue, InvalidCharacters = null)]
+        public string EncodedValue
+        {
+            get { return (string)base[encoded_value]; }
+            set { base[encoded_value] = value; }
         }
 
-        protected override ConfigurationPropertyCollection Properties {
+        protected override ConfigurationPropertyCollection Properties
+        {
             get { return properties; }
         }
-
-
     }
-
 }

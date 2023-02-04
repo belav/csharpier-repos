@@ -6,7 +6,11 @@ using System.Linq;
 
 namespace System.Web.Mvc
 {
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Parameter, AllowMultiple = false, Inherited = true)]
+    [AttributeUsage(
+        AttributeTargets.Class | AttributeTargets.Parameter,
+        AllowMultiple = false,
+        Inherited = true
+    )]
     public sealed class BindAttribute : Attribute
     {
         private string _exclude;
@@ -36,13 +40,22 @@ namespace System.Web.Mvc
 
         public string Prefix { get; set; }
 
-        internal static bool IsPropertyAllowed(string propertyName, ICollection<string> includeProperties, ICollection<string> excludeProperties)
+        internal static bool IsPropertyAllowed(
+            string propertyName,
+            ICollection<string> includeProperties,
+            ICollection<string> excludeProperties
+        )
         {
             // We allow a property to be bound if its both in the include list AND not in the exclude list.
             // An empty include list implies all properties are allowed.
             // An empty exclude list implies no properties are disallowed.
-            bool includeProperty = (includeProperties == null) || (includeProperties.Count == 0) || includeProperties.Contains(propertyName, StringComparer.OrdinalIgnoreCase);
-            bool excludeProperty = (excludeProperties != null) && excludeProperties.Contains(propertyName, StringComparer.OrdinalIgnoreCase);
+            bool includeProperty =
+                (includeProperties == null)
+                || (includeProperties.Count == 0)
+                || includeProperties.Contains(propertyName, StringComparer.OrdinalIgnoreCase);
+            bool excludeProperty =
+                (excludeProperties != null)
+                && excludeProperties.Contains(propertyName, StringComparer.OrdinalIgnoreCase);
             return includeProperty && !excludeProperty;
         }
 

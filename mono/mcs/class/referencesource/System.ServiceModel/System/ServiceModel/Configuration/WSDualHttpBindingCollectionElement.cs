@@ -8,12 +8,15 @@ namespace System.ServiceModel.Configuration
     using System.ServiceModel;
     using System.Globalization;
 
-    public partial class WSDualHttpBindingCollectionElement : StandardBindingCollectionElement<WSDualHttpBinding, WSDualHttpBindingElement>
+    public partial class WSDualHttpBindingCollectionElement
+        : StandardBindingCollectionElement<WSDualHttpBinding, WSDualHttpBindingElement>
     {
         internal static WSDualHttpBindingCollectionElement GetBindingCollectionElement()
         {
-            return (WSDualHttpBindingCollectionElement)ConfigurationHelpers.GetBindingCollectionElement(ConfigurationStrings.WSDualHttpBindingCollectionElementName);
+            return (WSDualHttpBindingCollectionElement)
+                ConfigurationHelpers.GetBindingCollectionElement(
+                    ConfigurationStrings.WSDualHttpBindingCollectionElementName
+                );
         }
-
     }
 }

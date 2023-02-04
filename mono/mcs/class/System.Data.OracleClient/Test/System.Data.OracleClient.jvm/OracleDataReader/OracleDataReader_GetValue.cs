@@ -1,6 +1,6 @@
-// 
+//
 // Copyright (c) 2006 Mainsoft Co.
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
 // "Software"), to deal in the Software without restriction, including
@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -38,22 +38,27 @@ namespace MonoTests.System.Data.OracleClient
     {
         Exception exp;
         OracleConnection con;
-        char [] Result;
+        char[] Result;
 
         [SetUp]
         public void SetUp()
         {
-                base.PrepareDataForTesting(MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString);
+            base.PrepareDataForTesting(
+                MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString
+            );
 
-                con = new OracleConnection(MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString);
-                Result = new char[100];
-                con.Open();
+            con = new OracleConnection(
+                MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString
+            );
+            Result = new char[100];
+            con.Open();
         }
 
         [TearDown]
         public void TearDown()
         {
-            if (con != null && con.State == ConnectionState.Open) con.Close();
+            if (con != null && con.State == ConnectionState.Open)
+                con.Close();
         }
 
         public static void Main()
@@ -70,7 +75,7 @@ namespace MonoTests.System.Data.OracleClient
             {
                 tc.exp = ex;
             }
-            finally    
+            finally
             {
                 tc.EndTest(tc.exp);
                 tc.TearDown();
@@ -92,14 +97,17 @@ namespace MonoTests.System.Data.OracleClient
             try
             {
                 BeginCase("check value");
-                
-                OracleCommand cmd = new OracleCommand("Select LastName From Employees Where EmployeeID = 100", con);
+
+                OracleCommand cmd = new OracleCommand(
+                    "Select LastName From Employees Where EmployeeID = 100",
+                    con
+                );
                 rdr = cmd.ExecuteReader();
                 rdr.Read();
 
-                Object obj = rdr.GetValue(0); 
+                Object obj = rdr.GetValue(0);
                 Compare(obj.ToString(), "Last100");
-            } 
+            }
             catch (Exception ex)
             {
                 exp = ex;
@@ -114,11 +122,14 @@ namespace MonoTests.System.Data.OracleClient
                 exp = null;
             }
         }
+
         private void TypesTests(DbTypeParametersCollection typesToTest)
         {
             exp = null;
 
-            DbTypeParametersCollection currentlyTested = new DbTypeParametersCollection(typesToTest.TableName);
+            DbTypeParametersCollection currentlyTested = new DbTypeParametersCollection(
+                typesToTest.TableName
+            );
             string rowId = "13289";
             object dbValue;
             OracleDataReader rdr = null;
@@ -138,7 +149,11 @@ namespace MonoTests.System.Data.OracleClient
                 {
                     currentlyTested.ExecuteSelectReader(rowId, out rdr, out selectCon);
                     rdr.Read();
-                    dbValue = WorkaroundOracleCharsPaddingLimitation(testedDbServer, currentParamType, rdr.GetValue(0));
+                    dbValue = WorkaroundOracleCharsPaddingLimitation(
+                        testedDbServer,
+                        currentParamType,
+                        rdr.GetValue(0)
+                    );
                     if (currentParamType.Value.GetType().IsArray)
                     {
                         Compare(dbValue as Array, currentParamType.Value as Array);
@@ -147,8 +162,8 @@ namespace MonoTests.System.Data.OracleClient
                     {
                         Compare(dbValue, currentParamType.Value);
                     }
-                } 
-                catch(Exception ex)
+                }
+                catch (Exception ex)
                 {
                     exp = ex;
                 }
@@ -168,6 +183,7 @@ namespace MonoTests.System.Data.OracleClient
                 }
             }
         }
+
         /// <summary>
         /// This is a workaround for the extra white spaces added in oracle to NCHAR & NVARCHAR values.
         /// The problem is a documented GH limitation, see bug #3417.
@@ -176,18 +192,29 @@ namespace MonoTests.System.Data.OracleClient
         /// <param name="testedServer">The database server we are currently running on.</param>
         /// <param name="val">The value returned from the database.</param>
         /// <returns>The normalized value..</returns>
-        private object WorkaroundOracleCharsPaddingLimitation(DataBaseServer testedServer, DbTypeParameter currentParam, object val)
+        private object WorkaroundOracleCharsPaddingLimitation(
+            DataBaseServer testedServer,
+            DbTypeParameter currentParam,
+            object val
+        )
         {
             object origVal = val;
             string dbTypeName = currentParam.DbTypeName.ToUpper();
-            if ( (testedServer == DataBaseServer.Oracle) && (dbTypeName == "CHAR" || dbTypeName == "NCHAR") )
+            if (
+                (testedServer == DataBaseServer.Oracle)
+                && (dbTypeName == "CHAR" || dbTypeName == "NCHAR")
+            )
             {
                 val = ((string)val).Substring(0, currentParam.Size);
-                Log(string.Format("Worked around oracle chars padding limitation by triming '{0}' to '{1}'", origVal, val));
+                Log(
+                    string.Format(
+                        "Worked around oracle chars padding limitation by triming '{0}' to '{1}'",
+                        origVal,
+                        val
+                    )
+                );
             }
             return val;
         }
-
-
     }
 }

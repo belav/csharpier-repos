@@ -5,20 +5,20 @@ public class Test
 {
     public static void Main()
     {
-        S2 s2 = new S2 ();
+        S2 s2 = new S2();
         int r = s2 ^ 5.04f;
     }
 }
 
 struct S2
 {
-    public static int operator ^ (double? p1, S2 s2)
+    public static int operator ^(double? p1, S2 s2)
     {
         return 1;
     }
-    
-    public static implicit operator int? (S2 s1)
-    { 
+
+    public static implicit operator int?(S2 s1)
+    {
         return int.MinValue;
     }
 }

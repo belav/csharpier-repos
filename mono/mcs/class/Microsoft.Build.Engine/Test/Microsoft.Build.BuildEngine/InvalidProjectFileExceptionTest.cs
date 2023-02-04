@@ -3,7 +3,7 @@
 //
 // Author:
 //   Marek Sieradzki (marek.sieradzki@gmail.com)
-// 
+//
 // (C) 2005 Marek Sieradzki
 //
 // Permission is hereby granted, free of charge, to any person obtaining
@@ -33,22 +33,24 @@ using System.Xml;
 using Microsoft.Build.BuildEngine;
 using NUnit.Framework;
 
-namespace MonoTests.Microsoft.Build.BuildEngine {
+namespace MonoTests.Microsoft.Build.BuildEngine
+{
     [TestFixture]
-    public class InvalidProjectFileExceptionTest {
+    public class InvalidProjectFileExceptionTest
+    {
         [Test]
-        public void TestCtorMessage ()
+        public void TestCtorMessage()
         {
             InvalidProjectFileException ipfe;
             string message = "message";
-            
-            ipfe = new InvalidProjectFileException (message);
-            
-            Assert.AreEqual (message, ipfe.Message, "Message");
+
+            ipfe = new InvalidProjectFileException(message);
+
+            Assert.AreEqual(message, ipfe.Message, "Message");
         }
-        
+
         [Test]
-        public void TestCtorProjectFile ()
+        public void TestCtorProjectFile()
         {
             InvalidProjectFileException ipfe;
             string projectFile = "projectFile";
@@ -60,33 +62,42 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
             string errorSubcategory = "errorSubcategory";
             string errorCode = "CS0000";
             string helpKeyword = "helpKeyword";
-            
-            ipfe = new InvalidProjectFileException (projectFile, lineNumber, columnNumber, endLineNumber, endColumnNumber,
-                message, errorSubcategory, errorCode, helpKeyword);
-            
-            Assert.AreEqual (projectFile, ipfe.ProjectFile, "A1");
-            Assert.AreEqual (lineNumber, ipfe.LineNumber, "A2");
-            Assert.AreEqual (columnNumber, ipfe.ColumnNumber, "A3");
-            Assert.AreEqual (endLineNumber, ipfe.EndLineNumber, "A4");
-            Assert.AreEqual (endColumnNumber, ipfe.EndColumnNumber, "A5");
-            Assert.AreEqual (message, ipfe.BaseMessage, "A6");
-            Assert.AreEqual (message + "  " + projectFile, ipfe.Message, "A7");
-            Assert.AreEqual (errorSubcategory, ipfe.ErrorSubcategory, "A8");
-            Assert.AreEqual (errorCode, ipfe.ErrorCode, "A9");
-            Assert.AreEqual (helpKeyword, ipfe.HelpKeyword, "A10");
+
+            ipfe = new InvalidProjectFileException(
+                projectFile,
+                lineNumber,
+                columnNumber,
+                endLineNumber,
+                endColumnNumber,
+                message,
+                errorSubcategory,
+                errorCode,
+                helpKeyword
+            );
+
+            Assert.AreEqual(projectFile, ipfe.ProjectFile, "A1");
+            Assert.AreEqual(lineNumber, ipfe.LineNumber, "A2");
+            Assert.AreEqual(columnNumber, ipfe.ColumnNumber, "A3");
+            Assert.AreEqual(endLineNumber, ipfe.EndLineNumber, "A4");
+            Assert.AreEqual(endColumnNumber, ipfe.EndColumnNumber, "A5");
+            Assert.AreEqual(message, ipfe.BaseMessage, "A6");
+            Assert.AreEqual(message + "  " + projectFile, ipfe.Message, "A7");
+            Assert.AreEqual(errorSubcategory, ipfe.ErrorSubcategory, "A8");
+            Assert.AreEqual(errorCode, ipfe.ErrorCode, "A9");
+            Assert.AreEqual(helpKeyword, ipfe.HelpKeyword, "A10");
         }
-        
+
         [Test]
-        public void TestCtorMessageException ()
+        public void TestCtorMessageException()
         {
             string message = "message";
-            Exception e = new Exception ("Exception message");
-            
-            new InvalidProjectFileException (message, e);
+            Exception e = new Exception("Exception message");
+
+            new InvalidProjectFileException(message, e);
         }
-        
+
         [Test]
-        public void TestCtorNode ()
+        public void TestCtorNode()
         {
             // FIXME: we need to load xml file to load something with non-empty XmlElement.BaseUri
             /*
@@ -109,18 +120,21 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void TestGetObjectData1 ()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void TestGetObjectData1()
         {
-            InvalidProjectFileException ipfe = new InvalidProjectFileException ();
-            ipfe.GetObjectData (null, new StreamingContext ());
+            InvalidProjectFileException ipfe = new InvalidProjectFileException();
+            ipfe.GetObjectData(null, new StreamingContext());
         }
 
         [Test]
-        public void TestGetObjectData2 ()
+        public void TestGetObjectData2()
         {
-            StreamingContext sc = new StreamingContext ();
-            SerializationInfo si = new SerializationInfo (typeof (InvalidProjectFileException), new FormatterConverter ());
+            StreamingContext sc = new StreamingContext();
+            SerializationInfo si = new SerializationInfo(
+                typeof(InvalidProjectFileException),
+                new FormatterConverter()
+            );
             InvalidProjectFileException ipfe;
             string projectFile = "projectFile";
             int lineNumber = 1;
@@ -132,19 +146,28 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
             string errorCode = "CS0000";
             string helpKeyword = "helpKeyword";
 
-            ipfe = new InvalidProjectFileException (projectFile, lineNumber, columnNumber, endLineNumber, endColumnNumber,
-                message, errorSubcategory, errorCode, helpKeyword);
-            ipfe.GetObjectData (si, sc);
+            ipfe = new InvalidProjectFileException(
+                projectFile,
+                lineNumber,
+                columnNumber,
+                endLineNumber,
+                endColumnNumber,
+                message,
+                errorSubcategory,
+                errorCode,
+                helpKeyword
+            );
+            ipfe.GetObjectData(si, sc);
 
-            Assert.AreEqual (projectFile, si.GetString ("projectFile"), "A1");
-            Assert.AreEqual (lineNumber, si.GetInt32 ("lineNumber"), "A2");
-            Assert.AreEqual (columnNumber, si.GetInt32 ("columnNumber"), "A3");
-            Assert.AreEqual (endLineNumber, si.GetInt32 ("endLineNumber"), "A4");
-            Assert.AreEqual (endColumnNumber, si.GetInt32 ("endColumnNumber"), "A5");
-            Assert.AreEqual (message, si.GetString ("Message"), "A6");
-            Assert.AreEqual (errorSubcategory, si.GetString ("errorSubcategory"), "A7");
-            Assert.AreEqual (errorCode, si.GetString ("errorCode"), "A8");
-            Assert.AreEqual (helpKeyword, si.GetString ("helpKeyword"), "A9");
+            Assert.AreEqual(projectFile, si.GetString("projectFile"), "A1");
+            Assert.AreEqual(lineNumber, si.GetInt32("lineNumber"), "A2");
+            Assert.AreEqual(columnNumber, si.GetInt32("columnNumber"), "A3");
+            Assert.AreEqual(endLineNumber, si.GetInt32("endLineNumber"), "A4");
+            Assert.AreEqual(endColumnNumber, si.GetInt32("endColumnNumber"), "A5");
+            Assert.AreEqual(message, si.GetString("Message"), "A6");
+            Assert.AreEqual(errorSubcategory, si.GetString("errorSubcategory"), "A7");
+            Assert.AreEqual(errorCode, si.GetString("errorCode"), "A8");
+            Assert.AreEqual(helpKeyword, si.GetString("helpKeyword"), "A9");
         }
     }
 }

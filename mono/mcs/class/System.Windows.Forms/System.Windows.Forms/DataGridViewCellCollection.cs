@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,193 +28,208 @@ using System.ComponentModel;
 
 namespace System.Windows.Forms
 {
-    [ListBindable (false)]
+    [ListBindable(false)]
     public class DataGridViewCellCollection : BaseCollection, IList, ICollection, IEnumerable
     {
         private DataGridViewRow dataGridViewRow;
 
-        public DataGridViewCellCollection (DataGridViewRow dataGridViewRow) : base()
+        public DataGridViewCellCollection(DataGridViewRow dataGridViewRow)
+            : base()
         {
             this.dataGridViewRow = dataGridViewRow;
         }
 
-        bool IList.IsFixedSize {
+        bool IList.IsFixedSize
+        {
             get { return base.List.IsFixedSize; }
         }
 
-        object IList.this [int index] {
-            get { return this [index]; }
-            set { this [index] = value as DataGridViewCell; }
+        object IList.this[int index]
+        {
+            get { return this[index]; }
+            set { this[index] = value as DataGridViewCell; }
         }
 
-        public DataGridViewCell this [int index] {
-            get { return (DataGridViewCell) base.List [index]; }
-            set {
+        public DataGridViewCell this[int index]
+        {
+            get { return (DataGridViewCell)base.List[index]; }
+            set
+            {
                 if (value == null)
-                    throw new ArgumentNullException ("value");
+                    throw new ArgumentNullException("value");
 
                 Insert(index, value);
             }
         }
 
-        internal DataGridViewCell GetCellInternal (int colIndex)
+        internal DataGridViewCell GetCellInternal(int colIndex)
         {
-            return (DataGridViewCell) base.List [colIndex];
+            return (DataGridViewCell)base.List[colIndex];
         }
-        
-        public DataGridViewCell this [string columnName] {
-            get {
-                if (columnName == null)
-                    throw new ArgumentNullException ("columnName");
 
-                foreach (DataGridViewCell cell in base.List) {
-                    if (string.Compare (cell.OwningColumn.Name, columnName, true) == 0)
+        public DataGridViewCell this[string columnName]
+        {
+            get
+            {
+                if (columnName == null)
+                    throw new ArgumentNullException("columnName");
+
+                foreach (DataGridViewCell cell in base.List)
+                {
+                    if (string.Compare(cell.OwningColumn.Name, columnName, true) == 0)
                         return cell;
                 }
 
-                throw new ArgumentException (string.Format (
-                    "Column name {0} cannot be found.",
-                    columnName), "columnName");
+                throw new ArgumentException(
+                    string.Format("Column name {0} cannot be found.", columnName),
+                    "columnName"
+                );
             }
-            set {
+            set
+            {
                 if (columnName == null)
-                    throw new ArgumentNullException ("columnName");
+                    throw new ArgumentNullException("columnName");
                 if (value == null)
-                    throw new ArgumentNullException ("value");
+                    throw new ArgumentNullException("value");
 
-                for (int i = 0; i < base.List.Count; i++) {
-                    DataGridViewCell cell = (DataGridViewCell) base.List [i];
-                    if (string.Compare (cell.OwningColumn.Name, columnName, true) == 0) {
-                        Insert (i, value);
+                for (int i = 0; i < base.List.Count; i++)
+                {
+                    DataGridViewCell cell = (DataGridViewCell)base.List[i];
+                    if (string.Compare(cell.OwningColumn.Name, columnName, true) == 0)
+                    {
+                        Insert(i, value);
                         return;
                     }
                 }
-                Add (value);
+                Add(value);
             }
         }
 
-        internal DataGridViewCell GetBoundCell (string dataPropertyName)
+        internal DataGridViewCell GetBoundCell(string dataPropertyName)
         {
-            foreach (DataGridViewCell cell in base.List) {
-                if (string.Compare (cell.OwningColumn.DataPropertyName, dataPropertyName, true) == 0)
+            foreach (DataGridViewCell cell in base.List)
+            {
+                if (string.Compare(cell.OwningColumn.DataPropertyName, dataPropertyName, true) == 0)
                     return cell;
             }
-            
+
             return null;
         }
-        
+
         public event CollectionChangeEventHandler CollectionChanged;
 
-        int IList.Add (object value)
+        int IList.Add(object value)
         {
-            return Add (value as DataGridViewCell);
+            return Add(value as DataGridViewCell);
         }
 
-        public virtual int Add (DataGridViewCell dataGridViewCell)
+        public virtual int Add(DataGridViewCell dataGridViewCell)
         {
-            int result = base.List.Add (dataGridViewCell);
-            dataGridViewCell.SetOwningRow (dataGridViewRow);
-            dataGridViewCell.SetColumnIndex (result);
-            dataGridViewCell.SetDataGridView (dataGridViewRow.DataGridView);
-            OnCollectionChanged (new CollectionChangeEventArgs (
-                CollectionChangeAction.Add, dataGridViewCell));
+            int result = base.List.Add(dataGridViewCell);
+            dataGridViewCell.SetOwningRow(dataGridViewRow);
+            dataGridViewCell.SetColumnIndex(result);
+            dataGridViewCell.SetDataGridView(dataGridViewRow.DataGridView);
+            OnCollectionChanged(
+                new CollectionChangeEventArgs(CollectionChangeAction.Add, dataGridViewCell)
+            );
             return result;
         }
 
-        internal void Replace (int columnIndex, DataGridViewCell dataGridViewCell)
+        internal void Replace(int columnIndex, DataGridViewCell dataGridViewCell)
         {
-            RemoveAt (columnIndex);
-            Insert (columnIndex, dataGridViewCell);
+            RemoveAt(columnIndex);
+            Insert(columnIndex, dataGridViewCell);
         }
 
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        public virtual void AddRange (params DataGridViewCell[] dataGridViewCells)
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public virtual void AddRange(params DataGridViewCell[] dataGridViewCells)
         {
             foreach (DataGridViewCell cell in dataGridViewCells)
-                Add (cell);
+                Add(cell);
         }
 
-        public virtual void Clear ()
+        public virtual void Clear()
         {
             base.List.Clear();
         }
 
-        bool IList.Contains (object value)
+        bool IList.Contains(object value)
         {
-            return Contains (value as DataGridViewCell);
+            return Contains(value as DataGridViewCell);
         }
 
-        public virtual bool Contains (DataGridViewCell dataGridViewCell)
+        public virtual bool Contains(DataGridViewCell dataGridViewCell)
         {
-            return base.List.Contains (dataGridViewCell);
+            return base.List.Contains(dataGridViewCell);
         }
 
-        public void CopyTo (DataGridViewCell[] array, int index)
+        public void CopyTo(DataGridViewCell[] array, int index)
         {
-            base.List.CopyTo (array, index);
+            base.List.CopyTo(array, index);
         }
 
-        int IList.IndexOf (object value)
+        int IList.IndexOf(object value)
         {
-            return IndexOf (value as DataGridViewCell);
+            return IndexOf(value as DataGridViewCell);
         }
 
-        public int IndexOf (DataGridViewCell dataGridViewCell)
+        public int IndexOf(DataGridViewCell dataGridViewCell)
         {
-            return base.List.IndexOf (dataGridViewCell);
+            return base.List.IndexOf(dataGridViewCell);
         }
 
-        void IList.Insert (int index, object value)
+        void IList.Insert(int index, object value)
         {
-            Insert (index, value as DataGridViewCell);
+            Insert(index, value as DataGridViewCell);
         }
 
-        public virtual void Insert (int index, DataGridViewCell dataGridViewCell)
+        public virtual void Insert(int index, DataGridViewCell dataGridViewCell)
         {
-            base.List.Insert (index, dataGridViewCell);
-            dataGridViewCell.SetOwningRow (dataGridViewRow);
-            dataGridViewCell.SetColumnIndex (index);
-            dataGridViewCell.SetDataGridView (dataGridViewRow.DataGridView);
-            ReIndex ();
-            OnCollectionChanged (new CollectionChangeEventArgs (
-                CollectionChangeAction.Add, dataGridViewCell));
+            base.List.Insert(index, dataGridViewCell);
+            dataGridViewCell.SetOwningRow(dataGridViewRow);
+            dataGridViewCell.SetColumnIndex(index);
+            dataGridViewCell.SetDataGridView(dataGridViewRow.DataGridView);
+            ReIndex();
+            OnCollectionChanged(
+                new CollectionChangeEventArgs(CollectionChangeAction.Add, dataGridViewCell)
+            );
         }
 
-        void IList.Remove (object value)
+        void IList.Remove(object value)
         {
-            Remove (value as DataGridViewCell);
+            Remove(value as DataGridViewCell);
         }
 
-        public virtual void Remove (DataGridViewCell cell)
+        public virtual void Remove(DataGridViewCell cell)
         {
-            base.List.Remove (cell);
-            ReIndex ();
-            OnCollectionChanged (new CollectionChangeEventArgs (
-                CollectionChangeAction.Remove, cell));
+            base.List.Remove(cell);
+            ReIndex();
+            OnCollectionChanged(new CollectionChangeEventArgs(CollectionChangeAction.Remove, cell));
         }
 
-        public virtual void RemoveAt (int index)
+        public virtual void RemoveAt(int index)
         {
-            DataGridViewCell cell = this [index];
-            base.List.RemoveAt (index);
-            ReIndex ();
-            OnCollectionChanged (new CollectionChangeEventArgs (
-                CollectionChangeAction.Remove, cell));
+            DataGridViewCell cell = this[index];
+            base.List.RemoveAt(index);
+            ReIndex();
+            OnCollectionChanged(new CollectionChangeEventArgs(CollectionChangeAction.Remove, cell));
         }
 
-        private void ReIndex ()
+        private void ReIndex()
         {
             for (int i = 0; i < base.List.Count; i++)
-                this[i].SetColumnIndex (i);
+                this[i].SetColumnIndex(i);
         }
 
-        protected override ArrayList List {
+        protected override ArrayList List
+        {
             get { return base.List; }
         }
 
-        protected void OnCollectionChanged (CollectionChangeEventArgs e)
+        protected void OnCollectionChanged(CollectionChangeEventArgs e)
         {
-            if (CollectionChanged != null) {
+            if (CollectionChanged != null)
+            {
                 CollectionChanged(this, e);
             }
         }

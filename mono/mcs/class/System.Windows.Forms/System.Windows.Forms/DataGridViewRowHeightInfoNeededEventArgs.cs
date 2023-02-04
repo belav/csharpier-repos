@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -23,34 +23,40 @@
 //    Pedro Martínez Juliá <pedromj@gmail.com>
 //
 
-namespace System.Windows.Forms {
-
-    public class DataGridViewRowHeightInfoNeededEventArgs : EventArgs {
-
+namespace System.Windows.Forms
+{
+    public class DataGridViewRowHeightInfoNeededEventArgs : EventArgs
+    {
         private int height;
         private int minimumHeight;
         private int rowIndex;
 
-        internal DataGridViewRowHeightInfoNeededEventArgs (int rowIndex, int height, int minimumHeight) {
+        internal DataGridViewRowHeightInfoNeededEventArgs(
+            int rowIndex,
+            int height,
+            int minimumHeight
+        )
+        {
             this.rowIndex = rowIndex;
             this.height = height;
             this.minimumHeight = minimumHeight;
         }
 
-        public int Height {
+        public int Height
+        {
             get { return height; }
             set { height = value < minimumHeight ? minimumHeight : value; }
         }
 
-        public int MinimumHeight {
+        public int MinimumHeight
+        {
             get { return minimumHeight; }
             set { minimumHeight = value; }
         }
 
-        public int RowIndex {
+        public int RowIndex
+        {
             get { return rowIndex; }
         }
-
     }
-
 }

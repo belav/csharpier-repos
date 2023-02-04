@@ -11,49 +11,55 @@ namespace TLens.Analyzers
 {
     sealed class InverterCtorsChainAnalyzer : Analyzer
     {
-        readonly List<(MethodDefinition, MethodDefinition)> ctors = new List<(MethodDefinition, MethodDefinition)> ();
+        readonly List<(MethodDefinition, MethodDefinition)> ctors =
+            new List<(MethodDefinition, MethodDefinition)>();
 
-        protected override void ProcessMethod (MethodDefinition method)
+        protected override void ProcessMethod(MethodDefinition method)
         {
             if (!method.IsConstructor || !method.DeclaringType.IsClass)
                 return;
 
-            foreach (var instr in method.Body.Instructions) {
-                switch (instr.OpCode.Code) {
-                case Code.Call:
-                    var mr = (MethodReference) instr.Operand;
-                    var md = mr.Resolve ();
-                    if (md == null)
-                        return;
+            foreach (var instr in method.Body.Instructions)
+            {
+                switch (instr.OpCode.Code)
+                {
+                    case Code.Call:
+                        var mr = (MethodReference)instr.Operand;
+                        var md = mr.Resolve();
+                        if (md == null)
+                            return;
 
-                    if (!md.IsConstructor)
-                        return;
+                        if (!md.IsConstructor)
+                            return;
 
-                    if (md.DeclaringType != method.DeclaringType)
-                        return;
+                        if (md.DeclaringType != method.DeclaringType)
+                            return;
 
-                    if (md.Parameters.Count <= method.Parameters.Count)
-                        return;
+                        if (md.Parameters.Count <= method.Parameters.Count)
+                            return;
 
-                    var prev = instr.Previous.OpCode.Code;
-                    if (prev == Code.Ldnull || prev == Code.Ldc_I4_0)
-                        ctors.Add ((method, md));
+                        var prev = instr.Previous.OpCode.Code;
+                        if (prev == Code.Ldnull || prev == Code.Ldc_I4_0)
+                            ctors.Add((method, md));
 
-                    break;
+                        break;
                 }
             }
         }
 
-        public override void PrintResults (int maxCount)
+        public override void PrintResults(int maxCount)
         {
-            var entries = ctors.OrderByDescending (l => l.Item2.GetEstimatedSize ()).Take (maxCount);
-            if (!entries.Any ())
+            var entries = ctors.OrderByDescending(l => l.Item2.GetEstimatedSize()).Take(maxCount);
+            if (!entries.Any())
                 return;
 
-            PrintHeader ("Constructors with possibly inverted initializations");
+            PrintHeader("Constructors with possibly inverted initializations");
 
-            foreach (var entry in entries) {
-                Console.WriteLine ($"Constructor '{entry.Item1.ToDisplay ()}' calls possibly unnecessary initialization in '{entry.Item2.ToDisplay (showSize: true)}'");
+            foreach (var entry in entries)
+            {
+                Console.WriteLine(
+                    $"Constructor '{entry.Item1.ToDisplay()}' calls possibly unnecessary initialization in '{entry.Item2.ToDisplay(showSize: true)}'"
+                );
             }
         }
     }

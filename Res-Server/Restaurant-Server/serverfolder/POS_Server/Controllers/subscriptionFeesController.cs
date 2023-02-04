@@ -17,6 +17,7 @@ namespace POS_Server.Controllers
     public class subscriptionFeesController : ApiController
     {
         CountriesController coctrlr = new CountriesController();
+
         [HttpPost]
         [Route("GetAll")]
         public string GetAll(string token)
@@ -33,21 +34,24 @@ namespace POS_Server.Controllers
                 using (incposdbEntities entity = new incposdbEntities())
                 {
                     var List1 = entity.subscriptionFees.ToList();
-                     var List= List1.Select(S => new subscriptionFeesModel
-                    {
-                        subscriptionFeesId = S.subscriptionFeesId,
-                        membershipId = S.membershipId,
-                        monthsCount = S.monthsCount,
-                        Amount = S.Amount,
-                        notes = S.notes,
-                        createDate = S.createDate,
-                        updateDate = S.updateDate,
-                        createUserId = S.createUserId,
-                        updateUserId = S.updateUserId,
-                        isActive = S.isActive,
-
-                    })
-                    .ToList();
+                    var List = List1
+                        .Select(
+                            S =>
+                                new subscriptionFeesModel
+                                {
+                                    subscriptionFeesId = S.subscriptionFeesId,
+                                    membershipId = S.membershipId,
+                                    monthsCount = S.monthsCount,
+                                    Amount = S.Amount,
+                                    notes = S.notes,
+                                    createDate = S.createDate,
+                                    updateDate = S.updateDate,
+                                    createUserId = S.createUserId,
+                                    updateUserId = S.updateUserId,
+                                    isActive = S.isActive,
+                                }
+                        )
+                        .ToList();
 
                     if (List.Count > 0)
                     {
@@ -57,20 +61,22 @@ namespace POS_Server.Controllers
                             if (List[i].isActive == 1)
                             {
                                 long subscriptionFeesId = (long)List[i].subscriptionFeesId;
-                                var items5 = entity.agentMembershipCash.Where(x => x.subscriptionFeesId == subscriptionFeesId).Select(b => new { b.agentMembershipCashId }).FirstOrDefault();
+                                var items5 = entity.agentMembershipCash
+                                    .Where(x => x.subscriptionFeesId == subscriptionFeesId)
+                                    .Select(b => new { b.agentMembershipCashId })
+                                    .FirstOrDefault();
 
                                 if (items5 is null)
                                     canDelete = true;
-
                             }
                             List[i].canDelete = canDelete;
                         }
                     }
                     return TokenManager.GenerateToken(List);
-
                 }
             }
         }
+
         /*
    public int subscriptionFeesId { get; set; }
         public Nullable<long> subscriptionFeesId { get; set; }
@@ -107,25 +113,25 @@ namespace POS_Server.Controllers
                 using (incposdbEntities entity = new incposdbEntities())
                 {
                     var bank = entity.subscriptionFees
-                   .Where(S => S.subscriptionFeesId == subscriptionFeesId)
-                   .Select(S => new
-                   {
-                       S.subscriptionFeesId,
-                       S.membershipId,
-                       S.monthsCount,
-                       S.Amount,
-                       S.notes,
-                       S.createDate,
-                       S.updateDate,
-                       S.createUserId,
-                       S.updateUserId,
-                       S.isActive,
-
-
-                   })
-                   .FirstOrDefault();
+                        .Where(S => S.subscriptionFeesId == subscriptionFeesId)
+                        .Select(
+                            S =>
+                                new
+                                {
+                                    S.subscriptionFeesId,
+                                    S.membershipId,
+                                    S.monthsCount,
+                                    S.Amount,
+                                    S.notes,
+                                    S.createDate,
+                                    S.updateDate,
+                                    S.createUserId,
+                                    S.updateUserId,
+                                    S.isActive,
+                                }
+                        )
+                        .FirstOrDefault();
                     return TokenManager.GenerateToken(bank);
-
                 }
             }
         }
@@ -152,7 +158,10 @@ namespace POS_Server.Controllers
                     {
                         subscriptionFeesId = c.Value.Replace("\\", string.Empty);
                         subscriptionFeesId = subscriptionFeesId.Trim('"');
-                        newObject = JsonConvert.DeserializeObject<subscriptionFees>(subscriptionFeesId, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        newObject = JsonConvert.DeserializeObject<subscriptionFees>(
+                            subscriptionFeesId,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                         break;
                     }
                 }
@@ -174,41 +183,39 @@ namespace POS_Server.Controllers
                         var bankEntity = entity.Set<subscriptionFees>();
                         if (newObject.subscriptionFeesId == 0)
                         {
-                            newObject.createDate =  coctrlr.AddOffsetTodate(DateTime.Now);
-                            newObject.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                            newObject.createDate = coctrlr.AddOffsetTodate(DateTime.Now);
+                            newObject.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                             newObject.updateUserId = newObject.createUserId;
                             tmpObject = bankEntity.Add(newObject);
                             entity.SaveChanges();
-                            message = tmpObject.subscriptionFeesId.ToString(); ;
+                            message = tmpObject.subscriptionFeesId.ToString();
+                            ;
                         }
                         else
                         {
-                            tmpObject = entity.subscriptionFees.Where(p => p.subscriptionFeesId == newObject.subscriptionFeesId).FirstOrDefault();
+                            tmpObject = entity.subscriptionFees
+                                .Where(p => p.subscriptionFeesId == newObject.subscriptionFeesId)
+                                .FirstOrDefault();
 
-                            tmpObject.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                            tmpObject.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
 
                             tmpObject.subscriptionFeesId = newObject.subscriptionFeesId;
                             tmpObject.membershipId = newObject.membershipId;
                             tmpObject.monthsCount = newObject.monthsCount;
                             tmpObject.Amount = newObject.Amount;
                             tmpObject.notes = newObject.notes;
-                          //  tmpObject.createDate = newObject.createDate;
+                            //  tmpObject.createDate = newObject.createDate;
 
                             tmpObject.createUserId = newObject.createUserId;
                             tmpObject.updateUserId = newObject.updateUserId;
                             tmpObject.isActive = newObject.isActive;
 
-
-
-
                             entity.SaveChanges();
                             message = tmpObject.subscriptionFeesId.ToString();
-
                         }
                         return TokenManager.GenerateToken(message);
                     }
                 }
-
                 catch
                 {
                     message = "0";
@@ -255,8 +262,9 @@ namespace POS_Server.Controllers
                     {
                         using (incposdbEntities entity = new incposdbEntities())
                         {
-
-                            subscriptionFees objDelete = entity.subscriptionFees.Find(subscriptionFeesId);
+                            subscriptionFees objDelete = entity.subscriptionFees.Find(
+                                subscriptionFeesId
+                            );
                             entity.subscriptionFees.Remove(objDelete);
                             message = entity.SaveChanges().ToString();
                             return TokenManager.GenerateToken(message);
@@ -273,11 +281,12 @@ namespace POS_Server.Controllers
                     {
                         using (incposdbEntities entity = new incposdbEntities())
                         {
-
-                            subscriptionFees objDelete = entity.subscriptionFees.Find(subscriptionFeesId);
+                            subscriptionFees objDelete = entity.subscriptionFees.Find(
+                                subscriptionFeesId
+                            );
                             objDelete.isActive = 0;
                             objDelete.updateUserId = userId;
-                            objDelete.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                            objDelete.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                             message = entity.SaveChanges().ToString();
                             return TokenManager.GenerateToken(message);
                         }
@@ -290,10 +299,8 @@ namespace POS_Server.Controllers
             }
         }
 
-
         public long Save(subscriptionFees newObject)
         {
-
             long message = 0;
 
             if (newObject.updateUserId == 0 || newObject.updateUserId == null)
@@ -319,8 +326,8 @@ namespace POS_Server.Controllers
                     var bankEntity = entity.Set<subscriptionFees>();
                     if (newObject.subscriptionFeesId == 0)
                     {
-                        newObject.createDate =  coctrlr.AddOffsetTodate(DateTime.Now);
-                        newObject.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                        newObject.createDate = coctrlr.AddOffsetTodate(DateTime.Now);
+                        newObject.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                         newObject.updateUserId = newObject.createUserId;
                         tmpObject = bankEntity.Add(newObject);
                         entity.SaveChanges();
@@ -328,38 +335,34 @@ namespace POS_Server.Controllers
                     }
                     else
                     {
-                        tmpObject = entity.subscriptionFees.Where(p => p.subscriptionFeesId == newObject.subscriptionFeesId).FirstOrDefault();
+                        tmpObject = entity.subscriptionFees
+                            .Where(p => p.subscriptionFeesId == newObject.subscriptionFeesId)
+                            .FirstOrDefault();
 
-                        tmpObject.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                        tmpObject.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
 
                         tmpObject.subscriptionFeesId = newObject.subscriptionFeesId;
                         tmpObject.membershipId = newObject.membershipId;
                         tmpObject.monthsCount = newObject.monthsCount;
                         tmpObject.Amount = newObject.Amount;
                         tmpObject.notes = newObject.notes;
-                      //  tmpObject.createDate = newObject.createDate;
+                        //  tmpObject.createDate = newObject.createDate;
 
                         tmpObject.createUserId = newObject.createUserId;
                         tmpObject.updateUserId = newObject.updateUserId;
                         tmpObject.isActive = newObject.isActive;
 
-
-
-
                         entity.SaveChanges();
                         message = tmpObject.subscriptionFeesId;
-
                     }
                     return message;
                 }
             }
-
             catch
             {
                 message = 0;
                 return message;
             }
-
         }
 
         public long DeleteByMembershipId(long membershipId)
@@ -370,16 +373,17 @@ namespace POS_Server.Controllers
             try
             {
                 using (incposdbEntities entity = new incposdbEntities())
-            {
-                items = entity.subscriptionFees.Where(x => x.membershipId == membershipId).ToList();
-                if (items != null)
                 {
-                    entity.subscriptionFees.RemoveRange(items);
-                 
-                        message = entity.SaveChanges();
-                }
+                    items = entity.subscriptionFees
+                        .Where(x => x.membershipId == membershipId)
+                        .ToList();
+                    if (items != null)
+                    {
+                        entity.subscriptionFees.RemoveRange(items);
 
-            }
+                        message = entity.SaveChanges();
+                    }
+                }
                 return message;
             }
             catch (Exception ex)
@@ -387,7 +391,6 @@ namespace POS_Server.Controllers
                 message = -2;
                 return message;
             }
-
         }
 
         public subscriptionFees GetById(long subscriptionFeesId)
@@ -397,26 +400,27 @@ namespace POS_Server.Controllers
             {
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-
                     var list = entity.subscriptionFees.ToList();
 
-                    item= list.Where(S => S.subscriptionFeesId == subscriptionFeesId)
-                   .Select(S => new subscriptionFees
-                   {
-                       subscriptionFeesId = S.subscriptionFeesId,
-                       membershipId = S.membershipId,
-                       monthsCount = S.monthsCount,
-                       Amount = S.Amount,
-                       notes = S.notes,
-                       createDate = S.createDate,
-                       updateDate = S.updateDate,
-                       createUserId = S.createUserId,
-                       updateUserId = S.updateUserId,
-                       isActive = S.isActive,
-
-                   }).FirstOrDefault();
+                    item = list.Where(S => S.subscriptionFeesId == subscriptionFeesId)
+                        .Select(
+                            S =>
+                                new subscriptionFees
+                                {
+                                    subscriptionFeesId = S.subscriptionFeesId,
+                                    membershipId = S.membershipId,
+                                    monthsCount = S.monthsCount,
+                                    Amount = S.Amount,
+                                    notes = S.notes,
+                                    createDate = S.createDate,
+                                    updateDate = S.updateDate,
+                                    createUserId = S.createUserId,
+                                    updateUserId = S.updateUserId,
+                                    isActive = S.isActive,
+                                }
+                        )
+                        .FirstOrDefault();
                     return item;
-
                 }
             }
             catch (Exception ex)
@@ -424,11 +428,6 @@ namespace POS_Server.Controllers
                 //item.notes = ex.ToString();
                 return item;
             }
-
-
-                
-            
         }
-
     }
 }

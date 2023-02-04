@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -42,30 +42,30 @@ namespace MonoTests.System.ServiceModel.Description
     [TestFixture]
     public class ServiceEndpointTest
     {
-        static ContractDescription contract1 = ContractDescription.GetContract (typeof (Foo));
+        static ContractDescription contract1 = ContractDescription.GetContract(typeof(Foo));
 
         [Test]
-        public void NullArguments ()
+        public void NullArguments()
         {
-            new ServiceEndpoint (contract1, null, null);
+            new ServiceEndpoint(contract1, null, null);
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void NullArguments2 ()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void NullArguments2()
         {
-            new ServiceEndpoint (null, null, null);
+            new ServiceEndpoint(null, null, null);
         }
 
         [Test]
 #if FEATURE_NO_BSD_SOCKETS
-        [ExpectedException (typeof (PlatformNotSupportedException))]
+        [ExpectedException(typeof(PlatformNotSupportedException))]
 #endif
-        public void ListenUri ()
+        public void ListenUri()
         {
-            Uri uri = new Uri ("http://localhost:" + NetworkHelpers.FindFreePort ());
-            var se = new ServiceEndpoint (contract1, null, new EndpointAddress (uri));
-            Assert.AreEqual (uri, se.ListenUri, "#1");
+            Uri uri = new Uri("http://localhost:" + NetworkHelpers.FindFreePort());
+            var se = new ServiceEndpoint(contract1, null, new EndpointAddress(uri));
+            Assert.AreEqual(uri, se.ListenUri, "#1");
         }
 
         #region contracts
@@ -74,7 +74,7 @@ namespace MonoTests.System.ServiceModel.Description
         interface Foo
         {
             [OperationContract]
-            string Echo (string input);
+            string Echo(string input);
         }
 
         #endregion

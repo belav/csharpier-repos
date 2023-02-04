@@ -12,7 +12,7 @@ namespace MonoTests.System.Data.SqlClient
     [TestFixture]
     public class SqlConnection_InfoMessage : GHTBase
     {
-        private int errorCounter=0;
+        private int errorCounter = 0;
 
         public static void Main()
         {
@@ -24,7 +24,7 @@ namespace MonoTests.System.Data.SqlClient
                 tc.BeginTest("NoName");
                 tc.run();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 exp = ex;
             }
@@ -34,16 +34,21 @@ namespace MonoTests.System.Data.SqlClient
                 tc.EndTest(exp);
             }
             // After test is ready, remove this line
-        
         }
 
-        [Test] 
+        [Test]
         [Category("NotWorking")]
         public void run()
         {
-            if (ConnectedDataProvider.GetDbType() != DataBaseServer.SQLServer) {
+            if (ConnectedDataProvider.GetDbType() != DataBaseServer.SQLServer)
+            {
                 //All tests in this class are only for MSSQLServer.
-                Log(string.Format("All tests in this class are only for MSSQLServer and cannot be tested on {0}", ConnectedDataProvider.GetDbType()));
+                Log(
+                    string.Format(
+                        "All tests in this class are only for MSSQLServer and cannot be tested on {0}",
+                        ConnectedDataProvider.GetDbType()
+                    )
+                );
                 return;
             }
 
@@ -53,13 +58,15 @@ namespace MonoTests.System.Data.SqlClient
             try
             {
                 BeginCase("InfoMessage testing");
-                SqlConnection con = new SqlConnection(ConnectedDataProvider.ConnectionStringSQLClient);
+                SqlConnection con = new SqlConnection(
+                    ConnectedDataProvider.ConnectionStringSQLClient
+                );
                 con.Open();
-                con.InfoMessage+=new SqlInfoMessageEventHandler(con_InfoMessage);
+                con.InfoMessage += new SqlInfoMessageEventHandler(con_InfoMessage);
                 generateError(con);
                 con.Close();
-            } 
-            catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 exp = ex;
             }
@@ -72,30 +79,24 @@ namespace MonoTests.System.Data.SqlClient
             // End Sub Test
         }
 
-
         private void generateError(SqlConnection con)
         {
             string errorString = string.Empty;
-            SqlCommand cmd = new SqlCommand (string.Empty,con); 
-            cmd.CommandText  = "Raiserror ('A sample SQL informational message',10,1)";
+            SqlCommand cmd = new SqlCommand(string.Empty, con);
+            cmd.CommandText = "Raiserror ('A sample SQL informational message',10,1)";
 
-            
             cmd.ExecuteNonQuery();
-        
-        
-        
+
             //                cmd.CommandText = "TestInfoMessage";
             //                cmd.CommandType = CommandType.StoredProcedure;
 
-            
+
             if (errorCounter == 0)
             {
-                Thread.Sleep(5000);    
+                Thread.Sleep(5000);
             }
-            Compare(errorCounter,1);
+            Compare(errorCounter, 1);
         }
-
-
 
         //Activate This Construntor to log All To Standard output
         //public TestClass():base(true){}

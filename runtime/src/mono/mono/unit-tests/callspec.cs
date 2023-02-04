@@ -1,11 +1,8 @@
-
 namespace Baz
 {
     class Foo
     {
-        public Foo()
-        {
-        }
+        public Foo() { }
 
         public string Bar()
         {
@@ -20,9 +17,7 @@ namespace Baz
 
     class Goo
     {
-        public Goo()
-        {
-        }
+        public Goo() { }
 
         public string Bar(string greet)
         {
@@ -32,9 +27,7 @@ namespace Baz
 
     class Foo2
     {
-        public Foo2()
-        {
-        }
+        public Foo2() { }
 
         public string Bar(string greet)
         {

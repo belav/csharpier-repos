@@ -3,21 +3,22 @@
 using System;
 using System.Threading;
 
+public struct ValX1<T> { }
 
-public struct ValX1<T> {}
-public class RefX1<T> {}
+public class RefX1<T> { }
 
-
-class Gen<T> 
+class Gen<T>
 {
     public static void EnterExitTest()
     {
         Gen<T> monitorT = new Gen<T>();
         Gen<T> monitorU = new Gen<T>();
-        
-        if(monitorU.Equals(monitorT))
-            throw new Exception("Invalid use of test case, T must not be equal to U - POSSIBLE TYPE SYSTEM BUG");
-                
+
+        if (monitorU.Equals(monitorT))
+            throw new Exception(
+                "Invalid use of test case, T must not be equal to U - POSSIBLE TYPE SYSTEM BUG"
+            );
+
         TestHelper myHelper = new TestHelper(Test_EnterExit10.nThreads);
         TestHelper myHelper2 = new TestHelper(Test_EnterExit10.nThreads);
         WaitHandle[] myWaiter = new WaitHandle[2];
@@ -29,7 +30,7 @@ class Gen<T>
         //     new MonitorDelegate(myHelper2.Consumer).BeginInvoke(monitorU,null,null);
         // }
 
-        for(int i=0;i<Test_EnterExit10.nThreads;i++)
+        for (int i = 0; i < Test_EnterExit10.nThreads; i++)
         {
             ThreadPool.QueueUserWorkItem(state =>
             {
@@ -42,16 +43,15 @@ class Gen<T>
             });
         }
 
-        for(int i=0;i<6;i++)
-        {    
-            if(WaitHandle.WaitAll(myWaiter,10000))//,true))
+        for (int i = 0; i < 6; i++)
+        {
+            if (WaitHandle.WaitAll(myWaiter, 10000)) //,true))
                 break;
-            if(myHelper.Error == true || myHelper2.Error == true)
+            if (myHelper.Error == true || myHelper2.Error == true)
                 break;
         }
         Test_EnterExit10.Eval(!(myHelper.Error || myHelper2.Error));
     }
-
 }
 
 public class Test_EnterExit10
@@ -59,6 +59,7 @@ public class Test_EnterExit10
     public static int nThreads = 10;
     public static int counter = 0;
     public static bool result = true;
+
     public static void Eval(bool exp)
     {
         counter++;
@@ -67,12 +68,11 @@ public class Test_EnterExit10
             result = exp;
             Console.WriteLine("Test Failed at location: " + counter);
         }
-    
     }
-    
+
     public static int Main()
     {
-        Gen<int>.EnterExitTest();    
+        Gen<int>.EnterExitTest();
         Gen<double>.EnterExitTest();
         Gen<string>.EnterExitTest();
         Gen<object>.EnterExitTest();
@@ -107,6 +107,4 @@ public class Test_EnterExit10
             return 1;
         }
     }
-}        
-
-
+}

@@ -1,21 +1,19 @@
 // CS0123: A method or delegate `Program.method(A)' parameters do not match delegate `D(dynamic)' parameters
 // Line: 19
 
-delegate object D (dynamic b);
+delegate object D(dynamic b);
 
-class A
-{
-}
+class A { }
 
 class Program
 {
-    static string method (A a)
+    static string method(A a)
     {
         return "";
     }
 
-    static void Main ()
+    static void Main()
     {
-        var d = new D (method);
+        var d = new D(method);
     }
 }

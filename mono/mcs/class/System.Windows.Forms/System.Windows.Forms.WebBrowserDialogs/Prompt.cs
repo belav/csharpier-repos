@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -37,23 +37,33 @@ namespace System.Windows.Forms.WebBrowserDialogs
             get { return text; }
         }
 
-        public Prompt (string title, string message, string text)
-            : base (title)
+        public Prompt(string title, string message, string text)
+            : base(title)
         {
-            InitTable (3, 1);
+            InitTable(3, 1);
 
-            AddLabel (0, 0, 0, message, -1, -1);
-            AddText (1, 0, 0, text, -1, -1, new EventHandler (onText));
-            AddButton (2, 0, 0, Locale.GetText ("OK"), -1, -1, true, false, new EventHandler (OkClick));
+            AddLabel(0, 0, 0, message, -1, -1);
+            AddText(1, 0, 0, text, -1, -1, new EventHandler(onText));
+            AddButton(
+                2,
+                0,
+                0,
+                Locale.GetText("OK"),
+                -1,
+                -1,
+                true,
+                false,
+                new EventHandler(OkClick)
+            );
         }
 
-        private void OkClick (object sender, EventArgs e)
+        private void OkClick(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.OK;
-            this.Close ();
+            this.Close();
         }
 
-        private void onText (object sender, EventArgs e)
+        private void onText(object sender, EventArgs e)
         {
             TextBox c = sender as TextBox;
             text = c.Text;

@@ -3,31 +3,34 @@
 
 public class TestCase
 {
-    static void Main ()
+    static void Main()
     {
         MyEnum me = MyEnum.Value1;
         OSType os = (OSType)me;
     }
 
-    struct OSType {
+    struct OSType
+    {
         int value;
-        
-        public int Value {
+
+        public int Value
+        {
             get { return Value; }
         }
 
-        public OSType (int value)
+        public OSType(int value)
         {
             this.value = value;
         }
 
-        public static implicit operator OSType (int i)
+        public static implicit operator OSType(int i)
         {
-            return new OSType (i);
+            return new OSType(i);
         }
     }
 
-    enum MyEnum {
+    enum MyEnum
+    {
         Value1
     }
 }

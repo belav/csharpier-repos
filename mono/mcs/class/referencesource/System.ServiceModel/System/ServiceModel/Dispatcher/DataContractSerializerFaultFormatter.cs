@@ -16,13 +16,11 @@ namespace System.ServiceModel.Dispatcher
     class DataContractSerializerFaultFormatter : FaultFormatter
     {
         internal DataContractSerializerFaultFormatter(Type[] detailTypes)
-            : base(detailTypes)
-        {
-        }
+            : base(detailTypes) { }
 
-        internal DataContractSerializerFaultFormatter(SynchronizedCollection<FaultContractInfo> faultContractInfoCollection)
-            : base(faultContractInfoCollection)
-        {
-        }
+        internal DataContractSerializerFaultFormatter(
+            SynchronizedCollection<FaultContractInfo> faultContractInfoCollection
+        )
+            : base(faultContractInfoCollection) { }
     }
 }

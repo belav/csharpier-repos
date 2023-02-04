@@ -18,10 +18,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -43,12 +43,12 @@ namespace System.Net
     {
         protected bool closed;
         bool disposed;
-        object locker = new object ();
+        object locker = new object();
         int read_timeout;
         int write_timeout;
         internal bool IgnoreIOErrors;
 
-        protected WebConnectionStream (WebConnection cnc, WebOperation operation)
+        protected WebConnectionStream(WebConnection cnc, WebOperation operation)
         {
             Connection = cnc;
             Operation = operation;
@@ -58,214 +58,233 @@ namespace System.Net
             write_timeout = read_timeout;
         }
 
-        internal HttpWebRequest Request {
-            get;
-        }
+        internal HttpWebRequest Request { get; }
 
-        internal WebConnection Connection {
-            get;
-        }
+        internal WebConnection Connection { get; }
 
-        internal WebOperation Operation {
-            get;
-        }
+        internal WebOperation Operation { get; }
 
         internal ServicePoint ServicePoint => Connection.ServicePoint;
 
-        public override bool CanTimeout {
+        public override bool CanTimeout
+        {
             get { return true; }
         }
 
-        public override int ReadTimeout {
-            get {
-                return read_timeout;
-            }
-
-            set {
+        public override int ReadTimeout
+        {
+            get { return read_timeout; }
+            set
+            {
                 if (value < -1)
-                    throw new ArgumentOutOfRangeException ("value");
+                    throw new ArgumentOutOfRangeException("value");
                 read_timeout = value;
             }
         }
 
-        public override int WriteTimeout {
-            get {
-                return write_timeout;
-            }
-
-            set {
+        public override int WriteTimeout
+        {
+            get { return write_timeout; }
+            set
+            {
                 if (value < -1)
-                    throw new ArgumentOutOfRangeException ("value");
+                    throw new ArgumentOutOfRangeException("value");
                 write_timeout = value;
             }
         }
 
-        protected Exception GetException (Exception e)
+        protected Exception GetException(Exception e)
         {
-            e = HttpWebRequest.FlattenException (e);
+            e = HttpWebRequest.FlattenException(e);
             if (e is WebException)
                 return e;
-            if (Operation.Aborted || e is OperationCanceledException || e is ObjectDisposedException)
-                return HttpWebRequest.CreateRequestAbortedException ();
+            if (
+                Operation.Aborted || e is OperationCanceledException || e is ObjectDisposedException
+            )
+                return HttpWebRequest.CreateRequestAbortedException();
             return e;
         }
 
-        protected abstract bool TryReadFromBufferedContent (byte[] buffer, int offset, int count, out int result);
+        protected abstract bool TryReadFromBufferedContent(
+            byte[] buffer,
+            int offset,
+            int count,
+            out int result
+        );
 
-        public override int Read (byte[] buffer, int offset, int count)
+        public override int Read(byte[] buffer, int offset, int count)
         {
             if (!CanRead)
-                throw new NotSupportedException (SR.net_writeonlystream);
+                throw new NotSupportedException(SR.net_writeonlystream);
 
             if (buffer == null)
-                throw new ArgumentNullException (nameof (buffer));
+                throw new ArgumentNullException(nameof(buffer));
 
             int length = buffer.Length;
             if (offset < 0 || length < offset)
-                throw new ArgumentOutOfRangeException (nameof (offset));
+                throw new ArgumentOutOfRangeException(nameof(offset));
             if (count < 0 || (length - offset) < count)
-                throw new ArgumentOutOfRangeException (nameof (count));
+                throw new ArgumentOutOfRangeException(nameof(count));
 
-            if (TryReadFromBufferedContent (buffer, offset, count, out var result))
+            if (TryReadFromBufferedContent(buffer, offset, count, out var result))
                 return result;
 
-            Operation.ThrowIfClosedOrDisposed ();
+            Operation.ThrowIfClosedOrDisposed();
 
             try
             {
-                return ReadAsync (buffer, offset, count, CancellationToken.None).Result;
-            } catch (Exception e) {
-                throw GetException (e);
+                return ReadAsync(buffer, offset, count, CancellationToken.None).Result;
+            }
+            catch (Exception e)
+            {
+                throw GetException(e);
             }
         }
 
-        public override IAsyncResult BeginRead (byte[] buffer, int offset, int count,
-                            AsyncCallback cb, object state)
+        public override IAsyncResult BeginRead(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback cb,
+            object state
+        )
         {
             if (!CanRead)
-                throw new NotSupportedException (SR.net_writeonlystream);
-            Operation.ThrowIfClosedOrDisposed ();
+                throw new NotSupportedException(SR.net_writeonlystream);
+            Operation.ThrowIfClosedOrDisposed();
 
             if (buffer == null)
-                throw new ArgumentNullException (nameof (buffer));
+                throw new ArgumentNullException(nameof(buffer));
 
             int length = buffer.Length;
             if (offset < 0 || length < offset)
-                throw new ArgumentOutOfRangeException (nameof (offset));
+                throw new ArgumentOutOfRangeException(nameof(offset));
             if (count < 0 || (length - offset) < count)
-                throw new ArgumentOutOfRangeException (nameof (count));
+                throw new ArgumentOutOfRangeException(nameof(count));
 
-            var task = ReadAsync (buffer, offset, count, CancellationToken.None);
-            return TaskToApm.Begin (task, cb, state);
+            var task = ReadAsync(buffer, offset, count, CancellationToken.None);
+            return TaskToApm.Begin(task, cb, state);
         }
 
-        public override int EndRead (IAsyncResult r)
+        public override int EndRead(IAsyncResult r)
         {
             if (r == null)
-                throw new ArgumentNullException (nameof (r));
+                throw new ArgumentNullException(nameof(r));
 
-            try {
-                return TaskToApm.End<int> (r);
-            } catch (Exception e) {
-                throw GetException (e);
+            try
+            {
+                return TaskToApm.End<int>(r);
+            }
+            catch (Exception e)
+            {
+                throw GetException(e);
             }
         }
 
-        public override IAsyncResult BeginWrite (byte[] buffer, int offset, int count,
-                             AsyncCallback cb, object state)
+        public override IAsyncResult BeginWrite(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback cb,
+            object state
+        )
         {
             if (buffer == null)
-                throw new ArgumentNullException (nameof (buffer));
+                throw new ArgumentNullException(nameof(buffer));
 
             int length = buffer.Length;
             if (offset < 0 || length < offset)
-                throw new ArgumentOutOfRangeException (nameof (offset));
+                throw new ArgumentOutOfRangeException(nameof(offset));
             if (count < 0 || (length - offset) < count)
-                throw new ArgumentOutOfRangeException (nameof (count));
+                throw new ArgumentOutOfRangeException(nameof(count));
 
             if (!CanWrite)
-                throw new NotSupportedException (SR.net_readonlystream);
-            Operation.ThrowIfClosedOrDisposed ();
+                throw new NotSupportedException(SR.net_readonlystream);
+            Operation.ThrowIfClosedOrDisposed();
 
-            var task = WriteAsync (buffer, offset, count, CancellationToken.None);
-            return TaskToApm.Begin (task, cb, state);
+            var task = WriteAsync(buffer, offset, count, CancellationToken.None);
+            return TaskToApm.Begin(task, cb, state);
         }
 
-        public override void EndWrite (IAsyncResult r)
+        public override void EndWrite(IAsyncResult r)
         {
             if (r == null)
-                throw new ArgumentNullException (nameof (r));
+                throw new ArgumentNullException(nameof(r));
 
-            try {
-                TaskToApm.End (r);
-            } catch (Exception e) {
-                throw GetException (e);
+            try
+            {
+                TaskToApm.End(r);
+            }
+            catch (Exception e)
+            {
+                throw GetException(e);
             }
         }
 
-        public override void Write (byte[] buffer, int offset, int count)
+        public override void Write(byte[] buffer, int offset, int count)
         {
             if (buffer == null)
-                throw new ArgumentNullException (nameof (buffer));
+                throw new ArgumentNullException(nameof(buffer));
 
             int length = buffer.Length;
             if (offset < 0 || length < offset)
-                throw new ArgumentOutOfRangeException (nameof (offset));
+                throw new ArgumentOutOfRangeException(nameof(offset));
             if (count < 0 || (length - offset) < count)
-                throw new ArgumentOutOfRangeException (nameof (count));
+                throw new ArgumentOutOfRangeException(nameof(count));
 
             if (!CanWrite)
-                throw new NotSupportedException (SR.net_readonlystream);
-            Operation.ThrowIfClosedOrDisposed ();
+                throw new NotSupportedException(SR.net_readonlystream);
+            Operation.ThrowIfClosedOrDisposed();
 
-            try {
-                WriteAsync (buffer, offset, count).Wait ();
-            } catch (Exception e) {
-                throw GetException (e);
+            try
+            {
+                WriteAsync(buffer, offset, count).Wait();
+            }
+            catch (Exception e)
+            {
+                throw GetException(e);
             }
         }
 
-        public override void Flush ()
+        public override void Flush() { }
+
+        public override Task FlushAsync(CancellationToken cancellationToken)
         {
+            return cancellationToken.IsCancellationRequested
+                ? Task.FromCancellation(cancellationToken)
+                : Task.CompletedTask;
         }
 
-        public override Task FlushAsync (CancellationToken cancellationToken)
-        {
-            return cancellationToken.IsCancellationRequested ?
-                Task.FromCancellation (cancellationToken) :
-                Task.CompletedTask;
-        }
-
-        internal void InternalClose ()
+        internal void InternalClose()
         {
             disposed = true;
         }
 
-        protected abstract void Close_internal (ref bool disposed);
+        protected abstract void Close_internal(ref bool disposed);
 
-        public override void Close ()
+        public override void Close()
         {
-            Close_internal (ref disposed);
+            Close_internal(ref disposed);
         }
 
-        public override long Seek (long a, SeekOrigin b)
+        public override long Seek(long a, SeekOrigin b)
         {
-            throw new NotSupportedException (SR.net_noseek);
+            throw new NotSupportedException(SR.net_noseek);
         }
 
-        public override void SetLength (long a)
+        public override void SetLength(long a)
         {
-            throw new NotSupportedException (SR.net_noseek);
+            throw new NotSupportedException(SR.net_noseek);
         }
 
         public override bool CanSeek => false;
 
-        public override long Length => throw new NotSupportedException (SR.net_noseek);
+        public override long Length => throw new NotSupportedException(SR.net_noseek);
 
-        public override long Position {
-            get { throw new NotSupportedException (SR.net_noseek); }
-            set { throw new NotSupportedException (SR.net_noseek); }
+        public override long Position
+        {
+            get { throw new NotSupportedException(SR.net_noseek); }
+            set { throw new NotSupportedException(SR.net_noseek); }
         }
     }
 }
-

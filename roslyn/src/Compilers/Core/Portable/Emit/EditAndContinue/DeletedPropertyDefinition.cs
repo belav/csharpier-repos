@@ -10,7 +10,9 @@ using Microsoft.CodeAnalysis.Symbols;
 
 namespace Microsoft.CodeAnalysis.Emit.EditAndContinue
 {
-    internal sealed class DeletedPropertyDefinition : DeletedDefinition<IPropertyDefinition>, IPropertyDefinition
+    internal sealed class DeletedPropertyDefinition
+        : DeletedDefinition<IPropertyDefinition>,
+            IPropertyDefinition
     {
         private readonly ITypeDefinition _containingTypeDef;
         private readonly ImmutableArray<DeletedParameterDefinition> _parameters;
@@ -18,7 +20,13 @@ namespace Microsoft.CodeAnalysis.Emit.EditAndContinue
         private readonly IMethodReference? _getter;
         private readonly IMethodReference? _setter;
 
-        public DeletedPropertyDefinition(IPropertyDefinition oldProperty, DeletedMethodDefinition? getter, DeletedMethodDefinition? setter, ITypeDefinition containingTypeDef, Dictionary<ITypeDefinition, DeletedTypeDefinition> typesUsedByDeletedMembers)
+        public DeletedPropertyDefinition(
+            IPropertyDefinition oldProperty,
+            DeletedMethodDefinition? getter,
+            DeletedMethodDefinition? setter,
+            ITypeDefinition containingTypeDef,
+            Dictionary<ITypeDefinition, DeletedTypeDefinition> typesUsedByDeletedMembers
+        )
             : base(oldProperty, typesUsedByDeletedMembers)
         {
             _containingTypeDef = containingTypeDef;
@@ -38,7 +46,8 @@ namespace Microsoft.CodeAnalysis.Emit.EditAndContinue
 
         public bool IsSpecialName => OldDefinition.IsSpecialName;
 
-        public ImmutableArray<IParameterDefinition> Parameters => StaticCast<IParameterDefinition>.From(_parameters);
+        public ImmutableArray<IParameterDefinition> Parameters =>
+            StaticCast<IParameterDefinition>.From(_parameters);
 
         public IMethodReference? Setter => _setter;
 
@@ -46,9 +55,11 @@ namespace Microsoft.CodeAnalysis.Emit.EditAndContinue
 
         public ushort ParameterCount => (ushort)_parameters.Length;
 
-        public ImmutableArray<ICustomModifier> ReturnValueCustomModifiers => OldDefinition.ReturnValueCustomModifiers;
+        public ImmutableArray<ICustomModifier> ReturnValueCustomModifiers =>
+            OldDefinition.ReturnValueCustomModifiers;
 
-        public ImmutableArray<ICustomModifier> RefCustomModifiers => OldDefinition.RefCustomModifiers;
+        public ImmutableArray<ICustomModifier> RefCustomModifiers =>
+            OldDefinition.RefCustomModifiers;
 
         public bool ReturnValueIsByRef => OldDefinition.ReturnValueIsByRef;
 

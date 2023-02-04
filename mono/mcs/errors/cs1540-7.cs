@@ -3,20 +3,18 @@
 
 class A
 {
-    protected object[] Test { get { return null; } }
-}
-
-class B : A
-{
-}
-
-class C: A
-{
-    public void Test2 (B b)
+    protected object[] Test
     {
-        foreach (object o in b.Test)
-        {
-        }
+        get { return null; }
     }
+}
 
+class B : A { }
+
+class C : A
+{
+    public void Test2(B b)
+    {
+        foreach (object o in b.Test) { }
+    }
 }

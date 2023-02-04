@@ -12,10 +12,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,77 +28,71 @@
 #if MONO_FEATURE_SRE
 using System.Runtime.InteropServices;
 
-namespace System.Reflection.Emit {
-
-
+namespace System.Reflection.Emit
+{
     /// <summary>
     ///  Represents the Token returned by the metadata to represent a Event.
     /// </summary>
-    [ComVisible (true)]
+    [ComVisible(true)]
     [Serializable]
-    public readonly struct EventToken : IEquatable<EventToken> {
-
+    public readonly struct EventToken : IEquatable<EventToken>
+    {
         internal readonly int tokValue;
 
-        public static readonly EventToken Empty = new EventToken ();
+        public static readonly EventToken Empty = new EventToken();
 
-        internal EventToken (int val)
+        internal EventToken(int val)
         {
             tokValue = val;
         }
 
-
-
         /// <summary>
         /// </summary>
-        public override bool Equals (object obj)
+        public override bool Equals(object obj)
         {
             bool res = obj is EventToken;
 
-            if (res) {
-                EventToken that = (EventToken) obj;
+            if (res)
+            {
+                EventToken that = (EventToken)obj;
                 res = (this.tokValue == that.tokValue);
             }
 
             return res;
         }
 
-        public bool Equals (EventToken obj)
+        public bool Equals(EventToken obj)
         {
             return (this.tokValue == obj.tokValue);
         }
 
-        public static bool operator == (EventToken a, EventToken b)
+        public static bool operator ==(EventToken a, EventToken b)
         {
-            return Equals (a, b);
+            return Equals(a, b);
         }
 
-        public static bool operator != (EventToken a, EventToken b)
+        public static bool operator !=(EventToken a, EventToken b)
         {
-            return !Equals (a, b);
+            return !Equals(a, b);
         }
 
         /// <summary>
         ///  Tests whether the given object is an instance of
         ///  EventToken and has the same token value.
         /// </summary>
-        public override int GetHashCode ()
+        public override int GetHashCode()
         {
             return tokValue;
         }
 
-
         /// <summary>
         ///  Returns the metadata token for this Event.
         /// </summary>
-        public int Token {
-            get {
-                return tokValue;
-            }
+        public int Token
+        {
+            get { return tokValue; }
         }
-
     }
-
 }
 
 #endif

@@ -8,21 +8,20 @@ namespace MonoTests.System
     [TestFixture]
     public class AbortBlockingConsoleIOTest
     {
-        void StartBlockingConsoleReadCall ()
+        void StartBlockingConsoleReadCall()
         {
-            Console.ReadLine ();
+            Console.ReadLine();
         }
 
         [Test]
-        public void AbortBlockingConsoleIOReadCall ()
+        public void AbortBlockingConsoleIOReadCall()
         {
-            Thread readThread = new Thread (StartBlockingConsoleReadCall);
-            readThread.Start ();
-            Thread.Sleep (2000);
+            Thread readThread = new Thread(StartBlockingConsoleReadCall);
+            readThread.Start();
+            Thread.Sleep(2000);
 
-            readThread.Abort ();
-            readThread.Join ();
+            readThread.Abort();
+            readThread.Join();
         }
-
     }
 }

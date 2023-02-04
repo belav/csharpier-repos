@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -58,8 +58,7 @@ namespace MonoTests.System.Web.DynamicData.ModelProviders
     class MyTableProvider : TableProvider
     {
         public MyTableProvider(DataModelProvider model)
-            : base(model)
-        { }
+            : base(model) { }
 
         public override ReadOnlyCollection<ColumnProvider> Columns
         {
@@ -67,7 +66,6 @@ namespace MonoTests.System.Web.DynamicData.ModelProviders
         }
 
         public override IQueryable GetQuery(object context)
-
         {
             throw new NotImplementedException();
         }
@@ -90,7 +88,7 @@ namespace MonoTests.System.Web.DynamicData.ModelProviders
             get { return 1; }
         }
     }
-    
+
     [TestFixture]
     public class TableProviderTest
     {
@@ -100,7 +98,7 @@ namespace MonoTests.System.Web.DynamicData.ModelProviders
             var tp = new MyTableProvider(null);
             Assert.AreEqual(null, tp.DataModel, "#A1");
         }
-        
+
         [Test]
         public void TableProvider_Defaults()
         {
@@ -108,10 +106,10 @@ namespace MonoTests.System.Web.DynamicData.ModelProviders
             var tp = new MyTableProvider(dmp);
 
             Assert.IsTrue(tp.DataModel != null, "#A1");
-            Assert.AreEqual(typeof (MyDataModelProvider), tp.DataModel.GetType (), "#A2");
+            Assert.AreEqual(typeof(MyDataModelProvider), tp.DataModel.GetType(), "#A2");
             Assert.AreEqual(null, tp.EntityType, "#A3");
             Assert.AreEqual(null, tp.Name, "#A4");
-            Assert.AreEqual(tp.GetType ().ToString (), tp.ToString(), "#A5");
+            Assert.AreEqual(tp.GetType().ToString(), tp.ToString(), "#A5");
         }
 
         [Test]
@@ -120,12 +118,12 @@ namespace MonoTests.System.Web.DynamicData.ModelProviders
             var dmp = new MyDataModelProvider();
             var tp = new MyTableProvider(dmp);
 
-            tp.SetName ("MyName");
+            tp.SetName("MyName");
             Assert.AreEqual(tp.Name, tp.ToString(), "#A1");
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
+        [ExpectedException(typeof(ArgumentNullException))]
         public void TableProvider_EvaluateForeignKey()
         {
             var dmp = new MyDataModelProvider();
@@ -175,4 +173,3 @@ namespace MonoTests.System.Web.DynamicData.ModelProviders
         }
     }
 }
-

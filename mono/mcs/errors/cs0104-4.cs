@@ -19,7 +19,5 @@ namespace C
     using B;
 
     [X]
-    class Test 
-    {
-    }
+    class Test { }
 }

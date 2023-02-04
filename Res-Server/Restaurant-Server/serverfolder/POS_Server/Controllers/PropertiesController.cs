@@ -17,14 +17,15 @@ namespace POS_Server.Controllers
     public class PropertiesController : ApiController
     {
         CountriesController coctrlr = new CountriesController();
+
         // GET api/<controller>
         [HttpPost]
         [Route("Get")]
         public string Get(string token)
         {
-token = TokenManager.readToken(HttpContext.Current.Request);
+            token = TokenManager.readToken(HttpContext.Current.Request);
             Boolean canDelete = false;
-var strP = TokenManager.GetPrincipal(token);
+            var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
                 return TokenManager.GenerateToken(strP);
@@ -33,16 +34,21 @@ var strP = TokenManager.GetPrincipal(token);
             {
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var propertiesList = entity.properties.Select(p => new PropertyModel {
-                      propertyId=  p.propertyId,
-                        name= p.name,
-                        createDate= p.createDate,
-                        createUserId= p.createUserId,
-                        updateDate= p.updateDate,
-                        updateUserId= p.updateUserId,
-                        isActive= p.isActive,
-                    })
-                    .ToList();
+                    var propertiesList = entity.properties
+                        .Select(
+                            p =>
+                                new PropertyModel
+                                {
+                                    propertyId = p.propertyId,
+                                    name = p.name,
+                                    createDate = p.createDate,
+                                    createUserId = p.createUserId,
+                                    updateDate = p.updateDate,
+                                    updateUserId = p.updateUserId,
+                                    isActive = p.isActive,
+                                }
+                        )
+                        .ToList();
 
                     if (propertiesList.Count > 0)
                     {
@@ -52,8 +58,11 @@ var strP = TokenManager.GetPrincipal(token);
                             canDelete = false;
 
                             long propertyId = (long)propertiesList[i].propertyId;
-                            var propItems = entity.propertiesItems.Where(x => x.propertyId == propertyId).Select(b => new { b.name,b.propertyId }).ToList();
-                           
+                            var propItems = entity.propertiesItems
+                                .Where(x => x.propertyId == propertyId)
+                                .Select(b => new { b.name, b.propertyId })
+                                .ToList();
+
                             if (propItems is null || propItems.Count == 0)
                             {
                                 canDelete = true;
@@ -65,7 +74,7 @@ var strP = TokenManager.GetPrincipal(token);
                                     if (values == "")
                                         values += s.name;
                                     else
-                                        values += ", "+ s.name ;
+                                        values += ", " + s.name;
                                 }
                             }
                             propertiesList[i].canDelete = canDelete;
@@ -73,17 +82,17 @@ var strP = TokenManager.GetPrincipal(token);
                         }
                     }
 
-                            return TokenManager.GenerateToken(propertiesList);
+                    return TokenManager.GenerateToken(propertiesList);
                 }
             }
-         }
+        }
 
         [HttpPost]
         [Route("GetPropertyValues")]
         public string GetPropertyValues(string token)
         {
-token = TokenManager.readToken(HttpContext.Current.Request);
-var strP = TokenManager.GetPrincipal(token);
+            token = TokenManager.readToken(HttpContext.Current.Request);
+            var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
                 return TokenManager.GenerateToken(strP);
@@ -101,33 +110,34 @@ var strP = TokenManager.GetPrincipal(token);
                 }
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var propertiesList =( from PI in entity.propertiesItems.Where(x => x.propertyId == propertyId)
-                                          join P in entity.properties on PI.propertyId equals P.propertyId
-                                          select new PropertiesItemModel(){
-                                              propertyItemId = PI.propertyItemId,
-                                              propertyId = PI.propertyId,
-                                           propertyItemName = PI.name,
-                                           createDate = PI.createDate,
-                                           createUserId = PI.createUserId,
-                                           updateDate = PI.updateDate,
-                                           updateUserId = PI.updateUserId,
-                                           propertyName = P.name,
-                                        })
-                                        .ToList();
+                    var propertiesList = (
+                        from PI in entity.propertiesItems.Where(x => x.propertyId == propertyId)
+                        join P in entity.properties on PI.propertyId equals P.propertyId
+                        select new PropertiesItemModel()
+                        {
+                            propertyItemId = PI.propertyItemId,
+                            propertyId = PI.propertyId,
+                            propertyItemName = PI.name,
+                            createDate = PI.createDate,
+                            createUserId = PI.createUserId,
+                            updateDate = PI.updateDate,
+                            updateUserId = PI.updateUserId,
+                            propertyName = P.name,
+                        }
+                    ).ToList();
 
-                  
-                            return TokenManager.GenerateToken(propertiesList);
+                    return TokenManager.GenerateToken(propertiesList);
                 }
             }
-         }
+        }
 
         [HttpPost]
         [Route("GetAllPropertiesValues")]
         public string GetAllPropertiesValues(string token)
         {
-token = TokenManager.readToken(HttpContext.Current.Request);
+            token = TokenManager.readToken(HttpContext.Current.Request);
             Boolean canDelete = false;
-var strP = TokenManager.GetPrincipal(token);
+            var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
                 return TokenManager.GenerateToken(strP);
@@ -136,19 +146,20 @@ var strP = TokenManager.GetPrincipal(token);
             {
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var propertiesList = (from PI in entity.propertiesItems
-                                          join P in entity.properties on PI.propertyId equals P.propertyId
-                                          select new PropertiesItemModel()
-                                          {
-                                              propertyId = PI.propertyId,
-                                              propertyItemName = PI.name,
-                                              createDate = PI.createDate,
-                                              createUserId = PI.createUserId,
-                                              updateDate = PI.updateDate,
-                                              updateUserId = PI.updateUserId,
-                                              propertyName = P.name,
-                                          })
-                                        .ToList();
+                    var propertiesList = (
+                        from PI in entity.propertiesItems
+                        join P in entity.properties on PI.propertyId equals P.propertyId
+                        select new PropertiesItemModel()
+                        {
+                            propertyId = PI.propertyId,
+                            propertyItemName = PI.name,
+                            createDate = PI.createDate,
+                            createUserId = PI.createUserId,
+                            updateDate = PI.updateDate,
+                            updateUserId = PI.updateUserId,
+                            propertyName = P.name,
+                        }
+                    ).ToList();
 
                     if (propertiesList.Count > 0)
                     {
@@ -157,7 +168,10 @@ var strP = TokenManager.GetPrincipal(token);
                             if (propertiesList[i].isActive == 1)
                             {
                                 long propertyItemId = (long)propertiesList[i].propertyItemId;
-                                var Itemsprop = entity.itemsProp.Where(x => x.propertyItemId == propertyItemId).Select(b => new { b.itemPropId }).FirstOrDefault();
+                                var Itemsprop = entity.itemsProp
+                                    .Where(x => x.propertyItemId == propertyItemId)
+                                    .Select(b => new { b.itemPropId })
+                                    .FirstOrDefault();
 
                                 if (Itemsprop is null)
                                     canDelete = true;
@@ -166,17 +180,18 @@ var strP = TokenManager.GetPrincipal(token);
                         }
                     }
 
-                            return TokenManager.GenerateToken(propertiesList);
+                    return TokenManager.GenerateToken(propertiesList);
                 }
             }
-         }
+        }
+
         // GET api/<controller>
         [HttpPost]
         [Route("GetPropertyByID")]
         public string GetPropertyByID(string token)
         {
-token = TokenManager.readToken(HttpContext.Current.Request);
-var strP = TokenManager.GetPrincipal(token);
+            token = TokenManager.readToken(HttpContext.Current.Request);
+            var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
                 return TokenManager.GenerateToken(strP);
@@ -195,20 +210,23 @@ var strP = TokenManager.GetPrincipal(token);
                 using (incposdbEntities entity = new incposdbEntities())
                 {
                     var property = entity.properties
-                   .Where(p => p.propertyId == propertyId)
-                   .Select(p => new {
-                       p.propertyId,
-                       p.name,
-                       p.createDate,
-                       p.createUserId,
-                       p.updateDate,
-                       p.updateUserId,
-                   })
-                   .FirstOrDefault();
-                            return TokenManager.GenerateToken(property);
+                        .Where(p => p.propertyId == propertyId)
+                        .Select(
+                            p =>
+                                new
+                                {
+                                    p.propertyId,
+                                    p.name,
+                                    p.createDate,
+                                    p.createUserId,
+                                    p.updateDate,
+                                    p.updateUserId,
+                                }
+                        )
+                        .FirstOrDefault();
+                    return TokenManager.GenerateToken(property);
                 }
             }
-            
         }
 
         // add or update property
@@ -216,9 +234,9 @@ var strP = TokenManager.GetPrincipal(token);
         [Route("Save")]
         public string Save(string token)
         {
-token = TokenManager.readToken(HttpContext.Current.Request);
+            token = TokenManager.readToken(HttpContext.Current.Request);
             string message = "";
-var strP = TokenManager.GetPrincipal(token);
+            var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
                 return TokenManager.GenerateToken(strP);
@@ -234,7 +252,10 @@ var strP = TokenManager.GetPrincipal(token);
                     {
                         propertiesObjects = c.Value.Replace("\\", string.Empty);
                         propertiesObjects = propertiesObjects.Trim('"');
-                        propertiesObject = JsonConvert.DeserializeObject<properties>(propertiesObjects, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        propertiesObject = JsonConvert.DeserializeObject<properties>(
+                            propertiesObjects,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                         break;
                     }
                 }
@@ -257,8 +278,8 @@ var strP = TokenManager.GetPrincipal(token);
                         var propEntity = entity.Set<properties>();
                         if (propertiesObject.propertyId == 0)
                         {
-                            propertiesObject.createDate =  coctrlr.AddOffsetTodate(DateTime.Now);
-                            propertiesObject.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                            propertiesObject.createDate = coctrlr.AddOffsetTodate(DateTime.Now);
+                            propertiesObject.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                             propertiesObject.updateUserId = propertiesObject.createUserId;
 
                             tmpProperty = propEntity.Add(propertiesObject);
@@ -268,10 +289,12 @@ var strP = TokenManager.GetPrincipal(token);
                         }
                         else
                         {
-                            tmpProperty = entity.properties.Where(p => p.propertyId == propertiesObject.propertyId).FirstOrDefault();
+                            tmpProperty = entity.properties
+                                .Where(p => p.propertyId == propertiesObject.propertyId)
+                                .FirstOrDefault();
                             tmpProperty.name = propertiesObject.name;
                             tmpProperty.isActive = propertiesObject.isActive;
-                            tmpProperty.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                            tmpProperty.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                             tmpProperty.updateUserId = propertiesObject.updateUserId;
                             entity.SaveChanges();
                             message = tmpProperty.propertyId.ToString();
@@ -279,7 +302,6 @@ var strP = TokenManager.GetPrincipal(token);
                         }
                     }
                 }
-
                 catch
                 {
                     message = "0";
@@ -292,9 +314,9 @@ var strP = TokenManager.GetPrincipal(token);
         [Route("Delete")]
         public string Delete(string token)
         {
-token = TokenManager.readToken(HttpContext.Current.Request);
+            token = TokenManager.readToken(HttpContext.Current.Request);
             string message = "";
-var strP = TokenManager.GetPrincipal(token);
+            var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
                 return TokenManager.GenerateToken(strP);
@@ -344,14 +366,13 @@ var strP = TokenManager.GetPrincipal(token);
                     {
                         properties PropertDelete = entity.properties.Find(propertyId);
                         PropertDelete.isActive = 0;
-                        PropertDelete.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                        PropertDelete.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                         PropertDelete.updateUserId = userId;
                         message = entity.SaveChanges().ToString();
                         return TokenManager.GenerateToken(message);
                     }
                 }
             }
-           
         }
     }
 }

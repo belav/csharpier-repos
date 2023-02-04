@@ -2,16 +2,19 @@
 // Line: 15
 // Compiler options: -warnaserror
 
-[assembly:System.CLSCompliant(true)]
+[assembly: System.CLSCompliant(true)]
 
-public class X {
-        public bool Value;
+public class X
+{
+    public bool Value;
 }
 
-public class Y: X {
-        private readonly bool vAalue;
+public class Y : X
+{
+    private readonly bool vAalue;
 }
-    
-public class CLSClass: Y {
-        protected internal bool value;
+
+public class CLSClass : Y
+{
+    protected internal bool value;
 }

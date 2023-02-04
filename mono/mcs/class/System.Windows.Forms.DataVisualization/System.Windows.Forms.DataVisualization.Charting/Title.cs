@@ -10,10 +10,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,22 +28,20 @@ namespace System.Windows.Forms.DataVisualization.Charting
 {
     public class Title : ChartNamedElement, IDisposable
     {
-        public Title ()
+        public Title() { }
+
+        public Title(string text)
         {
-               }
-        public Title (string text)
-        { 
-            this.Text = text; 
+            this.Text = text;
         }
-        public Title (string text, Docking docking)
+
+        public Title(string text, Docking docking)
         {
             this.Text = text;
             this.Docking = docking;
         }
-        public Title (string text,
-                Docking docking,
-                Font font,
-                Color color)
+
+        public Title(string text, Docking docking, Font font, Color color)
         {
             this.Text = text;
             this.Docking = docking;
@@ -80,9 +78,9 @@ namespace System.Windows.Forms.DataVisualization.Charting
         public virtual bool Visible { get; set; }
 
         [MonoTODO]
-        protected override void Dispose (bool disposing)
+        protected override void Dispose(bool disposing)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
     }
 }

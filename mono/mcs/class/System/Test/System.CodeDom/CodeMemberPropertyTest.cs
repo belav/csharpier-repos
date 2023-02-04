@@ -16,11 +16,15 @@ namespace MonoTests.System.CodeDom
     public class CodeMemberPropertyTest
     {
         [Test]
-        public void DefaultType ()
+        public void DefaultType()
         {
-            CodeMemberProperty property = new CodeMemberProperty ();
-            Assert.IsNotNull (property.Type, "#1");
-            Assert.AreEqual (new CodeTypeReference (string.Empty).BaseType, property.Type.BaseType, "#2");
+            CodeMemberProperty property = new CodeMemberProperty();
+            Assert.IsNotNull(property.Type, "#1");
+            Assert.AreEqual(
+                new CodeTypeReference(string.Empty).BaseType,
+                property.Type.BaseType,
+                "#2"
+            );
         }
     }
 }

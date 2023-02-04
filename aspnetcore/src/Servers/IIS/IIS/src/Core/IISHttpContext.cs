@@ -24,7 +24,10 @@ namespace Microsoft.AspNetCore.Server.IIS.Core;
 
 using BadHttpRequestException = Microsoft.AspNetCore.Http.BadHttpRequestException;
 
-internal abstract partial class IISHttpContext : NativeRequestContext, IThreadPoolWorkItem, IDisposable
+internal abstract partial class IISHttpContext
+    : NativeRequestContext,
+        IThreadPoolWorkItem,
+        IDisposable
 {
     private const int MinAllocBufferSize = 2048;
 
@@ -38,6 +41,7 @@ internal abstract partial class IISHttpContext : NativeRequestContext, IThreadPo
 
     private int _statusCode;
     private string? _reasonPhrase;
+
     // Used to synchronize callback registration and native method calls
     internal readonly object _contextLock = new object();
 
@@ -74,8 +78,12 @@ internal abstract partial class IISHttpContext : NativeRequestContext, IThreadPo
         IISServerOptions options,
         IISHttpServer server,
         ILogger logger,
-        bool useLatin1)
-        : base((HttpApiTypes.HTTP_REQUEST*)NativeMethods.HttpGetRawRequest(pInProcessHandler), useLatin1: useLatin1)
+        bool useLatin1
+    )
+        : base(
+            (HttpApiTypes.HTTP_REQUEST*)NativeMethods.HttpGetRawRequest(pInProcessHandler),
+            useLatin1: useLatin1
+        )
     {
         _memoryPool = memoryPool;
         _requestNativeHandle = pInProcessHandler;
@@ -117,7 +125,8 @@ internal abstract partial class IISHttpContext : NativeRequestContext, IThreadPo
     public IHeaderDictionary ResponseHeaders { get; set; } = default!;
     public IHeaderDictionary? ResponseTrailers { get; set; }
     private HeaderCollection HttpResponseHeaders { get; set; } = default!;
-    private HeaderCollection HttpResponseTrailers => _trailers ??= new HeaderCollection(checkTrailers: true);
+    private HeaderCollection HttpResponseTrailers =>
+        _trailers ??= new HeaderCollection(checkTrailers: true);
     internal bool HasTrailers => _trailers?.Count > 0;
 
     internal HttpApiTypes.HTTP_VERB KnownMethod { get; private set; }
@@ -150,7 +159,10 @@ internal abstract partial class IISHttpContext : NativeRequestContext, IThreadPo
                 pathBase = pathBase[..^1];
             }
 
-            if (KnownMethod == HttpApiTypes.HTTP_VERB.HttpVerbOPTIONS && string.Equals(RawTarget, "*", StringComparison.Ordinal))
+            if (
+                KnownMethod == HttpApiTypes.HTTP_VERB.HttpVerbOPTIONS
+                && string.Equals(RawTarget, "*", StringComparison.Ordinal)
+            )
             {
                 PathBase = string.Empty;
                 Path = string.Empty;
@@ -172,17 +184,21 @@ internal abstract partial class IISHttpContext : NativeRequestContext, IThreadPo
                 PathBase = originalPath;
                 Path = string.Empty;
             }
-            else if (originalPath.Length == pathBase.Length + 1
+            else if (
+                originalPath.Length == pathBase.Length + 1
                 && originalPath[^1] == '/'
-                && originalPath.StartsWith(pathBase, StringComparison.Ordinal))
+                && originalPath.StartsWith(pathBase, StringComparison.Ordinal)
+            )
             {
                 // Exact match, no need to preserve the casing
                 PathBase = pathBase;
                 Path = "/";
             }
-            else if (originalPath.Length == pathBase.Length + 1
+            else if (
+                originalPath.Length == pathBase.Length + 1
                 && originalPath[^1] == '/'
-                && originalPath.StartsWith(pathBase, StringComparison.OrdinalIgnoreCase))
+                && originalPath.StartsWith(pathBase, StringComparison.OrdinalIgnoreCase)
+            )
             {
                 // Preserve the user input casing
                 PathBase = originalPath[..pathBase.Length];
@@ -199,8 +215,10 @@ internal abstract partial class IISHttpContext : NativeRequestContext, IThreadPo
                 {
                     var baseValue = pathBase[baseOffset];
                     var offsetValue = originalPath[originalOffset];
-                    if (baseValue == offsetValue
-                        || char.ToUpperInvariant(baseValue) == char.ToUpperInvariant(offsetValue))
+                    if (
+                        baseValue == offsetValue
+                        || char.ToUpperInvariant(baseValue) == char.ToUpperInvariant(offsetValue)
+                    )
                     {
                         // case-insensitive match, continue
                         originalOffset++;
@@ -212,20 +230,33 @@ internal abstract partial class IISHttpContext : NativeRequestContext, IThreadPo
                         originalOffset++;
                         baseOffset++;
                     }
-                    else if (baseValue == '/' && originalPath.AsSpan(originalOffset).StartsWith("%2F", StringComparison.OrdinalIgnoreCase))
+                    else if (
+                        baseValue == '/'
+                        && originalPath
+                            .AsSpan(originalOffset)
+                            .StartsWith("%2F", StringComparison.OrdinalIgnoreCase)
+                    )
                     {
                         // Http.Sys un-escapes this
                         originalOffset += 3;
                         baseOffset++;
                     }
-                    else if (baseOffset > 0 && pathBase[baseOffset - 1] == '/'
-                        && (offsetValue == '/' || offsetValue == '\\'))
+                    else if (
+                        baseOffset > 0
+                        && pathBase[baseOffset - 1] == '/'
+                        && (offsetValue == '/' || offsetValue == '\\')
+                    )
                     {
                         // Duplicate slash, skip
                         originalOffset++;
                     }
-                    else if (baseOffset > 0 && pathBase[baseOffset - 1] == '/'
-                        && originalPath.AsSpan(originalOffset).StartsWith("%2F", StringComparison.OrdinalIgnoreCase))
+                    else if (
+                        baseOffset > 0
+                        && pathBase[baseOffset - 1] == '/'
+                        && originalPath
+                            .AsSpan(originalOffset)
+                            .StartsWith("%2F", StringComparison.OrdinalIgnoreCase)
+                    )
                     {
                         // Duplicate slash equivalent, skip
                         originalOffset += 3;
@@ -275,15 +306,18 @@ internal abstract partial class IISHttpContext : NativeRequestContext, IThreadPo
 
             (RequestBody, ResponseBody) = _streams.Start();
 
-            var pipe = new Pipe(new PipeOptions(
-                _memoryPool,
-                // The readerScheduler schedules internal non-blocking logic, so there's no reason to dispatch.
-                // The writerScheduler is PipeScheduler.ThreadPool by default which is correct because it
-                // schedules app code when backpressure is relieved which may block.
-                readerScheduler: PipeScheduler.Inline,
-                pauseWriterThreshold: PauseWriterThreshold,
-                resumeWriterThreshold: ResumeWriterTheshold,
-                minimumSegmentSize: MinAllocBufferSize));
+            var pipe = new Pipe(
+                new PipeOptions(
+                    _memoryPool,
+                    // The readerScheduler schedules internal non-blocking logic, so there's no reason to dispatch.
+                    // The writerScheduler is PipeScheduler.ThreadPool by default which is correct because it
+                    // schedules app code when backpressure is relieved which may block.
+                    readerScheduler: PipeScheduler.Inline,
+                    pauseWriterThreshold: PauseWriterThreshold,
+                    resumeWriterThreshold: ResumeWriterTheshold,
+                    minimumSegmentSize: MinAllocBufferSize
+                )
+            );
             _bodyOutput = new OutputProducer(pipe);
         }
 
@@ -345,7 +379,14 @@ internal abstract partial class IISHttpContext : NativeRequestContext, IThreadPo
         // Note Http.Sys adds the Transfer-Encoding: chunked header to HTTP/2 requests with bodies for back compat.
         // Transfer-Encoding takes priority over Content-Length.
         string transferEncoding = RequestHeaders.TransferEncoding.ToString();
-        if (transferEncoding != null && string.Equals("chunked", transferEncoding.Split(',')[^1].Trim(), StringComparison.OrdinalIgnoreCase))
+        if (
+            transferEncoding != null
+            && string.Equals(
+                "chunked",
+                transferEncoding.Split(',')[^1].Trim(),
+                StringComparison.OrdinalIgnoreCase
+            )
+        )
         {
             // https://datatracker.ietf.org/doc/html/rfc7230#section-3.3.2
             // A sender MUST NOT send a Content-Length header field in any message
@@ -419,8 +460,7 @@ internal abstract partial class IISHttpContext : NativeRequestContext, IThreadPo
 
     private bool StatusCodeCanHaveBody()
     {
-        return StatusCode != 204
-            && StatusCode != 304;
+        return StatusCode != 204 && StatusCode != 304;
     }
 
     private void InitializeRequestIO()
@@ -436,7 +476,13 @@ internal abstract partial class IISHttpContext : NativeRequestContext, IThreadPo
 
         EnsureIOInitialized();
 
-        _bodyInputPipe = new Pipe(new PipeOptions(_memoryPool, readerScheduler: PipeScheduler.ThreadPool, minimumSegmentSize: MinAllocBufferSize));
+        _bodyInputPipe = new Pipe(
+            new PipeOptions(
+                _memoryPool,
+                readerScheduler: PipeScheduler.ThreadPool,
+                minimumSegmentSize: MinAllocBufferSize
+            )
+        );
         _readBodyTask = ReadBody();
     }
 
@@ -452,7 +498,10 @@ internal abstract partial class IISHttpContext : NativeRequestContext, IThreadPo
 
     private void ThrowResponseAbortedException()
     {
-        throw new ObjectDisposedException(CoreStrings.UnhandledApplicationException, _applicationException);
+        throw new ObjectDisposedException(
+            CoreStrings.UnhandledApplicationException,
+            _applicationException
+        );
     }
 
     protected Task ProduceEnd()
@@ -501,27 +550,44 @@ internal abstract partial class IISHttpContext : NativeRequestContext, IThreadPo
 
     // Response trailers, reset, and GOAWAY are only on HTTP/2+ and require IIS support
     // that is only available on Win 11/Server 2022 or later.
-    private static readonly bool OsSupportsAdvancedHttp2 = OperatingSystem.IsWindowsVersionAtLeast(10, 0, 20348, 0);
+    private static readonly bool OsSupportsAdvancedHttp2 = OperatingSystem.IsWindowsVersionAtLeast(
+        10,
+        0,
+        20348,
+        0
+    );
 
     protected bool AdvancedHttp2FeaturesSupported()
     {
-        return OsSupportsAdvancedHttp2 &&
-            HttpVersion >= System.Net.HttpVersion.Version20 &&
-            NativeMethods.HttpHasResponse4(_requestNativeHandle);
+        return OsSupportsAdvancedHttp2
+            && HttpVersion >= System.Net.HttpVersion.Version20
+            && NativeMethods.HttpHasResponse4(_requestNativeHandle);
     }
 
     public unsafe void SetResponseHeaders()
     {
         // Verifies we have sent the statuscode before writing a header
-        var reasonPhrase = string.IsNullOrEmpty(ReasonPhrase) ? ReasonPhrases.GetReasonPhrase(StatusCode) : ReasonPhrase;
+        var reasonPhrase = string.IsNullOrEmpty(ReasonPhrase)
+            ? ReasonPhrases.GetReasonPhrase(StatusCode)
+            : ReasonPhrase;
 
         // This copies data into the underlying buffer
-        NativeMethods.HttpSetResponseStatusCode(_requestNativeHandle, (ushort)StatusCode, reasonPhrase);
+        NativeMethods.HttpSetResponseStatusCode(
+            _requestNativeHandle,
+            (ushort)StatusCode,
+            reasonPhrase
+        );
 
         if (AdvancedHttp2FeaturesSupported())
         {
             // Check if connection close is set, if so setting goaway
-            if (string.Equals(ConnectionClose, HttpResponseHeaders[HeaderNames.Connection], StringComparison.OrdinalIgnoreCase))
+            if (
+                string.Equals(
+                    ConnectionClose,
+                    HttpResponseHeaders[HeaderNames.Connection],
+                    StringComparison.OrdinalIgnoreCase
+                )
+            )
             {
                 NativeMethods.HttpSetNeedGoAway(_requestNativeHandle);
             }
@@ -537,7 +603,9 @@ internal abstract partial class IISHttpContext : NativeRequestContext, IThreadPo
                 continue;
             }
 
-            var knownHeaderIndex = HttpApiTypes.HTTP_RESPONSE_HEADER_ID.IndexOfKnownHeader(headerPair.Key);
+            var knownHeaderIndex = HttpApiTypes.HTTP_RESPONSE_HEADER_ID.IndexOfKnownHeader(
+                headerPair.Key
+            );
             for (var i = 0; i < headerValues.Count; i++)
             {
                 var headerValue = headerValues[i];
@@ -557,12 +625,24 @@ internal abstract partial class IISHttpContext : NativeRequestContext, IThreadPo
                         var headerNameBytes = Encoding.UTF8.GetBytes(headerPair.Key);
                         fixed (byte* pHeaderName = headerNameBytes)
                         {
-                            NativeMethods.HttpResponseSetUnknownHeader(_requestNativeHandle, pHeaderName, pHeaderValue, (ushort)headerValueBytes.Length, fReplace: isFirst);
+                            NativeMethods.HttpResponseSetUnknownHeader(
+                                _requestNativeHandle,
+                                pHeaderName,
+                                pHeaderValue,
+                                (ushort)headerValueBytes.Length,
+                                fReplace: isFirst
+                            );
                         }
                     }
                     else
                     {
-                        NativeMethods.HttpResponseSetKnownHeader(_requestNativeHandle, knownHeaderIndex, pHeaderValue, (ushort)headerValueBytes.Length, fReplace: isFirst);
+                        NativeMethods.HttpResponseSetKnownHeader(
+                            _requestNativeHandle,
+                            knownHeaderIndex,
+                            pHeaderValue,
+                            (ushort)headerValueBytes.Length,
+                            fReplace: isFirst
+                        );
                     }
                 }
             }
@@ -596,7 +676,13 @@ internal abstract partial class IISHttpContext : NativeRequestContext, IThreadPo
                     var headerValueBytes = Encoding.UTF8.GetBytes(headerValue);
                     fixed (byte* pHeaderValue = headerValueBytes)
                     {
-                        NativeMethods.HttpResponseSetTrailer(_requestNativeHandle, pHeaderName, pHeaderValue, (ushort)headerValueBytes.Length, replace: isFirst);
+                        NativeMethods.HttpResponseSetTrailer(
+                            _requestNativeHandle,
+                            pHeaderName,
+                            pHeaderValue,
+                            (ushort)headerValueBytes.Length,
+                            replace: isFirst
+                        );
                     }
 
                     isFirst = false;
@@ -678,7 +764,12 @@ internal abstract partial class IISHttpContext : NativeRequestContext, IThreadPo
                 }
                 catch (Exception ex)
                 {
-                    Log.ApplicationError(_logger, ((IHttpConnectionFeature)this).ConnectionId, ((IHttpRequestIdentifierFeature)this).TraceIdentifier, ex);
+                    Log.ApplicationError(
+                        _logger,
+                        ((IHttpConnectionFeature)this).ConnectionId,
+                        ((IHttpRequestIdentifierFeature)this).TraceIdentifier,
+                        ex
+                    );
                 }
             }
         }
@@ -716,7 +807,12 @@ internal abstract partial class IISHttpContext : NativeRequestContext, IThreadPo
             _applicationException = new AggregateException(_applicationException, ex);
         }
 
-        Log.ApplicationError(_logger, ((IHttpConnectionFeature)this).ConnectionId, ((IHttpRequestIdentifierFeature)this).TraceIdentifier, ex);
+        Log.ApplicationError(
+            _logger,
+            ((IHttpConnectionFeature)this).ConnectionId,
+            ((IHttpRequestIdentifierFeature)this).TraceIdentifier,
+            ex
+        );
     }
 
     public void PostCompletion(NativeMethods.REQUEST_NOTIFICATION_STATUS requestNotificationStatus)
@@ -768,18 +864,31 @@ internal abstract partial class IISHttpContext : NativeRequestContext, IThreadPo
 
     private static void ThrowResponseAlreadyStartedException(string name)
     {
-        throw new InvalidOperationException(CoreStrings.FormatParameterReadOnlyAfterResponseStarted(name));
+        throw new InvalidOperationException(
+            CoreStrings.FormatParameterReadOnlyAfterResponseStarted(name)
+        );
     }
 
     private WindowsPrincipal? GetWindowsPrincipal()
     {
-        NativeMethods.HttpGetAuthenticationInformation(_requestNativeHandle, out var authenticationType, out var token);
+        NativeMethods.HttpGetAuthenticationInformation(
+            _requestNativeHandle,
+            out var authenticationType,
+            out var token
+        );
 
         if (token != IntPtr.Zero && authenticationType != null)
         {
-            if ((authenticationType.Equals(NtlmString, StringComparison.OrdinalIgnoreCase)
-                || authenticationType.Equals(NegotiateString, StringComparison.OrdinalIgnoreCase)
-                || authenticationType.Equals(BasicString, StringComparison.OrdinalIgnoreCase)))
+            if (
+                (
+                    authenticationType.Equals(NtlmString, StringComparison.OrdinalIgnoreCase)
+                    || authenticationType.Equals(
+                        NegotiateString,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                    || authenticationType.Equals(BasicString, StringComparison.OrdinalIgnoreCase)
+                )
+            )
             {
                 return new WindowsPrincipal(new WindowsIdentity(token, authenticationType));
             }
@@ -802,7 +911,11 @@ internal abstract partial class IISHttpContext : NativeRequestContext, IThreadPo
         }
         catch (Exception ex)
         {
-            _logger.LogError(0, ex, $"Unexpected exception in {nameof(IISHttpContext)}.{nameof(HandleRequest)}.");
+            _logger.LogError(
+                0,
+                ex,
+                $"Unexpected exception in {nameof(IISHttpContext)}.{nameof(HandleRequest)}."
+            );
         }
         finally
         {
@@ -825,9 +938,12 @@ internal abstract partial class IISHttpContext : NativeRequestContext, IThreadPo
         }
     }
 
-    private static NativeMethods.REQUEST_NOTIFICATION_STATUS ConvertRequestCompletionResults(bool success)
+    private static NativeMethods.REQUEST_NOTIFICATION_STATUS ConvertRequestCompletionResults(
+        bool success
+    )
     {
-        return success ? NativeMethods.REQUEST_NOTIFICATION_STATUS.RQ_NOTIFICATION_CONTINUE
-                       : NativeMethods.REQUEST_NOTIFICATION_STATUS.RQ_NOTIFICATION_FINISH_REQUEST;
+        return success
+            ? NativeMethods.REQUEST_NOTIFICATION_STATUS.RQ_NOTIFICATION_CONTINUE
+            : NativeMethods.REQUEST_NOTIFICATION_STATUS.RQ_NOTIFICATION_FINISH_REQUEST;
     }
 }

@@ -8,7 +8,7 @@ interface I
 
 class C : I
 {
-    public int get_P ()
+    public int get_P()
     {
         return 1;
     }

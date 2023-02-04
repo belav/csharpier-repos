@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 
 namespace zipsharp
 {
-    [StructLayoutAttribute (LayoutKind.Sequential)]
+    [StructLayoutAttribute(LayoutKind.Sequential)]
     struct ZipTime
     {
         uint second;
@@ -19,19 +19,29 @@ namespace zipsharp
         uint month;
         uint year;
 
-        public ZipTime (DateTime time)
+        public ZipTime(DateTime time)
         {
-            second = (uint) time.Second;
-            minute = (uint) time.Minute;
-            hour = (uint) time.Hour;
-            day = (uint) time.Day;
-            month = (uint) time.Month - 1;
-            year = (uint) time.Year;
+            second = (uint)time.Second;
+            minute = (uint)time.Minute;
+            hour = (uint)time.Hour;
+            day = (uint)time.Day;
+            month = (uint)time.Month - 1;
+            year = (uint)time.Year;
         }
 
         public DateTime Date
         {
-            get { return new DateTime ((int) year, (int) month + 1, (int) day, (int) hour, (int) minute, (int) second); }
+            get
+            {
+                return new DateTime(
+                    (int)year,
+                    (int)month + 1,
+                    (int)day,
+                    (int)hour,
+                    (int)minute,
+                    (int)second
+                );
+            }
         }
     }
 }

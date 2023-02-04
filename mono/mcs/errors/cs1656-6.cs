@@ -3,9 +3,9 @@
 
 class Test
 {
-    static void Main ()
+    static void Main()
     {
-        foreach (int i in new int[] { 1, 2})
+        foreach (int i in new int[] { 1, 2 })
             i++;
     }
 }

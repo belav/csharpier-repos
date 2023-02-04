@@ -2,9 +2,10 @@
 // Line: 8
 // Compiler options: -warnaserror
 
-[assembly:System.CLSCompliant(true)]
+[assembly: System.CLSCompliant(true)]
 
-public class CLSClass {
-        protected int Constant = 1;
-        protected const bool constant = false;
+public class CLSClass
+{
+    protected int Constant = 1;
+    protected const bool constant = false;
 }

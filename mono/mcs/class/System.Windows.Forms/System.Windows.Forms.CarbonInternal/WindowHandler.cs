@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,8 +29,10 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 
-namespace System.Windows.Forms.CarbonInternal {
-    internal class WindowHandler : EventHandlerBase, IEventHandler {
+namespace System.Windows.Forms.CarbonInternal
+{
+    internal class WindowHandler : EventHandlerBase, IEventHandler
+    {
         internal const uint kEventWindowUpdate = 1;
         internal const uint kEventWindowDrawContent = 2;
         internal const uint kEventWindowActivated = 5;
@@ -107,117 +109,181 @@ namespace System.Windows.Forms.CarbonInternal {
         internal const uint kEventWindowDrawGrowBox = 1011;
         internal const uint kEventWindowGetGrowImageRegion = 1012;
         internal const uint kEventWindowPaint = 1013;
-        
-        internal WindowHandler (XplatUICarbon driver) : base (driver) {}
 
-        public bool ProcessEvent (IntPtr callref, IntPtr eventref, IntPtr handle, uint kind, ref MSG msg) {
-            IntPtr window = Driver.HandleToWindow (handle);
-            Hwnd hwnd = Hwnd.ObjectFromHandle (window);
-            if (window != IntPtr.Zero) {
-                switch (kind) {
-                    case kEventWindowActivated: {
-                        Control c = Control.FromHandle (hwnd.client_window);
-                        if (c != null) {
-                            Form form = c.FindForm ();
-                            if (form != null && !form.IsDisposed) {
-                                Driver.SendMessage (form.Handle, Msg.WM_ACTIVATE, (IntPtr) WindowActiveFlags.WA_ACTIVE, IntPtr.Zero);
+        internal WindowHandler(XplatUICarbon driver)
+            : base(driver) { }
+
+        public bool ProcessEvent(
+            IntPtr callref,
+            IntPtr eventref,
+            IntPtr handle,
+            uint kind,
+            ref MSG msg
+        )
+        {
+            IntPtr window = Driver.HandleToWindow(handle);
+            Hwnd hwnd = Hwnd.ObjectFromHandle(window);
+            if (window != IntPtr.Zero)
+            {
+                switch (kind)
+                {
+                    case kEventWindowActivated:
+                    {
+                        Control c = Control.FromHandle(hwnd.client_window);
+                        if (c != null)
+                        {
+                            Form form = c.FindForm();
+                            if (form != null && !form.IsDisposed)
+                            {
+                                Driver.SendMessage(
+                                    form.Handle,
+                                    Msg.WM_ACTIVATE,
+                                    (IntPtr)WindowActiveFlags.WA_ACTIVE,
+                                    IntPtr.Zero
+                                );
                                 XplatUICarbon.ActiveWindow = hwnd.client_window;
                             }
                         }
 
-                        foreach (IntPtr utility_window in XplatUICarbon.UtilityWindows) {
-                            if (utility_window != handle && !XplatUICarbon.IsWindowVisible (utility_window))
-                                XplatUICarbon.ShowWindow (utility_window);
-                        }    
+                        foreach (IntPtr utility_window in XplatUICarbon.UtilityWindows)
+                        {
+                            if (
+                                utility_window != handle
+                                && !XplatUICarbon.IsWindowVisible(utility_window)
+                            )
+                                XplatUICarbon.ShowWindow(utility_window);
+                        }
                         break;
                     }
                     case kEventWindowExpanding:
-                        foreach (IntPtr utility_window in XplatUICarbon.UtilityWindows) {
-                            if (utility_window != handle && !XplatUICarbon.IsWindowVisible (utility_window))
-                                XplatUICarbon.ShowWindow (utility_window);
+                        foreach (IntPtr utility_window in XplatUICarbon.UtilityWindows)
+                        {
+                            if (
+                                utility_window != handle
+                                && !XplatUICarbon.IsWindowVisible(utility_window)
+                            )
+                                XplatUICarbon.ShowWindow(utility_window);
                         }
                         msg.hwnd = hwnd.Handle;
                         msg.message = Msg.WM_ENTERSIZEMOVE;
                         return true;
                     case kEventWindowExpanded:
-                        NativeWindow.WndProc (hwnd.Handle, Msg.WM_WINDOWPOSCHANGED, IntPtr.Zero, IntPtr.Zero);
+                        NativeWindow.WndProc(
+                            hwnd.Handle,
+                            Msg.WM_WINDOWPOSCHANGED,
+                            IntPtr.Zero,
+                            IntPtr.Zero
+                        );
                         msg.hwnd = hwnd.Handle;
                         msg.message = Msg.WM_EXITSIZEMOVE;
                         return true;
-                    case kEventWindowDeactivated: {
-                        Control c = Control.FromHandle (hwnd.client_window);
-                        if (c != null) {
-                            Form form = c.FindForm ();
-                            if (form != null && XplatUICarbon.UnactiveWindow != form.Handle) {
-                                Driver.SendMessage (form.Handle, Msg.WM_ACTIVATE, (IntPtr) WindowActiveFlags.WA_INACTIVE, IntPtr.Zero);
+                    case kEventWindowDeactivated:
+                    {
+                        Control c = Control.FromHandle(hwnd.client_window);
+                        if (c != null)
+                        {
+                            Form form = c.FindForm();
+                            if (form != null && XplatUICarbon.UnactiveWindow != form.Handle)
+                            {
+                                Driver.SendMessage(
+                                    form.Handle,
+                                    Msg.WM_ACTIVATE,
+                                    (IntPtr)WindowActiveFlags.WA_INACTIVE,
+                                    IntPtr.Zero
+                                );
                                 XplatUICarbon.ActiveWindow = IntPtr.Zero;
                             }
                         }
-                        foreach (IntPtr utility_window in XplatUICarbon.UtilityWindows) {
-                            if (utility_window != handle && XplatUICarbon.IsWindowVisible (utility_window))
-                                XplatUICarbon.HideWindow (utility_window);
+                        foreach (IntPtr utility_window in XplatUICarbon.UtilityWindows)
+                        {
+                            if (
+                                utility_window != handle
+                                && XplatUICarbon.IsWindowVisible(utility_window)
+                            )
+                                XplatUICarbon.HideWindow(utility_window);
                         }
                         break;
                     }
                     case kEventWindowCollapsing:
-                        foreach (IntPtr utility_window in XplatUICarbon.UtilityWindows) {
-                            if (utility_window != handle && XplatUICarbon.IsWindowVisible (utility_window))
-                                XplatUICarbon.HideWindow (utility_window);
-                        }    
+                        foreach (IntPtr utility_window in XplatUICarbon.UtilityWindows)
+                        {
+                            if (
+                                utility_window != handle
+                                && XplatUICarbon.IsWindowVisible(utility_window)
+                            )
+                                XplatUICarbon.HideWindow(utility_window);
+                        }
                         msg.hwnd = hwnd.Handle;
                         msg.message = Msg.WM_ENTERSIZEMOVE;
                         return true;
                     case kEventWindowCollapsed:
-                        NativeWindow.WndProc (hwnd.Handle, Msg.WM_WINDOWPOSCHANGED, IntPtr.Zero, IntPtr.Zero);
+                        NativeWindow.WndProc(
+                            hwnd.Handle,
+                            Msg.WM_WINDOWPOSCHANGED,
+                            IntPtr.Zero,
+                            IntPtr.Zero
+                        );
                         msg.hwnd = hwnd.Handle;
                         msg.message = Msg.WM_EXITSIZEMOVE;
                         return true;
                     case kEventWindowClose:
-                        NativeWindow.WndProc (hwnd.Handle, Msg.WM_CLOSE, IntPtr.Zero, IntPtr.Zero);
+                        NativeWindow.WndProc(hwnd.Handle, Msg.WM_CLOSE, IntPtr.Zero, IntPtr.Zero);
                         return false;
-                    case kEventWindowShown: { 
+                    case kEventWindowShown:
+                    {
                         msg.message = Msg.WM_SHOWWINDOW;
-                        msg.lParam = (IntPtr) 1;
-                        msg.wParam = (IntPtr) 0;
+                        msg.lParam = (IntPtr)1;
+                        msg.wParam = (IntPtr)0;
                         msg.hwnd = hwnd.Handle;
 
                         return true;
                     }
-                    case kEventWindowResizeStarted: {
+                    case kEventWindowResizeStarted:
+                    {
                         msg.message = Msg.WM_ENTERSIZEMOVE;
                         msg.hwnd = hwnd.Handle;
                         return true;
                     }
-                    case kEventWindowResizeCompleted: {
+                    case kEventWindowResizeCompleted:
+                    {
                         msg.message = Msg.WM_EXITSIZEMOVE;
                         msg.hwnd = hwnd.Handle;
 
                         return true;
                     }
-                    case kEventWindowBoundsChanged: {
-                        Rect window_bounds = new Rect ();
-                        HIRect view_bounds = new HIRect ();
+                    case kEventWindowBoundsChanged:
+                    {
+                        Rect window_bounds = new Rect();
+                        HIRect view_bounds = new HIRect();
                         Size size;
 
-                        GetWindowBounds (handle, 33, ref window_bounds);
-                        
+                        GetWindowBounds(handle, 33, ref window_bounds);
+
                         view_bounds.size.width = window_bounds.right - window_bounds.left;
                         view_bounds.size.height = window_bounds.bottom - window_bounds.top;
 
-                        HIViewSetFrame (hwnd.WholeWindow, ref view_bounds);
+                        HIViewSetFrame(hwnd.WholeWindow, ref view_bounds);
 
-                        size = XplatUICarbon.TranslateQuartzWindowSizeToWindowSize (Control.FromHandle (hwnd.Handle).GetCreateParams (), (int)view_bounds.size.width, (int)view_bounds.size.height);
+                        size = XplatUICarbon.TranslateQuartzWindowSizeToWindowSize(
+                            Control.FromHandle(hwnd.Handle).GetCreateParams(),
+                            (int)view_bounds.size.width,
+                            (int)view_bounds.size.height
+                        );
 
-                        hwnd.X = (int) window_bounds.left;
-                        hwnd.Y = (int) window_bounds.top;
-                        hwnd.Width = (int) size.Width;
-                        hwnd.Height = (int) size.Height;
+                        hwnd.X = (int)window_bounds.left;
+                        hwnd.Y = (int)window_bounds.top;
+                        hwnd.Width = (int)size.Width;
+                        hwnd.Height = (int)size.Height;
 
-                        Driver.PerformNCCalc (hwnd);
+                        Driver.PerformNCCalc(hwnd);
 
                         msg.hwnd = hwnd.Handle;
                         msg.message = Msg.WM_WINDOWPOSCHANGED;
-                        Driver.SetCaretPos (XplatUICarbon.Caret.Hwnd, XplatUICarbon.Caret.X, XplatUICarbon.Caret.Y);
+                        Driver.SetCaretPos(
+                            XplatUICarbon.Caret.Hwnd,
+                            XplatUICarbon.Caret.X,
+                            XplatUICarbon.Caret.Y
+                        );
 
                         return true;
                     }
@@ -227,9 +293,9 @@ namespace System.Windows.Forms.CarbonInternal {
         }
 
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-        static extern int GetWindowBounds (IntPtr handle, uint region, ref Rect bounds);
+        static extern int GetWindowBounds(IntPtr handle, uint region, ref Rect bounds);
 
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-        static extern int HIViewSetFrame (IntPtr handle, ref HIRect bounds);
+        static extern int HIViewSetFrame(IntPtr handle, ref HIRect bounds);
     }
 }

@@ -3,10 +3,10 @@
 //   Rafael Mizrahi   <rafim@mainsoft.com>
 //   Erez Lotan       <erezl@mainsoft.com>
 //   Vladimir Krasnov <vladimirk@mainsoft.com>
-//   
-// 
+//
+//
 // Copyright (c) 2002-2005 Mainsoft Corporation.
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
 // "Software"), to deal in the Software without restriction, including
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -68,19 +68,19 @@ namespace MonoTests.stand_alone.WebHarness
 
 #if NUNIT
         [Suite]
-        static public TestSuite Suite 
+        static public TestSuite Suite
         {
-            get 
+            get
             {
                 ParseAppConfigFile();
 
-                TestSuite suite = new TestSuite ("SystemWebTests");
+                TestSuite suite = new TestSuite("SystemWebTests");
                 TestsCatalog tc = new TestsCatalog();
                 foreach (TestInfo ti in tc)
                 {
                     suite.Add(new SingleWebTest(ti, _baseUrlTst));
                 }
-                
+
                 return suite;
             }
         }
@@ -95,7 +95,7 @@ namespace MonoTests.stand_alone.WebHarness
             {
                 if (i < args.Length - 1)
                 {
-                    return args[i+1];
+                    return args[i + 1];
                 }
             }
             return "";
@@ -123,11 +123,11 @@ namespace MonoTests.stand_alone.WebHarness
             _baseUrlTst = ConfigurationSettings.AppSettings["TestBaseUrl"];
         }
 
-        static void ParseCommandLineAgrs(string [] args)
+        static void ParseCommandLineAgrs(string[] args)
         {
             _disableAlmost = IsParameterSet("-na", args);
             _runExcluded = IsParameterSet("-x", args);
-            
+
             // specifies the almost config xml file
             // default is almost_config.xml in current folder
             _ignoreListFile = GetParameterByName("-i", args);
@@ -135,7 +135,7 @@ namespace MonoTests.stand_alone.WebHarness
             {
                 _ignoreListFile = "almost_config.xml";
             }
-            
+
             // specifies tests catalog xml file
             // default is test_catalog.xml in current folder
             _catalogFile = GetParameterByName("-c", args);
@@ -143,7 +143,7 @@ namespace MonoTests.stand_alone.WebHarness
             {
                 _catalogFile = "test_catalog.xml";
             }
-            
+
             // specifies the folder where expected results will be stored
             // by default is current folder
             _outputPath = GetParameterByName("-o", args);
@@ -180,7 +180,7 @@ namespace MonoTests.stand_alone.WebHarness
             foreach (TestInfo ti in tc)
             {
                 Console.WriteLine("Running...  " + ti.Url);
-                XmlDocument d = wt.GetTestXml( ti );
+                XmlDocument d = wt.GetTestXml(ti);
                 d.Save(_outputPath + ti.Url.Replace("/", "_") + ".xml");
             }
         }
@@ -190,10 +190,12 @@ namespace MonoTests.stand_alone.WebHarness
             TestsCatalog tc = new TestsCatalog(_catalogFile, _runExcluded);
             foreach (TestInfo ti in tc)
             {
-                try {
+                try
+                {
                     RunSingleTest(baseUrl, ti);
                 }
-                catch (Exception e) {
+                catch (Exception e)
+                {
                     Console.WriteLine(e.Message);
                 }
             }
@@ -207,11 +209,14 @@ namespace MonoTests.stand_alone.WebHarness
 
             XmlDocument d1 = new XmlDocument();
             d1.Load(_outputPath + ti.Url.Replace("/", "_") + ".xml");
-            
-            XmlDocument d2 = wt.GetTestXml( ti );
+
+            XmlDocument d2 = wt.GetTestXml(ti);
             bool fp = wt.XmlCompare(d1, d2, _disableAlmost);
-            if (fp == false) {
-                throw new Exception("Url: " + ti.Url + "\nCompare failed:\n" + wt.CompareStatus + "\n");
+            if (fp == false)
+            {
+                throw new Exception(
+                    "Url: " + ti.Url + "\nCompare failed:\n" + wt.CompareStatus + "\n"
+                );
             }
             return fp;
         }
@@ -222,17 +227,19 @@ namespace MonoTests.stand_alone.WebHarness
     #region "NUnit"
 
 #if NUNIT
-    public class SingleWebTest : NUnit.Core.TestCase 
+    public class SingleWebTest : NUnit.Core.TestCase
     {
         TestInfo _testInfo = null;
         string _baseUrl = "";
-        public SingleWebTest (TestInfo testInfo, string baseUrl) : base (null, testInfo.Url) 
+
+        public SingleWebTest(TestInfo testInfo, string baseUrl)
+            : base(null, testInfo.Url)
         {
             _testInfo = testInfo;
             _baseUrl = baseUrl;
         }
 
-        public override void Run (TestCaseResult res) 
+        public override void Run(TestCaseResult res)
         {
             try
             {
@@ -249,5 +256,4 @@ namespace MonoTests.stand_alone.WebHarness
 #endif
 
     #endregion
-
 }

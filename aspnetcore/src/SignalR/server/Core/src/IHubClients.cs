@@ -15,5 +15,9 @@ public interface IHubClients : IHubClients<IClientProxy>
     /// </summary>
     /// <param name="connectionId">The connection ID.</param>
     /// <returns>A client caller.</returns>
-    new ISingleClientProxy Client(string connectionId) => new NonInvokingSingleClientProxy(((IHubClients<IClientProxy>)this).Client(connectionId), "IHubClients.Client(string connectionId)");
+    new ISingleClientProxy Client(string connectionId) =>
+        new NonInvokingSingleClientProxy(
+            ((IHubClients<IClientProxy>)this).Client(connectionId),
+            "IHubClients.Client(string connectionId)"
+        );
 }

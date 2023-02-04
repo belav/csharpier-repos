@@ -2,33 +2,38 @@ using System;
 
 public class Tests
 {
-    public static int Main ()
+    public static int Main()
     {
         return 0;
     }
 
-    void Test1 ()
+    void Test1()
     {
         int a;
-        if (true) {
+        if (true)
+        {
             a = 0;
-        } else {
+        }
+        else
+        {
             a = 1;
         }
 
-        Console.WriteLine (a);
+        Console.WriteLine(a);
     }
 
-    void Test2 ()
+    void Test2()
     {
         int a;
-        if (false) {
+        if (false)
+        {
             a = 0;
-        } else {
+        }
+        else
+        {
             a = 1;
         }
 
-        Console.WriteLine (a);
+        Console.WriteLine(a);
     }
 }
-

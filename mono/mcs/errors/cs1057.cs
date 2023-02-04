@@ -4,5 +4,4 @@
 public static class B
 {
     protected static object _a = null;
-            
 }

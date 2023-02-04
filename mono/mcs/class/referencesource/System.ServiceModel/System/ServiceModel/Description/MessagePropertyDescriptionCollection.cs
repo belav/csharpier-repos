@@ -11,12 +11,11 @@ namespace System.ServiceModel.Description
     using System.Xml;
     using System.Runtime.Serialization;
 
-    public class MessagePropertyDescriptionCollection : KeyedCollection<string, MessagePropertyDescription>
+    public class MessagePropertyDescriptionCollection
+        : KeyedCollection<string, MessagePropertyDescription>
     {
-        internal MessagePropertyDescriptionCollection() : base(null, 4)
-        {
-
-        }
+        internal MessagePropertyDescriptionCollection()
+            : base(null, 4) { }
 
         protected override string GetKeyForItem(MessagePropertyDescription item)
         {

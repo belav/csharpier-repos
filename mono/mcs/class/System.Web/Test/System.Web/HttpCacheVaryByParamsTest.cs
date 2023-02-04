@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,29 +31,29 @@ using System.Web;
 
 using NUnit.Framework;
 
-namespace MonoTests.System.Web {
-
+namespace MonoTests.System.Web
+{
     [TestFixture]
-    public class HttpCacheVaryByParamsTest {
-
+    public class HttpCacheVaryByParamsTest
+    {
         [Test]
-        public void Properties ()
+        public void Properties()
         {
-            HttpResponse response = new HttpResponse (Console.Out);
+            HttpResponse response = new HttpResponse(Console.Out);
             HttpCacheVaryByParams vary = response.Cache.VaryByParams;
 
             vary["hi"] = true;
-            Assert.IsTrue (vary["hi"], "vary[hi] == true");
+            Assert.IsTrue(vary["hi"], "vary[hi] == true");
 
             /* make sure setting IgnoreParams to either case doesn't clear the value */
             vary.IgnoreParams = true;
-            Assert.IsTrue (vary["hi"], "vary[hi] == true when IgnoreParams == true");
+            Assert.IsTrue(vary["hi"], "vary[hi] == true when IgnoreParams == true");
 
             vary.IgnoreParams = false;
-            Assert.IsTrue (vary["hi"], "vary[hi] == true when IgnoreParams == false");
+            Assert.IsTrue(vary["hi"], "vary[hi] == true when IgnoreParams == false");
 
             /* test case sensitivity */
-            Assert.IsTrue (vary["Hi"], "vary[Hi] == true");
+            Assert.IsTrue(vary["Hi"], "vary[Hi] == true");
         }
     }
 }

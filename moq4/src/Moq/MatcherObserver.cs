@@ -56,9 +56,7 @@ namespace Moq
         private int timestamp;
         private List<Observation> observations;
 
-        private MatcherObserver()
-        {
-        }
+        private MatcherObserver() { }
 
         public void Dispose()
         {
@@ -106,13 +104,20 @@ namespace Moq
             return false;
         }
 
-        public IEnumerable<Match> GetMatchesBetween(int fromTimestampInclusive, int toTimestampExclusive)
+        public IEnumerable<Match> GetMatchesBetween(
+            int fromTimestampInclusive,
+            int toTimestampExclusive
+        )
         {
             if (this.observations != null)
             {
                 return this.observations
-                           .Where(o => fromTimestampInclusive <= o.Timestamp && o.Timestamp < toTimestampExclusive)
-                           .Select(o => o.Match);
+                    .Where(
+                        o =>
+                            fromTimestampInclusive <= o.Timestamp
+                            && o.Timestamp < toTimestampExclusive
+                    )
+                    .Select(o => o.Match);
             }
             else
             {

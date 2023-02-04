@@ -1,5 +1,5 @@
 //
-// XmlAttributeOverrides.cs: 
+// XmlAttributeOverrides.cs:
 //
 // Author:
 //   John Donagher (john@webmeta.com)
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -39,38 +39,36 @@ namespace System.Xml.Serialization
     /// </summary>
     public class XmlAttributeOverrides
     {
-        
         private Hashtable overrides;
 
-        public XmlAttributeOverrides ()
+        public XmlAttributeOverrides()
         {
             overrides = new Hashtable();
         }
 
-        public XmlAttributes this [Type type] 
+        public XmlAttributes this[Type type]
         {
-            get { return this [type, string.Empty];    }
+            get { return this[type, string.Empty]; }
         }
 
-        public XmlAttributes this [Type type, string member]
+        public XmlAttributes this[Type type, string member]
         {
-            get 
-            {
-                return (XmlAttributes) overrides[GetKey(type,member)];
-            }
+            get { return (XmlAttributes)overrides[GetKey(type, member)]; }
         }
 
-        public void Add (Type type, XmlAttributes attributes) 
+        public void Add(Type type, XmlAttributes attributes)
         {
             Add(type, string.Empty, attributes);
         }
 
-        public void Add (Type type, string member, XmlAttributes attributes) 
+        public void Add(Type type, string member, XmlAttributes attributes)
         {
-            if(overrides[GetKey(type, member)] != null)
-                throw new Exception("The attributes for the given type and Member already exist in the collection");
-            
-            overrides.Add(GetKey(type,member), attributes);
+            if (overrides[GetKey(type, member)] != null)
+                throw new Exception(
+                    "The attributes for the given type and Member already exist in the collection"
+                );
+
+            overrides.Add(GetKey(type, member), attributes);
         }
 
         private TypeMember GetKey(Type type, string member)
@@ -78,17 +76,22 @@ namespace System.Xml.Serialization
             return new TypeMember(type, member);
         }
 
-        internal void AddKeyHash (System.Text.StringBuilder sb)
+        internal void AddKeyHash(System.Text.StringBuilder sb)
         {
-            sb.Append ("XAO ");
+            sb.Append("XAO ");
             foreach (DictionaryEntry entry in overrides)
             {
-                XmlAttributes val = (XmlAttributes) entry.Value;
+                XmlAttributes val = (XmlAttributes)entry.Value;
                 IFormattable keyFormattable = entry.Key as IFormattable;
-                sb.Append (keyFormattable != null ? keyFormattable.ToString (null, CultureInfo.InvariantCulture) : entry.Key.ToString()).Append(' ');
-                val.AddKeyHash (sb);
+                sb.Append(
+                        keyFormattable != null
+                            ? keyFormattable.ToString(null, CultureInfo.InvariantCulture)
+                            : entry.Key.ToString()
+                    )
+                    .Append(' ');
+                val.AddKeyHash(sb);
             }
-            sb.Append ("|");
+            sb.Append("|");
         }
     }
 }

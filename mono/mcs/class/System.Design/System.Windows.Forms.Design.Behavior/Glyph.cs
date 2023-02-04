@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -40,30 +40,31 @@ namespace System.Windows.Forms.Design.Behavior
         Behavior behavior;
 
         [MonoTODO]
-        protected Glyph (Behavior behavior)
+        protected Glyph(Behavior behavior)
         {
-            SetBehavior (behavior);
+            SetBehavior(behavior);
         }
 
         [MonoTODO]
-        public virtual Behavior Behavior {
+        public virtual Behavior Behavior
+        {
             get { return behavior; }
         }
 
         [MonoTODO]
-        public virtual Rectangle Bounds {
-            get { throw new NotImplementedException (); }
+        public virtual Rectangle Bounds
+        {
+            get { throw new NotImplementedException(); }
         }
 
-        public abstract Cursor GetHitTest (Point p);
+        public abstract Cursor GetHitTest(Point p);
 
-        public abstract void Paint (PaintEventArgs pe);
+        public abstract void Paint(PaintEventArgs pe);
 
         [MonoTODO]
-        protected void SetBehavior (Behavior behavior)
+        protected void SetBehavior(Behavior behavior)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
     }
 }
-

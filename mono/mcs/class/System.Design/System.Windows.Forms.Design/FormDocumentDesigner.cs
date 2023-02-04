@@ -39,47 +39,48 @@ namespace System.Windows.Forms.Design
 {
     internal class FormDocumentDesigner : DocumentDesigner
     {
-        
-        public FormDocumentDesigner ()
-        {
-        }
+        public FormDocumentDesigner() { }
 
-        public override void Initialize (IComponent component)
+        public override void Initialize(IComponent component)
         {
             Form form = component as Form;
             if (form == null)
-                throw new NotSupportedException ("FormDocumentDesigner can be initialized only with Forms");
+                throw new NotSupportedException(
+                    "FormDocumentDesigner can be initialized only with Forms"
+                );
 
             form.TopLevel = false;
             form.Visible = true;
-            base.Initialize (component);
+            base.Initialize(component);
         }
 
-        public override bool CanParent (Control control)
+        public override bool CanParent(Control control)
         {
             if (control is Form)
                 return false;
-            return base.CanParent (control);
+            return base.CanParent(control);
         }
 
-        protected override void WndProc (ref Message m)
+        protected override void WndProc(ref Message m)
         {
             // Filter out titlebar clicks
             //
-            switch ((Native.Msg) m.Msg) {
-            case Native.Msg.WM_NCLBUTTONDBLCLK:
-            case Native.Msg.WM_NCLBUTTONDOWN:
-            case Native.Msg.WM_NCMBUTTONDBLCLK:
-            case Native.Msg.WM_NCMBUTTONDOWN:
-            case Native.Msg.WM_NCRBUTTONDBLCLK:
-            case Native.Msg.WM_NCRBUTTONDOWN:
-                ISelectionService selectionServ = this.GetService (typeof (ISelectionService)) as ISelectionService;
-                if (selectionServ != null)
-                    selectionServ.SetSelectedComponents (new object[] { this.Component });
-                break;
-            default:
-                base.WndProc (ref m);
-                break;
+            switch ((Native.Msg)m.Msg)
+            {
+                case Native.Msg.WM_NCLBUTTONDBLCLK:
+                case Native.Msg.WM_NCLBUTTONDOWN:
+                case Native.Msg.WM_NCMBUTTONDBLCLK:
+                case Native.Msg.WM_NCMBUTTONDOWN:
+                case Native.Msg.WM_NCRBUTTONDBLCLK:
+                case Native.Msg.WM_NCRBUTTONDOWN:
+                    ISelectionService selectionServ =
+                        this.GetService(typeof(ISelectionService)) as ISelectionService;
+                    if (selectionServ != null)
+                        selectionServ.SetSelectedComponents(new object[] { this.Component });
+                    break;
+                default:
+                    base.WndProc(ref m);
+                    break;
             }
         }
     }

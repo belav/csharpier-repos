@@ -13,7 +13,5 @@ class TestB : TestA
         get { return null; }
     }
 
-    public static void Main ()
-    {
-    }
+    public static void Main() { }
 }

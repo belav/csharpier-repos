@@ -11,33 +11,36 @@ namespace Mono.Linker.Tests.TestCasesRunner
     {
         private readonly HashSet<IDisposable> itemsToDispose;
 
-        public TestCaseAssemblyResolver ()
+        public TestCaseAssemblyResolver()
         {
-            itemsToDispose = new HashSet<IDisposable> ();
+            itemsToDispose = new HashSet<IDisposable>();
         }
 
-        public override AssemblyDefinition? Resolve (AssemblyNameReference name, ReaderParameters parameters)
+        public override AssemblyDefinition? Resolve(
+            AssemblyNameReference name,
+            ReaderParameters parameters
+        )
         {
-            var assembly = base.Resolve (name, parameters);
+            var assembly = base.Resolve(name, parameters);
 
             if (assembly == null)
                 return null;
 
             // Don't do any caching because the reader parameters could be different each time
             // but we still want to track items that need to be disposed for easy clean up
-            itemsToDispose.Add (assembly);
+            itemsToDispose.Add(assembly);
 
             if (assembly.MainModule.SymbolReader != null)
-                itemsToDispose.Add (assembly.MainModule.SymbolReader);
+                itemsToDispose.Add(assembly.MainModule.SymbolReader);
             return assembly;
         }
 
-        protected override void Dispose (bool disposing)
+        protected override void Dispose(bool disposing)
         {
             foreach (var item in itemsToDispose)
-                item.Dispose ();
+                item.Dispose();
 
-            base.Dispose (disposing);
+            base.Dispose(disposing);
         }
     }
 }

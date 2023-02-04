@@ -20,8 +20,16 @@ namespace System.Data.Objects.Internal
     /// </summary>
     internal sealed class PocoPropertyAccessorStrategy : IPropertyAccessorStrategy
     {
-        private static readonly MethodInfo s_AddToCollectionGeneric = typeof(PocoPropertyAccessorStrategy).GetMethod("AddToCollection", BindingFlags.NonPublic | BindingFlags.Static);
-        private static readonly MethodInfo s_RemoveFromCollectionGeneric = typeof(PocoPropertyAccessorStrategy).GetMethod("RemoveFromCollection", BindingFlags.NonPublic | BindingFlags.Static);
+        private static readonly MethodInfo s_AddToCollectionGeneric =
+            typeof(PocoPropertyAccessorStrategy).GetMethod(
+                "AddToCollection",
+                BindingFlags.NonPublic | BindingFlags.Static
+            );
+        private static readonly MethodInfo s_RemoveFromCollectionGeneric =
+            typeof(PocoPropertyAccessorStrategy).GetMethod(
+                "RemoveFromCollection",
+                BindingFlags.NonPublic | BindingFlags.Static
+            );
 
         private object _entity;
 
@@ -47,13 +55,24 @@ namespace System.Data.Objects.Internal
                 if (relatedEnd.TargetAccessor.ValueGetter == null)
                 {
                     Type type = GetDeclaringType(relatedEnd);
-                    PropertyInfo propertyInfo = EntityUtil.GetTopProperty(ref type, relatedEnd.TargetAccessor.PropertyName);
+                    PropertyInfo propertyInfo = EntityUtil.GetTopProperty(
+                        ref type,
+                        relatedEnd.TargetAccessor.PropertyName
+                    );
                     if (propertyInfo == null)
                     {
-                        throw new EntityException(System.Data.Entity.Strings.PocoEntityWrapper_UnableToSetFieldOrProperty(relatedEnd.TargetAccessor.PropertyName, type.FullName));
+                        throw new EntityException(
+                            System.Data.Entity.Strings.PocoEntityWrapper_UnableToSetFieldOrProperty(
+                                relatedEnd.TargetAccessor.PropertyName,
+                                type.FullName
+                            )
+                        );
                     }
                     EntityProxyFactory factory = new EntityProxyFactory();
-                    relatedEnd.TargetAccessor.ValueGetter = factory.CreateBaseGetter(type, propertyInfo);
+                    relatedEnd.TargetAccessor.ValueGetter = factory.CreateBaseGetter(
+                        type,
+                        propertyInfo
+                    );
                 }
                 try
                 {
@@ -61,7 +80,13 @@ namespace System.Data.Objects.Internal
                 }
                 catch (Exception ex)
                 {
-                    throw new EntityException(System.Data.Entity.Strings.PocoEntityWrapper_UnableToSetFieldOrProperty(relatedEnd.TargetAccessor.PropertyName, _entity.GetType().FullName), ex);
+                    throw new EntityException(
+                        System.Data.Entity.Strings.PocoEntityWrapper_UnableToSetFieldOrProperty(
+                            relatedEnd.TargetAccessor.PropertyName,
+                            _entity.GetType().FullName
+                        ),
+                        ex
+                    );
                 }
             }
             return navPropValue;
@@ -79,13 +104,24 @@ namespace System.Data.Objects.Internal
                 if (relatedEnd.TargetAccessor.ValueSetter == null)
                 {
                     Type type = GetDeclaringType(relatedEnd);
-                    PropertyInfo propertyInfo = EntityUtil.GetTopProperty(ref type, relatedEnd.TargetAccessor.PropertyName);
+                    PropertyInfo propertyInfo = EntityUtil.GetTopProperty(
+                        ref type,
+                        relatedEnd.TargetAccessor.PropertyName
+                    );
                     if (propertyInfo == null)
                     {
-                        throw new EntityException(System.Data.Entity.Strings.PocoEntityWrapper_UnableToSetFieldOrProperty(relatedEnd.TargetAccessor.PropertyName, type.FullName));
+                        throw new EntityException(
+                            System.Data.Entity.Strings.PocoEntityWrapper_UnableToSetFieldOrProperty(
+                                relatedEnd.TargetAccessor.PropertyName,
+                                type.FullName
+                            )
+                        );
                     }
                     EntityProxyFactory factory = new EntityProxyFactory();
-                    relatedEnd.TargetAccessor.ValueSetter = factory.CreateBaseSetter(type, propertyInfo);
+                    relatedEnd.TargetAccessor.ValueSetter = factory.CreateBaseSetter(
+                        type,
+                        propertyInfo
+                    );
                 }
                 try
                 {
@@ -93,7 +129,13 @@ namespace System.Data.Objects.Internal
                 }
                 catch (Exception ex)
                 {
-                    throw new EntityException(System.Data.Entity.Strings.PocoEntityWrapper_UnableToSetFieldOrProperty(relatedEnd.TargetAccessor.PropertyName, _entity.GetType().FullName), ex);
+                    throw new EntityException(
+                        System.Data.Entity.Strings.PocoEntityWrapper_UnableToSetFieldOrProperty(
+                            relatedEnd.TargetAccessor.PropertyName,
+                            _entity.GetType().FullName
+                        ),
+                        ex
+                    );
                 }
             }
         }
@@ -102,8 +144,13 @@ namespace System.Data.Objects.Internal
         {
             if (relatedEnd.NavigationProperty != null)
             {
-                EntityType declaringEntityType = (EntityType)relatedEnd.NavigationProperty.DeclaringType;
-                ObjectTypeMapping mapping = System.Data.Common.Internal.Materialization.Util.GetObjectMapping(declaringEntityType, relatedEnd.WrappedOwner.Context.MetadataWorkspace);
+                EntityType declaringEntityType = (EntityType)
+                    relatedEnd.NavigationProperty.DeclaringType;
+                ObjectTypeMapping mapping =
+                    System.Data.Common.Internal.Materialization.Util.GetObjectMapping(
+                        declaringEntityType,
+                        relatedEnd.WrappedOwner.Context.MetadataWorkspace
+                    );
                 return mapping.ClrType.ClrType;
             }
             else
@@ -129,7 +176,12 @@ namespace System.Data.Objects.Internal
                 }
                 else
                 {
-                    throw new EntityException(System.Data.Entity.Strings.PocoEntityWrapper_UnableToSetFieldOrProperty(propertyName, entityType.FullName));
+                    throw new EntityException(
+                        System.Data.Entity.Strings.PocoEntityWrapper_UnableToSetFieldOrProperty(
+                            propertyName,
+                            entityType.FullName
+                        )
+                    );
                 }
             }
             return navPropType;
@@ -165,20 +217,31 @@ namespace System.Data.Objects.Internal
 
                 if (relatedEnd.TargetAccessor.CollectionAdd == null)
                 {
-                    relatedEnd.TargetAccessor.CollectionAdd = CreateCollectionAddFunction(entity.GetType(), relatedEnd.TargetAccessor.PropertyName);
+                    relatedEnd.TargetAccessor.CollectionAdd = CreateCollectionAddFunction(
+                        entity.GetType(),
+                        relatedEnd.TargetAccessor.PropertyName
+                    );
                 }
-
 
                 relatedEnd.TargetAccessor.CollectionAdd(collection, value);
             }
             catch (Exception ex)
             {
-                throw new EntityException(System.Data.Entity.Strings.PocoEntityWrapper_UnableToSetFieldOrProperty(relatedEnd.TargetAccessor.PropertyName, entity.GetType().FullName), ex);
+                throw new EntityException(
+                    System.Data.Entity.Strings.PocoEntityWrapper_UnableToSetFieldOrProperty(
+                        relatedEnd.TargetAccessor.PropertyName,
+                        entity.GetType().FullName
+                    ),
+                    ex
+                );
             }
         }
 
         // Helper method to create delegate with property setter
-        private static Action<object, object> CreateCollectionAddFunction(Type type, string propertyName)
+        private static Action<object, object> CreateCollectionAddFunction(
+            Type type,
+            string propertyName
+        )
         {
             Type navPropType = GetNavigationPropertyType(type, propertyName);
             Type elementType = EntityUtil.GetCollectionElementType(navPropType);
@@ -186,21 +249,20 @@ namespace System.Data.Objects.Internal
 
             MethodInfo addToCollection = s_AddToCollectionGeneric.MakeGenericMethod(elementType);
             return (Action<object, object>)addToCollection.Invoke(null, null);
-            
         }
 
         private static Action<object, object> AddToCollection<T>()
         {
             return (collectionArg, item) =>
+            {
+                ICollection<T> collection = (ICollection<T>)collectionArg;
+                Array array = collection as Array;
+                if (array != null && array.IsFixedSize)
                 {
-                    ICollection<T> collection = (ICollection<T>)collectionArg;
-                    Array array = collection as Array;
-                    if (array != null && array.IsFixedSize)
-                    {
-                        throw EntityUtil.CannotAddToFixedSizeArray(array);
-                    }
-                    collection.Add((T)item);
-                };
+                    throw EntityUtil.CannotAddToFixedSizeArray(array);
+                }
+                collection.Add((T)item);
+            };
         }
 
         #endregion
@@ -224,7 +286,10 @@ namespace System.Data.Objects.Internal
 
                     if (relatedEnd.TargetAccessor.CollectionRemove == null)
                     {
-                        relatedEnd.TargetAccessor.CollectionRemove = CreateCollectionRemoveFunction(entity.GetType(), relatedEnd.TargetAccessor.PropertyName);
+                        relatedEnd.TargetAccessor.CollectionRemove = CreateCollectionRemoveFunction(
+                            entity.GetType(),
+                            relatedEnd.TargetAccessor.PropertyName
+                        );
                     }
 
                     return relatedEnd.TargetAccessor.CollectionRemove(collection, value);
@@ -232,19 +297,30 @@ namespace System.Data.Objects.Internal
             }
             catch (Exception ex)
             {
-                throw new EntityException(System.Data.Entity.Strings.PocoEntityWrapper_UnableToSetFieldOrProperty(relatedEnd.TargetAccessor.PropertyName, entity.GetType().FullName), ex);
+                throw new EntityException(
+                    System.Data.Entity.Strings.PocoEntityWrapper_UnableToSetFieldOrProperty(
+                        relatedEnd.TargetAccessor.PropertyName,
+                        entity.GetType().FullName
+                    ),
+                    ex
+                );
             }
             return false;
         }
 
         // Helper method to create delegate with property setter
-        private static Func<object, object, bool> CreateCollectionRemoveFunction(Type type, string propertyName)
+        private static Func<object, object, bool> CreateCollectionRemoveFunction(
+            Type type,
+            string propertyName
+        )
         {
             Type navPropType = GetNavigationPropertyType(type, propertyName);
             Type elementType = EntityUtil.GetCollectionElementType(navPropType);
             Type collectionType = typeof(ICollection<>).MakeGenericType(elementType);
 
-            MethodInfo removeFromCollection = s_RemoveFromCollectionGeneric.MakeGenericMethod(elementType);
+            MethodInfo removeFromCollection = s_RemoveFromCollectionGeneric.MakeGenericMethod(
+                elementType
+            );
             return (Func<object, object, bool>)removeFromCollection.Invoke(null, null);
         }
 
@@ -280,10 +356,13 @@ namespace System.Data.Objects.Internal
                     Type entityType = _entity.GetType();
                     string propName = relatedEnd.TargetAccessor.PropertyName;
                     Type navPropType = GetNavigationPropertyType(entityType, propName);
-                    relatedEnd.TargetAccessor.CollectionCreate = CreateCollectionCreateDelegate(entityType, navPropType, propName);
+                    relatedEnd.TargetAccessor.CollectionCreate = CreateCollectionCreateDelegate(
+                        entityType,
+                        navPropType,
+                        propName
+                    );
                 }
                 return relatedEnd.TargetAccessor.CollectionCreate();
-
             }
         }
 
@@ -291,13 +370,22 @@ namespace System.Data.Objects.Internal
         /// We only get here if a navigation property getter returns null.  In this case, we try to set the
         /// navigation property to some collection that will work.
         /// </summary>
-        private static Func<object> CreateCollectionCreateDelegate(Type entityType, Type navigationPropertyType, string propName)
+        private static Func<object> CreateCollectionCreateDelegate(
+            Type entityType,
+            Type navigationPropertyType,
+            string propName
+        )
         {
             var typeToInstantiate = EntityUtil.DetermineCollectionType(navigationPropertyType);
 
             if (typeToInstantiate == null)
             {
-                throw new EntityException(System.Data.Entity.Strings.PocoEntityWrapper_UnableToMaterializeArbitaryNavPropType(propName, navigationPropertyType));
+                throw new EntityException(
+                    System.Data.Entity.Strings.PocoEntityWrapper_UnableToMaterializeArbitaryNavPropType(
+                        propName,
+                        navigationPropertyType
+                    )
+                );
             }
 
             return Expression.Lambda<Func<object>>(Expression.New(typeToInstantiate)).Compile();

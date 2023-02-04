@@ -25,9 +25,10 @@ namespace ILLink.Shared.TypeSystemProxy
 
     public static partial class WellKnownTypeExtensions
     {
-        public static (string Namespace, string Name) GetNamespaceAndName (this WellKnownType type)
+        public static (string Namespace, string Name) GetNamespaceAndName(this WellKnownType type)
         {
-            return type switch {
+            return type switch
+            {
                 WellKnownType.System_String => ("System", "String"),
                 WellKnownType.System_Nullable_T => ("System", "Nullable`1"),
                 WellKnownType.System_Type => ("System", "Type"),
@@ -36,34 +37,47 @@ namespace ILLink.Shared.TypeSystemProxy
                 WellKnownType.System_Object => ("System", "Object"),
                 WellKnownType.System_Attribute => ("System", "Attribute"),
                 WellKnownType.System_NotSupportedException => ("System", "NotSupportedException"),
-                WellKnownType.System_Runtime_CompilerServices_DisablePrivateReflectionAttribute => ("System.Runtime.CompilerServices", "DisablePrivateReflectionAttribute"),
+                WellKnownType.System_Runtime_CompilerServices_DisablePrivateReflectionAttribute
+                    => ("System.Runtime.CompilerServices", "DisablePrivateReflectionAttribute"),
                 WellKnownType.System_Void => ("System", "Void"),
             };
         }
-        public static string GetNamespace (this WellKnownType type) => GetNamespaceAndName (type).Namespace;
-        public static string GetName (this WellKnownType type) => GetNamespaceAndName (type).Name;
-        public static WellKnownType? GetWellKnownType (string @namespace, string name)
+
+        public static string GetNamespace(this WellKnownType type) =>
+            GetNamespaceAndName(type).Namespace;
+
+        public static string GetName(this WellKnownType type) => GetNamespaceAndName(type).Name;
+
+        public static WellKnownType? GetWellKnownType(string @namespace, string name)
         {
-            return @namespace switch {
-                "System" => name switch {
-                    "String" => WellKnownType.System_String,
-                    "Nullable`1" => WellKnownType.System_Nullable_T,
-                    "Type" => WellKnownType.System_Type,
-                    "Array" => WellKnownType.System_Array,
-                    "Attribute" => WellKnownType.System_Attribute,
-                    "Object" => WellKnownType.System_Object,
-                    "NotSupportedException" => WellKnownType.System_NotSupportedException,
-                    "Void" => WellKnownType.System_Void,
-                    _ => null
-                },
-                "System.Reflection" => name switch {
-                    "IReflect" => WellKnownType.System_Reflection_IReflect,
-                    _ => null
-                },
-                "System.Runtime.CompilerServices" => name switch {
-                    "DisablePrivateReflectionAttribute" => WellKnownType.System_Runtime_CompilerServices_DisablePrivateReflectionAttribute,
-                    _ => null
-                },
+            return @namespace switch
+            {
+                "System"
+                    => name switch
+                    {
+                        "String" => WellKnownType.System_String,
+                        "Nullable`1" => WellKnownType.System_Nullable_T,
+                        "Type" => WellKnownType.System_Type,
+                        "Array" => WellKnownType.System_Array,
+                        "Attribute" => WellKnownType.System_Attribute,
+                        "Object" => WellKnownType.System_Object,
+                        "NotSupportedException" => WellKnownType.System_NotSupportedException,
+                        "Void" => WellKnownType.System_Void,
+                        _ => null
+                    },
+                "System.Reflection"
+                    => name switch
+                    {
+                        "IReflect" => WellKnownType.System_Reflection_IReflect,
+                        _ => null
+                    },
+                "System.Runtime.CompilerServices"
+                    => name switch
+                    {
+                        "DisablePrivateReflectionAttribute"
+                            => WellKnownType.System_Runtime_CompilerServices_DisablePrivateReflectionAttribute,
+                        _ => null
+                    },
                 _ => null
             };
         }

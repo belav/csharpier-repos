@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,81 +35,86 @@ namespace System.ServiceModel.Security.Tokens
 {
     public class SslSecurityTokenParameters : SecurityTokenParameters
     {
-        public SslSecurityTokenParameters ()
-            : this (false, false)
-        {
-        }
+        public SslSecurityTokenParameters()
+            : this(false, false) { }
 
-        public SslSecurityTokenParameters (bool requireClientCertificate)
-            : this (requireClientCertificate, false)
-        {
-        }
+        public SslSecurityTokenParameters(bool requireClientCertificate)
+            : this(requireClientCertificate, false) { }
 
-        public SslSecurityTokenParameters (bool requireClientCertificate,
-            bool requireCancellation)
+        public SslSecurityTokenParameters(bool requireClientCertificate, bool requireCancellation)
         {
             this.cert = requireClientCertificate;
             this.cancel = requireCancellation;
         }
 
-        protected SslSecurityTokenParameters (SslSecurityTokenParameters other)
-            : base (other)
+        protected SslSecurityTokenParameters(SslSecurityTokenParameters other)
+            : base(other)
         {
             cert = other.cert;
             cancel = other.cancel;
         }
 
-        bool cert, cancel;
+        bool cert,
+            cancel;
 
-        public bool RequireClientCertificate {
+        public bool RequireClientCertificate
+        {
             get { return cert; }
             set { cert = value; }
         }
 
-        public bool RequireCancellation {
+        public bool RequireCancellation
+        {
             get { return cancel; }
             set { cancel = value; }
         }
 
-        public override string ToString ()
+        public override string ToString()
         {
-            return base.ToString ();
+            return base.ToString();
         }
 
-        protected override bool HasAsymmetricKey {
+        protected override bool HasAsymmetricKey
+        {
             get { return false; }
         }
 
-        protected override bool SupportsClientAuthentication {
-            get { return false; } 
-        }
-
-        protected override bool SupportsClientWindowsIdentity {
-            get { return false; } 
-        }
-
-        protected override bool SupportsServerAuthentication {
-            get { return true; } 
-        }
-
-        protected override SecurityTokenParameters CloneCore ()
+        protected override bool SupportsClientAuthentication
         {
-            return new SslSecurityTokenParameters (this);
+            get { return false; }
         }
 
-        protected override SecurityKeyIdentifierClause CreateKeyIdentifierClause (
-            SecurityToken token, SecurityTokenReferenceStyle referenceStyle)
+        protected override bool SupportsClientWindowsIdentity
+        {
+            get { return false; }
+        }
+
+        protected override bool SupportsServerAuthentication
+        {
+            get { return true; }
+        }
+
+        protected override SecurityTokenParameters CloneCore()
+        {
+            return new SslSecurityTokenParameters(this);
+        }
+
+        protected override SecurityKeyIdentifierClause CreateKeyIdentifierClause(
+            SecurityToken token,
+            SecurityTokenReferenceStyle referenceStyle
+        )
         {
             if (token == null)
-                throw new ArgumentNullException ("token");
+                throw new ArgumentNullException("token");
 
             SecurityContextSecurityToken sct = token as SecurityContextSecurityToken;
             if (sct == null)
-                throw new ArgumentException (String.Format ("Not supported SecurityToken: '{0}'", token));
-            return referenceStyle == SecurityTokenReferenceStyle.Internal ?
-                (SecurityKeyIdentifierClause)
-                new LocalIdKeyIdentifierClause (sct.Id) :
-                new SecurityContextKeyIdentifierClause (sct.ContextId, sct.KeyGeneration);
+                throw new ArgumentException(
+                    String.Format("Not supported SecurityToken: '{0}'", token)
+                );
+            return referenceStyle == SecurityTokenReferenceStyle.Internal
+                ? (SecurityKeyIdentifierClause)new LocalIdKeyIdentifierClause(sct.Id)
+                : new SecurityContextKeyIdentifierClause(sct.ContextId, sct.KeyGeneration);
             /*
             GenericXmlSecurityToken x = token as GenericXmlSecurityToken;
             if (x == null)
@@ -118,15 +123,17 @@ namespace System.ServiceModel.Security.Tokens
             */
         }
 
-        protected internal override void InitializeSecurityTokenRequirement (SecurityTokenRequirement requirement)
+        protected internal override void InitializeSecurityTokenRequirement(
+            SecurityTokenRequirement requirement
+        )
         {
-            requirement.TokenType =
-                RequireClientCertificate ?
-                ServiceModelSecurityTokenTypes.MutualSslnego :
-                ServiceModelSecurityTokenTypes.AnonymousSslnego;
+            requirement.TokenType = RequireClientCertificate
+                ? ServiceModelSecurityTokenTypes.MutualSslnego
+                : ServiceModelSecurityTokenTypes.AnonymousSslnego;
             requirement.RequireCryptographicToken = true;
-            requirement.Properties [ReqType.SupportSecurityContextCancellationProperty] = RequireCancellation;
-            requirement.Properties [ReqType.IssuedSecurityTokenParametersProperty] = this.Clone ();
+            requirement.Properties[ReqType.SupportSecurityContextCancellationProperty] =
+                RequireCancellation;
+            requirement.Properties[ReqType.IssuedSecurityTokenParametersProperty] = this.Clone();
             requirement.KeyType = SecurityKeyType.SymmetricKey;
         }
     }

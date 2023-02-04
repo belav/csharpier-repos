@@ -3,34 +3,35 @@
 using System;
 using System.Threading;
 
-public class mytest {
-    public static int Main() {
-        int           rValue = 100;
-        ManualResetEvent  mre  = null;
-        
+public class mytest
+{
+    public static int Main()
+    {
+        int rValue = 100;
+        ManualResetEvent mre = null;
+
         Console.WriteLine("Test ManualResetEvent for expected NullRef Exceptions");
-        Console.WriteLine( );
+        Console.WriteLine();
 
+        //         try {
+        // #pragma warning disable 618
+        //             mre.Handle = new IntPtr(1);
+        // #pragma warning restore 618
+        //             rValue = 1;
+        //         }
+        //         catch (NullReferenceException) {
+        //             Console.WriteLine("Caught NullReferenceException   (mre.Handle(new IntPtr(1)))");
+        //         }
+        //         try {
+        // #pragma warning disable 618
+        //             IntPtr iptr = mre.Handle;
+        // #pragma warning restore 618
+        //             rValue = 2;
+        //         }
+        //         catch (NullReferenceException) {
+        //             Console.WriteLine("Caught NullReferenceException   (IntPtr iptr = mre.Handle)");
+        //         }
 
-//         try {
-// #pragma warning disable 618
-//             mre.Handle = new IntPtr(1);
-// #pragma warning restore 618
-//             rValue = 1;
-//         }
-//         catch (NullReferenceException) {
-//             Console.WriteLine("Caught NullReferenceException   (mre.Handle(new IntPtr(1)))");
-//         }
-//         try {
-// #pragma warning disable 618
-//             IntPtr iptr = mre.Handle;
-// #pragma warning restore 618
-//             rValue = 2;
-//         }
-//         catch (NullReferenceException) {
-//             Console.WriteLine("Caught NullReferenceException   (IntPtr iptr = mre.Handle)");
-//         }
-    
         // try {
         //     mre.Close();
         //     rValue = 3;
@@ -38,20 +39,26 @@ public class mytest {
         // catch (NullReferenceException) {
         //     Console.WriteLine("Caught NullReferenceException   (mre.Close())");
         // }
-        
-        try {
+
+        try
+        {
             mre.Equals(new ManualResetEvent(true));
             rValue = 4;
         }
-        catch (NullReferenceException) {
-            Console.WriteLine("Caught NullReferenceException   (mre.Equals(new ManualResetEvent()))");
+        catch (NullReferenceException)
+        {
+            Console.WriteLine(
+                "Caught NullReferenceException   (mre.Equals(new ManualResetEvent()))"
+            );
         }
 
-        try {
+        try
+        {
             mre.GetHashCode();
             rValue = 5;
         }
-        catch (NullReferenceException) {
+        catch (NullReferenceException)
+        {
             Console.WriteLine("Caught NullReferenceException   (mre.GetHasCode())");
         }
 
@@ -61,13 +68,15 @@ public class mytest {
         // }
         // catch (NullReferenceException) {
         //     Console.WriteLine("Caught NullReferenceException   (mre.GetLifetimeService())");
-        // }        
+        // }
 
-        try {
+        try
+        {
             mre.GetType();
             rValue = 7;
         }
-        catch (NullReferenceException) {
+        catch (NullReferenceException)
+        {
             Console.WriteLine("Caught NullReferenceException   (mre.GetType())");
         }
 
@@ -78,44 +87,54 @@ public class mytest {
         // catch (NullReferenceException) {
         //     Console.WriteLine("Caught NullReferenceException   (mre.InitializeLifeTimeService())");
         // }
-    
-        try {
+
+        try
+        {
             mre.Reset();
             rValue = 9;
         }
-        catch (NullReferenceException) {
+        catch (NullReferenceException)
+        {
             Console.WriteLine("Caught NullReferenceException   (mre.Reset())");
         }
 
-        try {
+        try
+        {
             mre.Set();
             rValue = 10;
         }
-        catch (NullReferenceException) {
+        catch (NullReferenceException)
+        {
             Console.WriteLine("Caught NullReferenceException   (mre.Set())");
         }
 
-        try {
+        try
+        {
             mre.ToString();
             rValue = 11;
         }
-        catch (NullReferenceException) {
+        catch (NullReferenceException)
+        {
             Console.WriteLine("Caught NullReferenceException   (mre.ToString())");
         }
 
-        try {
+        try
+        {
             mre.WaitOne();
             rValue = 12;
         }
-        catch (NullReferenceException) {
+        catch (NullReferenceException)
+        {
             Console.WriteLine("Caught NullReferenceException   (mre.WaitOne())");
         }
 
-        try {
-            mre.WaitOne(1000);//,true);
+        try
+        {
+            mre.WaitOne(1000); //,true);
             rValue = 13;
         }
-        catch (NullReferenceException) {
+        catch (NullReferenceException)
+        {
             Console.WriteLine("Caught NullReferenceException   (mre.WaitOne(int)");
         }
 
@@ -127,11 +146,13 @@ public class mytest {
         //     Console.WriteLine("Caught NullReferenceException   (mre.WaitOne(int,bool))");
         // }
 
-        try {
-            mre.WaitOne(new TimeSpan(1000));//,true);
+        try
+        {
+            mre.WaitOne(new TimeSpan(1000)); //,true);
             rValue = 15;
         }
-        catch (NullReferenceException) {
+        catch (NullReferenceException)
+        {
             Console.WriteLine("Caught NullReferenceException   (mre.WaitOne(TimeSpan)");
         }
 
@@ -141,9 +162,9 @@ public class mytest {
         // }
         // catch (NullReferenceException) {
         //     Console.WriteLine("Caught NullReferenceException   (mre.WaitOne(TimeSpan,bool))");
-        // }        
+        // }
 
-        Console.WriteLine("Return Code == {0}",rValue);
+        Console.WriteLine("Return Code == {0}", rValue);
         return rValue;
     }
 }

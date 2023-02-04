@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 
 namespace zipsharp
 {
-    [StructLayoutAttribute (LayoutKind.Sequential)]
+    [StructLayoutAttribute(LayoutKind.Sequential)]
     struct ZipFileInfo32
     {
         ZipTime date;
@@ -17,16 +17,16 @@ namespace zipsharp
         uint internalFileAttributes;
         uint externalFileAttributes;
 
-        public ZipFileInfo32 (DateTime fileTime)
+        public ZipFileInfo32(DateTime fileTime)
         {
-            date = new ZipTime (fileTime);
+            date = new ZipTime(fileTime);
             dosDate = 0;
             internalFileAttributes = 0;
             externalFileAttributes = 0;
         }
     }
 
-    [StructLayoutAttribute (LayoutKind.Sequential)]
+    [StructLayoutAttribute(LayoutKind.Sequential)]
     struct ZipFileInfo64
     {
         ZipTime date;
@@ -34,9 +34,9 @@ namespace zipsharp
         ulong internalFileAttributes;
         ulong externalFileAttributes;
 
-        public ZipFileInfo64 (DateTime fileTime)
+        public ZipFileInfo64(DateTime fileTime)
         {
-            date = new ZipTime (fileTime);
+            date = new ZipTime(fileTime);
             dosDate = 0;
             internalFileAttributes = 0;
             externalFileAttributes = 0;

@@ -14,27 +14,36 @@ namespace System.Net
         private int m_Port;
         private AddressFamily m_Family;
 
-        public DnsEndPoint(string host, int port) : this(host, port, AddressFamily.Unspecified) {}
+        public DnsEndPoint(string host, int port)
+            : this(host, port, AddressFamily.Unspecified) { }
 
         public DnsEndPoint(string host, int port, AddressFamily addressFamily)
         {
-            if(host == null) {
+            if (host == null)
+            {
                 throw new ArgumentNullException("host");
             }
 
-            if (String.IsNullOrEmpty(host)) {
+            if (String.IsNullOrEmpty(host))
+            {
                 throw new ArgumentException(SR.GetString(SR.net_emptystringcall, "host"));
             }
 
-            if(port < IPEndPoint.MinPort || port > IPEndPoint.MaxPort) {
+            if (port < IPEndPoint.MinPort || port > IPEndPoint.MaxPort)
+            {
                 throw new ArgumentOutOfRangeException("port");
             }
 
-            if (addressFamily != AddressFamily.InterNetwork &&
-                addressFamily != AddressFamily.InterNetworkV6 &&
-                addressFamily != AddressFamily.Unspecified)
+            if (
+                addressFamily != AddressFamily.InterNetwork
+                && addressFamily != AddressFamily.InterNetworkV6
+                && addressFamily != AddressFamily.Unspecified
+            )
             {
-                throw new ArgumentException(SR.GetString(SR.net_sockets_invalid_optionValue_all), "addressFamily");
+                throw new ArgumentException(
+                    SR.GetString(SR.net_sockets_invalid_optionValue_all),
+                    "addressFamily"
+                );
             }
 
             m_Host = host;
@@ -49,9 +58,11 @@ namespace System.Net
             if (dnsComparand == null)
                 return false;
 
-            return (m_Family == dnsComparand.m_Family &&
-                    m_Port == dnsComparand.m_Port &&
-                    m_Host == dnsComparand.m_Host);
+            return (
+                m_Family == dnsComparand.m_Family
+                && m_Port == dnsComparand.m_Port
+                && m_Host == dnsComparand.m_Host
+            );
         }
 
         public override int GetHashCode()
@@ -66,23 +77,17 @@ namespace System.Net
 
         public string Host
         {
-            get {
-                return m_Host;
-            }
+            get { return m_Host; }
         }
 
         public override AddressFamily AddressFamily
         {
-            get {
-                return m_Family;
-            }
+            get { return m_Family; }
         }
 
         public int Port
         {
-            get {
-                return m_Port;
-            }
+            get { return m_Port; }
         }
     }
 }

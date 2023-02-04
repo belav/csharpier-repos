@@ -3,8 +3,6 @@
 public struct S
 {
     string s;
-    
-    public void Test ()
-    {
-    }
+
+    public void Test() { }
 }

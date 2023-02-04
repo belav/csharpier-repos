@@ -1,5 +1,5 @@
 //
-// OracleTransaction.cs 
+// OracleTransaction.cs
 //
 // Part of the Mono class libraries at
 // mcs/class/System.Data.OracleClient/System.Data.OracleClient
@@ -21,8 +21,7 @@ using System.Data.OracleClient.Oci;
 
 namespace System.Data.OracleClient
 {
-    public sealed class OracleTransaction :
-    Common.DbTransaction
+    public sealed class OracleTransaction : Common.DbTransaction
     {
         #region Fields
 
@@ -36,7 +35,11 @@ namespace System.Data.OracleClient
 
         #region Constructors
 
-        internal OracleTransaction (OracleConnection connection, IsolationLevel isolevel, OciTransactionHandle transaction)
+        internal OracleTransaction(
+            OracleConnection connection,
+            IsolationLevel isolevel,
+            OciTransactionHandle transaction
+        )
         {
             this.connection = connection;
             this.isolationLevel = isolevel;
@@ -48,53 +51,51 @@ namespace System.Data.OracleClient
 
         #region Properties
 
-        internal bool IsOpen {
+        internal bool IsOpen
+        {
             get { return isOpen; }
         }
 
-        public
-        new
-        OracleConnection Connection {
+        public new OracleConnection Connection
+        {
             get { return connection; }
         }
-        
+
         [MonoTODO]
-        protected override Common.DbConnection DbConnection {
+        protected override Common.DbConnection DbConnection
+        {
             get { return Connection; }
         }
 
-        public
-        override
-        IsolationLevel IsolationLevel {
+        public override IsolationLevel IsolationLevel
+        {
             get { return isolationLevel; }
         }
-
 
         #endregion // Properties
 
         #region Methods
 
-        internal void AttachToServiceContext ()
+        internal void AttachToServiceContext()
         {
-            transaction.AttachToServiceContext ();
+            transaction.AttachToServiceContext();
         }
 
-        public
-        override
-        void Commit ()
+        public override void Commit()
         {
-            transaction.Commit ();
+            transaction.Commit();
             Connection.Transaction = null;
             isOpen = false;
         }
 
-        protected override
-        void Dispose (bool disposing)
+        protected override void Dispose(bool disposing)
         {
-            if (!disposed) {
-                if (disposing) {
+            if (!disposed)
+            {
+                if (disposing)
+                {
                     if (isOpen)
-                        Rollback ();
+                        Rollback();
 
                     transaction.Dispose();
                 }
@@ -102,12 +103,9 @@ namespace System.Data.OracleClient
             }
         }
 
-
-        public
-        override
-        void Rollback ()
+        public override void Rollback()
         {
-            transaction.Rollback ();
+            transaction.Rollback();
             Connection.Transaction = null;
             isOpen = false;
         }

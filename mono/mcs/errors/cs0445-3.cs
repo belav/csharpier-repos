@@ -3,11 +3,13 @@
 
 struct S
 {
-    public void Do (object o)
+    public void Do(object o)
     {
-        ((S) o)[1] = 4;
+        ((S)o)[1] = 4;
     }
 
-    int this[int arg] { set { } }
+    int this[int arg]
+    {
+        set { }
+    }
 }
-

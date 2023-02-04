@@ -10,8 +10,17 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
 {
     internal interface IVSTypeScriptDiagnosticAnalyzerImplementation
     {
-        Task<ImmutableArray<Diagnostic>> AnalyzeProjectAsync(Project project, CancellationToken cancellationToken);
-        Task<ImmutableArray<Diagnostic>> AnalyzeDocumentSyntaxAsync(Document document, CancellationToken cancellationToken);
-        Task<ImmutableArray<Diagnostic>> AnalyzeDocumentSemanticsAsync(Document document, CancellationToken cancellationToken);
+        Task<ImmutableArray<Diagnostic>> AnalyzeProjectAsync(
+            Project project,
+            CancellationToken cancellationToken
+        );
+        Task<ImmutableArray<Diagnostic>> AnalyzeDocumentSyntaxAsync(
+            Document document,
+            CancellationToken cancellationToken
+        );
+        Task<ImmutableArray<Diagnostic>> AnalyzeDocumentSemanticsAsync(
+            Document document,
+            CancellationToken cancellationToken
+        );
     }
 }

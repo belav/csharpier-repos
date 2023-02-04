@@ -14,7 +14,7 @@ namespace MonoTests.System.ComponentModel.DataAnnotations
         public string WorksOnProperty { get; set; }
 
         [Display(ResourceType = typeof(GoodResources), Name = "NameKey")]
-        public string WorksOnMethod ()
+        public string WorksOnMethod()
         {
             return "";
         }
@@ -22,56 +22,70 @@ namespace MonoTests.System.ComponentModel.DataAnnotations
         [Display(ResourceType = typeof(GoodResources), Name = "NameKey")]
         public string worksOnField;
 
-        public string WorksOnParameter ([Display(ResourceType = typeof(GoodResources), Name = "NameKey")] string parameter1)
+        public string WorksOnParameter(
+            [Display(ResourceType = typeof(GoodResources), Name = "NameKey")] string parameter1
+        )
         {
             return "";
         }
     }
-    
+
     public class GoodResources
     {
-        public static string Name {
+        public static string Name
+        {
             get { return "NameValue"; }
         }
-        public static string ShortName {
+        public static string ShortName
+        {
             get { return "ShortNameValue"; }
         }
-        public static string Prompt {
+        public static string Prompt
+        {
             get { return "PromptValue"; }
         }
-        public static string Description {
+        public static string Description
+        {
             get { return "DescriptionValue"; }
         }
-        public static string GroupName {
+        public static string GroupName
+        {
             get { return "GroupNameValue"; }
         }
-        
     }
+
     public class BadResources
     {
-        private static string PrivateString {
+        private static string PrivateString
+        {
             get { return "Not a public string"; }
         }
-        public string InstanceString {
+        public string InstanceString
+        {
             get { return "Not a static string"; }
         }
-        public string WriteOnlyString {
+        public string WriteOnlyString
+        {
             set { }
         }
     }
+
     internal class InvisibleResources
     {
-        public static string InvisibleResource {
+        public static string InvisibleResource
+        {
             get { return "Not a visible string "; }
         }
     }
-    
+
     [TestFixture]
     public class DisplayAttributeTests
     {
-        const string property_not_set_message = "The {0} property has not been set.  Use the Get{0} method to get the value.";
-        const string localization_failed_message = "Cannot retrieve property '{0}' because localization failed.  Type '{1}' is not public or does not contain a public static string property with the name '{2}'.";
-    
+        const string property_not_set_message =
+            "The {0} property has not been set.  Use the Get{0} method to get the value.";
+        const string localization_failed_message =
+            "Cannot retrieve property '{0}' because localization failed.  Type '{1}' is not public or does not contain a public static string property with the name '{2}'.";
+
         [Test]
         public void StringProperties_ReturnLiteralValues_Success()
         {
@@ -83,13 +97,14 @@ namespace MonoTests.System.ComponentModel.DataAnnotations
                 Description = "Description",
                 GroupName = "GroupName"
             };
-            
+
             Assert.AreEqual("Name", display.GetName());
             Assert.AreEqual("ShortName", display.GetShortName());
             Assert.AreEqual("Prompt", display.GetPrompt());
             Assert.AreEqual("Description", display.GetDescription());
             Assert.AreEqual("GroupName", display.GetGroupName());
         }
+
         [Test]
         public void StringProperties_ReturnLocalizedValues_Success()
         {
@@ -102,25 +117,22 @@ namespace MonoTests.System.ComponentModel.DataAnnotations
                 Description = "Description",
                 GroupName = "GroupName"
             };
-            
+
             Assert.AreEqual(GoodResources.Name, display.GetName());
             Assert.AreEqual(GoodResources.ShortName, display.GetShortName());
             Assert.AreEqual(GoodResources.Prompt, display.GetPrompt());
             Assert.AreEqual(GoodResources.Description, display.GetDescription());
             Assert.AreEqual(GoodResources.GroupName, display.GetGroupName());
         }
-        
+
         [Test]
         public void ShortName_ReturnsName_WhenNotSet()
         {
-            var display = new DisplayAttribute()
-            {
-                Name = "Name"
-            };
-            
+            var display = new DisplayAttribute() { Name = "Name" };
+
             Assert.AreEqual("Name", display.GetShortName());
         }
-        
+
         [Test]
         public void OrderAndAutoGenerateProperties_Success()
         {
@@ -130,46 +142,55 @@ namespace MonoTests.System.ComponentModel.DataAnnotations
                 AutoGenerateField = true,
                 AutoGenerateFilter = false
             };
-            
+
             Assert.AreEqual(1, display.Order);
             Assert.AreEqual(1, display.GetOrder());
-            
+
             Assert.AreEqual(true, display.AutoGenerateField);
             Assert.AreEqual(true, display.GetAutoGenerateField());
-            
+
             Assert.AreEqual(false, display.AutoGenerateFilter);
             Assert.AreEqual(false, display.GetAutoGenerateFilter());
         }
-        
+
         [Test]
-        public void StringProperties_GetUnSetProperties_ReturnsNull ()
-        {
-            var display = new DisplayAttribute ();
-            Assert.IsNull (display.Name);
-            Assert.IsNull (display.ShortName);
-            Assert.IsNull (display.Prompt);
-            Assert.IsNull (display.Description);
-            Assert.IsNull (display.GroupName);
-            
-            Assert.IsNull (display.GetName ());
-            Assert.IsNull (display.GetShortName ());
-            Assert.IsNull (display.GetPrompt ());
-            Assert.IsNull (display.GetDescription ());
-            Assert.IsNull (display.GetGroupName ());
-        }
-        
-        [Test]
-        public void OrderAndAutoGeneratedProperties_GetUnSetProperties_ThrowsInvalidOperationException ()
+        public void StringProperties_GetUnSetProperties_ReturnsNull()
         {
             var display = new DisplayAttribute();
-            
-            ExceptionAssert.Throws<InvalidOperationException>(() => display.Order.ToString(), string.Format(property_not_set_message, "Order"));
-            ExceptionAssert.Throws<InvalidOperationException>(() => display.AutoGenerateField.ToString(), string.Format(property_not_set_message, "AutoGenerateField"));
-            ExceptionAssert.Throws<InvalidOperationException>(() => display.AutoGenerateFilter.ToString(), string.Format(property_not_set_message, "AutoGenerateFilter"));
+            Assert.IsNull(display.Name);
+            Assert.IsNull(display.ShortName);
+            Assert.IsNull(display.Prompt);
+            Assert.IsNull(display.Description);
+            Assert.IsNull(display.GroupName);
+
+            Assert.IsNull(display.GetName());
+            Assert.IsNull(display.GetShortName());
+            Assert.IsNull(display.GetPrompt());
+            Assert.IsNull(display.GetDescription());
+            Assert.IsNull(display.GetGroupName());
         }
-        
+
         [Test]
-        public void AllProperties_InvisibleResource_ThrowsInvalidOperationException ()
+        public void OrderAndAutoGeneratedProperties_GetUnSetProperties_ThrowsInvalidOperationException()
+        {
+            var display = new DisplayAttribute();
+
+            ExceptionAssert.Throws<InvalidOperationException>(
+                () => display.Order.ToString(),
+                string.Format(property_not_set_message, "Order")
+            );
+            ExceptionAssert.Throws<InvalidOperationException>(
+                () => display.AutoGenerateField.ToString(),
+                string.Format(property_not_set_message, "AutoGenerateField")
+            );
+            ExceptionAssert.Throws<InvalidOperationException>(
+                () => display.AutoGenerateFilter.ToString(),
+                string.Format(property_not_set_message, "AutoGenerateFilter")
+            );
+        }
+
+        [Test]
+        public void AllProperties_InvisibleResource_ThrowsInvalidOperationException()
         {
             var resourceType = typeof(InvisibleResources);
             var resourceKey = "InvisibleResource";
@@ -182,16 +203,31 @@ namespace MonoTests.System.ComponentModel.DataAnnotations
                 Description = resourceKey,
                 GroupName = resourceKey
             };
-            
-            ExceptionAssert.Throws<InvalidOperationException>(() => display.GetName(), string.Format(localization_failed_message, "Name", resourceType, resourceKey));
-            ExceptionAssert.Throws<InvalidOperationException>(() => display.GetShortName(), string.Format(localization_failed_message, "ShortName", resourceType, resourceKey));
-            ExceptionAssert.Throws<InvalidOperationException>(() => display.GetPrompt(), string.Format(localization_failed_message, "Prompt", resourceType, resourceKey));
-            ExceptionAssert.Throws<InvalidOperationException>(() => display.GetDescription(), string.Format(localization_failed_message, "Description", resourceType, resourceKey));
-            ExceptionAssert.Throws<InvalidOperationException>(() => display.GetGroupName(), string.Format(localization_failed_message, "GroupName", resourceType, resourceKey));        
+
+            ExceptionAssert.Throws<InvalidOperationException>(
+                () => display.GetName(),
+                string.Format(localization_failed_message, "Name", resourceType, resourceKey)
+            );
+            ExceptionAssert.Throws<InvalidOperationException>(
+                () => display.GetShortName(),
+                string.Format(localization_failed_message, "ShortName", resourceType, resourceKey)
+            );
+            ExceptionAssert.Throws<InvalidOperationException>(
+                () => display.GetPrompt(),
+                string.Format(localization_failed_message, "Prompt", resourceType, resourceKey)
+            );
+            ExceptionAssert.Throws<InvalidOperationException>(
+                () => display.GetDescription(),
+                string.Format(localization_failed_message, "Description", resourceType, resourceKey)
+            );
+            ExceptionAssert.Throws<InvalidOperationException>(
+                () => display.GetGroupName(),
+                string.Format(localization_failed_message, "GroupName", resourceType, resourceKey)
+            );
         }
-        
+
         [Test]
-        public void AllProperties_PrivateResource_ThrowsInvalidOperationException ()
+        public void AllProperties_PrivateResource_ThrowsInvalidOperationException()
         {
             var resourceType = typeof(BadResources);
             var resourceKey = "InstanceString";
@@ -204,16 +240,31 @@ namespace MonoTests.System.ComponentModel.DataAnnotations
                 Description = resourceKey,
                 GroupName = resourceKey
             };
-            
-            ExceptionAssert.Throws<InvalidOperationException>(() => display.GetName(), string.Format(localization_failed_message, "Name", resourceType, resourceKey));
-            ExceptionAssert.Throws<InvalidOperationException>(() => display.GetShortName(), string.Format(localization_failed_message, "ShortName", resourceType, resourceKey));
-            ExceptionAssert.Throws<InvalidOperationException>(() => display.GetPrompt(), string.Format(localization_failed_message, "Prompt", resourceType, resourceKey));
-            ExceptionAssert.Throws<InvalidOperationException>(() => display.GetDescription(), string.Format(localization_failed_message, "Description", resourceType, resourceKey));
-            ExceptionAssert.Throws<InvalidOperationException>(() => display.GetGroupName(), string.Format(localization_failed_message, "GroupName", resourceType, resourceKey));        
+
+            ExceptionAssert.Throws<InvalidOperationException>(
+                () => display.GetName(),
+                string.Format(localization_failed_message, "Name", resourceType, resourceKey)
+            );
+            ExceptionAssert.Throws<InvalidOperationException>(
+                () => display.GetShortName(),
+                string.Format(localization_failed_message, "ShortName", resourceType, resourceKey)
+            );
+            ExceptionAssert.Throws<InvalidOperationException>(
+                () => display.GetPrompt(),
+                string.Format(localization_failed_message, "Prompt", resourceType, resourceKey)
+            );
+            ExceptionAssert.Throws<InvalidOperationException>(
+                () => display.GetDescription(),
+                string.Format(localization_failed_message, "Description", resourceType, resourceKey)
+            );
+            ExceptionAssert.Throws<InvalidOperationException>(
+                () => display.GetGroupName(),
+                string.Format(localization_failed_message, "GroupName", resourceType, resourceKey)
+            );
         }
-        
+
         [Test]
-        public void AllProperties_InstanceResource_ThrowsInvalidOperationException ()
+        public void AllProperties_InstanceResource_ThrowsInvalidOperationException()
         {
             var resourceType = typeof(BadResources);
             var resourceKey = "InstanceString";
@@ -226,16 +277,31 @@ namespace MonoTests.System.ComponentModel.DataAnnotations
                 Description = resourceKey,
                 GroupName = resourceKey
             };
-            
-            ExceptionAssert.Throws<InvalidOperationException>(() => display.GetName(), string.Format(localization_failed_message, "Name", resourceType, resourceKey));
-            ExceptionAssert.Throws<InvalidOperationException>(() => display.GetShortName(), string.Format(localization_failed_message, "ShortName", resourceType, resourceKey));
-            ExceptionAssert.Throws<InvalidOperationException>(() => display.GetPrompt(), string.Format(localization_failed_message, "Prompt", resourceType, resourceKey));
-            ExceptionAssert.Throws<InvalidOperationException>(() => display.GetDescription(), string.Format(localization_failed_message, "Description", resourceType, resourceKey));
-            ExceptionAssert.Throws<InvalidOperationException>(() => display.GetGroupName(), string.Format(localization_failed_message, "GroupName", resourceType, resourceKey));        
+
+            ExceptionAssert.Throws<InvalidOperationException>(
+                () => display.GetName(),
+                string.Format(localization_failed_message, "Name", resourceType, resourceKey)
+            );
+            ExceptionAssert.Throws<InvalidOperationException>(
+                () => display.GetShortName(),
+                string.Format(localization_failed_message, "ShortName", resourceType, resourceKey)
+            );
+            ExceptionAssert.Throws<InvalidOperationException>(
+                () => display.GetPrompt(),
+                string.Format(localization_failed_message, "Prompt", resourceType, resourceKey)
+            );
+            ExceptionAssert.Throws<InvalidOperationException>(
+                () => display.GetDescription(),
+                string.Format(localization_failed_message, "Description", resourceType, resourceKey)
+            );
+            ExceptionAssert.Throws<InvalidOperationException>(
+                () => display.GetGroupName(),
+                string.Format(localization_failed_message, "GroupName", resourceType, resourceKey)
+            );
         }
-        
+
         [Test]
-        public void AllProperties_WriteOnlyResource_ThrowsInvalidOperationException ()
+        public void AllProperties_WriteOnlyResource_ThrowsInvalidOperationException()
         {
             var resourceType = typeof(BadResources);
             var resourceKey = "WriteOnlyString";
@@ -248,28 +314,45 @@ namespace MonoTests.System.ComponentModel.DataAnnotations
                 Description = resourceKey,
                 GroupName = resourceKey
             };
-            
-            ExceptionAssert.Throws<InvalidOperationException>(() => display.GetName(), string.Format(localization_failed_message, "Name", resourceType, resourceKey));
-            ExceptionAssert.Throws<InvalidOperationException>(() => display.GetShortName(), string.Format(localization_failed_message, "ShortName", resourceType, resourceKey));
-            ExceptionAssert.Throws<InvalidOperationException>(() => display.GetPrompt(), string.Format(localization_failed_message, "Prompt", resourceType, resourceKey));
-            ExceptionAssert.Throws<InvalidOperationException>(() => display.GetDescription(), string.Format(localization_failed_message, "Description", resourceType, resourceKey));
-            ExceptionAssert.Throws<InvalidOperationException>(() => display.GetGroupName(), string.Format(localization_failed_message, "GroupName", resourceType, resourceKey));        
+
+            ExceptionAssert.Throws<InvalidOperationException>(
+                () => display.GetName(),
+                string.Format(localization_failed_message, "Name", resourceType, resourceKey)
+            );
+            ExceptionAssert.Throws<InvalidOperationException>(
+                () => display.GetShortName(),
+                string.Format(localization_failed_message, "ShortName", resourceType, resourceKey)
+            );
+            ExceptionAssert.Throws<InvalidOperationException>(
+                () => display.GetPrompt(),
+                string.Format(localization_failed_message, "Prompt", resourceType, resourceKey)
+            );
+            ExceptionAssert.Throws<InvalidOperationException>(
+                () => display.GetDescription(),
+                string.Format(localization_failed_message, "Description", resourceType, resourceKey)
+            );
+            ExceptionAssert.Throws<InvalidOperationException>(
+                () => display.GetGroupName(),
+                string.Format(localization_failed_message, "GroupName", resourceType, resourceKey)
+            );
         }
     }
+
     public static class ExceptionAssert
     {
-        public static void Throws<TException> (Action action, string expectedMessage) where TException : Exception
+        public static void Throws<TException>(Action action, string expectedMessage)
+            where TException : Exception
         {
             try
             {
-                action ();
+                action();
             }
             catch (TException ex)
             {
-                Assert.AreEqual (expectedMessage, ex.Message);
+                Assert.AreEqual(expectedMessage, ex.Message);
                 return;
             }
-            
+
             Assert.Fail();
         }
     }

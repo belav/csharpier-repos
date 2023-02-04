@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,38 +36,63 @@ namespace System.Runtime.Remoting.Messaging
 {
     class ConstructionCallDictionary : MessageDictionary
     {
-        public static string[] InternalKeys = new string[] {"__Uri", "__MethodName", "__TypeName", "__MethodSignature", "__Args", "__CallContext", "__CallSiteActivationAttributes", "__ActivationType", "__ContextProperties", "__Activator", "__ActivationTypeName"};
+        public static string[] InternalKeys = new string[]
+        {
+            "__Uri",
+            "__MethodName",
+            "__TypeName",
+            "__MethodSignature",
+            "__Args",
+            "__CallContext",
+            "__CallSiteActivationAttributes",
+            "__ActivationType",
+            "__ContextProperties",
+            "__Activator",
+            "__ActivationTypeName"
+        };
 
-        public ConstructionCallDictionary(IConstructionCallMessage message) : base (message) 
-        { 
+        public ConstructionCallDictionary(IConstructionCallMessage message)
+            : base(message)
+        {
             MethodKeys = InternalKeys;
         }
 
-        protected override object GetMethodProperty (string key)
+        protected override object GetMethodProperty(string key)
         {
             switch (key)
             {
-                case "__Activator" : return ((IConstructionCallMessage)_message).Activator;
-                case "__CallSiteActivationAttributes" : return ((IConstructionCallMessage)_message).CallSiteActivationAttributes;
-                case "__ActivationType" : return ((IConstructionCallMessage)_message).ActivationType;
-                case "__ContextProperties" : return ((IConstructionCallMessage)_message).ContextProperties;
-                case "__ActivationTypeName" : return ((IConstructionCallMessage)_message).ActivationTypeName;
-                default : return base.GetMethodProperty (key);
+                case "__Activator":
+                    return ((IConstructionCallMessage)_message).Activator;
+                case "__CallSiteActivationAttributes":
+                    return ((IConstructionCallMessage)_message).CallSiteActivationAttributes;
+                case "__ActivationType":
+                    return ((IConstructionCallMessage)_message).ActivationType;
+                case "__ContextProperties":
+                    return ((IConstructionCallMessage)_message).ContextProperties;
+                case "__ActivationTypeName":
+                    return ((IConstructionCallMessage)_message).ActivationTypeName;
+                default:
+                    return base.GetMethodProperty(key);
             }
         }
-            
-        protected override void SetMethodProperty (string key, object value)
+
+        protected override void SetMethodProperty(string key, object value)
         {
             switch (key)
             {
-                case "__Activator": ((IConstructionCallMessage)_message).Activator = (IActivator) value; break;
+                case "__Activator":
+                    ((IConstructionCallMessage)_message).Activator = (IActivator)value;
+                    break;
 
                 case "__CallSiteActivationAttributes":
-                case "__ActivationType": 
-                case "__ContextProperties": 
-                case "__ActivationTypeName": throw new ArgumentException ("key was invalid");
+                case "__ActivationType":
+                case "__ContextProperties":
+                case "__ActivationTypeName":
+                    throw new ArgumentException("key was invalid");
 
-                default: base.SetMethodProperty (key, value); break;
+                default:
+                    base.SetMethodProperty(key, value);
+                    break;
             }
         }
     }

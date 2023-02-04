@@ -3,14 +3,11 @@
 // Compiler options: -warn:1 -warnaserror
 
 using System;
-[assembly:CLSCompliant (true)]
 
-[CLSCompliant (false)]
-public interface I
-{
-}
+[assembly: CLSCompliant(true)]
 
-public class C<T> where T : I
-{
-}
+[CLSCompliant(false)]
+public interface I { }
 
+public class C<T>
+    where T : I { }

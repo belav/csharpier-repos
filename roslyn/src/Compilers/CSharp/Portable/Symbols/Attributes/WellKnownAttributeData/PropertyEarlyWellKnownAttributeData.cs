@@ -14,7 +14,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     /// <summary>
     /// Information decoded from early well-known custom attributes applied on a property.
     /// </summary>
-    internal sealed class PropertyEarlyWellKnownAttributeData : CommonPropertyEarlyWellKnownAttributeData
+    internal sealed class PropertyEarlyWellKnownAttributeData
+        : CommonPropertyEarlyWellKnownAttributeData
     {
         #region IndexerNameAttribute
 

@@ -4,5 +4,5 @@
 
 interface I
 {
-    void Finalize ();
+    void Finalize();
 }

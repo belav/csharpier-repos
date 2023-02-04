@@ -11,7 +11,7 @@ enum MyEnum
 
 class C
 {
-    public static void Main ()
+    public static void Main()
     {
         var d = MyEnum.Value_1;
         var x = d & null;

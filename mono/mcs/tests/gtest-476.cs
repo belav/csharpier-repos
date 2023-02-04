@@ -2,31 +2,25 @@ using System;
 
 // Obsolete attribute cased early inflation of B without IFoo being defined for it
 
-interface IFoo
-{
-}
+interface IFoo { }
 
 class Test<T> : IFoo
 {
-    public B First ()
+    public B First()
     {
-        return new B ();
+        return new B();
     }
-    
-    public IFoo Second ()
+
+    public IFoo Second()
     {
-        return new B ();
+        return new B();
     }
 
     [Obsolete]
-    public struct B : IFoo
-    {
-    }
+    public struct B : IFoo { }
 }
 
 class C
 {
-    public static void Main ()
-    {
-    }
+    public static void Main() { }
 }

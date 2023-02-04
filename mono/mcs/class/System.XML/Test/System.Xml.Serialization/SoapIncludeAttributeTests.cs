@@ -17,10 +17,10 @@ namespace MonoTests.System.XmlSerialization
     public class SoapIncludeAttributeTests
     {
         [Test]
-        public void TypeDefault ()
+        public void TypeDefault()
         {
-            SoapIncludeAttribute attr = new SoapIncludeAttribute (null);
-            Assert.IsNull (attr.Type);
+            SoapIncludeAttribute attr = new SoapIncludeAttribute(null);
+            Assert.IsNull(attr.Type);
         }
     }
 }

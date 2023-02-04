@@ -1,15 +1,17 @@
 // CS0165: Use of unassigned local variable `a'
 // Line: 9
 
-class C {
-    public static int test4 ()
+class C
+{
+    public static int test4()
     {
         int a;
 
-        try {
+        try
+        {
             a = 3;
-        } catch {
         }
+        catch { }
 
         // CS0165
         return a;

@@ -1,7 +1,7 @@
 //
 // TextWriterTest.cs
 //
-// Author: 
+// Author:
 //    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2004 Novell (http://www.novell.com)
@@ -20,56 +20,60 @@ namespace MonoTests.System.IO
     {
         class MyTextWriter : TextWriter
         {
-            public override Encoding Encoding { get { return Encoding.Default; } }
-
-            internal MyTextWriter ()
-                : base (CultureInfo.InvariantCulture)
+            public override Encoding Encoding
             {
+                get { return Encoding.Default; }
             }
 
-            public void UpdateLine ()
+            internal MyTextWriter()
+                : base(CultureInfo.InvariantCulture) { }
+
+            public void UpdateLine()
             {
                 NewLine = "Z";
             }
 
-            public void UpdateLine2 ()
+            public void UpdateLine2()
             {
                 NewLine = "Y";
             }
         }
 
         [Test]
-        public void CoreNewLine ()
+        public void CoreNewLine()
         {
-            MyTextWriter w = new MyTextWriter ();
-            Assert.IsNotNull (w.NewLine);
+            MyTextWriter w = new MyTextWriter();
+            Assert.IsNotNull(w.NewLine);
 
-            w.UpdateLine ();
-            Assert.AreEqual ('Z', w.NewLine [0]);
+            w.UpdateLine();
+            Assert.AreEqual('Z', w.NewLine[0]);
 
-            w.UpdateLine2 ();
-            Assert.AreEqual ('Y', w.NewLine [0]);
+            w.UpdateLine2();
+            Assert.AreEqual('Y', w.NewLine[0]);
         }
 
-        class ArrayOrCharTester : TextWriter {
+        class ArrayOrCharTester : TextWriter
+        {
             public bool called_array;
-            public override Encoding Encoding { get { return Encoding.UTF8; }}
+            public override Encoding Encoding
+            {
+                get { return Encoding.UTF8; }
+            }
 
-            public override void Write (char [] x, int a, int b)
+            public override void Write(char[] x, int a, int b)
             {
                 called_array = true;
             }
-            public override void Write (char c)
-            {
-            }
+
+            public override void Write(char c) { }
         }
 
         [Test]
-        public void TestCharArrayCallsArrayIntInt ()
+        public void TestCharArrayCallsArrayIntInt()
         {
-            ArrayOrCharTester x = new ArrayOrCharTester ();
-            x.Write (new char [] {'a','b','c'});
-            Assert.AreEqual (true, x.called_array);            
+            ArrayOrCharTester x = new ArrayOrCharTester();
+            x.Write(new char[] { 'a', 'b', 'c' });
+            Assert.AreEqual(true, x.called_array);
         }
     }
 }

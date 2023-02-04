@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,7 +27,8 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace System.Net {
+namespace System.Net
+{
     sealed class ListenerPrefix
     {
         string original;
@@ -35,42 +36,47 @@ namespace System.Net {
         ushort port;
         string path;
         bool secure;
-        IPAddress [] addresses;
+        IPAddress[] addresses;
         public HttpListener Listener;
 
-        public ListenerPrefix (string prefix)
+        public ListenerPrefix(string prefix)
         {
             this.original = prefix;
-            Parse (prefix);
+            Parse(prefix);
         }
 
-        public override string ToString ()
+        public override string ToString()
         {
             return original;
         }
 
-        public IPAddress [] Addresses {
+        public IPAddress[] Addresses
+        {
             get { return addresses; }
             set { addresses = value; }
         }
-        public bool Secure {
+        public bool Secure
+        {
             get { return secure; }
         }
 
-        public string Host {
+        public string Host
+        {
             get { return host; }
         }
 
-        public int Port {
-            get { return (int) port; }
+        public int Port
+        {
+            get { return (int)port; }
         }
 
-        public string Path {
+        public string Path
+        {
             get { return path; }
         }
 
         // Equals and GetHashCode are required to detect duplicates in HttpListenerPrefixCollection.
-        public override bool Equals (object o)
+        public override bool Equals(object o)
         {
             ListenerPrefix other = o as ListenerPrefix;
             if (other == null)
@@ -79,82 +85,91 @@ namespace System.Net {
             return (original == other.original);
         }
 
-        public override int GetHashCode ()
+        public override int GetHashCode()
         {
-            return original.GetHashCode ();
+            return original.GetHashCode();
         }
 
-        void Parse (string uri)
+        void Parse(string uri)
         {
             ushort default_port = 80;
-            if (uri.StartsWith ("https://")) {
+            if (uri.StartsWith("https://"))
+            {
                 default_port = 443;
                 secure = true;
             }
 
             int length = uri.Length;
-            int start_host = uri.IndexOf (':') + 3;
+            int start_host = uri.IndexOf(':') + 3;
             if (start_host >= length)
-                throw new ArgumentException ("No host specified.");
+                throw new ArgumentException("No host specified.");
 
-            int startPort = uri.IndexOf (':', start_host, length - start_host);
-            if (uri [start_host] == '[') {
-                startPort = uri.IndexOf ("]:") + 1;
+            int startPort = uri.IndexOf(':', start_host, length - start_host);
+            if (uri[start_host] == '[')
+            {
+                startPort = uri.IndexOf("]:") + 1;
             }
             if (start_host == startPort)
-                throw new ArgumentException ("No host specified.");
+                throw new ArgumentException("No host specified.");
 
-            int root = uri.IndexOf ('/', start_host, length - start_host);
+            int root = uri.IndexOf('/', start_host, length - start_host);
             if (root == -1)
-                throw new ArgumentException ("No path specified.");
+                throw new ArgumentException("No path specified.");
 
-            if (startPort > 0) {
-                host = uri.Substring (start_host, startPort - start_host).Trim ('[', ']');
-                port = UInt16.Parse (uri.Substring (startPort + 1, root - startPort - 1));
-            } else {
-                host = uri.Substring (start_host, root - start_host).Trim ('[', ']');
+            if (startPort > 0)
+            {
+                host = uri.Substring(start_host, startPort - start_host).Trim('[', ']');
+                port = UInt16.Parse(uri.Substring(startPort + 1, root - startPort - 1));
+            }
+            else
+            {
+                host = uri.Substring(start_host, root - start_host).Trim('[', ']');
                 port = default_port;
             }
-            path = uri.Substring (root);
+            path = uri.Substring(root);
 
             if (path.Length != 1)
-                path = path.Substring (0, path.Length - 1);
+                path = path.Substring(0, path.Length - 1);
         }
 
-        public static void CheckUri (string uri)
+        public static void CheckUri(string uri)
         {
             if (uri == null)
-                throw new ArgumentNullException ("uriPrefix");
+                throw new ArgumentNullException("uriPrefix");
 
-            if (!uri.StartsWith ("http://") && !uri.StartsWith ("https://"))
-                throw new ArgumentException ("Only 'http' and 'https' schemes are supported.");
+            if (!uri.StartsWith("http://") && !uri.StartsWith("https://"))
+                throw new ArgumentException("Only 'http' and 'https' schemes are supported.");
 
             int length = uri.Length;
-            int start_host = uri.IndexOf (':') + 3;
+            int start_host = uri.IndexOf(':') + 3;
             if (start_host >= length)
-                throw new ArgumentException ("No host specified.");
+                throw new ArgumentException("No host specified.");
 
-            int startPort = uri.IndexOf (':', start_host, length - start_host);
-            if (uri [start_host] == '[')
-                startPort = uri.IndexOf ("]:") + 1;
+            int startPort = uri.IndexOf(':', start_host, length - start_host);
+            if (uri[start_host] == '[')
+                startPort = uri.IndexOf("]:") + 1;
             if (start_host == startPort)
-                throw new ArgumentException ("No host specified.");
-            int root = uri.IndexOf ('/', start_host, length - start_host);
+                throw new ArgumentException("No host specified.");
+            int root = uri.IndexOf('/', start_host, length - start_host);
             if (root == -1)
-                throw new ArgumentException ("No path specified.");
+                throw new ArgumentException("No path specified.");
 
-            if (startPort > 0) {
-                try {
-                    int p = Int32.Parse (uri.Substring (startPort + 1, root - startPort - 1));
+            if (startPort > 0)
+            {
+                try
+                {
+                    int p = Int32.Parse(uri.Substring(startPort + 1, root - startPort - 1));
                     if (p <= 0 || p >= 65536)
-                        throw new Exception ();
-                } catch {
-                    throw new ArgumentException ("Invalid port.");
+                        throw new Exception();
+                }
+                catch
+                {
+                    throw new ArgumentException("Invalid port.");
                 }
             }
 
-            if (uri [uri.Length - 1] != '/')
-                throw new ArgumentException ("The prefix must end with '/'");
+            if (uri[uri.Length - 1] != '/')
+                throw new ArgumentException("The prefix must end with '/'");
         }
     }
 }

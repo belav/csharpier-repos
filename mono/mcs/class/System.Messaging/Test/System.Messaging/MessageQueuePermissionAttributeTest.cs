@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,138 +33,168 @@ using System.Messaging;
 using System.Security;
 using System.Security.Permissions;
 
-namespace MonoTests.System.Messaging {
-
+namespace MonoTests.System.Messaging
+{
     [TestFixture]
-    public class MessageQueuePermissionAttributeTest {
-
+    public class MessageQueuePermissionAttributeTest
+    {
         [Test]
-        public void Default ()
+        public void Default()
         {
-            MessageQueuePermissionAttribute a = new MessageQueuePermissionAttribute (SecurityAction.Assert);
-            Assert.AreEqual (a.ToString (), a.TypeId.ToString (), "TypeId");
-            Assert.IsFalse (a.Unrestricted, "Unrestricted");
-            Assert.IsNull (a.Category, "Category");
-            Assert.IsNull (a.Label, "Label");
-            Assert.IsNull (a.MachineName, "MachineName");
-            Assert.IsNull (a.Path, "Path");
-            Assert.AreEqual (MessageQueuePermissionAccess.None, a.PermissionAccess, "PermissionAccess");
+            MessageQueuePermissionAttribute a = new MessageQueuePermissionAttribute(
+                SecurityAction.Assert
+            );
+            Assert.AreEqual(a.ToString(), a.TypeId.ToString(), "TypeId");
+            Assert.IsFalse(a.Unrestricted, "Unrestricted");
+            Assert.IsNull(a.Category, "Category");
+            Assert.IsNull(a.Label, "Label");
+            Assert.IsNull(a.MachineName, "MachineName");
+            Assert.IsNull(a.Path, "Path");
+            Assert.AreEqual(
+                MessageQueuePermissionAccess.None,
+                a.PermissionAccess,
+                "PermissionAccess"
+            );
 
             a.MachineName = "localhost";
-            MessageQueuePermission sp = (MessageQueuePermission)a.CreatePermission ();
-            Assert.IsFalse (sp.IsUnrestricted (), "IsUnrestricted");
+            MessageQueuePermission sp = (MessageQueuePermission)a.CreatePermission();
+            Assert.IsFalse(sp.IsUnrestricted(), "IsUnrestricted");
         }
 
         [Test]
-        public void Action ()
+        public void Action()
         {
-            MessageQueuePermissionAttribute a = new MessageQueuePermissionAttribute (SecurityAction.Assert);
-            Assert.AreEqual (SecurityAction.Assert, a.Action, "Action=Assert");
+            MessageQueuePermissionAttribute a = new MessageQueuePermissionAttribute(
+                SecurityAction.Assert
+            );
+            Assert.AreEqual(SecurityAction.Assert, a.Action, "Action=Assert");
             a.Action = SecurityAction.Demand;
-            Assert.AreEqual (SecurityAction.Demand, a.Action, "Action=Demand");
+            Assert.AreEqual(SecurityAction.Demand, a.Action, "Action=Demand");
             a.Action = SecurityAction.Deny;
-            Assert.AreEqual (SecurityAction.Deny, a.Action, "Action=Deny");
+            Assert.AreEqual(SecurityAction.Deny, a.Action, "Action=Deny");
             a.Action = SecurityAction.InheritanceDemand;
-            Assert.AreEqual (SecurityAction.InheritanceDemand, a.Action, "Action=InheritanceDemand");
+            Assert.AreEqual(SecurityAction.InheritanceDemand, a.Action, "Action=InheritanceDemand");
             a.Action = SecurityAction.LinkDemand;
-            Assert.AreEqual (SecurityAction.LinkDemand, a.Action, "Action=LinkDemand");
+            Assert.AreEqual(SecurityAction.LinkDemand, a.Action, "Action=LinkDemand");
             a.Action = SecurityAction.PermitOnly;
-            Assert.AreEqual (SecurityAction.PermitOnly, a.Action, "Action=PermitOnly");
+            Assert.AreEqual(SecurityAction.PermitOnly, a.Action, "Action=PermitOnly");
             a.Action = SecurityAction.RequestMinimum;
-            Assert.AreEqual (SecurityAction.RequestMinimum, a.Action, "Action=RequestMinimum");
+            Assert.AreEqual(SecurityAction.RequestMinimum, a.Action, "Action=RequestMinimum");
             a.Action = SecurityAction.RequestOptional;
-            Assert.AreEqual (SecurityAction.RequestOptional, a.Action, "Action=RequestOptional");
+            Assert.AreEqual(SecurityAction.RequestOptional, a.Action, "Action=RequestOptional");
             a.Action = SecurityAction.RequestRefuse;
-            Assert.AreEqual (SecurityAction.RequestRefuse, a.Action, "Action=RequestRefuse");
+            Assert.AreEqual(SecurityAction.RequestRefuse, a.Action, "Action=RequestRefuse");
         }
 
         [Test]
-        public void Action_Invalid ()
+        public void Action_Invalid()
         {
-            MessageQueuePermissionAttribute a = new MessageQueuePermissionAttribute ((SecurityAction)Int32.MinValue);
+            MessageQueuePermissionAttribute a = new MessageQueuePermissionAttribute(
+                (SecurityAction)Int32.MinValue
+            );
             // no validation in attribute
         }
 
         [Test]
-        public void Unrestricted ()
+        public void Unrestricted()
         {
-            MessageQueuePermissionAttribute a = new MessageQueuePermissionAttribute (SecurityAction.Assert);
+            MessageQueuePermissionAttribute a = new MessageQueuePermissionAttribute(
+                SecurityAction.Assert
+            );
             a.MachineName = "localhost";
             a.Unrestricted = true;
-            MessageQueuePermission mqp = (MessageQueuePermission)a.CreatePermission ();
-            Assert.IsTrue (mqp.IsUnrestricted (), "IsUnrestricted");
+            MessageQueuePermission mqp = (MessageQueuePermission)a.CreatePermission();
+            Assert.IsTrue(mqp.IsUnrestricted(), "IsUnrestricted");
 
             a.Unrestricted = false;
-            mqp = (MessageQueuePermission)a.CreatePermission ();
-            Assert.IsFalse (mqp.IsUnrestricted (), "!IsUnrestricted");
+            mqp = (MessageQueuePermission)a.CreatePermission();
+            Assert.IsFalse(mqp.IsUnrestricted(), "!IsUnrestricted");
         }
 
         [Test]
-        [ExpectedException (typeof (InvalidOperationException))]
-        public void Category_Null ()
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void Category_Null()
         {
-            MessageQueuePermissionAttribute a = new MessageQueuePermissionAttribute (SecurityAction.Assert);
+            MessageQueuePermissionAttribute a = new MessageQueuePermissionAttribute(
+                SecurityAction.Assert
+            );
             a.Category = null;
         }
 
         [Test]
-        public void Category ()
+        public void Category()
         {
-            MessageQueuePermissionAttribute a = new MessageQueuePermissionAttribute (SecurityAction.Assert);
+            MessageQueuePermissionAttribute a = new MessageQueuePermissionAttribute(
+                SecurityAction.Assert
+            );
             a.Category = "Mono";
-            Assert.AreEqual ("Mono", a.Category, "Category-1");
+            Assert.AreEqual("Mono", a.Category, "Category-1");
             a.Category = String.Empty;
-            Assert.AreEqual (String.Empty, a.Category, "Category-2");
+            Assert.AreEqual(String.Empty, a.Category, "Category-2");
         }
 
         [Test]
-        [ExpectedException (typeof (InvalidOperationException))]
-        public void Label_Null ()
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void Label_Null()
         {
-            MessageQueuePermissionAttribute a = new MessageQueuePermissionAttribute (SecurityAction.Assert);
+            MessageQueuePermissionAttribute a = new MessageQueuePermissionAttribute(
+                SecurityAction.Assert
+            );
             a.Label = null;
         }
 
         [Test]
-        public void Label ()
+        public void Label()
         {
-            MessageQueuePermissionAttribute a = new MessageQueuePermissionAttribute (SecurityAction.Assert);
+            MessageQueuePermissionAttribute a = new MessageQueuePermissionAttribute(
+                SecurityAction.Assert
+            );
             a.Label = "Mono";
-            Assert.AreEqual ("Mono", a.Label, "Label-1");
+            Assert.AreEqual("Mono", a.Label, "Label-1");
             a.Label = String.Empty;
-            Assert.AreEqual (String.Empty, a.Label, "Label-2");
+            Assert.AreEqual(String.Empty, a.Label, "Label-2");
         }
 
         [Test]
-        [ExpectedException (typeof (InvalidOperationException))]
-        public void MachineName_Null ()
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void MachineName_Null()
         {
-            MessageQueuePermissionAttribute a = new MessageQueuePermissionAttribute (SecurityAction.Assert);
+            MessageQueuePermissionAttribute a = new MessageQueuePermissionAttribute(
+                SecurityAction.Assert
+            );
             a.MachineName = null;
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentException))]
-        public void MachineName_Invalid ()
+        [ExpectedException(typeof(ArgumentException))]
+        public void MachineName_Invalid()
         {
-            MessageQueuePermissionAttribute a = new MessageQueuePermissionAttribute (SecurityAction.Assert);
+            MessageQueuePermissionAttribute a = new MessageQueuePermissionAttribute(
+                SecurityAction.Assert
+            );
             a.MachineName = String.Empty;
         }
 
         [Test]
-        public void MachineName ()
+        public void MachineName()
         {
-            MessageQueuePermissionAttribute a = new MessageQueuePermissionAttribute (SecurityAction.Assert);
+            MessageQueuePermissionAttribute a = new MessageQueuePermissionAttribute(
+                SecurityAction.Assert
+            );
             a.MachineName = "Mono";
-            Assert.AreEqual ("Mono", a.MachineName, "MachineName-1");
+            Assert.AreEqual("Mono", a.MachineName, "MachineName-1");
 
-            for (int i = 0; i < 256; i++) {
-                try{
-                    a.MachineName = Convert.ToChar (i).ToString ();
-                    Assert.AreEqual (i, (int)a.MachineName [0], i.ToString ());
+            for (int i = 0; i < 256; i++)
+            {
+                try
+                {
+                    a.MachineName = Convert.ToChar(i).ToString();
+                    Assert.AreEqual(i, (int)a.MachineName[0], i.ToString());
                 }
-                catch {
-                    switch (i) {
+                catch
+                {
+                    switch (i)
+                    {
                         case 9:
                         case 10:
                         case 11:
@@ -177,7 +207,7 @@ namespace MonoTests.System.Messaging {
                             // known invalid chars
                             break;
                         default:
-                            Assert.Fail (i.ToString ());
+                            Assert.Fail(i.ToString());
                             break;
                     }
                 }
@@ -187,80 +217,103 @@ namespace MonoTests.System.Messaging {
         }
 
         [Test]
-        [ExpectedException (typeof (InvalidOperationException))]
-        public void Path_Null ()
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void Path_Null()
         {
-            MessageQueuePermissionAttribute a = new MessageQueuePermissionAttribute (SecurityAction.Assert);
+            MessageQueuePermissionAttribute a = new MessageQueuePermissionAttribute(
+                SecurityAction.Assert
+            );
             a.Path = null;
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentException))]
-        public void Path_Invalid ()
+        [ExpectedException(typeof(ArgumentException))]
+        public void Path_Invalid()
         {
-            MessageQueuePermissionAttribute a = new MessageQueuePermissionAttribute (SecurityAction.Assert);
+            MessageQueuePermissionAttribute a = new MessageQueuePermissionAttribute(
+                SecurityAction.Assert
+            );
             a.Path = "Mono";
         }
 
         [Test]
-        public void Path ()
+        public void Path()
         {
-            MessageQueuePermissionAttribute a = new MessageQueuePermissionAttribute (SecurityAction.Assert);
+            MessageQueuePermissionAttribute a = new MessageQueuePermissionAttribute(
+                SecurityAction.Assert
+            );
             a.Path = "\\Mono";
-            Assert.AreEqual ("\\Mono", a.Path, "Path-1");
+            Assert.AreEqual("\\Mono", a.Path, "Path-1");
             a.Path = "\\";
-            Assert.AreEqual ("\\", a.Path, "Path-2");
+            Assert.AreEqual("\\", a.Path, "Path-2");
             a.Path = String.Empty;
-            Assert.AreEqual (String.Empty, a.Path, "Path-3");
+            Assert.AreEqual(String.Empty, a.Path, "Path-3");
         }
 
         [Test]
-        public void PermissionAccess_Invalid ()
+        public void PermissionAccess_Invalid()
         {
-            MessageQueuePermissionAttribute a = new MessageQueuePermissionAttribute (SecurityAction.Assert);
-            a.PermissionAccess = (MessageQueuePermissionAccess) Int32.MinValue;
-            Assert.AreEqual (Int32.MinValue, (int)a.PermissionAccess);
+            MessageQueuePermissionAttribute a = new MessageQueuePermissionAttribute(
+                SecurityAction.Assert
+            );
+            a.PermissionAccess = (MessageQueuePermissionAccess)Int32.MinValue;
+            Assert.AreEqual(Int32.MinValue, (int)a.PermissionAccess);
         }
 
         [Test]
-        public void PermissionAccess ()
+        public void PermissionAccess()
         {
-            MessageQueuePermissionAttribute a = new MessageQueuePermissionAttribute (SecurityAction.Assert);
+            MessageQueuePermissionAttribute a = new MessageQueuePermissionAttribute(
+                SecurityAction.Assert
+            );
             a.PermissionAccess = MessageQueuePermissionAccess.None;
-            Assert.AreEqual (MessageQueuePermissionAccess.None, a.PermissionAccess, "None");
+            Assert.AreEqual(MessageQueuePermissionAccess.None, a.PermissionAccess, "None");
             a.PermissionAccess = MessageQueuePermissionAccess.Browse;
-            Assert.AreEqual (MessageQueuePermissionAccess.Browse, a.PermissionAccess, "Browse");
+            Assert.AreEqual(MessageQueuePermissionAccess.Browse, a.PermissionAccess, "Browse");
             a.PermissionAccess = MessageQueuePermissionAccess.Send;
-            Assert.AreEqual (MessageQueuePermissionAccess.Send, a.PermissionAccess, "Send");
+            Assert.AreEqual(MessageQueuePermissionAccess.Send, a.PermissionAccess, "Send");
             a.PermissionAccess = MessageQueuePermissionAccess.Peek;
-            Assert.AreEqual (MessageQueuePermissionAccess.Peek, a.PermissionAccess, "Peek");
+            Assert.AreEqual(MessageQueuePermissionAccess.Peek, a.PermissionAccess, "Peek");
             a.PermissionAccess = MessageQueuePermissionAccess.Receive;
-            Assert.AreEqual (MessageQueuePermissionAccess.Receive, a.PermissionAccess, "Receive");
+            Assert.AreEqual(MessageQueuePermissionAccess.Receive, a.PermissionAccess, "Receive");
             a.PermissionAccess = MessageQueuePermissionAccess.Administer;
-            Assert.AreEqual (MessageQueuePermissionAccess.Administer, a.PermissionAccess, "Administer");
+            Assert.AreEqual(
+                MessageQueuePermissionAccess.Administer,
+                a.PermissionAccess,
+                "Administer"
+            );
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void CreatePermission_WithoutMachineName ()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void CreatePermission_WithoutMachineName()
         {
-            MessageQueuePermissionAttribute a = new MessageQueuePermissionAttribute (SecurityAction.Assert);
-            a.CreatePermission ();
+            MessageQueuePermissionAttribute a = new MessageQueuePermissionAttribute(
+                SecurityAction.Assert
+            );
+            a.CreatePermission();
         }
 
         [Test]
-        public void Attributes ()
+        public void Attributes()
         {
-            Type t = typeof (MessageQueuePermissionAttribute);
-            Assert.IsTrue (t.IsSerializable, "IsSerializable");
+            Type t = typeof(MessageQueuePermissionAttribute);
+            Assert.IsTrue(t.IsSerializable, "IsSerializable");
 
-            object [] attrs = t.GetCustomAttributes (typeof (AttributeUsageAttribute), false);
-            Assert.AreEqual (1, attrs.Length, "AttributeUsage");
-            AttributeUsageAttribute aua = (AttributeUsageAttribute)attrs [0];
-            Assert.IsTrue (aua.AllowMultiple, "AllowMultiple");
-            Assert.IsFalse (aua.Inherited, "Inherited");
-            AttributeTargets at = (AttributeTargets.Assembly | AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Constructor | AttributeTargets.Method | AttributeTargets.Event);
-            Assert.AreEqual (at, aua.ValidOn, "ValidOn");
+            object[] attrs = t.GetCustomAttributes(typeof(AttributeUsageAttribute), false);
+            Assert.AreEqual(1, attrs.Length, "AttributeUsage");
+            AttributeUsageAttribute aua = (AttributeUsageAttribute)attrs[0];
+            Assert.IsTrue(aua.AllowMultiple, "AllowMultiple");
+            Assert.IsFalse(aua.Inherited, "Inherited");
+            AttributeTargets at = (
+                AttributeTargets.Assembly
+                | AttributeTargets.Class
+                | AttributeTargets.Struct
+                | AttributeTargets.Constructor
+                | AttributeTargets.Method
+                | AttributeTargets.Event
+            );
+            Assert.AreEqual(at, aua.ValidOn, "ValidOn");
         }
     }
 }

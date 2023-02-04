@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -45,203 +45,248 @@ using System.Web.UI;
 
 namespace System.Web.DynamicData
 {
-    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
     public class DynamicDataRouteHandler : IRouteHandler
     {
-        static ReaderWriterLockSlim contextsLock = new ReaderWriterLockSlim ();
-        
-        static Dictionary <HttpContext, RouteContext> contexts = new Dictionary <HttpContext, RouteContext> ();
-        Dictionary <RouteContext, IHttpHandler> handlers;
+        static ReaderWriterLockSlim contextsLock = new ReaderWriterLockSlim();
 
-        Dictionary <RouteContext, IHttpHandler> Handlers {
-            get {
+        static Dictionary<HttpContext, RouteContext> contexts =
+            new Dictionary<HttpContext, RouteContext>();
+        Dictionary<RouteContext, IHttpHandler> handlers;
+
+        Dictionary<RouteContext, IHttpHandler> Handlers
+        {
+            get
+            {
                 if (handlers == null)
-                    handlers = new Dictionary <RouteContext, IHttpHandler> ();
+                    handlers = new Dictionary<RouteContext, IHttpHandler>();
 
                 return handlers;
             }
         }
 
-        static RouteContext GetOrCreateRouteContext (HttpContext httpContext)
+        static RouteContext GetOrCreateRouteContext(HttpContext httpContext)
         {
             RouteContext rc = null;
             bool locked = false;
-            try {
-                contextsLock.EnterReadLock ();
+            try
+            {
+                contextsLock.EnterReadLock();
                 locked = true;
-                if (contexts.TryGetValue (httpContext, out rc) && rc != null)
+                if (contexts.TryGetValue(httpContext, out rc) && rc != null)
                     return rc;
-            } finally {
+            }
+            finally
+            {
                 if (locked)
-                    contextsLock.ExitReadLock ();
+                    contextsLock.ExitReadLock();
             }
 
             locked = false;
-            try {
-                contextsLock.EnterWriteLock ();
+            try
+            {
+                contextsLock.EnterWriteLock();
                 locked = true;
-                rc = MakeRouteContext (new RequestContext (new HttpContextWrapper (httpContext), new RouteData ()), null, null, null);
-                contexts.Add (httpContext, rc);
-            } finally {
+                rc = MakeRouteContext(
+                    new RequestContext(new HttpContextWrapper(httpContext), new RouteData()),
+                    null,
+                    null,
+                    null
+                );
+                contexts.Add(httpContext, rc);
+            }
+            finally
+            {
                 if (locked)
-                    contextsLock.ExitWriteLock ();
+                    contextsLock.ExitWriteLock();
             }
 
             return rc;
         }
-        
-        public static RequestContext GetRequestContext (HttpContext httpContext)
+
+        public static RequestContext GetRequestContext(HttpContext httpContext)
         {
             if (httpContext == null)
-                throw new ArgumentNullException ("httpContext");
-            
-            return GetOrCreateRouteContext (httpContext).Context;
+                throw new ArgumentNullException("httpContext");
+
+            return GetOrCreateRouteContext(httpContext).Context;
         }
 
-        public static MetaTable GetRequestMetaTable (HttpContext httpContext)
+        public static MetaTable GetRequestMetaTable(HttpContext httpContext)
         {
             if (httpContext == null)
-                throw new ArgumentNullException ("httpContext");
+                throw new ArgumentNullException("httpContext");
 
             RouteContext rc;
             bool locked = false;
-            try {
-                contextsLock.EnterReadLock ();
+            try
+            {
+                contextsLock.EnterReadLock();
                 locked = true;
-                if (contexts.TryGetValue (httpContext, out rc) && rc != null)
+                if (contexts.TryGetValue(httpContext, out rc) && rc != null)
                     return rc.Table;
-            } finally {
+            }
+            finally
+            {
                 if (locked)
-                    contextsLock.ExitReadLock ();
+                    contextsLock.ExitReadLock();
             }
 
             return null;
         }
 
-        public static void SetRequestMetaTable (HttpContext httpContext, MetaTable table)
+        public static void SetRequestMetaTable(HttpContext httpContext, MetaTable table)
         {
             // And tradiationally... some .NET emulation code
             if (httpContext == null)
-                throw new NullReferenceException ();
+                throw new NullReferenceException();
 
-            GetOrCreateRouteContext (httpContext).Table = table;
+            GetOrCreateRouteContext(httpContext).Table = table;
         }
 
-        public DynamicDataRouteHandler ()
-        {
-        }
+        public DynamicDataRouteHandler() { }
 
         public MetaModel Model { get; internal set; }
 
-        [MonoTODO ("Needs a working test")]
-        public virtual IHttpHandler CreateHandler (DynamicDataRoute route, MetaTable table, string action)
+        [MonoTODO("Needs a working test")]
+        public virtual IHttpHandler CreateHandler(
+            DynamicDataRoute route,
+            MetaTable table,
+            string action
+        )
         {
             // .NET bug emulation mode
             if (route == null || table == null || action == null)
-                throw new NullReferenceException ();
+                throw new NullReferenceException();
 
             // NOTE: all code below is a result of guessing as no tests succeed for this
             // call so far!
 
             IHttpHandler ret = null;
-            
+
             // Give custom pages a chance
-            string viewName = String.IsNullOrEmpty (action) ? route.ViewName : action;
-            string path = GetCustomPageVirtualPath (table, viewName);
+            string viewName = String.IsNullOrEmpty(action) ? route.ViewName : action;
+            string path = GetCustomPageVirtualPath(table, viewName);
 
             // Pages might be in app resources, need to use a VPP
             VirtualPathProvider vpp = HostingEnvironment.VirtualPathProvider;
-            
-            if (vpp != null && vpp.FileExists (path))
-                ret = BuildManager.CreateInstanceFromVirtualPath (path, typeof (Page)) as IHttpHandler;
+
+            if (vpp != null && vpp.FileExists(path))
+                ret =
+                    BuildManager.CreateInstanceFromVirtualPath(path, typeof(Page)) as IHttpHandler;
 
             if (ret != null)
                 return ret;
 
-            path = GetScaffoldPageVirtualPath (table, viewName);
-            if (vpp != null && vpp.FileExists (path))
-                ret = BuildManager.CreateInstanceFromVirtualPath (path, typeof (Page)) as IHttpHandler;
-            
+            path = GetScaffoldPageVirtualPath(table, viewName);
+            if (vpp != null && vpp.FileExists(path))
+                ret =
+                    BuildManager.CreateInstanceFromVirtualPath(path, typeof(Page)) as IHttpHandler;
+
             return ret;
         }
 
-        protected virtual string GetCustomPageVirtualPath (MetaTable table, string viewName)
+        protected virtual string GetCustomPageVirtualPath(MetaTable table, string viewName)
         {
             // No such checks are made in .NET, we won't follow the pattern...
             MetaModel model = Model;
             if (table == null || model == null)
-                throw new NullReferenceException (); // yuck
+                throw new NullReferenceException(); // yuck
 
             // Believe it or not, this is what .NET does - pass a null/empty viewName
             // and you get /.aspx at the end...
-            return model.DynamicDataFolderVirtualPath + "CustomPages/" + table.Name + "/" + viewName + ".aspx";
+            return model.DynamicDataFolderVirtualPath
+                + "CustomPages/"
+                + table.Name
+                + "/"
+                + viewName
+                + ".aspx";
         }
 
-        protected virtual string GetScaffoldPageVirtualPath (MetaTable table, string viewName)
+        protected virtual string GetScaffoldPageVirtualPath(MetaTable table, string viewName)
         {
             // No such checks are made in .NET, we won't follow the pattern...
             MetaModel model = Model;
             if (table == null || model == null)
-                throw new NullReferenceException (); // yuck
+                throw new NullReferenceException(); // yuck
 
             // Believe it or not, this is what .NET does - pass a null/empty viewName
             // and you get /.aspx at the end...
             return model.DynamicDataFolderVirtualPath + "PageTemplates/" + viewName + ".aspx";
         }
 
-        IHttpHandler IRouteHandler.GetHttpHandler (RequestContext requestContext)
+        IHttpHandler IRouteHandler.GetHttpHandler(RequestContext requestContext)
         {
             if (requestContext == null)
-                throw new ArgumentNullException ("requestContext");
+                throw new ArgumentNullException("requestContext");
             RouteData rd = requestContext.RouteData;
             var dr = rd.Route as DynamicDataRoute;
             if (dr == null)
-                throw new ArgumentException ("The argument RequestContext does not have DynamicDataRoute in its RouteData");
-            string action = dr.GetActionFromRouteData (rd);
-            MetaTable mt = dr.GetTableFromRouteData (rd);
-            RouteContext rc = MakeRouteContext (requestContext, dr, action, mt);
+                throw new ArgumentException(
+                    "The argument RequestContext does not have DynamicDataRoute in its RouteData"
+                );
+            string action = dr.GetActionFromRouteData(rd);
+            MetaTable mt = dr.GetTableFromRouteData(rd);
+            RouteContext rc = MakeRouteContext(requestContext, dr, action, mt);
             IHttpHandler h;
-            
-            Dictionary <RouteContext, IHttpHandler> handlers = Handlers;
-            if (handlers.TryGetValue (rc, out h))
+
+            Dictionary<RouteContext, IHttpHandler> handlers = Handlers;
+            if (handlers.TryGetValue(rc, out h))
                 return h;
-            h = CreateHandler (dr, mt, action);
-            handlers.Add (rc, h);
+            h = CreateHandler(dr, mt, action);
+            handlers.Add(rc, h);
             return h;
         }
 
-        static RouteContext MakeRouteContext (RequestContext context, DynamicDataRoute route, string action, MetaTable table)
+        static RouteContext MakeRouteContext(
+            RequestContext context,
+            DynamicDataRoute route,
+            string action,
+            MetaTable table
+        )
         {
             RouteData rd = null;
-            
-            if (route == null) {
+
+            if (route == null)
+            {
                 rd = context.RouteData;
                 route = rd.Route as DynamicDataRoute;
             }
 
-            if (route != null) {
-                if (action == null) {
+            if (route != null)
+            {
+                if (action == null)
+                {
                     if (rd == null)
                         rd = context.RouteData;
-                    action = route.GetActionFromRouteData (rd);
+                    action = route.GetActionFromRouteData(rd);
                 }
-            
-                if (table == null) {
+
+                if (table == null)
+                {
                     if (rd == null)
                         rd = context.RouteData;
-                
-                    table = route.GetTableFromRouteData (rd);
+
+                    table = route.GetTableFromRouteData(rd);
                 }
             }
-            
-            return new RouteContext () {
+
+            return new RouteContext()
+            {
                 Route = route,
                 Action = action,
                 Table = table,
-                Context = context};
+                Context = context
+            };
         }
-        
+
         sealed class RouteContext
         {
             public DynamicDataRoute Route;
@@ -249,22 +294,22 @@ namespace System.Web.DynamicData
             public MetaTable Table;
             public RequestContext Context;
 
-            public RouteContext ()
-            {
-            }
-            
-            public override bool Equals (object obj)
+            public RouteContext() { }
+
+            public override bool Equals(object obj)
             {
                 RouteContext other = obj as RouteContext;
-                return other.Route == Route & other.Action == Action && other.Table == Table && other.Context == Context;
+                return other.Route == Route & other.Action == Action
+                    && other.Table == Table
+                    && other.Context == Context;
             }
 
-            public override int GetHashCode ()
+            public override int GetHashCode()
             {
-                return (Route != null ? Route.GetHashCode () << 27 : 0) +
-                    (Action != null ? Action.GetHashCode () << 19 : 0) +
-                    (Table != null ? Table.GetHashCode () << 9 : 0) +
-                    (Context != null ? Context.GetHashCode () : 0);
+                return (Route != null ? Route.GetHashCode() << 27 : 0)
+                    + (Action != null ? Action.GetHashCode() << 19 : 0)
+                    + (Table != null ? Table.GetHashCode() << 9 : 0)
+                    + (Context != null ? Context.GetHashCode() : 0);
             }
         }
     }

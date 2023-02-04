@@ -5,7 +5,7 @@ class C
 {
     const string s = "s";
 
-    public void Test ()
+    public void Test()
     {
         s = "x";
         string s = "a";

@@ -8,29 +8,29 @@ namespace Mono.Linker.Tests.Cases.DataFlow
     [ExpectedNoWarnings]
     public class DynamicDependencyDataflow
     {
-        public static void Main ()
+        public static void Main()
         {
-            DynamicDependencyFrom ();
+            DynamicDependencyFrom();
         }
 
         [Kept]
-        [KeptAttributeAttribute (typeof (DynamicallyAccessedMembersAttribute))]
-        [DynamicallyAccessedMembers (DynamicallyAccessedMemberTypes.PublicMethods)]
+        [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
         static Type TypeWithPublicMethods;
 
         [Kept]
-        [ExpectedWarning ("IL2080", nameof (Type.GetField))]
-        [DynamicDependency ("DynamicDependencyTo")]
-        static void DynamicDependencyFrom ()
+        [ExpectedWarning("IL2080", nameof(Type.GetField))]
+        [DynamicDependency("DynamicDependencyTo")]
+        static void DynamicDependencyFrom()
         {
-            _ = TypeWithPublicMethods.GetField ("f");
+            _ = TypeWithPublicMethods.GetField("f");
         }
 
         [Kept]
-        [ExpectedWarning ("IL2080", nameof (Type.GetProperty))]
-        static void DynamicDependencyTo ()
+        [ExpectedWarning("IL2080", nameof(Type.GetProperty))]
+        static void DynamicDependencyTo()
         {
-            _ = TypeWithPublicMethods.GetProperty ("p");
+            _ = TypeWithPublicMethods.GetProperty("p");
         }
     }
 }

@@ -10,7 +10,8 @@
 
 namespace System.Transactions
 {
-    public enum IsolationLevel {
+    public enum IsolationLevel
+    {
         Serializable,
         RepeatableRead,
         ReadCommitted,
@@ -20,4 +21,3 @@ namespace System.Transactions
         Unspecified
     }
 }
-

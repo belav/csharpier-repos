@@ -13,12 +13,12 @@ interface I
 
 class A
 {
-    public void meth(){}
+    public void meth() { }
 }
 
 class B : A
 {
-    new private void meth(){}
+    new private void meth() { }
 }
 
 class C : B, I
@@ -36,6 +36,5 @@ class C : B, I
             Console.WriteLine("Caught unexpected exception: " + e);
             return 101;
         }
-
     }
 }

@@ -29,38 +29,34 @@ namespace System.DirectoryServices
     [Serializable]
     public class DirectoryServicesCOMException : COMException, ISerializable
     {
-        public int ExtendedError {
-            get {
-                throw new NotImplementedException ();
-            }
-        }
-
-        public string ExtendedErrorMessage {
-            get {
-                throw new NotImplementedException ();
-            }
-        }
-
-        public DirectoryServicesCOMException ()
+        public int ExtendedError
         {
+            get { throw new NotImplementedException(); }
         }
 
-        public DirectoryServicesCOMException (string message) : base(message)
+        public string ExtendedErrorMessage
         {
+            get { throw new NotImplementedException(); }
         }
 
-        public DirectoryServicesCOMException (string message, Exception inner) : base(message, inner)
-        {
-        }
+        public DirectoryServicesCOMException() { }
 
-        protected DirectoryServicesCOMException (SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+        public DirectoryServicesCOMException(string message)
+            : base(message) { }
+
+        public DirectoryServicesCOMException(string message, Exception inner)
+            : base(message, inner) { }
+
+        protected DirectoryServicesCOMException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
 
         [SecurityPermission(SecurityAction.Demand, SerializationFormatter = true)]
-        public override void GetObjectData (SerializationInfo serializationInfo, StreamingContext streamingContext)
+        public override void GetObjectData(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
     }
 }

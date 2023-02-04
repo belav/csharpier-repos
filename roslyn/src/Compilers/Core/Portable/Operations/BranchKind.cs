@@ -30,4 +30,3 @@ namespace Microsoft.CodeAnalysis.Operations
         GoTo = 0x3
     }
 }
-

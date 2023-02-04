@@ -8,44 +8,45 @@ public class CustomMarkHandler : IMarkHandler
 {
     LinkContext _context;
 
-    public void Initialize (LinkContext context, MarkContext markContext)
+    public void Initialize(LinkContext context, MarkContext markContext)
     {
         _context = context;
-        markContext.RegisterMarkAssemblyAction (assembly => DiscoverTypesInAssembly (assembly));
-        markContext.RegisterMarkTypeAction (type => DiscoverMethodsInType (type));
-        markContext.RegisterMarkMethodAction (method => DiscoverMethodsOnDeclaringType (method));
+        markContext.RegisterMarkAssemblyAction(assembly => DiscoverTypesInAssembly(assembly));
+        markContext.RegisterMarkTypeAction(type => DiscoverMethodsInType(type));
+        markContext.RegisterMarkMethodAction(method => DiscoverMethodsOnDeclaringType(method));
     }
 
-    void MarkTypeFoo (TypeDefinition type)
+    void MarkTypeFoo(TypeDefinition type)
     {
         if (type.Name == "DiscoveredTypeForAssembly")
-            _context.Annotations.Mark (type);
+            _context.Annotations.Mark(type);
 
         if (!type.HasNestedTypes)
             return;
 
         foreach (var nested in type.NestedTypes)
-            MarkTypeFoo (nested);
+            MarkTypeFoo(nested);
     }
 
-    void DiscoverTypesInAssembly (AssemblyDefinition assembly)
+    void DiscoverTypesInAssembly(AssemblyDefinition assembly)
     {
         foreach (var type in assembly.MainModule.Types)
-            MarkTypeFoo (type);
+            MarkTypeFoo(type);
     }
 
-    void DiscoverMethodsInType (TypeDefinition type)
+    void DiscoverMethodsInType(TypeDefinition type)
     {
-        foreach (var method in type.Methods) {
+        foreach (var method in type.Methods)
+        {
             if (method.Name == $"DiscoveredMethodForType_{type.Name}")
-                _context.Annotations.Mark (method);
+                _context.Annotations.Mark(method);
         }
     }
 
-    void DiscoverMethodsOnDeclaringType (MethodDefinition method)
+    void DiscoverMethodsOnDeclaringType(MethodDefinition method)
     {
         foreach (var otherMethod in method.DeclaringType.Methods)
             if (otherMethod.Name == $"DiscoveredMethodForMethod_{method.Name}")
-                _context.Annotations.Mark (otherMethod);
+                _context.Annotations.Mark(otherMethod);
     }
 }

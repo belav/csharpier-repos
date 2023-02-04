@@ -11,9 +11,9 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.EmbeddedLanguages
     /// <inheritdoc cref="BraceMatchingResult"/>
     internal readonly record struct AspNetCoreBraceMatchingResult(
         TextSpan LeftSpan,
-        TextSpan RightSpan)
+        TextSpan RightSpan
+    )
     {
-        internal BraceMatchingResult ToBraceMatchingResult()
-            => new(LeftSpan, RightSpan);
+        internal BraceMatchingResult ToBraceMatchingResult() => new(LeftSpan, RightSpan);
     }
 }

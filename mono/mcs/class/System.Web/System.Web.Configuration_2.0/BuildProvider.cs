@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,63 +35,83 @@ using System.Configuration;
 
 namespace System.Web.Configuration
 {
-    public sealed class BuildProvider : ConfigurationElement {
-
+    public sealed class BuildProvider : ConfigurationElement
+    {
         static ConfigurationProperty extensionProp;
         static ConfigurationProperty typeProp;
         static ConfigurationPropertyCollection properties;
 
-        static BuildProvider ()
+        static BuildProvider()
         {
-            extensionProp = new ConfigurationProperty ("extension", typeof (string), "",
-                                   TypeDescriptor.GetConverter (typeof (string)), PropertyHelper.NonEmptyStringValidator,
-                                   ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey);
-            typeProp = new ConfigurationProperty ("type", typeof (string), "",
-                                  TypeDescriptor.GetConverter (typeof (string)), PropertyHelper.NonEmptyStringValidator,
-                                  ConfigurationPropertyOptions.IsRequired);
+            extensionProp = new ConfigurationProperty(
+                "extension",
+                typeof(string),
+                "",
+                TypeDescriptor.GetConverter(typeof(string)),
+                PropertyHelper.NonEmptyStringValidator,
+                ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey
+            );
+            typeProp = new ConfigurationProperty(
+                "type",
+                typeof(string),
+                "",
+                TypeDescriptor.GetConverter(typeof(string)),
+                PropertyHelper.NonEmptyStringValidator,
+                ConfigurationPropertyOptions.IsRequired
+            );
             properties = new ConfigurationPropertyCollection();
 
-            properties.Add (extensionProp);
-            properties.Add (typeProp);
+            properties.Add(extensionProp);
+            properties.Add(typeProp);
         }
 
-        internal BuildProvider ()
-        {
-        }
+        internal BuildProvider() { }
 
-        public BuildProvider (string extension, string type)
+        public BuildProvider(string extension, string type)
         {
             this.Extension = extension;
             this.Type = type;
         }
 
-        [StringValidator (MinLength = 1)]
-        [ConfigurationProperty ("extension", DefaultValue = "", Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey)]
-        public string Extension {
-            get { return (string) base[extensionProp]; }
-            set {
+        [StringValidator(MinLength = 1)]
+        [ConfigurationProperty(
+            "extension",
+            DefaultValue = "",
+            Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey
+        )]
+        public string Extension
+        {
+            get { return (string)base[extensionProp]; }
+            set
+            {
                 string ext;
 
-                if (!String.IsNullOrEmpty (value))
-                    ext = value.ToLowerInvariant ();
+                if (!String.IsNullOrEmpty(value))
+                    ext = value.ToLowerInvariant();
                 else
                     ext = value;
-                base [extensionProp] = ext;
+                base[extensionProp] = ext;
             }
         }
 
-        [StringValidator (MinLength = 1)]
-        [ConfigurationProperty ("type", DefaultValue = "", Options = ConfigurationPropertyOptions.IsRequired)]
-        public string Type {
-            get { return (string) base[typeProp]; }
+        [StringValidator(MinLength = 1)]
+        [ConfigurationProperty(
+            "type",
+            DefaultValue = "",
+            Options = ConfigurationPropertyOptions.IsRequired
+        )]
+        public string Type
+        {
+            get { return (string)base[typeProp]; }
             set { base[typeProp] = value; }
         }
 
-        protected internal override ConfigurationPropertyCollection Properties {
+        protected internal override ConfigurationPropertyCollection Properties
+        {
             get { return properties; }
         }
 
-        public override bool Equals (object provider)
+        public override bool Equals(object provider)
         {
             BuildProvider p = provider as BuildProvider;
             if (p == null)
@@ -100,11 +120,9 @@ namespace System.Web.Configuration
             return (Extension == p.Extension && Type == p.Type);
         }
 
-        public override int GetHashCode ()
+        public override int GetHashCode()
         {
-            return (Extension.GetHashCode () + Type.GetHashCode ());
+            return (Extension.GetHashCode() + Type.GetHashCode());
         }
     }
-    
 }
-

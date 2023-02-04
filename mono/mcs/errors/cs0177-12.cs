@@ -3,11 +3,11 @@
 
 class C
 {
-    delegate void D (string s, out int arg);
+    delegate void D(string s, out int arg);
 
-    public static void Main ()
+    public static void Main()
     {
-        D d = delegate (string s, out int arg)
+        D d = delegate(string s, out int arg)
         {
             return;
         };

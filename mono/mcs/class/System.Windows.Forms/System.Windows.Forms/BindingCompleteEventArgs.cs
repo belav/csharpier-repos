@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -39,23 +39,39 @@ namespace System.Windows.Forms
         private Exception exception;
 
         #region Public Constructors
-        public BindingCompleteEventArgs(Binding binding, BindingCompleteState state, BindingCompleteContext context)
-            : this (binding, state, context, String.Empty, null, false)
-        {
-        }
+        public BindingCompleteEventArgs(
+            Binding binding,
+            BindingCompleteState state,
+            BindingCompleteContext context
+        )
+            : this(binding, state, context, String.Empty, null, false) { }
 
-        public BindingCompleteEventArgs(Binding binding, BindingCompleteState state, BindingCompleteContext context, string errorText)
-            : this (binding, state, context, errorText, null, true)
-        {
-        }
+        public BindingCompleteEventArgs(
+            Binding binding,
+            BindingCompleteState state,
+            BindingCompleteContext context,
+            string errorText
+        )
+            : this(binding, state, context, errorText, null, true) { }
 
-        public BindingCompleteEventArgs(Binding binding, BindingCompleteState state, BindingCompleteContext context, string errorText, Exception exception)
-            : this (binding, state, context, errorText, exception, true)
-        {
-        }
+        public BindingCompleteEventArgs(
+            Binding binding,
+            BindingCompleteState state,
+            BindingCompleteContext context,
+            string errorText,
+            Exception exception
+        )
+            : this(binding, state, context, errorText, exception, true) { }
 
-        public BindingCompleteEventArgs(Binding binding, BindingCompleteState state, BindingCompleteContext context, string errorText, Exception exception, bool cancel)
-            : base (cancel)
+        public BindingCompleteEventArgs(
+            Binding binding,
+            BindingCompleteState state,
+            BindingCompleteContext context,
+            string errorText,
+            Exception exception,
+            bool cancel
+        )
+            : base(cancel)
         {
             this.binding = binding;
             this.state = state;
@@ -66,33 +82,38 @@ namespace System.Windows.Forms
         #endregion    // Public Constructors
 
         #region Public Instance Properties
-        public Binding Binding {
+        public Binding Binding
+        {
             get { return this.binding; }
         }
 
-        public BindingCompleteContext BindingCompleteContext {
+        public BindingCompleteContext BindingCompleteContext
+        {
             get { return this.context; }
         }
 
-        public BindingCompleteState BindingCompleteState {
+        public BindingCompleteState BindingCompleteState
+        {
             get { return this.state; }
         }
 
-        public string ErrorText {
+        public string ErrorText
+        {
             get { return this.error_text; }
         }
 
-        public Exception Exception {
+        public Exception Exception
+        {
             get { return this.exception; }
         }
         #endregion    // Public Instance Properties
 
-        internal void SetErrorText (string error_text)
+        internal void SetErrorText(string error_text)
         {
             this.error_text = error_text;
         }
 
-        internal void SetException (Exception exception)
+        internal void SetException(Exception exception)
         {
             this.exception = exception;
         }

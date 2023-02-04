@@ -5,7 +5,7 @@ class X
 {
     readonly int f = 0;
 
-    ref int Test ()
+    ref int Test()
     {
         return ref f;
     }

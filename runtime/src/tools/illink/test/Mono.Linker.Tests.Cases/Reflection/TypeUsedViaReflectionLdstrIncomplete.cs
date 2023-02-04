@@ -8,17 +8,17 @@ namespace Mono.Linker.Tests.Cases.Reflection
     /// </summary>
     public class TypeUsedViaReflectionLdstrIncomplete
     {
-        public static void Main ()
+        public static void Main()
         {
-            var typePart = GetTypePart ();
+            var typePart = GetTypePart();
             var assemblyPart = ",test";
-            var typeKept = Type.GetType (string.Concat (typePart, assemblyPart), false);
+            var typeKept = Type.GetType(string.Concat(typePart, assemblyPart), false);
         }
 
         public class Full { }
 
         [Kept]
-        static string GetTypePart ()
+        static string GetTypePart()
         {
             return "Mono.Linker.Tests.Cases.Reflection.TypeUsedViaReflectionLdstrIncomplete+Full";
         }

@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,136 +34,149 @@ using System.Threading;
 
 using NUnit.Framework;
 
-namespace MonoCasTests.System.Threading {
-
+namespace MonoCasTests.System.Threading
+{
     [TestFixture]
-    [Category ("CAS")]
-    public class ExecutionContextCas {
-
+    [Category("CAS")]
+    public class ExecutionContextCas
+    {
         static bool success;
 
-        static void Callback (object o)
+        static void Callback(object o)
         {
-            new SecurityPermission (SecurityPermissionFlag.UnmanagedCode).Demand ();
+            new SecurityPermission(SecurityPermissionFlag.UnmanagedCode).Demand();
             success = (bool)o;
         }
 
         [SetUp]
-        public void SetUp ()
+        public void SetUp()
         {
             if (!SecurityManager.SecurityEnabled)
-                Assert.Ignore ("SecurityManager isn't enabled");
+                Assert.Ignore("SecurityManager isn't enabled");
 
             success = false;
         }
 
         [TearDown]
-        public void TearDown ()
+        public void TearDown()
         {
-            if (ExecutionContext.IsFlowSuppressed ())
-                ExecutionContext.RestoreFlow ();
+            if (ExecutionContext.IsFlowSuppressed())
+                ExecutionContext.RestoreFlow();
         }
 
-        private void Thread_Run_Empty ()
+        private void Thread_Run_Empty()
         {
-            Assert.IsFalse (success, "pre-check");
-            ExecutionContext.Run (ExecutionContext.Capture (), new ContextCallback (Callback), true);
-            Assert.IsTrue (success, "post-check");
+            Assert.IsFalse(success, "pre-check");
+            ExecutionContext.Run(ExecutionContext.Capture(), new ContextCallback(Callback), true);
+            Assert.IsTrue(success, "post-check");
         }
 
         [Test]
-        public void Run_Empty ()
+        public void Run_Empty()
         {
-            Thread t = new Thread (new ThreadStart (Thread_Run_Empty));
-            t.Start ();
-            t.Join ();
+            Thread t = new Thread(new ThreadStart(Thread_Run_Empty));
+            t.Start();
+            t.Join();
         }
 
-        [SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
-        private ExecutionContext GetExecutionContextUnmanaged ()
+        [SecurityPermission(SecurityAction.Deny, UnmanagedCode = true)]
+        private ExecutionContext GetExecutionContextUnmanaged()
         {
-            return ExecutionContext.Capture ();
+            return ExecutionContext.Capture();
             // the Deny disappears with this stack frame but we got a capture of it
         }
 
-        private void Thread_Run_UnmanagedCode ()
+        private void Thread_Run_UnmanagedCode()
         {
             bool result = false;
-            Assert.IsFalse (success, "pre-check");
-            try {
-                ExecutionContext ec = GetExecutionContextUnmanaged ();
+            Assert.IsFalse(success, "pre-check");
+            try
+            {
+                ExecutionContext ec = GetExecutionContextUnmanaged();
                 // run with the captured security stack (i.e. deny unmanaged)
-                ExecutionContext.Run (ec, new ContextCallback (Callback), true);
+                ExecutionContext.Run(ec, new ContextCallback(Callback), true);
             }
-            catch (SecurityException) {
+            catch (SecurityException)
+            {
                 result = true;
             }
-            finally {
-                Assert.IsFalse (success, "post-check");
-                Assert.IsTrue (result, "Result");
+            finally
+            {
+                Assert.IsFalse(success, "post-check");
+                Assert.IsTrue(result, "Result");
             }
         }
 
         [Test]
-        public void Run_UnmanagedCode ()
+        public void Run_UnmanagedCode()
         {
-            Thread t = new Thread (new ThreadStart (Thread_Run_UnmanagedCode));
-            t.Start ();
-            t.Join ();
+            Thread t = new Thread(new ThreadStart(Thread_Run_UnmanagedCode));
+            t.Start();
+            t.Join();
         }
 
-        private void Thread_Run_UnmanagedCode_SuppressFlow_BeforeCapture ()
+        private void Thread_Run_UnmanagedCode_SuppressFlow_BeforeCapture()
         {
             bool result = false;
-            Assert.IsFalse (success, "pre-check");
-            AsyncFlowControl afc = ExecutionContext.SuppressFlow ();
-            try {
-                ExecutionContext ec = GetExecutionContextUnmanaged ();
-                ExecutionContext.Run (ec, new ContextCallback (Callback), true);
+            Assert.IsFalse(success, "pre-check");
+            AsyncFlowControl afc = ExecutionContext.SuppressFlow();
+            try
+            {
+                ExecutionContext ec = GetExecutionContextUnmanaged();
+                ExecutionContext.Run(ec, new ContextCallback(Callback), true);
             }
-            catch (InvalidOperationException) {
+            catch (InvalidOperationException)
+            {
                 result = true;
             }
-            finally {
-                Assert.IsFalse (success, "post-check");
-                afc.Undo ();
-                Assert.IsTrue (result, "Result");
+            finally
+            {
+                Assert.IsFalse(success, "post-check");
+                afc.Undo();
+                Assert.IsTrue(result, "Result");
             }
         }
 
         [Test]
-        public void Run_UnmanagedCode_SuppressFlow_BeforeCapture ()
+        public void Run_UnmanagedCode_SuppressFlow_BeforeCapture()
         {
-            Thread t = new Thread (new ThreadStart (Thread_Run_UnmanagedCode_SuppressFlow_BeforeCapture));
-            t.Start ();
-            t.Join ();
+            Thread t = new Thread(
+                new ThreadStart(Thread_Run_UnmanagedCode_SuppressFlow_BeforeCapture)
+            );
+            t.Start();
+            t.Join();
         }
 
-        private void Thread_Run_UnmanagedCode_SuppressFlow_AfterCapture ()
+        private void Thread_Run_UnmanagedCode_SuppressFlow_AfterCapture()
         {
             bool result = false;
-            Assert.IsFalse (success, "pre-check");
-            ExecutionContext ec = GetExecutionContextUnmanaged ();
-            AsyncFlowControl afc = ExecutionContext.SuppressFlow ();
-            try {
-                ExecutionContext.Run (ec, new ContextCallback (Callback), true);
+            Assert.IsFalse(success, "pre-check");
+            ExecutionContext ec = GetExecutionContextUnmanaged();
+            AsyncFlowControl afc = ExecutionContext.SuppressFlow();
+            try
+            {
+                ExecutionContext.Run(ec, new ContextCallback(Callback), true);
             }
-            catch (SecurityException) {
+            catch (SecurityException)
+            {
                 result = true;
             }
-            finally    {
-                Assert.IsFalse (success, "post-check");
-                afc.Undo ();
-                Assert.IsTrue (result, "Result");
+            finally
+            {
+                Assert.IsFalse(success, "post-check");
+                afc.Undo();
+                Assert.IsTrue(result, "Result");
             }
         }
 
         [Test]
-        public void Run_UnmanagedCode_SuppressFlow_AfterCapture ()
+        public void Run_UnmanagedCode_SuppressFlow_AfterCapture()
         {
-            Thread t = new Thread (new ThreadStart (Thread_Run_UnmanagedCode_SuppressFlow_AfterCapture));
-            t.Start ();
-            t.Join ();
+            Thread t = new Thread(
+                new ThreadStart(Thread_Run_UnmanagedCode_SuppressFlow_AfterCapture)
+            );
+            t.Start();
+            t.Join();
         }
     }
 }

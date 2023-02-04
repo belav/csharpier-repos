@@ -22,14 +22,16 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
         static AccessibilityTests()
         {
-            var t = Parse(@"
+            var t = Parse(
+                @"
 using System;
 class C1
 {
     void M() { object o = new object(); o.ToString(); }
 }
 
-");
+"
+            );
             CSharpCompilation c = CreateEmptyCompilation(new[] { t });
             s_testModel = c.GetSemanticModel(t);
             s_testPosition = t.FindNodeOrTokenByKind(SyntaxKind.VariableDeclaration).SpanStart;
@@ -39,44 +41,50 @@ class C1
         [Fact]
         public void IsAccessibleNullArguments()
         {
-            Assert.Throws<ArgumentNullException>(() =>
-                s_testModel.IsAccessible(s_testPosition, null));
+            Assert.Throws<ArgumentNullException>(
+                () => s_testModel.IsAccessible(s_testPosition, null)
+            );
         }
 
         [Fact]
         public void IsAccessibleLocationNotInSource()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                s_testModel.IsAccessible(-1, s_testSymbol));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => s_testModel.IsAccessible(-1, s_testSymbol)
+            );
 
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                s_testModel.IsAccessible(s_testModel.SyntaxTree.GetCompilationUnitRoot().FullSpan.End + 1, s_testSymbol));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () =>
+                    s_testModel.IsAccessible(
+                        s_testModel.SyntaxTree.GetCompilationUnitRoot().FullSpan.End + 1,
+                        s_testSymbol
+                    )
+            );
         }
 
         [Fact]
         public void IsAccessibleSymbolErrorType()
         {
-            Assert.True(
-                s_testModel.IsAccessible(s_testPosition, s_testSymbol));
+            Assert.True(s_testModel.IsAccessible(s_testPosition, s_testSymbol));
         }
 
         [WorkItem(527516, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/527516")]
         [Fact]
         public void IsAccessibleSymbolNotResolvable()
         {
-            Symbol symbol = CSharpCompilation.Create(
-                "NotResolvable",
-                references: new MetadataReference[] { MscorlibRef }).GetWellKnownType(WellKnownType.System_Exception);
+            Symbol symbol = CSharpCompilation
+                .Create("NotResolvable", references: new MetadataReference[] { MscorlibRef })
+                .GetWellKnownType(WellKnownType.System_Exception);
 
-            Assert.True(
-                s_testModel.IsAccessible(s_testPosition, symbol.GetPublicSymbol()));
+            Assert.True(s_testModel.IsAccessible(s_testPosition, symbol.GetPublicSymbol()));
         }
 
         [WorkItem(545450, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545450")]
         [Fact]
         public void ProtectedTypesNestedInGenericTypes_Property1()
         {
-            var source = @"
+            var source =
+                @"
 public class G<T>
 {
     protected class N { }
@@ -90,7 +98,8 @@ public class G<T>
         [Fact]
         public void ProtectedTypesNestedInGenericTypes_Property2()
         {
-            var source = @"
+            var source =
+                @"
 public class G<T>
 {
     protected class N { }
@@ -107,7 +116,8 @@ class C : G<int>
         [Fact]
         public void ProtectedTypesNestedInGenericTypes_Indexer1()
         {
-            var source = @"
+            var source =
+                @"
 public class G<T>
 {
     protected class N { }
@@ -121,7 +131,8 @@ public class G<T>
         [Fact]
         public void ProtectedTypesNestedInGenericTypes_Indexer2()
         {
-            var source = @"
+            var source =
+                @"
 public class G<T>
 {
     protected class N { }
@@ -138,7 +149,8 @@ class C : G<int>
         [Fact]
         public void ProtectedTypesNestedInGenericTypes_Method1()
         {
-            var source = @"
+            var source =
+                @"
 public class G<T>
 {
     protected class N { }
@@ -152,7 +164,8 @@ public class G<T>
         [Fact]
         public void ProtectedTypesNestedInGenericTypes_Method2()
         {
-            var source = @"
+            var source =
+                @"
 public class G<T>
 {
     protected class N { }
@@ -169,24 +182,28 @@ class C : G<int>
         [Fact]
         public void ProtectedTypesNestedInGenericTypes_Event1()
         {
-            var source = @"
+            var source =
+                @"
 public class G<T>
 {
     protected delegate void N();
 
     protected event G<int>.N E;
 }";
-            CreateCompilation(source).VerifyDiagnostics(
-                // (6,30): warning CS0067: The event 'G<T>.E' is never used
-                //     protected event G<int>.N E;
-                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "E").WithArguments("G<T>.E"));
+            CreateCompilation(source)
+                .VerifyDiagnostics(
+                    // (6,30): warning CS0067: The event 'G<T>.E' is never used
+                    //     protected event G<int>.N E;
+                    Diagnostic(ErrorCode.WRN_UnreferencedEvent, "E").WithArguments("G<T>.E")
+                );
         }
 
         [WorkItem(545450, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545450")]
         [Fact]
         public void ProtectedTypesNestedInGenericTypes_Event2()
         {
-            var source = @"
+            var source =
+                @"
 public class G<T>
 {
     protected delegate void N();
@@ -196,17 +213,20 @@ class C : G<int>
 {
     protected event G<long>.N E;
 }";
-            CreateCompilation(source).VerifyDiagnostics(
-                // (9,31): warning CS0067: The event 'C.E' is never used
-                //     protected event G<long>.N E;
-                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "E").WithArguments("C.E"));
+            CreateCompilation(source)
+                .VerifyDiagnostics(
+                    // (9,31): warning CS0067: The event 'C.E' is never used
+                    //     protected event G<long>.N E;
+                    Diagnostic(ErrorCode.WRN_UnreferencedEvent, "E").WithArguments("C.E")
+                );
         }
 
         [WorkItem(545450, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545450")]
         [Fact]
         public void ProtectedTypesNestedInGenericTypesLegacy()
         {
-            var source = @"
+            var source =
+                @"
 public class Bar<T> { }               
 
 public class RuleE<T>
@@ -256,16 +276,20 @@ class Test
     {
     }
 }";
-            CreateCompilation(source).VerifyDiagnostics(
-                // (16,32): warning CS0649: Field 'RuleE<T>.Z1.Goo' is never assigned to, and will always have its default value null
-                //         protected RuleE<int>.N Goo;    
-                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "Goo").WithArguments("RuleE<T>.Z1.Goo", "null"),
-                // (23,26): warning CS0169: The field 'RuleE<T>.Fld3' is never used
-                //     private RuleE<int>.N Fld3;    
-                Diagnostic(ErrorCode.WRN_UnreferencedField, "Fld3").WithArguments("RuleE<T>.Fld3"),
-                // (38,26): warning CS0169: The field 'D<T>.F3' is never used
-                //     private RuleE<int>.N F3;   
-                Diagnostic(ErrorCode.WRN_UnreferencedField, "F3").WithArguments("D<T>.F3"));
+            CreateCompilation(source)
+                .VerifyDiagnostics(
+                    // (16,32): warning CS0649: Field 'RuleE<T>.Z1.Goo' is never assigned to, and will always have its default value null
+                    //         protected RuleE<int>.N Goo;
+                    Diagnostic(ErrorCode.WRN_UnassignedInternalField, "Goo")
+                        .WithArguments("RuleE<T>.Z1.Goo", "null"),
+                    // (23,26): warning CS0169: The field 'RuleE<T>.Fld3' is never used
+                    //     private RuleE<int>.N Fld3;
+                    Diagnostic(ErrorCode.WRN_UnreferencedField, "Fld3")
+                        .WithArguments("RuleE<T>.Fld3"),
+                    // (38,26): warning CS0169: The field 'D<T>.F3' is never used
+                    //     private RuleE<int>.N F3;
+                    Diagnostic(ErrorCode.WRN_UnreferencedField, "F3").WithArguments("D<T>.F3")
+                );
         }
 
         [WorkItem(531368, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/531368")]
@@ -276,7 +300,8 @@ class Test
 
             // We have since switched to an iterative rather than recursive algorithm.
 
-            string brackets = "[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]";
+            string brackets =
+                "[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]";
             brackets = brackets + brackets; // 80
             brackets = brackets + brackets; // 160
             brackets = brackets + brackets; // 320
@@ -286,16 +311,21 @@ class Test
             brackets = brackets + brackets; // 5120
             brackets = brackets + brackets; // 10240
 
-            var source = @"
+            var source =
+                @"
     public class P
     {
         private class C {}
-        public C " + brackets + @" x;
+        public C "
+                + brackets
+                + @" x;
     }
 ";
-            CreateCompilation(source).VerifyDiagnostics(
-                Diagnostic(ErrorCode.ERR_BadVisFieldType, "x").WithArguments("P.x", "P.C" + brackets)
-);
+            CreateCompilation(source)
+                .VerifyDiagnostics(
+                    Diagnostic(ErrorCode.ERR_BadVisFieldType, "x")
+                        .WithArguments("P.x", "P.C" + brackets)
+                );
         }
     }
 }

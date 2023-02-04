@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,8 +36,8 @@ namespace System.Web.UI
     {
         string code;
         bool isAssign;
-        
-        public CodeBuilder (string code, bool isAssign, ILocation location)
+
+        public CodeBuilder(string code, bool isAssign, ILocation location)
         {
             this.code = code;
             this.isAssign = isAssign;
@@ -46,19 +46,20 @@ namespace System.Web.UI
             this.Location = location;
         }
 
-        internal override object CreateInstance ()
+        internal override object CreateInstance()
         {
             return null;
         }
 
-        internal string Code {
+        internal string Code
+        {
             get { return code; }
             set { code = value; }
         }
 
-        internal bool IsAssign {
+        internal bool IsAssign
+        {
             get { return isAssign; }
         }
     }
 }
-

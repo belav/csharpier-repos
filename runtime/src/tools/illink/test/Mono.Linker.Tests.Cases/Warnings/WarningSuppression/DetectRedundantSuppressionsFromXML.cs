@@ -12,26 +12,38 @@ namespace Mono.Linker.Tests.Cases.Warnings.WarningSuppression
 {
     [SkipKeptItemsValidation]
     [ExpectedNoWarnings]
-    [ExpectedWarning ("IL2121", "IL2026", ProducedBy = ProducedBy.Trimmer, FileName = "DetectRedundantSuppressionsFromXML.xml", SourceLine = 7)]
-    [ExpectedWarning ("IL2121", "IL2109", ProducedBy = ProducedBy.Trimmer, FileName = "DetectRedundantSuppressionsFromXML.xml", SourceLine = 12)]
-    [SetupLinkAttributesFile ("DetectRedundantSuppressionsFromXML.xml")]
+    [ExpectedWarning(
+        "IL2121",
+        "IL2026",
+        ProducedBy = ProducedBy.Trimmer,
+        FileName = "DetectRedundantSuppressionsFromXML.xml",
+        SourceLine = 7
+    )]
+    [ExpectedWarning(
+        "IL2121",
+        "IL2109",
+        ProducedBy = ProducedBy.Trimmer,
+        FileName = "DetectRedundantSuppressionsFromXML.xml",
+        SourceLine = 12
+    )]
+    [SetupLinkAttributesFile("DetectRedundantSuppressionsFromXML.xml")]
     public class DetectRedundantSuppressionsFromXML
     {
-        public static void Main ()
+        public static void Main()
         {
-            DetectRedundantSuppressions.Test ();
+            DetectRedundantSuppressions.Test();
         }
 
         public class DetectRedundantSuppressions
         {
-            public static void Test ()
+            public static void Test()
             {
-                DoNotTriggerWarning ();
+                DoNotTriggerWarning();
             }
 
             class SuppressedOnType : DoNotTriggerWarningType { }
 
-            static void DoNotTriggerWarning () { }
+            static void DoNotTriggerWarning() { }
 
             class DoNotTriggerWarningType { }
         }

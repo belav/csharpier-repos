@@ -1,5 +1,5 @@
 //
-// Tests for System.Web.UI.WebControls.TextBox.cs 
+// Tests for System.Web.UI.WebControls.TextBox.cs
 //
 // Author:
 //     Ben Maurer (bmaurer@novell.com)
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -39,121 +39,122 @@ using MonoTests.SystemWeb.Framework;
 using MonoTests.stand_alone.WebHarness;
 using System.Collections;
 
-namespace MonoTests.System.Web.UI.WebControls {
-    
-    [TestFixture]    
-    public class TextBoxTest {
-        class Poker : TextBox {
-            public new void AddParsedSubObject (object o)
+namespace MonoTests.System.Web.UI.WebControls
+{
+    [TestFixture]
+    public class TextBoxTest
+    {
+        class Poker : TextBox
+        {
+            public new void AddParsedSubObject(object o)
             {
-                base.AddParsedSubObject (o);
+                base.AddParsedSubObject(o);
             }
 
-            public void TrackState () 
+            public void TrackState()
             {
-                TrackViewState ();
+                TrackViewState();
             }
-            
-            public object SaveState ()
+
+            public object SaveState()
             {
                 foreach (string s in ViewState.Keys)
-                    Console.WriteLine ("{0}: {1}", s, ViewState[s]);
+                    Console.WriteLine("{0}: {1}", s, ViewState[s]);
 
-                return SaveViewState ();
+                return SaveViewState();
             }
-            
-            public void LoadState (object o)
+
+            public void LoadState(object o)
             {
-                LoadViewState (o);
+                LoadViewState(o);
             }
-            
-            public string Render ()
+
+            public string Render()
             {
-                StringWriter sw = new StringWriter ();
+                StringWriter sw = new StringWriter();
                 sw.NewLine = "\n";
-                HtmlTextWriter writer = new HtmlTextWriter (sw);
-                base.Render (writer);
-                return writer.InnerWriter.ToString ();
-            }            
+                HtmlTextWriter writer = new HtmlTextWriter(sw);
+                base.Render(writer);
+                return writer.InnerWriter.ToString();
+            }
         }
 
         [TestFixtureSetUp]
-        public void SetUp ()
+        public void SetUp()
         {
-            WebTest.CopyResource (GetType (), "TextBoxTestlPage.aspx", "TextBoxTestlPage.aspx");
-            WebTest.CopyResource (GetType (), "NoEventValidation.aspx", "NoEventValidation.aspx");
+            WebTest.CopyResource(GetType(), "TextBoxTestlPage.aspx", "TextBoxTestlPage.aspx");
+            WebTest.CopyResource(GetType(), "NoEventValidation.aspx", "NoEventValidation.aspx");
         }
 
         [Test]
-        public void Defaults ()
+        public void Defaults()
         {
-            Poker p = new Poker ();
-            Assert.AreEqual (string.Empty, p.ValidationGroup, "ValidationGroup");
-            Assert.AreEqual (false, p.CausesValidation, "CausesValidation");
+            Poker p = new Poker();
+            Assert.AreEqual(string.Empty, p.ValidationGroup, "ValidationGroup");
+            Assert.AreEqual(false, p.CausesValidation, "CausesValidation");
         }
 
         [Test]
-        public void Defaults_NotWorking ()
+        public void Defaults_NotWorking()
         {
-            Poker p = new Poker ();
-            Assert.AreEqual (AutoCompleteType.None, p.AutoCompleteType, "AutoCompleteType");
+            Poker p = new Poker();
+            Assert.AreEqual(AutoCompleteType.None, p.AutoCompleteType, "AutoCompleteType");
         }
 
         [Test]
-        public void MultilineRenderEscape ()
+        public void MultilineRenderEscape()
         {
-            Poker t = new Poker ();
+            Poker t = new Poker();
             t.TextMode = TextBoxMode.MultiLine;
             t.Text = "</textarea>";
             string exp = "<textarea rows=\"2\" cols=\"20\">\r\n&lt;/textarea&gt;</textarea>";
 
-            HtmlDiff.AssertAreEqual(exp, t.Render (),"MultilineRenderEscape");
+            HtmlDiff.AssertAreEqual(exp, t.Render(), "MultilineRenderEscape");
         }
 
-
         [Test]
-        public void ValidationProperties ()
+        public void ValidationProperties()
         {
-            Poker t = new Poker ();
+            Poker t = new Poker();
 
             // initial values
-            Assert.AreEqual (false, t.CausesValidation, "A1");
-            Assert.AreEqual ("", t.ValidationGroup, "A2");
+            Assert.AreEqual(false, t.CausesValidation, "A1");
+            Assert.AreEqual("", t.ValidationGroup, "A2");
 
             t.ValidationGroup = "VG";
-            Assert.AreEqual ("VG", t.ValidationGroup, "A3");
+            Assert.AreEqual("VG", t.ValidationGroup, "A3");
 
             t.CausesValidation = true;
-            Assert.IsTrue (t.CausesValidation, "A4");
+            Assert.IsTrue(t.CausesValidation, "A4");
         }
 
         [Test]
-        public void ViewState ()
+        public void ViewState()
         {
-            Poker t = new Poker ();
+            Poker t = new Poker();
 
             t.TrackState();
 
             t.ValidationGroup = "VG";
             t.CausesValidation = true;
 
-            object s = t.SaveState ();
-            Console.WriteLine ("state = {0}", s == null ? "null" : "not-null");
+            object s = t.SaveState();
+            Console.WriteLine("state = {0}", s == null ? "null" : "not-null");
 
-            Poker copy = new Poker ();
+            Poker copy = new Poker();
 
-            copy.LoadState (s);
+            copy.LoadState(s);
 
-            Assert.AreEqual ("VG", copy.ValidationGroup, "A1");
-            Assert.IsTrue (copy.CausesValidation, "A2");
+            Assert.AreEqual("VG", copy.ValidationGroup, "A1");
+            Assert.IsTrue(copy.CausesValidation, "A2");
         }
 
         [Test]
-        public void ValidationRender ()
+        public void ValidationRender()
         {
             /* test to show that the validation settings
              * have no effect on downlevel rendering */
-            Poker t = new Poker ();
+            Poker t = new Poker();
 
             t.TrackState();
 
@@ -161,229 +162,247 @@ namespace MonoTests.System.Web.UI.WebControls {
             t.CausesValidation = true;
             t.TextMode = TextBoxMode.MultiLine;
             string exp = "<textarea rows=\"2\" cols=\"20\">\r\n</textarea>";
-            HtmlDiff.AssertAreEqual (exp, t.Render (),"ValidationRender");
+            HtmlDiff.AssertAreEqual(exp, t.Render(), "ValidationRender");
         }
 
         [Test]
-        [Category ("NunitWeb")]
-        public void CausesValidation_ValidationGroup ()
+        [Category("NunitWeb")]
+        public void CausesValidation_ValidationGroup()
         {
-            WebTest t = new WebTest ("TextBoxTestlPage.aspx");
-            string str = t.Run ();
-            FormRequest fr = new FormRequest (t.Response, "form1");
-            fr.Controls.Add ("__EVENTTARGET");
-            fr.Controls.Add ("__EVENTARGUMENT");
-            fr.Controls.Add ("TextBox1");
+            WebTest t = new WebTest("TextBoxTestlPage.aspx");
+            string str = t.Run();
+            FormRequest fr = new FormRequest(t.Response, "form1");
+            fr.Controls.Add("__EVENTTARGET");
+            fr.Controls.Add("__EVENTARGUMENT");
+            fr.Controls.Add("TextBox1");
             fr.Controls["__EVENTTARGET"].Value = "TextBox1";
             fr.Controls["__EVENTARGUMENT"].Value = "";
             fr.Controls["TextBox1"].Value = "TestValue";
             t.Request = fr;
-            string html = t.Run ();
+            string html = t.Run();
 
-            if (html.IndexOf ("Validate_validation_group") == -1)
-                Assert.Fail ("Validate not created");
-            if (html.IndexOf ("MyValidationGroup") == -1)
-                Assert.Fail ("Wrong validation group");
+            if (html.IndexOf("Validate_validation_group") == -1)
+                Assert.Fail("Validate not created");
+            if (html.IndexOf("MyValidationGroup") == -1)
+                Assert.Fail("Wrong validation group");
         }
 
         #region Help_class
         public class PokerL : TextBox
         {
-            public string Render ()
+            public string Render()
             {
-                StringWriter sw = new StringWriter ();
+                StringWriter sw = new StringWriter();
                 sw.NewLine = "\n";
-                HtmlTextWriter writer = new HtmlTextWriter (sw);
-                base.Render (writer);
-                return writer.InnerWriter.ToString ();
-            }            
-
-            public new void RaisePostDataChangedEvent ()
-            {
-                base.RaisePostDataChangedEvent ();
+                HtmlTextWriter writer = new HtmlTextWriter(sw);
+                base.Render(writer);
+                return writer.InnerWriter.ToString();
             }
 
-            protected override bool LoadPostData (string postDataKey, global::System.Collections.Specialized.NameValueCollection postCollection)
+            public new void RaisePostDataChangedEvent()
             {
-                if (WebTest.CurrentTest.UserData == null) {
-                    ArrayList list = new ArrayList ();
-                    list.Add ("LoadPostData");
+                base.RaisePostDataChangedEvent();
+            }
+
+            protected override bool LoadPostData(
+                string postDataKey,
+                global::System.Collections.Specialized.NameValueCollection postCollection
+            )
+            {
+                if (WebTest.CurrentTest.UserData == null)
+                {
+                    ArrayList list = new ArrayList();
+                    list.Add("LoadPostData");
                     WebTest.CurrentTest.UserData = list;
                 }
-                else {
+                else
+                {
                     ArrayList list = WebTest.CurrentTest.UserData as ArrayList;
                     if (list == null)
-                        throw new NullReferenceException ();
-                    list.Add ("LoadPostData");
+                        throw new NullReferenceException();
+                    list.Add("LoadPostData");
                     WebTest.CurrentTest.UserData = list;
                 }
-                return base.LoadPostData (postDataKey, postCollection);
+                return base.LoadPostData(postDataKey, postCollection);
             }
 
-            protected internal override void OnLoad (EventArgs e)
+            protected internal override void OnLoad(EventArgs e)
             {
-                if (this.Page.IsPostBack) {
-                    if (WebTest.CurrentTest.UserData == null) {
-                        ArrayList list = new ArrayList ();
-                        list.Add ("ControlLoad");
+                if (this.Page.IsPostBack)
+                {
+                    if (WebTest.CurrentTest.UserData == null)
+                    {
+                        ArrayList list = new ArrayList();
+                        list.Add("ControlLoad");
                         WebTest.CurrentTest.UserData = list;
                     }
-                    else {
+                    else
+                    {
                         ArrayList list = WebTest.CurrentTest.UserData as ArrayList;
                         if (list == null)
-                            throw new NullReferenceException ();
-                        list.Add ("ControlLoad");
+                            throw new NullReferenceException();
+                        list.Add("ControlLoad");
                         WebTest.CurrentTest.UserData = list;
                     }
                 }
-                base.OnLoad (e);
+                base.OnLoad(e);
             }
         }
         #endregion
 
         [Test]
-        [Category ("NunitWeb")]
-        public void LoadPostData_Flow ()  //Just flow and not implementation detail
+        [Category("NunitWeb")]
+        public void LoadPostData_Flow() //Just flow and not implementation detail
         {
-            WebTest t = new WebTest (PageInvoker.CreateOnLoad (LoadPostData_Load));
-            string html = t.Run ();
-            FormRequest fr = new FormRequest (t.Response, "form1");
-            fr.Controls.Add ("__EVENTTARGET");
-            fr.Controls.Add ("__EVENTARGUMENT");
-            fr.Controls.Add ("pb");
+            WebTest t = new WebTest(PageInvoker.CreateOnLoad(LoadPostData_Load));
+            string html = t.Run();
+            FormRequest fr = new FormRequest(t.Response, "form1");
+            fr.Controls.Add("__EVENTTARGET");
+            fr.Controls.Add("__EVENTARGUMENT");
+            fr.Controls.Add("pb");
             fr.Controls["__EVENTTARGET"].Value = "pb";
             fr.Controls["__EVENTARGUMENT"].Value = "";
             fr.Controls["pb"].Value = "TestValue";
             t.Request = fr;
-            t.Run ();
+            t.Run();
 
             ArrayList eventlist = t.UserData as ArrayList;
             if (eventlist == null)
-                Assert.Fail ("User data does not been created fail");
-            Assert.AreEqual ("PageLoad", eventlist[0], "Live Cycle Flow #1");
-            Assert.AreEqual ("ControlLoad", eventlist[1], "Live Cycle Flow #2");
-            Assert.AreEqual ("LoadPostData", eventlist[2], "Live Cycle Flow #3");
+                Assert.Fail("User data does not been created fail");
+            Assert.AreEqual("PageLoad", eventlist[0], "Live Cycle Flow #1");
+            Assert.AreEqual("ControlLoad", eventlist[1], "Live Cycle Flow #2");
+            Assert.AreEqual("LoadPostData", eventlist[2], "Live Cycle Flow #3");
         }
 
-        public static void LoadPostData_Load (Page p)
+        public static void LoadPostData_Load(Page p)
         {
-            PokerL b = new PokerL ();
+            PokerL b = new PokerL();
             b.AutoPostBack = true;
             b.ID = "pb";
-            p.Form.Controls.Add (b);
-            if (p.IsPostBack) {
-                if (WebTest.CurrentTest.UserData == null) {
-                    ArrayList list = new ArrayList ();
-                    list.Add ("PageLoad");
+            p.Form.Controls.Add(b);
+            if (p.IsPostBack)
+            {
+                if (WebTest.CurrentTest.UserData == null)
+                {
+                    ArrayList list = new ArrayList();
+                    list.Add("PageLoad");
                     WebTest.CurrentTest.UserData = list;
                 }
-                else {
+                else
+                {
                     ArrayList list = WebTest.CurrentTest.UserData as ArrayList;
                     if (list == null)
-                        throw new NullReferenceException ();
-                    list.Add ("PageLoad");
+                        throw new NullReferenceException();
+                    list.Add("PageLoad");
                     WebTest.CurrentTest.UserData = list;
                 }
             }
         }
 
         [Test]
-        [Category ("NunitWeb")]
-        public void LoadPostData ()  
+        [Category("NunitWeb")]
+        public void LoadPostData()
         {
-            WebTest t = new WebTest (PageInvoker.CreateOnLoad (LoadPostData__Load));
-            string html = t.Run ();
-            FormRequest fr = new FormRequest (t.Response, "form1");
-            fr.Controls.Add ("__EVENTTARGET");
-            fr.Controls.Add ("__EVENTARGUMENT");
-            fr.Controls.Add ("pb");
+            WebTest t = new WebTest(PageInvoker.CreateOnLoad(LoadPostData__Load));
+            string html = t.Run();
+            FormRequest fr = new FormRequest(t.Response, "form1");
+            fr.Controls.Add("__EVENTTARGET");
+            fr.Controls.Add("__EVENTARGUMENT");
+            fr.Controls.Add("pb");
             fr.Controls["__EVENTTARGET"].Value = "pb";
             fr.Controls["__EVENTARGUMENT"].Value = "";
             fr.Controls["pb"].Value = "TestValue";
             t.Request = fr;
-            html = t.Run ();
+            html = t.Run();
 
             ArrayList eventlist = t.UserData as ArrayList;
             if (eventlist == null)
-                Assert.Fail ("User data does not been created fail");
-            Assert.AreEqual ("ControlLoad", eventlist[0], "Live Cycle Flow #1");
-            Assert.AreEqual ("LoadPostData", eventlist[1], "Live Cycle Flow #2");
-            Assert.AreEqual ("TextChanged", eventlist[2], "Live Cycle Flow #3");
+                Assert.Fail("User data does not been created fail");
+            Assert.AreEqual("ControlLoad", eventlist[0], "Live Cycle Flow #1");
+            Assert.AreEqual("LoadPostData", eventlist[1], "Live Cycle Flow #2");
+            Assert.AreEqual("TextChanged", eventlist[2], "Live Cycle Flow #3");
 
-            if (html.IndexOf ("TestValue") == -1)
-                Assert.Fail ("Wrong value failed");
+            if (html.IndexOf("TestValue") == -1)
+                Assert.Fail("Wrong value failed");
         }
 
-        public static void LoadPostData__Load (Page p)
+        public static void LoadPostData__Load(Page p)
         {
-            PokerL b = new PokerL ();
+            PokerL b = new PokerL();
             b.ID = "pb";
-            p.Form.Controls.Add (b);
-            b.TextChanged += new EventHandler (b_TextChanged);
+            p.Form.Controls.Add(b);
+            b.TextChanged += new EventHandler(b_TextChanged);
             if (p.IsPostBack)
-                p.Response.Write (b.Text);
+                p.Response.Write(b.Text);
         }
 
-        public static void b_TextChanged (object sender, EventArgs e)
+        public static void b_TextChanged(object sender, EventArgs e)
         {
-            if (WebTest.CurrentTest.UserData == null) {
-                ArrayList list = new ArrayList ();
-                list.Add ("TextChanged");
+            if (WebTest.CurrentTest.UserData == null)
+            {
+                ArrayList list = new ArrayList();
+                list.Add("TextChanged");
                 WebTest.CurrentTest.UserData = list;
             }
-            else {
+            else
+            {
                 ArrayList list = WebTest.CurrentTest.UserData as ArrayList;
                 if (list == null)
-                    throw new NullReferenceException ();
-                list.Add ("TextChanged");
+                    throw new NullReferenceException();
+                list.Add("TextChanged");
                 WebTest.CurrentTest.UserData = list;
             }
         }
 
         [Test]
-        public void RaisePostDataChangedEvent ()
+        public void RaisePostDataChangedEvent()
         {
-            PokerL p = new PokerL ();
-            p.TextChanged += new EventHandler (p_TextChanged);
-            Assert.AreEqual (false, eventTextChanged, "RaisePostDataChangedEvent#1");
-            p.RaisePostDataChangedEvent ();
-            Assert.AreEqual (true, eventTextChanged, "RaisePostDataChangedEvent#2");
+            PokerL p = new PokerL();
+            p.TextChanged += new EventHandler(p_TextChanged);
+            Assert.AreEqual(false, eventTextChanged, "RaisePostDataChangedEvent#1");
+            p.RaisePostDataChangedEvent();
+            Assert.AreEqual(true, eventTextChanged, "RaisePostDataChangedEvent#2");
         }
 
         bool eventTextChanged;
-        void  p_TextChanged(object sender, EventArgs e)
+
+        void p_TextChanged(object sender, EventArgs e)
         {
-            eventTextChanged = true;    
+            eventTextChanged = true;
         }
 
         [Test]
-        public void AutoCompleteType_Test ()
+        public void AutoCompleteType_Test()
         {
-            WebTest t = new WebTest ("NoEventValidation.aspx");
-            t = new WebTest (PageInvoker.CreateOnLoad (AutoCompleteType__Load));
-            string html = t.Run ();
-            string orig ="<input name=\"Poker\" type=\"text\" vcard_name=\"vCard.FirstName\" id=\"Poker\" />";
-            HtmlDiff.AssertAreEqual (orig, HtmlDiff.GetControlFromPageHtml (html), "AutoCompleteType");
+            WebTest t = new WebTest("NoEventValidation.aspx");
+            t = new WebTest(PageInvoker.CreateOnLoad(AutoCompleteType__Load));
+            string html = t.Run();
+            string orig =
+                "<input name=\"Poker\" type=\"text\" vcard_name=\"vCard.FirstName\" id=\"Poker\" />";
+            HtmlDiff.AssertAreEqual(
+                orig,
+                HtmlDiff.GetControlFromPageHtml(html),
+                "AutoCompleteType"
+            );
         }
 
-        public static void AutoCompleteType__Load (Page page)
+        public static void AutoCompleteType__Load(Page page)
         {
-            LiteralControl lcb = new LiteralControl (HtmlDiff.BEGIN_TAG);
-            LiteralControl lce = new LiteralControl (HtmlDiff.END_TAG);
+            LiteralControl lcb = new LiteralControl(HtmlDiff.BEGIN_TAG);
+            LiteralControl lce = new LiteralControl(HtmlDiff.END_TAG);
 
-            PokerL p = new PokerL ();
+            PokerL p = new PokerL();
             p.ID = "Poker";
             p.AutoCompleteType = AutoCompleteType.FirstName;
-            page.Form.Controls.Add (lcb);
-            page.Form.Controls.Add (p);
-            page.Form.Controls.Add (lce);
+            page.Form.Controls.Add(lcb);
+            page.Form.Controls.Add(p);
+            page.Form.Controls.Add(lce);
         }
 
         [TestFixtureTearDown]
-        public void TearDown ()
+        public void TearDown()
         {
-            WebTest.Unload ();
+            WebTest.Unload();
         }
     }
 }
-

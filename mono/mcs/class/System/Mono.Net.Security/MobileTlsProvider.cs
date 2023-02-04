@@ -18,16 +18,21 @@ namespace Mono.Net.Security
 {
     abstract class MobileTlsProvider : MonoTlsProvider
     {
-        public sealed override IMonoSslStream CreateSslStream (
-            Stream innerStream, bool leaveInnerStreamOpen,
-            MonoTlsSettings settings = null)
+        public sealed override IMonoSslStream CreateSslStream(
+            Stream innerStream,
+            bool leaveInnerStreamOpen,
+            MonoTlsSettings settings = null
+        )
         {
-            return SslStream.CreateMonoSslStream (innerStream, leaveInnerStreamOpen, this, settings);
+            return SslStream.CreateMonoSslStream(innerStream, leaveInnerStreamOpen, this, settings);
         }
 
-        internal abstract MobileAuthenticatedStream CreateSslStream (
-            SslStream sslStream, Stream innerStream, bool leaveInnerStreamOpen,
-            MonoTlsSettings settings);
+        internal abstract MobileAuthenticatedStream CreateSslStream(
+            SslStream sslStream,
+            Stream innerStream,
+            bool leaveInnerStreamOpen,
+            MonoTlsSettings settings
+        );
 
         /*
          * If @serverMode is true, then we're a server and want to validate a certificate
@@ -38,10 +43,16 @@ namespace Mono.Net.Security
          * Returns `true` if certificate validation has been performed and `false` to invoke the
          * default system validator.
          */
-        internal abstract bool ValidateCertificate (
-            ChainValidationHelper validator, string targetHost, bool serverMode,
-            X509CertificateCollection certificates, bool wantsChain, ref X509Chain chain,
-            ref SslPolicyErrors errors, ref int status11);
+        internal abstract bool ValidateCertificate(
+            ChainValidationHelper validator,
+            string targetHost,
+            bool serverMode,
+            X509CertificateCollection certificates,
+            bool wantsChain,
+            ref X509Chain chain,
+            ref SslPolicyErrors errors,
+            ref int status11
+        );
     }
 }
 

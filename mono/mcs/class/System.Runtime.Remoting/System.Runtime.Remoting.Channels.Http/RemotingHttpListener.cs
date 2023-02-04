@@ -1,11 +1,11 @@
 //
 // RemotingHttpListener.cs
-// 
+//
 // Author:
 //   Michael Hutchinson <mhutchinson@novell.com>
-// 
+//
 // Copyright (C) 2008 Novell, Inc (http://www.novell.com)
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
 // "Software"), to deal in the Software without restriction, including
@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -42,7 +42,7 @@ namespace System.Runtime.Remoting.Channels.Http
         HttpListener listener;
         int local_port;
 
-        public RemotingHttpListener (IPAddress addr, int port, HttpServerTransportSink sink)
+        public RemotingHttpListener(IPAddress addr, int port, HttpServerTransportSink sink)
         {
             this.sink = sink;
             bool find_port = false;
@@ -55,29 +55,34 @@ namespace System.Runtime.Remoting.Channels.Http
             else if (addr == IPAddress.IPv6Any)
                 address = "*";
             else
-                address = addr.ToString ();
+                address = addr.ToString();
 
-            listener = new HttpListener ();
-            while (true) {
+            listener = new HttpListener();
+            while (true)
+            {
                 Random rnd = null;
-                if (find_port) {
+                if (find_port)
+                {
                     if (rnd == null)
-                        rnd = new Random ();
-                    port = rnd.Next (1025, 65000);
+                        rnd = new Random();
+                    port = rnd.Next(1025, 65000);
                 }
-                try {
-                    listener.Prefixes.Add (String.Format ("http://{0}:{1}/", address, port));
-                    listener.Start ();
+                try
+                {
+                    listener.Prefixes.Add(String.Format("http://{0}:{1}/", address, port));
+                    listener.Start();
                     local_port = port;
                     break;
-                } catch (Exception) {
+                }
+                catch (Exception)
+                {
                     if (!find_port)
                         throw;
-                    listener.Prefixes.Clear ();
+                    listener.Prefixes.Clear();
                     // Port already in use
                 }
             }
-            listener.BeginGetContext (new AsyncCallback (OnGetContext), null);
+            listener.BeginGetContext(new AsyncCallback(OnGetContext), null);
         }
 
         public int AssignedPort
@@ -85,34 +90,44 @@ namespace System.Runtime.Remoting.Channels.Http
             get { return local_port; }
         }
 
-        void OnGetContext (IAsyncResult ares)
+        void OnGetContext(IAsyncResult ares)
         {
             if (listener == null)
                 return; // already disposed
 
             HttpListenerContext context = null;
-            try {
-                context = listener.EndGetContext (ares);
-                listener.BeginGetContext (new AsyncCallback (OnGetContext), null);
-            } catch {
+            try
+            {
+                context = listener.EndGetContext(ares);
+                listener.BeginGetContext(new AsyncCallback(OnGetContext), null);
+            }
+            catch
+            {
                 // Listener was closed
             }
 
-            if (context != null) {
-                try {
-                    sink.HandleRequest (context);
-                } catch {
-                    try {
-                        context.Response.Close ();
-                    } catch {}
+            if (context != null)
+            {
+                try
+                {
+                    sink.HandleRequest(context);
+                }
+                catch
+                {
+                    try
+                    {
+                        context.Response.Close();
+                    }
+                    catch { }
                 }
             }
         }
 
-        public void Dispose ()
+        public void Dispose()
         {
-            if (listener != null) {
-                listener.Close ();
+            if (listener != null)
+            {
+                listener.Close();
                 listener = null;
             }
         }

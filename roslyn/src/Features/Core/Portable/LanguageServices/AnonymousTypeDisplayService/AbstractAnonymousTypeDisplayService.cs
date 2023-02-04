@@ -12,26 +12,38 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.LanguageServices
 {
-    internal abstract partial class AbstractAnonymousTypeDisplayService : IAnonymousTypeDisplayService
+    internal abstract partial class AbstractAnonymousTypeDisplayService
+        : IAnonymousTypeDisplayService
     {
         public abstract ImmutableArray<SymbolDisplayPart> GetAnonymousTypeParts(
-            INamedTypeSymbol anonymousType, SemanticModel semanticModel, int position);
+            INamedTypeSymbol anonymousType,
+            SemanticModel semanticModel,
+            int position
+        );
 
         public AnonymousTypeDisplayInfo GetNormalAnonymousTypeDisplayInfo(
             ISymbol orderSymbol,
             IEnumerable<INamedTypeSymbol> directNormalAnonymousTypeReferences,
             SemanticModel semanticModel,
-            int position)
+            int position
+        )
         {
             if (!directNormalAnonymousTypeReferences.Any())
             {
                 return new AnonymousTypeDisplayInfo(
                     SpecializedCollections.EmptyDictionary<INamedTypeSymbol, string>(),
-                    SpecializedCollections.EmptyList<SymbolDisplayPart>());
+                    SpecializedCollections.EmptyList<SymbolDisplayPart>()
+                );
             }
 
-            var transitiveNormalAnonymousTypeReferences = GetTransitiveNormalAnonymousTypeReferences(directNormalAnonymousTypeReferences.ToSet());
-            transitiveNormalAnonymousTypeReferences = OrderAnonymousTypes(transitiveNormalAnonymousTypeReferences, orderSymbol);
+            var transitiveNormalAnonymousTypeReferences =
+                GetTransitiveNormalAnonymousTypeReferences(
+                    directNormalAnonymousTypeReferences.ToSet()
+                );
+            transitiveNormalAnonymousTypeReferences = OrderAnonymousTypes(
+                transitiveNormalAnonymousTypeReferences,
+                orderSymbol
+            );
 
             IList<SymbolDisplayPart> anonymousTypeParts = new List<SymbolDisplayPart>();
             anonymousTypeParts.Add(PlainText(FeaturesResources.Anonymous_Types_colon));
@@ -46,25 +58,39 @@ namespace Microsoft.CodeAnalysis.LanguageServices
 
                 var anonymousType = transitiveNormalAnonymousTypeReferences[i];
                 anonymousTypeParts.AddRange(Space(count: 4));
-                anonymousTypeParts.Add(Part(SymbolDisplayPartKind.ClassName, anonymousType, anonymousType.Name));
+                anonymousTypeParts.Add(
+                    Part(SymbolDisplayPartKind.ClassName, anonymousType, anonymousType.Name)
+                );
                 anonymousTypeParts.AddRange(Space());
                 anonymousTypeParts.Add(PlainText(FeaturesResources.is_));
                 anonymousTypeParts.AddRange(Space());
-                anonymousTypeParts.AddRange(GetAnonymousTypeParts(anonymousType, semanticModel, position));
+                anonymousTypeParts.AddRange(
+                    GetAnonymousTypeParts(anonymousType, semanticModel, position)
+                );
             }
 
             // Now, inline any delegate anonymous types we've got.
-            anonymousTypeParts = this.InlineDelegateAnonymousTypes(anonymousTypeParts, semanticModel, position);
+            anonymousTypeParts = this.InlineDelegateAnonymousTypes(
+                anonymousTypeParts,
+                semanticModel,
+                position
+            );
 
             // Finally, assign a name to all the anonymous types.
-            var anonymousTypeToName = GenerateAnonymousTypeNames(transitiveNormalAnonymousTypeReferences);
-            anonymousTypeParts = AnonymousTypeDisplayInfo.ReplaceAnonymousTypes(anonymousTypeParts, anonymousTypeToName);
+            var anonymousTypeToName = GenerateAnonymousTypeNames(
+                transitiveNormalAnonymousTypeReferences
+            );
+            anonymousTypeParts = AnonymousTypeDisplayInfo.ReplaceAnonymousTypes(
+                anonymousTypeParts,
+                anonymousTypeToName
+            );
 
             return new AnonymousTypeDisplayInfo(anonymousTypeToName, anonymousTypeParts);
         }
 
         private static Dictionary<INamedTypeSymbol, string> GenerateAnonymousTypeNames(
-            IList<INamedTypeSymbol> anonymousTypes)
+            IList<INamedTypeSymbol> anonymousTypes
+        )
         {
             var current = 0;
             var anonymousTypeToName = new Dictionary<INamedTypeSymbol, string>();
@@ -90,46 +116,60 @@ namespace Microsoft.CodeAnalysis.LanguageServices
 
         private static IList<INamedTypeSymbol> OrderAnonymousTypes(
             IList<INamedTypeSymbol> transitiveAnonymousTypeReferences,
-            ISymbol symbol)
+            ISymbol symbol
+        )
         {
             if (symbol is IMethodSymbol method)
             {
-                return transitiveAnonymousTypeReferences.OrderBy(
-                    (n1, n2) =>
-                    {
-                        var index1 = method.TypeArguments.IndexOf(n1);
-                        var index2 = method.TypeArguments.IndexOf(n2);
-                        index1 = index1 < 0 ? int.MaxValue : index1;
-                        index2 = index2 < 0 ? int.MaxValue : index2;
+                return transitiveAnonymousTypeReferences
+                    .OrderBy(
+                        (n1, n2) =>
+                        {
+                            var index1 = method.TypeArguments.IndexOf(n1);
+                            var index2 = method.TypeArguments.IndexOf(n2);
+                            index1 = index1 < 0 ? int.MaxValue : index1;
+                            index2 = index2 < 0 ? int.MaxValue : index2;
 
-                        return index1 - index2;
-                    }).ToList();
+                            return index1 - index2;
+                        }
+                    )
+                    .ToList();
             }
             else if (symbol is IPropertySymbol property)
             {
-                return transitiveAnonymousTypeReferences.OrderBy(
-                    (n1, n2) =>
-                    {
-                        if (n1.Equals(property.ContainingType) && !n2.Equals(property.ContainingType))
+                return transitiveAnonymousTypeReferences
+                    .OrderBy(
+                        (n1, n2) =>
                         {
-                            return -1;
+                            if (
+                                n1.Equals(property.ContainingType)
+                                && !n2.Equals(property.ContainingType)
+                            )
+                            {
+                                return -1;
+                            }
+                            else if (
+                                !n1.Equals(property.ContainingType)
+                                && n2.Equals(property.ContainingType)
+                            )
+                            {
+                                return 1;
+                            }
+                            else
+                            {
+                                return 0;
+                            }
                         }
-                        else if (!n1.Equals(property.ContainingType) && n2.Equals(property.ContainingType))
-                        {
-                            return 1;
-                        }
-                        else
-                        {
-                            return 0;
-                        }
-                    }).ToList();
+                    )
+                    .ToList();
             }
 
             return transitiveAnonymousTypeReferences;
         }
 
         private static IList<INamedTypeSymbol> GetTransitiveNormalAnonymousTypeReferences(
-            ISet<INamedTypeSymbol> anonymousTypeReferences)
+            ISet<INamedTypeSymbol> anonymousTypeReferences
+        )
         {
             var transitiveReferences = new List<INamedTypeSymbol>();
             var visitor = new NormalAnonymousTypeCollectorVisitor(transitiveReferences);
@@ -150,14 +190,17 @@ namespace Microsoft.CodeAnalysis.LanguageServices
             }
         }
 
-        protected static SymbolDisplayPart PlainText(string text)
-            => Part(SymbolDisplayPartKind.Text, text);
+        protected static SymbolDisplayPart PlainText(string text) =>
+            Part(SymbolDisplayPartKind.Text, text);
 
-        private static SymbolDisplayPart Part(SymbolDisplayPartKind kind, string text)
-            => Part(kind, null, text);
+        private static SymbolDisplayPart Part(SymbolDisplayPartKind kind, string text) =>
+            Part(kind, null, text);
 
-        private static SymbolDisplayPart Part(SymbolDisplayPartKind kind, ISymbol symbol, string text)
-            => new(kind, symbol, text);
+        private static SymbolDisplayPart Part(
+            SymbolDisplayPartKind kind,
+            ISymbol symbol,
+            string text
+        ) => new(kind, symbol, text);
 
         protected static IEnumerable<SymbolDisplayPart> Space(int count = 1)
         {
@@ -167,10 +210,10 @@ namespace Microsoft.CodeAnalysis.LanguageServices
             }
         }
 
-        protected static SymbolDisplayPart Punctuation(string text)
-            => Part(SymbolDisplayPartKind.Punctuation, text);
+        protected static SymbolDisplayPart Punctuation(string text) =>
+            Part(SymbolDisplayPartKind.Punctuation, text);
 
-        protected static SymbolDisplayPart Keyword(string text)
-            => Part(SymbolDisplayPartKind.Keyword, text);
+        protected static SymbolDisplayPart Keyword(string text) =>
+            Part(SymbolDisplayPartKind.Keyword, text);
     }
 }

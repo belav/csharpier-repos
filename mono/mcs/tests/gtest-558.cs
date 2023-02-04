@@ -2,23 +2,23 @@ using System;
 
 abstract class A<T>
 {
-    public abstract void Foo<U> (U arg) where U : T;
+    public abstract void Foo<U>(U arg)
+        where U : T;
 }
 
 class B : A<int>
 {
-    public override void Foo<U> (U arg)
+    public override void Foo<U>(U arg)
     {
         ValueType vt = arg;
-        Next (arg);
-    }
-    
-    void Next<UU> (UU a) where UU : struct
-    {
+        Next(arg);
     }
 
-    public static void Main ()
+    void Next<UU>(UU a)
+        where UU : struct { }
+
+    public static void Main()
     {
-        new B ().Foo (5);
+        new B().Foo(5);
     }
 }

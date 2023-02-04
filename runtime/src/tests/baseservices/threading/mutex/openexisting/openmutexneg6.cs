@@ -23,15 +23,17 @@ class OpenMutexNeg
             {
                 Mutex mut = Mutex.OpenExisting(sName);
             }
-            catch(WaitHandleCannotBeOpenedException)
+            catch (WaitHandleCannotBeOpenedException)
             {
-                //Expected    
+                //Expected
                 iRet = 100;
             }
             catch (Exception e)
             {
-                Console.WriteLine("Caught exception where WaitHandleCannotBeOpenedException was expected: " +
-                    e.ToString());
+                Console.WriteLine(
+                    "Caught exception where WaitHandleCannotBeOpenedException was expected: "
+                        + e.ToString()
+                );
             }
         }
 

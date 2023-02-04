@@ -33,10 +33,7 @@ namespace System.Management
         /// <para> Initializes a new instance of the <see cref='System.Management.ManagementNamedValueCollection'/> class, which is empty. This is
         ///    the default constructor.</para>
         /// </summary>
-        public ManagementNamedValueCollection()
-        {
-        }
-
+        public ManagementNamedValueCollection() { }
 
         /// <summary>
         /// <para>Initializes a new instance of the <see cref='System.Management.ManagementNamedValueCollection'/> class that is serializable
@@ -45,7 +42,8 @@ namespace System.Management
         /// </summary>
         /// <param name='info'>The <see cref='System.Runtime.Serialization.SerializationInfo'/> to populate with data.</param>
         /// <param name='context'>The destination (see <see cref='System.Runtime.Serialization.StreamingContext'/> ) for this serialization.</param>
-        protected ManagementNamedValueCollection(SerializationInfo info, StreamingContext context) : base(info, context)
+        protected ManagementNamedValueCollection(SerializationInfo info, StreamingContext context)
+            : base(info, context)
         {
             throw new PlatformNotSupportedException();
         }
@@ -180,11 +178,7 @@ namespace System.Management
         /// </value>
         public object this[string name]
         {
-            get
-            {
-                return base.BaseGet(name);
-            }
+            get { return base.BaseGet(name); }
         }
     }
-
 }

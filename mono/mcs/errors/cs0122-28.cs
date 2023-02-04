@@ -13,8 +13,8 @@ class A
 
 class C : A
 {
-    public static void Main ()
+    public static void Main()
     {
-        Console.WriteLine (X.V);
+        Console.WriteLine(X.V);
     }
 }

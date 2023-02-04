@@ -6,19 +6,11 @@ public class Proef
 
     public event EventHandler OnDoSomething
     {
-        add
-        {
-            _OnDoSomething += value;
-        }
-        remove
-        {
-            _OnDoSomething -= value;
-        }
+        add { _OnDoSomething += value; }
+        remove { _OnDoSomething -= value; }
     }
 
-    static void Temp(object s, EventArgs e)
-    {
-    }
+    static void Temp(object s, EventArgs e) { }
 
     public static void Main()
     {

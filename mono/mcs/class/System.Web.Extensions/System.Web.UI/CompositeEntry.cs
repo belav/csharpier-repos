@@ -12,10 +12,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,41 +31,41 @@ using System.Reflection;
 using System.Web.Hosting;
 
 namespace System.Web.UI
-{      
+{
     sealed class CompositeEntry
     {
         public Assembly Assembly;
         public string NameOrPath;
         public WebResourceAttribute Attribute;
 
-        string GetFilePath ()
+        string GetFilePath()
         {
             if (Assembly != null)
                 return Assembly.Location;
-            else if (!String.IsNullOrEmpty (NameOrPath))
-                return HostingEnvironment.MapPath (NameOrPath);
+            else if (!String.IsNullOrEmpty(NameOrPath))
+                return HostingEnvironment.MapPath(NameOrPath);
             else
                 return String.Empty;
         }
-        
-        public bool IsModifiedSince (DateTime since)
+
+        public bool IsModifiedSince(DateTime since)
         {
-            return File.GetLastWriteTimeUtc (GetFilePath ()) > since;
+            return File.GetLastWriteTimeUtc(GetFilePath()) > since;
         }
 
-        public bool IsModifiedSince (long atime)
+        public bool IsModifiedSince(long atime)
         {
-            return File.GetLastWriteTimeUtc (GetFilePath ()).Ticks > atime;
+            return File.GetLastWriteTimeUtc(GetFilePath()).Ticks > atime;
         }
-        
-        public override int GetHashCode ()
+
+        public override int GetHashCode()
         {
             int ret = 0;
 
             if (Assembly != null)
-                ret ^= Assembly.GetHashCode ();
+                ret ^= Assembly.GetHashCode();
             if (NameOrPath != null)
-                ret ^= NameOrPath.GetHashCode ();
+                ret ^= NameOrPath.GetHashCode();
 
             return ret;
         }

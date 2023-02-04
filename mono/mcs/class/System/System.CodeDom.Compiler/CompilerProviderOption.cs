@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -38,29 +38,47 @@ namespace System.CodeDom.Compiler
         static ConfigurationProperty nameProp;
         static ConfigurationProperty valueProp;
         static ConfigurationPropertyCollection properties;
-        
-        static CompilerProviderOption ()
+
+        static CompilerProviderOption()
         {
-            nameProp = new ConfigurationProperty ("name", typeof (string), "",
-                                  ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey);
-            valueProp = new ConfigurationProperty ("value", typeof (string), "",
-                                   ConfigurationPropertyOptions.IsRequired);
+            nameProp = new ConfigurationProperty(
+                "name",
+                typeof(string),
+                "",
+                ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey
+            );
+            valueProp = new ConfigurationProperty(
+                "value",
+                typeof(string),
+                "",
+                ConfigurationPropertyOptions.IsRequired
+            );
 
-            properties = new ConfigurationPropertyCollection ();
-            properties.Add (nameProp);
-            properties.Add (valueProp);
+            properties = new ConfigurationPropertyCollection();
+            properties.Add(nameProp);
+            properties.Add(valueProp);
         }
 
-        [ConfigurationProperty ("name", DefaultValue = "", Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey)]
-        public string Name {
-            get { return (string) base [nameProp]; }
-            set { base [nameProp] = value; }
+        [ConfigurationProperty(
+            "name",
+            DefaultValue = "",
+            Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey
+        )]
+        public string Name
+        {
+            get { return (string)base[nameProp]; }
+            set { base[nameProp] = value; }
         }
 
-        [ConfigurationProperty ("value", DefaultValue = "", Options = ConfigurationPropertyOptions.IsRequired)]
-        public string Value {
-            get { return (string) base [valueProp]; }
-            set { base [valueProp] = value; }
+        [ConfigurationProperty(
+            "value",
+            DefaultValue = "",
+            Options = ConfigurationPropertyOptions.IsRequired
+        )]
+        public string Value
+        {
+            get { return (string)base[valueProp]; }
+            set { base[valueProp] = value; }
         }
 
         protected override ConfigurationPropertyCollection Properties => properties;

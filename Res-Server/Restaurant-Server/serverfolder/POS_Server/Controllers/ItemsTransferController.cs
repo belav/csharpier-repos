@@ -17,11 +17,13 @@ namespace POS_Server.Controllers
     public class ItemsTransferController : ApiController
     {
         CountriesController coctrlr = new CountriesController();
+
         [HttpPost]
         [Route("Get")]
         public string Get(string token)
         {
-          token = TokenManager.readToken(HttpContext.Current.Request);var strP = TokenManager.GetPrincipal(token);
+            token = TokenManager.readToken(HttpContext.Current.Request);
+            var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
                 return TokenManager.GenerateToken(strP);
@@ -30,7 +32,6 @@ namespace POS_Server.Controllers
             {
                 long invoiceId = 0;
 
-
                 IEnumerable<Claim> claims = TokenManager.getTokenClaims(token);
                 foreach (Claim c in claims)
                 {
@@ -38,8 +39,6 @@ namespace POS_Server.Controllers
                     {
                         invoiceId = long.Parse(c.Value);
                     }
-
-
                 }
                 try
                 {
@@ -57,87 +56,101 @@ namespace POS_Server.Controllers
         {
             using (incposdbEntities entity = new incposdbEntities())
             {
-                var transferList = (from t in entity.itemsTransfer.Where(x => x.invoiceId == invoiceId && x.mainCourseId == null)
-                                    join u in entity.itemsUnits on t.itemUnitId equals u.itemUnitId
-                                    join i in entity.items on u.itemId equals i.itemId
-                                    join un in entity.units on u.unitId equals un.unitId
-                                    join inv in entity.invoices on t.invoiceId equals inv.invoiceId
-                                    select new ItemTransferModel()
-                                    {
-                                        itemsTransId = t.itemsTransId,
-                                        itemId = i.itemId,
-                                        itemName = i.name,
-                                        quantity = t.quantity,
-                                        invoiceId = entity.invoiceOrder.Where(x => x.itemsTransferId == t.itemsTransId).Select(x => x.orderId).FirstOrDefault(),
-                                        invNumber = inv.invNumber,
-
-                                        createUserId = t.createUserId,
-                                        updateUserId = t.updateUserId,
-                                        notes = t.notes,
-                                        createDate = t.createDate,
-                                        updateDate = t.updateDate,
-                                        itemUnitId = u.itemUnitId,
-                                        price = t.price,
-                                        unitName = un.name,
-                                        unitId = un.unitId,
-                                        barcode = u.barcode,
-                                        itemSerial = t.itemSerial,
-                                        itemType = i.type,
-                                        offerId = t.offerId,
-                                        forAgents = t.forAgents,
-                                    })
-                                    .ToList();
+                var transferList = (
+                    from t in entity.itemsTransfer.Where(
+                        x => x.invoiceId == invoiceId && x.mainCourseId == null
+                    )
+                    join u in entity.itemsUnits on t.itemUnitId equals u.itemUnitId
+                    join i in entity.items on u.itemId equals i.itemId
+                    join un in entity.units on u.unitId equals un.unitId
+                    join inv in entity.invoices on t.invoiceId equals inv.invoiceId
+                    select new ItemTransferModel()
+                    {
+                        itemsTransId = t.itemsTransId,
+                        itemId = i.itemId,
+                        itemName = i.name,
+                        quantity = t.quantity,
+                        invoiceId = entity.invoiceOrder
+                            .Where(x => x.itemsTransferId == t.itemsTransId)
+                            .Select(x => x.orderId)
+                            .FirstOrDefault(),
+                        invNumber = inv.invNumber,
+                        createUserId = t.createUserId,
+                        updateUserId = t.updateUserId,
+                        notes = t.notes,
+                        createDate = t.createDate,
+                        updateDate = t.updateDate,
+                        itemUnitId = u.itemUnitId,
+                        price = t.price,
+                        unitName = un.name,
+                        unitId = un.unitId,
+                        barcode = u.barcode,
+                        itemSerial = t.itemSerial,
+                        itemType = i.type,
+                        offerId = t.offerId,
+                        forAgents = t.forAgents,
+                    }
+                ).ToList();
 
                 foreach (var item in transferList)
                 {
-                    item.itemsIngredients = entity.itemsTransferIngredients.Where(x => x.itemsTransId == item.itemsTransId)
-                        .Select(x => new itemsTransferIngredientsModel()
+                    item.itemsIngredients = entity.itemsTransferIngredients
+                        .Where(x => x.itemsTransId == item.itemsTransId)
+                        .Select(
+                            x =>
+                                new itemsTransferIngredientsModel()
+                                {
+                                    dishIngredId = x.dishIngredId,
+                                    isActive = x.isActive,
+                                    DishIngredientName = x.dishIngredients.name,
+                                    itemUnitId = x.itemsTransfer.itemUnitId,
+                                    itemsTransId = x.itemsTransId,
+                                    isBasic = x.dishIngredients.isBasic,
+                                    itemsTransIngredId = x.itemsTransIngredId
+                                }
+                        )
+                        .ToList();
+
+                    item.itemExtras = (
+                        from t in entity.itemsTransfer.Where(
+                            x => x.mainCourseId == item.itemsTransId
+                        )
+                        join u in entity.itemsUnits on t.itemUnitId equals u.itemUnitId
+                        join i in entity.items on u.itemId equals i.itemId
+                        join un in entity.units on u.unitId equals un.unitId
+                        join inv in entity.invoices on t.invoiceId equals inv.invoiceId
+                        select new ItemTransferModel()
                         {
-                            dishIngredId = x.dishIngredId,
-                            isActive = x.isActive,
-                            DishIngredientName = x.dishIngredients.name,
-                            itemUnitId = x.itemsTransfer.itemUnitId,
-                            itemsTransId = x.itemsTransId,
-                            isBasic = x.dishIngredients.isBasic,
-                            itemsTransIngredId = x.itemsTransIngredId
-                        }).ToList();
-
-
-                    item.itemExtras = (from t in entity.itemsTransfer.Where(x => x.mainCourseId == item.itemsTransId)
-                                       join u in entity.itemsUnits on t.itemUnitId equals u.itemUnitId
-                                       join i in entity.items on u.itemId equals i.itemId
-                                       join un in entity.units on u.unitId equals un.unitId
-                                       join inv in entity.invoices on t.invoiceId equals inv.invoiceId
-                                       select new ItemTransferModel()
-                                       {
-                                           itemsTransId = t.itemsTransId,
-                                           itemId = i.itemId,
-                                           itemName = i.name,
-                                           quantity = t.quantity,
-                                           invoiceId = entity.invoiceOrder.Where(x => x.itemsTransferId == t.itemsTransId).Select(x => x.orderId).FirstOrDefault(),
-                                           invNumber = inv.invNumber,
-
-                                           createUserId = t.createUserId,
-                                           updateUserId = t.updateUserId,
-                                           notes = t.notes,
-                                           createDate = t.createDate,
-                                           updateDate = t.updateDate,
-                                           itemUnitId = u.itemUnitId,
-                                           price = t.price,
-                                           unitName = un.name,
-                                           unitId = un.unitId,
-                                           barcode = u.barcode,
-                                           itemSerial = t.itemSerial,
-                                           itemType = i.type,
-                                           offerId = t.offerId,
-                                           forAgents = t.forAgents,
-                                       })
-                                    .ToList();
+                            itemsTransId = t.itemsTransId,
+                            itemId = i.itemId,
+                            itemName = i.name,
+                            quantity = t.quantity,
+                            invoiceId = entity.invoiceOrder
+                                .Where(x => x.itemsTransferId == t.itemsTransId)
+                                .Select(x => x.orderId)
+                                .FirstOrDefault(),
+                            invNumber = inv.invNumber,
+                            createUserId = t.createUserId,
+                            updateUserId = t.updateUserId,
+                            notes = t.notes,
+                            createDate = t.createDate,
+                            updateDate = t.updateDate,
+                            itemUnitId = u.itemUnitId,
+                            price = t.price,
+                            unitName = un.name,
+                            unitId = un.unitId,
+                            barcode = u.barcode,
+                            itemSerial = t.itemSerial,
+                            itemType = i.type,
+                            offerId = t.offerId,
+                            forAgents = t.forAgents,
+                        }
+                    ).ToList();
                 }
                 return transferList;
             }
-
         }
+
         // add or update item transfer
         [HttpPost]
         [Route("Save")]
@@ -145,7 +158,7 @@ namespace POS_Server.Controllers
         {
             string message = "";
 
-            token = TokenManager.readToken(HttpContext.Current.Request); 
+            token = TokenManager.readToken(HttpContext.Current.Request);
             var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
@@ -163,7 +176,10 @@ namespace POS_Server.Controllers
                     {
                         Object = c.Value.Replace("\\", string.Empty);
                         Object = Object.Trim('"');
-                        newObject = JsonConvert.DeserializeObject<List<itemsTransfer>>(Object, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        newObject = JsonConvert.DeserializeObject<List<itemsTransfer>>(
+                            Object,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                     }
                     else if (c.Type == "invoiceId")
                     {
@@ -174,7 +190,7 @@ namespace POS_Server.Controllers
                 {
                     try
                     {
-                  string res = saveInvoiceItems(newObject,invoiceId);
+                        string res = saveInvoiceItems(newObject, invoiceId);
                         if (res == "0")
                             message = "0";
                         else
@@ -191,20 +207,25 @@ namespace POS_Server.Controllers
                 {
                     return TokenManager.GenerateToken("0");
                 }
-           } 
+            }
         }
-        public string saveInvoiceItems(List<itemsTransfer> newObject,long invoiceId)
+
+        public string saveInvoiceItems(List<itemsTransfer> newObject, long invoiceId)
         {
             string message = "";
             try
             {
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    List<invoiceOrder> iol = entity.invoiceOrder.Where(x => x.invoiceId == invoiceId).ToList();
+                    List<invoiceOrder> iol = entity.invoiceOrder
+                        .Where(x => x.invoiceId == invoiceId)
+                        .ToList();
                     entity.invoiceOrder.RemoveRange(iol);
                     entity.SaveChanges();
 
-                    List<itemsTransfer> items = entity.itemsTransfer.Where(x => x.invoiceId == invoiceId).ToList();
+                    List<itemsTransfer> items = entity.itemsTransfer
+                        .Where(x => x.invoiceId == invoiceId)
+                        .ToList();
                     entity.itemsTransfer.RemoveRange(items);
                     entity.SaveChanges();
 
@@ -227,11 +248,15 @@ namespace POS_Server.Controllers
 
                         var transferEntity = entity.Set<itemsTransfer>();
                         long orderId = 0;
-                        try { orderId = (int)newObject[i].invoiceId; } catch { }
-                        
+                        try
+                        {
+                            orderId = (int)newObject[i].invoiceId;
+                        }
+                        catch { }
+
                         newObject[i].invoiceId = invoiceId;
-                        newObject[i].createDate =  coctrlr.AddOffsetTodate(DateTime.Now);
-                        newObject[i].updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                        newObject[i].createDate = coctrlr.AddOffsetTodate(DateTime.Now);
+                        newObject[i].updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                         newObject[i].updateUserId = newObject[i].createUserId;
 
                         t = entity.itemsTransfer.Add(newObject[i]);
@@ -252,7 +277,9 @@ namespace POS_Server.Controllers
                         {
                             long offerId = (int)newObject[i].offerId;
                             long itemUnitId = (int)newObject[i].itemUnitId;
-                            var offer = entity.itemsOffers.Where(x => x.iuId == itemUnitId && x.offerId == offerId).FirstOrDefault();
+                            var offer = entity.itemsOffers
+                                .Where(x => x.iuId == itemUnitId && x.offerId == offerId)
+                                .FirstOrDefault();
 
                             offer.used += (int)newObject[i].quantity;
                         }
@@ -261,31 +288,45 @@ namespace POS_Server.Controllers
                     message = "1";
                 }
             }
-            catch { message = "0"; }
+            catch
+            {
+                message = "0";
+            }
             return message;
         }
 
-        public string saveSalesInvoiceItems(List<itemsTransfer> newObject,List<ItemTransferModel> itemsTransfer,long invoiceId)
+        public string saveSalesInvoiceItems(
+            List<itemsTransfer> newObject,
+            List<ItemTransferModel> itemsTransfer,
+            long invoiceId
+        )
         {
             string message = "";
-         try
+            try
             {
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-
-                    List<itemsTransfer> items = entity.itemsTransfer.Where(x => x.invoiceId == invoiceId).ToList();
+                    List<itemsTransfer> items = entity.itemsTransfer
+                        .Where(x => x.invoiceId == invoiceId)
+                        .ToList();
 
                     foreach (var item in items)
                     {
-                        var orderItem = entity.itemOrderPreparing.Where(x => x.itemsTransId == item.itemsTransId).FirstOrDefault();
+                        var orderItem = entity.itemOrderPreparing
+                            .Where(x => x.itemsTransId == item.itemsTransId)
+                            .FirstOrDefault();
                         if (orderItem == null)
                         {
                             // remove transfer ingredients
-                            var itemIngredients = entity.itemsTransferIngredients.Where(x => x.itemsTransId == item.itemsTransId).ToList();
+                            var itemIngredients = entity.itemsTransferIngredients
+                                .Where(x => x.itemsTransId == item.itemsTransId)
+                                .ToList();
                             entity.itemsTransferIngredients.RemoveRange(itemIngredients);
 
                             //remove item transfer extra
-                            var extras = entity.itemsTransfer.Where(x => x.mainCourseId == item.itemsTransId).ToList();
+                            var extras = entity.itemsTransfer
+                                .Where(x => x.mainCourseId == item.itemsTransId)
+                                .ToList();
                             entity.itemsTransferIngredients.RemoveRange(itemIngredients);
                             entity.SaveChanges();
 
@@ -304,16 +345,28 @@ namespace POS_Server.Controllers
                         long itemUnitId = (long)newObject[i].itemUnitId;
 
                         #region get avg price for item
-                        var avgPrice = entity.items.Where(m => m.itemId == entity.itemsUnits.Where(x => x.itemUnitId == itemUnitId).Select(x => x.itemId).FirstOrDefault()).Select(m => m.avgPurchasePrice).Single();
+                        var avgPrice = entity.items
+                            .Where(
+                                m =>
+                                    m.itemId
+                                    == entity.itemsUnits
+                                        .Where(x => x.itemUnitId == itemUnitId)
+                                        .Select(x => x.itemId)
+                                        .FirstOrDefault()
+                            )
+                            .Select(m => m.avgPurchasePrice)
+                            .Single();
                         #endregion
 
                         itemOrderPreparing orderItem = null;
-                        if(newObject[i].itemsTransId != 0)
+                        if (newObject[i].itemsTransId != 0)
                         {
                             long id = newObject[i].itemsTransId;
-                            orderItem = entity.itemOrderPreparing.Where(x => x.itemsTransId == id).FirstOrDefault();
+                            orderItem = entity.itemOrderPreparing
+                                .Where(x => x.itemsTransId == id)
+                                .FirstOrDefault();
                         }
-                            
+
                         if (orderItem == null)
                         {
                             itemsTransfer t;
@@ -332,10 +385,9 @@ namespace POS_Server.Controllers
 
                             var transferEntity = entity.Set<itemsTransfer>();
 
-
                             newObject[i].invoiceId = invoiceId;
-                            newObject[i].createDate =  coctrlr.AddOffsetTodate(DateTime.Now);
-                            newObject[i].updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                            newObject[i].createDate = coctrlr.AddOffsetTodate(DateTime.Now);
+                            newObject[i].updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                             newObject[i].updateUserId = newObject[i].createUserId;
                             newObject[i].purchasePrice = avgPrice;
 
@@ -354,7 +406,6 @@ namespace POS_Server.Controllers
                                         isActive = ing.isActive,
                                         itemsTransId = t.itemsTransId,
                                         notes = t.notes,
-
                                     };
                                     entity.itemsTransferIngredients.Add(itemIngredient);
                                     entity.SaveChanges();
@@ -366,7 +417,13 @@ namespace POS_Server.Controllers
                                 {
                                     var str = JsonConvert.SerializeObject(itm);
                                     itemsTransfer it = new itemsTransfer();
-                                    it = JsonConvert.DeserializeObject<itemsTransfer>(str, new JsonSerializerSettings { DateParseHandling = DateParseHandling.None });
+                                    it = JsonConvert.DeserializeObject<itemsTransfer>(
+                                        str,
+                                        new JsonSerializerSettings
+                                        {
+                                            DateParseHandling = DateParseHandling.None
+                                        }
+                                    );
 
                                     if (it.createUserId == 0 || it.createUserId == null)
                                     {
@@ -381,17 +438,15 @@ namespace POS_Server.Controllers
                                     if (it.itemSerial == null)
                                         it.itemSerial = "";
 
-
                                     it.mainCourseId = t.itemsTransId;
                                     it.invoiceId = invoiceId;
-                                    it.createDate =  coctrlr.AddOffsetTodate(DateTime.Now);
-                                    it.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                                    it.createDate = coctrlr.AddOffsetTodate(DateTime.Now);
+                                    it.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                                     it.updateUserId = it.createUserId;
 
                                     entity.itemsTransfer.Add(it);
                                     entity.SaveChanges();
                                 }
-                                
 
                                 #endregion
                             }
@@ -399,7 +454,7 @@ namespace POS_Server.Controllers
                         else
                         {
                             var itemT = entity.itemsTransfer.Find(newObject[i].itemsTransId);
-                            itemT.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                            itemT.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                             itemT.updateUserId = newObject[i].createUserId;
                             itemT.quantity = newObject[i].quantity;
                             itemT.price = newObject[i].price;
@@ -416,8 +471,10 @@ namespace POS_Server.Controllers
                         if (newObject[i].offerId != null && invoice.invType == "s")
                         {
                             long offerId = (int)newObject[i].offerId;
-                           
-                            var offer = entity.itemsOffers.Where(x => x.iuId == itemUnitId && x.offerId == offerId).FirstOrDefault();
+
+                            var offer = entity.itemsOffers
+                                .Where(x => x.iuId == itemUnitId && x.offerId == offerId)
+                                .FirstOrDefault();
 
                             offer.used += (int)newObject[i].quantity;
                         }
@@ -426,7 +483,10 @@ namespace POS_Server.Controllers
                     message = "1";
                 }
             }
-          catch { message = "0"; }
+            catch
+            {
+                message = "0";
+            }
             return message;
         }
 
@@ -436,13 +496,15 @@ namespace POS_Server.Controllers
 
             using (incposdbEntities entity2 = new incposdbEntities())
             {
-
-                List<itemsTransfer> items = entity2.itemsTransfer.Where(x => x.invoiceId == invoiceId).ToList();
-                List<itemsTransfer> expItems = entity2.itemsTransfer.Where(x => x.invoiceId == exportInvId).ToList();
+                List<itemsTransfer> items = entity2.itemsTransfer
+                    .Where(x => x.invoiceId == invoiceId)
+                    .ToList();
+                List<itemsTransfer> expItems = entity2.itemsTransfer
+                    .Where(x => x.invoiceId == exportInvId)
+                    .ToList();
                 entity2.itemsTransfer.RemoveRange(items);
                 entity2.itemsTransfer.RemoveRange(expItems);
                 entity2.SaveChanges();
-
 
                 for (int i = 0; i < newObject.Count; i++)
                 {
@@ -462,13 +524,12 @@ namespace POS_Server.Controllers
                     if (newObject[i].itemSerial == null)
                         newObject[i].itemSerial = "";
 
-                    newObject[i].createDate =  coctrlr.AddOffsetTodate(DateTime.Now);
-                    newObject[i].updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                    newObject[i].createDate = coctrlr.AddOffsetTodate(DateTime.Now);
+                    newObject[i].updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                     newObject[i].updateUserId = newObject[i].createUserId;
 
                     importItem = newObject[i];
                     importItem.invoiceId = (int)invoiceId;
-
 
                     entity2.itemsTransfer.Add(importItem);
                     entity2.SaveChanges();
@@ -514,26 +575,37 @@ namespace POS_Server.Controllers
                     using (incposdbEntities entity = new incposdbEntities())
                     {
                         List<ItemTransferModel> requiredTransfers = new List<ItemTransferModel>();
-                        var itemsTransfer = entity.itemsTransfer.Where(x => x.invoiceId == invoiceId).ToList();
+                        var itemsTransfer = entity.itemsTransfer
+                            .Where(x => x.invoiceId == invoiceId)
+                            .ToList();
                         foreach (itemsTransfer tr in itemsTransfer)
                         {
                             var lockedQuantity = entity.itemsLocations
-                                .Where(x => x.invoiceId == invoiceId && x.itemUnitId == tr.itemUnitId)
-                                .Select(x => x.quantity).Sum();
-                            var availableAmount = ilc.getBranchAmount((long)tr.itemUnitId, branchId);
-                            var item = (from i in entity.items
-                                        join u in entity.itemsUnits on i.itemId equals u.itemId
-                                        where u.itemUnitId == tr.itemUnitId
-                                        select new ItemModel()
-                                        {
-                                            itemId = i.itemId,
-                                            name = i.name,
-                                            unitName = u.units.name,
-                                        }).FirstOrDefault();
+                                .Where(
+                                    x => x.invoiceId == invoiceId && x.itemUnitId == tr.itemUnitId
+                                )
+                                .Select(x => x.quantity)
+                                .Sum();
+                            var availableAmount = ilc.getBranchAmount(
+                                (long)tr.itemUnitId,
+                                branchId
+                            );
+                            var item = (
+                                from i in entity.items
+                                join u in entity.itemsUnits on i.itemId equals u.itemId
+                                where u.itemUnitId == tr.itemUnitId
+                                select new ItemModel()
+                                {
+                                    itemId = i.itemId,
+                                    name = i.name,
+                                    unitName = u.units.name,
+                                }
+                            ).FirstOrDefault();
                             if (lockedQuantity == null)
                                 lockedQuantity = 0;
 
-                            long requiredQuantity = (long)tr.quantity - ((long)lockedQuantity + (long)availableAmount);
+                            long requiredQuantity =
+                                (long)tr.quantity - ((long)lockedQuantity + (long)availableAmount);
                             ItemTransferModel transfer = new ItemTransferModel()
                             {
                                 invoiceId = invoiceId,
@@ -548,7 +620,6 @@ namespace POS_Server.Controllers
                                 unitName = item.unitName,
                             };
                             requiredTransfers.Add(transfer);
-
                         }
                         return TokenManager.GenerateToken(requiredTransfers);
                     }
@@ -558,7 +629,6 @@ namespace POS_Server.Controllers
                     message = "0";
                     return TokenManager.GenerateToken(message);
                 }
-
             }
         }
 
@@ -591,45 +661,51 @@ namespace POS_Server.Controllers
                 }
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    List<itemsTransferIngredientsModel> List = new List<itemsTransferIngredientsModel>();
+                    List<itemsTransferIngredientsModel> List =
+                        new List<itemsTransferIngredientsModel>();
                     if (itemTransferId != 0)
                     {
-                        List = entity.itemsTransferIngredients.Where(S => S.itemsTransId == itemTransferId)
-                            .Select(S => new itemsTransferIngredientsModel
-                        {
-                            itemsTransIngredId = S.itemsTransIngredId,
-                            dishIngredId = S.dishIngredId,
-                            itemName = S.dishIngredients.itemsUnits.items.name,
-                            DishIngredientName = S.dishIngredients.name,
-                            itemUnitId = S.dishIngredients.itemUnitId,                           
-                            notes = S.notes,
-                            isActive = S.isActive,
-                            isBasic = S.dishIngredients.isBasic,
-                                
-                            }).ToList();
+                        List = entity.itemsTransferIngredients
+                            .Where(S => S.itemsTransId == itemTransferId)
+                            .Select(
+                                S =>
+                                    new itemsTransferIngredientsModel
+                                    {
+                                        itemsTransIngredId = S.itemsTransIngredId,
+                                        dishIngredId = S.dishIngredId,
+                                        itemName = S.dishIngredients.itemsUnits.items.name,
+                                        DishIngredientName = S.dishIngredients.name,
+                                        itemUnitId = S.dishIngredients.itemUnitId,
+                                        notes = S.notes,
+                                        isActive = S.isActive,
+                                        isBasic = S.dishIngredients.isBasic,
+                                    }
+                            )
+                            .ToList();
                     }
                     else
                     {
-                        List =entity.dishIngredients.Where(x => x.itemUnitId == itemUnitId && x.isActive == 1)
-                            .Select(S => new itemsTransferIngredientsModel{
-                                dishIngredId = S.dishIngredId,
-                                itemName = S.itemsUnits.items.name,
-                                DishIngredientName = S.name,
-
-                                itemUnitId = S.itemUnitId,
-                                notes = S.notes,
-                                isActive = S.isActive,
-
-                                isBasic = S.isBasic,
-                            }).ToList();
+                        List = entity.dishIngredients
+                            .Where(x => x.itemUnitId == itemUnitId && x.isActive == 1)
+                            .Select(
+                                S =>
+                                    new itemsTransferIngredientsModel
+                                    {
+                                        dishIngredId = S.dishIngredId,
+                                        itemName = S.itemsUnits.items.name,
+                                        DishIngredientName = S.name,
+                                        itemUnitId = S.itemUnitId,
+                                        notes = S.notes,
+                                        isActive = S.isActive,
+                                        isBasic = S.isBasic,
+                                    }
+                            )
+                            .ToList();
                     }
 
-
                     return TokenManager.GenerateToken(List);
-
                 }
             }
         }
-
     }
 }

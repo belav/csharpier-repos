@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -44,13 +44,13 @@ namespace MonoTests.System.Windows.Forms
         /// <para>2   A2  B2</para>
         /// </summary>
         /// <returns></returns>
-        public static DataGridView CreateAndFill ()
+        public static DataGridView CreateAndFill()
         {
-            DataGridView dgv = new DataGridView ();
-            dgv.Columns.Add ("A", "A");
-            dgv.Columns.Add ("B", "B");
-            dgv.Rows.Add ("Cell A1", "Cell B1");
-            dgv.Rows.Add ("Cell A2", "Cell B2");
+            DataGridView dgv = new DataGridView();
+            dgv.Columns.Add("A", "A");
+            dgv.Columns.Add("B", "B");
+            dgv.Rows.Add("Cell A1", "Cell B1");
+            dgv.Rows.Add("Cell A2", "Cell B2");
             return dgv;
         }
 
@@ -61,48 +61,52 @@ namespace MonoTests.System.Windows.Forms
         /// <para>2   A2  B2</para>
         /// </summary>
         /// <returns></returns>
-        public static DataGridView CreateAndFillForClipboard ()
+        public static DataGridView CreateAndFillForClipboard()
         {
-            DataGridView dgv = new DataGridView ();
+            DataGridView dgv = new DataGridView();
             DataGridViewColumn col;
             DataGridViewRow row;
             DataGridViewCell cell;
-            
-            foreach (string name in new string [] {"A", "B", "C", "D"}) {
-                col = new DataGridViewColumn ();
-                col.CellTemplate = new DataGridViewTextBoxCell ();
-                col.HeaderCell = new DataGridViewColumnHeaderTest.DataGridViewColumnHeaderClipboardCell ();
+
+            foreach (string name in new string[] { "A", "B", "C", "D" })
+            {
+                col = new DataGridViewColumn();
+                col.CellTemplate = new DataGridViewTextBoxCell();
+                col.HeaderCell =
+                    new DataGridViewColumnHeaderTest.DataGridViewColumnHeaderClipboardCell();
                 col.Name = name;
                 //if (dgv.Columns.Count == 1) {
                 //        col.HeaderText = null;
                 //} else if (dgv.Columns.Count == 2) {
                 //        col.HeaderText = string.Empty;
                 //} else {
-                        col.HeaderText = name;
+                col.HeaderText = name;
                 //}
-                
-                dgv.Columns.Add (col);
+
+                dgv.Columns.Add(col);
             }
-            
-            for (int i = 1; i <= 4; i++) {
-                row = new DataGridViewRow ();
-                row.HeaderCell = new DataGridViewRowHeaderTest.DataGridViewRowHeaderClipboardCell ();
+
+            for (int i = 1; i <= 4; i++)
+            {
+                row = new DataGridViewRow();
+                row.HeaderCell = new DataGridViewRowHeaderTest.DataGridViewRowHeaderClipboardCell();
                 //if (i == 3) { // Leave one at default value of null
                 //        row.HeaderCell.Value = null;
                 //} else if (i == 2) {
                 //        row.HeaderCell.Value = string.Empty;
                 //} else {
-                        row.HeaderCell.Value = "Row#" + i.ToString ();
+                row.HeaderCell.Value = "Row#" + i.ToString();
                 //}
-                    
-                foreach (DataGridViewColumn c in dgv.Columns) {
-                    cell = new DataGridViewCellTest.DataGridViewClipboardCell ();
-                    cell.Value = "Cell " + c.Name + i.ToString ();
-                    row.Cells.Add (cell);
+
+                foreach (DataGridViewColumn c in dgv.Columns)
+                {
+                    cell = new DataGridViewCellTest.DataGridViewClipboardCell();
+                    cell.Value = "Cell " + c.Name + i.ToString();
+                    row.Cells.Add(cell);
                 }
-                dgv.Rows.Add (row);
+                dgv.Rows.Add(row);
             }
-            
+
             return dgv;
         }
 
@@ -113,19 +117,22 @@ namespace MonoTests.System.Windows.Forms
         /// <para>2   A2  B2</para>
         /// </summary>
         /// <returns></returns>
-        public static DataGridView CreateAndFillBig ()
+        public static DataGridView CreateAndFillBig()
         {
-            DataGridView dgv = new DataGridView ();
-            for (int c = 0; c < 10; c++) {
-                string A = (((char) ((int) 'A') + c)).ToString ();
-                dgv.Columns.Add (A, A);
+            DataGridView dgv = new DataGridView();
+            for (int c = 0; c < 10; c++)
+            {
+                string A = (((char)((int)'A') + c)).ToString();
+                dgv.Columns.Add(A, A);
             }
-            for (int r = 0; r < 10; r++) {
-                List<object> cells = new List<object> ();
-                for (int c = 0; c < 10; c++) {
-                    cells.Add (string.Format ("Cell {0}{1}", dgv.Columns [c].Name, r));
+            for (int r = 0; r < 10; r++)
+            {
+                List<object> cells = new List<object>();
+                for (int c = 0; c < 10; c++)
+                {
+                    cells.Add(string.Format("Cell {0}{1}", dgv.Columns[c].Name, r));
                 }
-                dgv.Rows.Add (cells);
+                dgv.Rows.Add(cells);
             }
             return dgv;
         }

@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -41,7 +41,7 @@ namespace MonoTests.System.ComponentModel
     [TestFixture]
     public class NullableConverterTest
     {
-        [TypeConverter (typeof(MyTypeConverter))]
+        [TypeConverter(typeof(MyTypeConverter))]
         private struct MyType
         {
             int value;
@@ -49,59 +49,65 @@ namespace MonoTests.System.ComponentModel
 
         private class MyTypeConverter : TypeConverter
         {
-            public override bool GetStandardValuesSupported (ITypeDescriptorContext context)
+            public override bool GetStandardValuesSupported(ITypeDescriptorContext context)
             {
                 return true;
             }
 
-            public override TypeConverter.StandardValuesCollection GetStandardValues (ITypeDescriptorContext context)
+            public override TypeConverter.StandardValuesCollection GetStandardValues(
+                ITypeDescriptorContext context
+            )
             {
-                return new TypeConverter.StandardValuesCollection (new object[] {});
+                return new TypeConverter.StandardValuesCollection(new object[] { });
             }
         }
 
         [Test]
-        public void PropertyValues ()
+        public void PropertyValues()
         {
-            NullableConverter converter = new NullableConverter (typeof(MyType?));
-            Assert.AreEqual (typeof(MyType?), converter.NullableType, "#1");
-            Assert.AreEqual (typeof(MyType), converter.UnderlyingType, "#2");
-            Assert.AreEqual (typeof(MyTypeConverter), converter.UnderlyingTypeConverter.GetType(), "#2");
+            NullableConverter converter = new NullableConverter(typeof(MyType?));
+            Assert.AreEqual(typeof(MyType?), converter.NullableType, "#1");
+            Assert.AreEqual(typeof(MyType), converter.UnderlyingType, "#2");
+            Assert.AreEqual(
+                typeof(MyTypeConverter),
+                converter.UnderlyingTypeConverter.GetType(),
+                "#2"
+            );
         }
 
         [Test]
-        public void CanConvertFrom ()
+        public void CanConvertFrom()
         {
-            NullableConverter converter = new NullableConverter (typeof(MyType?));
-            Assert.IsTrue (converter.CanConvertFrom (null, typeof(MyType)), "#1");
-            Assert.IsFalse (converter.CanConvertFrom (null, typeof(object)), "#2");
+            NullableConverter converter = new NullableConverter(typeof(MyType?));
+            Assert.IsTrue(converter.CanConvertFrom(null, typeof(MyType)), "#1");
+            Assert.IsFalse(converter.CanConvertFrom(null, typeof(object)), "#2");
         }
 
         [Test]
-        public void CanConvertTo ()
+        public void CanConvertTo()
         {
-            NullableConverter converter = new NullableConverter (typeof(MyType?));
-            Assert.IsTrue (converter.CanConvertTo (null, typeof(MyType)), "#1");
-            Assert.IsFalse (converter.CanConvertTo (null, typeof(object)), "#2");
+            NullableConverter converter = new NullableConverter(typeof(MyType?));
+            Assert.IsTrue(converter.CanConvertTo(null, typeof(MyType)), "#1");
+            Assert.IsFalse(converter.CanConvertTo(null, typeof(object)), "#2");
         }
 
         [Test]
-        public void ConvertFrom_EmptyString ()
+        public void ConvertFrom_EmptyString()
         {
-            NullableConverter converter = new NullableConverter (typeof(MyType?));
-            Assert.IsNull (converter.ConvertFrom (null, null, String.Empty), "#1");
+            NullableConverter converter = new NullableConverter(typeof(MyType?));
+            Assert.IsNull(converter.ConvertFrom(null, null, String.Empty), "#1");
         }
 
         [Test]
-        public void GetStandardValues ()
+        public void GetStandardValues()
         {
-            NullableConverter converter = new NullableConverter (typeof(MyType?));
-            Assert.IsTrue (converter.GetStandardValuesSupported (null), "#1");
-            TypeConverter.StandardValuesCollection values = converter.GetStandardValues (null);
+            NullableConverter converter = new NullableConverter(typeof(MyType?));
+            Assert.IsTrue(converter.GetStandardValuesSupported(null), "#1");
+            TypeConverter.StandardValuesCollection values = converter.GetStandardValues(null);
             // MyTypeConverter returns an empty values collection, but
             // NullableConverter adds a null value to the set.
-            Assert.AreEqual (1, values.Count, "#2");
-            Assert.AreEqual (null, values[0], "#3");
+            Assert.AreEqual(1, values.Count, "#2");
+            Assert.AreEqual(null, values[0], "#3");
         }
     }
 }

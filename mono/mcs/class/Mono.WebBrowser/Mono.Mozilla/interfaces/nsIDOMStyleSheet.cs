@@ -7,10 +7,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,54 +30,63 @@ using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
 using System.Text;
 
-namespace Mono.Mozilla {
-
-    [Guid ("a6cf9080-15b3-11d2-932e-00805f8add32")]
-    [InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-    [ComImport ()]
-    internal interface nsIDOMStyleSheet {
-
+namespace Mono.Mozilla
+{
+    [Guid("a6cf9080-15b3-11d2-932e-00805f8add32")]
+    [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+    [ComImport()]
+    internal interface nsIDOMStyleSheet
+    {
 #region nsIDOMStyleSheet
         [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getType (  /*DOMString*/ HandleRef ret);
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getType( /*DOMString*/
+            HandleRef ret
+        );
 
         [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getDisabled ( out bool ret);
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getDisabled(out bool ret);
 
         [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int setDisabled ( bool value);
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int setDisabled(bool value);
 
         [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getOwnerNode ([MarshalAs (UnmanagedType.Interface)]  out nsIDOMNode ret);
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getOwnerNode([MarshalAs(UnmanagedType.Interface)] out nsIDOMNode ret);
 
         [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getParentStyleSheet ([MarshalAs (UnmanagedType.Interface)]  out nsIDOMStyleSheet ret);
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getParentStyleSheet([MarshalAs(UnmanagedType.Interface)] out nsIDOMStyleSheet ret);
 
         [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getHref (  /*DOMString*/ HandleRef ret);
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getHref( /*DOMString*/
+            HandleRef ret
+        );
 
         [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getTitle (  /*DOMString*/ HandleRef ret);
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getTitle( /*DOMString*/
+            HandleRef ret
+        );
 
         [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getMedia ([MarshalAs (UnmanagedType.Interface)]  out nsIDOMMediaList ret);
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getMedia([MarshalAs(UnmanagedType.Interface)] out nsIDOMMediaList ret);
 
 #endregion
     }
 
-
-    internal class nsDOMStyleSheet {
-        public static nsIDOMStyleSheet GetProxy (Mono.WebBrowser.IWebBrowser control, nsIDOMStyleSheet obj)
+    internal class nsDOMStyleSheet
+    {
+        public static nsIDOMStyleSheet GetProxy(
+            Mono.WebBrowser.IWebBrowser control,
+            nsIDOMStyleSheet obj
+        )
         {
-            object o = Base.GetProxyForObject (control, typeof(nsIDOMStyleSheet).GUID, obj);
+            object o = Base.GetProxyForObject(control, typeof(nsIDOMStyleSheet).GUID, obj);
             return o as nsIDOMStyleSheet;
         }
     }

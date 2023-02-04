@@ -9,6 +9,7 @@ namespace System.Runtime.InteropServices
         //------------------------------------------------------------------
         private readonly object? _wrapper;
         private readonly IntPtr _handle;
+
         //------------------------------------------------------------------
 
         public HandleRef(object? wrapper, IntPtr handle)

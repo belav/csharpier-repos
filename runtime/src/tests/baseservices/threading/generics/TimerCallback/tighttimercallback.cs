@@ -6,36 +6,39 @@ using System.Diagnostics;
 
 //namespace TimerCallbackTests ////////////// added this namesp
 
-class Gen<T> 
+class Gen<T>
 {
     public static Type objType;
 
     public void Target(object p)
-    {            
+    {
         Interlocked.Increment(ref Test.Xcounter);
         if (p.GetType() != objType)
         {
             Test.result = false;
-            Console.WriteLine("Expected parameter type: " + objType + ", but found type: " + p.GetType());
+            Console.WriteLine(
+                "Expected parameter type: " + objType + ", but found type: " + p.GetType()
+            );
         }
 
         if (this.GetType() != objType)
         {
             Test.result = false;
-            Console.WriteLine("Expected this type: " + objType + ", but found type: " + this.GetType());
+            Console.WriteLine(
+                "Expected this type: " + objType + ", but found type: " + this.GetType()
+            );
         }
-        
     }
-    
+
     public static void ThreadPoolTest()
-    {            
+    {
         Gen<T> obj = new Gen<T>();
         objType = obj.GetType();
 
         TimerCallback tcb = new TimerCallback(obj.Target);
         Stopwatch testWatch = new Stopwatch();
         testWatch.Start();
-        Timer timer = new Timer(tcb,obj,Test.delay,Test.period);
+        Timer timer = new Timer(tcb, obj, Test.delay, Test.period);
         while (testWatch.ElapsedMilliseconds < Test.timeToRun)
         {
             Thread.Sleep(0);
@@ -44,11 +47,19 @@ class Gen<T>
         timer.Dispose();
         testWatch.Stop();
 
-        if (Test.Xcounter > ((testWatch.ElapsedMilliseconds / Test.period)+2))
+        if (Test.Xcounter > ((testWatch.ElapsedMilliseconds / Test.period) + 2))
         {
             Test.result = false;
-            Console.WriteLine("Expected Timer to run at most " + ((testWatch.ElapsedMilliseconds / Test.period)+2) + " times, but found " + Test.Xcounter + " runs in " + obj.GetType() + " type object.");
-        }        
+            Console.WriteLine(
+                "Expected Timer to run at most "
+                    + ((testWatch.ElapsedMilliseconds / Test.period) + 2)
+                    + " times, but found "
+                    + Test.Xcounter
+                    + " runs in "
+                    + obj.GetType()
+                    + " type object."
+            );
+        }
 
         Test.Xcounter = 0;
     }
@@ -61,18 +72,18 @@ public class Test
     public static int Xcounter = 0;
     public static bool result = true;
     public static int timeToRun = 5000;
-    
+
     public static int Main()
     {
         Gen<int>.ThreadPoolTest();
         Gen<double>.ThreadPoolTest();
         Gen<string>.ThreadPoolTest();
-        Gen<object>.ThreadPoolTest(); 
-        Gen<Guid>.ThreadPoolTest(); 
+        Gen<object>.ThreadPoolTest();
+        Gen<Guid>.ThreadPoolTest();
 
-        Gen<int[]>.ThreadPoolTest(); 
+        Gen<int[]>.ThreadPoolTest();
         Gen<double[,]>.ThreadPoolTest();
-        Gen<string[][][]>.ThreadPoolTest(); 
+        Gen<string[][][]>.ThreadPoolTest();
         Gen<object[,,,]>.ThreadPoolTest();
         Gen<Guid[][,,,][]>.ThreadPoolTest();
 
@@ -87,4 +98,4 @@ public class Test
             return 1;
         }
     }
-}        
+}

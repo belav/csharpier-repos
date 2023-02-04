@@ -10,7 +10,7 @@ namespace MonoTests.Common
         private int index;
         private string value;
 
-        public KnownResponseHeader (int index, string value)
+        public KnownResponseHeader(int index, string value)
         {
             this.index = index;
             this.value = value;

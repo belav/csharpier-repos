@@ -12,10 +12,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,67 +36,75 @@ namespace System.ServiceModel.Channels
         QueueTransferProtocol queue_tr_protocol;
         bool use_ad;
 
-        public MsmqTransportBindingElement ()
-        {
-        }
+        public MsmqTransportBindingElement() { }
 
-        public int MaxPoolSize {
+        public int MaxPoolSize
+        {
             get { return max_pool_size; }
             set { max_pool_size = value; }
         }
 
-        public QueueTransferProtocol QueueTransferProtocol {
+        public QueueTransferProtocol QueueTransferProtocol
+        {
             get { return queue_tr_protocol; }
             set { queue_tr_protocol = value; }
         }
 
-        public override string Scheme {
+        public override string Scheme
+        {
             get { return "net.msmq"; }
         }
 
-        [MonoLimitation ("ActiveDirectory is windows-only solution")]
-        public bool UseActiveDirectory {
+        [MonoLimitation("ActiveDirectory is windows-only solution")]
+        public bool UseActiveDirectory
+        {
             get { return use_ad; }
             set { use_ad = value; }
         }
 
-        public override BindingElement Clone ()
+        public override BindingElement Clone()
         {
-            return (MsmqTransportBindingElement) MemberwiseClone ();
+            return (MsmqTransportBindingElement)MemberwiseClone();
         }
 
-        public override bool CanBuildChannelFactory<TChannel> (BindingContext context)
+        public override bool CanBuildChannelFactory<TChannel>(BindingContext context)
         {
             if (context == null)
-                throw new ArgumentNullException ("context");
-            return  typeof (TChannel) == typeof (IOutputChannel) ||
-                typeof (TChannel) == typeof (IOutputSessionChannel);
+                throw new ArgumentNullException("context");
+            return typeof(TChannel) == typeof(IOutputChannel)
+                || typeof(TChannel) == typeof(IOutputSessionChannel);
         }
 
         [MonoTODO]
-        public override IChannelFactory<TChannel> BuildChannelFactory<TChannel> (BindingContext context)
+        public override IChannelFactory<TChannel> BuildChannelFactory<TChannel>(
+            BindingContext context
+        )
         {
             if (context == null)
-                throw new ArgumentNullException ("context");
-            if (typeof (TChannel) == typeof (IOutputChannel))
-                return (IChannelFactory<TChannel>) new MsmqChannelFactory<IOutputChannel> (this, context);
-            if (typeof (TChannel) == typeof (IOutputSessionChannel))
-                return (IChannelFactory<TChannel>) new MsmqChannelFactory<IOutputChannel> (this, context);
-            return base.BuildChannelFactory<TChannel> (context);
+                throw new ArgumentNullException("context");
+            if (typeof(TChannel) == typeof(IOutputChannel))
+                return (IChannelFactory<TChannel>)
+                    new MsmqChannelFactory<IOutputChannel>(this, context);
+            if (typeof(TChannel) == typeof(IOutputSessionChannel))
+                return (IChannelFactory<TChannel>)
+                    new MsmqChannelFactory<IOutputChannel>(this, context);
+            return base.BuildChannelFactory<TChannel>(context);
         }
 
-        public override bool CanBuildChannelListener<TChannel> (BindingContext context)
+        public override bool CanBuildChannelListener<TChannel>(BindingContext context)
         {
             if (context == null)
-                throw new ArgumentNullException ("context");
-            return  typeof (TChannel) == typeof (IInputChannel) ||
-                typeof (TChannel) == typeof (IInputSessionChannel);
+                throw new ArgumentNullException("context");
+            return typeof(TChannel) == typeof(IInputChannel)
+                || typeof(TChannel) == typeof(IInputSessionChannel);
         }
 
         [MonoTODO]
-        public override IChannelListener<TChannel> BuildChannelListener<TChannel> (BindingContext context)
+        public override IChannelListener<TChannel> BuildChannelListener<TChannel>(
+            BindingContext context
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
     }
 }

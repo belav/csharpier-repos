@@ -7,32 +7,32 @@ class Program
 {
     public class A
     {
-        public static implicit operator string (A c)
+        public static implicit operator string(A c)
         {
             return null;
         }
-        
-        public static implicit operator Delegate (A c)
-        {
-            return null;
-        }
-    }
-    
-    public class B
-    {
-        public static implicit operator string (B c)
-        {
-            return null;
-        }
-        
-        public static implicit operator Delegate (B c)
+
+        public static implicit operator Delegate(A c)
         {
             return null;
         }
     }
 
-    public static void Main (string [] args)
+    public class B
     {
-        bool b = new A () != new B ();
+        public static implicit operator string(B c)
+        {
+            return null;
+        }
+
+        public static implicit operator Delegate(B c)
+        {
+            return null;
+        }
+    }
+
+    public static void Main(string[] args)
+    {
+        bool b = new A() != new B();
     }
 }

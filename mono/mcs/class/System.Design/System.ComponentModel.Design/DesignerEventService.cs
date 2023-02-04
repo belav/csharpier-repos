@@ -1,7 +1,7 @@
 //
 // System.ComponentModel.Design.DesignerEventService
 //
-// Authors:     
+// Authors:
 //      Ivan N. Zlatev (contact i-nZ.net)
 //
 // (C) 2006-2007 Ivan N. Zlatev
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -44,53 +44,52 @@ namespace System.ComponentModel.Design
     //
     internal sealed class DesignerEventService : IDesignerEventService
     {
-        
-        public DesignerEventService ()
+        public DesignerEventService()
         {
-            _designerList = new ArrayList ();
+            _designerList = new ArrayList();
         }
 
         private ArrayList _designerList;
         private IDesignerHost _activeDesigner;
 
-        public IDesignerHost ActiveDesigner {
-            get { 
-                return _activeDesigner; 
-            }
-            internal set {
+        public IDesignerHost ActiveDesigner
+        {
+            get { return _activeDesigner; }
+            internal set
+            {
                 IDesignerHost old = _activeDesigner;
                 _activeDesigner = value;
                 if (ActiveDesignerChanged != null)
-                    ActiveDesignerChanged (this, new ActiveDesignerEventArgs (old, value));
+                    ActiveDesignerChanged(this, new ActiveDesignerEventArgs(old, value));
             }
         }
 
-        public DesignerCollection Designers {
-            get { return new DesignerCollection (_designerList); }
+        public DesignerCollection Designers
+        {
+            get { return new DesignerCollection(_designerList); }
         }
 
         public event ActiveDesignerEventHandler ActiveDesignerChanged;
         public event DesignerEventHandler DesignerCreated;
         public event DesignerEventHandler DesignerDisposed;
         public event EventHandler SelectionChanged;
-        
-        public void RaiseDesignerCreated (IDesignerHost host)
+
+        public void RaiseDesignerCreated(IDesignerHost host)
         {
             if (DesignerCreated != null)
-                DesignerCreated (this, new DesignerEventArgs (host));
+                DesignerCreated(this, new DesignerEventArgs(host));
         }
-        
-        public void RaiseDesignerDisposed (IDesignerHost host)
+
+        public void RaiseDesignerDisposed(IDesignerHost host)
         {
             if (DesignerDisposed != null)
-                DesignerDisposed (this, new DesignerEventArgs (host));
+                DesignerDisposed(this, new DesignerEventArgs(host));
         }
-        
-        public void RaiseSelectionChanged ()
+
+        public void RaiseSelectionChanged()
         {
             if (SelectionChanged != null)
-                SelectionChanged (this, EventArgs.Empty);
+                SelectionChanged(this, EventArgs.Empty);
         }
-        
     }
 }

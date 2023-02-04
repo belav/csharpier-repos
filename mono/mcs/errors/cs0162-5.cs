@@ -6,10 +6,11 @@ using System;
 
 public class Driver
 {
-    public static void Main ()
+    public static void Main()
     {
         int yyTop = 0;
-        for (; ; ++yyTop) {
+        for (; ; ++yyTop)
+        {
             if (yyTop > 0)
                 break;
             else
@@ -17,4 +18,3 @@ public class Driver
         }
     }
 }
-

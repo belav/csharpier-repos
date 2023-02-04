@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,121 +34,140 @@ namespace System.Management
     public class WqlEventQuery : EventQuery
     {
         [MonoTODO]
-        public WqlEventQuery ()
+        public WqlEventQuery()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
-        
+
         [MonoTODO]
-        public WqlEventQuery (string queryOrEventClassName)
+        public WqlEventQuery(string queryOrEventClassName)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
-        
+
         [MonoTODO]
-        public WqlEventQuery (string eventClassName, TimeSpan withinInterval)
+        public WqlEventQuery(string eventClassName, TimeSpan withinInterval)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
-        
+
         [MonoTODO]
-        public WqlEventQuery (string eventClassName, string condition)
+        public WqlEventQuery(string eventClassName, string condition)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
-        
+
         [MonoTODO]
-        public WqlEventQuery (string eventClassName, TimeSpan withinInterval, string condition)
+        public WqlEventQuery(string eventClassName, TimeSpan withinInterval, string condition)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
-        
+
         [MonoTODO]
-        public WqlEventQuery (string eventClassName, string condition, TimeSpan groupWithinInterval)
+        public WqlEventQuery(string eventClassName, string condition, TimeSpan groupWithinInterval)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
-        
+
         [MonoTODO]
-        public WqlEventQuery (string eventClassName, string condition, TimeSpan groupWithinInterval, string [] groupByPropertyList)
+        public WqlEventQuery(
+            string eventClassName,
+            string condition,
+            TimeSpan groupWithinInterval,
+            string[] groupByPropertyList
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
-        
+
         [MonoTODO]
-        public WqlEventQuery (string eventClassName, TimeSpan withinInterval, string condition, TimeSpan groupWithinInterval, string [] groupByPropertyList, string havingCondition)
+        public WqlEventQuery(
+            string eventClassName,
+            TimeSpan withinInterval,
+            string condition,
+            TimeSpan groupWithinInterval,
+            string[] groupByPropertyList,
+            string havingCondition
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
-        
+
         // Properties
-        
+
         [MonoTODO]
-        public string Condition {
-            get { throw new NotImplementedException (); }
-            set { throw new NotImplementedException (); }
+        public string Condition
+        {
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
         }
-        
+
         [MonoTODO]
-        public string EventClassName {
-            get { throw new NotImplementedException (); }
-            set { throw new NotImplementedException (); }
+        public string EventClassName
+        {
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
         }
-        
+
         [MonoTODO]
-        public StringCollection GroupByPropertyList {
-            get { throw new NotImplementedException (); }
-            set { throw new NotImplementedException (); }
+        public StringCollection GroupByPropertyList
+        {
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
         }
-        
+
         [MonoTODO]
-        public TimeSpan GroupWithinInterval {
-            get { throw new NotImplementedException (); }
-            set { throw new NotImplementedException (); }
+        public TimeSpan GroupWithinInterval
+        {
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
         }
-        
+
         [MonoTODO]
-        public string HavingCondition {
-            get { throw new NotImplementedException (); }
-            set { throw new NotImplementedException (); }
+        public string HavingCondition
+        {
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
         }
-        
+
         [MonoTODO]
-        public override string QueryLanguage {
-            get { throw new NotImplementedException (); }
+        public override string QueryLanguage
+        {
+            get { throw new NotImplementedException(); }
         }
-        
+
         [MonoTODO]
-        public override string QueryString {
-            get { throw new NotImplementedException (); }
-            set { throw new NotImplementedException (); }
+        public override string QueryString
+        {
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
         }
-        
+
         [MonoTODO]
-        public TimeSpan WithinInterval {
-            get { throw new NotImplementedException (); }
-            set { throw new NotImplementedException (); }
+        public TimeSpan WithinInterval
+        {
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
         }
 
         // Methods
-        
+
         [MonoTODO]
-        protected internal void BuildQuery ()
+        protected internal void BuildQuery()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
-        
+
         [MonoTODO]
-        public override object Clone ()
+        public override object Clone()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
-        
+
         [MonoTODO]
-        protected internal override void ParseQuery (string query)
+        protected internal override void ParseQuery(string query)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
     }
 }
-

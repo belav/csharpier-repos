@@ -12,20 +12,14 @@ namespace Testing
     public partial class Test
     {
         /// test
-        public Test ()
-        {
-        }
+        public Test() { }
     }
 
     public partial class Test
     {
         /// test 2
-        public void Foo ()
-        {
-        }
+        public void Foo() { }
 
-        static void Main ()
-        {
-        }
+        static void Main() { }
     }
 }

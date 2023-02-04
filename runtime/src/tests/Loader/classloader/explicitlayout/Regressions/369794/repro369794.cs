@@ -18,16 +18,16 @@ class Test
         int i = sizeof(A);
         int j = Marshal.SizeOf(typeof(A));
 
-     if (i == 153 && j == 153)
-     {
-           Console.WriteLine("PASS");
-           return 100;  
-     }
-     else
-     {
-         Console.WriteLine("FAIL: sizeof and Marshal.SizeOf should have both returned 153.");
-        Console.WriteLine("ACTUAL: sizeof(A) = " + i + ", Marshal.SizeOf(A) = " + j); 
-         return 101;
-     }
+        if (i == 153 && j == 153)
+        {
+            Console.WriteLine("PASS");
+            return 100;
+        }
+        else
+        {
+            Console.WriteLine("FAIL: sizeof and Marshal.SizeOf should have both returned 153.");
+            Console.WriteLine("ACTUAL: sizeof(A) = " + i + ", Marshal.SizeOf(A) = " + j);
+            return 101;
+        }
     }
 }

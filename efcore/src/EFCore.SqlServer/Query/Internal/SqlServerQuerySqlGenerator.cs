@@ -26,7 +26,8 @@ public class SqlServerQuerySqlGenerator : QuerySqlGenerator
     /// </summary>
     public SqlServerQuerySqlGenerator(
         QuerySqlGeneratorDependencies dependencies,
-        IRelationalTypeMappingSource typeMappingSource)
+        IRelationalTypeMappingSource typeMappingSource
+    )
         : base(dependencies)
     {
         _typeMappingSource = typeMappingSource;
@@ -42,16 +43,20 @@ public class SqlServerQuerySqlGenerator : QuerySqlGenerator
     {
         var selectExpression = deleteExpression.SelectExpression;
 
-        if (selectExpression.Offset == null
+        if (
+            selectExpression.Offset == null
             && selectExpression.Having == null
             && selectExpression.Orderings.Count == 0
             && selectExpression.GroupBy.Count == 0
-            && selectExpression.Projection.Count == 0)
+            && selectExpression.Projection.Count == 0
+        )
         {
             Sql.Append("DELETE ");
             GenerateTop(selectExpression);
 
-            Sql.AppendLine($"FROM {Dependencies.SqlGenerationHelper.DelimitIdentifier(deleteExpression.Table.Alias)}");
+            Sql.AppendLine(
+                $"FROM {Dependencies.SqlGenerationHelper.DelimitIdentifier(deleteExpression.Table.Alias)}"
+            );
 
             Sql.Append("FROM ");
             GenerateList(selectExpression.Tables, e => Visit(e), sql => sql.AppendLine());
@@ -69,7 +74,10 @@ public class SqlServerQuerySqlGenerator : QuerySqlGenerator
         }
 
         throw new InvalidOperationException(
-            RelationalStrings.ExecuteOperationWithUnsupportedOperatorInSqlGeneration(nameof(RelationalQueryableExtensions.ExecuteDelete)));
+            RelationalStrings.ExecuteOperationWithUnsupportedOperatorInSqlGeneration(
+                nameof(RelationalQueryableExtensions.ExecuteDelete)
+            )
+        );
     }
 
     /// <summary>
@@ -82,16 +90,20 @@ public class SqlServerQuerySqlGenerator : QuerySqlGenerator
     {
         var selectExpression = updateExpression.SelectExpression;
 
-        if (selectExpression.Offset == null
+        if (
+            selectExpression.Offset == null
             && selectExpression.Having == null
             && selectExpression.Orderings.Count == 0
             && selectExpression.GroupBy.Count == 0
-            && selectExpression.Projection.Count == 0)
+            && selectExpression.Projection.Count == 0
+        )
         {
             Sql.Append("UPDATE ");
             GenerateTop(selectExpression);
 
-            Sql.AppendLine($"{Dependencies.SqlGenerationHelper.DelimitIdentifier(updateExpression.Table.Alias)}");
+            Sql.AppendLine(
+                $"{Dependencies.SqlGenerationHelper.DelimitIdentifier(updateExpression.Table.Alias)}"
+            );
             Sql.Append("SET ");
             Visit(updateExpression.ColumnValueSetters[0].Column);
             Sql.Append(" = ");
@@ -121,7 +133,10 @@ public class SqlServerQuerySqlGenerator : QuerySqlGenerator
         }
 
         throw new InvalidOperationException(
-            RelationalStrings.ExecuteOperationWithUnsupportedOperatorInSqlGeneration(nameof(RelationalQueryableExtensions.ExecuteUpdate)));
+            RelationalStrings.ExecuteOperationWithUnsupportedOperatorInSqlGeneration(
+                nameof(RelationalQueryableExtensions.ExecuteUpdate)
+            )
+        );
     }
 
     /// <summary>
@@ -132,8 +147,7 @@ public class SqlServerQuerySqlGenerator : QuerySqlGenerator
     /// </summary>
     protected override void GenerateTop(SelectExpression selectExpression)
     {
-        if (selectExpression.Limit != null
-            && selectExpression.Offset == null)
+        if (selectExpression.Limit != null && selectExpression.Offset == null)
         {
             Sql.Append("TOP(");
 
@@ -172,8 +186,7 @@ public class SqlServerQuerySqlGenerator : QuerySqlGenerator
         // Note: For Limit without Offset, SqlServer generates TOP()
         if (selectExpression.Offset != null)
         {
-            Sql.AppendLine()
-                .Append("OFFSET ");
+            Sql.AppendLine().Append("OFFSET ");
 
             Visit(selectExpression.Offset);
 
@@ -196,7 +209,9 @@ public class SqlServerQuerySqlGenerator : QuerySqlGenerator
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected virtual Expression VisitSqlServerAggregateFunction(SqlServerAggregateFunctionExpression aggregateFunctionExpression)
+    protected virtual Expression VisitSqlServerAggregateFunction(
+        SqlServerAggregateFunctionExpression aggregateFunctionExpression
+    )
     {
         Sql.Append(aggregateFunctionExpression.Name);
 
@@ -225,13 +240,21 @@ public class SqlServerQuerySqlGenerator : QuerySqlGenerator
         switch (extensionExpression)
         {
             case TableExpression tableExpression
-                when tableExpression.FindAnnotation(SqlServerAnnotationNames.TemporalOperationType) != null:
+                when tableExpression.FindAnnotation(SqlServerAnnotationNames.TemporalOperationType)
+                    != null:
             {
-                Sql.Append(Dependencies.SqlGenerationHelper.DelimitIdentifier(tableExpression.Name, tableExpression.Schema))
+                Sql.Append(
+                        Dependencies.SqlGenerationHelper.DelimitIdentifier(
+                            tableExpression.Name,
+                            tableExpression.Schema
+                        )
+                    )
                     .Append(" FOR SYSTEM_TIME ");
 
-                var temporalOperationType = (TemporalOperationType)tableExpression
-                    .FindAnnotation(SqlServerAnnotationNames.TemporalOperationType)!.Value!;
+                var temporalOperationType = (TemporalOperationType)
+                    tableExpression
+                        .FindAnnotation(SqlServerAnnotationNames.TemporalOperationType)!
+                        .Value!;
 
                 switch (temporalOperationType)
                 {
@@ -240,21 +263,43 @@ public class SqlServerQuerySqlGenerator : QuerySqlGenerator
                         break;
 
                     case TemporalOperationType.AsOf:
-                        var pointInTime =
-                            (DateTime)tableExpression.FindAnnotation(SqlServerAnnotationNames.TemporalAsOfPointInTime)!.Value!;
+                        var pointInTime = (DateTime)
+                            tableExpression
+                                .FindAnnotation(SqlServerAnnotationNames.TemporalAsOfPointInTime)!
+                                .Value!;
 
                         Sql.Append("AS OF ")
-                            .Append(_typeMappingSource.GetMapping(typeof(DateTime)).GenerateSqlLiteral(pointInTime));
+                            .Append(
+                                _typeMappingSource
+                                    .GetMapping(typeof(DateTime))
+                                    .GenerateSqlLiteral(pointInTime)
+                            );
                         break;
 
                     case TemporalOperationType.Between:
                     case TemporalOperationType.ContainedIn:
                     case TemporalOperationType.FromTo:
-                        var from = _typeMappingSource.GetMapping(typeof(DateTime)).GenerateSqlLiteral(
-                            (DateTime)tableExpression.FindAnnotation(SqlServerAnnotationNames.TemporalRangeOperationFrom)!.Value!);
+                        var from = _typeMappingSource
+                            .GetMapping(typeof(DateTime))
+                            .GenerateSqlLiteral(
+                                (DateTime)
+                                    tableExpression
+                                        .FindAnnotation(
+                                            SqlServerAnnotationNames.TemporalRangeOperationFrom
+                                        )!
+                                        .Value!
+                            );
 
-                        var to = _typeMappingSource.GetMapping(typeof(DateTime)).GenerateSqlLiteral(
-                            (DateTime)tableExpression.FindAnnotation(SqlServerAnnotationNames.TemporalRangeOperationTo)!.Value!);
+                        var to = _typeMappingSource
+                            .GetMapping(typeof(DateTime))
+                            .GenerateSqlLiteral(
+                                (DateTime)
+                                    tableExpression
+                                        .FindAnnotation(
+                                            SqlServerAnnotationNames.TemporalRangeOperationTo
+                                        )!
+                                        .Value!
+                            );
 
                         switch (temporalOperationType)
                         {
@@ -283,7 +328,11 @@ public class SqlServerQuerySqlGenerator : QuerySqlGenerator
                 if (tableExpression.Alias != null)
                 {
                     Sql.Append(AliasSeparator)
-                        .Append(Dependencies.SqlGenerationHelper.DelimitIdentifier(tableExpression.Alias));
+                        .Append(
+                            Dependencies.SqlGenerationHelper.DelimitIdentifier(
+                                tableExpression.Alias
+                            )
+                        );
                 }
 
                 return tableExpression;
@@ -299,8 +348,7 @@ public class SqlServerQuerySqlGenerator : QuerySqlGenerator
     /// <inheritdoc />
     protected override Expression VisitJsonScalar(JsonScalarExpression jsonScalarExpression)
     {
-        if (jsonScalarExpression.Path.Count == 1
-            && jsonScalarExpression.Path[0].ToString() == "$")
+        if (jsonScalarExpression.Path.Count == 1 && jsonScalarExpression.Path[0].ToString() == "$")
         {
             Visit(jsonScalarExpression.JsonColumn);
 
@@ -316,7 +364,11 @@ public class SqlServerQuerySqlGenerator : QuerySqlGenerator
             // JSON_VALUE always returns nvarchar(4000) (https://learn.microsoft.com/sql/t-sql/functions/json-value-transact-sql),
             // so we cast the result to the expected type - except if it's a string (since the cast interferes with indexes over
             // the JSON property).
-            Sql.Append(jsonScalarExpression.TypeMapping is StringTypeMapping ? "JSON_VALUE(" : "CAST(JSON_VALUE(");
+            Sql.Append(
+                jsonScalarExpression.TypeMapping is StringTypeMapping
+                    ? "JSON_VALUE("
+                    : "CAST(JSON_VALUE("
+            );
         }
 
         Visit(jsonScalarExpression.JsonColumn);
@@ -352,7 +404,11 @@ public class SqlServerQuerySqlGenerator : QuerySqlGenerator
 
         Sql.Append("')");
 
-        if (jsonScalarExpression.TypeMapping is not SqlServerJsonTypeMapping and not StringTypeMapping)
+        if (
+            jsonScalarExpression.TypeMapping
+            is not SqlServerJsonTypeMapping
+                and not StringTypeMapping
+        )
         {
             Sql.Append(" AS ");
             Sql.Append(jsonScalarExpression.TypeMapping!.StoreType);
@@ -376,7 +432,8 @@ public class SqlServerQuerySqlGenerator : QuerySqlGenerator
     private void GenerateList<T>(
         IReadOnlyList<T> items,
         Action<T> generationAction,
-        Action<IRelationalCommandBuilder>? joinAction = null)
+        Action<IRelationalCommandBuilder>? joinAction = null
+    )
     {
         joinAction ??= (isb => isb.Append(", "));
 

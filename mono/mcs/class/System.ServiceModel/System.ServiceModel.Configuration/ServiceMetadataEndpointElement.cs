@@ -11,10 +11,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -54,46 +54,59 @@ namespace System.ServiceModel.Configuration
 {
     public class ServiceMetadataEndpointElement : StandardEndpointElement
     {
-        static ConfigurationPropertyCollection properties = new ConfigurationPropertyCollection ();
+        static ConfigurationPropertyCollection properties = new ConfigurationPropertyCollection();
 
-        static ServiceMetadataEndpointElement ()
+        static ServiceMetadataEndpointElement()
         {
-            foreach (var item in new ConfigurationProperty [] {})
-                properties.Add (item);
+            foreach (var item in new ConfigurationProperty[] { })
+                properties.Add(item);
         }
 
-        protected internal override Type EndpointType {
-            get { return typeof (ServiceMetadataEndpoint); }
+        protected internal override Type EndpointType
+        {
+            get { return typeof(ServiceMetadataEndpoint); }
         }
 
-        protected override ConfigurationPropertyCollection Properties {
+        protected override ConfigurationPropertyCollection Properties
+        {
             get { return properties; }
         }
 
-        protected internal override ServiceEndpoint CreateServiceEndpoint (ContractDescription contractDescription)
+        protected internal override ServiceEndpoint CreateServiceEndpoint(
+            ContractDescription contractDescription
+        )
         {
-            return new ServiceMetadataEndpoint ();
+            return new ServiceMetadataEndpoint();
         }
 
-        protected override void OnApplyConfiguration (ServiceEndpoint endpoint, ChannelEndpointElement serviceEndpointElement)
+        protected override void OnApplyConfiguration(
+            ServiceEndpoint endpoint,
+            ChannelEndpointElement serviceEndpointElement
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        protected override void OnApplyConfiguration (ServiceEndpoint endpoint, ServiceEndpointElement serviceEndpointElement)
+        protected override void OnApplyConfiguration(
+            ServiceEndpoint endpoint,
+            ServiceEndpointElement serviceEndpointElement
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        protected override void OnInitializeAndValidate (ChannelEndpointElement channelEndpointElement)
+        protected override void OnInitializeAndValidate(
+            ChannelEndpointElement channelEndpointElement
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        protected override void OnInitializeAndValidate (ServiceEndpointElement serviceEndpointElement)
+        protected override void OnInitializeAndValidate(
+            ServiceEndpointElement serviceEndpointElement
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
     }
 }
-

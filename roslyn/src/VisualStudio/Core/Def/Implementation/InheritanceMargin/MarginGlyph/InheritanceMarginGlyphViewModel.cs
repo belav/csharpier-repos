@@ -44,10 +44,20 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
                         // Here we want to show a classified text with loc text,
                         // e.g. 'Bar' is inherited.
                         // But the classified text are inlines, so can't directly use string.format to generate the string
-                        var inlines = member.DisplayTexts.ToInlines(_classificationFormatMap, _classificationTypeMap);
-                        var startOfThePlaceholder = ServicesVSResources._0_is_inherited.IndexOf("{0}", StringComparison.Ordinal);
-                        var prefixString = ServicesVSResources._0_is_inherited[..startOfThePlaceholder];
-                        var suffixString = ServicesVSResources._0_is_inherited[(startOfThePlaceholder + "{0}".Length)..];
+                        var inlines = member.DisplayTexts.ToInlines(
+                            _classificationFormatMap,
+                            _classificationTypeMap
+                        );
+                        var startOfThePlaceholder = ServicesVSResources._0_is_inherited.IndexOf(
+                            "{0}",
+                            StringComparison.Ordinal
+                        );
+                        var prefixString = ServicesVSResources._0_is_inherited[
+                            ..startOfThePlaceholder
+                        ];
+                        var suffixString = ServicesVSResources._0_is_inherited[
+                            (startOfThePlaceholder + "{0}".Length)..
+                        ];
                         inlines.Insert(0, new Run(prefixString));
                         inlines.Add(new Run(suffixString));
                         var toolTipTextBlock = inlines.ToTextBlock(_classificationFormatMap);
@@ -89,7 +99,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
             IClassificationFormatMap classificationFormatMap,
             string automationName,
             double scaleFactor,
-            ImmutableArray<MenuItemViewModel> menuItemViewModels)
+            ImmutableArray<MenuItemViewModel> menuItemViewModels
+        )
         {
             _classificationTypeMap = classificationTypeMap;
             _classificationFormatMap = classificationFormatMap;
@@ -103,7 +114,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
             ClassificationTypeMap classificationTypeMap,
             IClassificationFormatMap classificationFormatMap,
             InheritanceMarginTag tag,
-            double zoomLevel)
+            double zoomLevel
+        )
         {
             var members = tag.MembersOnLine;
 
@@ -114,16 +126,42 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
             {
                 var member = tag.MembersOnLine[0];
 
-                var automationName = string.Format(ServicesVSResources._0_is_inherited, member.DisplayTexts.JoinText());
-                var menuItemViewModels = InheritanceMarginHelpers.CreateMenuItemViewModelsForSingleMember(member.TargetItems);
-                return new InheritanceMarginGlyphViewModel(tag, classificationTypeMap, classificationFormatMap, automationName, scaleFactor, menuItemViewModels);
+                var automationName = string.Format(
+                    ServicesVSResources._0_is_inherited,
+                    member.DisplayTexts.JoinText()
+                );
+                var menuItemViewModels =
+                    InheritanceMarginHelpers.CreateMenuItemViewModelsForSingleMember(
+                        member.TargetItems
+                    );
+                return new InheritanceMarginGlyphViewModel(
+                    tag,
+                    classificationTypeMap,
+                    classificationFormatMap,
+                    automationName,
+                    scaleFactor,
+                    menuItemViewModels
+                );
             }
             else
             {
                 // Same automation name can't be set for control for accessibility purpose. So add the line number info.
-                var automationName = string.Format(ServicesVSResources.Multiple_members_are_inherited_on_line_0, tag.LineNumber);
-                var menuItemViewModels = InheritanceMarginHelpers.CreateMenuItemViewModelsForMultipleMembers(tag.MembersOnLine);
-                return new InheritanceMarginGlyphViewModel(tag, classificationTypeMap, classificationFormatMap, automationName, scaleFactor, menuItemViewModels);
+                var automationName = string.Format(
+                    ServicesVSResources.Multiple_members_are_inherited_on_line_0,
+                    tag.LineNumber
+                );
+                var menuItemViewModels =
+                    InheritanceMarginHelpers.CreateMenuItemViewModelsForMultipleMembers(
+                        tag.MembersOnLine
+                    );
+                return new InheritanceMarginGlyphViewModel(
+                    tag,
+                    classificationTypeMap,
+                    classificationFormatMap,
+                    automationName,
+                    scaleFactor,
+                    menuItemViewModels
+                );
             }
         }
     }

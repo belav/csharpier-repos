@@ -14,55 +14,64 @@ using System.Security.Cryptography;
 
 using Mono.Security.Authenticode;
 
-[assembly: AssemblyTitle ("Mono CheckTrust")]
-[assembly: AssemblyDescription ("Verify if a PE binary has a valid Authenticode(tm) signature")]
+[assembly: AssemblyTitle("Mono CheckTrust")]
+[assembly: AssemblyDescription("Verify if a PE binary has a valid Authenticode(tm) signature")]
 
-namespace Mono.Tools {
-
-    class CheckTrust {
-
-        static private void Header () 
+namespace Mono.Tools
+{
+    class CheckTrust
+    {
+        static private void Header()
         {
-            Console.WriteLine (new AssemblyInfo ().ToString ());
+            Console.WriteLine(new AssemblyInfo().ToString());
         }
 
-        static private void Help () 
+        static private void Help()
         {
-            Console.WriteLine ("Usage: chktrust [options] filename{0}", Environment.NewLine);
-            Console.WriteLine ("\t-q\tquiet mode (no gui)");
-            Console.WriteLine ("\t-v\tverbose mode (display status for every steps)");
-            Console.WriteLine ("\t-?\thelp (display this help message)");
+            Console.WriteLine("Usage: chktrust [options] filename{0}", Environment.NewLine);
+            Console.WriteLine("\t-q\tquiet mode (no gui)");
+            Console.WriteLine("\t-v\tverbose mode (display status for every steps)");
+            Console.WriteLine("\t-?\thelp (display this help message)");
         }
 
         // static methods
-        static public int Check (string fileName, bool quiet, bool verbose) 
+        static public int Check(string fileName, bool quiet, bool verbose)
         {
-            AuthenticodeDeformatter a = new AuthenticodeDeformatter (fileName);
-            
+            AuthenticodeDeformatter a = new AuthenticodeDeformatter(fileName);
+
             // debug
-/*            FileStream fs = File.Open (fileName + ".sig", FileMode.Create, FileAccess.Write);
-            fs.Write (a.Signature, 0, a.Signature.Length);
-            fs.Close ();*/
+            /*            FileStream fs = File.Open (fileName + ".sig", FileMode.Create, FileAccess.Write);
+                        fs.Write (a.Signature, 0, a.Signature.Length);
+                        fs.Close ();*/
 
             // get something shorter to display
-            fileName = Path.GetFileName (fileName);
+            fileName = Path.GetFileName(fileName);
 
-            if (verbose) {
-                Console.WriteLine ("Verifying file {0} for Authenticode(tm) signatures...{1}", fileName, Environment.NewLine);
+            if (verbose)
+            {
+                Console.WriteLine(
+                    "Verifying file {0} for Authenticode(tm) signatures...{1}",
+                    fileName,
+                    Environment.NewLine
+                );
             }
 
-            if (a.Timestamp == DateTime.MinValue) {
+            if (a.Timestamp == DateTime.MinValue)
+            {
                 // signature only valid if the certificate is valid
-                Console.WriteLine ("WARNING! {0} is not timestamped!", fileName);
+                Console.WriteLine("WARNING! {0} is not timestamped!", fileName);
             }
-            else if (verbose) {
-                Console.WriteLine ("INFO! {0} was timestamped on {1}", fileName, a.Timestamp);
+            else if (verbose)
+            {
+                Console.WriteLine("INFO! {0} was timestamped on {1}", fileName, a.Timestamp);
             }
 
-            if (a.Reason > 0) {
+            if (a.Reason > 0)
+            {
                 string msg = null;
                 // FAILURES
-                switch (a.Reason) {
+                switch (a.Reason)
+                {
                     case 1:
                         msg = "doesn't contain a digital signature";
                         break;
@@ -91,27 +100,35 @@ namespace Mono.Tools {
                         msg = "unknown error";
                         break;
                 }
-    
-                Console.WriteLine ("ERROR! {0} {1}!{2}", fileName, msg, Environment.NewLine);
+
+                Console.WriteLine("ERROR! {0} {1}!{2}", fileName, msg, Environment.NewLine);
                 return 1;
             }
 
-            Console.WriteLine ("SUCCESS: {0} signature is valid{1}and can be traced back to a trusted root!{2}", fileName, Environment.NewLine, Environment.NewLine);
+            Console.WriteLine(
+                "SUCCESS: {0} signature is valid{1}and can be traced back to a trusted root!{2}",
+                fileName,
+                Environment.NewLine,
+                Environment.NewLine
+            );
             return 0;
         }
 
         [STAThread]
-        static int Main (string[] args) 
+        static int Main(string[] args)
         {
             bool verbose = false;
-            bool quiet = true;    // always true as we don't show UI
+            bool quiet = true; // always true as we don't show UI
             bool help = false;
             string fileName = null;
 
             Header();
-            try {
-                for (int i=0; i < args.Length; i++) {
-                    switch (args[i]) {
+            try
+            {
+                for (int i = 0; i < args.Length; i++)
+                {
+                    switch (args[i])
+                    {
                         case "-q":
                         case "-quiet":
                             quiet = true;
@@ -127,26 +144,27 @@ namespace Mono.Tools {
                             help = true;
                             break;
                         default:
-                            fileName = args [i];
+                            fileName = args[i];
                             break;
                     }
                 }
 
-                if ((help) || (fileName == null)) 
-                    Help ();
+                if ((help) || (fileName == null))
+                    Help();
                 else
-                    return Check (fileName, quiet, verbose);
-
+                    return Check(fileName, quiet, verbose);
             }
-            catch (CryptographicException ce) {
-                Console.WriteLine ("WARNING: " + ce.Message);
-                Console.WriteLine ("ERROR: Trust evaluation is incomplete!");
+            catch (CryptographicException ce)
+            {
+                Console.WriteLine("WARNING: " + ce.Message);
+                Console.WriteLine("ERROR: Trust evaluation is incomplete!");
             }
-            catch (Exception e) {
-                Console.WriteLine ("ERROR: " + e.ToString ());
-                Help ();
+            catch (Exception e)
+            {
+                Console.WriteLine("ERROR: " + e.ToString());
+                Help();
             }
-            Console.WriteLine ();
+            Console.WriteLine();
             return 1;
         }
     }

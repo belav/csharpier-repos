@@ -9,8 +9,9 @@ namespace VersionTolerantSerializationTestLib
         private string City = "v3-City";
         private string CountryCode = "v3-CountryCode";
 
-        public override string ToString () {
-            return String.Format ("v3 obj {0} {1} {2}", Street, City, CountryCode);
+        public override string ToString()
+        {
+            return String.Format("v3 obj {0} {1} {2}", Street, City, CountryCode);
         }
     }
 }

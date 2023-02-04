@@ -13,7 +13,8 @@ public class DefaultApplicationPartFactory : ApplicationPartFactory
     /// <summary>
     /// Gets an instance of <see cref="DefaultApplicationPartFactory"/>.
     /// </summary>
-    public static DefaultApplicationPartFactory Instance { get; } = new DefaultApplicationPartFactory();
+    public static DefaultApplicationPartFactory Instance { get; } =
+        new DefaultApplicationPartFactory();
 
     /// <summary>
     /// Gets the sequence of <see cref="ApplicationPart"/> instances that are created by this instance of <see cref="DefaultApplicationPartFactory"/>.

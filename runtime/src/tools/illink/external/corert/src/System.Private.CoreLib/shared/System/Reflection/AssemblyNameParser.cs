@@ -31,7 +31,9 @@ namespace System.Reflection
             if (token != AssemblyNameLexer.Token.String)
                 throw new FileLoadException();
 
-            if (string.IsNullOrEmpty(name) || name.IndexOfAny(s_illegalCharactersInSimpleName) != -1)
+            if (
+                string.IsNullOrEmpty(name) || name.IndexOfAny(s_illegalCharactersInSimpleName) != -1
+            )
                 throw new FileLoadException();
 
             Version version = null;
@@ -88,9 +90,16 @@ namespace System.Reflection
                     pkt = ParsePKT(attributeValue);
                 }
 
-                if (attributeName.Equals("ProcessorArchitecture", StringComparison.OrdinalIgnoreCase))
+                if (
+                    attributeName.Equals(
+                        "ProcessorArchitecture",
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 {
-                    flags |= (AssemblyNameFlags)(((int)ParseProcessorArchitecture(attributeValue)) << 4);
+                    flags |= (AssemblyNameFlags)(
+                        ((int)ParseProcessorArchitecture(attributeValue)) << 4
+                    );
                 }
 
                 if (attributeName.Equals("Retargetable", StringComparison.OrdinalIgnoreCase))
@@ -108,7 +117,9 @@ namespace System.Reflection
                 if (attributeName.Equals("ContentType", StringComparison.OrdinalIgnoreCase))
                 {
                     if (attributeValue.Equals("WindowsRuntime", StringComparison.OrdinalIgnoreCase))
-                        flags |= (AssemblyNameFlags)(((int)AssemblyContentType.WindowsRuntime) << 9);
+                        flags |= (AssemblyNameFlags)(
+                            ((int)AssemblyContentType.WindowsRuntime) << 9
+                        );
                     else
                         throw new FileLoadException();
                 }
@@ -150,7 +161,12 @@ namespace System.Reflection
                 return new Version(versionNumbers[0], versionNumbers[1]);
             if (versionNumbers[3] == ushort.MaxValue)
                 return new Version(versionNumbers[0], versionNumbers[1], versionNumbers[2]);
-            return new Version(versionNumbers[0], versionNumbers[1], versionNumbers[2], versionNumbers[3]);
+            return new Version(
+                versionNumbers[0],
+                versionNumbers[1],
+                versionNumbers[2],
+                versionNumbers[3]
+            );
         }
 
         private static string ParseCulture(string attributeValue)
@@ -168,7 +184,10 @@ namespace System.Reflection
 
         private static byte[] ParsePKT(string attributeValue)
         {
-            if (attributeValue.Equals("null", StringComparison.OrdinalIgnoreCase) || attributeValue.Length == 0)
+            if (
+                attributeValue.Equals("null", StringComparison.OrdinalIgnoreCase)
+                || attributeValue.Length == 0
+            )
                 return Array.Empty<byte>();
 
             if (attributeValue.Length != 8 * 2)

@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -38,74 +38,74 @@ namespace MonoTests.System.Xml
     public class XmlBinaryWriterSessionTest
     {
         [Test]
-        [ExpectedException (typeof (InvalidOperationException))]
-        public void TryAddDuplicate ()
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void TryAddDuplicate()
         {
-            XmlDictionary dic = new XmlDictionary ();
-            XmlDictionaryString d1 = dic.Add ("foo");
-            XmlBinaryWriterSession s = new XmlBinaryWriterSession ();
+            XmlDictionary dic = new XmlDictionary();
+            XmlDictionaryString d1 = dic.Add("foo");
+            XmlBinaryWriterSession s = new XmlBinaryWriterSession();
             int idx;
-            s.TryAdd (d1, out idx);
-            s.TryAdd (d1, out idx);
+            s.TryAdd(d1, out idx);
+            s.TryAdd(d1, out idx);
         }
 
         [Test]
-        public void TryAddIndex ()
+        public void TryAddIndex()
         {
-            XmlDictionary dic = new XmlDictionary ();
-            XmlDictionaryString d1 = dic.Add ("foo");
-            XmlDictionaryString d2 = dic.Add ("bar");
-            XmlDictionaryString d3 = dic.Add ("baz");
-            XmlBinaryWriterSession s = new XmlBinaryWriterSession ();
+            XmlDictionary dic = new XmlDictionary();
+            XmlDictionaryString d1 = dic.Add("foo");
+            XmlDictionaryString d2 = dic.Add("bar");
+            XmlDictionaryString d3 = dic.Add("baz");
+            XmlBinaryWriterSession s = new XmlBinaryWriterSession();
             int idx;
-            s.TryAdd (d1, out idx);
-            Assert.AreEqual (0, idx, "#1");
-            s.TryAdd (d3, out idx);
-            Assert.AreEqual (1, idx, "#2"); // not 2
+            s.TryAdd(d1, out idx);
+            Assert.AreEqual(0, idx, "#1");
+            s.TryAdd(d3, out idx);
+            Assert.AreEqual(1, idx, "#2"); // not 2
         }
 
         [Test]
-        public void WriterAddsStringsToSession ()
+        public void WriterAddsStringsToSession()
         {
-            var ms = new MemoryStream ();
-            var d = new MyXmlDictionary ();
-            var s = new MyXmlBinaryWriterSession ();
-            var w = XmlDictionaryWriter.CreateBinaryWriter (ms, d, s);
-            w.WriteStartElement ("root1");
-            w.WriteEndElement ();
-            Assert.AreEqual (0, d.List.Count, "#1");
-            Assert.AreEqual (0, s.List.Count, "#2");
-            w.WriteStartElement (d.Add ("root2"), XmlDictionaryString.Empty);
-            w.WriteEndElement ();
-            Assert.AreEqual (1, d.List.Count, "#3");
-            Assert.AreEqual (0, s.List.Count, "#4");
-            w.WriteStartElement (new XmlDictionary ().Add ("root3"), XmlDictionaryString.Empty);
-            w.WriteEndElement ();
-            Assert.AreEqual (1, d.List.Count, "#5");
-            Assert.AreEqual (1, s.List.Count, "#6");
+            var ms = new MemoryStream();
+            var d = new MyXmlDictionary();
+            var s = new MyXmlBinaryWriterSession();
+            var w = XmlDictionaryWriter.CreateBinaryWriter(ms, d, s);
+            w.WriteStartElement("root1");
+            w.WriteEndElement();
+            Assert.AreEqual(0, d.List.Count, "#1");
+            Assert.AreEqual(0, s.List.Count, "#2");
+            w.WriteStartElement(d.Add("root2"), XmlDictionaryString.Empty);
+            w.WriteEndElement();
+            Assert.AreEqual(1, d.List.Count, "#3");
+            Assert.AreEqual(0, s.List.Count, "#4");
+            w.WriteStartElement(new XmlDictionary().Add("root3"), XmlDictionaryString.Empty);
+            w.WriteEndElement();
+            Assert.AreEqual(1, d.List.Count, "#5");
+            Assert.AreEqual(1, s.List.Count, "#6");
         }
 
         class MyXmlDictionary : XmlDictionary
         {
-            public List<XmlDictionaryString> List = new List<XmlDictionaryString> ();
+            public List<XmlDictionaryString> List = new List<XmlDictionaryString>();
 
-            public override XmlDictionaryString Add (string s)
+            public override XmlDictionaryString Add(string s)
             {
-                var r = base.Add (s);
-                List.Add (r);
+                var r = base.Add(s);
+                List.Add(r);
                 return r;
             }
         }
 
         class MyXmlBinaryWriterSession : XmlBinaryWriterSession
         {
-            public List<XmlDictionaryString> List = new List<XmlDictionaryString> ();
+            public List<XmlDictionaryString> List = new List<XmlDictionaryString>();
 
-            public override bool TryAdd (XmlDictionaryString s, out int key)
+            public override bool TryAdd(XmlDictionaryString s, out int key)
             {
-                if (!base.TryAdd (s, out key))
+                if (!base.TryAdd(s, out key))
                     return false;
-                List.Add (s);
+                List.Add(s);
                 return true;
             }
         }

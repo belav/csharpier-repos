@@ -38,9 +38,18 @@ public class ConsoleStreamTests
         Stream inStream = Console.OpenStandardInput();
 
         byte[] buffer = new byte[1024];
-        Assert.Throws<ArgumentNullException>(() => { inStream.ReadAsync(null, 0, buffer.Length); });
-        Assert.Throws<ArgumentOutOfRangeException>(() => { inStream.ReadAsync(buffer, -1, buffer.Length); });
-        Assert.Throws<ArgumentOutOfRangeException>(() => { inStream.ReadAsync(buffer, 0, buffer.Length + 1); });
+        Assert.Throws<ArgumentNullException>(() =>
+        {
+            inStream.ReadAsync(null, 0, buffer.Length);
+        });
+        Assert.Throws<ArgumentOutOfRangeException>(() =>
+        {
+            inStream.ReadAsync(buffer, -1, buffer.Length);
+        });
+        Assert.Throws<ArgumentOutOfRangeException>(() =>
+        {
+            inStream.ReadAsync(buffer, 0, buffer.Length + 1);
+        });
     }
 
     [Fact]
@@ -64,9 +73,18 @@ public class ConsoleStreamTests
         Stream outStream = Console.OpenStandardOutput();
 
         byte[] bytes = Encoding.ASCII.GetBytes("Hi");
-        Assert.Throws<ArgumentNullException>(() => { outStream.WriteAsync(null, 0, bytes.Length); });
-        Assert.Throws<ArgumentOutOfRangeException>(() => { outStream.WriteAsync(bytes, -1, bytes.Length); });
-        Assert.Throws<ArgumentOutOfRangeException>(() => { outStream.WriteAsync(bytes, 0, bytes.Length + 1); });
+        Assert.Throws<ArgumentNullException>(() =>
+        {
+            outStream.WriteAsync(null, 0, bytes.Length);
+        });
+        Assert.Throws<ArgumentOutOfRangeException>(() =>
+        {
+            outStream.WriteAsync(bytes, -1, bytes.Length);
+        });
+        Assert.Throws<ArgumentOutOfRangeException>(() =>
+        {
+            outStream.WriteAsync(bytes, 0, bytes.Length + 1);
+        });
     }
 
     [ConditionalFact(typeof(Helpers), nameof(Helpers.IsConsoleInSupported))]
@@ -75,9 +93,15 @@ public class ConsoleStreamTests
         Stream inStream = Console.OpenStandardInput();
 
         byte[] bytes = Encoding.ASCII.GetBytes("Hi");
-        Assert.Throws<NotSupportedException>(() => { inStream.WriteAsync(bytes, 0, bytes.Length); });
+        Assert.Throws<NotSupportedException>(() =>
+        {
+            inStream.WriteAsync(bytes, 0, bytes.Length);
+        });
 
-        Assert.Throws<NotSupportedException>(() => { inStream.WriteAsync(bytes.AsMemory()); });
+        Assert.Throws<NotSupportedException>(() =>
+        {
+            inStream.WriteAsync(bytes.AsMemory());
+        });
     }
 
     [Fact]

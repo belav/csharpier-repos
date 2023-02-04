@@ -46,20 +46,20 @@ namespace MonoTests.System.Web.UI.WebControls
     class PokerButtonField : ButtonField
     {
         // View state Stuff
-        public PokerButtonField ()
-            : base ()
+        public PokerButtonField()
+            : base()
         {
-            TrackViewState ();
+            TrackViewState();
         }
 
-        public object SaveState ()
+        public object SaveState()
         {
-            return SaveViewState ();
+            return SaveViewState();
         }
 
-        public void LoadState (object o)
+        public void LoadState(object o)
         {
-            LoadViewState (o);
+            LoadViewState(o);
         }
 
         public StateBag StateBag
@@ -67,141 +67,153 @@ namespace MonoTests.System.Web.UI.WebControls
             get { return base.ViewState; }
         }
 
-        public void DoCopyProperties (DataControlField newField)
+        public void DoCopyProperties(DataControlField newField)
         {
-            base.CopyProperties (newField);
+            base.CopyProperties(newField);
         }
 
-        public DataControlField DoCreateField ()
+        public DataControlField DoCreateField()
         {
-            return base.CreateField ();
+            return base.CreateField();
         }
 
-        public string DoFormatDataTextValue (object dataTextValue)
+        public string DoFormatDataTextValue(object dataTextValue)
         {
-            return base.FormatDataTextValue (dataTextValue);
+            return base.FormatDataTextValue(dataTextValue);
         }
 
         public Control GetControl
         {
             get { return base.Control; }
-        } 
+        }
     }
 
     [TestFixture]
     public class ButtonFieldTest
     {
         [Test]
-        public void ButtonField_DefaultProperty ()
+        public void ButtonField_DefaultProperty()
         {
-            PokerButtonField button = new PokerButtonField ();
-            Assert.AreEqual ("", button.CommandName, "CommandName");
-            Assert.AreEqual ("", button.DataTextField, "DataTextField");
-            Assert.AreEqual ("", button.DataTextFormatString, "DataTextFormatString");
-            Assert.AreEqual ("", button.ImageUrl, "ImageUrl");
-            Assert.AreEqual ("", button.Text, "Text");
+            PokerButtonField button = new PokerButtonField();
+            Assert.AreEqual("", button.CommandName, "CommandName");
+            Assert.AreEqual("", button.DataTextField, "DataTextField");
+            Assert.AreEqual("", button.DataTextFormatString, "DataTextFormatString");
+            Assert.AreEqual("", button.ImageUrl, "ImageUrl");
+            Assert.AreEqual("", button.Text, "Text");
         }
 
         [Test]
-        public void ButtonField_AssignProperty ()
+        public void ButtonField_AssignProperty()
         {
-            PokerButtonField button = new PokerButtonField ();
+            PokerButtonField button = new PokerButtonField();
             button.CommandName = "test";
-            Assert.AreEqual ("test", button.CommandName, "CommandName");
+            Assert.AreEqual("test", button.CommandName, "CommandName");
             button.DataTextField = "test";
-            Assert.AreEqual ("test", button.DataTextField, "DataTextField");
+            Assert.AreEqual("test", button.DataTextField, "DataTextField");
             button.DataTextFormatString = "test";
-            Assert.AreEqual ("test", button.DataTextFormatString, "DataTextFormatString");
+            Assert.AreEqual("test", button.DataTextFormatString, "DataTextFormatString");
             button.ImageUrl = "test";
-            Assert.AreEqual ("test", button.ImageUrl, "ImageUrl");
+            Assert.AreEqual("test", button.ImageUrl, "ImageUrl");
             button.Text = "test";
-            Assert.AreEqual ("test", button.Text, "Text");
+            Assert.AreEqual("test", button.Text, "Text");
         }
 
         [Test]
-        public void ButtonField_Initialize ()
+        public void ButtonField_Initialize()
         {
-            Control control = new Control ();
+            Control control = new Control();
             control.ID = "test";
-            PokerButtonField button = new PokerButtonField ();
-            bool result = button.Initialize (true, control);
-            Assert.AreEqual (false, result, "Initialize");
-            Assert.AreEqual ("test", button.GetControl.ID, "InitializeControl");
+            PokerButtonField button = new PokerButtonField();
+            bool result = button.Initialize(true, control);
+            Assert.AreEqual(false, result, "Initialize");
+            Assert.AreEqual("test", button.GetControl.ID, "InitializeControl");
         }
 
         [Test]
-        public void ButtonField_InitializeCell ()
+        public void ButtonField_InitializeCell()
         {
             ButtonField field = new ButtonField();
             field.Text = "FieldText";
             field.HeaderText = "HeaderText";
             field.FooterText = "FooterText";
             field.CommandName = "Commandname";
-            DataControlFieldCell cell = new DataControlFieldCell (null);
-            field.InitializeCell (cell, DataControlCellType.Header, DataControlRowState.Normal, 0);
-            Assert.AreEqual ("HeaderText", cell.Text, "HeaderText");
-            field.InitializeCell (cell, DataControlCellType.Footer, DataControlRowState.Normal, 0);
-            Assert.AreEqual ("FooterText", cell.Text, "FooterText");
-            Assert.AreEqual (0, cell.Controls.Count, "BeforeInitilizeDataField");
-            field.InitializeCell (cell, DataControlCellType.DataCell, DataControlRowState.Normal, 0);
-            Assert.AreEqual (1, cell.Controls.Count, "AfterInitilizeDataField");
-            Assert.AreEqual ("FieldText",((IButtonControl)cell.Controls[0]).Text ,"FieldText" );
-            Assert.AreEqual ("Commandname", ((IButtonControl) cell.Controls[0]).CommandName , "Commandname");
-            Assert.AreEqual ("0", ((IButtonControl) cell.Controls[0]).CommandArgument, "CommandArgument");
+            DataControlFieldCell cell = new DataControlFieldCell(null);
+            field.InitializeCell(cell, DataControlCellType.Header, DataControlRowState.Normal, 0);
+            Assert.AreEqual("HeaderText", cell.Text, "HeaderText");
+            field.InitializeCell(cell, DataControlCellType.Footer, DataControlRowState.Normal, 0);
+            Assert.AreEqual("FooterText", cell.Text, "FooterText");
+            Assert.AreEqual(0, cell.Controls.Count, "BeforeInitilizeDataField");
+            field.InitializeCell(cell, DataControlCellType.DataCell, DataControlRowState.Normal, 0);
+            Assert.AreEqual(1, cell.Controls.Count, "AfterInitilizeDataField");
+            Assert.AreEqual("FieldText", ((IButtonControl)cell.Controls[0]).Text, "FieldText");
+            Assert.AreEqual(
+                "Commandname",
+                ((IButtonControl)cell.Controls[0]).CommandName,
+                "Commandname"
+            );
+            Assert.AreEqual(
+                "0",
+                ((IButtonControl)cell.Controls[0]).CommandArgument,
+                "CommandArgument"
+            );
             //Assert.AreEqual ("System.Web.UI.WebControls.DataControlLinkButton", ((IButtonControl) cell.Controls[0]).GetType ().ToString(), "TypeOfDataControlLinkButton");
-            cell.Controls.Clear ();
+            cell.Controls.Clear();
             field.ButtonType = ButtonType.Image;
-            field.InitializeCell (cell, DataControlCellType.DataCell, DataControlRowState.Normal, 0);
+            field.InitializeCell(cell, DataControlCellType.DataCell, DataControlRowState.Normal, 0);
             //Assert.AreEqual ("System.Web.UI.WebControls.ImageButton", ((IButtonControl) cell.Controls[0]).GetType ().ToString (), "TypeOfDataControlLinkButton");
-            cell.Controls.Clear ();
+            cell.Controls.Clear();
             field.ButtonType = ButtonType.Button;
-            field.InitializeCell (cell, DataControlCellType.DataCell, DataControlRowState.Normal, 0);
+            field.InitializeCell(cell, DataControlCellType.DataCell, DataControlRowState.Normal, 0);
             //Assert.AreEqual ("System.Web.UI.WebControls.Button", ((IButtonControl) cell.Controls[0]).GetType ().ToString (), "TypeOfDataControlLinkButton");
         }
 
         [Test]
-        public void ButtonField_ValidateSupportsCallback ()
+        public void ButtonField_ValidateSupportsCallback()
         {
-            //This method has been implemented as an empty method 
+            //This method has been implemented as an empty method
         }
 
         [Test]
-        public void ButtonField_CopyProperties ()
+        public void ButtonField_CopyProperties()
         {
-            PokerButtonField button = new PokerButtonField ();
-            ButtonField copy = new ButtonField ();
+            PokerButtonField button = new PokerButtonField();
+            ButtonField copy = new ButtonField();
             button.CommandName = "CommandName";
             button.DataTextField = "DataTextField";
             button.DataTextFormatString = "DataTextFormatString";
             button.ImageUrl = "ImageUrl";
             button.Text = "Text";
 
-            button.DoCopyProperties (copy);
-            Assert.AreEqual ("CommandName", copy.CommandName, "CommandName");
-            Assert.AreEqual ("DataTextField", copy.DataTextField, "DataTextField");
-            Assert.AreEqual ("DataTextFormatString", copy.DataTextFormatString, "DataTextFormatString");
-            Assert.AreEqual ("ImageUrl", copy.ImageUrl, "ImageUrl");
-            Assert.AreEqual ("Text", copy.Text, "Text");
+            button.DoCopyProperties(copy);
+            Assert.AreEqual("CommandName", copy.CommandName, "CommandName");
+            Assert.AreEqual("DataTextField", copy.DataTextField, "DataTextField");
+            Assert.AreEqual(
+                "DataTextFormatString",
+                copy.DataTextFormatString,
+                "DataTextFormatString"
+            );
+            Assert.AreEqual("ImageUrl", copy.ImageUrl, "ImageUrl");
+            Assert.AreEqual("Text", copy.Text, "Text");
         }
 
         [Test]
-        public void ButtonField_CreateField ()
+        public void ButtonField_CreateField()
         {
-            PokerButtonField button = new PokerButtonField ();
-            DataControlField newfield = button.DoCreateField ();
-            if (!(newfield is ButtonField)) {
-                Assert.Fail ("New buttonfield was not created");
+            PokerButtonField button = new PokerButtonField();
+            DataControlField newfield = button.DoCreateField();
+            if (!(newfield is ButtonField))
+            {
+                Assert.Fail("New buttonfield was not created");
             }
-
         }
 
         [Test]
-        public void ButtonField_FormatDataTextValue ()
+        public void ButtonField_FormatDataTextValue()
         {
-            PokerButtonField button = new PokerButtonField ();
+            PokerButtonField button = new PokerButtonField();
             button.DataTextFormatString = "-{0,8:G}-";
             string result = button.DoFormatDataTextValue(10);
-            Assert.AreEqual ("-      10-", result, "FormatDataValueWithFormat");
+            Assert.AreEqual("-      10-", result, "FormatDataValueWithFormat");
         }
     }
 }

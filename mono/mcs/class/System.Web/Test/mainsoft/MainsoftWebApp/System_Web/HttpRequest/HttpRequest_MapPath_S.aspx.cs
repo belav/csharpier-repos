@@ -37,23 +37,22 @@ using System.Web.SessionState;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
- 
+
 namespace GHTTests.System_Web_dll.System_Web
 {
-    public class HttpRequest_MapPath_S
-        : GHTBaseWeb 
+    public class HttpRequest_MapPath_S : GHTBaseWeb
     {
-        private void Page_Load(object sender, System.EventArgs e) 
+        private void Page_Load(object sender, System.EventArgs e)
         {
             System.Web.UI.HtmlControls.HtmlForm frm = (HtmlForm)FindControl("Form1");
             GHTTestBegin(frm);
             // trying full path
             GHTSubTestBegin("Request.MapPath1");
-            try 
+            try
             {
                 GHTSubTestAddResult(Request.MapPath("/"));
             }
-            catch (ArgumentException ex) 
+            catch (ArgumentException ex)
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }
@@ -61,12 +60,12 @@ namespace GHTTests.System_Web_dll.System_Web
 
             // trying invalid path
             GHTSubTestBegin("Request.MapPath2");
-            try 
+            try
             {
                 GHTSubTestAddResult(Request.MapPath("Http://dummy"));
                 GHTSubTestExpectedExceptionNotCaught("HttpException");
             }
-            catch (ArgumentException ex) 
+            catch (ArgumentException ex)
             {
                 GHTSubTestExpectedExceptionCaught(ex);
             }
@@ -74,12 +73,12 @@ namespace GHTTests.System_Web_dll.System_Web
 
             // another invalid path
             GHTSubTestBegin("Request.MapPath3");
-            try 
+            try
             {
                 // due to bug limitation 2846 we compare only the lenght of the MapPath
                 GHTSubTestAddResult((Request.MapPath("").Length > 0).ToString());
             }
-            catch (ArgumentException ex) 
+            catch (ArgumentException ex)
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }
@@ -87,25 +86,25 @@ namespace GHTTests.System_Web_dll.System_Web
 
             // trying a sub directory with a "/"
             GHTSubTestBegin("Request.MapPath4");
-            try 
+            try
             {
                 // due to bug limitation 2846 we compare only the lenght of the MapPath
                 GHTSubTestAddResult((Request.MapPath("/System_Web_dll").Length > 0).ToString());
             }
-            catch (ArgumentException ex) 
+            catch (ArgumentException ex)
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }
             GHTSubTestEnd();
 
-            // trying a sub directory 
+            // trying a sub directory
             GHTSubTestBegin("Request.MapPath5");
-            try 
+            try
             {
                 // due to bug limitation 2846 we compare only the lenght of the MapPath
                 GHTSubTestAddResult((Request.MapPath("/System_Web_dll/").Length > 0).ToString());
             }
-            catch (ArgumentException ex) 
+            catch (ArgumentException ex)
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }
@@ -122,13 +121,13 @@ namespace GHTTests.System_Web_dll.System_Web
             InitializeComponent();
             base.OnInit(e);
         }
-        
+
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
-        {    
+        {
             this.Load += new System.EventHandler(this.Page_Load);
         }
         #endregion

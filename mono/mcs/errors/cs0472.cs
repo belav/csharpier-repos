@@ -2,8 +2,9 @@
 // Line: 8
 // Compiler options: -warnaserror -warn:2
 
-public class X {
-    public static bool Compute (int x)
+public class X
+{
+    public static bool Compute(int x)
     {
         return x != null;
     }

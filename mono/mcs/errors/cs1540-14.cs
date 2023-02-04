@@ -3,7 +3,7 @@
 
 class A
 {
-    public A ()
+    public A()
     {
         var x = new { s = "-" };
         x.MemberwiseClone();

@@ -38,11 +38,10 @@ using System.Text;
 
 namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
 {
-    public class BaseDataList_DataBind_
-        : GHTDataListBase
+    public class BaseDataList_DataBind_ : GHTDataListBase
     {
         #region Web Form Designer generated code
-        override protected void OnInit(EventArgs e) 
+        override protected void OnInit(EventArgs e)
         {
             //
             // CODEGEN: This call is required by the ASP.NET Web Form Designer.
@@ -50,26 +49,32 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             InitializeComponent();
             base.OnInit(e);
         }
-        
+
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent() 
-        {    
+        private void InitializeComponent()
+        {
             this.Load += new System.EventHandler(this.Page_Load);
         }
         #endregion
         private delegate void BuildDataListControl(BaseDataList ctl);
 
-        private void Page_Load(object sender, System.EventArgs e) 
+        private void Page_Load(object sender, System.EventArgs e)
         {
             HtmlForm frm = (HtmlForm)FindControl("form1");
 
             GHTTestBegin(frm);
 
-            this.Test(typeof(DataGrid), new BaseDataList_DataBind_.BuildDataListControl(this.GHTBuildSampleDataGrid));
-            this.Test(typeof(DataList), new BaseDataList_DataBind_.BuildDataListControl(this.GHTBuildSampleDataList));
+            this.Test(
+                typeof(DataGrid),
+                new BaseDataList_DataBind_.BuildDataListControl(this.GHTBuildSampleDataGrid)
+            );
+            this.Test(
+                typeof(DataList),
+                new BaseDataList_DataBind_.BuildDataListControl(this.GHTBuildSampleDataList)
+            );
             testDataSetBind();
 
             GHTTestEnd();
@@ -81,7 +86,7 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             try
             {
                 this.GHTSubTestBegin("BaseDataList_" + CtlType.Name + "_DataBind1");
-                list1 = (BaseDataList) this.GHTElementClone(CtlType);
+                list1 = (BaseDataList)this.GHTElementClone(CtlType);
                 base.GHTActiveSubTest.Controls.Add(list1);
                 CtlBuilder(list1);
                 list1.DataSource = GHTDataListBase.GHTGetSampleDataSource();
@@ -94,7 +99,7 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             try
             {
                 this.GHTSubTestBegin("BaseDataList_" + CtlType.Name + "_DataBind2");
-                list1 = (BaseDataList) this.GHTElementClone(CtlType);
+                list1 = (BaseDataList)this.GHTElementClone(CtlType);
                 base.GHTActiveSubTest.Controls.Add(list1);
                 CtlBuilder(list1);
                 list1.DataSource = "Unknown";
@@ -116,7 +121,8 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
                 DataGrid grid1 = new DataGrid();
                 base.GHTActiveSubTest.Controls.Add(grid1);
                 DataSet set1 = new DataSet();
-                string text1 = "<NewDataSet><TestRunDetails><Test_x0020_Id>13266</Test_x0020_Id><Name>OleDbCommand_Transaction</Name></TestRunDetails></NewDataSet>";
+                string text1 =
+                    "<NewDataSet><TestRunDetails><Test_x0020_Id>13266</Test_x0020_Id><Name>OleDbCommand_Transaction</Name></TestRunDetails></NewDataSet>";
                 MemoryStream stream1 = new MemoryStream();
                 byte[] buffer1 = Encoding.Default.GetBytes(text1);
                 stream1.Write(buffer1, 0, buffer1.Length);
@@ -134,7 +140,5 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
                 // ProjectData.ClearProjectError();
             }
         }
- 
-
     }
 }

@@ -30,7 +30,8 @@ internal abstract class SaveTempDataPropertyFilterBase : ISaveTempDataCallback
     /// <summary>
     /// Tracks the values which originally existed in temp data.
     /// </summary>
-    public IDictionary<PropertyInfo, object> OriginalValues { get; } = new Dictionary<PropertyInfo, object>();
+    public IDictionary<PropertyInfo, object> OriginalValues { get; } =
+        new Dictionary<PropertyInfo, object>();
 
     /// <summary>
     /// Puts the modified values of <see cref="Subject"/> into <paramref name="tempData"/>.
@@ -81,7 +82,8 @@ internal abstract class SaveTempDataPropertyFilterBase : ISaveTempDataCallback
 
     public static IReadOnlyList<LifecycleProperty> GetTempDataProperties(
         TempDataSerializer tempDataSerializer,
-        Type type)
+        Type type
+    )
     {
         List<LifecycleProperty> results = null;
         var errorMessages = new List<string>();
@@ -92,7 +94,10 @@ internal abstract class SaveTempDataPropertyFilterBase : ISaveTempDataCallback
             var propertyHelper = propertyHelpers[i];
             var property = propertyHelper.Property;
             var tempDataAttribute = property.GetCustomAttribute<TempDataAttribute>();
-            if (tempDataAttribute != null && ValidateProperty(tempDataSerializer, errorMessages, propertyHelper.Property))
+            if (
+                tempDataAttribute != null
+                && ValidateProperty(tempDataSerializer, errorMessages, propertyHelper.Property)
+            )
             {
                 if (results == null)
                 {
@@ -117,15 +122,28 @@ internal abstract class SaveTempDataPropertyFilterBase : ISaveTempDataCallback
         return results;
     }
 
-    private static bool ValidateProperty(TempDataSerializer tempDataSerializer, List<string> errorMessages, PropertyInfo property)
+    private static bool ValidateProperty(
+        TempDataSerializer tempDataSerializer,
+        List<string> errorMessages,
+        PropertyInfo property
+    )
     {
-        if (!(property.SetMethod != null &&
-            property.SetMethod.IsPublic &&
-            property.GetMethod != null &&
-            property.GetMethod.IsPublic))
+        if (
+            !(
+                property.SetMethod != null
+                && property.SetMethod.IsPublic
+                && property.GetMethod != null
+                && property.GetMethod.IsPublic
+            )
+        )
         {
             errorMessages.Add(
-                Resources.FormatTempDataProperties_PublicGetterSetter(property.DeclaringType.FullName, property.Name, nameof(TempDataAttribute)));
+                Resources.FormatTempDataProperties_PublicGetterSetter(
+                    property.DeclaringType.FullName,
+                    property.Name,
+                    nameof(TempDataAttribute)
+                )
+            );
 
             return false;
         }
@@ -136,7 +154,8 @@ internal abstract class SaveTempDataPropertyFilterBase : ISaveTempDataCallback
                 tempDataSerializer.GetType().FullName,
                 TypeNameHelper.GetTypeDisplayName(property.DeclaringType),
                 property.Name,
-                TypeNameHelper.GetTypeDisplayName(property.PropertyType));
+                TypeNameHelper.GetTypeDisplayName(property.PropertyType)
+            );
 
             errorMessages.Add(errorMessage);
 

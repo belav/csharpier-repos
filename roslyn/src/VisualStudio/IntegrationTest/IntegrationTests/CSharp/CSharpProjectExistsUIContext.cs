@@ -20,9 +20,7 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
     public class CSharpProjectExistsUIContext : AbstractIntegrationTest
     {
         public CSharpProjectExistsUIContext(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory)
-        {
-        }
+            : base(instanceFactory) { }
 
         public override async Task InitializeAsync()
         {
@@ -33,16 +31,29 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
         [WpfFact]
         public void ProjectContextChanges()
         {
-            Assert.False(VisualStudio.Shell.IsUIContextActive(Guids.CSharpProjectExistsInWorkspaceUIContext));
+            Assert.False(
+                VisualStudio.Shell.IsUIContextActive(Guids.CSharpProjectExistsInWorkspaceUIContext)
+            );
 
-            VisualStudio.SolutionExplorer.AddProject(new ProjectUtils.Project("TestCSharpProject"), WellKnownProjectTemplates.ConsoleApplication, LanguageNames.CSharp);
+            VisualStudio.SolutionExplorer.AddProject(
+                new ProjectUtils.Project("TestCSharpProject"),
+                WellKnownProjectTemplates.ConsoleApplication,
+                LanguageNames.CSharp
+            );
 
-            Assert.True(VisualStudio.Shell.IsUIContextActive(Guids.CSharpProjectExistsInWorkspaceUIContext));
+            Assert.True(
+                VisualStudio.Shell.IsUIContextActive(Guids.CSharpProjectExistsInWorkspaceUIContext)
+            );
 
             VisualStudio.SolutionExplorer.CloseSolution();
-            VisualStudio.Workspace.WaitForAllAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.Workspace);
+            VisualStudio.Workspace.WaitForAllAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.Workspace
+            );
 
-            Assert.False(VisualStudio.Shell.IsUIContextActive(Guids.CSharpProjectExistsInWorkspaceUIContext));
+            Assert.False(
+                VisualStudio.Shell.IsUIContextActive(Guids.CSharpProjectExistsInWorkspaceUIContext)
+            );
         }
     }
 }

@@ -7,8 +7,7 @@ namespace System.CommandLine.IO
     {
         internal static void SetTerminalForegroundRed(this IConsole console)
         {
-            if (Platform.IsConsoleRedirectionCheckSupported &&
-                !Console.IsOutputRedirected)
+            if (Platform.IsConsoleRedirectionCheckSupported && !Console.IsOutputRedirected)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
             }
@@ -20,8 +19,7 @@ namespace System.CommandLine.IO
 
         internal static void ResetTerminalForegroundColor(this IConsole console)
         {
-            if (Platform.IsConsoleRedirectionCheckSupported &&
-                !Console.IsOutputRedirected)
+            if (Platform.IsConsoleRedirectionCheckSupported && !Console.IsOutputRedirected)
             {
                 Console.ResetColor();
             }

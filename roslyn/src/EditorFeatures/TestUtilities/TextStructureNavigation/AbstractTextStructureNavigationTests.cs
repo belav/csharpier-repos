@@ -33,7 +33,9 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.TextStructureNavigation
             var navigator = provider.CreateTextStructureNavigator(buffer);
 
             var position = document.CursorPosition!.Value;
-            var extent = navigator.GetExtentOfWord(new SnapshotPoint(buffer.CurrentSnapshot, position));
+            var extent = navigator.GetExtentOfWord(
+                new SnapshotPoint(buffer.CurrentSnapshot, position)
+            );
 
             var annotatedSpans = document.AnnotatedSpans;
 

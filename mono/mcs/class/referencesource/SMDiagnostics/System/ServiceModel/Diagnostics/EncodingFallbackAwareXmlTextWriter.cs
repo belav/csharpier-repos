@@ -20,8 +20,7 @@ namespace System.ServiceModel.Diagnostics
 
         public override void WriteString(string value)
         {
-            if (!string.IsNullOrEmpty(value) && 
-                ContainsInvalidXmlChar(value))
+            if (!string.IsNullOrEmpty(value) && ContainsInvalidXmlChar(value))
             {
                 byte[] blob = encoding.GetBytes(value);
                 value = encoding.GetString(blob);
@@ -46,9 +45,8 @@ namespace System.ServiceModel.Diagnostics
                     i++;
                     continue;
                 }
-                
-                if (i + 1 < len &&
-                    XmlConvert.IsXmlSurrogatePair(value[i + 1], value[i]))
+
+                if (i + 1 < len && XmlConvert.IsXmlSurrogatePair(value[i + 1], value[i]))
                 {
                     i += 2;
                     continue;

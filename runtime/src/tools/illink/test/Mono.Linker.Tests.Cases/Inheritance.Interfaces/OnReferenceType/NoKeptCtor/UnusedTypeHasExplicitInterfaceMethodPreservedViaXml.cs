@@ -3,39 +3,32 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 
 namespace Mono.Linker.Tests.Cases.Inheritance.Interfaces.OnReferenceType.NoKeptCtor
 {
-    [SetupLinkerDescriptorFile ("UnusedTypeHasExplicitInterfaceMethodPreservedViaXml.xml")]
+    [SetupLinkerDescriptorFile("UnusedTypeHasExplicitInterfaceMethodPreservedViaXml.xml")]
     public class UnusedTypeHasExplicitInterfaceMethodPreservedViaXml
     {
-        public static void Main ()
-        {
-        }
+        public static void Main() { }
 
         [Kept]
         interface IFoo
         {
             [Kept]
-            void Foo ();
+            void Foo();
         }
 
         interface IBar
         {
-            void Bar ();
+            void Bar();
         }
 
         [Kept]
-        [KeptInterface (typeof (IFoo))]
+        [KeptInterface(typeof(IFoo))]
         class A : IBar, IFoo
         {
-
             // Because an explicit interface method was preserved via xml, we need to now mark the interface implementation
             [Kept]
-            void IFoo.Foo ()
-            {
-            }
+            void IFoo.Foo() { }
 
-            void IBar.Bar ()
-            {
-            }
+            void IBar.Bar() { }
         }
     }
 }

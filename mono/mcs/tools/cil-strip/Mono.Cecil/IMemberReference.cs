@@ -26,10 +26,13 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil {
-
-    internal interface IMemberReference : IMetadataTokenProvider, IAnnotationProvider, IReflectionVisitable {
-
+namespace Mono.Cecil
+{
+    internal interface IMemberReference
+        : IMetadataTokenProvider,
+            IAnnotationProvider,
+            IReflectionVisitable
+    {
         string Name { get; set; }
         TypeReference DeclaringType { get; }
     }

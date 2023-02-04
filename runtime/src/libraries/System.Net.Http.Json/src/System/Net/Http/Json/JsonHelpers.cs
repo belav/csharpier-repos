@@ -10,9 +10,11 @@ namespace System.Net.Http.Json
 {
     internal static class JsonHelpers
     {
-        internal static readonly JsonSerializerOptions s_defaultSerializerOptions = new JsonSerializerOptions(JsonSerializerDefaults.Web);
+        internal static readonly JsonSerializerOptions s_defaultSerializerOptions =
+            new JsonSerializerOptions(JsonSerializerDefaults.Web);
 
-        internal static MediaTypeHeaderValue GetDefaultMediaType() => new("application/json") { CharSet = "utf-8" };
+        internal static MediaTypeHeaderValue GetDefaultMediaType() =>
+            new("application/json") { CharSet = "utf-8" };
 
         internal static Encoding? GetEncoding(string? charset)
         {
@@ -23,7 +25,11 @@ namespace System.Net.Http.Json
                 try
                 {
                     // Remove at most a single set of quotes.
-                    if (charset.Length > 2 && charset[0] == '\"' && charset[charset.Length - 1] == '\"')
+                    if (
+                        charset.Length > 2
+                        && charset[0] == '\"'
+                        && charset[charset.Length - 1] == '\"'
+                    )
                     {
                         encoding = Encoding.GetEncoding(charset.Substring(1, charset.Length - 2));
                     }

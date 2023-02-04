@@ -1,6 +1,4 @@
-public interface I<X>
-{
-}
+public interface I<X> { }
 
 public abstract class AnyObjectId : I<ObjectId>
 {
@@ -9,12 +7,10 @@ public abstract class AnyObjectId : I<ObjectId>
 
 public class ObjectId : AnyObjectId
 {
-    ObjectId ()
+    ObjectId()
     {
         W1 = 1;
     }
 
-    public static void Main ()
-    {
-    }
+    public static void Main() { }
 }

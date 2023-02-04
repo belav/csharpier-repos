@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,32 +32,32 @@ using System.Security.Permissions;
 
 using NUnit.Framework;
 
-namespace MonoCasTests.System.Security {
-
+namespace MonoCasTests.System.Security
+{
     [TestFixture]
-    [Category ("CAS")]
-    public class PermissionSetCas {
-
+    [Category("CAS")]
+    public class PermissionSetCas
+    {
         [SetUp]
-        public void SetUp ()
+        public void SetUp()
         {
             if (!SecurityManager.SecurityEnabled)
-                Assert.Ignore ("SecurityManager isn't enabled");
+                Assert.Ignore("SecurityManager isn't enabled");
         }
 
         [Test]
-        [ExpectedException (typeof (ExecutionEngineException))]
-        public void RevertAssert_WithoutAssertion ()
+        [ExpectedException(typeof(ExecutionEngineException))]
+        public void RevertAssert_WithoutAssertion()
         {
-            PermissionSet.RevertAssert ();
+            PermissionSet.RevertAssert();
         }
 
         [Test]
-        public void RevertAssert_WithAssertion ()
+        public void RevertAssert_WithAssertion()
         {
-            PermissionSet ups = new PermissionSet (PermissionState.Unrestricted);
-            ups.Assert ();
-            PermissionSet.RevertAssert ();
+            PermissionSet ups = new PermissionSet(PermissionState.Unrestricted);
+            ups.Assert();
+            PermissionSet.RevertAssert();
         }
     }
 }

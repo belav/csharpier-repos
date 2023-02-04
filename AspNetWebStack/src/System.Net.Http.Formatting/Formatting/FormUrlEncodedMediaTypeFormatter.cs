@@ -62,15 +62,16 @@ namespace System.Net.Http.Formatting
         /// </summary>
         public int MaxDepth
         {
-            get
-            {
-                return _maxDepth;
-            }
+            get { return _maxDepth; }
             set
             {
                 if (value < FormattingUtilities.DefaultMinDepth)
                 {
-                    throw Error.ArgumentMustBeGreaterThanOrEqualTo("value", value, FormattingUtilities.DefaultMinDepth);
+                    throw Error.ArgumentMustBeGreaterThanOrEqualTo(
+                        "value",
+                        value,
+                        FormattingUtilities.DefaultMinDepth
+                    );
                 }
 
                 _maxDepth = value;
@@ -86,7 +87,6 @@ namespace System.Net.Http.Formatting
         public int ReadBufferSize
         {
             get { return _readBufferSize; }
-
             set
             {
                 if (value < MinBufferSize)
@@ -100,10 +100,7 @@ namespace System.Net.Http.Formatting
 
         internal override bool CanWriteAnyTypes
         {
-            get
-            {
-                return _isDerived;
-            }
+            get { return _isDerived; }
         }
 
         /// <summary>
@@ -148,8 +145,17 @@ namespace System.Net.Http.Formatting
         /// <param name="content">The <see cref="HttpContent"/> for the content being read.</param>
         /// <param name="formatterLogger">The <see cref="IFormatterLogger"/> to log events to.</param>
         /// <returns>A <see cref="Task"/> whose result will be the object instance that has been read.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "The caught exception type is reflected into a faulted task.")]
-        public override Task<object> ReadFromStreamAsync(Type type, Stream readStream, HttpContent content, IFormatterLogger formatterLogger)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1031:DoNotCatchGeneralExceptionTypes",
+            Justification = "The caught exception type is reflected into a faulted task."
+        )]
+        public override Task<object> ReadFromStreamAsync(
+            Type type,
+            Stream readStream,
+            HttpContent content,
+            IFormatterLogger formatterLogger
+        )
         {
             if (type == null)
             {
@@ -174,7 +180,10 @@ namespace System.Net.Http.Formatting
         private object ReadFromStream(Type type, Stream readStream)
         {
             object result;
-            IEnumerable<KeyValuePair<string, string>> nameValuePairs = ReadFormUrlEncoded(readStream, ReadBufferSize);
+            IEnumerable<KeyValuePair<string, string>> nameValuePairs = ReadFormUrlEncoded(
+                readStream,
+                ReadBufferSize
+            );
 
             if (type == typeof(FormDataCollection))
             {
@@ -187,7 +196,11 @@ namespace System.Net.Http.Formatting
             else
             {
                 // Passed us an unsupported type. Should have called CanReadType() first.
-                throw Error.InvalidOperation(Properties.Resources.SerializerCannotSerializeType, GetType().Name, type.Name);
+                throw Error.InvalidOperation(
+                    Properties.Resources.SerializerCannotSerializeType,
+                    GetType().Name,
+                    type.Name
+                );
             }
             return result;
         }
@@ -199,10 +212,16 @@ namespace System.Net.Http.Formatting
         /// <param name="input">Stream to read from.</param>
         /// <param name="bufferSize">Size of the buffer used to read the contents.</param>
         /// <returns>Collection of name-value pairs.</returns>
-        private static IEnumerable<KeyValuePair<string, string>> ReadFormUrlEncoded(Stream input, int bufferSize)
+        private static IEnumerable<KeyValuePair<string, string>> ReadFormUrlEncoded(
+            Stream input,
+            int bufferSize
+        )
         {
             Contract.Assert(input != null, "input stream cannot be null");
-            Contract.Assert(bufferSize >= MinBufferSize, "buffer size cannot be less than MinBufferSize");
+            Contract.Assert(
+                bufferSize >= MinBufferSize,
+                "buffer size cannot be less than MinBufferSize"
+            );
 
             byte[] data = new byte[bufferSize];
 
@@ -224,14 +243,20 @@ namespace System.Net.Http.Formatting
                 }
                 catch (Exception e)
                 {
-                    throw Error.InvalidOperation(e, Properties.Resources.ErrorReadingFormUrlEncodedStream);
+                    throw Error.InvalidOperation(
+                        e,
+                        Properties.Resources.ErrorReadingFormUrlEncodedStream
+                    );
                 }
 
                 int bytesConsumed = 0;
                 state = parser.ParseBuffer(data, bytesRead, ref bytesConsumed, isFinal);
                 if (state != ParserState.NeedMoreData && state != ParserState.Done)
                 {
-                    throw Error.InvalidOperation(Properties.Resources.FormUrlEncodedParseError, bytesConsumed);
+                    throw Error.InvalidOperation(
+                        Properties.Resources.FormUrlEncodedParseError,
+                        bytesConsumed
+                    );
                 }
 
                 if (isFinal)

@@ -4,14 +4,15 @@
 class X
 {
     static int xx;
-    static long yy, zz;
+    static long yy,
+        zz;
 
-    public static void Main ()
+    public static void Main()
     {
-        (xx, yy, zz) = Foo ();
+        (xx, yy, zz) = Foo();
     }
 
-    static (int, long) Foo ()
+    static (int, long) Foo()
     {
         return (1, 3);
     }

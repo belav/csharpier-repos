@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -55,46 +55,46 @@ using System.Xml;
 namespace System.ServiceModel.Configuration
 {
     [MonoTODO]
-    public sealed partial class ServicePrincipalNameElement
-         : ConfigurationElement
+    public sealed partial class ServicePrincipalNameElement : ConfigurationElement
     {
         // Static Fields
         static ConfigurationPropertyCollection properties;
         static ConfigurationProperty value;
 
-        static ServicePrincipalNameElement ()
+        static ServicePrincipalNameElement()
         {
-            properties = new ConfigurationPropertyCollection ();
-            value = new ConfigurationProperty ("value",
-                typeof (string), "", new StringConverter (), null,
-                ConfigurationPropertyOptions.None);
+            properties = new ConfigurationPropertyCollection();
+            value = new ConfigurationProperty(
+                "value",
+                typeof(string),
+                "",
+                new StringConverter(),
+                null,
+                ConfigurationPropertyOptions.None
+            );
 
-            properties.Add (value);
+            properties.Add(value);
         }
 
-        public ServicePrincipalNameElement ()
-        {
-        }
-
+        public ServicePrincipalNameElement() { }
 
         // Properties
 
-        protected override ConfigurationPropertyCollection Properties {
+        protected override ConfigurationPropertyCollection Properties
+        {
             get { return properties; }
         }
 
-        [StringValidator ( MinLength = 0,
-            MaxLength = int.MaxValue,
-             InvalidCharacters = null)]
-        [ConfigurationProperty ("value",
-             Options = ConfigurationPropertyOptions.None,
-             DefaultValue = "")]
-        public string Value {
-            get { return (string) base [value]; }
-            set { base [value] = value; }
+        [StringValidator(MinLength = 0, MaxLength = int.MaxValue, InvalidCharacters = null)]
+        [ConfigurationProperty(
+            "value",
+            Options = ConfigurationPropertyOptions.None,
+            DefaultValue = ""
+        )]
+        public string Value
+        {
+            get { return (string)base[value]; }
+            set { base[value] = value; }
         }
-
-
     }
-
 }

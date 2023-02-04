@@ -6,17 +6,19 @@ namespace ConditionalAttributeTesting
 {
     class MainClass
     {
-        public static int Main ()
+        public static int Main()
         {
-            return HelloWorld ();
+            return HelloWorld();
         }
 
-        [Some ("Test")]
-        public static int HelloWorld ()
+        [Some("Test")]
+        public static int HelloWorld()
         {
-            var methodInfo = MethodBase.GetCurrentMethod ();
-            SomeAttribute someAttribute = Attribute.GetCustomAttribute (methodInfo, typeof (SomeAttribute)) as SomeAttribute;
-            if (someAttribute != null) {
+            var methodInfo = MethodBase.GetCurrentMethod();
+            SomeAttribute someAttribute =
+                Attribute.GetCustomAttribute(methodInfo, typeof(SomeAttribute)) as SomeAttribute;
+            if (someAttribute != null)
+            {
                 return 1;
             }
 
@@ -24,16 +26,12 @@ namespace ConditionalAttributeTesting
         }
     }
 
-    [AttributeUsage (AttributeTargets.All)]
-    [Conditional ("NOT_DEFINED")]
-    public abstract class BaseAttribute : Attribute
-    {
-    }
+    [AttributeUsage(AttributeTargets.All)]
+    [Conditional("NOT_DEFINED")]
+    public abstract class BaseAttribute : Attribute { }
 
     public class SomeAttribute : BaseAttribute
     {
-        public SomeAttribute (string someText)
-        {
-        }
+        public SomeAttribute(string someText) { }
     }
 }

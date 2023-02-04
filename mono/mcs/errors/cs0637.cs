@@ -5,7 +5,8 @@ using System;
 using System.Runtime.InteropServices;
 
 [StructLayout(LayoutKind.Explicit)]
-struct GValue {
-    [FieldOffset (4)]
-        public static int value = 3;
+struct GValue
+{
+    [FieldOffset(4)]
+    public static int value = 3;
 }

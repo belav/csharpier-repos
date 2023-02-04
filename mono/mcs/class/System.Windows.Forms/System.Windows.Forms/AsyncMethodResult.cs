@@ -26,83 +26,92 @@
 using System;
 using System.Threading;
 
-namespace System.Windows.Forms {
-
-    internal class AsyncMethodResult : IAsyncResult {
-
+namespace System.Windows.Forms
+{
+    internal class AsyncMethodResult : IAsyncResult
+    {
         private ManualResetEvent handle;
         private object state;
         private bool completed;
         private object return_value;
         private Exception exception;
 
-        public AsyncMethodResult ()
+        public AsyncMethodResult()
         {
-            handle = new ManualResetEvent (false);
+            handle = new ManualResetEvent(false);
         }
 
-        public virtual WaitHandle AsyncWaitHandle {
-            get {
-                lock (this) {
+        public virtual WaitHandle AsyncWaitHandle
+        {
+            get
+            {
+                lock (this)
+                {
                     return handle;
                 }
             }
         }
 
-        public object AsyncState {
+        public object AsyncState
+        {
             get { return state; }
             set { state = value; }
         }
 
-        public bool CompletedSynchronously {
+        public bool CompletedSynchronously
+        {
             get { return false; }
         }
 
-        public bool IsCompleted {
-            get {
-                lock (this) {
+        public bool IsCompleted
+        {
+            get
+            {
+                lock (this)
+                {
                     return completed;
                 }
             }
         }
-        
-        public object EndInvoke ()
+
+        public object EndInvoke()
         {
-            lock (this) {
-                if (completed) {
+            lock (this)
+            {
+                if (completed)
+                {
                     if (exception == null)
                         return return_value;
                     else
                         throw exception;
                 }
             }
-            handle.WaitOne ();
-            
+            handle.WaitOne();
+
             if (exception != null)
                 throw exception;
-                
+
             return return_value;
         }
 
-        public void Complete (object result)
+        public void Complete(object result)
         {
-            lock (this) {
+            lock (this)
+            {
                 completed = true;
                 return_value = result;
-                handle.Set ();
+                handle.Set();
             }
         }
-        
-        public void CompleteWithException (Exception ex)
+
+        public void CompleteWithException(Exception ex)
         {
-            lock (this) {
+            lock (this)
+            {
                 completed = true;
                 exception = ex;
-                handle.Set ();
+                handle.Set();
             }
         }
     }
-
 }
-
-

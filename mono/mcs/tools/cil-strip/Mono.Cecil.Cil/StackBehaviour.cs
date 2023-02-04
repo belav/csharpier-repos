@@ -26,9 +26,10 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil.Cil {
-
-    internal enum StackBehaviour {
+namespace Mono.Cecil.Cil
+{
+    internal enum StackBehaviour
+    {
         Pop0,
         Pop1,
         Pop1_pop1,

@@ -6,16 +6,16 @@ using System;
 
 public class Base
 {
-    public void InnerAttribute () {}
+    public void InnerAttribute() { }
 }
 
-class O: Base
+class O : Base
 {
     [AttributeUsage(AttributeTargets.Class)]
-    public sealed class InnerAttribute: Attribute {
-    }        
+    public sealed class InnerAttribute : Attribute { }
 }
 
-class D {
-    static void Main () {}
+class D
+{
+    static void Main() { }
 }

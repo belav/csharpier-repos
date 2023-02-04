@@ -14,8 +14,6 @@ namespace POS_Server.Models
         public string notes { get; set; }
         public Nullable<long> settingId { get; set; }
 
-
-  
         //setting
         public string name { get; set; }
     }

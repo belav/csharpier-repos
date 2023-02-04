@@ -3,12 +3,13 @@
 
 struct S
 {
-    delegate int D ();
-    
-    void Test ()
+    delegate int D();
+
+    void Test()
     {
-        D d = delegate { 
-            return base.GetHashcode ();
+        D d = delegate
+        {
+            return base.GetHashcode();
         };
     }
 }

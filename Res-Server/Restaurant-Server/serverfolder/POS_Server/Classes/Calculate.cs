@@ -9,11 +9,12 @@ namespace POS_Server.Classes
     {
         public decimal percentValue(decimal? value, decimal? percent)
         {
-          decimal? perval=  (value * percent / 100);
-            return (decimal) perval;
+            decimal? perval = (value * percent / 100);
+            return (decimal)perval;
         }
+
         public DateTime? changeDateformat(DateTime? date, string format)
-        {//@"d/M/yyyy"
+        { //@"d/M/yyyy"
             string sdate = "";
             if (date != null)
             {
@@ -25,7 +26,7 @@ namespace POS_Server.Classes
             return DateTime.Parse(sdate);
         }
 
-       public int getdays(DateTime date)
+        public int getdays(DateTime date)
         {
             int year;
             int month;
@@ -36,18 +37,18 @@ namespace POS_Server.Classes
 
             days = getdays(year, month);
 
-
-
-          //  int days = DateTime.DaysInMonth(year, month);
+            //  int days = DateTime.DaysInMonth(year, month);
 
             return days;
         }
-       public int getdays(int year, int month)
+
+        public int getdays(int year, int month)
         {
             int days = DateTime.DaysInMonth(year, month);
 
             return days;
         }
+
         public bool IsDateTime(string text)
         {
             DateTime dateTime;
@@ -63,6 +64,5 @@ namespace POS_Server.Classes
 
             return isDateTime;
         }
-
     }
 }

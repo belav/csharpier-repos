@@ -41,207 +41,172 @@ using System.Collections;
 
 namespace System.Windows.Forms.Design
 {
-    [DesignTimeVisible (false)]
-    [ToolboxItem (false)]
-    [ProvideProperty ("Location", typeof (IComponent))]
+    [DesignTimeVisible(false)]
+    [ToolboxItem(false)]
+    [ProvideProperty("Location", typeof(IComponent))]
     public class ComponentTray : ScrollableControl, IExtenderProvider
     {
-
         private IServiceProvider _serviceProvider;
         private IDesigner _mainDesigner = null;
         private bool _showLargeIcons = false;
         private bool _autoArrange = false;
 
-        public ComponentTray (IDesigner mainDesigner, IServiceProvider serviceProvider)
+        public ComponentTray(IDesigner mainDesigner, IServiceProvider serviceProvider)
         {
-            if (mainDesigner == null) {
-                throw new ArgumentNullException ("mainDesigner");
+            if (mainDesigner == null)
+            {
+                throw new ArgumentNullException("mainDesigner");
             }
-            if (serviceProvider == null) {
-                throw new ArgumentNullException ("serviceProvider");
+            if (serviceProvider == null)
+            {
+                throw new ArgumentNullException("serviceProvider");
             }
 
             _mainDesigner = mainDesigner;
             _serviceProvider = serviceProvider;
         }
 
-        public bool AutoArrange {
+        public bool AutoArrange
+        {
             get { return _autoArrange; }
             set { _autoArrange = value; }
         }
 
         [MonoTODO]
-        public int ComponentCount {
+        public int ComponentCount
+        {
             get { return 0; }
         }
 
-        public bool ShowLargeIcons {
+        public bool ShowLargeIcons
+        {
             get { return _showLargeIcons; }
             set { _showLargeIcons = value; }
         }
 
-
         [MonoTODO]
-        public virtual void AddComponent (IComponent component)
-        {
-        }
+        public virtual void AddComponent(IComponent component) { }
 
-        protected virtual bool CanCreateComponentFromTool (ToolboxItem tool)
+        protected virtual bool CanCreateComponentFromTool(ToolboxItem tool)
         {
             return true;
         }
 
-        protected virtual bool CanDisplayComponent (IComponent component)
+        protected virtual bool CanDisplayComponent(IComponent component)
         {
             return false;
         }
 
         [MonoTODO]
-        public void CreateComponentFromTool (ToolboxItem tool)
+        public void CreateComponentFromTool(ToolboxItem tool) { }
+
+        [MonoTODO]
+        protected void DisplayError(Exception e) { }
+
+        protected override void Dispose(bool disposing) { }
+
+        [Browsable(false)]
+        [Category("Layout")]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [DesignOnly(true)]
+        [Localizable(false)]
+        [MonoTODO]
+        public Point GetLocation(IComponent receiver)
         {
+            return new Point(0, 0);
         }
 
         [MonoTODO]
-        protected void DisplayError (Exception e)
-        {
-        }
-
-        protected override void Dispose (bool disposing)
-        {
-        }
-
-        [Browsable (false)]
-        [Category ("Layout")]
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        [DesignOnly (true)]
-        [Localizable (false)]
-        [MonoTODO]
-        public Point GetLocation (IComponent receiver)
-        {
-            return new Point (0,0);
-        }
+        public void SetLocation(IComponent receiver, Point location) { }
 
         [MonoTODO]
-        public void SetLocation (IComponent receiver, Point location)
+        public IComponent GetNextComponent(IComponent component, bool forward)
         {
+            throw new NotImplementedException();
+        }
+
+        [Browsable(false)]
+        [Category("Layout")]
+        [DesignOnly(true)]
+        [Localizable(false)]
+        [MonoTODO]
+        public Point GetTrayLocation(IComponent receiver)
+        {
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public IComponent GetNextComponent (IComponent component, bool forward)
+        public bool IsTrayComponent(IComponent comp)
         {
-            throw new NotImplementedException ();
-        }
-
-        [Browsable (false)]
-        [Category ("Layout")]
-        [DesignOnly (true)]
-        [Localizable (false)]
-        [MonoTODO]
-        public Point GetTrayLocation (IComponent receiver)
-        {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public bool IsTrayComponent (IComponent comp)
+        public void SetTrayLocation(IComponent receiver, Point location)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void SetTrayLocation (IComponent receiver, Point location)
-        {
-            throw new NotImplementedException ();
-        }
+        protected override void OnMouseDoubleClick(MouseEventArgs e) { }
 
         [MonoTODO]
-        protected override void OnMouseDoubleClick (MouseEventArgs e)
-        {
-        }
+        protected override void OnDragDrop(DragEventArgs de) { }
 
         [MonoTODO]
-        protected override void OnDragDrop (DragEventArgs de)
-        {
-        }
+        protected override void OnDragEnter(DragEventArgs de) { }
 
         [MonoTODO]
-        protected override void OnDragEnter (DragEventArgs de)
-        {
-        }
+        protected override void OnDragLeave(EventArgs e) { }
 
         [MonoTODO]
-        protected override void OnDragLeave (EventArgs e)
-        {
-        }
+        protected override void OnDragOver(DragEventArgs de) { }
 
         [MonoTODO]
-        protected override void OnDragOver (DragEventArgs de)
-        {
-        }
+        protected override void OnGiveFeedback(GiveFeedbackEventArgs gfevent) { }
 
         [MonoTODO]
-        protected override void OnGiveFeedback (GiveFeedbackEventArgs gfevent)
-        {
-        }
+        protected override void OnLayout(LayoutEventArgs levent) { }
 
         [MonoTODO]
-        protected override void OnLayout (LayoutEventArgs levent)
-        {
-        }
+        protected virtual void OnLostCapture() { }
 
         [MonoTODO]
-        protected virtual void OnLostCapture ()
-        {
-        }
+        protected override void OnMouseDown(MouseEventArgs e) { }
 
         [MonoTODO]
-        protected override void OnMouseDown (MouseEventArgs e)
-        {
-        }
+        protected override void OnMouseMove(MouseEventArgs e) { }
 
         [MonoTODO]
-        protected override void OnMouseMove (MouseEventArgs e)
-        {
-        }
+        protected override void OnMouseUp(MouseEventArgs e) { }
 
         [MonoTODO]
-        protected override void OnMouseUp (MouseEventArgs e)
-        {
-        }
+        protected override void OnPaint(PaintEventArgs pe) { }
 
         [MonoTODO]
-        protected override void OnPaint (PaintEventArgs pe)
-        {
-        }
+        protected virtual void OnSetCursor() { }
 
         [MonoTODO]
-        protected virtual void OnSetCursor ()
-        {
-        }
+        public virtual void RemoveComponent(IComponent component) { }
 
         [MonoTODO]
-        public virtual void RemoveComponent (IComponent component)
+        protected override void WndProc(ref Message m)
         {
+            base.WndProc(ref m);
         }
 
-        [MonoTODO]
-        protected override void WndProc (ref Message m)
-        {
-            base.WndProc (ref m);
-        }
-
-        bool IExtenderProvider.CanExtend (object component)
+        bool IExtenderProvider.CanExtend(object component)
         {
             return false;
         }
 
-        protected override object GetService (Type serviceType)
+        protected override object GetService(Type serviceType)
         {
-            if (_serviceProvider != null) {
-                return _serviceProvider.GetService (serviceType);
+            if (_serviceProvider != null)
+            {
+                return _serviceProvider.GetService(serviceType);
             }
             return null;
         }
-
     }
 }

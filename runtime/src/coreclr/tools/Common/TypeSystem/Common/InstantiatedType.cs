@@ -37,27 +37,28 @@ namespace Internal.TypeSystem
 
         public override TypeSystemContext Context
         {
-            get
-            {
-                return _typeDef.Context;
-            }
+            get { return _typeDef.Context; }
         }
 
         public override Instantiation Instantiation
         {
-            get
-            {
-                return _instantiation;
-            }
+            get { return _instantiation; }
         }
 
-        private MetadataType _baseType /* = this */;
+        private MetadataType _baseType /* = this */
+        ;
 
         private MetadataType InitializeBaseType()
         {
             var uninst = _typeDef.BaseType;
 
-            return (_baseType = (uninst != null) ? (MetadataType)uninst.InstantiateSignature(_instantiation, default(Instantiation)) : null);
+            return (
+                _baseType =
+                    (uninst != null)
+                        ? (MetadataType)
+                            uninst.InstantiateSignature(_instantiation, default(Instantiation))
+                        : null
+            );
         }
 
         public override DefType BaseType
@@ -114,18 +115,12 @@ namespace Internal.TypeSystem
 
         public override string Name
         {
-            get
-            {
-                return _typeDef.Name;
-            }
+            get { return _typeDef.Name; }
         }
 
         public override string Namespace
         {
-            get
-            {
-                return _typeDef.Namespace;
-            }
+            get { return _typeDef.Namespace; }
         }
 
         public override IEnumerable<MethodDesc> GetMethods()
@@ -145,7 +140,11 @@ namespace Internal.TypeSystem
         }
 
         // TODO: Substitutions, generics, modopts, ...
-        public override MethodDesc GetMethod(string name, MethodSignature signature, Instantiation substitution)
+        public override MethodDesc GetMethod(
+            string name,
+            MethodSignature signature,
+            Instantiation substitution
+        )
         {
             MethodDesc typicalMethodDef = _typeDef.GetMethod(name, signature, substitution);
             if (typicalMethodDef == null)
@@ -182,7 +181,10 @@ namespace Internal.TypeSystem
             // typicalFinalizer in that case is a MethodForInstantiatedType for an instantiated type
             // which is instantiated over the open type variables of the derived type.
 
-            while (typicalFinalizer.OwningType.GetTypeDefinition() != typeInHierarchy.GetTypeDefinition())
+            while (
+                typicalFinalizer.OwningType.GetTypeDefinition()
+                != typeInHierarchy.GetTypeDefinition()
+            )
             {
                 typeInHierarchy = typeInHierarchy.BaseType;
             }
@@ -194,7 +196,10 @@ namespace Internal.TypeSystem
             else
             {
                 Debug.Assert(typeInHierarchy is InstantiatedType);
-                return _typeDef.Context.GetMethodForInstantiatedType(typicalFinalizer.GetTypicalMethodDefinition(), (InstantiatedType)typeInHierarchy);
+                return _typeDef.Context.GetMethodForInstantiatedType(
+                    typicalFinalizer.GetTypicalMethodDefinition(),
+                    (InstantiatedType)typeInHierarchy
+                );
             }
         }
 
@@ -215,7 +220,10 @@ namespace Internal.TypeSystem
             return _typeDef.Context.GetFieldForInstantiatedType(fieldDef, this);
         }
 
-        public override TypeDesc InstantiateSignature(Instantiation typeInstantiation, Instantiation methodInstantiation)
+        public override TypeDesc InstantiateSignature(
+            Instantiation typeInstantiation,
+            Instantiation methodInstantiation
+        )
         {
             TypeDesc[] clone = null;
 
@@ -237,13 +245,20 @@ namespace Internal.TypeSystem
                 }
             }
 
-            return (clone == null) ? this : _typeDef.Context.GetInstantiatedType(_typeDef, new Instantiation(clone));
+            return (clone == null)
+                ? this
+                : _typeDef.Context.GetInstantiatedType(_typeDef, new Instantiation(clone));
         }
 
         /// <summary>
         /// Instantiate an array of TypeDescs over typeInstantiation and methodInstantiation
         /// </summary>
-        public static T[] InstantiateTypeArray<T>(T[] uninstantiatedTypes, Instantiation typeInstantiation, Instantiation methodInstantiation) where T : TypeDesc
+        public static T[] InstantiateTypeArray<T>(
+            T[] uninstantiatedTypes,
+            Instantiation typeInstantiation,
+            Instantiation methodInstantiation
+        )
+            where T : TypeDesc
         {
             T[] clone = null;
 

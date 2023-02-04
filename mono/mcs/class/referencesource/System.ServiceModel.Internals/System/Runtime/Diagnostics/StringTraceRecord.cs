@@ -5,7 +5,7 @@
 namespace System.Runtime.Diagnostics
 {
     using System;
-    using System.Xml;    
+    using System.Xml;
 
     class StringTraceRecord : TraceRecord
     {

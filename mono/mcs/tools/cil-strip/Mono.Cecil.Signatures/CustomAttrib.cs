@@ -26,38 +26,38 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil.Signatures {
-
+namespace Mono.Cecil.Signatures
+{
     using Mono.Cecil.Metadata;
 
-    internal sealed class CustomAttrib {
-
+    internal sealed class CustomAttrib
+    {
         public const ushort StdProlog = 0x0001;
 
         public MethodReference Constructor;
 
         public ushort Prolog;
-        public FixedArg [] FixedArgs;
+        public FixedArg[] FixedArgs;
         public ushort NumNamed;
-        public NamedArg [] NamedArgs;
+        public NamedArg[] NamedArgs;
         public bool Read;
 
-        public CustomAttrib (MethodReference ctor)
+        public CustomAttrib(MethodReference ctor)
         {
             Constructor = ctor;
         }
 
-        internal struct FixedArg {
-
+        internal struct FixedArg
+        {
             public bool SzArray;
             public uint NumElem;
-            public Elem [] Elems;
+            public Elem[] Elems;
 
-            internal static FixedArg [] Empty = new FixedArg [0];
+            internal static FixedArg[] Empty = new FixedArg[0];
         }
 
-        internal struct Elem {
-
+        internal struct Elem
+        {
             public bool Simple;
             public bool String;
             public bool Type;
@@ -69,8 +69,8 @@ namespace Mono.Cecil.Signatures {
             public TypeReference ElemType;
         }
 
-        internal struct NamedArg {
-
+        internal struct NamedArg
+        {
             public bool Field;
             public bool Property;
 
@@ -78,7 +78,7 @@ namespace Mono.Cecil.Signatures {
             public string FieldOrPropName;
             public FixedArg FixedArg;
 
-            internal static NamedArg [] Empty = new NamedArg [0];
+            internal static NamedArg[] Empty = new NamedArg[0];
         }
     }
 }

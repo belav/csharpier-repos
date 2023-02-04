@@ -9,21 +9,22 @@ class A
     {
         class C { }
 
-        public B() {
+        public B()
+        {
             string error = "";
 
-            if (typeof (C) != typeof (A.B.C))
+            if (typeof(C) != typeof(A.B.C))
                 error += " 'typeof' keyword,";
 
-            object o0 = new C ();
-            if (o0.GetType() != typeof (A.B.C))
+            object o0 = new C();
+            if (o0.GetType() != typeof(A.B.C))
                 error += " 'new' keyword,";
 
-            C o1 = new C ();
-            if (o1.GetType () != typeof (A.B.C))
+            C o1 = new C();
+            if (o1.GetType() != typeof(A.B.C))
                 error += " local declaration,";
 
-            object o2 = new A.B.C ();
+            object o2 = new A.B.C();
             if (!(o2 is C))
                 error += " 'is' keyword,";
 
@@ -31,42 +32,46 @@ class A
             if (o3 == null)
                 error += " 'as' keyword,";
 
-            try {
-                object o4 = (C) o2;
+            try
+            {
+                object o4 = (C)o2;
             }
-            catch {
+            catch
+            {
                 error += " type cast,";
             }
 
-            try {
-                object o5 = (C) (o2);
+            try
+            {
+                object o5 = (C)(o2);
             }
-            catch {
+            catch
+            {
                 error += " invocation-or-cast,";
             }
 
-            object o6 = new C [1];
+            object o6 = new C[1];
 
-            if (o6.GetType ().GetElementType () != typeof (A.B.C))
+            if (o6.GetType().GetElementType() != typeof(A.B.C))
                 error += " array creation,";
 
-            if (typeof (C []).GetElementType () != typeof (A.B.C))
+            if (typeof(C[]).GetElementType() != typeof(A.B.C))
                 error += " composed cast (array),";
 
-            ArrayList a = new ArrayList ();
-            a.Add (new A.B.C ());
+            ArrayList a = new ArrayList();
+            a.Add(new A.B.C());
 
-            try {
-                foreach (C c in a)
-                { 
-                }
+            try
+            {
+                foreach (C c in a) { }
             }
-            catch {
+            catch
+            {
                 error += " 'foreach' statement,";
             }
 
             if (error.Length != 0)
-                throw new Exception ("The following couldn't resolve C as A+B+C:" + error);
+                throw new Exception("The following couldn't resolve C as A+B+C:" + error);
         }
     }
 

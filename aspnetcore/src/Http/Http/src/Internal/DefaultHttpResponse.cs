@@ -9,9 +9,16 @@ namespace Microsoft.AspNetCore.Http;
 internal sealed class DefaultHttpResponse : HttpResponse
 {
     // Lambdas hoisted to static readonly fields to improve inlining https://github.com/dotnet/roslyn/issues/13624
-    private static readonly Func<IFeatureCollection, IHttpResponseFeature?> _nullResponseFeature = f => null;
-    private static readonly Func<IFeatureCollection, IHttpResponseBodyFeature?> _nullResponseBodyFeature = f => null;
-    private static readonly Func<IFeatureCollection, IResponseCookiesFeature?> _newResponseCookiesFeature = f => new ResponseCookiesFeature(f);
+    private static readonly Func<IFeatureCollection, IHttpResponseFeature?> _nullResponseFeature =
+        f => null;
+    private static readonly Func<
+        IFeatureCollection,
+        IHttpResponseBodyFeature?
+    > _nullResponseBodyFeature = f => null;
+    private static readonly Func<
+        IFeatureCollection,
+        IResponseCookiesFeature?
+    > _newResponseCookiesFeature = f => new ResponseCookiesFeature(f);
 
     private readonly DefaultHttpContext _context;
     private FeatureReferences<FeatureInterfaces> _features;
@@ -46,7 +53,10 @@ internal sealed class DefaultHttpResponse : HttpResponse
     private IResponseCookiesFeature ResponseCookiesFeature =>
         _features.Fetch(ref _features.Cache.Cookies, _newResponseCookiesFeature)!;
 
-    public override HttpContext HttpContext { get { return _context; } }
+    public override HttpContext HttpContext
+    {
+        get { return _context; }
+    }
 
     public override int StatusCode
     {
@@ -66,16 +76,20 @@ internal sealed class DefaultHttpResponse : HttpResponse
         {
             var otherFeature = _features.Collection.GetRequiredFeature<IHttpResponseBodyFeature>();
 
-            if (otherFeature is StreamResponseBodyFeature streamFeature
+            if (
+                otherFeature is StreamResponseBodyFeature streamFeature
                 && streamFeature.PriorFeature != null
-                && object.ReferenceEquals(value, streamFeature.PriorFeature.Stream))
+                && object.ReferenceEquals(value, streamFeature.PriorFeature.Stream)
+            )
             {
                 // They're reverting the stream back to the prior one. Revert the whole feature.
                 _features.Collection.Set(streamFeature.PriorFeature);
                 return;
             }
 
-            _features.Collection.Set<IHttpResponseBodyFeature>(new StreamResponseBodyFeature(value, otherFeature));
+            _features.Collection.Set<IHttpResponseBodyFeature>(
+                new StreamResponseBodyFeature(value, otherFeature)
+            );
         }
     }
 
@@ -87,10 +101,7 @@ internal sealed class DefaultHttpResponse : HttpResponse
 
     public override string? ContentType
     {
-        get
-        {
-            return Headers.ContentType;
-        }
+        get { return Headers.ContentType; }
         set
         {
             if (string.IsNullOrEmpty(value))

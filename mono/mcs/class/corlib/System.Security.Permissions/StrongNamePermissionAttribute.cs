@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,65 +31,72 @@
 using System.Globalization;
 using System.Runtime.InteropServices;
 
-namespace System.Security.Permissions {
-
-    [ComVisible (true)]
-    [AttributeUsage (AttributeTargets.Assembly | AttributeTargets.Class |
-             AttributeTargets.Struct | AttributeTargets.Constructor |
-             AttributeTargets.Method, AllowMultiple=true, Inherited=false)]
+namespace System.Security.Permissions
+{
+    [ComVisible(true)]
+    [AttributeUsage(
+        AttributeTargets.Assembly
+            | AttributeTargets.Class
+            | AttributeTargets.Struct
+            | AttributeTargets.Constructor
+            | AttributeTargets.Method,
+        AllowMultiple = true,
+        Inherited = false
+    )]
     [Serializable]
-    public sealed class StrongNameIdentityPermissionAttribute : CodeAccessSecurityAttribute    {
-
+    public sealed class StrongNameIdentityPermissionAttribute : CodeAccessSecurityAttribute
+    {
         // Fields
         private string name;
         private string key;
         private string version;
-        
+
         // Constructor
-        public StrongNameIdentityPermissionAttribute (SecurityAction action) 
-            : base (action)
-        {
-        }
-        
+        public StrongNameIdentityPermissionAttribute(SecurityAction action)
+            : base(action) { }
+
         // Properties
-        public string Name {
+        public string Name
+        {
             get { return name; }
             set { name = value; }
         }
 
-        public string PublicKey {
+        public string PublicKey
+        {
             get { return key; }
             set { key = value; }
         }
 
-        public string Version {
+        public string Version
+        {
             get { return version; }
             set { version = value; }
         }
-             
+
         // Methods
-        public override IPermission CreatePermission ()
+        public override IPermission CreatePermission()
         {
 #if MOBILE
             return null;
 #else
             if (this.Unrestricted)
-                return new StrongNameIdentityPermission (PermissionState.Unrestricted);
+                return new StrongNameIdentityPermission(PermissionState.Unrestricted);
 
             if ((name == null) && (key == null) && (version == null))
-                return new StrongNameIdentityPermission (PermissionState.None);
+                return new StrongNameIdentityPermission(PermissionState.None);
 
-            if (key == null) {
-                throw new ArgumentException (Locale.GetText (
-                    "PublicKey is required"));
+            if (key == null)
+            {
+                throw new ArgumentException(Locale.GetText("PublicKey is required"));
             }
-            StrongNamePublicKeyBlob blob = StrongNamePublicKeyBlob.FromString (key);
-                
+            StrongNamePublicKeyBlob blob = StrongNamePublicKeyBlob.FromString(key);
+
             Version v = null;
             if (version != null)
-                v = new Version (version);
+                v = new Version(version);
 
-            return new StrongNameIdentityPermission (blob, name, v);
+            return new StrongNameIdentityPermission(blob, name, v);
 #endif
         }
     }

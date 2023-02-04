@@ -5,9 +5,9 @@ namespace Mono.Linker.Tests.Cases.Generics
 {
     public class NewConstraintOnClass
     {
-        public static void Main ()
+        public static void Main()
         {
-            var g1 = new G1<G1Ctor> ();
+            var g1 = new G1<G1Ctor>();
         }
 
         class G1Ctor
@@ -15,23 +15,16 @@ namespace Mono.Linker.Tests.Cases.Generics
             static readonly int field = 1;
 
             [Kept]
-            public G1Ctor ()
-            {
-            }
+            public G1Ctor() { }
 
-            public G1Ctor (int a)
-            {
-            }
+            public G1Ctor(int a) { }
 
-            public void Foo ()
-            {
-            }
+            public void Foo() { }
         }
 
         [Kept]
-        [KeptMember (".ctor()")]
-        class G1<T> where T : G1Ctor, new()
-        {
-        }
+        [KeptMember(".ctor()")]
+        class G1<T>
+            where T : G1Ctor, new() { }
     }
 }

@@ -33,14 +33,22 @@ namespace System.Reflection.Runtime.TypeInfos
         }
 
         protected sealed override bool IsArrayImpl() => true;
+
         public sealed override bool IsSZArray => !_multiDim;
         public sealed override bool IsVariableBoundArray => _multiDim;
+
         protected sealed override bool IsByRefImpl() => false;
+
         protected sealed override bool IsPointerImpl() => false;
 
         protected sealed override TypeAttributes GetAttributeFlagsImpl()
         {
-            return TypeAttributes.AutoLayout | TypeAttributes.AnsiClass | TypeAttributes.Class | TypeAttributes.Public | TypeAttributes.Sealed | TypeAttributes.Serializable;
+            return TypeAttributes.AutoLayout
+                | TypeAttributes.AnsiClass
+                | TypeAttributes.Class
+                | TypeAttributes.Public
+                | TypeAttributes.Sealed
+                | TypeAttributes.Serializable;
         }
 
         internal sealed override IEnumerable<RuntimeConstructorInfo> SyntheticConstructors
@@ -72,14 +80,18 @@ namespace System.Reflection.Runtime.TypeInfos
                         arrayType,
                         ctorParameters,
                         InvokerOptions.AllowNullThis,
-                        delegate (object _this, object[] args, Type thisType)
+                        delegate(object _this, object[] args, Type thisType)
                         {
                             int[] lengths = new int[rank];
                             for (int i = 0; i < rank; i++)
                             {
                                 lengths[i] = (int)(args[i]);
                             }
-                            return ReflectionCoreExecution.ExecutionEnvironment.NewMultiDimArray(arrayType.TypeHandle, lengths, null);
+                            return ReflectionCoreExecution.ExecutionEnvironment.NewMultiDimArray(
+                                arrayType.TypeHandle,
+                                lengths,
+                                null
+                            );
                         }
                     );
                 }
@@ -110,7 +122,7 @@ namespace System.Reflection.Runtime.TypeInfos
                             arrayType,
                             ctorParameters,
                             InvokerOptions.AllowNullThis,
-                            delegate (object _this, object[] args, Type thisType)
+                            delegate(object _this, object[] args, Type thisType)
                             {
                                 int[] lengths = new int[args.Length];
                                 for (int i = 0; i < args.Length; i++)
@@ -146,7 +158,7 @@ namespace System.Reflection.Runtime.TypeInfos
                         arrayType,
                         ctorParameters,
                         InvokerOptions.AllowNullThis,
-                        delegate (object _this, object[] args, Type thisType)
+                        delegate(object _this, object[] args, Type thisType)
                         {
                             int[] lengths = new int[rank];
                             int[] lowerBounds = new int[rank];
@@ -155,7 +167,11 @@ namespace System.Reflection.Runtime.TypeInfos
                                 lowerBounds[i] = (int)(args[i * 2]);
                                 lengths[i] = (int)(args[i * 2 + 1]);
                             }
-                            return ReflectionCoreExecution.ExecutionEnvironment.NewMultiDimArray(arrayType.TypeHandle, lengths, lowerBounds);
+                            return ReflectionCoreExecution.ExecutionEnvironment.NewMultiDimArray(
+                                arrayType.TypeHandle,
+                                lengths,
+                                lowerBounds
+                            );
                         }
                     );
                 }
@@ -184,7 +200,7 @@ namespace System.Reflection.Runtime.TypeInfos
                         getParameters,
                         elementType,
                         InvokerOptions.None,
-                        delegate (object _this, object[] args, Type thisType)
+                        delegate(object _this, object[] args, Type thisType)
                         {
                             Array array = (Array)_this;
                             int[] indices = new int[rank];
@@ -207,7 +223,7 @@ namespace System.Reflection.Runtime.TypeInfos
                         setParameters,
                         voidType,
                         InvokerOptions.None,
-                        delegate (object _this, object[] args, Type thisType)
+                        delegate(object _this, object[] args, Type thisType)
                         {
                             Array array = (Array)_this;
                             int[] indices = new int[rank];
@@ -231,7 +247,7 @@ namespace System.Reflection.Runtime.TypeInfos
                         addressParameters,
                         elementType.GetByRefType(),
                         InvokerOptions.None,
-                        delegate (object _this, object[] args, Type thisType)
+                        delegate(object _this, object[] args, Type thisType)
                         {
                             throw new NotSupportedException();
                         }
@@ -245,10 +261,7 @@ namespace System.Reflection.Runtime.TypeInfos
         //
         internal sealed override QTypeDefRefOrSpec TypeRefDefOrSpecForBaseType
         {
-            get
-            {
-                return TypeDefInfoProjectionForArrays.TypeRefDefOrSpecForBaseType;
-            }
+            get { return TypeDefInfoProjectionForArrays.TypeRefDefOrSpecForBaseType; }
         }
 
         //
@@ -273,7 +286,10 @@ namespace System.Reflection.Runtime.TypeInfos
         {
             get
             {
-                return new TypeContext(new RuntimeTypeInfo[] { this.InternalRuntimeElementType }, null);
+                return new TypeContext(
+                    new RuntimeTypeInfo[] { this.InternalRuntimeElementType },
+                    null
+                );
             }
         }
 
@@ -297,8 +313,11 @@ namespace System.Reflection.Runtime.TypeInfos
         {
             get
             {
-                RuntimeTypeHandle projectionTypeHandleForArrays = ReflectionCoreExecution.ExecutionEnvironment.ProjectionTypeForArrays;
-                RuntimeTypeInfo projectionRuntimeTypeForArrays = projectionTypeHandleForArrays.GetTypeForRuntimeTypeHandle();
+                RuntimeTypeHandle projectionTypeHandleForArrays = ReflectionCoreExecution
+                    .ExecutionEnvironment
+                    .ProjectionTypeForArrays;
+                RuntimeTypeInfo projectionRuntimeTypeForArrays =
+                    projectionTypeHandleForArrays.GetTypeForRuntimeTypeHandle();
                 return projectionRuntimeTypeForArrays;
             }
         }
@@ -309,12 +328,19 @@ namespace System.Reflection.Runtime.TypeInfos
         private Array CreateJaggedArray(RuntimeTypeInfo arrayType, int[] lengths, int index)
         {
             int length = lengths[index];
-            Array jaggedArray = ReflectionCoreExecution.ExecutionEnvironment.NewArray(arrayType.TypeHandle, length);
+            Array jaggedArray = ReflectionCoreExecution.ExecutionEnvironment.NewArray(
+                arrayType.TypeHandle,
+                length
+            );
             if (index != lengths.Length - 1)
             {
                 for (int i = 0; i < length; i++)
                 {
-                    Array subArray = CreateJaggedArray(arrayType.InternalRuntimeElementType, lengths, index + 1);
+                    Array subArray = CreateJaggedArray(
+                        arrayType.InternalRuntimeElementType,
+                        lengths,
+                        index + 1
+                    );
                     jaggedArray.SetValue(subArray, i);
                 }
             }

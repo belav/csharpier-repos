@@ -3,34 +3,25 @@ using System;
 
 namespace Testing
 {
-    /// <summary> 
+    /// <summary>
     /// comment for struct
     /// </summary>
-    public struct StructTest
-    {
-    }
+    public struct StructTest { }
 
-    /// <summary> 
+    /// <summary>
     /// incorrect markup comment for struct
     /// </incorrect>
-    public struct StructTest2
-    {
-    }
+    public struct StructTest2 { }
 
     /**
         <summary>
         Java style commet
         </summary>
     */
-    public struct StructTest3
-    {
-    }
+    public struct StructTest3 { }
 
     public class Test
     {
-        public static void Main ()
-        {
-        }
+        public static void Main() { }
     }
 }
-

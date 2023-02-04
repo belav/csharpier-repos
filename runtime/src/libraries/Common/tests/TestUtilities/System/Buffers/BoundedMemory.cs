@@ -7,7 +7,8 @@ namespace System.Buffers
     /// Represents a region of native memory. The <see cref="Memory"/> property can be used
     /// to get a <see cref="Memory{Byte}"/> backed by this memory region.
     /// </summary>
-    public abstract class BoundedMemory<T> : IDisposable where T : unmanaged
+    public abstract class BoundedMemory<T> : IDisposable
+        where T : unmanaged
     {
         /// <summary>
         /// Returns a value stating whether this native memory block is readonly.

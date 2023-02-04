@@ -4,7 +4,7 @@
 
 public class Test
 {
-    public static void Main ()
+    public static void Main()
     {
         A<ushort>.N1<ushort> a = null;
     }

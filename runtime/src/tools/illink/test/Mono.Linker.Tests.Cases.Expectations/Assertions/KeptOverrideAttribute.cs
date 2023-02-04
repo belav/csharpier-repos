@@ -12,15 +12,15 @@ namespace Mono.Linker.Tests.Cases.Expectations.Assertions
     /// Fails in tests if the method doesn't have the override method in the original or linked assembly.
     /// </summary>
     /// <seealso cref="RemovedOverrideAttribute" />
-    [AttributeUsage (AttributeTargets.Method, AllowMultiple = true, Inherited = false)]
+    [AttributeUsage(AttributeTargets.Method, AllowMultiple = true, Inherited = false)]
     public class KeptOverrideAttribute : KeptAttribute
     {
         public Type TypeWithOverriddenMethodDeclaration;
 
-        public KeptOverrideAttribute (Type typeWithOverriddenMethod)
+        public KeptOverrideAttribute(Type typeWithOverriddenMethod)
         {
             if (typeWithOverriddenMethod == null)
-                throw new ArgumentNullException (nameof (typeWithOverriddenMethod));
+                throw new ArgumentNullException(nameof(typeWithOverriddenMethod));
             TypeWithOverriddenMethodDeclaration = typeWithOverriddenMethod;
         }
     }

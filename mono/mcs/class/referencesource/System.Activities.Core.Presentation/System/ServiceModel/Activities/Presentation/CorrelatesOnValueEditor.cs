@@ -18,14 +18,24 @@ namespace System.ServiceModel.Activities.Presentation
     {
         public CorrelatesOnValueEditor()
         {
-            this.InlineEditorTemplate = EditorCategoryTemplateDictionary.Instance.GetCategoryTemplate("CorrelatesOnDesigner_InlineTemplate");
+            this.InlineEditorTemplate =
+                EditorCategoryTemplateDictionary.Instance.GetCategoryTemplate(
+                    "CorrelatesOnDesigner_InlineTemplate"
+                );
         }
 
         public override void ShowDialog(PropertyValue propertyValue, IInputElement commandSource)
         {
-            ModelPropertyEntryToOwnerActivityConverter propertyEntryConverter = new ModelPropertyEntryToOwnerActivityConverter();
+            ModelPropertyEntryToOwnerActivityConverter propertyEntryConverter =
+                new ModelPropertyEntryToOwnerActivityConverter();
 
-            ModelItem modelItem = (ModelItem)propertyEntryConverter.Convert(propertyValue.ParentProperty, typeof(ModelItem), false, null);
+            ModelItem modelItem = (ModelItem)
+                propertyEntryConverter.Convert(
+                    propertyValue.ParentProperty,
+                    typeof(ModelItem),
+                    false,
+                    null
+                );
             EditingContext context = modelItem.GetEditingContext();
 
             this.ShowDialog(modelItem, context);
@@ -36,13 +46,16 @@ namespace System.ServiceModel.Activities.Presentation
             Fx.Assert(activity != null, "Activity model item shouldn't be null!");
             Fx.Assert(context != null, "EditingContext shouldn't be null!");
 
-
             string bookmarkTitle = (string)this.InlineEditorTemplate.Resources["bookmarkTitle"];
 
             UndoEngine undoEngine = context.Services.GetService<UndoEngine>();
             Fx.Assert(null != undoEngine, "UndoEngine should be available");
 
-            using (EditingScope scope = context.Services.GetRequiredService<ModelTreeManager>().CreateEditingScope(bookmarkTitle, true))
+            using (
+                EditingScope scope = context.Services
+                    .GetRequiredService<ModelTreeManager>()
+                    .CreateEditingScope(bookmarkTitle, true)
+            )
             {
                 if ((new EditorWindow(activity, context)).ShowOkCancel())
                 {
@@ -64,7 +77,9 @@ namespace System.ServiceModel.Activities.Presentation
                 this.MinWidth = 450;
                 this.WindowResizeMode = ResizeMode.CanResize;
                 this.WindowSizeToContent = SizeToContent.Manual;
-                var template = EditorCategoryTemplateDictionary.Instance.GetCategoryTemplate("CorrelatesOnDesigner_DialogTemplate");
+                var template = EditorCategoryTemplateDictionary.Instance.GetCategoryTemplate(
+                    "CorrelatesOnDesigner_DialogTemplate"
+                );
 
                 var presenter = new ContentPresenter()
                 {

@@ -4,7 +4,8 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Util {
+namespace System.Web.Util
+{
     using System;
     using System.Runtime.ExceptionServices;
     using System.Threading;
@@ -14,8 +15,8 @@ namespace System.Web.Util {
     // Asynchronous work will be queued and will execute sequentially, never consuming more than a single thread at a time.
     // Synchronous work will block and will execute on the current thread.
 
-    internal sealed class SynchronizationHelper {
-
+    internal sealed class SynchronizationHelper
+    {
         private Task _completionTask; // the Task that will run when all in-flight operations have completed
         private Thread _currentThread; // the Thread that's running the current Task; all threads must see the same value for this field
         private Task _lastScheduledTask = CreateInitialTask(); // the last Task that was queued to this helper, used to hook future Tasks (not volatile since always accessed under lock)
@@ -25,7 +26,8 @@ namespace System.Web.Util {
         private readonly ISyncContext _syncContext; // a context that wraps an operation with pre- and post-execution phases
         private readonly Action<bool> _appVerifierCallback; // for making sure that developers don't try calling us after the request has completed
 
-        public SynchronizationHelper(ISyncContext syncContext) {
+        public SynchronizationHelper(ISyncContext syncContext)
+        {
             _syncContext = syncContext;
             _appVerifierCallback = AppVerifier.GetSyncContextCheckDelegate(syncContext);
         }
@@ -36,20 +38,27 @@ namespace System.Web.Util {
         // Helper to access the _currentThread field in a thread-safe fashion.
         // It is not enough to mark the _currentThread field volatile, since that only guarantees
         // read / write ordering and doesn't ensure that each thread sees the same value.
-        private Thread CurrentThread {
+        private Thread CurrentThread
+        {
             get { return Interlocked.CompareExchange(ref _currentThread, null, null); }
             set { Interlocked.Exchange(ref _currentThread, value); }
         }
 
         // Returns the number of pending operations
-        public int PendingCount { get { return ChangeOperationCount(0); } }
+        public int PendingCount
+        {
+            get { return ChangeOperationCount(0); }
+        }
 
-        public int ChangeOperationCount(int addend) {
+        public int ChangeOperationCount(int addend)
+        {
             int newOperationCount = Interlocked.Add(ref _operationsInFlight, addend);
-            if (newOperationCount == 0) {
+            if (newOperationCount == 0)
+            {
                 // if an asynchronous completion operation is queued, run it
                 Task completionTask = Interlocked.Exchange(ref _completionTask, null);
-                if (completionTask != null) {
+                if (completionTask != null)
+                {
                     completionTask.Start();
                 }
             }
@@ -57,14 +66,17 @@ namespace System.Web.Util {
             return newOperationCount;
         }
 
-        private void CheckForRequestStateIfRequired(bool checkForReEntry) {
-            if (_appVerifierCallback != null) {
+        private void CheckForRequestStateIfRequired(bool checkForReEntry)
+        {
+            if (_appVerifierCallback != null)
+            {
                 _appVerifierCallback(checkForReEntry);
             }
         }
 
         // Creates the initial hook that future operations can ride off of
-        private static Task CreateInitialTask() {
+        private static Task CreateInitialTask()
+        {
             return Task.FromResult<object>(null);
         }
 
@@ -72,8 +84,10 @@ namespace System.Web.Util {
         // will be queued but will not be dispatched until control is released (by disposing of the
         // returned object). This operation might block if a different thread is currently in
         // control of the context.
-        public IDisposable EnterSynchronousControl() {
-            if (CurrentThread == Thread.CurrentThread) {
+        public IDisposable EnterSynchronousControl()
+        {
+            if (CurrentThread == Thread.CurrentThread)
+            {
                 // If the current thread already has control of this context, there's nothing extra to do.
                 return DisposableAction.Empty;
             }
@@ -81,31 +95,43 @@ namespace System.Web.Util {
             // used to mark the end of the synchronous task
             TaskCompletionSource<object> tcs = new TaskCompletionSource<object>();
             Task lastTask;
-            lock (_lockObj) {
+            lock (_lockObj)
+            {
                 lastTask = _lastScheduledTask;
                 _lastScheduledTask = tcs.Task; // future work can be scheduled off this Task
             }
 
             // The original task may end up Faulted, which would make its Wait() method throw an exception.
             // To avoid this, we instead wait on a continuation which is always guaranteed to complete successfully.
-            if (!lastTask.IsCompleted) { lastTask.ContinueWith(_ => { }, TaskContinuationOptions.ExecuteSynchronously).Wait(); }
+            if (!lastTask.IsCompleted)
+            {
+                lastTask
+                    .ContinueWith(_ => { }, TaskContinuationOptions.ExecuteSynchronously)
+                    .Wait();
+            }
             CurrentThread = Thread.CurrentThread;
 
             // synchronous control is released by marking the Task as complete
-            return new DisposableAction(() => {
+            return new DisposableAction(() =>
+            {
                 CurrentThread = null;
                 tcs.TrySetResult(null);
             });
         }
 
-        public void QueueAsynchronous(Action action) {
+        public void QueueAsynchronous(Action action)
+        {
             CheckForRequestStateIfRequired(checkForReEntry: true);
             ChangeOperationCount(+1);
 
             // This method only schedules work; it doesn't itself do any work. The lock is held for a very
             // short period of time.
-            lock (_lockObj) {
-                Task newTask = _lastScheduledTask.ContinueWith(_ => SafeWrapCallback(action), TaskScheduler.Default);
+            lock (_lockObj)
+            {
+                Task newTask = _lastScheduledTask.ContinueWith(
+                    _ => SafeWrapCallback(action),
+                    TaskScheduler.Default
+                );
                 _lastScheduledTask = newTask; // the newly-created task is now the last one
             }
         }
@@ -113,62 +139,79 @@ namespace System.Web.Util {
         // QueueAsynchronousAsync and SafeWrapCallbackAsync guarantee:
         // 1. For funcs posted here, it's would first come, first complete.
         // 2. There is no overlapping execution.
-        public void QueueAsynchronousAsync(Func<object, Task> func, object state) {
+        public void QueueAsynchronousAsync(Func<object, Task> func, object state)
+        {
             CheckForRequestStateIfRequired(checkForReEntry: true);
             ChangeOperationCount(+1);
 
             // This method only schedules work; it doesn't itself do any work. The lock is held for a very
             // short period of time.
-            lock (_lockObj) {
+            lock (_lockObj)
+            {
                 // 1. Note that we are chaining newTask with _lastScheduledTaskAsync, not _lastScheduledTask.
                 // Chaining newTask with _lastScheduledTask would cause deadlock.
                 // 2. Unwrap() is necessary to be called here. When chaining multiple tasks using the ContinueWith
                 // method, your return type will be Task<T> whereas T is the return type of the delegate/method
-                // passed to ContinueWith. As the return type of an async delegate is a Task, you will end up with 
+                // passed to ContinueWith. As the return type of an async delegate is a Task, you will end up with
                 // a Task<Task> and end up waiting for the async delegate to return you the Task which is done after
                 // the first await.
-                Task newTask = _lastScheduledTaskAsync.ContinueWith(
-                    async _ => { await SafeWrapCallbackAsync(func, state); }).Unwrap();
+                Task newTask = _lastScheduledTaskAsync
+                    .ContinueWith(async _ =>
+                    {
+                        await SafeWrapCallbackAsync(func, state);
+                    })
+                    .Unwrap();
                 _lastScheduledTaskAsync = newTask; // the newly-created task is now the last one
             }
         }
 
-        public void QueueSynchronous(Action action) {
+        public void QueueSynchronous(Action action)
+        {
             CheckForRequestStateIfRequired(checkForReEntry: false);
-            if (CurrentThread == Thread.CurrentThread) {
+            if (CurrentThread == Thread.CurrentThread)
+            {
                 // current thread already owns the context, so just execute inline to prevent deadlocks
                 action();
                 return;
             }
 
             ChangeOperationCount(+1);
-            using (EnterSynchronousControl()) {
+            using (EnterSynchronousControl())
+            {
                 SafeWrapCallback(action);
             }
         }
 
-        private void SafeWrapCallback(Action action) {
+        private void SafeWrapCallback(Action action)
+        {
             // This method will try to catch exceptions so that they don't bubble up to our
             // callers. However, ThreadAbortExceptions will continue to bubble up.
-            try {
+            try
+            {
                 CurrentThread = Thread.CurrentThread;
                 ISyncContextLock syncContextLock = null;
-                try {
+                try
+                {
                     syncContextLock = (_syncContext != null) ? _syncContext.Enter() : null;
-                    try {
+                    try
+                    {
                         action();
                     }
-                    catch (Exception ex) {
+                    catch (Exception ex)
+                    {
                         Error = ExceptionDispatchInfo.Capture(ex);
                     }
                 }
-                finally {
-                    if (syncContextLock != null) {
+                finally
+                {
+                    if (syncContextLock != null)
+                    {
                         syncContextLock.Leave();
                     }
                 }
             }
-            finally {
+            finally
+            {
                 CurrentThread = null;
                 ChangeOperationCount(-1);
             }
@@ -176,29 +219,41 @@ namespace System.Web.Util {
 
         // This method does not run the func by itself. It simply queues the func into the existing
         // syncContext queue.
-        private async Task SafeWrapCallbackAsync(Func<object, Task> func, object state) {
-            try {
+        private async Task SafeWrapCallbackAsync(Func<object, Task> func, object state)
+        {
+            try
+            {
                 TaskCompletionSource<Task> tcs = new TaskCompletionSource<Task>();
-                QueueAsynchronous(() => {
+                QueueAsynchronous(() =>
+                {
                     var t = func(state);
-                    t.ContinueWith((_) => {
-                        if (t.IsFaulted) {
-                            tcs.TrySetException(t.Exception.InnerExceptions);
-                        }
-                        else if (t.IsCanceled) {
-                            tcs.TrySetCanceled();
-                        }
-                        else {
-                            tcs.TrySetResult(t);
-                        }
-                    }, TaskContinuationOptions.ExecuteSynchronously);
+                    t.ContinueWith(
+                        (_) =>
+                        {
+                            if (t.IsFaulted)
+                            {
+                                tcs.TrySetException(t.Exception.InnerExceptions);
+                            }
+                            else if (t.IsCanceled)
+                            {
+                                tcs.TrySetCanceled();
+                            }
+                            else
+                            {
+                                tcs.TrySetResult(t);
+                            }
+                        },
+                        TaskContinuationOptions.ExecuteSynchronously
+                    );
                 });
                 await tcs.Task;
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 Error = ExceptionDispatchInfo.Capture(ex);
             }
-            finally {
+            finally
+            {
                 ChangeOperationCount(-1);
             }
         }
@@ -206,16 +261,17 @@ namespace System.Web.Util {
         // Sets the continuation that will asynchronously execute when the pending operation counter
         // hits zero. Returns true if asynchronous execution is expected, false if the operation
         // counter is already at zero and the caller should run the continuation inline.
-        public bool TrySetCompletionContinuation(Action continuation) {
+        public bool TrySetCompletionContinuation(Action continuation)
+        {
             int newOperationCount = ChangeOperationCount(+1); // prevent the operation counter from hitting zero while we're setting the field
             bool scheduledAsynchronously = (newOperationCount > 1);
-            if (scheduledAsynchronously) {
+            if (scheduledAsynchronously)
+            {
                 Interlocked.Exchange(ref _completionTask, new Task(continuation));
             }
 
             ChangeOperationCount(-1);
             return scheduledAsynchronously;
         }
-
     }
 }

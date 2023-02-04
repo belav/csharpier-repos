@@ -2,10 +2,10 @@ using System;
 
 class X
 {
-    public static int Main ()
+    public static int Main()
     {
-        var x = new X ();
-        x [0] = 3;
+        var x = new X();
+        x[0] = 3;
         if (x.field != 3)
             return 1;
         x.Prop = 5;
@@ -17,8 +17,7 @@ class X
 
     int field;
 
-    ref int this [int idx] => ref field;
+    ref int this[int idx] => ref field;
 
     ref int Prop => ref field;
-
 }

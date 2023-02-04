@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,11 +31,9 @@ namespace System.Xaml
 {
     public class XamlSchemaContextSettings
     {
-        public XamlSchemaContextSettings ()
-        {
-        }
+        public XamlSchemaContextSettings() { }
 
-        public XamlSchemaContextSettings (XamlSchemaContextSettings settings)
+        public XamlSchemaContextSettings(XamlSchemaContextSettings settings)
         {
             // null is allowed.
             var s = settings;
@@ -47,6 +45,5 @@ namespace System.Xaml
 
         public bool FullyQualifyAssemblyNamesInClrNamespaces { get; set; }
         public bool SupportMarkupExtensionsWithDuplicateArity { get; set; }
-
     }
 }

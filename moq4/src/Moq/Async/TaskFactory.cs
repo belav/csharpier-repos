@@ -13,9 +13,7 @@ namespace Moq.Async
     {
         public static readonly TaskFactory Instance = new TaskFactory();
 
-        private TaskFactory()
-        {
-        }
+        private TaskFactory() { }
 
         public override Task CreateCompleted()
         {

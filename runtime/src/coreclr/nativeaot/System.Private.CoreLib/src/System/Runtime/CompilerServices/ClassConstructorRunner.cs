@@ -30,35 +30,58 @@ namespace System.Runtime.CompilerServices
         // No attempt is made to detect or break deadlocks due to other synchronization mechanisms.
         //==============================================================================================================
 
-        private static unsafe object CheckStaticClassConstructionReturnGCStaticBase(StaticClassConstructionContext* context, object gcStaticBase)
+        private static unsafe object CheckStaticClassConstructionReturnGCStaticBase(
+            StaticClassConstructionContext* context,
+            object gcStaticBase
+        )
         {
             EnsureClassConstructorRun(context);
             return gcStaticBase;
         }
 
-        private static unsafe IntPtr CheckStaticClassConstructionReturnNonGCStaticBase(StaticClassConstructionContext* context, IntPtr nonGcStaticBase)
+        private static unsafe IntPtr CheckStaticClassConstructionReturnNonGCStaticBase(
+            StaticClassConstructionContext* context,
+            IntPtr nonGcStaticBase
+        )
         {
             EnsureClassConstructorRun(context);
             return nonGcStaticBase;
         }
 
-        private static unsafe object CheckStaticClassConstructionReturnThreadStaticBase(TypeManagerSlot* pModuleData, int typeTlsIndex, StaticClassConstructionContext* context)
+        private static unsafe object CheckStaticClassConstructionReturnThreadStaticBase(
+            TypeManagerSlot* pModuleData,
+            int typeTlsIndex,
+            StaticClassConstructionContext* context
+        )
         {
-            object threadStaticBase = ThreadStatics.GetThreadStaticBaseForType(pModuleData, typeTlsIndex);
+            object threadStaticBase = ThreadStatics.GetThreadStaticBaseForType(
+                pModuleData,
+                typeTlsIndex
+            );
             EnsureClassConstructorRun(context);
             return threadStaticBase;
         }
 
-        public static unsafe void EnsureClassConstructorRun(StaticClassConstructionContext* pContext)
+        public static unsafe void EnsureClassConstructorRun(
+            StaticClassConstructionContext* pContext
+        )
         {
             IntPtr pfnCctor = pContext->cctorMethodAddress;
-            NoisyLog("EnsureClassConstructorRun, cctor={0}, thread={1}", pfnCctor, CurrentManagedThreadId);
+            NoisyLog(
+                "EnsureClassConstructorRun, cctor={0}, thread={1}",
+                pfnCctor,
+                CurrentManagedThreadId
+            );
 
             // If we were called from MRT, this check is redundant but harmless. This is in case someone within classlib
             // (cough, Reflection) needs to call this explicitly.
             if (pContext->initialized == 1)
             {
-                NoisyLog("Cctor already run, cctor={0}, thread={1}", pfnCctor, CurrentManagedThreadId);
+                NoisyLog(
+                    "Cctor already run, cctor={0}, thread={1}",
+                    pfnCctor,
+                    CurrentManagedThreadId
+                );
                 return;
             }
 
@@ -73,19 +96,29 @@ namespace System.Runtime.CompilerServices
                     int currentManagedThreadId = CurrentManagedThreadId;
                     try
                     {
-                        NoisyLog("Acquired cctor lock, cctor={0}, thread={1}", pfnCctor, currentManagedThreadId);
+                        NoisyLog(
+                            "Acquired cctor lock, cctor={0}, thread={1}",
+                            pfnCctor,
+                            currentManagedThreadId
+                        );
 
                         cctors[cctorIndex].HoldingThread = currentManagedThreadId;
-                        if (pContext->initialized == 0)  // Check again in case some thread raced us while we were acquiring the lock.
+                        if (pContext->initialized == 0) // Check again in case some thread raced us while we were acquiring the lock.
                         {
-                            TypeInitializationException priorException = cctors[cctorIndex].Exception;
+                            TypeInitializationException priorException = cctors[
+                                cctorIndex
+                            ].Exception;
                             if (priorException != null)
                                 throw priorException;
                             try
                             {
-                                NoisyLog("Calling cctor, cctor={0}, thread={1}", pfnCctor, currentManagedThreadId);
+                                NoisyLog(
+                                    "Calling cctor, cctor={0}, thread={1}",
+                                    pfnCctor,
+                                    currentManagedThreadId
+                                );
 
-                                ((delegate*<void>)pfnCctor)();
+                                ((delegate* <void>)pfnCctor)();
 
                                 // Insert a memory barrier here to order any writes executed as part of static class
                                 // construction above with respect to the initialized flag update we're about to make
@@ -94,13 +127,22 @@ namespace System.Runtime.CompilerServices
                                 // still see uninitialized static fields on the class.
                                 Interlocked.MemoryBarrier();
 
-                                NoisyLog("Set type inited, cctor={0}, thread={1}", pfnCctor, currentManagedThreadId);
+                                NoisyLog(
+                                    "Set type inited, cctor={0}, thread={1}",
+                                    pfnCctor,
+                                    currentManagedThreadId
+                                );
 
                                 pContext->initialized = 1;
                             }
                             catch (Exception e)
                             {
-                                TypeInitializationException wrappedException = new TypeInitializationException(null, SR.TypeInitialization_Type_NoTypeAvailable, e);
+                                TypeInitializationException wrappedException =
+                                    new TypeInitializationException(
+                                        null,
+                                        SR.TypeInitialization_Type_NoTypeAvailable,
+                                        e
+                                    );
                                 cctors[cctorIndex].Exception = wrappedException;
                                 throw wrappedException;
                             }
@@ -109,7 +151,11 @@ namespace System.Runtime.CompilerServices
                     finally
                     {
                         cctors[cctorIndex].HoldingThread = ManagedThreadIdNone;
-                        NoisyLog("Releasing cctor lock, cctor={0}, thread={1}", pfnCctor, currentManagedThreadId);
+                        NoisyLog(
+                            "Releasing cctor lock, cctor={0}, thread={1}",
+                            pfnCctor,
+                            currentManagedThreadId
+                        );
 
                         cctorLock.Release();
                     }
@@ -124,7 +170,11 @@ namespace System.Runtime.CompilerServices
             {
                 Cctor.Release(cctor);
             }
-            NoisyLog("EnsureClassConstructorRun complete, cctor={0}, thread={1}", pfnCctor, CurrentManagedThreadId);
+            NoisyLog(
+                "EnsureClassConstructorRun complete, cctor={0}, thread={1}",
+                pfnCctor,
+                CurrentManagedThreadId
+            );
         }
 
         //=========================================================================================================
@@ -134,7 +184,7 @@ namespace System.Runtime.CompilerServices
         //=========================================================================================================
         private static bool DeadlockAwareAcquire(CctorHandle cctor, IntPtr pfnCctor)
         {
-            const int WaitIntervalSeedInMS = 1;      // seed with 1ms and double every time through the loop
+            const int WaitIntervalSeedInMS = 1; // seed with 1ms and double every time through the loop
             const int WaitIntervalLimitInMS = WaitIntervalSeedInMS << 7; // limit of 128ms
 
             int waitIntervalInMS = WaitIntervalSeedInMS;
@@ -143,7 +193,7 @@ namespace System.Runtime.CompilerServices
             Cctor[] cctors = cctor.Array;
             Lock lck = cctors[cctorIndex].Lock;
             if (lck.IsAcquired)
-                return false;     // Thread recursively triggered the same cctor.
+                return false; // Thread recursively triggered the same cctor.
 
             if (lck.TryAcquire(waitIntervalInMS))
                 return true;
@@ -162,7 +212,7 @@ namespace System.Runtime.CompilerServices
                 // If the threads are deadlocked for any reason other a class constructor cycling, this loop will never
                 // terminate - this is by design. If the user code inside the class constructors were to
                 // deadlock themselves, then that's a bug in user code.
-                for (;;)
+                for (; ; )
                 {
                     using (LockHolder.Hold(s_cctorGlobalLock))
                     {
@@ -181,8 +231,11 @@ namespace System.Runtime.CompilerServices
                             if (holdingThread == currentManagedThreadId)
                             {
                                 // Deadlock detected.  We will break the guarantee and return without running the .cctor.
-                                DebugLog("A class constructor was skipped due to class constructor cycle. cctor={0}, thread={1}",
-                                    pfnCctor, currentManagedThreadId);
+                                DebugLog(
+                                    "A class constructor was skipped due to class constructor cycle. cctor={0}, thread={1}",
+                                    pfnCctor,
+                                    currentManagedThreadId
+                                );
 
                                 // We are maintaining an invariant that the BlockingRecords never show a cycle because,
                                 // before we add a record, we first check for a cycle.  As a result, once we've said
@@ -223,9 +276,16 @@ namespace System.Runtime.CompilerServices
                         // respect to other updates to the BlockingRecords.
                         if (unmarkCookie == -1)
                         {
-                            NoisyLog("Mark thread blocked, cctor={0}, thread={1}", pfnCctor, currentManagedThreadId);
+                            NoisyLog(
+                                "Mark thread blocked, cctor={0}, thread={1}",
+                                pfnCctor,
+                                currentManagedThreadId
+                            );
 
-                            unmarkCookie = BlockingRecord.MarkThreadAsBlocked(currentManagedThreadId, cctor);
+                            unmarkCookie = BlockingRecord.MarkThreadAsBlocked(
+                                currentManagedThreadId,
+                                cctor
+                            );
                         }
                     } // _cctorGlobalLock scope
 
@@ -241,7 +301,11 @@ namespace System.Runtime.CompilerServices
             {
                 if (unmarkCookie != -1)
                 {
-                    NoisyLog("Unmark thread blocked, cctor={0}, thread={1}", pfnCctor, currentManagedThreadId);
+                    NoisyLog(
+                        "Unmark thread blocked, cctor={0}, thread={1}",
+                        pfnCctor,
+                        currentManagedThreadId
+                    );
                     BlockingRecord.UnmarkThreadAsBlocked(unmarkCookie);
                 }
             }
@@ -315,7 +379,9 @@ namespace System.Runtime.CompilerServices
                             Cctor[] segment = s_cctorArrays[cctorIndex];
                             for (int i = 0; i < segment.Length; i++)
                             {
-                                if (segment[i]._pContext == default(StaticClassConstructionContext*))
+                                if (
+                                    segment[i]._pContext == default(StaticClassConstructionContext*)
+                                )
                                 {
                                     resultArray = segment;
                                     resultIndex = i;
@@ -340,7 +406,10 @@ namespace System.Runtime.CompilerServices
                             resultIndex = 0;
                         }
 
-                        Debug.Assert(resultArray[resultIndex]._pContext == default(StaticClassConstructionContext*));
+                        Debug.Assert(
+                            resultArray[resultIndex]._pContext
+                                == default(StaticClassConstructionContext*)
+                        );
                         resultArray[resultIndex]._pContext = pContext;
                         resultArray[resultIndex].Lock = new Lock();
                         s_count++;
@@ -386,8 +455,14 @@ namespace System.Runtime.CompilerServices
                 _index = index;
             }
 
-            public Cctor[] Array { get { return _array; } }
-            public int Index { get { return _index; } }
+            public Cctor[] Array
+            {
+                get { return _array; }
+            }
+            public int Index
+            {
+                get { return _index; }
+            }
 
             private Cctor[] _array;
             private int _index;
@@ -409,7 +484,7 @@ namespace System.Runtime.CompilerServices
         //==============================================================================================================
         private struct BlockingRecord
         {
-            public int ManagedThreadId;     // ManagedThreadId of the blocked thread
+            public int ManagedThreadId; // ManagedThreadId of the blocked thread
             public CctorHandle BlockedOn;
 
             public static int MarkThreadAsBlocked(int managedThreadId, CctorHandle blockedOn)
@@ -432,14 +507,17 @@ namespace System.Runtime.CompilerServices
                     {
                         if (s_nextBlockingRecordIndex == s_blockingRecords.Length)
                         {
-                            BlockingRecord[] newBlockingRecords = new BlockingRecord[s_blockingRecords.Length + Grow];
+                            BlockingRecord[] newBlockingRecords = new BlockingRecord[
+                                s_blockingRecords.Length + Grow
+                            ];
                             for (int i = 0; i < s_blockingRecords.Length; i++)
                             {
                                 newBlockingRecords[i] = s_blockingRecords[i];
                             }
                             s_blockingRecords = newBlockingRecords;
                         }
-                        s_blockingRecords[s_nextBlockingRecordIndex].ManagedThreadId = managedThreadId;
+                        s_blockingRecords[s_nextBlockingRecordIndex].ManagedThreadId =
+                            managedThreadId;
                         s_nextBlockingRecordIndex++;
                     }
                     s_blockingRecords[found].BlockedOn = blockedOn;
@@ -519,10 +597,12 @@ namespace System.Runtime.CompilerServices
         {
             return ToHexStringUnsignedLong((ulong)num, false, 8);
         }
+
         private static string ToHexString(IntPtr num)
         {
             return ToHexStringUnsignedLong((ulong)num, false, 16);
         }
+
         private static char GetHexChar(uint u)
         {
             if (u < 10)
@@ -530,6 +610,7 @@ namespace System.Runtime.CompilerServices
 
             return unchecked((char)('a' + (u - 10)));
         }
+
         public static unsafe string ToHexStringUnsignedLong(ulong u, bool zeroPrepad, int numChars)
         {
             char[] chars = new char[numChars];

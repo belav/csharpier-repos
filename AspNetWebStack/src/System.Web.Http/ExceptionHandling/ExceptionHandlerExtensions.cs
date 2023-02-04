@@ -20,8 +20,11 @@ namespace System.Web.Http.ExceptionHandling
         /// A task that, when completed, contains the response message to return when the exception is handled, or
         /// <see langword="null"/> when the exception remains unhandled.
         /// </returns>
-        public static Task<HttpResponseMessage> HandleAsync(this IExceptionHandler handler,
-            ExceptionContext context, CancellationToken cancellationToken)
+        public static Task<HttpResponseMessage> HandleAsync(
+            this IExceptionHandler handler,
+            ExceptionContext context,
+            CancellationToken cancellationToken
+        )
         {
             if (handler == null)
             {
@@ -37,8 +40,11 @@ namespace System.Web.Http.ExceptionHandling
             return HandleAsyncCore(handler, handlerContext, cancellationToken);
         }
 
-        private static async Task<HttpResponseMessage> HandleAsyncCore(IExceptionHandler handler,
-            ExceptionHandlerContext context, CancellationToken cancellationToken)
+        private static async Task<HttpResponseMessage> HandleAsyncCore(
+            IExceptionHandler handler,
+            ExceptionHandlerContext context,
+            CancellationToken cancellationToken
+        )
         {
             Contract.Assert(handler != null);
             Contract.Assert(context != null);
@@ -56,8 +62,13 @@ namespace System.Web.Http.ExceptionHandling
 
             if (response == null)
             {
-                throw new InvalidOperationException(Error.Format(SRResources.TypeMethodMustNotReturnNull,
-                    typeof(IHttpActionResult).Name, "ExecuteAsync"));
+                throw new InvalidOperationException(
+                    Error.Format(
+                        SRResources.TypeMethodMustNotReturnNull,
+                        typeof(IHttpActionResult).Name,
+                        "ExecuteAsync"
+                    )
+                );
             }
 
             return response;

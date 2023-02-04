@@ -13,7 +13,7 @@ namespace Microsoft.Win32
         internal const int ERROR_INVALID_FUNCTION = 0x1;
         internal const int ERROR_FILE_NOT_FOUND = 0x2;
         internal const int ERROR_PATH_NOT_FOUND = 0x3;
-        internal const int ERROR_ACCESS_DENIED  = 0x5;
+        internal const int ERROR_ACCESS_DENIED = 0x5;
         internal const int ERROR_INVALID_HANDLE = 0x6;
         internal const int ERROR_NOT_ENOUGH_MEMORY = 0x8;
         internal const int ERROR_INVALID_DATA = 0xd;
@@ -32,13 +32,13 @@ namespace Microsoft.Win32
         internal const int ERROR_BAD_PATHNAME = 0xA1;
         internal const int ERROR_ALREADY_EXISTS = 0xB7;
         internal const int ERROR_ENVVAR_NOT_FOUND = 0xCB;
-        internal const int ERROR_FILENAME_EXCED_RANGE = 0xCE;  // filename too long.
+        internal const int ERROR_FILENAME_EXCED_RANGE = 0xCE; // filename too long.
         internal const int ERROR_NO_DATA = 0xE8;
         internal const int ERROR_PIPE_NOT_CONNECTED = 0xE9;
         internal const int ERROR_MORE_DATA = 0xEA;
         internal const int ERROR_DIRECTORY = 0x10B;
-        internal const int ERROR_OPERATION_ABORTED = 0x3E3;  // 995; For IO Cancellation
-        internal const int ERROR_NOT_FOUND = 0x490;          // 1168; For IO Cancellation
+        internal const int ERROR_OPERATION_ABORTED = 0x3E3; // 995; For IO Cancellation
+        internal const int ERROR_NOT_FOUND = 0x490; // 1168; For IO Cancellation
         internal const int ERROR_NO_TOKEN = 0x3f0;
         internal const int ERROR_DLL_INIT_FAILED = 0x45A;
         internal const int ERROR_NON_ACCOUNT_SID = 0x4E9;
@@ -59,20 +59,17 @@ namespace Microsoft.Win32
 
         internal const FileAttributes FILE_ATTRIBUTE_DIRECTORY = FileAttributes.Directory;
 
-        public static string GetMessage (int hr)
+        public static string GetMessage(int hr)
         {
             return "Error " + hr;
         }
 
-        public static int MakeHRFromErrorCode (int errorCode)
+        public static int MakeHRFromErrorCode(int errorCode)
         {
             return unchecked(((int)0x80070000) | errorCode);
         }
 
-        public class SECURITY_ATTRIBUTES
-        {
-
-        }
+        public class SECURITY_ATTRIBUTES { }
 
         internal class WIN32_FIND_DATA
         {

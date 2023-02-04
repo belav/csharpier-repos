@@ -15,8 +15,11 @@ using System.Threading;
 namespace System.Transactions
 {
     [Serializable]
-    public sealed class CommittableTransaction : Transaction,
-        ISerializable, IDisposable, System.IAsyncResult
+    public sealed class CommittableTransaction
+        : Transaction,
+            ISerializable,
+            IDisposable,
+            System.IAsyncResult
     {
         TransactionOptions options;
 
@@ -25,82 +28,82 @@ namespace System.Transactions
 
         IAsyncResult asyncResult;
 
-        public CommittableTransaction ()
-            : this (new TransactionOptions ())
-        {
-        }
+        public CommittableTransaction()
+            : this(new TransactionOptions()) { }
 
-        public CommittableTransaction (TimeSpan timeout)
-            : base (IsolationLevel.Serializable)
+        public CommittableTransaction(TimeSpan timeout)
+            : base(IsolationLevel.Serializable)
         {
-            options = new TransactionOptions ();
+            options = new TransactionOptions();
             options.Timeout = timeout;
         }
 
-        public CommittableTransaction (TransactionOptions options)
-            : base (options.IsolationLevel)
+        public CommittableTransaction(TransactionOptions options)
+            : base(options.IsolationLevel)
         {
             this.options = options;
         }
 
-        public IAsyncResult BeginCommit (AsyncCallback asyncCallback,
-            object asyncState)
+        public IAsyncResult BeginCommit(AsyncCallback asyncCallback, object asyncState)
         {
             this.callback = asyncCallback;
             this.user_defined_state = asyncState;
 
             AsyncCallback cb = null;
             if (asyncCallback != null)
-                cb = new AsyncCallback (CommitCallback);
+                cb = new AsyncCallback(CommitCallback);
 
-            asyncResult = BeginCommitInternal (cb);
+            asyncResult = BeginCommitInternal(cb);
             return this;
         }
-        
-        public void EndCommit (IAsyncResult asyncResult)
+
+        public void EndCommit(IAsyncResult asyncResult)
         {
             if (asyncResult != this)
-                throw new ArgumentException ("The IAsyncResult parameter must be the same parameter as returned by BeginCommit.", "asyncResult");
+                throw new ArgumentException(
+                    "The IAsyncResult parameter must be the same parameter as returned by BeginCommit.",
+                    "asyncResult"
+                );
 
-            EndCommitInternal (this.asyncResult);
+            EndCommitInternal(this.asyncResult);
         }
 
-        private void CommitCallback (IAsyncResult ar)
+        private void CommitCallback(IAsyncResult ar)
         {
             if (asyncResult == null && ar.CompletedSynchronously)
                 asyncResult = ar;
-            callback (this);
+            callback(this);
         }
 
-        public void Commit ()
+        public void Commit()
         {
-            CommitInternal ();
-        }
-        
-        [MonoTODO ("Not implemented")]
-        void ISerializable.GetObjectData (SerializationInfo info,
-            StreamingContext context)
-        {
-            throw new NotImplementedException ();
+            CommitInternal();
         }
 
-        object IAsyncResult.AsyncState {
+        [MonoTODO("Not implemented")]
+        void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            throw new NotImplementedException();
+        }
+
+        object IAsyncResult.AsyncState
+        {
             get { return user_defined_state; }
         }
 
-        WaitHandle IAsyncResult.AsyncWaitHandle {
+        WaitHandle IAsyncResult.AsyncWaitHandle
+        {
             get { return asyncResult.AsyncWaitHandle; }
         }
 
-        bool IAsyncResult.CompletedSynchronously {
+        bool IAsyncResult.CompletedSynchronously
+        {
             get { return asyncResult.CompletedSynchronously; }
         }
 
-        bool IAsyncResult.IsCompleted {
+        bool IAsyncResult.IsCompleted
+        {
             get { return asyncResult.IsCompleted; }
         }
-
-
     }
 }
-

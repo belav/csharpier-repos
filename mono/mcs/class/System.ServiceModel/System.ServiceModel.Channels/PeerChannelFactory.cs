@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -43,45 +43,56 @@ namespace System.ServiceModel.Channels
         MessageEncoder MessageEncoder { get; }
     }
 
-    internal class PeerChannelFactory<TChannel> : TransportChannelFactoryBase<TChannel>, IPeerChannelManager
+    internal class PeerChannelFactory<TChannel>
+        : TransportChannelFactoryBase<TChannel>,
+            IPeerChannelManager
     {
         PeerTransportBindingElement source;
-        
-        public PeerChannelFactory (PeerTransportBindingElement source, BindingContext ctx)
-            : base (source, ctx)
+
+        public PeerChannelFactory(PeerTransportBindingElement source, BindingContext ctx)
+            : base(source, ctx)
         {
             this.source = source;
-            foreach (BindingElement be in ctx.Binding.Elements) {
+            foreach (BindingElement be in ctx.Binding.Elements)
+            {
                 MessageEncodingBindingElement mbe = be as MessageEncodingBindingElement;
-                if (mbe != null) {
-                    MessageEncoder = CreateEncoder<TChannel> (mbe);
+                if (mbe != null)
+                {
+                    MessageEncoder = CreateEncoder<TChannel>(mbe);
                     break;
                 }
             }
             if (MessageEncoder == null)
-                MessageEncoder = new BinaryMessageEncoder ();
+                MessageEncoder = new BinaryMessageEncoder();
         }
 
         public PeerResolver Resolver { get; set; }
 
-        public PeerTransportBindingElement Source {
+        public PeerTransportBindingElement Source
+        {
             get { return source; }
         }
 
-        protected override TChannel OnCreateChannel (
-            EndpointAddress address, Uri via)
+        protected override TChannel OnCreateChannel(EndpointAddress address, Uri via)
         {
-            ThrowIfDisposedOrNotOpen ();
+            ThrowIfDisposedOrNotOpen();
 
             if (source.Scheme != address.Uri.Scheme)
-                throw new ArgumentException (String.Format ("Argument EndpointAddress has unsupported URI scheme: {0}", address.Uri.Scheme));
+                throw new ArgumentException(
+                    String.Format(
+                        "Argument EndpointAddress has unsupported URI scheme: {0}",
+                        address.Uri.Scheme
+                    )
+                );
 
-            Type t = typeof (TChannel);
-            if (t == typeof (IOutputChannel))
-                return (TChannel) (object) new PeerDuplexChannel (this, address, via, Resolver);
-            if (t == typeof (IDuplexChannel))
-                return (TChannel) (object) new PeerDuplexChannel (this, address, via, Resolver);
-            throw new InvalidOperationException (String.Format ("channel type {0} is not supported.", typeof (TChannel).Name));
+            Type t = typeof(TChannel);
+            if (t == typeof(IOutputChannel))
+                return (TChannel)(object)new PeerDuplexChannel(this, address, via, Resolver);
+            if (t == typeof(IDuplexChannel))
+                return (TChannel)(object)new PeerDuplexChannel(this, address, via, Resolver);
+            throw new InvalidOperationException(
+                String.Format("channel type {0} is not supported.", typeof(TChannel).Name)
+            );
         }
     }
 }

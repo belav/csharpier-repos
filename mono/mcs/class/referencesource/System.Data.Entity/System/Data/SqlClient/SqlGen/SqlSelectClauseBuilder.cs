@@ -16,18 +16,18 @@ namespace System.Data.SqlClient.SqlGen
     /// This class is used for building the SELECT clause of a Sql Statement
     /// It is used to gather information about required and optional columns
     /// and whether TOP and DISTINCT should be specified.
-    /// 
+    ///
     /// The underlying SqlBuilder is used for gathering the required columns.
-    /// 
-    /// The list of OptionalColumns is used for gathering the optional columns. 
+    ///
+    /// The list of OptionalColumns is used for gathering the optional columns.
     /// Whether a given OptionalColumn should be written is known only after the entire
-    /// command tree has been processed. 
-    /// 
+    /// command tree has been processed.
+    ///
     /// The IsDistinct property indicates that we want distinct columns.
     /// This is given out of band, since the input expression to the select clause
     /// may already have some columns projected out, and we use append-only SqlBuilders.
     /// The DISTINCT is inserted when we finally write the object into a string.
-    /// 
+    ///
     /// Also, we have a Top property, which is non-null if the number of results should
     /// be limited to certain number. It is given out of band for the same reasons as DISTINCT.
     ///
@@ -36,6 +36,7 @@ namespace System.Data.SqlClient.SqlGen
     {
         #region Fields and Properties
         private List<OptionalColumn> m_optionalColumns;
+
         internal void AddOptionalColumn(OptionalColumn column)
         {
             if (m_optionalColumns == null)
@@ -59,18 +60,18 @@ namespace System.Data.SqlClient.SqlGen
         /// <summary>
         /// Do we need to add a DISTINCT at the beginning of the SELECT
         /// </summary>
-        internal bool IsDistinct
-        {
-            get;
-            set;
-        }
+        internal bool IsDistinct { get; set; }
 
         /// <summary>
         /// Whether any columns have been specified.
         /// </summary>
         public override bool IsEmpty
         {
-            get { return (base.IsEmpty) && (this.m_optionalColumns == null || this.m_optionalColumns.Count == 0); }
+            get
+            {
+                return (base.IsEmpty)
+                    && (this.m_optionalColumns == null || this.m_optionalColumns.Count == 0);
+            }
         }
 
         private readonly Func<bool> m_isPartOfTopMostStatement;
@@ -87,16 +88,16 @@ namespace System.Data.SqlClient.SqlGen
 
         /// <summary>
         /// Writes the string representing the Select statement:
-        /// 
+        ///
         /// SELECT (DISTINCT) (TOP topClause) (optionalColumns) (requiredColumns)
-        /// 
-        /// If Distinct is specified or this is part of a top most statement 
+        ///
+        /// If Distinct is specified or this is part of a top most statement
         /// all optional columns are marked as used.
-        /// 
-        /// Optional columns are only written if marked as used. 
-        /// In addition, if no required columns are specified and no optional columns are 
+        ///
+        /// Optional columns are only written if marked as used.
+        /// In addition, if no required columns are specified and no optional columns are
         /// marked as used, the first optional column is written.
-        /// 
+        ///
         /// </summary>
         /// <param name="writer"></param>
         /// <param name="sqlGenerator"></param>
@@ -115,7 +116,7 @@ namespace System.Data.SqlClient.SqlGen
 
             if (this.IsEmpty)
             {
-                Debug.Assert(false);  // we have removed all possibilities of SELECT *.
+                Debug.Assert(false); // we have removed all possibilities of SELECT *.
                 writer.Write("*");
             }
             else
@@ -131,7 +132,7 @@ namespace System.Data.SqlClient.SqlGen
                     }
                     base.WriteSql(writer, sqlGenerator);
                 }
-                //If no optional columns were printed and there were no other columns, 
+                //If no optional columns were printed and there were no other columns,
                 // print at least the first optional column
                 else if (!printedAny)
                 {
@@ -146,7 +147,7 @@ namespace System.Data.SqlClient.SqlGen
         #region Private Helper Methods
 
         /// <summary>
-        /// Writes the optional columns that are used. 
+        /// Writes the optional columns that are used.
         /// If this is the topmost statement or distict is specifed as part of the same statement
         /// all optoinal columns are written.
         /// </summary>

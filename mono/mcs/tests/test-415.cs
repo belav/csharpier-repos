@@ -1,13 +1,17 @@
 // Compiler options: -r:test-415-lib.dll
 
 using System;
+
 public class MyTestExtended : MyTestAbstract
 {
-    public MyTestExtended() : base()
+    public MyTestExtended()
+        : base() { }
+
+    protected override string GetName()
     {
+        return "foo";
     }
 
-    protected override string GetName() { return "foo"; }
     public static void Main(string[] args)
     {
         Console.WriteLine("Calling PrintName");
@@ -15,5 +19,4 @@ public class MyTestExtended : MyTestAbstract
         test.PrintName();
         Console.WriteLine("Out of PrintName");
     }
-    
 }

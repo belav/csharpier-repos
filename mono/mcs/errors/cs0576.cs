@@ -3,9 +3,7 @@
 
 using S = System;
 
-public class S
-{
-}
+public class S { }
 
 public class Test
 {

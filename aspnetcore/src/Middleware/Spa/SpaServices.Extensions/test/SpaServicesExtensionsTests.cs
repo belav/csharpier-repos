@@ -33,7 +33,8 @@ public class SpaServicesExtensionsTests
 
         // Act & Assert
         var exception = Assert.Throws<InvalidOperationException>(
-            () => applicationbuilder.UseSpa(rb => { }));
+            () => applicationbuilder.UseSpa(rb => { })
+        );
 
         Assert.Equal("No RootPath was set on the SpaStaticFilesOptions.", exception.Message);
     }
@@ -46,9 +47,7 @@ public class SpaServicesExtensionsTests
         }
 
         var applicationbuilderMock = new Mock<IApplicationBuilder>();
-        applicationbuilderMock
-            .Setup(s => s.ApplicationServices)
-            .Returns(serviceProvider);
+        applicationbuilderMock.Setup(s => s.ApplicationServices).Returns(serviceProvider);
 
         return applicationbuilderMock.Object;
     }
@@ -69,7 +68,8 @@ public class SpaServicesExtensionsTests
         return services.BuildServiceProvider();
     }
 
-    private ListLoggerFactory ListLoggerFactory { get; } = new ListLoggerFactory(c => c == "Microsoft.AspNetCore.SpaServices");
+    private ListLoggerFactory ListLoggerFactory { get; } =
+        new ListLoggerFactory(c => c == "Microsoft.AspNetCore.SpaServices");
 
     private class TestHostApplicationLifetime : IHostApplicationLifetime
     {

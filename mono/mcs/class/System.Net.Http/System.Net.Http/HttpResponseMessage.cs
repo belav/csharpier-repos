@@ -40,109 +40,111 @@ namespace System.Net.Http
         Version version;
         bool disposed;
 
-        public HttpResponseMessage ()
-            : this (HttpStatusCode.OK)
-        {
-        }
+        public HttpResponseMessage()
+            : this(HttpStatusCode.OK) { }
 
-        public HttpResponseMessage (HttpStatusCode statusCode)
+        public HttpResponseMessage(HttpStatusCode statusCode)
         {
             StatusCode = statusCode;
         }
 
         public HttpContent Content { get; set; }
 
-        public HttpResponseHeaders Headers {
-            get {
-                return headers ?? (headers = new HttpResponseHeaders ());
-            }
+        public HttpResponseHeaders Headers
+        {
+            get { return headers ?? (headers = new HttpResponseHeaders()); }
         }
 
-        public bool IsSuccessStatusCode {
-            get {
+        public bool IsSuccessStatusCode
+        {
+            get
+            {
                 // Successful codes are 2xx
-                return statusCode >= HttpStatusCode.OK && statusCode < HttpStatusCode.MultipleChoices;
+                return statusCode >= HttpStatusCode.OK
+                    && statusCode < HttpStatusCode.MultipleChoices;
             }
         }
 
-        public string ReasonPhrase {
-            get {
-                return reasonPhrase ?? HttpStatusDescription.Get (statusCode);
-            }
-            set {
-                reasonPhrase = value;
-            }
+        public string ReasonPhrase
+        {
+            get { return reasonPhrase ?? HttpStatusDescription.Get(statusCode); }
+            set { reasonPhrase = value; }
         }
 
         public HttpRequestMessage RequestMessage { get; set; }
 
-        public HttpStatusCode StatusCode {
-            get {
-                return statusCode;
-            }
-            set {
+        public HttpStatusCode StatusCode
+        {
+            get { return statusCode; }
+            set
+            {
                 if (value < 0)
-                    throw new ArgumentOutOfRangeException ();
+                    throw new ArgumentOutOfRangeException();
 
                 statusCode = value;
             }
         }
 
-        public Version Version {
-            get {
-                return version ?? HttpVersion.Version11;
-            }
-            set {
+        public Version Version
+        {
+            get { return version ?? HttpVersion.Version11; }
+            set
+            {
                 if (value == null)
-                    throw new ArgumentNullException ("Version");
+                    throw new ArgumentNullException("Version");
 
                 version = value;
             }
         }
 
-        public void Dispose ()
+        public void Dispose()
         {
-            Dispose (true);
+            Dispose(true);
         }
 
-        protected virtual void Dispose (bool disposing)
+        protected virtual void Dispose(bool disposing)
         {
-            if (disposing && !disposed) {
+            if (disposing && !disposed)
+            {
                 disposed = true;
 
                 if (Content != null)
-                    Content.Dispose ();
+                    Content.Dispose();
             }
         }
 
-        public HttpResponseMessage EnsureSuccessStatusCode ()
+        public HttpResponseMessage EnsureSuccessStatusCode()
         {
             if (IsSuccessStatusCode)
                 return this;
 
-            throw new HttpRequestException (string.Format ("{0} ({1})", (int) statusCode, ReasonPhrase));
-        }
-        
-        public override string ToString ()
-        {
-            var sb = new StringBuilder ();
-            sb.Append ("StatusCode: ").Append ((int)StatusCode);
-            sb.Append (", ReasonPhrase: '").Append (ReasonPhrase ?? "<null>");
-            sb.Append ("', Version: ").Append (Version);
-            sb.Append (", Content: ").Append (Content != null ? Content.ToString () : "<null>");
-            sb.Append (", Headers:\r\n{\r\n").Append (Headers);
-            if (Content != null)
-                sb.Append (Content.Headers);
-            
-            sb.Append ("}");
-            
-            return sb.ToString ();
+            throw new HttpRequestException(
+                string.Format("{0} ({1})", (int)statusCode, ReasonPhrase)
+            );
         }
 
-        public HttpResponseHeaders TrailingHeaders {
-            get {
+        public override string ToString()
+        {
+            var sb = new StringBuilder();
+            sb.Append("StatusCode: ").Append((int)StatusCode);
+            sb.Append(", ReasonPhrase: '").Append(ReasonPhrase ?? "<null>");
+            sb.Append("', Version: ").Append(Version);
+            sb.Append(", Content: ").Append(Content != null ? Content.ToString() : "<null>");
+            sb.Append(", Headers:\r\n{\r\n").Append(Headers);
+            if (Content != null)
+                sb.Append(Content.Headers);
+
+            sb.Append("}");
+
+            return sb.ToString();
+        }
+
+        public HttpResponseHeaders TrailingHeaders
+        {
+            get
+            {
                 if (trailingHeaders == null)
-                    trailingHeaders = new HttpResponseHeaders ();
+                    trailingHeaders = new HttpResponseHeaders();
 
                 return trailingHeaders;
             }

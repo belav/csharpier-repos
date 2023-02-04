@@ -4,14 +4,14 @@ namespace Mono.Linker.Tests.Cases.References.Dependencies
 {
     public class UserAssembliesAreLinkedByDefault_Library1
     {
-        public void UsedMethod ()
+        public void UsedMethod()
         {
-            Console.WriteLine ("Used");
+            Console.WriteLine("Used");
         }
 
-        public void UnusedMethod ()
+        public void UnusedMethod()
         {
-            Console.WriteLine ("NotUsed");
+            Console.WriteLine("NotUsed");
         }
     }
 }

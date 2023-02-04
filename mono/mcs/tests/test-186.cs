@@ -4,7 +4,7 @@ namespace TestBUG
 {
     public class myAttribute : Attribute
     {
-        public myAttribute(string p1, string p2, string p3, int p4) {}
+        public myAttribute(string p1, string p2, string p3, int p4) { }
     }
 
     //
@@ -13,16 +13,9 @@ namespace TestBUG
     [myAttribute("stringArgument", (String)null, (String)null, 2)]
     public class Test
     {
-
-        public static int Main  ()
+        public static int Main()
         {
             return 0;
         }
     }
 }
-
-
-
-
-
-

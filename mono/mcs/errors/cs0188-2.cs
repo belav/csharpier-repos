@@ -5,12 +5,10 @@ struct B
 {
     public int a;
 
-    public B (int foo)
+    public B(int foo)
     {
-        Test ();
+        Test();
     }
 
-    public void Test ()
-    {
-    }
+    public void Test() { }
 }

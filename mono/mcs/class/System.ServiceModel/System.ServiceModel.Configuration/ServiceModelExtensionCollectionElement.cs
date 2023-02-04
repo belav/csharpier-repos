@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,121 +33,135 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    public abstract class ServiceModelExtensionCollectionElement<TServiceModelExtensionElement> : ConfigurationElement,
-        ICollection<TServiceModelExtensionElement>,
-        IEnumerable<TServiceModelExtensionElement>,
-        IEnumerable
+    public abstract class ServiceModelExtensionCollectionElement<TServiceModelExtensionElement>
+        : ConfigurationElement,
+            ICollection<TServiceModelExtensionElement>,
+            IEnumerable<TServiceModelExtensionElement>,
+            IEnumerable
         where TServiceModelExtensionElement : ServiceModelExtensionElement
     {
-        internal ServiceModelExtensionCollectionElement ()
-        {
-        }
+        internal ServiceModelExtensionCollectionElement() { }
 
         ConfigurationPropertyCollection properties;
 
-        KeyedByTypeCollection<TServiceModelExtensionElement> _list = new KeyedByTypeCollection<TServiceModelExtensionElement> ();
+        KeyedByTypeCollection<TServiceModelExtensionElement> _list =
+            new KeyedByTypeCollection<TServiceModelExtensionElement>();
         bool is_modified;
 
-        public virtual void Add (TServiceModelExtensionElement element)
+        public virtual void Add(TServiceModelExtensionElement element)
         {
             is_modified = true;
-            _list.Add (element);
-        }
-        
-        public virtual bool CanAdd (TServiceModelExtensionElement element) {
-            throw new NotImplementedException ();
+            _list.Add(element);
         }
 
-        public void Clear ()
+        public virtual bool CanAdd(TServiceModelExtensionElement element)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Clear()
         {
             is_modified = true;
-            _list.Clear ();
+            _list.Clear();
         }
 
-        public bool Contains (TServiceModelExtensionElement element)
+        public bool Contains(TServiceModelExtensionElement element)
         {
-            return _list.Contains (element);
+            return _list.Contains(element);
         }
 
-        public bool ContainsKey (string elementName)
+        public bool ContainsKey(string elementName)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public bool ContainsKey (Type elementType)
+        public bool ContainsKey(Type elementType)
         {
-            return _list.Contains (elementType);
+            return _list.Contains(elementType);
         }
 
-        public void CopyTo (TServiceModelExtensionElement[] elements,
-            int start)
+        public void CopyTo(TServiceModelExtensionElement[] elements, int start)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public IEnumerator<TServiceModelExtensionElement> GetEnumerator () {
+        public IEnumerator<TServiceModelExtensionElement> GetEnumerator()
+        {
             for (int i = 0; i < Count; i++)
-                yield return this [i];
+                yield return this[i];
         }
 
-        public bool Remove (TServiceModelExtensionElement element)
+        public bool Remove(TServiceModelExtensionElement element)
         {
             is_modified = true;
-            return _list.Remove (element.GetType ());
+            return _list.Remove(element.GetType());
         }
 
-        IEnumerator IEnumerable.GetEnumerator ()
+        IEnumerator IEnumerable.GetEnumerator()
         {
-            return GetEnumerator ();
+            return GetEnumerator();
         }
 
-        bool ICollection<TServiceModelExtensionElement>.IsReadOnly {
-            get { throw new NotImplementedException (); }
+        bool ICollection<TServiceModelExtensionElement>.IsReadOnly
+        {
+            get { throw new NotImplementedException(); }
         }
 
-        public TServiceModelExtensionElement this [int index] {
-            get {
-                return _list [index];
-            }
+        public TServiceModelExtensionElement this[int index]
+        {
+            get { return _list[index]; }
         }
 
-        public TServiceModelExtensionElement this [Type extensionType] {
-            get {
-                if (_list.Contains (extensionType))
-                    return _list [extensionType];
+        public TServiceModelExtensionElement this[Type extensionType]
+        {
+            get
+            {
+                if (_list.Contains(extensionType))
+                    return _list[extensionType];
                 return null;
             }
         }
 
-        protected override void DeserializeElement (XmlReader reader, bool serializeCollectionKey)
+        protected override void DeserializeElement(XmlReader reader, bool serializeCollectionKey)
         {
-            base.DeserializeElement (reader, serializeCollectionKey);
+            base.DeserializeElement(reader, serializeCollectionKey);
         }
 
-        protected override bool OnDeserializeUnrecognizedElement (string elementName, XmlReader reader) {
-            TServiceModelExtensionElement ext= DeserializeExtensionElement (elementName, reader);
+        protected override bool OnDeserializeUnrecognizedElement(
+            string elementName,
+            XmlReader reader
+        )
+        {
+            TServiceModelExtensionElement ext = DeserializeExtensionElement(elementName, reader);
             if (ext == null)
                 return false;
-            Add (ext);
+            Add(ext);
             return true;
         }
 
-        internal virtual TServiceModelExtensionElement DeserializeExtensionElement (string elementName, XmlReader reader) {
+        internal virtual TServiceModelExtensionElement DeserializeExtensionElement(
+            string elementName,
+            XmlReader reader
+        )
+        {
             return null;
         }
 
-        public int Count {
+        public int Count
+        {
             get { return _list.Count; }
         }
 
-        protected override void Reset (ConfigurationElement parentElement)
+        protected override void Reset(ConfigurationElement parentElement)
         {
-            base.Reset (parentElement);
-            var parent = (ServiceModelExtensionCollectionElement<TServiceModelExtensionElement>) parentElement;
+            base.Reset(parentElement);
+            var parent =
+                (ServiceModelExtensionCollectionElement<TServiceModelExtensionElement>)
+                    parentElement;
 
 #if true
             foreach (var item in parent)
-                Add (item);
+                Add(item);
 #else // FIXME: no way to call Reset() on item (hence disabled now)
             // It is based on ConfigurationElementCollection.Reset()
             for (int n=0; n<parent.Count; n++)
@@ -161,24 +175,27 @@ namespace System.ServiceModel.Configuration
 #endif
         }
 
-        protected override bool IsModified ()
+        protected override bool IsModified()
         {
             return is_modified;
         }
 
-        protected override void ResetModified ()
+        protected override void ResetModified()
         {
             is_modified = false;
         }
 
-        protected void SetIsModified ()
+        protected void SetIsModified()
         {
             is_modified = true;
         }
 
-        protected override ConfigurationPropertyCollection Properties {
-            get {
-                if (properties == null) {
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get
+            {
+                if (properties == null)
+                {
                     properties = base.Properties;
                 }
                 return properties;

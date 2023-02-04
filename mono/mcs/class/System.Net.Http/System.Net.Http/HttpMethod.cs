@@ -30,109 +30,101 @@ namespace System.Net.Http
 {
     public class HttpMethod : IEquatable<HttpMethod>
     {
-        static readonly HttpMethod delete_method = new HttpMethod ("DELETE");
-        static readonly HttpMethod get_method = new HttpMethod ("GET");
-        static readonly HttpMethod head_method = new HttpMethod ("HEAD");
-        static readonly HttpMethod options_method = new HttpMethod ("OPTIONS");
-        static readonly HttpMethod post_method = new HttpMethod ("POST");
-        static readonly HttpMethod put_method = new HttpMethod ("PUT");
-        static readonly HttpMethod trace_method = new HttpMethod ("TRACE");
+        static readonly HttpMethod delete_method = new HttpMethod("DELETE");
+        static readonly HttpMethod get_method = new HttpMethod("GET");
+        static readonly HttpMethod head_method = new HttpMethod("HEAD");
+        static readonly HttpMethod options_method = new HttpMethod("OPTIONS");
+        static readonly HttpMethod post_method = new HttpMethod("POST");
+        static readonly HttpMethod put_method = new HttpMethod("PUT");
+        static readonly HttpMethod trace_method = new HttpMethod("TRACE");
 
         readonly string method;
 
-        public HttpMethod (string method)
+        public HttpMethod(string method)
         {
-            if (string.IsNullOrEmpty (method))
-                throw new ArgumentException ("method");
+            if (string.IsNullOrEmpty(method))
+                throw new ArgumentException("method");
 
-            Headers.Parser.Token.Check (method);
+            Headers.Parser.Token.Check(method);
 
             this.method = method;
         }
 
-        public static HttpMethod Delete {
-            get {
-                return delete_method;
-            }
-        }
-
-        public static HttpMethod Get {
-            get {
-                return get_method;
-            }
-        }
-
-        public static HttpMethod Head {
-            get {
-                return head_method;
-            }
-        }
-
-        public string Method {
-            get {
-                return method;
-            }
-        }
-
-        public static HttpMethod Options {
-            get {
-                return options_method;
-            }
-        }
-
-        public static HttpMethod Post {
-            get {
-                return post_method;
-            }
-        }
-
-        public static HttpMethod Put {
-            get {
-                return put_method;
-            }
-        }
-
-        public static HttpMethod Trace {
-            get {
-                return trace_method;
-            }
-        }
-
-        public static bool operator == (HttpMethod left, HttpMethod right)
+        public static HttpMethod Delete
         {
-            if ((object) left == null || (object) right == null)
-                return ReferenceEquals (left, right);
-
-            return left.Equals (right);
+            get { return delete_method; }
         }
 
-        public static bool operator != (HttpMethod left, HttpMethod right)
+        public static HttpMethod Get
+        {
+            get { return get_method; }
+        }
+
+        public static HttpMethod Head
+        {
+            get { return head_method; }
+        }
+
+        public string Method
+        {
+            get { return method; }
+        }
+
+        public static HttpMethod Options
+        {
+            get { return options_method; }
+        }
+
+        public static HttpMethod Post
+        {
+            get { return post_method; }
+        }
+
+        public static HttpMethod Put
+        {
+            get { return put_method; }
+        }
+
+        public static HttpMethod Trace
+        {
+            get { return trace_method; }
+        }
+
+        public static bool operator ==(HttpMethod left, HttpMethod right)
+        {
+            if ((object)left == null || (object)right == null)
+                return ReferenceEquals(left, right);
+
+            return left.Equals(right);
+        }
+
+        public static bool operator !=(HttpMethod left, HttpMethod right)
         {
             return !(left == right);
         }
 
         public bool Equals(HttpMethod other)
         {
-            return string.Equals (method, other.method, StringComparison.OrdinalIgnoreCase);
+            return string.Equals(method, other.method, StringComparison.OrdinalIgnoreCase);
         }
 
-        public override bool Equals (object obj)
+        public override bool Equals(object obj)
         {
             var other = obj as HttpMethod;
-            return !ReferenceEquals (other, null) && Equals (other);
+            return !ReferenceEquals(other, null) && Equals(other);
         }
 
-        public override int GetHashCode ()
+        public override int GetHashCode()
         {
-            return method.GetHashCode ();
+            return method.GetHashCode();
         }
 
-        public override string ToString ()
+        public override string ToString()
         {
             return method;
         }
 
         // NS2.1:
-        public static System.Net.Http.HttpMethod Patch => throw new PlatformNotSupportedException ();
+        public static System.Net.Http.HttpMethod Patch => throw new PlatformNotSupportedException();
     }
 }

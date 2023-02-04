@@ -10,176 +10,177 @@ namespace Test.Sys.Drawing
     /// <summary>
     /// Summary description for Pens.
     /// </summary>
-    
+
     [TestFixture]
     public class PensFixture
     {
-
         [SetUp]
-        public void SetUp () 
-        {
-        }
+        public void SetUp() { }
 
         #region names array
-        private string [] ar_pens = {
-                                       "Transparent",
-                                       "AliceBlue",
-                                       "AntiqueWhite",
-                                       "Aqua",
-                                       "Aquamarine",
-                                       "Azure",
-                                       "Beige",
-                                       "Bisque",
-                                       "Black",
-                                       "BlanchedAlmond",
-                                       "Blue",
-                                       "BlueViolet",
-                                       "Brown",
-                                       "BurlyWood",
-                                       "CadetBlue",
-                                       "Chartreuse",
-                                       "Chocolate",
-                                       "Coral",
-                                       "CornflowerBlue",
-                                       "Cornsilk",
-                                       "Crimson",
-                                       "Cyan",
-                                       "DarkBlue",
-                                       "DarkCyan",
-                                       "DarkGoldenrod",
-                                       "DarkGray",
-                                       "DarkGreen",
-                                       "DarkKhaki",
-                                       "DarkMagenta",
-                                       "DarkOliveGreen",
-                                       "DarkOrange",
-                                       "DarkOrchid",
-                                       "DarkRed",
-                                       "DarkSalmon",
-                                       "DarkSeaGreen",
-                                       "DarkSlateBlue",
-                                       "DarkSlateGray",
-                                       "DarkTurquoise",
-                                       "DarkViolet",
-                                       "DeepPink",
-                                       "DeepSkyBlue",
-                                       "DimGray",
-                                       "DodgerBlue",
-                                       "Firebrick",
-                                       "FloralWhite",
-                                       "ForestGreen",
-                                       "Fuchsia",
-                                       "Gainsboro",
-                                       "GhostWhite",
-                                       "Gold",
-                                       "Goldenrod",
-                                       "Gray",
-                                       "Green",
-                                       "GreenYellow",
-                                       "Honeydew",
-                                       "HotPink",
-                                       "IndianRed",
-                                       "Indigo",
-                                       "Ivory",
-                                       "Khaki",
-                                       "Lavender",
-                                       "LavenderBlush",
-                                       "LawnGreen",
-                                       "LemonChiffon",
-                                       "LightBlue",
-                                       "LightCoral",
-                                       "LightCyan",
-                                       "LightGoldenrodYellow",
-                                       "LightGreen",
-                                       "LightGray",
-                                       "LightPink",
-                                       "LightSalmon",
-                                       "LightSeaGreen",
-                                       "LightSkyBlue",
-                                       "LightSlateGray",
-                                       "LightSteelBlue",
-                                       "LightYellow",
-                                       "Lime",
-                                       "LimeGreen",
-                                       "Linen",
-                                       "Magenta",
-                                       "Maroon",
-                                       "MediumAquamarine",
-                                       "MediumBlue",
-                                       "MediumOrchid",
-                                       "MediumPurple",
-                                       "MediumSeaGreen",
-                                       "MediumSlateBlue",
-                                       "MediumSpringGreen",
-                                       "MediumTurquoise",
-                                       "MediumVioletRed",
-                                       "MidnightBlue",
-                                       "MintCream",
-                                       "MistyRose",
-                                       "Moccasin",
-                                       "NavajoWhite",
-                                       "Navy",
-                                       "OldLace",
-                                       "Olive",
-                                       "OliveDrab",
-                                       "Orange",
-                                       "OrangeRed",
-                                       "Orchid",
-                                       "PaleGoldenrod",
-                                       "PaleGreen",
-                                       "PaleTurquoise",
-                                       "PaleVioletRed",
-                                       "PapayaWhip",
-                                       "PeachPuff",
-                                       "Peru",
-                                       "Pink",
-                                       "Plum",
-                                       "PowderBlue",
-                                       "Purple",
-                                       "Red",
-                                       "RosyBrown",
-                                       "RoyalBlue",
-                                       "SaddleBrown",
-                                       "Salmon",
-                                       "SandyBrown",
-                                       "SeaGreen",
-                                       "SeaShell",
-                                       "Sienna",
-                                       "Silver",
-                                       "SkyBlue",
-                                       "SlateBlue",
-                                       "SlateGray",
-                                       "Snow",
-                                       "SpringGreen",
-                                       "SteelBlue",
-                                       "Tan",
-                                       "Teal",
-                                       "Thistle",
-                                       "Tomato",
-                                       "Turquoise",
-                                       "Violet",
-                                       "Wheat",
-                                       "White",
-                                       "WhiteSmoke",
-                                       "Yellow",
-                                       "YellowGreen"};
+        private string[] ar_pens =
+        {
+            "Transparent",
+            "AliceBlue",
+            "AntiqueWhite",
+            "Aqua",
+            "Aquamarine",
+            "Azure",
+            "Beige",
+            "Bisque",
+            "Black",
+            "BlanchedAlmond",
+            "Blue",
+            "BlueViolet",
+            "Brown",
+            "BurlyWood",
+            "CadetBlue",
+            "Chartreuse",
+            "Chocolate",
+            "Coral",
+            "CornflowerBlue",
+            "Cornsilk",
+            "Crimson",
+            "Cyan",
+            "DarkBlue",
+            "DarkCyan",
+            "DarkGoldenrod",
+            "DarkGray",
+            "DarkGreen",
+            "DarkKhaki",
+            "DarkMagenta",
+            "DarkOliveGreen",
+            "DarkOrange",
+            "DarkOrchid",
+            "DarkRed",
+            "DarkSalmon",
+            "DarkSeaGreen",
+            "DarkSlateBlue",
+            "DarkSlateGray",
+            "DarkTurquoise",
+            "DarkViolet",
+            "DeepPink",
+            "DeepSkyBlue",
+            "DimGray",
+            "DodgerBlue",
+            "Firebrick",
+            "FloralWhite",
+            "ForestGreen",
+            "Fuchsia",
+            "Gainsboro",
+            "GhostWhite",
+            "Gold",
+            "Goldenrod",
+            "Gray",
+            "Green",
+            "GreenYellow",
+            "Honeydew",
+            "HotPink",
+            "IndianRed",
+            "Indigo",
+            "Ivory",
+            "Khaki",
+            "Lavender",
+            "LavenderBlush",
+            "LawnGreen",
+            "LemonChiffon",
+            "LightBlue",
+            "LightCoral",
+            "LightCyan",
+            "LightGoldenrodYellow",
+            "LightGreen",
+            "LightGray",
+            "LightPink",
+            "LightSalmon",
+            "LightSeaGreen",
+            "LightSkyBlue",
+            "LightSlateGray",
+            "LightSteelBlue",
+            "LightYellow",
+            "Lime",
+            "LimeGreen",
+            "Linen",
+            "Magenta",
+            "Maroon",
+            "MediumAquamarine",
+            "MediumBlue",
+            "MediumOrchid",
+            "MediumPurple",
+            "MediumSeaGreen",
+            "MediumSlateBlue",
+            "MediumSpringGreen",
+            "MediumTurquoise",
+            "MediumVioletRed",
+            "MidnightBlue",
+            "MintCream",
+            "MistyRose",
+            "Moccasin",
+            "NavajoWhite",
+            "Navy",
+            "OldLace",
+            "Olive",
+            "OliveDrab",
+            "Orange",
+            "OrangeRed",
+            "Orchid",
+            "PaleGoldenrod",
+            "PaleGreen",
+            "PaleTurquoise",
+            "PaleVioletRed",
+            "PapayaWhip",
+            "PeachPuff",
+            "Peru",
+            "Pink",
+            "Plum",
+            "PowderBlue",
+            "Purple",
+            "Red",
+            "RosyBrown",
+            "RoyalBlue",
+            "SaddleBrown",
+            "Salmon",
+            "SandyBrown",
+            "SeaGreen",
+            "SeaShell",
+            "Sienna",
+            "Silver",
+            "SkyBlue",
+            "SlateBlue",
+            "SlateGray",
+            "Snow",
+            "SpringGreen",
+            "SteelBlue",
+            "Tan",
+            "Teal",
+            "Thistle",
+            "Tomato",
+            "Turquoise",
+            "Violet",
+            "Wheat",
+            "White",
+            "WhiteSmoke",
+            "Yellow",
+            "YellowGreen"
+        };
 
-        string [] ar_system_pens = {
-                                       "ActiveCaptionText",
-                                       "Control",
-                                       "ControlText",
-                                       "ControlDark",
-                                       "ControlDarkDark",
-                                       "ControlLight",
-                                       "ControlLightLight",
-                                       "GrayText",
-                                       "Highlight",
-                                       "HighlightText",
-                                       "InactiveCaptionText",
-                                       "InfoText",
-                                       "MenuText",
-                                       "WindowFrame",
-                                       "WindowText"};
+        string[] ar_system_pens =
+        {
+            "ActiveCaptionText",
+            "Control",
+            "ControlText",
+            "ControlDark",
+            "ControlDarkDark",
+            "ControlLight",
+            "ControlLightLight",
+            "GrayText",
+            "Highlight",
+            "HighlightText",
+            "InactiveCaptionText",
+            "InfoText",
+            "MenuText",
+            "WindowFrame",
+            "WindowText"
+        };
         #endregion
 
 
@@ -187,7 +188,7 @@ namespace Test.Sys.Drawing
         public void PensPropertyCount()
         {
             Type t = typeof(Pens);
-            PropertyInfo [] pi = t.GetProperties(BindingFlags.Static | BindingFlags.Public);
+            PropertyInfo[] pi = t.GetProperties(BindingFlags.Static | BindingFlags.Public);
 
             int i = 0;
             foreach (PropertyInfo p in pi)
@@ -204,7 +205,7 @@ namespace Test.Sys.Drawing
         public void SystemPensPropertyCount()
         {
             Type t = typeof(SystemPens);
-            PropertyInfo [] pi = t.GetProperties(BindingFlags.Static | BindingFlags.Public);
+            PropertyInfo[] pi = t.GetProperties(BindingFlags.Static | BindingFlags.Public);
 
             int i = 0;
             foreach (PropertyInfo p in pi)
@@ -218,12 +219,12 @@ namespace Test.Sys.Drawing
         }
 
         [Test]
-        public void PensProperties () 
+        public void PensProperties()
         {
             Type t = typeof(Pens);
             foreach (string s in ar_pens)
             {
-                MemberInfo [] mi = t.GetMember(s);
+                MemberInfo[] mi = t.GetMember(s);
 
                 if (mi.Length == 1)
                 {
@@ -238,7 +239,7 @@ namespace Test.Sys.Drawing
                         Assert.Fail(s + " is not property of Pens class");
                     }
                 }
-                else 
+                else
                 {
                     Assert.Fail("Property " + s + " not found in Pens class");
                 }
@@ -246,12 +247,12 @@ namespace Test.Sys.Drawing
         }
 
         [Test]
-        public void SystemPensProperties () 
+        public void SystemPensProperties()
         {
             Type t = typeof(SystemPens);
             foreach (string s in ar_system_pens)
             {
-                MemberInfo [] mi = t.GetMember(s);
+                MemberInfo[] mi = t.GetMember(s);
 
                 if (mi.Length == 1)
                 {
@@ -266,7 +267,7 @@ namespace Test.Sys.Drawing
                         Assert.Fail(s + " is not property of SystemPens class");
                     }
                 }
-                else 
+                else
                 {
                     Assert.Fail("Property " + s + " not found in SystemPens class");
                 }
@@ -274,12 +275,12 @@ namespace Test.Sys.Drawing
         }
 
         [Test]
-        public void PenAssignValue () 
+        public void PenAssignValue()
         {
             Type t = typeof(Pens);
             foreach (string s in ar_pens)
             {
-                MemberInfo [] mi = t.GetMember(s);
+                MemberInfo[] mi = t.GetMember(s);
 
                 if (mi.Length == 1)
                 {
@@ -293,7 +294,7 @@ namespace Test.Sys.Drawing
                             pen.Color = Color.AliceBlue;
                             Assert.Fail("Pen.Color must throw exception");
                         }
-                        catch(ArgumentException)
+                        catch (ArgumentException)
                         {
                             Assert.IsTrue(true);
                         }
@@ -303,7 +304,7 @@ namespace Test.Sys.Drawing
                         Assert.Fail(s + " is not property of Pens class");
                     }
                 }
-                else 
+                else
                 {
                     Assert.Fail("Property " + s + " not found in Pens class");
                 }
@@ -311,12 +312,12 @@ namespace Test.Sys.Drawing
         }
 
         [Test]
-        public void SystemPenAssignValue () 
+        public void SystemPenAssignValue()
         {
             Type t = typeof(SystemPens);
             foreach (string s in ar_system_pens)
             {
-                MemberInfo [] mi = t.GetMember(s);
+                MemberInfo[] mi = t.GetMember(s);
 
                 if (mi.Length == 1)
                 {
@@ -330,7 +331,7 @@ namespace Test.Sys.Drawing
                             pen.Color = Color.AliceBlue;
                             Assert.Fail("SystemPen.Color must throw exception");
                         }
-                        catch(ArgumentException)
+                        catch (ArgumentException)
                         {
                             Assert.IsTrue(true);
                         }
@@ -340,7 +341,7 @@ namespace Test.Sys.Drawing
                         Assert.Fail(s + " is not property of SystemPen class");
                     }
                 }
-                else 
+                else
                 {
                     Assert.Fail("Property " + s + " not found in SystemPen class");
                 }

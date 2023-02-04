@@ -31,9 +31,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Test.Utilities
             _builder = builder;
         }
 
-        public override void DefaultVisit(Symbol symbol)
-        {
-        }
+        public override void DefaultVisit(Symbol symbol) { }
 
         public override void VisitModule(ModuleSymbol module)
         {
@@ -53,7 +51,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Test.Utilities
             foreach (var member in type.GetMembers())
             {
                 // Skip accessors since those are covered by associated symbol.
-                if (member.IsAccessor()) continue;
+                if (member.IsAccessor())
+                    continue;
                 Visit(member);
             }
         }

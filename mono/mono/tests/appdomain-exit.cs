@@ -1,10 +1,11 @@
-
 using System;
 
-public class foo {
-    public static int Main() {
+public class foo
+{
+    public static int Main()
+    {
         Environment.ExitCode = 2;
-        AppDomain domain=AppDomain.CreateDomain("Other");
+        AppDomain domain = AppDomain.CreateDomain("Other");
         Console.WriteLine("About to execute");
         domain.ExecuteAssembly("main-exit.exe");
         Console.WriteLine("Execute returns");
@@ -13,4 +14,3 @@ public class foo {
         return 1;
     }
 }
-

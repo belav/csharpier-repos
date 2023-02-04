@@ -5,9 +5,8 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers.Test
 {
     public class DiagnosticsAreReturned_IfFiltersAreAppliedToPageHandlerMethod : PageModel
     {
-        [/*MM*/ServiceFilter(typeof(object))]
-        public void OnGet()
-        {
-        }
+        [ /*MM*/
+        ServiceFilter(typeof(object))]
+        public void OnGet() { }
     }
 }

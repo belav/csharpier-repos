@@ -1,4 +1,4 @@
-// 
+//
 // System.EnterpriseServices.CompensatingResourceManager.Clerk.cs
 //
 // Author:
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,39 +31,42 @@
 using System;
 using System.EnterpriseServices;
 
-namespace System.EnterpriseServices.CompensatingResourceManager {
-    public sealed class Clerk {
-
+namespace System.EnterpriseServices.CompensatingResourceManager
+{
+    public sealed class Clerk
+    {
         #region Constructors
-        
+
         //internal Clerk (CrmLogControl logControl)
         //{
         //}
 
         [MonoTODO]
-        public Clerk (string compensator, string description, CompensatorOptions flags)
+        public Clerk(string compensator, string description, CompensatorOptions flags)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public Clerk (Type compensator, string description, CompensatorOptions flags)
+        public Clerk(Type compensator, string description, CompensatorOptions flags)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         #endregion // Constructors
 
         #region Properties
 
-        public int LogRecordCount {
+        public int LogRecordCount
+        {
             [MonoTODO]
-            get { throw new NotImplementedException (); }
+            get { throw new NotImplementedException(); }
         }
 
-        public string TransactionUOW {
+        public string TransactionUOW
+        {
             [MonoTODO]
-            get { throw new NotImplementedException (); }
+            get { throw new NotImplementedException(); }
         }
 
         #endregion // Properties
@@ -71,33 +74,33 @@ namespace System.EnterpriseServices.CompensatingResourceManager {
         #region Methods
 
         [MonoTODO]
-        ~Clerk ()
+        ~Clerk()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void ForceLog ()
+        public void ForceLog()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void ForceTransactionToAbort ()
+        public void ForceTransactionToAbort()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void ForgetLogRecord ()
+        public void ForgetLogRecord()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void WriteLogRecord (object record)
+        public void WriteLogRecord(object record)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         #endregion // Methods

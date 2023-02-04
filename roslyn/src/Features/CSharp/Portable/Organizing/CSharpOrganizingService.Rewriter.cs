@@ -16,11 +16,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Organizing
     {
         private class Rewriter : CSharpSyntaxRewriter
         {
-            private readonly Func<SyntaxNode, IEnumerable<ISyntaxOrganizer>> _nodeToOrganizersGetter;
+            private readonly Func<
+                SyntaxNode,
+                IEnumerable<ISyntaxOrganizer>
+            > _nodeToOrganizersGetter;
             private readonly SemanticModel _semanticModel;
             private readonly CancellationToken _cancellationToken;
 
-            public Rewriter(CSharpOrganizingService treeOrganizer, IEnumerable<ISyntaxOrganizer> organizers, SemanticModel semanticModel, CancellationToken cancellationToken)
+            public Rewriter(
+                CSharpOrganizingService treeOrganizer,
+                IEnumerable<ISyntaxOrganizer> organizers,
+                SemanticModel semanticModel,
+                CancellationToken cancellationToken
+            )
             {
                 _nodeToOrganizersGetter = treeOrganizer.GetNodeToOrganizers(organizers.ToList());
                 _semanticModel = semanticModel;

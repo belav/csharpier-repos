@@ -16,7 +16,8 @@ namespace DllImportGenerator.UnitTests
         [ConditionalFact]
         public async Task SkipLocalsInitAdded()
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.InteropServices;
 partial class C
 {
@@ -36,17 +37,29 @@ struct Native
 }";
             Compilation comp = await TestUtils.CreateCompilation(source);
 
-            Compilation newComp = TestUtils.RunGenerators(comp, out _, new Microsoft.Interop.DllImportGenerator());
+            Compilation newComp = TestUtils.RunGenerators(
+                comp,
+                out _,
+                new Microsoft.Interop.DllImportGenerator()
+            );
 
             ITypeSymbol c = newComp.GetTypeByMetadataName("C")!;
-            IMethodSymbol stubMethod = c.GetMembers().OfType<IMethodSymbol>().Single(m => m.Name == "Method");
-            Assert.Contains(stubMethod.GetAttributes(), attr => attr.AttributeClass!.ToDisplayString() == typeof(SkipLocalsInitAttribute).FullName);
+            IMethodSymbol stubMethod = c.GetMembers()
+                .OfType<IMethodSymbol>()
+                .Single(m => m.Name == "Method");
+            Assert.Contains(
+                stubMethod.GetAttributes(),
+                attr =>
+                    attr.AttributeClass!.ToDisplayString()
+                    == typeof(SkipLocalsInitAttribute).FullName
+            );
         }
 
         [ConditionalFact]
         public async Task SkipLocalsInitNotAddedOnForwardingStub()
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.InteropServices;
 partial class C
 {
@@ -55,11 +68,22 @@ partial class C
 }";
             Compilation comp = await TestUtils.CreateCompilation(source);
 
-            Compilation newComp = TestUtils.RunGenerators(comp, out _, new Microsoft.Interop.DllImportGenerator());
+            Compilation newComp = TestUtils.RunGenerators(
+                comp,
+                out _,
+                new Microsoft.Interop.DllImportGenerator()
+            );
 
             ITypeSymbol c = newComp.GetTypeByMetadataName("C")!;
-            IMethodSymbol stubMethod = c.GetMembers().OfType<IMethodSymbol>().Single(m => m.Name == "Method");
-            Assert.DoesNotContain(stubMethod.GetAttributes(), attr => attr.AttributeClass!.ToDisplayString() == typeof(SkipLocalsInitAttribute).FullName);
+            IMethodSymbol stubMethod = c.GetMembers()
+                .OfType<IMethodSymbol>()
+                .Single(m => m.Name == "Method");
+            Assert.DoesNotContain(
+                stubMethod.GetAttributes(),
+                attr =>
+                    attr.AttributeClass!.ToDisplayString()
+                    == typeof(SkipLocalsInitAttribute).FullName
+            );
         }
 
         public static IEnumerable<object[]> GetDownlevelTargetFrameworks()
@@ -74,9 +98,13 @@ partial class C
 
         [ConditionalTheory]
         [MemberData(nameof(GetDownlevelTargetFrameworks))]
-        public async Task SkipLocalsInitOnDownlevelTargetFrameworks(TestTargetFramework targetFramework, bool expectSkipLocalsInit)
+        public async Task SkipLocalsInitOnDownlevelTargetFrameworks(
+            TestTargetFramework targetFramework,
+            bool expectSkipLocalsInit
+        )
         {
-            string source = $@"
+            string source =
+                $@"
 using System.Runtime.InteropServices;
 {CodeSnippets.GeneratedDllImportAttributeDeclaration}
 namespace System.Runtime.InteropServices
@@ -104,24 +132,41 @@ struct Native
 }}";
             Compilation comp = await TestUtils.CreateCompilation(source, targetFramework);
 
-            Compilation newComp = TestUtils.RunGenerators(comp, out _, new Microsoft.Interop.DllImportGenerator());
+            Compilation newComp = TestUtils.RunGenerators(
+                comp,
+                out _,
+                new Microsoft.Interop.DllImportGenerator()
+            );
 
             ITypeSymbol c = newComp.GetTypeByMetadataName("C")!;
-            IMethodSymbol stubMethod = c.GetMembers().OfType<IMethodSymbol>().Single(m => m.Name == "Method");
+            IMethodSymbol stubMethod = c.GetMembers()
+                .OfType<IMethodSymbol>()
+                .Single(m => m.Name == "Method");
             if (expectSkipLocalsInit)
             {
-                Assert.Contains(stubMethod.GetAttributes(), attr => attr.AttributeClass!.ToDisplayString() == typeof(SkipLocalsInitAttribute).FullName);
+                Assert.Contains(
+                    stubMethod.GetAttributes(),
+                    attr =>
+                        attr.AttributeClass!.ToDisplayString()
+                        == typeof(SkipLocalsInitAttribute).FullName
+                );
             }
             else
             {
-                Assert.DoesNotContain(stubMethod.GetAttributes(), attr => attr.AttributeClass!.ToDisplayString() == typeof(SkipLocalsInitAttribute).FullName);
+                Assert.DoesNotContain(
+                    stubMethod.GetAttributes(),
+                    attr =>
+                        attr.AttributeClass!.ToDisplayString()
+                        == typeof(SkipLocalsInitAttribute).FullName
+                );
             }
         }
 
         [ConditionalFact]
         public async Task SkipLocalsInitNotAddedWhenDefinedAtModuleLevel()
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
 [module:SkipLocalsInit]
@@ -143,17 +188,29 @@ struct Native
 }";
             Compilation comp = await TestUtils.CreateCompilation(source);
 
-            Compilation newComp = TestUtils.RunGenerators(comp, out _, new Microsoft.Interop.DllImportGenerator());
+            Compilation newComp = TestUtils.RunGenerators(
+                comp,
+                out _,
+                new Microsoft.Interop.DllImportGenerator()
+            );
 
             ITypeSymbol c = newComp.GetTypeByMetadataName("C")!;
-            IMethodSymbol stubMethod = c.GetMembers().OfType<IMethodSymbol>().Single(m => m.Name == "Method");
-            Assert.DoesNotContain(stubMethod.GetAttributes(), attr => attr.AttributeClass!.ToDisplayString() == typeof(SkipLocalsInitAttribute).FullName);
+            IMethodSymbol stubMethod = c.GetMembers()
+                .OfType<IMethodSymbol>()
+                .Single(m => m.Name == "Method");
+            Assert.DoesNotContain(
+                stubMethod.GetAttributes(),
+                attr =>
+                    attr.AttributeClass!.ToDisplayString()
+                    == typeof(SkipLocalsInitAttribute).FullName
+            );
         }
 
         [ConditionalFact]
         public async Task SkipLocalsInitNotAddedWhenDefinedAtClassLevel()
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
 [SkipLocalsInit]
@@ -175,17 +232,29 @@ struct Native
 }";
             Compilation comp = await TestUtils.CreateCompilation(source);
 
-            Compilation newComp = TestUtils.RunGenerators(comp, out _, new Microsoft.Interop.DllImportGenerator());
+            Compilation newComp = TestUtils.RunGenerators(
+                comp,
+                out _,
+                new Microsoft.Interop.DllImportGenerator()
+            );
 
             ITypeSymbol c = newComp.GetTypeByMetadataName("C")!;
-            IMethodSymbol stubMethod = c.GetMembers().OfType<IMethodSymbol>().Single(m => m.Name == "Method");
-            Assert.DoesNotContain(stubMethod.GetAttributes(), attr => attr.AttributeClass!.ToDisplayString() == typeof(SkipLocalsInitAttribute).FullName);
+            IMethodSymbol stubMethod = c.GetMembers()
+                .OfType<IMethodSymbol>()
+                .Single(m => m.Name == "Method");
+            Assert.DoesNotContain(
+                stubMethod.GetAttributes(),
+                attr =>
+                    attr.AttributeClass!.ToDisplayString()
+                    == typeof(SkipLocalsInitAttribute).FullName
+            );
         }
 
         [ConditionalFact]
         public async Task SkipLocalsInitNotAddedWhenDefinedOnMethodByUser()
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
 partial class C
@@ -207,10 +276,16 @@ struct Native
 }";
             Compilation comp = await TestUtils.CreateCompilation(source);
 
-            Compilation newComp = TestUtils.RunGenerators(comp, out _, new Microsoft.Interop.DllImportGenerator());
+            Compilation newComp = TestUtils.RunGenerators(
+                comp,
+                out _,
+                new Microsoft.Interop.DllImportGenerator()
+            );
 
             ITypeSymbol c = newComp.GetTypeByMetadataName("C")!;
-            IMethodSymbol stubMethod = c.GetMembers().OfType<IMethodSymbol>().Single(m => m.Name == "Method");
+            IMethodSymbol stubMethod = c.GetMembers()
+                .OfType<IMethodSymbol>()
+                .Single(m => m.Name == "Method");
             Assert.DoesNotContain(newComp.GetDiagnostics(), d => d.Id != "CS0579"); // No duplicate attribute error
         }
     }

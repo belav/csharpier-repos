@@ -19,15 +19,22 @@ namespace MonoTests.Remoting
         static int checkPos = 0;
         static int writePos = 0;
         static string name = "";
-        static ArrayList contexts = new ArrayList ();
+        static ArrayList contexts = new ArrayList();
         static int domId = 1;
 
-        public static void Add (string msg)
+        public static void Add(string msg)
         {
             writePos++;
 
-            msg = writePos.ToString ("000") + " (d" + CommonDomainId + ",c" + CommonContextId + ") " + msg;
-            calls.Add (msg);
+            msg =
+                writePos.ToString("000")
+                + " (d"
+                + CommonDomainId
+                + ",c"
+                + CommonContextId
+                + ") "
+                + msg;
+            calls.Add(msg);
         }
 
         public static int CommonContextId
@@ -35,11 +42,11 @@ namespace MonoTests.Remoting
             get
             {
                 int id = Thread.CurrentContext.ContextID;
-                int idc = contexts.IndexOf (id);
+                int idc = contexts.IndexOf(id);
                 if (idc == -1)
                 {
                     idc = contexts.Count;
-                    contexts.Add (id);
+                    contexts.Add(id);
                 }
                 return idc;
             }
@@ -51,45 +58,62 @@ namespace MonoTests.Remoting
             set { domId = value; }
         }
 
-        public static void Init (string str)
+        public static void Init(string str)
         {
             calls = new ArrayList();
-            contexts = new ArrayList ();
+            contexts = new ArrayList();
             name = str;
             checkPos = 0;
             writePos = 0;
         }
 
-        public static void Check (string msg, int domain)
+        public static void Check(string msg, int domain)
         {
             bool optional = false;
-            if (msg.StartsWith ("#"))
+            if (msg.StartsWith("#"))
             {
                 optional = true;
-                msg = msg.Substring (1);
+                msg = msg.Substring(1);
             }
 
-            if (msg[6].ToString() != domain.ToString()) return;
+            if (msg[6].ToString() != domain.ToString())
+                return;
 
             if (checkPos >= calls.Count)
             {
-                if (!optional) Assert.Fail ("[" + name + "] Call check failed. Expected call not made: \"" + msg + "\"");
-                else return;
+                if (!optional)
+                    Assert.Fail(
+                        "[" + name + "] Call check failed. Expected call not made: \"" + msg + "\""
+                    );
+                else
+                    return;
             }
 
-            string call = (string) calls[checkPos++];
+            string call = (string)calls[checkPos++];
 
-            if (msg.Substring (3) != call.Substring (3))
+            if (msg.Substring(3) != call.Substring(3))
             {
-                if (optional) checkPos--;
-                else Assert.Fail ("[" + name + "] Call check failed in step " + (checkPos+1) + ". Expected \"" + msg + "\" found \"" + call + "\"");
+                if (optional)
+                    checkPos--;
+                else
+                    Assert.Fail(
+                        "["
+                            + name
+                            + "] Call check failed in step "
+                            + (checkPos + 1)
+                            + ". Expected \""
+                            + msg
+                            + "\" found \""
+                            + call
+                            + "\""
+                    );
             }
         }
 
-        public static void Check (string[] msgs, int domain)
+        public static void Check(string[] msgs, int domain)
         {
             foreach (string msg in msgs)
-                Check (msg, domain);
+                Check(msg, domain);
         }
 
         public static ArrayList Seq

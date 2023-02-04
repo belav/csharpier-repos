@@ -1,6 +1,6 @@
-// 
+//
 // Copyright (c) 2006 Mainsoft Co.
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
 // "Software"), to deal in the Software without restriction, including
@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,7 +34,7 @@ using NUnit.Framework;
 namespace MonoTests.System.Data.OracleClient
 {
     [TestFixture]
-    public class OracleDataReader_GetFloat_I : ADONetTesterClass 
+    public class OracleDataReader_GetFloat_I : ADONetTesterClass
     {
         private Exception exp = null;
         private int testTypesInvocations;
@@ -48,11 +48,11 @@ namespace MonoTests.System.Data.OracleClient
                 tc.BeginTest("OracleDataReader_GetFloat_I");
                 tc.run();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 tc.exp = ex;
             }
-            finally    
+            finally
             {
                 tc.EndTest(tc.exp);
             }
@@ -64,6 +64,7 @@ namespace MonoTests.System.Data.OracleClient
             DoTestTypes(ConnectedDataProvider.GetSimpleDbTypesParameters());
             DoTestTypes(ConnectedDataProvider.GetExtendedDbTypesParameters());
         }
+
         public void DoTestTypes(DbTypeParametersCollection row)
         {
             testTypesInvocations++;
@@ -79,14 +80,22 @@ namespace MonoTests.System.Data.OracleClient
                 {
                     //Run over all the columns in the result set row.
                     //For each column, try to read it as a float.
-                    for (int i=0; i<row.Count; i++)
+                    for (int i = 0; i < row.Count; i++)
                     {
-                        if (row[i].Value.GetType() == typeof(float) ||
-                            row[i].Value.GetType() == typeof(double)  ||
-                            row[i].Value.GetType() == typeof(decimal)) { //The value in the result set should be a float.
+                        if (
+                            row[i].Value.GetType() == typeof(float)
+                            || row[i].Value.GetType() == typeof(double)
+                            || row[i].Value.GetType() == typeof(decimal)
+                        )
+                        { //The value in the result set should be a float.
                             try
                             {
-                                BeginCase(string.Format("Calling GetFloat() on a field of dbtype {0}", row[i].DbTypeName));
+                                BeginCase(
+                                    string.Format(
+                                        "Calling GetFloat() on a field of dbtype {0}",
+                                        row[i].DbTypeName
+                                    )
+                                );
                                 float retFloat = rdr.GetFloat(i);
                                 Compare(row[i].Value, retFloat);
                             }
@@ -104,7 +113,12 @@ namespace MonoTests.System.Data.OracleClient
                         {
                             try
                             {
-                                BeginCase(string.Format("Calling GetFloat() on a field of dbtype {0}", row[i].DbTypeName));
+                                BeginCase(
+                                    string.Format(
+                                        "Calling GetFloat() on a field of dbtype {0}",
+                                        row[i].DbTypeName
+                                    )
+                                );
                                 float retFloat = rdr.GetFloat(i);
                                 ExpectedExceptionNotCaught("InvalidCastException");
                             }
@@ -128,11 +142,11 @@ namespace MonoTests.System.Data.OracleClient
             finally
             {
                 row.ExecuteDelete(rowId);
-                if ( (rdr != null) && (!rdr.IsClosed) )
+                if ((rdr != null) && (!rdr.IsClosed))
                 {
                     rdr.Close();
                 }
-                if ( (con != null) && (con.State != ConnectionState.Closed) )
+                if ((con != null) && (con.State != ConnectionState.Closed))
                 {
                     con.Close();
                 }

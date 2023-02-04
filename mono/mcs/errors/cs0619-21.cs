@@ -3,12 +3,12 @@
 // Compiler options: -unsafe
 
 [System.Obsolete("", true)]
-struct Obsolete {
-}
+struct Obsolete { }
 
-class MainClass {
-        unsafe public static void Main ()
-        {
-                System.Console.WriteLine (sizeof (Obsolete));
-        }
+class MainClass
+{
+    unsafe public static void Main()
+    {
+        System.Console.WriteLine(sizeof(Obsolete));
+    }
 }

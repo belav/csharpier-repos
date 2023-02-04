@@ -1,15 +1,13 @@
 // CS0030: Cannot convert type `string' to `IA'
 // Line: 13
 
-interface IA
-{
-}
+interface IA { }
 
 class MainClass
 {
-    public static void Main ()
+    public static void Main()
     {
         string s = "s";
-        IA i = (IA) s;
+        IA i = (IA)s;
     }
 }

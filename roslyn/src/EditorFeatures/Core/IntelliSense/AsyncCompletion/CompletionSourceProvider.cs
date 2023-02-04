@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             IUIThreadOperationExecutor operationExecutor,
             IAsynchronousOperationListenerProvider listenerProvider,
             Lazy<IStreamingFindUsagesPresenter> streamingPresenter,
-            EditorOptionsService editorOptionsService)
+            EditorOptionsService editorOptionsService
+        )
         {
             _threadingContext = threadingContext;
             _operationExecutor = operationExecutor;
@@ -48,7 +49,14 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             if (textView.IsInLspEditorContext())
                 return null;
 
-            return new CompletionSource(textView, _streamingPresenter, _threadingContext, _operationExecutor, _listener, _editorOptionsService);
+            return new CompletionSource(
+                textView,
+                _streamingPresenter,
+                _threadingContext,
+                _operationExecutor,
+                _listener,
+                _editorOptionsService
+            );
         }
     }
 }

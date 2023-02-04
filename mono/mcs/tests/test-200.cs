@@ -2,7 +2,7 @@ using System;
 
 class X
 {
-    public static int Main ()
+    public static int Main()
     {
         int x = 7;
         int y = 2;
@@ -20,14 +20,14 @@ class X
         byte c = 3;
         byte d = 5;
         x = d ^= c;
-        Console.WriteLine (x);
+        Console.WriteLine(x);
 
         // Implicit conversion with shift operators
         short s = 5;
-                int i = 30000001;
-                s <<= i;
-                Console.WriteLine (s);
-        Console.WriteLine ("OK");
+        int i = 30000001;
+        s <<= i;
+        Console.WriteLine(s);
+        Console.WriteLine("OK");
 
         return 0;
     }

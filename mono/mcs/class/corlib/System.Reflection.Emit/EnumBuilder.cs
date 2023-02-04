@@ -1,4 +1,3 @@
-
 //
 // Copyright (C) 2004 Novell, Inc (http://www.novell.com)
 //
@@ -9,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -39,318 +38,370 @@ using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-namespace System.Reflection.Emit {
-
+namespace System.Reflection.Emit
+{
 #if !MOBILE
-    [ComVisible (true)]
-    [ComDefaultInterface (typeof (_EnumBuilder))]
-    [ClassInterface (ClassInterfaceType.None)]
+    [ComVisible(true)]
+    [ComDefaultInterface(typeof(_EnumBuilder))]
+    [ClassInterface(ClassInterfaceType.None)]
     partial class EnumBuilder : _EnumBuilder
     {
-        void _EnumBuilder.GetIDsOfNames ([In] ref Guid riid, IntPtr rgszNames, uint cNames, uint lcid, IntPtr rgDispId)
+        void _EnumBuilder.GetIDsOfNames(
+            [In] ref Guid riid,
+            IntPtr rgszNames,
+            uint cNames,
+            uint lcid,
+            IntPtr rgDispId
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        void _EnumBuilder.GetTypeInfo (uint iTInfo, uint lcid, IntPtr ppTInfo)
+        void _EnumBuilder.GetTypeInfo(uint iTInfo, uint lcid, IntPtr ppTInfo)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        void _EnumBuilder.GetTypeInfoCount (out uint pcTInfo)
+        void _EnumBuilder.GetTypeInfoCount(out uint pcTInfo)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        void _EnumBuilder.Invoke (uint dispIdMember, [In] ref Guid riid, uint lcid, short wFlags, IntPtr pDispParams, IntPtr pVarResult, IntPtr pExcepInfo, IntPtr puArgErr)
+        void _EnumBuilder.Invoke(
+            uint dispIdMember,
+            [In] ref Guid riid,
+            uint lcid,
+            short wFlags,
+            IntPtr pDispParams,
+            IntPtr pVarResult,
+            IntPtr pExcepInfo,
+            IntPtr puArgErr
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
     }
 #endif
 
-    public sealed partial class EnumBuilder :     TypeInfo
+    public sealed partial class EnumBuilder : TypeInfo
     {
         private TypeBuilder _tb;
         private FieldBuilder _underlyingField;
         private Type _underlyingType;
 
-        internal EnumBuilder (ModuleBuilder mb, string name, TypeAttributes visibility, Type underlyingType)
+        internal EnumBuilder(
+            ModuleBuilder mb,
+            string name,
+            TypeAttributes visibility,
+            Type underlyingType
+        )
         {
-            _tb = new TypeBuilder (mb, name, (visibility | TypeAttributes.Sealed), 
-                typeof(Enum), null, PackingSize.Unspecified, 0, null);
+            _tb = new TypeBuilder(
+                mb,
+                name,
+                (visibility | TypeAttributes.Sealed),
+                typeof(Enum),
+                null,
+                PackingSize.Unspecified,
+                0,
+                null
+            );
             _underlyingType = underlyingType;
-            _underlyingField = _tb.DefineField ("value__", underlyingType,
-                (FieldAttributes.SpecialName | FieldAttributes.Private | FieldAttributes.RTSpecialName));
-            setup_enum_type (_tb);
+            _underlyingField = _tb.DefineField(
+                "value__",
+                underlyingType,
+                (
+                    FieldAttributes.SpecialName
+                    | FieldAttributes.Private
+                    | FieldAttributes.RTSpecialName
+                )
+            );
+            setup_enum_type(_tb);
         }
 
-        internal TypeBuilder GetTypeBuilder ()
+        internal TypeBuilder GetTypeBuilder()
         {
             return _tb;
         }
 
-        internal override Type InternalResolve ()
+        internal override Type InternalResolve()
         {
-            return _tb.InternalResolve (); 
+            return _tb.InternalResolve();
         }
 
-        internal override Type RuntimeResolve () {
-            return _tb.RuntimeResolve ();
-        }
-
-        public override Assembly Assembly {
-            get {
-                return _tb.Assembly;
-            }
-        }
-
-        public override string AssemblyQualifiedName {
-            get {
-                return _tb.AssemblyQualifiedName;
-            }
-        }
-
-        public override Type BaseType {
-            get {
-                return _tb.BaseType;
-            }
-        }
-
-        public override Type DeclaringType {
-            get {
-                return _tb.DeclaringType;
-            }
-        }
-
-        public override string FullName {
-            get {
-                return _tb.FullName;
-            }
-        }
-
-        public override Guid GUID {
-            get {
-                return _tb.GUID;
-            }
-        }
-
-        public override Module Module {
-            get {
-                return _tb.Module;
-            }
-        }
-
-        public override string Name {
-            get {
-                return _tb.Name;
-            }
-        }
-
-        public override string Namespace {
-            get { 
-                return _tb.Namespace;
-            }
-        }
-
-        public override Type ReflectedType {
-            get {
-                return _tb.ReflectedType;
-            }
-        }
-
-        public override RuntimeTypeHandle TypeHandle {
-            get {
-                return _tb.TypeHandle;
-            }
-        }
-
-        public TypeToken TypeToken {
-            get {
-                return _tb.TypeToken;
-            }
-        }
-
-        public FieldBuilder UnderlyingField {
-            get {
-                return _underlyingField;
-            }
-        }
-
-        public override Type UnderlyingSystemType {
-            get {
-                return _underlyingType;
-            }
-        }
-
-        public Type CreateType ()
+        internal override Type RuntimeResolve()
         {
-            Type res = _tb.CreateType ();
+            return _tb.RuntimeResolve();
+        }
+
+        public override Assembly Assembly
+        {
+            get { return _tb.Assembly; }
+        }
+
+        public override string AssemblyQualifiedName
+        {
+            get { return _tb.AssemblyQualifiedName; }
+        }
+
+        public override Type BaseType
+        {
+            get { return _tb.BaseType; }
+        }
+
+        public override Type DeclaringType
+        {
+            get { return _tb.DeclaringType; }
+        }
+
+        public override string FullName
+        {
+            get { return _tb.FullName; }
+        }
+
+        public override Guid GUID
+        {
+            get { return _tb.GUID; }
+        }
+
+        public override Module Module
+        {
+            get { return _tb.Module; }
+        }
+
+        public override string Name
+        {
+            get { return _tb.Name; }
+        }
+
+        public override string Namespace
+        {
+            get { return _tb.Namespace; }
+        }
+
+        public override Type ReflectedType
+        {
+            get { return _tb.ReflectedType; }
+        }
+
+        public override RuntimeTypeHandle TypeHandle
+        {
+            get { return _tb.TypeHandle; }
+        }
+
+        public TypeToken TypeToken
+        {
+            get { return _tb.TypeToken; }
+        }
+
+        public FieldBuilder UnderlyingField
+        {
+            get { return _underlyingField; }
+        }
+
+        public override Type UnderlyingSystemType
+        {
+            get { return _underlyingType; }
+        }
+
+        public Type CreateType()
+        {
+            Type res = _tb.CreateType();
             return res;
         }
 
         public TypeInfo CreateTypeInfo()
         {
-            return _tb.CreateTypeInfo ();
+            return _tb.CreateTypeInfo();
         }
 
-        public override Type GetEnumUnderlyingType ()
+        public override Type GetEnumUnderlyingType()
         {
             return _underlyingType;
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private extern void setup_enum_type (Type t);
+        private extern void setup_enum_type(Type t);
 
-        public FieldBuilder DefineLiteral (string literalName, object literalValue)
+        public FieldBuilder DefineLiteral(string literalName, object literalValue)
         {
             Type fieldType = this;
-            FieldBuilder fieldBuilder = _tb.DefineField (literalName, 
-                fieldType, (FieldAttributes.Literal | 
-                (FieldAttributes.Static | FieldAttributes.Public)));
-            fieldBuilder.SetConstant (literalValue);
+            FieldBuilder fieldBuilder = _tb.DefineField(
+                literalName,
+                fieldType,
+                (FieldAttributes.Literal | (FieldAttributes.Static | FieldAttributes.Public))
+            );
+            fieldBuilder.SetConstant(literalValue);
             return fieldBuilder;
         }
 
-        protected override TypeAttributes GetAttributeFlagsImpl ()
+        protected override TypeAttributes GetAttributeFlagsImpl()
         {
             return _tb.attrs;
         }
 
-        protected override ConstructorInfo GetConstructorImpl (
-            BindingFlags bindingAttr, Binder binder, CallingConventions callConvention,
-            Type[] types, ParameterModifier[] modifiers)
+        protected override ConstructorInfo GetConstructorImpl(
+            BindingFlags bindingAttr,
+            Binder binder,
+            CallingConventions callConvention,
+            Type[] types,
+            ParameterModifier[] modifiers
+        )
         {
-            return _tb.GetConstructor (bindingAttr, binder, callConvention, types, 
-                modifiers);
+            return _tb.GetConstructor(bindingAttr, binder, callConvention, types, modifiers);
         }
 
-        [ComVisible (true)]
+        [ComVisible(true)]
         public override ConstructorInfo[] GetConstructors(BindingFlags bindingAttr)
         {
-            return _tb.GetConstructors (bindingAttr);
+            return _tb.GetConstructors(bindingAttr);
         }
 
         public override object[] GetCustomAttributes(bool inherit)
         {
-            return _tb.GetCustomAttributes (inherit);
+            return _tb.GetCustomAttributes(inherit);
         }
 
         public override object[] GetCustomAttributes(Type attributeType, bool inherit)
         {
-            return _tb.GetCustomAttributes (attributeType, inherit);
+            return _tb.GetCustomAttributes(attributeType, inherit);
         }
 
         public override Type GetElementType()
         {
-            return _tb.GetElementType ();
+            return _tb.GetElementType();
         }
 
-        public override EventInfo GetEvent( string name, BindingFlags bindingAttr)
+        public override EventInfo GetEvent(string name, BindingFlags bindingAttr)
         {
-            return _tb.GetEvent (name, bindingAttr);
+            return _tb.GetEvent(name, bindingAttr);
         }
 
         public override EventInfo[] GetEvents()
         {
-            return _tb.GetEvents ();
+            return _tb.GetEvents();
         }
 
-        public override EventInfo[] GetEvents( BindingFlags bindingAttr)
+        public override EventInfo[] GetEvents(BindingFlags bindingAttr)
         {
-            return _tb.GetEvents (bindingAttr);
+            return _tb.GetEvents(bindingAttr);
         }
 
-        public override FieldInfo GetField( string name, BindingFlags bindingAttr)
+        public override FieldInfo GetField(string name, BindingFlags bindingAttr)
         {
-            return _tb.GetField (name, bindingAttr);
+            return _tb.GetField(name, bindingAttr);
         }
 
-        public override FieldInfo[] GetFields( BindingFlags bindingAttr)
+        public override FieldInfo[] GetFields(BindingFlags bindingAttr)
         {
-            return _tb.GetFields (bindingAttr);
+            return _tb.GetFields(bindingAttr);
         }
 
-        public override Type GetInterface (string name, bool ignoreCase)
+        public override Type GetInterface(string name, bool ignoreCase)
         {
-            return _tb.GetInterface (name, ignoreCase);
+            return _tb.GetInterface(name, ignoreCase);
         }
 
-        [ComVisible (true)]
-        public override InterfaceMapping GetInterfaceMap (Type interfaceType)
+        [ComVisible(true)]
+        public override InterfaceMapping GetInterfaceMap(Type interfaceType)
         {
-            return _tb.GetInterfaceMap (interfaceType);
+            return _tb.GetInterfaceMap(interfaceType);
         }
 
         public override Type[] GetInterfaces()
         {
-            return _tb.GetInterfaces ();
+            return _tb.GetInterfaces();
         }
 
-        public override MemberInfo[] GetMember (string name, MemberTypes type, BindingFlags bindingAttr)
+        public override MemberInfo[] GetMember(
+            string name,
+            MemberTypes type,
+            BindingFlags bindingAttr
+        )
         {
-            return _tb.GetMember (name, type, bindingAttr);
+            return _tb.GetMember(name, type, bindingAttr);
         }
 
         public override MemberInfo[] GetMembers(BindingFlags bindingAttr)
         {
-            return _tb.GetMembers (bindingAttr);
+            return _tb.GetMembers(bindingAttr);
         }
 
-        protected override MethodInfo GetMethodImpl (
-            string name, BindingFlags bindingAttr, Binder binder,
-            CallingConventions callConvention, Type[] types,
-            ParameterModifier[] modifiers)
+        protected override MethodInfo GetMethodImpl(
+            string name,
+            BindingFlags bindingAttr,
+            Binder binder,
+            CallingConventions callConvention,
+            Type[] types,
+            ParameterModifier[] modifiers
+        )
         {
-            if (types == null) {
-                return _tb.GetMethod (name, bindingAttr);
+            if (types == null)
+            {
+                return _tb.GetMethod(name, bindingAttr);
             }
 
-            return _tb.GetMethod (name, bindingAttr, binder, 
-                callConvention, types, modifiers);
+            return _tb.GetMethod(name, bindingAttr, binder, callConvention, types, modifiers);
         }
 
-        public override MethodInfo[] GetMethods (BindingFlags bindingAttr)
+        public override MethodInfo[] GetMethods(BindingFlags bindingAttr)
         {
-            return _tb.GetMethods (bindingAttr);
+            return _tb.GetMethods(bindingAttr);
         }
 
-        public override Type GetNestedType (string name, BindingFlags bindingAttr)
+        public override Type GetNestedType(string name, BindingFlags bindingAttr)
         {
-            return _tb.GetNestedType (name, bindingAttr);
+            return _tb.GetNestedType(name, bindingAttr);
         }
 
-        public override Type[] GetNestedTypes (BindingFlags bindingAttr)
+        public override Type[] GetNestedTypes(BindingFlags bindingAttr)
         {
-            return _tb.GetNestedTypes (bindingAttr);
+            return _tb.GetNestedTypes(bindingAttr);
         }
 
-        public override PropertyInfo[] GetProperties (BindingFlags bindingAttr)
+        public override PropertyInfo[] GetProperties(BindingFlags bindingAttr)
         {
-            return _tb.GetProperties (bindingAttr);
+            return _tb.GetProperties(bindingAttr);
         }
 
-        protected override PropertyInfo GetPropertyImpl (
-            string name, BindingFlags bindingAttr, Binder binder,
-            Type returnType, Type[] types,
-            ParameterModifier[] modifiers)
+        protected override PropertyInfo GetPropertyImpl(
+            string name,
+            BindingFlags bindingAttr,
+            Binder binder,
+            Type returnType,
+            Type[] types,
+            ParameterModifier[] modifiers
+        )
         {
-            throw CreateNotSupportedException ();
+            throw CreateNotSupportedException();
         }
 
-        protected override bool HasElementTypeImpl ()
+        protected override bool HasElementTypeImpl()
         {
             return _tb.HasElementType;
         }
 
-        public override object InvokeMember (
-            string name, BindingFlags invokeAttr, Binder binder,
-            object target, object[] args,
-            ParameterModifier[] modifiers, CultureInfo culture,
-            string[] namedParameters)
+        public override object InvokeMember(
+            string name,
+            BindingFlags invokeAttr,
+            Binder binder,
+            object target,
+            object[] args,
+            ParameterModifier[] modifiers,
+            CultureInfo culture,
+            string[] namedParameters
+        )
         {
-            return _tb.InvokeMember (name, invokeAttr, binder, target, 
-                args, modifiers, culture, namedParameters);
+            return _tb.InvokeMember(
+                name,
+                invokeAttr,
+                binder,
+                target,
+                args,
+                modifiers,
+                culture,
+                namedParameters
+            );
         }
 
         protected override bool IsArrayImpl()
@@ -383,62 +434,64 @@ namespace System.Reflection.Emit {
             return true;
         }
 
-        public override bool IsDefined (Type attributeType, bool inherit)
+        public override bool IsDefined(Type attributeType, bool inherit)
         {
-            return _tb.IsDefined (attributeType, inherit);
+            return _tb.IsDefined(attributeType, inherit);
         }
 
-        public override Type MakeArrayType ()
+        public override Type MakeArrayType()
         {
-            return  new ArrayType (this, 0);
+            return new ArrayType(this, 0);
         }
 
-        public override Type MakeArrayType (int rank)
+        public override Type MakeArrayType(int rank)
         {
             if (rank < 1)
-                throw new IndexOutOfRangeException ();
-            return new ArrayType (this, rank);
+                throw new IndexOutOfRangeException();
+            return new ArrayType(this, rank);
         }
 
-        public override Type MakeByRefType ()
+        public override Type MakeByRefType()
         {
-            return new ByRefType (this);
+            return new ByRefType(this);
         }
 
-        public override Type MakePointerType ()
+        public override Type MakePointerType()
         {
-            return new PointerType (this);
+            return new PointerType(this);
         }
 
-        public void SetCustomAttribute (CustomAttributeBuilder customBuilder)
+        public void SetCustomAttribute(CustomAttributeBuilder customBuilder)
         {
-            _tb.SetCustomAttribute (customBuilder);
+            _tb.SetCustomAttribute(customBuilder);
         }
 
-        [ComVisible (true)]
-        public void SetCustomAttribute (ConstructorInfo con, byte[] binaryAttribute)
+        [ComVisible(true)]
+        public void SetCustomAttribute(ConstructorInfo con, byte[] binaryAttribute)
         {
-            SetCustomAttribute (new CustomAttributeBuilder (con, binaryAttribute));
+            SetCustomAttribute(new CustomAttributeBuilder(con, binaryAttribute));
         }
 
-        private Exception CreateNotSupportedException ()
+        private Exception CreateNotSupportedException()
         {
-            return new NotSupportedException ("The invoked member is not supported in a dynamic module.");
+            return new NotSupportedException(
+                "The invoked member is not supported in a dynamic module."
+            );
         }
 
-        internal override bool IsUserType {
-            get {
-                return false;
-            }
-        }
-
-        public override bool IsConstructedGenericType {
+        internal override bool IsUserType
+        {
             get { return false; }
         }
 
-        public override bool IsAssignableFrom (TypeInfo typeInfo)
+        public override bool IsConstructedGenericType
         {
-            return base.IsAssignableFrom (typeInfo);
+            get { return false; }
+        }
+
+        public override bool IsAssignableFrom(TypeInfo typeInfo)
+        {
+            return base.IsAssignableFrom(typeInfo);
         }
 
         public override bool IsTypeDefinition => true;

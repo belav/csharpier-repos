@@ -21,18 +21,20 @@ namespace ILLink.Shared.TypeSystemProxy
 
         private readonly MethodProxy _method;
 
-        public ParameterProxyEnumerable (int start, int end, MethodProxy method)
+        public ParameterProxyEnumerable(int start, int end, MethodProxy method)
         {
             _start = start;
             _end = end;
             _method = method;
         }
 
-        public ParameterEnumerator GetEnumerator () => new ParameterEnumerator (_start, _end, _method);
+        public ParameterEnumerator GetEnumerator() =>
+            new ParameterEnumerator(_start, _end, _method);
 
-        IEnumerator<ParameterProxy> IEnumerable<ParameterProxy>.GetEnumerator () => new ParameterEnumerator (_start, _end, _method);
+        IEnumerator<ParameterProxy> IEnumerable<ParameterProxy>.GetEnumerator() =>
+            new ParameterEnumerator(_start, _end, _method);
 
-        IEnumerator IEnumerable.GetEnumerator () => new ParameterEnumerator (_start, _end, _method);
+        IEnumerator IEnumerable.GetEnumerator() => new ParameterEnumerator(_start, _end, _method);
 
         public struct ParameterEnumerator : IEnumerator<ParameterProxy>
         {
@@ -41,7 +43,7 @@ namespace ILLink.Shared.TypeSystemProxy
             private readonly int _end;
             private readonly MethodProxy _method;
 
-            public ParameterEnumerator (int start, int end, MethodProxy method)
+            public ParameterEnumerator(int start, int end, MethodProxy method)
             {
                 _start = start;
                 _current = start - 1;
@@ -49,15 +51,15 @@ namespace ILLink.Shared.TypeSystemProxy
                 _method = method;
             }
 
-            public ParameterProxy Current => new ParameterProxy (_method, (ParameterIndex) _current);
+            public ParameterProxy Current => new ParameterProxy(_method, (ParameterIndex)_current);
 
-            object IEnumerator.Current => new ParameterProxy (_method, (ParameterIndex) _current);
+            object IEnumerator.Current => new ParameterProxy(_method, (ParameterIndex)_current);
 
-            public bool MoveNext () => ++_current < _end;
+            public bool MoveNext() => ++_current < _end;
 
-            public void Reset () => _current = _start;
+            public void Reset() => _current = _start;
 
-            void IDisposable.Dispose () { }
+            void IDisposable.Dispose() { }
         }
     }
 }

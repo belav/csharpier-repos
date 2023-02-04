@@ -11,12 +11,10 @@ struct Test
     public V v1;
     public V v2;
 
-    public Test (int mm)
+    public Test(int mm)
     {
-        v1 = new V ();
+        v1 = new V();
     }
 
-    public static void Main ()
-    {
-    }
+    public static void Main() { }
 }

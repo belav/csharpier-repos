@@ -11,47 +11,38 @@ namespace A
 
 namespace A
 {
-    public abstract partial class B<T> where T : B<T>.C
-    {
-    }
+    public abstract partial class B<T>
+        where T : B<T>.C { }
 }
 
 namespace A
 {
     public partial class B<T>
     {
-        public partial class C : I
-        {
-        }
+        public partial class C : I { }
     }
 }
 
 namespace A
 {
-    public interface Ibase
-    {
-    }
+    public interface Ibase { }
 
     public partial class B<T>
     {
-        public interface I : Ibase
-        {
-        }
+        public interface I : Ibase { }
     }
 }
 
 namespace A
 {
-    class Bar : B<Bar>.C
-    {
-    }
+    class Bar : B<Bar>.C { }
 
     public class Test
     {
-        public static void Main ()
+        public static void Main()
         {
-            Ibase b = new Bar ();
-            System.Console.WriteLine (b != null);
+            Ibase b = new Bar();
+            System.Console.WriteLine(b != null);
         }
     }
 }

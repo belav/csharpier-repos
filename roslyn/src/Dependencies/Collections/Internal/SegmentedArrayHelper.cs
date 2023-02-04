@@ -20,8 +20,13 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
         /// A combination of <see cref="MethodImplOptions.AggressiveInlining"/> and
         /// <see cref="F:System.Runtime.CompilerServices.MethodImplOptions.AggressiveOptimization"/>.
         /// </summary>
-        [SuppressMessage("Documentation", "CA1200:Avoid using cref tags with a prefix", Justification = "The field is not supported in all compilation targets.")]
-        internal const MethodImplOptions FastPathMethodImplOptions = MethodImplOptions.AggressiveInlining | (MethodImplOptions)512;
+        [SuppressMessage(
+            "Documentation",
+            "CA1200:Avoid using cref tags with a prefix",
+            Justification = "The field is not supported in all compilation targets."
+        )]
+        internal const MethodImplOptions FastPathMethodImplOptions =
+            MethodImplOptions.AggressiveInlining | (MethodImplOptions)512;
 
         [MethodImpl(FastPathMethodImplOptions)]
         internal static int GetSegmentSize<T>()
@@ -117,20 +122,23 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
         /// <returns>The bit mask to obtain the index within a page from an absolute index within a segmented array.</returns>
         private static int CalculateOffsetMask(int segmentSize)
         {
-            Debug.Assert(segmentSize == 1 || (segmentSize & (segmentSize - 1)) == 0, "Expected size of 1, or a power of 2");
+            Debug.Assert(
+                segmentSize == 1 || (segmentSize & (segmentSize - 1)) == 0,
+                "Expected size of 1, or a power of 2"
+            );
             return segmentSize - 1;
         }
 
         internal static class TestAccessor
         {
-            public static int CalculateSegmentSize(int elementSize)
-                => SegmentedArrayHelper.CalculateSegmentSize(elementSize);
+            public static int CalculateSegmentSize(int elementSize) =>
+                SegmentedArrayHelper.CalculateSegmentSize(elementSize);
 
-            public static int CalculateSegmentShift(int elementSize)
-                => SegmentedArrayHelper.CalculateSegmentShift(elementSize);
+            public static int CalculateSegmentShift(int elementSize) =>
+                SegmentedArrayHelper.CalculateSegmentShift(elementSize);
 
-            public static int CalculateOffsetMask(int elementSize)
-                => SegmentedArrayHelper.CalculateOffsetMask(elementSize);
+            public static int CalculateOffsetMask(int elementSize) =>
+                SegmentedArrayHelper.CalculateOffsetMask(elementSize);
         }
 
         private static class ReferenceTypeSegmentHelper

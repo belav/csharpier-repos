@@ -15,14 +15,20 @@ internal static class ErrorPageBuilder
         IFileProvider contentRootFileProvider,
         ILogger logger,
         bool showDetailedErrors,
-        Exception exception)
+        Exception exception
+    )
     {
         if (exception is TargetInvocationException tae)
         {
             exception = tae.InnerException!;
         }
 
-        var model = ErrorPageModelBuilder.CreateErrorPageModel(contentRootFileProvider, logger, showDetailedErrors, exception);
+        var model = ErrorPageModelBuilder.CreateErrorPageModel(
+            contentRootFileProvider,
+            logger,
+            showDetailedErrors,
+            exception
+        );
 
         var errorPage = new ErrorPage(model);
         return context =>

@@ -34,11 +34,25 @@ namespace Internal.Reflection.Core
     {
         public const string DefaultAssemblyNameForGetType = "System.Private.CoreLib";
 
-        public abstract bool Bind(RuntimeAssemblyName refName, bool cacheMissedLookups, out AssemblyBindResult result, out Exception exception);
+        public abstract bool Bind(
+            RuntimeAssemblyName refName,
+            bool cacheMissedLookups,
+            out AssemblyBindResult result,
+            out Exception exception
+        );
 
-        public abstract bool Bind(ReadOnlySpan<byte> rawAssembly, ReadOnlySpan<byte> rawSymbolStore, out AssemblyBindResult result, out Exception exception);
+        public abstract bool Bind(
+            ReadOnlySpan<byte> rawAssembly,
+            ReadOnlySpan<byte> rawSymbolStore,
+            out AssemblyBindResult result,
+            out Exception exception
+        );
 
-        public abstract bool Bind(string assemblyPath, out AssemblyBindResult bindResult, out Exception exception);
+        public abstract bool Bind(
+            string assemblyPath,
+            out AssemblyBindResult bindResult,
+            out Exception exception
+        );
 
         public abstract IList<AssemblyBindResult> GetLoadedAssemblies();
     }

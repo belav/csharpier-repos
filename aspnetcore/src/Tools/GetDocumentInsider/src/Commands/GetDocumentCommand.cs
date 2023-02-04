@@ -18,9 +18,8 @@ internal sealed class GetDocumentCommand : ProjectCommandBase
     private CommandOption _fileListPath;
     private CommandOption _output;
 
-    public GetDocumentCommand(IConsole console) : base(console)
-    {
-    }
+    public GetDocumentCommand(IConsole console)
+        : base(console) { }
 
     public override void Configure(CommandLineApplication command)
     {
@@ -82,14 +81,17 @@ internal sealed class GetDocumentCommand : ProjectCommandBase
             if (!File.Exists(assemblyPath))
             {
                 throw new InvalidOperationException(
-                    $"Referenced assembly '{name}' was not found in '{toolsDirectory}'.");
+                    $"Referenced assembly '{name}' was not found in '{toolsDirectory}'."
+                );
             }
 
             return loadContext.LoadFromAssemblyPath(assemblyPath);
         };
 
 #elif NETFRAMEWORK
-        AppDomain.CurrentDomain.AssemblyResolve += (source, eventArgs) =>
+        AppDomain
+            .CurrentDomain
+            .AssemblyResolve += (source, eventArgs) =>
         {
             var assemblyName = new AssemblyName(eventArgs.Name);
             var name = assemblyName.Name;
@@ -109,7 +111,8 @@ internal sealed class GetDocumentCommand : ProjectCommandBase
             if (!File.Exists(assemblyPath))
             {
                 throw new InvalidOperationException(
-                    $"Referenced assembly '{name}' was not found in '{toolsDirectory}'.");
+                    $"Referenced assembly '{name}' was not found in '{toolsDirectory}'."
+                );
             }
 
             return Assembly.LoadFile(assemblyPath);

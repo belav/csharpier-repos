@@ -31,7 +31,7 @@ namespace Mono.Security.Interface
     /// <summary>
     /// RFC 2246 A.5
     /// </summary>
-    [CLSCompliant (false)]
+    [CLSCompliant(false)]
     public enum CipherSuiteCode : ushort
     {
         TLS_NULL_WITH_NULL_NULL = 0x0000,

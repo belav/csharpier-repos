@@ -4,14 +4,14 @@
 
 using System;
 
-class ErrorCS0067 {
-    public delegate void FooHandler ();
+class ErrorCS0067
+{
+    public delegate void FooHandler();
 }
 
-class Foo {
+class Foo
+{
     private event ErrorCS0067.FooHandler OnFoo;
-    
-    public static void Main () {
-    }
-}
 
+    public static void Main() { }
+}

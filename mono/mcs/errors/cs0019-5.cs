@@ -1,19 +1,17 @@
 // CS0019: Operator `==' cannot be applied to operands of type `X' and `Y'
 // Line : 13
 
-class X {
-}
+class X { }
 
-class Y {
-}
+class Y { }
 
-class T {
-    static void Main ()
+class T
+{
+    static void Main()
     {
-        X x = new X ();
-        Y y = new Y ();
+        X x = new X();
+        Y y = new Y();
 
-        if (x == y){
-        }
+        if (x == y) { }
     }
 }

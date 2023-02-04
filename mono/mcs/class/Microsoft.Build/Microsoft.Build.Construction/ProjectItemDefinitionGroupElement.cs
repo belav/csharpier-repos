@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,29 +34,41 @@ using Microsoft.Build.Internal;
 
 namespace Microsoft.Build.Construction
 {
-        [System.Diagnostics.DebuggerDisplayAttribute ("#ItemDefinitions={Count} Condition={Condition} Label={Label}")]
-        public class ProjectItemDefinitionGroupElement : ProjectElementContainer
+    [System.Diagnostics.DebuggerDisplayAttribute(
+        "#ItemDefinitions={Count} Condition={Condition} Label={Label}"
+    )]
+    public class ProjectItemDefinitionGroupElement : ProjectElementContainer
+    {
+        internal ProjectItemDefinitionGroupElement(ProjectRootElement containingProject)
         {
-                internal ProjectItemDefinitionGroupElement (ProjectRootElement containingProject)
-                {
-                        ContainingProject = containingProject;
-                }
-                public ICollection<ProjectItemDefinitionElement> ItemDefinitions {
-                        get { return new CollectionFromEnumerable<ProjectItemDefinitionElement> (
-                                new FilteredEnumerable<ProjectItemDefinitionElement> (Children)); }
-                }
-                public ProjectItemDefinitionElement AddItemDefinition (string itemType)
-                {
-                        var definition = ContainingProject.CreateItemDefinitionElement (itemType);
-                        AppendChild (definition);
-                        return definition;
-                }
-                internal override string XmlName {
-                        get { return "ItemDefinitionGroup"; }
-                }
-                internal override ProjectElement LoadChildElement (XmlReader reader)
-                {
-                        return AddItemDefinition (reader.LocalName);
-                }
+            ContainingProject = containingProject;
         }
+
+        public ICollection<ProjectItemDefinitionElement> ItemDefinitions
+        {
+            get
+            {
+                return new CollectionFromEnumerable<ProjectItemDefinitionElement>(
+                    new FilteredEnumerable<ProjectItemDefinitionElement>(Children)
+                );
+            }
+        }
+
+        public ProjectItemDefinitionElement AddItemDefinition(string itemType)
+        {
+            var definition = ContainingProject.CreateItemDefinitionElement(itemType);
+            AppendChild(definition);
+            return definition;
+        }
+
+        internal override string XmlName
+        {
+            get { return "ItemDefinitionGroup"; }
+        }
+
+        internal override ProjectElement LoadChildElement(XmlReader reader)
+        {
+            return AddItemDefinition(reader.LocalName);
+        }
+    }
 }

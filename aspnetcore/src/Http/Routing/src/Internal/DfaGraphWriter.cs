@@ -44,7 +44,13 @@ public class DfaGraphWriter
         var endpoints = dataSource.Endpoints;
         for (var i = 0; i < endpoints.Count; i++)
         {
-            if (endpoints[i] is RouteEndpoint endpoint && (endpoint.Metadata.GetMetadata<ISuppressMatchingMetadata>()?.SuppressMatching ?? false) == false)
+            if (
+                endpoints[i] is RouteEndpoint endpoint
+                && (
+                    endpoint.Metadata.GetMetadata<ISuppressMatchingMetadata>()?.SuppressMatching
+                    ?? false
+                ) == false
+            )
             {
                 builder.AddEndpoint(endpoint);
             }
@@ -74,7 +80,9 @@ public class DfaGraphWriter
             {
                 foreach (var literal in node.Literals)
                 {
-                    writer.WriteLine($"{label} -> {visited[literal.Value]} [label=\"/{literal.Key}\"]");
+                    writer.WriteLine(
+                        $"{label} -> {visited[literal.Value]} [label=\"/{literal.Key}\"]"
+                    );
                 }
             }
 
@@ -92,7 +100,9 @@ public class DfaGraphWriter
             {
                 foreach (var policy in node.PolicyEdges)
                 {
-                    writer.WriteLine($"{label} -> {visited[policy.Value]} [label=\"{policy.Key}\"]");
+                    writer.WriteLine(
+                        $"{label} -> {visited[policy.Value]} [label=\"{policy.Key}\"]"
+                    );
                 }
             }
 

@@ -18,10 +18,16 @@ namespace Microsoft.CodeAnalysis.Remote
     {
         internal readonly struct Handle : IDisposable
         {
-            private readonly ConcurrentDictionary<RemoteServiceCallbackId, object> _callbackInstances;
+            private readonly ConcurrentDictionary<
+                RemoteServiceCallbackId,
+                object
+            > _callbackInstances;
             public readonly RemoteServiceCallbackId Id;
 
-            public Handle(ConcurrentDictionary<RemoteServiceCallbackId, object> callbackInstances, RemoteServiceCallbackId callbackId)
+            public Handle(
+                ConcurrentDictionary<RemoteServiceCallbackId, object> callbackInstances,
+                RemoteServiceCallbackId callbackId
+            )
             {
                 _callbackInstances = callbackInstances;
                 Id = callbackId;
@@ -34,7 +40,8 @@ namespace Microsoft.CodeAnalysis.Remote
         }
 
         private int _callbackId = 1;
-        private readonly ConcurrentDictionary<RemoteServiceCallbackId, object> _callbackInstances = new(concurrencyLevel: 2, capacity: 10);
+        private readonly ConcurrentDictionary<RemoteServiceCallbackId, object> _callbackInstances =
+            new(concurrencyLevel: 2, capacity: 10);
 
         public Handle CreateHandle(object? instance)
         {

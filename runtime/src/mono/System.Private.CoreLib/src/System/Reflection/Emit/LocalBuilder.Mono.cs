@@ -54,7 +54,7 @@ namespace System.Reflection.Emit
         private int startOffset;
         private int endOffset;
 
-        [DynamicDependency(nameof(name))]  // Automatically keeps all previous fields too due to StructLayout
+        [DynamicDependency(nameof(name))] // Automatically keeps all previous fields too due to StructLayout
         internal LocalBuilder(Type t, ILGenerator ilgen)
         {
             this.type = t;
@@ -63,26 +63,17 @@ namespace System.Reflection.Emit
 
         public override Type LocalType
         {
-            get
-            {
-                return type;
-            }
+            get { return type; }
         }
 
         public override bool IsPinned
         {
-            get
-            {
-                return is_pinned;
-            }
+            get { return is_pinned; }
         }
 
         public override int LocalIndex
         {
-            get
-            {
-                return position;
-            }
+            get { return position; }
         }
 
         internal string? Name

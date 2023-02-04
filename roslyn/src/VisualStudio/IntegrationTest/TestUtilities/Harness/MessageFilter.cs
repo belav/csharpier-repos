@@ -20,8 +20,7 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.Harness
 
         public MessageFilter()
             : this(timeout: TimeSpan.FromSeconds(60), retryDelay: TimeSpan.FromMilliseconds(150))
-        {
-        }
+        { }
 
         public MessageFilter(TimeSpan timeout, TimeSpan retryDelay)
         {
@@ -30,15 +29,23 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.Harness
             _messageFilterRegistration = MessageFilterSafeHandle.Register(this);
         }
 
-        public uint HandleInComingCall(uint dwCallType, IntPtr htaskCaller, uint dwTickCount, INTERFACEINFO[] lpInterfaceInfo)
+        public uint HandleInComingCall(
+            uint dwCallType,
+            IntPtr htaskCaller,
+            uint dwTickCount,
+            INTERFACEINFO[] lpInterfaceInfo
+        )
         {
             return (uint)SERVERCALL.SERVERCALL_ISHANDLED;
         }
 
         public uint RetryRejectedCall(IntPtr htaskCallee, uint dwTickCount, uint dwRejectType)
         {
-            if ((SERVERCALL)dwRejectType is not SERVERCALL.SERVERCALL_RETRYLATER
-                and not SERVERCALL.SERVERCALL_REJECTED)
+            if (
+                (SERVERCALL)dwRejectType
+                is not SERVERCALL.SERVERCALL_RETRYLATER
+                    and not SERVERCALL.SERVERCALL_REJECTED
+            )
             {
                 return CancelCall;
             }

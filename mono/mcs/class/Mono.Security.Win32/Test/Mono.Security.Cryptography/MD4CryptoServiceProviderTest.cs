@@ -11,18 +11,17 @@ using System;
 using NUnit.Framework;
 using Mono.Security.Cryptography;
 
-namespace MonoTests.Security.Cryptography {
-
-[TestFixture]
-public class MD4CryptoServiceProviderTest : MD4Test {
-
-    [SetUp]
-    public void Setup () 
+namespace MonoTests.Security.Cryptography
+{
+    [TestFixture]
+    public class MD4CryptoServiceProviderTest : MD4Test
     {
-        hash = new MD4CryptoServiceProvider ();
+        [SetUp]
+        public void Setup()
+        {
+            hash = new MD4CryptoServiceProvider();
+        }
+
+        // this will run ALL tests defined in MD4Test.cs with the MD4CryptoServiceProvider implementation
     }
-
-    // this will run ALL tests defined in MD4Test.cs with the MD4CryptoServiceProvider implementation
-}
-
 }

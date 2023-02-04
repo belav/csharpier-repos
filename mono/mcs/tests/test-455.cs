@@ -1,15 +1,18 @@
-struct Foo {
+struct Foo
+{
     public int x;
-    public override int GetHashCode ()
+
+    public override int GetHashCode()
     {
-        return base.GetHashCode ();
+        return base.GetHashCode();
     }
 }
 
-class Test {
-    public static void Main ()
+class Test
+{
+    public static void Main()
     {
-        Foo foo = new Foo ();
-        System.Console.WriteLine (foo.GetHashCode ());
+        Foo foo = new Foo();
+        System.Console.WriteLine(foo.GetHashCode());
     }
 }

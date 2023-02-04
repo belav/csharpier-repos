@@ -1,24 +1,24 @@
 /*
 Used to determine Browser Capabilities by the Browsers UserAgent String and related
 Browser supplied Headers.
-Copyright (C) 2002-Present  Owen Brady (Ocean at owenbrady dot net) 
+Copyright (C) 2002-Present  Owen Brady (Ocean at owenbrady dot net)
 and Dean Brettle (dean at brettle dot com)
 
-Permission is hereby granted, free of charge, to any person obtaining a copy 
+Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights 
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell 
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 copies of the Software, and to permit persons to whom the Software is furnished
 to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all 
+The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
-INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
-PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT 
-HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION 
-OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE 
+INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 namespace System.Web.Configuration.nBrowser
@@ -32,8 +32,9 @@ namespace System.Web.Configuration.nBrowser
         private bool MatchType = true;
         private string MatchName = string.Empty;
         private string MatchGroup = string.Empty;
+
         //FxCop will complain that this is assigned to but never used.
-        //Reason I keep it around is to see the actual regex expresion 
+        //Reason I keep it around is to see the actual regex expresion
         //used without having to drill down deep in regex object to find it
         private string MatchPattern = string.Empty;
         private System.Text.RegularExpressions.Regex RegexPattern;
@@ -46,7 +47,12 @@ namespace System.Web.Configuration.nBrowser
         /// <param name="matchGroup">Two Options, capability, header</param>
         /// <param name="matchName">Header Name</param>
         /// <param name="matchPattern">Regular Expression Pattern</param>
-        public Identification(bool matchType, string matchGroup, string matchName, string matchPattern)
+        public Identification(
+            bool matchType,
+            string matchGroup,
+            string matchName,
+            string matchPattern
+        )
         {
             this.MatchType = matchType;
             this.MatchGroup = matchGroup;
@@ -54,6 +60,7 @@ namespace System.Web.Configuration.nBrowser
             this.MatchPattern = matchPattern;
             RegexPattern = new System.Text.RegularExpressions.Regex(matchPattern);
         }
+
         /// <summary>
         /// Builds a Match Object from the result of the regular expression
         /// </summary>
@@ -63,8 +70,9 @@ namespace System.Web.Configuration.nBrowser
         {
             return RegexPattern.Match(Header == null ? string.Empty : Header);
         }
+
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public bool IsMatchSuccessful(System.Text.RegularExpressions.Match m)
         {
@@ -73,31 +81,23 @@ namespace System.Web.Configuration.nBrowser
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public string Name
         {
-            get
-            {
-                return this.MatchName;
-            }
+            get { return this.MatchName; }
         }
+
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public string Group
         {
-            get
-            {
-                return this.MatchGroup;
-            }
+            get { return this.MatchGroup; }
         }
         public string Pattern
         {
-            get
-            {
-                return MatchPattern;
-            }
+            get { return MatchPattern; }
         }
     }
 }

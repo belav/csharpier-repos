@@ -3,10 +3,10 @@
 
 class C
 {
-    void Foo ()
+    void Foo()
     {
         int[] array;
         int idx;
-        const int c = array [idx];
+        const int c = array[idx];
     }
 }

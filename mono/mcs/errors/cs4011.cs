@@ -3,7 +3,7 @@
 
 static class S
 {
-    public static int GetAwaiter (this int i)
+    public static int GetAwaiter(this int i)
     {
         return 1;
     }
@@ -11,7 +11,7 @@ static class S
 
 class A
 {
-    static async void Test ()
+    static async void Test()
     {
         await 9;
     }

@@ -21,13 +21,18 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
         [PreserveSig]
         int TryGetIDsOfNames(
             ref Guid iid,
-            [MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPWStr, SizeParamIndex = 2)]
-            string[] names,
+            [MarshalAs(
+                UnmanagedType.LPArray,
+                ArraySubType = UnmanagedType.LPWStr,
+                SizeParamIndex = 2
+            )]
+                string[] names,
             uint cNames,
             int lcid,
             [Out]
             [MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.I4, SizeParamIndex = 2)]
-            int[] rgDispId);
+                int[] rgDispId
+        );
 
         [PreserveSig]
         int TryInvoke(
@@ -38,7 +43,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             ref ComTypes.DISPPARAMS pDispParams,
             IntPtr VarResult,
             IntPtr pExcepInfo,
-            IntPtr puArgErr);
+            IntPtr puArgErr
+        );
     }
 
     [ComImport]

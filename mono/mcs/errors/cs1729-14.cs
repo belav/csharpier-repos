@@ -5,16 +5,14 @@ namespace TestCases
 {
     public class GmcsCtorBug
     {
-        public static void Test ()
+        public static void Test()
         {
-            new ClassWithNonPublicConstructor ();
+            new ClassWithNonPublicConstructor();
         }
     }
 
     public class ClassWithNonPublicConstructor
     {
-        protected ClassWithNonPublicConstructor (int p)
-        {
-        }
+        protected ClassWithNonPublicConstructor(int p) { }
     }
 }

@@ -7,10 +7,8 @@ using System.Linq;
 
 class C
 {
-    public void Foo (int i)
+    public void Foo(int i)
     {
-        var e = from v in "a"
-            let ii = Foo (2)
-            select v;
+        var e = from v in "a" let ii = Foo(2) select v;
     }
 }

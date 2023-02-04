@@ -14,15 +14,9 @@ namespace Roslyn.Test.Utilities
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = true)]
     public sealed class WorkItemAttribute : Attribute
     {
-        public int Id
-        {
-            get;
-        }
+        public int Id { get; }
 
-        public string Location
-        {
-            get;
-        }
+        public string Location { get; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="WorkItemAttribute"/>.

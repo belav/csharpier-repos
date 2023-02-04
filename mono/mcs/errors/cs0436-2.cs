@@ -8,17 +8,14 @@ namespace System.Runtime.CompilerServices
 {
     public class RuntimeHelpers
     {
-        public static void SomeMethod ()
-        {
-        }
+        public static void SomeMethod() { }
     }
 }
 
-
 class C
 {
-    public static void Main ()
+    public static void Main()
     {
-        RuntimeHelpers.SomeMethod (null);
+        RuntimeHelpers.SomeMethod(null);
     }
 }

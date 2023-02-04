@@ -18,16 +18,29 @@ namespace ILLink.Shared.TrimAnalysis
         public RequireDynamicallyAccessedMembersAction(
             ReflectionMarker reflectionMarker,
             in DiagnosticContext diagnosticContext,
-            Origin memberWithRequirements)
+            Origin memberWithRequirements
+        )
         {
             _reflectionMarker = reflectionMarker;
             _diagnosticContext = diagnosticContext;
             _memberWithRequirements = memberWithRequirements;
         }
 
-        public partial bool TryResolveTypeNameAndMark(string typeName, bool needsAssemblyName, out TypeProxy type)
+        public partial bool TryResolveTypeNameAndMark(
+            string typeName,
+            bool needsAssemblyName,
+            out TypeProxy type
+        )
         {
-            if (_reflectionMarker.TryResolveTypeNameAndMark(typeName, _diagnosticContext, needsAssemblyName, _memberWithRequirements, out TypeDesc? foundType))
+            if (
+                _reflectionMarker.TryResolveTypeNameAndMark(
+                    typeName,
+                    _diagnosticContext,
+                    needsAssemblyName,
+                    _memberWithRequirements,
+                    out TypeDesc? foundType
+                )
+            )
             {
                 type = new(foundType);
                 return true;
@@ -39,9 +52,17 @@ namespace ILLink.Shared.TrimAnalysis
             }
         }
 
-        private partial void MarkTypeForDynamicallyAccessedMembers(in TypeProxy type, DynamicallyAccessedMemberTypes dynamicallyAccessedMemberTypes)
+        private partial void MarkTypeForDynamicallyAccessedMembers(
+            in TypeProxy type,
+            DynamicallyAccessedMemberTypes dynamicallyAccessedMemberTypes
+        )
         {
-            _reflectionMarker.MarkTypeForDynamicallyAccessedMembers(_diagnosticContext.Origin, type.Type, dynamicallyAccessedMemberTypes, _memberWithRequirements);
+            _reflectionMarker.MarkTypeForDynamicallyAccessedMembers(
+                _diagnosticContext.Origin,
+                type.Type,
+                dynamicallyAccessedMemberTypes,
+                _memberWithRequirements
+            );
         }
     }
 }

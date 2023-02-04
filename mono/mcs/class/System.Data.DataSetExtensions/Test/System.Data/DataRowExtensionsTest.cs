@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -38,45 +38,45 @@ namespace MonoTests.System.Data
     [TestFixture]
     public class DataRowExtensionsTest
     {
-        DataRow SetupRow ()
+        DataRow SetupRow()
         {
-            DataTable dt = new DataTable ("TestTable");
-            DataColumn dc = new DataColumn ("Column1", typeof (string));
+            DataTable dt = new DataTable("TestTable");
+            DataColumn dc = new DataColumn("Column1", typeof(string));
             dc.AllowDBNull = true;
-            dt.Columns.Add (dc);
+            dt.Columns.Add(dc);
 
-            dc = new DataColumn ("Column2", typeof (int));
+            dc = new DataColumn("Column2", typeof(int));
             dc.AllowDBNull = true;
-            dt.Columns.Add (dc);
-            
-            DataRow row = dt.NewRow ();
-            dt.Rows.Add (row);
+            dt.Columns.Add(dc);
+
+            DataRow row = dt.NewRow();
+            dt.Rows.Add(row);
             return row;
         }
-        
-        [Test]
-        public void Field_T_DBNullFieldValue ()
-        {
-            DataRow row = SetupRow ();
-            row ["Column1"] = null;
-            row ["Column2"] = DBNull.Value;
-            
-            string s = row.Field <string> ("Column1");
-            Assert.AreEqual (null, s, "#A1");
 
-            int? i = row.Field <int?> ("Column2");
-            Assert.AreEqual (null, i, "#A2");
+        [Test]
+        public void Field_T_DBNullFieldValue()
+        {
+            DataRow row = SetupRow();
+            row["Column1"] = null;
+            row["Column2"] = DBNull.Value;
+
+            string s = row.Field<string>("Column1");
+            Assert.AreEqual(null, s, "#A1");
+
+            int? i = row.Field<int?>("Column2");
+            Assert.AreEqual(null, i, "#A2");
         }
 
         [Test]
-        [ExpectedException (typeof (InvalidCastException))]
-        public void Field_T_DBNullFieldValue_ValueType ()
+        [ExpectedException(typeof(InvalidCastException))]
+        public void Field_T_DBNullFieldValue_ValueType()
         {
-            DataRow row = SetupRow ();
-            row ["Column1"] = null;
-            row ["Column2"] = DBNull.Value;
+            DataRow row = SetupRow();
+            row["Column1"] = null;
+            row["Column2"] = DBNull.Value;
 
-            int i = row.Field <int> ("Column2");
+            int i = row.Field<int>("Column2");
         }
     }
 }

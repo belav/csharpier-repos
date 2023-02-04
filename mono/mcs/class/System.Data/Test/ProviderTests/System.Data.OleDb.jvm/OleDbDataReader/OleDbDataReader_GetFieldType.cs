@@ -1,6 +1,6 @@
-// 
+//
 // Copyright (c) 2006 Mainsoft Co.
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
 // "Software"), to deal in the Software without restriction, including
@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,7 +26,6 @@ using System.Data;
 using System.Data.OleDb;
 
 using MonoTests.System.Data.Utils;
-
 
 using NUnit.Framework;
 
@@ -46,21 +45,29 @@ namespace MonoTests.System.Data.OleDb
             BeginCase("Setup");
             try
             {
-                con = new OleDbConnection(MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString);
+                con = new OleDbConnection(
+                    MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString
+                );
                 con.Open();
                 cmd = new OleDbCommand("Select OrderID, CustomerID, OrderDate From Orders", con);
                 rdr = cmd.ExecuteReader();
                 rdr.Read();
-
             }
-            catch(Exception ex){exp = ex;}
-            finally    {EndCase(exp);}
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                EndCase(exp);
+            }
         }
 
         [TearDown]
         public void TearDown()
         {
-            if (con.State == ConnectionState.Open) con.Close();
+            if (con.State == ConnectionState.Open)
+                con.Close();
         }
 
         public static void Main()
@@ -74,8 +81,14 @@ namespace MonoTests.System.Data.OleDb
                 tc.run();
                 tc.TearDown();
             }
-            catch(Exception ex){exp = ex;}
-            finally    {tc.EndTest(exp);}
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                tc.EndTest(exp);
+            }
         }
 
         [Test]
@@ -86,18 +99,32 @@ namespace MonoTests.System.Data.OleDb
             try
             {
                 BeginCase("check type string");
-                Compare(rdr.GetFieldType(1).FullName,typeof(string).FullName );
-            } 
-            catch(Exception ex){exp = ex;}
-            finally{EndCase(exp); exp = null;}
+                Compare(rdr.GetFieldType(1).FullName, typeof(string).FullName);
+            }
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                EndCase(exp);
+                exp = null;
+            }
 
             try
             {
                 BeginCase("check type date");
-                Compare(rdr.GetFieldType(2).FullName,typeof(DateTime).FullName );
-            } 
-            catch(Exception ex){exp = ex;}
-            finally{EndCase(exp); exp = null;}
+                Compare(rdr.GetFieldType(2).FullName, typeof(DateTime).FullName);
+            }
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                EndCase(exp);
+                exp = null;
+            }
         }
     }
 }

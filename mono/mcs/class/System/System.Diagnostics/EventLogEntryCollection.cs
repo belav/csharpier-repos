@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,10 +33,10 @@ using System;
 using System.Collections;
 using System.Diagnostics;
 
-namespace System.Diagnostics {
-
-    public class EventLogEntryCollection : ICollection, IEnumerable {
-
+namespace System.Diagnostics
+{
+    public class EventLogEntryCollection : ICollection, IEnumerable
+    {
         readonly EventLogImpl _impl;
 
         internal EventLogEntryCollection(EventLogImpl impl)
@@ -44,81 +44,90 @@ namespace System.Diagnostics {
             _impl = impl;
         }
 
-        public int Count {
+        public int Count
+        {
             get { return _impl.EntryCount; }
         }
 
-        public virtual EventLogEntry this [int index] {
+        public virtual EventLogEntry this[int index]
+        {
             get { return _impl[index]; }
         }
 
-        bool ICollection.IsSynchronized {
+        bool ICollection.IsSynchronized
+        {
             get { return false; }
         }
 
-        object ICollection.SyncRoot {
+        object ICollection.SyncRoot
+        {
             get { return this; }
         }
 
-        public void CopyTo (EventLogEntry[] entries, int index)
+        public void CopyTo(EventLogEntry[] entries, int index)
         {
-            EventLogEntry[] evLogEntries = _impl.GetEntries ();
-            Array.Copy (evLogEntries, 0, entries, index, evLogEntries.Length);
+            EventLogEntry[] evLogEntries = _impl.GetEntries();
+            Array.Copy(evLogEntries, 0, entries, index, evLogEntries.Length);
         }
 
-        public IEnumerator GetEnumerator ()
+        public IEnumerator GetEnumerator()
         {
-            return new EventLogEntryEnumerator (_impl);
+            return new EventLogEntryEnumerator(_impl);
         }
 
-        void ICollection.CopyTo (Array array, int index)
+        void ICollection.CopyTo(Array array, int index)
         {
-            EventLogEntry[] entries = _impl.GetEntries ();
-            Array.Copy (entries, 0, array, index, entries.Length);
+            EventLogEntry[] entries = _impl.GetEntries();
+            Array.Copy(entries, 0, array, index, entries.Length);
         }
 
         private class EventLogEntryEnumerator : IEnumerator
         {
-            internal EventLogEntryEnumerator (EventLogImpl impl)
+            internal EventLogEntryEnumerator(EventLogImpl impl)
             {
                 _impl = impl;
             }
 
-            object IEnumerator.Current {
+            object IEnumerator.Current
+            {
                 get { return Current; }
             }
 
-            public EventLogEntry Current {
-                get {
+            public EventLogEntry Current
+            {
+                get
+                {
                     if (_currentEntry != null)
                         return _currentEntry;
 
-                    throw new InvalidOperationException ("No current EventLog"
-                        + " entry available, cursor is located before the first"
-                        + " or after the last element of the enumeration.");
+                    throw new InvalidOperationException(
+                        "No current EventLog"
+                            + " entry available, cursor is located before the first"
+                            + " or after the last element of the enumeration."
+                    );
                 }
             }
 
-            public bool MoveNext ()
+            public bool MoveNext()
             {
                 _currentIndex++;
-                if (_currentIndex >= _impl.EntryCount) {
+                if (_currentIndex >= _impl.EntryCount)
+                {
                     _currentEntry = null;
                     return false;
                 }
-                _currentEntry = _impl [_currentIndex];
+                _currentEntry = _impl[_currentIndex];
                 return true;
             }
 
-            public void Reset ()
+            public void Reset()
             {
-                _currentIndex = - 1;
+                _currentIndex = -1;
             }
 
             readonly EventLogImpl _impl;
             int _currentIndex = -1;
             EventLogEntry _currentEntry;
         }
+    }
 }
-}
-

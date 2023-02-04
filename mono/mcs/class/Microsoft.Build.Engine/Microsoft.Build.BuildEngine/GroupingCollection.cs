@@ -5,7 +5,7 @@
 // Authors:
 //   Marek Sieradzki (marek.sieradzki@gmail.com)
 //   Marek Safar (marek.safar@gmail.com)
-// 
+//
 // (C) 2005 Marek Sieradzki
 // Copyright (c) 2014 Xamarin Inc. (http://www.xamarin.com)
 //
@@ -32,149 +32,162 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Microsoft.Build.BuildEngine {
-    internal class GroupingCollection : IEnumerable {
-        
-        int    imports;
-        int    itemGroups;
-        Project    project;
-        int    propertyGroups;
-        int    chooses;
+namespace Microsoft.Build.BuildEngine
+{
+    internal class GroupingCollection : IEnumerable
+    {
+        int imports;
+        int itemGroups;
+        Project project;
+        int propertyGroups;
+        int chooses;
 
-        LinkedList <object>    list;
-        LinkedListNode <object>    add_iterator;
-    
-        public GroupingCollection (Project project)
+        LinkedList<object> list;
+        LinkedListNode<object> add_iterator;
+
+        public GroupingCollection(Project project)
         {
-            list = new LinkedList <object> ();
+            list = new LinkedList<object>();
             add_iterator = null;
             this.project = project;
         }
 
-        public IEnumerator GetChooseEnumerator ()
+        public IEnumerator GetChooseEnumerator()
         {
             foreach (object o in list)
                 if (o is BuildChoose)
                     yield return o;
         }
 
-        public IEnumerator GetEnumerator ()
+        public IEnumerator GetEnumerator()
         {
-            return list.GetEnumerator ();
+            return list.GetEnumerator();
         }
 
-        public IEnumerator GetImportEnumerator ()
+        public IEnumerator GetImportEnumerator()
         {
             foreach (object o in list)
                 if (o is Import)
                     yield return o;
         }
 
-        public IEnumerator GetItemGroupAndChooseEnumerator ()
+        public IEnumerator GetItemGroupAndChooseEnumerator()
         {
             foreach (object o in list)
                 if (o is BuildItemGroup || o is BuildPropertyGroup)
                     yield return o;
         }
 
-        public IEnumerator GetItemGroupEnumerator ()
+        public IEnumerator GetItemGroupEnumerator()
         {
             foreach (object o in list)
                 if (o is BuildItemGroup)
                     yield return o;
         }
 
-        public IEnumerator GetPropertyGroupAndChooseEnumerator ()
+        public IEnumerator GetPropertyGroupAndChooseEnumerator()
         {
             foreach (object o in list)
                 if (o is BuildPropertyGroup || o is BuildChoose)
                     yield return o;
         }
 
-        public IEnumerator GetPropertyGroupEnumerator ()
+        public IEnumerator GetPropertyGroupEnumerator()
         {
             foreach (object o in list)
                 if (o is BuildPropertyGroup)
                     yield return o;
         }
-        
-        internal void Add (BuildPropertyGroup bpg)
+
+        internal void Add(BuildPropertyGroup bpg)
         {
             bpg.GroupingCollection = this;
             propertyGroups++;
             if (add_iterator == null)
-                list.AddLast (bpg);
-            else {
-                list.AddAfter (add_iterator, bpg);
+                list.AddLast(bpg);
+            else
+            {
+                list.AddAfter(add_iterator, bpg);
                 add_iterator = add_iterator.Next;
             }
         }
-        
-        internal void Add (BuildItemGroup big)
+
+        internal void Add(BuildItemGroup big)
         {
             itemGroups++;
             if (add_iterator == null)
-                list.AddLast (big);
-            else {
-                list.AddAfter (add_iterator, big);
+                list.AddLast(big);
+            else
+            {
+                list.AddAfter(add_iterator, big);
                 add_iterator = add_iterator.Next;
             }
         }
-        
-        internal void Add (BuildChoose bc)
+
+        internal void Add(BuildChoose bc)
         {
             chooses++;
             if (add_iterator == null)
-                list.AddLast (bc);
-            else {
-                list.AddAfter (add_iterator, bc);
+                list.AddLast(bc);
+            else
+            {
+                list.AddAfter(add_iterator, bc);
                 add_iterator = add_iterator.Next;
             }
         }
 
-        internal void Add (Import import)
+        internal void Add(Import import)
         {
             imports++;
             if (add_iterator == null)
-                list.AddLast (import);
-            else {
-                list.AddAfter (add_iterator, import);
+                list.AddLast(import);
+            else
+            {
+                list.AddAfter(add_iterator, import);
                 add_iterator = add_iterator.Next;
             }
         }
 
-        internal void Remove (BuildItemGroup big)
+        internal void Remove(BuildItemGroup big)
         {
             if (big.ParentProject != project)
-                throw new InvalidOperationException (
-                    "The \"BuildItemGroup\" object specified does not belong to the correct \"Project\" object.");
+                throw new InvalidOperationException(
+                    "The \"BuildItemGroup\" object specified does not belong to the correct \"Project\" object."
+                );
 
-            big.Detach ();
-            list.Remove (big);
+            big.Detach();
+            list.Remove(big);
         }
 
-        internal void Remove (BuildPropertyGroup bpg)
+        internal void Remove(BuildPropertyGroup bpg)
         {
             // FIXME: add bpg.Detach ();
-            bpg.XmlElement.ParentNode.RemoveChild (bpg.XmlElement);
-            list.Remove (bpg);
+            bpg.XmlElement.ParentNode.RemoveChild(bpg.XmlElement);
+            list.Remove(bpg);
         }
 
-        internal void Evaluate ()
+        internal void Evaluate()
         {
-            Evaluate (EvaluationType.Property | EvaluationType.Choose);
-            Evaluate (EvaluationType.Item);
+            Evaluate(EvaluationType.Property | EvaluationType.Choose);
+            Evaluate(EvaluationType.Item);
         }
 
-        internal void Evaluate (EvaluationType type)
+        internal void Evaluate(EvaluationType type)
         {
             add_iterator = list.First;
 
-            for (var evaluate_iterator = list.First; evaluate_iterator != null; evaluate_iterator = evaluate_iterator.Next) {
+            for (
+                var evaluate_iterator = list.First;
+                evaluate_iterator != null;
+                evaluate_iterator = evaluate_iterator.Next
+            )
+            {
                 var bpg = evaluate_iterator.Value as BuildPropertyGroup;
-                if (bpg != null) {
-                    if ((type & EvaluationType.Property) != 0) {
-                        EvaluateBuildPropertyGroup (bpg);
+                if (bpg != null)
+                {
+                    if ((type & EvaluationType.Property) != 0)
+                    {
+                        EvaluateBuildPropertyGroup(bpg);
 
                         // if it wasn't moved by adding anything because of evaluating a Import shift it
                         if (add_iterator == evaluate_iterator)
@@ -185,16 +198,18 @@ namespace Microsoft.Build.BuildEngine {
                 }
 
                 var big = evaluate_iterator.Value as BuildItemGroup;
-                if (big != null) {
+                if (big != null)
+                {
                     if ((type & EvaluationType.Item) != 0)
-                        EvaluateBuildItemGroup (big);
+                        EvaluateBuildItemGroup(big);
                     continue;
                 }
 
                 var bc = evaluate_iterator.Value as BuildChoose;
-                if (bc != null) {
+                if (bc != null)
+                {
                     if ((type & EvaluationType.Choose) != 0)
-                        EvaluateBuildChoose (bc);
+                        EvaluateBuildChoose(bc);
                     continue;
                 }
 
@@ -204,68 +219,88 @@ namespace Microsoft.Build.BuildEngine {
             add_iterator = null;
         }
 
-        void EvaluateBuildPropertyGroup (BuildPropertyGroup bpg)
+        void EvaluateBuildPropertyGroup(BuildPropertyGroup bpg)
         {
-            project.PushThisFileProperty (bpg.DefinedInFileName);
-            try {
-                if (ConditionParser.ParseAndEvaluate (bpg.Condition, project))
-                    bpg.Evaluate ();
-            } finally {
-                project.PopThisFileProperty ();
+            project.PushThisFileProperty(bpg.DefinedInFileName);
+            try
+            {
+                if (ConditionParser.ParseAndEvaluate(bpg.Condition, project))
+                    bpg.Evaluate();
+            }
+            finally
+            {
+                project.PopThisFileProperty();
             }
         }
 
-        void EvaluateBuildItemGroup (BuildItemGroup big)
+        void EvaluateBuildItemGroup(BuildItemGroup big)
         {
-            project.PushThisFileProperty (big.DefinedInFileName);
-            try {
-                if (ConditionParser.ParseAndEvaluate (big.Condition, project))
-                    big.Evaluate ();
-            } finally {
-                project.PopThisFileProperty ();
+            project.PushThisFileProperty(big.DefinedInFileName);
+            try
+            {
+                if (ConditionParser.ParseAndEvaluate(big.Condition, project))
+                    big.Evaluate();
+            }
+            finally
+            {
+                project.PopThisFileProperty();
             }
         }
 
-        void EvaluateBuildChoose (BuildChoose bc)
+        void EvaluateBuildChoose(BuildChoose bc)
         {
-            project.PushThisFileProperty (bc.DefinedInFileName);
-            try {
+            project.PushThisFileProperty(bc.DefinedInFileName);
+            try
+            {
                 bool whenUsed = false;
-                foreach (BuildWhen bw in bc.Whens) {
-                    if (ConditionParser.ParseAndEvaluate (bw.Condition, project)) {
-                        bw.Evaluate ();
+                foreach (BuildWhen bw in bc.Whens)
+                {
+                    if (ConditionParser.ParseAndEvaluate(bw.Condition, project))
+                    {
+                        bw.Evaluate();
                         whenUsed = true;
                         break;
                     }
                 }
-                if (!whenUsed && bc.Otherwise != null &&
-                    ConditionParser.ParseAndEvaluate (bc.Otherwise.Condition, project)) {
-                    bc.Otherwise.Evaluate ();
+                if (
+                    !whenUsed
+                    && bc.Otherwise != null
+                    && ConditionParser.ParseAndEvaluate(bc.Otherwise.Condition, project)
+                )
+                {
+                    bc.Otherwise.Evaluate();
                 }
-            } finally {
-                project.PopThisFileProperty ();
+            }
+            finally
+            {
+                project.PopThisFileProperty();
             }
         }
 
-        internal int Imports {
+        internal int Imports
+        {
             get { return this.imports; }
         }
-        
-        internal int ItemGroups {
+
+        internal int ItemGroups
+        {
             get { return this.itemGroups; }
         }
-        
-        internal int PropertyGroups {
+
+        internal int PropertyGroups
+        {
             get { return this.propertyGroups; }
         }
-        
-        internal int Chooses {
+
+        internal int Chooses
+        {
             get { return this.chooses; }
-        } 
+        }
     }
 
     [Flags]
-    enum EvaluationType {
+    enum EvaluationType
+    {
         Property = 1 << 0,
         Item = 1 << 1,
         Choose = 1 << 2,

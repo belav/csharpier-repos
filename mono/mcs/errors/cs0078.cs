@@ -4,9 +4,10 @@
 
 using System;
 
-class ErrorCS0078 {
-    public static void Main () {
+class ErrorCS0078
+{
+    public static void Main()
+    {
         long a = 1l;
     }
 }
-

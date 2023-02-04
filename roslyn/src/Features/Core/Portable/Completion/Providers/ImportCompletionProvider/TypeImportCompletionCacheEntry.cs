@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             Checksum checksum,
             string language,
             ImmutableArray<TypeImportCompletionItemInfo> items,
-            int publicItemCount)
+            int publicItemCount
+        )
         {
             AssemblySymbolKey = assemblySymbolKey;
             Checksum = checksum;
@@ -49,13 +50,19 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             string genericTypeSuffix,
             bool isAttributeContext,
             bool isCaseSensitive,
-            bool hideAdvancedMembers)
+            bool hideAdvancedMembers
+        )
         {
-            if (AssemblySymbolKey.Resolve(originCompilation).Symbol is not IAssemblySymbol assemblySymbol)
+            if (
+                AssemblySymbolKey.Resolve(originCompilation).Symbol
+                is not IAssemblySymbol assemblySymbol
+            )
                 return ImmutableArray<CompletionItem>.Empty;
 
             var isSameLanguage = Language == language;
-            var isInternalsVisible = originCompilation.Assembly.IsSameAssemblyOrHasFriendAccessTo(assemblySymbol);
+            var isInternalsVisible = originCompilation.Assembly.IsSameAssemblyOrHasFriendAccessTo(
+                assemblySymbol
+            );
             using var _ = ArrayBuilder<CompletionItem>.GetInstance(out var builder);
 
             // PERF: try set the capacity upfront to avoid allocation from Resize
@@ -104,7 +111,10 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 if (!isSameLanguage && info.IsGeneric)
                 {
                     // We don't want to cache this item.
-                    item = ImportCompletionItem.CreateItemWithGenericDisplaySuffix(item, genericTypeSuffix);
+                    item = ImportCompletionItem.CreateItemWithGenericDisplaySuffix(
+                        item,
+                        genericTypeSuffix
+                    );
                 }
 
                 builder.Add(item);
@@ -112,12 +122,24 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
 
             return builder.ToImmutable();
 
-            static CompletionItem GetAppropriateAttributeItem(CompletionItem attributeItem, bool isCaseSensitive)
+            static CompletionItem GetAppropriateAttributeItem(
+                CompletionItem attributeItem,
+                bool isCaseSensitive
+            )
             {
-                if (attributeItem.DisplayText.TryGetWithoutAttributeSuffix(isCaseSensitive: isCaseSensitive, out var attributeNameWithoutSuffix))
+                if (
+                    attributeItem.DisplayText.TryGetWithoutAttributeSuffix(
+                        isCaseSensitive: isCaseSensitive,
+                        out var attributeNameWithoutSuffix
+                    )
+                )
                 {
                     // We don't want to cache this item.
-                    return ImportCompletionItem.CreateAttributeItemWithoutSuffix(attributeItem, attributeNameWithoutSuffix, CompletionItemFlags.Expanded);
+                    return ImportCompletionItem.CreateAttributeItemWithoutSuffix(
+                        attributeItem,
+                        attributeNameWithoutSuffix,
+                        CompletionItemFlags.Expanded
+                    );
                 }
 
                 return attributeItem;
@@ -136,7 +158,13 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
 
             private readonly ArrayBuilder<TypeImportCompletionItemInfo> _itemsBuilder;
 
-            public Builder(SymbolKey assemblySymbolKey, Checksum checksum, string language, string genericTypeSuffix, EditorBrowsableInfo editorBrowsableInfo)
+            public Builder(
+                SymbolKey assemblySymbolKey,
+                Checksum checksum,
+                string language,
+                string genericTypeSuffix,
+                EditorBrowsableInfo editorBrowsableInfo
+            )
             {
                 _assemblySymbolKey = assemblySymbolKey;
                 _checksum = checksum;
@@ -154,16 +182,19 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                     _checksum,
                     _language,
                     _itemsBuilder.ToImmutable(),
-                    _publicItemCount);
+                    _publicItemCount
+                );
             }
 
             public void AddItem(INamedTypeSymbol symbol, string containingNamespace, bool isPublic)
             {
                 // We want to cache items with EditoBrowsableState == Advanced regardless of current "hide adv members" option value
-                var (isBrowsable, isEditorBrowsableStateAdvanced) = symbol.IsEditorBrowsableWithState(
-                    hideAdvancedMembers: false,
-                    _editorBrowsableInfo.Compilation,
-                    _editorBrowsableInfo);
+                var (isBrowsable, isEditorBrowsableStateAdvanced) =
+                    symbol.IsEditorBrowsableWithState(
+                        hideAdvancedMembers: false,
+                        _editorBrowsableInfo.Compilation,
+                        _editorBrowsableInfo
+                    );
 
                 if (!isBrowsable)
                 {
@@ -173,13 +204,14 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
 
                 var isGeneric = symbol.Arity > 0;
 
-                // Need to determine if a type is an attribute up front since we want to filter out 
-                // non-attribute types when in attribute context. We can't do this lazily since we don't hold 
-                // on to symbols. However, the cost of calling `IsAttribute` on every top-level type symbols 
-                // is prohibitively high, so we opt for the heuristic that would do the simple textual "Attribute" 
+                // Need to determine if a type is an attribute up front since we want to filter out
+                // non-attribute types when in attribute context. We can't do this lazily since we don't hold
+                // on to symbols. However, the cost of calling `IsAttribute` on every top-level type symbols
+                // is prohibitively high, so we opt for the heuristic that would do the simple textual "Attribute"
                 // suffix check first, then the more expensive symbolic check. As a result, all unimported
                 // attribute types that don't have "Attribute" suffix would be filtered out when in attribute context.
-                var isAttribute = symbol.Name.HasAttributeSuffix(isCaseSensitive: false) && symbol.IsAttribute();
+                var isAttribute =
+                    symbol.Name.HasAttributeSuffix(isCaseSensitive: false) && symbol.IsAttribute();
 
                 var item = ImportCompletionItem.Create(
                     symbol.Name,
@@ -188,47 +220,63 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                     symbol.GetGlyph(),
                     _genericTypeSuffix,
                     CompletionItemFlags.CachedAndExpanded,
-                    extensionMethodData: null);
+                    extensionMethodData: null
+                );
 
                 if (isPublic)
                     _publicItemCount++;
 
-                _itemsBuilder.Add(new TypeImportCompletionItemInfo(item, isPublic, isGeneric, isAttribute, isEditorBrowsableStateAdvanced));
+                _itemsBuilder.Add(
+                    new TypeImportCompletionItemInfo(
+                        item,
+                        isPublic,
+                        isGeneric,
+                        isAttribute,
+                        isEditorBrowsableStateAdvanced
+                    )
+                );
             }
 
-            public void Dispose()
-                => _itemsBuilder.Free();
+            public void Dispose() => _itemsBuilder.Free();
         }
 
         private readonly struct TypeImportCompletionItemInfo
         {
             private readonly ItemPropertyKind _properties;
 
-            public TypeImportCompletionItemInfo(CompletionItem item, bool isPublic, bool isGeneric, bool isAttribute, bool isEditorBrowsableStateAdvanced)
+            public TypeImportCompletionItemInfo(
+                CompletionItem item,
+                bool isPublic,
+                bool isGeneric,
+                bool isAttribute,
+                bool isEditorBrowsableStateAdvanced
+            )
             {
                 Item = item;
-                _properties = (isPublic ? ItemPropertyKind.IsPublic : 0)
-                            | (isGeneric ? ItemPropertyKind.IsGeneric : 0)
-                            | (isAttribute ? ItemPropertyKind.IsAttribute : 0)
-                            | (isEditorBrowsableStateAdvanced ? ItemPropertyKind.IsEditorBrowsableStateAdvanced : 0);
+                _properties =
+                    (isPublic ? ItemPropertyKind.IsPublic : 0)
+                    | (isGeneric ? ItemPropertyKind.IsGeneric : 0)
+                    | (isAttribute ? ItemPropertyKind.IsAttribute : 0)
+                    | (
+                        isEditorBrowsableStateAdvanced
+                            ? ItemPropertyKind.IsEditorBrowsableStateAdvanced
+                            : 0
+                    );
             }
 
             public CompletionItem Item { get; }
 
-            public bool IsPublic
-                => (_properties & ItemPropertyKind.IsPublic) != 0;
+            public bool IsPublic => (_properties & ItemPropertyKind.IsPublic) != 0;
 
-            public bool IsGeneric
-                => (_properties & ItemPropertyKind.IsGeneric) != 0;
+            public bool IsGeneric => (_properties & ItemPropertyKind.IsGeneric) != 0;
 
-            public bool IsAttribute
-                => (_properties & ItemPropertyKind.IsAttribute) != 0;
+            public bool IsAttribute => (_properties & ItemPropertyKind.IsAttribute) != 0;
 
-            public bool IsEditorBrowsableStateAdvanced
-                => (_properties & ItemPropertyKind.IsEditorBrowsableStateAdvanced) != 0;
+            public bool IsEditorBrowsableStateAdvanced =>
+                (_properties & ItemPropertyKind.IsEditorBrowsableStateAdvanced) != 0;
 
-            public TypeImportCompletionItemInfo WithItem(CompletionItem item)
-                => new(item, IsPublic, IsGeneric, IsAttribute, IsEditorBrowsableStateAdvanced);
+            public TypeImportCompletionItemInfo WithItem(CompletionItem item) =>
+                new(item, IsPublic, IsGeneric, IsAttribute, IsEditorBrowsableStateAdvanced);
 
             [Flags]
             private enum ItemPropertyKind : byte

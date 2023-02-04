@@ -13,14 +13,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.EmbeddedStatem
 {
     using VerifyCS = CSharpCodeFixVerifier<
         EmbeddedStatementPlacementDiagnosticAnalyzer,
-        EmbeddedStatementPlacementCodeFixProvider>;
+        EmbeddedStatementPlacementCodeFixProvider
+    >;
 
     public class EmbeddedStatementPlacementTests
     {
         [Fact]
         public async Task NoErrorOnWrappedStatement()
         {
-            var source = @"class TestClass
+            var source =
+                @"class TestClass
 {
     void M()
     {
@@ -32,21 +34,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.EmbeddedStatem
             {
                 TestCode = source,
                 FixedCode = source,
-                Options = { { CSharpCodeStyleOptions.AllowEmbeddedStatementsOnSameLine, CodeStyleOptions2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.AllowEmbeddedStatementsOnSameLine,
+                        CodeStyleOptions2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
         [Fact]
         public async Task ErrorOnNonWrappedIfStatement()
         {
-            var source = @"class TestClass
+            var source =
+                @"class TestClass
 {
     void M()
     {
         if (true) [|return|];
     }
 }";
-            var fixedCode = @"class TestClass
+            var fixedCode =
+                @"class TestClass
 {
     void M()
     {
@@ -58,14 +68,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.EmbeddedStatem
             {
                 TestCode = source,
                 FixedCode = fixedCode,
-                Options = { { CSharpCodeStyleOptions.AllowEmbeddedStatementsOnSameLine, CodeStyleOptions2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.AllowEmbeddedStatementsOnSameLine,
+                        CodeStyleOptions2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
         [Fact]
         public async Task NoErrorOnNonWrappedIfStatement_WhenOptionDisabled()
         {
-            var source = @"class TestClass
+            var source =
+                @"class TestClass
 {
     void M()
     {
@@ -75,14 +92,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.EmbeddedStatem
             await new VerifyCS.Test
             {
                 TestCode = source,
-                Options = { { CSharpCodeStyleOptions.AllowEmbeddedStatementsOnSameLine, true, NotificationOption2.Suggestion } }
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.AllowEmbeddedStatementsOnSameLine,
+                        true,
+                        NotificationOption2.Suggestion
+                    }
+                }
             }.RunAsync();
         }
 
         [Fact]
         public async Task NotOnElseIf()
         {
-            var source = @"class TestClass
+            var source =
+                @"class TestClass
 {
     void M()
     {
@@ -97,14 +122,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.EmbeddedStatem
             {
                 TestCode = source,
                 FixedCode = source,
-                Options = { { CSharpCodeStyleOptions.AllowEmbeddedStatementsOnSameLine, CodeStyleOptions2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.AllowEmbeddedStatementsOnSameLine,
+                        CodeStyleOptions2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
         [Fact]
         public async Task ErrorOnElseWithNonIfStatementOnSameLine()
         {
-            var source = @"class TestClass
+            var source =
+                @"class TestClass
 {
     void M()
     {
@@ -113,7 +145,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.EmbeddedStatem
         else [|return|];
     }
 }";
-            var fixedCode = @"class TestClass
+            var fixedCode =
+                @"class TestClass
 {
     void M()
     {
@@ -127,21 +160,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.EmbeddedStatem
             {
                 TestCode = source,
                 FixedCode = fixedCode,
-                Options = { { CSharpCodeStyleOptions.AllowEmbeddedStatementsOnSameLine, CodeStyleOptions2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.AllowEmbeddedStatementsOnSameLine,
+                        CodeStyleOptions2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
         [Fact]
         public async Task ErrorOnIfWithSingleLineBlock()
         {
-            var source = @"class TestClass
+            var source =
+                @"class TestClass
 {
     void M()
     {
         if (true) [|{|] return; }
     }
 }";
-            var fixedCode = @"class TestClass
+            var fixedCode =
+                @"class TestClass
 {
     void M()
     {
@@ -155,14 +196,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.EmbeddedStatem
             {
                 TestCode = source,
                 FixedCode = fixedCode,
-                Options = { { CSharpCodeStyleOptions.AllowEmbeddedStatementsOnSameLine, CodeStyleOptions2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.AllowEmbeddedStatementsOnSameLine,
+                        CodeStyleOptions2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
         [Fact]
         public async Task NoWrappingForMemberOrLambdaBlock()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 class TestClass
@@ -184,21 +232,29 @@ class TestClass
             {
                 TestCode = source,
                 FixedCode = source,
-                Options = { { CSharpCodeStyleOptions.AllowEmbeddedStatementsOnSameLine, CodeStyleOptions2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.AllowEmbeddedStatementsOnSameLine,
+                        CodeStyleOptions2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
         [Fact]
         public async Task WrappingForLocalFunction()
         {
-            var source = @"class TestClass
+            var source =
+                @"class TestClass
 {
     void N()
     {
         void Local() [|{|] return; }
     }
 }";
-            var fixedCode = @"class TestClass
+            var fixedCode =
+                @"class TestClass
 {
     void N()
     {
@@ -212,21 +268,29 @@ class TestClass
             {
                 TestCode = source,
                 FixedCode = fixedCode,
-                Options = { { CSharpCodeStyleOptions.AllowEmbeddedStatementsOnSameLine, CodeStyleOptions2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.AllowEmbeddedStatementsOnSameLine,
+                        CodeStyleOptions2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
         [Fact]
         public async Task ErrorOnNonWrappedIfStatementWithEmptyBlock()
         {
-            var source = @"class TestClass
+            var source =
+                @"class TestClass
 {
     void M()
     {
         if (true) [|{|] }
     }
 }";
-            var fixedCode = @"class TestClass
+            var fixedCode =
+                @"class TestClass
 {
     void M()
     {
@@ -239,14 +303,21 @@ class TestClass
             {
                 TestCode = source,
                 FixedCode = fixedCode,
-                Options = { { CSharpCodeStyleOptions.AllowEmbeddedStatementsOnSameLine, CodeStyleOptions2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.AllowEmbeddedStatementsOnSameLine,
+                        CodeStyleOptions2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
         [Fact]
         public async Task WrapLambdaWithNestedStatement()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 class TestClass
@@ -256,7 +327,8 @@ class TestClass
         Action a1 = () => { [|if|] (true) return; };
     }
 }";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 using System;
 
 class TestClass
@@ -274,14 +346,21 @@ class TestClass
             {
                 TestCode = source,
                 FixedCode = fixedCode,
-                Options = { { CSharpCodeStyleOptions.AllowEmbeddedStatementsOnSameLine, CodeStyleOptions2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.AllowEmbeddedStatementsOnSameLine,
+                        CodeStyleOptions2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
         [Fact]
         public async Task FixAll1()
         {
-            var source = @"class TestClass
+            var source =
+                @"class TestClass
 {
     void M()
     {
@@ -289,7 +368,8 @@ class TestClass
         if (true) [|return|];
     }
 }";
-            var fixedCode = @"class TestClass
+            var fixedCode =
+                @"class TestClass
 {
     void M()
     {
@@ -303,7 +383,13 @@ class TestClass
             {
                 TestCode = source,
                 FixedCode = fixedCode,
-                Options = { { CSharpCodeStyleOptions.AllowEmbeddedStatementsOnSameLine, CodeStyleOptions2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.AllowEmbeddedStatementsOnSameLine,
+                        CodeStyleOptions2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
     }

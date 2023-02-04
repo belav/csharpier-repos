@@ -3,12 +3,10 @@ using System.Diagnostics;
 
 namespace Internal.Runtime.CompilerServices
 {
-    [Conditional ("ALWAYSREMOVED")]
+    [Conditional("ALWAYSREMOVED")]
     [AttributeUsage(AttributeTargets.All)]
     class RelocatedTypeAttribute : Attribute
     {
-        public RelocatedTypeAttribute(String originalAssemblySimpleName)
-        {
-        }
+        public RelocatedTypeAttribute(String originalAssemblySimpleName) { }
     }
 }

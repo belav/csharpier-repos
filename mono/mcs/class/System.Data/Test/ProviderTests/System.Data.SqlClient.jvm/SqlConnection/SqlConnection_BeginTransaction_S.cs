@@ -17,9 +17,15 @@ namespace MonoTests.System.Data.SqlClient
         [SetUp]
         public void SetUp()
         {
-            if (ConnectedDataProvider.GetDbType() != DataBaseServer.SQLServer) {
+            if (ConnectedDataProvider.GetDbType() != DataBaseServer.SQLServer)
+            {
                 //All tests in this class are only for MSSQLServer.
-                Log(string.Format("All tests in this class are only for MSSQLServer and cannot be tested on {0}", ConnectedDataProvider.GetDbType()));
+                Log(
+                    string.Format(
+                        "All tests in this class are only for MSSQLServer and cannot be tested on {0}",
+                        ConnectedDataProvider.GetDbType()
+                    )
+                );
                 return;
             }
 
@@ -31,22 +37,36 @@ namespace MonoTests.System.Data.SqlClient
                 con.Open();
                 Compare("Setup", "Setup");
             }
-            catch(Exception ex)    {exp = ex;}
-            finally    {EndCase(exp); exp = null;}
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                EndCase(exp);
+                exp = null;
+            }
         }
 
         [TearDown]
         public void TearDown()
         {
-            if (ConnectedDataProvider.GetDbType() != DataBaseServer.SQLServer) {
+            if (ConnectedDataProvider.GetDbType() != DataBaseServer.SQLServer)
+            {
                 //All tests in this class are only for MSSQLServer.
-                Log(string.Format("All tests in this class are only for MSSQLServer and cannot be tested on {0}", ConnectedDataProvider.GetDbType()));
+                Log(
+                    string.Format(
+                        "All tests in this class are only for MSSQLServer and cannot be tested on {0}",
+                        ConnectedDataProvider.GetDbType()
+                    )
+                );
                 return;
             }
 
             if (con != null)
             {
-                if (con.State == ConnectionState.Open) con.Close();
+                if (con.State == ConnectionState.Open)
+                    con.Close();
             }
         }
 
@@ -59,13 +79,17 @@ namespace MonoTests.System.Data.SqlClient
                 tc.BeginTest("SqlConnection_BeginTransaction_S");
 
                 //testing only on SQLServer
-                if (ConnectedDataProvider.GetDbType(ConnectedDataProvider.ConnectionStringSQLClient) != DataBaseServer.SQLServer) return ; 
+                if (
+                    ConnectedDataProvider.GetDbType(ConnectedDataProvider.ConnectionStringSQLClient)
+                    != DataBaseServer.SQLServer
+                )
+                    return;
 
                 tc.SetUp();
                 tc.run();
                 tc.TearDown();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 exp = ex;
             }
@@ -75,48 +99,55 @@ namespace MonoTests.System.Data.SqlClient
             }
         }
 
-        [Test] 
+        [Test]
         public void run()
         {
-            if (ConnectedDataProvider.GetDbType() != DataBaseServer.SQLServer) {
+            if (ConnectedDataProvider.GetDbType() != DataBaseServer.SQLServer)
+            {
                 //All tests in this class are only for MSSQLServer.
-                Log(string.Format("All tests in this class are only for MSSQLServer and cannot be tested on {0}", ConnectedDataProvider.GetDbType()));
+                Log(
+                    string.Format(
+                        "All tests in this class are only for MSSQLServer and cannot be tested on {0}",
+                        ConnectedDataProvider.GetDbType()
+                    )
+                );
                 return;
             }
 
             Exception exp = null;
 
-            #region        ---- Bug 2716 - MSSQL - SqlCommand.Transaction ---- 
+            #region        ---- Bug 2716 - MSSQL - SqlCommand.Transaction ----
             // testing only SQLServerr
             if (ConnectedDataProvider.GetDbType(con.ConnectionString) != DataBaseServer.SQLServer)
             {
                 try
                 {
                     BeginCase("Bug 2716 - MSSQL - SqlCommand.Transaction");
-                    SqlCommand comm = new SqlCommand("SELECT * FROM Customers",con);
+                    SqlCommand comm = new SqlCommand("SELECT * FROM Customers", con);
 
                     SqlTransaction trans = con.BeginTransaction("transaction");
                     comm.Transaction = trans;
 
                     con.Close();
-                    Compare(con.State,ConnectionState.Closed);
-                } 
-                catch(Exception ex)
+                    Compare(con.State, ConnectionState.Closed);
+                }
+                catch (Exception ex)
                 {
                     exp = ex;
                 }
                 finally
                 {
                     if (con != null)
-                    {if (con.State == ConnectionState.Open) con.Close();}
+                    {
+                        if (con.State == ConnectionState.Open)
+                            con.Close();
+                    }
 
                     EndCase(exp);
                     exp = null;
                 }
-
             }
             #endregion
-
         }
     }
 }

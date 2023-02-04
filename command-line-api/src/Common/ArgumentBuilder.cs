@@ -1,4 +1,3 @@
-
 using System;
 using System.CommandLine;
 using System.Reflection;
@@ -34,7 +33,9 @@ internal static class ArgumentBuilder
 
         var argumentType = typeof(Argument<>).MakeGenericType(argsParam.ParameterType);
 
-        var ctor = argumentType.GetConstructor(new[] { typeof(string), argsParam.ParameterType, typeof(string) });
+        var ctor = argumentType.GetConstructor(
+            new[] { typeof(string), argsParam.ParameterType, typeof(string) }
+        );
 
         return (Argument)ctor.Invoke(new object[] { argsParam.Name, argsParam.DefaultValue, null });
     }

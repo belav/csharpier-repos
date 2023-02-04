@@ -4,7 +4,5 @@
 
 class C
 {
-    public static void Main<T, U> ()
-    {
-    }
+    public static void Main<T, U>() { }
 }

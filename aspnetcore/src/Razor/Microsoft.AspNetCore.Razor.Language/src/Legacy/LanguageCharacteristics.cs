@@ -83,14 +83,26 @@ internal abstract class LanguageCharacteristics<TTokenizer>
         return token != null && (token.Kind == GetKnownTokenType(type));
     }
 
-    public virtual Tuple<SyntaxToken, SyntaxToken> SplitToken(SyntaxToken token, int splitAt, SyntaxKind leftType)
+    public virtual Tuple<SyntaxToken, SyntaxToken> SplitToken(
+        SyntaxToken token,
+        int splitAt,
+        SyntaxKind leftType
+    )
     {
-        var left = CreateToken(token.Content.Substring(0, splitAt), leftType, RazorDiagnostic.EmptyArray);
+        var left = CreateToken(
+            token.Content.Substring(0, splitAt),
+            leftType,
+            RazorDiagnostic.EmptyArray
+        );
 
         SyntaxToken right = null;
         if (splitAt < token.Content.Length)
         {
-            right = CreateToken(token.Content.Substring(splitAt), token.Kind, token.GetDiagnostics());
+            right = CreateToken(
+                token.Content.Substring(splitAt),
+                token.Kind,
+                token.GetDiagnostics()
+            );
         }
 
         return Tuple.Create(left, right);
@@ -100,8 +112,13 @@ internal abstract class LanguageCharacteristics<TTokenizer>
 
     public virtual bool KnowsTokenType(KnownTokenType type)
     {
-        return type == KnownTokenType.Unknown || (GetKnownTokenType(type) != GetKnownTokenType(KnownTokenType.Unknown));
+        return type == KnownTokenType.Unknown
+            || (GetKnownTokenType(type) != GetKnownTokenType(KnownTokenType.Unknown));
     }
 
-    protected abstract SyntaxToken CreateToken(string content, SyntaxKind type, RazorDiagnostic[] errors);
+    protected abstract SyntaxToken CreateToken(
+        string content,
+        SyntaxKind type,
+        RazorDiagnostic[] errors
+    );
 }

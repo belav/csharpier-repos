@@ -17,7 +17,6 @@ public abstract class ArrayBase<T> : EnumerableBase<T>
     {
         yield break;
     }
-
 }
 
 public class HashedArrayList<T> : ArrayBase<T>
@@ -30,6 +29,5 @@ public class HashedArrayList<T> : ArrayBase<T>
 
 class X
 {
-    public static void Main ()
-    { }
+    public static void Main() { }
 }

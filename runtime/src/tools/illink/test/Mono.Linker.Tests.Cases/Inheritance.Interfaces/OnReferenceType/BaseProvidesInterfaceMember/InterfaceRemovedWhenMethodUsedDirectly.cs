@@ -4,32 +4,28 @@ namespace Mono.Linker.Tests.Cases.Inheritance.Interfaces.OnReferenceType.BasePro
 {
     public class InterfaceRemovedWhenMethodUsedDirectly
     {
-        public static void Main ()
+        public static void Main()
         {
-            var f = new FooWithBase ();
-            f.Method ();
+            var f = new FooWithBase();
+            f.Method();
         }
 
         interface IFoo
         {
-            void Method ();
+            void Method();
         }
 
         [Kept]
-        [KeptMember (".ctor()")]
+        [KeptMember(".ctor()")]
         class BaseFoo
         {
             [Kept]
-            public void Method ()
-            {
-            }
+            public void Method() { }
         }
 
         [Kept]
-        [KeptMember (".ctor()")]
-        [KeptBaseType (typeof (BaseFoo))]
-        class FooWithBase : BaseFoo, IFoo
-        {
-        }
+        [KeptMember(".ctor()")]
+        [KeptBaseType(typeof(BaseFoo))]
+        class FooWithBase : BaseFoo, IFoo { }
     }
 }

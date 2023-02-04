@@ -4,7 +4,7 @@
 // Authors:
 //   Marek Sieradzki (marek.sieradzki@gmail.com)
 //   Marek Safar (marek.safar@gmail.com)
-// 
+//
 // (C) 2006 Marek Sieradzki
 // Copyright (c) 2014 Xamarin Inc. (http://www.xamarin.com)
 //
@@ -33,61 +33,76 @@ using System.IO;
 using System.Reflection;
 using System.Xml;
 
-namespace Microsoft.Build.BuildEngine {
-    internal sealed class ConditionFunctionExpression : ConditionExpression {
-    
-        List <ConditionFactorExpression>     args;
-        string                    name;
-        
-        static readonly Dictionary<string, Func<string, Project, bool>> functions = new Dictionary<string, Func<string, Project, bool>> (StringComparer.OrdinalIgnoreCase) {
+namespace Microsoft.Build.BuildEngine
+{
+    internal sealed class ConditionFunctionExpression : ConditionExpression
+    {
+        List<ConditionFactorExpression> args;
+        string name;
+
+        static readonly Dictionary<string, Func<string, Project, bool>> functions = new Dictionary<
+            string,
+            Func<string, Project, bool>
+        >(StringComparer.OrdinalIgnoreCase)
+        {
             { "Exists", Exists },
-            { "HasTrailingSlash" , HasTrailingSlash }
+            { "HasTrailingSlash", HasTrailingSlash }
         };
-        
-        public ConditionFunctionExpression (string name, List <ConditionFactorExpression> args)
+
+        public ConditionFunctionExpression(string name, List<ConditionFactorExpression> args)
         {
             this.args = args;
             this.name = name;
         }
-        
-        public override bool BoolEvaluate (Project context)
+
+        public override bool BoolEvaluate(Project context)
         {
             Func<string, Project, bool> func;
-            if (!functions.TryGetValue (name, out func)) {
+            if (!functions.TryGetValue(name, out func))
+            {
                 // MSB4091
-                throw new Exception (string.Format ("Found a call to an undefined function \"{0}\".", name));
+                throw new Exception(
+                    string.Format("Found a call to an undefined function \"{0}\".", name)
+                );
             }
 
-            if (args.Count != 1) {
+            if (args.Count != 1)
+            {
                 // MSB4089
-                throw new Exception (string.Format ("Incorrect number of arguments to function in condition \"{0}\". Found {1} argument(s) when expecting {2}.",
-                    name, args.Count, 1));
+                throw new Exception(
+                    string.Format(
+                        "Incorrect number of arguments to function in condition \"{0}\". Found {1} argument(s) when expecting {2}.",
+                        name,
+                        args.Count,
+                        1
+                    )
+                );
             }
-            
-            return func (args [0].StringEvaluate (context), context);
+
+            return func(args[0].StringEvaluate(context), context);
         }
-        
-        public override float NumberEvaluate (Project context)
+
+        public override float NumberEvaluate(Project context)
         {
-            throw new NotSupportedException ();
+            throw new NotSupportedException();
         }
-        
-        public override string StringEvaluate (Project context)
+
+        public override string StringEvaluate(Project context)
         {
-            throw new NotSupportedException ();
+            throw new NotSupportedException();
         }
-        
-        public override bool CanEvaluateToBool (Project context)
+
+        public override bool CanEvaluateToBool(Project context)
         {
-            return functions.ContainsKey (name);
+            return functions.ContainsKey(name);
         }
-        
-        public override bool CanEvaluateToNumber (Project context)
+
+        public override bool CanEvaluateToNumber(Project context)
         {
             return false;
         }
-        
-        public override bool CanEvaluateToString (Project context)
+
+        public override bool CanEvaluateToString(Project context)
         {
             return false;
         }
@@ -95,38 +110,37 @@ namespace Microsoft.Build.BuildEngine {
 #pragma warning disable 0169
 #region Functions
         // FIXME imported projects
-        static bool Exists (string file, Project context)
+        static bool Exists(string file, Project context)
         {
-            if (string.IsNullOrEmpty (file))
+            if (string.IsNullOrEmpty(file))
                 return false;
 
-            string directory  = null;
-            
+            string directory = null;
+
             if (context.FullFileName != String.Empty)
-                directory = Path.GetDirectoryName (context.FullFileName);
-                
-            if (!Path.IsPathRooted (file) && directory != null && directory != String.Empty)
-                file = Path.Combine (directory, file);
-        
-            return File.Exists (file) || Directory.Exists (file);
+                directory = Path.GetDirectoryName(context.FullFileName);
+
+            if (!Path.IsPathRooted(file) && directory != null && directory != String.Empty)
+                file = Path.Combine(directory, file);
+
+            return File.Exists(file) || Directory.Exists(file);
         }
 
-        static bool HasTrailingSlash (string file, Project context)
+        static bool HasTrailingSlash(string file, Project context)
         {
             if (file == null)
                 return false;
 
-            file = file.Trim ();
+            file = file.Trim();
 
             int len = file.Length;
             if (len == 0)
                 return false;
 
-            return file [len - 1] == '\\' || file [len - 1] == '/';
+            return file[len - 1] == '\\' || file[len - 1] == '/';
         }
 
 #endregion
 #pragma warning restore 0169
-
     }
 }

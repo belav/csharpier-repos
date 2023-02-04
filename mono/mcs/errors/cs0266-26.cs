@@ -6,7 +6,8 @@ using System.Collections.Generic;
 
 public class Test
 {
-    static void Bla<T, U> () where T : U
+    static void Bla<T, U>()
+        where T : U
     {
         IEnumerable<T> ita = null;
         IEnumerable<U> itu = ita;

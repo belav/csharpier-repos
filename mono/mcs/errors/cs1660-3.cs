@@ -3,8 +3,9 @@
 
 using System;
 
-class X {
-    static void Main ()
+class X
+{
+    static void Main()
     {
         object o = () => true;
     }

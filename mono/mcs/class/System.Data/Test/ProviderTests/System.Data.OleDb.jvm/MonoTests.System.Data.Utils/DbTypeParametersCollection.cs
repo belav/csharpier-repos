@@ -1,6 +1,6 @@
-// 
+//
 // Copyright (c) 2006 Mainsoft Co.
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
 // "Software"), to deal in the Software without restriction, including
@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -40,9 +40,7 @@ namespace MonoTests.System.Data.Utils.Data
         /// <summary>
         /// Default constructor.
         /// </summary>
-        public DbTypeParametersCollection()
-        {
-        }
+        public DbTypeParametersCollection() { }
 
         /// <summary>
         /// Constructor.
@@ -62,32 +60,27 @@ namespace MonoTests.System.Data.Utils.Data
         #region Properties & Indexers
         public string TableName
         {
-            get
-            {
-                return m_sTableName;
-            }
-            set
-            {
-                m_sTableName = value;
-            }
+            get { return m_sTableName; }
+            set { m_sTableName = value; }
         }
+
         /// <summary>
         /// Gets or sets the DbTypeParameter at the specified index.
         /// </summary>
         /// <exception cref="ArgumentException">The column name specified by value.DBColumnName already exist in other DbTypeParameter in the DbTypeParametersCollection.</exception>
-        public DbTypeParameter this[int a_iIndex]  
+        public DbTypeParameter this[int a_iIndex]
         {
-            get  
-            {
-                return((DbTypeParameter)List[a_iIndex]);
-            }
-            set  
+            get { return ((DbTypeParameter)List[a_iIndex]); }
+            set
             {
                 //Check that the collection does not already contain a DbTypeParameter with the same column name.
                 int l_iIndexOfValueColumnName = this.IndexOf(value.DbColumnName);
                 if (l_iIndexOfValueColumnName != -1 && l_iIndexOfValueColumnName != a_iIndex)
                 {
-                    throw new ArgumentException("The column name specified by DbTypeParameter.DBColumnName already exist in other DbTypeParameter in the DbTypeParametersCollection.", "value");
+                    throw new ArgumentException(
+                        "The column name specified by DbTypeParameter.DBColumnName already exist in other DbTypeParameter in the DbTypeParametersCollection.",
+                        "value"
+                    );
                 }
                 else
                 {
@@ -100,37 +93,28 @@ namespace MonoTests.System.Data.Utils.Data
         /// Gets or sets the DbTypeParameter with the specified DBColumnName.
         /// </summary>
         /// <exception cref="ArgumentException">The column name specified by value.DBColumnName already exist in other DbTypeParameter in the DbTypeParametersCollection.</exception>
-        public DbTypeParameter this[string a_sDBColumnName]  
+        public DbTypeParameter this[string a_sDBColumnName]
         {
-            get  
-            {
-                return this[IndexOf(a_sDBColumnName)];
-            }
-            set  
-            {
-                this[IndexOf(a_sDBColumnName)] = value;
-            }
+            get { return this[IndexOf(a_sDBColumnName)]; }
+            set { this[IndexOf(a_sDBColumnName)] = value; }
         }
+
         /// <summary>
         /// A textual string that conatins the OleDb place holder for parameter ('?') for each of the parameters.
         /// </summary>
-        public  string OleDbParameterPlaceHolderList
+        public string OleDbParameterPlaceHolderList
         {
-            get
-            {
-                return GetParameterPlaceHolderList("?, ");
-            }
+            get { return GetParameterPlaceHolderList("?, "); }
         }
+
         /// <summary>
         /// A textual string that conatins the MSSQL place holder for parameter ('@parame_name') for each of the parameters.
         /// </summary>
         public string SqlParameterPlaceHolderList
         {
-            get
-            {
-                return GetParameterPlaceHolderList("{0}, ");
-            }
+            get { return GetParameterPlaceHolderList("{0}, "); }
         }
+
         /// <summary>
         /// A string that contains a comma delimited list of all default column names for the parameters held by this collection.
         /// </summary>
@@ -138,7 +122,8 @@ namespace MonoTests.System.Data.Utils.Data
         {
             get
             {
-                Sys.Text.StringBuilder l_sbColumnsList = new Sys.Text.StringBuilder();;
+                Sys.Text.StringBuilder l_sbColumnsList = new Sys.Text.StringBuilder();
+                ;
 
                 foreach (DbTypeParameter l_oCurrent in this)
                 {
@@ -146,11 +131,12 @@ namespace MonoTests.System.Data.Utils.Data
                 }
 
                 //remove last ', ' from values list:
-                l_sbColumnsList.Remove(l_sbColumnsList.Length -2, 2);
+                l_sbColumnsList.Remove(l_sbColumnsList.Length - 2, 2);
 
                 return l_sbColumnsList.ToString();
             }
         }
+
         /// <summary>
         /// A string that contains a comma delimited list of all values of the parameters held by this collection.
         /// </summary>
@@ -165,27 +151,28 @@ namespace MonoTests.System.Data.Utils.Data
                 foreach (DbTypeParameter l_oCurrent in this)
                 {
                     //Handle types with string representation different then ToString().
-                    l_sCurrentVal = (l_oCurrent.Value != DBNull.Value) ? l_oCurrent.Value.ToString() : "NULL";
+                    l_sCurrentVal =
+                        (l_oCurrent.Value != DBNull.Value) ? l_oCurrent.Value.ToString() : "NULL";
                     if (l_oCurrent.Value is bool)
                     {
                         l_sCurrentVal = ((bool)l_oCurrent.Value) ? "1" : "0";
                     }
 
-                    //Set the correct foratting according to type.                    
+                    //Set the correct foratting according to type.
                     l_sCurrentFormatting = (l_oCurrent.Value is string) ? "'{0}', " : "{0}, ";
-                    
+
                     //appent the textual representation.
                     l_sbValuesList.AppendFormat(l_sCurrentFormatting, l_sCurrentVal);
                 }
 
                 //remove last ', ' from values list:
-                l_sbValuesList.Remove(l_sbValuesList.Length -2, 2);
+                l_sbValuesList.Remove(l_sbValuesList.Length - 2, 2);
 
                 return l_sbValuesList.ToString();
             }
         }
         #endregion
-        
+
         #region Methods
         #region Public
         #region Sys.Collections.CollectionBase implementation
@@ -195,13 +182,16 @@ namespace MonoTests.System.Data.Utils.Data
         /// <param name="a_oToAdd">The DbTypeParameter to add to the collection. </param>
         /// <returns>The index of the new DbTypeParameter object.</returns>
         /// <exception cref="ArgumentException">The column name specified by a_oToAdd.DBColumnName already exist in other DbTypeParameter in the DbTypeParametersCollection.</exception>
-        public virtual int Add( DbTypeParameter a_oToAdd )  
+        public virtual int Add(DbTypeParameter a_oToAdd)
         {
             if (this.Contains(a_oToAdd.DbColumnName))
             {
-                throw new ArgumentException("The column name specified by DbTypeParameter.DBColumnName already exist in other DbTypeParameter in the DbTypeParametersCollection.", "a_oToAdd");
+                throw new ArgumentException(
+                    "The column name specified by DbTypeParameter.DBColumnName already exist in other DbTypeParameter in the DbTypeParametersCollection.",
+                    "a_oToAdd"
+                );
             }
-            return( List.Add( a_oToAdd ) );
+            return (List.Add(a_oToAdd));
         }
 
         /// <summary>
@@ -238,9 +228,9 @@ namespace MonoTests.System.Data.Utils.Data
         /// </summary>
         /// <param name="a_oToFind">The DbTypeParameter object to locate. </param>
         /// <returns>The zero-based location of the DbTypeParameter in the collection, if found; otherwise, -1.</returns>
-        public virtual int IndexOf( DbTypeParameter a_oToFind)  
+        public virtual int IndexOf(DbTypeParameter a_oToFind)
         {
-            return( List.IndexOf( a_oToFind ) );
+            return (List.IndexOf(a_oToFind));
         }
 
         /// <summary>
@@ -248,9 +238,9 @@ namespace MonoTests.System.Data.Utils.Data
         /// </summary>
         /// <param name="a_oToFind">The DbTypeParameter object to locate. </param>
         /// <returns>The zero-based location of the DbTypeParameter in the collection, if found; otherwise, -1.</returns>
-        public virtual int IndexOf( string a_sColumnName )  
+        public virtual int IndexOf(string a_sColumnName)
         {
-            for (int i=0; i<List.Count; i++)
+            for (int i = 0; i < List.Count; i++)
             {
                 if (this[i].DbColumnName.ToUpper() == a_sColumnName.ToUpper())
                 {
@@ -259,7 +249,7 @@ namespace MonoTests.System.Data.Utils.Data
             }
 
             //Didn't find such DbTypeParameter:
-            return-1;
+            return -1;
         }
 
         /// <summary>
@@ -267,10 +257,10 @@ namespace MonoTests.System.Data.Utils.Data
         /// </summary>
         /// <param name="a_oToFind">The DbTypeParameter to locate in the DbTypeParametersCollection</param>
         /// <returns>true if the DbTypeParametersCollection contains the specified DbTypeParameter; otherwise, false.</returns>
-        public virtual bool Contains( DbTypeParameter a_oToFind )  
+        public virtual bool Contains(DbTypeParameter a_oToFind)
         {
             // If a_oToFind is not of type DbTypeParameter, this will return false.
-            return( List.Contains( a_oToFind ) );
+            return (List.Contains(a_oToFind));
         }
 
         /// <summary>
@@ -278,7 +268,7 @@ namespace MonoTests.System.Data.Utils.Data
         /// </summary>
         /// <param name="a_sToFind">The column name to locate in the DbTypeParametersCollection</param>
         /// <returns>true if the DbTypeParametersCollection contains a DbTypeParameter with specific column name; otherwise, false.</returns>
-        public virtual bool Contains( string a_sToFind )  
+        public virtual bool Contains(string a_sToFind)
         {
             return (this.IndexOf(a_sToFind) > -1);
         }
@@ -290,7 +280,7 @@ namespace MonoTests.System.Data.Utils.Data
         public virtual OleDbParameter[] ToOleDbParameterArray()
         {
             OleDbParameter[] l_oParams = new OleDbParameter[this.Count];
-            for (int i=0; i<this.Count; i++)
+            for (int i = 0; i < this.Count; i++)
             {
                 l_oParams[i] = new OleDbParameter(this[i].ParameterName, this[i].Value);
             }
@@ -305,7 +295,7 @@ namespace MonoTests.System.Data.Utils.Data
         public virtual SqlParameter[] ToSqlParameterArray()
         {
             SqlParameter[] l_oParams = new SqlParameter[this.Count];
-            for (int i=0; i<this.Count; i++)
+            for (int i = 0; i < this.Count; i++)
             {
                 l_oParams[i] = new SqlParameter(this[i].ParameterName, this[i].Value);
             }
@@ -319,9 +309,8 @@ namespace MonoTests.System.Data.Utils.Data
         /// <returns>An array of objects that contains all values of parameters in this collection</returns>
         public virtual object[] ToValuesArray()
         {
-            
             object[] l_oParams = new object[this.Count];
-            for (int i=0; i<this.Count; i++)
+            for (int i = 0; i < this.Count; i++)
             {
                 l_oParams[i] = this[i].Value;
             }
@@ -349,7 +338,7 @@ namespace MonoTests.System.Data.Utils.Data
                 {
                     l_cmdInsert.Connection.Open();
                 }
-//                Sys.Console.WriteLine(l_cmdInsert.CommandText);
+                //                Sys.Console.WriteLine(l_cmdInsert.CommandText);
                 l_iRecordsInserted = l_cmdInsert.ExecuteNonQuery();
             }
             finally
@@ -381,7 +370,11 @@ namespace MonoTests.System.Data.Utils.Data
             int l_iRecordsDeleted;
             OleDbCommand l_cmdDelete = new OleDbCommand();
             l_cmdDelete.Connection = new OleDbConnection(ConnectedDataProvider.ConnectionString);
-            l_cmdDelete.CommandText = String.Format("DELETE FROM {0} WHERE ID='{1}'", a_sTableName, a_sUniqueId);
+            l_cmdDelete.CommandText = String.Format(
+                "DELETE FROM {0} WHERE ID='{1}'",
+                a_sTableName,
+                a_sUniqueId
+            );
             try
             {
                 if (l_cmdDelete.Connection.State != ConnectionState.Open)
@@ -397,7 +390,7 @@ namespace MonoTests.System.Data.Utils.Data
 
             return l_iRecordsDeleted;
         }
-        
+
         /// <summary>
         /// Executes a select command that selects all columns specified by this collection,
         /// from the table specified by this collections TableName property,
@@ -413,13 +406,18 @@ namespace MonoTests.System.Data.Utils.Data
         /// This is the case until the Close method of the OleDbDataReader is called.
         /// It is the users responsibility to close the OleDbConnection explicitly when it is no longer needed.
         /// </remarks>
-        public virtual void ExecuteSelectReader(string a_sUniqueId, out OleDbDataReader a_oReader, out OleDbConnection a_oConnection)
+        public virtual void ExecuteSelectReader(
+            string a_sUniqueId,
+            out OleDbDataReader a_oReader,
+            out OleDbConnection a_oConnection
+        )
         {
             OleDbCommand l_cmdSelect = BuildSelectCommand(a_sUniqueId);
             l_cmdSelect.Connection.Open();
             a_oConnection = l_cmdSelect.Connection;
             a_oReader = l_cmdSelect.ExecuteReader();
         }
+
         /// <summary>
         /// Executes a select command that selects all columns specified by this collection,
         /// from the table specified by this collections TableName property,
@@ -455,35 +453,41 @@ namespace MonoTests.System.Data.Utils.Data
         #region Callbacks
         //All these methods are callbacks, that ensure type safty of elements within the base.List.
 
-        protected override void OnInsert( int index, Object value )  
+        protected override void OnInsert(int index, Object value)
         {
-            if ( value.GetType() != Type.GetType("MonoTests.System.Data.Utils.Data.DbTypeParameter") )
-                throw new ArgumentException( "value must be of type DbTypeParameter.", "value" );
+            if (value.GetType() != Type.GetType("MonoTests.System.Data.Utils.Data.DbTypeParameter"))
+                throw new ArgumentException("value must be of type DbTypeParameter.", "value");
         }
 
-        protected override void OnRemove( int index, Object value )  
+        protected override void OnRemove(int index, Object value)
         {
-            if ( value.GetType() != Type.GetType("MonoTests.System.Data.Utils.Data.DbTypeParameter") )
-                throw new ArgumentException( "value must be of type DbTypeParameter.", "value" );
+            if (value.GetType() != Type.GetType("MonoTests.System.Data.Utils.Data.DbTypeParameter"))
+                throw new ArgumentException("value must be of type DbTypeParameter.", "value");
         }
 
-        protected override void OnSet( int index, Object oldValue, Object newValue )  
+        protected override void OnSet(int index, Object oldValue, Object newValue)
         {
-            if ( newValue.GetType() != Type.GetType("MonoTests.System.Data.Utils.Data.DbTypeParameter") )
-                throw new ArgumentException( "newValue must be of type DbTypeParameter.", "newValue" );
+            if (
+                newValue.GetType()
+                != Type.GetType("MonoTests.System.Data.Utils.Data.DbTypeParameter")
+            )
+                throw new ArgumentException(
+                    "newValue must be of type DbTypeParameter.",
+                    "newValue"
+                );
         }
 
-        protected override void OnValidate( Object value )  
+        protected override void OnValidate(Object value)
         {
-            if ( value.GetType() != Type.GetType("MonoTests.System.Data.Utils.Data.DbTypeParameter") )
-                throw new ArgumentException( "value must be of type DbTypeParameter." );
+            if (value.GetType() != Type.GetType("MonoTests.System.Data.Utils.Data.DbTypeParameter"))
+                throw new ArgumentException("value must be of type DbTypeParameter.");
         }
         #endregion
 
         #region Private
         /// <summary>
         /// Create a SQL text for an INSERT command with parameters ('?' notation).
-        /// The command uses the table specified in the TableName property, 
+        /// The command uses the table specified in the TableName property,
         /// and uses the columns specified in this parameters collection.
         /// </summary>
         /// <param name="a_sUniqueId">The Unique id for the row to be inserted.</param>
@@ -493,8 +497,14 @@ namespace MonoTests.System.Data.Utils.Data
             string l_sColumnsList = ColumnsList;
             string l_sValuesList = OleDbParameterPlaceHolderList;
 
-            l_sCmd = String.Format("INSERT INTO {0} (ID, {1}) VALUES ('{2}', {3})", m_sTableName, l_sColumnsList, a_sUniqueId, l_sValuesList);
-            
+            l_sCmd = String.Format(
+                "INSERT INTO {0} (ID, {1}) VALUES ('{2}', {3})",
+                m_sTableName,
+                l_sColumnsList,
+                a_sUniqueId,
+                l_sValuesList
+            );
+
             return l_sCmd;
         }
 
@@ -509,9 +519,10 @@ namespace MonoTests.System.Data.Utils.Data
                 a_oParams.Add(l_oCurrent.ParameterName, l_oCurrent.Value);
             }
         }
+
         /// <summary>
         /// Create a command object for a SELECT command .
-        /// The command uses the table specified in the TableName property, 
+        /// The command uses the table specified in the TableName property,
         /// and uses the columns specified in this parameters collection.
         /// </summary>
         /// <remarks>The ID column is not included in the selected columns of this command.</remarks>
@@ -520,11 +531,18 @@ namespace MonoTests.System.Data.Utils.Data
         {
             string l_sColumnsList = ColumnsList;
             string l_sCmdTxt;
-            OleDbConnection l_oConnection = new OleDbConnection(ConnectedDataProvider.ConnectionString);
+            OleDbConnection l_oConnection = new OleDbConnection(
+                ConnectedDataProvider.ConnectionString
+            );
             OleDbCommand l_cmdSelect = new OleDbCommand();
 
             //Build the command's text.
-            l_sCmdTxt = string.Format("SELECT {0} FROM {1} WHERE ID='{2}'", l_sColumnsList, this.TableName, a_sUniqueId);
+            l_sCmdTxt = string.Format(
+                "SELECT {0} FROM {1} WHERE ID='{2}'",
+                l_sColumnsList,
+                this.TableName,
+                a_sUniqueId
+            );
 
             //Build the command object.
             l_cmdSelect.CommandText = l_sCmdTxt;
@@ -540,7 +558,8 @@ namespace MonoTests.System.Data.Utils.Data
         /// <returns>A string that conatins a place holder for each of the parameters.</returns>
         private string GetParameterPlaceHolderList(string a_sSormatting)
         {
-            Sys.Text.StringBuilder l_sbValuesList = new Sys.Text.StringBuilder();;
+            Sys.Text.StringBuilder l_sbValuesList = new Sys.Text.StringBuilder();
+            ;
 
             foreach (DbTypeParameter l_oCurrent in this)
             {
@@ -548,7 +567,7 @@ namespace MonoTests.System.Data.Utils.Data
             }
 
             //remove last ', ' from values list:
-            l_sbValuesList.Remove(l_sbValuesList.Length -2, 2);
+            l_sbValuesList.Remove(l_sbValuesList.Length - 2, 2);
 
             return l_sbValuesList.ToString();
         }

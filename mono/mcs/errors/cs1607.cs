@@ -4,7 +4,5 @@
 
 class Test
 {
-    static void Main ()
-    {
-    }
+    static void Main() { }
 }

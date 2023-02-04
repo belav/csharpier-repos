@@ -28,7 +28,7 @@ namespace Mono.WebAssembly.SdkTests
 {
     public static class WasmProjectTemplates
     {
-        public static ProjectCreator WasmProject (
+        public static ProjectCreator WasmProject(
             this ProjectCreatorTemplates templates,
             string[] projectReferences,
             string path = null,
@@ -38,14 +38,24 @@ namespace Mono.WebAssembly.SdkTests
             string toolsVersion = null,
             string treatAsLocalProperty = null,
             ProjectCollection projectCollection = null,
-            NewProjectFileOptions? projectFileOptions = NewProjectFileOptions.None)
+            NewProjectFileOptions? projectFileOptions = NewProjectFileOptions.None
+        )
         {
             //this is in wasm\sdk\Mono.WebAssembly.SdkTest\bin\Debug\net461
             string currentDirectory = Environment.CurrentDirectory;
-            var monoSdkDir = Path.GetFullPath (Path.Combine (currentDirectory, "..", "..", "..", "..", "..", ".."));
-            var sdkPropsDir = Path.Combine (monoSdkDir, "wasm", "sdk", "Mono.WebAssembly.Sdk", "sdk");
+            var monoSdkDir = Path.GetFullPath(
+                Path.Combine(currentDirectory, "..", "..", "..", "..", "..", "..")
+            );
+            var sdkPropsDir = Path.Combine(
+                monoSdkDir,
+                "wasm",
+                "sdk",
+                "Mono.WebAssembly.Sdk",
+                "sdk"
+            );
 
-            return ProjectCreator.Create (
+            return ProjectCreator
+                .Create(
                     path,
                     defaultTargets,
                     initialTargets,
@@ -53,14 +63,19 @@ namespace Mono.WebAssembly.SdkTests
                     toolsVersion,
                     treatAsLocalProperty,
                     projectCollection,
-                    projectFileOptions)
-                .PropertyGroup ()
-                .Property ("MonoWasmSdkPath", monoSdkDir)
-                .Import (Path.Combine (sdkPropsDir, "Sdk.props"))
-                .ForEach (projectReferences, (projectReference, i) => {
-                    i.ItemProjectReference (projectReference);
-                })
-                .Import (Path.Combine (sdkPropsDir, "Sdk.targets"));
+                    projectFileOptions
+                )
+                .PropertyGroup()
+                .Property("MonoWasmSdkPath", monoSdkDir)
+                .Import(Path.Combine(sdkPropsDir, "Sdk.props"))
+                .ForEach(
+                    projectReferences,
+                    (projectReference, i) =>
+                    {
+                        i.ItemProjectReference(projectReference);
+                    }
+                )
+                .Import(Path.Combine(sdkPropsDir, "Sdk.targets"));
         }
     }
 }

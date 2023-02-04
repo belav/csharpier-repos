@@ -21,28 +21,14 @@ namespace System.Activities.Core.Presentation
 
         public ModelItemCollection Properties
         {
-            private get
-            {
-                return this.properties;
-            }
-
-            set
-            {
-                this.properties = value;
-            }
+            private get { return this.properties; }
+            set { this.properties = value; }
         }
 
         public Predicate<DynamicActivityProperty> Filter
         {
-            private get
-            {
-                return this.filter;
-            }
-
-            set
-            {
-                this.filter = value;
-            }
+            private get { return this.filter; }
+            set { this.filter = value; }
         }
 
         public ReadOnlyCollection<DynamicActivityProperty> DropDownItems
@@ -51,12 +37,13 @@ namespace System.Activities.Core.Presentation
             {
                 if (this.dropDownItems == null)
                 {
-                    this.dropDownItems = new ReadOnlyCollection<DynamicActivityProperty>(new List<DynamicActivityProperty>());
+                    this.dropDownItems = new ReadOnlyCollection<DynamicActivityProperty>(
+                        new List<DynamicActivityProperty>()
+                    );
                 }
 
                 return this.dropDownItems;
             }
-
             private set
             {
                 if (this.dropDownItems != value)
@@ -71,11 +58,7 @@ namespace System.Activities.Core.Presentation
 
         public string SelectedPropertyName
         {
-            get
-            {
-                return this.selectedPropertyName;
-            }
-
+            get { return this.selectedPropertyName; }
             set
             {
                 if (this.selectedPropertyName != value)
@@ -103,7 +86,8 @@ namespace System.Activities.Core.Presentation
             {
                 foreach (ModelItem modelItem in this.Properties)
                 {
-                    DynamicActivityProperty property = modelItem.GetCurrentValue() as DynamicActivityProperty;
+                    DynamicActivityProperty property =
+                        modelItem.GetCurrentValue() as DynamicActivityProperty;
 
                     if (property != null)
                     {
@@ -113,7 +97,12 @@ namespace System.Activities.Core.Presentation
                             clone.Name = property.Name;
                             clone.Type = property.Type;
                             list.Add(clone);
-                            if (StringComparer.Ordinal.Equals(this.SelectedPropertyName, property.Name))
+                            if (
+                                StringComparer.Ordinal.Equals(
+                                    this.SelectedPropertyName,
+                                    property.Name
+                                )
+                            )
                             {
                                 currentSelectionFound = true;
                             }

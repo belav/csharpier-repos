@@ -9,12 +9,13 @@ enum MyEnum : short
 
 class ConstantPattern
 {
-    static bool Generic<T> (T t) where T : class
+    static bool Generic<T>(T t)
+        where T : class
     {
-        return t is default (T);
+        return t is default(T);
     }
 
-    public static int Main ()
+    public static int Main()
     {
         bool b4 = false;
         b4 = !b4;
@@ -41,7 +42,7 @@ class ConstantPattern
         bool r3 = o3 is null;
         if (r3)
             return 6;
-        
+
         r3 = o3 is 4;
         if (!r3)
             return 7;
@@ -67,7 +68,7 @@ class ConstantPattern
         if (!r4)
             return 12;
 
-        ConstantPattern o7 = new ConstantPattern ();
+        ConstantPattern o7 = new ConstantPattern();
         if (!(o7 is ConstantPattern))
             return 13;
 
@@ -81,13 +82,13 @@ class ConstantPattern
         if (!(o8 is true))
             return 16;
 
-        if (Generic (""))
+        if (Generic(""))
             return 17;
 
-        if (!Generic<Delegate> (null))
+        if (!Generic<Delegate>(null))
             return 18;
 
-        Console.WriteLine ("ok");
+        Console.WriteLine("ok");
         return 0;
     }
 }

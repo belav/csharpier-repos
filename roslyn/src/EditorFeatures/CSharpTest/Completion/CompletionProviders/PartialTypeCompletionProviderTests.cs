@@ -15,13 +15,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
     [Trait(Traits.Feature, Traits.Features.Completion)]
     public class PartialTypeCompletionProviderTests : AbstractCSharpCompletionProviderTests
     {
-        internal override Type GetCompletionProviderType()
-            => typeof(PartialTypeCompletionProvider);
+        internal override Type GetCompletionProviderType() => typeof(PartialTypeCompletionProvider);
 
         [Fact]
         public async Task TestRecommendTypesWithoutPartial()
         {
-            var text = @"
+            var text =
+                @"
 class C { }
 
 partial class $$";
@@ -32,7 +32,8 @@ partial class $$";
         [Fact]
         public async Task TestPartialClass1()
         {
-            var text = @"
+            var text =
+                @"
 partial class C { }
 
 partial class $$";
@@ -43,7 +44,8 @@ partial class $$";
         [Fact]
         public async Task TestPartialGenericClass1()
         {
-            var text = @"
+            var text =
+                @"
 class Bar { }
 
 partial class C<Bar> { }
@@ -56,14 +58,16 @@ partial class $$";
         [Fact]
         public async Task TestPartialGenericClassCommitOnParen()
         {
-            var text = @"
+            var text =
+                @"
 class Bar { }
 
 partial class C<Bar> { }
 
 partial class $$";
 
-            var expected = @"
+            var expected =
+                @"
 class Bar { }
 
 partial class C<Bar> { }
@@ -76,14 +80,16 @@ partial class C<";
         [Fact]
         public async Task TestPartialGenericClassCommitOnTab()
         {
-            var text = @"
+            var text =
+                @"
 class Bar { }
 
 partial class C<Bar> { }
 
 partial class $$";
 
-            var expected = @"
+            var expected =
+                @"
 class Bar { }
 
 partial class C<Bar> { }
@@ -96,12 +102,14 @@ partial class C<Bar>";
         [Fact]
         public async Task TestPartialGenericClassCommitOnSpace()
         {
-            var text = @"
+            var text =
+                @"
 partial class C<T> { }
 
 partial class $$";
 
-            var expected = @"
+            var expected =
+                @"
 partial class C<T> { }
 
 partial class C<T> ";
@@ -112,7 +120,8 @@ partial class C<T> ";
         [Fact]
         public async Task TestPartialClassWithModifiers()
         {
-            var text = @"
+            var text =
+                @"
 partial class C { }
 
 internal partial class $$";
@@ -123,7 +132,8 @@ internal partial class $$";
         [Fact]
         public async Task TestPartialStruct()
         {
-            var text = @"
+            var text =
+                @"
 partial struct S { }
 
 partial struct $$";
@@ -134,7 +144,8 @@ partial struct $$";
         [Fact]
         public async Task TestPartialInterface()
         {
-            var text = @"
+            var text =
+                @"
 partial interface I { }
 
 partial interface $$";
@@ -145,7 +156,8 @@ partial interface $$";
         [Fact]
         public async Task TestTypeKindMatches1()
         {
-            var text = @"
+            var text =
+                @"
 partial struct S { }
 
 partial class $$";
@@ -156,7 +168,8 @@ partial class $$";
         [Fact]
         public async Task TestTypeKindMatches2()
         {
-            var text = @"
+            var text =
+                @"
 partial class C { }
 
 partial struct $$";
@@ -167,7 +180,8 @@ partial struct $$";
         [Fact]
         public async Task TestPartialClassesInSameNamespace()
         {
-            var text = @"
+            var text =
+                @"
 namespace N
 {
     partial class Goo { }
@@ -184,7 +198,8 @@ namespace N
         [Fact]
         public async Task TestNotPartialClassesAcrossDifferentNamespaces()
         {
-            var text = @"
+            var text =
+                @"
 namespace N
 {
     partial class Goo { }
@@ -198,7 +213,8 @@ partial class $$";
         [Fact]
         public async Task TestNotPartialClassesInOuterNamespaces()
         {
-            var text = @"
+            var text =
+                @"
 partial class C { }
 
 namespace N
@@ -213,7 +229,8 @@ namespace N
         [Fact]
         public async Task TestNotPartialClassesInOuterClass()
         {
-            var text = @"
+            var text =
+                @"
 partial class C
 {
     partial class $$
@@ -226,12 +243,14 @@ partial class C
         [Fact]
         public async Task TestClassWithConstraint()
         {
-            var text = @"
+            var text =
+                @"
 partial class C1<T> where T : System.Exception { }
 
 partial class $$";
 
-            var expected = @"
+            var expected =
+                @"
 partial class C1<T> where T : System.Exception { }
 
 partial class C1<T>";
@@ -250,7 +269,8 @@ partial class C1<T>";
         [Fact]
         public async Task TestNotInTrivia()
         {
-            var text = @"
+            var text =
+                @"
 partial class C1 { }
 
 partial class //$$";
@@ -261,12 +281,14 @@ partial class //$$";
         [Fact]
         public async Task TestPartialClassWithReservedName()
         {
-            var text = @"
+            var text =
+                @"
 partial class @class { }
 
 partial class $$";
 
-            var expected = @"
+            var expected =
+                @"
 partial class @class { }
 
 partial class @class";
@@ -277,12 +299,14 @@ partial class @class";
         [Fact]
         public async Task TestPartialGenericClassWithReservedName()
         {
-            var text = @"
+            var text =
+                @"
 partial class @class<T> { }
 
 partial class $$";
 
-            var expected = @"
+            var expected =
+                @"
 partial class @class<T> { }
 
 partial class @class<T>";
@@ -293,12 +317,14 @@ partial class @class<T>";
         [Fact]
         public async Task TestPartialGenericInterfaceWithVariance()
         {
-            var text = @"
+            var text =
+                @"
 partial interface I<out T> { }
 
 partial interface $$";
 
-            var expected = @"
+            var expected =
+                @"
 partial interface I<out T> { }
 
 partial interface I<out T>";

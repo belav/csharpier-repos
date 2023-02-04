@@ -8,8 +8,11 @@ namespace Microsoft.CodeAnalysis.Formatting;
 
 internal static class AutoFormattingOptionsStorage
 {
-    public static AutoFormattingOptions GetAutoFormattingOptions(this IGlobalOptionService globalOptions, string language)
-        => new()
+    public static AutoFormattingOptions GetAutoFormattingOptions(
+        this IGlobalOptionService globalOptions,
+        string language
+    ) =>
+        new()
         {
             FormatOnReturn = globalOptions.GetOption(FormatOnReturn, language),
             FormatOnTyping = globalOptions.GetOption(FormatOnTyping, language),
@@ -17,15 +20,27 @@ internal static class AutoFormattingOptionsStorage
             FormatOnCloseBrace = globalOptions.GetOption(FormatOnCloseBrace, language)
         };
 
-    internal static readonly PerLanguageOption2<bool> FormatOnReturn = new(
-        "FormattingOptions_AutoFormattingOnReturn", AutoFormattingOptions.Default.FormatOnReturn);
+    internal static readonly PerLanguageOption2<bool> FormatOnReturn =
+        new(
+            "FormattingOptions_AutoFormattingOnReturn",
+            AutoFormattingOptions.Default.FormatOnReturn
+        );
 
-    public static readonly PerLanguageOption2<bool> FormatOnTyping = new(
-        "FormattingOptions_AutoFormattingOnTyping", AutoFormattingOptions.Default.FormatOnTyping);
+    public static readonly PerLanguageOption2<bool> FormatOnTyping =
+        new(
+            "FormattingOptions_AutoFormattingOnTyping",
+            AutoFormattingOptions.Default.FormatOnTyping
+        );
 
-    public static readonly PerLanguageOption2<bool> FormatOnSemicolon = new(
-        "FormattingOptions_AutoFormattingOnSemicolon", AutoFormattingOptions.Default.FormatOnSemicolon);
+    public static readonly PerLanguageOption2<bool> FormatOnSemicolon =
+        new(
+            "FormattingOptions_AutoFormattingOnSemicolon",
+            AutoFormattingOptions.Default.FormatOnSemicolon
+        );
 
-    public static readonly PerLanguageOption2<bool> FormatOnCloseBrace = new(
-        "BraceCompletionOptions_AutoFormattingOnCloseBrace", AutoFormattingOptions.Default.FormatOnCloseBrace);
+    public static readonly PerLanguageOption2<bool> FormatOnCloseBrace =
+        new(
+            "BraceCompletionOptions_AutoFormattingOnCloseBrace",
+            AutoFormattingOptions.Default.FormatOnCloseBrace
+        );
 }

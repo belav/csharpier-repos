@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,14 +29,15 @@
 
 using System.Collections;
 
-namespace System.Security.AccessControl {
+namespace System.Security.AccessControl
+{
     public abstract class GenericAcl : ICollection, IEnumerable
     {
         public static readonly byte AclRevision;
         public static readonly byte AclRevisionDS;
         public static readonly int MaxBinaryLength;
-        
-        static GenericAcl ()
+
+        static GenericAcl()
         {
             // FIXME: they are likely platform dependent (on windows)
             AclRevision = 2;
@@ -44,58 +45,56 @@ namespace System.Security.AccessControl {
             MaxBinaryLength = 0x10000;
         }
 
-        protected GenericAcl ()
-        {
-        }
-        
+        protected GenericAcl() { }
+
         public abstract int BinaryLength { get; }
-        
+
         public abstract int Count { get; }
-        
-        public bool IsSynchronized {
+
+        public bool IsSynchronized
+        {
             get { return false; }
         }
-        
-        public abstract GenericAce this [int index] {
-            get;
-            set;
-        }
-        
+
+        public abstract GenericAce this[int index] { get; set; }
+
         public abstract byte Revision { get; }
-        
-        public virtual object SyncRoot {
+
+        public virtual object SyncRoot
+        {
             get { return this; }
         }
-        
-        public void CopyTo (GenericAce [] array, int index)
+
+        public void CopyTo(GenericAce[] array, int index)
         {
             if (array == null)
-                throw new ArgumentNullException ("array");
+                throw new ArgumentNullException("array");
             if (index < 0 || array.Length - index < Count)
-                throw new ArgumentOutOfRangeException ("index", "Index must be non-negative integer and must not exceed array length - count");
+                throw new ArgumentOutOfRangeException(
+                    "index",
+                    "Index must be non-negative integer and must not exceed array length - count"
+                );
             for (int i = 0; i < Count; i++)
-                array [i + index] = this [i];
+                array[i + index] = this[i];
         }
 
-        void ICollection.CopyTo (Array array, int index)
+        void ICollection.CopyTo(Array array, int index)
         {
-            CopyTo ((GenericAce []) array, index);
-        }
-        
-        public abstract void GetBinaryForm (byte[] binaryForm, int offset);
-        
-        public AceEnumerator GetEnumerator ()
-        {
-            return new AceEnumerator (this);
+            CopyTo((GenericAce[])array, index);
         }
 
-        IEnumerator IEnumerable.GetEnumerator ()
+        public abstract void GetBinaryForm(byte[] binaryForm, int offset);
+
+        public AceEnumerator GetEnumerator()
         {
-            return GetEnumerator ();
+            return new AceEnumerator(this);
         }
-        
-        internal abstract string GetSddlForm(ControlFlags sdFlags,
-                                             bool isDacl);
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+
+        internal abstract string GetSddlForm(ControlFlags sdFlags, bool isDacl);
     }
 }
-

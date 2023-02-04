@@ -3,14 +3,13 @@
 class Foo<T>
     where T : System.ICloneable
 {
-    public X Test (T t)
+    public X Test(T t)
     {
-        return (X) t;
+        return (X)t;
     }
 }
 
 class X
 {
-    static void Main ()
-    { }
+    static void Main() { }
 }

@@ -7,7 +7,7 @@ using System;
 
 public interface ICounter
 {
-    void Increment ();
+    void Increment();
 }
 
 namespace ValueTypeCounters
@@ -16,7 +16,7 @@ namespace ValueTypeCounters
     {
         public int Value;
 
-        public void Increment ()
+        public void Increment()
         {
             Value += 2;
         }
@@ -26,12 +26,12 @@ namespace ValueTypeCounters
     {
         public int Value;
 
-        public override string ToString ()
+        public override string ToString()
         {
-            return Value.ToString ();
+            return Value.ToString();
         }
 
-        public void Increment ()
+        public void Increment()
         {
             Value += 2;
         }
@@ -41,12 +41,12 @@ namespace ValueTypeCounters
     {
         public int Value;
 
-        public override string ToString ()
+        public override string ToString()
         {
-            return Value.ToString ();
+            return Value.ToString();
         }
 
-        void ICounter.Increment ()
+        void ICounter.Increment()
         {
             Value++;
         }
@@ -56,17 +56,17 @@ namespace ValueTypeCounters
     {
         public int Value;
 
-        public override string ToString ()
+        public override string ToString()
         {
-            return Value.ToString ();
+            return Value.ToString();
         }
 
-        void ICounter.Increment ()
+        void ICounter.Increment()
         {
             Value++;
         }
 
-        public void Increment ()
+        public void Increment()
         {
             Value += 2;
         }
@@ -79,7 +79,7 @@ namespace ReferenceTypeCounters
     {
         public int Value;
 
-        public void Increment ()
+        public void Increment()
         {
             Value += 2;
         }
@@ -89,12 +89,12 @@ namespace ReferenceTypeCounters
     {
         public int Value;
 
-        public override string ToString ()
+        public override string ToString()
         {
-            return Value.ToString ();
+            return Value.ToString();
         }
 
-        public void Increment ()
+        public void Increment()
         {
             Value += 2;
         }
@@ -104,12 +104,12 @@ namespace ReferenceTypeCounters
     {
         public int Value;
 
-        public override string ToString ()
+        public override string ToString()
         {
-            return Value.ToString ();
+            return Value.ToString();
         }
 
-        void ICounter.Increment ()
+        void ICounter.Increment()
         {
             Value++;
         }
@@ -119,17 +119,17 @@ namespace ReferenceTypeCounters
     {
         public int Value;
 
-        public override string ToString ()
+        public override string ToString()
         {
-            return Value.ToString ();
+            return Value.ToString();
         }
 
-        void ICounter.Increment ()
+        void ICounter.Increment()
         {
             Value++;
         }
 
-        public void Increment ()
+        public void Increment()
         {
             Value += 2;
         }
@@ -144,26 +144,26 @@ namespace Test
     public class Test<T>
         where T : ICounter
     {
-        public static void Foo (T x)
+        public static void Foo(T x)
         {
-            Console.WriteLine (x.ToString ());
-            x.Increment ();
-            Console.WriteLine (x.ToString ());
+            Console.WriteLine(x.ToString());
+            x.Increment();
+            Console.WriteLine(x.ToString());
         }
     }
 
     public class X
     {
-        public static void Main ()
+        public static void Main()
         {
-            Test<V.SimpleCounter>.Foo (new V.SimpleCounter ());
-            Test<V.PrintingCounter>.Foo (new V.PrintingCounter ());
-            Test<V.ExplicitCounter>.Foo (new V.ExplicitCounter ());
-            Test<V.InterfaceCounter>.Foo (new V.InterfaceCounter ());
-            Test<R.SimpleCounter>.Foo (new R.SimpleCounter ());
-            Test<R.PrintingCounter>.Foo (new R.PrintingCounter ());
-            Test<R.ExplicitCounter>.Foo (new R.ExplicitCounter ());
-            Test<R.InterfaceCounter>.Foo (new R.InterfaceCounter ());
+            Test<V.SimpleCounter>.Foo(new V.SimpleCounter());
+            Test<V.PrintingCounter>.Foo(new V.PrintingCounter());
+            Test<V.ExplicitCounter>.Foo(new V.ExplicitCounter());
+            Test<V.InterfaceCounter>.Foo(new V.InterfaceCounter());
+            Test<R.SimpleCounter>.Foo(new R.SimpleCounter());
+            Test<R.PrintingCounter>.Foo(new R.PrintingCounter());
+            Test<R.ExplicitCounter>.Foo(new R.ExplicitCounter());
+            Test<R.InterfaceCounter>.Foo(new R.InterfaceCounter());
         }
     }
 }

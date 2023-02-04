@@ -4,36 +4,34 @@ namespace Mono.Linker.Tests.Cases.Inheritance.Interfaces.OnReferenceType.BasePro
 {
     public class GenericInterfaceWithGenericMethod
     {
-        public static void Main ()
+        public static void Main()
         {
-            IFoo<object> f = new FooWithBase ();
-            var result = f.Method<object> (null);
+            IFoo<object> f = new FooWithBase();
+            var result = f.Method<object>(null);
         }
 
         [Kept]
         interface IFoo<TType>
         {
             [Kept]
-            TMethod Method<TMethod> (TType arg);
+            TMethod Method<TMethod>(TType arg);
         }
 
         [Kept]
-        [KeptMember (".ctor()")]
+        [KeptMember(".ctor()")]
         class BaseFoo
         {
             [Kept]
-            public TMethod Method<TMethod> (object arg)
+            public TMethod Method<TMethod>(object arg)
             {
-                return default (TMethod);
+                return default(TMethod);
             }
         }
 
         [Kept]
-        [KeptMember (".ctor()")]
-        [KeptBaseType (typeof (BaseFoo))]
-        [KeptInterface (typeof (IFoo<object>))]
-        class FooWithBase : BaseFoo, IFoo<object>
-        {
-        }
+        [KeptMember(".ctor()")]
+        [KeptBaseType(typeof(BaseFoo))]
+        [KeptInterface(typeof(IFoo<object>))]
+        class FooWithBase : BaseFoo, IFoo<object> { }
     }
 }

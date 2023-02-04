@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,12 +29,13 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace System.EnterpriseServices.Internal {
-
+namespace System.EnterpriseServices.Internal
+{
     [Guid("1E7BA9F7-21DB-4482-929E-21BDE2DFE51C")]
-    public interface ISoapServerTlb {
+    public interface ISoapServerTlb
+    {
         [DispId(1)]
-        void AddServerTlb (
+        void AddServerTlb(
             [MarshalAs(UnmanagedType.BStr)] string progId,
             [MarshalAs(UnmanagedType.BStr)] string classId,
             [MarshalAs(UnmanagedType.BStr)] string interfaceId,
@@ -47,10 +48,11 @@ namespace System.EnterpriseServices.Internal {
             [MarshalAs(UnmanagedType.BStr)] string discoFile,
             [MarshalAs(UnmanagedType.BStr)] string operation,
             [MarshalAs(UnmanagedType.BStr)] out string assemblyName,
-            [MarshalAs(UnmanagedType.BStr)] out string typeName);
+            [MarshalAs(UnmanagedType.BStr)] out string typeName
+        );
 
         [DispId(2)]
-        void DeleteServerTlb (
+        void DeleteServerTlb(
             [MarshalAs(UnmanagedType.BStr)] string progId,
             [MarshalAs(UnmanagedType.BStr)] string classId,
             [MarshalAs(UnmanagedType.BStr)] string interfaceId,
@@ -60,6 +62,7 @@ namespace System.EnterpriseServices.Internal {
             [MarshalAs(UnmanagedType.BStr)] string virtualRoot,
             [MarshalAs(UnmanagedType.BStr)] string operation,
             [MarshalAs(UnmanagedType.BStr)] string assemblyName,
-            [MarshalAs(UnmanagedType.BStr)] string typeName);
+            [MarshalAs(UnmanagedType.BStr)] string typeName
+        );
     }
 }

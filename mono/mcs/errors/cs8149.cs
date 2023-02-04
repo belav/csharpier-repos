@@ -5,7 +5,7 @@ class A
 {
     int p;
 
-    int Test ()
+    int Test()
     {
         return ref p;
     }

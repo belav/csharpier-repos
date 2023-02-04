@@ -7,32 +7,31 @@ namespace Mono.Linker.Tests.Cases.Inheritance.Interfaces.OnReferenceType.NoKeptC
     /// <summary>
     /// The interface can still be removed in this case because PreserveDependency is just preserving Foo() on the current type
     /// </summary>
-    [SetupCompileBefore ("FakeSystemAssembly.dll", new[] { "../../../PreserveDependencies/Dependencies/PreserveDependencyAttribute.cs" })]
+    [SetupCompileBefore(
+        "FakeSystemAssembly.dll",
+        new[] { "../../../PreserveDependencies/Dependencies/PreserveDependencyAttribute.cs" }
+    )]
     public class PreserveDependencyPreservesInterfaceMethod
     {
-        public static void Main ()
+        public static void Main()
         {
-            StaticMethodOnlyUsed.StaticMethod ();
+            StaticMethodOnlyUsed.StaticMethod();
         }
 
         interface IUnusedInterface
         {
-            void Foo ();
+            void Foo();
         }
 
         [Kept]
         class StaticMethodOnlyUsed : IUnusedInterface
         {
             [Kept]
-            public void Foo ()
-            {
-            }
+            public void Foo() { }
 
             [Kept]
-            [PreserveDependency ("Foo")]
-            public static void StaticMethod ()
-            {
-            }
+            [PreserveDependency("Foo")]
+            public static void StaticMethod() { }
         }
     }
 }

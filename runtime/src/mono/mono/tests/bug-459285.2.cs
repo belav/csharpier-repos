@@ -15,18 +15,18 @@ public class Foo<T>
     }
 }
 
-public class Bar: Foo<string>
-{
-}
-
+public class Bar : Foo<string> { }
 
 public class MainClass
 {
     public static int Main()
     {
-        try {
+        try
+        {
             new Bar().DoSomething();
-        } catch {
+        }
+        catch
+        {
             return 0;
         }
         return 1;

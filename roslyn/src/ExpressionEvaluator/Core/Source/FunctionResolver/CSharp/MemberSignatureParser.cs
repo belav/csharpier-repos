@@ -128,6 +128,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                 switch (CurrentToken.Kind)
                 {
                     case TokenKind.Identifier:
+
                         {
                             var token = EatToken();
                             var name = token.Text;
@@ -158,7 +159,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                 if (CurrentToken.Kind == TokenKind.LessThan)
                 {
                     var typeArguments = ParseTypeArguments();
-                    signature = new GenericTypeSignature((QualifiedTypeSignature)signature, typeArguments);
+                    signature = new GenericTypeSignature(
+                        (QualifiedTypeSignature)signature,
+                        typeArguments
+                    );
                 }
                 if (CurrentToken.Kind != TokenKind.Dot)
                 {
@@ -221,7 +225,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                         EatToken();
                         type = new GenericTypeSignature(
                             SpecialType.System_Nullable_T.GetTypeSignature(),
-                            ImmutableArray.Create(type));
+                            ImmutableArray.Create(type)
+                        );
                         break;
                     default:
                         return type;
@@ -326,8 +331,6 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             return new InvalidSignatureException();
         }
 
-        private sealed class InvalidSignatureException : Exception
-        {
-        }
+        private sealed class InvalidSignatureException : Exception { }
     }
 }

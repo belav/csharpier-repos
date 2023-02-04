@@ -3,15 +3,13 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 
 namespace Mono.Linker.Tests.Cases.LinkXml
 {
-    [SetupLinkerDescriptorFile ("UnusedTypeWithPreserveAllHasAllMembersPreserved.xml")]
+    [SetupLinkerDescriptorFile("UnusedTypeWithPreserveAllHasAllMembersPreserved.xml")]
     class UnusedTypeWithPreserveAllHasAllMembersPreserved
     {
-        public static void Main ()
-        {
-        }
+        public static void Main() { }
 
         [Kept]
-        [KeptMember (".ctor()")]
+        [KeptMember(".ctor()")]
         class Unused
         {
             [Kept]
@@ -34,57 +32,81 @@ namespace Mono.Linker.Tests.Cases.LinkXml
 
             [Kept]
             [KeptBackingField]
-            public string Property1 { [Kept] get; [Kept] set; }
+            public string Property1
+            {
+                [Kept]
+                get;
+                [Kept]
+                set;
+            }
 
             [Kept]
             [KeptBackingField]
-            private string Property2 { [Kept] get; [Kept] set; }
+            private string Property2
+            {
+                [Kept]
+                get;
+                [Kept]
+                set;
+            }
 
             [Kept]
             [KeptBackingField]
-            internal string Property3 { [Kept] get; [Kept] set; }
+            internal string Property3
+            {
+                [Kept]
+                get;
+                [Kept]
+                set;
+            }
 
             [Kept]
             [KeptBackingField]
-            public static string Property4 { [Kept] get; [Kept] set; }
+            public static string Property4
+            {
+                [Kept]
+                get;
+                [Kept]
+                set;
+            }
 
             [Kept]
             [KeptBackingField]
-            private static string Property5 { [Kept] get; [Kept] set; }
+            private static string Property5
+            {
+                [Kept]
+                get;
+                [Kept]
+                set;
+            }
 
             [Kept]
             [KeptBackingField]
-            internal static string Property6 { [Kept] get; [Kept] set; }
-
-            [Kept]
-            public void Method1 ()
+            internal static string Property6
             {
+                [Kept]
+                get;
+                [Kept]
+                set;
             }
 
             [Kept]
-            private void Method2 ()
-            {
-            }
+            public void Method1() { }
 
             [Kept]
-            internal void Method3 ()
-            {
-            }
+            private void Method2() { }
 
             [Kept]
-            public static void Method4 ()
-            {
-            }
+            internal void Method3() { }
 
             [Kept]
-            private static void Method5 ()
-            {
-            }
+            public static void Method4() { }
 
             [Kept]
-            internal static void Method6 ()
-            {
-            }
+            private static void Method5() { }
+
+            [Kept]
+            internal static void Method6() { }
         }
     }
 }

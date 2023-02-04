@@ -11,9 +11,14 @@ namespace System.Security.Cryptography
     {
         protected RandomNumberGenerator() { }
 
-        public static RandomNumberGenerator Create() => RandomNumberGeneratorImplementation.s_singleton;
+        public static RandomNumberGenerator Create() =>
+            RandomNumberGeneratorImplementation.s_singleton;
 
-        [Obsolete(Obsoletions.CryptoStringFactoryMessage, DiagnosticId = Obsoletions.CryptoStringFactoryDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.CryptoStringFactoryMessage,
+            DiagnosticId = Obsoletions.CryptoStringFactoryDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [RequiresUnreferencedCode(CryptoConfig.CreateFromNameUnreferencedCodeMessage)]
         public static RandomNumberGenerator? Create(string rngName)
         {
@@ -131,8 +136,7 @@ namespace System.Security.Cryptography
             {
                 RandomNumberGeneratorImplementation.FillSpan(oneUintBytes);
                 result = mask & oneUint;
-            }
-            while (result > range);
+            } while (result > range);
 
             return (int)result + fromInclusive;
         }

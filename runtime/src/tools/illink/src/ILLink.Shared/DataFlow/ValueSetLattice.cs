@@ -14,6 +14,7 @@ namespace ILLink.Shared.DataFlow
     {
         public ValueSet<TValue> Top => default;
 
-        public ValueSet<TValue> Meet (ValueSet<TValue> left, ValueSet<TValue> right) => ValueSet<TValue>.Meet (left, right);
+        public ValueSet<TValue> Meet(ValueSet<TValue> left, ValueSet<TValue> right) =>
+            ValueSet<TValue>.Meet(left, right);
     }
 }

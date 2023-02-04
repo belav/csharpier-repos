@@ -2,11 +2,12 @@ using System;
 using System.Reflection;
 using System.Reflection.Emit;
 
-public class Tests {
+public class Tests
+{
     // This set of tests are for checking the impact of custom modifiers on vtable layout and
     // method overrides. CustomModifiers are used for one thing and one thing alone, and that's making
     // two method signatures that would otherwise be equal into unequal signatures. This is used by C++/CLI
-    // to tag primitive types with the C++-side type. For instance, this allows a single primitive type for 
+    // to tag primitive types with the C++-side type. For instance, this allows a single primitive type for
     // various integer types, but prevents a function taking an int from overriding a function taking a long.
     //
     // We have to use SRE or il to interact with it, as C# compilers don't do much with modifiers beyond
@@ -20,38 +21,54 @@ public class Tests {
     MethodInfo invokeParentSig;
     MethodInfo invokeParentForwardSig;
 
-    public static void DefineMethodM (TypeBuilder tb, string className, Type [] required_modifiers, Type [] optional_modifiers)
+    public static void DefineMethodM(
+        TypeBuilder tb,
+        string className,
+        Type[] required_modifiers,
+        Type[] optional_modifiers
+    )
     {
         // Example il (no equivalent C# for modreqs)
         // Note that the modifiers will change for each class
         //
         //    // method line 4
-        // .method public virtual hidebysig 
-        //        instance default string M (int32* modreq ([mscorlib]System.Runtime.CompilerServices.IsReadOnlyAttribute)  A_1)  cil managed 
+        // .method public virtual hidebysig
+        //        instance default string M (int32* modreq ([mscorlib]System.Runtime.CompilerServices.IsReadOnlyAttribute)  A_1)  cil managed
         // {
         //     // Method begins at RVA 0x2104
         // Code size 6 (0x6)
         //     .maxstack 8
         //     IL_0000:  ldstr "ChildSameMod"
-        //     IL_0005:  ret 
+        //     IL_0005:  ret
         //   } // end of method ChildSameMod::M
         //
 
-        Type[][] req_mods = required_modifiers != null ? new Type [][] {required_modifiers} : null;
-        Type[][] opt_mods = optional_modifiers != null ? new Type [][] {optional_modifiers} : null;
-        MethodBuilder mbIM = tb.DefineMethod("M", MethodAttributes.Public | MethodAttributes.HideBySig |
-                MethodAttributes.Virtual,
+        Type[][] req_mods = required_modifiers != null ? new Type[][] { required_modifiers } : null;
+        Type[][] opt_mods = optional_modifiers != null ? new Type[][] { optional_modifiers } : null;
+        MethodBuilder mbIM = tb.DefineMethod(
+            "M",
+            MethodAttributes.Public | MethodAttributes.HideBySig | MethodAttributes.Virtual,
             CallingConventions.Standard,
-            typeof (string), null, null,
-            new Type[] {typeof (int *)}, req_mods, opt_mods);
+            typeof(string),
+            null,
+            null,
+            new Type[] { typeof(int*) },
+            req_mods,
+            opt_mods
+        );
         ILGenerator il = mbIM.GetILGenerator();
-        il.Emit (OpCodes.Ldstr, className);
+        il.Emit(OpCodes.Ldstr, className);
         //il.Emit (OpCodes.Ldstr, className);
         //il.Emit (OpCodes.Call, typeof(Console).GetMethod("WriteLine", new Type[] { typeof(string) }));
-        il.Emit (OpCodes.Ret);
+        il.Emit(OpCodes.Ret);
     }
 
-    public static void DefineMethodInvoke (TypeBuilder tb, string invokeName, MethodInfo target, Type argument)
+    public static void DefineMethodInvoke(
+        TypeBuilder tb,
+        string invokeName,
+        MethodInfo target,
+        Type argument
+    )
     {
         // Example il (no equivalent C# for modreqs)
         // Note that the modifiers will change as per the callee
@@ -73,30 +90,40 @@ public class Tests {
         //    IL_0008:  callvirt instance string class Parent::M(int32* modreq ([mscorlib]System.Runtime.CompilerServices.IsReadOnlyAttribute) )
         //    IL_000d:  ret
         //} // end of method Invoker::InvokeParentSig
-        // 
+        //
         //
 
-        MethodBuilder mbIM = tb.DefineMethod(invokeName, MethodAttributes.Public | MethodAttributes.Static,
+        MethodBuilder mbIM = tb.DefineMethod(
+            invokeName,
+            MethodAttributes.Public | MethodAttributes.Static,
             CallingConventions.Standard,
-            typeof (string), null, null,
-            new Type [] {argument}, null, null);
+            typeof(string),
+            null,
+            null,
+            new Type[] { argument },
+            null,
+            null
+        );
         ILGenerator il = mbIM.GetILGenerator();
-        var local = il.DeclareLocal (typeof (int));
+        var local = il.DeclareLocal(typeof(int));
 
-        il.Emit (OpCodes.Ldarg_0);
-        il.Emit (OpCodes.Ldc_I4_0);
-        il.Emit (OpCodes.Stloc, local);
-        il.Emit (OpCodes.Ldloca_S, 0);
-        il.Emit (OpCodes.Callvirt, target);
+        il.Emit(OpCodes.Ldarg_0);
+        il.Emit(OpCodes.Ldc_I4_0);
+        il.Emit(OpCodes.Stloc, local);
+        il.Emit(OpCodes.Ldloca_S, 0);
+        il.Emit(OpCodes.Callvirt, target);
 
-        il.Emit (OpCodes.Ret);
+        il.Emit(OpCodes.Ret);
     }
 
-    public Tests ()
+    public Tests()
     {
         string name = "CustomModifiersOverride";
         AssemblyName asmName = new AssemblyName(name);
-        AssemblyBuilder ab = AppDomain.CurrentDomain.DefineDynamicAssembly(asmName, AssemblyBuilderAccess.RunAndSave);
+        AssemblyBuilder ab = AppDomain.CurrentDomain.DefineDynamicAssembly(
+            asmName,
+            AssemblyBuilderAccess.RunAndSave
+        );
         ModuleBuilder mb = ab.DefineDynamicModule(name, name + ".dll");
 
         // Create class hierarchy:
@@ -118,78 +145,92 @@ public class Tests {
         // method, we can tell whether the method signatures have been found equal by the underlying
         // runtime, and whether the impact on VTable layout is correct.
 
-        var mods = new Type [] { typeof (System.Runtime.CompilerServices.IsReadOnlyAttribute) };
-    
+        var mods = new Type[] { typeof(System.Runtime.CompilerServices.IsReadOnlyAttribute) };
+
         var parent = mb.DefineType("Parent", TypeAttributes.Public);
-        DefineMethodM (parent, "Parent", mods, null);
-        var parentType = parent.CreateType ();
-    
+        DefineMethodM(parent, "Parent", mods, null);
+        var parentType = parent.CreateType();
+
         var childSameMod = mb.DefineType("ChildSameMod", TypeAttributes.Public, parent);
-        DefineMethodM (childSameMod, "ChildSameMod", mods, null);
-        var childSameModType = childSameMod.CreateType ();
+        DefineMethodM(childSameMod, "ChildSameMod", mods, null);
+        var childSameModType = childSameMod.CreateType();
 
         var childNoMod = mb.DefineType("ChildNoMod", TypeAttributes.Public, parent);
-        DefineMethodM (childNoMod, "ChildNoMod", null, null);
-        var childNoModType = childNoMod.CreateType ();
+        DefineMethodM(childNoMod, "ChildNoMod", null, null);
+        var childNoModType = childNoMod.CreateType();
 
         var childOptMod = mb.DefineType("ChildOptMod", TypeAttributes.Public, parent);
-        DefineMethodM (childOptMod, "ChildOptMod", null, mods);
-        var childOptModType = childOptMod.CreateType ();
+        DefineMethodM(childOptMod, "ChildOptMod", null, mods);
+        var childOptModType = childOptMod.CreateType();
 
-        var first_mod = typeof (System.Runtime.CompilerServices.IsReadOnlyAttribute);
-        var second_mod = typeof (System.Runtime.CompilerServices.SpecialNameAttribute);
-        var third_mod = typeof (System.Runtime.CompilerServices.IsConst);
+        var first_mod = typeof(System.Runtime.CompilerServices.IsReadOnlyAttribute);
+        var second_mod = typeof(System.Runtime.CompilerServices.SpecialNameAttribute);
+        var third_mod = typeof(System.Runtime.CompilerServices.IsConst);
 
-        var forwardMods = new Type [] {first_mod, second_mod, third_mod};
-        var backwardMods = new Type [] {third_mod, second_mod, first_mod};
+        var forwardMods = new Type[] { first_mod, second_mod, third_mod };
+        var backwardMods = new Type[] { third_mod, second_mod, first_mod };
 
         var parentThreeForward = mb.DefineType("ParentThreeForward", TypeAttributes.Public);
-        DefineMethodM (parentThreeForward, "ParentThreeForward", forwardMods, null);
-        var parentThreeForwardType = parentThreeForward.CreateType ();
+        DefineMethodM(parentThreeForward, "ParentThreeForward", forwardMods, null);
+        var parentThreeForwardType = parentThreeForward.CreateType();
 
-        var childThreeForward = mb.DefineType("ChildThreeForward", TypeAttributes.Public, parentThreeForward);
-        DefineMethodM (childThreeForward, "ChildThreeForward", forwardMods, null);
-        var childThreeForwardType = childThreeForward.CreateType ();
+        var childThreeForward = mb.DefineType(
+            "ChildThreeForward",
+            TypeAttributes.Public,
+            parentThreeForward
+        );
+        DefineMethodM(childThreeForward, "ChildThreeForward", forwardMods, null);
+        var childThreeForwardType = childThreeForward.CreateType();
 
-        var childThreeBackward = mb.DefineType("ChildThreeBackward", TypeAttributes.Public, parentThreeForward);
-        DefineMethodM (childThreeBackward, "ChildThreeBackward", backwardMods, null);
-        var childThreeBackwardType = childThreeBackward.CreateType ();
+        var childThreeBackward = mb.DefineType(
+            "ChildThreeBackward",
+            TypeAttributes.Public,
+            parentThreeForward
+        );
+        DefineMethodM(childThreeBackward, "ChildThreeBackward", backwardMods, null);
+        var childThreeBackwardType = childThreeBackward.CreateType();
 
         var invoker = mb.DefineType("Invoker", TypeAttributes.Public);
         // Since we want to generate callvirt calls which contain references to the custom modifiers
         // for the parent types, to actually probe overloading or not, we need to generate the classes the make those
         // calls
 
-        var methodBaseReference = parentType.GetMethod ("M");
-        DefineMethodInvoke (invoker, "InvokeParentSig", methodBaseReference, parentType);
+        var methodBaseReference = parentType.GetMethod("M");
+        DefineMethodInvoke(invoker, "InvokeParentSig", methodBaseReference, parentType);
 
-        var methodBaseReferenceMultiple = parentThreeForwardType.GetMethod ("M");
-        DefineMethodInvoke (invoker, "InvokeParentThreeForwardSig", methodBaseReferenceMultiple, parentThreeForwardType);
+        var methodBaseReferenceMultiple = parentThreeForwardType.GetMethod("M");
+        DefineMethodInvoke(
+            invoker,
+            "InvokeParentThreeForwardSig",
+            methodBaseReferenceMultiple,
+            parentThreeForwardType
+        );
 
-        var invokerType = invoker.CreateType ();
+        var invokerType = invoker.CreateType();
 
         ab.Save(name + ".dll");
 
-        childNoModObj = Activator.CreateInstance (childNoModType);
-        childOptModObj = Activator.CreateInstance (childOptModType);
-        childSameModObj = Activator.CreateInstance (childSameModType);
-        childForwardObj = Activator.CreateInstance (childThreeForwardType);
-        childBackwardObj = Activator.CreateInstance (childThreeBackwardType);
-        invokeParentSig = invokerType.GetMethod ("InvokeParentSig");
-        invokeParentForwardSig = invokerType.GetMethod ("InvokeParentThreeForwardSig");
+        childNoModObj = Activator.CreateInstance(childNoModType);
+        childOptModObj = Activator.CreateInstance(childOptModType);
+        childSameModObj = Activator.CreateInstance(childSameModType);
+        childForwardObj = Activator.CreateInstance(childThreeForwardType);
+        childBackwardObj = Activator.CreateInstance(childThreeBackwardType);
+        invokeParentSig = invokerType.GetMethod("InvokeParentSig");
+        invokeParentForwardSig = invokerType.GetMethod("InvokeParentThreeForwardSig");
     }
 
-    public static int Main () {
+    public static int Main()
+    {
         // The expected behavior can be near impossible to reproduce using this .exe on
         // another CLR because many SRE implementations do not correctly use modifiers. To
         // compare results with another runtime, get the dll saved by the above ab.Save()
-        // line, manually copy it over, and run it with the other CLR. 
-        var tester = new Tests ();
-        tester.TestModSufficient ();
-        tester.TestModNecessary ();
-        tester.TestModReqSameAsOpt ();
-        tester.TestModReqMulti ();
-        tester.TestModReqMultiNoOrder ();
+        // line, manually copy it over, and run it with the other CLR.
+        var tester = new Tests();
+        tester.TestModSufficient();
+        tester.TestModNecessary();
+        tester.TestModReqSameAsOpt();
+        tester.TestModReqMulti();
+        tester.TestModReqMultiNoOrder();
 
         return 0;
     }
@@ -202,6 +243,7 @@ public class Tests {
         else
             Console.WriteLine("Success: {0} {1}", childSameModObj.GetType().Name, result);
     }
+
     public void TestModNecessary()
     {
         var result = (string)invokeParentSig.Invoke(null, new Object[] { childNoModObj });
@@ -210,6 +252,7 @@ public class Tests {
         else
             Console.WriteLine("Success: {0} {1}", childNoModObj.GetType().Name, result);
     }
+
     public void TestModReqSameAsOpt()
     {
         var result = (string)invokeParentSig.Invoke(null, new Object[] { childOptModObj });
@@ -218,20 +261,34 @@ public class Tests {
         else
             Console.WriteLine("Success: {0} {1}", childOptModObj.GetType().Name, result);
     }
+
     public void TestModReqMulti()
     {
         var result = (string)invokeParentForwardSig.Invoke(null, new Object[] { childForwardObj });
         if (result != "ChildThreeForward")
-            throw new Exception(String.Format("Unexpected Class Override {0}, MULTIPLE MODS BROKEN", result));
+            throw new Exception(
+                String.Format("Unexpected Class Override {0}, MULTIPLE MODS BROKEN", result)
+            );
         else
-            Console.WriteLine("Success MULTI MODS: {0} {1}", childForwardObj.GetType().Name, result);
+            Console.WriteLine(
+                "Success MULTI MODS: {0} {1}",
+                childForwardObj.GetType().Name,
+                result
+            );
     }
+
     public void TestModReqMultiNoOrder()
     {
         var result = (string)invokeParentForwardSig.Invoke(null, new Object[] { childBackwardObj });
         if (result != "ParentThreeForward")
-            throw new Exception(String.Format("Unexpected Class Override: {0}, ORDER MATTERS", result));
+            throw new Exception(
+                String.Format("Unexpected Class Override: {0}, ORDER MATTERS", result)
+            );
         else
-            Console.WriteLine("Success ORDER MATTERS: {0} {1}", childBackwardObj.GetType().Name, result);
+            Console.WriteLine(
+                "Success ORDER MATTERS: {0} {1}",
+                childBackwardObj.GetType().Name,
+                result
+            );
     }
 }

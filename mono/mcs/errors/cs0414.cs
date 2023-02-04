@@ -2,10 +2,9 @@
 // Line: 6
 // Compiler options: -warnaserror -warn:3
 
-class X {
+class X
+{
     int i = 3;
-    
-    public void Y ()
-    {
-    }
+
+    public void Y() { }
 }

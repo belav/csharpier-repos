@@ -16,12 +16,15 @@ using System.Web.DynamicData;
 
 public partial class CustomColorField : System.Web.DynamicData.FieldTemplateUserControl
 {
-    public override Control DataControl {
+    public override Control DataControl
+    {
         get { return Literal1; }
     }
 
-    public override string FieldValueString {
-        get {
+    public override string FieldValueString
+    {
+        get
+        {
             var color = (Color)FieldValue;
             if (color == null)
                 return "Unknown";

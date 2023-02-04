@@ -16,11 +16,16 @@ using Xunit;
 
 namespace Roslyn.Test.Utilities
 {
-    internal sealed class MockSymUnmanagedReader : ISymUnmanagedReader, ISymUnmanagedReader2, ISymUnmanagedReader3
+    internal sealed class MockSymUnmanagedReader
+        : ISymUnmanagedReader,
+            ISymUnmanagedReader2,
+            ISymUnmanagedReader3
     {
         private readonly ImmutableDictionary<int, MethodDebugInfoBytes> _methodDebugInfoMap;
 
-        public MockSymUnmanagedReader(ImmutableDictionary<int, MethodDebugInfoBytes> methodDebugInfoMap)
+        public MockSymUnmanagedReader(
+            ImmutableDictionary<int, MethodDebugInfoBytes> methodDebugInfoMap
+        )
         {
             _methodDebugInfoMap = methodDebugInfoMap;
         }
@@ -46,15 +51,28 @@ namespace Roslyn.Test.Utilities
             return HResult.S_OK;
         }
 
-        public int GetSymAttribute(int methodToken, string name, int bufferLength, out int count, byte[] customDebugInformation)
+        public int GetSymAttribute(
+            int methodToken,
+            string name,
+            int bufferLength,
+            out int count,
+            byte[] customDebugInformation
+        )
         {
-            // The EE should never be calling ISymUnmanagedReader.GetSymAttribute.  
-            // In order to account for EnC updates, it should always be calling 
+            // The EE should never be calling ISymUnmanagedReader.GetSymAttribute.
+            // In order to account for EnC updates, it should always be calling
             // ISymUnmanagedReader3.GetSymAttributeByVersion instead.
             throw ExceptionUtilities.Unreachable();
         }
 
-        public int GetSymAttributeByVersion(int methodToken, int version, string name, int bufferLength, out int count, byte[] customDebugInformation)
+        public int GetSymAttributeByVersion(
+            int methodToken,
+            int version,
+            string name,
+            int bufferLength,
+            out int count,
+            byte[] customDebugInformation
+        )
         {
             Assert.Equal(1, version);
 
@@ -72,7 +90,13 @@ namespace Roslyn.Test.Utilities
             return HResult.S_OK;
         }
 
-        public int GetDocument(string url, Guid language, Guid languageVendor, Guid documentType, out ISymUnmanagedDocument document)
+        public int GetDocument(
+            string url,
+            Guid language,
+            Guid languageVendor,
+            Guid documentType,
+            out ISymUnmanagedDocument document
+        )
         {
             throw new NotImplementedException();
         }
@@ -87,27 +111,50 @@ namespace Roslyn.Test.Utilities
             throw new NotImplementedException();
         }
 
-        public int GetVariables(int methodToken, int bufferLength, out int count, ISymUnmanagedVariable[] variables)
+        public int GetVariables(
+            int methodToken,
+            int bufferLength,
+            out int count,
+            ISymUnmanagedVariable[] variables
+        )
         {
             throw new NotImplementedException();
         }
 
-        public int GetGlobalVariables(int bufferLength, out int count, ISymUnmanagedVariable[] variables)
+        public int GetGlobalVariables(
+            int bufferLength,
+            out int count,
+            ISymUnmanagedVariable[] variables
+        )
         {
             throw new NotImplementedException();
         }
 
-        public int GetMethodFromDocumentPosition(ISymUnmanagedDocument document, int line, int column, out ISymUnmanagedMethod method)
+        public int GetMethodFromDocumentPosition(
+            ISymUnmanagedDocument document,
+            int line,
+            int column,
+            out ISymUnmanagedMethod method
+        )
         {
             throw new NotImplementedException();
         }
 
-        public int GetNamespaces(int bufferLength, out int count, ISymUnmanagedNamespace[] namespaces)
+        public int GetNamespaces(
+            int bufferLength,
+            out int count,
+            ISymUnmanagedNamespace[] namespaces
+        )
         {
             throw new NotImplementedException();
         }
 
-        public int Initialize(object metadataImporter, string fileName, string searchPath, IStream stream)
+        public int Initialize(
+            object metadataImporter,
+            string fileName,
+            string searchPath,
+            IStream stream
+        )
         {
             throw new NotImplementedException();
         }
@@ -127,12 +174,23 @@ namespace Roslyn.Test.Utilities
             throw new NotImplementedException();
         }
 
-        public int GetMethodsFromDocumentPosition(ISymUnmanagedDocument document, int line, int column, int bufferLength, out int count, ISymUnmanagedMethod[] methods)
+        public int GetMethodsFromDocumentPosition(
+            ISymUnmanagedDocument document,
+            int line,
+            int column,
+            int bufferLength,
+            out int count,
+            ISymUnmanagedMethod[] methods
+        )
         {
             throw new NotImplementedException();
         }
 
-        public int GetDocumentVersion(ISymUnmanagedDocument document, out int version, out bool isCurrent)
+        public int GetDocumentVersion(
+            ISymUnmanagedDocument document,
+            out int version,
+            out bool isCurrent
+        )
         {
             throw new NotImplementedException();
         }
@@ -142,22 +200,44 @@ namespace Roslyn.Test.Utilities
             throw new NotImplementedException();
         }
 
-        public int GetMethodByVersionPreRemap(int methodToken, int version, out ISymUnmanagedMethod method)
+        public int GetMethodByVersionPreRemap(
+            int methodToken,
+            int version,
+            out ISymUnmanagedMethod method
+        )
         {
             throw new NotImplementedException();
         }
 
-        public int GetSymAttributePreRemap(int methodToken, string name, int bufferLength, out int count, byte[] customDebugInformation)
+        public int GetSymAttributePreRemap(
+            int methodToken,
+            string name,
+            int bufferLength,
+            out int count,
+            byte[] customDebugInformation
+        )
         {
             throw new NotImplementedException();
         }
 
-        public int GetMethodsInDocument(ISymUnmanagedDocument document, int bufferLength, out int count, ISymUnmanagedMethod[] methods)
+        public int GetMethodsInDocument(
+            ISymUnmanagedDocument document,
+            int bufferLength,
+            out int count,
+            ISymUnmanagedMethod[] methods
+        )
         {
             throw new NotImplementedException();
         }
 
-        public int GetSymAttributeByVersionPreRemap(int methodToken, int version, string name, int bufferLength, out int count, byte[] customDebugInformation)
+        public int GetSymAttributeByVersionPreRemap(
+            int methodToken,
+            int version,
+            string name,
+            int bufferLength,
+            out int count,
+            byte[] customDebugInformation
+        )
         {
             throw new NotImplementedException();
         }
@@ -184,7 +264,16 @@ namespace Roslyn.Test.Utilities
             return HResult.S_OK;
         }
 
-        int ISymUnmanagedMethod.GetSequencePoints(int cPoints, out int pcPoints, int[] offsets, ISymUnmanagedDocument[] documents, int[] lines, int[] columns, int[] endLines, int[] endColumns)
+        int ISymUnmanagedMethod.GetSequencePoints(
+            int cPoints,
+            out int pcPoints,
+            int[] offsets,
+            ISymUnmanagedDocument[] documents,
+            int[] lines,
+            int[] columns,
+            int[] endLines,
+            int[] endColumns
+        )
         {
             pcPoints = 1;
             offsets[0] = 0;
@@ -201,17 +290,33 @@ namespace Roslyn.Test.Utilities
             throw new NotImplementedException();
         }
 
-        int ISymUnmanagedMethod.GetOffset(ISymUnmanagedDocument document, int line, int column, out int retVal)
+        int ISymUnmanagedMethod.GetOffset(
+            ISymUnmanagedDocument document,
+            int line,
+            int column,
+            out int retVal
+        )
         {
             throw new NotImplementedException();
         }
 
-        int ISymUnmanagedMethod.GetParameters(int cParams, out int pcParams, ISymUnmanagedVariable[] parms)
+        int ISymUnmanagedMethod.GetParameters(
+            int cParams,
+            out int pcParams,
+            ISymUnmanagedVariable[] parms
+        )
         {
             throw new NotImplementedException();
         }
 
-        int ISymUnmanagedMethod.GetRanges(ISymUnmanagedDocument document, int line, int column, int cRanges, out int pcRanges, int[] ranges)
+        int ISymUnmanagedMethod.GetRanges(
+            ISymUnmanagedDocument document,
+            int line,
+            int column,
+            int cRanges,
+            out int pcRanges,
+            int[] ranges
+        )
         {
             throw new NotImplementedException();
         }
@@ -221,7 +326,12 @@ namespace Roslyn.Test.Utilities
             throw new NotImplementedException();
         }
 
-        int ISymUnmanagedMethod.GetSourceStartEnd(ISymUnmanagedDocument[] docs, int[] lines, int[] columns, out bool retVal)
+        int ISymUnmanagedMethod.GetSourceStartEnd(
+            ISymUnmanagedDocument[] docs,
+            int[] lines,
+            int[] columns,
+            out bool retVal
+        )
         {
             throw new NotImplementedException();
         }
@@ -240,7 +350,13 @@ namespace Roslyn.Test.Utilities
         private readonly int _startOffset;
         private readonly int _endOffset;
 
-        public MockSymUnmanagedScope(ImmutableArray<ISymUnmanagedScope> children, ImmutableArray<ISymUnmanagedNamespace> namespaces, ISymUnmanagedConstant[] constants = null, int startOffset = 0, int endOffset = 1)
+        public MockSymUnmanagedScope(
+            ImmutableArray<ISymUnmanagedScope> children,
+            ImmutableArray<ISymUnmanagedNamespace> namespaces,
+            ISymUnmanagedConstant[] constants = null,
+            int startOffset = 0,
+            int endOffset = 1
+        )
         {
             _children = children;
             _namespaces = namespaces;
@@ -301,7 +417,11 @@ namespace Roslyn.Test.Utilities
             return HResult.S_OK;
         }
 
-        public int GetConstants(int cConstants, out int pcConstants, ISymUnmanagedConstant[] constants)
+        public int GetConstants(
+            int cConstants,
+            out int pcConstants,
+            ISymUnmanagedConstant[] constants
+        )
         {
             pcConstants = _constants.Length;
             if (constants != null)
@@ -333,12 +453,20 @@ namespace Roslyn.Test.Utilities
             return 0;
         }
 
-        int ISymUnmanagedNamespace.GetNamespaces(int cNameSpaces, out int pcNameSpaces, ISymUnmanagedNamespace[] namespaces)
+        int ISymUnmanagedNamespace.GetNamespaces(
+            int cNameSpaces,
+            out int pcNameSpaces,
+            ISymUnmanagedNamespace[] namespaces
+        )
         {
             throw new NotImplementedException();
         }
 
-        int ISymUnmanagedNamespace.GetVariables(int cVars, out int pcVars, ISymUnmanagedVariable[] pVars)
+        int ISymUnmanagedNamespace.GetVariables(
+            int cVars,
+            out int pcVars,
+            ISymUnmanagedVariable[] pVars
+        )
         {
             throw new NotImplementedException();
         }
@@ -352,7 +480,11 @@ namespace Roslyn.Test.Utilities
         private readonly object _value;
         private readonly GetSignatureDelegate _getSignature;
 
-        public MockSymUnmanagedConstant(string name, object value, GetSignatureDelegate getSignature)
+        public MockSymUnmanagedConstant(
+            string name,
+            object value,
+            GetSignatureDelegate getSignature
+        )
         {
             _name = name;
             _value = value;
@@ -384,7 +516,12 @@ namespace Roslyn.Test.Utilities
 
     internal static class MockSymUnmanagedHelpers
     {
-        public static void TwoPhaseCopy<T>(this ImmutableArray<T> source, int numDesired, out int numRead, T[] destination)
+        public static void TwoPhaseCopy<T>(
+            this ImmutableArray<T> source,
+            int numDesired,
+            out int numRead,
+            T[] destination
+        )
         {
             if (destination == null)
             {

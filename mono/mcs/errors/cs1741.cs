@@ -3,7 +3,5 @@
 
 public class C
 {
-    public void Test (ref bool a = true)
-    {
-    }
+    public void Test(ref bool a = true) { }
 }

@@ -5,7 +5,7 @@ public struct S
 {
     int f;
 
-    public ref S Foo ()
+    public ref S Foo()
     {
         return ref f;
     }

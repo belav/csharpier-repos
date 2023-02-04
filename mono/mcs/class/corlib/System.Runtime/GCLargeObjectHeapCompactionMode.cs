@@ -35,4 +35,3 @@ namespace System.Runtime
         CompactOnce = 2
     }
 }
-

@@ -39,7 +39,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
 
             Assert.Equal(strings.Length, idcol.Count);
             Assert.True(Enumerable.SequenceEqual(strings.OrderBy(x => x), idcol.OrderBy(x => x)));
-            Assert.Equal(idcol.GetEnumerator().GetType(), ((System.Collections.IEnumerable)idcol).GetEnumerator().GetType());
+            Assert.Equal(
+                idcol.GetEnumerator().GetType(),
+                ((System.Collections.IEnumerable)idcol).GetEnumerator().GetType()
+            );
 
             AssertContains(idcol, strings);
             AssertNotContains(idcol, strings.Select(s => s.ToUpper()));
@@ -56,7 +59,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
 
             Assert.Equal(strings.Length, idcol.Count);
             Assert.True(Enumerable.SequenceEqual(strings.OrderBy(x => x), idcol.OrderBy(x => x)));
-            Assert.Equal(idcol.GetEnumerator().GetType(), ((System.Collections.IEnumerable)idcol).GetEnumerator().GetType());
+            Assert.Equal(
+                idcol.GetEnumerator().GetType(),
+                ((System.Collections.IEnumerable)idcol).GetEnumerator().GetType()
+            );
 
             AssertContains(idcol, strings);
             AssertContains(idcol, strings.Select(s => s.ToUpper()));

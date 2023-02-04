@@ -6,9 +6,9 @@ class X
 {
     private static Y y;
 
-    public static void Main ()
+    public static void Main()
     {
-        y = new Y ();
+        y = new Y();
 
         object o = y.Foo.Hello;
     }
@@ -16,10 +16,14 @@ class X
 
 class Y
 {
-    public enum Foo { Hello, World };
-
-    public void Test (Foo foo)
+    public enum Foo
     {
-        Console.WriteLine (foo);
+        Hello,
+        World
+    };
+
+    public void Test(Foo foo)
+    {
+        Console.WriteLine(foo);
     }
 }

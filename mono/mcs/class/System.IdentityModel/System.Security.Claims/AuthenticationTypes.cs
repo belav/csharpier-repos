@@ -1,6 +1,7 @@
-namespace System.Security.Claims {
-
-    public static class AuthenticationTypes {
+namespace System.Security.Claims
+{
+    public static class AuthenticationTypes
+    {
         public const string Basic = "Basic";
         public const string Federation = "Federation";
         public const string Kerberos = "Kerberos";

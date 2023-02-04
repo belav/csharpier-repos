@@ -4,11 +4,13 @@
 
 using System;
 
-class A {
+class A
+{
     [Obsolete]
     public virtual event EventHandler MyEvent;
 }
 
-class B : A {
+class B : A
+{
     public override event EventHandler MyEvent;
 }

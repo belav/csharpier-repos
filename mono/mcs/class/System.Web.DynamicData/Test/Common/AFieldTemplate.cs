@@ -9,24 +9,24 @@ namespace MonoTests.Common
 {
     class AFieldTemplate : ITemplate
     {
-        public List <Control> Controls { get; private set; }
+        public List<Control> Controls { get; private set; }
 
-        public AFieldTemplate ()
+        public AFieldTemplate()
         {
-            Controls = new List<Control> ();
+            Controls = new List<Control>();
         }
 
-        public void InstantiateIn (Control container)
+        public void InstantiateIn(Control container)
         {
             if (container == null)
                 return;
 
-            List <Control> controls = Controls;
+            List<Control> controls = Controls;
             if (controls.Count == 0)
                 return;
 
             foreach (Control c in controls)
-                container.Controls.Add (c);
+                container.Controls.Add(c);
         }
     }
 }

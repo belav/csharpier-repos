@@ -3,22 +3,18 @@
 
 public class A
 {
-    public static void Foo ()
-    {
-    }
+    public static void Foo() { }
 }
 
 public class Test
 {
     static A Prop
     {
-        get {
-            return null;
-        }
+        get { return null; }
     }
 
-    public static void Main ()
+    public static void Main()
     {
-        Test.Prop.Foo ();
+        Test.Prop.Foo();
     }
 }

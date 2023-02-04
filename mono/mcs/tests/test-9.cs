@@ -1,7 +1,11 @@
-class X {
-    public static int Main (string [] args)
+class X
+{
+    public static int Main(string[] args)
     {
-        decimal a, b, c, d;
+        decimal a,
+            b,
+            c,
+            d;
 
         a = 0;
         b = 1;
@@ -18,7 +22,7 @@ class X {
 
         if (!(c == d))
             return 4;
-        
+
         return 0;
     }
 }

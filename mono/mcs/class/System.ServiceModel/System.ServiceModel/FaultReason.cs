@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,56 +36,57 @@ namespace System.ServiceModel
 {
     public class FaultReason
     {
-        List<FaultReasonText> trans = new List<FaultReasonText> ();
+        List<FaultReasonText> trans = new List<FaultReasonText>();
         TextList public_trans;
 
-        public FaultReason (FaultReasonText translation)
+        public FaultReason(FaultReasonText translation)
         {
             if (translation == null)
-                throw new ArgumentNullException ("translation");
-            trans.Add (translation);
+                throw new ArgumentNullException("translation");
+            trans.Add(translation);
         }
 
-        public FaultReason (IEnumerable<FaultReasonText> translations)
+        public FaultReason(IEnumerable<FaultReasonText> translations)
         {
             if (translations == null)
-                throw new ArgumentNullException ("translations");
+                throw new ArgumentNullException("translations");
             foreach (FaultReasonText t in translations)
-                trans.Add (t);
+                trans.Add(t);
             if (trans.Count == 0)
-                throw new ArgumentException ("The argument list should contain at least one fault reason text.");
+                throw new ArgumentException(
+                    "The argument list should contain at least one fault reason text."
+                );
         }
 
-        public FaultReason (string text)
-            : this (new FaultReasonText (text))
+        public FaultReason(string text)
+            : this(new FaultReasonText(text)) { }
+
+        public TextList Translations
         {
-        }
-
-        public TextList Translations {
-            get {
+            get
+            {
                 if (public_trans == null)
-                    public_trans = new TextList (new object (), trans);
+                    public_trans = new TextList(new object(), trans);
                 return public_trans;
             }
         }
 
-        public FaultReasonText GetMatchingTranslation ()
+        public FaultReasonText GetMatchingTranslation()
         {
-            return GetMatchingTranslation (CultureInfo.CurrentCulture);
+            return GetMatchingTranslation(CultureInfo.CurrentCulture);
         }
 
-        public FaultReasonText GetMatchingTranslation (
-            CultureInfo cultureInfo)
+        public FaultReasonText GetMatchingTranslation(CultureInfo cultureInfo)
         {
             foreach (FaultReasonText t in trans)
-                if (t.Matches (cultureInfo))
+                if (t.Matches(cultureInfo))
                     return t;
-            return trans [0];
+            return trans[0];
         }
 
-        public override string ToString ()
+        public override string ToString()
         {
-            return GetMatchingTranslation ().Text;
+            return GetMatchingTranslation().Text;
         }
     }
 }

@@ -16,9 +16,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.CommentSelection
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpCommentSelectionService()
-        {
-        }
+        public CSharpCommentSelectionService() { }
 
         public override string SingleLineCommentString => "//";
         public override bool SupportsBlockComment => true;

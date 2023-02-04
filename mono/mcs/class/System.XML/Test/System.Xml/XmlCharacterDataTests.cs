@@ -24,12 +24,12 @@ namespace MonoTests.System.Xml
         bool changing;
 
         [SetUp]
-        public void GetReady ()
+        public void GetReady()
         {
-            document = new XmlDocument ();
-            document.NodeChanged += new XmlNodeChangedEventHandler (this.EventNodeChanged);
-            document.NodeChanging += new XmlNodeChangedEventHandler (this.EventNodeChanging);
-            comment = document.CreateComment ("foo");
+            document = new XmlDocument();
+            document.NodeChanged += new XmlNodeChangedEventHandler(this.EventNodeChanged);
+            document.NodeChanging += new XmlNodeChangedEventHandler(this.EventNodeChanging);
+            comment = document.CreateComment("foo");
         }
 
         private void EventNodeChanged(Object sender, XmlNodeChangedEventArgs e)
@@ -37,170 +37,170 @@ namespace MonoTests.System.Xml
             changed = true;
         }
 
-        private void EventNodeChanging (Object sender, XmlNodeChangedEventArgs e)
+        private void EventNodeChanging(Object sender, XmlNodeChangedEventArgs e)
         {
             changing = true;
         }
 
         [Test]
-        public void AppendData ()
+        public void AppendData()
         {
             changed = false;
             changing = false;
-            comment.AppendData ("bar");
-            Assert.IsTrue (changed);
-            Assert.IsTrue (changing);
-            Assert.AreEqual ("foobar", comment.Data);
+            comment.AppendData("bar");
+            Assert.IsTrue(changed);
+            Assert.IsTrue(changing);
+            Assert.AreEqual("foobar", comment.Data);
 
             comment.Value = "foo";
-            comment.AppendData (null);
-            Assert.AreEqual ("foo", comment.Data);
+            comment.AppendData(null);
+            Assert.AreEqual("foo", comment.Data);
         }
 
         [Test]
-        public void DeleteData ()
+        public void DeleteData()
         {
             comment.Value = "bar";
             changed = false;
             changing = false;
-            comment.DeleteData (1, 1);
-            Assert.IsTrue (changed);
-            Assert.IsTrue (changing);
-            Assert.AreEqual ("br", comment.Data);
+            comment.DeleteData(1, 1);
+            Assert.IsTrue(changed);
+            Assert.IsTrue(changing);
+            Assert.AreEqual("br", comment.Data);
 
-            try 
+            try
             {
                 comment.Value = "foo";
                 comment.DeleteData(-1, 1);
-                Assert.Fail ("Expected an ArgumentOutOfRangeException to be thrown.");
-            } 
-            catch (ArgumentOutOfRangeException) {}
+                Assert.Fail("Expected an ArgumentOutOfRangeException to be thrown.");
+            }
+            catch (ArgumentOutOfRangeException) { }
 
             comment.Value = "foo";
             comment.DeleteData(1, 5);
-            Assert.AreEqual ("f", comment.Data);
+            Assert.AreEqual("f", comment.Data);
 
             comment.Value = "foo";
             comment.DeleteData(3, 10);
-            Assert.AreEqual ("foo", comment.Data);
+            Assert.AreEqual("foo", comment.Data);
         }
 
         [Test]
-        [Category ("NotDotNet")] // enbug in 2.0
-        [Ignore ("bug in Microsoft sources")]
-        public void InsertData ()
+        [Category("NotDotNet")] // enbug in 2.0
+        [Ignore("bug in Microsoft sources")]
+        public void InsertData()
         {
             comment.Value = "foobaz";
             changed = false;
             changing = false;
-            comment.InsertData (3, "bar");
-            Assert.IsTrue (changed);
-            Assert.IsTrue (changing);
-            Assert.AreEqual ("foobarbaz", comment.Data);
+            comment.InsertData(3, "bar");
+            Assert.IsTrue(changed);
+            Assert.IsTrue(changing);
+            Assert.AreEqual("foobarbaz", comment.Data);
 
-            try 
+            try
             {
                 comment.Value = "foo";
-                comment.InsertData (-1, "bar");
-                Assert.Fail ("Expected an ArgumentOutOfRangeException to be thrown.");
-            } 
-            catch (ArgumentOutOfRangeException) {}
+                comment.InsertData(-1, "bar");
+                Assert.Fail("Expected an ArgumentOutOfRangeException to be thrown.");
+            }
+            catch (ArgumentOutOfRangeException) { }
 
             comment.Value = "foo";
-            comment.InsertData (3, "bar");
-            Assert.AreEqual ("foobar", comment.Data);
+            comment.InsertData(3, "bar");
+            Assert.AreEqual("foobar", comment.Data);
 
-            try 
+            try
             {
                 comment.Value = "foo";
-                comment.InsertData (4, "bar");
-                Assert.Fail ("Expected an ArgumentOutOfRangeException to be thrown.");
-            } 
-            catch (ArgumentOutOfRangeException) {}
+                comment.InsertData(4, "bar");
+                Assert.Fail("Expected an ArgumentOutOfRangeException to be thrown.");
+            }
+            catch (ArgumentOutOfRangeException) { }
 
-            try 
+            try
             {
                 comment.Value = "foo";
-                comment.InsertData (1, null);
-                Assert.Fail ("Expected an ArgumentNullException to be thrown.");
-            } 
-            catch (ArgumentNullException) {}
+                comment.InsertData(1, null);
+                Assert.Fail("Expected an ArgumentNullException to be thrown.");
+            }
+            catch (ArgumentNullException) { }
         }
 
         [Test]
-        [Category ("NotDotNet")] // enbug in 2.0
-        [Ignore ("bug in Microsoft sources")]
-        public void ReplaceData ()
+        [Category("NotDotNet")] // enbug in 2.0
+        [Ignore("bug in Microsoft sources")]
+        public void ReplaceData()
         {
             changed = false;
             changing = false;
-            comment.ReplaceData (0, 3, "bar");
-            Assert.IsTrue (changed);
-            Assert.IsTrue (changing);
-            Assert.AreEqual ("bar", comment.Data);
+            comment.ReplaceData(0, 3, "bar");
+            Assert.IsTrue(changed);
+            Assert.IsTrue(changing);
+            Assert.AreEqual("bar", comment.Data);
 
             comment.Value = "foo";
-            comment.ReplaceData (2, 3, "bar");
-            Assert.AreEqual ("fobar", comment.Data);
+            comment.ReplaceData(2, 3, "bar");
+            Assert.AreEqual("fobar", comment.Data);
 
             comment.Value = "foo";
-            comment.ReplaceData (3, 3, "bar");
-            Assert.AreEqual ("foobar", comment.Data);
+            comment.ReplaceData(3, 3, "bar");
+            Assert.AreEqual("foobar", comment.Data);
 
-            try 
+            try
             {
                 comment.Value = "foo";
-                comment.ReplaceData (4, 3, "bar");
-                Assert.Fail ("Expected an ArgumentOutOfRangeException to be thrown.");
-            } 
-            catch (ArgumentOutOfRangeException) {}
+                comment.ReplaceData(4, 3, "bar");
+                Assert.Fail("Expected an ArgumentOutOfRangeException to be thrown.");
+            }
+            catch (ArgumentOutOfRangeException) { }
 
-            try 
+            try
             {
                 comment.Value = "foo";
-                comment.ReplaceData (-1, 3, "bar");
-                Assert.Fail ("Expected an ArgumentOutOfRangeException to be thrown.");
-            } 
-            catch (ArgumentOutOfRangeException) {}
+                comment.ReplaceData(-1, 3, "bar");
+                Assert.Fail("Expected an ArgumentOutOfRangeException to be thrown.");
+            }
+            catch (ArgumentOutOfRangeException) { }
 
             comment.Value = "foo";
-            comment.ReplaceData (0, 2, "bar");
-            Assert.AreEqual ("baro", comment.Data);
+            comment.ReplaceData(0, 2, "bar");
+            Assert.AreEqual("baro", comment.Data);
 
             comment.Value = "foo";
-            comment.ReplaceData (0, 5, "bar");
-            Assert.AreEqual ("bar", comment.Data);
+            comment.ReplaceData(0, 5, "bar");
+            Assert.AreEqual("bar", comment.Data);
 
-            try 
+            try
             {
                 comment.Value = "foo";
-                comment.ReplaceData (1, 1, null);
-                Assert.Fail ("Expected an ArgumentNullException to be thrown.");
-            } 
-            catch (ArgumentNullException) {}
+                comment.ReplaceData(1, 1, null);
+                Assert.Fail("Expected an ArgumentNullException to be thrown.");
+            }
+            catch (ArgumentNullException) { }
         }
 
         [Test]
-        public void Substring ()
+        public void Substring()
         {
             comment.Value = "test string";
-            Assert.AreEqual (comment.Substring (0, 50), "test string");
+            Assert.AreEqual(comment.Substring(0, 50), "test string");
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentOutOfRangeException))]
-        public void SubstringStartOutOfRange ()
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void SubstringStartOutOfRange()
         {
             comment.Value = "test string";
-            comment.Substring (-5, 10);
+            comment.Substring(-5, 10);
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentOutOfRangeException))]
-        public void SubstringCountOutOfRange ()
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void SubstringCountOutOfRange()
         {
             comment.Value = "test string";
-            comment.Substring (10, -5);
+            comment.Substring(10, -5);
         }
     }
 }

@@ -1,28 +1,28 @@
 using System;
 
-public delegate void Foo ();
+public delegate void Foo();
 
 public class World
 {
-    public void Hello (long a)
-    { }
+    public void Hello(long a) { }
 
-    public void Test (int t)
+    public void Test(int t)
     {
-        Hello (t);
+        Hello(t);
         int u = 2 * t;
-        Foo foo = delegate {
-            Hello (u);
+        Foo foo = delegate
+        {
+            Hello(u);
         };
-        foo ();
+        foo();
     }
 }
 
 class X
 {
-    public static void Main ()
+    public static void Main()
     {
-        World world = new World ();
-        world.Test (5);
+        World world = new World();
+        world.Test(5);
     }
 }

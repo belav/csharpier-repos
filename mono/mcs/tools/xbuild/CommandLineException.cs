@@ -30,56 +30,55 @@
 using System;
 using System.Runtime.Serialization;
 
-namespace Mono.XBuild.CommandLine {
+namespace Mono.XBuild.CommandLine
+{
     [Serializable]
-    public class CommandLineException : Exception {
+    public class CommandLineException : Exception
+    {
         int errorCode;
-        
-        public CommandLineException ()
-            : base ("Unknown command line exception has occured.")
-        {
-        }
-        
-        public CommandLineException (string message)
-            : base (message) 
-        {
-        }
-        
-        public CommandLineException (string message, int errorCode)
-            : base (message)
+
+        public CommandLineException()
+            : base("Unknown command line exception has occured.") { }
+
+        public CommandLineException(string message)
+            : base(message) { }
+
+        public CommandLineException(string message, int errorCode)
+            : base(message)
         {
             this.errorCode = errorCode;
         }
-        
-        public CommandLineException (string message, Exception innerException)
-            : base (message, innerException)
-        {
-        }
-        
-        public CommandLineException (string message, Exception innerException, int errorCode)
-            : base (message, innerException)
+
+        public CommandLineException(string message, Exception innerException)
+            : base(message, innerException) { }
+
+        public CommandLineException(string message, Exception innerException, int errorCode)
+            : base(message, innerException)
         {
             this.errorCode = errorCode;
         }
-        
-        public CommandLineException (SerializationInfo info, StreamingContext context)
-            : base (info, context)
+
+        public CommandLineException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
         {
-            errorCode = info.GetInt32 ("ErrorCode");
+            errorCode = info.GetInt32("ErrorCode");
         }
-        
-        public override void GetObjectData (SerializationInfo info, StreamingContext context)
+
+        public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            base.GetObjectData (info, context);
-            info.AddValue ("ErrorCode", errorCode);
+            base.GetObjectData(info, context);
+            info.AddValue("ErrorCode", errorCode);
         }
-        
-        public int ErrorCode {
+
+        public int ErrorCode
+        {
             get { return errorCode; }
         }
 
-        public override string Message {
-            get {
+        public override string Message
+        {
+            get
+            {
                 if (InnerException != null)
                     return base.Message + ": " + InnerException.Message;
                 else
@@ -88,4 +87,3 @@ namespace Mono.XBuild.CommandLine {
         }
     }
 }
-

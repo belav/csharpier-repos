@@ -3,25 +3,23 @@
 
 using System;
 
-delegate void Foo ();
+delegate void Foo();
 
-interface IList 
+interface IList
 {
     event Foo Test;
 }
 
-interface ICounter 
+interface ICounter
 {
     event Foo Test;
 }
 
-interface IListCounter: IList, ICounter
-{
-}
+interface IListCounter : IList, ICounter { }
 
 class Test
 {
-    static void Foo (IListCounter t)
+    static void Foo(IListCounter t)
     {
         t.Test += null;
     }

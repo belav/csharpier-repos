@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -37,7 +37,6 @@ using MonoTests.stand_alone.WebHarness;
 using MonoTests.SystemWeb.Framework;
 
 namespace MonoTests.System.Web.UI.WebControls
-
 {
     class PokerHotSpot : HotSpot
     {
@@ -73,6 +72,7 @@ namespace MonoTests.System.Web.UI.WebControls
         {
             get { return (""); }
         }
+
         public override string GetCoordinates()
         {
             return ("");
@@ -82,7 +82,6 @@ namespace MonoTests.System.Web.UI.WebControls
     [TestFixture]
     public class HotSpotTest
     {
-
         [Test]
         public void HotSpot_DefaultProperties()
         {
@@ -172,10 +171,10 @@ namespace MonoTests.System.Web.UI.WebControls
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void HotSpot_ExpAccessKey()
         {
-            // The specified access key is neither a a null reference, 
-            // an empty string (""), nor a single character string. 
+            // The specified access key is neither a a null reference,
+            // an empty string (""), nor a single character string.
             PokerHotSpot hotSpot = new PokerHotSpot();
-            hotSpot.AccessKey = "abc"; 
+            hotSpot.AccessKey = "abc";
         }
 
         [Test]
@@ -198,5 +197,3 @@ namespace MonoTests.System.Web.UI.WebControls
         //}
     }
 }
-
-

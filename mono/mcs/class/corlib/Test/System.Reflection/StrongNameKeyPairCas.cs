@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,101 +36,103 @@ using System.Security.Permissions;
 
 using MonoTests.System.Reflection;
 
-namespace MonoCasTests.System.Reflection {
-
+namespace MonoCasTests.System.Reflection
+{
     [TestFixture]
-    [Category ("CAS")]
-    public class StrongNameKeyPairCas {
-
+    [Category("CAS")]
+    public class StrongNameKeyPairCas
+    {
         [SetUp]
-        public void SetUp ()
+        public void SetUp()
         {
             if (!SecurityManager.SecurityEnabled)
-                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+                Assert.Ignore("SecurityManager.SecurityEnabled is OFF");
         }
 
         // Partial Trust Tests
 
         [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        [ExpectedException (typeof (SecurityException))]
-        public void CtorByteArray_Deny_Unrestricted ()
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        [ExpectedException(typeof(SecurityException))]
+        public void CtorByteArray_Deny_Unrestricted()
         {
-            new StrongNameKeyPair ((byte[])null);
+            new StrongNameKeyPair((byte[])null);
         }
 
         [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        [ExpectedException (typeof (SecurityException))]
-        public void CtorFileStream_Deny_Unrestricted ()
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        [ExpectedException(typeof(SecurityException))]
+        public void CtorFileStream_Deny_Unrestricted()
         {
-            new StrongNameKeyPair ((FileStream)null);
+            new StrongNameKeyPair((FileStream)null);
         }
 
         [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        [ExpectedException (typeof (SecurityException))]
-        public void CtorKeyContainer_Deny_Unrestricted ()
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        [ExpectedException(typeof(SecurityException))]
+        public void CtorKeyContainer_Deny_Unrestricted()
         {
-            new StrongNameKeyPair ((string)null);
+            new StrongNameKeyPair((string)null);
         }
 
         [Test]
-        public void PublicKey_Deny_Unrestricted ()
+        public void PublicKey_Deny_Unrestricted()
         {
-            PublicKey (new StrongNameKeyPair (StrongNameKeyPairTest.GetKey ()));
+            PublicKey(new StrongNameKeyPair(StrongNameKeyPairTest.GetKey()));
         }
 
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        private void PublicKey (StrongNameKeyPair snkp)
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        private void PublicKey(StrongNameKeyPair snkp)
         {
-            Assert.IsNotNull (snkp.PublicKey, "PublicKey");
+            Assert.IsNotNull(snkp.PublicKey, "PublicKey");
         }
 
         // Partial Trust - Working (minimal permissions)
 
         [Test]
-        [SecurityPermission (SecurityAction.PermitOnly, UnmanagedCode = true)]
-        public void CtorByteArray_PermitOnly_UnmanagedCode ()
+        [SecurityPermission(SecurityAction.PermitOnly, UnmanagedCode = true)]
+        public void CtorByteArray_PermitOnly_UnmanagedCode()
         {
-            StrongNameKeyPairTest snkpt = new StrongNameKeyPairTest ();
-            snkpt.ConstructorByteArray ();
-            snkpt.ConstructorECMAByteArray ();
+            StrongNameKeyPairTest snkpt = new StrongNameKeyPairTest();
+            snkpt.ConstructorByteArray();
+            snkpt.ConstructorECMAByteArray();
         }
 
         [Test]
-        public void CtorFileStream_PermitOnly_UnmanagedCodeFileIOPermission ()
+        public void CtorFileStream_PermitOnly_UnmanagedCodeFileIOPermission()
         {
-            StrongNameKeyPairTest snkpt = new StrongNameKeyPairTest ();
+            StrongNameKeyPairTest snkpt = new StrongNameKeyPairTest();
             FileStream fs = null;
-            try {
-                snkpt.SetUp ();
-                string filename = snkpt.CreateSnkFile ();
-                fs = new FileStream (filename, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
-                // we needed too much permissions before calling the 
+            try
+            {
+                snkpt.SetUp();
+                string filename = snkpt.CreateSnkFile();
+                fs = new FileStream(filename, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+                // we needed too much permissions before calling the
                 // interesting part, so the test is splitted in two
-                CtorFileStream (fs);
+                CtorFileStream(fs);
             }
-            finally {
+            finally
+            {
                 if (fs != null)
-                    fs.Close ();
-                snkpt.TearDown ();
+                    fs.Close();
+                snkpt.TearDown();
             }
         }
 
-        [SecurityPermission (SecurityAction.PermitOnly, UnmanagedCode = true)]
-        private void CtorFileStream (FileStream fs)
+        [SecurityPermission(SecurityAction.PermitOnly, UnmanagedCode = true)]
+        private void CtorFileStream(FileStream fs)
         {
-            new StrongNameKeyPair (fs);
+            new StrongNameKeyPair(fs);
         }
 
         [Test]
-        [SecurityPermission (SecurityAction.PermitOnly, UnmanagedCode = true)]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void CtorKeyContainer_PermitOnly_UnmanagedCode () 
+        [SecurityPermission(SecurityAction.PermitOnly, UnmanagedCode = true)]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void CtorKeyContainer_PermitOnly_UnmanagedCode()
         {
-            StrongNameKeyPairTest snkpt = new StrongNameKeyPairTest ();
-            snkpt.ConstructorNullString ();
+            StrongNameKeyPairTest snkpt = new StrongNameKeyPairTest();
+            snkpt.ConstructorNullString();
         }
     }
 }

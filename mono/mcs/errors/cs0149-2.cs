@@ -1,20 +1,19 @@
 // CS0149: Method name expected
 // Line: 17
 
-public class Blah {
+public class Blah
+{
+    public delegate int MyDelegate(int i, int j);
 
-    public delegate int MyDelegate (int i, int j);
-
-    public int Foo (int i, int j)
+    public int Foo(int i, int j)
     {
-        return i+j;
+        return i + j;
     }
 
-    public static void Main ()
+    public static void Main()
     {
-        Blah i = new Blah ();
+        Blah i = new Blah();
 
-        MyDelegate del = new MyDelegate ();
+        MyDelegate del = new MyDelegate();
     }
 }
-

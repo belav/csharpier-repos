@@ -37,15 +37,14 @@ namespace MonoTests.System.Collections.Generic
     public class IListTest
     {
         [Test] // bug #80260
-        public void CastToArray ()
+        public void CastToArray()
         {
             IList<string> list = new string[] { "foo", "bar" };
-            string[] array = (string[]) list;
-            Assert.IsNotNull (array, "#1");
-            Assert.AreEqual (2, array.Length, "#2");
-            Assert.AreEqual ("foo", array [0], "#3");
-            Assert.AreEqual ("bar", array [1], "#4");
+            string[] array = (string[])list;
+            Assert.IsNotNull(array, "#1");
+            Assert.AreEqual(2, array.Length, "#2");
+            Assert.AreEqual("foo", array[0], "#3");
+            Assert.AreEqual("bar", array[1], "#4");
         }
     }
 }
-

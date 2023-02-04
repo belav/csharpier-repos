@@ -13,14 +13,14 @@ public sealed class TagHelperBinding
         IReadOnlyList<KeyValuePair<string, string>> attributes,
         string parentTagName,
         IReadOnlyDictionary<TagHelperDescriptor, IReadOnlyList<TagMatchingRuleDescriptor>> mappings,
-        string tagHelperPrefix)
+        string tagHelperPrefix
+    )
     {
         TagName = tagName;
         Attributes = attributes;
         ParentTagName = parentTagName;
         Mappings = mappings;
         TagHelperPrefix = tagHelperPrefix;
-
     }
 
     public IEnumerable<TagHelperDescriptor> Descriptors => Mappings.Keys;
@@ -39,8 +39,12 @@ public sealed class TagHelperBinding
         {
             foreach (var descriptor in Mappings.Keys)
             {
-                if (!descriptor.Metadata.TryGetValue(TagHelperMetadata.Common.ClassifyAttributesOnly, out var value) ||
-                    !string.Equals(value, bool.TrueString, StringComparison.OrdinalIgnoreCase))
+                if (
+                    !descriptor.Metadata.TryGetValue(
+                        TagHelperMetadata.Common.ClassifyAttributesOnly,
+                        out var value
+                    ) || !string.Equals(value, bool.TrueString, StringComparison.OrdinalIgnoreCase)
+                )
                 {
                     return false;
                 }
@@ -61,7 +65,10 @@ public sealed class TagHelperBinding
 
     public IReadOnlyList<KeyValuePair<string, string>> Attributes { get; }
 
-    public IReadOnlyDictionary<TagHelperDescriptor, IReadOnlyList<TagMatchingRuleDescriptor>> Mappings { get; }
+    public IReadOnlyDictionary<
+        TagHelperDescriptor,
+        IReadOnlyList<TagMatchingRuleDescriptor>
+    > Mappings { get; }
 
     public string TagHelperPrefix { get; }
 

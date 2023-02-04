@@ -17,24 +17,25 @@ using Xunit.Abstractions;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicitCast
 {
-    public partial class AddExplicitCastTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    public partial class AddExplicitCastTests
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public AddExplicitCastTests(ITestOutputHelper logger)
-           : base(logger)
-        {
-        }
+            : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (null, new CSharpAddExplicitCastCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) => (null, new CSharpAddExplicitCastCodeFixProvider());
 
-        protected override ImmutableArray<CodeAction> MassageActions(ImmutableArray<CodeAction> actions)
-            => FlattenActions(actions);
+        protected override ImmutableArray<CodeAction> MassageActions(
+            ImmutableArray<CodeAction> actions
+        ) => FlattenActions(actions);
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddExplicitCast)]
         public async Task SimpleVariableDeclaration()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 class Program
 {
     class Base {}
@@ -45,7 +46,7 @@ class Program
         Derived d = [|b|];
     }
 }",
-            @"
+                @"
 class Program
 {
     class Base {}
@@ -55,14 +56,15 @@ class Program
         Base b;
         Derived d = (Derived)b;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddExplicitCast)]
         public async Task SimpleVariableDeclarationWithFunctionInnvocation()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 class Program
 {
     class Base {}
@@ -78,7 +80,7 @@ class Program
         Derived d = [|returnBase()|];
     }
 }",
-            @"
+                @"
 class Program
 {
     class Base {}
@@ -93,14 +95,15 @@ class Program
     {
         Derived d = (Derived)returnBase();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddExplicitCast)]
         public async Task ReturnStatementWithObject()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 class Program
 {
     class Base {}
@@ -111,7 +114,7 @@ class Program
         return b[||];
     }
 }",
-            @"
+                @"
 class Program
 {
     class Base {}
@@ -121,14 +124,15 @@ class Program
         Base b;
         return (Derived)b;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddExplicitCast)]
         public async Task ReturnStatementWithIEnumerable()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 using System.Collections.Generic;
 class Program
 {
@@ -140,7 +144,7 @@ class Program
         return b[||];
     }
 }",
-            @"
+                @"
 using System.Collections.Generic;
 class Program
 {
@@ -151,14 +155,15 @@ class Program
         Base b;
         return (IEnumerable<Derived>)b;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddExplicitCast)]
         public async Task ReturnStatementWithIEnumerator()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 using System.Collections.Generic;
 class Program
 {
@@ -170,7 +175,7 @@ class Program
         return b[||];
     }
 }",
-            @"
+                @"
 using System.Collections.Generic;
 class Program
 {
@@ -181,14 +186,15 @@ class Program
         Base b;
         return (IEnumerator<Derived>)b;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddExplicitCast)]
         public async Task ReturnStatementWithFunctionInnvocation()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 class Program
 {
     class Base {}
@@ -203,7 +209,7 @@ class Program
         return [|returnBase()|];
     }
 }",
-            @"
+                @"
 class Program
 {
     class Base {}
@@ -217,14 +223,15 @@ class Program
     Derived returnDerived() {
         return (Derived)returnBase();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddExplicitCast)]
         public async Task SimpleFunctionArgumentsWithObject1()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 class Program
 {
     class Base {}
@@ -242,7 +249,7 @@ class Program
         passDerived([|b|]);
     }
 }",
-            @"
+                @"
 class Program
 {
     class Base {}
@@ -259,14 +266,15 @@ class Program
         Base b;
         passDerived((Derived)b);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddExplicitCast)]
         public async Task SimpleFunctionArgumentsWithObject2()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 class Program
 {
     class Base {}
@@ -284,7 +292,7 @@ class Program
         passDerived(1, [|b|]);
     }
 }",
-            @"
+                @"
 class Program
 {
     class Base {}
@@ -301,14 +309,15 @@ class Program
         Base b;
         passDerived(1, (Derived)b);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddExplicitCast)]
         public async Task SimpleFunctionArgumentsWithFunctionInvocation()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 class Program
 {
     class Base {}
@@ -325,7 +334,7 @@ class Program
         passDerived([|returnBase()|]);
     }
 }",
-            @"
+                @"
 class Program
 {
     class Base {}
@@ -341,14 +350,15 @@ class Program
     void M() {
         passDerived((Derived)returnBase());
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddExplicitCast)]
         public async Task YieldReturnStatementWithObject()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 using System.Collections.Generic;
 class Program
 {
@@ -360,7 +370,7 @@ class Program
         yield return [|b|];
     }
 }",
-            @"
+                @"
 using System.Collections.Generic;
 class Program
 {
@@ -371,14 +381,15 @@ class Program
         Base b;
         yield return (Derived)b;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddExplicitCast)]
         public async Task SimpleConstructorArgumentsWithObject()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 class Program
 {
     class Base {}
@@ -392,7 +403,7 @@ class Program
         Test t = new Test(b[||]);
     }
 }",
-            @"
+                @"
 class Program
 {
     class Base {}
@@ -405,14 +416,15 @@ class Program
         Base b;
         Test t = new Test((Derived)b);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddExplicitCast)]
         public async Task ReturnTypeWithTask()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 using System.Threading.Tasks;
 
 class Program
@@ -425,7 +437,7 @@ class Program
         return [||]b;
     }
 }",
-            @"
+                @"
 using System.Threading.Tasks;
 
 class Program
@@ -437,14 +449,15 @@ class Program
         Base b;
         return (Derived)b;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddExplicitCast)]
         public async Task VariableDeclarationWithPublicFieldMember()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 class Program
 {
     class Base {}
@@ -460,7 +473,7 @@ class Program
         Derived d = [||]t.b;
     }
 }",
-            @"
+                @"
 class Program
 {
     class Base {}
@@ -475,14 +488,15 @@ class Program
         Test t = new Test(b);
         Derived d = (Derived)t.b;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddExplicitCast)]
         public async Task VariableDeclarationWithPrivateFieldMember()
         {
             await TestMissingInRegularAndScriptAsync(
-            @"
+                @"
 class Program
 {
     class Base {}
@@ -497,14 +511,15 @@ class Program
         Test t = new Test(b);
         Derived d = [||]t.b;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddExplicitCast)]
         public async Task PublicMemberFunctionArgument1()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 using System.Collections.Generic;
 
 class Program
@@ -518,7 +533,7 @@ class Program
         list.Add(b[||]);
     }
 }",
-            @"
+                @"
 using System.Collections.Generic;
 
 class Program
@@ -531,14 +546,15 @@ class Program
         List<Derived> list = new List<Derived>();
         list.Add((Derived)b);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddExplicitCast)]
         public async Task PublicMemberFunctionArgument2()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 class Program
 {
     class Base {}
@@ -553,7 +569,7 @@ class Program
         t.testing(b[||]);
     }
 }",
-            @"
+                @"
 class Program
 {
     class Base {}
@@ -567,14 +583,15 @@ class Program
         Test t;
         t.testing((Derived)b);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddExplicitCast)]
         public async Task PrivateMemberFunctionArgument()
         {
             await TestMissingInRegularAndScriptAsync(
-            @"
+                @"
 class Program
 {
     class Base {}
@@ -588,14 +605,15 @@ class Program
         Test t;
         t.testing(b[||]);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddExplicitCast)]
         public async Task MemberFunctions()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 class Program
 {
     class Base {}
@@ -611,7 +629,7 @@ class Program
         t.testing(b[||]);
     }
 }",
-            @"
+                @"
 class Program
 {
     class Base {}
@@ -626,14 +644,15 @@ class Program
         Test t;
         t.testing((Derived)b);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddExplicitCast)]
         public async Task BaseConstructorArgument()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 class Program
 {
     class Base {}
@@ -645,7 +664,7 @@ class Program
         public Derived_Test (Base b) : base([||]b) {}
     }
 }",
-            @"
+                @"
 class Program
 {
     class Base {}
@@ -656,14 +675,15 @@ class Program
     class Derived_Test : Test  {
         public Derived_Test (Base b) : base((Derived)b) {}
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddExplicitCast)]
         public async Task ThisConstructorArgument()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 class Program
 {
     class Base {}
@@ -673,7 +693,7 @@ class Program
         public Test(Base b, int i) : this([||]b) {}
     }
 }",
-            @"
+                @"
 class Program
 {
     class Base {}
@@ -682,14 +702,15 @@ class Program
         public Test(Derived d) {}
         public Test(Base b, int i) : this((Derived)b) {}
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddExplicitCast)]
         public async Task LambdaFunction1()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 using System;
 
 class Program
@@ -700,7 +721,7 @@ class Program
         Func<Base, Derived> foo = d => [||]d;
     }
 }",
-            @"
+                @"
 using System;
 
 class Program
@@ -710,14 +731,15 @@ class Program
     void M() {
         Func<Base, Derived> foo = d => (Derived)d;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddExplicitCast)]
         public async Task LambdaFunction2()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 using System;
 
 class Program
@@ -731,7 +753,7 @@ class Program
         Base b2 = func([||]b);
     }
 }",
-            @"
+                @"
 using System;
 
 class Program
@@ -744,14 +766,15 @@ class Program
         Base b;
         Base b2 = func((Derived)b);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddExplicitCast)]
         public async Task LambdaFunction3()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 using System;
 
 class Program
@@ -765,7 +788,7 @@ class Program
         Derived b2 = [||]func(b);
     }
 }",
-            @"
+                @"
 using System;
 
 class Program
@@ -778,14 +801,15 @@ class Program
         Base b;
         Derived b2 = (Derived)func(b);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddExplicitCast)]
         public async Task LambdaFunction4()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 using System;
 
 class Program
@@ -799,7 +823,7 @@ class Program
         return [||]func(b);
     }
 }",
-            @"
+                @"
 using System;
 
 class Program
@@ -812,14 +836,15 @@ class Program
         Base b;
         return (Derived)func(b);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddExplicitCast)]
         public async Task LambdaFunction5_ReturnStatement()
         {
             await TestMissingInRegularAndScriptAsync(
-            @"
+                @"
 using System;
 
 class Program
@@ -830,14 +855,15 @@ class Program
     Action<Derived> Foo() {
         return [||](Base b) => { };
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddExplicitCast)]
         public async Task LambdaFunction6_Arguments()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 using System;
 
 class Program
@@ -851,7 +877,7 @@ class Program
         M([||]b, (Derived d) => { });
     }
 }",
-            @"
+                @"
 using System;
 
 class Program
@@ -864,14 +890,15 @@ class Program
         Base b = new Derived();
         M((Derived)b, (Derived d) => { });
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddExplicitCast)]
         public async Task LambdaFunction7_Arguments()
         {
             await TestMissingInRegularAndScriptAsync(
-            @"
+                @"
 using System;
 
 class Program
@@ -884,14 +911,15 @@ class Program
         Base b = new Derived();
         M([||]b, (Base base) => { });
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddExplicitCast)]
         public async Task LambdaFunction8_Arguments()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 using System;
 
 class Program
@@ -905,7 +933,7 @@ class Program
         M([||]b1, (Derived d) => { }, (Derived d) => { });
     }
 }",
-            @"
+                @"
 using System;
 
 class Program
@@ -918,14 +946,15 @@ class Program
         Base b1 = new Derived();
         M((Derived)b1, (Derived d) => { }, (Derived d) => { });
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddExplicitCast)]
         public async Task LambdaFunction9_Arguments()
         {
             await TestMissingInRegularAndScriptAsync(
-            @"
+                @"
 using System;
 
 class Program
@@ -938,14 +967,15 @@ class Program
         Base b1 = new Derived();
         M([||]b1, action: new Action<Derived>[0], (Derived d) => { }, (Derived d) => { });
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddExplicitCast)]
         public async Task InheritInterfaces1()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 class Program
 {
     interface Base1 {}
@@ -956,7 +986,7 @@ class Program
         Derived d = [||]b;
     }
 }",
-            @"
+                @"
 class Program
 {
     interface Base1 {}
@@ -966,14 +996,15 @@ class Program
     void Foo(Base2 b) {
         Derived d = (Derived)b;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddExplicitCast)]
         public async Task InheritInterfaces2()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 class Program
 {
     interface Base1 {}
@@ -985,7 +1016,7 @@ class Program
         Derived2 d = [||]b;
     }
 }",
-            @"
+                @"
 class Program
 {
     interface Base1 {}
@@ -996,14 +1027,15 @@ class Program
     void Foo(Base2 b) {
         Derived2 d = (Derived2)b;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddExplicitCast)]
         public async Task InheritInterfaces3()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 class Program
 {
     interface Base1 {}
@@ -1013,7 +1045,7 @@ class Program
         return [||]b;
     }
 }",
-            @"
+                @"
 class Program
 {
     interface Base1 {}
@@ -1022,14 +1054,15 @@ class Program
     Base2 Foo(Base1 b) {
         return (Base2)b;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddExplicitCast)]
         public async Task InheritInterfaces4()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 class Program
 {
     interface Base1 {}
@@ -1039,7 +1072,7 @@ class Program
         Base2 b2 = [||]b;
     }
 }",
-            @"
+                @"
 class Program
 {
     interface Base1 {}
@@ -1048,14 +1081,15 @@ class Program
     void Foo(Base1 b) {
         Base2 b2 = (Base2)b;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddExplicitCast)]
         public async Task InheritInterfaces5()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 class Program
 {
     interface Base1 {}
@@ -1069,7 +1103,7 @@ class Program
         Foo([||]b);
     }
 }",
-            @"
+                @"
 class Program
 {
     interface Base1 {}
@@ -1082,14 +1116,15 @@ class Program
     void M(Base1 b) {
         Foo((Derived2)b);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddExplicitCast)]
         public async Task GenericType()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 using System;
 class Program
 {
@@ -1102,7 +1137,7 @@ class Program
         Func<Derived, Derived> func2 = [||]func1;
     }
 }",
-            @"
+                @"
 using System;
 class Program
 {
@@ -1114,14 +1149,15 @@ class Program
         Func<Base, Base> func1 = b => b;
         Func<Derived, Derived> func2 = (Func<Derived, Derived>)func1;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddExplicitCast)]
         public async Task GenericType2()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 using System;
 class Program
 {
@@ -1135,7 +1171,7 @@ class Program
         Foo(func1[||]);
     }
 }",
-            @"
+                @"
 using System;
 class Program
 {
@@ -1148,14 +1184,15 @@ class Program
         Func<Base, Base> func1 = b => b;
         Foo((Func<Derived, Derived>)func1);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddExplicitCast)]
         public async Task GenericType3()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 using System;
 class Program
 {
@@ -1167,7 +1204,7 @@ class Program
         return func1[||];
     }
 }",
-            @"
+                @"
 using System;
 class Program
 {
@@ -1178,14 +1215,15 @@ class Program
         Func<Base, Base> func1 = b => b;
         return (Func<Derived, Derived>)func1;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddExplicitCast)]
         public async Task GenericType4()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 class Program
 {
     void Foo()
@@ -1200,7 +1238,7 @@ class Program
 
     public class B<T> : A<T> where T : CB { }
 }",
-            @"
+                @"
 class Program
 {
     void Foo()
@@ -1214,14 +1252,15 @@ class Program
     public interface A<T> where T : IA { }
 
     public class B<T> : A<T> where T : CB { }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddExplicitCast)]
         public async Task GenericType5()
         {
             await TestMissingInRegularAndScriptAsync(
-            @"
+                @"
 class Program
 {
     void Foo()
@@ -1235,14 +1274,15 @@ class Program
     public class A<T> where T : IA { }
 
     public class B<T> : A<T> where T : IB { }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddExplicitCast)]
         public async Task GenericType6()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 class Program
 {
     void Foo()
@@ -1257,7 +1297,7 @@ class Program
 
     public class B<T, U> : A<T, U> where T : IB { }
 }",
-            @"
+                @"
 class Program
 {
     void Foo()
@@ -1271,14 +1311,15 @@ class Program
     public interface A<T, U> where T : IA { }
 
     public class B<T, U> : A<T, U> where T : IB { }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddExplicitCast)]
         public async Task ObjectInitializer()
         {
             await TestMissingInRegularAndScriptAsync(
-            @"
+                @"
 class Program
 {
     class Base { }
@@ -1291,14 +1332,15 @@ class Program
         Derived d = [||]new Base();
         Derived d2 = new Test();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddExplicitCast)]
         public async Task ObjectInitializer2()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 class Program
 {
     class Base { }
@@ -1312,7 +1354,7 @@ class Program
         Derived d2 = [||]new Test();
     }
 }",
-            @"
+                @"
 class Program
 {
     class Base { }
@@ -1325,14 +1367,15 @@ class Program
         Derived d = new Base();
         Derived d2 = (Derived)new Test();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddExplicitCast)]
         public async Task ObjectInitializer3()
         {
             await TestMissingInRegularAndScriptAsync(
-            @"
+                @"
 class Program
 {
     class Base { }
@@ -1344,14 +1387,15 @@ class Program
     Derived returnDerived() {
         return [||]new Base();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddExplicitCast)]
         public async Task ObjectInitializer4()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 class Program
 {
     class Base { }
@@ -1364,7 +1408,7 @@ class Program
         return [||]new Test();
     }
 }",
-            @"
+                @"
 class Program
 {
     class Base { }
@@ -1376,14 +1420,15 @@ class Program
     Derived returnDerived() {
         return (Derived)new Test();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddExplicitCast)]
         public async Task ObjectInitializer5()
         {
             await TestMissingInRegularAndScriptAsync(
-            @"
+                @"
 class Program
 {
     class Base { }
@@ -1396,14 +1441,15 @@ class Program
     void Foo() {
         M([||]new Base());
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddExplicitCast)]
         public async Task ObjectInitializer6()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 class Program
 {
     class Base { }
@@ -1417,7 +1463,7 @@ class Program
         M([||]new Test());
     }
 }",
-            @"
+                @"
 class Program
 {
     class Base { }
@@ -1430,14 +1476,15 @@ class Program
     void Foo() {
         M((Derived)new Test());
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddExplicitCast)]
         public async Task ObjectInitializer7()
         {
             await TestMissingInRegularAndScriptAsync(
-            @"
+                @"
 class Program
 {
     class Base { }
@@ -1450,14 +1497,15 @@ class Program
     void Foo() {
         M([||]new Base());
     }
-}");
+}"
+            );
         }
 
         [Fact(Skip = "https://github.com/dotnet/roslyn/issues/41500")]
         public async Task RedundantCast1()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 class Program
 {
     class Base { }
@@ -1467,7 +1515,7 @@ class Program
         Derived d = [||](Base)b;
     }
 }",
-            @"
+                @"
 class Program
 {
     class Base { }
@@ -1476,14 +1524,15 @@ class Program
         Base b;
         Derived d = (Derived)b;
     }
-}");
+}"
+            );
         }
 
         [Fact(Skip = "https://github.com/dotnet/roslyn/issues/41500")]
         public async Task RedundantCast2()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 class Program
 {
     class Base { }
@@ -1494,7 +1543,7 @@ class Program
         Derived2 d = [||](Derived1)b;
     }
 }",
-            @"
+                @"
 class Program
 {
     class Base { }
@@ -1504,14 +1553,15 @@ class Program
         Base b;
         Derived2 d = (Derived2)b;
     }
-}");
+}"
+            );
         }
 
         [Fact(Skip = "https://github.com/dotnet/roslyn/issues/41500")]
         public async Task RedundantCast3()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 class Program
 {
     class Base { }
@@ -1522,7 +1572,7 @@ class Program
         M([||](Base)b);
     }
 }",
-            @"
+                @"
 class Program
 {
     class Base { }
@@ -1532,14 +1582,15 @@ class Program
         Base b;
         M((Derived)b);
     }
-}");
+}"
+            );
         }
 
         [Fact(Skip = "https://github.com/dotnet/roslyn/issues/41500")]
         public async Task RedundantCast4()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 class Program
 {
     class Base { }
@@ -1551,7 +1602,7 @@ class Program
         M([||](Derived1)b);
     }
 }",
-            @"
+                @"
 class Program
 {
     class Base { }
@@ -1562,14 +1613,15 @@ class Program
         Base b;
         M((Derived2)b);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddExplicitCast)]
         public async Task ExactMethodCandidate()
         {
             await TestMissingInRegularAndScriptAsync(
-            @"
+                @"
 class Program
 {
     class Base
@@ -1587,14 +1639,15 @@ class Program
         Derived d = new Derived();
         d.Testing([||]b);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddExplicitCast)]
         public async Task MethodCandidates1_ArgumentsInOrder_NoLabels()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 class Program
 {
     class Base {}
@@ -1609,7 +1662,7 @@ class Program
         Foo("""", [||]b);
     }
 }",
-            @"
+                @"
 class Program
 {
     class Base {}
@@ -1623,14 +1676,15 @@ class Program
         Base b = new Base();
         Foo("""", (Derived)b);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddExplicitCast)]
         public async Task MethodCandidates2_ArgumentsInOrder_NoLabels()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 class Program
 {
     class Base {}
@@ -1647,7 +1701,7 @@ class Program
         Foo("""", [||]b, out var i);
     }
 }",
-            @"
+                @"
 class Program
 {
     class Base {}
@@ -1663,14 +1717,15 @@ class Program
         Base b = new Base();
         Foo("""", (Derived)b, out var i);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddExplicitCast)]
         public async Task MethodCandidates3_ArgumentsInOrder_NoLabels_Params()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 class Program
 {
     class Base { }
@@ -1687,7 +1742,7 @@ class Program
         Foo("""", [||]b, out var i);
     }
 }",
-            @"
+                @"
 class Program
 {
     class Base { }
@@ -1703,14 +1758,15 @@ class Program
         Base b = new Base();
         Foo("""", (Derived)b, out var i);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddExplicitCast)]
         public async Task MethodCandidates4_ArgumentsInOrder_NoLabels_Params()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 class Program
 {
     class Base { }
@@ -1727,7 +1783,7 @@ class Program
         Foo("""", [||]b, out var i, 1);
     }
 }",
-            @"
+                @"
 class Program
 {
     class Base { }
@@ -1743,14 +1799,15 @@ class Program
         Base b = new Base();
         Foo("""", (Derived)b, out var i, 1);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddExplicitCast)]
         public async Task MethodCandidates5_ArgumentsInOrder_NoLabels_Params()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 class Program
 {
     class Base { }
@@ -1767,7 +1824,7 @@ class Program
         Foo("""", [||]b, out var i, 1, 2, 3);
     }
 }",
-            @"
+                @"
 class Program
 {
     class Base { }
@@ -1783,14 +1840,15 @@ class Program
         Base b = new Base();
         Foo("""", (Derived)b, out var i, 1, 2, 3);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddExplicitCast)]
         public async Task MethodCandidates6_ArgumentsInOrder_NoLabels_Params()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 class Program
 {
     class Base { }
@@ -1806,7 +1864,7 @@ class Program
         Foo("""", [||]b);
     }
 }",
-            @"
+                @"
 class Program
 {
     class Base { }
@@ -1821,14 +1879,15 @@ class Program
         Base b = new Base();
         Foo("""", (Derived)b);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddExplicitCast)]
         public async Task MethodCandidates7_ArgumentsInOrder_NoLabels_Params()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 class Program
 {
     class Base { }
@@ -1844,7 +1903,7 @@ class Program
         Foo("""", b, [||]b);
     }
 }",
-            @"
+                @"
 class Program
 {
     class Base { }
@@ -1859,14 +1918,15 @@ class Program
         Base b = new Base();
         Foo("""", b, (Derived2)b);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddExplicitCast)]
         public async Task MethodCandidates8_ArgumentsInOrder_NoLabels()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 namespace ExtensionMethods
 {
     public class Base { }
@@ -1887,7 +1947,7 @@ namespace ExtensionMethods
         public static void Foo(this string str, Derived d, Derived d2) { }
     }
 }",
-            @"
+                @"
 namespace ExtensionMethods
 {
     public class Base { }
@@ -1907,14 +1967,15 @@ namespace ExtensionMethods
     {
         public static void Foo(this string str, Derived d, Derived d2) { }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddExplicitCast)]
         public async Task MethodCandidates9_ArgumentsOutOfOrder_NoLabels()
         {
             await TestMissingInRegularAndScriptAsync(
-            @"
+                @"
 class Program
 {
     class Base {}
@@ -1929,14 +1990,15 @@ class Program
         Base b = new Base();
         Foo(b[||], """");
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddExplicitCast)]
         public async Task MethodCandidates10_ArgumentsInOrder_SomeLabels()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 class Program
 {
     class Base { }
@@ -1952,7 +2014,7 @@ class Program
         Foo("""", d: [||]b, 1);
     }
 }",
-            @"
+                @"
 class Program
 {
     class Base { }
@@ -1967,14 +2029,15 @@ class Program
         Base b = new Base();
         Foo("""", d: (Derived)b, 1);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddExplicitCast)]
         public async Task MethodCandidates11_ArgumentsInOrder_SomeLabels_Params()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 class Program
 {
     class Base { }
@@ -1991,7 +2054,7 @@ class Program
         Foo("""", d: [||]b, 1, list: strlist);
     }
 }",
-            @"
+                @"
 class Program
 {
     class Base { }
@@ -2007,14 +2070,15 @@ class Program
         var strlist = new string[1];
         Foo("""", d: (Derived)b, 1, list: strlist);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddExplicitCast)]
         public async Task MethodCandidates12_ArgumentsInOrder_SomeLabels_Params()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 class Program
 {
     class Base { }
@@ -2031,7 +2095,7 @@ class Program
         Foo("""", d: [||]b, list: strlist, i: 1);
     }
 }",
-            @"
+                @"
 class Program
 {
     class Base { }
@@ -2047,14 +2111,15 @@ class Program
         var strlist = new string[1];
         Foo("""", d: (Derived)b, list: strlist, i: 1);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddExplicitCast)]
         public async Task MethodCandidates13_ArgumentsOutOfOrder_SomeLabels()
         {
             await TestMissingInRegularAndScriptAsync(
-            @"
+                @"
 class Program
 {
     class Base { }
@@ -2070,14 +2135,15 @@ class Program
         var strlist = new string[1];
         Foo(d: [||]b, """", 1, list: strlist);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddExplicitCast)]
         public async Task MethodCandidates14_ArgumentsOutOfOrder_AllLabels()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 class Program
 {
     class Base { }
@@ -2094,7 +2160,7 @@ class Program
         Foo(d: [||]b, s: """", list: strlist, i: 1);
     }
 }",
-            @"
+                @"
 class Program
 {
     class Base { }
@@ -2110,14 +2176,15 @@ class Program
         var strlist = new string[1];
         Foo(d: (Derived)b, s: """", list: strlist, i: 1);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddExplicitCast)]
         public async Task MethodCandidates15_ArgumentsOutOfOrder_AllLabels()
         {
             await TestMissingInRegularAndScriptAsync(
-            @"
+                @"
 class Program
 {
     class Base { }
@@ -2133,14 +2200,15 @@ class Program
         var strlist = new string[1];
         Foo(d: """", s: [||]b, list: strlist, i: 1);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddExplicitCast)]
         public async Task MethodCandidates17_ArgumentsInOrder_SomeLabels()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 class Program
 {
     class Base { }
@@ -2156,7 +2224,7 @@ class Program
         Foo("""", d: [||]b, 1);
     }
 }",
-            @"
+                @"
 class Program
 {
     class Base { }
@@ -2171,14 +2239,15 @@ class Program
         Base b = new Base();
         Foo("""", d: (Derived)b, 1);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddExplicitCast)]
         public async Task MethodCandidates18_ArgumentsInOrder_SomeLabels()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 class Program
 {
     class Base { }
@@ -2195,7 +2264,7 @@ class Program
         Foo("""", d: b, [||]dlist);
     }
 }",
-            @"
+                @"
 class Program
 {
     class Base { }
@@ -2211,14 +2280,15 @@ class Program
         var dlist = new Derived[] {};
         Foo("""", d: b, (Derived2[])dlist);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddExplicitCast)]
         public async Task MethodCandidates19_ArgumentsInOrder_NoLabels_Params()
         {
             await TestMissingInRegularAndScriptAsync(
-            @"
+                @"
 class Program
 {
     class Base { }
@@ -2234,14 +2304,15 @@ class Program
         var dlist = new Derived[] {};
         Foo([||]dlist, new Derived2());
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddExplicitCast)]
         public async Task MethodCandidates20_ArgumentsInOrder_NoLabels_Params()
         {
             await TestMissingInRegularAndScriptAsync(
-            @"
+                @"
 class Program
 {
     class Base { }
@@ -2257,14 +2328,15 @@ class Program
         var dlist = new Derived[] {};
         Foo([||]dlist, dlist);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddExplicitCast)]
         public async Task MethodCandidates21_ArgumentsInOrder_Labels()
         {
             await TestMissingInRegularAndScriptAsync(
-            @"
+                @"
 class Program
 {
     class Base { }
@@ -2277,14 +2349,15 @@ class Program
         Base b = new Base();
         Foo([||]b, i:1, i:1);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddExplicitCast)]
         public async Task MethodCandidates22_ArgumentsInOrder()
         {
             await TestMissingInRegularAndScriptAsync(
-            @"
+                @"
 class Program
 {
     class Base {}
@@ -2300,14 +2373,15 @@ class Program
         Base b = new Base();
         Foo("""", [||]b, out Base i);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddExplicitCast)]
         public async Task ConstructorCandidates1()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 class Program
 {
     class Base { }
@@ -2327,7 +2401,7 @@ class Program
         Test t = new Test(d: [||]b, s:"""", i:1, list : strlist);
     }
 }",
-            @"
+                @"
 class Program
 {
     class Base { }
@@ -2346,14 +2420,15 @@ class Program
         var strlist = new string[1];
         Test t = new Test(d: (Derived)b, s:"""", i:1, list : strlist);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddExplicitCast)]
         public async Task ConstructorCandidates2()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 class Program
 {
     class Base { }
@@ -2375,7 +2450,7 @@ class Program
         Test t = new Test("""", d: [||]b, i:1, ""1"", ""2"", ""3"");
     }
 }",
-            @"
+                @"
 class Program
 {
     class Base { }
@@ -2396,14 +2471,15 @@ class Program
         var strlist = new string[1];
         Test t = new Test("""", d: (Derived)b, i:1, ""1"", ""2"", ""3"");
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddExplicitCast)]
         public async Task ConstructorCandidates3()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 class Program
 {
     class Base { }
@@ -2417,7 +2493,7 @@ class Program
         Test(string s, Derived d, int i) { }
     }
 }",
-            @"
+                @"
 class Program
 {
     class Base { }
@@ -2430,7 +2506,8 @@ class Program
         public Test(string s, Base b, int i, params object[] list) : this(d : (Derived)b, s : s, i : i) { }
         Test(string s, Derived d, int i) { }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddExplicitCast)]
@@ -2454,12 +2531,15 @@ class Program
 }";
             using (var workspace = CreateWorkspaceFromOptions(initialMarkup, new TestParameters()))
             {
-                var (actions, actionToInvoke) = await GetCodeActionsAsync(workspace, new TestParameters());
+                var (actions, actionToInvoke) = await GetCodeActionsAsync(
+                    workspace,
+                    new TestParameters()
+                );
                 Assert.Equal(2, actions.Length);
             }
 
             var expect_0 =
-@"
+                @"
 class Program
 {
     class Base { }
@@ -2474,11 +2554,15 @@ class Program
         Test(string s, Derived2 d, int i) { }
     }
 }";
-            await TestInRegularAndScriptAsync(initialMarkup, expect_0, index: 0,
-                title: string.Format(FeaturesResources.Convert_type_to_0, "Derived"));
+            await TestInRegularAndScriptAsync(
+                initialMarkup,
+                expect_0,
+                index: 0,
+                title: string.Format(FeaturesResources.Convert_type_to_0, "Derived")
+            );
 
             var expect_1 =
-    @"
+                @"
 class Program
 {
     class Base { }
@@ -2493,8 +2577,12 @@ class Program
         Test(string s, Derived2 d, int i) { }
     }
 }";
-            await TestInRegularAndScriptAsync(initialMarkup, expect_1, index: 1,
-                title: string.Format(FeaturesResources.Convert_type_to_0, "Derived2"));
+            await TestInRegularAndScriptAsync(
+                initialMarkup,
+                expect_1,
+                index: 1,
+                title: string.Format(FeaturesResources.Convert_type_to_0, "Derived2")
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddExplicitCast)]
@@ -2519,12 +2607,15 @@ class Program
 
             using (var workspace = CreateWorkspaceFromOptions(initialMarkup, new TestParameters()))
             {
-                var (actions, actionToInvoke) = await GetCodeActionsAsync(workspace, new TestParameters());
+                var (actions, actionToInvoke) = await GetCodeActionsAsync(
+                    workspace,
+                    new TestParameters()
+                );
                 Assert.Equal(2, actions.Length);
             }
 
             var expect_0 =
-@"
+                @"
 class Program
 {
     class Base { }
@@ -2539,11 +2630,15 @@ class Program
         Test(string s, int i, Derived2 d) { }
     }
 }";
-            await TestInRegularAndScriptAsync(initialMarkup, expect_0, index: 0,
-                title: string.Format(FeaturesResources.Convert_type_to_0, "Derived"));
+            await TestInRegularAndScriptAsync(
+                initialMarkup,
+                expect_0,
+                index: 0,
+                title: string.Format(FeaturesResources.Convert_type_to_0, "Derived")
+            );
 
             var expect_1 =
-    @"
+                @"
 class Program
 {
     class Base { }
@@ -2558,9 +2653,12 @@ class Program
         Test(string s, int i, Derived2 d) { }
     }
 }";
-            await TestInRegularAndScriptAsync(initialMarkup, expect_1, index: 1,
-                title: string.Format(FeaturesResources.Convert_type_to_0, "Derived2"));
-
+            await TestInRegularAndScriptAsync(
+                initialMarkup,
+                expect_1,
+                index: 1,
+                title: string.Format(FeaturesResources.Convert_type_to_0, "Derived2")
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddExplicitCast)]
@@ -2649,7 +2747,7 @@ class Program
         public async Task MultipleOptions5()
         {
             var initialMarkup =
-            @"
+                @"
 class Program
 {
     class Base { }
@@ -2669,12 +2767,15 @@ class Program
 }";
             using (var workspace = CreateWorkspaceFromOptions(initialMarkup, new TestParameters()))
             {
-                var (actions, actionToInvoke) = await GetCodeActionsAsync(workspace, new TestParameters());
+                var (actions, actionToInvoke) = await GetCodeActionsAsync(
+                    workspace,
+                    new TestParameters()
+                );
                 Assert.Equal(2, actions.Length);
             }
 
             var expect_0 =
-@"
+                @"
 class Program
 {
     class Base { }
@@ -2692,11 +2793,15 @@ class Program
         Foo("""", d: (Derived)b, list: strlist, i: 1);
     }
 }";
-            await TestInRegularAndScriptAsync(initialMarkup, expect_0, index: 0,
-                title: string.Format(FeaturesResources.Convert_type_to_0, "Derived"));
+            await TestInRegularAndScriptAsync(
+                initialMarkup,
+                expect_0,
+                index: 0,
+                title: string.Format(FeaturesResources.Convert_type_to_0, "Derived")
+            );
 
             var expect_1 =
-    @"
+                @"
 class Program
 {
     class Base { }
@@ -2714,15 +2819,19 @@ class Program
         Foo("""", d: (Derived2)b, list: strlist, i: 1);
     }
 }";
-            await TestInRegularAndScriptAsync(initialMarkup, expect_1, index: 1,
-                title: string.Format(FeaturesResources.Convert_type_to_0, "Derived2"));
+            await TestInRegularAndScriptAsync(
+                initialMarkup,
+                expect_1,
+                index: 1,
+                title: string.Format(FeaturesResources.Convert_type_to_0, "Derived2")
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddExplicitCast)]
         public async Task MultipleOptions6()
         {
             var initialMarkup =
-            @"
+                @"
 class Program
 {
     class Base { 
@@ -2745,12 +2854,15 @@ class Program
 }";
             using (var workspace = CreateWorkspaceFromOptions(initialMarkup, new TestParameters()))
             {
-                var (actions, actionToInvoke) = await GetCodeActionsAsync(workspace, new TestParameters());
+                var (actions, actionToInvoke) = await GetCodeActionsAsync(
+                    workspace,
+                    new TestParameters()
+                );
                 Assert.Equal(3, actions.Length);
             }
 
             var expect_0 =
-@"
+                @"
 class Program
 {
     class Base { 
@@ -2771,11 +2883,15 @@ class Program
         Foo("""", d: (string)b, i: 1);
     }
 }";
-            await TestInRegularAndScriptAsync(initialMarkup, expect_0, index: 0,
-                title: string.Format(FeaturesResources.Convert_type_to_0, "string"));
+            await TestInRegularAndScriptAsync(
+                initialMarkup,
+                expect_0,
+                index: 0,
+                title: string.Format(FeaturesResources.Convert_type_to_0, "string")
+            );
 
             var expect_1 =
-@"
+                @"
 class Program
 {
     class Base { 
@@ -2796,11 +2912,15 @@ class Program
         Foo("""", d: (Derived)b, i: 1);
     }
 }";
-            await TestInRegularAndScriptAsync(initialMarkup, expect_1, index: 1,
-                title: string.Format(FeaturesResources.Convert_type_to_0, "Derived"));
+            await TestInRegularAndScriptAsync(
+                initialMarkup,
+                expect_1,
+                index: 1,
+                title: string.Format(FeaturesResources.Convert_type_to_0, "Derived")
+            );
 
             var expect_2 =
-@"
+                @"
 class Program
 {
     class Base { 
@@ -2821,15 +2941,19 @@ class Program
         Foo("""", d: (Derived2)b, i: 1);
     }
 }";
-            await TestInRegularAndScriptAsync(initialMarkup, expect_2, index: 2,
-                title: string.Format(FeaturesResources.Convert_type_to_0, "Derived2"));
+            await TestInRegularAndScriptAsync(
+                initialMarkup,
+                expect_2,
+                index: 2,
+                title: string.Format(FeaturesResources.Convert_type_to_0, "Derived2")
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddExplicitCast)]
         public async Task MultipleOptions7()
         {
             var initialMarkup =
-            @"
+                @"
 class Program
 {
     class Base { }
@@ -2849,7 +2973,7 @@ class Program
     }
 }";
             var expected =
-            @"
+                @"
 class Program
 {
     class Base { }
@@ -2875,7 +2999,7 @@ class Program
         public async Task MultipleOptions8()
         {
             var initialMarkup =
-            @"
+                @"
 class Program
 {
     class Base { }
@@ -2894,7 +3018,7 @@ class Program
     }
 }";
             var expected =
-            @"
+                @"
 class Program
 {
     class Base { }
@@ -2970,7 +3094,8 @@ class Program
         Derived d;
         M(d = (Derived)b);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddExplicitCast)]
@@ -3006,7 +3131,8 @@ class Program
         Derived d;
         M((Derived2)(d = b));
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddExplicitCast)]
@@ -3021,7 +3147,8 @@ class C
         TypeThatDoesntExist t = new TypeThatDoesntExist();
         M([||]t);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddExplicitCast)]
@@ -3049,7 +3176,8 @@ class C
     void M() 
     {
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddExplicitCast)]
@@ -3076,7 +3204,8 @@ class C
 
         if (array[(int)o] > 0) {}
     }
-}");
+}"
+            );
         }
     }
 }

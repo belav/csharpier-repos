@@ -1,16 +1,16 @@
-// Copyright 2004-2021 Castle Project - http://www.castleproject.org/ 
-//  
-// Licensed under the Apache License, Version 2.0 (the "License"); 
-// you may not use this file except in compliance with the License. 
-// You may obtain a copy of the License at 
-//  
-//     http://www.apache.org/licenses/LICENSE-2.0 
-//  
-// Unless required by applicable law or agreed to in writing, software 
-// distributed under the License is distributed on an "AS IS" BASIS, 
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. 
-// See the License for the specific language governing permissions and 
-// limitations under the License. 
+// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
 namespace Castle.DynamicProxy.Tests
 {
@@ -42,7 +42,9 @@ namespace Castle.DynamicProxy.Tests
         public void CreateDelegateToMixin_when_given_non_delegate_type_throws_ArgumentException()
         {
             var _ = new object();
-            Assert.Throws<ArgumentException>(() => ProxyUtil.CreateDelegateToMixin(_, typeof(Exception)));
+            Assert.Throws<ArgumentException>(
+                () => ProxyUtil.CreateDelegateToMixin(_, typeof(Exception))
+            );
         }
 
         [Test]
@@ -56,7 +58,9 @@ namespace Castle.DynamicProxy.Tests
         public void CreateDelegateToMixin_throws_MissingMethodException_if_no_suitable_Invoke_method_found()
         {
             var proxy = new FakeProxyWithInvokeMethods();
-            Assert.Throws<MissingMethodException>(() => ProxyUtil.CreateDelegateToMixin<Action<bool>>(proxy));
+            Assert.Throws<MissingMethodException>(
+                () => ProxyUtil.CreateDelegateToMixin<Action<bool>>(proxy)
+            );
         }
 
         [Test]
@@ -101,7 +105,9 @@ namespace Castle.DynamicProxy.Tests
         }
 
         [TestCaseSource(nameof(AccessibleMethods))]
-        public void IsAccessibleWithReason_Accessible_Method_Does_Not_Populate_ReasonMethodIsNotAccessible(MethodBase method)
+        public void IsAccessibleWithReason_Accessible_Method_Does_Not_Populate_ReasonMethodIsNotAccessible(
+            MethodBase method
+        )
         {
             string reason;
             ProxyUtil.IsAccessible(method, out reason);
@@ -117,20 +123,27 @@ namespace Castle.DynamicProxy.Tests
         }
 
         [TestCaseSource(nameof(InaccessibleMethods))]
-        public void IsAccessibleWithReason_Inaccessible_Method_Populates_ReasonMethodIsNotAccessible(MethodBase method)
+        public void IsAccessibleWithReason_Inaccessible_Method_Populates_ReasonMethodIsNotAccessible(
+            MethodBase method
+        )
         {
             string reason;
             ProxyUtil.IsAccessible(method, out reason);
 
-            var expectedReason = "Can not create proxy for method Void " + method.Name + "() because it or its declaring type is not accessible. Make it public, or internal and mark your assembly with [assembly: InternalsVisibleTo(InternalsVisible.ToDynamicProxyGenAssembly2)] attribute, because assembly Castle.Core.Tests is strong-named.";
+            var expectedReason =
+                "Can not create proxy for method Void "
+                + method.Name
+                + "() because it or its declaring type is not accessible. Make it public, or internal and mark your assembly with [assembly: InternalsVisibleTo(InternalsVisible.ToDynamicProxyGenAssembly2)] attribute, because assembly Castle.Core.Tests is strong-named.";
 
             Assert.AreEqual(expectedReason, reason);
         }
 
         private static MethodInfo GetMethod(Type declaringType, string name)
         {
-            return declaringType.GetMethod(name,
-                BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+            return declaringType.GetMethod(
+                name,
+                BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
+            );
         }
 
         public static readonly MethodBase[] AccessibleMethods =
@@ -149,32 +162,20 @@ namespace Castle.DynamicProxy.Tests
 
         public class PublicTestClass
         {
-            public void APublicMethod()
-            {
-            }
+            public void APublicMethod() { }
 
-            protected void AProtectedMethod()
-            {
-            }
+            protected void AProtectedMethod() { }
 
-            internal void AnInternalMethod()
-            {
-            }
+            internal void AnInternalMethod() { }
 
-            protected internal void AProtectedInternalMethod()
-            {
-            }
+            protected internal void AProtectedInternalMethod() { }
 
-            private void APrivateMethod()
-            {
-            }
+            private void APrivateMethod() { }
         }
 
         private class PrivateTestClass
         {
-            public void APublicMethod()
-            {
-            }
+            public void APublicMethod() { }
         }
 
         private sealed class FakeProxyWithInvokeMethods

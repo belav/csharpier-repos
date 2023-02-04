@@ -1,30 +1,30 @@
 using System;
 using System.Collections;
 
-class X {
+class X
+{
     public event EventHandler Hook;
 
-    public IEnumerator Pipeline ()
+    public IEnumerator Pipeline()
     {
         if (Hook == null)
-            throw new Exception ("error");
+            throw new Exception("error");
 
-        Hook (this, EventArgs.Empty);
-        
+        Hook(this, EventArgs.Empty);
+
         yield return 0;
     }
 
-    static void M (object sender, EventArgs args)
+    static void M(object sender, EventArgs args)
     {
-        Console.WriteLine ("Hook invoked");
+        Console.WriteLine("Hook invoked");
     }
-    
-    public static void Main ()
+
+    public static void Main()
     {
-        X x = new X ();
+        X x = new X();
         x.Hook += M;
-        IEnumerator y = x.Pipeline ();
-        y.MoveNext ();
+        IEnumerator y = x.Pipeline();
+        y.MoveNext();
     }
 }
-

@@ -5,9 +5,8 @@ namespace Test
 {
     public class TestClass
     {
-        private TestClass() : base()
-        {
-        }
+        private TestClass()
+            : base() { }
     }
 
     class Class1
@@ -17,4 +16,4 @@ namespace Test
             TestClass test = new TestClass();
         }
     }
-} 
+}

@@ -1,4 +1,4 @@
-// 
+//
 // MonoLocationHelper.cs: Returns paths like libdir, bindir etc.
 //
 // Author:
@@ -29,23 +29,28 @@
 using System;
 using System.IO;
 
-namespace Mono.XBuild.Utilities {
-    internal class MonoLocationHelper {
-    
+namespace Mono.XBuild.Utilities
+{
+    internal class MonoLocationHelper
+    {
         static string binDir;
         static string libDir;
         static string assembliesDir;
+
         //static string xbuildDir;
-    
-        static MonoLocationHelper ()
+
+        static MonoLocationHelper()
         {
             string assemblyLocation;
-            DirectoryInfo t1, t2, t3, t4;
-            
-            assemblyLocation = Path.GetDirectoryName (typeof (object).Assembly.Location);
+            DirectoryInfo t1,
+                t2,
+                t3,
+                t4;
+
+            assemblyLocation = Path.GetDirectoryName(typeof(object).Assembly.Location);
             assembliesDir = assemblyLocation;
             // /usr/local/lib/mono/1.0
-            t1 = new DirectoryInfo (assemblyLocation);
+            t1 = new DirectoryInfo(assemblyLocation);
             // /usr/local/lib/mono
             t2 = t1.Parent;
             // /usr/local/lib/mono/xbuild
@@ -54,24 +59,23 @@ namespace Mono.XBuild.Utilities {
             t3 = t2.Parent;
             // /usr/local
             t4 = t3.Parent;
-            binDir = Path.Combine (t4.FullName, "bin");
-            libDir = Path.Combine (t4.FullName, "lib");
+            binDir = Path.Combine(t4.FullName, "bin");
+            libDir = Path.Combine(t4.FullName, "lib");
         }
-    
-        internal static string GetBinDir ()
+
+        internal static string GetBinDir()
         {
             return binDir;
         }
-        
-        internal static string GetLibDir ()
+
+        internal static string GetLibDir()
         {
             return libDir;
         }
-        
-        internal static string GetAssembliesDir ()
+
+        internal static string GetAssembliesDir()
         {
             return assembliesDir;
         }
     }
 }
-

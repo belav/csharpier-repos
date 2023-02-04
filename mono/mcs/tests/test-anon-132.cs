@@ -1,22 +1,23 @@
 using System;
 using System.Collections.Generic;
 
-public class Program {
-
-    public static void Assert (Action<int> action)
+public class Program
+{
+    public static void Assert(Action<int> action)
     {
-        action (42);
+        action(42);
     }
 
-    public static void Foo<T> (IList<T> list)
+    public static void Foo<T>(IList<T> list)
     {
-        Assert (i => {
-            T [] backup = new T [list.Count];
+        Assert(i =>
+        {
+            T[] backup = new T[list.Count];
         });
     }
 
-    public static void Main (string [] args)
+    public static void Main(string[] args)
     {
-        Foo (args);
+        Foo(args);
     }
 }

@@ -9,10 +9,20 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
 {
     internal static class IWaitIndicatorExtensions
     {
-        public static WaitIndicatorResult Wait(this IWaitIndicator waitIndicator, string titleAndMessage, bool allowCancel, Action<IWaitContext> action)
-            => waitIndicator.Wait(titleAndMessage, titleAndMessage, allowCancel, action);
+        public static WaitIndicatorResult Wait(
+            this IWaitIndicator waitIndicator,
+            string titleAndMessage,
+            bool allowCancel,
+            Action<IWaitContext> action
+        ) => waitIndicator.Wait(titleAndMessage, titleAndMessage, allowCancel, action);
 
-        public static WaitIndicatorResult Wait(this IWaitIndicator waitIndicator, string titleAndMessage, bool allowCancel, bool showProgress, Action<IWaitContext> action)
-            => waitIndicator.Wait(titleAndMessage, titleAndMessage, allowCancel, showProgress, action);
+        public static WaitIndicatorResult Wait(
+            this IWaitIndicator waitIndicator,
+            string titleAndMessage,
+            bool allowCancel,
+            bool showProgress,
+            Action<IWaitContext> action
+        ) =>
+            waitIndicator.Wait(titleAndMessage, titleAndMessage, allowCancel, showProgress, action);
     }
 }

@@ -12,10 +12,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,154 +32,164 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 
-namespace System.ServiceModel.Dispatcher {
-
+namespace System.ServiceModel.Dispatcher
+{
     [DataContract]
     internal class ActionMessageFilterTable<TFilterData>
-        : IMessageFilterTable<TFilterData>, 
-          IDictionary<MessageFilter,TFilterData>,
-          ICollection<KeyValuePair<MessageFilter, TFilterData>>, 
-          IEnumerable<KeyValuePair<MessageFilter,TFilterData>>, 
-          IEnumerable
+        : IMessageFilterTable<TFilterData>,
+            IDictionary<MessageFilter, TFilterData>,
+            ICollection<KeyValuePair<MessageFilter, TFilterData>>,
+            IEnumerable<KeyValuePair<MessageFilter, TFilterData>>,
+            IEnumerable
     {
         Dictionary<MessageFilter, TFilterData> table;
-        
-        public ActionMessageFilterTable ()
+
+        public ActionMessageFilterTable()
         {
-            table = new Dictionary<MessageFilter, TFilterData> ();
+            table = new Dictionary<MessageFilter, TFilterData>();
         }
 
-        public void Add (KeyValuePair<MessageFilter, TFilterData> item)
+        public void Add(KeyValuePair<MessageFilter, TFilterData> item)
         {
-            table.Add (item.Key, item.Value);
+            table.Add(item.Key, item.Value);
         }
 
-        public void Add (ActionMessageFilter filter, TFilterData data)
+        public void Add(ActionMessageFilter filter, TFilterData data)
         {
-            table.Add (filter, data);
+            table.Add(filter, data);
         }
 
-        public void Add (MessageFilter filter, TFilterData data)
+        public void Add(MessageFilter filter, TFilterData data)
         {
-            table.Add (filter, data);
+            table.Add(filter, data);
         }
 
-        public void Clear ()
+        public void Clear()
         {
-            table.Clear ();
+            table.Clear();
         }
 
-        public bool Contains (KeyValuePair<MessageFilter, TFilterData> item)
+        public bool Contains(KeyValuePair<MessageFilter, TFilterData> item)
         {
-            return table.ContainsKey (item.Key);
+            return table.ContainsKey(item.Key);
         }
 
-        public bool ContainsKey (MessageFilter filter)
+        public bool ContainsKey(MessageFilter filter)
         {
-            return table.ContainsKey (filter);
+            return table.ContainsKey(filter);
         }
 
-        public void CopyTo (KeyValuePair<MessageFilter, TFilterData> [] array, int index)
+        public void CopyTo(KeyValuePair<MessageFilter, TFilterData>[] array, int index)
         {
-            ((ICollection<KeyValuePair<MessageFilter, TFilterData>>) table).CopyTo (array, index);
+            ((ICollection<KeyValuePair<MessageFilter, TFilterData>>)table).CopyTo(array, index);
         }
 
-        public IEnumerator<KeyValuePair<MessageFilter, TFilterData>> GetEnumerator ()
+        public IEnumerator<KeyValuePair<MessageFilter, TFilterData>> GetEnumerator()
         {
-            return ((ICollection<KeyValuePair<MessageFilter, TFilterData>>) table).GetEnumerator ();
+            return ((ICollection<KeyValuePair<MessageFilter, TFilterData>>)table).GetEnumerator();
         }
 
-        public bool GetMatchingFilter (Message message, out MessageFilter result)
+        public bool GetMatchingFilter(Message message, out MessageFilter result)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public bool GetMatchingFilter (MessageBuffer buffer, out MessageFilter result)
+        public bool GetMatchingFilter(MessageBuffer buffer, out MessageFilter result)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public bool GetMatchingFilters (Message message, ICollection<MessageFilter> results)
+        public bool GetMatchingFilters(Message message, ICollection<MessageFilter> results)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public bool GetMatchingFilters (MessageBuffer buffer, ICollection<MessageFilter> results)
+        public bool GetMatchingFilters(MessageBuffer buffer, ICollection<MessageFilter> results)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public bool GetMatchingValue (Message message, out TFilterData data)
+        public bool GetMatchingValue(Message message, out TFilterData data)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public bool GetMatchingValue (MessageBuffer buffer, out TFilterData data)
+        public bool GetMatchingValue(MessageBuffer buffer, out TFilterData data)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public bool GetMatchingValues (Message message, ICollection<TFilterData> results)
+        public bool GetMatchingValues(Message message, ICollection<TFilterData> results)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public bool GetMatchingValues (MessageBuffer buffer, ICollection<TFilterData> results)
+        public bool GetMatchingValues(MessageBuffer buffer, ICollection<TFilterData> results)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public bool Remove (ActionMessageFilter filter)
+        public bool Remove(ActionMessageFilter filter)
         {
             if (filter == null)
-                throw new ArgumentNullException ("filter is null.");
+                throw new ArgumentNullException("filter is null.");
 
-            return table.Remove (filter);
+            return table.Remove(filter);
         }
 
-        public bool Remove (MessageFilter filter)
+        public bool Remove(MessageFilter filter)
         {
             if (filter == null)
-                throw new ArgumentNullException ("filter is null.");
+                throw new ArgumentNullException("filter is null.");
 
-            return table.Remove (filter);
+            return table.Remove(filter);
         }
 
-        public bool Remove (KeyValuePair<MessageFilter, TFilterData> item)
+        public bool Remove(KeyValuePair<MessageFilter, TFilterData> item)
         {
-            return table.Remove (item.Key);
+            return table.Remove(item.Key);
         }
 
-        IEnumerator IEnumerable.GetEnumerator ()
+        IEnumerator IEnumerable.GetEnumerator()
         {
-            return table.GetEnumerator ();
+            return table.GetEnumerator();
         }
 
-        public bool TryGetValue (MessageFilter filter, out TFilterData data)
+        public bool TryGetValue(MessageFilter filter, out TFilterData data)
         {
-            if (table.ContainsKey (filter)){
-                data = table [filter];
+            if (table.ContainsKey(filter))
+            {
+                data = table[filter];
                 return true;
             }
 
-            data = default (TFilterData);
+            data = default(TFilterData);
             return false;
         }
 
-        public int Count { get { return table.Count; }}
-
-        public bool IsReadOnly { get { return false; }}
-
-        public TFilterData this [MessageFilter filter] {
-            get { return table [filter]; }
-            set { table [filter] = value; }
+        public int Count
+        {
+            get { return table.Count; }
         }
 
-        public ICollection<MessageFilter> Keys {
+        public bool IsReadOnly
+        {
+            get { return false; }
+        }
+
+        public TFilterData this[MessageFilter filter]
+        {
+            get { return table[filter]; }
+            set { table[filter] = value; }
+        }
+
+        public ICollection<MessageFilter> Keys
+        {
             get { return table.Keys; }
         }
 
-        public ICollection<TFilterData> Values {
+        public ICollection<TFilterData> Values
+        {
             get { return table.Values; }
         }
     }

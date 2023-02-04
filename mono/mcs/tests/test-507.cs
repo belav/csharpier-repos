@@ -11,33 +11,46 @@ namespace NewslotVirtualFinal
 
     internal class NewslotVirtualFinal : INewslotVirtualFinal
     {
-        private NewslotVirtualFinal()
-        {
-        }
+        private NewslotVirtualFinal() { }
 
-        public void SomeMethod()
-        {
-        }
+        public void SomeMethod() { }
 
-        public virtual void SomeMethod2()
-        {
-        }
+        public virtual void SomeMethod2() { }
     }
-    
+
     class C
     {
-        public static int Main ()
+        public static int Main()
         {
-            Type t = typeof (NewslotVirtualFinal);
-            MethodInfo mi = t.GetMethod ("SomeMethod");
-            if (mi.Attributes != (MethodAttributes.PrivateScope | MethodAttributes.Public | MethodAttributes.Final | MethodAttributes.Virtual | MethodAttributes.HideBySig | MethodAttributes.VtableLayoutMask))
+            Type t = typeof(NewslotVirtualFinal);
+            MethodInfo mi = t.GetMethod("SomeMethod");
+            if (
+                mi.Attributes
+                != (
+                    MethodAttributes.PrivateScope
+                    | MethodAttributes.Public
+                    | MethodAttributes.Final
+                    | MethodAttributes.Virtual
+                    | MethodAttributes.HideBySig
+                    | MethodAttributes.VtableLayoutMask
+                )
+            )
                 return 1;
-            
-            mi = t.GetMethod ("SomeMethod2");
-            if (mi.Attributes != (MethodAttributes.PrivateScope | MethodAttributes.Public | MethodAttributes.Virtual | MethodAttributes.HideBySig | MethodAttributes.VtableLayoutMask))
+
+            mi = t.GetMethod("SomeMethod2");
+            if (
+                mi.Attributes
+                != (
+                    MethodAttributes.PrivateScope
+                    | MethodAttributes.Public
+                    | MethodAttributes.Virtual
+                    | MethodAttributes.HideBySig
+                    | MethodAttributes.VtableLayoutMask
+                )
+            )
                 return 2;
-            
-            Console.WriteLine ("OK");
+
+            Console.WriteLine("OK");
             return 0;
         }
     }

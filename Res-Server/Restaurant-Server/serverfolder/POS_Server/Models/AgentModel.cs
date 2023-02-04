@@ -7,7 +7,6 @@ namespace POS_Server.Models
 {
     public class AgentModel
     {
-
         public long agentId { get; set; }
         public Nullable<long> pointId { get; set; }
         public string name { get; set; }
@@ -42,11 +41,8 @@ namespace POS_Server.Models
         public Nullable<long> subscriptionFeesId { get; set; }
         public Nullable<long> cashTransId { get; set; }
         public Nullable<long> membershipId { get; set; }
-  
+
         public Nullable<System.DateTime> startDate { get; set; }
         public Nullable<System.DateTime> EndDate { get; set; }
-
-
-
     }
 }

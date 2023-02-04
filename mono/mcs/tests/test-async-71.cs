@@ -7,19 +7,20 @@ class UnsafeContext
 {
     static int Main()
     {
-        if (TestUnsafe (1).Result != 0)
+        if (TestUnsafe(1).Result != 0)
             return 1;
 
         return 0;
     }
 
-    static async Task<int> TestUnsafe (int g)
+    static async Task<int> TestUnsafe(int g)
     {
-        unsafe {
+        unsafe
+        {
             int* ga = &g;
         }
 
-        await Task.Yield ();
+        await Task.Yield();
         return 0;
     }
 }

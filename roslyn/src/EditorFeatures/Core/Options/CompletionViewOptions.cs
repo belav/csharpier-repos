@@ -9,7 +9,10 @@ namespace Microsoft.CodeAnalysis.Completion
     internal sealed class CompletionViewOptions
     {
         public static readonly PerLanguageOption2<bool> HighlightMatchingPortionsOfCompletionListItems =
-            new("CompletionOptions_HighlightMatchingPortionsOfCompletionListItems", defaultValue: true);
+            new(
+                "CompletionOptions_HighlightMatchingPortionsOfCompletionListItems",
+                defaultValue: true
+            );
 
         public static readonly PerLanguageOption2<bool> ShowCompletionItemFilters =
             new("CompletionOptions_ShowCompletionItemFilters", defaultValue: true);

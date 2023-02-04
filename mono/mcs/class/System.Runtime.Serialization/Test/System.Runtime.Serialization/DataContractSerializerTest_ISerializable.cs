@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -42,19 +42,19 @@ namespace MonoTests.System.Runtime.Serialization
         {
             public string Foo { get; }
 
-            public TestClassISerializable (string foo)
+            public TestClassISerializable(string foo)
             {
                 Foo = foo;
             }
 
-            TestClassISerializable (SerializationInfo info, StreamingContext context)
+            TestClassISerializable(SerializationInfo info, StreamingContext context)
             {
-                Foo = info.GetString ("foo");
+                Foo = info.GetString("foo");
             }
 
-            void ISerializable.GetObjectData (SerializationInfo info, StreamingContext context)
+            void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
             {
-                info.AddValue ("foo", Foo);
+                info.AddValue("foo", Foo);
             }
         }
 
@@ -62,51 +62,55 @@ namespace MonoTests.System.Runtime.Serialization
         // regressed when integrating MS Reference Source DCS, et. al.:
         //   https://bugzilla.xamarin.com/show_bug.cgi?id=37171
         [Test]
-        public void TestISerializableCtor ()
+        public void TestISerializableCtor()
         {
-            var serializer = new DataContractSerializer (
+            var serializer = new DataContractSerializer(
                 typeof(TestClassISerializable),
-                new DataContractSerializerSettings {
-                    DataContractResolver = new Resolver ()
-                }
+                new DataContractSerializerSettings { DataContractResolver = new Resolver() }
             );
 
-            var stream = new MemoryStream ();
+            var stream = new MemoryStream();
 
-            var expected = new TestClassISerializable ("hello world");
-            serializer.WriteObject (stream, expected);
+            var expected = new TestClassISerializable("hello world");
+            serializer.WriteObject(stream, expected);
 
-            stream.Flush ();
+            stream.Flush();
             stream.Position = 0;
 
-            var actual = (TestClassISerializable)serializer.ReadObject (stream);
+            var actual = (TestClassISerializable)serializer.ReadObject(stream);
 
-            Assert.AreEqual (expected.Foo, actual.Foo, "#DCS_ISer_Ctor");
+            Assert.AreEqual(expected.Foo, actual.Foo, "#DCS_ISer_Ctor");
         }
 
         // Resolver to force DCS to serialize any type, ensuring the ISerializable
         // path will be taken for objects implementing that interface
         class Resolver : DataContractResolver
         {
-            public override Type ResolveName (string typeName, string typeNamespace,
-                Type declaredType, DataContractResolver knownTypeResolver)
+            public override Type ResolveName(
+                string typeName,
+                string typeNamespace,
+                Type declaredType,
+                DataContractResolver knownTypeResolver
+            )
             {
-                return Type.GetType (typeNamespace == null
-                    ? typeName
-                    : typeNamespace + "." + typeName
+                return Type.GetType(
+                    typeNamespace == null ? typeName : typeNamespace + "." + typeName
                 );
             }
 
-            public override bool TryResolveType (Type type, Type declaredType,
+            public override bool TryResolveType(
+                Type type,
+                Type declaredType,
                 DataContractResolver knownTypeResolver,
                 out XmlDictionaryString typeName,
-                out XmlDictionaryString typeNamespace)
+                out XmlDictionaryString typeNamespace
+            )
             {
                 var name = type.FullName;
                 var namesp = type.Namespace;
-                name = name.Substring (type.Namespace.Length + 1);
-                typeName = new XmlDictionaryString (XmlDictionary.Empty, name, 0);
-                typeNamespace = new XmlDictionaryString (XmlDictionary.Empty, namesp, 0);
+                name = name.Substring(type.Namespace.Length + 1);
+                typeName = new XmlDictionaryString(XmlDictionary.Empty, name, 0);
+                typeNamespace = new XmlDictionaryString(XmlDictionary.Empty, namesp, 0);
                 return true;
             }
         }

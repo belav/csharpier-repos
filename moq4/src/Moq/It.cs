@@ -53,18 +53,24 @@ namespace Moq
             if (typeof(TValue).IsOrContainsTypeMatcher())
             {
                 return Match.Create<TValue>(
-                    (argument, parameterType) => argument == null || parameterType.IsAssignableFrom(argument.GetType()),
-                    () => It.IsAny<TValue>());
+                    (argument, parameterType) =>
+                        argument == null || parameterType.IsAssignableFrom(argument.GetType()),
+                    () => It.IsAny<TValue>()
+                );
             }
             else
             {
                 return Match.Create<TValue>(
-                     argument                 => argument == null || argument is TValue,
-                    () => It.IsAny<TValue>());
+                    argument => argument == null || argument is TValue,
+                    () => It.IsAny<TValue>()
+                );
             }
         }
 
-        private static readonly MethodInfo isAnyMethod = typeof(It).GetMethod(nameof(It.IsAny), BindingFlags.Public | BindingFlags.Static);
+        private static readonly MethodInfo isAnyMethod = typeof(It).GetMethod(
+            nameof(It.IsAny),
+            BindingFlags.Public | BindingFlags.Static
+        );
 
         internal static MethodCallExpression IsAny(Type genericArgument)
         {
@@ -101,14 +107,17 @@ namespace Moq
             if (typeof(TValue).IsOrContainsTypeMatcher())
             {
                 return Match.Create<TValue>(
-                    (argument, parameterType) => argument != null && parameterType.IsAssignableFrom(argument.GetType()),
-                    () => It.IsNotNull<TValue>());
+                    (argument, parameterType) =>
+                        argument != null && parameterType.IsAssignableFrom(argument.GetType()),
+                    () => It.IsNotNull<TValue>()
+                );
             }
             else
             {
                 return Match.Create<TValue>(
-                     argument                 => argument is TValue,
-                    () => It.IsNotNull<TValue>());
+                    argument => argument is TValue,
+                    () => It.IsNotNull<TValue>()
+                );
             }
         }
 
@@ -147,7 +156,10 @@ namespace Moq
 
             return Match.Create<TValue>(
                 argument => match.CompileUsingExpressionCompiler().Invoke(argument),
-                Expression.Lambda<Func<TValue>>(Expression.Call(thisMethod.MakeGenericMethod(typeof(TValue)), match)));
+                Expression.Lambda<Func<TValue>>(
+                    Expression.Call(thisMethod.MakeGenericMethod(typeof(TValue)), match)
+                )
+            );
         }
 
         /// <summary>
@@ -169,8 +181,12 @@ namespace Moq
             var thisMethod = (MethodInfo)MethodBase.GetCurrentMethod();
 
             return Match.Create<TValue>(
-                (argument, parameterType) => match.CompileUsingExpressionCompiler().Invoke(argument, parameterType),
-                Expression.Lambda<Func<TValue>>(Expression.Call(thisMethod.MakeGenericMethod(typeof(TValue)), match)));
+                (argument, parameterType) =>
+                    match.CompileUsingExpressionCompiler().Invoke(argument, parameterType),
+                Expression.Lambda<Func<TValue>>(
+                    Expression.Call(thisMethod.MakeGenericMethod(typeof(TValue)), match)
+                )
+            );
         }
 
         /// <summary>
@@ -187,7 +203,10 @@ namespace Moq
         [EditorBrowsable(EditorBrowsableState.Advanced)]
         public static TValue Is<TValue>(TValue value, IEqualityComparer<TValue> comparer)
         {
-            return Match.Create<TValue>(actual => comparer.Equals(actual, value), () => It.Is<TValue>(value, comparer));
+            return Match.Create<TValue>(
+                actual => comparer.Equals(actual, value),
+                () => It.Is<TValue>(value, comparer)
+            );
         }
 
         /// <summary>
@@ -210,21 +229,23 @@ namespace Moq
         public static TValue IsInRange<TValue>(TValue from, TValue to, Range rangeKind)
             where TValue : IComparable
         {
-            return Match<TValue>.Create(value =>
-            {
-                if (value == null)
+            return Match<TValue>.Create(
+                value =>
                 {
-                    return false;
-                }
+                    if (value == null)
+                    {
+                        return false;
+                    }
 
-                if (rangeKind == Range.Exclusive)
-                {
-                    return value.CompareTo(from) > 0 && value.CompareTo(to) < 0;
-                }
+                    if (rangeKind == Range.Exclusive)
+                    {
+                        return value.CompareTo(from) > 0 && value.CompareTo(to) < 0;
+                    }
 
-                return value.CompareTo(from) >= 0 && value.CompareTo(to) <= 0;
-            },
-            () => It.IsInRange(from, to, rangeKind));
+                    return value.CompareTo(from) >= 0 && value.CompareTo(to) <= 0;
+                },
+                () => It.IsInRange(from, to, rangeKind)
+            );
         }
 
         /// <summary>
@@ -255,9 +276,15 @@ namespace Moq
         /// <param name="items">The sequence of possible values.</param>
         /// <param name="comparer">An <see cref="IEqualityComparer{T}"/> with which the values should be compared.</param>
         /// <typeparam name="TValue">Type of the argument to check.</typeparam>
-        public static TValue IsIn<TValue>(IEnumerable<TValue> items, IEqualityComparer<TValue> comparer)
+        public static TValue IsIn<TValue>(
+            IEnumerable<TValue> items,
+            IEqualityComparer<TValue> comparer
+        )
         {
-            return Match<TValue>.Create(value => items.Contains(value, comparer), () => It.IsIn(items, comparer));
+            return Match<TValue>.Create(
+                value => items.Contains(value, comparer),
+                () => It.IsIn(items, comparer)
+            );
         }
 
         /// <summary>
@@ -308,9 +335,15 @@ namespace Moq
         /// <param name="items">The sequence of disallowed values.</param>
         /// <param name="comparer">An <see cref="IEqualityComparer{T}"/> with which the values should be compared.</param>
         /// <typeparam name="TValue">Type of the argument to check.</typeparam>
-        public static TValue IsNotIn<TValue>(IEnumerable<TValue> items, IEqualityComparer<TValue> comparer)
+        public static TValue IsNotIn<TValue>(
+            IEnumerable<TValue> items,
+            IEqualityComparer<TValue> comparer
+        )
         {
-            return Match<TValue>.Create(value => !items.Contains(value, comparer), () => It.IsNotIn(items, comparer));
+            return Match<TValue>.Create(
+                value => !items.Contains(value, comparer),
+                () => It.IsNotIn(items, comparer)
+            );
         }
 
         /// <summary>
@@ -353,7 +386,10 @@ namespace Moq
             var re = new Regex(regex);
 
             // But evaluated every time :)
-            return Match<string>.Create(value => value != null && re.IsMatch(value), () => It.IsRegex(regex));
+            return Match<string>.Create(
+                value => value != null && re.IsMatch(value),
+                () => It.IsRegex(regex)
+            );
         }
 
         /// <summary>
@@ -377,7 +413,10 @@ namespace Moq
             var re = new Regex(regex, options);
 
             // But evaluated every time :)
-            return Match<string>.Create(value => value != null && re.IsMatch(value), () => It.IsRegex(regex, options));
+            return Match<string>.Create(
+                value => value != null && re.IsMatch(value),
+                () => It.IsRegex(regex, options)
+            );
         }
 
         /// <summary>

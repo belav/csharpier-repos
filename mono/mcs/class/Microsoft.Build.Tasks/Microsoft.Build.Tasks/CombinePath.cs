@@ -32,52 +32,53 @@ using System.IO;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
 
-namespace Microsoft.Build.Tasks {
+namespace Microsoft.Build.Tasks
+{
     [MonoTODO]
-    public class CombinePath : TaskExtension {
-    
-        string        base_path;
-        ITaskItem []    combined_paths;
-        ITaskItem []    paths;
-        
-        public CombinePath ()
-        {
-        }
-        
-        public override bool Execute ()
+    public class CombinePath : TaskExtension
+    {
+        string base_path;
+        ITaskItem[] combined_paths;
+        ITaskItem[] paths;
+
+        public CombinePath() { }
+
+        public override bool Execute()
         {
             if (paths.Length == 0)
                 return true;
 
-            List <ITaskItem> combined = new List <ITaskItem> ();
+            List<ITaskItem> combined = new List<ITaskItem>();
 
             foreach (ITaskItem path in paths)
-                if (String.IsNullOrEmpty (base_path))
-                    combined.Add (path);
+                if (String.IsNullOrEmpty(base_path))
+                    combined.Add(path);
                 else
-                    combined.Add (new TaskItem (Path.Combine (base_path, path.ItemSpec)));
+                    combined.Add(new TaskItem(Path.Combine(base_path, path.ItemSpec)));
 
-            combined_paths = combined.ToArray ();
-            
+            combined_paths = combined.ToArray();
+
             return true;
         }
-        
-        public string BasePath {
+
+        public string BasePath
+        {
             get { return base_path; }
             set { base_path = value; }
         }
-        
+
         [Output]
-        public ITaskItem [] CombinedPaths {
+        public ITaskItem[] CombinedPaths
+        {
             get { return combined_paths; }
             set { combined_paths = value; }
         }
-        
+
         [Required]
-        public ITaskItem [] Paths {
+        public ITaskItem[] Paths
+        {
             get { return paths; }
             set { paths = value; }
         }
     }
 }
-

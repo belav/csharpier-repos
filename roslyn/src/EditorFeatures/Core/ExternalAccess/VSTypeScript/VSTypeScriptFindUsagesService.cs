@@ -27,11 +27,31 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
             _underlyingService = underlyingService;
         }
 
-        public Task FindReferencesAsync(IFindUsagesContext context, Document document, int position, CancellationToken cancellationToken)
-            => _underlyingService.FindReferencesAsync(document, position, new Context(context), cancellationToken);
+        public Task FindReferencesAsync(
+            IFindUsagesContext context,
+            Document document,
+            int position,
+            CancellationToken cancellationToken
+        ) =>
+            _underlyingService.FindReferencesAsync(
+                document,
+                position,
+                new Context(context),
+                cancellationToken
+            );
 
-        public Task FindImplementationsAsync(IFindUsagesContext context, Document document, int position, CancellationToken cancellationToken)
-            => _underlyingService.FindImplementationsAsync(document, position, new Context(context), cancellationToken);
+        public Task FindImplementationsAsync(
+            IFindUsagesContext context,
+            Document document,
+            int position,
+            CancellationToken cancellationToken
+        ) =>
+            _underlyingService.FindImplementationsAsync(
+                document,
+                position,
+                new Context(context),
+                cancellationToken
+            );
 
         private sealed class Context : IVSTypeScriptFindUsagesContext
         {
@@ -42,23 +62,31 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
                 _context = context;
             }
 
-            public IVSTypeScriptStreamingProgressTracker ProgressTracker
-                => new ProgressTracker(_context.ProgressTracker);
+            public IVSTypeScriptStreamingProgressTracker ProgressTracker =>
+                new ProgressTracker(_context.ProgressTracker);
 
-            public ValueTask ReportMessageAsync(string message, CancellationToken cancellationToken)
-                => _context.ReportMessageAsync(message, cancellationToken);
+            public ValueTask ReportMessageAsync(
+                string message,
+                CancellationToken cancellationToken
+            ) => _context.ReportMessageAsync(message, cancellationToken);
 
-            public ValueTask SetSearchTitleAsync(string title, CancellationToken cancellationToken)
-                => _context.SetSearchTitleAsync(title, cancellationToken);
+            public ValueTask SetSearchTitleAsync(
+                string title,
+                CancellationToken cancellationToken
+            ) => _context.SetSearchTitleAsync(title, cancellationToken);
 
-            public ValueTask OnDefinitionFoundAsync(VSTypeScriptDefinitionItem definition, CancellationToken cancellationToken)
-                => _context.OnDefinitionFoundAsync(definition.UnderlyingObject, cancellationToken);
+            public ValueTask OnDefinitionFoundAsync(
+                VSTypeScriptDefinitionItem definition,
+                CancellationToken cancellationToken
+            ) => _context.OnDefinitionFoundAsync(definition.UnderlyingObject, cancellationToken);
 
-            public ValueTask OnReferenceFoundAsync(VSTypeScriptSourceReferenceItem reference, CancellationToken cancellationToken)
-                => _context.OnReferenceFoundAsync(reference.UnderlyingObject, cancellationToken);
+            public ValueTask OnReferenceFoundAsync(
+                VSTypeScriptSourceReferenceItem reference,
+                CancellationToken cancellationToken
+            ) => _context.OnReferenceFoundAsync(reference.UnderlyingObject, cancellationToken);
 
-            public ValueTask OnCompletedAsync(CancellationToken cancellationToken)
-                => ValueTaskFactory.CompletedTask;
+            public ValueTask OnCompletedAsync(CancellationToken cancellationToken) =>
+                ValueTaskFactory.CompletedTask;
         }
 
         private sealed class ProgressTracker : IVSTypeScriptStreamingProgressTracker
@@ -70,11 +98,11 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
                 _progressTracker = progressTracker;
             }
 
-            public ValueTask AddItemsAsync(int count, CancellationToken cancellationToken)
-                => _progressTracker.AddItemsAsync(count, cancellationToken);
+            public ValueTask AddItemsAsync(int count, CancellationToken cancellationToken) =>
+                _progressTracker.AddItemsAsync(count, cancellationToken);
 
-            public ValueTask ItemCompletedAsync(CancellationToken cancellationToken)
-                => _progressTracker.ItemCompletedAsync(cancellationToken);
+            public ValueTask ItemCompletedAsync(CancellationToken cancellationToken) =>
+                _progressTracker.ItemCompletedAsync(cancellationToken);
         }
     }
 }

@@ -7,42 +7,42 @@ enum E : uint
 
 class A
 {
-    public static implicit operator sbyte (A mask)
+    public static implicit operator sbyte(A mask)
     {
         return 1;
     }
 
-    public static implicit operator byte (A mask)
+    public static implicit operator byte(A mask)
     {
         return 2;
     }
 
-    public static implicit operator short (A mask)
+    public static implicit operator short(A mask)
     {
         return 3;
     }
 
-    public static implicit operator ushort (A mask)
+    public static implicit operator ushort(A mask)
     {
         return 4;
     }
 
-    public static implicit operator int (A mask)
+    public static implicit operator int(A mask)
     {
         return 5;
     }
 
-    public static implicit operator uint (A mask)
+    public static implicit operator uint(A mask)
     {
         return 6;
     }
 
-    public static implicit operator long (A mask)
+    public static implicit operator long(A mask)
     {
         return 7;
     }
 
-    public static implicit operator ulong (A mask)
+    public static implicit operator ulong(A mask)
     {
         return 8;
     }
@@ -50,32 +50,32 @@ class A
 
 class A2
 {
-    public static implicit operator sbyte (A2 mask)
+    public static implicit operator sbyte(A2 mask)
     {
         return 1;
     }
 
-    public static implicit operator byte (A2 mask)
+    public static implicit operator byte(A2 mask)
     {
         return 2;
     }
 
-    public static implicit operator short (A2 mask)
+    public static implicit operator short(A2 mask)
     {
         return 3;
     }
 
-    public static implicit operator uint (A2 mask)
+    public static implicit operator uint(A2 mask)
     {
         return 6;
     }
 
-    public static implicit operator long (A2 mask)
+    public static implicit operator long(A2 mask)
     {
         return 7;
     }
 
-    public static implicit operator ulong (A2 mask)
+    public static implicit operator ulong(A2 mask)
     {
         return 8;
     }
@@ -83,22 +83,22 @@ class A2
 
 class A3
 {
-    public static implicit operator sbyte (A3 mask)
+    public static implicit operator sbyte(A3 mask)
     {
         return 1;
     }
 
-    public static implicit operator uint (A3 mask)
+    public static implicit operator uint(A3 mask)
     {
         return 6;
     }
 
-    public static implicit operator long (A3 mask)
+    public static implicit operator long(A3 mask)
     {
         return 7;
     }
 
-    public static implicit operator ulong (A3 mask)
+    public static implicit operator ulong(A3 mask)
     {
         return 8;
     }
@@ -106,17 +106,17 @@ class A3
 
 class A4
 {
-    public static implicit operator uint (A4 mask)
+    public static implicit operator uint(A4 mask)
     {
         return 6;
     }
 
-    public static implicit operator long (A4 mask)
+    public static implicit operator long(A4 mask)
     {
         return 7;
     }
 
-    public static implicit operator ulong (A4 mask)
+    public static implicit operator ulong(A4 mask)
     {
         return 8;
     }
@@ -124,12 +124,12 @@ class A4
 
 class A5
 {
-    public static implicit operator uint (A5 mask)
+    public static implicit operator uint(A5 mask)
     {
         return 6;
     }
 
-    public static implicit operator int (A5 mask)
+    public static implicit operator int(A5 mask)
     {
         return 8;
     }
@@ -137,7 +137,7 @@ class A5
 
 class A6
 {
-    public static implicit operator byte (A6 mask)
+    public static implicit operator byte(A6 mask)
     {
         return 2;
     }
@@ -145,7 +145,7 @@ class A6
 
 class MyDecimal
 {
-    public static implicit operator decimal (MyDecimal d)
+    public static implicit operator decimal(MyDecimal d)
     {
         return 42;
     }
@@ -153,7 +153,7 @@ class MyDecimal
 
 public class Constraint
 {
-    public static int Main ()
+    public static int Main()
     {
         A a = null;
         A2 a2 = null;
@@ -188,19 +188,18 @@ public class Constraint
         if (~a6 != -3)
             return 15;
 
-        MyDecimal d = new MyDecimal ();
+        MyDecimal d = new MyDecimal();
         if (-d != -42)
             return 20;
 
         E e = E.Value;
         if (~e != (E)4294967271)
             return 21;
-            
-        uint dp = 0;
-        dp = +dp;            
 
-        Console.WriteLine ("OK");
+        uint dp = 0;
+        dp = +dp;
+
+        Console.WriteLine("OK");
         return 0;
     }
-
 }

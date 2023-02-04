@@ -17,8 +17,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
     {
         private class FailureInlineRenameInfo : IInlineRenameInfo
         {
-            public FailureInlineRenameInfo(string localizedErrorMessage)
-                => this.LocalizedErrorMessage = localizedErrorMessage;
+            public FailureInlineRenameInfo(string localizedErrorMessage) =>
+                this.LocalizedErrorMessage = localizedErrorMessage;
 
             public bool CanRename => false;
 
@@ -40,15 +40,35 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
 
             public string GetFinalSymbolName(string replacementText) => null;
 
-            public TextSpan GetReferenceEditSpan(InlineRenameLocation location, string triggerText, CancellationToken cancellationToken) => default;
+            public TextSpan GetReferenceEditSpan(
+                InlineRenameLocation location,
+                string triggerText,
+                CancellationToken cancellationToken
+            ) => default;
 
-            public TextSpan? GetConflictEditSpan(InlineRenameLocation location, string triggerText, string replacementText, CancellationToken cancellationToken) => null;
+            public TextSpan? GetConflictEditSpan(
+                InlineRenameLocation location,
+                string triggerText,
+                string replacementText,
+                CancellationToken cancellationToken
+            ) => null;
 
-            public Task<IInlineRenameLocationSet> FindRenameLocationsAsync(OptionSet optionSet, CancellationToken cancellationToken) => Task.FromResult<IInlineRenameLocationSet>(null);
+            public Task<IInlineRenameLocationSet> FindRenameLocationsAsync(
+                OptionSet optionSet,
+                CancellationToken cancellationToken
+            ) => Task.FromResult<IInlineRenameLocationSet>(null);
 
-            public bool TryOnAfterGlobalSymbolRenamed(Workspace workspace, IEnumerable<DocumentId> changedDocumentIDs, string replacementText) => false;
+            public bool TryOnAfterGlobalSymbolRenamed(
+                Workspace workspace,
+                IEnumerable<DocumentId> changedDocumentIDs,
+                string replacementText
+            ) => false;
 
-            public bool TryOnBeforeGlobalSymbolRenamed(Workspace workspace, IEnumerable<DocumentId> changedDocumentIDs, string replacementText) => false;
+            public bool TryOnBeforeGlobalSymbolRenamed(
+                Workspace workspace,
+                IEnumerable<DocumentId> changedDocumentIDs,
+                string replacementText
+            ) => false;
         }
     }
 }

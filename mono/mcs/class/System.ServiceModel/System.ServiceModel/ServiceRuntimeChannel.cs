@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -39,84 +39,126 @@ namespace System.ServiceModel.MonoInternal
     // FIXME: this is a (similar) workaround for bug 571907.
     public
 #endif
-    class DuplexServiceRuntimeChannel : ServiceRuntimeChannel, IDuplexContextChannel, IInternalContextChannel
+    class DuplexServiceRuntimeChannel
+        : ServiceRuntimeChannel,
+            IDuplexContextChannel,
+            IInternalContextChannel
     {
-        public DuplexServiceRuntimeChannel (IChannel channel, DispatchRuntime runtime)
-            : base (channel, runtime)
+        public DuplexServiceRuntimeChannel(IChannel channel, DispatchRuntime runtime)
+            : base(channel, runtime)
         {
             if (channel == null)
-                throw new ArgumentNullException ("channel");
+                throw new ArgumentNullException("channel");
             // setup callback ClientRuntimeChannel.
             var crt = runtime.CallbackClientRuntime;
             if (crt == null)
-                throw new InvalidOperationException ("The DispatchRuntime does not have CallbackClientRuntime");
-            contract = ContractDescriptionGenerator.GetCallbackContract (runtime.Type, crt.CallbackClientType);
-            client = new ClientRuntimeChannel (crt, contract, this.DefaultOpenTimeout, this.DefaultCloseTimeout, channel, null,
-                               runtime.ChannelDispatcher.MessageVersion, this.RemoteAddress, null);
+                throw new InvalidOperationException(
+                    "The DispatchRuntime does not have CallbackClientRuntime"
+                );
+            contract = ContractDescriptionGenerator.GetCallbackContract(
+                runtime.Type,
+                crt.CallbackClientType
+            );
+            client = new ClientRuntimeChannel(
+                crt,
+                contract,
+                this.DefaultOpenTimeout,
+                this.DefaultCloseTimeout,
+                channel,
+                null,
+                runtime.ChannelDispatcher.MessageVersion,
+                this.RemoteAddress,
+                null
+            );
         }
 
         ClientRuntimeChannel client;
         ContractDescription contract;
 
-        public override bool AllowOutputBatching {
+        public override bool AllowOutputBatching
+        {
             get { return client.AllowOutputBatching; }
             set { client.AllowOutputBatching = value; }
         }
 
-        public override TimeSpan OperationTimeout {
+        public override TimeSpan OperationTimeout
+        {
             get { return client.OperationTimeout; }
             set { client.OperationTimeout = value; }
         }
 
-        public bool AutomaticInputSessionShutdown {
-            get { throw new NotImplementedException (); }
-            set { throw new NotImplementedException (); }
+        public bool AutomaticInputSessionShutdown
+        {
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
         }
 
         public InstanceContext CallbackInstance { get; set; }
 
-        public ContractDescription Contract {
+        public ContractDescription Contract
+        {
             get { return contract; }
         }
 
-        public OperationContext Context {
-            set {  }
+        public OperationContext Context
+        {
+            set { }
         }
 
         Action<TimeSpan> session_shutdown_delegate;
 
-        public void CloseOutputSession (TimeSpan timeout)
+        public void CloseOutputSession(TimeSpan timeout)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public IAsyncResult BeginCloseOutputSession (TimeSpan timeout, AsyncCallback callback, object state)
+        public IAsyncResult BeginCloseOutputSession(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             if (session_shutdown_delegate == null)
-                session_shutdown_delegate = new Action<TimeSpan> (CloseOutputSession);
-            return session_shutdown_delegate.BeginInvoke (timeout, callback, state);
+                session_shutdown_delegate = new Action<TimeSpan>(CloseOutputSession);
+            return session_shutdown_delegate.BeginInvoke(timeout, callback, state);
         }
 
-        public void EndCloseOutputSession (IAsyncResult result)
+        public void EndCloseOutputSession(IAsyncResult result)
         {
-            session_shutdown_delegate.EndInvoke (result);
+            session_shutdown_delegate.EndInvoke(result);
         }
 
         // proxy base implementation.
 
-        public IAsyncResult BeginProcess (MethodBase method, string operationName, object [] parameters, AsyncCallback callback, object asyncState)
+        public IAsyncResult BeginProcess(
+            MethodBase method,
+            string operationName,
+            object[] parameters,
+            AsyncCallback callback,
+            object asyncState
+        )
         {
-            return client.BeginProcess (method, operationName, parameters, callback, asyncState);
+            return client.BeginProcess(method, operationName, parameters, callback, asyncState);
         }
 
-        public object EndProcess (MethodBase method, string operationName, object [] parameters, IAsyncResult result)
+        public object EndProcess(
+            MethodBase method,
+            string operationName,
+            object[] parameters,
+            IAsyncResult result
+        )
         {
-            return client.EndProcess (method, operationName, parameters, result);
+            return client.EndProcess(method, operationName, parameters, result);
         }
 
-        public object Process (MethodBase method, string operationName, object [] parameters, OperationContext context)
+        public object Process(
+            MethodBase method,
+            string operationName,
+            object[] parameters,
+            OperationContext context
+        )
         {
-            return client.Process (method, operationName, parameters, context);
+            return client.Process(method, operationName, parameters, context);
         }
     }
 
@@ -132,15 +174,15 @@ namespace System.ServiceModel.MonoInternal
         readonly IChannel channel;
         readonly DispatchRuntime runtime;
 
-        public ServiceRuntimeChannel (IChannel channel, DispatchRuntime runtime)
+        public ServiceRuntimeChannel(IChannel channel, DispatchRuntime runtime)
         {
             this.channel = channel;
             this.runtime = runtime;
         }
 
-        void OnChannelClose (object o, EventArgs e)
+        void OnChannelClose(object o, EventArgs e)
         {
-            Close ();
+            Close();
         }
 
         #region IContextChannel
@@ -148,8 +190,10 @@ namespace System.ServiceModel.MonoInternal
         [MonoTODO]
         public virtual bool AllowOutputBatching { get; set; }
 
-        public IInputSession InputSession {
-            get {
+        public IInputSession InputSession
+        {
+            get
+            {
                 var ch = channel as ISessionChannel<IInputSession>;
                 if (ch != null)
                     return ch.Session;
@@ -158,12 +202,14 @@ namespace System.ServiceModel.MonoInternal
             }
         }
 
-        public EndpointAddress LocalAddress {
-            get {
+        public EndpointAddress LocalAddress
+        {
+            get
+            {
                 if (channel is IReplyChannel)
-                    return ((IReplyChannel) channel).LocalAddress;
+                    return ((IReplyChannel)channel).LocalAddress;
                 if (channel is IInputChannel)
-                    return ((IInputChannel) channel).LocalAddress;
+                    return ((IInputChannel)channel).LocalAddress;
                 return null;
             }
         }
@@ -171,102 +217,119 @@ namespace System.ServiceModel.MonoInternal
         [MonoTODO]
         public virtual TimeSpan OperationTimeout { get; set; }
 
-        public IOutputSession OutputSession {
-            get {
+        public IOutputSession OutputSession
+        {
+            get
+            {
                 var dch = channel as ISessionChannel<IDuplexSession>;
                 return dch != null ? dch.Session : null;
             }
         }
 
-        public EndpointAddress RemoteAddress {
-            get {
+        public EndpointAddress RemoteAddress
+        {
+            get
+            {
                 if (channel is IDuplexChannel)
-                    return ((IDuplexChannel) channel).RemoteAddress;
+                    return ((IDuplexChannel)channel).RemoteAddress;
                 return null;
             }
         }
 
-        public string SessionId {
+        public string SessionId
+        {
             get { return InputSession != null ? InputSession.Id : null; }
         }
 
         #endregion
 
         // CommunicationObject
-        protected internal override TimeSpan DefaultOpenTimeout {
+        protected internal override TimeSpan DefaultOpenTimeout
+        {
             get { return runtime.ChannelDispatcher.DefaultOpenTimeout; }
         }
 
-        protected internal override TimeSpan DefaultCloseTimeout {
+        protected internal override TimeSpan DefaultCloseTimeout
+        {
             get { return runtime.ChannelDispatcher.DefaultCloseTimeout; }
         }
 
-        protected override void OnAbort ()
+        protected override void OnAbort()
         {
-            channel.Abort ();
+            channel.Abort();
         }
 
         Action<TimeSpan> close_delegate;
 
-        protected override IAsyncResult OnBeginClose (
-            TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             if (close_delegate == null)
-                close_delegate = new Action<TimeSpan> (OnClose);
-            return close_delegate.BeginInvoke (timeout, callback, state);
+                close_delegate = new Action<TimeSpan>(OnClose);
+            return close_delegate.BeginInvoke(timeout, callback, state);
         }
 
-        protected override void OnEndClose (IAsyncResult result)
+        protected override void OnEndClose(IAsyncResult result)
         {
-            close_delegate.EndInvoke (result);
+            close_delegate.EndInvoke(result);
         }
 
-        protected override void OnClose (TimeSpan timeout)
+        protected override void OnClose(TimeSpan timeout)
         {
             channel.Closing -= OnChannelClose;
         }
 
-        protected override IAsyncResult OnBeginOpen (
-            TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginOpen(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
-            return channel.BeginOpen (timeout, callback, state);
+            return channel.BeginOpen(timeout, callback, state);
         }
 
-        protected override void OnEndOpen (IAsyncResult result)
+        protected override void OnEndOpen(IAsyncResult result)
         {
-            channel.EndOpen (result);
+            channel.EndOpen(result);
         }
 
-        protected override void OnOpen (TimeSpan timeout)
+        protected override void OnOpen(TimeSpan timeout)
         {
             if (channel.State == CommunicationState.Created)
-                channel.Open (timeout);
+                channel.Open(timeout);
         }
 
         // IChannel
-        public T GetProperty<T> () where T : class
+        public T GetProperty<T>()
+            where T : class
         {
-            return channel.GetProperty<T> ();
+            return channel.GetProperty<T>();
         }
 
         // IExtensibleObject<IContextChannel>
-        public IExtensionCollection<IContextChannel> Extensions {
-            get {
+        public IExtensionCollection<IContextChannel> Extensions
+        {
+            get
+            {
                 if (extensions == null)
-                    extensions = new ExtensionCollection<IContextChannel> (this);
+                    extensions = new ExtensionCollection<IContextChannel>(this);
                 return extensions;
             }
         }
 
-        public Uri ListenUri {
+        public Uri ListenUri
+        {
             get { return runtime.ChannelDispatcher.Listener.Uri; }
         }
 
         #region IDisposable Members
 
-        public void Dispose ()
+        public void Dispose()
         {
-            Close ();
+            Close();
         }
 
         #endregion

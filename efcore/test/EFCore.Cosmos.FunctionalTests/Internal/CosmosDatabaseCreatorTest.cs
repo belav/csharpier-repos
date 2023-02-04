@@ -25,13 +25,18 @@ public class CosmosDatabaseCreatorTest
         }
         finally
         {
-            testDatabase.Initialize(testDatabase.ServiceProvider, () => new BloggingContext(testDatabase));
+            testDatabase.Initialize(
+                testDatabase.ServiceProvider,
+                () => new BloggingContext(testDatabase)
+            );
         }
     }
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
-    public async Task EnsureCreated_returns_true_when_database_exists_but_collections_do_not(bool async)
+    public async Task EnsureCreated_returns_true_when_database_exists_but_collections_do_not(
+        bool async
+    )
     {
         await using var testDatabase = CosmosTestStore.Create("EnsureCreatedTest");
         try
@@ -43,7 +48,10 @@ public class CosmosDatabaseCreatorTest
         }
         finally
         {
-            testDatabase.Initialize(testDatabase.ServiceProvider, () => new BloggingContext(testDatabase));
+            testDatabase.Initialize(
+                testDatabase.ServiceProvider,
+                () => new BloggingContext(testDatabase)
+            );
         }
     }
 
@@ -52,7 +60,10 @@ public class CosmosDatabaseCreatorTest
     public async Task EnsureCreated_returns_false_when_database_and_collections_exist(bool async)
     {
         await using var testDatabase = CosmosTestStore.Create("EnsureCreatedReady");
-        testDatabase.Initialize(testDatabase.ServiceProvider, testStore => new BloggingContext((CosmosTestStore)testStore));
+        testDatabase.Initialize(
+            testDatabase.ServiceProvider,
+            testStore => new BloggingContext((CosmosTestStore)testStore)
+        );
 
         using var context = new BloggingContext(testDatabase);
         var creator = context.GetService<IDatabaseCreator>();
@@ -95,17 +106,15 @@ public class CosmosDatabaseCreatorTest
             _name = testStore.Name;
         }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder
-                .UseCosmos(
-                    _connectionUri,
-                    _authToken,
-                    _name,
-                    b => b.ApplyConfiguration());
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+            optionsBuilder.UseCosmos(
+                _connectionUri,
+                _authToken,
+                _name,
+                b => b.ApplyConfiguration()
+            );
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-        }
+        protected override void OnModelCreating(ModelBuilder modelBuilder) { }
 
         public DbSet<Blog> Blogs { get; set; }
     }

@@ -28,11 +28,13 @@
 using Microsoft.Build.Framework;
 using NUnit.Framework;
 
-namespace MonoTests.Microsoft.Build.Framework {
+namespace MonoTests.Microsoft.Build.Framework
+{
     [TestFixture]
-    public class BuildErrorEventArgsTest {
+    public class BuildErrorEventArgsTest
+    {
         [Test]
-        public void AssignmentTest ()
+        public void AssignmentTest()
         {
             BuildErrorEventArgs beea;
             string subcategory = "subcategory";
@@ -45,20 +47,30 @@ namespace MonoTests.Microsoft.Build.Framework {
             string message = "message";
             string helpKeyword = "helpKeyword";
             string senderName = "MSBuild";
-            
-            beea = new BuildErrorEventArgs (subcategory, code, file, lineNumber, columnNumber, endLineNumber,
-                endColumnNumber, message, helpKeyword, senderName);
-            
-            Assert.AreEqual (subcategory, beea.Subcategory, "Subcategory");
-            Assert.AreEqual (code, beea.Code, "Code");
-            Assert.AreEqual (file, beea.File, "File");
-            Assert.AreEqual (lineNumber, beea.LineNumber, "LineNumber");
-            Assert.AreEqual (columnNumber, beea.ColumnNumber, "ColumnNumber");
-            Assert.AreEqual (endLineNumber, beea.EndLineNumber, "EndLineNumber");
-            Assert.AreEqual (endColumnNumber, beea.EndColumnNumber, "EndColumnNumber");
-            Assert.AreEqual (message, beea.Message, "Message");
-            Assert.AreEqual (helpKeyword, beea.HelpKeyword, "HelpKeyword");
-            Assert.AreEqual (senderName, beea.SenderName, "SenderName");
+
+            beea = new BuildErrorEventArgs(
+                subcategory,
+                code,
+                file,
+                lineNumber,
+                columnNumber,
+                endLineNumber,
+                endColumnNumber,
+                message,
+                helpKeyword,
+                senderName
+            );
+
+            Assert.AreEqual(subcategory, beea.Subcategory, "Subcategory");
+            Assert.AreEqual(code, beea.Code, "Code");
+            Assert.AreEqual(file, beea.File, "File");
+            Assert.AreEqual(lineNumber, beea.LineNumber, "LineNumber");
+            Assert.AreEqual(columnNumber, beea.ColumnNumber, "ColumnNumber");
+            Assert.AreEqual(endLineNumber, beea.EndLineNumber, "EndLineNumber");
+            Assert.AreEqual(endColumnNumber, beea.EndColumnNumber, "EndColumnNumber");
+            Assert.AreEqual(message, beea.Message, "Message");
+            Assert.AreEqual(helpKeyword, beea.HelpKeyword, "HelpKeyword");
+            Assert.AreEqual(senderName, beea.SenderName, "SenderName");
         }
     }
 }

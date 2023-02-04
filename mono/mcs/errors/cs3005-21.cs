@@ -3,12 +3,14 @@
 // Compiler options: -warnaserror
 
 using System;
-[assembly:CLSCompliant (true)]
 
-public class CLSClass {
-        [CLSCompliant (false)]
-        public int NameABC;
-            
-        public int NameAbc;
-        public int NameAbC;
+[assembly: CLSCompliant(true)]
+
+public class CLSClass
+{
+    [CLSCompliant(false)]
+    public int NameABC;
+
+    public int NameAbc;
+    public int NameAbC;
 }

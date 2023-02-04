@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -44,17 +44,25 @@ using System.IO;
 using System.Text;
 using System.Threading;
 using System.Runtime.InteropServices;
-namespace System {
-    class TermInfoDriver : IConsoleDriver {
 
+namespace System
+{
+    class TermInfoDriver : IConsoleDriver
+    {
         // This points to a variable that is updated by unmanage code on window size changes.
-        unsafe static int *native_terminal_size;
+        unsafe static int* native_terminal_size;
 
         // The current size that we believe we have
         static int terminal_size;
-        
+
         //static uint flag = 0xdeadbeef;
-        readonly static string [] locations = { "/usr/share/terminfo", "/etc/terminfo", "/usr/lib/terminfo", "/lib/terminfo" };
+        readonly static string[] locations =
+        {
+            "/usr/share/terminfo",
+            "/etc/terminfo",
+            "/usr/lib/terminfo",
+            "/lib/terminfo"
+        };
 
         TermInfoReader reader;
         int cursorLeft;
@@ -72,18 +80,20 @@ namespace System {
 
         int windowWidth;
         int windowHeight;
+
         //int windowTop;
         //int windowLeft;
         int bufferHeight;
         int bufferWidth;
 
-        char [] buffer;
+        char[] buffer;
         int readpos;
         int writepos;
-        string keypadXmit, keypadLocal;
+        string keypadXmit,
+            keypadLocal;
         bool controlCAsInput;
         bool inited;
-        object initLock = new object ();
+        object initLock = new object();
         bool initKeys;
         string origPair;
         string origColors;
@@ -96,42 +106,45 @@ namespace System {
         bool noGetPosition;
         Hashtable keymap;
         ByteMatcher rootmap;
-        int rl_startx = -1, rl_starty = -1;
-        byte [] control_characters; // Indexed by ControlCharacters.XXXXXX
+        int rl_startx = -1,
+            rl_starty = -1;
+        byte[] control_characters; // Indexed by ControlCharacters.XXXXXX
 #if DEBUG
         StreamWriter logger;
 #endif
 
-        static string TryTermInfoDir (string dir, string term )
+        static string TryTermInfoDir(string dir, string term)
         {
-            string path = String.Format ("{0}/{1:x}/{2}", dir, (int)(term [0]), term);
-            if (File.Exists (path))
+            string path = String.Format("{0}/{1:x}/{2}", dir, (int)(term[0]), term);
+            if (File.Exists(path))
                 return path;
-                
-            path = Path.Combine (dir, term.Substring (0, 1), term);
-            if (File.Exists (path))
+
+            path = Path.Combine(dir, term.Substring(0, 1), term);
+            if (File.Exists(path))
                 return path;
             return null;
         }
 
-        static string SearchTerminfo (string term)
+        static string SearchTerminfo(string term)
         {
             if (term == null || term == String.Empty)
                 return null;
 
             string path;
-            string terminfo = Environment.GetEnvironmentVariable ("TERMINFO");
-            if (terminfo != null && Directory.Exists (terminfo)){
-                path = TryTermInfoDir (terminfo, term);
+            string terminfo = Environment.GetEnvironmentVariable("TERMINFO");
+            if (terminfo != null && Directory.Exists(terminfo))
+            {
+                path = TryTermInfoDir(terminfo, term);
                 if (path != null)
                     return path;
             }
-                    
-            foreach (string dir in locations) {
-                if (!Directory.Exists (dir))
+
+            foreach (string dir in locations)
+            {
+                if (!Directory.Exists(dir))
                     continue;
 
-                path = TryTermInfoDir (dir, term);
+                path = TryTermInfoDir(dir, term);
                 if (path != null)
                     return path;
             }
@@ -139,20 +152,18 @@ namespace System {
             return null;
         }
 
-        void WriteConsole (string str)
+        void WriteConsole(string str)
         {
             if (str == null)
                 return;
-            
-            stdout.InternalWriteString (str);
+
+            stdout.InternalWriteString(str);
         }
 
-        public TermInfoDriver ()
-            : this (Environment.GetEnvironmentVariable ("TERM"))
-        {
-        }
+        public TermInfoDriver()
+            : this(Environment.GetEnvironmentVariable("TERM")) { }
 
-        public TermInfoDriver (string term)
+        public TermInfoDriver(string term)
         {
 #if DEBUG
             File.Delete ("console.log");
@@ -160,168 +171,209 @@ namespace System {
 #endif
             this.term = term;
 
-            string filename = SearchTerminfo (term);
+            string filename = SearchTerminfo(term);
             if (filename != null)
-                reader = new TermInfoReader (term, filename);
-            else {
+                reader = new TermInfoReader(term, filename);
+            else
+            {
                 // fallbacks
-                if (term == "xterm") {
-                    reader = new TermInfoReader (term, KnownTerminals.xterm);
-                } else if (term == "linux") {
-                    reader = new TermInfoReader (term, KnownTerminals.linux);
+                if (term == "xterm")
+                {
+                    reader = new TermInfoReader(term, KnownTerminals.xterm);
+                }
+                else if (term == "linux")
+                {
+                    reader = new TermInfoReader(term, KnownTerminals.linux);
                 }
             }
 
             if (reader == null)
-                reader = new TermInfoReader (term, KnownTerminals.ansi);
+                reader = new TermInfoReader(term, KnownTerminals.ansi);
 
-            if (!(Console.stdout is CStreamWriter)) {
+            if (!(Console.stdout is CStreamWriter))
+            {
                 // Application set its own stdout, we need a reference to the real stdout
-                stdout = new CStreamWriter (Console.OpenStandardOutput (0), Console.OutputEncoding, false);
-                ((StreamWriter) stdout).AutoFlush = true;
-            } else {
-                stdout = (CStreamWriter) Console.stdout;
+                stdout = new CStreamWriter(
+                    Console.OpenStandardOutput(0),
+                    Console.OutputEncoding,
+                    false
+                );
+                ((StreamWriter)stdout).AutoFlush = true;
+            }
+            else
+            {
+                stdout = (CStreamWriter)Console.stdout;
             }
         }
 
-        public bool Initialized {
+        public bool Initialized
+        {
             get { return inited; }
         }
 
-        public void Init ()
+        public void Init()
         {
             if (inited)
                 return;
 
-            lock (initLock){
+            lock (initLock)
+            {
                 if (inited)
                     return;
-                
-                try {
+
+                try
+                {
                     /* This should not happen any more, since it is checked for in Console */
                     if (!ConsoleDriver.IsConsole)
-                        throw new IOException ("Not a tty.");
-                    
-                    ConsoleDriver.SetEcho (false);
-                    
+                        throw new IOException("Not a tty.");
+
+                    ConsoleDriver.SetEcho(false);
+
                     string endString = null;
-                    keypadXmit = reader.Get (TermInfoStrings.KeypadXmit);
-                    keypadLocal = reader.Get (TermInfoStrings.KeypadLocal);
-                    if (keypadXmit != null) {
-                        WriteConsole (keypadXmit); // Needed to get the arrows working
+                    keypadXmit = reader.Get(TermInfoStrings.KeypadXmit);
+                    keypadLocal = reader.Get(TermInfoStrings.KeypadLocal);
+                    if (keypadXmit != null)
+                    {
+                        WriteConsole(keypadXmit); // Needed to get the arrows working
                         if (keypadLocal != null)
                             endString += keypadLocal;
                     }
-                    
-                    origPair = reader.Get (TermInfoStrings.OrigPair);
-                    origColors = reader.Get (TermInfoStrings.OrigColors);
-                    setfgcolor = reader.Get (TermInfoStrings.SetAForeground);
-                    setbgcolor = reader.Get (TermInfoStrings.SetABackground);
-                    maxColors = reader.Get (TermInfoNumbers.MaxColors);
-                    maxColors = Math.Max (Math.Min (maxColors, 16), 1);
-                    
+
+                    origPair = reader.Get(TermInfoStrings.OrigPair);
+                    origColors = reader.Get(TermInfoStrings.OrigColors);
+                    setfgcolor = reader.Get(TermInfoStrings.SetAForeground);
+                    setbgcolor = reader.Get(TermInfoStrings.SetABackground);
+                    maxColors = reader.Get(TermInfoNumbers.MaxColors);
+                    maxColors = Math.Max(Math.Min(maxColors, 16), 1);
+
                     string resetColors = (origColors == null) ? origPair : origColors;
                     if (resetColors != null)
                         endString += resetColors;
-                    
-                    unsafe {
-                        if (!ConsoleDriver.TtySetup (keypadXmit, endString, out control_characters, out native_terminal_size)){
-                            control_characters = new byte [17];
+                    unsafe
+                    {
+                        if (
+                            !ConsoleDriver.TtySetup(
+                                keypadXmit,
+                                endString,
+                                out control_characters,
+                                out native_terminal_size
+                            )
+                        )
+                        {
+                            control_characters = new byte[17];
                             native_terminal_size = null;
                             //throw new IOException ("Error initializing terminal.");
                         }
                     }
-                    
-                    stdin = new StreamReader (Console.OpenStandardInput (0), Console.InputEncoding);
-                    clear = reader.Get (TermInfoStrings.ClearScreen);
-                    bell = reader.Get (TermInfoStrings.Bell);
-                    if (clear == null) {
-                        clear = reader.Get (TermInfoStrings.CursorHome);
-                        clear += reader.Get (TermInfoStrings.ClrEos);
+
+                    stdin = new StreamReader(Console.OpenStandardInput(0), Console.InputEncoding);
+                    clear = reader.Get(TermInfoStrings.ClearScreen);
+                    bell = reader.Get(TermInfoStrings.Bell);
+                    if (clear == null)
+                    {
+                        clear = reader.Get(TermInfoStrings.CursorHome);
+                        clear += reader.Get(TermInfoStrings.ClrEos);
                     }
-                    
-                    csrVisible = reader.Get (TermInfoStrings.CursorNormal);
+
+                    csrVisible = reader.Get(TermInfoStrings.CursorNormal);
                     if (csrVisible == null)
-                        csrVisible = reader.Get (TermInfoStrings.CursorVisible);
-                    
-                    csrInvisible = reader.Get (TermInfoStrings.CursorInvisible);
-                    if (term == "cygwin" || term == "linux" || (term != null && term.StartsWith ("xterm")) ||
-                        term == "rxvt" || term == "dtterm") {
+                        csrVisible = reader.Get(TermInfoStrings.CursorVisible);
+
+                    csrInvisible = reader.Get(TermInfoStrings.CursorInvisible);
+                    if (
+                        term == "cygwin"
+                        || term == "linux"
+                        || (term != null && term.StartsWith("xterm"))
+                        || term == "rxvt"
+                        || term == "dtterm"
+                    )
+                    {
                         titleFormat = "\x1b]0;{0}\x7"; // icon + window title
-                    } else if (term == "iris-ansi") {
+                    }
+                    else if (term == "iris-ansi")
+                    {
                         titleFormat = "\x1bP1.y{0}\x1b\\"; // not tested
-                    } else if (term == "sun-cmd") {
+                    }
+                    else if (term == "sun-cmd")
+                    {
                         titleFormat = "\x1b]l{0}\x1b\\"; // not tested
                     }
-                    
-                    cursorAddress = reader.Get (TermInfoStrings.CursorAddress);
-                    
-                    GetCursorPosition ();
-    #if DEBUG
+
+                    cursorAddress = reader.Get(TermInfoStrings.CursorAddress);
+
+                    GetCursorPosition();
+#if DEBUG
                     logger.WriteLine ("noGetPosition: {0} left: {1} top: {2}", noGetPosition, cursorLeft, cursorTop);
                     logger.Flush ();
-    #endif
-                    if (noGetPosition) {
-                        WriteConsole (clear);
+#endif
+                    if (noGetPosition)
+                    {
+                        WriteConsole(clear);
                         cursorLeft = 0;
                         cursorTop = 0;
                     }
-
-                } finally {
+                }
+                finally
+                {
                     inited = true;
                 }
-
             }
         }
 
-        void IncrementX ()
+        void IncrementX()
         {
             cursorLeft++;
-            if (cursorLeft >= WindowWidth) {
+            if (cursorLeft >= WindowWidth)
+            {
                 cursorTop++;
                 cursorLeft = 0;
-                if (cursorTop >= WindowHeight) {
+                if (cursorTop >= WindowHeight)
+                {
                     // Writing beyond the initial screen
-                    if (rl_starty != -1) rl_starty--;
+                    if (rl_starty != -1)
+                        rl_starty--;
                     cursorTop--;
                 }
             }
         }
 
         // Should never get called unless inited
-        public void WriteSpecialKey (ConsoleKeyInfo key)
+        public void WriteSpecialKey(ConsoleKeyInfo key)
         {
-            switch (key.Key) {
-            case ConsoleKey.Backspace:
-                if (cursorLeft > 0) {
-                    if (cursorLeft <= rl_startx && cursorTop == rl_starty)
-                        break;
-                    cursorLeft--;
-                    SetCursorPosition (cursorLeft, cursorTop);
-                    WriteConsole (" ");
-                    SetCursorPosition (cursorLeft, cursorTop);
-                }
+            switch (key.Key)
+            {
+                case ConsoleKey.Backspace:
+                    if (cursorLeft > 0)
+                    {
+                        if (cursorLeft <= rl_startx && cursorTop == rl_starty)
+                            break;
+                        cursorLeft--;
+                        SetCursorPosition(cursorLeft, cursorTop);
+                        WriteConsole(" ");
+                        SetCursorPosition(cursorLeft, cursorTop);
+                    }
 #if DEBUG
                 logger.WriteLine ("BS left: {0} top: {1}", cursorLeft, cursorTop);
                 logger.Flush ();
 #endif
-                break;
-            case ConsoleKey.Tab:
-                int n = 8 - (cursorLeft % 8);
-                for (int i = 0; i < n; i++){
-                    IncrementX ();
-                }
-                WriteConsole ("\t");
-                break;
-            case ConsoleKey.Clear:
-                WriteConsole (clear);
-                cursorLeft = 0;
-                cursorTop = 0;
-                break;
-            case ConsoleKey.Enter:
-                break;
-            default:
-                break;
+                    break;
+                case ConsoleKey.Tab:
+                    int n = 8 - (cursorLeft % 8);
+                    for (int i = 0; i < n; i++)
+                    {
+                        IncrementX();
+                    }
+                    WriteConsole("\t");
+                    break;
+                case ConsoleKey.Clear:
+                    WriteConsole(clear);
+                    cursorLeft = 0;
+                    cursorTop = 0;
+                    break;
+                case ConsoleKey.Enter:
+                    break;
+                default:
+                    break;
             }
 #if DEBUG
             logger.WriteLine ("left: {0} top: {1}", cursorLeft, cursorTop);
@@ -330,45 +382,47 @@ namespace System {
         }
 
         // Should never get called unless inited
-        public void WriteSpecialKey (char c)
+        public void WriteSpecialKey(char c)
         {
-            WriteSpecialKey (CreateKeyInfoFromInt (c, false));
+            WriteSpecialKey(CreateKeyInfoFromInt(c, false));
         }
 
-        public bool IsSpecialKey (ConsoleKeyInfo key)
+        public bool IsSpecialKey(ConsoleKeyInfo key)
         {
             if (!inited)
                 return false;
 
-            switch (key.Key) {
-            case ConsoleKey.Backspace:
-                return true;
-            case ConsoleKey.Tab:
-                return true;
-            case ConsoleKey.Clear:
-                return true;
-            case ConsoleKey.Enter:
-                cursorLeft = 0;
-                cursorTop++;
-                if (cursorTop >= WindowHeight) {
-                    cursorTop--;
-                    //TODO: scroll up
-                }
-                return false;
-            default:
-                // CStreamWriter will handle writing this key
-                IncrementX ();
-                return false;
+            switch (key.Key)
+            {
+                case ConsoleKey.Backspace:
+                    return true;
+                case ConsoleKey.Tab:
+                    return true;
+                case ConsoleKey.Clear:
+                    return true;
+                case ConsoleKey.Enter:
+                    cursorLeft = 0;
+                    cursorTop++;
+                    if (cursorTop >= WindowHeight)
+                    {
+                        cursorTop--;
+                        //TODO: scroll up
+                    }
+                    return false;
+                default:
+                    // CStreamWriter will handle writing this key
+                    IncrementX();
+                    return false;
             }
         }
 
-        public bool IsSpecialKey (char c)
+        public bool IsSpecialKey(char c)
         {
-            return IsSpecialKey (CreateKeyInfoFromInt (c, false));
+            return IsSpecialKey(CreateKeyInfoFromInt(c, false));
         }
 
         /// <summary>
-        /// The values of the ConsoleColor enums unfortunately don't map to the 
+        /// The values of the ConsoleColor enums unfortunately don't map to the
         /// corresponding ANSI values.  We need to do the mapping manually.
         /// See http://en.wikipedia.org/wiki/ANSI_escape_code#Colors
         /// </summary>
@@ -383,21 +437,20 @@ namespace System {
             5, // DarkMagenta,
             3, // DarkYellow,
             7, // Gray,
-    
             // Bright colors
-            8,  // DarkGray,
+            8, // DarkGray,
             12, // Blue,
             10, // Green,
             14, // Cyan,
-            9,  // Red,
+            9, // Red,
             13, // Magenta,
             11, // Yellow,
-            15  // White
+            15 // White
         };
 
-        void ChangeColor (string format, ConsoleColor color)
+        void ChangeColor(string format, ConsoleColor color)
         {
-            if (String.IsNullOrEmpty (format))
+            if (String.IsNullOrEmpty(format))
                 // the terminal doesn't support colors
                 return;
 
@@ -407,99 +460,118 @@ namespace System {
 
             int ansiCode = _consoleColorToAnsiCode[ccValue] % maxColors;
 
-            WriteConsole (ParameterizedStrings.Evaluate (format, ansiCode));
+            WriteConsole(ParameterizedStrings.Evaluate(format, ansiCode));
         }
-        
-        public ConsoleColor BackgroundColor {
-            get {
-                if (!inited) {
-                    Init ();
+
+        public ConsoleColor BackgroundColor
+        {
+            get
+            {
+                if (!inited)
+                {
+                    Init();
                 }
 
                 return bgcolor;
             }
-            set {
-                if (!inited) {
-                    Init ();
+            set
+            {
+                if (!inited)
+                {
+                    Init();
                 }
-                ChangeColor (setbgcolor, value);
+                ChangeColor(setbgcolor, value);
                 bgcolor = value;
             }
         }
 
-        public ConsoleColor ForegroundColor {
-            get {
-                if (!inited) {
-                    Init ();
+        public ConsoleColor ForegroundColor
+        {
+            get
+            {
+                if (!inited)
+                {
+                    Init();
                 }
 
                 return fgcolor;
             }
-            set {
-                if (!inited) {
-                    Init ();
+            set
+            {
+                if (!inited)
+                {
+                    Init();
                 }
-                ChangeColor (setfgcolor, value);
+                ChangeColor(setfgcolor, value);
                 fgcolor = value;
             }
         }
 
-        void GetCursorPosition ()
+        void GetCursorPosition()
         {
-            int row = 0, col = 0;
+            int row = 0,
+                col = 0;
             int b;
 
             // First, get any data in the input buffer.  Merely reduces the likelyhood of getting an error
-            int inqueue = ConsoleDriver.InternalKeyAvailable (0);
-            while (inqueue-- > 0){
-                b = stdin.Read ();
-                AddToBuffer (b);
+            int inqueue = ConsoleDriver.InternalKeyAvailable(0);
+            while (inqueue-- > 0)
+            {
+                b = stdin.Read();
+                AddToBuffer(b);
             }
 
             // Then try to probe for the cursor coordinates
-            WriteConsole ("\x1b[6n");
-            if (ConsoleDriver.InternalKeyAvailable (1000) <= 0) {
+            WriteConsole("\x1b[6n");
+            if (ConsoleDriver.InternalKeyAvailable(1000) <= 0)
+            {
                 noGetPosition = true;
                 return;
             }
 
-            b = stdin.Read ();
-            while (b != '\x1b') {
-                AddToBuffer (b);
-                if (ConsoleDriver.InternalKeyAvailable (100) <= 0)
+            b = stdin.Read();
+            while (b != '\x1b')
+            {
+                AddToBuffer(b);
+                if (ConsoleDriver.InternalKeyAvailable(100) <= 0)
                     return;
-                b = stdin.Read ();
+                b = stdin.Read();
             }
 
-            b = stdin.Read ();
-            if (b != '[') {
-                AddToBuffer ('\x1b');
-                AddToBuffer (b);
+            b = stdin.Read();
+            if (b != '[')
+            {
+                AddToBuffer('\x1b');
+                AddToBuffer(b);
                 return;
             }
 
-            b = stdin.Read ();
-            if (b != ';') {
+            b = stdin.Read();
+            if (b != ';')
+            {
                 row = b - '0';
-                b = stdin.Read ();
-                while ((b >= '0') && (b <= '9')) {
+                b = stdin.Read();
+                while ((b >= '0') && (b <= '9'))
+                {
                     row = row * 10 + b - '0';
-                    b = stdin.Read ();
+                    b = stdin.Read();
                 }
                 // Row/col is 0 based
-                row --;
+                row--;
             }
 
-            b = stdin.Read ();
-            if (b != 'R') {
+            b = stdin.Read();
+            if (b != 'R')
+            {
                 col = b - '0';
-                b = stdin.Read ();
-                while ((b >= '0') && (b <= '9')) {
+                b = stdin.Read();
+                while ((b >= '0') && (b <= '9'))
+                {
                     col = col * 10 + b - '0';
-                    b = stdin.Read ();
+                    b = stdin.Read();
                 }
                 // Row/col is 0 based
-                col --;
+                col--;
             }
 
 #if DEBUG
@@ -511,183 +583,232 @@ namespace System {
             cursorTop = row;
         }
 
-        public int BufferHeight {
-            get {
-                if (!inited) {
-                    Init ();
+        public int BufferHeight
+        {
+            get
+            {
+                if (!inited)
+                {
+                    Init();
                 }
 
-                CheckWindowDimensions ();
+                CheckWindowDimensions();
                 return bufferHeight;
             }
-            set {
-                if (!inited) {
-                    Init ();
+            set
+            {
+                if (!inited)
+                {
+                    Init();
                 }
 
-                SetBufferSize (BufferWidth, value);
+                SetBufferSize(BufferWidth, value);
             }
         }
 
-        public int BufferWidth {
-            get {
-                if (!inited) {
-                    Init ();
+        public int BufferWidth
+        {
+            get
+            {
+                if (!inited)
+                {
+                    Init();
                 }
 
-                CheckWindowDimensions ();
+                CheckWindowDimensions();
                 return bufferWidth;
             }
-            set {
-                if (!inited) {
-                    Init ();
+            set
+            {
+                if (!inited)
+                {
+                    Init();
                 }
 
-                SetBufferSize (value, BufferHeight);
+                SetBufferSize(value, BufferHeight);
             }
         }
 
-        public bool CapsLock {
-            get {
-                if (!inited) {
-                    Init ();
+        public bool CapsLock
+        {
+            get
+            {
+                if (!inited)
+                {
+                    Init();
                 }
                 return false;
             }
         }
 
-        public int CursorLeft {
-            get {
-                if (!inited) {
-                    Init ();
+        public int CursorLeft
+        {
+            get
+            {
+                if (!inited)
+                {
+                    Init();
                 }
 
                 return cursorLeft;
             }
-            set {
-                if (!inited) {
-                    Init ();
+            set
+            {
+                if (!inited)
+                {
+                    Init();
                 }
 
-                SetCursorPosition (value, CursorTop);
+                SetCursorPosition(value, CursorTop);
             }
         }
 
-        public int CursorTop {
-            get {
-                if (!inited) {
-                    Init ();
+        public int CursorTop
+        {
+            get
+            {
+                if (!inited)
+                {
+                    Init();
                 }
 
                 return cursorTop;
             }
-            set {
-                if (!inited) {
-                    Init ();
+            set
+            {
+                if (!inited)
+                {
+                    Init();
                 }
 
-                SetCursorPosition (CursorLeft, value);
+                SetCursorPosition(CursorLeft, value);
             }
         }
 
-        public bool CursorVisible {
-            get {
-                if (!inited) {
-                    Init ();
+        public bool CursorVisible
+        {
+            get
+            {
+                if (!inited)
+                {
+                    Init();
                 }
 
                 return cursorVisible;
             }
-            set {
-                if (!inited) {
-                    Init ();
+            set
+            {
+                if (!inited)
+                {
+                    Init();
                 }
 
                 cursorVisible = value;
-                WriteConsole ((value ? csrVisible : csrInvisible));
+                WriteConsole((value ? csrVisible : csrInvisible));
             }
         }
 
         // we have CursorNormal vs. CursorVisible...
         [MonoTODO]
-        public int CursorSize {
-            get {
-                if (!inited) {
-                    Init ();
+        public int CursorSize
+        {
+            get
+            {
+                if (!inited)
+                {
+                    Init();
                 }
                 return 1;
             }
-            set {
-                if (!inited) {
-                    Init ();
+            set
+            {
+                if (!inited)
+                {
+                    Init();
                 }
             }
-
         }
 
-        public bool KeyAvailable {
-            get {
-                if (!inited) {
-                    Init ();
+        public bool KeyAvailable
+        {
+            get
+            {
+                if (!inited)
+                {
+                    Init();
                 }
 
-                return (writepos > readpos || ConsoleDriver.InternalKeyAvailable (0) > 0);
+                return (writepos > readpos || ConsoleDriver.InternalKeyAvailable(0) > 0);
             }
         }
 
         // We don't know these next 2 values, so return something reasonable
-        public int LargestWindowHeight {
+        public int LargestWindowHeight
+        {
             get { return WindowHeight; }
         }
 
-        public int LargestWindowWidth {
+        public int LargestWindowWidth
+        {
             get { return WindowWidth; }
         }
 
-        public bool NumberLock {
-            get {
-                if (!inited) {
-                    Init ();
+        public bool NumberLock
+        {
+            get
+            {
+                if (!inited)
+                {
+                    Init();
                 }
 
                 return false;
             }
         }
 
-        public string Title {
-            get {
-                if (!inited) {
-                    Init ();
+        public string Title
+        {
+            get
+            {
+                if (!inited)
+                {
+                    Init();
                 }
                 return title;
             }
-            
-            set {
-                if (!inited) {
-                    Init ();
+            set
+            {
+                if (!inited)
+                {
+                    Init();
                 }
 
                 title = value;
-                WriteConsole (String.Format (titleFormat, value));
+                WriteConsole(String.Format(titleFormat, value));
             }
         }
 
-        public bool TreatControlCAsInput {
-            get {
-                if (!inited) {
-                    Init ();
+        public bool TreatControlCAsInput
+        {
+            get
+            {
+                if (!inited)
+                {
+                    Init();
                 }
                 return controlCAsInput;
             }
-            set {
-                if (!inited) {
-                    Init ();
+            set
+            {
+                if (!inited)
+                {
+                    Init();
                 }
 
                 if (controlCAsInput == value)
                     return;
 
-                ConsoleDriver.SetBreak (value);
+                ConsoleDriver.SetBreak(value);
                 controlCAsInput = value;
             }
         }
@@ -695,20 +816,23 @@ namespace System {
         //
         // Requries that caller calls Init () if not !inited.
         //
-        unsafe void CheckWindowDimensions ()
+        unsafe void CheckWindowDimensions()
         {
             if (native_terminal_size == null || terminal_size == *native_terminal_size)
                 return;
 
-            if (*native_terminal_size == -1){
-                int c = reader.Get (TermInfoNumbers.Columns);
+            if (*native_terminal_size == -1)
+            {
+                int c = reader.Get(TermInfoNumbers.Columns);
                 if (c != 0)
                     windowWidth = c;
-                
-                c = reader.Get (TermInfoNumbers.Lines);
+
+                c = reader.Get(TermInfoNumbers.Lines);
                 if (c != 0)
                     windowHeight = c;
-            } else {
+            }
+            else
+            {
                 terminal_size = *native_terminal_size;
                 windowWidth = terminal_size >> 16;
                 windowHeight = terminal_size & 0xffff;
@@ -720,362 +844,447 @@ namespace System {
         // Should be called after init
         //
         // Only works on some Xterm-based terminals
-        void TrySetWindowDimensions (int width, int height)
+        void TrySetWindowDimensions(int width, int height)
         {
             if (width <= 0)
-                throw new ArgumentOutOfRangeException ("width", "Value must be higher than 0");
+                throw new ArgumentOutOfRangeException("width", "Value must be higher than 0");
             if (height <= 0)
-                throw new ArgumentOutOfRangeException ("height", "Value must be highet than 0");
+                throw new ArgumentOutOfRangeException("height", "Value must be highet than 0");
 
             if (height == WindowHeight && width == WindowWidth)
                 return;
 
-            if (term.StartsWith ("xterm")) {
-                WriteConsole ("\x1b[8;" + height.ToString () + ";" + width.ToString () + "t");
+            if (term.StartsWith("xterm"))
+            {
+                WriteConsole("\x1b[8;" + height.ToString() + ";" + width.ToString() + "t");
 
                 // Wait for window to get resized
-                Thread.Sleep (50);
-            } else {
-                throw new PlatformNotSupportedException ("Resizing can only work in xterm-based terminals");
+                Thread.Sleep(50);
+            }
+            else
+            {
+                throw new PlatformNotSupportedException(
+                    "Resizing can only work in xterm-based terminals"
+                );
             }
         }
 
-        
-        public int WindowHeight {
-            get {
-                if (!inited) {
-                    Init ();
+        public int WindowHeight
+        {
+            get
+            {
+                if (!inited)
+                {
+                    Init();
                 }
 
-                CheckWindowDimensions ();
+                CheckWindowDimensions();
                 return windowHeight;
             }
-            set {
-                if (!inited) {
-                    Init ();
+            set
+            {
+                if (!inited)
+                {
+                    Init();
                 }
 
-                SetWindowSize (WindowWidth, value);
+                SetWindowSize(WindowWidth, value);
             }
         }
 
-        public int WindowLeft {
-            get {
-                if (!inited) {
-                    Init ();
+        public int WindowLeft
+        {
+            get
+            {
+                if (!inited)
+                {
+                    Init();
                 }
 
                 //CheckWindowDimensions ();
                 return 0;
             }
-            set {
-                if (!inited) {
-                    Init ();
+            set
+            {
+                if (!inited)
+                {
+                    Init();
                 }
 
                 if (value == 0)
                     return;
 
-                throw new ArgumentOutOfRangeException ("Unix terminals only support window position (0; 0)");
+                throw new ArgumentOutOfRangeException(
+                    "Unix terminals only support window position (0; 0)"
+                );
             }
         }
 
-        public int WindowTop {
-            get {
-                if (!inited) {
-                    Init ();
+        public int WindowTop
+        {
+            get
+            {
+                if (!inited)
+                {
+                    Init();
                 }
 
                 //CheckWindowDimensions ();
                 return 0;
             }
-            set {
-                if (!inited) {
-                    Init ();
+            set
+            {
+                if (!inited)
+                {
+                    Init();
                 }
 
                 if (value == 0)
                     return;
 
-                throw new ArgumentOutOfRangeException ("Unix terminals only support window position (0; 0)");
+                throw new ArgumentOutOfRangeException(
+                    "Unix terminals only support window position (0; 0)"
+                );
             }
         }
 
-        public int WindowWidth {
-            get {
-                if (!inited) {
-                    Init ();
+        public int WindowWidth
+        {
+            get
+            {
+                if (!inited)
+                {
+                    Init();
                 }
 
-                CheckWindowDimensions ();
+                CheckWindowDimensions();
                 return windowWidth;
             }
-            set {
-                if (!inited) {
-                    Init ();
+            set
+            {
+                if (!inited)
+                {
+                    Init();
                 }
 
-                SetWindowSize (value, WindowHeight);
+                SetWindowSize(value, WindowHeight);
             }
         }
 
-        public void Clear ()
+        public void Clear()
         {
-            if (!inited) {
-                Init ();
+            if (!inited)
+            {
+                Init();
             }
 
-            WriteConsole (clear);
+            WriteConsole(clear);
             cursorLeft = 0;
             cursorTop = 0;
         }
 
-        public void Beep (int frequency, int duration)
+        public void Beep(int frequency, int duration)
         {
-            if (!inited) {
-                Init ();
+            if (!inited)
+            {
+                Init();
             }
 
-            WriteConsole (bell);
+            WriteConsole(bell);
         }
 
-        public void MoveBufferArea (int sourceLeft, int sourceTop, int sourceWidth, int sourceHeight,
-                    int targetLeft, int targetTop, Char sourceChar,
-                    ConsoleColor sourceForeColor, ConsoleColor sourceBackColor)
+        public void MoveBufferArea(
+            int sourceLeft,
+            int sourceTop,
+            int sourceWidth,
+            int sourceHeight,
+            int targetLeft,
+            int targetTop,
+            Char sourceChar,
+            ConsoleColor sourceForeColor,
+            ConsoleColor sourceBackColor
+        )
         {
-            if (!inited) {
-                Init ();
+            if (!inited)
+            {
+                Init();
             }
 
-            throw new PlatformNotSupportedException ("Implemented only on Windows");
+            throw new PlatformNotSupportedException("Implemented only on Windows");
         }
 
-        void AddToBuffer (int b)
+        void AddToBuffer(int b)
         {
-            if (buffer == null) {
-                buffer = new char [1024];
-            } else if (writepos >= buffer.Length) {
-                char [] newbuf = new char [buffer.Length * 2];
-                Buffer.BlockCopy (buffer, 0, newbuf, 0, buffer.Length);
+            if (buffer == null)
+            {
+                buffer = new char[1024];
+            }
+            else if (writepos >= buffer.Length)
+            {
+                char[] newbuf = new char[buffer.Length * 2];
+                Buffer.BlockCopy(buffer, 0, newbuf, 0, buffer.Length);
                 buffer = newbuf;
             }
 
-            buffer [writepos++] = (char) b;
+            buffer[writepos++] = (char)b;
         }
 
-        void AdjustBuffer ()
+        void AdjustBuffer()
         {
-            if (readpos >= writepos) {
+            if (readpos >= writepos)
+            {
                 readpos = writepos = 0;
             }
         }
 
-        ConsoleKeyInfo CreateKeyInfoFromInt (int n, bool alt)
+        ConsoleKeyInfo CreateKeyInfoFromInt(int n, bool alt)
         {
-            char c = (char) n;
+            char c = (char)n;
             ConsoleKey key = (ConsoleKey)n;
             bool shift = false;
             bool ctrl = false;
 
-            switch (n){
-            case 10:
-                key = ConsoleKey.Enter;
-                break;
-            case 0x20:
-                key = ConsoleKey.Spacebar;
-                break;
-            case 45:
-                key = ConsoleKey.Subtract;
-                break;
-            case 43:
-                key = ConsoleKey.Add;
-                break;
-            case 47:
-                key = ConsoleKey.Divide;
-                break;
-            case 42:
-                key = ConsoleKey.Multiply;
-                break;
-            case 8: case 9: case 12: case 13: case 19:
-                /* Values in ConsoleKey */
-                break;
-            case 27:
-                key = ConsoleKey.Escape;
-                break;
-                
-            default:
-                if (n >= 1 && n <= 26) {
-                    // For Ctrl-a to Ctrl-z.
-                    ctrl = true;
-                    key = ConsoleKey.A + n - 1;
-                } else if (n >= 'a' && n <= 'z') {
-                    key = ConsoleKey.A - 'a' + n;
-                } else if (n >= 'A' && n <= 'Z') {
-                    shift = true;
-                } else if (n >= '0' && n <= '9') {
-                } else
-                    key = 0;
-                break;
+            switch (n)
+            {
+                case 10:
+                    key = ConsoleKey.Enter;
+                    break;
+                case 0x20:
+                    key = ConsoleKey.Spacebar;
+                    break;
+                case 45:
+                    key = ConsoleKey.Subtract;
+                    break;
+                case 43:
+                    key = ConsoleKey.Add;
+                    break;
+                case 47:
+                    key = ConsoleKey.Divide;
+                    break;
+                case 42:
+                    key = ConsoleKey.Multiply;
+                    break;
+                case 8:
+                case 9:
+                case 12:
+                case 13:
+                case 19:
+                    /* Values in ConsoleKey */
+                    break;
+                case 27:
+                    key = ConsoleKey.Escape;
+                    break;
+
+                default:
+                    if (n >= 1 && n <= 26)
+                    {
+                        // For Ctrl-a to Ctrl-z.
+                        ctrl = true;
+                        key = ConsoleKey.A + n - 1;
+                    }
+                    else if (n >= 'a' && n <= 'z')
+                    {
+                        key = ConsoleKey.A - 'a' + n;
+                    }
+                    else if (n >= 'A' && n <= 'Z')
+                    {
+                        shift = true;
+                    }
+                    else if (n >= '0' && n <= '9') { }
+                    else
+                        key = 0;
+                    break;
             }
 
-            return new ConsoleKeyInfo (c, key, shift, alt, ctrl);
+            return new ConsoleKeyInfo(c, key, shift, alt, ctrl);
         }
 
-        object GetKeyFromBuffer (bool cooked)
+        object GetKeyFromBuffer(bool cooked)
         {
             if (readpos >= writepos)
                 return null;
 
-            int next = buffer [readpos];
-            if (!cooked || !rootmap.StartsWith (next)) {
+            int next = buffer[readpos];
+            if (!cooked || !rootmap.StartsWith(next))
+            {
                 readpos++;
-                AdjustBuffer ();
-                return CreateKeyInfoFromInt (next, false);
+                AdjustBuffer();
+                return CreateKeyInfoFromInt(next, false);
             }
 
             int used;
-            TermInfoStrings str = rootmap.Match (buffer, readpos, writepos - readpos, out used);
-            if ((int) str == -1){
+            TermInfoStrings str = rootmap.Match(buffer, readpos, writepos - readpos, out used);
+            if ((int)str == -1)
+            {
                 // Escape sequences: alt keys are sent as ESC-key
-                if (buffer [readpos] == 27 && (writepos - readpos) >= 2){
+                if (buffer[readpos] == 27 && (writepos - readpos) >= 2)
+                {
                     readpos += 2;
-                    AdjustBuffer ();
-                    if (buffer [readpos+1] == 127)
-                        return new ConsoleKeyInfo ((char)8, ConsoleKey.Backspace, false, true, false);
-                    return CreateKeyInfoFromInt (buffer [readpos+1], true);
-                } else
+                    AdjustBuffer();
+                    if (buffer[readpos + 1] == 127)
+                        return new ConsoleKeyInfo(
+                            (char)8,
+                            ConsoleKey.Backspace,
+                            false,
+                            true,
+                            false
+                        );
+                    return CreateKeyInfoFromInt(buffer[readpos + 1], true);
+                }
+                else
                     return null;
             }
 
             ConsoleKeyInfo key;
-            if (keymap [str] != null) {
-                key = (ConsoleKeyInfo) keymap [str];
-            } else {
+            if (keymap[str] != null)
+            {
+                key = (ConsoleKeyInfo)keymap[str];
+            }
+            else
+            {
                 readpos++;
-                AdjustBuffer ();
-                return CreateKeyInfoFromInt (next, false);
+                AdjustBuffer();
+                return CreateKeyInfoFromInt(next, false);
             }
 
             readpos += used;
-            AdjustBuffer ();
+            AdjustBuffer();
             return key;
         }
 
-        ConsoleKeyInfo ReadKeyInternal (out bool fresh)
+        ConsoleKeyInfo ReadKeyInternal(out bool fresh)
         {
             if (!inited)
-                Init ();
+                Init();
 
-            InitKeys ();
+            InitKeys();
 
             object o;
 
-            if ((o = GetKeyFromBuffer (true)) == null) {
-                do {
-                    if (ConsoleDriver.InternalKeyAvailable (150) > 0) {
-                        do {
-                            AddToBuffer (stdin.Read ());
-                        } while (ConsoleDriver.InternalKeyAvailable (0) > 0);
-                    } else if (stdin.DataAvailable ()) {
-                        do {
-                            AddToBuffer (stdin.Read ());
-                        } while (stdin.DataAvailable ());
-                    } else {
-                        if ((o = GetKeyFromBuffer (false)) != null)
+            if ((o = GetKeyFromBuffer(true)) == null)
+            {
+                do
+                {
+                    if (ConsoleDriver.InternalKeyAvailable(150) > 0)
+                    {
+                        do
+                        {
+                            AddToBuffer(stdin.Read());
+                        } while (ConsoleDriver.InternalKeyAvailable(0) > 0);
+                    }
+                    else if (stdin.DataAvailable())
+                    {
+                        do
+                        {
+                            AddToBuffer(stdin.Read());
+                        } while (stdin.DataAvailable());
+                    }
+                    else
+                    {
+                        if ((o = GetKeyFromBuffer(false)) != null)
                             break;
 
-                        AddToBuffer (stdin.Read ());
+                        AddToBuffer(stdin.Read());
                     }
-                    
-                    o = GetKeyFromBuffer (true);
+
+                    o = GetKeyFromBuffer(true);
                 } while (o == null);
 
                 // freshly read character
                 fresh = true;
-            } else {
+            }
+            else
+            {
                 // this char was pre-buffered (e.g. not fresh)
                 fresh = false;
             }
 
-            return (ConsoleKeyInfo) o;
+            return (ConsoleKeyInfo)o;
         }
 
 #region Input echoing optimization
-        bool InputPending ()
+        bool InputPending()
         {
             // check if we've got pending input we can read immediately
-            return readpos < writepos || stdin.DataAvailable ();
+            return readpos < writepos || stdin.DataAvailable();
         }
 
-        char [] echobuf = null;
+        char[] echobuf = null;
         int echon = 0;
 
         // Queues a character to be echo'd back to the console
-        void QueueEcho (char c)
+        void QueueEcho(char c)
         {
             if (echobuf == null)
-                echobuf = new char [1024];
+                echobuf = new char[1024];
 
             echobuf[echon++] = c;
 
-            if (echon == echobuf.Length || !InputPending ()) {
+            if (echon == echobuf.Length || !InputPending())
+            {
                 // blit our echo buffer to the console
-                stdout.InternalWriteChars (echobuf, echon);
+                stdout.InternalWriteChars(echobuf, echon);
                 echon = 0;
             }
         }
 
         // Queues a key to be echo'd back to the console
-        void Echo (ConsoleKeyInfo key)
+        void Echo(ConsoleKeyInfo key)
         {
-            if (!IsSpecialKey (key)) {
-                QueueEcho (key.KeyChar);
+            if (!IsSpecialKey(key))
+            {
+                QueueEcho(key.KeyChar);
                 return;
             }
 
             // flush pending echo's
-            EchoFlush ();
+            EchoFlush();
 
-            WriteSpecialKey (key);
+            WriteSpecialKey(key);
         }
 
         // Flush the pending echo queue
-        void EchoFlush ()
+        void EchoFlush()
         {
             if (echon == 0)
                 return;
 
             // flush our echo buffer to the console
-            stdout.InternalWriteChars (echobuf, echon);
+            stdout.InternalWriteChars(echobuf, echon);
             echon = 0;
         }
 #endregion
 
-        public int Read ([In, Out] char [] dest, int index, int count)
+        public int Read([In, Out] char[] dest, int index, int count)
         {
-            bool fresh, echo = false;
+            bool fresh,
+                echo = false;
             StringBuilder sbuf;
             ConsoleKeyInfo key;
-            int BoL = 0;  // Beginning-of-Line marker (can't backspace beyond this)
+            int BoL = 0; // Beginning-of-Line marker (can't backspace beyond this)
             object o;
             char c;
 
-            sbuf = new StringBuilder ();
+            sbuf = new StringBuilder();
 
             // consume buffered keys first (do not echo, these have already been echo'd)
-            while (true) {
-                if ((o = GetKeyFromBuffer (true)) == null)
+            while (true)
+            {
+                if ((o = GetKeyFromBuffer(true)) == null)
                     break;
 
-                key = (ConsoleKeyInfo) o;
+                key = (ConsoleKeyInfo)o;
                 c = key.KeyChar;
 
-                if (key.Key != ConsoleKey.Backspace) {
+                if (key.Key != ConsoleKey.Backspace)
+                {
                     if (key.Key == ConsoleKey.Enter)
                         BoL = sbuf.Length;
 
-                    sbuf.Append (c);
-                } else if (sbuf.Length > BoL) {
+                    sbuf.Append(c);
+                }
+                else if (sbuf.Length > BoL)
+                {
                     sbuf.Length--;
                 }
             }
@@ -1084,35 +1293,42 @@ namespace System {
             rl_startx = cursorLeft;
             rl_starty = cursorTop;
 
-            do {
-                key = ReadKeyInternal (out fresh);
+            do
+            {
+                key = ReadKeyInternal(out fresh);
                 echo = echo || fresh;
                 c = key.KeyChar;
 
-                if (key.Key != ConsoleKey.Backspace) {
+                if (key.Key != ConsoleKey.Backspace)
+                {
                     if (key.Key == ConsoleKey.Enter)
                         BoL = sbuf.Length;
 
-                    sbuf.Append (c);
-                } else if (sbuf.Length > BoL) {
+                    sbuf.Append(c);
+                }
+                else if (sbuf.Length > BoL)
+                {
                     sbuf.Length--;
-                } else {
+                }
+                else
+                {
                     continue;
                 }
 
                 // echo fresh keys back to the console
                 if (echo)
-                    Echo (key);
+                    Echo(key);
             } while (key.Key != ConsoleKey.Enter);
 
-            EchoFlush ();
+            EchoFlush();
 
             rl_startx = -1;
             rl_starty = -1;
 
             // copy up to count chars into dest
             int nread = 0;
-            while (count > 0 && nread < sbuf.Length) {
+            while (count > 0 && nread < sbuf.Length)
+            {
                 dest[index + nread] = sbuf[nread];
                 nread++;
                 count--;
@@ -1120,59 +1336,62 @@ namespace System {
 
             // put the rest back into our key buffer
             for (int i = nread; i < sbuf.Length; i++)
-                AddToBuffer (sbuf[i]);
+                AddToBuffer(sbuf[i]);
 
             return nread;
         }
 
-        public ConsoleKeyInfo ReadKey (bool intercept)
+        public ConsoleKeyInfo ReadKey(bool intercept)
         {
             bool fresh;
 
-            ConsoleKeyInfo key = ReadKeyInternal (out fresh);
+            ConsoleKeyInfo key = ReadKeyInternal(out fresh);
 
-            if (!intercept && fresh) {
+            if (!intercept && fresh)
+            {
                 // echo the fresh key back to the console
-                Echo (key);
-                EchoFlush ();
+                Echo(key);
+                EchoFlush();
             }
 
             return key;
         }
 
-        public string ReadLine ()
-         {
-            return ReadUntilConditionInternal (true);
-         }
+        public string ReadLine()
+        {
+            return ReadUntilConditionInternal(true);
+        }
 
-        public string ReadToEnd ()
-         {
-            return ReadUntilConditionInternal (false);
-         }
+        public string ReadToEnd()
+        {
+            return ReadUntilConditionInternal(false);
+        }
 
-        private string ReadUntilConditionInternal (bool haltOnNewLine)
-         {
+        private string ReadUntilConditionInternal(bool haltOnNewLine)
+        {
             if (!inited)
-                Init ();
+                Init();
 
             // Hack to make Iron Python work (since it goes behind our backs
             // when writing to the console thus preventing us from keeping
             // cursor state normally).
-            GetCursorPosition ();
+            GetCursorPosition();
 
-            StringBuilder builder = new StringBuilder ();
-            bool fresh, echo = false;
+            StringBuilder builder = new StringBuilder();
+            bool fresh,
+                echo = false;
             ConsoleKeyInfo key;
             char c;
 
             rl_startx = cursorLeft;
             rl_starty = cursorTop;
-            char eof = (char) control_characters [ControlCharacters.EOF];
+            char eof = (char)control_characters[ControlCharacters.EOF];
 
             bool treatAsEnterKey;
 
-            do {
-                key = ReadKeyInternal (out fresh);
+            do
+            {
+                key = ReadKeyInternal(out fresh);
                 echo = echo || fresh;
                 c = key.KeyChar;
                 // EOF -> Ctrl-D (EOT) pressed.
@@ -1181,12 +1400,18 @@ namespace System {
 
                 treatAsEnterKey = haltOnNewLine && (key.Key == ConsoleKey.Enter);
 
-                if (!treatAsEnterKey) {
-                    if (key.Key != ConsoleKey.Backspace) {
-                        builder.Append (c);
-                    } else if (builder.Length > 0) {
+                if (!treatAsEnterKey)
+                {
+                    if (key.Key != ConsoleKey.Backspace)
+                    {
+                        builder.Append(c);
+                    }
+                    else if (builder.Length > 0)
+                    {
                         builder.Length--;
-                    } else {
+                    }
+                    else
+                    {
                         // skips over echoing the key to the console
                         continue;
                     }
@@ -1194,159 +1419,534 @@ namespace System {
 
                 // echo fresh keys back to the console
                 if (echo)
-                    Echo (key);
+                    Echo(key);
             } while (!treatAsEnterKey);
 
-            EchoFlush ();
+            EchoFlush();
 
             rl_startx = -1;
             rl_starty = -1;
 
-            return builder.ToString ();
-         }
+            return builder.ToString();
+        }
 
-        public void ResetColor ()
+        public void ResetColor()
         {
-            if (!inited) {
-                Init ();
+            if (!inited)
+            {
+                Init();
             }
 
             string str = (origPair != null) ? origPair : origColors;
-            WriteConsole (str);
+            WriteConsole(str);
         }
 
-        public void SetBufferSize (int width, int height)
+        public void SetBufferSize(int width, int height)
         {
-            if (!inited) {
-                Init ();
+            if (!inited)
+            {
+                Init();
             }
 
-            TrySetWindowDimensions (width, height);
+            TrySetWindowDimensions(width, height);
         }
 
-        public void SetCursorPosition (int left, int top)
+        public void SetCursorPosition(int left, int top)
         {
-            if (!inited) {
-                Init ();
+            if (!inited)
+            {
+                Init();
             }
 
-            CheckWindowDimensions ();
+            CheckWindowDimensions();
             if (left < 0 || left >= bufferWidth)
-                throw new ArgumentOutOfRangeException ("left", left.ToString (), "Value must be positive and below the buffer width.");
+                throw new ArgumentOutOfRangeException(
+                    "left",
+                    left.ToString(),
+                    "Value must be positive and below the buffer width."
+                );
 
             if (top < 0 || top >= bufferHeight)
-                throw new ArgumentOutOfRangeException ("top", top.ToString (), "Value must be positive and below the buffer height.");
+                throw new ArgumentOutOfRangeException(
+                    "top",
+                    top.ToString(),
+                    "Value must be positive and below the buffer height."
+                );
 
             // Either CursorAddress or nothing.
             // We might want to play with up/down/left/right/home when ca is not available.
             if (cursorAddress == null)
-                throw new IOException ("This terminal does not suport setting the cursor position.");
+                throw new IOException("This terminal does not suport setting the cursor position.");
 
-            WriteConsole (ParameterizedStrings.Evaluate (cursorAddress, top, left));
+            WriteConsole(ParameterizedStrings.Evaluate(cursorAddress, top, left));
             cursorLeft = left;
             cursorTop = top;
         }
 
-        public void SetWindowPosition (int left, int top)
+        public void SetWindowPosition(int left, int top)
         {
-            if (!inited) {
-                Init ();
+            if (!inited)
+            {
+                Init();
             }
 
             if (left != 0 || top != 0)
-                throw new ArgumentOutOfRangeException ("Unix terminals only support window position (0; 0)");
+                throw new ArgumentOutOfRangeException(
+                    "Unix terminals only support window position (0; 0)"
+                );
         }
 
-        public void SetWindowSize (int width, int height)
+        public void SetWindowSize(int width, int height)
         {
-            if (!inited) {
-                Init ();
+            if (!inited)
+            {
+                Init();
             }
 
-            TrySetWindowDimensions (width, height);
+            TrySetWindowDimensions(width, height);
         }
 
-
-        void CreateKeyMap ()
+        void CreateKeyMap()
         {
-            keymap = new Hashtable ();
-            
-            keymap [TermInfoStrings.KeyBackspace] = new ConsoleKeyInfo ('\0', ConsoleKey.Backspace, false, false, false);
-            keymap [TermInfoStrings.KeyClear] = new ConsoleKeyInfo ('\0', ConsoleKey.Clear, false, false, false);
-             // Delete character...
-            keymap [TermInfoStrings.KeyDown] = new ConsoleKeyInfo ('\0', ConsoleKey.DownArrow, false, false, false);
-            keymap [TermInfoStrings.KeyF1] = new ConsoleKeyInfo ('\0', ConsoleKey.F1, false, false, false);
-            keymap [TermInfoStrings.KeyF10] = new ConsoleKeyInfo ('\0', ConsoleKey.F10, false, false, false);
-            keymap [TermInfoStrings.KeyF2] = new ConsoleKeyInfo ('\0', ConsoleKey.F2, false, false, false);
-            keymap [TermInfoStrings.KeyF3] = new ConsoleKeyInfo ('\0', ConsoleKey.F3, false, false, false);
-            keymap [TermInfoStrings.KeyF4] = new ConsoleKeyInfo ('\0', ConsoleKey.F4, false, false, false);
-            keymap [TermInfoStrings.KeyF5] = new ConsoleKeyInfo ('\0', ConsoleKey.F5, false, false, false);
-            keymap [TermInfoStrings.KeyF6] = new ConsoleKeyInfo ('\0', ConsoleKey.F6, false, false, false);
-            keymap [TermInfoStrings.KeyF7] = new ConsoleKeyInfo ('\0', ConsoleKey.F7, false, false, false);
-            keymap [TermInfoStrings.KeyF8] = new ConsoleKeyInfo ('\0', ConsoleKey.F8, false, false, false);
-            keymap [TermInfoStrings.KeyF9] = new ConsoleKeyInfo ('\0', ConsoleKey.F9, false, false, false);
-            keymap [TermInfoStrings.KeyHome] = new ConsoleKeyInfo ('\0', ConsoleKey.Home, false, false, false);
-            keymap [TermInfoStrings.KeyLeft] = new ConsoleKeyInfo ('\0', ConsoleKey.LeftArrow, false, false, false);
-            keymap [TermInfoStrings.KeyLl] = new ConsoleKeyInfo ('\0', ConsoleKey.NumPad1, false, false, false);
-            keymap [TermInfoStrings.KeyNpage] = new ConsoleKeyInfo ('\0', ConsoleKey.PageDown, false, false, false);
-            keymap [TermInfoStrings.KeyPpage] = new ConsoleKeyInfo ('\0', ConsoleKey.PageUp, false, false, false);
-            keymap [TermInfoStrings.KeyRight] = new ConsoleKeyInfo ('\0', ConsoleKey.RightArrow, false, false, false);
-            keymap [TermInfoStrings.KeySf] = new ConsoleKeyInfo ('\0', ConsoleKey.PageDown, false, false, false);
-            keymap [TermInfoStrings.KeySr] = new ConsoleKeyInfo ('\0', ConsoleKey.PageUp, false, false, false);
-            keymap [TermInfoStrings.KeyUp] = new ConsoleKeyInfo ('\0', ConsoleKey.UpArrow, false, false, false);
-            keymap [TermInfoStrings.KeyA1] = new ConsoleKeyInfo ('\0', ConsoleKey.NumPad7, false, false, false);
-            keymap [TermInfoStrings.KeyA3] = new ConsoleKeyInfo ('\0', ConsoleKey.NumPad9, false, false, false);
-            keymap [TermInfoStrings.KeyB2] = new ConsoleKeyInfo ('\0', ConsoleKey.NumPad5, false, false, false);
-            keymap [TermInfoStrings.KeyC1] = new ConsoleKeyInfo ('\0', ConsoleKey.NumPad1, false, false, false);
-            keymap [TermInfoStrings.KeyC3] = new ConsoleKeyInfo ('\0', ConsoleKey.NumPad3, false, false, false);
-            keymap [TermInfoStrings.KeyBtab] = new ConsoleKeyInfo ('\0', ConsoleKey.Tab, true, false, false);
-            keymap [TermInfoStrings.KeyBeg] = new ConsoleKeyInfo ('\0', ConsoleKey.Home, false, false, false);
-            keymap [TermInfoStrings.KeyCopy] = new ConsoleKeyInfo ('C', ConsoleKey.C, false, true, false);
-            keymap [TermInfoStrings.KeyEnd] = new ConsoleKeyInfo ('\0', ConsoleKey.End, false, false, false);
-            keymap [TermInfoStrings.KeyEnter] = new ConsoleKeyInfo ('\n', ConsoleKey.Enter, false, false, false);
-            keymap [TermInfoStrings.KeyHelp] = new ConsoleKeyInfo ('\0', ConsoleKey.Help, false, false, false);
-            keymap [TermInfoStrings.KeyPrint] = new ConsoleKeyInfo ('\0', ConsoleKey.Print, false, false, false);
-            keymap [TermInfoStrings.KeyUndo] = new ConsoleKeyInfo ('Z', ConsoleKey.Z , false, true, false);
-            keymap [TermInfoStrings.KeySbeg] = new ConsoleKeyInfo ('\0', ConsoleKey.Home, true, false, false);
-            keymap [TermInfoStrings.KeyScopy] = new ConsoleKeyInfo ('C', ConsoleKey.C , true, true, false);
-            keymap [TermInfoStrings.KeySdc] = new ConsoleKeyInfo ('\x9', ConsoleKey.Delete, true, false, false);
-            keymap [TermInfoStrings.KeyShelp] = new ConsoleKeyInfo ('\0', ConsoleKey.Help, true, false, false);
-            keymap [TermInfoStrings.KeyShome] = new ConsoleKeyInfo ('\0', ConsoleKey.Home, true, false, false);
-            keymap [TermInfoStrings.KeySleft] = new ConsoleKeyInfo ('\0', ConsoleKey.LeftArrow, true, false, false);
-            keymap [TermInfoStrings.KeySprint] = new ConsoleKeyInfo ('\0', ConsoleKey.Print, true, false, false);
-            keymap [TermInfoStrings.KeySright] = new ConsoleKeyInfo ('\0', ConsoleKey.RightArrow, true, false, false);
-            keymap [TermInfoStrings.KeySundo] = new ConsoleKeyInfo ('Z', ConsoleKey.Z, true, false, false);
-            keymap [TermInfoStrings.KeyF11] = new ConsoleKeyInfo ('\0', ConsoleKey.F11, false, false, false);
-            keymap [TermInfoStrings.KeyF12] = new ConsoleKeyInfo ('\0', ConsoleKey.F12 , false, false, false);
-            keymap [TermInfoStrings.KeyF13] = new ConsoleKeyInfo ('\0', ConsoleKey.F13, false, false, false);
-            keymap [TermInfoStrings.KeyF14] = new ConsoleKeyInfo ('\0', ConsoleKey.F14, false, false, false);
-            keymap [TermInfoStrings.KeyF15] = new ConsoleKeyInfo ('\0', ConsoleKey.F15, false, false, false);
-            keymap [TermInfoStrings.KeyF16] = new ConsoleKeyInfo ('\0', ConsoleKey.F16, false, false, false);
-            keymap [TermInfoStrings.KeyF17] = new ConsoleKeyInfo ('\0', ConsoleKey.F17, false, false, false);
-            keymap [TermInfoStrings.KeyF18] = new ConsoleKeyInfo ('\0', ConsoleKey.F18, false, false, false);
-            keymap [TermInfoStrings.KeyF19] = new ConsoleKeyInfo ('\0', ConsoleKey.F19, false, false, false);
-            keymap [TermInfoStrings.KeyF20] = new ConsoleKeyInfo ('\0', ConsoleKey.F20, false, false, false);
-            keymap [TermInfoStrings.KeyF21] = new ConsoleKeyInfo ('\0', ConsoleKey.F21, false, false, false);
-            keymap [TermInfoStrings.KeyF22] = new ConsoleKeyInfo ('\0', ConsoleKey.F22, false, false, false);
-            keymap [TermInfoStrings.KeyF23] = new ConsoleKeyInfo ('\0', ConsoleKey.F23, false, false, false);
-            keymap [TermInfoStrings.KeyF24] = new ConsoleKeyInfo ('\0', ConsoleKey.F24, false, false, false);
+            keymap = new Hashtable();
+
+            keymap[TermInfoStrings.KeyBackspace] = new ConsoleKeyInfo(
+                '\0',
+                ConsoleKey.Backspace,
+                false,
+                false,
+                false
+            );
+            keymap[TermInfoStrings.KeyClear] = new ConsoleKeyInfo(
+                '\0',
+                ConsoleKey.Clear,
+                false,
+                false,
+                false
+            );
+            // Delete character...
+            keymap[TermInfoStrings.KeyDown] = new ConsoleKeyInfo(
+                '\0',
+                ConsoleKey.DownArrow,
+                false,
+                false,
+                false
+            );
+            keymap[TermInfoStrings.KeyF1] = new ConsoleKeyInfo(
+                '\0',
+                ConsoleKey.F1,
+                false,
+                false,
+                false
+            );
+            keymap[TermInfoStrings.KeyF10] = new ConsoleKeyInfo(
+                '\0',
+                ConsoleKey.F10,
+                false,
+                false,
+                false
+            );
+            keymap[TermInfoStrings.KeyF2] = new ConsoleKeyInfo(
+                '\0',
+                ConsoleKey.F2,
+                false,
+                false,
+                false
+            );
+            keymap[TermInfoStrings.KeyF3] = new ConsoleKeyInfo(
+                '\0',
+                ConsoleKey.F3,
+                false,
+                false,
+                false
+            );
+            keymap[TermInfoStrings.KeyF4] = new ConsoleKeyInfo(
+                '\0',
+                ConsoleKey.F4,
+                false,
+                false,
+                false
+            );
+            keymap[TermInfoStrings.KeyF5] = new ConsoleKeyInfo(
+                '\0',
+                ConsoleKey.F5,
+                false,
+                false,
+                false
+            );
+            keymap[TermInfoStrings.KeyF6] = new ConsoleKeyInfo(
+                '\0',
+                ConsoleKey.F6,
+                false,
+                false,
+                false
+            );
+            keymap[TermInfoStrings.KeyF7] = new ConsoleKeyInfo(
+                '\0',
+                ConsoleKey.F7,
+                false,
+                false,
+                false
+            );
+            keymap[TermInfoStrings.KeyF8] = new ConsoleKeyInfo(
+                '\0',
+                ConsoleKey.F8,
+                false,
+                false,
+                false
+            );
+            keymap[TermInfoStrings.KeyF9] = new ConsoleKeyInfo(
+                '\0',
+                ConsoleKey.F9,
+                false,
+                false,
+                false
+            );
+            keymap[TermInfoStrings.KeyHome] = new ConsoleKeyInfo(
+                '\0',
+                ConsoleKey.Home,
+                false,
+                false,
+                false
+            );
+            keymap[TermInfoStrings.KeyLeft] = new ConsoleKeyInfo(
+                '\0',
+                ConsoleKey.LeftArrow,
+                false,
+                false,
+                false
+            );
+            keymap[TermInfoStrings.KeyLl] = new ConsoleKeyInfo(
+                '\0',
+                ConsoleKey.NumPad1,
+                false,
+                false,
+                false
+            );
+            keymap[TermInfoStrings.KeyNpage] = new ConsoleKeyInfo(
+                '\0',
+                ConsoleKey.PageDown,
+                false,
+                false,
+                false
+            );
+            keymap[TermInfoStrings.KeyPpage] = new ConsoleKeyInfo(
+                '\0',
+                ConsoleKey.PageUp,
+                false,
+                false,
+                false
+            );
+            keymap[TermInfoStrings.KeyRight] = new ConsoleKeyInfo(
+                '\0',
+                ConsoleKey.RightArrow,
+                false,
+                false,
+                false
+            );
+            keymap[TermInfoStrings.KeySf] = new ConsoleKeyInfo(
+                '\0',
+                ConsoleKey.PageDown,
+                false,
+                false,
+                false
+            );
+            keymap[TermInfoStrings.KeySr] = new ConsoleKeyInfo(
+                '\0',
+                ConsoleKey.PageUp,
+                false,
+                false,
+                false
+            );
+            keymap[TermInfoStrings.KeyUp] = new ConsoleKeyInfo(
+                '\0',
+                ConsoleKey.UpArrow,
+                false,
+                false,
+                false
+            );
+            keymap[TermInfoStrings.KeyA1] = new ConsoleKeyInfo(
+                '\0',
+                ConsoleKey.NumPad7,
+                false,
+                false,
+                false
+            );
+            keymap[TermInfoStrings.KeyA3] = new ConsoleKeyInfo(
+                '\0',
+                ConsoleKey.NumPad9,
+                false,
+                false,
+                false
+            );
+            keymap[TermInfoStrings.KeyB2] = new ConsoleKeyInfo(
+                '\0',
+                ConsoleKey.NumPad5,
+                false,
+                false,
+                false
+            );
+            keymap[TermInfoStrings.KeyC1] = new ConsoleKeyInfo(
+                '\0',
+                ConsoleKey.NumPad1,
+                false,
+                false,
+                false
+            );
+            keymap[TermInfoStrings.KeyC3] = new ConsoleKeyInfo(
+                '\0',
+                ConsoleKey.NumPad3,
+                false,
+                false,
+                false
+            );
+            keymap[TermInfoStrings.KeyBtab] = new ConsoleKeyInfo(
+                '\0',
+                ConsoleKey.Tab,
+                true,
+                false,
+                false
+            );
+            keymap[TermInfoStrings.KeyBeg] = new ConsoleKeyInfo(
+                '\0',
+                ConsoleKey.Home,
+                false,
+                false,
+                false
+            );
+            keymap[TermInfoStrings.KeyCopy] = new ConsoleKeyInfo(
+                'C',
+                ConsoleKey.C,
+                false,
+                true,
+                false
+            );
+            keymap[TermInfoStrings.KeyEnd] = new ConsoleKeyInfo(
+                '\0',
+                ConsoleKey.End,
+                false,
+                false,
+                false
+            );
+            keymap[TermInfoStrings.KeyEnter] = new ConsoleKeyInfo(
+                '\n',
+                ConsoleKey.Enter,
+                false,
+                false,
+                false
+            );
+            keymap[TermInfoStrings.KeyHelp] = new ConsoleKeyInfo(
+                '\0',
+                ConsoleKey.Help,
+                false,
+                false,
+                false
+            );
+            keymap[TermInfoStrings.KeyPrint] = new ConsoleKeyInfo(
+                '\0',
+                ConsoleKey.Print,
+                false,
+                false,
+                false
+            );
+            keymap[TermInfoStrings.KeyUndo] = new ConsoleKeyInfo(
+                'Z',
+                ConsoleKey.Z,
+                false,
+                true,
+                false
+            );
+            keymap[TermInfoStrings.KeySbeg] = new ConsoleKeyInfo(
+                '\0',
+                ConsoleKey.Home,
+                true,
+                false,
+                false
+            );
+            keymap[TermInfoStrings.KeyScopy] = new ConsoleKeyInfo(
+                'C',
+                ConsoleKey.C,
+                true,
+                true,
+                false
+            );
+            keymap[TermInfoStrings.KeySdc] = new ConsoleKeyInfo(
+                '\x9',
+                ConsoleKey.Delete,
+                true,
+                false,
+                false
+            );
+            keymap[TermInfoStrings.KeyShelp] = new ConsoleKeyInfo(
+                '\0',
+                ConsoleKey.Help,
+                true,
+                false,
+                false
+            );
+            keymap[TermInfoStrings.KeyShome] = new ConsoleKeyInfo(
+                '\0',
+                ConsoleKey.Home,
+                true,
+                false,
+                false
+            );
+            keymap[TermInfoStrings.KeySleft] = new ConsoleKeyInfo(
+                '\0',
+                ConsoleKey.LeftArrow,
+                true,
+                false,
+                false
+            );
+            keymap[TermInfoStrings.KeySprint] = new ConsoleKeyInfo(
+                '\0',
+                ConsoleKey.Print,
+                true,
+                false,
+                false
+            );
+            keymap[TermInfoStrings.KeySright] = new ConsoleKeyInfo(
+                '\0',
+                ConsoleKey.RightArrow,
+                true,
+                false,
+                false
+            );
+            keymap[TermInfoStrings.KeySundo] = new ConsoleKeyInfo(
+                'Z',
+                ConsoleKey.Z,
+                true,
+                false,
+                false
+            );
+            keymap[TermInfoStrings.KeyF11] = new ConsoleKeyInfo(
+                '\0',
+                ConsoleKey.F11,
+                false,
+                false,
+                false
+            );
+            keymap[TermInfoStrings.KeyF12] = new ConsoleKeyInfo(
+                '\0',
+                ConsoleKey.F12,
+                false,
+                false,
+                false
+            );
+            keymap[TermInfoStrings.KeyF13] = new ConsoleKeyInfo(
+                '\0',
+                ConsoleKey.F13,
+                false,
+                false,
+                false
+            );
+            keymap[TermInfoStrings.KeyF14] = new ConsoleKeyInfo(
+                '\0',
+                ConsoleKey.F14,
+                false,
+                false,
+                false
+            );
+            keymap[TermInfoStrings.KeyF15] = new ConsoleKeyInfo(
+                '\0',
+                ConsoleKey.F15,
+                false,
+                false,
+                false
+            );
+            keymap[TermInfoStrings.KeyF16] = new ConsoleKeyInfo(
+                '\0',
+                ConsoleKey.F16,
+                false,
+                false,
+                false
+            );
+            keymap[TermInfoStrings.KeyF17] = new ConsoleKeyInfo(
+                '\0',
+                ConsoleKey.F17,
+                false,
+                false,
+                false
+            );
+            keymap[TermInfoStrings.KeyF18] = new ConsoleKeyInfo(
+                '\0',
+                ConsoleKey.F18,
+                false,
+                false,
+                false
+            );
+            keymap[TermInfoStrings.KeyF19] = new ConsoleKeyInfo(
+                '\0',
+                ConsoleKey.F19,
+                false,
+                false,
+                false
+            );
+            keymap[TermInfoStrings.KeyF20] = new ConsoleKeyInfo(
+                '\0',
+                ConsoleKey.F20,
+                false,
+                false,
+                false
+            );
+            keymap[TermInfoStrings.KeyF21] = new ConsoleKeyInfo(
+                '\0',
+                ConsoleKey.F21,
+                false,
+                false,
+                false
+            );
+            keymap[TermInfoStrings.KeyF22] = new ConsoleKeyInfo(
+                '\0',
+                ConsoleKey.F22,
+                false,
+                false,
+                false
+            );
+            keymap[TermInfoStrings.KeyF23] = new ConsoleKeyInfo(
+                '\0',
+                ConsoleKey.F23,
+                false,
+                false,
+                false
+            );
+            keymap[TermInfoStrings.KeyF24] = new ConsoleKeyInfo(
+                '\0',
+                ConsoleKey.F24,
+                false,
+                false,
+                false
+            );
             // These were previously missing:
-            keymap [TermInfoStrings.KeyDc] = new ConsoleKeyInfo ('\0', ConsoleKey.Delete, false, false, false);
-            keymap [TermInfoStrings.KeyIc] = new ConsoleKeyInfo ('\0', ConsoleKey.Insert, false, false, false);
+            keymap[TermInfoStrings.KeyDc] = new ConsoleKeyInfo(
+                '\0',
+                ConsoleKey.Delete,
+                false,
+                false,
+                false
+            );
+            keymap[TermInfoStrings.KeyIc] = new ConsoleKeyInfo(
+                '\0',
+                ConsoleKey.Insert,
+                false,
+                false,
+                false
+            );
         }
 
-        void InitKeys ()
+        void InitKeys()
         {
             if (initKeys)
                 return;
 
-            CreateKeyMap ();
-            rootmap = new ByteMatcher ();
+            CreateKeyMap();
+            rootmap = new ByteMatcher();
 
             //
             // The keys that we know about and use
             //
-            var UsedKeys = new [] {
+            var UsedKeys = new[]
+            {
                 TermInfoStrings.KeyBackspace,
                 TermInfoStrings.KeyClear,
                 TermInfoStrings.KeyDown,
@@ -1405,42 +2005,44 @@ namespace System {
                 TermInfoStrings.KeyF22,
                 TermInfoStrings.KeyF23,
                 TermInfoStrings.KeyF24,
-
                 // These were missing
                 TermInfoStrings.KeyDc,
                 TermInfoStrings.KeyIc
             };
-            
+
             foreach (TermInfoStrings tis in UsedKeys)
-                AddStringMapping (tis);
-            
-            rootmap.AddMapping (TermInfoStrings.KeyBackspace, new byte [] { control_characters [ControlCharacters.Erase] });
-            rootmap.Sort ();
+                AddStringMapping(tis);
+
+            rootmap.AddMapping(
+                TermInfoStrings.KeyBackspace,
+                new byte[] { control_characters[ControlCharacters.Erase] }
+            );
+            rootmap.Sort();
             initKeys = true;
         }
 
-        void AddStringMapping (TermInfoStrings s)
+        void AddStringMapping(TermInfoStrings s)
         {
-            byte [] bytes = reader.GetStringBytes (s);
+            byte[] bytes = reader.GetStringBytes(s);
             if (bytes == null)
                 return;
 
-            rootmap.AddMapping (s, bytes);
+            rootmap.AddMapping(s, bytes);
         }
     }
 
     /// <summary>Provides support for evaluating parameterized terminfo database format strings.</summary>
     internal static class ParameterizedStrings
     {
-                /// <summary>A cached stack to use to avoid allocating a new stack object for every evaluation.</summary>
-                [ThreadStatic]
-                private static LowLevelStack _cachedStack;
+        /// <summary>A cached stack to use to avoid allocating a new stack object for every evaluation.</summary>
+        [ThreadStatic]
+        private static LowLevelStack _cachedStack;
 
-                /// <summary>Evaluates a terminfo formatting string, using the supplied arguments.</summary>
-                /// <param name="format">The format string.</param>
-                /// <param name="args">The arguments to the format string.</param>
-                /// <returns>The formatted string.</returns>
-                public static string Evaluate(string format, params FormatParam[] args)
+        /// <summary>Evaluates a terminfo formatting string, using the supplied arguments.</summary>
+        /// <param name="format">The format string.</param>
+        /// <param name="args">The arguments to the format string.</param>
+        /// <returns>The formatted string.</returns>
+        public static string Evaluate(string format, params FormatParam[] args)
         {
             if (format == null)
                 throw new ArgumentNullException("format");
@@ -1457,32 +2059,38 @@ namespace System {
             // "dynamic" and "static" variables are much less often used (the "dynamic" and "static"
             // terminology appears to just refer to two different collections rather than to any semantic
             // meaning).  As such, we'll only initialize them if we really need them.
-            FormatParam[] dynamicVars = null, staticVars = null;
-            
+            FormatParam[] dynamicVars = null,
+                staticVars = null;
+
             int pos = 0;
             return EvaluateInternal(format, ref pos, args, stack, ref dynamicVars, ref staticVars);
-            
+
             // EvaluateInternal may throw IndexOutOfRangeException and InvalidOperationException
             // if the format string is malformed or if it's inconsistent with the parameters provided.
         }
-        
-                /// <summary>Evaluates a terminfo formatting string, using the supplied arguments and processing data structures.</summary>
-                /// <param name="format">The format string.</param>
-                /// <param name="pos">The position in <paramref name="format"/> to start processing.</param>
-                /// <param name="args">The arguments to the format string.</param>
-                /// <param name="stack">The stack to use as the format string is evaluated.</param>
-                /// <param name="dynamicVars">A lazily-initialized collection of variables.</param>
-                /// <param name="staticVars">A lazily-initialized collection of variables.</param>
-                /// <returns>
-                /// The formatted string; this may be empty if the evaluation didn't yield any output.
-                /// The evaluation stack will have a 1 at the top if all processing was completed at invoked level
-                /// of recursion, and a 0 at the top if we're still inside of a conditional that requires more processing.
-                /// </returns>
-                private static string EvaluateInternal(
-            string format, ref int pos, FormatParam[] args, LowLevelStack stack,
-            ref FormatParam[] dynamicVars, ref FormatParam[] staticVars)
+
+        /// <summary>Evaluates a terminfo formatting string, using the supplied arguments and processing data structures.</summary>
+        /// <param name="format">The format string.</param>
+        /// <param name="pos">The position in <paramref name="format"/> to start processing.</param>
+        /// <param name="args">The arguments to the format string.</param>
+        /// <param name="stack">The stack to use as the format string is evaluated.</param>
+        /// <param name="dynamicVars">A lazily-initialized collection of variables.</param>
+        /// <param name="staticVars">A lazily-initialized collection of variables.</param>
+        /// <returns>
+        /// The formatted string; this may be empty if the evaluation didn't yield any output.
+        /// The evaluation stack will have a 1 at the top if all processing was completed at invoked level
+        /// of recursion, and a 0 at the top if we're still inside of a conditional that requires more processing.
+        /// </returns>
+        private static string EvaluateInternal(
+            string format,
+            ref int pos,
+            FormatParam[] args,
+            LowLevelStack stack,
+            ref FormatParam[] dynamicVars,
+            ref FormatParam[] staticVars
+        )
         {
-            // Create a StringBuilder to store the output of this processing.  We use the format's length as an 
+            // Create a StringBuilder to store the output of this processing.  We use the format's length as an
             // approximation of an upper-bound for how large the output will be, though with parameter processing,
             // this is just an estimate, sometimes way over, sometimes under.
             StringBuilder output = new StringBuilder(format.Length);
@@ -1496,251 +2104,289 @@ namespace System {
             bool sawIfConditional = false;
 
             // Process each character in the format string, starting from the position passed in.
-            for (; pos < format.Length; pos++){
+            for (; pos < format.Length; pos++)
+            {
                 // '%' is the escape character for a special sequence to be evaluated.
                 // Anything else just gets pushed to output.
-                if (format[pos] != '%') {
+                if (format[pos] != '%')
+                {
                     output.Append(format[pos]);
                     continue;
                 }
                 // We have a special parameter sequence to process.  Now we need
                 // to look at what comes after the '%'.
                 ++pos;
-                switch (format[pos]) {
-                // Output appending operations
-                case '%': // Output the escaped '%'
-                    output.Append('%');
-                    break;
-                case 'c': // Pop the stack and output it as a char
-                    output.Append((char)stack.Pop().Int32);
-                    break;
-                case 's': // Pop the stack and output it as a string
-                    output.Append(stack.Pop().String);
-                    break;
-                case 'd': // Pop the stack and output it as an integer
-                    output.Append(stack.Pop().Int32);
-                    break;
-                case 'o':
-                case 'X':
-                case 'x':
-                case ':':
-                case '0':
-                case '1':
-                case '2':
-                case '3':
-                case '4':
-                case '5':
-                case '6':
-                case '7':
-                case '8':
-                case '9':
-                    // printf strings of the format "%[[:]flags][width[.precision]][doxXs]" are allowed
-                    // (with a ':' used in front of flags to help differentiate from binary operations, as flags can
-                    // include '-' and '+').  While above we've special-cased common usage (e.g. %d, %s),
-                    // for more complicated expressions we delegate to printf.
-                    int printfEnd = pos;
-                    for (; printfEnd < format.Length; printfEnd++) // find the end of the printf format string
-                    {
-                        char ec = format[printfEnd];
-                        if (ec == 'd' || ec == 'o' || ec == 'x' || ec == 'X' || ec == 's')
+                switch (format[pos])
+                {
+                    // Output appending operations
+                    case '%': // Output the escaped '%'
+                        output.Append('%');
+                        break;
+                    case 'c': // Pop the stack and output it as a char
+                        output.Append((char)stack.Pop().Int32);
+                        break;
+                    case 's': // Pop the stack and output it as a string
+                        output.Append(stack.Pop().String);
+                        break;
+                    case 'd': // Pop the stack and output it as an integer
+                        output.Append(stack.Pop().Int32);
+                        break;
+                    case 'o':
+                    case 'X':
+                    case 'x':
+                    case ':':
+                    case '0':
+                    case '1':
+                    case '2':
+                    case '3':
+                    case '4':
+                    case '5':
+                    case '6':
+                    case '7':
+                    case '8':
+                    case '9':
+                        // printf strings of the format "%[[:]flags][width[.precision]][doxXs]" are allowed
+                        // (with a ':' used in front of flags to help differentiate from binary operations, as flags can
+                        // include '-' and '+').  While above we've special-cased common usage (e.g. %d, %s),
+                        // for more complicated expressions we delegate to printf.
+                        int printfEnd = pos;
+                        for (; printfEnd < format.Length; printfEnd++) // find the end of the printf format string
                         {
-                            break;
+                            char ec = format[printfEnd];
+                            if (ec == 'd' || ec == 'o' || ec == 'x' || ec == 'X' || ec == 's')
+                            {
+                                break;
+                            }
                         }
-                    }
-                    if (printfEnd >= format.Length)
-                        throw new InvalidOperationException("Terminfo database contains invalid values");
-                    string printfFormat = format.Substring(pos - 1, printfEnd - pos + 2); // extract the format string
-                    if (printfFormat.Length > 1 && printfFormat[1] == ':')
-                        printfFormat = printfFormat.Remove(1, 1);
-                    output.Append(FormatPrintF(printfFormat, stack.Pop().Object)); // do the printf formatting and append its output
-                    break;
+                        if (printfEnd >= format.Length)
+                            throw new InvalidOperationException(
+                                "Terminfo database contains invalid values"
+                            );
+                        string printfFormat = format.Substring(pos - 1, printfEnd - pos + 2); // extract the format string
+                        if (printfFormat.Length > 1 && printfFormat[1] == ':')
+                            printfFormat = printfFormat.Remove(1, 1);
+                        output.Append(FormatPrintF(printfFormat, stack.Pop().Object)); // do the printf formatting and append its output
+                        break;
 
                     // Stack pushing operations
-                case 'p': // Push the specified parameter (1-based) onto the stack
-                    pos++;
-                    stack.Push(args[format[pos] - '1']);
-                    break;
-                case 'l': // Pop a string and push its length
-                    stack.Push(stack.Pop().String.Length);
-                    break;
-                case '{': // Push integer literal, enclosed between braces
-                    pos++;
-                    int intLit = 0;
-                    while (format[pos] != '}')
-                    {
-                        intLit = (intLit * 10) + (format[pos] - '0');
+                    case 'p': // Push the specified parameter (1-based) onto the stack
                         pos++;
-                    }
-                    stack.Push(intLit);
-                    break;
-                case '\'': // Push literal character, enclosed between single quotes
-                    stack.Push((int)format[pos + 1]);
-                    pos += 2;
-                    break;
+                        stack.Push(args[format[pos] - '1']);
+                        break;
+                    case 'l': // Pop a string and push its length
+                        stack.Push(stack.Pop().String.Length);
+                        break;
+                    case '{': // Push integer literal, enclosed between braces
+                        pos++;
+                        int intLit = 0;
+                        while (format[pos] != '}')
+                        {
+                            intLit = (intLit * 10) + (format[pos] - '0');
+                            pos++;
+                        }
+                        stack.Push(intLit);
+                        break;
+                    case '\'': // Push literal character, enclosed between single quotes
+                        stack.Push((int)format[pos + 1]);
+                        pos += 2;
+                        break;
 
                     // Storing and retrieving "static" and "dynamic" variables
-                case 'P': // Pop a value and store it into either static or dynamic variables based on whether the a-z variable is capitalized
-                    pos++;
-                    int setIndex;
-                    FormatParam[] targetVars = GetDynamicOrStaticVariables(format[pos], ref dynamicVars, ref staticVars, out setIndex);
-                    targetVars[setIndex] = stack.Pop();
-                    break;
-                case 'g': // Push a static or dynamic variable; which is based on whether the a-z variable is capitalized
-                    pos++;
-                    int getIndex;
-                    FormatParam[] sourceVars = GetDynamicOrStaticVariables(format[pos], ref dynamicVars, ref staticVars, out getIndex);
-                    stack.Push(sourceVars[getIndex]);
-                    break;
+                    case 'P': // Pop a value and store it into either static or dynamic variables based on whether the a-z variable is capitalized
+                        pos++;
+                        int setIndex;
+                        FormatParam[] targetVars = GetDynamicOrStaticVariables(
+                            format[pos],
+                            ref dynamicVars,
+                            ref staticVars,
+                            out setIndex
+                        );
+                        targetVars[setIndex] = stack.Pop();
+                        break;
+                    case 'g': // Push a static or dynamic variable; which is based on whether the a-z variable is capitalized
+                        pos++;
+                        int getIndex;
+                        FormatParam[] sourceVars = GetDynamicOrStaticVariables(
+                            format[pos],
+                            ref dynamicVars,
+                            ref staticVars,
+                            out getIndex
+                        );
+                        stack.Push(sourceVars[getIndex]);
+                        break;
 
                     // Binary operations
-                case '+':
-                case '-':
-                case '*':
-                case '/':
-                case 'm':
-                case '^': // arithmetic
-                case '&':
-                case '|':                                         // bitwise
-                case '=':
-                case '>':
-                case '<':                               // comparison
-                case 'A':
-                case 'O':                                         // logical
-                    int second = stack.Pop().Int32; // it's a stack... the second value was pushed last
-                    int first = stack.Pop().Int32;
-                    int res;
-                    switch (format[pos]) {
                     case '+':
-                        res = first + second;
-                        break;
                     case '-':
-                        res = first - second;
-                        break;
                     case '*':
-                        res = first * second;
-                        break;
                     case '/':
-                        res = first / second;
-                        break;
                     case 'm':
-                        res = first % second;
-                        break;
-                    case '^':
-                        res = first ^ second;
-                        break;
+                    case '^': // arithmetic
                     case '&':
-                        res = first & second;
-                        break;
-                    case '|':
-                        res = first | second;
-                        break;
+                    case '|': // bitwise
                     case '=':
-                        res = AsInt(first == second);
-                        break;
                     case '>':
-                        res = AsInt(first > second);
-                        break;
-                    case '<':
-                        res = AsInt(first < second);
-                        break;
+                    case '<': // comparison
                     case 'A':
-                        res = AsInt(AsBool(first) && AsBool(second));
+                    case 'O': // logical
+                        int second = stack.Pop().Int32; // it's a stack... the second value was pushed last
+                        int first = stack.Pop().Int32;
+                        int res;
+                        switch (format[pos])
+                        {
+                            case '+':
+                                res = first + second;
+                                break;
+                            case '-':
+                                res = first - second;
+                                break;
+                            case '*':
+                                res = first * second;
+                                break;
+                            case '/':
+                                res = first / second;
+                                break;
+                            case 'm':
+                                res = first % second;
+                                break;
+                            case '^':
+                                res = first ^ second;
+                                break;
+                            case '&':
+                                res = first & second;
+                                break;
+                            case '|':
+                                res = first | second;
+                                break;
+                            case '=':
+                                res = AsInt(first == second);
+                                break;
+                            case '>':
+                                res = AsInt(first > second);
+                                break;
+                            case '<':
+                                res = AsInt(first < second);
+                                break;
+                            case 'A':
+                                res = AsInt(AsBool(first) && AsBool(second));
+                                break;
+                            case 'O':
+                                res = AsInt(AsBool(first) || AsBool(second));
+                                break;
+                            default:
+                                res = 0;
+                                break;
+                        }
+                        stack.Push(res);
                         break;
-                    case 'O':
-                        res = AsInt(AsBool(first) || AsBool(second));
-                        break;
-                    default:
-                        res = 0;
-                        break;
-                    }
-                    stack.Push(res);
-                    break;
 
                     // Unary operations
-                case '!':
-                case '~':
-                    int value = stack.Pop().Int32;
-                    stack.Push(
-                        format[pos] == '!' ? AsInt(!AsBool(value)) :
-                        ~value);
-                    break;
+                    case '!':
+                    case '~':
+                        int value = stack.Pop().Int32;
+                        stack.Push(format[pos] == '!' ? AsInt(!AsBool(value)) : ~value);
+                        break;
 
                     // Augment first two parameters by 1
-                case 'i':
-                    args[0] = 1 + args[0].Int32;
-                    args[1] = 1 + args[1].Int32;
-                    break;
+                    case 'i':
+                        args[0] = 1 + args[0].Int32;
+                        args[1] = 1 + args[1].Int32;
+                        break;
 
                     // Conditional of the form %? if-part %t then-part %e else-part %;
                     // The "%e else-part" is optional.
-                case '?':
-                    sawIfConditional = true;
-                    break;
-                case 't':
-                    // We hit the end of the if-part and are about to start the then-part.
-                    // The if-part left its result on the stack; pop and evaluate.
-                    bool conditionalResult = AsBool(stack.Pop().Int32);
+                    case '?':
+                        sawIfConditional = true;
+                        break;
+                    case 't':
+                        // We hit the end of the if-part and are about to start the then-part.
+                        // The if-part left its result on the stack; pop and evaluate.
+                        bool conditionalResult = AsBool(stack.Pop().Int32);
 
-                    // Regardless of whether it's true, run the then-part to get past it.
-                    // If the conditional was true, output the then results.
-                    pos++;
-                    string thenResult = EvaluateInternal(format, ref pos, args, stack, ref dynamicVars, ref staticVars);
-                    if (conditionalResult)
-                    {
-                        output.Append(thenResult);
-                    }
-
-                    // We're past the then; the top of the stack should now be a Boolean
-                    // indicating whether this conditional has more to be processed (an else clause).
-                    if (!AsBool(stack.Pop().Int32))
-                    {
-                        // Process the else clause, and if the conditional was false, output the else results.
+                        // Regardless of whether it's true, run the then-part to get past it.
+                        // If the conditional was true, output the then results.
                         pos++;
-                        string elseResult = EvaluateInternal(format, ref pos, args, stack, ref dynamicVars, ref staticVars);
-                        if (!conditionalResult)
+                        string thenResult = EvaluateInternal(
+                            format,
+                            ref pos,
+                            args,
+                            stack,
+                            ref dynamicVars,
+                            ref staticVars
+                        );
+                        if (conditionalResult)
                         {
-                            output.Append(elseResult);
+                            output.Append(thenResult);
                         }
-                        // Now we should be done (any subsequent elseif logic will have bene handled in the recursive call).
+
+                        // We're past the then; the top of the stack should now be a Boolean
+                        // indicating whether this conditional has more to be processed (an else clause).
                         if (!AsBool(stack.Pop().Int32))
                         {
-                            throw new InvalidOperationException("Terminfo database contains invalid values");
+                            // Process the else clause, and if the conditional was false, output the else results.
+                            pos++;
+                            string elseResult = EvaluateInternal(
+                                format,
+                                ref pos,
+                                args,
+                                stack,
+                                ref dynamicVars,
+                                ref staticVars
+                            );
+                            if (!conditionalResult)
+                            {
+                                output.Append(elseResult);
+                            }
+                            // Now we should be done (any subsequent elseif logic will have bene handled in the recursive call).
+                            if (!AsBool(stack.Pop().Int32))
+                            {
+                                throw new InvalidOperationException(
+                                    "Terminfo database contains invalid values"
+                                );
+                            }
                         }
-                    }
 
-                    // If we're in a nested processing, return to our parent.
-                    if (!sawIfConditional)
-                    {
-                        stack.Push(1);
+                        // If we're in a nested processing, return to our parent.
+                        if (!sawIfConditional)
+                        {
+                            stack.Push(1);
+                            return output.ToString();
+                        }
+                        // Otherwise, we're done processing the conditional in its entirety.
+                        sawIfConditional = false;
+                        break;
+                    case 'e':
+                    case ';':
+                        // Let our caller know why we're exiting, whether due to the end of the conditional or an else branch.
+                        stack.Push(AsInt(format[pos] == ';'));
                         return output.ToString();
-                    }
-                    // Otherwise, we're done processing the conditional in its entirety.
-                    sawIfConditional = false;
-                    break;
-                case 'e':
-                case ';':
-                    // Let our caller know why we're exiting, whether due to the end of the conditional or an else branch.
-                    stack.Push(AsInt(format[pos] == ';'));
-                    return output.ToString();
 
                     // Anything else is an error
-                default:
-                    throw new InvalidOperationException("Terminfo database contains invalid values");
+                    default:
+                        throw new InvalidOperationException(
+                            "Terminfo database contains invalid values"
+                        );
                 }
             }
             stack.Push(1);
             return output.ToString();
         }
-        
-                /// <summary>Converts an Int32 to a Boolean, with 0 meaning false and all non-zero values meaning true.</summary>
-                /// <param name="i">The integer value to convert.</param>
-                /// <returns>true if the integer was non-zero; otherwise, false.</returns>
-                static bool AsBool(Int32 i) { return i != 0; }
 
-                /// <summary>Converts a Boolean to an Int32, with true meaning 1 and false meaning 0.</summary>
-                /// <param name="b">The Boolean value to convert.</param>
-                /// <returns>1 if the Boolean is true; otherwise, 0.</returns>
-                static int AsInt(bool b) { return b ? 1 : 0; }
+        /// <summary>Converts an Int32 to a Boolean, with 0 meaning false and all non-zero values meaning true.</summary>
+        /// <param name="i">The integer value to convert.</param>
+        /// <returns>true if the integer was non-zero; otherwise, false.</returns>
+        static bool AsBool(Int32 i)
+        {
+            return i != 0;
+        }
+
+        /// <summary>Converts a Boolean to an Int32, with true meaning 1 and false meaning 0.</summary>
+        /// <param name="b">The Boolean value to convert.</param>
+        /// <returns>1 if the Boolean is true; otherwise, 0.</returns>
+        static int AsInt(bool b)
+        {
+            return b ? 1 : 0;
+        }
 
         static string StringFromAsciiBytes(byte[] buffer, int offset, int length)
         {
@@ -1761,76 +2407,90 @@ namespace System {
 
         [DllImport("libc")]
         static extern unsafe int snprintf(byte* str, IntPtr size, string format, int arg1);
-        
-                /// <summary>Formats an argument into a printf-style format string.</summary>
-                /// <param name="format">The printf-style format string.</param>
-                /// <param name="arg">The argument to format.  This must be an Int32 or a String.</param>
-                /// <returns>The formatted string.</returns>
-                static unsafe string FormatPrintF(string format, object arg)
-                {
+
+        /// <summary>Formats an argument into a printf-style format string.</summary>
+        /// <param name="format">The printf-style format string.</param>
+        /// <param name="arg">The argument to format.  This must be an Int32 or a String.</param>
+        /// <returns>The formatted string.</returns>
+        static unsafe string FormatPrintF(string format, object arg)
+        {
             // Determine how much space is needed to store the formatted string.
             string stringArg = arg as string;
-            int neededLength = stringArg != null ?
-                snprintf(null, IntPtr.Zero, format, stringArg) :
-                snprintf(null, IntPtr.Zero, format, (int)arg);
+            int neededLength =
+                stringArg != null
+                    ? snprintf(null, IntPtr.Zero, format, stringArg)
+                    : snprintf(null, IntPtr.Zero, format, (int)arg);
             if (neededLength == 0)
                 return string.Empty;
             if (neededLength < 0)
                 throw new InvalidOperationException("The printf operation failed");
-            
+
             // Allocate the needed space, format into it, and return the data as a string.
             byte[] bytes = new byte[neededLength + 1]; // extra byte for the null terminator
-            fixed (byte* ptr = bytes){
-                int length = stringArg != null ?
-                    snprintf(ptr, (IntPtr)bytes.Length, format, stringArg) :
-                    snprintf(ptr, (IntPtr)bytes.Length, format, (int)arg);
+            fixed (byte* ptr = bytes)
+            {
+                int length =
+                    stringArg != null
+                        ? snprintf(ptr, (IntPtr)bytes.Length, format, stringArg)
+                        : snprintf(ptr, (IntPtr)bytes.Length, format, (int)arg);
                 if (length != neededLength)
                 {
                     throw new InvalidOperationException("Invalid printf operation");
                 }
             }
             return StringFromAsciiBytes(bytes, 0, neededLength);
-                }
-        
-                /// <summary>Gets the lazily-initialized dynamic or static variables collection, based on the supplied variable name.</summary>
-                /// <param name="c">The name of the variable.</param>
-                /// <param name="dynamicVars">The lazily-initialized dynamic variables collection.</param>
-                /// <param name="staticVars">The lazily-initialized static variables collection.</param>
-                /// <param name="index">The index to use to index into the variables.</param>
-                /// <returns>The variables collection.</returns>
-                private static FormatParam[] GetDynamicOrStaticVariables(
-            char c, ref FormatParam[] dynamicVars, ref FormatParam[] staticVars, out int index)
-                {
-            if (c >= 'A' && c <= 'Z'){
+        }
+
+        /// <summary>Gets the lazily-initialized dynamic or static variables collection, based on the supplied variable name.</summary>
+        /// <param name="c">The name of the variable.</param>
+        /// <param name="dynamicVars">The lazily-initialized dynamic variables collection.</param>
+        /// <param name="staticVars">The lazily-initialized static variables collection.</param>
+        /// <param name="index">The index to use to index into the variables.</param>
+        /// <returns>The variables collection.</returns>
+        private static FormatParam[] GetDynamicOrStaticVariables(
+            char c,
+            ref FormatParam[] dynamicVars,
+            ref FormatParam[] staticVars,
+            out int index
+        )
+        {
+            if (c >= 'A' && c <= 'Z')
+            {
                 index = c - 'A';
                 return staticVars ?? (staticVars = new FormatParam[26]); // one slot for each letter of alphabet
-            } else if (c >= 'a' && c <= 'z') {
+            }
+            else if (c >= 'a' && c <= 'z')
+            {
                 index = c - 'a';
                 return dynamicVars ?? (dynamicVars = new FormatParam[26]); // one slot for each letter of alphabet
             }
-            else throw new InvalidOperationException("Terminfo database contains invalid values");
-                }
+            else
+                throw new InvalidOperationException("Terminfo database contains invalid values");
+        }
 
-                /// <summary>
-                /// Represents a parameter to a terminfo formatting string.
-                /// It is a discriminated union of either an integer or a string, 
-                /// with characters represented as integers.
-                /// </summary>
-                public struct FormatParam
-                {
+        /// <summary>
+        /// Represents a parameter to a terminfo formatting string.
+        /// It is a discriminated union of either an integer or a string,
+        /// with characters represented as integers.
+        /// </summary>
+        public struct FormatParam
+        {
             /// <summary>The integer stored in the parameter.</summary>
             private readonly int _int32;
+
             /// <summary>The string stored in the parameter.</summary>
             private readonly string _string; // null means an Int32 is stored
-            
+
             /// <summary>Initializes the parameter with an integer value.</summary>
             /// <param name="value">The value to be stored in the parameter.</param>
-            public FormatParam(Int32 value) : this(value, null) { }
-            
+            public FormatParam(Int32 value)
+                : this(value, null) { }
+
             /// <summary>Initializes the parameter with a string value.</summary>
             /// <param name="value">The value to be stored in the parameter.</param>
-            public FormatParam(String value) : this(0, value ?? string.Empty) { }
-            
+            public FormatParam(String value)
+                : this(0, value ?? string.Empty) { }
+
             /// <summary>Initializes the parameter.</summary>
             /// <param name="intValue">The integer value.</param>
             /// <param name="stringValue">The string value.</param>
@@ -1839,39 +2499,51 @@ namespace System {
                 _int32 = intValue;
                 _string = stringValue;
             }
-            
+
             /// <summary>Implicit converts an integer into a parameter.</summary>
             public static implicit operator FormatParam(int value)
             {
                 return new FormatParam(value);
             }
-            
+
             /// <summary>Implicit converts a string into a parameter.</summary>
             public static implicit operator FormatParam(string value)
             {
                 return new FormatParam(value);
             }
-            
+
             /// <summary>Gets the integer value of the parameter. If a string was stored, 0 is returned.</summary>
-            public int Int32 { get { return _int32; } }
-            
+            public int Int32
+            {
+                get { return _int32; }
+            }
+
             /// <summary>Gets the string value of the parameter.  If an Int32 or a null String were stored, an empty string is returned.</summary>
-            public string String { get { return _string ?? string.Empty; } }
-            
+            public string String
+            {
+                get { return _string ?? string.Empty; }
+            }
+
             /// <summary>Gets the string or the integer value as an object.</summary>
-            public object Object { get { return _string ?? (object)_int32; } }
-                }
-        
-                /// <summary>Provides a basic stack data structure.</summary>
-                /// <typeparam name="T">Specifies the type of data in the stack.</typeparam>
-                private sealed class LowLevelStack
+            public object Object
+            {
+                get { return _string ?? (object)_int32; }
+            }
+        }
+
+        /// <summary>Provides a basic stack data structure.</summary>
+        /// <typeparam name="T">Specifies the type of data in the stack.</typeparam>
+        private sealed class LowLevelStack
         {
             private const int DefaultSize = 4;
             private FormatParam[] _arr;
             private int _count;
-            
-            public LowLevelStack() { _arr = new FormatParam[DefaultSize]; }
-            
+
+            public LowLevelStack()
+            {
+                _arr = new FormatParam[DefaultSize];
+            }
+
             public FormatParam Pop()
             {
                 if (_count == 0)
@@ -1881,65 +2553,67 @@ namespace System {
                 _arr[_count] = default(FormatParam);
                 return item;
             }
-            
+
             public void Push(FormatParam item)
             {
-                if (_arr.Length == _count){
+                if (_arr.Length == _count)
+                {
                     var newArr = new FormatParam[_arr.Length * 2];
                     Array.Copy(_arr, 0, newArr, 0, _arr.Length);
                     _arr = newArr;
                 }
                 _arr[_count++] = item;
             }
-            
+
             public void Clear()
             {
                 Array.Clear(_arr, 0, _count);
                 _count = 0;
             }
-                }
+        }
     }
-           
-    class ByteMatcher {
-        Hashtable map = new Hashtable ();
-        Hashtable starts = new Hashtable ();
 
-        public void AddMapping (TermInfoStrings key, byte [] val)
+    class ByteMatcher
+    {
+        Hashtable map = new Hashtable();
+        Hashtable starts = new Hashtable();
+
+        public void AddMapping(TermInfoStrings key, byte[] val)
         {
             if (val.Length == 0)
                 return;
 
-            map [val] = key;
-            starts [(int) val [0]] = true;
+            map[val] = key;
+            starts[(int)val[0]] = true;
         }
 
-        public void Sort ()
+        public void Sort() { }
+
+        public bool StartsWith(int c)
         {
+            return (starts[c] != null);
         }
 
-        public bool StartsWith (int c)
+        public TermInfoStrings Match(char[] buffer, int offset, int length, out int used)
         {
-            return (starts [c] != null);
-        }
-
-        public TermInfoStrings Match (char [] buffer, int offset, int length, out int used)
-        {
-            foreach (byte [] bytes in map.Keys) {
-                for (int i = 0; i < bytes.Length && i < length; i++) {
-                    if ((char) bytes [i] != buffer [offset + i])
+            foreach (byte[] bytes in map.Keys)
+            {
+                for (int i = 0; i < bytes.Length && i < length; i++)
+                {
+                    if ((char)bytes[i] != buffer[offset + i])
                         break;
 
-                    if (bytes.Length - 1 == i) {
+                    if (bytes.Length - 1 == i)
+                    {
                         used = bytes.Length;
-                        return (TermInfoStrings) map [bytes];
+                        return (TermInfoStrings)map[bytes];
                     }
                 }
             }
 
             used = 0;
-            return (TermInfoStrings) (-1);
+            return (TermInfoStrings)(-1);
         }
     }
 }
 #endif
-

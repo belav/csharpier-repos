@@ -1,11 +1,11 @@
 //
 // System.ComponentModel.Design.MultilineStringEditor.cs
-// 
+//
 // Author:
 //   Andreas Nahr (ClassDevelopment@A-SoftTech.com)
-// 
+//
 // (C) 2007 Andreas Nahr
-// 
+//
 
 //
 // Permission is hereby granted, free of charge, to any person obtaining
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -40,7 +40,7 @@ namespace System.ComponentModel.Design
     {
         private class EditorControl : TextBox
         {
-            public EditorControl ()
+            public EditorControl()
             {
                 Multiline = true;
                 AcceptsReturn = true;
@@ -53,17 +53,20 @@ namespace System.ComponentModel.Design
         }
 
         private IWindowsFormsEditorService editorService;
-        private EditorControl control = new EditorControl ();
+        private EditorControl control = new EditorControl();
 
-        public MultilineStringEditor ()
-        {
-        }
+        public MultilineStringEditor() { }
 
-        public override object EditValue (ITypeDescriptorContext context, IServiceProvider provider, object value)
+        public override object EditValue(
+            ITypeDescriptorContext context,
+            IServiceProvider provider,
+            object value
+        )
         {
             if (context != null && provider != null)
             {
-                editorService = (IWindowsFormsEditorService)provider.GetService (typeof (IWindowsFormsEditorService));
+                editorService = (IWindowsFormsEditorService)
+                    provider.GetService(typeof(IWindowsFormsEditorService));
                 if (editorService != null)
                 {
                     if (value == null)
@@ -72,19 +75,19 @@ namespace System.ComponentModel.Design
                         return value;
 
                     control.Text = (string)value;
-                    editorService.DropDownControl (control);
+                    editorService.DropDownControl(control);
                     return control.Text;
                 }
             }
-            return base.EditValue (context, provider, value);
+            return base.EditValue(context, provider, value);
         }
 
-        public override UITypeEditorEditStyle GetEditStyle (ITypeDescriptorContext context)
+        public override UITypeEditorEditStyle GetEditStyle(ITypeDescriptorContext context)
         {
             return UITypeEditorEditStyle.DropDown;
         }
 
-        public override bool GetPaintValueSupported (ITypeDescriptorContext context)
+        public override bool GetPaintValueSupported(ITypeDescriptorContext context)
         {
             return false;
         }

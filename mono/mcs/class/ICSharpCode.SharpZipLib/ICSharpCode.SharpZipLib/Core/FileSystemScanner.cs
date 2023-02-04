@@ -20,7 +20,7 @@
 // making a combined work based on this library.  Thus, the terms and
 // conditions of the GNU General Public License cover the whole
 // combination.
-// 
+//
 // As a special exception, the copyright holders of this library give you
 // permission to link this library with independent modules to produce an
 // executable, regardless of the license terms of these independent
@@ -42,7 +42,9 @@ namespace ICSharpCode.SharpZipLib.Core
     /// <summary>
     /// Event arguments for scanning.
     /// </summary>
-    [System.ObsoleteAttribute("This assembly has been deprecated. Please use https://www.nuget.org/packages/SharpZipLib/ instead.")]
+    [System.ObsoleteAttribute(
+        "This assembly has been deprecated. Please use https://www.nuget.org/packages/SharpZipLib/ instead."
+    )]
     public class ScanEventArgs : EventArgs
     {
         /// <summary>
@@ -54,9 +56,9 @@ namespace ICSharpCode.SharpZipLib.Core
             this.name = name;
             ContinueRunning = true;
         }
-        
+
         string name;
-        
+
         /// <summary>
         /// The name for this event.
         /// </summary>
@@ -64,9 +66,9 @@ namespace ICSharpCode.SharpZipLib.Core
         {
             get { return name; }
         }
-        
+
         bool continueRunning;
-        
+
         /// <summary>
         /// Get set a value indicating if scanning should continue or not.
         /// </summary>
@@ -80,7 +82,9 @@ namespace ICSharpCode.SharpZipLib.Core
     /// <summary>
     /// Event arguments for directories.
     /// </summary>
-    [System.ObsoleteAttribute("This assembly has been deprecated. Please use https://www.nuget.org/packages/SharpZipLib/ instead.")]
+    [System.ObsoleteAttribute(
+        "This assembly has been deprecated. Please use https://www.nuget.org/packages/SharpZipLib/ instead."
+    )]
     public class DirectoryEventArgs : ScanEventArgs
     {
         /// <summary>
@@ -89,11 +93,11 @@ namespace ICSharpCode.SharpZipLib.Core
         /// <param name="name">The name for this directory.</param>
         /// <param name="hasMatchingFiles">Flag value indicating if any matching files are contained in this directory.</param>
         public DirectoryEventArgs(string name, bool hasMatchingFiles)
-            : base (name)
+            : base(name)
         {
             this.hasMatchingFiles = hasMatchingFiles;
         }
-        
+
         /// <summary>
         /// Get a value indicating if the directory contains any matching files or not.
         /// </summary>
@@ -101,14 +105,16 @@ namespace ICSharpCode.SharpZipLib.Core
         {
             get { return hasMatchingFiles; }
         }
-        
+
         bool hasMatchingFiles;
     }
-    
+
     /// <summary>
     /// Arguments passed when scan failures are detected.
     /// </summary>
-    [System.ObsoleteAttribute("This assembly has been deprecated. Please use https://www.nuget.org/packages/SharpZipLib/ instead.")]
+    [System.ObsoleteAttribute(
+        "This assembly has been deprecated. Please use https://www.nuget.org/packages/SharpZipLib/ instead."
+    )]
     public class ScanFailureEventArgs
     {
         /// <summary>
@@ -122,9 +128,9 @@ namespace ICSharpCode.SharpZipLib.Core
             this.exception = e;
             continueRunning = true;
         }
-        
+
         string name;
-        
+
         /// <summary>
         /// The applicable name.
         /// </summary>
@@ -132,9 +138,9 @@ namespace ICSharpCode.SharpZipLib.Core
         {
             get { return name; }
         }
-        
+
         Exception exception;
-        
+
         /// <summary>
         /// The applicable exception.
         /// </summary>
@@ -144,7 +150,7 @@ namespace ICSharpCode.SharpZipLib.Core
         }
 
         bool continueRunning;
-        
+
         /// <summary>
         /// Get / set a value indicating wether scanning should continue.
         /// </summary>
@@ -154,35 +160,45 @@ namespace ICSharpCode.SharpZipLib.Core
             set { continueRunning = value; }
         }
     }
-    
+
     /// <summary>
     /// Delegate invokked when a directory is processed.
     /// </summary>
-    [System.ObsoleteAttribute("This assembly has been deprecated. Please use https://www.nuget.org/packages/SharpZipLib/ instead.")]
+    [System.ObsoleteAttribute(
+        "This assembly has been deprecated. Please use https://www.nuget.org/packages/SharpZipLib/ instead."
+    )]
     public delegate void ProcessDirectoryDelegate(object Sender, DirectoryEventArgs e);
-    
+
     /// <summary>
     /// Delegate invoked when a file is processed.
     /// </summary>
-    [System.ObsoleteAttribute("This assembly has been deprecated. Please use https://www.nuget.org/packages/SharpZipLib/ instead.")]
+    [System.ObsoleteAttribute(
+        "This assembly has been deprecated. Please use https://www.nuget.org/packages/SharpZipLib/ instead."
+    )]
     public delegate void ProcessFileDelegate(object sender, ScanEventArgs e);
-    
+
     /// <summary>
     /// Delegate invoked when a directory failure is detected.
     /// </summary>
-    [System.ObsoleteAttribute("This assembly has been deprecated. Please use https://www.nuget.org/packages/SharpZipLib/ instead.")]
+    [System.ObsoleteAttribute(
+        "This assembly has been deprecated. Please use https://www.nuget.org/packages/SharpZipLib/ instead."
+    )]
     public delegate void DirectoryFailureDelegate(object sender, ScanFailureEventArgs e);
-    
+
     /// <summary>
     /// Delegate invoked when a file failure is detected.
     /// </summary>
-    [System.ObsoleteAttribute("This assembly has been deprecated. Please use https://www.nuget.org/packages/SharpZipLib/ instead.")]
+    [System.ObsoleteAttribute(
+        "This assembly has been deprecated. Please use https://www.nuget.org/packages/SharpZipLib/ instead."
+    )]
     public delegate void FileFailureDelegate(object sender, ScanFailureEventArgs e);
 
     /// <summary>
     /// FileSystemScanner provides facilities scanning of files and directories.
     /// </summary>
-    [System.ObsoleteAttribute("This assembly has been deprecated. Please use https://www.nuget.org/packages/SharpZipLib/ instead.")]
+    [System.ObsoleteAttribute(
+        "This assembly has been deprecated. Please use https://www.nuget.org/packages/SharpZipLib/ instead."
+    )]
     public class FileSystemScanner
     {
         /// <summary>
@@ -193,7 +209,7 @@ namespace ICSharpCode.SharpZipLib.Core
         {
             fileFilter = new PathFilter(filter);
         }
-        
+
         /// <summary>
         /// Initialise a new instance of <see cref="FileSystemScanner"></see>
         /// </summary>
@@ -204,7 +220,7 @@ namespace ICSharpCode.SharpZipLib.Core
             this.fileFilter = new PathFilter(fileFilter);
             this.directoryFilter = new PathFilter(directoryFilter);
         }
-        
+
         /// <summary>
         /// Initialise a new instance of <see cref="FileSystemScanner"></see>
         /// </summary>
@@ -213,7 +229,7 @@ namespace ICSharpCode.SharpZipLib.Core
         {
             this.fileFilter = fileFilter;
         }
-        
+
         /// <summary>
         /// Initialise a new instance of <see cref="FileSystemScanner"></see>
         /// </summary>
@@ -224,12 +240,12 @@ namespace ICSharpCode.SharpZipLib.Core
             this.fileFilter = fileFilter;
             this.directoryFilter = directoryFilter;
         }
-        
+
         /// <summary>
         /// Delegate to invoke when a directory is processed.
         /// </summary>
         public ProcessDirectoryDelegate ProcessDirectory;
-        
+
         /// <summary>
         /// Delegate to invoke when a file is processed.
         /// </summary>
@@ -239,12 +255,12 @@ namespace ICSharpCode.SharpZipLib.Core
         /// Delegate to invoke when a directory failure is detected.
         /// </summary>
         public DirectoryFailureDelegate DirectoryFailure;
-        
+
         /// <summary>
         /// Delegate to invoke when a file failure is detected.
         /// </summary>
         public FileFailureDelegate FileFailure;
-        
+
         /// <summary>
         /// Raise the DirectoryFailure event.
         /// </summary>
@@ -252,15 +268,18 @@ namespace ICSharpCode.SharpZipLib.Core
         /// <param name="e">The exception detected.</param>
         public void OnDirectoryFailure(string directory, Exception e)
         {
-            if ( DirectoryFailure == null ) {
+            if (DirectoryFailure == null)
+            {
                 alive = false;
-            } else {
+            }
+            else
+            {
                 ScanFailureEventArgs args = new ScanFailureEventArgs(directory, e);
                 DirectoryFailure(this, args);
                 alive = args.ContinueRunning;
             }
         }
-        
+
         /// <summary>
         /// Raise the FileFailure event.
         /// </summary>
@@ -268,9 +287,12 @@ namespace ICSharpCode.SharpZipLib.Core
         /// <param name="e">The exception detected.</param>
         public void OnFileFailure(string file, Exception e)
         {
-            if ( FileFailure == null ) {
+            if (FileFailure == null)
+            {
                 alive = false;
-            } else {
+            }
+            else
+            {
                 ScanFailureEventArgs args = new ScanFailureEventArgs(file, e);
                 FileFailure(this, args);
                 alive = args.ContinueRunning;
@@ -283,13 +305,14 @@ namespace ICSharpCode.SharpZipLib.Core
         /// <param name="file">The file name.</param>
         public void OnProcessFile(string file)
         {
-            if ( ProcessFile != null ) {
+            if (ProcessFile != null)
+            {
                 ScanEventArgs args = new ScanEventArgs(file);
                 ProcessFile(this, args);
                 alive = args.ContinueRunning;
             }
         }
-        
+
         /// <summary>
         /// Raise the ProcessDirectory event.
         /// </summary>
@@ -297,7 +320,8 @@ namespace ICSharpCode.SharpZipLib.Core
         /// <param name="hasMatchingFiles">Flag indicating if the directory has matching files.</param>
         public void OnProcessDirectory(string directory, bool hasMatchingFiles)
         {
-            if ( ProcessDirectory != null ) {
+            if (ProcessDirectory != null)
+            {
                 DirectoryEventArgs args = new DirectoryEventArgs(directory, hasMatchingFiles);
                 ProcessDirectory(this, args);
                 alive = args.ContinueRunning;
@@ -314,29 +338,38 @@ namespace ICSharpCode.SharpZipLib.Core
             alive = true;
             ScanDir(directory, recurse);
         }
-        
+
         void ScanDir(string directory, bool recurse)
         {
-
-            try {
+            try
+            {
                 string[] names = System.IO.Directory.GetFiles(directory);
                 bool hasMatch = false;
-                for (int fileIndex = 0; fileIndex < names.Length; ++fileIndex) {
-                    if ( !fileFilter.IsMatch(names[fileIndex]) ) {
+                for (int fileIndex = 0; fileIndex < names.Length; ++fileIndex)
+                {
+                    if (!fileFilter.IsMatch(names[fileIndex]))
+                    {
                         names[fileIndex] = null;
-                    } else {
+                    }
+                    else
+                    {
                         hasMatch = true;
                     }
                 }
-                
+
                 OnProcessDirectory(directory, hasMatch);
-                
-                if ( alive && hasMatch ) {
-                    foreach (string fileName in names) {
-                        try {
-                            if ( fileName != null ) {
+
+                if (alive && hasMatch)
+                {
+                    foreach (string fileName in names)
+                    {
+                        try
+                        {
+                            if (fileName != null)
+                            {
                                 OnProcessFile(fileName);
-                                if ( !alive ) {
+                                if (!alive)
+                                {
                                     break;
                                 }
                             }
@@ -348,37 +381,46 @@ namespace ICSharpCode.SharpZipLib.Core
                     }
                 }
             }
-            catch (Exception e) {
+            catch (Exception e)
+            {
                 OnDirectoryFailure(directory, e);
             }
 
-            if ( alive && recurse ) {
-                try {
+            if (alive && recurse)
+            {
+                try
+                {
                     string[] names = System.IO.Directory.GetDirectories(directory);
-                    foreach (string fulldir in names) {
-                        if ((directoryFilter == null) || (directoryFilter.IsMatch(fulldir))) {
+                    foreach (string fulldir in names)
+                    {
+                        if ((directoryFilter == null) || (directoryFilter.IsMatch(fulldir)))
+                        {
                             ScanDir(fulldir, true);
-                            if ( !alive ) {
+                            if (!alive)
+                            {
                                 break;
                             }
                         }
                     }
                 }
-                catch (Exception e) {
+                catch (Exception e)
+                {
                     OnDirectoryFailure(directory, e);
                 }
             }
         }
-        
+
         #region Instance Fields
         /// <summary>
         /// The file filter currently in use.
         /// </summary>
         IScanFilter fileFilter;
+
         /// <summary>
         /// The directory filter currently in use.
         /// </summary>
         IScanFilter directoryFilter;
+
         /// <summary>
         /// Falg indicating if scanning is still alive.  Used to cancel a scan.
         /// </summary>

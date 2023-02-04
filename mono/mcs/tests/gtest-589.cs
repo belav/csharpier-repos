@@ -2,39 +2,40 @@ using System;
 
 public class Z : IGenericInterface<Z>
 {
-    public Z Start ()
+    public Z Start()
     {
         return this;
     }
 
-    Z IGenericInterface<Z>.Start ()
+    Z IGenericInterface<Z>.Start()
     {
-        throw new ApplicationException ();
+        throw new ApplicationException();
     }
 }
 
 public interface IGenericInterface<T>
 {
-    T Start ();
+    T Start();
 }
 
-public class A<T> where T : Z, IGenericInterface<int> 
+public class A<T>
+    where T : Z, IGenericInterface<int>
 {
-    public void SomeOperation (T t)
+    public void SomeOperation(T t)
     {
-        t.Start ();
+        t.Start();
     }
 }
 
-public class C : Z, IGenericInterface<int> 
+public class C : Z, IGenericInterface<int>
 {
-    int IGenericInterface<int>.Start ()
+    int IGenericInterface<int>.Start()
     {
-        throw new NotImplementedException ();
+        throw new NotImplementedException();
     }
 
-    public static void Main ()
+    public static void Main()
     {
-        new A<C> ().SomeOperation (new C ());
+        new A<C>().SomeOperation(new C());
     }
 }

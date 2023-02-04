@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -46,77 +46,104 @@ namespace System.Runtime.Remoting.Activation
     {
         static IActivator _constructionActivator;
 
-        static IActivator ConstructionActivator {
-            get {
+        static IActivator ConstructionActivator
+        {
+            get
+            {
                 if (_constructionActivator == null)
-                    _constructionActivator = new ConstructionLevelActivator ();
+                    _constructionActivator = new ConstructionLevelActivator();
 
                 return _constructionActivator;
             }
         }
 
-        public static IMessage Activate (RemotingProxy proxy, ConstructionCall ctorCall)
+        public static IMessage Activate(RemotingProxy proxy, ConstructionCall ctorCall)
         {
             IMessage response;
             ctorCall.SourceProxy = proxy;
 
             if (Thread.CurrentContext.HasExitSinks && !ctorCall.IsContextOk)
-                response = Thread.CurrentContext.GetClientContextSinkChain ().SyncProcessMessage (ctorCall);
+                response = Thread.CurrentContext
+                    .GetClientContextSinkChain()
+                    .SyncProcessMessage(ctorCall);
             else
-                response = RemoteActivate (ctorCall);
+                response = RemoteActivate(ctorCall);
 
-            if (response is IConstructionReturnMessage && ((IConstructionReturnMessage)response).Exception == null && proxy.ObjectIdentity == null)
+            if (
+                response is IConstructionReturnMessage
+                && ((IConstructionReturnMessage)response).Exception == null
+                && proxy.ObjectIdentity == null
+            )
             {
-                Identity identity = RemotingServices.GetMessageTargetIdentity (ctorCall);
-                proxy.AttachIdentity (identity);
+                Identity identity = RemotingServices.GetMessageTargetIdentity(ctorCall);
+                proxy.AttachIdentity(identity);
             }
 
             return response;
         }
 
-        public static IMessage RemoteActivate (IConstructionCallMessage ctorCall)
+        public static IMessage RemoteActivate(IConstructionCallMessage ctorCall)
         {
-            try 
+            try
             {
-                return ctorCall.Activator.Activate (ctorCall);
+                return ctorCall.Activator.Activate(ctorCall);
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
-                return new ReturnMessage (ex, ctorCall);
-            }        
+                return new ReturnMessage(ex, ctorCall);
+            }
         }
 
-        public static object CreateProxyFromAttributes (Type type, object[] activationAttributes)
+        public static object CreateProxyFromAttributes(Type type, object[] activationAttributes)
         {
             string activationUrl = null;
             foreach (object attr in activationAttributes)
             {
-                if (!(attr is IContextAttribute)) throw new RemotingException ("Activation attribute does not implement the IContextAttribute interface");
-                if (attr is UrlAttribute) activationUrl = ((UrlAttribute)attr).UrlValue;
+                if (!(attr is IContextAttribute))
+                    throw new RemotingException(
+                        "Activation attribute does not implement the IContextAttribute interface"
+                    );
+                if (attr is UrlAttribute)
+                    activationUrl = ((UrlAttribute)attr).UrlValue;
             }
 
             if (activationUrl != null)
-                return RemotingServices.CreateClientProxy (type, activationUrl, activationAttributes);
+                return RemotingServices.CreateClientProxy(
+                    type,
+                    activationUrl,
+                    activationAttributes
+                );
 
-            ActivatedClientTypeEntry activatedEntry = RemotingConfiguration.IsRemotelyActivatedClientType (type);
+            ActivatedClientTypeEntry activatedEntry =
+                RemotingConfiguration.IsRemotelyActivatedClientType(type);
             if (activatedEntry != null)
-                return RemotingServices.CreateClientProxy (activatedEntry, activationAttributes);
+                return RemotingServices.CreateClientProxy(activatedEntry, activationAttributes);
 
             if (type.IsContextful)
-                return RemotingServices.CreateClientProxyForContextBound (type, activationAttributes);
-            
+                return RemotingServices.CreateClientProxyForContextBound(
+                    type,
+                    activationAttributes
+                );
+
             return null;
         }
 
-        public static ConstructionCall CreateConstructionCall (Type type, string activationUrl, object[] activationAttributes)
+        public static ConstructionCall CreateConstructionCall(
+            Type type,
+            string activationUrl,
+            object[] activationAttributes
+        )
         {
-            ConstructionCall ctorCall = new ConstructionCall (type);
+            ConstructionCall ctorCall = new ConstructionCall(type);
 
-            if (!type.IsContextful) 
+            if (!type.IsContextful)
             {
                 // Must be a remote activated object
-                ctorCall.Activator = new AppDomainLevelActivator (activationUrl, ConstructionActivator);
-                ctorCall.IsContextOk = false;    // It'll be activated in a remote context
+                ctorCall.Activator = new AppDomainLevelActivator(
+                    activationUrl,
+                    ConstructionActivator
+                );
+                ctorCall.IsContextOk = false; // It'll be activated in a remote context
                 return ctorCall;
             }
 
@@ -124,19 +151,20 @@ namespace System.Runtime.Remoting.Activation
             // check if a new context is needed.
 
             IActivator activatorChain = ConstructionActivator;
-            activatorChain = new ContextLevelActivator (activatorChain);
+            activatorChain = new ContextLevelActivator(activatorChain);
 
-            ArrayList attributes = new ArrayList ();
-            if (activationAttributes != null) attributes.AddRange (activationAttributes);
+            ArrayList attributes = new ArrayList();
+            if (activationAttributes != null)
+                attributes.AddRange(activationAttributes);
 
-            bool isContextOk = (activationUrl == ChannelServices.CrossContextUrl);    // Remote CBOs are always created in a new context
+            bool isContextOk = (activationUrl == ChannelServices.CrossContextUrl); // Remote CBOs are always created in a new context
             Context currentContext = Threading.Thread.CurrentContext;
 
-            if (isContextOk) 
+            if (isContextOk)
             {
-                foreach (IContextAttribute attr in attributes) 
+                foreach (IContextAttribute attr in attributes)
                 {
-                    if (!attr.IsContextOK (currentContext, ctorCall)) 
+                    if (!attr.IsContextOK(currentContext, ctorCall))
                     {
                         isContextOk = false;
                         break;
@@ -144,13 +172,15 @@ namespace System.Runtime.Remoting.Activation
                 }
             }
 
-            object[] typeAttributes = type.GetCustomAttributes (true);
-            foreach (object attr in typeAttributes) 
+            object[] typeAttributes = type.GetCustomAttributes(true);
+            foreach (object attr in typeAttributes)
             {
-                if (attr is IContextAttribute) 
+                if (attr is IContextAttribute)
                 {
-                    isContextOk = isContextOk && ((IContextAttribute)attr).IsContextOK (currentContext, ctorCall);
-                    attributes.Add (attr);
+                    isContextOk =
+                        isContextOk
+                        && ((IContextAttribute)attr).IsContextOK(currentContext, ctorCall);
+                    attributes.Add(attr);
                 }
             }
 
@@ -159,43 +189,45 @@ namespace System.Runtime.Remoting.Activation
                 // A new context is needed. Collect the context properties and chain
                 // the context level activator.
 
-                ctorCall.SetActivationAttributes (attributes.ToArray());
+                ctorCall.SetActivationAttributes(attributes.ToArray());
 
                 foreach (IContextAttribute attr in attributes)
-                    attr.GetPropertiesForNewContext (ctorCall);
+                    attr.GetPropertiesForNewContext(ctorCall);
             }
 
             if (activationUrl != ChannelServices.CrossContextUrl)
-                activatorChain = new AppDomainLevelActivator (activationUrl, activatorChain);
-            
+                activatorChain = new AppDomainLevelActivator(activationUrl, activatorChain);
+
             ctorCall.Activator = activatorChain;
             ctorCall.IsContextOk = isContextOk;
 
             return ctorCall;
         }
 
-        public static IMessage CreateInstanceFromMessage (IConstructionCallMessage ctorCall)
+        public static IMessage CreateInstanceFromMessage(IConstructionCallMessage ctorCall)
         {
-            object obj = AllocateUninitializedClassInstance (ctorCall.ActivationType);
+            object obj = AllocateUninitializedClassInstance(ctorCall.ActivationType);
 
-            ServerIdentity identity = (ServerIdentity) RemotingServices.GetMessageTargetIdentity (ctorCall);
-            identity.AttachServerObject ((MarshalByRefObject) obj, Threading.Thread.CurrentContext);
+            ServerIdentity identity = (ServerIdentity)
+                RemotingServices.GetMessageTargetIdentity(ctorCall);
+            identity.AttachServerObject((MarshalByRefObject)obj, Threading.Thread.CurrentContext);
 
             ConstructionCall call = ctorCall as ConstructionCall;
 
             if (ctorCall.ActivationType.IsContextful && call != null && call.SourceProxy != null)
             {
-                call.SourceProxy.AttachIdentity (identity);
-                MarshalByRefObject target = (MarshalByRefObject) call.SourceProxy.GetTransparentProxy ();
-                RemotingServices.InternalExecuteMessage (target, ctorCall);
+                call.SourceProxy.AttachIdentity(identity);
+                MarshalByRefObject target = (MarshalByRefObject)
+                    call.SourceProxy.GetTransparentProxy();
+                RemotingServices.InternalExecuteMessage(target, ctorCall);
             }
             else
-                ctorCall.MethodBase.Invoke (obj, ctorCall.Args);
+                ctorCall.MethodBase.Invoke(obj, ctorCall.Args);
 
-            return new ConstructionResponse (obj, null, ctorCall);
+            return new ConstructionResponse(obj, null, ctorCall);
         }
 
-        public static object CreateProxyForType (Type type)
+        public static object CreateProxyForType(Type type)
         {
             // Called by the runtime when creating an instance of a type
             // that has been registered as remotely activated.
@@ -203,39 +235,43 @@ namespace System.Runtime.Remoting.Activation
             // First of all check for remote activation. If the object is not remote, then
             // it may be contextbound.
 
-            ActivatedClientTypeEntry activatedEntry = RemotingConfiguration.IsRemotelyActivatedClientType (type);
+            ActivatedClientTypeEntry activatedEntry =
+                RemotingConfiguration.IsRemotelyActivatedClientType(type);
             if (activatedEntry != null)
-                return RemotingServices.CreateClientProxy (activatedEntry, null);
+                return RemotingServices.CreateClientProxy(activatedEntry, null);
 
-            WellKnownClientTypeEntry wellknownEntry = RemotingConfiguration.IsWellKnownClientType (type);
+            WellKnownClientTypeEntry wellknownEntry = RemotingConfiguration.IsWellKnownClientType(
+                type
+            );
             if (wellknownEntry != null)
-                return RemotingServices.CreateClientProxy (wellknownEntry);
+                return RemotingServices.CreateClientProxy(wellknownEntry);
 
             if (type.IsContextful)
-                return RemotingServices.CreateClientProxyForContextBound (type, null);
+                return RemotingServices.CreateClientProxyForContextBound(type, null);
 #if !MOBILE
-            if (type.IsCOMObject) {
-                return RemotingServices.CreateClientProxyForComInterop (type);
+            if (type.IsCOMObject)
+            {
+                return RemotingServices.CreateClientProxyForComInterop(type);
             }
 #endif
             return null;
         }
 
-        internal static void PushActivationAttributes (Type serverType, Object[] attributes)
+        internal static void PushActivationAttributes(Type serverType, Object[] attributes)
         {
             // TODO:
         }
 
-        internal static void PopActivationAttributes (Type serverType)
+        internal static void PopActivationAttributes(Type serverType)
         {
             // TODO:
         }
 
         // Allocates an uninitialized instance. It never creates proxies.
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public static extern object AllocateUninitializedClassInstance (Type type);
+        public static extern object AllocateUninitializedClassInstance(Type type);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern static void EnableProxyActivation (Type type, bool enable);
+        public extern static void EnableProxyActivation(Type type, bool enable);
     }
 }

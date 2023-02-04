@@ -1,5 +1,3 @@
-
-
 // "cast by example" test
 
 class CastByExample

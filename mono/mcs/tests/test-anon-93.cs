@@ -8,21 +8,32 @@ namespace BaseTest
 
         public event EventHandler MyEvent
         {
-            add { myEvent += delegate { value (this, EventArgs.Empty); };  }
-            remove { myEvent += delegate { value (this, EventArgs.Empty); }; }
+            add
+            {
+                myEvent += delegate
+                {
+                    value(this, EventArgs.Empty);
+                };
+            }
+            remove
+            {
+                myEvent += delegate
+                {
+                    value(this, EventArgs.Empty);
+                };
+            }
         }
 
-        public void RaiseMyEvent (object o, EventArgs e)
+        public void RaiseMyEvent(object o, EventArgs e)
         {
-            myEvent (o, e);
+            myEvent(o, e);
         }
 
-        public static void Main ()
+        public static void Main()
         {
-            MainClass c = new MainClass ();
-            c.MyEvent += (o, e) => Console.WriteLine ("Hey! from {0} / {1}", o, e);
-            c.RaiseMyEvent (null, null);
+            MainClass c = new MainClass();
+            c.MyEvent += (o, e) => Console.WriteLine("Hey! from {0} / {1}", o, e);
+            c.RaiseMyEvent(null, null);
         }
     }
 }
-

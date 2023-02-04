@@ -6,4 +6,3 @@ public class Test
 {
     var v = "a";
 }
-

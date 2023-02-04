@@ -25,15 +25,15 @@
 using System;
 using System.Reflection;
 
-[assembly: AssemblyTitle ("System.IO.Compression.dll")]
-[assembly: AssemblyDescription ("System.IO.Compression.dll")]
-[assembly: AssemblyDefaultAlias ("System.IO.Compression.dll")]
+[assembly: AssemblyTitle("System.IO.Compression.dll")]
+[assembly: AssemblyDescription("System.IO.Compression.dll")]
+[assembly: AssemblyDefaultAlias("System.IO.Compression.dll")]
 
-[assembly: AssemblyCompany (Consts.MonoCompany)]
-[assembly: AssemblyProduct (Consts.MonoProduct)]
-[assembly: AssemblyCopyright (Consts.MonoCopyright)]
-[assembly: AssemblyVersion (Consts.FxVersion)]
-[assembly: AssemblyInformationalVersion (Consts.FxFileVersion)]
-[assembly: AssemblyFileVersion (Consts.FxFileVersion)]
-[assembly: AssemblyDelaySign (true)]
-[assembly: CLSCompliant (true)]
+[assembly: AssemblyCompany(Consts.MonoCompany)]
+[assembly: AssemblyProduct(Consts.MonoProduct)]
+[assembly: AssemblyCopyright(Consts.MonoCopyright)]
+[assembly: AssemblyVersion(Consts.FxVersion)]
+[assembly: AssemblyInformationalVersion(Consts.FxFileVersion)]
+[assembly: AssemblyFileVersion(Consts.FxFileVersion)]
+[assembly: AssemblyDelaySign(true)]
+[assembly: CLSCompliant(true)]

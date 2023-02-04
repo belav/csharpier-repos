@@ -4,15 +4,14 @@
 
 using System;
 
-public class CS0652 {
-
-    public static void Main () 
+public class CS0652
+{
+    public static void Main()
     {
         byte b = 0;
         if (b == -1)
-            Console.WriteLine (":(");
+            Console.WriteLine(":(");
         else
-            Console.WriteLine (":)");
+            Console.WriteLine(":)");
     }
 }
-

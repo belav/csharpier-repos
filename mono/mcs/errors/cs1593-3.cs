@@ -6,12 +6,10 @@ using System;
 
 class C
 {
-    static void Main (string [] args)
+    static void Main(string[] args)
     {
-        M ((x, y) => 2);
+        M((x, y) => 2);
     }
 
-    static void M (Func<int, int> a)
-    {
-    }
+    static void M(Func<int, int> a) { }
 }

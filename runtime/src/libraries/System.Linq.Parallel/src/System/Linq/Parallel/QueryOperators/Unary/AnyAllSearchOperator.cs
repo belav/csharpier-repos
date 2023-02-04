@@ -48,7 +48,11 @@ namespace System.Linq.Parallel
         //                     a member of the set; for any this is true, for all it is false.
         //
 
-        internal AnyAllSearchOperator(IEnumerable<TInput> child, bool qualification, Func<TInput, bool> predicate)
+        internal AnyAllSearchOperator(
+            IEnumerable<TInput> child,
+            bool qualification,
+            Func<TInput, bool> predicate
+        )
             : base(child)
         {
             Debug.Assert(child != null, "child data source cannot be null");
@@ -69,7 +73,12 @@ namespace System.Linq.Parallel
             // reductions over the individual partitions, and because each parallel partition
             // could do a lot of work to produce a single output element, we prefer to turn off
             // pipelining, and process the final reductions serially.
-            using (IEnumerator<bool> enumerator = GetEnumerator(ParallelMergeOptions.FullyBuffered, true))
+            using (
+                IEnumerator<bool> enumerator = GetEnumerator(
+                    ParallelMergeOptions.FullyBuffered,
+                    true
+                )
+            )
             {
                 // Any value equal to our qualification means that we've found an element matching
                 // the condition, and so we return the qualification without looking in subsequent
@@ -91,8 +100,7 @@ namespace System.Linq.Parallel
         // partitions as needed.
         //
 
-        internal override QueryResults<bool> Open(
-            QuerySettings settings, bool preferStriping)
+        internal override QueryResults<bool> Open(QuerySettings settings, bool preferStriping)
         {
             // We just open the child operator.
             QueryResults<TInput> childQueryResults = Child.Open(settings, preferStriping);
@@ -100,33 +108,49 @@ namespace System.Linq.Parallel
         }
 
         internal override void WrapPartitionedStream<TKey>(
-            PartitionedStream<TInput, TKey> inputStream, IPartitionedStreamRecipient<bool> recipient, bool preferStriping, QuerySettings settings)
+            PartitionedStream<TInput, TKey> inputStream,
+            IPartitionedStreamRecipient<bool> recipient,
+            bool preferStriping,
+            QuerySettings settings
+        )
         {
             // Create a shared cancellation variable and then return a possibly wrapped new enumerator.
             Shared<bool> resultFoundFlag = new Shared<bool>(false);
 
             int partitionCount = inputStream.PartitionCount;
             PartitionedStream<bool, int> outputStream = new PartitionedStream<bool, int>(
-                partitionCount, Util.GetDefaultComparer<int>(), OrdinalIndexState.Correct);
+                partitionCount,
+                Util.GetDefaultComparer<int>(),
+                OrdinalIndexState.Correct
+            );
 
             for (int i = 0; i < partitionCount; i++)
             {
-                outputStream[i] = new AnyAllSearchOperatorEnumerator<TKey>(inputStream[i], _qualification, _predicate, i, resultFoundFlag,
-                    settings.CancellationState.MergedCancellationToken);
+                outputStream[i] = new AnyAllSearchOperatorEnumerator<TKey>(
+                    inputStream[i],
+                    _qualification,
+                    _predicate,
+                    i,
+                    resultFoundFlag,
+                    settings.CancellationState.MergedCancellationToken
+                );
             }
 
             recipient.Receive(outputStream);
         }
 
-
         //---------------------------------------------------------------------------------------
         // Returns an enumerable that represents the query executing sequentially.
         //
 
-        [ExcludeFromCodeCoverage(Justification = "This method should never be called as it is an ending operator with LimitsParallelism=false")]
+        [ExcludeFromCodeCoverage(
+            Justification = "This method should never be called as it is an ending operator with LimitsParallelism=false"
+        )]
         internal override IEnumerable<bool> AsSequentialQuery(CancellationToken token)
         {
-            Debug.Fail("This method should never be called as it is an ending operator with LimitsParallelism=false.");
+            Debug.Fail(
+                "This method should never be called as it is an ending operator with LimitsParallelism=false."
+            );
             throw new NotSupportedException();
         }
 
@@ -146,7 +170,8 @@ namespace System.Linq.Parallel
         // requested.
         //
 
-        private sealed class AnyAllSearchOperatorEnumerator<TKey> : QueryOperatorEnumerator<bool, int>
+        private sealed class AnyAllSearchOperatorEnumerator<TKey>
+            : QueryOperatorEnumerator<bool, int>
         {
             private readonly QueryOperatorEnumerator<TInput, TKey> _source; // The source data.
             private readonly Func<TInput, bool> _predicate; // The predicate.
@@ -159,9 +184,14 @@ namespace System.Linq.Parallel
             // Instantiates a new any/all search operator.
             //
 
-            internal AnyAllSearchOperatorEnumerator(QueryOperatorEnumerator<TInput, TKey> source, bool qualification,
-                                                    Func<TInput, bool> predicate, int partitionIndex, Shared<bool> resultFoundFlag,
-                                                    CancellationToken cancellationToken)
+            internal AnyAllSearchOperatorEnumerator(
+                QueryOperatorEnumerator<TInput, TKey> source,
+                bool qualification,
+                Func<TInput, bool> predicate,
+                int partitionIndex,
+                Shared<bool> resultFoundFlag,
+                CancellationToken cancellationToken
+            )
             {
                 Debug.Assert(source != null);
                 Debug.Assert(predicate != null);
@@ -220,8 +250,7 @@ namespace System.Linq.Parallel
                             currentElement = _qualification;
                             break;
                         }
-                    }
-                    while (_source.MoveNext(ref element!, ref keyUnused));
+                    } while (_source.MoveNext(ref element!, ref keyUnused));
 
                     return true;
                 }

@@ -2,12 +2,11 @@
 // Line: 16
 // Compiler options: -nostdlib CS0656-corlib.cs
 
-namespace System.Runtime.CompilerServices {
+namespace System.Runtime.CompilerServices
+{
     class RuntimeHelpers
     {
-        public static void InitializeArray ()
-        {
-        }
+        public static void InitializeArray() { }
     }
 }
 

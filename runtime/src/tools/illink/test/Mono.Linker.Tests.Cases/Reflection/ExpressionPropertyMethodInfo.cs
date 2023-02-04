@@ -16,168 +16,218 @@ namespace Mono.Linker.Tests.Cases.Reflection
     [ExpectedNoWarnings]
     public class ExpressionPropertyMethodInfo
     {
-        public static void Main ()
+        public static void Main()
         {
-            PropertyGetter.Test ();
-            PropertySetter.Test ();
-            TestNull ();
-            TestNonPropertyMethod ();
-            TestNonExistentMethod ();
-            MultipleMethods.Test (0);
-            TestUnknownMethod (null);
+            PropertyGetter.Test();
+            PropertySetter.Test();
+            TestNull();
+            TestNonPropertyMethod();
+            TestNonExistentMethod();
+            MultipleMethods.Test(0);
+            TestUnknownMethod(null);
         }
 
         [Kept]
-        [KeptMember (".ctor()")]
+        [KeptMember(".ctor()")]
         class PropertyGetter
         {
             [Kept]
             [KeptBackingField]
-            public static int StaticPropertyExpressionAccess {
+            public static int StaticPropertyExpressionAccess
+            {
                 [Kept]
                 get;
                 [Kept]
-                [KeptAttributeAttribute (typeof (RequiresUnreferencedCodeAttribute))]
-                [RequiresUnreferencedCode (nameof (StaticPropertyExpressionAccess))]
+                [KeptAttributeAttribute(typeof(RequiresUnreferencedCodeAttribute))]
+                [RequiresUnreferencedCode(nameof(StaticPropertyExpressionAccess))]
                 set;
             }
 
             [Kept]
             [KeptBackingField]
-            public static int StaticPropertyViaReflection {
+            public static int StaticPropertyViaReflection
+            {
                 [Kept]
                 get;
                 [Kept]
-                [KeptAttributeAttribute (typeof (RequiresUnreferencedCodeAttribute))]
-                [RequiresUnreferencedCode (nameof (StaticPropertyViaReflection))]
+                [KeptAttributeAttribute(typeof(RequiresUnreferencedCodeAttribute))]
+                [RequiresUnreferencedCode(nameof(StaticPropertyViaReflection))]
                 set;
             }
 
             [Kept]
             [KeptBackingField]
-            public static int StaticPropertyViaRuntimeMethod {
+            public static int StaticPropertyViaRuntimeMethod
+            {
                 [Kept]
                 get;
                 [Kept]
-                [KeptAttributeAttribute (typeof (RequiresUnreferencedCodeAttribute))]
-                [RequiresUnreferencedCode (nameof (StaticPropertyViaRuntimeMethod))]
+                [KeptAttributeAttribute(typeof(RequiresUnreferencedCodeAttribute))]
+                [RequiresUnreferencedCode(nameof(StaticPropertyViaRuntimeMethod))]
                 set;
             }
 
             [Kept]
             [KeptBackingField]
-            public int InstancePropertyExpressionAccess {
+            public int InstancePropertyExpressionAccess
+            {
                 [Kept]
                 get;
                 [Kept]
-                [KeptAttributeAttribute (typeof (RequiresUnreferencedCodeAttribute))]
-                [RequiresUnreferencedCode (nameof (InstancePropertyExpressionAccess))]
+                [KeptAttributeAttribute(typeof(RequiresUnreferencedCodeAttribute))]
+                [RequiresUnreferencedCode(nameof(InstancePropertyExpressionAccess))]
                 set;
             }
 
             [Kept]
             [KeptBackingField]
-            public int InstancePropertyViaReflection {
+            public int InstancePropertyViaReflection
+            {
                 [Kept]
                 get;
                 [Kept]
-                [KeptAttributeAttribute (typeof (RequiresUnreferencedCodeAttribute))]
-                [RequiresUnreferencedCode (nameof (InstancePropertyViaReflection))]
+                [KeptAttributeAttribute(typeof(RequiresUnreferencedCodeAttribute))]
+                [RequiresUnreferencedCode(nameof(InstancePropertyViaReflection))]
                 set;
             }
 
             [Kept]
             // https://github.com/dotnet/linker/issues/2669
-            [ExpectedWarning ("IL2026", nameof (StaticPropertyExpressionAccess), ProducedBy = ProducedBy.Trimmer)]
-            [ExpectedWarning ("IL2026", nameof (StaticPropertyViaReflection))]
-            [ExpectedWarning ("IL2026", nameof (StaticPropertyViaRuntimeMethod))]
+            [ExpectedWarning(
+                "IL2026",
+                nameof(StaticPropertyExpressionAccess),
+                ProducedBy = ProducedBy.Trimmer
+            )]
+            [ExpectedWarning("IL2026", nameof(StaticPropertyViaReflection))]
+            [ExpectedWarning("IL2026", nameof(StaticPropertyViaRuntimeMethod))]
             // https://github.com/dotnet/linker/issues/2669
-            [ExpectedWarning ("IL2026", nameof (InstancePropertyExpressionAccess), ProducedBy = ProducedBy.Trimmer)]
-            [ExpectedWarning ("IL2026", nameof (InstancePropertyViaReflection))]
-            public static void Test ()
+            [ExpectedWarning(
+                "IL2026",
+                nameof(InstancePropertyExpressionAccess),
+                ProducedBy = ProducedBy.Trimmer
+            )]
+            [ExpectedWarning("IL2026", nameof(InstancePropertyViaReflection))]
+            public static void Test()
             {
                 Expression<Func<int>> staticGetter = () => StaticPropertyExpressionAccess;
 
-                Expression.Property (null, typeof (PropertyGetter).GetMethod ("get_StaticPropertyViaReflection"));
+                Expression.Property(
+                    null,
+                    typeof(PropertyGetter).GetMethod("get_StaticPropertyViaReflection")
+                );
 
-                PropertyGetter instance = new PropertyGetter ();
-                Expression<Func<PropertyGetter, int>> instanceGetter = i => i.InstancePropertyExpressionAccess;
+                PropertyGetter instance = new PropertyGetter();
+                Expression<Func<PropertyGetter, int>> instanceGetter = i =>
+                    i.InstancePropertyExpressionAccess;
 
-                Expression.Property (Expression.New (typeof (PropertyGetter)), typeof (PropertyGetter).GetMethod ("get_InstancePropertyViaReflection"));
+                Expression.Property(
+                    Expression.New(typeof(PropertyGetter)),
+                    typeof(PropertyGetter).GetMethod("get_InstancePropertyViaReflection")
+                );
 
-                Expression.Property (null, typeof (PropertyGetter).GetRuntimeMethod ("get_StaticPropertyViaRuntimeMethod", Type.EmptyTypes));
+                Expression.Property(
+                    null,
+                    typeof(PropertyGetter).GetRuntimeMethod(
+                        "get_StaticPropertyViaRuntimeMethod",
+                        Type.EmptyTypes
+                    )
+                );
             }
         }
 
         [Kept]
-        [KeptMember (".ctor()")]
+        [KeptMember(".ctor()")]
         class PropertySetter
         {
             [Kept]
             [KeptBackingField]
-            public static int StaticPropertyReflectionAccess {
-                [Kept]
-                [KeptAttributeAttribute (typeof (RequiresUnreferencedCodeAttribute))]
-                [RequiresUnreferencedCode (nameof (StaticPropertyReflectionAccess))]
-                get;
-                [Kept]
-                set;
-            }
-
-            [Kept]
-            [KeptBackingField]
-            public static int StaticPropertyViaRuntimeMethod {
-                [Kept]
-                [KeptAttributeAttribute (typeof (RequiresUnreferencedCodeAttribute))]
-                [RequiresUnreferencedCode (nameof (StaticPropertyViaRuntimeMethod))]
-                get;
-                [Kept]
-                set;
-            }
-
-            [Kept]
-            [KeptBackingField]
-            public int InstancePropertyReflectionAccess {
-                [Kept]
-                [KeptAttributeAttribute (typeof (RequiresUnreferencedCodeAttribute))]
-                [RequiresUnreferencedCode (nameof (InstancePropertyReflectionAccess))]
-                get;
-                [Kept]
-                set;
-            }
-
-            [Kept]
-            [ExpectedWarning ("IL2026", nameof (StaticPropertyReflectionAccess))]
-            [ExpectedWarning ("IL2026", nameof (StaticPropertyViaRuntimeMethod))]
-            [ExpectedWarning ("IL2026", nameof (InstancePropertyReflectionAccess))]
-            public static void Test ()
+            public static int StaticPropertyReflectionAccess
             {
-                Expression.Property (null, typeof (PropertySetter).GetMethod ("set_StaticPropertyReflectionAccess"));
+                [Kept]
+                [KeptAttributeAttribute(typeof(RequiresUnreferencedCodeAttribute))]
+                [RequiresUnreferencedCode(nameof(StaticPropertyReflectionAccess))]
+                get;
+                [Kept]
+                set;
+            }
 
-                Expression.Property (null, typeof (PropertySetter).GetRuntimeMethod ("set_StaticPropertyViaRuntimeMethod", Type.EmptyTypes));
+            [Kept]
+            [KeptBackingField]
+            public static int StaticPropertyViaRuntimeMethod
+            {
+                [Kept]
+                [KeptAttributeAttribute(typeof(RequiresUnreferencedCodeAttribute))]
+                [RequiresUnreferencedCode(nameof(StaticPropertyViaRuntimeMethod))]
+                get;
+                [Kept]
+                set;
+            }
 
-                Expression.Property (Expression.New (typeof (PropertySetter)), typeof (PropertySetter).GetMethod ("set_InstancePropertyReflectionAccess"));
+            [Kept]
+            [KeptBackingField]
+            public int InstancePropertyReflectionAccess
+            {
+                [Kept]
+                [KeptAttributeAttribute(typeof(RequiresUnreferencedCodeAttribute))]
+                [RequiresUnreferencedCode(nameof(InstancePropertyReflectionAccess))]
+                get;
+                [Kept]
+                set;
+            }
+
+            [Kept]
+            [ExpectedWarning("IL2026", nameof(StaticPropertyReflectionAccess))]
+            [ExpectedWarning("IL2026", nameof(StaticPropertyViaRuntimeMethod))]
+            [ExpectedWarning("IL2026", nameof(InstancePropertyReflectionAccess))]
+            public static void Test()
+            {
+                Expression.Property(
+                    null,
+                    typeof(PropertySetter).GetMethod("set_StaticPropertyReflectionAccess")
+                );
+
+                Expression.Property(
+                    null,
+                    typeof(PropertySetter).GetRuntimeMethod(
+                        "set_StaticPropertyViaRuntimeMethod",
+                        Type.EmptyTypes
+                    )
+                );
+
+                Expression.Property(
+                    Expression.New(typeof(PropertySetter)),
+                    typeof(PropertySetter).GetMethod("set_InstancePropertyReflectionAccess")
+                );
             }
         }
 
         [Kept]
-        static void TestNull ()
+        static void TestNull()
         {
             MethodInfo mi = null;
-            Expression.Property (null, mi);
+            Expression.Property(null, mi);
         }
 
         [Kept]
-        [ExpectedWarning ("IL2103", nameof (Expression) + "." + nameof (Expression.Property))]
-        static void TestNonPropertyMethod ()
+        [ExpectedWarning("IL2103", nameof(Expression) + "." + nameof(Expression.Property))]
+        static void TestNonPropertyMethod()
         {
-            Expression.Property (null, typeof (ExpressionPropertyMethodInfo).GetMethod (nameof (TestNonPropertyMethod), BindingFlags.NonPublic | BindingFlags.Static));
+            Expression.Property(
+                null,
+                typeof(ExpressionPropertyMethodInfo).GetMethod(
+                    nameof(TestNonPropertyMethod),
+                    BindingFlags.NonPublic | BindingFlags.Static
+                )
+            );
         }
 
         [Kept]
-        static void TestNonExistentMethod ()
+        static void TestNonExistentMethod()
         {
-            Expression.Property (null, typeof (ExpressionPropertyMethodInfo).GetMethod ("NonExistent"));
+            Expression.Property(
+                null,
+                typeof(ExpressionPropertyMethodInfo).GetMethod("NonExistent")
+            );
         }
 
         [Kept]
@@ -185,54 +235,61 @@ namespace Mono.Linker.Tests.Cases.Reflection
         {
             [Kept]
             [KeptBackingField]
-            public static int FirstStaticProperty {
+            public static int FirstStaticProperty
+            {
                 [Kept]
                 get;
                 [Kept]
-                [KeptAttributeAttribute (typeof (RequiresUnreferencedCodeAttribute))]
-                [RequiresUnreferencedCode (nameof (FirstStaticProperty))]
+                [KeptAttributeAttribute(typeof(RequiresUnreferencedCodeAttribute))]
+                [RequiresUnreferencedCode(nameof(FirstStaticProperty))]
                 set;
             }
 
             [Kept]
             [KeptBackingField]
-            public static int SecondStaticProperty {
+            public static int SecondStaticProperty
+            {
                 [Kept]
                 get;
                 [Kept]
-                [KeptAttributeAttribute (typeof (RequiresUnreferencedCodeAttribute))]
-                [RequiresUnreferencedCode (nameof (SecondStaticProperty))]
+                [KeptAttributeAttribute(typeof(RequiresUnreferencedCodeAttribute))]
+                [RequiresUnreferencedCode(nameof(SecondStaticProperty))]
                 set;
             }
 
             [Kept]
-            [ExpectedWarning ("IL2026", nameof (FirstStaticProperty))]
-            [ExpectedWarning ("IL2026", nameof (SecondStaticProperty))]
-            public static void Test (int p)
+            [ExpectedWarning("IL2026", nameof(FirstStaticProperty))]
+            [ExpectedWarning("IL2026", nameof(SecondStaticProperty))]
+            public static void Test(int p)
             {
                 MethodInfo mi;
-                switch (p) {
-                case 0:
-                    mi = typeof (MultipleMethods).GetMethod ("get_FirstStaticProperty");
-                    break;
-                case 1:
-                    mi = typeof (MultipleMethods).GetMethod ("get_SecondStaticProperty");
-                    break;
-                default:
-                    mi = null;
-                    break;
+                switch (p)
+                {
+                    case 0:
+                        mi = typeof(MultipleMethods).GetMethod("get_FirstStaticProperty");
+                        break;
+                    case 1:
+                        mi = typeof(MultipleMethods).GetMethod("get_SecondStaticProperty");
+                        break;
+                    default:
+                        mi = null;
+                        break;
                 }
 
-                Expression.Property (null, mi);
+                Expression.Property(null, mi);
             }
         }
 
         [Kept]
         // https://github.com/dotnet/linker/issues/2670
-        [ExpectedWarning ("IL2103", nameof (Expression) + "." + nameof (Expression.Property), ProducedBy = ProducedBy.Trimmer)]
-        static void TestUnknownMethod (MethodInfo mi)
+        [ExpectedWarning(
+            "IL2103",
+            nameof(Expression) + "." + nameof(Expression.Property),
+            ProducedBy = ProducedBy.Trimmer
+        )]
+        static void TestUnknownMethod(MethodInfo mi)
         {
-            Expression.Property (null, mi);
+            Expression.Property(null, mi);
         }
     }
 }

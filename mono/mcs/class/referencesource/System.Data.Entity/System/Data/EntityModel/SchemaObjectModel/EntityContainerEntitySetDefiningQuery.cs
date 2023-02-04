@@ -25,9 +25,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
         /// </summary>
         /// <param name="parentElement">Reference to the schema element.</param>
         public EntityContainerEntitySetDefiningQuery(EntityContainerEntitySet parentElement)
-            : base( parentElement )
-        {
-        }
+            : base(parentElement) { }
 
         public string Query
         {
@@ -44,11 +42,14 @@ namespace System.Data.EntityModel.SchemaObjectModel
         {
             base.Validate();
 
-            if(String.IsNullOrEmpty(_query))
+            if (String.IsNullOrEmpty(_query))
             {
-                AddError(ErrorCode.EmptyDefiningQuery, EdmSchemaErrorSeverity.Error,
-                    System.Data.Entity.Strings.EmptyDefiningQuery);
+                AddError(
+                    ErrorCode.EmptyDefiningQuery,
+                    EdmSchemaErrorSeverity.Error,
+                    System.Data.Entity.Strings.EmptyDefiningQuery
+                );
             }
         }
-   }
+    }
 }

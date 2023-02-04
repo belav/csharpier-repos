@@ -30,164 +30,184 @@ using System;
 using System.Runtime.InteropServices;
 using Microsoft.Build.Framework;
 
-namespace Microsoft.Build.Tasks.Deployment.ManifestUtilities {
-    
-    [ComVisible (false)]
-    public sealed class ApplicationManifest : AssemblyManifest {
-    
-        string            configFile;
-        AssemblyReference    entryPoint;
-        string            iconFile;
-        bool            isClickOnceManifest;
-        int            maxTargetPath;
-        string            osDescription;
-        string            osSupportUrl;
-        string            osVersion;
-        TrustInfo        trustInfo;
-        string            xmlConfigFile;
-        AssemblyIdentity    xmlEntryPointIdentity;
-        string            xmlEntryPointParameters;
-        string            xmlEntryPointPath;
-        string            xmlIconFile;
-        string            xmlIsClickOnceManifest;
-        string            xmlOSBuild;
-        string            xmlOSDescription;
-        string            xmlOSMajor;
-        string            xmlOSMinor;
-        string            xmlOSRevision;
-        string            xmlOSSupportUrl;
-        
+namespace Microsoft.Build.Tasks.Deployment.ManifestUtilities
+{
+    [ComVisible(false)]
+    public sealed class ApplicationManifest : AssemblyManifest
+    {
+        string configFile;
+        AssemblyReference entryPoint;
+        string iconFile;
+        bool isClickOnceManifest;
+        int maxTargetPath;
+        string osDescription;
+        string osSupportUrl;
+        string osVersion;
+        TrustInfo trustInfo;
+        string xmlConfigFile;
+        AssemblyIdentity xmlEntryPointIdentity;
+        string xmlEntryPointParameters;
+        string xmlEntryPointPath;
+        string xmlIconFile;
+        string xmlIsClickOnceManifest;
+        string xmlOSBuild;
+        string xmlOSDescription;
+        string xmlOSMajor;
+        string xmlOSMinor;
+        string xmlOSRevision;
+        string xmlOSSupportUrl;
+
         [MonoTODO]
-        public ApplicationManifest ()
+        public ApplicationManifest()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
-        
+
         [MonoTODO]
-        public string ConfigFile {
+        public string ConfigFile
+        {
             get { return configFile; }
             set { configFile = value; }
         }
-        
+
         [MonoTODO]
-        public override AssemblyReference EntryPoint {
+        public override AssemblyReference EntryPoint
+        {
             get { return entryPoint; }
             set { entryPoint = value; }
         }
-        
+
         [MonoTODO]
-        public string IconFile {
+        public string IconFile
+        {
             get { return iconFile; }
             set { iconFile = value; }
         }
-        
+
         [MonoTODO]
-        public bool IsClickOnceManifest {
+        public bool IsClickOnceManifest
+        {
             get { return isClickOnceManifest; }
             set { isClickOnceManifest = value; }
         }
-        
+
         [MonoTODO]
-        public int MaxTargetPath {
+        public int MaxTargetPath
+        {
             get { return maxTargetPath; }
             set { maxTargetPath = value; }
         }
-        
+
         [MonoTODO]
-        public string OSDescription {
+        public string OSDescription
+        {
             get { return osDescription; }
             set { osDescription = value; }
         }
-        
+
         [MonoTODO]
-        public string OSSupportUrl {
+        public string OSSupportUrl
+        {
             get { return osSupportUrl; }
             set { osSupportUrl = value; }
         }
-        
+
         [MonoTODO]
-        public string OSVersion {
+        public string OSVersion
+        {
             get { return osVersion; }
             set { osVersion = value; }
         }
-        
+
         [MonoTODO]
-        public TrustInfo TrustInfo {
+        public TrustInfo TrustInfo
+        {
             get { return trustInfo; }
             set { trustInfo = value; }
         }
-        
+
         [MonoTODO]
-        public string XmlConfigFile {
+        public string XmlConfigFile
+        {
             get { return xmlConfigFile; }
             set { xmlConfigFile = value; }
         }
-        
+
         [MonoTODO]
-        public AssemblyIdentity XmlEntryPointIdentity {
+        public AssemblyIdentity XmlEntryPointIdentity
+        {
             get { return xmlEntryPointIdentity; }
             set { xmlEntryPointIdentity = value; }
         }
-        
+
         [MonoTODO]
-        public string XmlEntryPointParameters {
+        public string XmlEntryPointParameters
+        {
             get { return xmlEntryPointParameters; }
             set { xmlEntryPointParameters = value; }
         }
-        
+
         [MonoTODO]
-        public string XmlEntryPointPath {
+        public string XmlEntryPointPath
+        {
             get { return xmlEntryPointPath; }
             set { xmlEntryPointPath = value; }
         }
-        
+
         [MonoTODO]
-        public string XmlIconFile {
+        public string XmlIconFile
+        {
             get { return xmlIconFile; }
             set { xmlIconFile = value; }
         }
-        
+
         [MonoTODO]
-        public string XmlIsClickOnceManifest {
+        public string XmlIsClickOnceManifest
+        {
             get { return xmlIsClickOnceManifest; }
             set { xmlIsClickOnceManifest = value; }
         }
-        
+
         [MonoTODO]
-        public string XmlOSBuild {
+        public string XmlOSBuild
+        {
             get { return xmlOSBuild; }
             set { xmlOSBuild = value; }
         }
-        
+
         [MonoTODO]
-        public string XmlOSDescription {
+        public string XmlOSDescription
+        {
             get { return xmlOSDescription; }
             set { xmlOSDescription = value; }
         }
-        
+
         [MonoTODO]
-        public string XmlOSMajor {
+        public string XmlOSMajor
+        {
             get { return xmlOSMajor; }
             set { xmlOSMajor = value; }
         }
-        
+
         [MonoTODO]
-        public string XmlOSMinor {
+        public string XmlOSMinor
+        {
             get { return xmlOSMinor; }
             set { xmlOSMinor = value; }
         }
-        
+
         [MonoTODO]
-        public string XmlOSRevision {
+        public string XmlOSRevision
+        {
             get { return xmlOSRevision; }
             set { xmlOSRevision = value; }
         }
-        
+
         [MonoTODO]
-        public string XmlOSSupportUrl {
+        public string XmlOSSupportUrl
+        {
             get { return xmlOSSupportUrl; }
             set { xmlOSSupportUrl = value; }
         }
     }
 }
-

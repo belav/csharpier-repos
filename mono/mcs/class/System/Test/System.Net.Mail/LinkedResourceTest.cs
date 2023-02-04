@@ -18,33 +18,36 @@ namespace MonoTests.System.Net.Mail
     public class LinkedResourceTest
     {
         LinkedResource lr;
-        
+
         [SetUp]
-        public void GetReady ()
+        public void GetReady()
         {
-            lr = LinkedResource.CreateLinkedResourceFromString ("test", new ContentType ("text/plain"));
+            lr = LinkedResource.CreateLinkedResourceFromString(
+                "test",
+                new ContentType("text/plain")
+            );
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void ArgumentNullException ()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void ArgumentNullException()
         {
             string s = null;
-            new LinkedResource (s);
+            new LinkedResource(s);
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void ArgumentNullException2 ()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void ArgumentNullException2()
         {
             Stream s = null;
-            new LinkedResource (s);
+            new LinkedResource(s);
         }
 
         [Test]
-        public void TransferEncodingTest ()
+        public void TransferEncodingTest()
         {
-            Assert.AreEqual (TransferEncoding.QuotedPrintable, lr.TransferEncoding);
+            Assert.AreEqual(TransferEncoding.QuotedPrintable, lr.TransferEncoding);
         }
     }
 }

@@ -15,7 +15,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
 {
     public abstract partial class TextViewWindow_OutOfProc : OutOfProcComponent
     {
-        public class Verifier<TTextViewWindow> where TTextViewWindow : TextViewWindow_OutOfProc
+        public class Verifier<TTextViewWindow>
+            where TTextViewWindow : TextViewWindow_OutOfProc
         {
             protected readonly TTextViewWindow _textViewWindow;
             protected readonly VisualStudioInstance _instance;
@@ -32,9 +33,12 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
                 bool verifyNotShowing = false,
                 bool ensureExpectedItemsAreOrdered = false,
                 FixAllScope? fixAllScope = null,
-                bool blockUntilComplete = true)
+                bool blockUntilComplete = true
+            )
             {
-                using var cancellationTokenSource = new CancellationTokenSource(Helper.HangMitigatingTimeout);
+                using var cancellationTokenSource = new CancellationTokenSource(
+                    Helper.HangMitigatingTimeout
+                );
 
                 var expectedItems = new[] { expectedItem };
 
@@ -43,8 +47,14 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
                 {
                     cancellationTokenSource.Token.ThrowIfCancellationRequested();
 
-                    applied = CodeActions(expectedItems, applyFix ? expectedItem : null, verifyNotShowing,
-                        ensureExpectedItemsAreOrdered, fixAllScope, blockUntilComplete);
+                    applied = CodeActions(
+                        expectedItems,
+                        applyFix ? expectedItem : null,
+                        verifyNotShowing,
+                        ensureExpectedItemsAreOrdered,
+                        fixAllScope,
+                        blockUntilComplete
+                    );
                 } while (applied is false);
             }
 
@@ -61,7 +71,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
                 bool verifyNotShowing = false,
                 bool ensureExpectedItemsAreOrdered = false,
                 FixAllScope? fixAllScope = null,
-                bool blockUntilComplete = true)
+                bool blockUntilComplete = true
+            )
             {
                 _textViewWindow.ShowLightBulb();
                 _textViewWindow.WaitForLightBulbSession();
@@ -78,15 +89,11 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
                 {
                     if (ensureExpectedItemsAreOrdered)
                     {
-                        TestUtilities.ThrowIfExpectedItemNotFoundInOrder(
-                            actions,
-                            expectedItems);
+                        TestUtilities.ThrowIfExpectedItemNotFoundInOrder(actions, expectedItems);
                     }
                     else
                     {
-                        TestUtilities.ThrowIfExpectedItemNotFound(
-                            actions,
-                            expectedItems);
+                        TestUtilities.ThrowIfExpectedItemNotFound(actions, expectedItems);
                     }
                 }
 
@@ -97,12 +104,19 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
 
                 if (!RoslynString.IsNullOrEmpty(applyFix))
                 {
-                    var result = _textViewWindow.ApplyLightBulbAction(applyFix, fixAllScope, blockUntilComplete);
+                    var result = _textViewWindow.ApplyLightBulbAction(
+                        applyFix,
+                        fixAllScope,
+                        blockUntilComplete
+                    );
 
                     if (blockUntilComplete)
                     {
                         // wait for action to complete
-                        _instance.Workspace.WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.LightBulb);
+                        _instance.Workspace.WaitForAsyncOperations(
+                            Helper.HangMitigatingTimeout,
+                            FeatureAttribute.LightBulb
+                        );
                     }
 
                     return result;
@@ -115,15 +129,26 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
             {
                 if (_textViewWindow.IsLightBulbSessionExpanded())
                 {
-                    throw new InvalidOperationException("Expected no light bulb session, but one was found.");
+                    throw new InvalidOperationException(
+                        "Expected no light bulb session, but one was found."
+                    );
                 }
             }
 
             public void CurrentTokenType(string tokenType)
             {
-                _instance.Workspace.WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.SolutionCrawlerLegacy);
-                _instance.Workspace.WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.DiagnosticService);
-                _instance.Workspace.WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.Classification);
+                _instance.Workspace.WaitForAsyncOperations(
+                    Helper.HangMitigatingTimeout,
+                    FeatureAttribute.SolutionCrawlerLegacy
+                );
+                _instance.Workspace.WaitForAsyncOperations(
+                    Helper.HangMitigatingTimeout,
+                    FeatureAttribute.DiagnosticService
+                );
+                _instance.Workspace.WaitForAsyncOperations(
+                    Helper.HangMitigatingTimeout,
+                    FeatureAttribute.Classification
+                );
                 var actualTokenTypes = _textViewWindow.GetCurrentClassifications();
                 Assert.Equal(actualTokenTypes.Length, 1);
                 Assert.Contains(tokenType, actualTokenTypes[0]);

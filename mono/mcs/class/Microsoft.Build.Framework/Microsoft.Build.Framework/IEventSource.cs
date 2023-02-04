@@ -3,7 +3,7 @@
 //
 // Author:
 //   Marek Sieradzki (marek.sieradzki@gmail.com)
-// 
+//
 // (C) 2005 Marek Sieradzki
 //
 // Permission is hereby granted, free of charge, to any person obtaining
@@ -46,4 +46,3 @@ namespace Microsoft.Build.Framework
         event BuildWarningEventHandler WarningRaised;
     }
 }
-

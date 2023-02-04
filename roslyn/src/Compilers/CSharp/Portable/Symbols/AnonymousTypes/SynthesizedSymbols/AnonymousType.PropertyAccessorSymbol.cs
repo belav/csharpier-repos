@@ -21,7 +21,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             internal AnonymousTypePropertyGetAccessorSymbol(AnonymousTypePropertySymbol property)
                 // winmdobj output only effects setters, so we can always set this to false
-                : base(property.ContainingType, SourcePropertyAccessorSymbol.GetAccessorName(property.Name, getNotSet: true, isWinMdOutput: false))
+                : base(
+                    property.ContainingType,
+                    SourcePropertyAccessorSymbol.GetAccessorName(
+                        property.Name,
+                        getNotSet: true,
+                        isWinMdOutput: false
+                    )
+                )
             {
                 _property = property;
             }
@@ -70,20 +77,22 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 get { return false; }
             }
 
-            internal sealed override bool IsMetadataVirtual(bool ignoreInterfaceImplementationChanges = false)
+            internal sealed override bool IsMetadataVirtual(
+                bool ignoreInterfaceImplementationChanges = false
+            )
             {
                 return false;
             }
 
             internal override bool IsMetadataFinal
             {
-                get
-                {
-                    return false;
-                }
+                get { return false; }
             }
 
-            internal override void AddSynthesizedAttributes(PEModuleBuilder moduleBuilder, ref ArrayBuilder<SynthesizedAttributeData> attributes)
+            internal override void AddSynthesizedAttributes(
+                PEModuleBuilder moduleBuilder,
+                ref ArrayBuilder<SynthesizedAttributeData> attributes
+            )
             {
                 // Do not call base.AddSynthesizedAttributes.
                 // Dev11 does not emit DebuggerHiddenAttribute in property accessors

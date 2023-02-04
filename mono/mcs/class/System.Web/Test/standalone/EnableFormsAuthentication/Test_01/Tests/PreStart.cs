@@ -6,9 +6,9 @@ namespace Test_01.Tests
 {
     public class PreStart
     {
-        public static void FormsAuthenticationSetUp ()
+        public static void FormsAuthenticationSetUp()
         {
-            FormsAuthentication.EnableFormsAuthentication (null);
+            FormsAuthentication.EnableFormsAuthentication(null);
         }
     }
 }

@@ -2,9 +2,7 @@
 
 public class B
 {
-    private protected enum E
-    {
-    }
+    private protected enum E { }
 
     public int Index { get; protected private set; }
 
@@ -14,7 +12,5 @@ public class B
 
     private protected int field;
 
-    public static void Main ()
-    {
-    }
+    public static void Main() { }
 }

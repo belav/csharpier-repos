@@ -24,11 +24,10 @@ public class test
         }
         catch (Exception ex)
         {
-            Console.WriteLine("Invalid read = {0} (should be NullRef)",ex.GetType());
+            Console.WriteLine("Invalid read = {0} (should be NullRef)", ex.GetType());
             ret = 10;
         }
         Console.WriteLine(100 == ret ? "Test Passed" : "Test Failed");
         return ret;
     }
 }
-

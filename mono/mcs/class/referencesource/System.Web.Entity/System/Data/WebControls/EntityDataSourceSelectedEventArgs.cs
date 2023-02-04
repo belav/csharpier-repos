@@ -25,10 +25,12 @@ namespace System.Web.UI.WebControls
         private readonly int _totalRowCount = 0;
         private readonly DataSourceSelectArguments _selectArguments;
 
-        internal EntityDataSourceSelectedEventArgs(ObjectContext context, 
-                                                   IEnumerable results, 
-                                                   int totalRowCount, 
-                                                   DataSourceSelectArguments selectArgs)
+        internal EntityDataSourceSelectedEventArgs(
+            ObjectContext context,
+            IEnumerable results,
+            int totalRowCount,
+            DataSourceSelectArguments selectArgs
+        )
         {
             _context = context;
             _results = results;

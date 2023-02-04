@@ -20,9 +20,7 @@ namespace Roslyn.VisualStudio.IntegrationTests.VisualBasic
         protected override string LanguageName => LanguageNames.VisualBasic;
 
         public BasicIntelliSense(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, nameof(BasicIntelliSense))
-        {
-        }
+            : base(instanceFactory, nameof(BasicIntelliSense)) { }
 
         public override async Task InitializeAsync()
         {
@@ -35,121 +33,141 @@ namespace Roslyn.VisualStudio.IntegrationTests.VisualBasic
         [WpfFact(Skip = "https://github.com/dotnet/roslyn/issues/38301")]
         public void IntelliSenseTriggersOnParenWithBraceCompletionAndCorrectUndoMerging()
         {
-            SetUpEditor(@"
+            SetUpEditor(
+                @"
 Module Module1
     Sub Main()
         $$
     End Sub
-End Module");
+End Module"
+            );
 
             VisualStudio.Editor.SetUseSuggestionMode(false);
 
             VisualStudio.SendKeys.Send("dim q as lis(");
             VisualStudio.Editor.Verify.CompletionItemsExist("Of");
 
-            VisualStudio.Editor.Verify.TextContains(@"
+            VisualStudio.Editor.Verify.TextContains(
+                @"
 Module Module1
     Sub Main()
         Dim q As List($$)
     End Sub
 End Module",
-assertCaretPosition: true);
+                assertCaretPosition: true
+            );
 
-            VisualStudio.SendKeys.Send(
-                VirtualKey.Down,
-                VirtualKey.Tab);
+            VisualStudio.SendKeys.Send(VirtualKey.Down, VirtualKey.Tab);
 
-            VisualStudio.Editor.Verify.TextContains(@"
+            VisualStudio.Editor.Verify.TextContains(
+                @"
 Module Module1
     Sub Main()
         Dim q As List(Of$$)
     End Sub
 End Module",
-assertCaretPosition: true);
+                assertCaretPosition: true
+            );
 
             VisualStudio.SendKeys.Send(" inte");
             VisualStudio.Editor.Verify.CompletionItemsExist("Integer");
 
             VisualStudio.SendKeys.Send(')');
 
-            VisualStudio.Editor.Verify.TextContains(@"
+            VisualStudio.Editor.Verify.TextContains(
+                @"
 Module Module1
     Sub Main()
         Dim q As List(Of Integer)$$
     End Sub
 End Module",
-assertCaretPosition: true);
+                assertCaretPosition: true
+            );
 
             VisualStudio.SendKeys.Send(Ctrl(VirtualKey.Z));
 
-            VisualStudio.Editor.Verify.TextContains(@"
+            VisualStudio.Editor.Verify.TextContains(
+                @"
 Module Module1
     Sub Main()
         Dim q As List(Of inte)$$
     End Sub
 End Module",
-assertCaretPosition: true);
+                assertCaretPosition: true
+            );
 
             VisualStudio.SendKeys.Send(Ctrl(VirtualKey.Z));
 
-            VisualStudio.Editor.Verify.TextContains(@"
+            VisualStudio.Editor.Verify.TextContains(
+                @"
 Module Module1
     Sub Main()
         Dim q As List(Of inte$$)
     End Sub
 End Module",
-assertCaretPosition: true);
+                assertCaretPosition: true
+            );
 
             VisualStudio.SendKeys.Send(Ctrl(VirtualKey.Z));
 
-            VisualStudio.Editor.Verify.TextContains(@"
+            VisualStudio.Editor.Verify.TextContains(
+                @"
 Module Module1
     Sub Main()
         Dim q As List(Of$$)
     End Sub
 End Module",
-assertCaretPosition: true);
+                assertCaretPosition: true
+            );
 
             VisualStudio.SendKeys.Send(Ctrl(VirtualKey.Z));
 
-            VisualStudio.Editor.Verify.TextContains(@"
+            VisualStudio.Editor.Verify.TextContains(
+                @"
 Module Module1
     Sub Main()
         Dim q As List($$)
     End Sub
 End Module",
-assertCaretPosition: true);
+                assertCaretPosition: true
+            );
 
             VisualStudio.SendKeys.Send(Ctrl(VirtualKey.Z));
 
-            VisualStudio.Editor.Verify.TextContains(@"
+            VisualStudio.Editor.Verify.TextContains(
+                @"
 Module Module1
     Sub Main()
         Dim q As lis($$)
     End Sub
 End Module",
-assertCaretPosition: true);
+                assertCaretPosition: true
+            );
 
             VisualStudio.SendKeys.Send(Ctrl(VirtualKey.Z));
 
-            VisualStudio.Editor.Verify.TextContains(@"
+            VisualStudio.Editor.Verify.TextContains(
+                @"
 Module Module1
     Sub Main()
         Dim q As lis($$
     End Sub
 End Module",
-assertCaretPosition: true);
+                assertCaretPosition: true
+            );
         }
 
         [WpfFact(Skip = "https://github.com/dotnet/roslyn/issues/45234")]
         public void TypeAVariableDeclaration()
         {
-            SetUpEditor(@"
+            SetUpEditor(
+                @"
 Module Module1
     Sub Main()
         $$
     End Sub
-End Module");
+End Module"
+            );
 
             VisualStudio.Editor.SetUseSuggestionMode(false);
 
@@ -190,21 +208,21 @@ End Module");
             VisualStudio.SendKeys.Send(VirtualKey.Backspace);
             Assert.True(VisualStudio.Editor.IsCompletionActive());
 
-            VisualStudio.SendKeys.Send(
-                VirtualKey.Left,
-                VirtualKey.Delete);
+            VisualStudio.SendKeys.Send(VirtualKey.Left, VirtualKey.Delete);
             Assert.True(VisualStudio.Editor.IsCompletionActive());
         }
 
         [WpfFact]
         public void DismissIntelliSenseOnApostrophe()
         {
-            SetUpEditor(@"
+            SetUpEditor(
+                @"
 Module Module1
     Sub Main()
         $$
     End Sub
-End Module");
+End Module"
+            );
 
             VisualStudio.Editor.SetUseSuggestionMode(false);
 
@@ -214,18 +232,23 @@ End Module");
             VisualStudio.SendKeys.Send("'");
             Assert.False(VisualStudio.Editor.IsCompletionActive());
             var actualText = VisualStudio.Editor.GetText();
-            Assert.Contains(@"Module Module1
+            Assert.Contains(
+                @"Module Module1
     Sub Main()
         Dim q As '
     End Sub
-End Module", actualText);
+End Module",
+                actualText
+            );
         }
 
         [WpfFact]
         public void TypeLeftAngleAfterImports()
         {
-            SetUpEditor(@"
-Imports$$");
+            SetUpEditor(
+                @"
+Imports$$"
+            );
 
             VisualStudio.Editor.SetUseSuggestionMode(false);
 
@@ -239,12 +262,14 @@ Imports$$");
         [WpfFact]
         public void DismissAndRetriggerIntelliSenseOnEquals()
         {
-            SetUpEditor(@"
+            SetUpEditor(
+                @"
 Module Module1
     Function M(val As Integer) As Integer
         $$
     End Function
-End Module");
+End Module"
+            );
 
             VisualStudio.Editor.SetUseSuggestionMode(false);
 
@@ -255,13 +280,15 @@ End Module");
             VisualStudio.Editor.Verify.CompletionItemsExist("val");
 
             VisualStudio.SendKeys.Send(' ');
-            VisualStudio.Editor.Verify.TextContains(@"
+            VisualStudio.Editor.Verify.TextContains(
+                @"
 Module Module1
     Function M(val As Integer) As Integer
         M=val $$
     End Function
 End Module",
-assertCaretPosition: true);
+                assertCaretPosition: true
+            );
         }
 
         [WpfFact]
@@ -270,11 +297,16 @@ assertCaretPosition: true);
             VisualStudio.Editor.SetUseSuggestionMode(false);
 
             VisualStudio.SendKeys.Send("Nam Foo");
-            VisualStudio.Editor.Verify.CurrentLineText("Namespace Foo$$", assertCaretPosition: true);
+            VisualStudio.Editor.Verify.CurrentLineText(
+                "Namespace Foo$$",
+                assertCaretPosition: true
+            );
 
             ClearEditor();
 
-            VisualStudio.Editor.SendKeys(new KeyPress(VirtualKey.Space, ShiftState.Ctrl | ShiftState.Alt));
+            VisualStudio.Editor.SendKeys(
+                new KeyPress(VirtualKey.Space, ShiftState.Ctrl | ShiftState.Alt)
+            );
 
             VisualStudio.SendKeys.Send("Nam Foo");
             VisualStudio.Editor.Verify.CurrentLineText("Nam Foo$$", assertCaretPosition: true);
@@ -286,7 +318,10 @@ assertCaretPosition: true);
             VisualStudio.Editor.SetUseSuggestionMode(false);
 
             VisualStudio.SendKeys.Send("Nam Foo");
-            VisualStudio.Editor.Verify.CurrentLineText("Namespace Foo$$", assertCaretPosition: true);
+            VisualStudio.Editor.Verify.CurrentLineText(
+                "Namespace Foo$$",
+                assertCaretPosition: true
+            );
 
             ClearEditor();
 
@@ -299,7 +334,8 @@ assertCaretPosition: true);
         [WpfFact]
         public void EnterTriggerCompletionListAndImplementInterface()
         {
-            SetUpEditor(@"
+            SetUpEditor(
+                @"
 Interface UFoo
     Sub FooBar()
 End Interface
@@ -307,7 +343,8 @@ End Interface
 Public Class Bar
     Implements$$
 
-End Class");
+End Class"
+            );
 
             VisualStudio.Editor.SetUseSuggestionMode(false);
 
@@ -317,7 +354,8 @@ End Class");
             VisualStudio.SendKeys.Send(VirtualKey.Enter);
             Assert.False(VisualStudio.Editor.IsCompletionActive());
             var actualText = VisualStudio.Editor.GetText();
-            Assert.Contains(@"
+            Assert.Contains(
+                @"
 Interface UFoo
     Sub FooBar()
 End Interface
@@ -328,7 +366,9 @@ Public Class Bar
     Public Sub FooBar() Implements UFoo.FooBar
         Throw New NotImplementedException()
     End Sub
-End Class", actualText);
+End Class",
+                actualText
+            );
         }
     }
 }

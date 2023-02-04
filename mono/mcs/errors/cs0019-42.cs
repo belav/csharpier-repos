@@ -2,13 +2,13 @@
 // Line: 5
 public class TestClass<T>
 {
-    public bool Check (T x, T y) { return x == y; }
+    public bool Check(T x, T y)
+    {
+        return x == y;
+    }
 }
 
 public class X
 {
-    static void Main ()
-    { }
+    static void Main() { }
 }
-
-

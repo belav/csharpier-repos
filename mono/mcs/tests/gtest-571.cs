@@ -2,7 +2,8 @@ using System;
 
 public abstract class A<T>
 {
-    public abstract A<MM> For<MM> () where MM : T;
+    public abstract A<MM> For<MM>()
+        where MM : T;
 }
 
 public class B<U, X, V> : A<V>
@@ -11,26 +12,26 @@ public class B<U, X, V> : A<V>
 {
     readonly A<U> _inner;
 
-    public B (A<U> inner)
+    public B(A<U> inner)
     {
         _inner = inner;
     }
 
-    public override A<PP> For<PP> () // base constraint is copied as PP : V
+    public override A<PP> For<PP>() // base constraint is copied as PP : V
     {
-        return _inner.For<PP> ();
+        return _inner.For<PP>();
     }
 }
 
 public class Test : A<Test>
 {
-    public static void Main ()
+    public static void Main()
     {
-        var t = new Test ();
-        new B<Test, Test, Test> (t).For<Test> ();
+        var t = new Test();
+        new B<Test, Test, Test>(t).For<Test>();
     }
 
-    public override A<QQ> For<QQ> ()
+    public override A<QQ> For<QQ>()
     {
         return null;
     }

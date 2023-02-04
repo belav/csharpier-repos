@@ -110,7 +110,7 @@ namespace Newtonsoft.Json.Serialization
         {
             unchecked
             {
-                var hashCode = GetType().GetHashCode();     // make sure different types do not result in equal values
+                var hashCode = GetType().GetHashCode(); // make sure different types do not result in equal values
                 hashCode = (hashCode * 397) ^ ProcessDictionaryKeys.GetHashCode();
                 hashCode = (hashCode * 397) ^ ProcessExtensionDataNames.GetHashCode();
                 hashCode = (hashCode * 397) ^ OverrideSpecifiedNames.GetHashCode();
@@ -137,10 +137,10 @@ namespace Newtonsoft.Json.Serialization
                 return false;
             }
 
-            return GetType() == other.GetType() &&
-                ProcessDictionaryKeys == other.ProcessDictionaryKeys &&
-                ProcessExtensionDataNames == other.ProcessExtensionDataNames &&
-                OverrideSpecifiedNames == other.OverrideSpecifiedNames;
+            return GetType() == other.GetType()
+                && ProcessDictionaryKeys == other.ProcessDictionaryKeys
+                && ProcessExtensionDataNames == other.ProcessExtensionDataNames
+                && OverrideSpecifiedNames == other.OverrideSpecifiedNames;
         }
     }
 }

@@ -1,17 +1,17 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // <OWNER>Microsoft</OWNER>
-// 
+//
 
 //
 // CryptoAPITransform.cs
 //
 
-namespace System.Security.Cryptography {
-
+namespace System.Security.Cryptography
+{
     using System.Security.AccessControl;
     using System.Security.Permissions;
     using System.Runtime.InteropServices;
@@ -278,67 +278,76 @@ namespace System.Security.Cryptography {
     [Serializable]
     [System.Runtime.InteropServices.ComVisible(true)]
     [Flags]
-    public enum CspProviderFlags {
-        NoFlags                 = 0x0000,
-        UseMachineKeyStore      = 0x0001,
-        UseDefaultKeyContainer  = 0x0002,
-        UseNonExportableKey     = 0x0004,
-        UseExistingKey          = 0x0008,
-        UseArchivableKey        = 0x0010,
-        UseUserProtectedKey     = 0x0020,
-        NoPrompt                = 0x0040,
-        CreateEphemeralKey      = 0x0080
+    public enum CspProviderFlags
+    {
+        NoFlags = 0x0000,
+        UseMachineKeyStore = 0x0001,
+        UseDefaultKeyContainer = 0x0002,
+        UseNonExportableKey = 0x0004,
+        UseExistingKey = 0x0008,
+        UseArchivableKey = 0x0010,
+        UseUserProtectedKey = 0x0020,
+        NoPrompt = 0x0040,
+        CreateEphemeralKey = 0x0080
     }
 
     [System.Runtime.InteropServices.ComVisible(true)]
     public sealed class CspParameters
     {
-        public int          ProviderType;
-        public string       ProviderName;
+        public int ProviderType;
+        public string ProviderName;
+
         [ResourceExposure(ResourceScope.Machine)]
-        public string       KeyContainerName;
-        public int          KeyNumber;
+        public string KeyContainerName;
+        public int KeyNumber;
 
         private int m_flags;
-        public CspProviderFlags Flags {
-            get { return (CspProviderFlags) m_flags; }
-            set { 
+        public CspProviderFlags Flags
+        {
+            get { return (CspProviderFlags)m_flags; }
+            set
+            {
                 int allFlags = 0x00FF; // this should change if more values are added to CspProviderFlags
-                Contract.Assert((CspProviderFlags.UseMachineKeyStore |
-                                CspProviderFlags.UseDefaultKeyContainer |
-                                CspProviderFlags.UseNonExportableKey |
-                                CspProviderFlags.UseExistingKey |
-                                CspProviderFlags.UseArchivableKey |
-                                CspProviderFlags.UseUserProtectedKey |
-                                CspProviderFlags.NoPrompt |
-                                CspProviderFlags.CreateEphemeralKey) == (CspProviderFlags)allFlags, "allFlags does not match all CspProviderFlags");
-                
-                int flags = (int) value;
+                Contract.Assert(
+                    (
+                        CspProviderFlags.UseMachineKeyStore
+                        | CspProviderFlags.UseDefaultKeyContainer
+                        | CspProviderFlags.UseNonExportableKey
+                        | CspProviderFlags.UseExistingKey
+                        | CspProviderFlags.UseArchivableKey
+                        | CspProviderFlags.UseUserProtectedKey
+                        | CspProviderFlags.NoPrompt
+                        | CspProviderFlags.CreateEphemeralKey
+                    ) == (CspProviderFlags)allFlags,
+                    "allFlags does not match all CspProviderFlags"
+                );
+
+                int flags = (int)value;
                 if ((flags & ~allFlags) != 0)
-                    throw new ArgumentException(Environment.GetResourceString("Arg_EnumIllegalVal", (int)value), "value");
+                    throw new ArgumentException(
+                        Environment.GetResourceString("Arg_EnumIllegalVal", (int)value),
+                        "value"
+                    );
                 m_flags = flags;
             }
         }
 
 #if FEATURE_MACL || MONO
         private CryptoKeySecurity m_cryptoKeySecurity;
-        public CryptoKeySecurity CryptoKeySecurity {
-            get {
-                return m_cryptoKeySecurity;
-            }
-            set {
-                m_cryptoKeySecurity = value;
-            }
+        public CryptoKeySecurity CryptoKeySecurity
+        {
+            get { return m_cryptoKeySecurity; }
+            set { m_cryptoKeySecurity = value; }
         }
 #endif
 
 #if (FEATURE_CRYPTO && FEATURE_X509_SECURESTRINGS) || FEATURE_CORECLR
         private SecureString m_keyPassword;
-        public SecureString KeyPassword {
-            get {
-                return m_keyPassword;
-            }
-            set {
+        public SecureString KeyPassword
+        {
+            get { return m_keyPassword; }
+            set
+            {
                 m_keyPassword = value;
                 // Parent handle and PIN are mutually exclusive.
                 m_parentWindowHandle = IntPtr.Zero;
@@ -346,13 +355,13 @@ namespace System.Security.Cryptography {
         }
 
         private IntPtr m_parentWindowHandle;
-        public IntPtr ParentWindowHandle {
+        public IntPtr ParentWindowHandle
+        {
             [ResourceExposure(ResourceScope.Machine)]
-            get {
-                return m_parentWindowHandle;
-            }
+            get { return m_parentWindowHandle; }
             [ResourceExposure(ResourceScope.Machine)]
-            set {
+            set
+            {
                 m_parentWindowHandle = value;
                 // Parent handle and PIN are mutually exclusive.
                 m_keyPassword = null;
@@ -362,43 +371,64 @@ namespace System.Security.Cryptography {
 
         [ResourceExposure(ResourceScope.None)]
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
-        public CspParameters () : this(Utils.DefaultRsaProviderType, null, null) {}
+        public CspParameters()
+            : this(Utils.DefaultRsaProviderType, null, null) { }
 
         [ResourceExposure(ResourceScope.None)]
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
-        public CspParameters (int dwTypeIn) : this(dwTypeIn, null, null) {}
+        public CspParameters(int dwTypeIn)
+            : this(dwTypeIn, null, null) { }
 
         [ResourceExposure(ResourceScope.None)]
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
-        public CspParameters (int dwTypeIn, string strProviderNameIn) : this(dwTypeIn, strProviderNameIn, null) {}
+        public CspParameters(int dwTypeIn, string strProviderNameIn)
+            : this(dwTypeIn, strProviderNameIn, null) { }
 
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        public CspParameters (int dwTypeIn, string strProviderNameIn, string strContainerNameIn) :
-            this (dwTypeIn, strProviderNameIn, strContainerNameIn, CspProviderFlags.NoFlags) {}
+        public CspParameters(int dwTypeIn, string strProviderNameIn, string strContainerNameIn)
+            : this(dwTypeIn, strProviderNameIn, strContainerNameIn, CspProviderFlags.NoFlags) { }
 
 #if MONO || (FEATURE_MACL && FEATURE_CRYPTO && FEATURE_X509_SECURESTRINGS)
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        public CspParameters (int providerType, string providerName, string keyContainerName,
-                              CryptoKeySecurity cryptoKeySecurity, SecureString keyPassword)
-            : this (providerType, providerName, keyContainerName) {
+        public CspParameters(
+            int providerType,
+            string providerName,
+            string keyContainerName,
+            CryptoKeySecurity cryptoKeySecurity,
+            SecureString keyPassword
+        )
+            : this(providerType, providerName, keyContainerName)
+        {
             m_cryptoKeySecurity = cryptoKeySecurity;
             m_keyPassword = keyPassword;
         }
 
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        public CspParameters (int providerType, string providerName, string keyContainerName,
-                              CryptoKeySecurity cryptoKeySecurity, IntPtr parentWindowHandle)
-            : this (providerType, providerName, keyContainerName) {
+        public CspParameters(
+            int providerType,
+            string providerName,
+            string keyContainerName,
+            CryptoKeySecurity cryptoKeySecurity,
+            IntPtr parentWindowHandle
+        )
+            : this(providerType, providerName, keyContainerName)
+        {
             m_cryptoKeySecurity = cryptoKeySecurity;
             m_parentWindowHandle = parentWindowHandle;
         }
 #endif // #if FEATURE_MACL && FEATURE_CRYPTO && FEATURE_X509_SECURESTRINGS
 
         [ResourceExposure(ResourceScope.Machine)]
-        internal CspParameters (int providerType, string providerName, string keyContainerName, CspProviderFlags flags) {
+        internal CspParameters(
+            int providerType,
+            string providerName,
+            string keyContainerName,
+            CspProviderFlags flags
+        )
+        {
             ProviderType = providerType;
             ProviderName = providerName;
             KeyContainerName = keyContainerName;
@@ -407,7 +437,8 @@ namespace System.Security.Cryptography {
         }
 
         // copy constructor
-        internal CspParameters (CspParameters parameters) {
+        internal CspParameters(CspParameters parameters)
+        {
             ProviderType = parameters.ProviderType;
             ProviderName = parameters.ProviderName;
             KeyContainerName = parameters.KeyContainerName;

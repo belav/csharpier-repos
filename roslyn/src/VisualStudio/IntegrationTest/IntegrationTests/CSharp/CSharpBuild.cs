@@ -21,21 +21,24 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
     public class CSharpBuild : AbstractIntegrationTest
     {
         public CSharpBuild(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory)
-        {
-        }
+            : base(instanceFactory) { }
 
         public override async Task InitializeAsync()
         {
             await base.InitializeAsync().ConfigureAwait(true);
             VisualStudio.SolutionExplorer.CreateSolution(nameof(CSharpBuild));
-            VisualStudio.SolutionExplorer.AddProject(new ProjectUtils.Project("TestProj"), WellKnownProjectTemplates.ConsoleApplication, LanguageNames.CSharp);
+            VisualStudio.SolutionExplorer.AddProject(
+                new ProjectUtils.Project("TestProj"),
+                WellKnownProjectTemplates.ConsoleApplication,
+                LanguageNames.CSharp
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.Build)]
         public void BuildProject()
         {
-            var editorText = @"using System;
+            var editorText =
+                @"using System;
 
 class Program
 {
@@ -55,18 +58,25 @@ class Program
         {
             VisualStudio.SolutionExplorer.SaveAll();
 
-            var pathToDevenv = Path.Combine(VisualStudio.InstallationPath, @"Common7\IDE\devenv.exe");
+            var pathToDevenv = Path.Combine(
+                VisualStudio.InstallationPath,
+                @"Common7\IDE\devenv.exe"
+            );
             var pathToSolution = VisualStudio.SolutionExplorer.SolutionFileFullPath;
             var logFileName = pathToSolution + ".log";
 
             File.Delete(logFileName);
 
-            var commandLine = $"\"{pathToSolution}\" /Rebuild Debug /Out \"{logFileName}\" {VisualStudioInstanceFactory.VsLaunchArgs}";
+            var commandLine =
+                $"\"{pathToSolution}\" /Rebuild Debug /Out \"{logFileName}\" {VisualStudioInstanceFactory.VsLaunchArgs}";
 
             var process = Process.Start(pathToDevenv, commandLine);
             Assert.True(process.WaitForExit((int)Helper.HangMitigatingTimeout.TotalMilliseconds));
 
-            Assert.Contains("Rebuild All: 1 succeeded, 0 failed, 0 skipped", File.ReadAllText(logFileName));
+            Assert.Contains(
+                "Rebuild All: 1 succeeded, 0 failed, 0 skipped",
+                File.ReadAllText(logFileName)
+            );
 
             Assert.Equal(0, process.ExitCode);
         }

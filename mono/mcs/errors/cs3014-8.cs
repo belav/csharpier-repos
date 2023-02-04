@@ -4,7 +4,8 @@
 
 using System;
 
-public enum E2 {
-        [CLSCompliant (true)]
-        Foo
+public enum E2
+{
+    [CLSCompliant(true)]
+    Foo
 }

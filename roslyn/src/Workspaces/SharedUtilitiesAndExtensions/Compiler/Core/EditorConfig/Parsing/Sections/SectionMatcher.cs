@@ -14,24 +14,28 @@ namespace Microsoft.CodeAnalysis.EditorConfig.Parsing
         private readonly ImmutableArray<(int minValue, int maxValue)> _numberRangePairs;
         private readonly string _headerText;
 
-        private static readonly Regex s_multiFileWithDotOutside = new(@"\*\.\{(.*)\}", RegexOptions.Compiled);
-        private static readonly Regex s_multiFileWithDotInside = new(@"\*\{(.*)\}", RegexOptions.Compiled);
-        private static readonly Regex s_fileExtensionMatcher = new(@"([^,]+)", RegexOptions.Compiled);
+        private static readonly Regex s_multiFileWithDotOutside =
+            new(@"\*\.\{(.*)\}", RegexOptions.Compiled);
+        private static readonly Regex s_multiFileWithDotInside =
+            new(@"\*\{(.*)\}", RegexOptions.Compiled);
+        private static readonly Regex s_fileExtensionMatcher =
+            new(@"([^,]+)", RegexOptions.Compiled);
 
         private Regex Regex { get; }
 
         private SectionMatcher(
-                Regex regex,
-                string headerText,
-                ImmutableArray<(int minValue, int maxValue)> numberRangePairs)
+            Regex regex,
+            string headerText,
+            ImmutableArray<(int minValue, int maxValue)> numberRangePairs
+        )
         {
             Regex = regex;
             _numberRangePairs = numberRangePairs;
             _headerText = headerText;
         }
 
-        public bool IsLanguageMatch(Language language, SectionMatch matchKind = default)
-            => GetLanguageMatchKind(language) == matchKind;
+        public bool IsLanguageMatch(Language language, SectionMatch matchKind = default) =>
+            GetLanguageMatchKind(language) == matchKind;
 
         public bool IsPathMatch(string relativePath, SectionMatch matchKind = default)
         {
@@ -104,32 +108,45 @@ namespace Microsoft.CodeAnalysis.EditorConfig.Parsing
             return SectionMatch.NoMatch;
         }
 
-        private bool IsExactLanguageMatch(Language language)
-            => IsExactLanguageMatchForCSharp(language) ||
-               IsExactLanguageMatchForVisualBasic(language) ||
-               IsExactLanguageMatchForBothVisualBasicAndCSharp(language);
+        private bool IsExactLanguageMatch(Language language) =>
+            IsExactLanguageMatchForCSharp(language)
+            || IsExactLanguageMatchForVisualBasic(language)
+            || IsExactLanguageMatchForBothVisualBasicAndCSharp(language);
 
-        private bool IsExactLanguageMatchForCSharp(Language language)
-            => language.HasFlag(Language.CSharp) &&
-               !language.HasFlag(Language.VisualBasic) &&
-               _headerText == DefaultCSharpSplat;
+        private bool IsExactLanguageMatchForCSharp(Language language) =>
+            language.HasFlag(Language.CSharp)
+            && !language.HasFlag(Language.VisualBasic)
+            && _headerText == DefaultCSharpSplat;
 
-        private bool IsExactLanguageMatchForVisualBasic(Language language)
-            => language.HasFlag(Language.VisualBasic) &&
-               !language.HasFlag(Language.CSharp) &&
-               _headerText == DefaultVisualBasicSplat;
+        private bool IsExactLanguageMatchForVisualBasic(Language language) =>
+            language.HasFlag(Language.VisualBasic)
+            && !language.HasFlag(Language.CSharp)
+            && _headerText == DefaultVisualBasicSplat;
 
-        private bool IsExactLanguageMatchForBothVisualBasicAndCSharp(Language language)
-            => language.HasFlag(Language.CSharp) &&
-               language.HasFlag(Language.VisualBasic) &&
-               (MatchesBothLanguages(_headerText, s_multiFileWithDotOutside, DefaultCSharpExtensionWithoutDot, DefaultVisualBasicExtensionWithoutDot) ||
-                MatchesBothLanguages(_headerText, s_multiFileWithDotInside, DefaultCSharpExtension, DefaultVisualBasicExtension));
+        private bool IsExactLanguageMatchForBothVisualBasicAndCSharp(Language language) =>
+            language.HasFlag(Language.CSharp)
+            && language.HasFlag(Language.VisualBasic)
+            && (
+                MatchesBothLanguages(
+                    _headerText,
+                    s_multiFileWithDotOutside,
+                    DefaultCSharpExtensionWithoutDot,
+                    DefaultVisualBasicExtensionWithoutDot
+                )
+                || MatchesBothLanguages(
+                    _headerText,
+                    s_multiFileWithDotInside,
+                    DefaultCSharpExtension,
+                    DefaultVisualBasicExtension
+                )
+            );
 
         private static bool MatchesBothLanguages(
             string text,
             Regex pattern,
             string firstFileExtension,
-            string secondFileExtension)
+            string secondFileExtension
+        )
         {
             var matchCollection = pattern.Matches(text);
             if (matchCollection.Count == 1)
@@ -143,8 +160,14 @@ namespace Microsoft.CodeAnalysis.EditorConfig.Parsing
                     {
                         var firstExtension = fileExtensionMatches[0].Value;
                         var secondExtension = fileExtensionMatches[1].Value;
-                        return (firstExtension == firstFileExtension && secondExtension == secondFileExtension) ||
-                               (firstExtension == secondFileExtension && secondExtension == firstFileExtension);
+                        return (
+                                firstExtension == firstFileExtension
+                                && secondExtension == secondFileExtension
+                            )
+                            || (
+                                firstExtension == secondFileExtension
+                                && secondExtension == firstFileExtension
+                            );
                     }
                 }
             }
@@ -152,28 +175,53 @@ namespace Microsoft.CodeAnalysis.EditorConfig.Parsing
             return false;
         }
 
-        private bool IsExactLanguageMatchWithOthers(Language language)
-            => IsExactMatchForCSharpWithOthers(language) ||
-               IsExactMatchForVisualBasicWithOthers(language) ||
-               IsExactMatchForBothVisualBasicAndCSharpWithOthers(language);
+        private bool IsExactLanguageMatchWithOthers(Language language) =>
+            IsExactMatchForCSharpWithOthers(language)
+            || IsExactMatchForVisualBasicWithOthers(language)
+            || IsExactMatchForBothVisualBasicAndCSharpWithOthers(language);
 
-        private bool IsExactMatchForCSharpWithOthers(Language language)
-            => language.HasFlag(Language.CSharp) &&
-               !language.HasFlag(Language.VisualBasic) &&
-               (IsMatchWithOthers(_headerText, s_multiFileWithDotOutside, DefaultCSharpExtensionWithoutDot, DefaultVisualBasicExtensionWithoutDot) ||
-                IsMatchWithOthers(_headerText, s_multiFileWithDotInside, DefaultCSharpExtension, DefaultVisualBasicExtension));
+        private bool IsExactMatchForCSharpWithOthers(Language language) =>
+            language.HasFlag(Language.CSharp)
+            && !language.HasFlag(Language.VisualBasic)
+            && (
+                IsMatchWithOthers(
+                    _headerText,
+                    s_multiFileWithDotOutside,
+                    DefaultCSharpExtensionWithoutDot,
+                    DefaultVisualBasicExtensionWithoutDot
+                )
+                || IsMatchWithOthers(
+                    _headerText,
+                    s_multiFileWithDotInside,
+                    DefaultCSharpExtension,
+                    DefaultVisualBasicExtension
+                )
+            );
 
-        private bool IsExactMatchForVisualBasicWithOthers(Language language)
-            => language.HasFlag(Language.VisualBasic) &&
-               !language.HasFlag(Language.CSharp) &&
-               (IsMatchWithOthers(_headerText, s_multiFileWithDotOutside, DefaultVisualBasicExtensionWithoutDot, DefaultCSharpExtensionWithoutDot) ||
-                IsMatchWithOthers(_headerText, s_multiFileWithDotInside, DefaultVisualBasicExtension, DefaultCSharpExtension));
+        private bool IsExactMatchForVisualBasicWithOthers(Language language) =>
+            language.HasFlag(Language.VisualBasic)
+            && !language.HasFlag(Language.CSharp)
+            && (
+                IsMatchWithOthers(
+                    _headerText,
+                    s_multiFileWithDotOutside,
+                    DefaultVisualBasicExtensionWithoutDot,
+                    DefaultCSharpExtensionWithoutDot
+                )
+                || IsMatchWithOthers(
+                    _headerText,
+                    s_multiFileWithDotInside,
+                    DefaultVisualBasicExtension,
+                    DefaultCSharpExtension
+                )
+            );
 
         private static bool IsMatchWithOthers(
             string text,
             Regex pattern,
             string mustMatchFileExtension,
-            string? mustNotMatchFileExtension = null)
+            string? mustNotMatchFileExtension = null
+        )
         {
             var matchCollection = pattern.Matches(text);
             if (matchCollection.Count == 1)
@@ -192,8 +240,10 @@ namespace Microsoft.CodeAnalysis.EditorConfig.Parsing
                             matchedRequiredExtension = true;
                         }
 
-                        if (mustNotMatchFileExtension is not null &&
-                            fileExtensionMatch?.Value == mustNotMatchFileExtension)
+                        if (
+                            mustNotMatchFileExtension is not null
+                            && fileExtensionMatch?.Value == mustNotMatchFileExtension
+                        )
                         {
                             matchedForbiddenExtension = true;
                         }
@@ -206,17 +256,30 @@ namespace Microsoft.CodeAnalysis.EditorConfig.Parsing
             return false;
         }
 
-        private bool IsExactMatchForBothVisualBasicAndCSharpWithOthers(Language language)
-            => language.HasFlag(Language.CSharp) &&
-               language.HasFlag(Language.VisualBasic) &&
-               (MatchesBothLanguagesWithOthers(_headerText, s_multiFileWithDotOutside, DefaultVisualBasicExtensionWithoutDot, DefaultCSharpExtensionWithoutDot) ||
-                MatchesBothLanguagesWithOthers(_headerText, s_multiFileWithDotInside, DefaultVisualBasicExtension, DefaultCSharpExtension));
+        private bool IsExactMatchForBothVisualBasicAndCSharpWithOthers(Language language) =>
+            language.HasFlag(Language.CSharp)
+            && language.HasFlag(Language.VisualBasic)
+            && (
+                MatchesBothLanguagesWithOthers(
+                    _headerText,
+                    s_multiFileWithDotOutside,
+                    DefaultVisualBasicExtensionWithoutDot,
+                    DefaultCSharpExtensionWithoutDot
+                )
+                || MatchesBothLanguagesWithOthers(
+                    _headerText,
+                    s_multiFileWithDotInside,
+                    DefaultVisualBasicExtension,
+                    DefaultCSharpExtension
+                )
+            );
 
         private static bool MatchesBothLanguagesWithOthers(
             string text,
             Regex pattern,
             string firstFileExtension,
-            string secondFileExtension)
+            string secondFileExtension
+        )
         {
             var matchCollection = pattern.Matches(text);
             if (matchCollection.Count == 1)
@@ -248,54 +311,82 @@ namespace Microsoft.CodeAnalysis.EditorConfig.Parsing
             return false;
         }
 
-        private bool IsAnyLanguageMatch(Language language)
-            => IsAnyLanguageMatchForCSharp(language) ||
-               IsAnyLanguageMatchForVisualBasic(language) ||
-               IsExactMatchForBothVisualBasicAndCSharpWithOthers(language);
+        private bool IsAnyLanguageMatch(Language language) =>
+            IsAnyLanguageMatchForCSharp(language)
+            || IsAnyLanguageMatchForVisualBasic(language)
+            || IsExactMatchForBothVisualBasicAndCSharpWithOthers(language);
 
-        private bool IsAnyLanguageMatchForCSharp(Language language)
-            => language.HasFlag(Language.CSharp) && !language.HasFlag(Language.VisualBasic) &&
-               (IsMatchWithOthers(_headerText, s_multiFileWithDotOutside, DefaultCSharpExtensionWithoutDot) ||
-                IsMatchWithOthers(_headerText, s_multiFileWithDotInside, DefaultCSharpExtension));
+        private bool IsAnyLanguageMatchForCSharp(Language language) =>
+            language.HasFlag(Language.CSharp)
+            && !language.HasFlag(Language.VisualBasic)
+            && (
+                IsMatchWithOthers(
+                    _headerText,
+                    s_multiFileWithDotOutside,
+                    DefaultCSharpExtensionWithoutDot
+                )
+                || IsMatchWithOthers(_headerText, s_multiFileWithDotInside, DefaultCSharpExtension)
+            );
 
-        private bool IsAnyLanguageMatchForVisualBasic(Language language)
-            => language.HasFlag(Language.VisualBasic) && !language.HasFlag(Language.CSharp) &&
-               (IsMatchWithOthers(_headerText, s_multiFileWithDotOutside, DefaultVisualBasicExtensionWithoutDot) ||
-                IsMatchWithOthers(_headerText, s_multiFileWithDotInside, DefaultVisualBasicExtension));
+        private bool IsAnyLanguageMatchForVisualBasic(Language language) =>
+            language.HasFlag(Language.VisualBasic)
+            && !language.HasFlag(Language.CSharp)
+            && (
+                IsMatchWithOthers(
+                    _headerText,
+                    s_multiFileWithDotOutside,
+                    DefaultVisualBasicExtensionWithoutDot
+                )
+                || IsMatchWithOthers(
+                    _headerText,
+                    s_multiFileWithDotInside,
+                    DefaultVisualBasicExtension
+                )
+            );
 
-        private bool IsFilePatternMatch(Language language)
-            => IsCSharpFilePatternMatch(language) ||
-               IsVisualBasicFilePatternMatch(language) ||
-               IsPatternMatchForBothVisualBasicAndCSharp(language);
+        private bool IsFilePatternMatch(Language language) =>
+            IsCSharpFilePatternMatch(language)
+            || IsVisualBasicFilePatternMatch(language)
+            || IsPatternMatchForBothVisualBasicAndCSharp(language);
 
-        private bool IsCSharpFilePatternMatch(Language language)
-            => language.HasFlag(Language.CSharp) && !language.HasFlag(Language.VisualBasic) &&
-               IsPathMatch(DefaultCSharpPath);
+        private bool IsCSharpFilePatternMatch(Language language) =>
+            language.HasFlag(Language.CSharp)
+            && !language.HasFlag(Language.VisualBasic)
+            && IsPathMatch(DefaultCSharpPath);
 
-        private bool IsVisualBasicFilePatternMatch(Language language)
-            => language.HasFlag(Language.VisualBasic) && !language.HasFlag(Language.CSharp) &&
-               IsPathMatch(DefaultVisualBasicPath);
+        private bool IsVisualBasicFilePatternMatch(Language language) =>
+            language.HasFlag(Language.VisualBasic)
+            && !language.HasFlag(Language.CSharp)
+            && IsPathMatch(DefaultVisualBasicPath);
 
-        private bool IsPatternMatchForBothVisualBasicAndCSharp(Language language)
-            => language.HasFlag(Language.VisualBasic) && language.HasFlag(Language.CSharp) &&
-               IsPathMatch(DefaultVisualBasicPath) && IsPathMatch(DefaultCSharpPath);
+        private bool IsPatternMatchForBothVisualBasicAndCSharp(Language language) =>
+            language.HasFlag(Language.VisualBasic)
+            && language.HasFlag(Language.CSharp)
+            && IsPathMatch(DefaultVisualBasicPath)
+            && IsPathMatch(DefaultCSharpPath);
 
-        private static bool IsSuperSet(Language language, string pattern)
-            => IsCSharpSuperSet(language, pattern) ||
-               IsVisualBasicSuperSet(language, pattern) ||
-               IsCSharpOrVisualBasicSuperSet(language, pattern);
+        private static bool IsSuperSet(Language language, string pattern) =>
+            IsCSharpSuperSet(language, pattern)
+            || IsVisualBasicSuperSet(language, pattern)
+            || IsCSharpOrVisualBasicSuperSet(language, pattern);
 
-        private static bool IsCSharpSuperSet(Language language, string pattern)
-            => language.HasFlag(Language.CSharp) && !language.HasFlag(Language.VisualBasic) &&
-               !pattern.Contains(DefaultCSharpExtensionWithoutDot);
+        private static bool IsCSharpSuperSet(Language language, string pattern) =>
+            language.HasFlag(Language.CSharp)
+            && !language.HasFlag(Language.VisualBasic)
+            && !pattern.Contains(DefaultCSharpExtensionWithoutDot);
 
-        private static bool IsVisualBasicSuperSet(Language language, string pattern)
-            => language.HasFlag(Language.VisualBasic) && !language.HasFlag(Language.CSharp) &&
-               !pattern.Contains(DefaultVisualBasicExtensionWithoutDot);
+        private static bool IsVisualBasicSuperSet(Language language, string pattern) =>
+            language.HasFlag(Language.VisualBasic)
+            && !language.HasFlag(Language.CSharp)
+            && !pattern.Contains(DefaultVisualBasicExtensionWithoutDot);
 
-        private static bool IsCSharpOrVisualBasicSuperSet(Language language, string pattern)
-            => language.HasFlag(Language.VisualBasic) && language.HasFlag(Language.VisualBasic) &&
-               !(pattern.Contains(DefaultCSharpExtensionWithoutDot) && pattern.Contains(DefaultVisualBasicExtensionWithoutDot));
+        private static bool IsCSharpOrVisualBasicSuperSet(Language language, string pattern) =>
+            language.HasFlag(Language.VisualBasic)
+            && language.HasFlag(Language.VisualBasic)
+            && !(
+                pattern.Contains(DefaultCSharpExtensionWithoutDot)
+                && pattern.Contains(DefaultVisualBasicExtensionWithoutDot)
+            );
 
         private bool IsPathMatch(string s)
         {
@@ -315,9 +406,11 @@ namespace Microsoft.CodeAnalysis.EditorConfig.Parsing
             {
                 var (minValue, maxValue) = _numberRangePairs[i];
                 // Index 0 is the whole regex
-                if (!int.TryParse(match.Groups[i + 1].Value, out var matchedNum) ||
-                    matchedNum < minValue ||
-                    matchedNum > maxValue)
+                if (
+                    !int.TryParse(match.Groups[i + 1].Value, out var matchedNum)
+                    || matchedNum < minValue
+                    || matchedNum > maxValue
+                )
                 {
                     return false;
                 }

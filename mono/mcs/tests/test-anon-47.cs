@@ -1,22 +1,23 @@
 using System;
 
-public delegate void Foo ();
+public delegate void Foo();
 
 public class World
 {
-    public void Hello (long a)
-    { }
+    public void Hello(long a) { }
 
-    public void Test (int t)
+    public void Test(int t)
     {
-        Hello (t);
+        Hello(t);
         long j = 1 << t;
-        for (int u = 0; u < j; u++) {
+        for (int u = 0; u < j; u++)
+        {
             long test = t;
 
-            Foo foo = delegate {
+            Foo foo = delegate
+            {
                 long v = u * t * test;
-                Hello (v);
+                Hello(v);
             };
         }
     }
@@ -24,9 +25,9 @@ public class World
 
 class X
 {
-    public static void Main ()
+    public static void Main()
     {
-        World world = new World ();
-        world.Test (5);
+        World world = new World();
+        world.Test(5);
     }
 }

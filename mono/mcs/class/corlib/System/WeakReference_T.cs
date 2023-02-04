@@ -27,59 +27,63 @@
 using System.Runtime.Serialization;
 using System.Runtime.InteropServices;
 
-namespace System {
+namespace System
+{
     [SerializableAttribute]
-    public sealed class WeakReference<T> : ISerializable 
+    public sealed class WeakReference<T> : ISerializable
         where T : class
     {
         GCHandle handle;
         bool trackResurrection;
 
-        public WeakReference (T target)
-            : this (target, false)
-        {
-        }
+        public WeakReference(T target)
+            : this(target, false) { }
 
-        public WeakReference (T target, bool trackResurrection)
+        public WeakReference(T target, bool trackResurrection)
         {
             this.trackResurrection = trackResurrection;
-            var handleType = trackResurrection ? GCHandleType.WeakTrackResurrection : GCHandleType.Weak;
-            handle = GCHandle.Alloc (target, handleType);
+            var handleType = trackResurrection
+                ? GCHandleType.WeakTrackResurrection
+                : GCHandleType.Weak;
+            handle = GCHandle.Alloc(target, handleType);
         }
 
-        WeakReference (SerializationInfo info, StreamingContext context)
+        WeakReference(SerializationInfo info, StreamingContext context)
         {
             if (info == null)
-                throw new ArgumentNullException ("info");
-            
-            trackResurrection = info.GetBoolean ("TrackResurrection");
-            var target = info.GetValue ("TrackedObject", typeof (T));
+                throw new ArgumentNullException("info");
 
-            var handleType = trackResurrection ? GCHandleType.WeakTrackResurrection : GCHandleType.Weak;
-            handle = GCHandle.Alloc (target, handleType);
+            trackResurrection = info.GetBoolean("TrackResurrection");
+            var target = info.GetValue("TrackedObject", typeof(T));
+
+            var handleType = trackResurrection
+                ? GCHandleType.WeakTrackResurrection
+                : GCHandleType.Weak;
+            handle = GCHandle.Alloc(target, handleType);
         }
 
-        public void GetObjectData (SerializationInfo info, StreamingContext context)
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             if (info == null)
-                throw new ArgumentNullException ("info");
-            
-            info.AddValue ("TrackResurrection", trackResurrection);
+                throw new ArgumentNullException("info");
+
+            info.AddValue("TrackResurrection", trackResurrection);
 
             if (handle.IsAllocated)
-                info.AddValue ("TrackedObject", handle.Target);
+                info.AddValue("TrackedObject", handle.Target);
             else
-                info.AddValue ("TrackedObject", null);
+                info.AddValue("TrackedObject", null);
         }
 
-        public void SetTarget (T target)
+        public void SetTarget(T target)
         {
             handle.Target = target;
         }
 
-        public bool TryGetTarget (out T target)
+        public bool TryGetTarget(out T target)
         {
-            if (!handle.IsAllocated) {
+            if (!handle.IsAllocated)
+            {
                 target = null;
                 return false;
             }
@@ -89,9 +93,9 @@ namespace System {
         }
 
         //Methods
-        ~WeakReference ()
+        ~WeakReference()
         {
-            handle.Free ();
+            handle.Free();
         }
     }
 }

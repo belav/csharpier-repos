@@ -4,7 +4,7 @@
 
 class Test
 {
-    public static void Main ()
+    public static void Main()
     {
         var a = B.Value;
     }

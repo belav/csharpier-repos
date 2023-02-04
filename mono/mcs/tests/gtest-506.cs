@@ -5,8 +5,8 @@ public struct SchemaEntry<T>
 
 public class C
 {
-    public static void Main ()
+    public static void Main()
     {
-        new SchemaEntry<short> ();
+        new SchemaEntry<short>();
     }
 }

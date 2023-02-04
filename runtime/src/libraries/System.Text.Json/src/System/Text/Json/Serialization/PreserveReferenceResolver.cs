@@ -20,7 +20,9 @@ namespace System.Text.Json.Serialization
             if (writing)
             {
                 // Comparer used here does a reference equality comparison on serialization, which is where we use the objects as the dictionary keys.
-                _objectToReferenceIdMap = new Dictionary<object, string>(ReferenceEqualityComparer.Instance);
+                _objectToReferenceIdMap = new Dictionary<object, string>(
+                    ReferenceEqualityComparer.Instance
+                );
             }
             else
             {

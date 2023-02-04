@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,86 +35,86 @@ using System.ComponentModel.Design;
 using System.Globalization;
 using System.Security.Permissions;
 
-namespace System.Web.UI.Design {
-
-    [SecurityPermission (SecurityAction.Demand, Flags = SecurityPermissionFlag.UnmanagedCode)]
+namespace System.Web.UI.Design
+{
+    [SecurityPermission(SecurityAction.Demand, Flags = SecurityPermissionFlag.UnmanagedCode)]
     public class HierarchicalDataSourceDesigner : ControlDesigner, IHierarchicalDataSourceDesigner
     {
-        public HierarchicalDataSourceDesigner ()
-        {
-        }
+        public HierarchicalDataSourceDesigner() { }
 
         public event EventHandler DataSourceChanged;
 
         public event EventHandler SchemaRefreshed;
 
         [MonoTODO]
-        public override DesignerActionListCollection ActionLists {
-            get { throw new NotImplementedException (); }
-        }
-
-        [MonoTODO]
-        public virtual bool CanConfigure {
-            get { throw new NotImplementedException (); }
-        }
-
-        [MonoTODO]
-        public virtual bool CanRefreshSchema {
-            get { throw new NotImplementedException (); }
-        }
-
-        [MonoTODO]
-        protected bool SuppressingDataSourceEvents {
-            get { throw new NotImplementedException (); }
-        }
-
-        public virtual void Configure ()
+        public override DesignerActionListCollection ActionLists
         {
-            throw new NotSupportedException ();
+            get { throw new NotImplementedException(); }
         }
 
         [MonoTODO]
-        public override string GetDesignTimeHtml ()
+        public virtual bool CanConfigure
         {
-            throw new NotImplementedException ();
+            get { throw new NotImplementedException(); }
         }
 
         [MonoTODO]
-        public virtual DesignerHierarchicalDataSourceView GetView (string viewPath)
+        public virtual bool CanRefreshSchema
         {
-            throw new NotImplementedException ();
+            get { throw new NotImplementedException(); }
         }
 
         [MonoTODO]
-        protected virtual void OnDataSourceChanged (EventArgs e)
+        protected bool SuppressingDataSourceEvents
         {
-            throw new NotImplementedException ();
+            get { throw new NotImplementedException(); }
+        }
+
+        public virtual void Configure()
+        {
+            throw new NotSupportedException();
         }
 
         [MonoTODO]
-        protected virtual void OnSchemaRefreshed (EventArgs e)
+        public override string GetDesignTimeHtml()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public virtual void RefreshSchema (bool preferSilent)
+        public virtual DesignerHierarchicalDataSourceView GetView(string viewPath)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public virtual void ResumeDataSourceEvents ()
+        protected virtual void OnDataSourceChanged(EventArgs e)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public virtual void SuppressDataSourceEvents ()
+        protected virtual void OnSchemaRefreshed(EventArgs e)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        public virtual void RefreshSchema(bool preferSilent)
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        public virtual void ResumeDataSourceEvents()
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        public virtual void SuppressDataSourceEvents()
+        {
+            throw new NotImplementedException();
         }
     }
-
 }
-

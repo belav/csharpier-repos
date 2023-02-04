@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -41,65 +41,72 @@ namespace System.Runtime.Remoting.Lifetime
         ArrayList _objects = new ArrayList();
         Timer _timer = null;
 
-        public void SetPollTime (TimeSpan timeSpan)
+        public void SetPollTime(TimeSpan timeSpan)
         {
-            lock (_objects.SyncRoot) 
+            lock (_objects.SyncRoot)
             {
                 if (_timer != null)
-                    _timer.Change (timeSpan,timeSpan);
+                    _timer.Change(timeSpan, timeSpan);
             }
         }
 
-        public void TrackLifetime (ServerIdentity identity)
+        public void TrackLifetime(ServerIdentity identity)
         {
             lock (_objects.SyncRoot)
             {
                 identity.Lease.Activate();
-                _objects.Add (identity);
+                _objects.Add(identity);
 
-                if (_timer == null) StartManager();
+                if (_timer == null)
+                    StartManager();
             }
         }
 
-        public void StopTrackingLifetime (ServerIdentity identity)
+        public void StopTrackingLifetime(ServerIdentity identity)
         {
             lock (_objects.SyncRoot)
             {
-                _objects.Remove (identity);
+                _objects.Remove(identity);
             }
         }
 
         public void StartManager()
         {
-            _timer = new Timer (new TimerCallback (ManageLeases), null, LifetimeServices.LeaseManagerPollTime,LifetimeServices.LeaseManagerPollTime);
+            _timer = new Timer(
+                new TimerCallback(ManageLeases),
+                null,
+                LifetimeServices.LeaseManagerPollTime,
+                LifetimeServices.LeaseManagerPollTime
+            );
         }
 
         public void StopManager()
         {
             Timer t = _timer;
             _timer = null;
-            if (t != null) t.Dispose();
+            if (t != null)
+                t.Dispose();
         }
 
         public void ManageLeases(object state)
         {
             lock (_objects.SyncRoot)
             {
-                int n=0;
+                int n = 0;
                 while (n < _objects.Count)
                 {
                     ServerIdentity ident = (ServerIdentity)_objects[n];
                     ident.Lease.UpdateState();
                     if (ident.Lease.CurrentState == LeaseState.Expired)
                     {
-                        _objects.RemoveAt (n);
-                        ident.OnLifetimeExpired ();
+                        _objects.RemoveAt(n);
+                        ident.OnLifetimeExpired();
                     }
                     else
                         n++;
                 }
 
-                if (_objects.Count == 0) 
+                if (_objects.Count == 0)
                     StopManager();
             }
         }

@@ -18,24 +18,22 @@ namespace System.DirectoryServices.AccountManagement
     {
         public static SDSCache Domain
         {
-            get
-            {
-                return SDSCache.s_domainCache;
-            }
+            get { return SDSCache.s_domainCache; }
         }
 
         public static SDSCache LocalMachine
         {
-            get
-            {
-                return SDSCache.s_localMachineCache;
-            }
+            get { return SDSCache.s_localMachineCache; }
         }
 
         private static readonly SDSCache s_domainCache = new SDSCache(false);
         private static readonly SDSCache s_localMachineCache = new SDSCache(true);
 
-        public PrincipalContext GetContext(string name, NetCred credentials, ContextOptions contextOptions)
+        public PrincipalContext GetContext(
+            string name,
+            NetCred credentials,
+            ContextOptions contextOptions
+        )
         {
             string contextName = name;
             string userName = null;
@@ -55,13 +53,14 @@ namespace System.DirectoryServices.AccountManagement
             }
 
             GlobalDebug.WriteLineIf(
-                        GlobalDebug.Info,
-                        "SDSCache",
-                        "GetContext: looking for context for server {0}, user {1}, explicitCreds={2}, options={3}",
-                        name,
-                        userName,
-                        explicitCreds.ToString(),
-                        contextOptions.ToString());
+                GlobalDebug.Info,
+                "SDSCache",
+                "GetContext: looking for context for server {0}, user {1}, explicitCreds={2}, options={3}",
+                name,
+                userName,
+                explicitCreds.ToString(),
+                contextOptions.ToString()
+            );
 
             if (!_isSAM)
             {
@@ -69,11 +68,20 @@ namespace System.DirectoryServices.AccountManagement
 
                 // DS_RETURN_DNS_NAME | DS_DIRECTORY_SERVICE_REQUIRED | DS_BACKGROUND_ONLY
                 int flags = unchecked((int)(0x40000000 | 0x00000010 | 0x00000100));
-                UnsafeNativeMethods.DomainControllerInfo info = Utils.GetDcName(null, contextName, null, flags);
+                UnsafeNativeMethods.DomainControllerInfo info = Utils.GetDcName(
+                    null,
+                    contextName,
+                    null,
+                    flags
+                );
                 contextName = info.DomainName;
             }
 
-            GlobalDebug.WriteLineIf(GlobalDebug.Info, "SDSCache", "GetContext: final contextName is " + contextName);
+            GlobalDebug.WriteLineIf(
+                GlobalDebug.Info,
+                "SDSCache",
+                "GetContext: final contextName is " + contextName
+            );
 
             ManualResetEvent contextReadyEvent = null;
 
@@ -98,16 +106,26 @@ namespace System.DirectoryServices.AccountManagement
 
                     if (credHolder != null)
                     {
-                        GlobalDebug.WriteLineIf(GlobalDebug.Info, "SDSCache", "GetContext: found a credHolder for " + contextName);
+                        GlobalDebug.WriteLineIf(
+                            GlobalDebug.Info,
+                            "SDSCache",
+                            "GetContext: found a credHolder for " + contextName
+                        );
 
-                        credTable = (explicitCreds ? credHolder.explicitCreds : credHolder.defaultCreds);
+                        credTable = (
+                            explicitCreds ? credHolder.explicitCreds : credHolder.defaultCreds
+                        );
                         Debug.Assert(credTable != null);
 
                         object o = credTable[userName];
 
                         if (o is Placeholder)
                         {
-                            GlobalDebug.WriteLineIf(GlobalDebug.Info, "SDSCache", "GetContext: credHolder for " + contextName + " has a Placeholder");
+                            GlobalDebug.WriteLineIf(
+                                GlobalDebug.Info,
+                                "SDSCache",
+                                "GetContext: credHolder for " + contextName + " has a Placeholder"
+                            );
 
                             // A PrincipalContext is currently being constructed by another thread.
                             // Wait for it.
@@ -118,20 +136,32 @@ namespace System.DirectoryServices.AccountManagement
                         WeakReference refToContext = o as WeakReference;
                         if (refToContext != null)
                         {
-                            GlobalDebug.WriteLineIf(GlobalDebug.Info, "SDSCache", "GetContext: refToContext is non-null");
+                            GlobalDebug.WriteLineIf(
+                                GlobalDebug.Info,
+                                "SDSCache",
+                                "GetContext: refToContext is non-null"
+                            );
 
-                            ctx = (PrincipalContext)refToContext.Target;  // null if GC'ed
+                            ctx = (PrincipalContext)refToContext.Target; // null if GC'ed
 
                             // If the PrincipalContext hasn't been GCed or disposed, use it.
                             // Otherwise, we'll need to create a new one
                             if (ctx != null && ctx.Disposed == false)
                             {
-                                GlobalDebug.WriteLineIf(GlobalDebug.Info, "SDSCache", "GetContext: using found refToContext");
+                                GlobalDebug.WriteLineIf(
+                                    GlobalDebug.Info,
+                                    "SDSCache",
+                                    "GetContext: using found refToContext"
+                                );
                                 return ctx;
                             }
                             else
                             {
-                                GlobalDebug.WriteLineIf(GlobalDebug.Info, "SDSCache", "GetContext: refToContext is GCed/disposed, removing");
+                                GlobalDebug.WriteLineIf(
+                                    GlobalDebug.Info,
+                                    "SDSCache",
+                                    "GetContext: refToContext is GCed/disposed, removing"
+                                );
                                 credTable.Remove(userName);
                             }
                         }
@@ -143,16 +173,22 @@ namespace System.DirectoryServices.AccountManagement
                     if (credHolder == null)
                     {
                         GlobalDebug.WriteLineIf(
-                                GlobalDebug.Info,
-                                "SDSCache",
-                                "GetContext: null credHolder for " + contextName + ", explicitCreds=" + explicitCreds.ToString());
+                            GlobalDebug.Info,
+                            "SDSCache",
+                            "GetContext: null credHolder for "
+                                + contextName
+                                + ", explicitCreds="
+                                + explicitCreds.ToString()
+                        );
 
                         // No contexts exist for the contextName.  Create a CredHolder for the contextName so we have a place
                         // to store the PrincipalContext we'll be creating.
                         credHolder = new CredHolder();
                         _table[contextName] = credHolder;
 
-                        credTable = (explicitCreds ? credHolder.explicitCreds : credHolder.defaultCreds);
+                        credTable = (
+                            explicitCreds ? credHolder.explicitCreds : credHolder.defaultCreds
+                        );
                     }
 
                     // Put a placeholder on the contextName/userName slot, so that other threads that come along after
@@ -162,18 +198,22 @@ namespace System.DirectoryServices.AccountManagement
 
                 // Now we just need to create a PrincipalContext for the contextName and credentials
                 GlobalDebug.WriteLineIf(
-                        GlobalDebug.Info,
-                        "SDSCache",
-                        "GetContext: creating context, contextName=" + contextName + ", options=" + contextOptions.ToString());
+                    GlobalDebug.Info,
+                    "SDSCache",
+                    "GetContext: creating context, contextName="
+                        + contextName
+                        + ", options="
+                        + contextOptions.ToString()
+                );
 
                 ctx = new PrincipalContext(
-                                (_isSAM ? ContextType.Machine : ContextType.Domain),
-                                contextName,
-                                null,
-                                contextOptions,
-                                credentials?.UserName,
-                                credentials?.Password
-                                );
+                    (_isSAM ? ContextType.Machine : ContextType.Domain),
+                    contextName,
+                    null,
+                    contextOptions,
+                    credentials?.UserName,
+                    credentials?.Password
+                );
 
                 lock (_tableLock)
                 {

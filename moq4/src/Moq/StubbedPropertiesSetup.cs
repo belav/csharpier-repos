@@ -61,14 +61,20 @@ namespace Moq
                 Debug.Assert(invocation.Method.IsGetAccessor());
 
                 var propertyName = invocation.Method.Name.Substring(4);
-                var value = this.values.GetOrAdd(propertyName, pn => this.Mock.GetDefaultValue(invocation.Method, out _, this.defaultValueProvider));
+                var value = this.values.GetOrAdd(
+                    propertyName,
+                    pn =>
+                        this.Mock.GetDefaultValue(
+                            invocation.Method,
+                            out _,
+                            this.defaultValueProvider
+                        )
+                );
                 invocation.ReturnValue = value;
             }
         }
 
-        protected override void VerifySelf()
-        {
-        }
+        protected override void VerifySelf() { }
 
         private sealed class PropertyAccessorExpectation : Expectation
         {
@@ -79,18 +85,24 @@ namespace Moq
                 Debug.Assert(mock != null);
 
                 var mockType = mock.GetType();
-                var setupAllPropertiesMethod = mockType.GetMethod(nameof(Mock<object>.SetupAllProperties));
+                var setupAllPropertiesMethod = mockType.GetMethod(
+                    nameof(Mock<object>.SetupAllProperties)
+                );
                 var mockedType = setupAllPropertiesMethod.ReturnType.GetGenericArguments()[0];
                 var mockGetMethod = Mock.GetMethod.MakeGenericMethod(mockedType);
                 var mockParam = E.Parameter(mockedType, "m");
-                this.expression = E.Lambda(E.Call(E.Call(mockGetMethod, mockParam), setupAllPropertiesMethod), mockParam);
+                this.expression = E.Lambda(
+                    E.Call(E.Call(mockGetMethod, mockParam), setupAllPropertiesMethod),
+                    mockParam
+                );
             }
 
             public override LambdaExpression Expression => this.expression;
 
             public override bool Equals(Expectation other)
             {
-                return other is PropertyAccessorExpectation pae && ExpressionComparer.Default.Equals(this.expression, pae.expression);
+                return other is PropertyAccessorExpectation pae
+                    && ExpressionComparer.Default.Equals(this.expression, pae.expression);
             }
 
             public override int GetHashCode()

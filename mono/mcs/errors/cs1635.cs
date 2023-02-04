@@ -4,10 +4,10 @@
 
 class C
 {
-    public static void Main ()
+    public static void Main()
     {
 #pragma warning disable 219
-    int o = 4;
+        int o = 4;
 #pragma warning restore 219
     }
 }

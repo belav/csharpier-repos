@@ -2,44 +2,43 @@ using System;
 
 class X
 {
-    protected virtual int Foo ()
+    protected virtual int Foo()
     {
         return 1;
     }
 
-    protected delegate int FooDelegate ();
+    protected delegate int FooDelegate();
     protected FooDelegate foo;
 
-    protected X ()
+    protected X()
     {
-        foo = new FooDelegate (Foo);
+        foo = new FooDelegate(Foo);
     }
 }
 
 class Y : X
 {
-    protected Y ()
-        : base ()
-    { }
+    protected Y()
+        : base() { }
 
-    protected override int Foo ()
+    protected override int Foo()
     {
         return 2;
     }
 
-    int Hello ()
+    int Hello()
     {
-        return foo ();
+        return foo();
     }
 
-    public static void Main ()
+    public static void Main()
     {
-        Y y = new Y ();
-        int result = y.Hello ();
+        Y y = new Y();
+        int result = y.Hello();
 
         if (result == 2)
-            Console.WriteLine ("OK");
+            Console.WriteLine("OK");
         else
-            Console.WriteLine ("NOT OK");
+            Console.WriteLine("NOT OK");
     }
 }

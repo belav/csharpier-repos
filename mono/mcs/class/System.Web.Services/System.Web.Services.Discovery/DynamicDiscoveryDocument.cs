@@ -1,4 +1,4 @@
-// 
+//
 // System.Web.Services.Discovery.DynamicDiscoveryDocument.cs
 //
 // Author:
@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,58 +32,63 @@
 using System.IO;
 using System.Xml.Serialization;
 
-namespace System.Web.Services.Discovery {
-
-    [XmlRootAttribute("dynamicDiscovery", Namespace="urn:schemas-dynamicdiscovery:disco.2000-03-17", IsNullable=true)]
-    public sealed class DynamicDiscoveryDocument {
-
+namespace System.Web.Services.Discovery
+{
+    [XmlRootAttribute(
+        "dynamicDiscovery",
+        Namespace = "urn:schemas-dynamicdiscovery:disco.2000-03-17",
+        IsNullable = true
+    )]
+    public sealed class DynamicDiscoveryDocument
+    {
         #region Fields
-        
+
         public const string Namespace = "urn:schemas-dynamicdiscovery:disco.2000-03-17";
-        
+
         ExcludePathInfo[] excludes;
-        
+
         #endregion // Fields
-        
+
         #region Constructors
 
-        public DynamicDiscoveryDocument () 
-        {
-        }
-        
+        public DynamicDiscoveryDocument() { }
+
         #endregion // Constructors
 
         #region Properties
-        
+
         [XmlElement("exclude", typeof(ExcludePathInfo))]
-        public ExcludePathInfo[] ExcludePaths {
+        public ExcludePathInfo[] ExcludePaths
+        {
             get { return excludes; }
             set { excludes = value; }
         }
-        
+
         #endregion // Properties
 
         #region Methods
 
-        public static DynamicDiscoveryDocument Load (Stream stream)
+        public static DynamicDiscoveryDocument Load(Stream stream)
         {
-            XmlSerializer ser = new XmlSerializer (typeof(DynamicDiscoveryDocument));
-            return (DynamicDiscoveryDocument) ser.Deserialize (stream);
+            XmlSerializer ser = new XmlSerializer(typeof(DynamicDiscoveryDocument));
+            return (DynamicDiscoveryDocument)ser.Deserialize(stream);
         }
 
-        public void Write (Stream stream)
+        public void Write(Stream stream)
         {
-            XmlSerializer ser = new XmlSerializer (typeof(DynamicDiscoveryDocument));
-            ser.Serialize (stream, this);
+            XmlSerializer ser = new XmlSerializer(typeof(DynamicDiscoveryDocument));
+            ser.Serialize(stream, this);
         }
-        
-        internal bool IsExcluded (string path)
+
+        internal bool IsExcluded(string path)
         {
-            if (excludes == null) return false;
-            
+            if (excludes == null)
+                return false;
+
             foreach (ExcludePathInfo ex in excludes)
-                if (ex.Path == path) return true;
-                
+                if (ex.Path == path)
+                    return true;
+
             return false;
         }
 

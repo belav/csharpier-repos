@@ -9,14 +9,19 @@ namespace Microsoft.CodeAnalysis.InlineHints;
 [DataContract]
 internal readonly record struct InlineTypeHintsOptions
 {
-    [DataMember] public bool EnabledForTypes { get; init; } = false;
-    [DataMember] public bool ForImplicitVariableTypes { get; init; } = true;
-    [DataMember] public bool ForLambdaParameterTypes { get; init; } = true;
-    [DataMember] public bool ForImplicitObjectCreation { get; init; } = true;
+    [DataMember]
+    public bool EnabledForTypes { get; init; } = false;
 
-    public InlineTypeHintsOptions()
-    {
-    }
+    [DataMember]
+    public bool ForImplicitVariableTypes { get; init; } = true;
+
+    [DataMember]
+    public bool ForLambdaParameterTypes { get; init; } = true;
+
+    [DataMember]
+    public bool ForImplicitObjectCreation { get; init; } = true;
+
+    public InlineTypeHintsOptions() { }
 
     public static readonly InlineTypeHintsOptions Default = new();
 }

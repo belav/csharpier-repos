@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -39,75 +39,89 @@ namespace System.Runtime.Remoting.Channels.Tcp
     internal class TcpServerTransportSink : IServerChannelSink, IChannelSinkBase
     {
         IServerChannelSink next_sink;
-        
-        public TcpServerTransportSink (IServerChannelSink next)
+
+        public TcpServerTransportSink(IServerChannelSink next)
         {
             next_sink = next;
         }
-        
-        public IServerChannelSink NextChannelSink 
+
+        public IServerChannelSink NextChannelSink
         {
-            get 
+            get { return next_sink; }
+        }
+
+        public IDictionary Properties
+        {
+            get
             {
-                return next_sink;
+                if (next_sink != null)
+                    return next_sink.Properties;
+                else
+                    return null;
             }
         }
 
-        public IDictionary Properties 
-        {
-            get 
-            {
-                if (next_sink != null) return next_sink.Properties;
-                else return null;
-            }
-        }
-
-        public void AsyncProcessResponse (IServerResponseChannelSinkStack sinkStack, object state,
-            IMessage msg, ITransportHeaders headers, Stream responseStream)
+        public void AsyncProcessResponse(
+            IServerResponseChannelSinkStack sinkStack,
+            object state,
+            IMessage msg,
+            ITransportHeaders headers,
+            Stream responseStream
+        )
         {
             ClientConnection connection = (ClientConnection)state;
-            
-            NetworkStream ns = new NetworkStream (connection.Socket);
-            TcpMessageIO.SendMessageStream (ns, responseStream, headers, connection.Buffer);
-            ns.Flush ();
-            ns.Close ();
+
+            NetworkStream ns = new NetworkStream(connection.Socket);
+            TcpMessageIO.SendMessageStream(ns, responseStream, headers, connection.Buffer);
+            ns.Flush();
+            ns.Close();
         }
 
-        public Stream GetResponseStream (IServerResponseChannelSinkStack sinkStack, object state,
-            IMessage msg, ITransportHeaders headers)
+        public Stream GetResponseStream(
+            IServerResponseChannelSinkStack sinkStack,
+            object state,
+            IMessage msg,
+            ITransportHeaders headers
+        )
         {
             return null;
         }
-        
-        public ServerProcessing ProcessMessage (IServerChannelSinkStack sinkStack,
+
+        public ServerProcessing ProcessMessage(
+            IServerChannelSinkStack sinkStack,
             IMessage requestMsg,
             ITransportHeaders requestHeaders,
             Stream requestStream,
             out IMessage responseMsg,
             out ITransportHeaders responseHeaders,
-            out Stream responseStream)
+            out Stream responseStream
+        )
         {
             // this is the first sink, and TcpServerChannel does not call it.
-            throw new NotSupportedException ();
+            throw new NotSupportedException();
         }
 
-        internal void InternalProcessMessage (ClientConnection connection, Stream stream)
+        internal void InternalProcessMessage(ClientConnection connection, Stream stream)
         {
             // Reads the headers and the request stream
 
             Stream requestStream;
             ITransportHeaders requestHeaders;
 
-            requestStream = TcpMessageIO.ReceiveMessageStream (stream, out requestHeaders, connection.Buffer);
-            requestHeaders [CommonTransportKeys.IPAddress] = connection.ClientAddress;
-            requestHeaders [CommonTransportKeys.ConnectionId] = connection.Id;
+            requestStream = TcpMessageIO.ReceiveMessageStream(
+                stream,
+                out requestHeaders,
+                connection.Buffer
+            );
+            requestHeaders[CommonTransportKeys.IPAddress] = connection.ClientAddress;
+            requestHeaders[CommonTransportKeys.ConnectionId] = connection.Id;
 
-            string uri = (string) requestHeaders [CommonTransportKeys.RequestUri];
-            TcpChannel.ParseChannelUrl (uri, out uri);
-            
+            string uri = (string)requestHeaders[CommonTransportKeys.RequestUri];
+            TcpChannel.ParseChannelUrl(uri, out uri);
+
             if (uri != null)
-                requestHeaders [CommonTransportKeys.RequestUri] = uri;
-            
+                requestHeaders[CommonTransportKeys.RequestUri] = uri;
+
             // Pushes the connection object together with the sink. This information
             // will be used for sending the response in an async call.
 
@@ -118,13 +132,26 @@ namespace System.Runtime.Remoting.Channels.Tcp
             Stream responseStream;
             IMessage responseMsg;
 
-            ServerProcessing proc = next_sink.ProcessMessage(sinkStack, null, requestHeaders, requestStream, out responseMsg, out responseHeaders, out responseStream);
+            ServerProcessing proc = next_sink.ProcessMessage(
+                sinkStack,
+                null,
+                requestHeaders,
+                requestStream,
+                out responseMsg,
+                out responseHeaders,
+                out responseStream
+            );
 
             switch (proc)
             {
                 case ServerProcessing.Complete:
-                    TcpMessageIO.SendMessageStream (stream, responseStream, responseHeaders, connection.Buffer);
-                    stream.Flush ();
+                    TcpMessageIO.SendMessageStream(
+                        stream,
+                        responseStream,
+                        responseHeaders,
+                        connection.Buffer
+                    );
+                    stream.Flush();
                     break;
 
                 case ServerProcessing.Async:
@@ -134,4 +161,3 @@ namespace System.Runtime.Remoting.Channels.Tcp
         }
     }
 }
-

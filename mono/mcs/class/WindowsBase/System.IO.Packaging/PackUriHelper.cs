@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -25,68 +25,70 @@
 
 using System;
 
-namespace System.IO.Packaging {
-
+namespace System.IO.Packaging
+{
     public static class PackUriHelper
     {
         public static readonly string UriSchemePack = "pack";
         static readonly Uri PackSchemeUri = new Uri("pack://", UriKind.Absolute);
         static readonly char[] _escapedChars = new char[] { '%', ',', '?', '@' };
 
-        
-        static PackUriHelper ()
+        static PackUriHelper()
         {
-            if (!UriParser.IsKnownScheme (UriSchemePack))
-                UriParser.Register (new PackUriParser (), UriSchemePack, -1);
+            if (!UriParser.IsKnownScheme(UriSchemePack))
+                UriParser.Register(new PackUriParser(), UriSchemePack, -1);
         }
-        
-        public static int ComparePackUri (Uri firstPackUri, Uri secondPackUri)
+
+        public static int ComparePackUri(Uri firstPackUri, Uri secondPackUri)
         {
             if (firstPackUri == null)
                 return secondPackUri == null ? 0 : -1;
             if (secondPackUri == null)
                 return 1;
 
-            Check.PackUriIsValid (firstPackUri);
-            Check.PackUriIsValid (secondPackUri);
+            Check.PackUriIsValid(firstPackUri);
+            Check.PackUriIsValid(secondPackUri);
 
             // FIXME: What exactly is compared. Lets assume originalstring
-            return firstPackUri.OriginalString.CompareTo (secondPackUri.OriginalString);
+            return firstPackUri.OriginalString.CompareTo(secondPackUri.OriginalString);
         }
 
-        public static int ComparePartUri (Uri firstPartUri, Uri secondPartUri)
+        public static int ComparePartUri(Uri firstPartUri, Uri secondPartUri)
         {
             if (firstPartUri == null)
                 return secondPartUri == null ? 0 : -1;
             if (secondPartUri == null)
                 return 1;
 
-            Check.PartUriIsValid (firstPartUri);
-            Check.PartUriIsValid (secondPartUri);
+            Check.PartUriIsValid(firstPartUri);
+            Check.PartUriIsValid(secondPartUri);
 
-            return firstPartUri.OriginalString.CompareTo (secondPartUri.OriginalString);
+            return firstPartUri.OriginalString.CompareTo(secondPartUri.OriginalString);
         }
 
-        public static Uri Create (Uri packageUri)
+        public static Uri Create(Uri packageUri)
         {
-            return Create (packageUri, null, null);
+            return Create(packageUri, null, null);
         }
 
-        public static Uri Create (Uri packageUri, Uri partUri)
+        public static Uri Create(Uri packageUri, Uri partUri)
         {
-            return Create (packageUri, partUri, null);
+            return Create(packageUri, partUri, null);
         }
 
-        public static Uri Create (Uri packageUri, Uri partUri, string fragment)
+        public static Uri Create(Uri packageUri, Uri partUri, string fragment)
         {
-            Check.PackageUri (packageUri);
-            Check.PackageUriIsValid (packageUri);
-            
+            Check.PackageUri(packageUri);
+            Check.PackageUriIsValid(packageUri);
+
             if (partUri != null)
-                Check.PartUriIsValid (partUri);
-            
+                Check.PartUriIsValid(partUri);
+
             if (fragment != null && (fragment.Length == 0 || fragment[0] != '#'))
-                throw new ArgumentException ("Fragment", "Fragment must not be empty and must start with '#'");
+                throw new ArgumentException(
+                    "Fragment",
+                    "Fragment must not be empty and must start with '#'"
+                );
 
             // FIXME: Validate that partUri is a valid one? Must be relative, must start with '/'
 
@@ -96,7 +98,9 @@ namespace System.IO.Packaging {
 
             foreach (var ch in _escapedChars)
             {
-                orig = !orig.Contains(ch.ToString()) ? orig : orig.Replace(ch.ToString(), Uri.HexEscape(ch));
+                orig = !orig.Contains(ch.ToString())
+                    ? orig
+                    : orig.Replace(ch.ToString(), Uri.HexEscape(ch));
             }
 
             orig = orig.Replace('/', ',');
@@ -104,40 +108,40 @@ namespace System.IO.Packaging {
             if (partUri != null)
                 orig += partUri.OriginalString;
 
-            if ((fragment == null && partUri == null)&& orig[orig.Length - 1] != '/')
+            if ((fragment == null && partUri == null) && orig[orig.Length - 1] != '/')
                 orig += '/';
 
             if (fragment != null)
                 orig += fragment;
-            
-            return new Uri ("pack://" + orig);
+
+            return new Uri("pack://" + orig);
         }
 
-        public static Uri CreatePartUri (Uri partUri)
+        public static Uri CreatePartUri(Uri partUri)
         {
-            Check.PartUri (partUri);
-            
+            Check.PartUri(partUri);
+
             if (partUri.OriginalString[0] != '/')
-                partUri = new Uri("/" + partUri.ToString (), UriKind.Relative);
+                partUri = new Uri("/" + partUri.ToString(), UriKind.Relative);
             return partUri;
         }
 
-        public static Uri GetNormalizedPartUri (Uri partUri)
+        public static Uri GetNormalizedPartUri(Uri partUri)
         {
-            Check.PartUri (partUri);
-            return new Uri (partUri.ToString ().ToUpperInvariant (), UriKind.Relative);
+            Check.PartUri(partUri);
+            return new Uri(partUri.ToString().ToUpperInvariant(), UriKind.Relative);
         }
 
-        public static Uri GetPackageUri (Uri packUri)
+        public static Uri GetPackageUri(Uri packUri)
         {
-            Check.PackUri (packUri);
-            Check.PackUriIsValid (packUri);
+            Check.PackUri(packUri);
+            Check.PackUriIsValid(packUri);
 
             string s = packUri.Host.Replace(',', '/');
-            return new Uri (Uri.UnescapeDataString(s), UriKind.RelativeOrAbsolute);
+            return new Uri(Uri.UnescapeDataString(s), UriKind.RelativeOrAbsolute);
         }
 
-        public static Uri GetPartUri (Uri packUri)
+        public static Uri GetPartUri(Uri packUri)
         {
             Check.PackUri(packUri);
             Check.PackUriIsValid(packUri);
@@ -148,59 +152,59 @@ namespace System.IO.Packaging {
             return new Uri(packUri.AbsolutePath, UriKind.Relative);
         }
 
-        public static Uri GetRelationshipPartUri (Uri partUri)
+        public static Uri GetRelationshipPartUri(Uri partUri)
         {
-            Check.PartUri (partUri);
-            Check.PartUriIsValid (partUri);
-            
-            int index = partUri.OriginalString.LastIndexOf ("/");
-            string s = partUri.OriginalString.Substring (0, index);
-            s += "/_rels" + partUri.OriginalString.Substring (index) + ".rels";
-            return new Uri (s, UriKind.Relative);
+            Check.PartUri(partUri);
+            Check.PartUriIsValid(partUri);
+
+            int index = partUri.OriginalString.LastIndexOf("/");
+            string s = partUri.OriginalString.Substring(0, index);
+            s += "/_rels" + partUri.OriginalString.Substring(index) + ".rels";
+            return new Uri(s, UriKind.Relative);
         }
 
-        public static Uri GetRelativeUri (Uri sourcePartUri, Uri targetPartUri)
+        public static Uri GetRelativeUri(Uri sourcePartUri, Uri targetPartUri)
         {
-            Check.SourcePartUri (sourcePartUri);
-            Check.TargetPartUri (targetPartUri);
+            Check.SourcePartUri(sourcePartUri);
+            Check.TargetPartUri(targetPartUri);
 
-            Uri uri = new Uri ("http://fake.com");
-            Uri a = new Uri (uri, sourcePartUri.OriginalString);
-            Uri b = new Uri (uri, targetPartUri.OriginalString);
+            Uri uri = new Uri("http://fake.com");
+            Uri a = new Uri(uri, sourcePartUri.OriginalString);
+            Uri b = new Uri(uri, targetPartUri.OriginalString);
 
             return a.MakeRelativeUri(b);
         }
 
-        public static Uri GetSourcePartUriFromRelationshipPartUri (Uri relationshipPartUri)
+        public static Uri GetSourcePartUriFromRelationshipPartUri(Uri relationshipPartUri)
         {
             //Check.RelationshipPartUri (relationshipPartUri);
-            if (!IsRelationshipPartUri (relationshipPartUri))
-                throw new Exception  ("is not a relationship part!?");
+            if (!IsRelationshipPartUri(relationshipPartUri))
+                throw new Exception("is not a relationship part!?");
             return null;
         }
 
-        public static bool IsRelationshipPartUri (Uri partUri)
+        public static bool IsRelationshipPartUri(Uri partUri)
         {
-            Check.PartUri (partUri);
-            return partUri.OriginalString.StartsWith ("/_rels") && partUri.OriginalString.EndsWith (".rels");
+            Check.PartUri(partUri);
+            return partUri.OriginalString.StartsWith("/_rels")
+                && partUri.OriginalString.EndsWith(".rels");
         }
 
-        public static Uri ResolvePartUri (Uri sourcePartUri, Uri targetUri)
+        public static Uri ResolvePartUri(Uri sourcePartUri, Uri targetUri)
         {
-            Check.SourcePartUri (sourcePartUri);
-            Check.TargetUri (targetUri);
-            
-            Check.PartUriIsValid (sourcePartUri);
-            if (targetUri.IsAbsoluteUri)
-                throw new ArgumentException ("targetUri", "Absolute URIs are not supported");
+            Check.SourcePartUri(sourcePartUri);
+            Check.TargetUri(targetUri);
 
-            Uri uri = new Uri ("http://fake.com");
-            uri = new Uri (uri, sourcePartUri);
-            uri = new Uri (uri, targetUri);
+            Check.PartUriIsValid(sourcePartUri);
+            if (targetUri.IsAbsoluteUri)
+                throw new ArgumentException("targetUri", "Absolute URIs are not supported");
+
+            Uri uri = new Uri("http://fake.com");
+            uri = new Uri(uri, sourcePartUri);
+            uri = new Uri(uri, targetUri);
 
             // Trim out 'http://fake.com'
-            return new Uri (uri.OriginalString.Substring (15), UriKind.Relative); 
+            return new Uri(uri.OriginalString.Substring(15), UriKind.Relative);
         }
     }
-
 }

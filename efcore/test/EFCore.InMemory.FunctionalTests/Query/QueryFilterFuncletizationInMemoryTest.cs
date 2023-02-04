@@ -8,14 +8,12 @@ public class QueryFilterFuncletizationInMemoryTest
 {
     public QueryFilterFuncletizationInMemoryTest(
         QueryFilterFuncletizationInMemoryFixture fixture,
-        ITestOutputHelper testOutputHelper)
-        : base(fixture)
-    {
-    }
+        ITestOutputHelper testOutputHelper
+    )
+        : base(fixture) { }
 
     public class QueryFilterFuncletizationInMemoryFixture : QueryFilterFuncletizationFixtureBase
     {
-        protected override ITestStoreFactory TestStoreFactory
-            => InMemoryTestStoreFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory => InMemoryTestStoreFactory.Instance;
     }
 }

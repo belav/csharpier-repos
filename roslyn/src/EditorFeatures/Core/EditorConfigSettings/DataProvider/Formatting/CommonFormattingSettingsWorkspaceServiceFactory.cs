@@ -10,14 +10,17 @@ using Microsoft.CodeAnalysis.Host.Mef;
 
 namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.DataProvider.Formatting
 {
-    [ExportWorkspaceServiceFactory(typeof(IWorkspaceSettingsProviderFactory<FormattingSetting>)), Shared]
+    [
+        ExportWorkspaceServiceFactory(typeof(IWorkspaceSettingsProviderFactory<FormattingSetting>)),
+        Shared
+    ]
     internal class CommonFormattingSettingsWorkspaceServiceFactory : IWorkspaceServiceFactory
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public CommonFormattingSettingsWorkspaceServiceFactory() { }
 
-        public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices)
-            => new CommonFormattingSettingsProviderFactory(workspaceServices.Workspace);
+        public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices) =>
+            new CommonFormattingSettingsProviderFactory(workspaceServices.Workspace);
     }
 }

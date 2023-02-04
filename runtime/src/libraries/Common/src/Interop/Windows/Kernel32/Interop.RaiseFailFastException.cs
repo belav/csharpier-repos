@@ -33,7 +33,11 @@ internal partial class Interop
         // Wrapper for calling RaiseFailFastException
         //
         [DoesNotReturn]
-        internal static unsafe void RaiseFailFastException(uint faultCode, IntPtr pExAddress, IntPtr pExContext)
+        internal static unsafe void RaiseFailFastException(
+            uint faultCode,
+            IntPtr pExAddress,
+            IntPtr pExContext
+        )
         {
             EXCEPTION_RECORD exceptionRecord;
             exceptionRecord.ExceptionCode = faultCode;
@@ -46,7 +50,8 @@ internal partial class Interop
             RaiseFailFastException(
                 &exceptionRecord,
                 pExContext,
-                pExAddress == IntPtr.Zero ? FAIL_FAST_GENERATE_EXCEPTION_ADDRESS : 0);
+                pExAddress == IntPtr.Zero ? FAIL_FAST_GENERATE_EXCEPTION_ADDRESS : 0
+            );
         }
 
         [LibraryImport(Libraries.Kernel32, EntryPoint = "RaiseFailFastException")]
@@ -54,6 +59,7 @@ internal partial class Interop
         private static unsafe partial void RaiseFailFastException(
             EXCEPTION_RECORD* pExceptionRecord,
             IntPtr pContextRecord,
-            uint dwFlags);
+            uint dwFlags
+        );
     }
 }

@@ -11,7 +11,8 @@ public static class Process
         Action<string> stdOut = null,
         Action<string> stdErr = null,
         string workingDirectory = null,
-        params (string key, string value)[] environmentVariables)
+        params (string key, string value)[] environmentVariables
+    )
     {
         args ??= "";
 

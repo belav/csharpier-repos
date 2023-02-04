@@ -32,8 +32,10 @@ namespace Microsoft.CodeAnalysis.Host.Mef
         private readonly ExportProvider _exportProvider;
 
         // accumulated cache for exports
-        private ImmutableDictionary<ExportKey, IEnumerable> _exportsMap
-            = ImmutableDictionary<ExportKey, IEnumerable>.Empty;
+        private ImmutableDictionary<ExportKey, IEnumerable> _exportsMap = ImmutableDictionary<
+            ExportKey,
+            IEnumerable
+        >.Empty;
 
         private MefV1HostServices(ExportProvider exportProvider)
         {
@@ -63,14 +65,20 @@ namespace Microsoft.CodeAnalysis.Host.Mef
             }
 
             var catalog = new AggregateCatalog(assemblies.Select(a => new AssemblyCatalog(a)));
-            var container = new CompositionContainer(catalog, compositionOptions: CompositionOptions.DisableSilentRejection | CompositionOptions.IsThreadSafe);
+            var container = new CompositionContainer(
+                catalog,
+                compositionOptions: CompositionOptions.DisableSilentRejection
+                    | CompositionOptions.IsThreadSafe
+            );
             return new MefV1HostServices(container);
         }
 
         /// <summary>
         /// Creates a new <see cref="HostWorkspaceServices"/> associated with the specified workspace.
         /// </summary>
-        protected internal override HostWorkspaceServices CreateWorkspaceServices(Workspace workspace)
+        protected internal override HostWorkspaceServices CreateWorkspaceServices(
+            Workspace workspace
+        )
         {
             return new MefWorkspaceServices(this, workspace);
         }
@@ -80,13 +88,22 @@ namespace Microsoft.CodeAnalysis.Host.Mef
         /// </summary>
         public IEnumerable<Lazy<TExtension, TMetadata>> GetExports<TExtension, TMetadata>()
         {
-            var key = new ExportKey(typeof(TExtension).AssemblyQualifiedName, typeof(TMetadata).AssemblyQualifiedName);
+            var key = new ExportKey(
+                typeof(TExtension).AssemblyQualifiedName,
+                typeof(TMetadata).AssemblyQualifiedName
+            );
             if (!_exportsMap.TryGetValue(key, out var exports))
             {
-                exports = ImmutableInterlocked.GetOrAdd(ref _exportsMap, key, _ =>
-                {
-                    return _exportProvider.GetExports<TExtension, TMetadata>().ToImmutableArray();
-                });
+                exports = ImmutableInterlocked.GetOrAdd(
+                    ref _exportsMap,
+                    key,
+                    _ =>
+                    {
+                        return _exportProvider
+                            .GetExports<TExtension, TMetadata>()
+                            .ToImmutableArray();
+                    }
+                );
             }
 
             return (IEnumerable<Lazy<TExtension, TMetadata>>)exports;
@@ -100,15 +117,17 @@ namespace Microsoft.CodeAnalysis.Host.Mef
             var key = new ExportKey(typeof(TExtension).AssemblyQualifiedName, "");
             if (!_exportsMap.TryGetValue(key, out var exports))
             {
-                exports = ImmutableInterlocked.GetOrAdd(ref _exportsMap, key, _ =>
-                    _exportProvider.GetExports<TExtension>().ToImmutableArray());
+                exports = ImmutableInterlocked.GetOrAdd(
+                    ref _exportsMap,
+                    key,
+                    _ => _exportProvider.GetExports<TExtension>().ToImmutableArray()
+                );
             }
 
             return (IEnumerable<Lazy<TExtension>>)exports;
         }
 
-        internal TestAccessor GetTestAccessor()
-            => new TestAccessor(this);
+        internal TestAccessor GetTestAccessor() => new TestAccessor(this);
 
         private readonly struct ExportKey : IEquatable<ExportKey>
         {
@@ -124,16 +143,27 @@ namespace Microsoft.CodeAnalysis.Host.Mef
 
             public bool Equals(ExportKey other)
             {
-                return string.Compare(this.ExtensionTypeName, other.ExtensionTypeName, StringComparison.OrdinalIgnoreCase) == 0
-                    && string.Compare(this.MetadataTypeName, other.MetadataTypeName, StringComparison.OrdinalIgnoreCase) == 0;
+                return string.Compare(
+                        this.ExtensionTypeName,
+                        other.ExtensionTypeName,
+                        StringComparison.OrdinalIgnoreCase
+                    ) == 0
+                    && string.Compare(
+                        this.MetadataTypeName,
+                        other.MetadataTypeName,
+                        StringComparison.OrdinalIgnoreCase
+                    ) == 0;
             }
 
-            public override bool Equals(object obj)
-                => obj is ExportKey exportKey && this.Equals(exportKey);
+            public override bool Equals(object obj) =>
+                obj is ExportKey exportKey && this.Equals(exportKey);
 
             public override int GetHashCode()
             {
-                return Hash.Combine(this.MetadataTypeName.GetHashCode(), this.ExtensionTypeName.GetHashCode());
+                return Hash.Combine(
+                    this.MetadataTypeName.GetHashCode(),
+                    this.ExtensionTypeName.GetHashCode()
+                );
             }
         }
 

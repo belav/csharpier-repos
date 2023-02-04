@@ -41,11 +41,9 @@ using System.Collections.Specialized;
 
 namespace GHTTests.System_Web_dll.System_Web
 {
-    public class HttpRequest_Headers
-        : GHTBaseWeb 
+    public class HttpRequest_Headers : GHTBaseWeb
     {
-
-        private void Page_Load(object sender, System.EventArgs e) 
+        private void Page_Load(object sender, System.EventArgs e)
         {
             System.Web.UI.HtmlControls.HtmlForm frm = (HtmlForm)FindControl("Form1");
             GHTTestBegin(frm);
@@ -53,69 +51,76 @@ namespace GHTTests.System_Web_dll.System_Web
             // testing if the headers object is set
             // ===================================
             GHTSubTestBegin("Request.Headers1");
-                try 
-                {
-                    if (Request.Headers == null)
-                        GHTSubTestAddResult("Failed");
-                    else
-                        GHTSubTestAddResult("Success");
-                }
-                catch (Exception ex) 
-                {
-                    GHTSubTestAddResult("unxpected " + ex.GetType().Name + " exception was caught-" + ex.Message);
-                }
+            try
+            {
+                if (Request.Headers == null)
+                    GHTSubTestAddResult("Failed");
+                else
+                    GHTSubTestAddResult("Success");
+            }
+            catch (Exception ex)
+            {
+                GHTSubTestAddResult(
+                    "unxpected " + ex.GetType().Name + " exception was caught-" + ex.Message
+                );
+            }
 
             GHTSubTestEnd();
 
             // ===================================
-            // testing if the objects returned is from the 
+            // testing if the objects returned is from the
             // correct type
             // ===================================
             GHTSubTestBegin("Request.Headers2");
-            try 
+            try
             {
                 NameValueCollection cookie = Request.Headers;
                 GHTSubTestAddResult("success");
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
-                GHTSubTestAddResult("Unxpected " + ex.GetType().Name + " exception was caught-" + ex.Message);
+                GHTSubTestAddResult(
+                    "Unxpected " + ex.GetType().Name + " exception was caught-" + ex.Message
+                );
             }
             GHTSubTestEnd();
 
             // ===================================
             // testing if the Headers collection contains the
-            // right context. 
+            // right context.
             // ===================================
             GHTSubTestBegin("Request.Headers3");
-            try 
+            try
             {
                 NameValueCollection Headers = Request.Headers;
                 foreach (string current in Headers.Keys)
                     GHTSubTestAddResult(current);
             }
-
-            catch (Exception ex) 
+            catch (Exception ex)
             {
-                GHTSubTestAddResult("Unxpected " + ex.GetType().Name + " exception was caught-" + ex.Message);
+                GHTSubTestAddResult(
+                    "Unxpected " + ex.GetType().Name + " exception was caught-" + ex.Message
+                );
             }
 
             GHTSubTestEnd();
 
             // ===================================
             // testing if the Headers collection contains the
-            // right context. 
+            // right context.
             // ===================================
             GHTSubTestBegin("Request.Headers4");
-            try 
+            try
             {
                 NameValueCollection Headers = this.Request.Headers;
                 foreach (string header in Headers.AllKeys)
                     GHTSubTestAddResult(header);
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
-                GHTSubTestAddResult("Unxpected " + ex.GetType().Name + " exception was caught-" + ex.Message);
+                GHTSubTestAddResult(
+                    "Unxpected " + ex.GetType().Name + " exception was caught-" + ex.Message
+                );
             }
             GHTSubTestEnd();
 
@@ -129,14 +134,21 @@ namespace GHTTests.System_Web_dll.System_Web
                 {
                     if (textArray1[num1].ToLower().CompareTo("host") != 0)
                     {
-                        this.GHTSubTestAddResult(textArray1[num1] + "=" + this.Request.Headers.Get(textArray1[num1]) + "<br>");
+                        this.GHTSubTestAddResult(
+                            textArray1[num1]
+                                + "="
+                                + this.Request.Headers.Get(textArray1[num1])
+                                + "<br>"
+                        );
                     }
                 }
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
-                GHTSubTestAddResult("unxpected " + ex.GetType().Name + " exception was caught-" + ex.Message);
-                }
+                GHTSubTestAddResult(
+                    "unxpected " + ex.GetType().Name + " exception was caught-" + ex.Message
+                );
+            }
             GHTSubTestEnd();
             GHTTestEnd();
         }
@@ -150,16 +162,15 @@ namespace GHTTests.System_Web_dll.System_Web
             InitializeComponent();
             base.OnInit(e);
         }
-        
+
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
-        {    
+        {
             this.Load += new System.EventHandler(this.Page_Load);
         }
         #endregion
-
     }
 }

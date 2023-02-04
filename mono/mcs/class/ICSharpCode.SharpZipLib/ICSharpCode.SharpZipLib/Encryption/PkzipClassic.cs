@@ -21,7 +21,7 @@
 // making a combined work based on this library.  Thus, the terms and
 // conditions of the GNU General Public License cover the whole
 // combination.
-// 
+//
 // As a special exception, the copyright holders of this library give you
 // permission to link this library with independent modules to produce an
 // executable, regardless of the license terms of these independent
@@ -44,34 +44,32 @@ namespace ICSharpCode.SharpZipLib.Encryption
 {
     /// <summary>
     /// PkzipClassic embodies the classic or original encryption facilities used in Pkzip archives.
-    /// While it has been superceded by more recent and more powerful algorithms, its still in use and 
+    /// While it has been superceded by more recent and more powerful algorithms, its still in use and
     /// is viable for preventing casual snooping
     /// </summary>
-    [System.ObsoleteAttribute("This assembly has been deprecated. Please use https://www.nuget.org/packages/SharpZipLib/ instead.")]
-    public abstract class PkzipClassic  : SymmetricAlgorithm
+    [System.ObsoleteAttribute(
+        "This assembly has been deprecated. Please use https://www.nuget.org/packages/SharpZipLib/ instead."
+    )]
+    public abstract class PkzipClassic : SymmetricAlgorithm
     {
         /// <summary>
         /// Generates new encryption keys based on given seed
         /// </summary>
         static public byte[] GenerateKeys(byte[] seed)
         {
-            if ( seed == null ) 
+            if (seed == null)
             {
                 throw new ArgumentNullException("seed");
             }
 
-            if ( seed.Length == 0 )
+            if (seed.Length == 0)
             {
                 throw new ArgumentException("seed");
             }
 
-            uint[] newKeys = new uint[] {
-                                        0x12345678,
-                                        0x23456789,
-                                        0x34567890
-                                     };
-            
-            for (int i = 0; i < seed.Length; ++i) 
+            uint[] newKeys = new uint[] { 0x12345678, 0x23456789, 0x34567890 };
+
+            for (int i = 0; i < seed.Length; ++i)
             {
                 newKeys[0] = Crc32.ComputeCrc32(newKeys[0], seed[i]);
                 newKeys[1] = newKeys[1] + (byte)newKeys[0];
@@ -102,10 +100,10 @@ namespace ICSharpCode.SharpZipLib.Encryption
     /// </summary>
     class PkzipClassicCryptoBase
     {
-        uint[] keys     = null;
+        uint[] keys = null;
 
         /// <summary>
-        /// Transform a single byte 
+        /// Transform a single byte
         /// </summary>
         /// <returns>
         /// The transformed value
@@ -118,23 +116,31 @@ namespace ICSharpCode.SharpZipLib.Encryption
 
         protected void SetKeys(byte[] keyData)
         {
-            if ( keyData == null ) {
+            if (keyData == null)
+            {
                 throw new ArgumentNullException("keyData");
             }
-        
-            if ( keyData.Length != 12 ) {
+
+            if (keyData.Length != 12)
+            {
                 throw new InvalidOperationException("Keys not valid");
             }
-            
+
             keys = new uint[3];
-            keys[0] = (uint)((keyData[3] << 24) | (keyData[2] << 16) | (keyData[1] << 8) | keyData[0]);
-            keys[1] = (uint)((keyData[7] << 24) | (keyData[6] << 16) | (keyData[5] << 8) | keyData[4]);
-            keys[2] = (uint)((keyData[11] << 24) | (keyData[10] << 16) | (keyData[9] << 8) | keyData[8]);
+            keys[0] = (uint)(
+                (keyData[3] << 24) | (keyData[2] << 16) | (keyData[1] << 8) | keyData[0]
+            );
+            keys[1] = (uint)(
+                (keyData[7] << 24) | (keyData[6] << 16) | (keyData[5] << 8) | keyData[4]
+            );
+            keys[2] = (uint)(
+                (keyData[11] << 24) | (keyData[10] << 16) | (keyData[9] << 8) | keyData[8]
+            );
         }
 
         /// <summary>
-        /// Update encryption keys 
-        /// </summary>        
+        /// Update encryption keys
+        /// </summary>
         protected void UpdateKeys(byte ch)
         {
             keys[0] = Crc32.ComputeCrc32(keys[0], ch);
@@ -185,7 +191,7 @@ namespace ICSharpCode.SharpZipLib.Encryption
         }
 
         /// <summary>
-        /// Transforms the specified region of the input byte array and copies 
+        /// Transforms the specified region of the input byte array and copies
         /// the resulting transform to the specified region of the output byte array.
         /// </summary>
         /// <param name="inputBuffer">The input for which to compute the transform.</param>
@@ -194,9 +200,16 @@ namespace ICSharpCode.SharpZipLib.Encryption
         /// <param name="outputBuffer">The output to which to write the transform.</param>
         /// <param name="outputOffset">The offset into the output byte array from which to begin writing data.</param>
         /// <returns>The number of bytes written.</returns>
-        public int TransformBlock(byte[] inputBuffer, int inputOffset, int inputCount, byte[] outputBuffer, int outputOffset)
+        public int TransformBlock(
+            byte[] inputBuffer,
+            int inputOffset,
+            int inputCount,
+            byte[] outputBuffer,
+            int outputOffset
+        )
         {
-            for (int i = inputOffset; i < inputOffset + inputCount; ++i) {
+            for (int i = inputOffset; i < inputOffset + inputCount; ++i)
+            {
                 byte oldbyte = inputBuffer[i];
                 outputBuffer[outputOffset++] = (byte)(inputBuffer[i] ^ TransformByte());
                 UpdateKeys(oldbyte);
@@ -209,9 +222,7 @@ namespace ICSharpCode.SharpZipLib.Encryption
         /// </summary>
         public bool CanReuseTransform
         {
-            get {
-                return true;
-            }
+            get { return true; }
         }
 
         /// <summary>
@@ -219,9 +230,7 @@ namespace ICSharpCode.SharpZipLib.Encryption
         /// </summary>
         public int InputBlockSize
         {
-            get {
-                return 1;
-            }
+            get { return 1; }
         }
 
         /// <summary>
@@ -229,9 +238,7 @@ namespace ICSharpCode.SharpZipLib.Encryption
         /// </summary>
         public int OutputBlockSize
         {
-            get {
-                return 1;
-            }
+            get { return 1; }
         }
 
         /// <summary>
@@ -239,9 +246,7 @@ namespace ICSharpCode.SharpZipLib.Encryption
         /// </summary>
         public bool CanTransformMultipleBlocks
         {
-            get {
-                return true;
-            }
+            get { return true; }
         }
 
         #endregion
@@ -258,7 +263,6 @@ namespace ICSharpCode.SharpZipLib.Encryption
 
         #endregion
     }
-
 
     /// <summary>
     /// PkzipClassic CryptoTransform for decryption.
@@ -291,7 +295,7 @@ namespace ICSharpCode.SharpZipLib.Encryption
         }
 
         /// <summary>
-        /// Transforms the specified region of the input byte array and copies 
+        /// Transforms the specified region of the input byte array and copies
         /// the resulting transform to the specified region of the output byte array.
         /// </summary>
         /// <param name="inputBuffer">The input for which to compute the transform.</param>
@@ -300,9 +304,16 @@ namespace ICSharpCode.SharpZipLib.Encryption
         /// <param name="outputBuffer">The output to which to write the transform.</param>
         /// <param name="outputOffset">The offset into the output byte array from which to begin writing data.</param>
         /// <returns>The number of bytes written.</returns>
-        public int TransformBlock(byte[] inputBuffer, int inputOffset, int inputCount, byte[] outputBuffer, int outputOffset)
+        public int TransformBlock(
+            byte[] inputBuffer,
+            int inputOffset,
+            int inputCount,
+            byte[] outputBuffer,
+            int outputOffset
+        )
         {
-            for (int i = inputOffset; i < inputOffset + inputCount; ++i) {
+            for (int i = inputOffset; i < inputOffset + inputCount; ++i)
+            {
                 byte newByte = (byte)(inputBuffer[i] ^ TransformByte());
                 outputBuffer[outputOffset++] = newByte;
                 UpdateKeys(newByte);
@@ -315,9 +326,7 @@ namespace ICSharpCode.SharpZipLib.Encryption
         /// </summary>
         public bool CanReuseTransform
         {
-            get {
-                return true;
-            }
+            get { return true; }
         }
 
         /// <summary>
@@ -325,9 +334,7 @@ namespace ICSharpCode.SharpZipLib.Encryption
         /// </summary>
         public int InputBlockSize
         {
-            get {
-                return 1;
-            }
+            get { return 1; }
         }
 
         /// <summary>
@@ -335,9 +342,7 @@ namespace ICSharpCode.SharpZipLib.Encryption
         /// </summary>
         public int OutputBlockSize
         {
-            get {
-                return 1;
-            }
+            get { return 1; }
         }
 
         /// <summary>
@@ -345,9 +350,7 @@ namespace ICSharpCode.SharpZipLib.Encryption
         /// </summary>
         public bool CanTransformMultipleBlocks
         {
-            get {
-                return true;
-            }
+            get { return true; }
         }
 
         #endregion
@@ -366,20 +369,23 @@ namespace ICSharpCode.SharpZipLib.Encryption
     }
 
     /// <summary>
-    /// Defines a wrapper object to access the Pkzip algorithm. 
+    /// Defines a wrapper object to access the Pkzip algorithm.
     /// This class cannot be inherited.
     /// </summary>
-    [System.ObsoleteAttribute("This assembly has been deprecated. Please use https://www.nuget.org/packages/SharpZipLib/ instead.")]
+    [System.ObsoleteAttribute(
+        "This assembly has been deprecated. Please use https://www.nuget.org/packages/SharpZipLib/ instead."
+    )]
     public sealed class PkzipClassicManaged : PkzipClassic
     {
         /// <summary>
         /// Get / set the applicable block size.
         /// </summary>
         /// <remarks>The only valid block size is 8.</remarks>
-        public override int BlockSize 
+        public override int BlockSize
         {
             get { return 8; }
-            set {
+            set
+            {
                 if (value != 8)
                     throw new CryptographicException();
             }
@@ -390,10 +396,11 @@ namespace ICSharpCode.SharpZipLib.Encryption
         /// </summary>
         public override KeySizes[] LegalKeySizes
         {
-            get {
+            get
+            {
                 KeySizes[] keySizes = new KeySizes[1];
                 keySizes[0] = new KeySizes(12 * 8, 12 * 8, 0);
-                return keySizes; 
+                return keySizes;
             }
         }
 
@@ -410,10 +417,11 @@ namespace ICSharpCode.SharpZipLib.Encryption
         /// </summary>
         public override KeySizes[] LegalBlockSizes
         {
-            get {
+            get
+            {
                 KeySizes[] keySizes = new KeySizes[1];
                 keySizes[0] = new KeySizes(1 * 8, 1 * 8, 0);
-                return keySizes; 
+                return keySizes;
             }
         }
 
@@ -424,13 +432,8 @@ namespace ICSharpCode.SharpZipLib.Encryption
         /// </summary>
         public override byte[] Key
         {
-            get {
-                return key;
-            }
-        
-            set {
-                key = value;
-            }
+            get { return key; }
+            set { key = value; }
         }
 
         /// <summary>
@@ -449,10 +452,7 @@ namespace ICSharpCode.SharpZipLib.Encryption
         /// <param name="rgbKey">The key to use for this encryptor.</param>
         /// <param name="rgbIV">Initialisation vector for the new encryptor.</param>
         /// <returns>Returns a new PkzipClassic encryptor</returns>
-        public override ICryptoTransform CreateEncryptor(
-            byte[] rgbKey,
-            byte[] rgbIV
-        )
+        public override ICryptoTransform CreateEncryptor(byte[] rgbKey, byte[] rgbIV)
         {
             return new PkzipClassicEncryptCryptoTransform(rgbKey);
         }
@@ -463,10 +463,7 @@ namespace ICSharpCode.SharpZipLib.Encryption
         /// <param name="rgbKey">Keys to use for this new decryptor.</param>
         /// <param name="rgbIV">Initialisation vector for the new decryptor.</param>
         /// <returns>Returns a new decryptor.</returns>
-        public override ICryptoTransform CreateDecryptor(
-            byte[] rgbKey,
-            byte[] rgbIV
-        )
+        public override ICryptoTransform CreateDecryptor(byte[] rgbKey, byte[] rgbIV)
         {
             return new PkzipClassicDecryptCryptoTransform(rgbKey);
         }

@@ -1,6 +1,6 @@
 namespace Test1
 {
-    public delegate int TestDelegate1 ();
+    public delegate int TestDelegate1();
 
     public interface TestItem
     {
@@ -11,13 +11,11 @@ namespace Test1
     {
         private TestDelegate1 delegates1;
 
-        public TestItem1()
-        {
-        }
+        public TestItem1() { }
 
         public int Test()
         {
-            return delegates1 ();
+            return delegates1();
         }
 
         public virtual event TestDelegate1 OnUpdate
@@ -34,14 +32,11 @@ namespace Test1
                 delegates1 -= value;
             }
         }
-
     }
 
     public class TestItem2 : TestItem1
     {
-        public TestItem2()
-        {
-        }
+        public TestItem2() { }
 
         public override event TestDelegate1 OnUpdate
         {
@@ -63,10 +58,13 @@ namespace Test1
         public static int Main()
         {
             TestItem1 ti = new TestItem2();
-            ti.OnUpdate += delegate() { return 5;  };
+            ti.OnUpdate += delegate()
+            {
+                return 5;
+            };
             if (ti.Test() != 5)
                 return 1;
-            
+
             return 0;
         }
     }

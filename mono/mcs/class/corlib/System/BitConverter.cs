@@ -11,11 +11,12 @@ namespace System
         [Intrinsic]
         public static readonly bool IsLittleEndian;
 
-        static BitConverter ()
+        static BitConverter()
         {
-            unsafe {
+            unsafe
+            {
                 ushort i = 0x1234;
-                byte *b = (byte*)&i;
+                byte* b = (byte*)&i;
                 IsLittleEndian = (*b == 0x34);
             }
         }

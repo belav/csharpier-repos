@@ -3,7 +3,7 @@
 
 struct S
 {
-    public static int Main ()
+    public static int Main()
     {
         S? s = null;
         A a = s;
@@ -13,8 +13,8 @@ struct S
 
 struct A
 {
-    public static implicit operator A (S x)
+    public static implicit operator A(S x)
     {
-        return new A ();
+        return new A();
     }
 }

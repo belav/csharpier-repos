@@ -20,7 +20,11 @@ namespace IntelHardwareIntrinsicTest._Sse1
 
             if (Sse.IsSupported)
             {
-                using (TestTable_SingleArray<float> floatTable = new TestTable_SingleArray<float>(new float[4] { 1, -5, 100, 3 }))
+                using (
+                    TestTable_SingleArray<float> floatTable = new TestTable_SingleArray<float>(
+                        new float[4] { 1, -5, 100, 3 }
+                    )
+                )
                 {
                     try
                     {

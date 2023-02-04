@@ -18,8 +18,11 @@ namespace System.Web.Helpers
         public DynamicJsonObject(IDictionary<string, object> values)
         {
             Debug.Assert(values != null);
-            _values = values.ToDictionary(p => p.Key, p => Json.WrapObject(p.Value),
-                                          StringComparer.OrdinalIgnoreCase);
+            _values = values.ToDictionary(
+                p => p.Key,
+                p => Json.WrapObject(p.Value),
+                StringComparer.OrdinalIgnoreCase
+            );
         }
 
         public override bool TryConvert(ConvertBinder binder, out object result)
@@ -31,7 +34,13 @@ namespace System.Web.Helpers
             }
             else
             {
-                throw new InvalidOperationException(String.Format(CultureInfo.CurrentCulture, HelpersResources.Json_UnableToConvertType, binder.Type));
+                throw new InvalidOperationException(
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        HelpersResources.Json_UnableToConvertType,
+                        binder.Type
+                    )
+                );
             }
             return true;
         }

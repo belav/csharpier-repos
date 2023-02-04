@@ -15,14 +15,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
     [Trait(Traits.Feature, Traits.Features.KeywordHighlighting)]
     public class LoopHighlighterTests : AbstractCSharpKeywordHighlighterTests
     {
-        internal override Type GetHighlighterType()
-            => typeof(LoopHighlighter);
+        internal override Type GetHighlighterType() => typeof(LoopHighlighter);
 
         [Fact]
         public async Task TestExample1_1()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -38,14 +37,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
             }
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestExample1_2()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -61,14 +61,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
             }
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestExample1_3()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -84,14 +85,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
             }
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestExample2_1()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -108,14 +110,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         }
         [|while|] (true);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestExample2_2()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -132,14 +135,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         }
         [|while|] (true);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestExample2_3()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -156,14 +160,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         }
         [|while|] (true);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestExample2_4()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -180,14 +185,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         }
         {|Cursor:[|while|]|} (true);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestExample2_5()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -204,14 +210,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         }
         while {|Cursor:(true)|};
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestExample2_6()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -228,14 +235,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         }
         [|while|] (true);{|Cursor:|}
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestExample3_1()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -251,14 +259,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
             }
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestExample3_2()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -274,14 +283,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
             }
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestExample3_3()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -297,14 +307,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
             }
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestExample4_1()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -320,14 +331,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
             }
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestExample4_2()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -343,14 +355,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
             }
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestExample4_3()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -366,14 +379,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
             }
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestNestedExample1_1()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -408,14 +422,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
             }
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestNestedExample1_2()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -450,14 +465,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
             }
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestNestedExample1_3()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -492,14 +508,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
             }
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestNestedExample1_4()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -534,14 +551,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
             }
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestNestedExample1_5()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -576,14 +594,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
             }
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestNestedExample1_6()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -618,14 +637,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
             }
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestNestedExample1_7()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -660,14 +680,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
             }
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestNestedExample1_8()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -702,7 +723,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
             }
         }
     }
-}");
+}"
+            );
         }
 
         // TestNestedExample1 9-13 are in SwitchStatementHighlighterTests.cs
@@ -711,7 +733,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         public async Task TestNestedExample1_14()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -746,14 +768,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
             }
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestNestedExample1_15()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -788,14 +811,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
             }
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestNestedExample2_1()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -824,14 +848,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
             }
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestNestedExample2_2()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -860,14 +885,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
             }
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestNestedExample2_3()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -896,14 +922,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
             }
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestNestedExample2_4()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -932,14 +959,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
             }
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestNestedExample2_5()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -968,14 +996,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
             }
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestNestedExample2_6()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -1004,14 +1033,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
             }
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestNestedExample2_7()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -1040,14 +1070,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
             }
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestNestedExample2_8()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -1076,14 +1107,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
             }
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestNestedExample2_9()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -1112,14 +1144,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
             }
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestNestedExample2_10()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -1148,14 +1181,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
             }
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestNestedExample2_11()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -1184,7 +1218,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
             }
         }
     }
-}");
+}"
+            );
         }
     }
 }

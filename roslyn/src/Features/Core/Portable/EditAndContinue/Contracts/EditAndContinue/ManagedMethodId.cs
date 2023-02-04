@@ -22,18 +22,14 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.Contracts
         /// </summary>
         /// <param name="module">Module version ID in which the method exists.</param>
         /// <param name="method">Method ID.</param>
-        public ManagedMethodId(
-            Guid module,
-            ManagedModuleMethodId method)
+        public ManagedMethodId(Guid module, ManagedModuleMethodId method)
         {
             Module = module;
             Method = method;
         }
 
         public ManagedMethodId(Guid module, int token, int version)
-            : this(module, new(token, version))
-        {
-        }
+            : this(module, new(token, version)) { }
 
         /// <summary>
         /// The module version ID in which the method exists.
@@ -63,9 +59,11 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.Contracts
             return Module.GetHashCode() ^ Method.GetHashCode();
         }
 
-        public static bool operator ==(ManagedMethodId left, ManagedMethodId right) => left.Equals(right);
+        public static bool operator ==(ManagedMethodId left, ManagedMethodId right) =>
+            left.Equals(right);
 
-        public static bool operator !=(ManagedMethodId left, ManagedMethodId right) => !(left == right);
+        public static bool operator !=(ManagedMethodId left, ManagedMethodId right) =>
+            !(left == right);
 
         internal string GetDebuggerDisplay() => $"mvid={Module} {Method.GetDebuggerDisplay()}";
     }

@@ -33,7 +33,10 @@ namespace System.Web.Http.Tracing.Tracers
             get { return _innerHandler; }
         }
 
-        protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+        protected override Task<HttpResponseMessage> SendAsync(
+            HttpRequestMessage request,
+            CancellationToken cancellationToken
+        )
         {
             return _traceWriter.TraceBeginEndAsync<HttpResponseMessage>(
                 request,
@@ -50,7 +53,8 @@ namespace System.Web.Http.Tracing.Tracers
                         tr.Status = response.StatusCode;
                     }
                 },
-                errorTrace: null);
+                errorTrace: null
+            );
         }
     }
 }

@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,112 +31,99 @@ namespace System.ServiceProcess
 {
     internal class UnixServiceController : ServiceControllerImpl
     {
-        public UnixServiceController (ServiceController serviceController)
-            : base (serviceController)
+        public UnixServiceController(ServiceController serviceController)
+            : base(serviceController) { }
+
+        public override bool CanPauseAndContinue
         {
+            get { throw new NotImplementedException(); }
         }
 
-        public override bool CanPauseAndContinue {
-            get {
-                throw new NotImplementedException ();
-            }
-        }
-
-        public override bool CanShutdown {
-            get {
-                throw new NotImplementedException ();
-            }
-        }
-
-        public override bool CanStop {
-            get {
-                throw new NotImplementedException ();
-            }
-        }
-
-        public override ServiceController [] DependentServices {
-            get {
-                throw new NotImplementedException ();
-            }
-        }
-
-        public override string DisplayName {
-            get {
-                throw new NotImplementedException ();
-            }
-        }
-
-        public override string ServiceName {
-            get {
-                throw new NotImplementedException ();
-            }
-        }
-
-        public override ServiceController [] ServicesDependedOn {
-            get {
-                throw new NotImplementedException ();
-            }
-        }
-
-        public override ServiceType ServiceType {
-            get {
-                throw new NotImplementedException ();
-            }
-        }
-
-        public override ServiceControllerStatus Status {
-            get {
-                throw new NotImplementedException ();
-            }
-        }
-
-        public override void Close ()
+        public override bool CanShutdown
         {
-            throw new NotImplementedException ();
+            get { throw new NotImplementedException(); }
         }
 
-        public override void Continue ()
+        public override bool CanStop
         {
-            throw new NotImplementedException ();
+            get { throw new NotImplementedException(); }
         }
 
-        public override void Dispose (bool disposing)
+        public override ServiceController[] DependentServices
         {
+            get { throw new NotImplementedException(); }
         }
 
-        public override void ExecuteCommand (int command)
+        public override string DisplayName
         {
-            throw new NotImplementedException ();
+            get { throw new NotImplementedException(); }
         }
 
-        public override ServiceController [] GetDevices ()
+        public override string ServiceName
         {
-            throw new NotImplementedException ();
+            get { throw new NotImplementedException(); }
         }
 
-        public override ServiceController [] GetServices ()
+        public override ServiceController[] ServicesDependedOn
         {
-            throw new NotImplementedException ();
+            get { throw new NotImplementedException(); }
         }
 
-        public override void Pause ()
+        public override ServiceType ServiceType
         {
-            throw new NotImplementedException ();
+            get { throw new NotImplementedException(); }
         }
 
-        public override void Refresh ()
+        public override ServiceControllerStatus Status
         {
-            throw new NotImplementedException ();
+            get { throw new NotImplementedException(); }
         }
 
-        public override void Start (string [] args)
+        public override void Close()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public override void Stop ()
+        public override void Continue()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
+        }
+
+        public override void Dispose(bool disposing) { }
+
+        public override void ExecuteCommand(int command)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override ServiceController[] GetDevices()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override ServiceController[] GetServices()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Pause()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Refresh()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Start(string[] args)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Stop()
+        {
+            throw new NotImplementedException();
         }
     }
 }

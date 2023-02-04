@@ -27,7 +27,8 @@ public class DefaultValidationHtmlAttributeProvider : ValidationHtmlAttributePro
     public DefaultValidationHtmlAttributeProvider(
         IOptions<MvcViewOptions> optionsAccessor,
         IModelMetadataProvider metadataProvider,
-        ClientValidatorCache clientValidatorCache)
+        ClientValidatorCache clientValidatorCache
+    )
     {
         if (optionsAccessor == null)
         {
@@ -48,14 +49,17 @@ public class DefaultValidationHtmlAttributeProvider : ValidationHtmlAttributePro
         _metadataProvider = metadataProvider;
 
         var clientValidatorProviders = optionsAccessor.Value.ClientModelValidatorProviders;
-        _clientModelValidatorProvider = new CompositeClientModelValidatorProvider(clientValidatorProviders);
+        _clientModelValidatorProvider = new CompositeClientModelValidatorProvider(
+            clientValidatorProviders
+        );
     }
 
     /// <inheritdoc />
     public override void AddValidationAttributes(
         ViewContext viewContext,
         ModelExplorer modelExplorer,
-        IDictionary<string, string> attributes)
+        IDictionary<string, string> attributes
+    )
     {
         if (viewContext == null)
         {
@@ -80,14 +84,16 @@ public class DefaultValidationHtmlAttributeProvider : ValidationHtmlAttributePro
 
         var validators = _clientValidatorCache.GetValidators(
             modelExplorer.Metadata,
-            _clientModelValidatorProvider);
+            _clientModelValidatorProvider
+        );
         if (validators.Count > 0)
         {
             var validationContext = new ClientModelValidationContext(
                 viewContext,
                 modelExplorer.Metadata,
                 _metadataProvider,
-                attributes);
+                attributes
+            );
 
             for (var i = 0; i < validators.Count; i++)
             {

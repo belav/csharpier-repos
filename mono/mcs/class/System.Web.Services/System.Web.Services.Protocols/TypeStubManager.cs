@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,13 +36,13 @@ using System.Xml.Serialization;
 using System.Web.Services;
 using System.Web.Services.Description;
 
-namespace System.Web.Services.Protocols {
-
+namespace System.Web.Services.Protocols
+{
     //
     // This class represents all the information we extract from a MethodInfo
     // in the WebClientProtocol derivative stub class
     //
-    internal class MethodStubInfo 
+    internal class MethodStubInfo
     {
         internal LogicalMethodInfo MethodInfo;
         internal TypeStubInfo TypeStub;
@@ -50,7 +50,7 @@ namespace System.Web.Services.Protocols {
         // The name used by the stub class to reference this method.
         internal string Name;
         internal WebMethodAttribute MethodAttribute;
-        
+
         internal string OperationName
         {
             get { return MethodInfo.Name; }
@@ -59,17 +59,18 @@ namespace System.Web.Services.Protocols {
         //
         // Constructor
         //
-        public MethodStubInfo (TypeStubInfo parent, LogicalMethodInfo source)
+        public MethodStubInfo(TypeStubInfo parent, LogicalMethodInfo source)
         {
             TypeStub = parent;
             MethodInfo = source;
 
-            object [] o = source.GetCustomAttributes (typeof (WebMethodAttribute));
+            object[] o = source.GetCustomAttributes(typeof(WebMethodAttribute));
             if (o.Length > 0)
             {
-                MethodAttribute = (WebMethodAttribute) o [0];
+                MethodAttribute = (WebMethodAttribute)o[0];
                 Name = MethodAttribute.MessageName;
-                if (Name == "") Name = source.Name;
+                if (Name == "")
+                    Name = source.Name;
             }
             else
                 Name = source.Name;
@@ -80,178 +81,213 @@ namespace System.Web.Services.Protocols {
     // Holds the metadata loaded from the type stub, as well as
     // the metadata for all the methods in the type
     //
-    internal abstract class TypeStubInfo 
+    internal abstract class TypeStubInfo
     {
-        Hashtable name_to_method = new Hashtable ();
+        Hashtable name_to_method = new Hashtable();
         MethodStubInfo[] methods;
-        ArrayList bindings = new ArrayList ();
+        ArrayList bindings = new ArrayList();
         LogicalTypeInfo logicalType;
         string defaultBinding;
         ArrayList mappings;
         XmlSerializer[] serializers;
 
-        public TypeStubInfo (LogicalTypeInfo logicalTypeInfo)
+        public TypeStubInfo(LogicalTypeInfo logicalTypeInfo)
         {
             this.logicalType = logicalTypeInfo;
 
-            object [] o = Type.GetCustomAttributes (typeof (WebServiceBindingAttribute), false);
+            object[] o = Type.GetCustomAttributes(typeof(WebServiceBindingAttribute), false);
 
-            bool isClientSide = typeof (SoapHttpClientProtocol).IsAssignableFrom (Type);
+            bool isClientSide = typeof(SoapHttpClientProtocol).IsAssignableFrom(Type);
             bool defaultAdded = false;
 
             string defaultBindingName = logicalType.WebServiceName + ProtocolName;
             if (o.Length > 0)
-                foreach (WebServiceBindingAttribute at in o) {
-                    AddBinding (new BindingInfo (at, defaultBindingName, LogicalType.WebServiceNamespace));
+                foreach (WebServiceBindingAttribute at in o)
+                {
+                    AddBinding(
+                        new BindingInfo(at, defaultBindingName, LogicalType.WebServiceNamespace)
+                    );
                     if ((at.Name == null || at.Name.Length == 0) || (at.Name == defaultBindingName))
                         defaultAdded = true;
                 }
 
             if (!defaultAdded && !isClientSide)
-                AddBindingAt (0, new BindingInfo (null, defaultBindingName, logicalType.WebServiceNamespace));
+                AddBindingAt(
+                    0,
+                    new BindingInfo(null, defaultBindingName, logicalType.WebServiceNamespace)
+                );
 
-            foreach (Type ifaceType in Type.GetInterfaces ()) {
-                o = ifaceType.GetCustomAttributes (typeof (WebServiceBindingAttribute), false);
-                if (o.Length > 0) {
+            foreach (Type ifaceType in Type.GetInterfaces())
+            {
+                o = ifaceType.GetCustomAttributes(typeof(WebServiceBindingAttribute), false);
+                if (o.Length > 0)
+                {
                     defaultBindingName = ifaceType.Name + ProtocolName;
                     foreach (WebServiceBindingAttribute at in o)
-                        AddBinding (new BindingInfo (at, defaultBindingName, LogicalType.WebServiceNamespace));
+                        AddBinding(
+                            new BindingInfo(at, defaultBindingName, LogicalType.WebServiceNamespace)
+                        );
                 }
             }
         }
-        
-        public WsiProfiles WsiClaims {
-            get {
-                return (((BindingInfo) Bindings [0]).WebServiceBindingAttribute != null) ?
-                    ((BindingInfo) Bindings [0]).WebServiceBindingAttribute.ConformsTo : WsiProfiles.None;
+
+        public WsiProfiles WsiClaims
+        {
+            get
+            {
+                return (((BindingInfo)Bindings[0]).WebServiceBindingAttribute != null)
+                    ? ((BindingInfo)Bindings[0]).WebServiceBindingAttribute.ConformsTo
+                    : WsiProfiles.None;
             }
         }
-        
+
         public LogicalTypeInfo LogicalType
         {
             get { return logicalType; }
         }
-        
+
         public Type Type
         {
             get { return logicalType.Type; }
         }
-        
+
         public string DefaultBinding
         {
             get { return defaultBinding; }
         }
-        
-        public virtual XmlReflectionImporter XmlImporter 
+
+        public virtual XmlReflectionImporter XmlImporter
         {
             get { return null; }
         }
 
-        public virtual SoapReflectionImporter SoapImporter 
+        public virtual SoapReflectionImporter SoapImporter
         {
             get { return null; }
         }
-        
+
         public virtual string ProtocolName
         {
             get { return null; }
         }
-        
-        public XmlSerializer GetSerializer (int n)
+
+        public XmlSerializer GetSerializer(int n)
         {
-            return serializers [n];
-        }
-        
-        public int RegisterSerializer (XmlMapping map)
-        {
-            if (mappings == null) mappings = new ArrayList ();
-            return mappings.Add (map);
+            return serializers[n];
         }
 
-        public void Initialize ()
+        public int RegisterSerializer(XmlMapping map)
         {
-            BuildTypeMethods ();
-            
+            if (mappings == null)
+                mappings = new ArrayList();
+            return mappings.Add(map);
+        }
+
+        public void Initialize()
+        {
+            BuildTypeMethods();
+
             if (mappings != null)
             {
                 // Build all the serializers at once
-                XmlMapping[] maps = (XmlMapping[]) mappings.ToArray(typeof(XmlMapping));
-                serializers = XmlSerializer.FromMappings (maps);
+                XmlMapping[] maps = (XmlMapping[])mappings.ToArray(typeof(XmlMapping));
+                serializers = XmlSerializer.FromMappings(maps);
             }
         }
-        
+
         //
         // Extract all method information
         //
-        protected virtual void BuildTypeMethods ()
+        protected virtual void BuildTypeMethods()
         {
-            bool isClientProxy = typeof(WebClientProtocol).IsAssignableFrom (Type);
+            bool isClientProxy = typeof(WebClientProtocol).IsAssignableFrom(Type);
 
-            ArrayList metStubs = new ArrayList ();
+            ArrayList metStubs = new ArrayList();
             foreach (LogicalMethodInfo mi in logicalType.LogicalMethods)
             {
-                if (!isClientProxy && mi.CustomAttributeProvider.GetCustomAttributes (typeof(WebMethodAttribute), true).Length == 0)
+                if (
+                    !isClientProxy
+                    && mi.CustomAttributeProvider
+                        .GetCustomAttributes(typeof(WebMethodAttribute), true)
+                        .Length == 0
+                )
                     continue;
-                    
-                MethodStubInfo msi = CreateMethodStubInfo (this, mi, isClientProxy);
+
+                MethodStubInfo msi = CreateMethodStubInfo(this, mi, isClientProxy);
 
                 if (msi == null)
                     continue;
 
-                if (name_to_method.ContainsKey (msi.Name)) {
-                    string msg = "Both " + msi.MethodInfo.ToString () + " and " + GetMethod (msi.Name).MethodInfo + " use the message name '" + msi.Name + "'. ";
-                    msg += "Use the MessageName property of WebMethod custom attribute to specify unique message names for the methods";
-                    throw new InvalidOperationException (msg);
+                if (name_to_method.ContainsKey(msi.Name))
+                {
+                    string msg =
+                        "Both "
+                        + msi.MethodInfo.ToString()
+                        + " and "
+                        + GetMethod(msi.Name).MethodInfo
+                        + " use the message name '"
+                        + msi.Name
+                        + "'. ";
+                    msg +=
+                        "Use the MessageName property of WebMethod custom attribute to specify unique message names for the methods";
+                    throw new InvalidOperationException(msg);
                 }
-                
-                name_to_method [msi.Name] = msi;
-                metStubs.Add (msi);
+
+                name_to_method[msi.Name] = msi;
+                metStubs.Add(msi);
             }
-            methods = (MethodStubInfo[]) metStubs.ToArray (typeof (MethodStubInfo));
+            methods = (MethodStubInfo[])metStubs.ToArray(typeof(MethodStubInfo));
         }
-        
-        protected abstract MethodStubInfo CreateMethodStubInfo (TypeStubInfo typeInfo, LogicalMethodInfo methodInfo, bool isClientProxy);
-        
-        public MethodStubInfo GetMethod (string name)
+
+        protected abstract MethodStubInfo CreateMethodStubInfo(
+            TypeStubInfo typeInfo,
+            LogicalMethodInfo methodInfo,
+            bool isClientProxy
+        );
+
+        public MethodStubInfo GetMethod(string name)
         {
-            return (MethodStubInfo) name_to_method [name];
+            return (MethodStubInfo)name_to_method[name];
         }
 
         public MethodStubInfo[] Methods
         {
             get { return methods; }
         }
-        
+
         internal ArrayList Bindings
         {
             get { return bindings; }
         }
-        
-        internal void AddBinding (BindingInfo info)
+
+        internal void AddBinding(BindingInfo info)
         {
-            bindings.Add (info);
+            bindings.Add(info);
         }
 
-        internal void AddBindingAt (int pos, BindingInfo info)
+        internal void AddBindingAt(int pos, BindingInfo info)
         {
-            bindings.Insert (pos, info);
+            bindings.Insert(pos, info);
         }
-        
-        internal BindingInfo GetBinding (string name)
+
+        internal BindingInfo GetBinding(string name)
         {
-            if (name == null || name.Length == 0) return (BindingInfo) bindings[0];
-            
+            if (name == null || name.Length == 0)
+                return (BindingInfo)bindings[0];
+
             for (int n = 0; n < bindings.Count; n++)
-                if (((BindingInfo)bindings[n]).Name == name) return (BindingInfo)bindings[n];
+                if (((BindingInfo)bindings[n]).Name == name)
+                    return (BindingInfo)bindings[n];
             return null;
         }
     }
-    
+
     internal class BindingInfo
     {
-        public BindingInfo (WebServiceBindingAttribute at, string name, string ns)
+        public BindingInfo(WebServiceBindingAttribute at, string name, string ns)
         {
-            if (at != null) {
+            if (at != null)
+            {
                 Name = at.Name;
                 Namespace = at.Namespace;
                 Location = at.Location;
@@ -264,7 +300,7 @@ namespace System.Web.Services.Protocols {
             if (Namespace == null || Namespace.Length == 0)
                 Namespace = ns;
         }
-        
+
         public readonly string Name;
         public readonly string Namespace;
         public readonly string Location;
@@ -274,35 +310,35 @@ namespace System.Web.Services.Protocols {
     //
     // Manages type stubs
     //
-    internal class TypeStubManager 
+    internal class TypeStubManager
     {
         static Hashtable type_to_manager;
-        
-        static TypeStubManager ()
+
+        static TypeStubManager()
         {
-            type_to_manager = new Hashtable ();
+            type_to_manager = new Hashtable();
         }
 
-        static internal TypeStubInfo GetTypeStub (Type t, string protocolName)
+        static internal TypeStubInfo GetTypeStub(Type t, string protocolName)
         {
-            LogicalTypeInfo tm = GetLogicalTypeInfo (t);
-            return tm.GetTypeStub (protocolName);
+            LogicalTypeInfo tm = GetLogicalTypeInfo(t);
+            return tm.GetTypeStub(protocolName);
         }
-        
+
         //
         // This needs to be thread safe
         //
-        static internal LogicalTypeInfo GetLogicalTypeInfo (Type t)
+        static internal LogicalTypeInfo GetLogicalTypeInfo(Type t)
         {
             lock (type_to_manager)
             {
-                LogicalTypeInfo tm = (LogicalTypeInfo) type_to_manager [t];
-    
+                LogicalTypeInfo tm = (LogicalTypeInfo)type_to_manager[t];
+
                 if (tm != null)
                     return tm;
 
-                tm = new LogicalTypeInfo (t);
-                type_to_manager [t] = tm;
+                tm = new LogicalTypeInfo(t);
+                type_to_manager[t] = tm;
 
                 return tm;
             }

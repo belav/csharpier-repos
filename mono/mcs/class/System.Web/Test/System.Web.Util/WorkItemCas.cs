@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,47 +33,48 @@ using System.Security;
 using System.Security.Permissions;
 using System.Web.Util;
 
-namespace MonoCasTests.System.Web.Util {
-
+namespace MonoCasTests.System.Web.Util
+{
     [TestFixture]
-    [Category ("CAS")]
-    public class WorkItemCas : AspNetHostingMinimal {
-
+    [Category("CAS")]
+    public class WorkItemCas : AspNetHostingMinimal
+    {
         [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Constructor_Deny_Unrestricted ()
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor_Deny_Unrestricted()
         {
-            new WorkItem ();
+            new WorkItem();
         }
 
-        private void Callback ()
-        {
-        }
+        private void Callback() { }
 
         [Test]
-        [SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
-        [ExpectedException (typeof (SecurityException))]
-        public void Post_Deny_UnmanagedCode ()
+        [SecurityPermission(SecurityAction.Deny, UnmanagedCode = true)]
+        [ExpectedException(typeof(SecurityException))]
+        public void Post_Deny_UnmanagedCode()
         {
-            WorkItem.Post (new WorkItemCallback (Callback));
+            WorkItem.Post(new WorkItemCallback(Callback));
         }
 
         [Test]
-        [SecurityPermission (SecurityAction.PermitOnly, UnmanagedCode = true)]
-        public void Post_PermitOnly_UnmanagedCode ()
+        [SecurityPermission(SecurityAction.PermitOnly, UnmanagedCode = true)]
+        public void Post_PermitOnly_UnmanagedCode()
         {
-            try {
-                WorkItem.Post (new WorkItemCallback (Callback));
+            try
+            {
+                WorkItem.Post(new WorkItemCallback(Callback));
             }
-            catch (PlatformNotSupportedException) {
+            catch (PlatformNotSupportedException)
+            {
                 // Mono and Windows prior to NT
             }
         }
 
         // LinkDemand
 
-        public override Type Type {
-            get { return typeof (WorkItem); }
+        public override Type Type
+        {
+            get { return typeof(WorkItem); }
         }
     }
 }

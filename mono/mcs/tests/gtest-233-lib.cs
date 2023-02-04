@@ -9,10 +9,11 @@ public class MyClass<TItem>
     public MyClass() { }
 
     public event ListChangedEventHandler ListChanged;
-    public void AddListChangedEventHandler (ListChangedEventHandler handler)
+
+    public void AddListChangedEventHandler(ListChangedEventHandler handler)
     {
         ListChanged += handler;
     }
 
-    protected void OnListChanged (ListChangedEventArgs e)  {}
+    protected void OnListChanged(ListChangedEventArgs e) { }
 }

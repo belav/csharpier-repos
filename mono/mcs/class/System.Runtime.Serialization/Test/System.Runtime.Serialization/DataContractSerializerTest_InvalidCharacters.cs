@@ -42,30 +42,29 @@ namespace MonoTests.System.Runtime.Serialization
         }
 
         [Test]
-        public void Test ()
+        public void Test()
         {
             var data = new MyData
             {
-                Text = "Test " + ASCIIEncoding.ASCII.GetString (new byte[] { 0x06 })
+                Text = "Test " + ASCIIEncoding.ASCII.GetString(new byte[] { 0x06 })
             };
 
-            var serializer = new DataContractSerializer (typeof(MyData), "MyData", string.Empty);
+            var serializer = new DataContractSerializer(typeof(MyData), "MyData", string.Empty);
 
             string serialized;
-            using (var ms = new MemoryStream ()) {
-                serializer.WriteObject (ms, data);
-                serialized = new string (Encoding.UTF8.GetChars (ms.GetBuffer ()));
+            using (var ms = new MemoryStream())
+            {
+                serializer.WriteObject(ms, data);
+                serialized = new string(Encoding.UTF8.GetChars(ms.GetBuffer()));
 
-                Assert.IsTrue (serialized.Contains ("Test &#x6;"), "#1");
+                Assert.IsTrue(serialized.Contains("Test &#x6;"), "#1");
 
-                ms.Seek (0, SeekOrigin.Begin);
+                ms.Seek(0, SeekOrigin.Begin);
 
-                var data2 = (MyData)serializer.ReadObject (ms);
-                Assert.AreEqual (data2.Text.Length, 6, "#2");
-                Assert.AreEqual (data2.Text [5], (char)0x06, "#3");
+                var data2 = (MyData)serializer.ReadObject(ms);
+                Assert.AreEqual(data2.Text.Length, 6, "#2");
+                Assert.AreEqual(data2.Text[5], (char)0x06, "#3");
             }
         }
-
-        
     }
 }

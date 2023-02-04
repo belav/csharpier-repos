@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             bool isPartialResult,
             TimeSpan getSymbolsTime,
             TimeSpan createItemsTime,
-            TimeSpan? remoteAssetSyncTime)
+            TimeSpan? remoteAssetSyncTime
+        )
         {
             CompletionItems = completionItems;
             IsPartialResult = isPartialResult;

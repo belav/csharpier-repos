@@ -8,9 +8,14 @@ namespace AutoMapper.UnitTests.Projection
 
             public NestedExpressionMapFromTests()
             {
-                _config = new MapperConfiguration(cfg => 
-                    cfg.CreateProjection<Parent, ParentDto>()
-                        .ForMember(dest => dest.TotalSum, opt => opt.MapFrom(p => p.Children.Sum(child => child.Value))));
+                _config = new MapperConfiguration(
+                    cfg =>
+                        cfg.CreateProjection<Parent, ParentDto>()
+                            .ForMember(
+                                dest => dest.TotalSum,
+                                opt => opt.MapFrom(p => p.Children.Sum(child => child.Value))
+                            )
+                );
             }
 
             [Fact]
@@ -38,7 +43,6 @@ namespace AutoMapper.UnitTests.Projection
         {
             public int TotalSum { get; set; }
         }
-
 
         public class Parent
         {

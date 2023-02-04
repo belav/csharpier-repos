@@ -26,10 +26,10 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil.Binary {
-
-    internal sealed class ExportTable : IBinaryVisitable {
-
+namespace Mono.Cecil.Binary
+{
+    internal sealed class ExportTable : IBinaryVisitable
+    {
         public uint Characteristics;
         public uint TimeDateStamp;
         public ushort MajorVersion;
@@ -42,18 +42,16 @@ namespace Mono.Cecil.Binary {
         public RVA AddressOfNames;
         public RVA AddressOfNameOrdinals;
 
-        public RVA [] AddressesOfFunctions;
-        public RVA [] AddressesOfNames;
-        public ushort [] NameOrdinals;
-        public string [] Names;
+        public RVA[] AddressesOfFunctions;
+        public RVA[] AddressesOfNames;
+        public ushort[] NameOrdinals;
+        public string[] Names;
 
-        internal ExportTable ()
-        {
-        }
+        internal ExportTable() { }
 
-        public void Accept (IBinaryVisitor visitor)
+        public void Accept(IBinaryVisitor visitor)
         {
-            visitor.VisitExportTable (this);
+            visitor.VisitExportTable(this);
         }
     }
 }

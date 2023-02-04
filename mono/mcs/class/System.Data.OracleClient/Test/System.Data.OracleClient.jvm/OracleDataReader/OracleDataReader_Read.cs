@@ -1,6 +1,6 @@
-// 
+//
 // Copyright (c) 2006 Mainsoft Co.
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
 // "Software"), to deal in the Software without restriction, including
@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,13 +27,12 @@ using System.Data.OracleClient;
 
 using MonoTests.System.Data.Utils;
 
-
 using NUnit.Framework;
 
 namespace MonoTests.System.Data.OracleClient
 {
     [TestFixture]
-    public class OracleDataReader_Read : ADONetTesterClass 
+    public class OracleDataReader_Read : ADONetTesterClass
     {
         OracleConnection con;
         OracleCommand cmd;
@@ -46,14 +45,25 @@ namespace MonoTests.System.Data.OracleClient
             try
             {
                 //prepare data
-                base.PrepareDataForTesting(MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString);
+                base.PrepareDataForTesting(
+                    MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString
+                );
 
-                con = new OracleConnection(MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString);
+                con = new OracleConnection(
+                    MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString
+                );
                 cmd = new OracleCommand("", con);
                 con.Open();
             }
-            catch(Exception ex)    {exp = ex;}
-            finally    {EndCase(exp); exp = null;}
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                EndCase(exp);
+                exp = null;
+            }
         }
 
         [TearDown]
@@ -74,8 +84,14 @@ namespace MonoTests.System.Data.OracleClient
                 tc.run();
                 tc.TearDown();
             }
-            catch(Exception ex){exp = ex;}
-            finally    {tc.EndTest(exp);}
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                tc.EndTest(exp);
+            }
         }
 
         [Test]
@@ -83,7 +99,8 @@ namespace MonoTests.System.Data.OracleClient
         {
             Exception exp = null;
 
-            cmd.CommandText = "Select EmployeeID, LastName, FirstName, Title, BirthDate From Employees where EmployeeID in (100,200) order by EmployeeID asc";
+            cmd.CommandText =
+                "Select EmployeeID, LastName, FirstName, Title, BirthDate From Employees where EmployeeID in (100,200) order by EmployeeID asc";
             OracleDataReader rdr = cmd.ExecuteReader();
 
             try
@@ -91,38 +108,64 @@ namespace MonoTests.System.Data.OracleClient
                 BeginCase("first row");
                 bool read = rdr.Read();
                 Compare(read, true);
-            } 
-            catch(Exception ex){exp = ex;}
-            finally{EndCase(exp); exp = null;}
-
+            }
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                EndCase(exp);
+                exp = null;
+            }
 
             try
             {
                 BeginCase("first row - value");
                 object obj = rdr.GetValue(0);
                 Compare(obj.ToString(), "100");
-            } 
-            catch(Exception ex){exp = ex;}
-            finally{EndCase(exp); exp = null;}
-
+            }
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                EndCase(exp);
+                exp = null;
+            }
 
             try
             {
                 BeginCase("Second row");
                 bool read = rdr.Read();
                 Compare(read, true);
-            } 
-            catch(Exception ex){exp = ex;}
-            finally{EndCase(exp); exp = null;}
+            }
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                EndCase(exp);
+                exp = null;
+            }
 
             try
             {
                 BeginCase("Second row - value");
                 object obj = rdr.GetValue(0);
                 Compare(obj.ToString(), "200");
-            } 
-            catch(Exception ex){exp = ex;}
-            finally{EndCase(exp); exp = null;}
+            }
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                EndCase(exp);
+                exp = null;
+            }
 
             try
             {
@@ -130,21 +173,34 @@ namespace MonoTests.System.Data.OracleClient
                 bool read = rdr.Read();
                 Compare(read, false);
                 rdr.Close();
-            } 
-            catch(Exception ex){exp = ex;}
-            finally{EndCase(exp); exp = null;}
+            }
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                EndCase(exp);
+                exp = null;
+            }
 
             try
             {
                 BeginCase("Read return false");
-                cmd.CommandText= "select * from Orders where OrderID=-909";
+                cmd.CommandText = "select * from Orders where OrderID=-909";
                 rdr = cmd.ExecuteReader();
-                Compare(rdr.Read(),false);
+                Compare(rdr.Read(), false);
                 rdr.Close();
-            } 
-            catch(Exception ex){exp = ex;}
-            finally{EndCase(exp); exp = null;}
-
+            }
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                EndCase(exp);
+                exp = null;
+            }
         }
     }
 }

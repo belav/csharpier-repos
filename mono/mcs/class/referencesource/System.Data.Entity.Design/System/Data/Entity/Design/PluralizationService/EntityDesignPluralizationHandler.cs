@@ -24,11 +24,7 @@ namespace System.Data.Entity.Design
         /// <summary>
         /// user might set the service to null, so we have to check the null when using this property
         /// </summary>
-        internal PluralizationService Service
-        {
-            get;
-            set;
-        }
+        internal PluralizationService Service { get; set; }
 
         /// <summary>
         /// Handler for pluralization service in Entity Design
@@ -55,8 +51,9 @@ namespace System.Data.Entity.Design
         {
             if (this.Service != null)
             {
-                return toEnd.RelationshipMultiplicity == RelationshipMultiplicity.Many ?
-                    this.Service.Pluralize(storeTableName) : this.Service.Singularize(storeTableName);
+                return toEnd.RelationshipMultiplicity == RelationshipMultiplicity.Many
+                    ? this.Service.Pluralize(storeTableName)
+                    : this.Service.Singularize(storeTableName);
             }
             else
             {

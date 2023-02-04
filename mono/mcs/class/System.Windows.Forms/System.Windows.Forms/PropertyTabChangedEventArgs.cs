@@ -40,7 +40,7 @@ namespace System.Windows.Forms
         #endregion    // Local Variables
 
         #region Constructor
-        public PropertyTabChangedEventArgs ( PropertyTab oldTab , PropertyTab newTab )
+        public PropertyTabChangedEventArgs(PropertyTab oldTab, PropertyTab newTab)
         {
             old_tab = oldTab;
             new_tab = newTab;
@@ -50,16 +50,12 @@ namespace System.Windows.Forms
         #region Public Instance Properties
         public PropertyTab NewTab
         {
-            get {
-                return new_tab;
-            }
+            get { return new_tab; }
         }
 
         public PropertyTab OldTab
         {
-            get {
-                return old_tab;
-            }
+            get { return old_tab; }
         }
         #endregion    // Public Instance Properties
     }

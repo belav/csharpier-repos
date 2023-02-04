@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -41,51 +41,69 @@ namespace MonoTests.Common
         public uint StopMonitoringCallCount { get; private set; }
         public bool UseNullState { get; set; }
 
-        public object GetService (Type serviceType)
+        public object GetService(Type serviceType)
         {
             return this;
         }
 
-        object IServiceProvider.GetService (Type serviceType)
+        object IServiceProvider.GetService(Type serviceType)
         {
-            return GetService (serviceType);
+            return GetService(serviceType);
         }
 
-        public void FakeChanged (string filePath)
+        public void FakeChanged(string filePath)
         {
             if (callback == null)
                 return;
 
-            callback (null);
+            callback(null);
         }
 
-        public void StartMonitoring (string filePath, OnChangedCallback onChangedCallback, out object state, out DateTimeOffset lastWriteTime, out long fileSize)
+        public void StartMonitoring(
+            string filePath,
+            OnChangedCallback onChangedCallback,
+            out object state,
+            out DateTimeOffset lastWriteTime,
+            out long fileSize
+        )
         {
             if (UseNullState)
                 state = null;
             else
                 state = filePath;
-            lastWriteTime = DateTimeOffset.FromFileTime (DateTime.Now.Ticks);
+            lastWriteTime = DateTimeOffset.FromFileTime(DateTime.Now.Ticks);
             callback = onChangedCallback;
             fileSize = 10;
             StartMonitoringCalled = true;
             StartMonitoringCallCount++;
         }
 
-        public void StopMonitoring (string filePath, object state)
+        public void StopMonitoring(string filePath, object state)
         {
             StopMonitoringCalled = true;
             StopMonitoringCallCount++;
         }
 
-        void IFileChangeNotificationSystem.StartMonitoring (string filePath, OnChangedCallback onChangedCallback, out object state, out DateTimeOffset lastWriteTime, out long fileSize)
+        void IFileChangeNotificationSystem.StartMonitoring(
+            string filePath,
+            OnChangedCallback onChangedCallback,
+            out object state,
+            out DateTimeOffset lastWriteTime,
+            out long fileSize
+        )
         {
-            StartMonitoring (filePath, onChangedCallback, out state, out lastWriteTime, out fileSize);
+            StartMonitoring(
+                filePath,
+                onChangedCallback,
+                out state,
+                out lastWriteTime,
+                out fileSize
+            );
         }
 
-        void IFileChangeNotificationSystem.StopMonitoring (string filePath, object state)
+        void IFileChangeNotificationSystem.StopMonitoring(string filePath, object state)
         {
-            StopMonitoring (filePath, state);
+            StopMonitoring(filePath, state);
         }
     }
 }

@@ -11,7 +11,11 @@ namespace System.Buffers.Text
         //   -----------------------------
         //   Tue, 03 Jan 2017 08:08:05 GMT
         //
-        private static bool TryFormatDateTimeR(DateTime value, Span<byte> destination, out int bytesWritten)
+        private static bool TryFormatDateTimeR(
+            DateTime value,
+            Span<byte> destination,
+            out int bytesWritten
+        )
         {
             if (destination.Length <= 28)
             {
@@ -22,13 +26,19 @@ namespace System.Buffers.Text
             value.GetDate(out int year, out int month, out int day);
             value.GetTime(out int hour, out int minute, out int second);
 
-            FormattingHelpers.CopyFourBytes("Sun,Mon,Tue,Wed,Thu,Fri,Sat,"u8.Slice(4 * (int)value.DayOfWeek), destination);
+            FormattingHelpers.CopyFourBytes(
+                "Sun,Mon,Tue,Wed,Thu,Fri,Sat,"u8.Slice(4 * (int)value.DayOfWeek),
+                destination
+            );
             destination[4] = Utf8Constants.Space;
 
             FormattingHelpers.WriteTwoDecimalDigits((uint)day, destination, 5);
             destination[7] = Utf8Constants.Space;
 
-            FormattingHelpers.CopyFourBytes("Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec "u8.Slice(4 * (month - 1)), destination.Slice(8));
+            FormattingHelpers.CopyFourBytes(
+                "Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec "u8.Slice(4 * (month - 1)),
+                destination.Slice(8)
+            );
 
             FormattingHelpers.WriteFourDecimalDigits((uint)year, destination, 12);
             destination[16] = Utf8Constants.Space;

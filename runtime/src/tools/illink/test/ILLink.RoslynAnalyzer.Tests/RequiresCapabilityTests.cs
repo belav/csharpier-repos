@@ -11,105 +11,105 @@ namespace ILLink.RoslynAnalyzer.Tests
         protected override string TestSuiteName => "RequiresCapability";
 
         [Fact]
-        public Task BasicRequires ()
+        public Task BasicRequires()
         {
-            return RunTest (nameof (BasicRequires));
+            return RunTest(nameof(BasicRequires));
         }
 
         [Fact]
-        public Task ReflectionAccessFromCompilerGeneratedCode ()
+        public Task ReflectionAccessFromCompilerGeneratedCode()
         {
-            return RunTest ();
+            return RunTest();
         }
 
         [Fact]
-        public Task RequiresAccessedThrough ()
+        public Task RequiresAccessedThrough()
         {
-            return RunTest (nameof (RequiresAccessedThrough));
+            return RunTest(nameof(RequiresAccessedThrough));
         }
 
         [Fact]
-        public Task RequiresAttributeMismatch ()
+        public Task RequiresAttributeMismatch()
         {
-            return RunTest (nameof (RequiresAttributeMismatch));
+            return RunTest(nameof(RequiresAttributeMismatch));
         }
 
         [Fact]
-        public Task RequiresCapabilityFromCopiedAssembly ()
+        public Task RequiresCapabilityFromCopiedAssembly()
         {
-            return RunTest (nameof (RequiresCapabilityFromCopiedAssembly));
+            return RunTest(nameof(RequiresCapabilityFromCopiedAssembly));
         }
 
         [Fact]
-        public Task RequiresCapabilityReflectionAnalysisEnabled ()
+        public Task RequiresCapabilityReflectionAnalysisEnabled()
         {
-            return RunTest (nameof (RequiresCapabilityReflectionAnalysisEnabled));
+            return RunTest(nameof(RequiresCapabilityReflectionAnalysisEnabled));
         }
 
         [Fact]
-        public Task RequiresInCompilerGeneratedCode ()
+        public Task RequiresInCompilerGeneratedCode()
         {
-            return RunTest (nameof (RequiresInCompilerGeneratedCode));
+            return RunTest(nameof(RequiresInCompilerGeneratedCode));
         }
 
         [Fact]
-        public Task RequiresInCompilerGeneratedCodeRelease ()
+        public Task RequiresInCompilerGeneratedCodeRelease()
         {
-            return RunTest ();
+            return RunTest();
         }
 
         [Fact]
-        public Task RequiresOnAttribute ()
+        public Task RequiresOnAttribute()
         {
-            return RunTest (nameof (RequiresOnAttribute));
+            return RunTest(nameof(RequiresOnAttribute));
         }
 
         [Fact]
-        public Task RequiresOnAttributeCtor ()
+        public Task RequiresOnAttributeCtor()
         {
-            return RunTest (nameof (RequiresOnAttributeCtor));
+            return RunTest(nameof(RequiresOnAttributeCtor));
         }
 
         [Fact]
-        public Task RequiresOnClass ()
+        public Task RequiresOnClass()
         {
-            return RunTest (nameof (RequiresOnClass));
+            return RunTest(nameof(RequiresOnClass));
         }
 
         [Fact]
-        public Task RequiresOnStaticConstructor ()
+        public Task RequiresOnStaticConstructor()
         {
-            return RunTest (nameof (RequiresOnStaticConstructor));
+            return RunTest(nameof(RequiresOnStaticConstructor));
         }
 
         [Fact]
-        public Task RequiresOnVirtualsAndInterfaces ()
+        public Task RequiresOnVirtualsAndInterfaces()
         {
-            return RunTest (nameof (RequiresOnVirtualsAndInterfaces));
+            return RunTest(nameof(RequiresOnVirtualsAndInterfaces));
         }
 
         [Fact]
-        public Task RequiresViaDataflow ()
+        public Task RequiresViaDataflow()
         {
-            return RunTest (nameof (RequiresViaDataflow));
+            return RunTest(nameof(RequiresViaDataflow));
         }
 
         [Fact]
-        public Task RequiresViaXml ()
+        public Task RequiresViaXml()
         {
-            return RunTest (nameof (RequiresViaXml));
+            return RunTest(nameof(RequiresViaXml));
         }
 
         [Fact]
-        public Task RequiresWithCopyAssembly ()
+        public Task RequiresWithCopyAssembly()
         {
-            return RunTest (nameof (RequiresWithCopyAssembly));
+            return RunTest(nameof(RequiresWithCopyAssembly));
         }
 
         [Fact]
-        public Task SuppressRequires ()
+        public Task SuppressRequires()
         {
-            return RunTest (nameof (SuppressRequires));
+            return RunTest(nameof(SuppressRequires));
         }
     }
 }

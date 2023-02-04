@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,22 +35,26 @@ using System.Web.UI;
 
 namespace System.Web.UI.WebControls
 {
-    [AspNetHostingPermissionAttribute(SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermissionAttribute(SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermissionAttribute(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermissionAttribute(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
     public class DataPagerFieldCommandEventArgs : CommandEventArgs
     {
-        public object CommandSource {
-            get;
-            private set;
-        }
+        public object CommandSource { get; private set; }
 
-        public DataPagerFieldItem Item {
-            get;
-            private set;
-        }
-        
-        public DataPagerFieldCommandEventArgs (DataPagerFieldItem item, object commandSource, CommandEventArgs originalArgs)
-            : base (originalArgs)
+        public DataPagerFieldItem Item { get; private set; }
+
+        public DataPagerFieldCommandEventArgs(
+            DataPagerFieldItem item,
+            object commandSource,
+            CommandEventArgs originalArgs
+        )
+            : base(originalArgs)
         {
             Item = item;
             CommandSource = commandSource;

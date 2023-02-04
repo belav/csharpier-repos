@@ -10,7 +10,10 @@ namespace Test
     {
         int[] m_an;
 
-        static bool Test1(int[] param1) { return false; }
+        static bool Test1(int[] param1)
+        {
+            return false;
+        }
 
         static int[] Test(ref AA[] param1)
         {

@@ -21,8 +21,13 @@ namespace System.Web.Http.Controllers
 
         private readonly IHttpActionResult _innerResult;
 
-        public ExceptionFilterResult(HttpActionContext context, IExceptionFilter[] filters,
-            IExceptionLogger exceptionLogger, IExceptionHandler exceptionHandler, IHttpActionResult innerResult)
+        public ExceptionFilterResult(
+            HttpActionContext context,
+            IExceptionFilter[] filters,
+            IExceptionLogger exceptionLogger,
+            IExceptionHandler exceptionHandler,
+            IHttpActionResult innerResult
+        )
         {
             Contract.Assert(context != null);
             Contract.Assert(filters != null);
@@ -59,7 +64,8 @@ namespace System.Web.Http.Controllers
             ExceptionContext exceptionContext = new ExceptionContext(
                 exception,
                 ExceptionCatchBlocks.IExceptionFilter,
-                _context);
+                _context
+            );
 
             if (!isCancellationException)
             {
@@ -67,20 +73,29 @@ namespace System.Web.Http.Controllers
                 await _exceptionLogger.LogAsync(exceptionContext, cancellationToken);
             }
 
-            HttpActionExecutedContext executedContext = new HttpActionExecutedContext(_context, exception);
+            HttpActionExecutedContext executedContext = new HttpActionExecutedContext(
+                _context,
+                exception
+            );
 
             // Note: exception filters need to be scheduled in the reverse order so that
             // the more specific filter (e.g. Action) executes before the less specific ones (e.g. Global)
             for (int i = _filters.Length - 1; i >= 0; i--)
             {
                 IExceptionFilter exceptionFilter = _filters[i];
-                await exceptionFilter.ExecuteExceptionFilterAsync(executedContext, cancellationToken);
+                await exceptionFilter.ExecuteExceptionFilterAsync(
+                    executedContext,
+                    cancellationToken
+                );
             }
 
             if (executedContext.Response == null && !isCancellationException)
             {
                 // We don't log cancellation exceptions because it doesn't represent an error.
-                executedContext.Response = await _exceptionHandler.HandleAsync(exceptionContext, cancellationToken);
+                executedContext.Response = await _exceptionHandler.HandleAsync(
+                    exceptionContext,
+                    cancellationToken
+                );
             }
 
             if (executedContext.Response != null)

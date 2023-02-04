@@ -40,7 +40,13 @@ namespace Microsoft.Internal.Collections
             }
 
             Type closedType;
-            if (ReflectionServices.TryGetGenericInterfaceType(type, IEnumerableOfTType, out closedType))
+            if (
+                ReflectionServices.TryGetGenericInterfaceType(
+                    type,
+                    IEnumerableOfTType,
+                    out closedType
+                )
+            )
             {
                 return closedType.GetGenericArguments()[0];
             }
@@ -51,7 +57,13 @@ namespace Microsoft.Internal.Collections
         public static Type GetCollectionElementType(Type type)
         {
             Type closedType;
-            if (ReflectionServices.TryGetGenericInterfaceType(type, ICollectionOfTType, out closedType))
+            if (
+                ReflectionServices.TryGetGenericInterfaceType(
+                    type,
+                    ICollectionOfTType,
+                    out closedType
+                )
+            )
             {
                 return closedType.GetGenericArguments()[0];
             }
@@ -66,7 +78,10 @@ namespace Microsoft.Internal.Collections
             return new ReadOnlyCollection<T>(source.AsArray());
         }
 
-        public static IEnumerable<T> ConcatAllowingNull<T>(this IEnumerable<T> source, IEnumerable<T> second)
+        public static IEnumerable<T> ConcatAllowingNull<T>(
+            this IEnumerable<T> source,
+            IEnumerable<T> second
+        )
         {
             if (second == null || !second.FastAny())
             {
@@ -81,7 +96,10 @@ namespace Microsoft.Internal.Collections
             return source.Concat(second);
         }
 
-        public static ICollection<T> ConcatAllowingNull<T>(this ICollection<T> source, ICollection<T> second)
+        public static ICollection<T> ConcatAllowingNull<T>(
+            this ICollection<T> source,
+            ICollection<T> second
+        )
         {
             if (second == null || (second.Count == 0))
             {
@@ -99,7 +117,10 @@ namespace Microsoft.Internal.Collections
             return result;
         }
 
-        public static List<T> FastAppendToListAllowNulls<T>(this List<T> source, IEnumerable<T> second)
+        public static List<T> FastAppendToListAllowNulls<T>(
+            this List<T> source,
+            IEnumerable<T> second
+        )
         {
             if (second == null)
             {
@@ -126,16 +147,15 @@ namespace Microsoft.Internal.Collections
                     return source;
                 }
             }
-            
+
             // last resort - nothing is null, need to append
             source.AddRange(second);
             return source;
-            
         }
- 
+
         public static void ForEach<T>(this IEnumerable<T> source, Action<T> action)
         {
-            foreach(T t in source)
+            foreach (T t in source)
             {
                 action.Invoke(t);
             }
@@ -180,10 +200,10 @@ namespace Microsoft.Internal.Collections
 
         public static bool FastAny<T>(this IEnumerable<T> source)
         {
-            // Enumerable.Any<T> underneath doesn't cast to ICollection, 
+            // Enumerable.Any<T> underneath doesn't cast to ICollection,
             // like it does with many of the other LINQ methods.
             // Below is significantly (4x) when mainly working with ICollection
-            // sources and a little slower if working with mainly IEnumerable<T> 
+            // sources and a little slower if working with mainly IEnumerable<T>
             // sources.
 
             // Cast to ICollection instead of ICollection<T> for performance reasons.
@@ -200,9 +220,9 @@ namespace Microsoft.Internal.Collections
         {
             Assumes.NotNull(stack);
 
-            // Stack<T>.GetEnumerator walks from top to bottom 
-            // of the stack, whereas Stack<T>(IEnumerable<T>) 
-            // pushes to bottom from top, so we need to reverse 
+            // Stack<T>.GetEnumerator walks from top to bottom
+            // of the stack, whereas Stack<T>(IEnumerable<T>)
+            // pushes to bottom from top, so we need to reverse
             // the stack to get them in the right order.
             return new Stack<T>(stack.Reverse());
         }
@@ -238,9 +258,9 @@ namespace Microsoft.Internal.Collections
                 return false;
             }
 
-            for(int i=0; i< thisArray.Length; i++)
+            for (int i = 0; i < thisArray.Length; i++)
             {
-                if (!thisArray[i].Equals( thatArray[i]))
+                if (!thisArray[i].Equals(thatArray[i]))
                 {
                     return false;
                 }

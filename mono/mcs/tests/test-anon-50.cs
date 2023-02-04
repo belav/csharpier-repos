@@ -5,7 +5,7 @@ using System.Collections;
 
 public class Test
 {
-    public IEnumerable Foo (int a)
+    public IEnumerable Foo(int a)
     {
         yield return a;
         yield return a * a;
@@ -15,37 +15,37 @@ public class Test
 
 class X
 {
-    public static int Main ()
+    public static int Main()
     {
-        Test test = new Test ();
+        Test test = new Test();
 
-        IEnumerable a = test.Foo (5);
+        IEnumerable a = test.Foo(5);
 
-        IEnumerator c = a.GetEnumerator ();
-        if (!c.MoveNext ())
+        IEnumerator c = a.GetEnumerator();
+        if (!c.MoveNext())
             return 5;
-        if ((int) c.Current != 5)
+        if ((int)c.Current != 5)
             return 6;
-        if (!c.MoveNext ())
+        if (!c.MoveNext())
             return 7;
-        if ((int) c.Current != 25)
+        if ((int)c.Current != 25)
             return 8;
 
-        IEnumerator d = a.GetEnumerator ();
+        IEnumerator d = a.GetEnumerator();
 
-        if ((int) c.Current != 25)
+        if ((int)c.Current != 25)
             return 9;
-        if (!d.MoveNext ())
+        if (!d.MoveNext())
             return 10;
-        if ((int) c.Current != 25)
+        if ((int)c.Current != 25)
             return 11;
-        if ((int) d.Current != 5)
+        if ((int)d.Current != 5)
             return 12;
 
-        if (c.MoveNext ())
+        if (c.MoveNext())
             return 13;
 
-        ((IDisposable) a).Dispose ();
+        ((IDisposable)a).Dispose();
         return 0;
     }
 }

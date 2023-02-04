@@ -9,11 +9,8 @@
 ///     <appSettings>
 ///         <add key = "blah" value = "blech"/>
 ///     </appSettings>
-/// </configuration> 
+/// </configuration>
 public class Test
-{    
-    static void Main ()
-    {
-    }
+{
+    static void Main() { }
 }
-

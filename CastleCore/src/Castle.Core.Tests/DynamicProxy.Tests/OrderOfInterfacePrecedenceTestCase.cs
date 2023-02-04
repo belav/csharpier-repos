@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -25,14 +25,20 @@ namespace Castle.DynamicProxy.Tests
     /// See http://support.castleproject.org/projects/DYNPROXY/issues/view/DYNPROXY-ISSUE-96 for details
     /// </summary>
     [TestFixture]
-    public class OrderOfInterfacePrecedenceTestCase:BasePEVerifyTestCase
+    public class OrderOfInterfacePrecedenceTestCase : BasePEVerifyTestCase
     {
         [Test]
         public void Same_Interface_on_target_and_mixin_should_forward_to_target()
         {
             var target = new ServiceImpl();
             var mixin = new AlwaysThrowsServiceImpl();
-            var proxy = generator.CreateInterfaceProxyWithTarget(typeof (IService), Type.EmptyTypes, target, MixIn(mixin)) as IService;
+            var proxy =
+                generator.CreateInterfaceProxyWithTarget(
+                    typeof(IService),
+                    Type.EmptyTypes,
+                    target,
+                    MixIn(mixin)
+                ) as IService;
             Assert.DoesNotThrow(() => proxy.Sum(1, 2));
         }
 
@@ -40,12 +46,17 @@ namespace Castle.DynamicProxy.Tests
         public void Same_Interface_on_proxy_withouth_target_and_mixin_should_forward_to_null_target()
         {
             var interceptor = new WithCallbackInterceptor(i =>
-                                                              {
-                                                                  Assert.IsNull(i.InvocationTarget);
-                                                                  i.ReturnValue = 0;
-                                                              });
+            {
+                Assert.IsNull(i.InvocationTarget);
+                i.ReturnValue = 0;
+            });
             var mixin = new AlwaysThrowsServiceImpl();
-            var proxy = generator.CreateInterfaceProxyWithoutTarget(typeof (IService), Type.EmptyTypes, MixIn(mixin), interceptor);
+            var proxy = generator.CreateInterfaceProxyWithoutTarget(
+                typeof(IService),
+                Type.EmptyTypes,
+                MixIn(mixin),
+                interceptor
+            );
             Assert.DoesNotThrow(() => (proxy as IService).Sum(2, 2));
         }
 
@@ -54,7 +65,11 @@ namespace Castle.DynamicProxy.Tests
         {
             var target = new ServiceImpl();
             var mixin = new AlwaysThrowsServiceImpl();
-            var proxy = generator.CreateInterfaceProxyWithTargetInterface(typeof (IService), target, MixIn(mixin));
+            var proxy = generator.CreateInterfaceProxyWithTargetInterface(
+                typeof(IService),
+                target,
+                MixIn(mixin)
+            );
             Assert.DoesNotThrow(() => (proxy as IService).Sum(2, 2));
         }
 
@@ -63,12 +78,17 @@ namespace Castle.DynamicProxy.Tests
         {
             var target = new ServiceImpl();
             var mixin = new ServiceImpl();
-            IInterceptor interceptor = new WithCallbackInterceptor(i=>
-                                                                       {
-                                                                           Assert.AreSame(target,i.InvocationTarget);
-                                                                           i.ReturnValue = 0;
-                                                                       });
-            var proxy = generator.CreateInterfaceProxyWithTargetInterface(typeof(IService), target, MixIn(mixin),interceptor);
+            IInterceptor interceptor = new WithCallbackInterceptor(i =>
+            {
+                Assert.AreSame(target, i.InvocationTarget);
+                i.ReturnValue = 0;
+            });
+            var proxy = generator.CreateInterfaceProxyWithTargetInterface(
+                typeof(IService),
+                target,
+                MixIn(mixin),
+                interceptor
+            );
             Assert.DoesNotThrow(() => (proxy as IService).Sum(2, 2));
         }
 
@@ -76,7 +96,12 @@ namespace Castle.DynamicProxy.Tests
         public void Same_Interface_on_target_and_additionalInterface_should_forward_to_target()
         {
             var target = new ServiceImpl();
-            var proxy = generator.CreateInterfaceProxyWithTarget(typeof (IService), new[] {typeof (IService)}, target) as IService;
+            var proxy =
+                generator.CreateInterfaceProxyWithTarget(
+                    typeof(IService),
+                    new[] { typeof(IService) },
+                    target
+                ) as IService;
             Assert.DoesNotThrow(() => proxy.Sum(1, 2));
         }
 
@@ -84,7 +109,11 @@ namespace Castle.DynamicProxy.Tests
         public void Mixin_with_derived_target_interface_forwards_base_to_target_derived_to_mixin()
         {
             var mixin = new ClassImplementingIDerivedSimpleMixin();
-            object proxy = generator.CreateInterfaceProxyWithTarget(typeof (ISimpleMixin), new SimpleMixin(), MixIn(mixin));
+            object proxy = generator.CreateInterfaceProxyWithTarget(
+                typeof(ISimpleMixin),
+                new SimpleMixin(),
+                MixIn(mixin)
+            );
             Assert.AreEqual(1, (proxy as ISimpleMixin).DoSomething());
             Assert.AreEqual(2, (proxy as IDerivedSimpleMixin).DoSomethingDerived());
         }
@@ -93,10 +122,12 @@ namespace Castle.DynamicProxy.Tests
         public void Mixin_and_target_implement_additionalInterface_forwards_to_target()
         {
             var mixin = new SimpleMixin();
-            object proxy = generator.CreateInterfaceProxyWithTarget(typeof (ISimpleMixin),
-                                                                    new[] {typeof (IDerivedSimpleMixin)},
-                                                                    new ClassImplementingIDerivedSimpleMixin(),
-                                                                    MixIn(mixin));
+            object proxy = generator.CreateInterfaceProxyWithTarget(
+                typeof(ISimpleMixin),
+                new[] { typeof(IDerivedSimpleMixin) },
+                new ClassImplementingIDerivedSimpleMixin(),
+                MixIn(mixin)
+            );
             Assert.AreEqual(3, (proxy as ISimpleMixin).DoSomething());
             Assert.AreEqual(2, (proxy as IDerivedSimpleMixin).DoSomethingDerived());
         }
@@ -105,10 +136,12 @@ namespace Castle.DynamicProxy.Tests
         public void Mixin_same_as_additionalInterface_forwards_to_mixin()
         {
             var mixin = new ClassImplementingIDerivedSimpleMixin();
-            object proxy = generator.CreateInterfaceProxyWithTarget(typeof (ISimpleMixin),
-                                                                    new[] {typeof (IDerivedSimpleMixin)},
-                                                                    new SimpleMixin(),
-                                                                    MixIn(mixin));
+            object proxy = generator.CreateInterfaceProxyWithTarget(
+                typeof(ISimpleMixin),
+                new[] { typeof(IDerivedSimpleMixin) },
+                new SimpleMixin(),
+                MixIn(mixin)
+            );
             Assert.AreEqual(1, (proxy as ISimpleMixin).DoSomething());
             Assert.AreEqual(2, (proxy as IDerivedSimpleMixin).DoSomethingDerived());
         }
@@ -118,7 +151,11 @@ namespace Castle.DynamicProxy.Tests
         {
             var interceptor = new LogInvocationInterceptor();
             var mixin = new ClassImplementingISimpleMixin();
-            object proxy = generator.CreateClassProxy(typeof(SimpleMixin), MixIn(mixin), interceptor);
+            object proxy = generator.CreateClassProxy(
+                typeof(SimpleMixin),
+                MixIn(mixin),
+                interceptor
+            );
             Assert.AreEqual(1, (proxy as ISimpleMixin).DoSomething());
             Assert.IsEmpty(interceptor.Invocations);
         }
@@ -128,8 +165,12 @@ namespace Castle.DynamicProxy.Tests
         {
             var interceptor = new LogInvocationInterceptor();
             var mixin = new ClassImplementingISimpleMixin();
-            object proxy = generator.CreateClassProxy(typeof(SimpleMixin), new[] { typeof(ISimpleMixin) }, MixIn(mixin),
-                                                      interceptor);
+            object proxy = generator.CreateClassProxy(
+                typeof(SimpleMixin),
+                new[] { typeof(ISimpleMixin) },
+                MixIn(mixin),
+                interceptor
+            );
             Assert.AreEqual(1, (proxy as ISimpleMixin).DoSomething());
             Assert.IsNotEmpty(interceptor.Invocations);
         }
@@ -139,12 +180,15 @@ namespace Castle.DynamicProxy.Tests
         {
             var interceptor = new LogInvocationInterceptor();
             var mixin = new ClassImplementingIDerivedSimpleMixin();
-            object proxy = generator.CreateClassProxy(typeof(SimpleMixin), new[] { typeof(IDerivedSimpleMixin) }, MixIn(mixin),
-                                                      interceptor);
+            object proxy = generator.CreateClassProxy(
+                typeof(SimpleMixin),
+                new[] { typeof(IDerivedSimpleMixin) },
+                MixIn(mixin),
+                interceptor
+            );
             Assert.AreEqual(2, (proxy as IDerivedSimpleMixin).DoSomethingDerived());
             Assert.IsNotEmpty(interceptor.Invocations);
         }
-
 
         private ProxyGenerationOptions MixIn(object mixin)
         {

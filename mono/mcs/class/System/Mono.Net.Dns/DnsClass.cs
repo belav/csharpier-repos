@@ -18,8 +18,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 //
-namespace Mono.Net.Dns {
-    enum DnsClass : ushort {
+namespace Mono.Net.Dns
+{
+    enum DnsClass : ushort
+    {
         Internet = 1,
         IN = 1,
         CSNET = 2,
@@ -30,4 +32,3 @@ namespace Mono.Net.Dns {
         HS = 4,
     }
 }
-

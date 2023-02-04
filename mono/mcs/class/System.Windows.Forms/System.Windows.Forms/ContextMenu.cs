@@ -34,55 +34,61 @@ namespace System.Windows.Forms
     public class ContextMenu : Menu
     {
         private RightToLeft right_to_left;
-        private Control    src_control;
+        private Control src_control;
 
         #region Events
-        static object CollapseEvent = new object ();
-        static object PopupEvent = new object ();
+        static object CollapseEvent = new object();
+        static object PopupEvent = new object();
 
-        public event EventHandler Collapse {
-            add { Events.AddHandler (CollapseEvent, value); }
-            remove { Events.RemoveHandler (CollapseEvent, value); }
+        public event EventHandler Collapse
+        {
+            add { Events.AddHandler(CollapseEvent, value); }
+            remove { Events.RemoveHandler(CollapseEvent, value); }
         }
 
-        public event EventHandler Popup {
-            add { Events.AddHandler (PopupEvent, value); }
-            remove { Events.RemoveHandler (PopupEvent, value); }
+        public event EventHandler Popup
+        {
+            add { Events.AddHandler(PopupEvent, value); }
+            remove { Events.RemoveHandler(PopupEvent, value); }
         }
-        
+
         #endregion Events
 
-        public ContextMenu () : base (null)
+        public ContextMenu()
+            : base(null)
         {
-            tracker = new MenuTracker (this);
+            tracker = new MenuTracker(this);
             right_to_left = RightToLeft.Inherit;
         }
 
-        public ContextMenu (MenuItem [] menuItems) : base (menuItems)
+        public ContextMenu(MenuItem[] menuItems)
+            : base(menuItems)
         {
-            tracker = new MenuTracker (this);
+            tracker = new MenuTracker(this);
             right_to_left = RightToLeft.Inherit;
         }
-        
+
         #region Public Properties
-        
+
         [Localizable(true)]
-        [DefaultValue (RightToLeft.No)]
-        public virtual RightToLeft RightToLeft {
+        [DefaultValue(RightToLeft.No)]
+        public virtual RightToLeft RightToLeft
+        {
             get { return right_to_left; }
             set { right_to_left = value; }
         }
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public Control SourceControl {
+        public Control SourceControl
+        {
             get { return src_control; }
             private set
             {
                 if (src_control == value)
                     return;
                 src_control = value;
-                OnSetSourceControlDone (new SetSourceControlDoneArgs (value));
+                OnSetSourceControlDone(new SetSourceControlDoneArgs(value));
             }
         }
 
@@ -90,79 +96,86 @@ namespace System.Windows.Forms
 
         #region Public Methods
 
-        protected internal virtual bool ProcessCmdKey (ref Message msg, Keys keyData, Control control)
+        protected internal virtual bool ProcessCmdKey(
+            ref Message msg,
+            Keys keyData,
+            Control control
+        )
         {
             SourceControl = control;
-            return ProcessCmdKey (ref msg, keyData);
+            return ProcessCmdKey(ref msg, keyData);
         }
 
-        protected internal virtual void OnCollapse (EventArgs e)
+        protected internal virtual void OnCollapse(EventArgs e)
         {
-            EventHandler eh = (EventHandler) (Events [CollapseEvent]);
+            EventHandler eh = (EventHandler)(Events[CollapseEvent]);
             if (eh != null)
-                eh (this, e);
+                eh(this, e);
         }
 
-        protected internal virtual void OnPopup (EventArgs e)
+        protected internal virtual void OnPopup(EventArgs e)
         {
-            EventHandler eh = (EventHandler) (Events [PopupEvent]);
+            EventHandler eh = (EventHandler)(Events[PopupEvent]);
             if (eh != null)
-                eh (this, e);
+                eh(this, e);
         }
-        
-        public void Show (Control control, Point pos)
+
+        public void Show(Control control, Point pos)
         {
             if (control == null)
-                throw new ArgumentException ();
+                throw new ArgumentException();
 
             SourceControl = control;
-            OnPopup (EventArgs.Empty);
+            OnPopup(EventArgs.Empty);
 
-            pos = control.PointToScreen (pos);
-            MenuTracker.TrackPopupMenu (this, pos);
-            
+            pos = control.PointToScreen(pos);
+            MenuTracker.TrackPopupMenu(this, pos);
+
             SourceControl = null;
-            OnCollapse (EventArgs.Empty);
+            OnCollapse(EventArgs.Empty);
         }
 
-        public void Show (Control control, Point pos, LeftRightAlignment alignment)
+        public void Show(Control control, Point pos, LeftRightAlignment alignment)
         {
             Point point;
-            
+
             if (alignment == LeftRightAlignment.Left)
-                point = new Point ((pos.X - control.Width), pos.Y);
+                point = new Point((pos.X - control.Width), pos.Y);
             else
                 point = pos;
 
-            Show (control, point);
+            Show(control, point);
         }
         #endregion Public Methods
 
-        internal void Hide ()
+        internal void Hide()
         {
-            tracker.Deactivate ();
+            tracker.Deactivate();
             SourceControl = null;
         }
 
         #region Internal Events
 
-        internal delegate void SetSourceControlDoneHandler (object sender, SetSourceControlDoneArgs e);
-        
-        // Is used by UIA API.
-        [Browsable (false)]
-        internal static event SetSourceControlDoneHandler SetSourceControlDone; 
+        internal delegate void SetSourceControlDoneHandler(
+            object sender,
+            SetSourceControlDoneArgs e
+        );
 
-        private void OnSetSourceControlDone (SetSourceControlDoneArgs e)
+        // Is used by UIA API.
+        [Browsable(false)]
+        internal static event SetSourceControlDoneHandler SetSourceControlDone;
+
+        private void OnSetSourceControlDone(SetSourceControlDoneArgs e)
         {
             if (SetSourceControlDone != null)
-                SetSourceControlDone (this, e);
+                SetSourceControlDone(this, e);
         }
 
         internal class SetSourceControlDoneArgs : EventArgs
         {
             public readonly Control NewOwner;
 
-            public SetSourceControlDoneArgs (Control newOwner)
+            public SetSourceControlDoneArgs(Control newOwner)
             {
                 NewOwner = newOwner;
             }

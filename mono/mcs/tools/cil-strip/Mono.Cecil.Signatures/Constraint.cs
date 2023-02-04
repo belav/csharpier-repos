@@ -26,12 +26,13 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil.Signatures {
-
+namespace Mono.Cecil.Signatures
+{
     using Mono.Cecil.Metadata;
 
-    internal enum Constraint : byte {
+    internal enum Constraint : byte
+    {
         None = 0x0,
-        Pinned = (byte) ElementType.Pinned
+        Pinned = (byte)ElementType.Pinned
     }
 }

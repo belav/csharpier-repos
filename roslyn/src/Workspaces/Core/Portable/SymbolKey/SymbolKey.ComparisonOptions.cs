@@ -23,18 +23,19 @@ namespace Microsoft.CodeAnalysis
             public ComparisonOptions(bool ignoreCase, bool ignoreAssemblyKeys)
             {
                 _flags =
-                    BoolToOption(ignoreCase, Option.IgnoreCase) |
-                    BoolToOption(ignoreAssemblyKeys, Option.IgnoreAssemblyKeys);
+                    BoolToOption(ignoreCase, Option.IgnoreCase)
+                    | BoolToOption(ignoreAssemblyKeys, Option.IgnoreAssemblyKeys);
             }
 
             public bool IgnoreCase => (_flags & Option.IgnoreCase) == Option.IgnoreCase;
 
-            public bool IgnoreAssemblyKey => (_flags & Option.IgnoreAssemblyKeys) == Option.IgnoreAssemblyKeys;
+            public bool IgnoreAssemblyKey =>
+                (_flags & Option.IgnoreAssemblyKeys) == Option.IgnoreAssemblyKeys;
 
             public byte FlagsValue => (byte)_flags;
 
-            private static Option BoolToOption(bool value, Option option)
-                => value ? option : Option.None;
+            private static Option BoolToOption(bool value, Option option) =>
+                value ? option : Option.None;
         }
     }
 }

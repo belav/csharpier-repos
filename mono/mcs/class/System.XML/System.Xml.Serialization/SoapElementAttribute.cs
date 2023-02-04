@@ -1,5 +1,5 @@
 //
-// SoapElementAttribute.cs: 
+// SoapElementAttribute.cs:
 //
 // Author:
 //   John Donagher (john@webmeta.com)
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,62 +35,64 @@ namespace System.Xml.Serialization
     /// <summary>
     /// Summary description for SoapElementAttribute.
     /// </summary>
-    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field
-         | AttributeTargets.Parameter | AttributeTargets.ReturnValue)]
+    [AttributeUsage(
+        AttributeTargets.Property
+            | AttributeTargets.Field
+            | AttributeTargets.Parameter
+            | AttributeTargets.ReturnValue
+    )]
     public class SoapElementAttribute : Attribute
     {
         private string dataType;
         private string elementName;
         private bool isNullable;
 
-        public SoapElementAttribute ()
-        {
-        }
-        public SoapElementAttribute (string elementName) 
+        public SoapElementAttribute() { }
+
+        public SoapElementAttribute(string elementName)
         {
             this.elementName = elementName;
         }
 
-        public string DataType {
-            get {
-                if (dataType == null) {
+        public string DataType
+        {
+            get
+            {
+                if (dataType == null)
+                {
                     return string.Empty;
                 }
                 return dataType;
             }
-            set {
-                dataType = value;
-            }
+            set { dataType = value; }
         }
 
-        public string ElementName {
-            get {
-                if (elementName == null) {
+        public string ElementName
+        {
+            get
+            {
+                if (elementName == null)
+                {
                     return string.Empty;
                 }
                 return elementName;
             }
-            set {
-                elementName = value;
-            }
+            set { elementName = value; }
         }
 
-        public bool IsNullable {
-            get {
-                return isNullable;
-            } 
-            set {
-                isNullable = value;
-            }
-        }
-        
-        internal void AddKeyHash (System.Text.StringBuilder sb)
+        public bool IsNullable
         {
-            sb.Append ("SEA ");
-            KeyHelper.AddField (sb, 1, elementName);
-            KeyHelper.AddField (sb, 2, dataType);
-            KeyHelper.AddField (sb, 3, isNullable);
-            sb.Append ('|');
+            get { return isNullable; }
+            set { isNullable = value; }
+        }
+
+        internal void AddKeyHash(System.Text.StringBuilder sb)
+        {
+            sb.Append("SEA ");
+            KeyHelper.AddField(sb, 1, elementName);
+            KeyHelper.AddField(sb, 2, dataType);
+            KeyHelper.AddField(sb, 3, isNullable);
+            sb.Append('|');
         }
     }
 }

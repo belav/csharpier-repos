@@ -33,50 +33,49 @@ namespace System.Resources
 {
     sealed class AssemblyNamesTypeResolutionService : ITypeResolutionService
     {
-        public AssemblyNamesTypeResolutionService (AssemblyName[] names)
-        {
-
-        }
+        public AssemblyNamesTypeResolutionService(AssemblyName[] names) { }
 
         #region ITypeResolutionService implementation
 
-        public Assembly GetAssembly (AssemblyName name)
+        public Assembly GetAssembly(AssemblyName name)
         {
-            return GetAssembly (name, true);
+            return GetAssembly(name, true);
         }
 
-        public Assembly GetAssembly (AssemblyName name, bool throwOnError)
+        public Assembly GetAssembly(AssemblyName name, bool throwOnError)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public Type GetType (string name)
+        public Type GetType(string name)
         {
-            return GetType (name, true);
+            return GetType(name, true);
         }
 
-        public Type GetType (string name, bool throwOnError)
+        public Type GetType(string name, bool throwOnError)
         {
-            return GetType (name, throwOnError, false);
+            return GetType(name, throwOnError, false);
         }
 
-        public Type GetType (string name, bool throwOnError, bool ignoreCase)
+        public Type GetType(string name, bool throwOnError, bool ignoreCase)
         {
-            var type = Type.GetType (name, false, ignoreCase);
+            var type = Type.GetType(name, false, ignoreCase);
             if (type == null && throwOnError)
-                throw new ArgumentException (string.Format ("Could not find a type for a name. The type name was `{0}'", name));
+                throw new ArgumentException(
+                    string.Format("Could not find a type for a name. The type name was `{0}'", name)
+                );
 
             return type;
         }
 
-        public void ReferenceAssembly (AssemblyName name)
+        public void ReferenceAssembly(AssemblyName name)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public string GetPathOfAssembly (AssemblyName name)
+        public string GetPathOfAssembly(AssemblyName name)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         #endregion

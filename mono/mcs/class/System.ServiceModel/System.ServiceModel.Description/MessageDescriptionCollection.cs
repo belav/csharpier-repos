@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,11 +33,9 @@ namespace System.ServiceModel.Description
 {
     public class MessageDescriptionCollection : Collection<MessageDescription>
     {
-        internal MessageDescriptionCollection ()
-        {
-        }
+        internal MessageDescriptionCollection() { }
 
-        public MessageDescription Find (string action)
+        public MessageDescription Find(string action)
         {
             foreach (MessageDescription md in this)
                 if (md.Action == action)
@@ -45,13 +43,12 @@ namespace System.ServiceModel.Description
             return null;
         }
 
-        public Collection<MessageDescription> FindAll (string action)
+        public Collection<MessageDescription> FindAll(string action)
         {
-            Collection<MessageDescription> list =
-                new Collection<MessageDescription> ();
+            Collection<MessageDescription> list = new Collection<MessageDescription>();
             foreach (MessageDescription md in this)
                 if (md.Action == action)
-                    list.Add (md);
+                    list.Add(md);
             return list;
         }
     }

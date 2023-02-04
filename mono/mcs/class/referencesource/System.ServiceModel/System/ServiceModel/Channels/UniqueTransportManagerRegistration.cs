@@ -12,7 +12,11 @@ namespace System.ServiceModel.Channels
     {
         List<TransportManager> list;
 
-        public UniqueTransportManagerRegistration(TransportManager uniqueManager, Uri listenUri, HostNameComparisonMode hostNameComparisonMode)
+        public UniqueTransportManagerRegistration(
+            TransportManager uniqueManager,
+            Uri listenUri,
+            HostNameComparisonMode hostNameComparisonMode
+        )
             : base(listenUri, hostNameComparisonMode)
         {
             this.list = new List<TransportManager>();

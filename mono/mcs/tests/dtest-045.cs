@@ -2,22 +2,24 @@ using System;
 
 class Test
 {
-    public static int Main ()
+    public static int Main()
     {
-        dynamic index = (uint) int.MaxValue + 1;
+        dynamic index = (uint)int.MaxValue + 1;
         dynamic array = new int[] { 1, 2 };
 
-        try {
-            var a = array [index];
+        try
+        {
+            var a = array[index];
             return 1;
-        } catch (System.OverflowException) {
         }
+        catch (System.OverflowException) { }
 
-        try {
+        try
+        {
             array[ulong.MaxValue] = 1;
             return 2;
-        } catch (System.OverflowException) {
         }
+        catch (System.OverflowException) { }
 
         return 0;
     }

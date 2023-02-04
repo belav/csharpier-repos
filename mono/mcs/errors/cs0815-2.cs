@@ -4,13 +4,10 @@
 
 public class Test
 {
-    static void Main ()
+    static void Main()
     {
-        var v = Foo ();
+        var v = Foo();
     }
 
-    static void Foo ()
-    {
-    }
+    static void Foo() { }
 }
-

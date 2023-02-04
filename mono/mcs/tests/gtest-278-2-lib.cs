@@ -9,29 +9,29 @@ public class C
 {
     public class CC
     {
-        public static string Print ()
+        public static string Print()
         {
-            return typeof (CC).FullName;
+            return typeof(CC).FullName;
         }
     }
 
-    public static string Print ()
+    public static string Print()
     {
-        return typeof (C).FullName;
+        return typeof(C).FullName;
     }
 }
 
 public class D
 {
-    public static string Print ()
+    public static string Print()
     {
-        return typeof (D).FullName;
+        return typeof(D).FullName;
     }
 }
 
 public struct G<T>
 {
-    public static T Test (T t)
+    public static T Test(T t)
     {
         return t;
     }

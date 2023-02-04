@@ -15,20 +15,32 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
     {
         private static void AssertIncompleteSubmission(string code)
         {
-            Assert.False(SyntaxFactory.IsCompleteSubmission(SyntaxFactory.ParseSyntaxTree(code, options: TestOptions.Script)));
+            Assert.False(
+                SyntaxFactory.IsCompleteSubmission(
+                    SyntaxFactory.ParseSyntaxTree(code, options: TestOptions.Script)
+                )
+            );
         }
 
         private static void AssertCompleteSubmission(string code)
         {
-            Assert.True(SyntaxFactory.IsCompleteSubmission(SyntaxFactory.ParseSyntaxTree(code, options: TestOptions.Script)));
+            Assert.True(
+                SyntaxFactory.IsCompleteSubmission(
+                    SyntaxFactory.ParseSyntaxTree(code, options: TestOptions.Script)
+                )
+            );
         }
 
         [Fact]
         public void TextIsCompleteSubmission()
         {
             Assert.Throws<ArgumentNullException>(() => SyntaxFactory.IsCompleteSubmission(null));
-            Assert.Throws<ArgumentException>(() =>
-                SyntaxFactory.IsCompleteSubmission(SyntaxFactory.ParseSyntaxTree("", options: TestOptions.Regular)));
+            Assert.Throws<ArgumentException>(
+                () =>
+                    SyntaxFactory.IsCompleteSubmission(
+                        SyntaxFactory.ParseSyntaxTree("", options: TestOptions.Regular)
+                    )
+            );
 
             AssertCompleteSubmission("");
             AssertCompleteSubmission("//hello");
@@ -46,19 +58,23 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
             AssertIncompleteSubmission("using X; /*");
 
-            AssertIncompleteSubmission(@"
+            AssertIncompleteSubmission(
+                @"
 void goo() 
 {
 #if F
 }
-");
+"
+            );
 
-            AssertIncompleteSubmission(@"
+            AssertIncompleteSubmission(
+                @"
 void goo() 
 {
 #region R
 }
-");
+"
+            );
 
             AssertCompleteSubmission("1");
             AssertCompleteSubmission("1;");

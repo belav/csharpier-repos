@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.PatternMatching
                 string pattern,
                 CultureInfo culture,
                 bool includeMatchedSpans,
-                bool allowFuzzyMatching)
+                bool allowFuzzyMatching
+            )
                 : base(includeMatchedSpans, culture, allowFuzzyMatching)
             {
                 pattern = pattern.Trim();
@@ -41,15 +42,28 @@ namespace Microsoft.CodeAnalysis.PatternMatching
             /// </summary>
             /// <returns>If this was a match, a set of match types that occurred while matching the
             /// patterns. If it was not a match, it returns null.</returns>
-            public override bool AddMatches(string candidate, ref TemporaryArray<PatternMatch> matches)
+            public override bool AddMatches(
+                string candidate,
+                ref TemporaryArray<PatternMatch> matches
+            )
             {
                 if (SkipMatch(candidate))
                 {
                     return false;
                 }
 
-                return MatchPatternSegment(candidate, in _fullPatternSegment, ref matches, fuzzyMatch: false) ||
-                       MatchPatternSegment(candidate, in _fullPatternSegment, ref matches, fuzzyMatch: true);
+                return MatchPatternSegment(
+                        candidate,
+                        in _fullPatternSegment,
+                        ref matches,
+                        fuzzyMatch: false
+                    )
+                    || MatchPatternSegment(
+                        candidate,
+                        in _fullPatternSegment,
+                        ref matches,
+                        fuzzyMatch: true
+                    );
             }
         }
     }

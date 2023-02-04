@@ -1,4 +1,4 @@
-// 
+//
 // System.Web.TraceContext
 //
 // Author:
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,11 +36,14 @@ using System.Web.UI;
 namespace System.Web
 {
     // CAS - no InheritanceDemand here as the class is sealed
-    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
     public sealed class TraceContext
     {
-        static readonly object traceFinishedEvent = new object ();
-        
+        static readonly object traceFinishedEvent = new object();
+
         HttpContext _Context;
         TraceManager _traceManager;
         bool _Enabled;
@@ -50,35 +53,37 @@ namespace System.Web
         bool _haveTrace;
         Hashtable view_states;
         Hashtable control_states;
-        Hashtable sizes;        
-        EventHandlerList events = new EventHandlerList ();
-        
-        public event TraceContextEventHandler TraceFinished {
-            add { events.AddHandler (traceFinishedEvent, value); }
-            remove { events.AddHandler (traceFinishedEvent, value); }
+        Hashtable sizes;
+        EventHandlerList events = new EventHandlerList();
+
+        public event TraceContextEventHandler TraceFinished
+        {
+            add { events.AddHandler(traceFinishedEvent, value); }
+            remove { events.AddHandler(traceFinishedEvent, value); }
         }
 
-        public TraceContext (HttpContext context)
+        public TraceContext(HttpContext context)
         {
             _Context = context;
         }
 
-        internal bool HaveTrace {
-            get {
-                return _haveTrace;
-            }
+        internal bool HaveTrace
+        {
+            get { return _haveTrace; }
         }
 
-        public bool IsEnabled {
-            get {
+        public bool IsEnabled
+        {
+            get
+            {
                 if (!_haveTrace)
                     return TraceManager.Enabled;
                 return _Enabled;
             }
-
-            set {
+            set
+            {
                 if (value && data == null)
-                    data = new TraceData ();
+                    data = new TraceData();
                 _haveTrace = true;
                 _Enabled = value;
             }
@@ -95,103 +100,101 @@ namespace System.Web
             }
         }
 
-        public TraceMode TraceMode {
-            get {
-                return (_Mode == TraceMode.Default) ? TraceManager.TraceMode : _Mode;
-            }
-            set {
-                _Mode = value;
-            }
+        public TraceMode TraceMode
+        {
+            get { return (_Mode == TraceMode.Default) ? TraceManager.TraceMode : _Mode; }
+            set { _Mode = value; }
         }
 
         public void Warn(string message)
         {
-            Write (String.Empty, message, null, true);
+            Write(String.Empty, message, null, true);
         }
 
         public void Warn(string category, string message)
         {
-            Write (category, message, null, true);
+            Write(category, message, null, true);
         }
 
-        public void Warn (string category, string message, Exception errorInfo)
+        public void Warn(string category, string message, Exception errorInfo)
         {
-            Write (category, message, errorInfo, true);
+            Write(category, message, errorInfo, true);
         }
 
-        public void Write (string message)
+        public void Write(string message)
         {
-            Write (String.Empty, message, null, false);
+            Write(String.Empty, message, null, false);
         }
 
-        public void Write (string category, string message)
+        public void Write(string category, string message)
         {
-            Write (category, message, null, false);
+            Write(category, message, null, false);
         }
 
-        public void Write (string category, string message, Exception errorInfo)
+        public void Write(string category, string message, Exception errorInfo)
         {
-            Write (category, message, errorInfo, false);
+            Write(category, message, errorInfo, false);
         }
 
-        void Write (string category, string msg, Exception error, bool Warning)
+        void Write(string category, string msg, Exception error, bool Warning)
         {
             if (!IsEnabled)
                 return;
             if (data == null)
-                data = new TraceData ();
-            data.Write (category, msg, error, Warning);
+                data = new TraceData();
+            data.Write(category, msg, error, Warning);
         }
 
-        internal void SaveData ()
+        internal void SaveData()
         {
             if (data == null)
-                data = new TraceData ();
+                data = new TraceData();
 
             data.TraceMode = _Context.Trace.TraceMode;
 
-            SetRequestDetails ();
+            SetRequestDetails();
             if (_Context.Handler is Page)
-                data.AddControlTree ((Page) _Context.Handler, view_states, control_states, sizes);
+                data.AddControlTree((Page)_Context.Handler, view_states, control_states, sizes);
 
-            AddCookies ();
-            AddHeaders ();
-            AddServerVars ();
-            TraceManager.AddTraceData (data);
+            AddCookies();
+            AddHeaders();
+            AddServerVars();
+            TraceManager.AddTraceData(data);
             data_saved = true;
         }
 
-        internal void SaveViewState (Control ctrl, object vs)
+        internal void SaveViewState(Control ctrl, object vs)
         {
             if (view_states == null)
-                view_states = new Hashtable ();
+                view_states = new Hashtable();
 
-            view_states [ctrl] = vs;
+            view_states[ctrl] = vs;
         }
 
-        internal void SaveControlState (Control ctrl, object vs) {
+        internal void SaveControlState(Control ctrl, object vs)
+        {
             if (control_states == null)
-                control_states = new Hashtable ();
+                control_states = new Hashtable();
 
-            control_states [ctrl] = vs;
+            control_states[ctrl] = vs;
         }
 
-        internal void SaveSize (Control ctrl, int size)
+        internal void SaveSize(Control ctrl, int size)
         {
             if (sizes == null)
-                sizes = new Hashtable ();
+                sizes = new Hashtable();
 
-            sizes [ctrl] = size;
+            sizes[ctrl] = size;
         }
 
-        internal void Render (HtmlTextWriter output)
+        internal void Render(HtmlTextWriter output)
         {
             if (!data_saved)
-                SaveData ();
-            data.Render (output);
+                SaveData();
+            data.Render(output);
         }
 
-        void SetRequestDetails ()
+        void SetRequestDetails()
         {
             data.RequestPath = _Context.Request.FilePath;
             data.SessionID = (_Context.Session != null ? _Context.Session.SessionID : String.Empty);
@@ -202,23 +205,22 @@ namespace System.Web
             data.ResponseEncoding = _Context.Response.ContentEncoding;
         }
 
-        void AddCookies ()
+        void AddCookies()
         {
             foreach (string key in _Context.Request.Cookies.Keys)
-                data.AddCookie (key, _Context.Request.Cookies [key].Value);
+                data.AddCookie(key, _Context.Request.Cookies[key].Value);
         }
 
-        void AddHeaders ()
+        void AddHeaders()
         {
             foreach (string key in _Context.Request.Headers.Keys)
-                data.AddHeader (key, _Context.Request.Headers [key]);
+                data.AddHeader(key, _Context.Request.Headers[key]);
         }
 
-        void AddServerVars ()
+        void AddServerVars()
         {
             foreach (string key in _Context.Request.ServerVariables)
-                data.AddServerVar (key, _Context.Request.ServerVariables [key]);
+                data.AddServerVar(key, _Context.Request.ServerVariables[key]);
         }
     }
 }
-

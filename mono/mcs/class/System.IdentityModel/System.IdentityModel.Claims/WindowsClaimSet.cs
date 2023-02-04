@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -41,74 +41,80 @@ namespace System.IdentityModel.Claims
         // Constructors
 
         [MonoTODO]
-        public WindowsClaimSet (WindowsIdentity windowsIdentity)
+        public WindowsClaimSet(WindowsIdentity windowsIdentity)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public WindowsClaimSet (WindowsIdentity windowsIdentity, bool includeWindowsGroups)
+        public WindowsClaimSet(WindowsIdentity windowsIdentity, bool includeWindowsGroups)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public WindowsClaimSet (WindowsIdentity windowsIdentity, DateTime expirationTime)
+        public WindowsClaimSet(WindowsIdentity windowsIdentity, DateTime expirationTime)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public WindowsClaimSet (WindowsIdentity windowsIdentity, bool includeWindowsGroups, DateTime expirationTime)
+        public WindowsClaimSet(
+            WindowsIdentity windowsIdentity,
+            bool includeWindowsGroups,
+            DateTime expirationTime
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         // Properties
 
-        public override int Count {
-            get { throw new NotImplementedException (); }
+        public override int Count
+        {
+            get { throw new NotImplementedException(); }
         }
 
-        public override ClaimSet Issuer {
-            get { throw new NotImplementedException (); }
+        public override ClaimSet Issuer
+        {
+            get { throw new NotImplementedException(); }
         }
 
-        public override Claim this [int index] {
-            get { throw new NotImplementedException (); }
+        public override Claim this[int index]
+        {
+            get { throw new NotImplementedException(); }
         }
 
-        public DateTime ExpirationTime {
+        public DateTime ExpirationTime
+        {
             get { return expiration_time; }
         }
 
-        public WindowsIdentity WindowsIdentity {
+        public WindowsIdentity WindowsIdentity
+        {
             get { return identity; }
         }
 
         // Methods
 
         [MonoTODO]
-        public void Dispose ()
+        public void Dispose() { }
+
+        [MonoTODO]
+        public override IEnumerable<Claim> FindClaims(string claimType, string right)
         {
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public override IEnumerable<Claim> FindClaims (
-            string claimType, string right)
+        public override IEnumerator<Claim> GetEnumerator()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        [MonoTODO]
-        public override IEnumerator<Claim> GetEnumerator ()
+        public override string ToString()
         {
-            throw new NotImplementedException ();
-        }
-
-        public override string ToString ()
-        {
-            return base.ToString ();
+            return base.ToString();
         }
     }
 }

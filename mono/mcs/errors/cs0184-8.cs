@@ -6,11 +6,10 @@ using System;
 
 class X
 {
-    void Foo ()
+    void Foo()
     {
         int? i = null;
-        
-        if (i is bool?) {
-        }
+
+        if (i is bool?) { }
     }
 }

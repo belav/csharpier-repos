@@ -12,10 +12,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,72 +31,73 @@ using System.Collections;
 using System.Diagnostics;
 using System.Web.UI.WebControls;
 
-namespace MonoTests.System.Web.UI.WebControls {
-
+namespace MonoTests.System.Web.UI.WebControls
+{
     [TestFixture]
-    public class HyperLinkColumnTest {
-
+    public class HyperLinkColumnTest
+    {
         [Test]
-        public void SetUpTest ()
+        public void SetUpTest()
         {
-            HyperLinkColumn column = new HyperLinkColumn ();
-            Assert.AreEqual (String.Empty, column.DataNavigateUrlField, "#1");
-            Assert.AreEqual (String.Empty, column.DataTextField, "2");
-            Assert.AreEqual (String.Empty, column.DataTextFormatString, "#3");
-            Assert.AreEqual (String.Empty, column.NavigateUrl, "#4");            
-            Assert.AreEqual (String.Empty, column.Target, "#5");
-            Assert.AreEqual (String.Empty, column.Text, "#6");
+            HyperLinkColumn column = new HyperLinkColumn();
+            Assert.AreEqual(String.Empty, column.DataNavigateUrlField, "#1");
+            Assert.AreEqual(String.Empty, column.DataTextField, "2");
+            Assert.AreEqual(String.Empty, column.DataTextFormatString, "#3");
+            Assert.AreEqual(String.Empty, column.NavigateUrl, "#4");
+            Assert.AreEqual(String.Empty, column.Target, "#5");
+            Assert.AreEqual(String.Empty, column.Text, "#6");
         }
 
         [Test]
-        public void DataNavigateUrlFieldTest ()
+        public void DataNavigateUrlFieldTest()
         {
-            HyperLinkColumn column = new HyperLinkColumn ();
+            HyperLinkColumn column = new HyperLinkColumn();
             string foo = "foo";
             string bar = "bar";
 
             column.NavigateUrl = foo;
-            Assert.AreEqual (foo, column.NavigateUrl, "#1");
+            Assert.AreEqual(foo, column.NavigateUrl, "#1");
 
             // Test the bit about DataNavigateUrlField having precedence over NavigateUrl
             column.DataNavigateUrlField = bar;
-            Assert.AreEqual (bar, column.DataNavigateUrlField, "#2");
+            Assert.AreEqual(bar, column.DataNavigateUrlField, "#2");
             // what does this mean? shouldn't NavigateUrl be "bar" now?
-            Assert.AreEqual (foo, column.NavigateUrl, "#3"); 
+            Assert.AreEqual(foo, column.NavigateUrl, "#3");
         }
 
-        public class MyColumn : HyperLinkColumn {
-            public string FormatUrl (object input)
+        public class MyColumn : HyperLinkColumn
+        {
+            public string FormatUrl(object input)
             {
-                return FormatDataNavigateUrlValue (input);
+                return FormatDataNavigateUrlValue(input);
             }
 
-            public string FormatText (object input)
+            public string FormatText(object input)
             {
-                return FormatDataTextValue (input);
+                return FormatDataTextValue(input);
             }
 
-            public void InitCell (TableCell cell, int column_index, ListItemType item_type)
+            public void InitCell(TableCell cell, int column_index, ListItemType item_type)
             {
-              base.InitializeCell (cell, column_index, item_type);
+                base.InitializeCell(cell, column_index, item_type);
             }
         }
 
         [Test]
-        public void FormatTest ()
+        public void FormatTest()
         {
-            MyColumn column = new MyColumn ();
+            MyColumn column = new MyColumn();
             column.DataNavigateUrlFormatString = "!{0}!";
-            Assert.AreEqual (String.Empty, column.FormatUrl (null), "#1");
-            Assert.AreEqual ("!foo!", column.FormatUrl ("foo"), "#2");
+            Assert.AreEqual(String.Empty, column.FormatUrl(null), "#1");
+            Assert.AreEqual("!foo!", column.FormatUrl("foo"), "#2");
 
             column.DataTextFormatString = "!{0}!";
-            Assert.AreEqual (String.Empty, column.FormatText (null), "#3");
-            Assert.AreEqual ("!foo!", column.FormatText ("foo"), "#4");
+            Assert.AreEqual(String.Empty, column.FormatText(null), "#3");
+            Assert.AreEqual("!foo!", column.FormatText("foo"), "#4");
         }
 
         [Test]
-        public void InitCellTest ()
+        public void InitCellTest()
         {
             MyColumn column;
             TableCell cell;
@@ -105,48 +106,47 @@ namespace MonoTests.System.Web.UI.WebControls {
             column = new MyColumn();
             cell = new TableCell();
             column.HeaderText = "This is a Header";
-            column.InitCell (cell, 0, ListItemType.Header);
+            column.InitCell(cell, 0, ListItemType.Header);
 
-            Assert.AreEqual ("This is a Header", cell.Text, "#1");
+            Assert.AreEqual("This is a Header", cell.Text, "#1");
 
             /* test that for Item it adds a HyperLinkControl */
             column = new MyColumn();
             cell = new TableCell();
             column.NavigateUrl = "http://www.novell.com/";
             column.Text = "Novell.com";
-            column.InitCell (cell, 0, ListItemType.Item);
+            column.InitCell(cell, 0, ListItemType.Item);
 
-            Assert.AreEqual (1, cell.Controls.Count, "#2");
-            Assert.IsTrue (cell.Controls[0] is HyperLink, "#3");
+            Assert.AreEqual(1, cell.Controls.Count, "#2");
+            Assert.IsTrue(cell.Controls[0] is HyperLink, "#3");
 
             /* test that for EditItem it adds a HyperLinkControl */
             column = new MyColumn();
             cell = new TableCell();
             column.NavigateUrl = "http://www.novell.com/";
             column.Text = "Novell.com";
-            column.InitCell (cell, 0, ListItemType.EditItem);
+            column.InitCell(cell, 0, ListItemType.EditItem);
 
-            Assert.AreEqual (1, cell.Controls.Count, "#4");
-            Assert.IsTrue (cell.Controls[0] is HyperLink, "#5");
+            Assert.AreEqual(1, cell.Controls.Count, "#4");
+            Assert.IsTrue(cell.Controls[0] is HyperLink, "#5");
 
             /* test that for AlternatingItem it adds a HyperLinkControl */
             column = new MyColumn();
             cell = new TableCell();
             column.NavigateUrl = "http://www.novell.com/";
             column.Text = "Novell.com";
-            column.InitCell (cell, 0, ListItemType.AlternatingItem);
+            column.InitCell(cell, 0, ListItemType.AlternatingItem);
 
-            Assert.AreEqual (1, cell.Controls.Count, "#6");
-            Assert.IsTrue (cell.Controls[0] is HyperLink, "#7");
+            Assert.AreEqual(1, cell.Controls.Count, "#6");
+            Assert.IsTrue(cell.Controls[0] is HyperLink, "#7");
 
             /* test that for Footer it just sets the cell.Text to FooterText */
             column = new MyColumn();
             cell = new TableCell();
             column.FooterText = "This is a Footer";
-            column.InitCell (cell, 0, ListItemType.Footer);
+            column.InitCell(cell, 0, ListItemType.Footer);
 
-            Assert.AreEqual ("This is a Footer", cell.Text, "#8");
+            Assert.AreEqual("This is a Footer", cell.Text, "#8");
         }
-
     }
 }

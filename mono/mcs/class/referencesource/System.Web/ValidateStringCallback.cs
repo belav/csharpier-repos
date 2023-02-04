@@ -4,11 +4,11 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web {
+namespace System.Web
+{
     using System;
     using System.Web.Util;
 
     // Delegate to a function that can validate a single string from a collection
     internal delegate void ValidateStringCallback(string key, string value);
-
 }

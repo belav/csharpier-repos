@@ -1,9 +1,9 @@
-// 
+//
 // Authors
 //    Sebastien Pouliot  <sebastien@xamarin.com>
 //
 // Copyright 2013 Xamarin Inc. http://www.xamarin.com
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
 // "Software"), to deal in the Software without restriction, including
@@ -29,53 +29,54 @@ using System.Linq;
 using System.Reflection;
 using System.Xml.Linq;
 
-namespace Mono.ApiTools {
+namespace Mono.ApiTools
+{
+    class MethodComparer : ConstructorComparer
+    {
+        public MethodComparer(State state)
+            : base(state) { }
 
-    class MethodComparer : ConstructorComparer {
-
-        public MethodComparer (State state)
-            : base (state)
+        public override string GroupName
         {
-        }
-
-        public override string GroupName {
             get { return "methods"; }
         }
 
-        public override string ElementName {
+        public override string ElementName
+        {
             get { return "method"; }
         }
 
         // operators have identical names but vary by return types
-        public override bool Find (XElement e)
+        public override bool Find(XElement e)
         {
-            if (e.GetAttribute ("name") != Source.GetAttribute ("name"))
+            if (e.GetAttribute("name") != Source.GetAttribute("name"))
                 return false;
 
-            if (e.GetAttribute ("returntype") != Source.GetAttribute ("returntype"))
+            if (e.GetAttribute("returntype") != Source.GetAttribute("returntype"))
                 return false;
 
-            var eGP = e.Element ("generic-parameters");
-            var sGP = Source.Element ("generic-parameters");
+            var eGP = e.Element("generic-parameters");
+            var sGP = Source.Element("generic-parameters");
 
             if (eGP == null && sGP == null)
                 return true;
             else if (eGP == null ^ sGP == null)
                 return false;
-            else {
-                var eGPs = eGP.Elements ("generic-parameter");
-                var sGPs = sGP.Elements ("generic-parameter");
-                return eGPs.Count () == sGPs.Count ();
+            else
+            {
+                var eGPs = eGP.Elements("generic-parameter");
+                var sGPs = sGP.Elements("generic-parameter");
+                return eGPs.Count() == sGPs.Count();
             }
         }
 
-        protected override bool IsBreakingRemoval (XElement e)
+        protected override bool IsBreakingRemoval(XElement e)
         {
             // Removing virtual methods that override another method is not a breaking change.
-            var is_override = e.Attribute ("is-override");
+            var is_override = e.Attribute("is-override");
             if (is_override != null)
                 return is_override.Value != "true";
-            
+
             return true; // all other removals are breaking changes
         }
     }

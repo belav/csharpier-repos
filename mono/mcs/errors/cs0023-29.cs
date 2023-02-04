@@ -5,6 +5,6 @@ class X
 {
     static void Bug<T>(System.Func<T> func)
     {
-        var r = func?.Invoke ();
+        var r = func?.Invoke();
     }
 }

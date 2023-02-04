@@ -11,9 +11,9 @@ namespace ILLink.RoslynAnalyzer.Tests
         protected override string TestSuiteName => "Advanced";
 
         [Fact]
-        public Task TypeCheckRemoval ()
+        public Task TypeCheckRemoval()
         {
-            return RunTest (allowMissingWarnings: true);
+            return RunTest(allowMissingWarnings: true);
         }
     }
 }

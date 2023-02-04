@@ -65,7 +65,8 @@ namespace POS_Server.Models
         public bool isArchived { get; set; }
         public IEnumerable<TableModel> tables { get; set; }
         public string payStatus { get; set; }
-        // agent 
+
+        // agent
         public string agentAddress { get; set; }
         public string agentMobile { get; set; }
         public string agentResSectorsName { get; set; }
@@ -77,37 +78,34 @@ namespace POS_Server.Models
         public int sequence { get; set; }
         public bool performed { get; set; }
 
-  
         public Nullable<decimal> DBDiscountValue { get; set; }
-      
-      
-       
+
         public string shipCompanyName { get; set; }
-    
+
         public int isPrePaid { get; set; }
         public int isShipPaid { get; set; }
         public int isFreeShip { get; set; }
-      
+
         public Nullable<int> sliceId { get; set; }
         public string sliceName { get; set; }
-      
+
         public List<PayedInvclass> cachTrans { get; set; }
-      
+
         public string sales_invoice_note { get; set; }
         public string itemtax_note { get; set; }
         public string mainInvNumber { get; set; }
-       
+
         public bool canReturn { get; set; }
         public InvoiceModel ChildInvoice { get; set; }
+
         //4 report
         public List<InvoiceModel> returnInvList { get; set; }
         public Nullable<decimal> totalNetRep { get; set; }
         public string agentCompany { get; set; }
         public List<orderPreparingStatusModel> orderStatusList { get; set; }
         public decimal orderDuration { get; set; }
-
-
     }
+
     public class PayedInvclass
     {
         public string processType { get; set; }
@@ -118,8 +116,8 @@ namespace POS_Server.Models
         public Nullable<decimal> commissionValue { get; set; }
         public Nullable<decimal> commissionRatio { get; set; }
         public string docNum { get; set; }
-
     }
+
     public class CouponInvoiceModel
     {
         public long id { get; set; }

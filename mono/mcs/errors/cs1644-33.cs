@@ -6,8 +6,5 @@ using System;
 
 class C
 {
-    public async void Foo ()
-    {
-    }
+    public async void Foo() { }
 }
-

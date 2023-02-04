@@ -15,9 +15,11 @@ namespace System.ServiceModel.Activation.Configuration
     using System.Security.Principal;
 
     [ConfigurationCollection(typeof(SecurityIdentifierElement))]
-    public sealed class SecurityIdentifierElementCollection : ServiceModelConfigurationElementCollection<SecurityIdentifierElement>
+    public sealed class SecurityIdentifierElementCollection
+        : ServiceModelConfigurationElementCollection<SecurityIdentifierElement>
     {
-        public SecurityIdentifierElementCollection() : base() { }
+        public SecurityIdentifierElementCollection()
+            : base() { }
 
         protected override Object GetElementKey(ConfigurationElement element)
         {
@@ -34,15 +36,33 @@ namespace System.ServiceModel.Activation.Configuration
         {
             if (Iis7Helper.IisVersion >= 7)
             {
-                this.Add(new SecurityIdentifierElement(new SecurityIdentifier(ConfigurationStrings.IIS_IUSRSSid)));
+                this.Add(
+                    new SecurityIdentifierElement(
+                        new SecurityIdentifier(ConfigurationStrings.IIS_IUSRSSid)
+                    )
+                );
             }
 
-            this.Add(new SecurityIdentifierElement(new SecurityIdentifier(WellKnownSidType.LocalSystemSid, null)));
-            this.Add(new SecurityIdentifierElement(new SecurityIdentifier(WellKnownSidType.BuiltinAdministratorsSid, null)));
-            this.Add(new SecurityIdentifierElement(new SecurityIdentifier(WellKnownSidType.LocalServiceSid, null)));
-            this.Add(new SecurityIdentifierElement(new SecurityIdentifier(WellKnownSidType.NetworkServiceSid, null)));
+            this.Add(
+                new SecurityIdentifierElement(
+                    new SecurityIdentifier(WellKnownSidType.LocalSystemSid, null)
+                )
+            );
+            this.Add(
+                new SecurityIdentifierElement(
+                    new SecurityIdentifier(WellKnownSidType.BuiltinAdministratorsSid, null)
+                )
+            );
+            this.Add(
+                new SecurityIdentifierElement(
+                    new SecurityIdentifier(WellKnownSidType.LocalServiceSid, null)
+                )
+            );
+            this.Add(
+                new SecurityIdentifierElement(
+                    new SecurityIdentifier(WellKnownSidType.NetworkServiceSid, null)
+                )
+            );
         }
     }
 }
-
-

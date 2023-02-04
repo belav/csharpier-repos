@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public CSharpVisualBasicLanguageServerFactory(
-            CSharpVisualBasicLspServiceProvider lspServiceProvider)
+            CSharpVisualBasicLspServiceProvider lspServiceProvider
+        )
         {
             _lspServiceProvider = lspServiceProvider;
         }
@@ -33,7 +34,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer
             ICapabilitiesProvider capabilitiesProvider,
             WellKnownLspServerKinds serverKind,
             ILspServiceLogger logger,
-            HostServices hostServices)
+            HostServices hostServices
+        )
         {
             var server = new RoslynLanguageServer(
                 _lspServiceProvider,
@@ -42,15 +44,28 @@ namespace Microsoft.CodeAnalysis.LanguageServer
                 logger,
                 hostServices,
                 ProtocolConstants.RoslynLspLanguages,
-                serverKind);
+                serverKind
+            );
 
             return server;
         }
 
-        public AbstractLanguageServer<RequestContext> Create(Stream input, Stream output, ICapabilitiesProvider capabilitiesProvider, ILspServiceLogger logger, HostServices hostServices)
+        public AbstractLanguageServer<RequestContext> Create(
+            Stream input,
+            Stream output,
+            ICapabilitiesProvider capabilitiesProvider,
+            ILspServiceLogger logger,
+            HostServices hostServices
+        )
         {
             var jsonRpc = new JsonRpc(new HeaderDelimitedMessageHandler(output, input));
-            return Create(jsonRpc, capabilitiesProvider, WellKnownLspServerKinds.CSharpVisualBasicLspServer, logger, hostServices);
+            return Create(
+                jsonRpc,
+                capabilitiesProvider,
+                WellKnownLspServerKinds.CSharpVisualBasicLspServer,
+                logger,
+                hostServices
+            );
         }
     }
 }

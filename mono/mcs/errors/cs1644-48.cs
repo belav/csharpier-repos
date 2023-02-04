@@ -4,8 +4,8 @@
 
 class C
 {
-    public static void Main ()
+    public static void Main()
     {
-        var res = nameof (C.Main);
+        var res = nameof(C.Main);
     }
 }

@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,88 +26,93 @@
 using System.ComponentModel;
 using System.Drawing;
 
-namespace System.Windows.Forms {
-
-    [ToolboxBitmap ("")]
-    public class DataGridViewImageColumn : DataGridViewColumn {
-
+namespace System.Windows.Forms
+{
+    [ToolboxBitmap("")]
+    public class DataGridViewImageColumn : DataGridViewColumn
+    {
         private Icon icon;
         private Image image;
         private bool valuesAreIcons;
 
-        public DataGridViewImageColumn () : this(false)
-        {
-        }
+        public DataGridViewImageColumn()
+            : this(false) { }
 
-        public DataGridViewImageColumn (bool valuesAreIcons)
+        public DataGridViewImageColumn(bool valuesAreIcons)
         {
             this.valuesAreIcons = valuesAreIcons;
             base.CellTemplate = new DataGridViewImageCell(valuesAreIcons);
-            (base.CellTemplate as DataGridViewImageCell).ImageLayout = DataGridViewImageCellLayout.Normal;
+            (base.CellTemplate as DataGridViewImageCell).ImageLayout =
+                DataGridViewImageCellLayout.Normal;
             DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             icon = null;
             image = null;
         }
 
-        [Browsable (false)]
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        public override DataGridViewCell CellTemplate {
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public override DataGridViewCell CellTemplate
+        {
             get { return base.CellTemplate; }
             set { base.CellTemplate = value as DataGridViewImageCell; }
         }
 
-        [Browsable (true)]
-        public override DataGridViewCellStyle DefaultCellStyle {
+        [Browsable(true)]
+        public override DataGridViewCellStyle DefaultCellStyle
+        {
             get { return base.DefaultCellStyle; }
             set { base.DefaultCellStyle = value; }
         }
 
-        [Browsable (true)]
-        [DefaultValue ("")]
-        public string Description {
+        [Browsable(true)]
+        [DefaultValue("")]
+        public string Description
+        {
             get { return (base.CellTemplate as DataGridViewImageCell).Description; }
             set { (base.CellTemplate as DataGridViewImageCell).Description = value; }
         }
 
-        [Browsable (false)]
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        public Icon Icon {
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public Icon Icon
+        {
             get { return icon; }
             set { icon = value; }
         }
 
-        [DefaultValue (null)]
-        public Image Image {
+        [DefaultValue(null)]
+        public Image Image
+        {
             get { return image; }
             set { image = value; }
         }
 
-        [DefaultValue (DataGridViewImageCellLayout.Normal)]
-        public DataGridViewImageCellLayout ImageLayout {
+        [DefaultValue(DataGridViewImageCellLayout.Normal)]
+        public DataGridViewImageCellLayout ImageLayout
+        {
             get { return (base.CellTemplate as DataGridViewImageCell).ImageLayout; }
             set { (base.CellTemplate as DataGridViewImageCell).ImageLayout = value; }
         }
 
-        [Browsable (false)]
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        public bool ValuesAreIcons {
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool ValuesAreIcons
+        {
             get { return valuesAreIcons; }
             set { valuesAreIcons = value; }
         }
 
-        public override object Clone ()
+        public override object Clone()
         {
-            DataGridViewImageColumn col = (DataGridViewImageColumn) base.Clone();
+            DataGridViewImageColumn col = (DataGridViewImageColumn)base.Clone();
             col.icon = this.icon;
             col.image = this.image;
             return col;
         }
 
-        public override string ToString ()
+        public override string ToString()
         {
             return GetType().Name;
         }
-
     }
-
 }

@@ -17,13 +17,13 @@ namespace MonoTests.System.XmlSerialization
     public class SoapEnumAttributeTests
     {
         [Test]
-        public void NameDefault ()
+        public void NameDefault()
         {
-            SoapEnumAttribute attr = new SoapEnumAttribute ();
-            Assert.AreEqual (string.Empty, attr.Name, "#1");
+            SoapEnumAttribute attr = new SoapEnumAttribute();
+            Assert.AreEqual(string.Empty, attr.Name, "#1");
 
             attr.Name = null;
-            Assert.AreEqual (string.Empty, attr.Name, "#2");
+            Assert.AreEqual(string.Empty, attr.Name, "#2");
         }
     }
 }

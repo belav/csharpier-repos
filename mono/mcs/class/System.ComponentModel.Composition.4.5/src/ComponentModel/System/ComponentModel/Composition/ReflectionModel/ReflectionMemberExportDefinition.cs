@@ -21,7 +21,11 @@ namespace System.ComponentModel.Composition.ReflectionModel
         private readonly ICompositionElement _origin;
         private IDictionary<string, object> _metadata;
 
-        public ReflectionMemberExportDefinition(LazyMemberInfo member, ExportDefinition exportDefinition, ICompositionElement origin)
+        public ReflectionMemberExportDefinition(
+            LazyMemberInfo member,
+            ExportDefinition exportDefinition,
+            ICompositionElement origin
+        )
         {
             Assumes.NotNull(exportDefinition);
 
@@ -84,10 +88,12 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
         private string GetDisplayName()
         {
-            return string.Format(CultureInfo.CurrentCulture,
-                   "{0} (ContractName=\"{1}\")",    // NOLOC
-                   this.ToReflectionMember().GetDisplayName(),
-                   this.ContractName);
+            return string.Format(
+                CultureInfo.CurrentCulture,
+                "{0} (ContractName=\"{1}\")", // NOLOC
+                this.ToReflectionMember().GetDisplayName(),
+                this.ContractName
+            );
         }
     }
 }

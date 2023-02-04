@@ -5,21 +5,18 @@ using System;
 
 static class X
 {
-    public static void Main ()
-    {
-    }
+    public static void Main() { }
 
-    static void Foo ()
+    static void Foo()
     {
         var fileName = "";
         string[] all = null;
 
-        all.Each (x => {
+        all.Each(x =>
+        {
             var name = fileName.Name;
         });
     }
 
-    static void Each<T> (this T[] s, Action<T> a)
-    {
-    }
+    static void Each<T>(this T[] s, Action<T> a) { }
 }

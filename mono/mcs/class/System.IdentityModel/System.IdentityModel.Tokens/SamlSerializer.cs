@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -37,78 +37,92 @@ namespace System.IdentityModel.Tokens
     public class SamlSerializer
     {
         [MonoTODO]
-        public SamlSerializer ()
-        {
-        }
+        public SamlSerializer() { }
 
         [MonoTODO]
-        public virtual SamlAdvice LoadAdvice (XmlDictionaryReader reader,
+        public virtual SamlAdvice LoadAdvice(
+            XmlDictionaryReader reader,
             SecurityTokenSerializer keyInfoSerializer,
-            SecurityTokenResolver outOfBandTokenResolver)
+            SecurityTokenResolver outOfBandTokenResolver
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public virtual SamlAssertion LoadAssertion (XmlDictionaryReader reader,
+        public virtual SamlAssertion LoadAssertion(
+            XmlDictionaryReader reader,
             SecurityTokenSerializer keyInfoSerializer,
-            SecurityTokenResolver outOfBandTokenResolver)
+            SecurityTokenResolver outOfBandTokenResolver
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public virtual SamlAttribute LoadAttribute (XmlDictionaryReader reader,
+        public virtual SamlAttribute LoadAttribute(
+            XmlDictionaryReader reader,
             SecurityTokenSerializer keyInfoSerializer,
-            SecurityTokenResolver outOfBandTokenResolver)
+            SecurityTokenResolver outOfBandTokenResolver
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public virtual SamlCondition LoadCondition (XmlDictionaryReader reader,
+        public virtual SamlCondition LoadCondition(
+            XmlDictionaryReader reader,
             SecurityTokenSerializer keyInfoSerializer,
-            SecurityTokenResolver outOfBandTokenResolver)
+            SecurityTokenResolver outOfBandTokenResolver
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public virtual SamlConditions LoadConditions (XmlDictionaryReader reader,
+        public virtual SamlConditions LoadConditions(
+            XmlDictionaryReader reader,
             SecurityTokenSerializer keyInfoSerializer,
-            SecurityTokenResolver outOfBandTokenResolver)
+            SecurityTokenResolver outOfBandTokenResolver
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public virtual SamlStatement LoadStatement (XmlDictionaryReader reader,
+        public virtual SamlStatement LoadStatement(
+            XmlDictionaryReader reader,
             SecurityTokenSerializer keyInfoSerializer,
-            SecurityTokenResolver outOfBandTokenResolver)
+            SecurityTokenResolver outOfBandTokenResolver
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public virtual SamlSecurityToken ReadToken (XmlReader reader,
+        public virtual SamlSecurityToken ReadToken(
+            XmlReader reader,
             SecurityTokenSerializer keyInfoSerializer,
-            SecurityTokenResolver outOfBandTokenResolver)
+            SecurityTokenResolver outOfBandTokenResolver
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public virtual void WriteToken (SamlSecurityToken token, 
+        public virtual void WriteToken(
+            SamlSecurityToken token,
             XmlWriter writer,
-            SecurityTokenSerializer keyInfoSerializer)
+            SecurityTokenSerializer keyInfoSerializer
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void PopulateDictionary (IXmlDictionary dictionary)
+        public void PopulateDictionary(IXmlDictionary dictionary)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
     }
 }

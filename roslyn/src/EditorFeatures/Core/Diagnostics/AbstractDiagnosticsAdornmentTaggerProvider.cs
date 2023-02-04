@@ -12,8 +12,8 @@ using Microsoft.VisualStudio.Text.Tagging;
 
 namespace Microsoft.CodeAnalysis.Diagnostics
 {
-    internal abstract partial class AbstractDiagnosticsAdornmentTaggerProvider<TTag> :
-        AbstractPushOrPullDiagnosticsTaggerProvider<TTag>
+    internal abstract partial class AbstractDiagnosticsAdornmentTaggerProvider<TTag>
+        : AbstractPushOrPullDiagnosticsTaggerProvider<TTag>
         where TTag : class, ITag
     {
         protected AbstractDiagnosticsAdornmentTaggerProvider(
@@ -22,17 +22,27 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             IDiagnosticAnalyzerService analyzerService,
             IGlobalOptionService globalOptions,
             ITextBufferVisibilityTracker? visibilityTracker,
-            IAsynchronousOperationListenerProvider listenerProvider)
-            : base(threadingContext, diagnosticService, analyzerService, globalOptions, visibilityTracker, listenerProvider.GetListener(FeatureAttribute.ErrorSquiggles))
-        {
-        }
+            IAsynchronousOperationListenerProvider listenerProvider
+        )
+            : base(
+                threadingContext,
+                diagnosticService,
+                analyzerService,
+                globalOptions,
+                visibilityTracker,
+                listenerProvider.GetListener(FeatureAttribute.ErrorSquiggles)
+            ) { }
 
         protected abstract TTag? CreateTag(Workspace workspace, DiagnosticData diagnostic);
 
         protected sealed override bool IsEnabled => true;
 
         protected sealed override ITagSpan<TTag>? CreateTagSpan(
-            Workspace workspace, bool isLiveUpdate, SnapshotSpan span, DiagnosticData data)
+            Workspace workspace,
+            bool isLiveUpdate,
+            SnapshotSpan span,
+            DiagnosticData data
+        )
         {
             var errorTag = CreateTag(workspace, data);
             if (errorTag == null)
@@ -49,10 +59,14 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             return new TagSpan<TTag>(adjustedSpan, errorTag);
         }
 
-        protected virtual SnapshotSpan AdjustSnapshotSpan(SnapshotSpan span, int minimumLength)
-            => AdjustSnapshotSpan(span, minimumLength, maximumLength: int.MaxValue);
+        protected virtual SnapshotSpan AdjustSnapshotSpan(SnapshotSpan span, int minimumLength) =>
+            AdjustSnapshotSpan(span, minimumLength, maximumLength: int.MaxValue);
 
-        protected static SnapshotSpan AdjustSnapshotSpan(SnapshotSpan span, int minimumLength, int maximumLength)
+        protected static SnapshotSpan AdjustSnapshotSpan(
+            SnapshotSpan span,
+            int minimumLength,
+            int maximumLength
+        )
         {
             var snapshot = span.Snapshot;
 
@@ -63,7 +77,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             var start = Math.Max(0, Math.Min(span.Start, snapshot.Length - length));
 
             // make sure length is smaller than snapshot.Length which can happen if start == 0
-            return new SnapshotSpan(snapshot, start, Math.Min(start + length, snapshot.Length) - start);
+            return new SnapshotSpan(
+                snapshot,
+                start,
+                Math.Min(start + length, snapshot.Length) - start
+            );
         }
     }
 }

@@ -6,8 +6,8 @@ using System;
 class C
 {
     static event EventHandler h;
-    
-    public static void Main ()
+
+    public static void Main()
     {
         h = 0;
     }

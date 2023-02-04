@@ -13,82 +13,102 @@ namespace MonoTests.Common
 {
     public static class Utils
     {
-        public static MetaModel CommonInitialize ()
+        public static MetaModel CommonInitialize()
         {
-            return CommonInitialize (false);
+            return CommonInitialize(false);
         }
 
-        public static MetaModel CommonInitialize (bool myDynamicDataRoute)
+        public static MetaModel CommonInitialize(bool myDynamicDataRoute)
         {
             MetaModel m = MetaModel.Default;
 
-            var req = new FakeHttpWorkerRequest ();
-            var ctx = new HttpContext (req);
+            var req = new FakeHttpWorkerRequest();
+            var ctx = new HttpContext(req);
             HttpContext.Current = ctx;
 
             RouteCollection routes = RouteTable.Routes;
-            routes.Clear ();
-            if (myDynamicDataRoute) {
-                routes.Add (
-                    new MyDynamicDataRoute ("{table}/{action}.aspx") {
-                        Constraints = new RouteValueDictionary (new { action = "List|Details|Edit|Insert" }),
+            routes.Clear();
+            if (myDynamicDataRoute)
+            {
+                routes.Add(
+                    new MyDynamicDataRoute("{table}/{action}.aspx")
+                    {
+                        Constraints = new RouteValueDictionary(
+                            new { action = "List|Details|Edit|Insert" }
+                        ),
                         Model = m,
-                        RouteHandler = new MyDynamicDataRouteHandler ()
-                    });
-            } else {
-                routes.Add (
-                    new DynamicDataRoute ("{table}/{action}.aspx") {
-                        Constraints = new RouteValueDictionary (new { action = "List|Details|Edit|Insert" }),
+                        RouteHandler = new MyDynamicDataRouteHandler()
+                    }
+                );
+            }
+            else
+            {
+                routes.Add(
+                    new DynamicDataRoute("{table}/{action}.aspx")
+                    {
+                        Constraints = new RouteValueDictionary(
+                            new { action = "List|Details|Edit|Insert" }
+                        ),
                         Model = m,
-                        RouteHandler = new MyDynamicDataRouteHandler ()
-                    });
+                        RouteHandler = new MyDynamicDataRouteHandler()
+                    }
+                );
             }
 
             return m;
         }
 
-        public static MetaModel GetModel<ContextType> ()
+        public static MetaModel GetModel<ContextType>()
         {
             // This is really, really dumb but we need that since if the type has already
             // been registered by another test, or tests are re-ran without nunit having
             // reloaded the dll we'll get a duplicate entry exception.
             MetaModel m;
-            try {
-                m = MetaModel.GetModel (typeof (ContextType));
-            } catch (InvalidOperationException) {
-                m = new MetaModel ();
-                m.RegisterContext (typeof (ContextType));
-            } finally {
-                MetaModel.ResetRegistrationException ();
+            try
+            {
+                m = MetaModel.GetModel(typeof(ContextType));
+            }
+            catch (InvalidOperationException)
+            {
+                m = new MetaModel();
+                m.RegisterContext(typeof(ContextType));
+            }
+            finally
+            {
+                MetaModel.ResetRegistrationException();
             }
 
             return m;
         }
 
-        public static void RegisterContext (DataModelProvider model)
+        public static void RegisterContext(DataModelProvider model)
         {
-            RegisterContext (model, null);
+            RegisterContext(model, null);
         }
 
-        public static void RegisterContext (Type contextType)
+        public static void RegisterContext(Type contextType)
         {
-            RegisterContext (contextType, null);
+            RegisterContext(contextType, null);
         }
 
-        public static void RegisterContext (DataModelProvider model, ContextConfiguration config)
+        public static void RegisterContext(DataModelProvider model, ContextConfiguration config)
         {
-            RegisterContext (model, config, true);
+            RegisterContext(model, config, true);
         }
 
-        public static void RegisterContext (Type contextType, ContextConfiguration config)
+        public static void RegisterContext(Type contextType, ContextConfiguration config)
         {
-            RegisterContext (contextType, config, true);
+            RegisterContext(contextType, config, true);
         }
-        
-        public static void RegisterContext (DataModelProvider model, ContextConfiguration config, bool defaultModel)
+
+        public static void RegisterContext(
+            DataModelProvider model,
+            ContextConfiguration config,
+            bool defaultModel
+        )
         {
             // Just in case no model has been created yet
-            MetaModel m = new MetaModel ();
+            MetaModel m = new MetaModel();
 
             if (defaultModel)
                 m = MetaModel.Default;
@@ -96,29 +116,40 @@ namespace MonoTests.Common
             Exception exception = null;
             MetaModel registered = null;
 
-            try {
-                registered = MetaModel.GetModel (model.ContextType);
-            } catch (Exception) {
+            try
+            {
+                registered = MetaModel.GetModel(model.ContextType);
+            }
+            catch (Exception)
+            {
                 // ignore
             }
 
-            try {
+            try
+            {
                 if (registered == null)
-                    m.RegisterContext (model, config);
-            } catch (InvalidOperationException ex) {
+                    m.RegisterContext(model, config);
+            }
+            catch (InvalidOperationException ex)
+            {
                 exception = ex;
             }
 
-            if (exception != null) {
-                Console.WriteLine ("RegisterContext exception:");
-                Console.WriteLine (exception);
+            if (exception != null)
+            {
+                Console.WriteLine("RegisterContext exception:");
+                Console.WriteLine(exception);
             }
         }
 
-        public static void RegisterContext (Type contextType, ContextConfiguration config, bool defaultModel)
+        public static void RegisterContext(
+            Type contextType,
+            ContextConfiguration config,
+            bool defaultModel
+        )
         {
             // Just in case no model has been created yet
-            MetaModel m = new MetaModel ();
+            MetaModel m = new MetaModel();
 
             if (defaultModel)
                 m = MetaModel.Default;
@@ -126,38 +157,46 @@ namespace MonoTests.Common
             Exception exception = null;
             MetaModel registered = null;
 
-            try {
-                registered = MetaModel.GetModel (contextType);
-            } catch (Exception) {
+            try
+            {
+                registered = MetaModel.GetModel(contextType);
+            }
+            catch (Exception)
+            {
                 // ignore
             }
 
-            try {
-                if (registered == null) {
+            try
+            {
+                if (registered == null)
+                {
                     if (config != null)
-                        m.RegisterContext (contextType, config);
+                        m.RegisterContext(contextType, config);
                     else
-                        m.RegisterContext (contextType);
+                        m.RegisterContext(contextType);
                 }
-            } catch (InvalidOperationException ex) {
+            }
+            catch (InvalidOperationException ex)
+            {
                 exception = ex;
             }
 
-            if (exception != null) {
-                Console.WriteLine ("RegisterContext exception:");
-                Console.WriteLine (exception);
+            if (exception != null)
+            {
+                Console.WriteLine("RegisterContext exception:");
+                Console.WriteLine(exception);
             }
         }
 
-        public static string BuildActionName (MetaTable table, string action)
+        public static string BuildActionName(MetaTable table, string action)
         {
             return "/" + table.Name + "/" + action + ".aspx";
         }
 
-        public static string BuildActionName (MetaTable table, string action, string query)
+        public static string BuildActionName(MetaTable table, string action, string query)
         {
             string ret = "/" + table.Name + "/" + action + ".aspx";
-            if (!String.IsNullOrEmpty (query))
+            if (!String.IsNullOrEmpty(query))
                 ret += "?" + query;
             return ret;
         }

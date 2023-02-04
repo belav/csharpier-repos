@@ -12,7 +12,12 @@ namespace System
     public abstract partial class Enum
     {
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "Enum_GetValuesAndNames")]
-        private static partial void GetEnumValuesAndNames(QCallTypeHandle enumType, ObjectHandleOnStack values, ObjectHandleOnStack names, Interop.BOOL getNames);
+        private static partial void GetEnumValuesAndNames(
+            QCallTypeHandle enumType,
+            ObjectHandleOnStack values,
+            ObjectHandleOnStack names,
+            Interop.BOOL getNames
+        );
 
         [MethodImpl(MethodImplOptions.InternalCall)]
         private static extern object InternalBoxEnum(RuntimeType enumType, long value);
@@ -24,7 +29,9 @@ namespace System
         private static unsafe CorElementType InternalGetCorElementType(RuntimeType rt)
         {
             Debug.Assert(rt.IsActualEnum);
-            CorElementType elementType = InternalGetCorElementType((MethodTable*)rt.GetUnderlyingNativeHandle());
+            CorElementType elementType = InternalGetCorElementType(
+                (MethodTable*)rt.GetUnderlyingNativeHandle()
+            );
             GC.KeepAlive(rt);
             return elementType;
         }
@@ -32,7 +39,9 @@ namespace System
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private unsafe CorElementType InternalGetCorElementType()
         {
-            CorElementType elementType = InternalGetCorElementType(RuntimeHelpers.GetMethodTable(this));
+            CorElementType elementType = InternalGetCorElementType(
+                RuntimeHelpers.GetMethodTable(this)
+            );
             GC.KeepAlive(this);
             return elementType;
         }
@@ -74,7 +83,9 @@ namespace System
             // Sanity check the last element in the table
             Debug.Assert(s_underlyingTypes[(int)CorElementType.ELEMENT_TYPE_U] == typeof(nuint));
 
-            RuntimeType? underlyingType = s_underlyingTypes[(int)InternalGetCorElementType((MethodTable*)enumType.GetUnderlyingNativeHandle())];
+            RuntimeType? underlyingType = s_underlyingTypes[
+                (int)InternalGetCorElementType((MethodTable*)enumType.GetUnderlyingNativeHandle())
+            ];
             GC.KeepAlive(enumType);
 
             Debug.Assert(underlyingType != null);
@@ -82,15 +93,23 @@ namespace System
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static EnumInfo<TUnderlyingValue> GetEnumInfo<TUnderlyingValue>(RuntimeType enumType, bool getNames = true)
+        private static EnumInfo<TUnderlyingValue> GetEnumInfo<TUnderlyingValue>(
+            RuntimeType enumType,
+            bool getNames = true
+        )
             where TUnderlyingValue : struct, INumber<TUnderlyingValue>
         {
-            return enumType.GenericCache is EnumInfo<TUnderlyingValue> info && (!getNames || info.Names is not null) ?
-                info :
-                InitializeEnumInfo(enumType, getNames);
+            return
+                enumType.GenericCache is EnumInfo<TUnderlyingValue> info
+                && (!getNames || info.Names is not null)
+                ? info
+                : InitializeEnumInfo(enumType, getNames);
 
             [MethodImpl(MethodImplOptions.NoInlining)]
-            static EnumInfo<TUnderlyingValue> InitializeEnumInfo(RuntimeType enumType, bool getNames)
+            static EnumInfo<TUnderlyingValue> InitializeEnumInfo(
+                RuntimeType enumType,
+                bool getNames
+            )
             {
                 TUnderlyingValue[]? values = null;
                 string[]? names = null;
@@ -99,7 +118,8 @@ namespace System
                     new QCallTypeHandle(ref enumType),
                     ObjectHandleOnStack.Create(ref values),
                     ObjectHandleOnStack.Create(ref names),
-                    getNames ? Interop.BOOL.TRUE : Interop.BOOL.FALSE);
+                    getNames ? Interop.BOOL.TRUE : Interop.BOOL.FALSE
+                );
 
                 Debug.Assert(values!.GetType() == typeof(TUnderlyingValue[]));
                 Debug.Assert(!getNames || names!.GetType() == typeof(string[]));

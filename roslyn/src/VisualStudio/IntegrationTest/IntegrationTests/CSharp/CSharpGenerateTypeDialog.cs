@@ -24,25 +24,27 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
         private GenerateTypeDialog_OutOfProc GenerateTypeDialog => VisualStudio.GenerateTypeDialog;
 
         public CSharpGenerateTypeDialog(VisualStudioInstanceFactory instanceFactory)
-                    : base(instanceFactory, nameof(CSharpGenerateTypeDialog))
-        {
-        }
+            : base(instanceFactory, nameof(CSharpGenerateTypeDialog)) { }
 
         [WpfFact]
         public void OpenAndCloseDialog()
         {
-            SetUpEditor(@"class C
+            SetUpEditor(
+                @"class C
 {
     void Method() 
     { 
         $$A a;    
     }
 }
-");
+"
+            );
 
-            VisualStudio.Editor.Verify.CodeAction("Generate new type...",
+            VisualStudio.Editor.Verify.CodeAction(
+                "Generate new type...",
                 applyFix: true,
-                blockUntilComplete: false);
+                blockUntilComplete: false
+            );
 
             GenerateTypeDialog.VerifyOpen();
             GenerateTypeDialog.ClickCancel();
@@ -53,23 +55,31 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
         public void CSharpToBasic()
         {
             var vbProj = new ProjectUtils.Project("VBProj");
-            VisualStudio.SolutionExplorer.AddProject(vbProj, WellKnownProjectTemplates.ClassLibrary, LanguageNames.VisualBasic);
+            VisualStudio.SolutionExplorer.AddProject(
+                vbProj,
+                WellKnownProjectTemplates.ClassLibrary,
+                LanguageNames.VisualBasic
+            );
 
             var project = new ProjectUtils.Project(ProjectName);
             VisualStudio.SolutionExplorer.OpenFile(project, "Class1.cs");
 
-            SetUpEditor(@"class C
+            SetUpEditor(
+                @"class C
 {
     void Method() 
     { 
         $$A a;    
     }
 }
-");
+"
+            );
 
-            VisualStudio.Editor.Verify.CodeAction("Generate new type...",
+            VisualStudio.Editor.Verify.CodeAction(
+                "Generate new type...",
                 applyFix: true,
-                blockUntilComplete: false);
+                blockUntilComplete: false
+            );
 
             GenerateTypeDialog.VerifyOpen();
             GenerateTypeDialog.SetAccessibility("public");
@@ -81,13 +91,17 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
 
             VisualStudio.SolutionExplorer.OpenFile(vbProj, "GenerateTypeTest.vb");
             var actualText = VisualStudio.Editor.GetText();
-            Assert.Contains(@"Public Interface A
+            Assert.Contains(
+                @"Public Interface A
 End Interface
-", actualText);
+",
+                actualText
+            );
 
             VisualStudio.SolutionExplorer.OpenFile(project, "Class1.cs");
             actualText = VisualStudio.Editor.GetText();
-            Assert.Contains(@"using VBProj;
+            Assert.Contains(
+                @"using VBProj;
 
 class C
 {
@@ -96,8 +110,9 @@ class C
         A a;    
     }
 }
-", actualText);
-
+",
+                actualText
+            );
         }
     }
 }

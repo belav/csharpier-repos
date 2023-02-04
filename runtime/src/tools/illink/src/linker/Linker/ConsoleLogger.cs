@@ -7,9 +7,9 @@ namespace Mono.Linker
 {
     public class ConsoleLogger : ILogger
     {
-        public void LogMessage (MessageContainer message)
+        public void LogMessage(MessageContainer message)
         {
-            Console.WriteLine (message.ToString ());
+            Console.WriteLine(message.ToString());
         }
     }
 }

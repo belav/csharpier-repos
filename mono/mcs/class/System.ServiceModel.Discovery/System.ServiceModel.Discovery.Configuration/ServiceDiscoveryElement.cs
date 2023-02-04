@@ -10,10 +10,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,34 +34,44 @@ namespace System.ServiceModel.Discovery.Configuration
     {
         static ConfigurationPropertyCollection properties;
         static ConfigurationProperty announcement_endpoints;
-        
-        static ServiceDiscoveryElement ()
+
+        static ServiceDiscoveryElement()
         {
-            announcement_endpoints = new ConfigurationProperty ("announcementEndpoints", typeof (AnnouncementChannelEndpointElementCollection), null, null, null, ConfigurationPropertyOptions.None);
-            properties = new ConfigurationPropertyCollection ();
-            properties.Add (announcement_endpoints);
+            announcement_endpoints = new ConfigurationProperty(
+                "announcementEndpoints",
+                typeof(AnnouncementChannelEndpointElementCollection),
+                null,
+                null,
+                null,
+                ConfigurationPropertyOptions.None
+            );
+            properties = new ConfigurationPropertyCollection();
+            properties.Add(announcement_endpoints);
         }
 
-        public ServiceDiscoveryElement ()
+        public ServiceDiscoveryElement() { }
+
+        [ConfigurationProperty("announcementEndpoints")]
+        public AnnouncementChannelEndpointElementCollection AnnouncementEndpoints
         {
+            get
+            {
+                return (AnnouncementChannelEndpointElementCollection)base[announcement_endpoints];
+            }
+        }
+        public override Type BehaviorType
+        {
+            get { return typeof(ServiceDiscoveryBehavior); }
         }
 
-        [ConfigurationProperty ("announcementEndpoints")]
-        public AnnouncementChannelEndpointElementCollection AnnouncementEndpoints {
-            get { return (AnnouncementChannelEndpointElementCollection) base [announcement_endpoints]; }
-        }
-        public override Type BehaviorType {
-            get { return typeof (ServiceDiscoveryBehavior); }
-        }
-        
-        protected override ConfigurationPropertyCollection Properties {
+        protected override ConfigurationPropertyCollection Properties
+        {
             get { return properties; }
         }
-        
-        protected internal override object CreateBehavior ()
+
+        protected internal override object CreateBehavior()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
     }
 }
-

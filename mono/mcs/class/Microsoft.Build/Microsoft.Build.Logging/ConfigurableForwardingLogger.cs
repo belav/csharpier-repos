@@ -7,23 +7,23 @@ namespace Microsoft.Build.Logging
     {
         #region INodeLogger implementation
 
-        public void Initialize (IEventSource eventSource, int nodeCount)
+        public void Initialize(IEventSource eventSource, int nodeCount)
         {
-            Initialize (eventSource);
+            Initialize(eventSource);
         }
 
         #endregion
 
         #region ILogger implementation
 
-        public void Initialize (IEventSource eventSource)
+        public void Initialize(IEventSource eventSource)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public void Shutdown ()
+        public void Shutdown()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         public string Parameters { get; set; }

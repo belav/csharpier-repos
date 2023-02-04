@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,62 +29,63 @@
 
 using System.Runtime.InteropServices;
 
-namespace System.Security.Policy {
-
+namespace System.Security.Policy
+{
     [Serializable]
-    [ComVisible (true)]
-    public sealed class AllMembershipCondition : IMembershipCondition, IConstantMembershipCondition {
-
+    [ComVisible(true)]
+    public sealed class AllMembershipCondition : IMembershipCondition, IConstantMembershipCondition
+    {
         private readonly int version = 1;
 
-        public AllMembershipCondition ()
-        {
-        }
+        public AllMembershipCondition() { }
 
         // Always returns true
-        public bool Check (Evidence evidence)
+        public bool Check(Evidence evidence)
         {
             return true;
         }
 
-        public IMembershipCondition Copy ()
+        public IMembershipCondition Copy()
         {
-            return new AllMembershipCondition ();
+            return new AllMembershipCondition();
         }
 
-        public override bool Equals (object o)
+        public override bool Equals(object o)
         {
             return (o is AllMembershipCondition);
         }
- 
-        public void FromXml (SecurityElement e)
+
+        public void FromXml(SecurityElement e)
         {
-            FromXml (e, null);
+            FromXml(e, null);
         }
 
-        public void FromXml (SecurityElement e, PolicyLevel level)
+        public void FromXml(SecurityElement e, PolicyLevel level)
         {
-            MembershipConditionHelper.CheckSecurityElement (e, "e", version, version);
+            MembershipConditionHelper.CheckSecurityElement(e, "e", version, version);
         }
 
-        public override int GetHashCode ()
+        public override int GetHashCode()
         {
-            return typeof (AllMembershipCondition).GetHashCode ();
+            return typeof(AllMembershipCondition).GetHashCode();
         }
 
-        public override string ToString ()
+        public override string ToString()
         {
             return "All code";
         }
 
-        public SecurityElement ToXml ()
+        public SecurityElement ToXml()
         {
-            return ToXml (null);
+            return ToXml(null);
         }
 
-        public SecurityElement ToXml (PolicyLevel level)
+        public SecurityElement ToXml(PolicyLevel level)
         {
-            SecurityElement se = MembershipConditionHelper.Element (typeof (AllMembershipCondition), version);
+            SecurityElement se = MembershipConditionHelper.Element(
+                typeof(AllMembershipCondition),
+                version
+            );
             // nothing to add
             return se;
         }

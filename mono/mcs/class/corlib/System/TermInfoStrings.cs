@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,9 +31,11 @@
 
 // These values are taken from 'man 5 terminfo' and /usr/include/term.h.
 // They are the indexes for the string capabilities in a terminfo file.
-namespace System {
-    enum TermInfoStrings {
-        BackTab,        // 0
+namespace System
+{
+    enum TermInfoStrings
+    {
+        BackTab, // 0
         Bell,
         CarriageReturn,
         ChangeScrollRegion,
@@ -426,9 +428,8 @@ namespace System {
         EnterTopHlMode,
         EnterVerticalHlMode,
         SetAAttributes,
-        SetPglenInch,        // 393
+        SetPglenInch, // 393
         Last
     }
 }
 #endif
-

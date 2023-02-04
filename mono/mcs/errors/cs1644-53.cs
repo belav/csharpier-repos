@@ -4,8 +4,8 @@
 
 class Class
 {
-    static (int, bool) Foo ()
+    static (int, bool) Foo()
     {
         return;
-    }    
+    }
 }

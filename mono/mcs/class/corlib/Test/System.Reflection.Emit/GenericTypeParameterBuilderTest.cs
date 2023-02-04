@@ -30,332 +30,360 @@ namespace MonoTests.System.Reflection.Emit
         static string ASSEMBLY_NAME = "MonoTests.System.Reflection.Emit.TypeBuilderTest";
 
         [SetUp]
-        protected void SetUp ()
+        protected void SetUp()
         {
-            SetUp (AssemblyBuilderAccess.RunAndSave);
+            SetUp(AssemblyBuilderAccess.RunAndSave);
         }
 
-        protected void SetUp (AssemblyBuilderAccess mode)
+        protected void SetUp(AssemblyBuilderAccess mode)
         {
-            AssemblyName assemblyName = new AssemblyName ();
+            AssemblyName assemblyName = new AssemblyName();
             assemblyName.Name = ASSEMBLY_NAME;
 
-            assembly =
-                Thread.GetDomain ().DefineDynamicAssembly (
-                    assemblyName, mode, Path.GetTempPath ());
+            assembly = Thread
+                .GetDomain()
+                .DefineDynamicAssembly(assemblyName, mode, Path.GetTempPath());
 
-            module = assembly.DefineDynamicModule ("module1");
+            module = assembly.DefineDynamicModule("module1");
         }
 
         [Test]
-        public void PropertiesValue ()
+        public void PropertiesValue()
         {
-            TypeBuilder tb = module.DefineType ("ns.type", TypeAttributes.Public);
-            var gparam = tb.DefineGenericParameters ("A", "B")[1];
+            TypeBuilder tb = module.DefineType("ns.type", TypeAttributes.Public);
+            var gparam = tb.DefineGenericParameters("A", "B")[1];
 
-            Assert.AreEqual (assembly, gparam.Assembly, "#1");
-            Assert.AreEqual (null, gparam.AssemblyQualifiedName, "#2");
-            Assert.AreEqual (null, gparam.BaseType, "#3");
-            Assert.AreEqual (null, gparam.FullName, "#4");
-            Assert.AreEqual (module, gparam.Module, "#5");
-            Assert.AreEqual (null, gparam.Namespace, "#6");
-            Assert.AreEqual (gparam, gparam.UnderlyingSystemType, "#7");
-            Assert.AreEqual ("B", gparam.Name, "#8");
+            Assert.AreEqual(assembly, gparam.Assembly, "#1");
+            Assert.AreEqual(null, gparam.AssemblyQualifiedName, "#2");
+            Assert.AreEqual(null, gparam.BaseType, "#3");
+            Assert.AreEqual(null, gparam.FullName, "#4");
+            Assert.AreEqual(module, gparam.Module, "#5");
+            Assert.AreEqual(null, gparam.Namespace, "#6");
+            Assert.AreEqual(gparam, gparam.UnderlyingSystemType, "#7");
+            Assert.AreEqual("B", gparam.Name, "#8");
 
-            try {
+            try
+            {
                 object x = gparam.GUID;
-                Assert.Fail ("#9");
-            } catch (NotSupportedException) {}
+                Assert.Fail("#9");
+            }
+            catch (NotSupportedException) { }
 
-            try {
+            try
+            {
                 object x = gparam.TypeHandle;
-                Assert.Fail ("#10");
-            } catch (NotSupportedException) {}
+                Assert.Fail("#10");
+            }
+            catch (NotSupportedException) { }
 
-            try {
+            try
+            {
                 object x = gparam.StructLayoutAttribute;
-                Assert.Fail ("#11");
-            } catch (NotSupportedException) {}
-
-            Assert.AreEqual (TypeAttributes.Public, gparam.Attributes, "#12");
-            Assert.IsFalse (gparam.HasElementType, "#13");
-            Assert.IsFalse (gparam.IsArray, "#14");
-            Assert.IsFalse (gparam.IsByRef, "#15");
-            Assert.IsFalse (gparam.IsCOMObject, "#16");
-            Assert.IsFalse (gparam.IsPointer, "#17");
-            Assert.IsFalse (gparam.IsPrimitive, "#18");
-
-        }    
-
-        [Test]
-        public void Methods ()
-        {
-            TypeBuilder tb = module.DefineType ("ns.type", TypeAttributes.Public);
-            var gparam = tb.DefineGenericParameters ("A", "B")[1];
-
-            try {
-                gparam.GetInterface ("foo", true);
-                Assert.Fail ("#1");
-            } catch (NotSupportedException) {
-
+                Assert.Fail("#11");
             }
-    
-            try {
-                gparam.GetInterfaces ();
-                Assert.Fail ("#2");
-            } catch (NotSupportedException) {
+            catch (NotSupportedException) { }
 
-            }
-    
-            try {
-                gparam.GetElementType ();
-                Assert.Fail ("#3");
-            } catch (NotSupportedException) {
-
-            }
-    
-            try {
-                gparam.GetEvent ("foo", BindingFlags.Public);
-                Assert.Fail ("#4");
-            } catch (NotSupportedException) {
-
-            }
-    
-            try {
-                gparam.GetEvents (BindingFlags.Public);
-                Assert.Fail ("#5");
-            } catch (NotSupportedException) {
-
-            }
-    
-            try {
-                gparam.GetField ("foo", BindingFlags.Public);
-                Assert.Fail ("#6");
-            } catch (NotSupportedException) {
-
-            }
-    
-            try {
-                gparam.GetFields (BindingFlags.Public);
-                Assert.Fail ("#7");
-            } catch (NotSupportedException) {
-
-            }
-    
-            try {
-                gparam.GetMembers (BindingFlags.Public);
-                Assert.Fail ("#8");
-            } catch (NotSupportedException) {
-
-            }
-    
-            try {
-                gparam.GetMethod ("Sort");
-                Assert.Fail ("#9");
-            } catch (NotSupportedException) {
-
-            }
-    
-            try {
-                gparam.GetMethods (BindingFlags.Public);
-                Assert.Fail ("#9");
-            } catch (NotSupportedException) {
-
-            }
-    
-            try {
-                gparam.GetNestedType ("bla", BindingFlags.Public);
-                Assert.Fail ("#10");
-            } catch (NotSupportedException) {
-
-            }
-    
-            try {
-                gparam.GetNestedTypes (BindingFlags.Public);
-                Assert.Fail ("#11");
-            } catch (NotSupportedException) {
-
-            }
-    
-            try {
-                gparam.GetProperties (BindingFlags.Public);
-                Assert.Fail ("#12");
-            } catch (NotSupportedException) {
-
-            }    
-    
-            try {
-                gparam.GetProperty ("Length");
-                Assert.Fail ("#13");
-            } catch (NotSupportedException) {
-
-            }
-    
-            try {
-                gparam.GetConstructor (new Type[] { typeof (int) });
-                Assert.Fail ("#14");
-            } catch (NotSupportedException) {
-
-            }
-    
-            try {
-                gparam.GetArrayRank ();
-                Assert.Fail ("#15");
-            } catch (NotSupportedException) {
-
-            }
-
-            try {
-                gparam.GetConstructors (BindingFlags.Public);
-                Assert.Fail ("#16");
-            } catch (NotSupportedException) {}
-
-            try {
-                gparam.InvokeMember ("GetLength", BindingFlags.Public, null, null, null);
-                Assert.Fail ("#17");
-            } catch (NotSupportedException) {}
-
-            try {
-                gparam.IsSubclassOf (gparam);
-                Assert.Fail ("#18");
-            } catch (NotSupportedException) {}
-
-            try {
-                gparam.IsAssignableFrom (gparam);
-                Assert.Fail ("#19");
-            } catch (NotSupportedException) {}
-
-            try {
-                gparam.GetInterfaceMap (typeof (IEnumerable));
-                Assert.Fail ("#20");
-            } catch (NotSupportedException) {}
-
-            try {
-                gparam.IsInstanceOfType (new object());
-                Assert.Fail ("#21");
-            } catch (NotSupportedException) {}
+            Assert.AreEqual(TypeAttributes.Public, gparam.Attributes, "#12");
+            Assert.IsFalse(gparam.HasElementType, "#13");
+            Assert.IsFalse(gparam.IsArray, "#14");
+            Assert.IsFalse(gparam.IsByRef, "#15");
+            Assert.IsFalse(gparam.IsCOMObject, "#16");
+            Assert.IsFalse(gparam.IsPointer, "#17");
+            Assert.IsFalse(gparam.IsPrimitive, "#18");
         }
 
         [Test]
-        public void MakeGenericType ()
+        public void Methods()
         {
-            TypeBuilder tb = module.DefineType ("dd.test", TypeAttributes.Public);
-            var gparam = tb.DefineGenericParameters ("A", "B")[1];
-            try {
-                gparam.MakeGenericType (new Type[] { typeof (string) });
-                Assert.Fail ("#1");
-            } catch (InvalidOperationException) {}
+            TypeBuilder tb = module.DefineType("ns.type", TypeAttributes.Public);
+            var gparam = tb.DefineGenericParameters("A", "B")[1];
+
+            try
+            {
+                gparam.GetInterface("foo", true);
+                Assert.Fail("#1");
+            }
+            catch (NotSupportedException) { }
+
+            try
+            {
+                gparam.GetInterfaces();
+                Assert.Fail("#2");
+            }
+            catch (NotSupportedException) { }
+
+            try
+            {
+                gparam.GetElementType();
+                Assert.Fail("#3");
+            }
+            catch (NotSupportedException) { }
+
+            try
+            {
+                gparam.GetEvent("foo", BindingFlags.Public);
+                Assert.Fail("#4");
+            }
+            catch (NotSupportedException) { }
+
+            try
+            {
+                gparam.GetEvents(BindingFlags.Public);
+                Assert.Fail("#5");
+            }
+            catch (NotSupportedException) { }
+
+            try
+            {
+                gparam.GetField("foo", BindingFlags.Public);
+                Assert.Fail("#6");
+            }
+            catch (NotSupportedException) { }
+
+            try
+            {
+                gparam.GetFields(BindingFlags.Public);
+                Assert.Fail("#7");
+            }
+            catch (NotSupportedException) { }
+
+            try
+            {
+                gparam.GetMembers(BindingFlags.Public);
+                Assert.Fail("#8");
+            }
+            catch (NotSupportedException) { }
+
+            try
+            {
+                gparam.GetMethod("Sort");
+                Assert.Fail("#9");
+            }
+            catch (NotSupportedException) { }
+
+            try
+            {
+                gparam.GetMethods(BindingFlags.Public);
+                Assert.Fail("#9");
+            }
+            catch (NotSupportedException) { }
+
+            try
+            {
+                gparam.GetNestedType("bla", BindingFlags.Public);
+                Assert.Fail("#10");
+            }
+            catch (NotSupportedException) { }
+
+            try
+            {
+                gparam.GetNestedTypes(BindingFlags.Public);
+                Assert.Fail("#11");
+            }
+            catch (NotSupportedException) { }
+
+            try
+            {
+                gparam.GetProperties(BindingFlags.Public);
+                Assert.Fail("#12");
+            }
+            catch (NotSupportedException) { }
+
+            try
+            {
+                gparam.GetProperty("Length");
+                Assert.Fail("#13");
+            }
+            catch (NotSupportedException) { }
+
+            try
+            {
+                gparam.GetConstructor(new Type[] { typeof(int) });
+                Assert.Fail("#14");
+            }
+            catch (NotSupportedException) { }
+
+            try
+            {
+                gparam.GetArrayRank();
+                Assert.Fail("#15");
+            }
+            catch (NotSupportedException) { }
+
+            try
+            {
+                gparam.GetConstructors(BindingFlags.Public);
+                Assert.Fail("#16");
+            }
+            catch (NotSupportedException) { }
+
+            try
+            {
+                gparam.InvokeMember("GetLength", BindingFlags.Public, null, null, null);
+                Assert.Fail("#17");
+            }
+            catch (NotSupportedException) { }
+
+            try
+            {
+                gparam.IsSubclassOf(gparam);
+                Assert.Fail("#18");
+            }
+            catch (NotSupportedException) { }
+
+            try
+            {
+                gparam.IsAssignableFrom(gparam);
+                Assert.Fail("#19");
+            }
+            catch (NotSupportedException) { }
+
+            try
+            {
+                gparam.GetInterfaceMap(typeof(IEnumerable));
+                Assert.Fail("#20");
+            }
+            catch (NotSupportedException) { }
+
+            try
+            {
+                gparam.IsInstanceOfType(new object());
+                Assert.Fail("#21");
+            }
+            catch (NotSupportedException) { }
         }
 
+        [Test]
+        public void MakeGenericType()
+        {
+            TypeBuilder tb = module.DefineType("dd.test", TypeAttributes.Public);
+            var gparam = tb.DefineGenericParameters("A", "B")[1];
+            try
+            {
+                gparam.MakeGenericType(new Type[] { typeof(string) });
+                Assert.Fail("#1");
+            }
+            catch (InvalidOperationException) { }
+        }
 
         [Test]
-        public void GenericParameterAttributes ()
+        public void GenericParameterAttributes()
         {
-            TypeBuilder tb = module.DefineType ("dd.test", TypeAttributes.Public);
-            var gparam = tb.DefineGenericParameters ("A", "B")[1];
-            try {
+            TypeBuilder tb = module.DefineType("dd.test", TypeAttributes.Public);
+            var gparam = tb.DefineGenericParameters("A", "B")[1];
+            try
+            {
                 object attr = gparam.GenericParameterAttributes;
-                Assert.Fail ("#1");
-            } catch (NotSupportedException) {}
+                Assert.Fail("#1");
+            }
+            catch (NotSupportedException) { }
         }
 
         [Test]
-        public void MakeArrayType ()
+        public void MakeArrayType()
         {
-            TypeBuilder tb = module.DefineType ("dd.test", TypeAttributes.Public);
-            var gparam = tb.DefineGenericParameters ("A", "B")[1];
-            Type res = gparam.MakeArrayType ();
-            Assert.IsNotNull (res, "#1");
-            Assert.IsTrue (res.IsArray, "#2");
+            TypeBuilder tb = module.DefineType("dd.test", TypeAttributes.Public);
+            var gparam = tb.DefineGenericParameters("A", "B")[1];
+            Type res = gparam.MakeArrayType();
+            Assert.IsNotNull(res, "#1");
+            Assert.IsTrue(res.IsArray, "#2");
 
-            res = gparam.MakeArrayType (2);
-            Assert.IsNotNull (res, "#3");
-            Assert.IsTrue (res.IsArray, "#4");
+            res = gparam.MakeArrayType(2);
+            Assert.IsNotNull(res, "#3");
+            Assert.IsTrue(res.IsArray, "#4");
         }
 
         [Test]
-        public void MakeByRefType ()
+        public void MakeByRefType()
         {
-            TypeBuilder tb = module.DefineType ("dd.test", TypeAttributes.Public);
-            var gparam = tb.DefineGenericParameters ("A", "B")[1];
-            Type res = gparam.MakeByRefType ();
+            TypeBuilder tb = module.DefineType("dd.test", TypeAttributes.Public);
+            var gparam = tb.DefineGenericParameters("A", "B")[1];
+            Type res = gparam.MakeByRefType();
 
-            Assert.IsNotNull (res, "#1");
-            Assert.IsTrue (res.IsByRef, "#2");
+            Assert.IsNotNull(res, "#1");
+            Assert.IsTrue(res.IsByRef, "#2");
         }
 
         [Test]
-        public void MakePointerType ()
+        public void MakePointerType()
         {
-            TypeBuilder tb = module.DefineType ("dd.test", TypeAttributes.Public);
-            var gparam = tb.DefineGenericParameters ("A", "B")[1];
-            Type res = gparam.MakePointerType ();
+            TypeBuilder tb = module.DefineType("dd.test", TypeAttributes.Public);
+            var gparam = tb.DefineGenericParameters("A", "B")[1];
+            Type res = gparam.MakePointerType();
 
-            Assert.IsNotNull (res, "#1");
-            Assert.IsTrue (res.IsPointer, "#2");
+            Assert.IsNotNull(res, "#1");
+            Assert.IsTrue(res.IsPointer, "#2");
         }
 
         [Test]
-        public void SetBaseTypeConstraintWithNull ()
+        public void SetBaseTypeConstraintWithNull()
         {
-            TypeBuilder tb = module.DefineType ("dd.test", TypeAttributes.Public);
-            var gparam = tb.DefineGenericParameters ("A", "B")[1];
+            TypeBuilder tb = module.DefineType("dd.test", TypeAttributes.Public);
+            var gparam = tb.DefineGenericParameters("A", "B")[1];
 
-            Assert.IsNull (gparam.BaseType, "#1");
-            gparam.SetBaseTypeConstraint (null);
-            Assert.AreEqual (typeof (object), gparam.BaseType, "#2");
+            Assert.IsNull(gparam.BaseType, "#1");
+            gparam.SetBaseTypeConstraint(null);
+            Assert.AreEqual(typeof(object), gparam.BaseType, "#2");
         }
 
         [Test]
-        public void GenericTypeMembers ()
+        public void GenericTypeMembers()
         {
-            TypeBuilder tb = module.DefineType ("dd.test", TypeAttributes.Public);
-            var gparam = tb.DefineGenericParameters ("A", "B")[1];
+            TypeBuilder tb = module.DefineType("dd.test", TypeAttributes.Public);
+            var gparam = tb.DefineGenericParameters("A", "B")[1];
 
-            try {
-                gparam.GetGenericArguments ();
-                Assert.Fail ("#1");
-            } catch (InvalidOperationException) {}
+            try
+            {
+                gparam.GetGenericArguments();
+                Assert.Fail("#1");
+            }
+            catch (InvalidOperationException) { }
 
-            try {
-                gparam.GetGenericParameterConstraints ();
-                Assert.Fail ("#2");
-            } catch (InvalidOperationException) {}
+            try
+            {
+                gparam.GetGenericParameterConstraints();
+                Assert.Fail("#2");
+            }
+            catch (InvalidOperationException) { }
 
-            try {
-                gparam.GetGenericTypeDefinition ();
-                Assert.Fail ("#3");
-            } catch (InvalidOperationException) {}
-        
-            Assert.IsTrue (gparam.ContainsGenericParameters, "#4");
-            try {
+            try
+            {
+                gparam.GetGenericTypeDefinition();
+                Assert.Fail("#3");
+            }
+            catch (InvalidOperationException) { }
+
+            Assert.IsTrue(gparam.ContainsGenericParameters, "#4");
+            try
+            {
                 var x = gparam.GenericParameterAttributes;
-                Assert.Fail ("#5");
-            } catch (NotSupportedException) {}
+                Assert.Fail("#5");
+            }
+            catch (NotSupportedException) { }
 
-            Assert.AreEqual (1, gparam.GenericParameterPosition, "#6");
+            Assert.AreEqual(1, gparam.GenericParameterPosition, "#6");
 
-            Assert.IsTrue (gparam.ContainsGenericParameters, "#7");
+            Assert.IsTrue(gparam.ContainsGenericParameters, "#7");
 
-            Assert.IsTrue (gparam.IsGenericParameter, "#8");
-            Assert.IsFalse (gparam.IsGenericType, "#9");
-            Assert.IsFalse (gparam.IsGenericTypeDefinition, "#10");
+            Assert.IsTrue(gparam.IsGenericParameter, "#8");
+            Assert.IsFalse(gparam.IsGenericType, "#9");
+            Assert.IsFalse(gparam.IsGenericTypeDefinition, "#10");
         }
 
         [Test]
         // CompilerContext no longer supported
-        [Category ("NotWorking")]
-        public void GetAttributeFlagsImpl ()
+        [Category("NotWorking")]
+        public void GetAttributeFlagsImpl()
         {
-            SetUp (AssemblyBuilderAccess.RunAndSave  | (AssemblyBuilderAccess)0x800);
-            TypeBuilder tb = module.DefineType ("ns.type", TypeAttributes.Public);
-            var gparam = tb.DefineGenericParameters ("A", "B")[1];
+            SetUp(AssemblyBuilderAccess.RunAndSave | (AssemblyBuilderAccess)0x800);
+            TypeBuilder tb = module.DefineType("ns.type", TypeAttributes.Public);
+            var gparam = tb.DefineGenericParameters("A", "B")[1];
 
-            Assert.AreEqual (TypeAttributes.Public, gparam.Attributes, "#1");
+            Assert.AreEqual(TypeAttributes.Public, gparam.Attributes, "#1");
         }
 
         [Test]
-        public void ActionConstructorInfoTest ()
+        public void ActionConstructorInfoTest()
         {
             // Regression test for https://bugzilla.xamarin.com/show_bug.cgi?id=58454
             //
@@ -373,40 +401,42 @@ namespace MonoTests.System.Reflection.Emit
                ...  and then: new Store<string>().Subscribe<int>("x");
             */
 
-            SetUp (AssemblyBuilderAccess.Run);
+            SetUp(AssemblyBuilderAccess.Run);
 
-            var tb = module.DefineType ("Store");
-            var tparsStore = tb.DefineGenericParameters ("TState");
+            var tb = module.DefineType("Store");
+            var tparsStore = tb.DefineGenericParameters("TState");
 
-            tb.DefineDefaultConstructor (MethodAttributes.Public);
+            tb.DefineDefaultConstructor(MethodAttributes.Public);
 
-            var methFoo = tb.DefineMethod ("Foo", MethodAttributes.Public | MethodAttributes.Static);
-            var tparsFoo = methFoo.DefineGenericParameters ("X");
-            methFoo.SetReturnType (typeof(void));
-            methFoo.SetParameters (tparsFoo[0]);
-            methFoo.GetILGenerator().Emit (OpCodes.Ret);
+            var methFoo = tb.DefineMethod("Foo", MethodAttributes.Public | MethodAttributes.Static);
+            var tparsFoo = methFoo.DefineGenericParameters("X");
+            methFoo.SetReturnType(typeof(void));
+            methFoo.SetParameters(tparsFoo[0]);
+            methFoo.GetILGenerator().Emit(OpCodes.Ret);
 
-            var methSub = tb.DefineMethod ("Subscribe", MethodAttributes.Public | MethodAttributes.Static);
-            var tparsSub = methSub.DefineGenericParameters ("TSelection");
-            var actOfSel = typeof(Action<>).MakeGenericType (tparsSub[0]); // Action<TSelection>
-            methSub.SetReturnType  (actOfSel);
-            methSub.SetParameters (tparsStore[0]); // TState
-            var ilg = methSub.GetILGenerator ();
-            ilg.Emit (OpCodes.Ldnull); // instance == null
-            ilg.Emit (OpCodes.Ldftn, methFoo.MakeGenericMethod (tparsSub[0])); // ldftn void class Store`1<!TState>::Foo<!!0> (!!0)
-            var aaa = TypeBuilder.GetConstructor (actOfSel, typeof(Action<>).GetConstructors()[0]);
-            ilg.Emit (OpCodes.Newobj, aaa); // new Action<TSelection> (Foo<TSelection>);
-            ilg.Emit (OpCodes.Ret);
+            var methSub = tb.DefineMethod(
+                "Subscribe",
+                MethodAttributes.Public | MethodAttributes.Static
+            );
+            var tparsSub = methSub.DefineGenericParameters("TSelection");
+            var actOfSel = typeof(Action<>).MakeGenericType(tparsSub[0]); // Action<TSelection>
+            methSub.SetReturnType(actOfSel);
+            methSub.SetParameters(tparsStore[0]); // TState
+            var ilg = methSub.GetILGenerator();
+            ilg.Emit(OpCodes.Ldnull); // instance == null
+            ilg.Emit(OpCodes.Ldftn, methFoo.MakeGenericMethod(tparsSub[0])); // ldftn void class Store`1<!TState>::Foo<!!0> (!!0)
+            var aaa = TypeBuilder.GetConstructor(actOfSel, typeof(Action<>).GetConstructors()[0]);
+            ilg.Emit(OpCodes.Newobj, aaa); // new Action<TSelection> (Foo<TSelection>);
+            ilg.Emit(OpCodes.Ret);
 
-            var tgen = tb.CreateType (); // TState`1
+            var tgen = tb.CreateType(); // TState`1
 
             var t = tgen.MakeGenericType(typeof(string));
-            var x = t.GetConstructor(Type.EmptyTypes).Invoke (null); // x = new Store<string> ()
+            var x = t.GetConstructor(Type.EmptyTypes).Invoke(null); // x = new Store<string> ()
             var mgen = t.GetMethod("Subscribe");
-            var m = mgen.MakeGenericMethod (typeof (int)); // Action<int> Store<string>.Subscribe<int> (string)
-            var y = m.Invoke (x, new object[] {"hello"}); // x.Subscribte<int> ("hello")
-            Assert.IsNotNull (y);
+            var m = mgen.MakeGenericMethod(typeof(int)); // Action<int> Store<string>.Subscribe<int> (string)
+            var y = m.Invoke(x, new object[] { "hello" }); // x.Subscribte<int> ("hello")
+            Assert.IsNotNull(y);
         }
-
     }
 }

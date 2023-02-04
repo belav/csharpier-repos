@@ -9,13 +9,16 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.OmniSharp.Structure
 {
     internal readonly record struct OmniSharpBlockStructureOptions(
         bool ShowBlockStructureGuidesForCommentsAndPreprocessorRegions,
-        bool ShowOutliningForCommentsAndPreprocessorRegions)
+        bool ShowOutliningForCommentsAndPreprocessorRegions
+    )
     {
-        internal BlockStructureOptions ToBlockStructureOptions()
-            => BlockStructureOptions.Default with
+        internal BlockStructureOptions ToBlockStructureOptions() =>
+            BlockStructureOptions.Default with
             {
-                ShowBlockStructureGuidesForCommentsAndPreprocessorRegions = ShowBlockStructureGuidesForCommentsAndPreprocessorRegions,
-                ShowOutliningForCommentsAndPreprocessorRegions = ShowOutliningForCommentsAndPreprocessorRegions,
+                ShowBlockStructureGuidesForCommentsAndPreprocessorRegions =
+                    ShowBlockStructureGuidesForCommentsAndPreprocessorRegions,
+                ShowOutliningForCommentsAndPreprocessorRegions =
+                    ShowOutliningForCommentsAndPreprocessorRegions,
             };
     }
 }

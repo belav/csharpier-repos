@@ -23,8 +23,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace Mono.Net.Dns {
-    class DnsResourceRecord {
+namespace Mono.Net.Dns
+{
+    class DnsResourceRecord
+    {
         string name;
         DnsType type;
         DnsClass klass;
@@ -32,10 +34,10 @@ namespace Mono.Net.Dns {
         ushort rdlength;
         ArraySegment<byte> m_rdata;
 
-        internal DnsResourceRecord() {
-        }
+        internal DnsResourceRecord() { }
 
-        internal void CopyFrom(DnsResourceRecord rr) {
+        internal void CopyFrom(DnsResourceRecord rr)
+        {
             name = rr.name;
             type = rr.type;
             klass = rr.klass;
@@ -44,7 +46,12 @@ namespace Mono.Net.Dns {
             m_rdata = rr.m_rdata;
         }
 
-        static internal DnsResourceRecord CreateFromBuffer(DnsPacket packet, int size, ref int offset) {
+        static internal DnsResourceRecord CreateFromBuffer(
+            DnsPacket packet,
+            int size,
+            ref int offset
+        )
+        {
             string pname = packet.ReadName(ref offset);
             DnsType ptype = (DnsType)packet.ReadUInt16(ref offset);
             DnsClass pclass = (DnsClass)packet.ReadUInt16(ref offset);
@@ -59,53 +66,68 @@ namespace Mono.Net.Dns {
             rr.m_rdata = new ArraySegment<byte>(packet.Packet, offset, prdlength);
             offset += prdlength;
 
-            switch(pclass) {
-            case DnsClass.IN:
-                switch(ptype) {
-                case DnsType.A:
-                    rr = new DnsResourceRecordA(rr);
-                    break;
-                case DnsType.AAAA:
-                    rr = new DnsResourceRecordAAAA(rr);
-                    break;
-                case DnsType.CNAME:
-                    rr = new DnsResourceRecordCName(rr);
-                    break;
-                case DnsType.PTR:
-                    rr = new DnsResourceRecordPTR(rr);
+            switch (pclass)
+            {
+                case DnsClass.IN:
+                    switch (ptype)
+                    {
+                        case DnsType.A:
+                            rr = new DnsResourceRecordA(rr);
+                            break;
+                        case DnsType.AAAA:
+                            rr = new DnsResourceRecordAAAA(rr);
+                            break;
+                        case DnsType.CNAME:
+                            rr = new DnsResourceRecordCName(rr);
+                            break;
+                        case DnsType.PTR:
+                            rr = new DnsResourceRecordPTR(rr);
+                            break;
+                        default:
+                            break;
+                    }
                     break;
                 default:
                     break;
-                    }
-                break;
-            default:
-                break;
             }
             return rr;
         }
 
-        public string Name {
+        public string Name
+        {
             get { return name; }
         }
 
-        public DnsType Type {
+        public DnsType Type
+        {
             get { return type; }
         }
 
-        public DnsClass Class {
+        public DnsClass Class
+        {
             get { return klass; }
         }
 
-        public int Ttl {
+        public int Ttl
+        {
             get { return ttl; }
         }
 
-        public ArraySegment<byte> Data {
+        public ArraySegment<byte> Data
+        {
             get { return m_rdata; }
         }
 
-        public override string ToString() {
-            return String.Format("Name: {0}, Type: {1}, Class: {2}, Ttl: {3}, Data length: {4}", name, type, klass, ttl, Data.Count);
+        public override string ToString()
+        {
+            return String.Format(
+                "Name: {0}, Type: {1}, Class: {2}, Ttl: {3}, Data length: {4}",
+                name,
+                type,
+                klass,
+                ttl,
+                Data.Count
+            );
         }
     }
 }

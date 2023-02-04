@@ -3,53 +3,53 @@ using System.Reflection;
 
 public interface I
 {
-    int Foo ();
+    int Foo();
 }
 
 public class A : I
 {
-    int I.Foo ()
+    int I.Foo()
     {
-        Console.WriteLine ("a");
+        Console.WriteLine("a");
         return 1;
     }
 }
 
 public class AA : A, I
 {
-    public int Foo ()
+    public int Foo()
     {
-        Console.WriteLine ("aa");
+        Console.WriteLine("aa");
         return 2;
     }
 }
 
 public class B : A
 {
-    public int Foo ()
+    public int Foo()
     {
-        Console.WriteLine ("b");
+        Console.WriteLine("b");
         return 3;
     }
 }
 
 public class Test
 {
-    public static int Main ()
+    public static int Main()
     {
-        I i = new AA ();
-        if (i.Foo () != 2)
+        I i = new AA();
+        if (i.Foo() != 2)
             return 1;
-        
-        i = new B ();
-        if (i.Foo () != 1)
+
+        i = new B();
+        if (i.Foo() != 1)
             return 2;
-        
-        var m = typeof (B).GetMethod ("Foo");
-        Console.WriteLine (m.Attributes);
+
+        var m = typeof(B).GetMethod("Foo");
+        Console.WriteLine(m.Attributes);
         if (m.Attributes != (MethodAttributes.Public | MethodAttributes.HideBySig))
             return 3;
-        
+
         return 0;
     }
 }

@@ -2,17 +2,15 @@ using System;
 
 struct S
 {
-    public int X, Y;
+    public int X,
+        Y;
 }
 
 class X
 {
-    public static int Main ()
+    public static int Main()
     {
-        var rect = new S {
-            X = 1,
-            Y = 2,
-        };
+        var rect = new S { X = 1, Y = 2, };
 
         if (rect.X != 1)
             return 1;
@@ -20,10 +18,7 @@ class X
         if (rect.Y != 2)
             return 2;
 
-        rect = new S {
-            X = rect.X,
-            Y = rect.Y,
-        };
+        rect = new S { X = rect.X, Y = rect.Y, };
 
         if (rect.X != 1)
             return 3;

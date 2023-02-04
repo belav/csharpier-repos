@@ -17,10 +17,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,10 +30,10 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace System.Diagnostics {
-
-    public struct CounterSample {
-        
+namespace System.Diagnostics
+{
+    public struct CounterSample
+    {
         // do not reorder and keep in sync with the runtime
         // in metadata/mono-perfcounters.c
         private long rawValue;
@@ -41,31 +41,40 @@ namespace System.Diagnostics {
         private long counterFrequency;
         private long systemFrequency;
         private long timeStamp;
-        private long timeStamp100nSec; 
+        private long timeStamp100nSec;
         private long counterTimeStamp;
         private PerformanceCounterType counterType;
 
-        public CounterSample (long rawValue, 
-            long baseValue, 
-            long counterFrequency, 
-            long systemFrequency, 
-            long timeStamp, 
-            long timeStamp100nSec, 
-            PerformanceCounterType counterType)
-            : this (rawValue, baseValue, counterFrequency, 
-                systemFrequency, timeStamp, timeStamp100nSec, 
-                counterType, 0)
-        {
-        }
+        public CounterSample(
+            long rawValue,
+            long baseValue,
+            long counterFrequency,
+            long systemFrequency,
+            long timeStamp,
+            long timeStamp100nSec,
+            PerformanceCounterType counterType
+        )
+            : this(
+                rawValue,
+                baseValue,
+                counterFrequency,
+                systemFrequency,
+                timeStamp,
+                timeStamp100nSec,
+                counterType,
+                0
+            ) { }
 
-        public CounterSample (long rawValue, 
-            long baseValue, 
-            long counterFrequency, 
-            long systemFrequency, 
-            long timeStamp, 
-            long timeStamp100nSec, 
-            PerformanceCounterType counterType, 
-            long counterTimeStamp)
+        public CounterSample(
+            long rawValue,
+            long baseValue,
+            long counterFrequency,
+            long systemFrequency,
+            long timeStamp,
+            long timeStamp100nSec,
+            PerformanceCounterType counterType,
+            long counterTimeStamp
+        )
         {
             this.rawValue = rawValue;
             this.baseValue = baseValue;
@@ -77,95 +86,114 @@ namespace System.Diagnostics {
             this.counterTimeStamp = counterTimeStamp;
         }
 
-        public static CounterSample Empty = new CounterSample (
-            0, 0, 0, 0, 0, 0, 
-            PerformanceCounterType.NumberOfItems32, 
-            0);
+        public static CounterSample Empty = new CounterSample(
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            PerformanceCounterType.NumberOfItems32,
+            0
+        );
 
-        public long BaseValue {
-            get {return baseValue;}
-        }
-
-        public long CounterFrequency {
-            get {return counterFrequency;}
-        }
-
-        public long CounterTimeStamp {
-            get {return counterTimeStamp;}
-        }
-
-        public PerformanceCounterType CounterType {
-            get {return counterType;}
-        }
-
-        public long RawValue {
-            get {return rawValue;}
-        }
-
-        public long SystemFrequency {
-            get {return systemFrequency;}
-        }
-
-        public long TimeStamp {
-            get {return timeStamp;}
-        }
-
-        public long TimeStamp100nSec {
-            get {return timeStamp100nSec;}
-        }
-
-        public static float Calculate (CounterSample counterSample)
+        public long BaseValue
         {
-            return CounterSampleCalculator.ComputeCounterValue (counterSample);
+            get { return baseValue; }
         }
 
-        public static float Calculate (CounterSample counterSample,
-            CounterSample nextCounterSample)
+        public long CounterFrequency
         {
-            return CounterSampleCalculator.ComputeCounterValue (counterSample, nextCounterSample);
+            get { return counterFrequency; }
         }
 
-        public override bool Equals (object o)
+        public long CounterTimeStamp
+        {
+            get { return counterTimeStamp; }
+        }
+
+        public PerformanceCounterType CounterType
+        {
+            get { return counterType; }
+        }
+
+        public long RawValue
+        {
+            get { return rawValue; }
+        }
+
+        public long SystemFrequency
+        {
+            get { return systemFrequency; }
+        }
+
+        public long TimeStamp
+        {
+            get { return timeStamp; }
+        }
+
+        public long TimeStamp100nSec
+        {
+            get { return timeStamp100nSec; }
+        }
+
+        public static float Calculate(CounterSample counterSample)
+        {
+            return CounterSampleCalculator.ComputeCounterValue(counterSample);
+        }
+
+        public static float Calculate(CounterSample counterSample, CounterSample nextCounterSample)
+        {
+            return CounterSampleCalculator.ComputeCounterValue(counterSample, nextCounterSample);
+        }
+
+        public override bool Equals(object o)
         {
             if (!(o is CounterSample))
                 return false;
-            return Equals ((CounterSample) o);
+            return Equals((CounterSample)o);
         }
 
-        public bool Equals (CounterSample sample)
+        public bool Equals(CounterSample sample)
         {
-            return
-                rawValue == sample.rawValue &&
-                baseValue == sample.counterFrequency &&
-                counterFrequency == sample.counterFrequency &&
-                systemFrequency == sample.systemFrequency &&
-                timeStamp == sample.timeStamp &&
-                timeStamp100nSec == sample.timeStamp100nSec &&
-                counterTimeStamp == sample.counterTimeStamp &&
-                counterType == sample.counterType;
+            return rawValue == sample.rawValue
+                && baseValue == sample.counterFrequency
+                && counterFrequency == sample.counterFrequency
+                && systemFrequency == sample.systemFrequency
+                && timeStamp == sample.timeStamp
+                && timeStamp100nSec == sample.timeStamp100nSec
+                && counterTimeStamp == sample.counterTimeStamp
+                && counterType == sample.counterType;
         }
 
-        public static bool operator == (CounterSample a, CounterSample b)
+        public static bool operator ==(CounterSample a, CounterSample b)
         {
-            return a.Equals (b);
+            return a.Equals(b);
         }
 
-        public static bool operator != (CounterSample a, CounterSample b)
+        public static bool operator !=(CounterSample a, CounterSample b)
         {
-            return !a.Equals (b);
+            return !a.Equals(b);
         }
 
-        public override int GetHashCode ()
+        public override int GetHashCode()
         {
-            return (int) (rawValue << 28 ^
-                (baseValue << 24 ^
-                (counterFrequency << 20 ^
-                (systemFrequency << 16 ^
-                (timeStamp << 8 ^
-                (timeStamp100nSec << 4 ^
-                (counterTimeStamp ^
-                (int) counterType)))))));
+            return (int)(
+                rawValue << 28
+                ^ (
+                    baseValue << 24
+                    ^ (
+                        counterFrequency << 20
+                        ^ (
+                            systemFrequency << 16
+                            ^ (
+                                timeStamp << 8
+                                ^ (timeStamp100nSec << 4 ^ (counterTimeStamp ^ (int)counterType))
+                            )
+                        )
+                    )
+                )
+            );
         }
     }
 }
-

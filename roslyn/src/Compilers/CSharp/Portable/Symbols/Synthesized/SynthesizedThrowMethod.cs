@@ -12,15 +12,43 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     /// </summary>
     internal sealed class SynthesizedThrowMethod : SynthesizedGlobalMethodSymbol
     {
-        internal SynthesizedThrowMethod(SourceModuleSymbol containingModule, PrivateImplementationDetails privateImplType, TypeSymbol returnType, TypeSymbol paramType)
-            : base(containingModule, privateImplType, returnType, PrivateImplementationDetails.SynthesizedThrowFunctionName)
+        internal SynthesizedThrowMethod(
+            SourceModuleSymbol containingModule,
+            PrivateImplementationDetails privateImplType,
+            TypeSymbol returnType,
+            TypeSymbol paramType
+        )
+            : base(
+                containingModule,
+                privateImplType,
+                returnType,
+                PrivateImplementationDetails.SynthesizedThrowFunctionName
+            )
         {
-            this.SetParameters(ImmutableArray.Create<ParameterSymbol>(SynthesizedParameterSymbol.Create(this, TypeWithAnnotations.Create(paramType), 0, RefKind.None, "paramName")));
+            this.SetParameters(
+                ImmutableArray.Create<ParameterSymbol>(
+                    SynthesizedParameterSymbol.Create(
+                        this,
+                        TypeWithAnnotations.Create(paramType),
+                        0,
+                        RefKind.None,
+                        "paramName"
+                    )
+                )
+            );
         }
 
-        internal override void GenerateMethodBody(TypeCompilationState compilationState, BindingDiagnosticBag diagnostics)
+        internal override void GenerateMethodBody(
+            TypeCompilationState compilationState,
+            BindingDiagnosticBag diagnostics
+        )
         {
-            SyntheticBoundNodeFactory F = new SyntheticBoundNodeFactory(this, this.GetNonNullSyntaxNode(), compilationState, diagnostics);
+            SyntheticBoundNodeFactory F = new SyntheticBoundNodeFactory(
+                this,
+                this.GetNonNullSyntaxNode(),
+                compilationState,
+                diagnostics
+            );
             F.CurrentFunction = this;
 
             try
@@ -29,7 +57,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                 //throw new ArgumentNullException(paramName);
 
-                var body = F.Throw(F.New(F.WellKnownMethod(WellKnownMember.System_ArgumentNullException__ctorString), ImmutableArray.Create<BoundExpression>(F.Parameter(paramName))));
+                var body = F.Throw(
+                    F.New(
+                        F.WellKnownMethod(WellKnownMember.System_ArgumentNullException__ctorString),
+                        ImmutableArray.Create<BoundExpression>(F.Parameter(paramName))
+                    )
+                );
 
                 // NOTE: we created this block in its most-lowered form, so analysis is unnecessary
                 F.CloseMethod(body);

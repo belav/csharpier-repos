@@ -27,100 +27,105 @@ namespace System.DirectoryServices.ActiveDirectory
     [DirectoryServicesPermission(SecurityAction.LinkDemand, Unrestricted = true)]
     public class ApplicationPartition : ActiveDirectoryPartition
     {
-        public DirectoryServerCollection DirectoryServers {
-            get {
-                throw new NotImplementedException ();
-            }
-        }
-
-        public string SecurityReferenceDomain {
-            get {
-                throw new NotImplementedException ();
-            }
-            set {
-                throw new NotImplementedException ();
-            }
-        }
-
-        public ApplicationPartition (DirectoryContext context, string distinguishedName)
+        public DirectoryServerCollection DirectoryServers
         {
-            throw new NotImplementedException ();
+            get { throw new NotImplementedException(); }
         }
 
-        public ApplicationPartition (DirectoryContext context, string distinguishedName, string objectClass)
+        public string SecurityReferenceDomain
         {
-            throw new NotImplementedException ();
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
         }
 
-        protected override void Dispose (bool disposing)
+        public ApplicationPartition(DirectoryContext context, string distinguishedName)
         {
-
+            throw new NotImplementedException();
         }
 
-        public static ApplicationPartition GetApplicationPartition (DirectoryContext context)
+        public ApplicationPartition(
+            DirectoryContext context,
+            string distinguishedName,
+            string objectClass
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public static ApplicationPartition FindByName (DirectoryContext context, string distinguishedName)
+        protected override void Dispose(bool disposing) { }
+
+        public static ApplicationPartition GetApplicationPartition(DirectoryContext context)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public DirectoryServer FindDirectoryServer ()
+        public static ApplicationPartition FindByName(
+            DirectoryContext context,
+            string distinguishedName
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public DirectoryServer FindDirectoryServer (string siteName)
+        public DirectoryServer FindDirectoryServer()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public DirectoryServer FindDirectoryServer (bool forceRediscovery)
+        public DirectoryServer FindDirectoryServer(string siteName)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public DirectoryServer FindDirectoryServer (string siteName, bool forceRediscovery)
+        public DirectoryServer FindDirectoryServer(bool forceRediscovery)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public ReadOnlyDirectoryServerCollection FindAllDirectoryServers ()
+        public DirectoryServer FindDirectoryServer(string siteName, bool forceRediscovery)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public ReadOnlyDirectoryServerCollection FindAllDirectoryServers (string siteName)
+        public ReadOnlyDirectoryServerCollection FindAllDirectoryServers()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public ReadOnlyDirectoryServerCollection FindAllDiscoverableDirectoryServers ()
+        public ReadOnlyDirectoryServerCollection FindAllDirectoryServers(string siteName)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public ReadOnlyDirectoryServerCollection FindAllDiscoverableDirectoryServers (string siteName)
+        public ReadOnlyDirectoryServerCollection FindAllDiscoverableDirectoryServers()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public void Delete ()
+        public ReadOnlyDirectoryServerCollection FindAllDiscoverableDirectoryServers(
+            string siteName
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public void Save ()
+        public void Delete()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        [DirectoryServicesPermission(SecurityAction.LinkDemand, Unrestricted = true), DirectoryServicesPermission(SecurityAction.InheritanceDemand, Unrestricted = true)]
-        public override DirectoryEntry GetDirectoryEntry ()
+        public void Save()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
+        }
+
+        [
+            DirectoryServicesPermission(SecurityAction.LinkDemand, Unrestricted = true),
+            DirectoryServicesPermission(SecurityAction.InheritanceDemand, Unrestricted = true)
+        ]
+        public override DirectoryEntry GetDirectoryEntry()
+        {
+            throw new NotImplementedException();
         }
     }
 }

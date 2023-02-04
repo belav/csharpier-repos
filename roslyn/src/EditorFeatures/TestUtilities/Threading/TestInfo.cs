@@ -15,8 +15,7 @@ namespace Roslyn.Test.Utilities
     {
         public decimal Time { get; }
 
-        public TestInfo(decimal time)
-            => Time = time;
+        public TestInfo(decimal time) => Time = time;
 
         public static ImmutableDictionary<string, TestInfo> GetPassedTestsInfo()
         {
@@ -27,7 +26,11 @@ namespace Roslyn.Test.Utilities
                 if (File.Exists(filePath))
                 {
                     var doc = XDocument.Load(filePath);
-                    foreach (var test in doc.XPathSelectElements("/assemblies/assembly/collection/test[@result='Pass']"))
+                    foreach (
+                        var test in doc.XPathSelectElements(
+                            "/assemblies/assembly/collection/test[@result='Pass']"
+                        )
+                    )
                     {
                         if (decimal.TryParse(test.Attribute("time").Value, out var time))
                         {

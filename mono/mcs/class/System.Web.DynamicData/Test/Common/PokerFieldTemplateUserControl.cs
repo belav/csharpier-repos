@@ -8,19 +8,19 @@ namespace MonoTests.Common
 {
     public class PokerFieldTemplateUserControl : FieldTemplateUserControl
     {
-        public string GetChildrenPath ()
+        public string GetChildrenPath()
         {
             return ChildrenPath;
         }
 
-        public string GetForeignKeyPath ()
+        public string GetForeignKeyPath()
         {
             return ForeignKeyPath;
         }
 
-        public string CallBuildChildrenPath (string path)
+        public string CallBuildChildrenPath(string path)
         {
-            return BuildChildrenPath (path);
+            return BuildChildrenPath(path);
         }
     }
 }

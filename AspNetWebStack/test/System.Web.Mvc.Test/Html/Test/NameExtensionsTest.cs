@@ -24,7 +24,10 @@ namespace System.Web.Mvc.Html.Test
             Assert.Equal("", html.NameForModel().ToHtmlString());
             Assert.Equal("foo", html.Name("foo").ToHtmlString());
             Assert.Equal("foo.bar", html.Name("foo.bar").ToHtmlString());
-            Assert.Equal("&lt;script>alert(&quot;XSS!&quot;)&lt;/script>", html.Name("<script>alert(\"XSS!\")</script>").ToHtmlString());
+            Assert.Equal(
+                "&lt;script>alert(&quot;XSS!&quot;)&lt;/script>",
+                html.Name("<script>alert(\"XSS!\")</script>").ToHtmlString()
+            );
         }
 
         [Fact]
@@ -48,29 +51,42 @@ namespace System.Web.Mvc.Html.Test
         public void StronglyTypedWithNoPrefix()
         {
             // Arrange
-            HtmlHelper<OuterClass> html = MvcHelper.GetHtmlHelper(new ViewDataDictionary<OuterClass>());
+            HtmlHelper<OuterClass> html = MvcHelper.GetHtmlHelper(
+                new ViewDataDictionary<OuterClass>()
+            );
 
             // Act & Assert
             Assert.Equal("IntValue", html.IdFor(m => m.IntValue).ToHtmlString());
             Assert.Equal("Inner_StringValue", html.IdFor(m => m.Inner.StringValue).ToHtmlString());
 
             Assert.Equal("IntValue", html.NameFor(m => m.IntValue).ToHtmlString());
-            Assert.Equal("Inner.StringValue", html.NameFor(m => m.Inner.StringValue).ToHtmlString());
+            Assert.Equal(
+                "Inner.StringValue",
+                html.NameFor(m => m.Inner.StringValue).ToHtmlString()
+            );
         }
 
         [Fact]
         public void StronglyTypedWithPrefix()
         {
             // Arrange
-            HtmlHelper<OuterClass> html = MvcHelper.GetHtmlHelper(new ViewDataDictionary<OuterClass>());
+            HtmlHelper<OuterClass> html = MvcHelper.GetHtmlHelper(
+                new ViewDataDictionary<OuterClass>()
+            );
             html.ViewData.TemplateInfo.HtmlFieldPrefix = "prefix";
 
             // Act & Assert
             Assert.Equal("prefix_IntValue", html.IdFor(m => m.IntValue).ToHtmlString());
-            Assert.Equal("prefix_Inner_StringValue", html.IdFor(m => m.Inner.StringValue).ToHtmlString());
+            Assert.Equal(
+                "prefix_Inner_StringValue",
+                html.IdFor(m => m.Inner.StringValue).ToHtmlString()
+            );
 
             Assert.Equal("prefix.IntValue", html.NameFor(m => m.IntValue).ToHtmlString());
-            Assert.Equal("prefix.Inner.StringValue", html.NameFor(m => m.Inner.StringValue).ToHtmlString());
+            Assert.Equal(
+                "prefix.Inner.StringValue",
+                html.NameFor(m => m.Inner.StringValue).ToHtmlString()
+            );
         }
 
         // Regression test for codeplex #554 - editor templates for collections would add an extra dot to the
@@ -79,15 +95,23 @@ namespace System.Web.Mvc.Html.Test
         public void StronglyTypedCollectionWithPrefix()
         {
             // Arrange
-            HtmlHelper<List<OuterClass>> html = MvcHelper.GetHtmlHelper(new ViewDataDictionary<List<OuterClass>>());
+            HtmlHelper<List<OuterClass>> html = MvcHelper.GetHtmlHelper(
+                new ViewDataDictionary<List<OuterClass>>()
+            );
             html.ViewData.TemplateInfo.HtmlFieldPrefix = "prefix";
 
             // Act & Assert
             Assert.Equal("prefix_0__IntValue", html.IdFor(m => m[0].IntValue).ToHtmlString());
-            Assert.Equal("prefix_0__Inner_StringValue", html.IdFor(m => m[0].Inner.StringValue).ToHtmlString());
+            Assert.Equal(
+                "prefix_0__Inner_StringValue",
+                html.IdFor(m => m[0].Inner.StringValue).ToHtmlString()
+            );
 
             Assert.Equal("prefix[0].IntValue", html.NameFor(m => m[0].IntValue).ToHtmlString());
-            Assert.Equal("prefix[0].Inner.StringValue", html.NameFor(m => m[0].Inner.StringValue).ToHtmlString());
+            Assert.Equal(
+                "prefix[0].Inner.StringValue",
+                html.NameFor(m => m[0].Inner.StringValue).ToHtmlString()
+            );
         }
 
         [Theory]
@@ -118,7 +142,6 @@ namespace System.Web.Mvc.Html.Test
             var idResult = helper.Id("");
             var idForResult = helper.IdFor(m => m);
             var idForModelResult = helper.IdForModel();
-
 
             // Assert
             Assert.Equal(expectedText, idResult.ToHtmlString());
@@ -154,7 +177,6 @@ namespace System.Web.Mvc.Html.Test
             var nameResult = helper.Name("");
             var nameForResult = helper.NameFor(m => m);
             var nameForModelResult = helper.NameForModel();
-
 
             // Assert
             Assert.Equal(expectedText, nameResult.ToHtmlString());

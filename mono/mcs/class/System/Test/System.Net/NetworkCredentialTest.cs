@@ -32,89 +32,92 @@ using System.Security;
 
 using NUnit.Framework;
 
-namespace MonoTests.System.Net {
-
+namespace MonoTests.System.Net
+{
     [TestFixture]
-    public class NetworkCredentialTest {
-
-        void CheckDefaults (NetworkCredential nc)
+    public class NetworkCredentialTest
+    {
+        void CheckDefaults(NetworkCredential nc)
         {
-            Assert.AreSame (String.Empty, nc.Domain, "Domain");
-            Assert.AreSame (String.Empty, nc.Password, "Password");
-            Assert.AreSame (String.Empty, nc.UserName, "UserName");
-            Assert.AreSame (nc, nc.GetCredential (null, null), "GetCredential");
+            Assert.AreSame(String.Empty, nc.Domain, "Domain");
+            Assert.AreSame(String.Empty, nc.Password, "Password");
+            Assert.AreSame(String.Empty, nc.UserName, "UserName");
+            Assert.AreSame(nc, nc.GetCredential(null, null), "GetCredential");
         }
 
-        void CheckCustom (NetworkCredential nc)
+        void CheckCustom(NetworkCredential nc)
         {
-            Assert.AreEqual ("dom", nc.Domain, "Domain");
-            Assert.AreEqual ("********", nc.Password, "Password");
-            Assert.AreEqual ("user", nc.UserName, "UserName");
-            Assert.AreSame (nc, nc.GetCredential (new Uri ("http://www.example.com"), "basic"), "GetCredential");
+            Assert.AreEqual("dom", nc.Domain, "Domain");
+            Assert.AreEqual("********", nc.Password, "Password");
+            Assert.AreEqual("user", nc.UserName, "UserName");
+            Assert.AreSame(
+                nc,
+                nc.GetCredential(new Uri("http://www.example.com"), "basic"),
+                "GetCredential"
+            );
         }
 
         [Test]
-        public void Constructor_0 ()
+        public void Constructor_0()
         {
-            NetworkCredential nc = new NetworkCredential ();
-            CheckDefaults (nc);
+            NetworkCredential nc = new NetworkCredential();
+            CheckDefaults(nc);
 
             nc.UserName = null;
             nc.Domain = null;
             nc.Password = null;
-            CheckDefaults (nc);
+            CheckDefaults(nc);
 
             nc.UserName = "user";
             nc.Domain = "dom";
             nc.Password = "********";
-            CheckCustom (nc);
+            CheckCustom(nc);
         }
 
         [Test]
-        public void Constructor_2 ()
+        public void Constructor_2()
         {
-            NetworkCredential nc = new NetworkCredential ((string)null, (string)null);
-            CheckDefaults (nc);
+            NetworkCredential nc = new NetworkCredential((string)null, (string)null);
+            CheckDefaults(nc);
 
             nc.UserName = String.Empty;
             nc.Domain = String.Empty;
             nc.Password = null;
-            CheckDefaults (nc);
+            CheckDefaults(nc);
 
-            nc = new NetworkCredential ("user", "********");
+            nc = new NetworkCredential("user", "********");
             nc.Domain = "dom";
-            CheckCustom (nc);
+            CheckCustom(nc);
         }
 
         [Test]
-        public void Constructor_3 ()
+        public void Constructor_3()
         {
-            NetworkCredential nc = new NetworkCredential ((string)null, (string)null, (string)null);
-            CheckDefaults (nc);
+            NetworkCredential nc = new NetworkCredential((string)null, (string)null, (string)null);
+            CheckDefaults(nc);
 
             nc.UserName = String.Empty;
             nc.Domain = null;
             nc.Password = String.Empty;
-            CheckDefaults (nc);
+            CheckDefaults(nc);
 
-            nc = new NetworkCredential ("user", "********", "dom");
-            CheckCustom (nc);
+            nc = new NetworkCredential("user", "********", "dom");
+            CheckCustom(nc);
         }
 
         [Test]
-        public void DecipherSecureString ()
+        public void DecipherSecureString()
         {
             // many code snippets suggest using the following to get the decrypted string from a SecureString
-            var ss = new SecureString ();
+            var ss = new SecureString();
             ss.AppendChar('h');
             ss.AppendChar('e');
             ss.AppendChar('l');
             ss.AppendChar('l');
             ss.AppendChar('o');
- 
-            string plain = new NetworkCredential (string.Empty, ss).Password;
-            Assert.AreEqual ("hello", plain);
+
+            string plain = new NetworkCredential(string.Empty, ss).Password;
+            Assert.AreEqual("hello", plain);
         }
     }
 }
-

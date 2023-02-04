@@ -27,11 +27,14 @@ public class CollectingEventListenerTests
             await Task.Yield();
 
             var events = GetEvents();
-            EventAssert.Collection(events,
+            EventAssert.Collection(
+                events,
                 EventAssert.Event(1, "Test", EventLevel.Informational),
-                EventAssert.Event(2, "TestWithPayload", EventLevel.Verbose)
+                EventAssert
+                    .Event(2, "TestWithPayload", EventLevel.Verbose)
                     .Payload("payload1", 42)
-                    .Payload("payload2", 4.2));
+                    .Payload("payload2", 4.2)
+            );
         }
     }
 
@@ -52,22 +55,34 @@ public class CollectingEventListenerTests
     public class CollectingTests
     {
         public class A : CollectingTestBase { }
+
         public class B : CollectingTestBase { }
+
         public class C : CollectingTestBase { }
+
         public class D : CollectingTestBase { }
+
         public class E : CollectingTestBase { }
+
         public class F : CollectingTestBase { }
+
         public class G : CollectingTestBase { }
     }
 
     public class NonCollectingTests
     {
         public class A : NonCollectingTestBase { }
+
         public class B : NonCollectingTestBase { }
+
         public class C : NonCollectingTestBase { }
+
         public class D : NonCollectingTestBase { }
+
         public class E : NonCollectingTestBase { }
+
         public class F : NonCollectingTestBase { }
+
         public class G : NonCollectingTestBase { }
     }
 }
@@ -77,9 +92,7 @@ public class TestEventSource : EventSource
 {
     public static readonly TestEventSource Log = new TestEventSource();
 
-    private TestEventSource()
-    {
-    }
+    private TestEventSource() { }
 
     [Event(eventId: 1, Level = EventLevel.Informational, Message = "Test")]
     public void Test() => WriteEvent(1);

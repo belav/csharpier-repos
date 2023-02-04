@@ -17,58 +17,72 @@ namespace System.ServiceModel.Dispatcher
         IChannel reply_or_input;
         IContextChannel context_channel;
 
-        public InputOrReplyRequestProcessor (DispatchRuntime runtime, IChannel replyOrInput)
+        public InputOrReplyRequestProcessor(DispatchRuntime runtime, IChannel replyOrInput)
         {
-            Init (runtime, replyOrInput);
+            Init(runtime, replyOrInput);
 
             //initialization
-            InitializeChain.AddHandler (new InitializingHandler ());
+            InitializeChain.AddHandler(new InitializingHandler());
 
             //processing
-            ProcessingChain.AddHandler (new PostReceiveRequestHandler ()).
-                            AddHandler (new OperationInvokerHandler (replyOrInput));
+            ProcessingChain
+                .AddHandler(new PostReceiveRequestHandler())
+                .AddHandler(new OperationInvokerHandler(replyOrInput));
 
             //errors
-            ErrorChain.AddHandler (new ErrorProcessingHandler (replyOrInput));
+            ErrorChain.AddHandler(new ErrorProcessingHandler(replyOrInput));
 
             //finalize
-            FinalizationChain.AddHandler (new FinalizeProcessingHandler ());
+            FinalizationChain.AddHandler(new FinalizeProcessingHandler());
         }
 
-        void Init (DispatchRuntime runtime, IChannel replyOrInput)
+        void Init(DispatchRuntime runtime, IChannel replyOrInput)
         {
             dispatch_runtime = runtime;
             reply_or_input = replyOrInput;
         }
 
-        public void ProcessInput (Message message)
+        public void ProcessInput(Message message)
         {
-            OperationContext opcx = CreateOperationContext (message);
-            ProcessRequest (new MessageProcessingContext (opcx, reply_or_input));
+            OperationContext opcx = CreateOperationContext(message);
+            ProcessRequest(new MessageProcessingContext(opcx, reply_or_input));
         }
 
-        public void ProcessReply (RequestContext rc)
+        public void ProcessReply(RequestContext rc)
         {
-            OperationContext opcx = CreateOperationContext (rc.RequestMessage);
+            OperationContext opcx = CreateOperationContext(rc.RequestMessage);
             opcx.RequestContext = rc;
-            ProcessRequest (new MessageProcessingContext (opcx, reply_or_input));
+            ProcessRequest(new MessageProcessingContext(opcx, reply_or_input));
         }
 
-        OperationContext CreateOperationContext (Message incoming)
+        OperationContext CreateOperationContext(Message incoming)
         {
             IContextChannel contextChannel;
-            if (dispatch_runtime.CallbackClientRuntime.CallbackClientType != null) {
+            if (dispatch_runtime.CallbackClientRuntime.CallbackClientType != null)
+            {
 #if DISABLE_REAL_PROXY
-                var type = ServiceProxyGenerator.CreateCallbackProxyType (dispatch_runtime, dispatch_runtime.CallbackClientRuntime.CallbackClientType);
-                contextChannel = (ServiceRuntimeChannel) Activator.CreateInstance (type, new object [] {reply_or_input, dispatch_runtime});
+                var type = ServiceProxyGenerator.CreateCallbackProxyType(
+                    dispatch_runtime,
+                    dispatch_runtime.CallbackClientRuntime.CallbackClientType
+                );
+                contextChannel = (ServiceRuntimeChannel)
+                    Activator.CreateInstance(
+                        type,
+                        new object[] { reply_or_input, dispatch_runtime }
+                    );
 #else
-                contextChannel = (IContextChannel) new ClientRealProxy (dispatch_runtime.CallbackClientRuntime.CallbackClientType, new DuplexServiceRuntimeChannel (reply_or_input, dispatch_runtime), true).GetTransparentProxy ();
+                contextChannel = (IContextChannel)
+                    new ClientRealProxy(
+                        dispatch_runtime.CallbackClientRuntime.CallbackClientType,
+                        new DuplexServiceRuntimeChannel(reply_or_input, dispatch_runtime),
+                        true
+                    ).GetTransparentProxy();
 #endif
             }
             else
-                contextChannel = new ServiceRuntimeChannel (reply_or_input, dispatch_runtime);
-            contextChannel.Open (); // FIXME: timeout?
-            OperationContext opCtx = new OperationContext (contextChannel);
+                contextChannel = new ServiceRuntimeChannel(reply_or_input, dispatch_runtime);
+            contextChannel.Open(); // FIXME: timeout?
+            OperationContext opCtx = new OperationContext(contextChannel);
             opCtx.IncomingMessage = incoming;
             opCtx.EndpointDispatcher = dispatch_runtime.EndpointDispatcher;
             context_channel = contextChannel;

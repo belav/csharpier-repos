@@ -30,62 +30,60 @@ namespace Mono.Btls.Interface
 {
     public class BtlsX509Store : BtlsObject
     {
-        new internal MonoBtlsX509Store Instance {
+        new internal MonoBtlsX509Store Instance
+        {
             get { return (MonoBtlsX509Store)base.Instance; }
         }
 
-        internal BtlsX509Store (MonoBtlsX509Store store)
-            : base (store)
+        internal BtlsX509Store(MonoBtlsX509Store store)
+            : base(store) { }
+
+        public void LoadLocations(string file, string path)
         {
+            Instance.LoadLocations(file, path);
         }
 
-        public void LoadLocations (string file, string path)
+        public void AddTrustedRoots()
         {
-            Instance.LoadLocations (file, path);
+            Instance.AddTrustedRoots();
         }
 
-        public void AddTrustedRoots ()
+        public void AddCertificate(BtlsX509 x509)
         {
-            Instance.AddTrustedRoots ();
+            Instance.AddCertificate(x509.Instance);
         }
 
-        public void AddCertificate (BtlsX509 x509)
+        public int GetCount()
         {
-            Instance.AddCertificate (x509.Instance);
+            return Instance.GetCount();
         }
 
-        public int GetCount ()
+        public void AddLookup(X509CertificateCollection certificates, BtlsX509TrustKind trust)
         {
-            return Instance.GetCount ();
+            Instance.AddCollection(certificates, (MonoBtlsX509TrustKind)trust);
         }
 
-        public void AddLookup (X509CertificateCollection certificates, BtlsX509TrustKind trust)
+        static MonoBtlsX509FileType GetFileType(BtlsX509Format format)
         {
-            Instance.AddCollection (certificates, (MonoBtlsX509TrustKind)trust);
-        }
-
-        static MonoBtlsX509FileType GetFileType (BtlsX509Format format)
-        {
-            switch (format) {
-            case BtlsX509Format.DER:
-                return MonoBtlsX509FileType.ASN1;
-            case BtlsX509Format.PEM:
-                return MonoBtlsX509FileType.PEM;
-            default:
-                throw new NotSupportedException ();
+            switch (format)
+            {
+                case BtlsX509Format.DER:
+                    return MonoBtlsX509FileType.ASN1;
+                case BtlsX509Format.PEM:
+                    return MonoBtlsX509FileType.PEM;
+                default:
+                    throw new NotSupportedException();
             }
         }
 
-        public void AddDirectoryLookup (string dir, BtlsX509Format format)
+        public void AddDirectoryLookup(string dir, BtlsX509Format format)
         {
-            Instance.AddDirectoryLookup (dir, GetFileType (format));
+            Instance.AddDirectoryLookup(dir, GetFileType(format));
         }
 
-        public void AddFileLookup (string file, BtlsX509Format format)
+        public void AddFileLookup(string file, BtlsX509Format format)
         {
-            Instance.AddFileLookup (file, GetFileType (format));
+            Instance.AddFileLookup(file, GetFileType(format));
         }
-
     }
 }
-

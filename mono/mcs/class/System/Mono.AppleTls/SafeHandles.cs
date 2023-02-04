@@ -32,16 +32,12 @@ namespace System.Security.Cryptography.X509Certificates
 {
     sealed partial class SafeSecIdentityHandle : SafeKeychainItemHandle
     {
-        public SafeSecIdentityHandle ()
-        {
-        }
+        public SafeSecIdentityHandle() { }
     }
 
     sealed partial class SafeSecCertificateHandle : SafeKeychainItemHandle
     {
-        public SafeSecCertificateHandle ()
-        {
-        }
+        public SafeSecCertificateHandle() { }
     }
 }
 
@@ -49,23 +45,19 @@ namespace System.Security.Cryptography.Apple
 {
     partial class SafeKeychainItemHandle : SafeHandle
     {
-        internal SafeKeychainItemHandle ()
-            : base (IntPtr.Zero, ownsHandle: true)
-        {
-        }
+        internal SafeKeychainItemHandle()
+            : base(IntPtr.Zero, ownsHandle: true) { }
 
-        protected override bool ReleaseHandle ()
+        protected override bool ReleaseHandle()
         {
             if (handle != IntPtr.Zero)
-                CFObject.CFRelease (handle);
-            SetHandle (IntPtr.Zero);
+                CFObject.CFRelease(handle);
+            SetHandle(IntPtr.Zero);
             return true;
         }
 
         public override bool IsInvalid => handle == IntPtr.Zero;
     }
 
-    partial class SafeSecKeyRefHandle : SafeKeychainItemHandle
-    {
-    }
+    partial class SafeSecKeyRefHandle : SafeKeychainItemHandle { }
 }

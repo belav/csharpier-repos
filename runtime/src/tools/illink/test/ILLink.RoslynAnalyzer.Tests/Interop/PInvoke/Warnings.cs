@@ -11,9 +11,9 @@ namespace ILLink.RoslynAnalyzer.Tests.Interop.PInvoke
         protected override string TestSuiteName => "Interop/PInvoke/Warnings";
 
         [Fact]
-        public Task ComPInvokeWarning ()
+        public Task ComPInvokeWarning()
         {
-            return RunTest ();
+            return RunTest();
         }
     }
 }

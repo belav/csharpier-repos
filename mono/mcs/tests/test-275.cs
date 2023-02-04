@@ -1,36 +1,42 @@
 using System;
 
-public delegate int DelType ();
+public delegate int DelType();
 
 struct S
 {
     public event DelType MyEvent;
     public static event DelType MyEventStatic;
-    
-    public int RunInstance ()
+
+    public int RunInstance()
     {
-        return MyEvent ();
+        return MyEvent();
     }
-    
-    public int RunStatic ()
+
+    public int RunStatic()
     {
-        return MyEventStatic ();
+        return MyEventStatic();
     }
 }
 
 public class Test
 {
-    public static int Main ()
+    public static int Main()
     {
-        S.MyEventStatic += delegate () { return 22; };
-        S s = new S ();
-        s.MyEvent += delegate () { return 6; };
-        if (s.RunInstance () != 6)
+        S.MyEventStatic += delegate()
+        {
+            return 22;
+        };
+        S s = new S();
+        s.MyEvent += delegate()
+        {
+            return 6;
+        };
+        if (s.RunInstance() != 6)
             return 1;
-        
-        if (s.RunStatic () != 22)
+
+        if (s.RunStatic() != 22)
             return 2;
-        
+
         return 0;
     }
 }

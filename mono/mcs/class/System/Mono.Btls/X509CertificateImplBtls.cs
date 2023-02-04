@@ -57,257 +57,317 @@ namespace Mono.Btls
         X509CertificateImplCollection intermediateCerts;
         PublicKey publicKey;
 
-        internal X509CertificateImplBtls ()
+        internal X509CertificateImplBtls() { }
+
+        internal X509CertificateImplBtls(MonoBtlsX509 x509)
         {
+            this.x509 = x509.Copy();
         }
 
-        internal X509CertificateImplBtls (MonoBtlsX509 x509)
+        X509CertificateImplBtls(X509CertificateImplBtls other)
         {
-            this.x509 = x509.Copy ();
-        }
-
-        X509CertificateImplBtls (X509CertificateImplBtls other)
-        {
-            x509 = other.x509 != null ? other.x509.Copy () : null;
-            nativePrivateKey = other.nativePrivateKey != null ? other.nativePrivateKey.Copy () : null;
+            x509 = other.x509 != null ? other.x509.Copy() : null;
+            nativePrivateKey =
+                other.nativePrivateKey != null ? other.nativePrivateKey.Copy() : null;
             if (other.intermediateCerts != null)
-                intermediateCerts = other.intermediateCerts.Clone ();
+                intermediateCerts = other.intermediateCerts.Clone();
         }
 
-        internal X509CertificateImplBtls (byte[] data, MonoBtlsX509Format format)
+        internal X509CertificateImplBtls(byte[] data, MonoBtlsX509Format format)
         {
-            x509 = MonoBtlsX509.LoadFromData (data, format);
+            x509 = MonoBtlsX509.LoadFromData(data, format);
         }
 
-        internal X509CertificateImplBtls (byte[] data, SafePasswordHandle password, X509KeyStorageFlags keyStorageFlags)
+        internal X509CertificateImplBtls(
+            byte[] data,
+            SafePasswordHandle password,
+            X509KeyStorageFlags keyStorageFlags
+        )
         {
-            if (password == null || password.IsInvalid) {
-                try {
-                    Import (data);
-                } catch (Exception e) {
-                    try {
-                         ImportPkcs12 (data, null);
-                    } catch {
-                        try {
-                            ImportAuthenticode (data);
-                        } catch {
-                            string msg = Locale.GetText ("Unable to decode certificate.");
+            if (password == null || password.IsInvalid)
+            {
+                try
+                {
+                    Import(data);
+                }
+                catch (Exception e)
+                {
+                    try
+                    {
+                        ImportPkcs12(data, null);
+                    }
+                    catch
+                    {
+                        try
+                        {
+                            ImportAuthenticode(data);
+                        }
+                        catch
+                        {
+                            string msg = Locale.GetText("Unable to decode certificate.");
                             // inner exception is the original (not second) exception
-                            throw new CryptographicException (msg, e);
+                            throw new CryptographicException(msg, e);
                         }
                     }
                 }
-            } else {
+            }
+            else
+            {
                 // try PKCS#12
-                try {
-                    ImportPkcs12 (data, password);
-                } catch (Exception e) {
-                    try {
+                try
+                {
+                    ImportPkcs12(data, password);
+                }
+                catch (Exception e)
+                {
+                    try
+                    {
                         // it's possible to supply a (unrequired/unusued) password
                         // fix bug #79028
-                        Import (data);
-                    } catch {
-                        try {
-                            ImportAuthenticode (data);
-                        } catch {
-                            string msg = Locale.GetText ("Unable to decode certificate.");
+                        Import(data);
+                    }
+                    catch
+                    {
+                        try
+                        {
+                            ImportAuthenticode(data);
+                        }
+                        catch
+                        {
+                            string msg = Locale.GetText("Unable to decode certificate.");
                             // inner exception is the original (not second) exception
-                            throw new CryptographicException (msg, e);
+                            throw new CryptographicException(msg, e);
                         }
                     }
                 }
             }
         }
 
-        public override bool IsValid {
+        public override bool IsValid
+        {
             get { return x509 != null && x509.IsValid; }
         }
 
-        public override IntPtr Handle {
-            get { return x509.Handle.DangerousGetHandle (); }
+        public override IntPtr Handle
+        {
+            get { return x509.Handle.DangerousGetHandle(); }
         }
 
-        public override IntPtr GetNativeAppleCertificate ()
+        public override IntPtr GetNativeAppleCertificate()
         {
             return IntPtr.Zero;
         }
 
-        internal MonoBtlsX509 X509 {
-            get {
-                ThrowIfContextInvalid ();
+        internal MonoBtlsX509 X509
+        {
+            get
+            {
+                ThrowIfContextInvalid();
                 return x509;
             }
         }
 
-        internal MonoBtlsKey NativePrivateKey {
-            get {
-                ThrowIfContextInvalid ();
+        internal MonoBtlsKey NativePrivateKey
+        {
+            get
+            {
+                ThrowIfContextInvalid();
                 return nativePrivateKey;
             }
         }
 
-        public override X509CertificateImpl Clone ()
+        public override X509CertificateImpl Clone()
         {
-            ThrowIfContextInvalid ();
-            return new X509CertificateImplBtls (this);
+            ThrowIfContextInvalid();
+            return new X509CertificateImplBtls(this);
         }
 
-        public override bool Equals (X509CertificateImpl other, out bool result)
+        public override bool Equals(X509CertificateImpl other, out bool result)
         {
             var otherBoringImpl = other as X509CertificateImplBtls;
-            if (otherBoringImpl == null) {
+            if (otherBoringImpl == null)
+            {
                 result = false;
                 return false;
             }
 
-            result = MonoBtlsX509.Compare (X509, otherBoringImpl.X509) == 0;
+            result = MonoBtlsX509.Compare(X509, otherBoringImpl.X509) == 0;
             return true;
         }
 
-        protected override byte[] GetRawCertData ()
+        protected override byte[] GetRawCertData()
         {
-            ThrowIfContextInvalid ();
-            return X509.GetRawData (MonoBtlsX509Format.DER);
+            ThrowIfContextInvalid();
+            return X509.GetRawData(MonoBtlsX509Format.DER);
         }
 
-        internal override X509CertificateImplCollection IntermediateCertificates {
+        internal override X509CertificateImplCollection IntermediateCertificates
+        {
             get { return intermediateCerts; }
         }
 
-        protected override void Dispose (bool disposing)
+        protected override void Dispose(bool disposing)
         {
-            if (x509 != null) {
-                x509.Dispose ();
+            if (x509 != null)
+            {
+                x509.Dispose();
                 x509 = null;
             }
         }
 
 #region X509Certificate2Impl
 
-        internal override X509Certificate2Impl FallbackImpl => throw new InvalidOperationException ();
+        internal override X509Certificate2Impl FallbackImpl =>
+            throw new InvalidOperationException();
 
         public override bool HasPrivateKey => nativePrivateKey != null;
 
-        public override AsymmetricAlgorithm PrivateKey {
-            get {
+        public override AsymmetricAlgorithm PrivateKey
+        {
+            get
+            {
                 if (nativePrivateKey == null)
                     return null;
-                var bytes = nativePrivateKey.GetBytes (true);
-                return PKCS8.PrivateKeyInfo.DecodeRSA (bytes);
+                var bytes = nativePrivateKey.GetBytes(true);
+                return PKCS8.PrivateKeyInfo.DecodeRSA(bytes);
             }
-            set {
+            set
+            {
                 if (nativePrivateKey != null)
-                    nativePrivateKey.Dispose ();
-                try {
+                    nativePrivateKey.Dispose();
+                try
+                {
                     // FIXME: there doesn't seem to be a public API to check whether it actually
                     //        contains a private key (apart from RSAManaged.PublicOnly).
                     if (value != null)
-                        nativePrivateKey = MonoBtlsKey.CreateFromRSAPrivateKey ((RSA)value);
-                } catch {
+                        nativePrivateKey = MonoBtlsKey.CreateFromRSAPrivateKey((RSA)value);
+                }
+                catch
+                {
                     nativePrivateKey = null;
                 }
             }
         }
 
-        public override RSA GetRSAPrivateKey ()
+        public override RSA GetRSAPrivateKey()
         {
             if (nativePrivateKey == null)
                 return null;
-            var bytes = nativePrivateKey.GetBytes (true);
-            return PKCS8.PrivateKeyInfo.DecodeRSA (bytes);
+            var bytes = nativePrivateKey.GetBytes(true);
+            return PKCS8.PrivateKeyInfo.DecodeRSA(bytes);
         }
 
-        public override DSA GetDSAPrivateKey ()
+        public override DSA GetDSAPrivateKey()
         {
-            throw new PlatformNotSupportedException ();
+            throw new PlatformNotSupportedException();
         }
 
-        public override PublicKey PublicKey {
-            get {
-                ThrowIfContextInvalid ();
-                if (publicKey == null) {
-                    var keyAsn = X509.GetPublicKeyAsn1 ();
-                    var keyParamAsn = X509.GetPublicKeyParameters ();
-                    publicKey = new PublicKey (keyAsn.Oid, keyParamAsn, keyAsn);
+        public override PublicKey PublicKey
+        {
+            get
+            {
+                ThrowIfContextInvalid();
+                if (publicKey == null)
+                {
+                    var keyAsn = X509.GetPublicKeyAsn1();
+                    var keyParamAsn = X509.GetPublicKeyParameters();
+                    publicKey = new PublicKey(keyAsn.Oid, keyParamAsn, keyAsn);
                 }
                 return publicKey;
             }
         }
 
-        void Import (byte[] data)
+        void Import(byte[] data)
         {
-            if (data != null) {
+            if (data != null)
+            {
                 // Does it look like PEM?
-                if ((data.Length > 0) && (data [0] != 0x30))
-                    x509 = MonoBtlsX509.LoadFromData (data, MonoBtlsX509Format.PEM);
+                if ((data.Length > 0) && (data[0] != 0x30))
+                    x509 = MonoBtlsX509.LoadFromData(data, MonoBtlsX509Format.PEM);
                 else
-                    x509 = MonoBtlsX509.LoadFromData (data, MonoBtlsX509Format.DER);
+                    x509 = MonoBtlsX509.LoadFromData(data, MonoBtlsX509Format.DER);
             }
         }
 
-        void ImportPkcs12 (byte[] data, SafePasswordHandle password)
+        void ImportPkcs12(byte[] data, SafePasswordHandle password)
         {
-            using (var pkcs12 = new MonoBtlsPkcs12 ()) {
-                if (password == null || password.IsInvalid) {
-                    try {
+            using (var pkcs12 = new MonoBtlsPkcs12())
+            {
+                if (password == null || password.IsInvalid)
+                {
+                    try
+                    {
                         // Support both unencrypted PKCS#12..
-                        pkcs12.Import (data, null);
-                    } catch {
-                        // ..and PKCS#12 encrypted with an empty password
-                        using (var empty = new SafePasswordHandle (string.Empty))
-                            pkcs12.Import (data, empty);
+                        pkcs12.Import(data, null);
                     }
-                } else {
-                    pkcs12.Import (data, password);
+                    catch
+                    {
+                        // ..and PKCS#12 encrypted with an empty password
+                        using (var empty = new SafePasswordHandle(string.Empty))
+                            pkcs12.Import(data, empty);
+                    }
+                }
+                else
+                {
+                    pkcs12.Import(data, password);
                 }
 
-                x509 = pkcs12.GetCertificate (0);
+                x509 = pkcs12.GetCertificate(0);
                 if (pkcs12.HasPrivateKey)
-                    nativePrivateKey = pkcs12.GetPrivateKey ();
-                if (pkcs12.Count > 1) {
-                    intermediateCerts = new X509CertificateImplCollection ();
-                    for (int i = 0; i < pkcs12.Count; i++) {
-                        using (var ic = pkcs12.GetCertificate (i)) {
-                            if (MonoBtlsX509.Compare (ic, x509) == 0)
+                    nativePrivateKey = pkcs12.GetPrivateKey();
+                if (pkcs12.Count > 1)
+                {
+                    intermediateCerts = new X509CertificateImplCollection();
+                    for (int i = 0; i < pkcs12.Count; i++)
+                    {
+                        using (var ic = pkcs12.GetCertificate(i))
+                        {
+                            if (MonoBtlsX509.Compare(ic, x509) == 0)
                                 continue;
-                            var impl = new X509CertificateImplBtls (ic);
-                            intermediateCerts.Add (impl, true);
+                            var impl = new X509CertificateImplBtls(ic);
+                            intermediateCerts.Add(impl, true);
                         }
                     }
                 }
             }
         }
 
-        void ImportAuthenticode (byte[] data)
+        void ImportAuthenticode(byte[] data)
         {
-            if (data != null) {
-                AuthenticodeDeformatter ad = new AuthenticodeDeformatter (data);
-                Import (ad.SigningCertificate.RawData);
+            if (data != null)
+            {
+                AuthenticodeDeformatter ad = new AuthenticodeDeformatter(data);
+                Import(ad.SigningCertificate.RawData);
             }
         }
 
-        public override bool Verify (X509Certificate2 thisCertificate)
+        public override bool Verify(X509Certificate2 thisCertificate)
         {
-            using (var chain = new MonoBtlsX509Chain ()) {
-                chain.AddCertificate (x509.Copy ());
-                if (intermediateCerts != null) {
-                    for (int i = 0; i < intermediateCerts.Count; i++) {
-                        var intermediate = (X509CertificateImplBtls)intermediateCerts [i];
-                        chain.AddCertificate (intermediate.x509.Copy ());
+            using (var chain = new MonoBtlsX509Chain())
+            {
+                chain.AddCertificate(x509.Copy());
+                if (intermediateCerts != null)
+                {
+                    for (int i = 0; i < intermediateCerts.Count; i++)
+                    {
+                        var intermediate = (X509CertificateImplBtls)intermediateCerts[i];
+                        chain.AddCertificate(intermediate.x509.Copy());
                     }
                 }
-                return MonoBtlsProvider.ValidateCertificate (chain, null);
+                return MonoBtlsProvider.ValidateCertificate(chain, null);
             }
         }
 
-        public override void Reset ()
+        public override void Reset()
         {
-            if (x509 != null) {
-                x509.Dispose ();
+            if (x509 != null)
+            {
+                x509.Dispose();
                 x509 = null;
             }
-            if (nativePrivateKey != null) {
-                nativePrivateKey.Dispose ();
+            if (nativePrivateKey != null)
+            {
+                nativePrivateKey.Dispose();
                 nativePrivateKey = null;
             }
             publicKey = null;

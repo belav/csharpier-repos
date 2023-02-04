@@ -23,7 +23,10 @@ namespace Microsoft.CodeAnalysis.LegacySolutionEvents
     {
         bool ShouldReportChanges(SolutionServices services);
 
-        ValueTask OnWorkspaceChangedAsync(WorkspaceChangeEventArgs args, CancellationToken cancellationToken);
+        ValueTask OnWorkspaceChangedAsync(
+            WorkspaceChangeEventArgs args,
+            CancellationToken cancellationToken
+        );
 #if false // Not used in unit testing crawling
         ValueTask OnTextDocumentOpenedAsync(TextDocumentEventArgs args, CancellationToken cancellationToken);
         ValueTask OnTextDocumentClosedAsync(TextDocumentEventArgs args, CancellationToken cancellationToken);
@@ -31,14 +34,16 @@ namespace Microsoft.CodeAnalysis.LegacySolutionEvents
     }
 
     [ExportWorkspaceService(typeof(ILegacySolutionEventsAggregationService)), Shared]
-    internal class DefaultLegacySolutionEventsAggregationService : ILegacySolutionEventsAggregationService
+    internal class DefaultLegacySolutionEventsAggregationService
+        : ILegacySolutionEventsAggregationService
     {
         private readonly ImmutableArray<Lazy<ILegacySolutionEventsListener>> _eventsServices;
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public DefaultLegacySolutionEventsAggregationService(
-            [ImportMany] IEnumerable<Lazy<ILegacySolutionEventsListener>> eventsServices)
+            [ImportMany] IEnumerable<Lazy<ILegacySolutionEventsListener>> eventsServices
+        )
         {
             _eventsServices = eventsServices.ToImmutableArray();
         }
@@ -54,10 +59,15 @@ namespace Microsoft.CodeAnalysis.LegacySolutionEvents
             return false;
         }
 
-        public async ValueTask OnWorkspaceChangedAsync(WorkspaceChangeEventArgs args, CancellationToken cancellationToken)
+        public async ValueTask OnWorkspaceChangedAsync(
+            WorkspaceChangeEventArgs args,
+            CancellationToken cancellationToken
+        )
         {
             foreach (var service in _eventsServices)
-                await service.Value.OnWorkspaceChangedAsync(args, cancellationToken).ConfigureAwait(false);
+                await service.Value
+                    .OnWorkspaceChangedAsync(args, cancellationToken)
+                    .ConfigureAwait(false);
         }
 
 #if false // Not used in unit testing crawling

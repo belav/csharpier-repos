@@ -18,7 +18,6 @@ namespace Microsoft.CodeAnalysis.Debugging
             LineOffset = lineOffset;
         }
 
-        public bool IsDefault
-            => Name == null;
+        public bool IsDefault => Name == null;
     }
 }

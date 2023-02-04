@@ -6,7 +6,7 @@ using System.Text;
 
 namespace MonoTests.Common
 {
-    [DisplayName ("My name is FooDisplayName, and I am friendly")]
+    [DisplayName("My name is FooDisplayName, and I am friendly")]
     class FooDisplayName
     {
         public string Column1 { get; set; }
@@ -15,7 +15,7 @@ namespace MonoTests.Common
         public int PrimaryKeyColumn2 { get; set; }
         public bool PrimaryKeyColumn3 { get; set; }
 
-        public FooDisplayName ()
+        public FooDisplayName()
         {
             Column1 = "hello";
             Column2 = 123;

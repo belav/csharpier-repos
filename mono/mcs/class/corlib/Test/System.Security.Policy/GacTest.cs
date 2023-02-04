@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,61 +33,62 @@ using System.Security;
 using System.Security.Policy;
 using System.Security.Permissions;
 
-namespace MonoTests.System.Security.Policy {
-
+namespace MonoTests.System.Security.Policy
+{
     [TestFixture]
-    public class GacInstalledTest {
-
+    public class GacInstalledTest
+    {
         [Test]
-        public void Constructor () 
+        public void Constructor()
         {
-            GacInstalled gac = new GacInstalled ();
-            Assert.IsNotNull (gac);
+            GacInstalled gac = new GacInstalled();
+            Assert.IsNotNull(gac);
         }
 
         [Test]
-        public void Copy ()
+        public void Copy()
         {
-            GacInstalled gac = new GacInstalled ();
-            GacInstalled copy = (GacInstalled)gac.Copy ();
-            Assert.AreEqual (gac, copy, "Equals");
-            Assert.IsFalse (Object.ReferenceEquals (gac, copy), "ReferenceEquals");
+            GacInstalled gac = new GacInstalled();
+            GacInstalled copy = (GacInstalled)gac.Copy();
+            Assert.AreEqual(gac, copy, "Equals");
+            Assert.IsFalse(Object.ReferenceEquals(gac, copy), "ReferenceEquals");
         }
 
         [Test]
-        public void CreateIdentityPermission ()
+        public void CreateIdentityPermission()
         {
-            GacInstalled gac = new GacInstalled ();
-            IPermission p = gac.CreateIdentityPermission (null);
-            Assert.IsTrue ((p is GacIdentityPermission), "GacIdentityPermission");
-            Assert.IsNotNull (p, "CreateIdentityPermission(null)");
-            p = gac.CreateIdentityPermission (new Evidence ());
-            Assert.IsNotNull (p, "CreateIdentityPermission(Evidence)");
+            GacInstalled gac = new GacInstalled();
+            IPermission p = gac.CreateIdentityPermission(null);
+            Assert.IsTrue((p is GacIdentityPermission), "GacIdentityPermission");
+            Assert.IsNotNull(p, "CreateIdentityPermission(null)");
+            p = gac.CreateIdentityPermission(new Evidence());
+            Assert.IsNotNull(p, "CreateIdentityPermission(Evidence)");
         }
 
         [Test]
-        public void Equals ()
+        public void Equals()
         {
-            GacInstalled gac = new GacInstalled ();
-            Assert.IsFalse (gac.Equals (null), "Equals(null)");
-            GacInstalled g2 = new GacInstalled ();
-            Assert.IsTrue (gac.Equals (g2), "Equals(g2)");
-            Assert.IsTrue (g2.Equals (gac), "Equals(gac)");
+            GacInstalled gac = new GacInstalled();
+            Assert.IsFalse(gac.Equals(null), "Equals(null)");
+            GacInstalled g2 = new GacInstalled();
+            Assert.IsTrue(gac.Equals(g2), "Equals(g2)");
+            Assert.IsTrue(g2.Equals(gac), "Equals(gac)");
         }
 
         [Test]
-        public void GetHashCode_ ()
+        public void GetHashCode_()
         {
-            GacInstalled gac = new GacInstalled ();
-            Assert.AreEqual (0, gac.GetHashCode ());
+            GacInstalled gac = new GacInstalled();
+            Assert.AreEqual(0, gac.GetHashCode());
         }
 
         [Test]
-        public void ToString_ ()
+        public void ToString_()
         {
-            GacInstalled gac = new GacInstalled ();
-            Assert.IsTrue (gac.ToString ().StartsWith ("<System.Security.Policy.GacInstalled version=\"1\"/>"));
+            GacInstalled gac = new GacInstalled();
+            Assert.IsTrue(
+                gac.ToString().StartsWith("<System.Security.Policy.GacInstalled version=\"1\"/>")
+            );
         }
     }
 }
-

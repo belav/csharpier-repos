@@ -46,12 +46,12 @@ namespace System.Net.Http.Headers
             OpenParens,
         }
 
-        public static readonly Token Empty = new Token (Type.Token, 0, 0);
+        public static readonly Token Empty = new Token(Type.Token, 0, 0);
 
         readonly Type type;
 
-        public Token (Type type, int startPosition, int endPosition)
-            : this ()
+        public Token(Type type, int startPosition, int endPosition)
+            : this()
         {
             this.type = type;
             StartPosition = startPosition;
@@ -61,198 +61,345 @@ namespace System.Net.Http.Headers
         public int StartPosition { get; private set; }
         public int EndPosition { get; private set; }
 
-        public Type Kind {
-            get {
-                return type;
-            }
+        public Type Kind
+        {
+            get { return type; }
         }
 
-        public static implicit operator Token.Type (Token token)
+        public static implicit operator Token.Type(Token token)
         {
             return token.type;
         }
 
-        public override string ToString ()
+        public override string ToString()
         {
-            return type.ToString ();
+            return type.ToString();
         }
     }
 
     class Lexer
     {
         // any CHAR except CTLs or separators
-        static readonly bool[] token_chars = {
-            /*0*/    false, false, false, false, false, false, false, false, false, false,
-            /*10*/    false, false, false, false, false, false, false, false, false, false,
-            /*20*/    false, false, false, false, false, false, false, false, false, false,
-            /*30*/    false, false, false, true, false, true, true, true, true, true,
-            /*40*/    false, false, true, true, false, true, true, false, true, true,
-            /*50*/    true, true, true, true, true, true, true, true, false, false,
-            /*60*/    false, false, false, false, false, true, true, true, true, true,
-            /*70*/    true, true, true, true, true, true, true, true, true, true,
-            /*80*/    true, true, true, true, true, true, true, true, true, true,
-            /*90*/    true, false, false, false, true, true, true, true, true, true,
-            /*100*/    true, true, true, true, true, true, true, true, true, true,
-            /*110*/    true, true, true, true, true, true, true, true, true, true,
-            /*120*/    true, true, true, false, true, false, true
-            };
+        static readonly bool[] token_chars =
+        {
+            /*0*/false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            /*10*/false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            /*20*/false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            /*30*/false,
+            false,
+            false,
+            true,
+            false,
+            true,
+            true,
+            true,
+            true,
+            true,
+            /*40*/false,
+            false,
+            true,
+            true,
+            false,
+            true,
+            true,
+            false,
+            true,
+            true,
+            /*50*/true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            false,
+            false,
+            /*60*/false,
+            false,
+            false,
+            false,
+            false,
+            true,
+            true,
+            true,
+            true,
+            true,
+            /*70*/true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            /*80*/true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            /*90*/true,
+            false,
+            false,
+            false,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            /*100*/true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            /*110*/true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            /*120*/true,
+            true,
+            true,
+            false,
+            true,
+            false,
+            true
+        };
 
         static readonly int last_token_char = token_chars.Length;
-        static readonly string[] dt_formats = new[] {
-                "r",
-                "dddd, dd'-'MMM'-'yy HH:mm:ss 'GMT'",
-                "ddd MMM d HH:mm:ss yyyy",
-                "d MMM yy H:m:s",
-                "ddd, d MMM yyyy H:m:s zzz"
+        static readonly string[] dt_formats = new[]
+        {
+            "r",
+            "dddd, dd'-'MMM'-'yy HH:mm:ss 'GMT'",
+            "ddd MMM d HH:mm:ss yyyy",
+            "d MMM yy H:m:s",
+            "ddd, d MMM yyyy H:m:s zzz"
         };
 
         readonly string s;
         int pos;
 
-        public Lexer (string stream)
+        public Lexer(string stream)
         {
             this.s = stream;
         }
 
-        public int Position {
-            get {
-                return pos;
-            }
-            set {
-                pos = value;
-            }
-        }
-
-        public string GetStringValue (Token token)
+        public int Position
         {
-            return s.Substring (token.StartPosition, token.EndPosition - token.StartPosition);
+            get { return pos; }
+            set { pos = value; }
         }
 
-        public string GetStringValue (Token start, Token end)
+        public string GetStringValue(Token token)
         {
-            return s.Substring (start.StartPosition, end.EndPosition - start.StartPosition);
+            return s.Substring(token.StartPosition, token.EndPosition - token.StartPosition);
         }
 
-        public string GetQuotedStringValue (Token start)
+        public string GetStringValue(Token start, Token end)
         {
-            return s.Substring (start.StartPosition + 1, start.EndPosition - start.StartPosition - 2);
+            return s.Substring(start.StartPosition, end.EndPosition - start.StartPosition);
         }
 
-        public string GetRemainingStringValue (int position)
+        public string GetQuotedStringValue(Token start)
         {
-            return position > s.Length ? null : s.Substring (position);
+            return s.Substring(
+                start.StartPosition + 1,
+                start.EndPosition - start.StartPosition - 2
+            );
         }
 
-        public bool IsStarStringValue (Token token)
+        public string GetRemainingStringValue(int position)
+        {
+            return position > s.Length ? null : s.Substring(position);
+        }
+
+        public bool IsStarStringValue(Token token)
         {
             return (token.EndPosition - token.StartPosition) == 1 && s[token.StartPosition] == '*';
         }
 
-        public bool TryGetNumericValue (Token token, out int value)
+        public bool TryGetNumericValue(Token token, out int value)
         {
-            return int.TryParse (GetStringValue (token), NumberStyles.None, CultureInfo.InvariantCulture, out value);
+            return int.TryParse(
+                GetStringValue(token),
+                NumberStyles.None,
+                CultureInfo.InvariantCulture,
+                out value
+            );
         }
 
-        public bool TryGetNumericValue (Token token, out long value)
+        public bool TryGetNumericValue(Token token, out long value)
         {
-            return long.TryParse (GetStringValue (token), NumberStyles.None, CultureInfo.InvariantCulture, out value);
+            return long.TryParse(
+                GetStringValue(token),
+                NumberStyles.None,
+                CultureInfo.InvariantCulture,
+                out value
+            );
         }
 
-        public TimeSpan? TryGetTimeSpanValue (Token token)
+        public TimeSpan? TryGetTimeSpanValue(Token token)
         {
             int seconds;
-            if (TryGetNumericValue (token, out seconds)) {
-                return TimeSpan.FromSeconds (seconds);
+            if (TryGetNumericValue(token, out seconds))
+            {
+                return TimeSpan.FromSeconds(seconds);
             }
 
             return null;
         }
 
-        public bool TryGetDateValue (Token token, out DateTimeOffset value)
+        public bool TryGetDateValue(Token token, out DateTimeOffset value)
         {
-            string text = token == Token.Type.QuotedString ?
-                s.Substring (token.StartPosition + 1, token.EndPosition - token.StartPosition - 2) :
-                GetStringValue (token);
+            string text =
+                token == Token.Type.QuotedString
+                    ? s.Substring(
+                        token.StartPosition + 1,
+                        token.EndPosition - token.StartPosition - 2
+                    )
+                    : GetStringValue(token);
 
-            return TryGetDateValue (text, out value);
+            return TryGetDateValue(text, out value);
         }
 
-        public static bool TryGetDateValue (string text, out DateTimeOffset value)
+        public static bool TryGetDateValue(string text, out DateTimeOffset value)
         {
-            const DateTimeStyles DefaultStyles = DateTimeStyles.AssumeUniversal | DateTimeStyles.AllowWhiteSpaces;
+            const DateTimeStyles DefaultStyles =
+                DateTimeStyles.AssumeUniversal | DateTimeStyles.AllowWhiteSpaces;
 
-            return DateTimeOffset.TryParseExact (text, dt_formats, DateTimeFormatInfo.InvariantInfo, DefaultStyles, out value);
+            return DateTimeOffset.TryParseExact(
+                text,
+                dt_formats,
+                DateTimeFormatInfo.InvariantInfo,
+                DefaultStyles,
+                out value
+            );
         }
 
-        public bool TryGetDoubleValue (Token token, out double value)
+        public bool TryGetDoubleValue(Token token, out double value)
         {
-            string s = GetStringValue (token);
-            return double.TryParse (s, NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out value);
+            string s = GetStringValue(token);
+            return double.TryParse(
+                s,
+                NumberStyles.AllowDecimalPoint,
+                CultureInfo.InvariantCulture,
+                out value
+            );
         }
 
-        public static bool IsValidToken (string input)
+        public static bool IsValidToken(string input)
         {
             int i = 0;
             //
             // any CHAR except CTLs or separator
             //
-            for (; i < input.Length; ++i) {
+            for (; i < input.Length; ++i)
+            {
                 char s = input[i];
-                if (!IsValidCharacter (s))
+                if (!IsValidCharacter(s))
                     return false;
             }
 
             return i > 0;
         }
 
-        public static bool IsValidCharacter (char input)
+        public static bool IsValidCharacter(char input)
         {
             return input < last_token_char && token_chars[input];
         }
 
-        public void EatChar ()
+        public void EatChar()
         {
             ++pos;
         }
 
-        public int PeekChar ()
+        public int PeekChar()
         {
             return pos < s.Length ? s[pos] : -1;
         }
 
-        public bool ScanCommentOptional (out string value)
+        public bool ScanCommentOptional(out string value)
         {
             Token t;
-            if (ScanCommentOptional (out value, out t))
+            if (ScanCommentOptional(out value, out t))
                 return true;
 
             return t == Token.Type.End;
         }
 
-        public bool ScanCommentOptional (out string value, out Token readToken)
+        public bool ScanCommentOptional(out string value, out Token readToken)
         {
-            readToken = Scan ();
-            if (readToken != Token.Type.OpenParens) {
+            readToken = Scan();
+            if (readToken != Token.Type.OpenParens)
+            {
                 value = null;
                 return false;
             }
 
             int parens = 1;
-            while (pos < s.Length) {
+            while (pos < s.Length)
+            {
                 var ch = s[pos];
-                if (ch == '(') {
+                if (ch == '(')
+                {
                     ++parens;
                     ++pos;
                     continue;
                 }
 
-                if (ch == ')') {
+                if (ch == ')')
+                {
                     ++pos;
                     if (--parens > 0)
                         continue;
 
                     var start = readToken.StartPosition;
-                    value = s.Substring (start, pos - start);
+                    value = s.Substring(start, pos - start);
                     return true;
                 }
 
@@ -267,97 +414,110 @@ namespace System.Net.Http.Headers
             return false;
         }
 
-        public Token Scan (bool recognizeDash = false)
+        public Token Scan(bool recognizeDash = false)
         {
             int start = pos;
             if (s == null)
-                return new Token (Token.Type.Error, 0, 0);
+                return new Token(Token.Type.Error, 0, 0);
 
             Token.Type ttype;
-            if (pos >= s.Length) {
+            if (pos >= s.Length)
+            {
                 ttype = Token.Type.End;
-            } else {
+            }
+            else
+            {
                 ttype = Token.Type.Error;
-            start:
+                start:
                 char ch = s[pos++];
-                switch (ch) {
-                case ' ':
-                case '\t':
-                    if (pos == s.Length) {
-                        ttype = Token.Type.End;
-                        break;
-                    }
-
-                    goto start;
-                case '=':
-                    ttype = Token.Type.SeparatorEqual;
-                    break;
-                case ';':
-                    ttype = Token.Type.SeparatorSemicolon;
-                    break;
-                case '/':
-                    ttype = Token.Type.SeparatorSlash;
-                    break;
-                case '-':
-                    if (recognizeDash) {
-                        ttype = Token.Type.SeparatorDash;
-                        break;
-                    }
-
-                    goto default;
-                case ',':
-                    ttype = Token.Type.SeparatorComma;
-                    break;
-                case '"':
-                    // Quoted string
-                    start = pos - 1;
-                    while (pos < s.Length) {
-                        ch = s [pos++];
-
-                        //
-                        // The backslash character ("\") MAY be used as a single-character
-                           // quoting mechanism only within quoted-string
-                        //
-                        if (ch == '\\') {
-                            if (pos + 1 < s.Length) {
-                                ++pos;
-                                continue;
-                            }
-
+                switch (ch)
+                {
+                    case ' ':
+                    case '\t':
+                        if (pos == s.Length)
+                        {
+                            ttype = Token.Type.End;
                             break;
                         }
 
-                        if (ch == '"') {
-                            ttype = Token.Type.QuotedString;
+                        goto start;
+                    case '=':
+                        ttype = Token.Type.SeparatorEqual;
+                        break;
+                    case ';':
+                        ttype = Token.Type.SeparatorSemicolon;
+                        break;
+                    case '/':
+                        ttype = Token.Type.SeparatorSlash;
+                        break;
+                    case '-':
+                        if (recognizeDash)
+                        {
+                            ttype = Token.Type.SeparatorDash;
                             break;
                         }
-                    }
 
-                    break;
-                case '(':
-                    start = pos - 1;
-                    ttype = Token.Type.OpenParens;
-                    break;
-                default:
-                    if (ch < last_token_char && token_chars[ch]) {
+                        goto default;
+                    case ',':
+                        ttype = Token.Type.SeparatorComma;
+                        break;
+                    case '"':
+                        // Quoted string
                         start = pos - 1;
+                        while (pos < s.Length)
+                        {
+                            ch = s[pos++];
 
-                        ttype = Token.Type.Token;
-                        while (pos < s.Length) {
-                            ch = s[pos];
-                            if (ch >= last_token_char || !token_chars[ch]) {
+                            //
+                            // The backslash character ("\") MAY be used as a single-character
+                            // quoting mechanism only within quoted-string
+                            //
+                            if (ch == '\\')
+                            {
+                                if (pos + 1 < s.Length)
+                                {
+                                    ++pos;
+                                    continue;
+                                }
+
                                 break;
                             }
 
-                            ++pos;
+                            if (ch == '"')
+                            {
+                                ttype = Token.Type.QuotedString;
+                                break;
+                            }
                         }
-                    }
 
-                    break;
+                        break;
+                    case '(':
+                        start = pos - 1;
+                        ttype = Token.Type.OpenParens;
+                        break;
+                    default:
+                        if (ch < last_token_char && token_chars[ch])
+                        {
+                            start = pos - 1;
+
+                            ttype = Token.Type.Token;
+                            while (pos < s.Length)
+                            {
+                                ch = s[pos];
+                                if (ch >= last_token_char || !token_chars[ch])
+                                {
+                                    break;
+                                }
+
+                                ++pos;
+                            }
+                        }
+
+                        break;
                 }
             }
 
-            return new Token (ttype, start, pos);
+            return new Token(ttype, start, pos);
         }
     }
 }

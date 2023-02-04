@@ -1,5 +1,5 @@
 //
-// CompiledTemplateBuilderCas.cs 
+// CompiledTemplateBuilderCas.cs
 //    - CAS unit tests for System.Web.UI.CompiledTemplateBuilder
 //
 // Author:
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -37,43 +37,49 @@ using System.Security.Permissions;
 using System.Web;
 using System.Web.UI;
 
-namespace MonoCasTests.System.Web.UI {
-
+namespace MonoCasTests.System.Web.UI
+{
     [TestFixture]
-    [Category ("CAS")]
-    public class CompiledTemplateBuilderCas : AspNetHostingMinimal {
-
+    [Category("CAS")]
+    public class CompiledTemplateBuilderCas : AspNetHostingMinimal
+    {
         private Control control;
 
         [TestFixtureSetUp]
-        public void FixtureSetUp ()
+        public void FixtureSetUp()
         {
-            control = new Control ();
+            control = new Control();
         }
 
-        private void BuildTemplate (Control control)
-        {
-        }
+        private void BuildTemplate(Control control) { }
 
         [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Deny_Unrestricted ()
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Deny_Unrestricted()
         {
-            CompiledTemplateBuilder ctb = new CompiledTemplateBuilder (new BuildTemplateMethod (BuildTemplate));
-            ctb.InstantiateIn (control);
+            CompiledTemplateBuilder ctb = new CompiledTemplateBuilder(
+                new BuildTemplateMethod(BuildTemplate)
+            );
+            ctb.InstantiateIn(control);
         }
 
         // LinkDemand
 
-        public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
+        public override object CreateControl(
+            SecurityAction action,
+            AspNetHostingPermissionLevel level
+        )
         {
-            ConstructorInfo ci = this.Type.GetConstructor (new Type[1] { typeof (BuildTemplateMethod) });
-            Assert.IsNotNull (ci, ".ctor(BuildTemplateMethod)");
-            return ci.Invoke (new object[1] { new BuildTemplateMethod (BuildTemplate) });
+            ConstructorInfo ci = this.Type.GetConstructor(
+                new Type[1] { typeof(BuildTemplateMethod) }
+            );
+            Assert.IsNotNull(ci, ".ctor(BuildTemplateMethod)");
+            return ci.Invoke(new object[1] { new BuildTemplateMethod(BuildTemplate) });
         }
 
-        public override Type Type {
-            get { return typeof (CompiledTemplateBuilder); }
+        public override Type Type
+        {
+            get { return typeof(CompiledTemplateBuilder); }
         }
     }
 }

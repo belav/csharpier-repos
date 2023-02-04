@@ -11,15 +11,15 @@ namespace preservesig_test
             MethodInfo dofoo = typeof(TestClass).GetMethod("DoFoo");
             if ((dofoo.GetMethodImplementationFlags() & MethodImplAttributes.PreserveSig) == 0)
                 return 1;
-            
-            dofoo = typeof(TestClass).GetProperty("Foo").GetGetMethod ();
+
+            dofoo = typeof(TestClass).GetProperty("Foo").GetGetMethod();
             if ((dofoo.GetMethodImplementationFlags() & MethodImplAttributes.PreserveSig) == 0)
                 return 1;
 
-            dofoo = typeof(TestClass).GetEvent("e").GetAddMethod (true);
+            dofoo = typeof(TestClass).GetEvent("e").GetAddMethod(true);
             if ((dofoo.GetMethodImplementationFlags() & MethodImplAttributes.PreserveSig) == 0)
                 return 1;
-            
+
             Console.WriteLine("Has PreserveSig");
             return 0;
         }
@@ -27,22 +27,21 @@ namespace preservesig_test
 
     public class TestClass
     {
-        public delegate void D ();
-        
-        [method:PreserveSig]
+        public delegate void D();
+
+        [method: PreserveSig]
         public event D e;
-        
+
         [PreserveSig()]
         public int DoFoo()
         {
             return 0;
         }
-        
-        public int Foo {
+
+        public int Foo
+        {
             [PreserveSig]
-            get {
-                return 2;
-            }
+            get { return 2; }
         }
     }
 }

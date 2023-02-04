@@ -30,72 +30,81 @@ using System;
 using System.Runtime.InteropServices;
 using Microsoft.Build.Framework;
 
-namespace Microsoft.Build.Tasks.Deployment.ManifestUtilities {
-    
-    [ComVisible (false)]
-    public class ProxyStub {
-    
-        string    baseInterface;
-        string    iid;
-        string    name;
-        string    numMethods;
-        string    tlbId;
-        string    xmlBaseInterface;
-        string    xmlIID;
-        string    xmlName;
-        string    xmlNumMethods;
-        string    xmlTlbId;
-    
+namespace Microsoft.Build.Tasks.Deployment.ManifestUtilities
+{
+    [ComVisible(false)]
+    public class ProxyStub
+    {
+        string baseInterface;
+        string iid;
+        string name;
+        string numMethods;
+        string tlbId;
+        string xmlBaseInterface;
+        string xmlIID;
+        string xmlName;
+        string xmlNumMethods;
+        string xmlTlbId;
+
         [MonoTODO]
-        public ProxyStub ()
+        public ProxyStub()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
-        
-        public string BaseInterface {
+
+        public string BaseInterface
+        {
             get { return baseInterface; }
         }
-        
-        public string IID {
+
+        public string IID
+        {
             get { return iid; }
         }
-        
-        public string Name {
+
+        public string Name
+        {
             get { return name; }
         }
-        
-        public string NumMethods {
+
+        public string NumMethods
+        {
             get { return numMethods; }
         }
-        
-        public string TlbId {
+
+        public string TlbId
+        {
             get { return tlbId; }
         }
-        
-        public string XmlBaseInterface {
+
+        public string XmlBaseInterface
+        {
             get { return xmlBaseInterface; }
             set { xmlBaseInterface = value; }
         }
-        
-        public string XmlIID {
+
+        public string XmlIID
+        {
             get { return xmlIID; }
             set { xmlIID = value; }
         }
-        
-        public string XmlName {
+
+        public string XmlName
+        {
             get { return xmlName; }
             set { xmlName = value; }
         }
-        
-        public string XmlNumMethods {
+
+        public string XmlNumMethods
+        {
             get { return xmlNumMethods; }
             set { xmlNumMethods = value; }
         }
-        
-        public string XmlTlbId {
+
+        public string XmlTlbId
+        {
             get { return xmlTlbId; }
             set { xmlTlbId = value; }
         }
     }
 }
-

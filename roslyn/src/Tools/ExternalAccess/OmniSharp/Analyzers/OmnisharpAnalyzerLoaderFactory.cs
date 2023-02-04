@@ -8,7 +8,9 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.OmniSharp.Analyzers
 {
     internal static class OmnisharpAnalyzerAssemblyLoaderFactory
     {
-        public static IAnalyzerAssemblyLoader CreateShadowCopyAnalyzerAssemblyLoader(string? baseDirectory = null)
+        public static IAnalyzerAssemblyLoader CreateShadowCopyAnalyzerAssemblyLoader(
+            string? baseDirectory = null
+        )
         {
             return new ShadowCopyAnalyzerAssemblyLoader(baseDirectory);
         }

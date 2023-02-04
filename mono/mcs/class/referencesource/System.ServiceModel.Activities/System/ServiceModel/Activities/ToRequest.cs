@@ -17,21 +17,11 @@ namespace System.ServiceModel.Activities
 
         Collection<InArgument> parameters;
 
-        public ToRequest()
-        {
-        }
+        public ToRequest() { }
 
-        public Send Send
-        {
-            get;
-            set;
-        }
+        public Send Send { get; set; }
 
-        public IClientMessageFormatter Formatter
-        {
-            get;
-            set;
-        }
+        public IClientMessageFormatter Formatter { get; set; }
 
         public Collection<InArgument> Parameters
         {
@@ -45,12 +35,8 @@ namespace System.ServiceModel.Activities
             }
         }
 
-        public OutArgument<Message> Message
-        {
-            get;
-            set;
-        }
-       
+        public OutArgument<Message> Message { get; set; }
+
         internal MessageVersion MessageVersion
         {
             get
@@ -70,13 +56,22 @@ namespace System.ServiceModel.Activities
                 int count = 0;
                 foreach (InArgument parameter in this.parameters)
                 {
-                    RuntimeArgument parameterArgument = new RuntimeArgument(Constants.Parameter + count++, parameter.ArgumentType, ArgumentDirection.In);
+                    RuntimeArgument parameterArgument = new RuntimeArgument(
+                        Constants.Parameter + count++,
+                        parameter.ArgumentType,
+                        ArgumentDirection.In
+                    );
                     metadata.Bind(parameter, parameterArgument);
                     metadata.AddArgument(parameterArgument);
                 }
             }
 
-            RuntimeArgument messageArgument = new RuntimeArgument(Constants.Message, Constants.MessageType, ArgumentDirection.Out, true);
+            RuntimeArgument messageArgument = new RuntimeArgument(
+                Constants.Message,
+                Constants.MessageType,
+                ArgumentDirection.Out,
+                true
+            );
             metadata.Bind(this.Message, messageArgument);
             metadata.AddArgument(messageArgument);
 
@@ -102,8 +97,11 @@ namespace System.ServiceModel.Activities
             // Formatter is cached since it is fixed for each definition of Send
             if (this.Formatter == null)
             {
-                OperationDescription operation = ContractInferenceHelper.CreateOneWayOperationDescription(this.Send);
-                this.Formatter = ClientOperationFormatterProvider.GetFormatterFromRuntime(operation);
+                OperationDescription operation =
+                    ContractInferenceHelper.CreateOneWayOperationDescription(this.Send);
+                this.Formatter = ClientOperationFormatterProvider.GetFormatterFromRuntime(
+                    operation
+                );
 
                 this.Send.OperationDescription = operation;
             }

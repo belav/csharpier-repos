@@ -15,7 +15,10 @@ namespace Microsoft.CodeAnalysis.ExtractInterface
         private readonly ExtractInterfaceTypeAnalysisResult _typeAnalysisResult;
         private readonly AbstractExtractInterfaceService _extractInterfaceService;
 
-        public ExtractInterfaceCodeAction(AbstractExtractInterfaceService extractInterfaceService, ExtractInterfaceTypeAnalysisResult typeAnalysisResult)
+        public ExtractInterfaceCodeAction(
+            AbstractExtractInterfaceService extractInterfaceService,
+            ExtractInterfaceTypeAnalysisResult typeAnalysisResult
+        )
         {
             _extractInterfaceService = extractInterfaceService;
             _typeAnalysisResult = typeAnalysisResult;
@@ -23,34 +26,54 @@ namespace Microsoft.CodeAnalysis.ExtractInterface
 
         public override object GetOptions(CancellationToken cancellationToken)
         {
-            var containingNamespaceDisplay = _typeAnalysisResult.TypeToExtractFrom.ContainingNamespace.IsGlobalNamespace
+            var containingNamespaceDisplay = _typeAnalysisResult
+                .TypeToExtractFrom
+                .ContainingNamespace
+                .IsGlobalNamespace
                 ? string.Empty
                 : _typeAnalysisResult.TypeToExtractFrom.ContainingNamespace.ToDisplayString();
 
-            return AbstractExtractInterfaceService.GetExtractInterfaceOptionsAsync(
-                _typeAnalysisResult.DocumentToExtractFrom,
-                _typeAnalysisResult.TypeToExtractFrom,
-                _typeAnalysisResult.ExtractableMembers,
-                containingNamespaceDisplay,
-                _typeAnalysisResult.FallbackOptions,
-                cancellationToken).WaitAndGetResult_CanCallOnBackground(cancellationToken);
+            return AbstractExtractInterfaceService
+                .GetExtractInterfaceOptionsAsync(
+                    _typeAnalysisResult.DocumentToExtractFrom,
+                    _typeAnalysisResult.TypeToExtractFrom,
+                    _typeAnalysisResult.ExtractableMembers,
+                    containingNamespaceDisplay,
+                    _typeAnalysisResult.FallbackOptions,
+                    cancellationToken
+                )
+                .WaitAndGetResult_CanCallOnBackground(cancellationToken);
         }
 
-        protected override async Task<IEnumerable<CodeActionOperation>> ComputeOperationsAsync(object options, CancellationToken cancellationToken)
+        protected override async Task<IEnumerable<CodeActionOperation>> ComputeOperationsAsync(
+            object options,
+            CancellationToken cancellationToken
+        )
         {
             var operations = SpecializedCollections.EmptyEnumerable<CodeActionOperation>();
 
-            if (options is ExtractInterfaceOptionsResult extractInterfaceOptions && !extractInterfaceOptions.IsCancelled)
+            if (
+                options is ExtractInterfaceOptionsResult extractInterfaceOptions
+                && !extractInterfaceOptions.IsCancelled
+            )
             {
                 var extractInterfaceResult = await _extractInterfaceService
-                        .ExtractInterfaceFromAnalyzedTypeAsync(_typeAnalysisResult, extractInterfaceOptions, cancellationToken).ConfigureAwait(false);
+                    .ExtractInterfaceFromAnalyzedTypeAsync(
+                        _typeAnalysisResult,
+                        extractInterfaceOptions,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
                 if (extractInterfaceResult.Succeeded)
                 {
                     operations = new CodeActionOperation[]
                     {
                         new ApplyChangesOperation(extractInterfaceResult.UpdatedSolution),
-                        new DocumentNavigationOperation(extractInterfaceResult.NavigationDocumentId, position: 0)
+                        new DocumentNavigationOperation(
+                            extractInterfaceResult.NavigationDocumentId,
+                            position: 0
+                        )
                     };
                 }
             }

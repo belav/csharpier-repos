@@ -7,11 +7,9 @@ using System.Linq;
 
 class C
 {
-    public static void Main ()
+    public static void Main()
     {
         int i = 9;
-        var e = from v in "a"
-            let i = 2
-            select v;
+        var e = from v in "a" let i = 2 select v;
     }
 }

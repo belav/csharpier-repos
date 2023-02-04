@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -41,14 +41,14 @@ namespace Mono.Xml.XPath2
     // compilers that are created during one XQueryCommand.Compile().
     internal class XQueryCompileContext
     {
-        public XQueryCompileContext ()
+        public XQueryCompileContext()
         {
-            schemaCache = new Hashtable ();
-            moduleCache = new Hashtable ();
+            schemaCache = new Hashtable();
+            moduleCache = new Hashtable();
 
-            inEffectSchemas = new XmlSchemaSet ();
-            inEffectVariables = new Hashtable ();
-            inEffectFunctions = new XQueryFunctionTable ();
+            inEffectSchemas = new XmlSchemaSet();
+            inEffectVariables = new Hashtable();
+            inEffectFunctions = new XQueryFunctionTable();
         }
 
         // Compiled schema table; It is used to avoid multiple time
@@ -56,6 +56,7 @@ namespace Mono.Xml.XPath2
         // when a library module is divided into multiple files.
         // [location string] -> XmlSchema (done) or null (not).
         IDictionary schemaCache;
+
         // ditto for local module resources.
         // [location] -> XQueryLibraryModule (done) or null (not).
         IDictionary moduleCache;
@@ -65,27 +66,31 @@ namespace Mono.Xml.XPath2
         Hashtable inEffectVariables;
         XQueryFunctionTable inEffectFunctions;
 
-        public IDictionary SchemaCache {
+        public IDictionary SchemaCache
+        {
             get { return schemaCache; }
         }
 
-        public IDictionary ModuleCache {
+        public IDictionary ModuleCache
+        {
             get { return moduleCache; }
         }
 
         // Compilation results
 
-        public XmlSchemaSet InEffectSchemas {
+        public XmlSchemaSet InEffectSchemas
+        {
             get { return inEffectSchemas; }
         }
 
-        public Hashtable InEffectVariables {
+        public Hashtable InEffectVariables
+        {
             get { return inEffectVariables; }
         }
 
-        public XQueryFunctionTable InEffectFunctions {
+        public XQueryFunctionTable InEffectFunctions
+        {
             get { return inEffectFunctions; }
         }
     }
 }
-

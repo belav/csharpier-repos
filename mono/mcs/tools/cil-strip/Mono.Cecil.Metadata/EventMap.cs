@@ -29,51 +29,50 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil.Metadata {
-
-    internal sealed class EventMapTable : IMetadataTable {
-
+namespace Mono.Cecil.Metadata
+{
+    internal sealed class EventMapTable : IMetadataTable
+    {
         public const int RId = 0x12;
 
         RowCollection m_rows;
 
-        public EventMapRow this [int index] {
-            get { return m_rows [index] as EventMapRow; }
-            set { m_rows [index] = value; }
+        public EventMapRow this[int index]
+        {
+            get { return m_rows[index] as EventMapRow; }
+            set { m_rows[index] = value; }
         }
 
-        public RowCollection Rows {
+        public RowCollection Rows
+        {
             get { return m_rows; }
             set { m_rows = value; }
         }
 
-        public int Id {
+        public int Id
+        {
             get { return RId; }
         }
 
-        internal EventMapTable ()
-        {
-        }
+        internal EventMapTable() { }
 
-        public void Accept (IMetadataTableVisitor visitor)
+        public void Accept(IMetadataTableVisitor visitor)
         {
-            visitor.VisitEventMapTable (this);
-            this.Rows.Accept (visitor.GetRowVisitor ());
+            visitor.VisitEventMapTable(this);
+            this.Rows.Accept(visitor.GetRowVisitor());
         }
     }
 
-    internal sealed class EventMapRow : IMetadataRow {
-
+    internal sealed class EventMapRow : IMetadataRow
+    {
         public uint Parent;
         public uint EventList;
 
-        internal EventMapRow ()
-        {
-        }
+        internal EventMapRow() { }
 
-        public void Accept (IMetadataRowVisitor visitor)
+        public void Accept(IMetadataRowVisitor visitor)
         {
-            visitor.VisitEventMapRow (this);
+            visitor.VisitEventMapRow(this);
         }
     }
 }

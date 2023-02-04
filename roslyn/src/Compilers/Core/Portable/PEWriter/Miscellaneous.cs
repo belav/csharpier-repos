@@ -21,7 +21,9 @@ namespace Microsoft.Cci
         /// <summary>
         /// True if the given enumerable is not null and contains at least one element.
         /// </summary>
-        public static bool EnumerableIsNotEmpty<T>([NotNullWhen(returnValue: true)] IEnumerable<T>? enumerable)
+        public static bool EnumerableIsNotEmpty<T>(
+            [NotNullWhen(returnValue: true)] IEnumerable<T>? enumerable
+        )
         {
             if (enumerable == null)
             {
@@ -46,7 +48,9 @@ namespace Microsoft.Cci
         /// <summary>
         /// True if the given enumerable is null or contains no elements
         /// </summary>
-        public static bool EnumerableIsEmpty<T>([NotNullWhen(returnValue: false)] IEnumerable<T>? enumerable)
+        public static bool EnumerableIsEmpty<T>(
+            [NotNullWhen(returnValue: false)] IEnumerable<T>? enumerable
+        )
         {
             return !EnumerableIsNotEmpty<T>(enumerable);
         }
@@ -115,28 +119,19 @@ namespace Microsoft.Cci
         /// <summary>
         /// An argument string (cookie) passed to the custom marshaller at run time.
         /// </summary>
-        string CustomMarshallerRuntimeArgument
-        {
-            get;
-        }
+        string CustomMarshallerRuntimeArgument { get; }
 
         /// <summary>
         /// The unmanaged element type of the unmanaged array.
         /// -1 if it should be omitted from the marshal blob.
         /// </summary>
-        System.Runtime.InteropServices.UnmanagedType ElementType
-        {
-            get;
-        }
+        System.Runtime.InteropServices.UnmanagedType ElementType { get; }
 
         /// <summary>
         /// Specifies the index of the parameter that contains the value of the Interface Identifier (IID) of the marshalled object.
         /// -1 if it should be omitted from the marshal blob.
         /// </summary>
-        int IidParameterIndex
-        {
-            get;
-        }
+        int IidParameterIndex { get; }
 
         /// <summary>
         /// The unmanaged type to which the managed type will be marshalled. This can be UnmanagedType.CustomMarshaler, in which case the unmanaged type
@@ -148,29 +143,20 @@ namespace Microsoft.Cci
         /// The number of elements in the fixed size portion of the unmanaged array.
         /// -1 if it should be omitted from the marshal blob.
         /// </summary>
-        int NumberOfElements
-        {
-            get;
-        }
+        int NumberOfElements { get; }
 
         /// <summary>
         /// The zero based index of the parameter in the unmanaged method that contains the number of elements in the variable portion of unmanaged array.
         /// If -1, the variable portion is of size zero, or the caller conveys the size of the variable portion of the array to the unmanaged method in some other way.
         /// </summary>
-        short ParamIndex
-        {
-            get;
-        }
+        short ParamIndex { get; }
 
         /// <summary>
         /// The type to which the variant values of all elements of the safe array must belong. See also SafeArrayElementUserDefinedSubtype.
         /// (The element type of a safe array is VARIANT. The "sub type" specifies the value of all of the tag fields (vt) of the element values. )
         /// -1 if it should be omitted from the marshal blob.
         /// </summary>
-        VarEnum SafeArrayElementSubtype
-        {
-            get;
-        }
+        VarEnum SafeArrayElementSubtype { get; }
 
         /// <summary>
         /// A reference to the user defined type to which the variant values of all elements of the safe array must belong.
@@ -248,6 +234,7 @@ namespace Microsoft.Cci
         }
 
         internal readonly byte[] SectionBytes;
+
         //This is the offset into SectionBytes that should be modified.
         //It should have the section's RVA added to it.
         internal readonly uint[] Relocations;
@@ -262,27 +249,20 @@ namespace Microsoft.Cci
         /// <summary>
         /// A string that identifies what type of resource this is. Only valid if this.TypeId &lt; 0.
         /// </summary>
-        string TypeName
-        {
-            get;
+        string TypeName { get;
             // ^ requires this.TypeId < 0;
         }
 
         /// <summary>
         /// An integer tag that identifies what type of resource this is. If the value is less than 0, this.TypeName should be used instead.
         /// </summary>
-        int TypeId
-        {
-            get;
-        }
+        int TypeId { get; }
 
         /// <summary>
         /// The name of the resource. Only valid if this.Id &lt; 0.
         /// </summary>
-        string Name
-        {
-            get;
-            // ^ requires this.Id < 0; 
+        string Name { get;
+            // ^ requires this.Id < 0;
         }
 
         /// <summary>

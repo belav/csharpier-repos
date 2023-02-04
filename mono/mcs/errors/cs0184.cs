@@ -2,13 +2,12 @@
 // Line:
 // Compiler options: -warnaserror -warn:1
 
-class X {
-
-    static void Main ()
+class X
+{
+    static void Main()
     {
         int a = 1;
-        
-        if (a is byte){
-        }
+
+        if (a is byte) { }
     }
 }

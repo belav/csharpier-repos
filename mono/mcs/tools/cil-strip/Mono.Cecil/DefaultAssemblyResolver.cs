@@ -26,37 +26,38 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil {
-
+namespace Mono.Cecil
+{
     using System.Collections;
 
-    internal class DefaultAssemblyResolver : BaseAssemblyResolver {
-
+    internal class DefaultAssemblyResolver : BaseAssemblyResolver
+    {
         IDictionary m_cache;
 
-        public DefaultAssemblyResolver ()
+        public DefaultAssemblyResolver()
         {
-            m_cache = new Hashtable ();
+            m_cache = new Hashtable();
         }
 
-        public override AssemblyDefinition Resolve (AssemblyNameReference name)
+        public override AssemblyDefinition Resolve(AssemblyNameReference name)
         {
-            AssemblyDefinition asm = (AssemblyDefinition) m_cache [name.FullName];
-            if (asm == null) {
-                asm = base.Resolve (name);
-                m_cache [name.FullName] = asm;
+            AssemblyDefinition asm = (AssemblyDefinition)m_cache[name.FullName];
+            if (asm == null)
+            {
+                asm = base.Resolve(name);
+                m_cache[name.FullName] = asm;
             }
 
             return asm;
         }
 
-        protected void RegisterAssembly (AssemblyDefinition assembly)
+        protected void RegisterAssembly(AssemblyDefinition assembly)
         {
             string key = assembly.Name.FullName;
-            if (m_cache.Contains (key))
+            if (m_cache.Contains(key))
                 return;
 
-            m_cache [key] = assembly;
+            m_cache[key] = assembly;
         }
     }
 }

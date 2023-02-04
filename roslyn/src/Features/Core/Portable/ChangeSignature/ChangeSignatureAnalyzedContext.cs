@@ -6,9 +6,7 @@ using Microsoft.CodeAnalysis.CodeCleanup;
 
 namespace Microsoft.CodeAnalysis.ChangeSignature
 {
-    internal abstract class ChangeSignatureAnalyzedContext
-    {
-    }
+    internal abstract class ChangeSignatureAnalyzedContext { }
 
     internal sealed class ChangeSignatureAnalysisSucceededContext : ChangeSignatureAnalyzedContext
     {
@@ -19,7 +17,12 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
         public readonly CodeCleanupOptionsProvider FallbackOptions;
 
         public ChangeSignatureAnalysisSucceededContext(
-            Document document, int positionForTypeBinding, ISymbol symbol, ParameterConfiguration parameterConfiguration, CodeCleanupOptionsProvider fallbackOptions)
+            Document document,
+            int positionForTypeBinding,
+            ISymbol symbol,
+            ParameterConfiguration parameterConfiguration,
+            CodeCleanupOptionsProvider fallbackOptions
+        )
         {
             Document = document;
             Symbol = symbol;

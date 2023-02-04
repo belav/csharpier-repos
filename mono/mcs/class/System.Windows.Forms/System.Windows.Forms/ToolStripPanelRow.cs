@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,7 +34,7 @@ using System.Collections.Generic;
 
 namespace System.Windows.Forms
 {
-    [ToolboxItem (false)]
+    [ToolboxItem(false)]
     public class ToolStripPanelRow : Component, IComponent, IDisposable
     {
         private Rectangle bounds;
@@ -44,163 +44,185 @@ namespace System.Windows.Forms
         private ToolStripPanel parent;
 
         #region Public Constructors
-        public ToolStripPanelRow (ToolStripPanel parent)
+        public ToolStripPanelRow(ToolStripPanel parent)
         {
             this.bounds = Rectangle.Empty;
-            this.controls = new List<Control> ();
+            this.controls = new List<Control>();
             this.parent = parent;
         }
         #endregion
 
         #region Public Properties
-        public Rectangle Bounds {
+        public Rectangle Bounds
+        {
             get { return this.bounds; }
         }
 
-        [Browsable (false)]
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        public Control[] Controls {
-            get { return this.controls.ToArray (); }
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public Control[] Controls
+        {
+            get { return this.controls.ToArray(); }
         }
 
-        public Rectangle DisplayRectangle {
+        public Rectangle DisplayRectangle
+        {
             get { return this.Bounds; }
         }
 
-        public LayoutEngine LayoutEngine {
-            get { 
-                return DefaultLayout.Instance;
-            }
+        public LayoutEngine LayoutEngine
+        {
+            get { return DefaultLayout.Instance; }
         }
 
-        public Padding Margin {
+        public Padding Margin
+        {
             get { return this.margin; }
             set { this.margin = value; }
         }
 
-        public Orientation Orientation {
+        public Orientation Orientation
+        {
             get { return this.parent.Orientation; }
         }
 
-        public virtual Padding Padding {
+        public virtual Padding Padding
+        {
             get { return this.padding; }
             set { this.padding = value; }
         }
 
-        public ToolStripPanel ToolStripPanel {
+        public ToolStripPanel ToolStripPanel
+        {
             get { return this.parent; }
-        } 
+        }
         #endregion
 
         #region Protected Properties
-        protected virtual Padding DefaultMargin { get { return Padding.Empty; } }
-        protected virtual Padding DefaultPadding { get { return Padding.Empty; } }
+        protected virtual Padding DefaultMargin
+        {
+            get { return Padding.Empty; }
+        }
+        protected virtual Padding DefaultPadding
+        {
+            get { return Padding.Empty; }
+        }
         #endregion
 
         #region Public Methods
-        public bool CanMove (ToolStrip toolStripToDrag)
+        public bool CanMove(ToolStrip toolStripToDrag)
         {
             // If something uses Stretch, it gets a whole Row to itself
             if (this.controls.Count > 0)
                 if (toolStripToDrag.Stretch || (this.controls[0] as ToolStrip).Stretch)
                     return false;
-            
+
             int width = 0;
-            
+
             foreach (ToolStrip ts in this.controls)
                 width += (ts.Width + ts.Margin.Horizontal);
-                
-            if (width + toolStripToDrag.Width + toolStripToDrag.Margin.Horizontal <= this.bounds.Width)
+
+            if (
+                width + toolStripToDrag.Width + toolStripToDrag.Margin.Horizontal
+                <= this.bounds.Width
+            )
                 return true;
-                
+
             return false;
         }
         #endregion
 
         #region Protected Methods
-        protected override void Dispose (bool disposing)
+        protected override void Dispose(bool disposing)
         {
-            base.Dispose (disposing);
+            base.Dispose(disposing);
         }
-        
-        protected void OnBoundsChanged (Rectangle oldBounds, Rectangle newBounds)
+
+        protected void OnBoundsChanged(Rectangle oldBounds, Rectangle newBounds) { }
+
+        protected internal virtual void OnControlAdded(Control control, int index)
         {
+            control.SizeChanged += new EventHandler(control_SizeChanged);
+            controls.Add(control);
+            this.OnLayout(new LayoutEventArgs(control, string.Empty));
         }
-        
-        protected internal virtual void OnControlAdded (Control control, int index)
+
+        protected internal virtual void OnControlRemoved(Control control, int index)
         {
-            control.SizeChanged += new EventHandler (control_SizeChanged);
-            controls.Add (control);
-            this.OnLayout (new LayoutEventArgs (control, string.Empty));
+            control.SizeChanged -= new EventHandler(control_SizeChanged);
+            controls.Remove(control);
+            this.OnLayout(new LayoutEventArgs(control, string.Empty));
         }
-        
-        protected internal virtual void OnControlRemoved (Control control, int index)
-        {
-            control.SizeChanged -= new EventHandler (control_SizeChanged);
-            controls.Remove (control);
-            this.OnLayout (new LayoutEventArgs (control, string.Empty));
-        }
-        
-        protected virtual void OnLayout (LayoutEventArgs e)
+
+        protected virtual void OnLayout(LayoutEventArgs e)
         {
             int height = 0;
-            
-            if (this.Orientation == Orientation.Horizontal) {
+
+            if (this.Orientation == Orientation.Horizontal)
+            {
                 foreach (ToolStrip ts in this.controls)
                     if (ts.Height > height)
                         height = ts.Height;
-                        
+
                 if (height != this.bounds.Height)
                     this.bounds.Height = height;
-            } else {
+            }
+            else
+            {
                 foreach (ToolStrip ts in this.controls)
-                    if (ts.GetPreferredSize (Size.Empty).Width > height)
-                        height = ts.GetPreferredSize (Size.Empty).Width;
+                    if (ts.GetPreferredSize(Size.Empty).Width > height)
+                        height = ts.GetPreferredSize(Size.Empty).Width;
 
                 if (height != this.bounds.Width)
                     this.bounds.Width = height;
             }
-                
-            this.Layout (this, e);
+
+            this.Layout(this, e);
         }
-        
-        protected internal virtual void OnOrientationChanged ()
-        {
-        }
+
+        protected internal virtual void OnOrientationChanged() { }
         #endregion
 
         #region Private/Internal Methods
-        internal void SetBounds (Rectangle bounds)
+        internal void SetBounds(Rectangle bounds)
         {
-            if (this.bounds != bounds) {
+            if (this.bounds != bounds)
+            {
                 Rectangle old_bounds = this.bounds;
                 this.bounds = bounds;
-                this.OnBoundsChanged (old_bounds, bounds);
-                this.OnLayout (new LayoutEventArgs (null, "Bounds"));
+                this.OnBoundsChanged(old_bounds, bounds);
+                this.OnLayout(new LayoutEventArgs(null, "Bounds"));
             }
         }
-        
-        private bool Layout (object container, LayoutEventArgs args)
+
+        private bool Layout(object container, LayoutEventArgs args)
         {
             ToolStripPanelRow tspr = (ToolStripPanelRow)container;
             Point position = tspr.DisplayRectangle.Location;
             foreach (ToolStrip ts in tspr.Controls)
             {
-                if (Orientation == Orientation.Horizontal) {
+                if (Orientation == Orientation.Horizontal)
+                {
                     if (ts.Stretch)
-                        ts.Width = this.bounds.Width - ts.Margin.Horizontal - this.Padding.Horizontal;
+                        ts.Width =
+                            this.bounds.Width - ts.Margin.Horizontal - this.Padding.Horizontal;
                     else
-                        ts.Width = ts.GetPreferredSize (Size.Empty).Width;
-                        
+                        ts.Width = ts.GetPreferredSize(Size.Empty).Width;
+
                     position.X += ts.Margin.Left;
                     ts.Location = position;
-                    
+
                     position.X += (ts.Width + ts.Margin.Left);
-                } else {
+                }
+                else
+                {
                     if (ts.Stretch)
-                        ts.Size = new Size (ts.GetPreferredSize (Size.Empty).Width, this.bounds.Height - ts.Margin.Vertical - this.Padding.Vertical);
+                        ts.Size = new Size(
+                            ts.GetPreferredSize(Size.Empty).Width,
+                            this.bounds.Height - ts.Margin.Vertical - this.Padding.Vertical
+                        );
                     else
-                        ts.Size = ts.GetPreferredSize (Size.Empty);
+                        ts.Size = ts.GetPreferredSize(Size.Empty);
 
                     position.Y += ts.Margin.Top;
                     ts.Location = position;
@@ -208,13 +230,13 @@ namespace System.Windows.Forms
                     position.Y += (ts.Height + ts.Margin.Top);
                 }
             }
-            
+
             return false;
         }
 
-        void control_SizeChanged (object sender, EventArgs e)
+        void control_SizeChanged(object sender, EventArgs e)
         {
-            this.OnLayout (new LayoutEventArgs ((Control)sender, string.Empty));
+            this.OnLayout(new LayoutEventArgs((Control)sender, string.Empty));
         }
         #endregion
     }

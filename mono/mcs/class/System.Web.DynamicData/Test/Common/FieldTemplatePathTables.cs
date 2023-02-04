@@ -13,77 +13,158 @@ namespace MonoTests.Common
 {
     sealed class FieldTemplatePathTables
     {
-        public static readonly List<FieldTemplateTestDescription> FieldTemplateReadOnlyColumns = new List<FieldTemplateTestDescription> ()
-        {
-            new FieldTemplateTestDescription ("Char_Column", "~/DynamicData/FieldTemplates/Text.ascx"),
-            new FieldTemplateTestDescription ("Byte_Column", "~/DynamicData/FieldTemplates/Text.ascx"),
-            new FieldTemplateTestDescription ("Int_Column", "~/DynamicData/FieldTemplates/Text.ascx"),
-            new FieldTemplateTestDescription ("Long_Column", "~/DynamicData/FieldTemplates/Text.ascx"),
-            new FieldTemplateTestDescription ("Bool_Column", "~/DynamicData/FieldTemplates/Boolean.ascx"),
-            new FieldTemplateTestDescription ("String_Column", "~/DynamicData/FieldTemplates/Text.ascx"),
-            new FieldTemplateTestDescription ("Float_Column", "~/DynamicData/FieldTemplates/Text.ascx"),
-            new FieldTemplateTestDescription ("Single_Column", "~/DynamicData/FieldTemplates/Text.ascx"),
-            new FieldTemplateTestDescription ("Double_Column", "~/DynamicData/FieldTemplates/Text.ascx"),
-            new FieldTemplateTestDescription ("Decimal_Column", "~/DynamicData/FieldTemplates/Text.ascx"),
-            new FieldTemplateTestDescription ("SByte_Column"),
-            new FieldTemplateTestDescription ("UInt_Column"),
-            new FieldTemplateTestDescription ("ULong_Column"),
-            new FieldTemplateTestDescription ("Short_Column", "~/DynamicData/FieldTemplates/Text.ascx"),
-            new FieldTemplateTestDescription ("UShort_Column"),
-            new FieldTemplateTestDescription ("DateTime_Column", "~/DynamicData/FieldTemplates/DateTime.ascx"),
-            new FieldTemplateTestDescription ("FooEmpty_Column"),
-            new FieldTemplateTestDescription ("Object_Column"),
-            new FieldTemplateTestDescription ("ByteArray_Column"),
-            new FieldTemplateTestDescription ("IntArray_Column"),
-            new FieldTemplateTestDescription ("StringArray_Column"),
-            new FieldTemplateTestDescription ("ObjectArray_Column"),
-            new FieldTemplateTestDescription ("StringList_Column"),
-            new FieldTemplateTestDescription ("Dictionary_Column"),
-            new FieldTemplateTestDescription ("ICollection_Column"),
-            new FieldTemplateTestDescription ("IEnumerable_Column"),
-            new FieldTemplateTestDescription ("ICollectionByte_Column"),
-            new FieldTemplateTestDescription ("IEnumerableByte_Column"),
-            new FieldTemplateTestDescription ("ByteMultiArray_Column"),
-            new FieldTemplateTestDescription ("BoolArray_Column"),
-            new FieldTemplateTestDescription ("MaximumLength_Column4", "~/DynamicData/FieldTemplates/Text.ascx"),
-        };
+        public static readonly List<FieldTemplateTestDescription> FieldTemplateReadOnlyColumns =
+            new List<FieldTemplateTestDescription>()
+            {
+                new FieldTemplateTestDescription(
+                    "Char_Column",
+                    "~/DynamicData/FieldTemplates/Text.ascx"
+                ),
+                new FieldTemplateTestDescription(
+                    "Byte_Column",
+                    "~/DynamicData/FieldTemplates/Text.ascx"
+                ),
+                new FieldTemplateTestDescription(
+                    "Int_Column",
+                    "~/DynamicData/FieldTemplates/Text.ascx"
+                ),
+                new FieldTemplateTestDescription(
+                    "Long_Column",
+                    "~/DynamicData/FieldTemplates/Text.ascx"
+                ),
+                new FieldTemplateTestDescription(
+                    "Bool_Column",
+                    "~/DynamicData/FieldTemplates/Boolean.ascx"
+                ),
+                new FieldTemplateTestDescription(
+                    "String_Column",
+                    "~/DynamicData/FieldTemplates/Text.ascx"
+                ),
+                new FieldTemplateTestDescription(
+                    "Float_Column",
+                    "~/DynamicData/FieldTemplates/Text.ascx"
+                ),
+                new FieldTemplateTestDescription(
+                    "Single_Column",
+                    "~/DynamicData/FieldTemplates/Text.ascx"
+                ),
+                new FieldTemplateTestDescription(
+                    "Double_Column",
+                    "~/DynamicData/FieldTemplates/Text.ascx"
+                ),
+                new FieldTemplateTestDescription(
+                    "Decimal_Column",
+                    "~/DynamicData/FieldTemplates/Text.ascx"
+                ),
+                new FieldTemplateTestDescription("SByte_Column"),
+                new FieldTemplateTestDescription("UInt_Column"),
+                new FieldTemplateTestDescription("ULong_Column"),
+                new FieldTemplateTestDescription(
+                    "Short_Column",
+                    "~/DynamicData/FieldTemplates/Text.ascx"
+                ),
+                new FieldTemplateTestDescription("UShort_Column"),
+                new FieldTemplateTestDescription(
+                    "DateTime_Column",
+                    "~/DynamicData/FieldTemplates/DateTime.ascx"
+                ),
+                new FieldTemplateTestDescription("FooEmpty_Column"),
+                new FieldTemplateTestDescription("Object_Column"),
+                new FieldTemplateTestDescription("ByteArray_Column"),
+                new FieldTemplateTestDescription("IntArray_Column"),
+                new FieldTemplateTestDescription("StringArray_Column"),
+                new FieldTemplateTestDescription("ObjectArray_Column"),
+                new FieldTemplateTestDescription("StringList_Column"),
+                new FieldTemplateTestDescription("Dictionary_Column"),
+                new FieldTemplateTestDescription("ICollection_Column"),
+                new FieldTemplateTestDescription("IEnumerable_Column"),
+                new FieldTemplateTestDescription("ICollectionByte_Column"),
+                new FieldTemplateTestDescription("IEnumerableByte_Column"),
+                new FieldTemplateTestDescription("ByteMultiArray_Column"),
+                new FieldTemplateTestDescription("BoolArray_Column"),
+                new FieldTemplateTestDescription(
+                    "MaximumLength_Column4",
+                    "~/DynamicData/FieldTemplates/Text.ascx"
+                ),
+            };
 
-        public static readonly List<FieldTemplateTestDescription> FieldTemplateEditColumns = new List<FieldTemplateTestDescription> ()
-        {
-            new FieldTemplateTestDescription ("Char_Column", "~/DynamicData/FieldTemplates/Text_Edit.ascx"),
-            new FieldTemplateTestDescription ("Byte_Column", "~/DynamicData/FieldTemplates/Integer_Edit.ascx"),
-            new FieldTemplateTestDescription ("Int_Column", "~/DynamicData/FieldTemplates/Integer_Edit.ascx"),
-            new FieldTemplateTestDescription ("Long_Column", "~/DynamicData/FieldTemplates/Integer_Edit.ascx"),
-            new FieldTemplateTestDescription ("Bool_Column", "~/DynamicData/FieldTemplates/Boolean_Edit.ascx"),
-            new FieldTemplateTestDescription ("String_Column", "~/DynamicData/FieldTemplates/Text_Edit.ascx"),
-            new FieldTemplateTestDescription ("Float_Column", "~/DynamicData/FieldTemplates/Decimal_Edit.ascx"),
-            new FieldTemplateTestDescription ("Single_Column", "~/DynamicData/FieldTemplates/Decimal_Edit.ascx"),
-            new FieldTemplateTestDescription ("Double_Column", "~/DynamicData/FieldTemplates/Decimal_Edit.ascx"),
-            new FieldTemplateTestDescription ("Decimal_Column", "~/DynamicData/FieldTemplates/Decimal_Edit.ascx"),
-            new FieldTemplateTestDescription ("SByte_Column"),
-            new FieldTemplateTestDescription ("UInt_Column"),
-            new FieldTemplateTestDescription ("ULong_Column"),
-            new FieldTemplateTestDescription ("Short_Column", "~/DynamicData/FieldTemplates/Integer_Edit.ascx"),
-            new FieldTemplateTestDescription ("UShort_Column"),
-            new FieldTemplateTestDescription ("DateTime_Column", "~/DynamicData/FieldTemplates/DateTime_Edit.ascx"),
-            new FieldTemplateTestDescription ("FooEmpty_Column"),
-            new FieldTemplateTestDescription ("Object_Column"),
-            new FieldTemplateTestDescription ("ByteArray_Column"),
-            new FieldTemplateTestDescription ("IntArray_Column"),
-            new FieldTemplateTestDescription ("StringArray_Column"),
-            new FieldTemplateTestDescription ("ObjectArray_Column"),
-            new FieldTemplateTestDescription ("StringList_Column"),
-            new FieldTemplateTestDescription ("Dictionary_Column"),
-            new FieldTemplateTestDescription ("ICollection_Column"),
-            new FieldTemplateTestDescription ("IEnumerable_Column"),
-            new FieldTemplateTestDescription ("ICollectionByte_Column"),
-            new FieldTemplateTestDescription ("IEnumerableByte_Column"),
-            new FieldTemplateTestDescription ("ByteMultiArray_Column"),
-            new FieldTemplateTestDescription ("BoolArray_Column"),
-            new FieldTemplateTestDescription ("MaximumLength_Column4", "~/DynamicData/FieldTemplates/MultilineText_Edit.ascx"),
-        };
+        public static readonly List<FieldTemplateTestDescription> FieldTemplateEditColumns =
+            new List<FieldTemplateTestDescription>()
+            {
+                new FieldTemplateTestDescription(
+                    "Char_Column",
+                    "~/DynamicData/FieldTemplates/Text_Edit.ascx"
+                ),
+                new FieldTemplateTestDescription(
+                    "Byte_Column",
+                    "~/DynamicData/FieldTemplates/Integer_Edit.ascx"
+                ),
+                new FieldTemplateTestDescription(
+                    "Int_Column",
+                    "~/DynamicData/FieldTemplates/Integer_Edit.ascx"
+                ),
+                new FieldTemplateTestDescription(
+                    "Long_Column",
+                    "~/DynamicData/FieldTemplates/Integer_Edit.ascx"
+                ),
+                new FieldTemplateTestDescription(
+                    "Bool_Column",
+                    "~/DynamicData/FieldTemplates/Boolean_Edit.ascx"
+                ),
+                new FieldTemplateTestDescription(
+                    "String_Column",
+                    "~/DynamicData/FieldTemplates/Text_Edit.ascx"
+                ),
+                new FieldTemplateTestDescription(
+                    "Float_Column",
+                    "~/DynamicData/FieldTemplates/Decimal_Edit.ascx"
+                ),
+                new FieldTemplateTestDescription(
+                    "Single_Column",
+                    "~/DynamicData/FieldTemplates/Decimal_Edit.ascx"
+                ),
+                new FieldTemplateTestDescription(
+                    "Double_Column",
+                    "~/DynamicData/FieldTemplates/Decimal_Edit.ascx"
+                ),
+                new FieldTemplateTestDescription(
+                    "Decimal_Column",
+                    "~/DynamicData/FieldTemplates/Decimal_Edit.ascx"
+                ),
+                new FieldTemplateTestDescription("SByte_Column"),
+                new FieldTemplateTestDescription("UInt_Column"),
+                new FieldTemplateTestDescription("ULong_Column"),
+                new FieldTemplateTestDescription(
+                    "Short_Column",
+                    "~/DynamicData/FieldTemplates/Integer_Edit.ascx"
+                ),
+                new FieldTemplateTestDescription("UShort_Column"),
+                new FieldTemplateTestDescription(
+                    "DateTime_Column",
+                    "~/DynamicData/FieldTemplates/DateTime_Edit.ascx"
+                ),
+                new FieldTemplateTestDescription("FooEmpty_Column"),
+                new FieldTemplateTestDescription("Object_Column"),
+                new FieldTemplateTestDescription("ByteArray_Column"),
+                new FieldTemplateTestDescription("IntArray_Column"),
+                new FieldTemplateTestDescription("StringArray_Column"),
+                new FieldTemplateTestDescription("ObjectArray_Column"),
+                new FieldTemplateTestDescription("StringList_Column"),
+                new FieldTemplateTestDescription("Dictionary_Column"),
+                new FieldTemplateTestDescription("ICollection_Column"),
+                new FieldTemplateTestDescription("IEnumerable_Column"),
+                new FieldTemplateTestDescription("ICollectionByte_Column"),
+                new FieldTemplateTestDescription("IEnumerableByte_Column"),
+                new FieldTemplateTestDescription("ByteMultiArray_Column"),
+                new FieldTemplateTestDescription("BoolArray_Column"),
+                new FieldTemplateTestDescription(
+                    "MaximumLength_Column4",
+                    "~/DynamicData/FieldTemplates/MultilineText_Edit.ascx"
+                ),
+            };
 
-        public static readonly List<string> NonDefaultFullTypeNameTemplates = new List<string> () {
+        public static readonly List<string> NonDefaultFullTypeNameTemplates = new List<string>()
+        {
             "System.Char.ascx",
             "System.Char.ascx.cs",
             "System.Byte.ascx",
@@ -118,45 +199,109 @@ namespace MonoTests.Common
             "System.Collections.ICollection.ascx.cs",
         };
 
-        public static readonly List<FieldTemplateTestDescription> FieldTemplateNonDefaultColumns = new List<FieldTemplateTestDescription> ()
+        public static readonly List<FieldTemplateTestDescription> FieldTemplateNonDefaultColumns =
+            new List<FieldTemplateTestDescription>()
+            {
+                new FieldTemplateTestDescription(
+                    "Char_Column",
+                    "~/DynamicData/FieldTemplates/System.Char.ascx"
+                ),
+                new FieldTemplateTestDescription(
+                    "Byte_Column",
+                    "~/DynamicData/FieldTemplates/System.Byte.ascx"
+                ),
+                new FieldTemplateTestDescription(
+                    "Int_Column",
+                    "~/DynamicData/FieldTemplates/System.Int32.ascx"
+                ),
+                new FieldTemplateTestDescription(
+                    "Long_Column",
+                    "~/DynamicData/FieldTemplates/System.Int64.ascx"
+                ),
+                new FieldTemplateTestDescription(
+                    "Bool_Column",
+                    "~/DynamicData/FieldTemplates/System.Boolean.ascx"
+                ),
+                new FieldTemplateTestDescription(
+                    "String_Column",
+                    "~/DynamicData/FieldTemplates/Text.ascx"
+                ),
+                new FieldTemplateTestDescription(
+                    "Float_Column",
+                    "~/DynamicData/FieldTemplates/System.String.ascx"
+                ),
+                new FieldTemplateTestDescription(
+                    "Single_Column",
+                    "~/DynamicData/FieldTemplates/System.String.ascx"
+                ),
+                new FieldTemplateTestDescription(
+                    "Double_Column",
+                    "~/DynamicData/FieldTemplates/System.String.ascx"
+                ),
+                new FieldTemplateTestDescription(
+                    "Decimal_Column",
+                    "~/DynamicData/FieldTemplates/System.String.ascx"
+                ),
+                new FieldTemplateTestDescription(
+                    "SByte_Column",
+                    "~/DynamicData/FieldTemplates/System.SByte.ascx"
+                ),
+                new FieldTemplateTestDescription(
+                    "UInt_Column",
+                    "~/DynamicData/FieldTemplates/System.UInt32.ascx"
+                ),
+                new FieldTemplateTestDescription(
+                    "ULong_Column",
+                    "~/DynamicData/FieldTemplates/System.UInt64.ascx"
+                ),
+                new FieldTemplateTestDescription(
+                    "Short_Column",
+                    "~/DynamicData/FieldTemplates/System.Int16.ascx"
+                ),
+                new FieldTemplateTestDescription(
+                    "UShort_Column",
+                    "~/DynamicData/FieldTemplates/System.UInt16.ascx"
+                ),
+                new FieldTemplateTestDescription(
+                    "DateTime_Column",
+                    "~/DynamicData/FieldTemplates/DateTime.ascx"
+                ),
+                new FieldTemplateTestDescription(
+                    "FooEmpty_Column",
+                    "~/DynamicData/FieldTemplates/MonoTests.Common.FooEmpty.ascx"
+                ),
+                new FieldTemplateTestDescription(
+                    "Object_Column",
+                    "~/DynamicData/FieldTemplates/System.Object.ascx"
+                ),
+                new FieldTemplateTestDescription(
+                    "ByteArray_Column",
+                    "~/DynamicData/FieldTemplates/System.Byte[].ascx"
+                ),
+                new FieldTemplateTestDescription("IntArray_Column"),
+                new FieldTemplateTestDescription("StringArray_Column"),
+                new FieldTemplateTestDescription("ObjectArray_Column"),
+                new FieldTemplateTestDescription("StringList_Column"),
+                // Doesn't work for some reason
+                //new FieldTemplateTestDescription ("StringList_Column", "~/DynamicData/FieldTemplates/System.Collections.Generic.List`1[System.String].ascx"),
+                new FieldTemplateTestDescription("Dictionary_Column"),
+                new FieldTemplateTestDescription(
+                    "ICollection_Column",
+                    "~/DynamicData/FieldTemplates/System.Collections.ICollection.ascx"
+                ),
+                new FieldTemplateTestDescription("IEnumerable_Column"),
+                new FieldTemplateTestDescription("ICollectionByte_Column"),
+                new FieldTemplateTestDescription("IEnumerableByte_Column"),
+                new FieldTemplateTestDescription("ByteMultiArray_Column"),
+                new FieldTemplateTestDescription("BoolArray_Column"),
+                new FieldTemplateTestDescription(
+                    "MaximumLength_Column4",
+                    "~/DynamicData/FieldTemplates/System.String.ascx"
+                ),
+            };
+
+        public static readonly List<string> NonDefaultShortTypeNameTemplates = new List<string>()
         {
-            new FieldTemplateTestDescription ("Char_Column", "~/DynamicData/FieldTemplates/System.Char.ascx"),
-            new FieldTemplateTestDescription ("Byte_Column", "~/DynamicData/FieldTemplates/System.Byte.ascx"),
-            new FieldTemplateTestDescription ("Int_Column", "~/DynamicData/FieldTemplates/System.Int32.ascx"),
-            new FieldTemplateTestDescription ("Long_Column", "~/DynamicData/FieldTemplates/System.Int64.ascx"),
-            new FieldTemplateTestDescription ("Bool_Column", "~/DynamicData/FieldTemplates/System.Boolean.ascx"),
-            new FieldTemplateTestDescription ("String_Column", "~/DynamicData/FieldTemplates/Text.ascx"),
-            new FieldTemplateTestDescription ("Float_Column", "~/DynamicData/FieldTemplates/System.String.ascx"),
-            new FieldTemplateTestDescription ("Single_Column", "~/DynamicData/FieldTemplates/System.String.ascx"),
-            new FieldTemplateTestDescription ("Double_Column", "~/DynamicData/FieldTemplates/System.String.ascx"),
-            new FieldTemplateTestDescription ("Decimal_Column", "~/DynamicData/FieldTemplates/System.String.ascx"),
-            new FieldTemplateTestDescription ("SByte_Column", "~/DynamicData/FieldTemplates/System.SByte.ascx"),
-            new FieldTemplateTestDescription ("UInt_Column", "~/DynamicData/FieldTemplates/System.UInt32.ascx"),
-            new FieldTemplateTestDescription ("ULong_Column", "~/DynamicData/FieldTemplates/System.UInt64.ascx"),
-            new FieldTemplateTestDescription ("Short_Column", "~/DynamicData/FieldTemplates/System.Int16.ascx"),
-            new FieldTemplateTestDescription ("UShort_Column", "~/DynamicData/FieldTemplates/System.UInt16.ascx"),
-            new FieldTemplateTestDescription ("DateTime_Column", "~/DynamicData/FieldTemplates/DateTime.ascx"),
-            new FieldTemplateTestDescription ("FooEmpty_Column", "~/DynamicData/FieldTemplates/MonoTests.Common.FooEmpty.ascx"),
-            new FieldTemplateTestDescription ("Object_Column", "~/DynamicData/FieldTemplates/System.Object.ascx"),
-            new FieldTemplateTestDescription ("ByteArray_Column", "~/DynamicData/FieldTemplates/System.Byte[].ascx"),
-            new FieldTemplateTestDescription ("IntArray_Column"),
-            new FieldTemplateTestDescription ("StringArray_Column"),
-            new FieldTemplateTestDescription ("ObjectArray_Column"),
-            new FieldTemplateTestDescription ("StringList_Column"),
-
-            // Doesn't work for some reason
-            //new FieldTemplateTestDescription ("StringList_Column", "~/DynamicData/FieldTemplates/System.Collections.Generic.List`1[System.String].ascx"),
-            new FieldTemplateTestDescription ("Dictionary_Column"),
-            new FieldTemplateTestDescription ("ICollection_Column", "~/DynamicData/FieldTemplates/System.Collections.ICollection.ascx"),
-            new FieldTemplateTestDescription ("IEnumerable_Column"),
-            new FieldTemplateTestDescription ("ICollectionByte_Column"),
-            new FieldTemplateTestDescription ("IEnumerableByte_Column"),
-            new FieldTemplateTestDescription ("ByteMultiArray_Column"),
-            new FieldTemplateTestDescription ("BoolArray_Column"),
-            new FieldTemplateTestDescription ("MaximumLength_Column4", "~/DynamicData/FieldTemplates/System.String.ascx"),
-        };
-
-        public static readonly List<string> NonDefaultShortTypeNameTemplates = new List<string> () {
             "Char.ascx",
             "Char.ascx.cs",
             "Byte.ascx",
@@ -187,89 +332,174 @@ namespace MonoTests.Common
             "ICollection.ascx.cs",
         };
 
-        public static readonly List<FieldTemplateTestDescription> FieldTemplateNonDefaultShortColumns = new List<FieldTemplateTestDescription> ()
-        {
-            new FieldTemplateTestDescription ("FooEmpty_Column", "~/DynamicData/FieldTemplates/FooEmpty.ascx"),
-            new FieldTemplateTestDescription ("Char_Column", "~/DynamicData/FieldTemplates/Char.ascx"),
-            new FieldTemplateTestDescription ("Byte_Column", "~/DynamicData/FieldTemplates/Byte.ascx"),
-            new FieldTemplateTestDescription ("Int_Column", "~/DynamicData/FieldTemplates/Int32.ascx"),
-            new FieldTemplateTestDescription ("Long_Column", "~/DynamicData/FieldTemplates/Int64.ascx"),
-            new FieldTemplateTestDescription ("Bool_Column", "~/DynamicData/FieldTemplates/Boolean.ascx"),
-            new FieldTemplateTestDescription ("String_Column", "~/DynamicData/FieldTemplates/Text.ascx"),
-            new FieldTemplateTestDescription ("Float_Column", "~/DynamicData/FieldTemplates/String.ascx"),
-            new FieldTemplateTestDescription ("Single_Column", "~/DynamicData/FieldTemplates/String.ascx"),
-            new FieldTemplateTestDescription ("Double_Column", "~/DynamicData/FieldTemplates/String.ascx"),
-            new FieldTemplateTestDescription ("Decimal_Column", "~/DynamicData/FieldTemplates/String.ascx"),
-            new FieldTemplateTestDescription ("SByte_Column", "~/DynamicData/FieldTemplates/SByte.ascx"),
-            new FieldTemplateTestDescription ("UInt_Column", "~/DynamicData/FieldTemplates/UInt32.ascx"),
-            new FieldTemplateTestDescription ("ULong_Column", "~/DynamicData/FieldTemplates/UInt64.ascx"),
-            new FieldTemplateTestDescription ("Short_Column", "~/DynamicData/FieldTemplates/Int16.ascx"),
-            new FieldTemplateTestDescription ("UShort_Column", "~/DynamicData/FieldTemplates/UInt16.ascx"),
-            new FieldTemplateTestDescription ("DateTime_Column", "~/DynamicData/FieldTemplates/DateTime.ascx"),
-            new FieldTemplateTestDescription ("Object_Column", "~/DynamicData/FieldTemplates/Object.ascx"),
-            new FieldTemplateTestDescription ("ByteArray_Column", "~/DynamicData/FieldTemplates/Byte[].ascx"),
-            new FieldTemplateTestDescription ("IntArray_Column"),
-            new FieldTemplateTestDescription ("StringArray_Column"),
-            new FieldTemplateTestDescription ("ObjectArray_Column"),
-            new FieldTemplateTestDescription ("StringList_Column"),
+        public static readonly List<FieldTemplateTestDescription> FieldTemplateNonDefaultShortColumns =
+            new List<FieldTemplateTestDescription>()
+            {
+                new FieldTemplateTestDescription(
+                    "FooEmpty_Column",
+                    "~/DynamicData/FieldTemplates/FooEmpty.ascx"
+                ),
+                new FieldTemplateTestDescription(
+                    "Char_Column",
+                    "~/DynamicData/FieldTemplates/Char.ascx"
+                ),
+                new FieldTemplateTestDescription(
+                    "Byte_Column",
+                    "~/DynamicData/FieldTemplates/Byte.ascx"
+                ),
+                new FieldTemplateTestDescription(
+                    "Int_Column",
+                    "~/DynamicData/FieldTemplates/Int32.ascx"
+                ),
+                new FieldTemplateTestDescription(
+                    "Long_Column",
+                    "~/DynamicData/FieldTemplates/Int64.ascx"
+                ),
+                new FieldTemplateTestDescription(
+                    "Bool_Column",
+                    "~/DynamicData/FieldTemplates/Boolean.ascx"
+                ),
+                new FieldTemplateTestDescription(
+                    "String_Column",
+                    "~/DynamicData/FieldTemplates/Text.ascx"
+                ),
+                new FieldTemplateTestDescription(
+                    "Float_Column",
+                    "~/DynamicData/FieldTemplates/String.ascx"
+                ),
+                new FieldTemplateTestDescription(
+                    "Single_Column",
+                    "~/DynamicData/FieldTemplates/String.ascx"
+                ),
+                new FieldTemplateTestDescription(
+                    "Double_Column",
+                    "~/DynamicData/FieldTemplates/String.ascx"
+                ),
+                new FieldTemplateTestDescription(
+                    "Decimal_Column",
+                    "~/DynamicData/FieldTemplates/String.ascx"
+                ),
+                new FieldTemplateTestDescription(
+                    "SByte_Column",
+                    "~/DynamicData/FieldTemplates/SByte.ascx"
+                ),
+                new FieldTemplateTestDescription(
+                    "UInt_Column",
+                    "~/DynamicData/FieldTemplates/UInt32.ascx"
+                ),
+                new FieldTemplateTestDescription(
+                    "ULong_Column",
+                    "~/DynamicData/FieldTemplates/UInt64.ascx"
+                ),
+                new FieldTemplateTestDescription(
+                    "Short_Column",
+                    "~/DynamicData/FieldTemplates/Int16.ascx"
+                ),
+                new FieldTemplateTestDescription(
+                    "UShort_Column",
+                    "~/DynamicData/FieldTemplates/UInt16.ascx"
+                ),
+                new FieldTemplateTestDescription(
+                    "DateTime_Column",
+                    "~/DynamicData/FieldTemplates/DateTime.ascx"
+                ),
+                new FieldTemplateTestDescription(
+                    "Object_Column",
+                    "~/DynamicData/FieldTemplates/Object.ascx"
+                ),
+                new FieldTemplateTestDescription(
+                    "ByteArray_Column",
+                    "~/DynamicData/FieldTemplates/Byte[].ascx"
+                ),
+                new FieldTemplateTestDescription("IntArray_Column"),
+                new FieldTemplateTestDescription("StringArray_Column"),
+                new FieldTemplateTestDescription("ObjectArray_Column"),
+                new FieldTemplateTestDescription("StringList_Column"),
+                // Doesn't work for some reason
+                //new FieldTemplateTestDescription ("StringList_Column", "~/DynamicData/FieldTemplates/List`1[System.String].ascx"),
+                new FieldTemplateTestDescription("Dictionary_Column"),
+                new FieldTemplateTestDescription(
+                    "ICollection_Column",
+                    "~/DynamicData/FieldTemplates/ICollection.ascx"
+                ),
+                new FieldTemplateTestDescription("IEnumerable_Column"),
+                new FieldTemplateTestDescription("ICollectionByte_Column"),
+                new FieldTemplateTestDescription("IEnumerableByte_Column"),
+                new FieldTemplateTestDescription("ByteMultiArray_Column"),
+                new FieldTemplateTestDescription("BoolArray_Column"),
+                new FieldTemplateTestDescription(
+                    "MaximumLength_Column4",
+                    "~/DynamicData/FieldTemplates/String.ascx"
+                ),
+            };
 
-            // Doesn't work for some reason
-            //new FieldTemplateTestDescription ("StringList_Column", "~/DynamicData/FieldTemplates/List`1[System.String].ascx"),
-            new FieldTemplateTestDescription ("Dictionary_Column"),
-            new FieldTemplateTestDescription ("ICollection_Column", "~/DynamicData/FieldTemplates/ICollection.ascx"),
-            new FieldTemplateTestDescription ("IEnumerable_Column"),
-            new FieldTemplateTestDescription ("ICollectionByte_Column"),
-            new FieldTemplateTestDescription ("IEnumerableByte_Column"),
-            new FieldTemplateTestDescription ("ByteMultiArray_Column"),
-            new FieldTemplateTestDescription ("BoolArray_Column"),
-            new FieldTemplateTestDescription ("MaximumLength_Column4", "~/DynamicData/FieldTemplates/String.ascx"),
-        };
-
-        public static void SetUp_ShortTypeNameTemplates (object caller)
+        public static void SetUp_ShortTypeNameTemplates(object caller)
         {
             if (caller == null)
-                throw new ArgumentNullException ("caller");
-            Type type = caller.GetType ();
+                throw new ArgumentNullException("caller");
+            Type type = caller.GetType();
             foreach (string tname in NonDefaultShortTypeNameTemplates)
-                WebTest.CopyResource (type, "MonoTests.WebPages.DynamicData.FieldTemplates_NonDefault." + tname, TestsSetup.BuildPath ("DynamicData/FieldTemplates/" + tname));
+                WebTest.CopyResource(
+                    type,
+                    "MonoTests.WebPages.DynamicData.FieldTemplates_NonDefault." + tname,
+                    TestsSetup.BuildPath("DynamicData/FieldTemplates/" + tname)
+                );
         }
 
-        public static void CleanUp_ShortTypeNameTemplates ()
+        public static void CleanUp_ShortTypeNameTemplates()
         {
             string baseDir = WebTest.TestBaseDir;
             string filePath;
 
-            foreach (string tname in NonDefaultShortTypeNameTemplates) {
-                filePath = Path.Combine (baseDir, TestsSetup.BuildPath ("DynamicData/FieldTemplates/" + tname));
-                try {
-                    if (File.Exists (filePath))
-                        File.Delete (filePath);
-                } catch {
+            foreach (string tname in NonDefaultShortTypeNameTemplates)
+            {
+                filePath = Path.Combine(
+                    baseDir,
+                    TestsSetup.BuildPath("DynamicData/FieldTemplates/" + tname)
+                );
+                try
+                {
+                    if (File.Exists(filePath))
+                        File.Delete(filePath);
+                }
+                catch
+                {
                     // ignore
                 }
             }
         }
 
-        public static void SetUp_FullTypeNameTemplates (object caller)
+        public static void SetUp_FullTypeNameTemplates(object caller)
         {
             if (caller == null)
-                throw new ArgumentNullException ("caller");
-            Type type = caller.GetType ();
+                throw new ArgumentNullException("caller");
+            Type type = caller.GetType();
             foreach (string tname in NonDefaultFullTypeNameTemplates)
-                WebTest.CopyResource (type, "MonoTests.WebPages.DynamicData.FieldTemplates_NonDefault." + tname, TestsSetup.BuildPath ("DynamicData/FieldTemplates/" + tname));
+                WebTest.CopyResource(
+                    type,
+                    "MonoTests.WebPages.DynamicData.FieldTemplates_NonDefault." + tname,
+                    TestsSetup.BuildPath("DynamicData/FieldTemplates/" + tname)
+                );
         }
 
-        public static void CleanUp_FullTypeNameTemplates ()
+        public static void CleanUp_FullTypeNameTemplates()
         {
             string baseDir = WebTest.TestBaseDir;
             string filePath;
 
-            foreach (string tname in NonDefaultFullTypeNameTemplates) {
-                filePath = Path.Combine (baseDir, TestsSetup.BuildPath ("DynamicData/FieldTemplates/" + tname));
-                try {
-                    if (File.Exists (filePath))
-                        File.Delete (filePath);
-                } catch {
+            foreach (string tname in NonDefaultFullTypeNameTemplates)
+            {
+                filePath = Path.Combine(
+                    baseDir,
+                    TestsSetup.BuildPath("DynamicData/FieldTemplates/" + tname)
+                );
+                try
+                {
+                    if (File.Exists(filePath))
+                        File.Delete(filePath);
+                }
+                catch
+                {
                     // ignore
                 }
             }

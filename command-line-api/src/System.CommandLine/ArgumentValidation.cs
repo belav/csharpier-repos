@@ -27,7 +27,9 @@ namespace System.CommandLine
         /// </summary>
         /// <param name="argument">The argument to configure.</param>
         /// <returns>The configured argument.</returns>
-        public static Argument<DirectoryInfo> AcceptExistingOnly(this Argument<DirectoryInfo> argument)
+        public static Argument<DirectoryInfo> AcceptExistingOnly(
+            this Argument<DirectoryInfo> argument
+        )
         {
             argument.Validators.Add(Validate.DirectoryExists);
             return argument;
@@ -38,7 +40,9 @@ namespace System.CommandLine
         /// </summary>
         /// <param name="argument">The argument to configure.</param>
         /// <returns>The configured argument.</returns>
-        public static Argument<FileSystemInfo> AcceptExistingOnly(this Argument<FileSystemInfo> argument)
+        public static Argument<FileSystemInfo> AcceptExistingOnly(
+            this Argument<FileSystemInfo> argument
+        )
         {
             argument.Validators.Add(Validate.FileOrDirectoryExists);
             return argument;

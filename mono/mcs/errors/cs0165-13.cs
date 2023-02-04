@@ -4,14 +4,15 @@
 struct Rectangle
 {
     internal int x;
-    public int X {
+    public int X
+    {
         set { }
     }
 }
 
 public class Foo
 {
-    public static void Main ()
+    public static void Main()
     {
         Rectangle foo;
         foo.X = 5;

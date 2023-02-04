@@ -21,21 +21,31 @@ namespace N
 
     class M
     {
-        public static int Main ()
+        public static int Main()
         {
             int count = 0;
-            foreach (MethodInfo method in typeof (Nested.C).GetMethods (BindingFlags.Instance | BindingFlags.NonPublic)) {
-                Console.WriteLine (method.Name);
+            foreach (
+                MethodInfo method in typeof(Nested.C).GetMethods(
+                    BindingFlags.Instance | BindingFlags.NonPublic
+                )
+            )
+            {
+                Console.WriteLine(method.Name);
                 if (method.Name == "N.Nested.I<int>.get_P")
                     ++count;
             }
 
-            foreach (PropertyInfo pi in typeof (Nested.C).GetProperties (BindingFlags.Instance | BindingFlags.NonPublic)) {
-                Console.WriteLine (pi.Name);
+            foreach (
+                PropertyInfo pi in typeof(Nested.C).GetProperties(
+                    BindingFlags.Instance | BindingFlags.NonPublic
+                )
+            )
+            {
+                Console.WriteLine(pi.Name);
                 if (pi.Name == "N.Nested.I<int>.P")
                     count += 2;
             }
-            
+
             return 3 - count;
         }
     }

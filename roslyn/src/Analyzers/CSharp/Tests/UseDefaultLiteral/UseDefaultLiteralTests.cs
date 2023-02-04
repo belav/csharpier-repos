@@ -14,7 +14,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDefaultLiteral
 {
     using VerifyCS = CSharpCodeFixVerifier<
         CSharpUseDefaultLiteralDiagnosticAnalyzer,
-        CSharpUseDefaultLiteralCodeFixProvider>;
+        CSharpUseDefaultLiteralCodeFixProvider
+    >;
 
     [Trait(Traits.Feature, Traits.Features.CodeActionsUseDefaultLiteral)]
     public class UseDefaultLiteralTests
@@ -342,7 +343,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDefaultLiteral
                     """,
                 LanguageVersion = LanguageVersion.CSharp7_1,
                 DiagnosticSelector = d => d[0],
-                CodeFixTestBehaviors = Testing.CodeFixTestBehaviors.FixOne | Testing.CodeFixTestBehaviors.SkipFixAllCheck
+                CodeFixTestBehaviors =
+                    Testing.CodeFixTestBehaviors.FixOne
+                    | Testing.CodeFixTestBehaviors.SkipFixAllCheck
             }.RunAsync();
         }
 
@@ -371,7 +374,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDefaultLiteral
                     """,
                 LanguageVersion = LanguageVersion.CSharp7_1,
                 DiagnosticSelector = d => d[1],
-                CodeFixTestBehaviors = Testing.CodeFixTestBehaviors.FixOne | Testing.CodeFixTestBehaviors.SkipFixAllCheck
+                CodeFixTestBehaviors =
+                    Testing.CodeFixTestBehaviors.FixOne
+                    | Testing.CodeFixTestBehaviors.SkipFixAllCheck
             }.RunAsync();
         }
 

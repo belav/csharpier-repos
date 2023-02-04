@@ -16,7 +16,8 @@ using IKVM.Reflection.Emit;
 using System.Reflection.Emit;
 #endif
 
-namespace Mono.CSharp {
+namespace Mono.CSharp
+{
     public class LambdaExpression : AnonymousMethodExpression
     {
         //
@@ -24,48 +25,65 @@ namespace Mono.CSharp {
         //    A list of Parameters (explicitly typed parameters)
         //    An ImplicitLambdaParameter
         //
-        public LambdaExpression (Location loc)
-            : base (loc)
-        {
-        }
+        public LambdaExpression(Location loc)
+            : base(loc) { }
 
-        protected override Expression CreateExpressionTree (ResolveContext ec, TypeSpec delegate_type)
+        protected override Expression CreateExpressionTree(
+            ResolveContext ec,
+            TypeSpec delegate_type
+        )
         {
             if (ec.IsInProbingMode)
                 return this;
 
-            BlockContext bc = new BlockContext (ec.MemberContext, ec.ConstructorBlock, ec.BuiltinTypes.Void) {
+            BlockContext bc = new BlockContext(
+                ec.MemberContext,
+                ec.ConstructorBlock,
+                ec.BuiltinTypes.Void
+            )
+            {
                 CurrentAnonymousMethod = ec.CurrentAnonymousMethod
             };
 
-            Expression args = Parameters.CreateExpressionTree (bc, loc);
-            Expression expr = Block.CreateExpressionTree (ec);
+            Expression args = Parameters.CreateExpressionTree(bc, loc);
+            Expression expr = Block.CreateExpressionTree(ec);
             if (expr == null)
                 return null;
 
-            Arguments arguments = new Arguments (2);
-            arguments.Add (new Argument (expr));
-            arguments.Add (new Argument (args));
-            return CreateExpressionFactoryCall (ec, "Lambda",
-                new TypeArguments (new TypeExpression (delegate_type, loc)),
-                arguments);
+            Arguments arguments = new Arguments(2);
+            arguments.Add(new Argument(expr));
+            arguments.Add(new Argument(args));
+            return CreateExpressionFactoryCall(
+                ec,
+                "Lambda",
+                new TypeArguments(new TypeExpression(delegate_type, loc)),
+                arguments
+            );
         }
 
-        public override bool HasExplicitParameters {
-            get {
-                return Parameters.Count > 0 && !(Parameters.FixedParameters [0] is ImplicitLambdaParameter);
+        public override bool HasExplicitParameters
+        {
+            get
+            {
+                return Parameters.Count > 0
+                    && !(Parameters.FixedParameters[0] is ImplicitLambdaParameter);
             }
         }
 
-        protected override ParametersCompiled ResolveParameters (ResolveContext ec, TypeInferenceContext tic, TypeSpec delegateType)
+        protected override ParametersCompiled ResolveParameters(
+            ResolveContext ec,
+            TypeInferenceContext tic,
+            TypeSpec delegateType
+        )
         {
             if (!delegateType.IsDelegate)
                 return null;
 
-            AParametersCollection d_params = Delegate.GetParameters (delegateType);
+            AParametersCollection d_params = Delegate.GetParameters(delegateType);
 
-            if (HasExplicitParameters) {
-                if (!VerifyExplicitParameters (ec, tic, delegateType, d_params))
+            if (HasExplicitParameters)
+            {
+                if (!VerifyExplicitParameters(ec, tic, delegateType, d_params))
                     return null;
 
                 return Parameters;
@@ -75,100 +93,113 @@ namespace Mono.CSharp {
             // If L has an implicitly typed parameter list we make implicit parameters explicit
             // Set each parameter of L is given the type of the corresponding parameter in D
             //
-            if (!VerifyParameterCompatibility (ec, tic, delegateType, d_params, ec.IsInProbingMode))
+            if (!VerifyParameterCompatibility(ec, tic, delegateType, d_params, ec.IsInProbingMode))
                 return null;
 
-            TypeSpec [] ptypes = new TypeSpec [Parameters.Count];
-            for (int i = 0; i < d_params.Count; i++) {
+            TypeSpec[] ptypes = new TypeSpec[Parameters.Count];
+            for (int i = 0; i < d_params.Count; i++)
+            {
                 // D has no ref or out parameters
                 if ((d_params.FixedParameters[i].ModFlags & Parameter.Modifier.RefOutMask) != 0)
                     return null;
 
-                TypeSpec d_param = d_params.Types [i];
+                TypeSpec d_param = d_params.Types[i];
 
                 //
                 // When type inference context exists try to apply inferred type arguments
                 //
-                if (tic != null) {
-                    d_param = tic.InflateGenericArgument (ec, d_param);
+                if (tic != null)
+                {
+                    d_param = tic.InflateGenericArgument(ec, d_param);
                 }
 
-                ptypes [i] = d_param;
-                ImplicitLambdaParameter ilp = (ImplicitLambdaParameter) Parameters.FixedParameters [i];
-                ilp.SetParameterType (d_param);
-                ilp.Resolve (null, i);
+                ptypes[i] = d_param;
+                ImplicitLambdaParameter ilp = (ImplicitLambdaParameter)
+                    Parameters.FixedParameters[i];
+                ilp.SetParameterType(d_param);
+                ilp.Resolve(null, i);
             }
 
             Parameters.Types = ptypes;
             return Parameters;
         }
 
-        protected override AnonymousMethodBody CompatibleMethodFactory (TypeSpec returnType, TypeSpec delegateType, ParametersCompiled p, ParametersBlock b)
+        protected override AnonymousMethodBody CompatibleMethodFactory(
+            TypeSpec returnType,
+            TypeSpec delegateType,
+            ParametersCompiled p,
+            ParametersBlock b
+        )
         {
-            return new LambdaMethod (p, b, returnType, delegateType, loc);
+            return new LambdaMethod(p, b, returnType, delegateType, loc);
         }
 
-        protected override bool DoResolveParameters (ResolveContext rc)
+        protected override bool DoResolveParameters(ResolveContext rc)
         {
             //
             // Only explicit parameters can be resolved at this point
             //
-            if (HasExplicitParameters) {
-                return Parameters.Resolve (rc);
+            if (HasExplicitParameters)
+            {
+                return Parameters.Resolve(rc);
             }
 
             return true;
         }
 
-        public override string GetSignatureForError ()
+        public override string GetSignatureForError()
         {
             return "lambda expression";
         }
-        
-        public override object Accept (StructuralVisitor visitor)
+
+        public override object Accept(StructuralVisitor visitor)
         {
-            return visitor.Visit (this);
+            return visitor.Visit(this);
         }
     }
 
     class LambdaMethod : AnonymousMethodBody
     {
-        public LambdaMethod (ParametersCompiled parameters,
-                    ParametersBlock block, TypeSpec return_type, TypeSpec delegate_type,
-                    Location loc)
-            : base (parameters, block, return_type, delegate_type, loc)
-        {
-        }
+        public LambdaMethod(
+            ParametersCompiled parameters,
+            ParametersBlock block,
+            TypeSpec return_type,
+            TypeSpec delegate_type,
+            Location loc
+        )
+            : base(parameters, block, return_type, delegate_type, loc) { }
 
         #region Properties
 
-        public override string ContainerType {
-            get {
-                return "lambda expression";
-            }
+        public override string ContainerType
+        {
+            get { return "lambda expression"; }
         }
 
         #endregion
 
-        protected override void CloneTo (CloneContext clonectx, Expression target)
+        protected override void CloneTo(CloneContext clonectx, Expression target)
         {
             // TODO: nothing ??
         }
 
-        public override Expression CreateExpressionTree (ResolveContext ec)
+        public override Expression CreateExpressionTree(ResolveContext ec)
         {
-            BlockContext bc = new BlockContext (ec.MemberContext, Block, ReturnType);
-            Expression args = parameters.CreateExpressionTree (bc, loc);
-            Expression expr = Block.CreateExpressionTree (ec);
+            BlockContext bc = new BlockContext(ec.MemberContext, Block, ReturnType);
+            Expression args = parameters.CreateExpressionTree(bc, loc);
+            Expression expr = Block.CreateExpressionTree(ec);
             if (expr == null)
                 return null;
 
-            Arguments arguments = new Arguments (2);
-            arguments.Add (new Argument (expr));
-            arguments.Add (new Argument (args));
-            return CreateExpressionFactoryCall (ec, "Lambda",
-                new TypeArguments (new TypeExpression (type, loc)),
-                arguments);
+            Arguments arguments = new Arguments(2);
+            arguments.Add(new Argument(expr));
+            arguments.Add(new Argument(args));
+            return CreateExpressionFactoryCall(
+                ec,
+                "Lambda",
+                new TypeArguments(new TypeExpression(type, loc)),
+                arguments
+            );
         }
     }
 
@@ -181,66 +212,81 @@ namespace Mono.CSharp {
     {
         ExpressionStatement statement;
 
-        public ContextualReturn (Expression expr)
-            : base (expr, expr.StartLocation)
-        {
-        }
+        public ContextualReturn(Expression expr)
+            : base(expr, expr.StartLocation) { }
 
-        public override Expression CreateExpressionTree (ResolveContext ec)
+        public override Expression CreateExpressionTree(ResolveContext ec)
         {
-            if (Expr is ReferenceExpression) {
-                ec.Report.Error (8155, Expr.Location, "Lambda expressions that return by reference cannot be converted to expression trees");
+            if (Expr is ReferenceExpression)
+            {
+                ec.Report.Error(
+                    8155,
+                    Expr.Location,
+                    "Lambda expressions that return by reference cannot be converted to expression trees"
+                );
                 return null;
             }
 
-            return Expr.CreateExpressionTree (ec);
+            return Expr.CreateExpressionTree(ec);
         }
 
-        protected override void DoEmit (EmitContext ec)
+        protected override void DoEmit(EmitContext ec)
         {
-            if (statement != null) {
-                statement.EmitStatement (ec);
+            if (statement != null)
+            {
+                statement.EmitStatement(ec);
                 if (unwind_protect)
-                    ec.Emit (OpCodes.Leave, ec.CreateReturnLabel ());
-                else {
-                    ec.Emit (OpCodes.Ret);
+                    ec.Emit(OpCodes.Leave, ec.CreateReturnLabel());
+                else
+                {
+                    ec.Emit(OpCodes.Ret);
                 }
                 return;
             }
 
-            base.DoEmit (ec);
+            base.DoEmit(ec);
         }
 
-        protected override bool DoResolve (BlockContext ec)
+        protected override bool DoResolve(BlockContext ec)
         {
             //
             // When delegate returns void, only expression statements can be used
             //
-            if (ec.ReturnType.Kind == MemberKind.Void) {
-                Expr = Expr.Resolve (ec);
+            if (ec.ReturnType.Kind == MemberKind.Void)
+            {
+                Expr = Expr.Resolve(ec);
                 if (Expr == null)
                     return false;
 
-                if (Expr is ReferenceExpression) {
+                if (Expr is ReferenceExpression)
+                {
                     // CSC: should be different error code
-                    ec.Report.Error (8149, loc, "By-reference returns can only be used in lambda expressions that return by reference");
+                    ec.Report.Error(
+                        8149,
+                        loc,
+                        "By-reference returns can only be used in lambda expressions that return by reference"
+                    );
                     return false;
                 }
 
                 statement = Expr as ExpressionStatement;
-                if (statement == null) {
+                if (statement == null)
+                {
                     var reduced = Expr as IReducedExpressionStatement;
-                    if (reduced != null) {
+                    if (reduced != null)
+                    {
                         statement = EmptyExpressionStatement.Instance;
-                    } else {
-                        Expr.Error_InvalidExpressionStatement (ec);
+                    }
+                    else
+                    {
+                        Expr.Error_InvalidExpressionStatement(ec);
                     }
                 }
 
                 return true;
             }
 
-            return base.DoResolve (ec);
+            return base.DoResolve(ec);
         }
     }
 }

@@ -38,10 +38,7 @@ namespace System.Web.Razor.Test.Framework
 
         public override int GetHashCode()
         {
-            return HashCodeCombiner.Start()
-                .Add(Start)
-                .Add(Content)
-                .CombinedHash;
+            return HashCodeCombiner.Start().Add(Start).Add(Content).CombinedHash;
         }
 
         public void OffsetStart(SourceLocation documentStart)
@@ -67,7 +64,9 @@ namespace System.Web.Razor.Test.Framework
             }
             else
             {
-                Start = new SourceLocationTracker(prev.Start).UpdateLocation(prev.Content).CurrentLocation;
+                Start = new SourceLocationTracker(prev.Start)
+                    .UpdateLocation(prev.Content)
+                    .CurrentLocation;
             }
         }
     }

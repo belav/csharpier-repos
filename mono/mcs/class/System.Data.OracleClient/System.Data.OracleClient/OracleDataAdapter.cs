@@ -29,9 +29,15 @@ using System.Drawing.Design;
 
 namespace System.Data.OracleClient
 {
-    [DefaultEvent ("RowUpdated")]
-    [Designer ("Microsoft.VSDesigner.Data.VS.OracleDataAdapterDesigner, " + Consts.AssemblyMicrosoft_VSDesigner)]
-    [ToolboxItem ("Microsoft.VSDesigner.Data.VS.OracleDataAdapterToolboxItem, " + Consts.AssemblyMicrosoft_VSDesigner)]
+    [DefaultEvent("RowUpdated")]
+    [Designer(
+        "Microsoft.VSDesigner.Data.VS.OracleDataAdapterDesigner, "
+            + Consts.AssemblyMicrosoft_VSDesigner
+    )]
+    [ToolboxItem(
+        "Microsoft.VSDesigner.Data.VS.OracleDataAdapterToolboxItem, "
+            + Consts.AssemblyMicrosoft_VSDesigner
+    )]
     public sealed class OracleDataAdapter : DbDataAdapter, IDbDataAdapter
     {
         #region Fields
@@ -46,120 +52,142 @@ namespace System.Data.OracleClient
 
         #region Constructors
 
-        public OracleDataAdapter () : this ((OracleCommand) null)
-        {
-        }
+        public OracleDataAdapter()
+            : this((OracleCommand)null) { }
 
-        public OracleDataAdapter (OracleCommand selectCommand)
+        public OracleDataAdapter(OracleCommand selectCommand)
         {
             SelectCommand = selectCommand;
             UpdateBatchSize = 1;
         }
 
-        public OracleDataAdapter (string selectCommandText, OracleConnection selectConnection)
-            : this (new OracleCommand (selectCommandText, selectConnection))
-        {
-        }
+        public OracleDataAdapter(string selectCommandText, OracleConnection selectConnection)
+            : this(new OracleCommand(selectCommandText, selectConnection)) { }
 
-        public OracleDataAdapter (string selectCommandText, string selectConnectionString)
-            : this (selectCommandText, new OracleConnection (selectConnectionString))
-        {
-        }
+        public OracleDataAdapter(string selectCommandText, string selectConnectionString)
+            : this(selectCommandText, new OracleConnection(selectConnectionString)) { }
 
         #endregion
 
         #region Properties
 
-        [DefaultValue (null)]
-        [Editor ("Microsoft.VSDesigner.Data.Design.DBCommandEditor, " + Consts.AssemblyMicrosoft_VSDesigner, typeof(UITypeEditor))]
-        public
-        new
-        OracleCommand DeleteCommand {
+        [DefaultValue(null)]
+        [Editor(
+            "Microsoft.VSDesigner.Data.Design.DBCommandEditor, "
+                + Consts.AssemblyMicrosoft_VSDesigner,
+            typeof(UITypeEditor)
+        )]
+        public new OracleCommand DeleteCommand
+        {
             get { return deleteCommand; }
             set { deleteCommand = value; }
         }
 
-        [DefaultValue (null)]
-        [Editor ("Microsoft.VSDesigner.Data.Design.DBCommandEditor, " + Consts.AssemblyMicrosoft_VSDesigner, typeof(UITypeEditor))]
-        public
-        new
-        OracleCommand InsertCommand {
+        [DefaultValue(null)]
+        [Editor(
+            "Microsoft.VSDesigner.Data.Design.DBCommandEditor, "
+                + Consts.AssemblyMicrosoft_VSDesigner,
+            typeof(UITypeEditor)
+        )]
+        public new OracleCommand InsertCommand
+        {
             get { return insertCommand; }
             set { insertCommand = value; }
         }
 
-        [DefaultValue (null)]
-        [Editor ("Microsoft.VSDesigner.Data.Design.DBCommandEditor, " + Consts.AssemblyMicrosoft_VSDesigner, typeof(UITypeEditor))]
-        public
-        new
-        OracleCommand SelectCommand {
+        [DefaultValue(null)]
+        [Editor(
+            "Microsoft.VSDesigner.Data.Design.DBCommandEditor, "
+                + Consts.AssemblyMicrosoft_VSDesigner,
+            typeof(UITypeEditor)
+        )]
+        public new OracleCommand SelectCommand
+        {
             get { return selectCommand; }
             set { selectCommand = value; }
         }
 
-        [DefaultValue (null)]
-        [Editor ("Microsoft.VSDesigner.Data.Design.DBCommandEditor, " + Consts.AssemblyMicrosoft_VSDesigner, typeof(UITypeEditor))]
-        public
-        new
-        OracleCommand UpdateCommand {
+        [DefaultValue(null)]
+        [Editor(
+            "Microsoft.VSDesigner.Data.Design.DBCommandEditor, "
+                + Consts.AssemblyMicrosoft_VSDesigner,
+            typeof(UITypeEditor)
+        )]
+        public new OracleCommand UpdateCommand
+        {
             get { return updateCommand; }
             set { updateCommand = value; }
         }
 
-        public override int UpdateBatchSize {
+        public override int UpdateBatchSize
+        {
             get { return updateBatchSize; }
-            set {
+            set
+            {
                 if (value < 0)
-                    throw new ArgumentOutOfRangeException ("UpdateBatchSize");
-                updateBatchSize = value; 
+                    throw new ArgumentOutOfRangeException("UpdateBatchSize");
+                updateBatchSize = value;
             }
         }
 
-        IDbCommand IDbDataAdapter.DeleteCommand {
+        IDbCommand IDbDataAdapter.DeleteCommand
+        {
             get { return DeleteCommand; }
-            set { DeleteCommand = (OracleCommand) value; }
+            set { DeleteCommand = (OracleCommand)value; }
         }
 
-        IDbCommand IDbDataAdapter.InsertCommand {
+        IDbCommand IDbDataAdapter.InsertCommand
+        {
             get { return InsertCommand; }
-            set { InsertCommand = (OracleCommand) value; }
+            set { InsertCommand = (OracleCommand)value; }
         }
 
-        IDbCommand IDbDataAdapter.SelectCommand {
+        IDbCommand IDbDataAdapter.SelectCommand
+        {
             get { return SelectCommand; }
-            set { SelectCommand = (OracleCommand) value; }
+            set { SelectCommand = (OracleCommand)value; }
         }
 
-        IDbCommand IDbDataAdapter.UpdateCommand {
+        IDbCommand IDbDataAdapter.UpdateCommand
+        {
             get { return UpdateCommand; }
-            set { UpdateCommand = (OracleCommand) value; }
+            set { UpdateCommand = (OracleCommand)value; }
         }
 
         #endregion // Properties
 
         #region Methods
 
-        protected override RowUpdatedEventArgs CreateRowUpdatedEvent (DataRow dataRow, IDbCommand command, StatementType statementType, DataTableMapping tableMapping)
+        protected override RowUpdatedEventArgs CreateRowUpdatedEvent(
+            DataRow dataRow,
+            IDbCommand command,
+            StatementType statementType,
+            DataTableMapping tableMapping
+        )
         {
-            return new OracleRowUpdatedEventArgs (dataRow, command, statementType, tableMapping);
+            return new OracleRowUpdatedEventArgs(dataRow, command, statementType, tableMapping);
         }
 
-
-        protected override RowUpdatingEventArgs CreateRowUpdatingEvent (DataRow dataRow, IDbCommand command, StatementType statementType, DataTableMapping tableMapping)
+        protected override RowUpdatingEventArgs CreateRowUpdatingEvent(
+            DataRow dataRow,
+            IDbCommand command,
+            StatementType statementType,
+            DataTableMapping tableMapping
+        )
         {
-            return new OracleRowUpdatingEventArgs (dataRow, command, statementType, tableMapping);
+            return new OracleRowUpdatingEventArgs(dataRow, command, statementType, tableMapping);
         }
 
-        protected override void OnRowUpdated (RowUpdatedEventArgs value)
+        protected override void OnRowUpdated(RowUpdatedEventArgs value)
         {
             if (RowUpdated != null)
-                RowUpdated (this, (OracleRowUpdatedEventArgs) value);
+                RowUpdated(this, (OracleRowUpdatedEventArgs)value);
         }
 
-        protected override void OnRowUpdating (RowUpdatingEventArgs value)
+        protected override void OnRowUpdating(RowUpdatingEventArgs value)
         {
             if (RowUpdating != null)
-                RowUpdating (this, (OracleRowUpdatingEventArgs) value);
+                RowUpdating(this, (OracleRowUpdatingEventArgs)value);
         }
 
         #endregion // Methods

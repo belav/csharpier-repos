@@ -12,14 +12,23 @@ namespace System.Net.Http.Json.Functional.Tests
 {
     public class HttpContentJsonExtensionsTests
     {
-        private readonly List<HttpHeaderData> _headers = new List<HttpHeaderData> { new HttpHeaderData("Content-Type", "application/json") };
+        private readonly List<HttpHeaderData> _headers = new List<HttpHeaderData>
+        {
+            new HttpHeaderData("Content-Type", "application/json")
+        };
 
         [Fact]
         public void ThrowOnNull()
         {
             HttpContent content = null;
-            AssertExtensions.Throws<ArgumentNullException>("content", () => content.ReadFromJsonAsync<Person>());
-            AssertExtensions.Throws<ArgumentNullException>("content", () => content.ReadFromJsonAsync(typeof(Person)));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "content",
+                () => content.ReadFromJsonAsync<Person>()
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "content",
+                () => content.ReadFromJsonAsync(typeof(Person))
+            );
         }
 
         [Theory]
@@ -43,12 +52,15 @@ namespace System.Net.Http.Json.Functional.Tests
                         per.Validate();
                     }
                 },
-                server => server.HandleRequestAsync(headers: _headers, content: json));
+                server => server.HandleRequestAsync(headers: _headers, content: json)
+            );
         }
 
         [Theory]
         [MemberData(nameof(ReadFromJsonTestData))]
-        public async Task HttpContentGetFromJsonAsyncOverloadsWithoutJsonSerializerOptionsBehaveTheSameAsWithDefaultValue(string json)
+        public async Task HttpContentGetFromJsonAsyncOverloadsWithoutJsonSerializerOptionsBehaveTheSameAsWithDefaultValue(
+            string json
+        )
         {
             await HttpMessageHandlerLoopbackServer.CreateClientAndServerAsync(
                 async (handler, uri) =>
@@ -64,12 +76,14 @@ namespace System.Net.Http.Json.Functional.Tests
                         }
                         var request = new HttpRequestMessage(HttpMethod.Get, uri);
                         HttpResponseMessage response = await client.SendAsync(request);
-                        Person per1 = (Person) await response.Content.ReadFromJsonAsync(typeof(Person));
+                        Person per1 = (Person)
+                            await response.Content.ReadFromJsonAsync(typeof(Person));
                         per1.Validate();
 
                         request = new HttpRequestMessage(HttpMethod.Get, uri);
                         response = await client.SendAsync(request);
-                        Person per2 = (Person) await response.Content.ReadFromJsonAsync(typeof(Person), options: null);
+                        Person per2 = (Person)
+                            await response.Content.ReadFromJsonAsync(typeof(Person), options: null);
                         per2.Validate();
                         AssertPersonEquality(per1, per2);
 
@@ -80,12 +94,13 @@ namespace System.Net.Http.Json.Functional.Tests
 
                         request = new HttpRequestMessage(HttpMethod.Get, uri);
                         response = await client.SendAsync(request);
-                        per2 = await response.Content.ReadFromJsonAsync<Person>(options:null);
+                        per2 = await response.Content.ReadFromJsonAsync<Person>(options: null);
                         per2.Validate();
                         AssertPersonEquality(per1, per2);
                     }
                 },
-                server => server.HandleRequestAsync(headers: _headers, content: json));
+                server => server.HandleRequestAsync(headers: _headers, content: json)
+            );
         }
 
         public static IEnumerable<object[]> ReadFromJsonTestData()
@@ -114,7 +129,8 @@ namespace System.Net.Http.Json.Functional.Tests
                         Assert.Null(per);
                     }
                 },
-                server => server.HandleRequestAsync(headers: _headers, content: "null"));
+                server => server.HandleRequestAsync(headers: _headers, content: "null")
+            );
         }
 
         [Fact]
@@ -129,11 +145,17 @@ namespace System.Net.Http.Json.Functional.Tests
                         HttpResponseMessage response = await client.SendAsync(request);
 
                         // As of now, we pass the message body to the serializer even when its empty which causes the serializer to throw.
-                        JsonException ex = await Assert.ThrowsAsync<JsonException>(() => response.Content.ReadFromJsonAsync(typeof(Person)));
-                        Assert.Contains("Path: $ | LineNumber: 0 | BytePositionInLine: 0", ex.Message);
+                        JsonException ex = await Assert.ThrowsAsync<JsonException>(
+                            () => response.Content.ReadFromJsonAsync(typeof(Person))
+                        );
+                        Assert.Contains(
+                            "Path: $ | LineNumber: 0 | BytePositionInLine: 0",
+                            ex.Message
+                        );
                     }
                 },
-                server => server.HandleRequestAsync(headers: _headers));
+                server => server.HandleRequestAsync(headers: _headers)
+            );
         }
 
         [Fact]
@@ -156,7 +178,12 @@ namespace System.Net.Http.Json.Functional.Tests
                         person.Validate();
                     }
                 },
-                server => server.HandleRequestAsync(headers: customHeaders, content: Person.Create().Serialize()));
+                server =>
+                    server.HandleRequestAsync(
+                        headers: customHeaders,
+                        content: Person.Create().Serialize()
+                    )
+            );
         }
 
         [Fact]
@@ -175,11 +202,19 @@ namespace System.Net.Http.Json.Functional.Tests
                         var request = new HttpRequestMessage(HttpMethod.Get, uri);
                         HttpResponseMessage response = await client.SendAsync(request);
 
-                        InvalidOperationException ex = await Assert.ThrowsAsync<InvalidOperationException>(() => response.Content.ReadFromJsonAsync<Person>());
+                        InvalidOperationException ex =
+                            await Assert.ThrowsAsync<InvalidOperationException>(
+                                () => response.Content.ReadFromJsonAsync<Person>()
+                            );
                         Assert.IsType<ArgumentException>(ex.InnerException);
                     }
                 },
-                server => server.HandleRequestAsync(headers: customHeaders, content: Person.Create().Serialize()));
+                server =>
+                    server.HandleRequestAsync(
+                        headers: customHeaders,
+                        content: Person.Create().Serialize()
+                    )
+            );
         }
 
         [Fact]
@@ -194,7 +229,9 @@ namespace System.Net.Http.Json.Functional.Tests
                         var request = new HttpRequestMessage(HttpMethod.Get, uri);
                         HttpResponseMessage response = await client.SendAsync(request);
 
-                        Person per = Assert.IsType<Person>(await response.Content.ReadFromJsonAsync(typeof(Person)));
+                        Person per = Assert.IsType<Person>(
+                            await response.Content.ReadFromJsonAsync(typeof(Person))
+                        );
                         per.Validate();
 
                         request = new HttpRequestMessage(HttpMethod.Get, uri);
@@ -206,10 +243,19 @@ namespace System.Net.Http.Json.Functional.Tests
                 },
                 async server =>
                 {
-                    var headers = new List<HttpHeaderData> { new HttpHeaderData("Content-Type", "application/json; charset=utf-16") };
-                    await server.HandleRequestAsync(statusCode: HttpStatusCode.OK, headers: headers, bytes: Encoding.Unicode.GetBytes(json));
-                });
+                    var headers = new List<HttpHeaderData>
+                    {
+                        new HttpHeaderData("Content-Type", "application/json; charset=utf-16")
+                    };
+                    await server.HandleRequestAsync(
+                        statusCode: HttpStatusCode.OK,
+                        headers: headers,
+                        bytes: Encoding.Unicode.GetBytes(json)
+                    );
+                }
+            );
         }
+
         [Fact]
         public async Task EnsureDefaultJsonSerializerOptionsAsync()
         {
@@ -223,7 +269,8 @@ namespace System.Net.Http.Json.Functional.Tests
                         await response.Content.ReadFromJsonAsync(typeof(EnsureDefaultOptions));
                     }
                 },
-                server => server.HandleRequestAsync(headers: _headers, content: "{}"));
+                server => server.HandleRequestAsync(headers: _headers, content: "{}")
+            );
         }
 
         [Theory]
@@ -253,7 +300,12 @@ namespace System.Net.Http.Json.Functional.Tests
                         person.Validate();
                     }
                 },
-                server => server.HandleRequestAsync(headers: customHeaders, content: Person.Create().Serialize()));
+                server =>
+                    server.HandleRequestAsync(
+                        headers: customHeaders,
+                        content: Person.Create().Serialize()
+                    )
+            );
         }
     }
 }

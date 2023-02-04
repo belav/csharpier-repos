@@ -2,7 +2,7 @@
 
 public class Class1
 {
-    public byte[] Finalize ()
+    public byte[] Finalize()
     {
         return null;
     }

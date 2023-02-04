@@ -13,7 +13,12 @@ namespace WebApiHelpPageWebHost.UnitTest.Helpers
 {
     public static class ApiDescriptionHelpers
     {
-        public static ApiDescription GetApiDescription(HttpConfiguration config, string controllerName, string actionName, params string[] parameterNames)
+        public static ApiDescription GetApiDescription(
+            HttpConfiguration config,
+            string controllerName,
+            string actionName,
+            params string[] parameterNames
+        )
         {
             if (config == null)
             {
@@ -23,14 +28,30 @@ namespace WebApiHelpPageWebHost.UnitTest.Helpers
                 config.Formatters.Add(new JsonMediaTypeFormatter());
                 config.Routes.MapHttpRoute("Default", "{controller}");
             }
-            HashSet<string> parameterSet = new HashSet<string>(parameterNames, StringComparer.OrdinalIgnoreCase);
+            HashSet<string> parameterSet = new HashSet<string>(
+                parameterNames,
+                StringComparer.OrdinalIgnoreCase
+            );
             foreach (var apiDescription in config.Services.GetApiExplorer().ApiDescriptions)
             {
                 HttpActionDescriptor actionDescriptor = apiDescription.ActionDescriptor;
-                if (String.Equals(actionDescriptor.ControllerDescriptor.ControllerName, controllerName, StringComparison.OrdinalIgnoreCase) &&
-                    String.Equals(actionDescriptor.ActionName, actionName, StringComparison.OrdinalIgnoreCase))
+                if (
+                    String.Equals(
+                        actionDescriptor.ControllerDescriptor.ControllerName,
+                        controllerName,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                    && String.Equals(
+                        actionDescriptor.ActionName,
+                        actionName,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 {
-                    HashSet<string> actionParameterSet = new HashSet<string>(actionDescriptor.GetParameters().Select(p => p.ParameterName), StringComparer.OrdinalIgnoreCase);
+                    HashSet<string> actionParameterSet = new HashSet<string>(
+                        actionDescriptor.GetParameters().Select(p => p.ParameterName),
+                        StringComparer.OrdinalIgnoreCase
+                    );
                     if (parameterSet.SetEquals(actionParameterSet))
                     {
                         return apiDescription;

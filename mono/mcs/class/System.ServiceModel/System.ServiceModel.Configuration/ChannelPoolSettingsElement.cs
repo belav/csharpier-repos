@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -54,49 +54,51 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed class ChannelPoolSettingsElement
-         : ConfigurationElement
+    public sealed class ChannelPoolSettingsElement : ConfigurationElement
     {
-        public ChannelPoolSettingsElement () {
-        }
-
+        public ChannelPoolSettingsElement() { }
 
         // Properties
 
-        [ConfigurationProperty ("idleTimeout",
-             DefaultValue = "00:02:00",
-             Options = ConfigurationPropertyOptions.None)]
-        [TypeConverter (typeof (TimeSpanConverter))]
-        public TimeSpan IdleTimeout {
-            get { return (TimeSpan) base ["idleTimeout"]; }
-            set { base ["idleTimeout"] = value; }
+        [ConfigurationProperty(
+            "idleTimeout",
+            DefaultValue = "00:02:00",
+            Options = ConfigurationPropertyOptions.None
+        )]
+        [TypeConverter(typeof(TimeSpanConverter))]
+        public TimeSpan IdleTimeout
+        {
+            get { return (TimeSpan)base["idleTimeout"]; }
+            set { base["idleTimeout"] = value; }
         }
 
-        [ConfigurationProperty ("leaseTimeout",
-             DefaultValue = "00:10:00",
-             Options = ConfigurationPropertyOptions.None)]
-        [TypeConverter (typeof (TimeSpanConverter))]
-        public TimeSpan LeaseTimeout {
-            get { return (TimeSpan) base ["leaseTimeout"]; }
-            set { base ["leaseTimeout"] = value; }
+        [ConfigurationProperty(
+            "leaseTimeout",
+            DefaultValue = "00:10:00",
+            Options = ConfigurationPropertyOptions.None
+        )]
+        [TypeConverter(typeof(TimeSpanConverter))]
+        public TimeSpan LeaseTimeout
+        {
+            get { return (TimeSpan)base["leaseTimeout"]; }
+            set { base["leaseTimeout"] = value; }
         }
 
-        [ConfigurationProperty ("maxOutboundChannelsPerEndpoint",
-             DefaultValue = "10",
-             Options = ConfigurationPropertyOptions.None)]
-        [IntegerValidator (MinValue = 1,
-            MaxValue = int.MaxValue,
-            ExcludeRange = false)]
-        public int MaxOutboundChannelsPerEndpoint {
-            get { return (int) base ["maxOutboundChannelsPerEndpoint"]; }
-            set { base ["maxOutboundChannelsPerEndpoint"] = value; }
+        [ConfigurationProperty(
+            "maxOutboundChannelsPerEndpoint",
+            DefaultValue = "10",
+            Options = ConfigurationPropertyOptions.None
+        )]
+        [IntegerValidator(MinValue = 1, MaxValue = int.MaxValue, ExcludeRange = false)]
+        public int MaxOutboundChannelsPerEndpoint
+        {
+            get { return (int)base["maxOutboundChannelsPerEndpoint"]; }
+            set { base["maxOutboundChannelsPerEndpoint"] = value; }
         }
 
-        protected override ConfigurationPropertyCollection Properties {
+        protected override ConfigurationPropertyCollection Properties
+        {
             get { return base.Properties; }
         }
-
-
     }
-
 }

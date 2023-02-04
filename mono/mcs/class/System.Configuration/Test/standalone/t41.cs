@@ -3,58 +3,63 @@ using System.Configuration;
 
 public class MyElement : ConfigurationElement
 {
-    public MyElement ()
+    public MyElement() { }
+
+    [ConfigurationProperty("name", Options = ConfigurationPropertyOptions.IsKey)]
+    public string Name
     {
+        get { return (string)this["name"]; }
     }
 
-    [ConfigurationProperty ("name", Options = ConfigurationPropertyOptions.IsKey)]
-    public string Name {
-        get { return (string) this ["name"]; }
-    }
-    [ConfigurationProperty ("value")]
-    public string Value {
-        get { return (string) this ["value"]; }
+    [ConfigurationProperty("value")]
+    public string Value
+    {
+        get { return (string)this["value"]; }
     }
 }
 
-[ConfigurationCollection (typeof (MyElement), CollectionType = ConfigurationElementCollectionType.AddRemoveClearMapAlternate)]
+[ConfigurationCollection(
+    typeof(MyElement),
+    CollectionType = ConfigurationElementCollectionType.AddRemoveClearMapAlternate
+)]
 public class MyElementCollection : ConfigurationElementCollection
 {
-    protected override ConfigurationElement CreateNewElement ()
+    protected override ConfigurationElement CreateNewElement()
     {
-        return new MyElement ();
-    }
-    protected override object GetElementKey (ConfigurationElement e)
-    {
-        return ((MyElement) e).Name;
+        return new MyElement();
     }
 
-    public void Add (MyElement e)
+    protected override object GetElementKey(ConfigurationElement e)
     {
-        BaseAdd (e);
+        return ((MyElement)e).Name;
     }
 
-    protected override void BaseAdd (ConfigurationElement e)
+    public void Add(MyElement e)
     {
-        base.BaseAdd (e);
+        BaseAdd(e);
+    }
+
+    protected override void BaseAdd(ConfigurationElement e)
+    {
+        base.BaseAdd(e);
     }
 }
 
 public class MySection : ConfigurationSection
 {
-    [ConfigurationProperty ("MyElements")]
-    public MyElementCollection MyElements {
-        get { return (MyElementCollection) this ["MyElements"]; }
+    [ConfigurationProperty("MyElements")]
+    public MyElementCollection MyElements
+    {
+        get { return (MyElementCollection)this["MyElements"]; }
     }
 }
 
 public class Driver
 {
-    public static void Main ()
+    public static void Main()
     {
-        MySection ms = (MySection) ConfigurationManager.GetSection ("MySection");
+        MySection ms = (MySection)ConfigurationManager.GetSection("MySection");
         foreach (MyElement e in ms.MyElements)
-            Console.WriteLine (e.Name);
+            Console.WriteLine(e.Name);
     }
 }
-

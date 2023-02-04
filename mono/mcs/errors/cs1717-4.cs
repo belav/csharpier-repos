@@ -3,11 +3,11 @@
 // Compiler options: -warnaserror -warn:3
 
 class A
-{    
+{
     static int Value;
-    
-    void D ()
+
+    void D()
     {
-    A.Value = Value;
+        A.Value = Value;
     }
 }

@@ -26,7 +26,8 @@ public class ExpressionExtensionsTest
 
         Assert.Contains(
             CoreStrings.InvalidMemberExpression(expression),
-            Assert.Throws<ArgumentException>(() => expression.GetPropertyAccess()).Message);
+            Assert.Throws<ArgumentException>(() => expression.GetPropertyAccess()).Message
+        );
     }
 
     [ConditionalFact]
@@ -37,7 +38,8 @@ public class ExpressionExtensionsTest
 
         Assert.Contains(
             CoreStrings.InvalidMemberExpression(expression),
-            Assert.Throws<ArgumentException>(() => expression.GetPropertyAccess()).Message);
+            Assert.Throws<ArgumentException>(() => expression.GetPropertyAccess()).Message
+        );
     }
 
     [ConditionalFact]
@@ -94,7 +96,8 @@ public class ExpressionExtensionsTest
 
         Assert.Contains(
             CoreStrings.InvalidMembersExpression(expression),
-            Assert.Throws<ArgumentException>(() => expression.GetPropertyAccessList()).Message);
+            Assert.Throws<ArgumentException>(() => expression.GetPropertyAccessList()).Message
+        );
     }
 
     [ConditionalFact]
@@ -106,7 +109,8 @@ public class ExpressionExtensionsTest
 
         Assert.Contains(
             CoreStrings.InvalidMembersExpression(expression),
-            Assert.Throws<ArgumentException>(() => expression.GetPropertyAccessList()).Message);
+            Assert.Throws<ArgumentException>(() => expression.GetPropertyAccessList()).Message
+        );
     }
 
     [ConditionalFact]
@@ -138,7 +142,8 @@ public class ExpressionExtensionsTest
 
         Assert.Contains(
             CoreStrings.InvalidMemberExpression(expression),
-            Assert.Throws<ArgumentException>(() => expression.GetMemberAccess()).Message);
+            Assert.Throws<ArgumentException>(() => expression.GetMemberAccess()).Message
+        );
     }
 
     [ConditionalFact]
@@ -151,18 +156,21 @@ public class ExpressionExtensionsTest
             TenantId = 200
         };
 
-        Expression<Func<ModelBuilderTest.EntityWithFields, int>> expression = e => closure.CompanyId;
+        Expression<Func<ModelBuilderTest.EntityWithFields, int>> expression = e =>
+            closure.CompanyId;
 
         Assert.Contains(
             CoreStrings.InvalidMemberExpression(expression),
-            Assert.Throws<ArgumentException>(() => expression.GetMemberAccess()).Message);
+            Assert.Throws<ArgumentException>(() => expression.GetMemberAccess()).Message
+        );
     }
 
     [ConditionalFact]
     public void Get_member_access_should_handle_convert()
     {
         // Note: CompanyId is an int, so we are converting int -> long
-        Expression<Func<ModelBuilderTest.EntityWithFields, long>> fieldExpression = e => e.CompanyId;
+        Expression<Func<ModelBuilderTest.EntityWithFields, long>> fieldExpression = e =>
+            e.CompanyId;
 
         var memberInfo = fieldExpression.GetMemberAccess();
 
@@ -173,7 +181,8 @@ public class ExpressionExtensionsTest
     [ConditionalFact]
     public void Get_member_access_list_should_handle_convert()
     {
-        Expression<Func<ModelBuilderTest.EntityWithFields, object>> expression = e => new { e.Id, e.CompanyId };
+        Expression<Func<ModelBuilderTest.EntityWithFields, object>> expression = e =>
+            new { e.Id, e.CompanyId };
 
         var memberInfos = expression.GetMemberAccessList();
 
@@ -186,11 +195,13 @@ public class ExpressionExtensionsTest
     [ConditionalFact]
     public void Get_member_access_list_should_throw_when_invalid_expression()
     {
-        Expression<Func<ModelBuilderTest.EntityWithFields, object>> expression = e => new { P = e.Id + e.CompanyId };
+        Expression<Func<ModelBuilderTest.EntityWithFields, object>> expression = e =>
+            new { P = e.Id + e.CompanyId };
 
         Assert.Contains(
             CoreStrings.InvalidMembersExpression(expression),
-            Assert.Throws<ArgumentException>(() => expression.GetMemberAccessList()).Message);
+            Assert.Throws<ArgumentException>(() => expression.GetMemberAccessList()).Message
+        );
     }
 
     [ConditionalFact]
@@ -203,10 +214,12 @@ public class ExpressionExtensionsTest
             TenantId = 200
         };
 
-        Expression<Func<ModelBuilderTest.EntityWithFields, object>> expression = e => new { e.Id, closure.CompanyId };
+        Expression<Func<ModelBuilderTest.EntityWithFields, object>> expression = e =>
+            new { e.Id, closure.CompanyId };
 
         Assert.Contains(
             CoreStrings.InvalidMembersExpression(expression),
-            Assert.Throws<ArgumentException>(() => expression.GetMemberAccessList()).Message);
+            Assert.Throws<ArgumentException>(() => expression.GetMemberAccessList()).Message
+        );
     }
 }

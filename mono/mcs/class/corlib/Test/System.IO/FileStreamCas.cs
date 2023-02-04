@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,12 +35,12 @@ using System.Security;
 using System.Security.Permissions;
 using System.Threading;
 
-namespace MonoCasTests.System.IO {
-
+namespace MonoCasTests.System.IO
+{
     [TestFixture]
-    [Category ("CAS")]
-    public class FileStreamCas {
-
+    [Category("CAS")]
+    public class FileStreamCas
+    {
         private MonoTests.System.IO.FileStreamTest fst;
         private const int timeout = 30000;
         private string message;
@@ -50,204 +50,214 @@ namespace MonoCasTests.System.IO {
         static ManualResetEvent reset;
 
         [TestFixtureSetUp]
-        public void FixtureSetUp ()
+        public void FixtureSetUp()
         {
             // this occurs with a "clean" stack (full trust)
-            fst  = new MonoTests.System.IO.FileStreamTest ();
-            reset = new ManualResetEvent (false);
-            readfile = Path.GetTempFileName ();
-            writefile = Path.GetTempFileName ();
+            fst = new MonoTests.System.IO.FileStreamTest();
+            reset = new ManualResetEvent(false);
+            readfile = Path.GetTempFileName();
+            writefile = Path.GetTempFileName();
         }
 
         [TestFixtureTearDown]
-        public void FixtureTearDown ()
+        public void FixtureTearDown()
         {
-            reset.Close ();
-            if (File.Exists (readfile))
-                File.Delete (readfile);
-            if (File.Exists (writefile))
-                File.Delete (writefile);
+            reset.Close();
+            if (File.Exists(readfile))
+                File.Delete(readfile);
+            if (File.Exists(writefile))
+                File.Delete(writefile);
         }
 
         [SetUp]
-        public void SetUp ()
+        public void SetUp()
         {
             if (!SecurityManager.SecurityEnabled)
-                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+                Assert.Ignore("SecurityManager.SecurityEnabled is OFF");
         }
 
         // Partial Trust Tests - i.e. call "normal" unit with reduced privileges
 
         [Test]
-        [ExpectedException (typeof (SecurityException))]
-        public void PartialTrust_DenyUnrestricted_Failure ()
+        [ExpectedException(typeof(SecurityException))]
+        public void PartialTrust_DenyUnrestricted_Failure()
         {
-            try {
+            try
+            {
                 // SetUp/TearDown requires FileIOPermission
-                fst.SetUp ();
+                fst.SetUp();
                 // so does the call but that's the test ;-)
-                CallRestricted (fst);
+                CallRestricted(fst);
             }
-            finally {
-                fst.TearDown ();
+            finally
+            {
+                fst.TearDown();
             }
         }
 
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        private void CallRestricted (MonoTests.System.IO.FileStreamTest fst)
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        private void CallRestricted(MonoTests.System.IO.FileStreamTest fst)
         {
-            fst.TestDefaultProperties ();
+            fst.TestDefaultProperties();
         }
 
         [Test]
-        [FileIOPermission (SecurityAction.PermitOnly, Unrestricted = true)]
-        public void PartialTrust_PermitOnly_FileIOPermission_Success ()
+        [FileIOPermission(SecurityAction.PermitOnly, Unrestricted = true)]
+        public void PartialTrust_PermitOnly_FileIOPermission_Success()
         {
-            fst.SetUp ();
-            fst.TestCtr ();
-            fst.CtorAccess1Read2Read ();
-            fst.Write ();
-            fst.Length ();
-            fst.Flush ();
-            fst.TestDefaultProperties ();
-            fst.TestLock ();
-            fst.Seek ();
-            fst.TestSeek ();
-            fst.TestClose ();
-            fst.PositionAfterSetLength ();
-            fst.ReadBytePastEndOfStream ();
-            fst.TearDown ();
+            fst.SetUp();
+            fst.TestCtr();
+            fst.CtorAccess1Read2Read();
+            fst.Write();
+            fst.Length();
+            fst.Flush();
+            fst.TestDefaultProperties();
+            fst.TestLock();
+            fst.Seek();
+            fst.TestSeek();
+            fst.TestClose();
+            fst.PositionAfterSetLength();
+            fst.ReadBytePastEndOfStream();
+            fst.TearDown();
         }
 
         [Test]
-        [FileIOPermission (SecurityAction.PermitOnly, Unrestricted = true)]
-        [SecurityPermission (SecurityAction.PermitOnly, UnmanagedCode = true)]
-        public void PartialTrust_PermitOnly_FileIOPermissionUnmanagedCode_Success ()
+        [FileIOPermission(SecurityAction.PermitOnly, Unrestricted = true)]
+        [SecurityPermission(SecurityAction.PermitOnly, UnmanagedCode = true)]
+        public void PartialTrust_PermitOnly_FileIOPermissionUnmanagedCode_Success()
         {
-            fst.SetUp ();
-            fst.TestFlushNotOwningHandle ();
-            fst.TearDown ();
+            fst.SetUp();
+            fst.TestFlushNotOwningHandle();
+            fst.TearDown();
         }
 
         // test Demand by denying the required permissions
 
         [Test]
-        [SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
-        [ExpectedException (typeof (SecurityException))]
-        public void Ctor_IntPtrFileAccess ()
+        [SecurityPermission(SecurityAction.Deny, UnmanagedCode = true)]
+        [ExpectedException(typeof(SecurityException))]
+        public void Ctor_IntPtrFileAccess()
         {
-            new FileStream (IntPtr.Zero, FileAccess.Read);
+            new FileStream(IntPtr.Zero, FileAccess.Read);
         }
 
         [Test]
-        [SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
-        [ExpectedException (typeof (SecurityException))]
-        public void Ctor_IntPtrFileAccessBool ()
+        [SecurityPermission(SecurityAction.Deny, UnmanagedCode = true)]
+        [ExpectedException(typeof(SecurityException))]
+        public void Ctor_IntPtrFileAccessBool()
         {
-            new FileStream (IntPtr.Zero, FileAccess.Read, false);
+            new FileStream(IntPtr.Zero, FileAccess.Read, false);
         }
 
         [Test]
-        [SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
-        [ExpectedException (typeof (SecurityException))]
-        public void Ctor_IntPtrFileAccessBoolInt ()
+        [SecurityPermission(SecurityAction.Deny, UnmanagedCode = true)]
+        [ExpectedException(typeof(SecurityException))]
+        public void Ctor_IntPtrFileAccessBoolInt()
         {
-            new FileStream (IntPtr.Zero, FileAccess.Read, false, 0);
+            new FileStream(IntPtr.Zero, FileAccess.Read, false, 0);
         }
 
         [Test]
-        [SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
-        [ExpectedException (typeof (SecurityException))]
-        public void Ctor_IntPtrFileAccessBoolIntBool ()
+        [SecurityPermission(SecurityAction.Deny, UnmanagedCode = true)]
+        [ExpectedException(typeof(SecurityException))]
+        public void Ctor_IntPtrFileAccessBoolIntBool()
         {
-            new FileStream (IntPtr.Zero, FileAccess.Read, false, 0, false);
+            new FileStream(IntPtr.Zero, FileAccess.Read, false, 0, false);
         }
 
         // we use reflection to call FileStream as the Handle property is protected
-        // by a LinkDemand (which will be converted into full demand, i.e. a stack 
+        // by a LinkDemand (which will be converted into full demand, i.e. a stack
         // walk) when reflection is used (i.e. it gets testable).
 
         [Test]
-        [SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
-        [ExpectedException (typeof (SecurityException))]
-        public void Handle ()
+        [SecurityPermission(SecurityAction.Deny, UnmanagedCode = true)]
+        [ExpectedException(typeof(SecurityException))]
+        public void Handle()
         {
-            FileStream fs = File.OpenWrite (Path.GetTempFileName ());
-            try {
-                MethodInfo mi = typeof (FileStream).GetProperty ("Handle").GetGetMethod ();
-                mi.Invoke (fs, null);
+            FileStream fs = File.OpenWrite(Path.GetTempFileName());
+            try
+            {
+                MethodInfo mi = typeof(FileStream).GetProperty("Handle").GetGetMethod();
+                mi.Invoke(fs, null);
             }
-            finally {
-                fs.Close ();
+            finally
+            {
+                fs.Close();
             }
         }
 
         // async tests (for stack propagation)
 
-        private void ReadCallback (IAsyncResult ar)
+        private void ReadCallback(IAsyncResult ar)
         {
             FileStream s = (FileStream)ar.AsyncState;
-            s.EndRead (ar);
-            try {
+            s.EndRead(ar);
+            try
+            {
                 // can we do something bad here ?
-                Assert.IsNotNull (Environment.GetEnvironmentVariable ("USERNAME"));
+                Assert.IsNotNull(Environment.GetEnvironmentVariable("USERNAME"));
                 message = "Expected a SecurityException";
             }
-            catch (SecurityException) {
+            catch (SecurityException)
+            {
                 message = null;
-                reset.Set ();
+                reset.Set();
             }
-            catch (Exception e) {
-                message = e.ToString ();
+            catch (Exception e)
+            {
+                message = e.ToString();
             }
         }
 
         [Test]
-        [EnvironmentPermission (SecurityAction.Deny, Read = "USERNAME")]
-        public void AsyncRead ()
+        [EnvironmentPermission(SecurityAction.Deny, Read = "USERNAME")]
+        public void AsyncRead()
         {
-            FileStream fs = new FileStream (readfile, FileMode.OpenOrCreate);
+            FileStream fs = new FileStream(readfile, FileMode.OpenOrCreate);
             message = "AsyncRead";
-            reset.Reset ();
-            IAsyncResult r = fs.BeginRead (new byte[0], 0, 0, new AsyncCallback (ReadCallback), fs);
-            Assert.IsNotNull (r, "IAsyncResult");
-            if (!reset.WaitOne (timeout, true))
-                Assert.Ignore ("Timeout");
-            Assert.IsNull (message, message);
-            fs.Close ();
+            reset.Reset();
+            IAsyncResult r = fs.BeginRead(new byte[0], 0, 0, new AsyncCallback(ReadCallback), fs);
+            Assert.IsNotNull(r, "IAsyncResult");
+            if (!reset.WaitOne(timeout, true))
+                Assert.Ignore("Timeout");
+            Assert.IsNull(message, message);
+            fs.Close();
         }
 
-        private void WriteCallback (IAsyncResult ar)
+        private void WriteCallback(IAsyncResult ar)
         {
             FileStream s = (FileStream)ar.AsyncState;
-            s.EndWrite (ar);
-            try {
+            s.EndWrite(ar);
+            try
+            {
                 // can we do something bad here ?
-                Assert.IsNotNull (Environment.GetEnvironmentVariable ("USERNAME"));
+                Assert.IsNotNull(Environment.GetEnvironmentVariable("USERNAME"));
                 message = "Expected a SecurityException";
             }
-            catch (SecurityException) {
+            catch (SecurityException)
+            {
                 message = null;
-                reset.Set ();
+                reset.Set();
             }
-            catch (Exception e) {
-                message = e.ToString ();
+            catch (Exception e)
+            {
+                message = e.ToString();
             }
         }
 
         [Test]
-        [EnvironmentPermission (SecurityAction.Deny, Read = "USERNAME")]
-        public void AsyncWrite ()
+        [EnvironmentPermission(SecurityAction.Deny, Read = "USERNAME")]
+        public void AsyncWrite()
         {
-            FileStream fs = new FileStream (writefile, FileMode.OpenOrCreate);
+            FileStream fs = new FileStream(writefile, FileMode.OpenOrCreate);
             message = "AsyncWrite";
-            reset.Reset ();
-            IAsyncResult r = fs.BeginWrite (new byte[0], 0, 0, new AsyncCallback (WriteCallback), fs);
-            Assert.IsNotNull (r, "IAsyncResult");
-            if (!reset.WaitOne (timeout, true))
-                Assert.Ignore ("Timeout");
-            Assert.IsNull (message, message);
-            fs.Close ();
+            reset.Reset();
+            IAsyncResult r = fs.BeginWrite(new byte[0], 0, 0, new AsyncCallback(WriteCallback), fs);
+            Assert.IsNotNull(r, "IAsyncResult");
+            if (!reset.WaitOne(timeout, true))
+                Assert.Ignore("Timeout");
+            Assert.IsNull(message, message);
+            fs.Close();
         }
     }
 }

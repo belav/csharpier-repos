@@ -13,7 +13,13 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.ConvertToRecord), Shared]
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeFixProviderNames.ConvertToRecord
+        ),
+        Shared
+    ]
     internal class CSharpConvertToRecordCodeFixProvider : CodeFixProvider
     {
         /// <summary>
@@ -23,16 +29,15 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpConvertToRecordCodeFixProvider()
-        {
-        }
+        public CSharpConvertToRecordCodeFixProvider() { }
 
         public override FixAllProvider? GetFixAllProvider()
         {
             return null;
         }
 
-        public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(CS8865);
+        public override ImmutableArray<string> FixableDiagnosticIds =>
+            ImmutableArray.Create(CS8865);
 
         public override async Task RegisterCodeFixesAsync(CodeFixContext context)
         {
@@ -41,7 +46,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
             var cancellationToken = context.CancellationToken;
 
             // get the class declaration. The span should be on the base type in the base list
-            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            var root = await document
+                .GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
             var baseTypeSyntax = root.FindNode(span) as BaseTypeSyntax;
 
             var typeDeclaration = baseTypeSyntax?.GetAncestor<TypeDeclarationSyntax>();
@@ -50,8 +57,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
                 return;
             }
 
-            var action = await ConvertToRecordEngine.GetCodeActionAsync(
-                document, typeDeclaration, cancellationToken).ConfigureAwait(false);
+            var action = await ConvertToRecordEngine
+                .GetCodeActionAsync(document, typeDeclaration, cancellationToken)
+                .ConfigureAwait(false);
 
             if (action != null)
             {

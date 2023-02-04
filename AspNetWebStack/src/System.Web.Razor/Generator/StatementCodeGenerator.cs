@@ -19,11 +19,18 @@ namespace System.Web.Razor.Generator
 
             int startGeneratedCode = target.Start.CharacterIndex;
             int paddingCharCount;
-            generatedCode = CodeGeneratorPaddingHelper.PadStatement(context.Host, generatedCode, target, ref startGeneratedCode, out paddingCharCount);
+            generatedCode = CodeGeneratorPaddingHelper.PadStatement(
+                context.Host,
+                generatedCode,
+                target,
+                ref startGeneratedCode,
+                out paddingCharCount
+            );
 
             context.AddStatement(
                 generatedCode,
-                context.GenerateLinePragma(target, paddingCharCount));
+                context.GenerateLinePragma(target, paddingCharCount)
+            );
         }
 
         public override string ToString()

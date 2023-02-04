@@ -23,7 +23,10 @@ namespace Microsoft.CodeAnalysis.UnitTests
             // https://github.com/dotnet/roslyn/blob/8e3d62a30b833631baaa4e84c5892298f16a8c9e/src/Workspaces/SharedUtilitiesAndExtensions/Compiler/Core/Options/EditorConfig/EditorConfigStorageLocationExtensions.cs#L21
             Assert.Equal(
                 typeof(ImmutableDictionary<string, string>),
-                typeof(DictionaryAnalyzerConfigOptions).GetField("Options", BindingFlags.Instance | BindingFlags.NonPublic)?.FieldType);
+                typeof(DictionaryAnalyzerConfigOptions)
+                    .GetField("Options", BindingFlags.Instance | BindingFlags.NonPublic)
+                    ?.FieldType
+            );
         }
     }
 }

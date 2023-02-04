@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,12 +34,10 @@ namespace System.Xaml
 {
     public class XamlObjectWriterSettings : XamlWriterSettings
     {
-        public XamlObjectWriterSettings ()
-        {
-        }
+        public XamlObjectWriterSettings() { }
 
-        public XamlObjectWriterSettings (XamlObjectWriterSettings settings)
-            : base (settings)
+        public XamlObjectWriterSettings(XamlObjectWriterSettings settings)
+            : base(settings)
         {
             var s = settings;
 #if !__MOBILE__
@@ -66,22 +64,26 @@ namespace System.Xaml
         public EventHandler<XamlSetValueEventArgs> XamlSetValueHandler { get; set; }
 
 #if !__MOBILE__
-        [MonoTODO ("Ignored")]
+        [MonoTODO("Ignored")]
         public XamlAccessLevel AccessLevel { get; set; }
 #endif
 
         public INameScope ExternalNameScope { get; set; }
-        [MonoTODO ("Ignored")]
+
+        [MonoTODO("Ignored")]
         public bool IgnoreCanConvert { get; set; }
-        [MonoTODO ("Ignored")]
+
+        [MonoTODO("Ignored")]
         public bool PreferUnconvertedDictionaryKeys { get; set; }
 
         public bool RegisterNamesOnExternalNamescope { get; set; }
 
         public object RootObjectInstance { get; set; }
-        [MonoTODO ("Ignored")]
+
+        [MonoTODO("Ignored")]
         public bool SkipDuplicatePropertyCheck { get; set; }
-        [MonoTODO ("Ignored")]
+
+        [MonoTODO("Ignored")]
         public bool SkipProvideValueOnRoot { get; set; }
     }
 }

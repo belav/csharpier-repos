@@ -17,7 +17,11 @@ namespace System.Web.UI.WebControls
     /// Represents errors that occur when validating properties of a dynamic data source.
     /// </summary>
     [Serializable]
-    [SuppressMessage("Microsoft.Design", "CA1032:ImplementStandardExceptionConstructors", Justification = "SerializeObjectState used instead")]
+    [SuppressMessage(
+        "Microsoft.Design",
+        "CA1032:ImplementStandardExceptionConstructors",
+        Justification = "SerializeObjectState used instead"
+    )]
     public sealed class EntityDataSourceValidationException : Exception, IDynamicValidatorException
     {
         /// <summary>
@@ -61,7 +65,10 @@ namespace System.Web.UI.WebControls
         /// </summary>
         /// <param name="message">Exception message.</param>
         /// <param name="innerExceptions">Inner exceptions.</param>
-        internal EntityDataSourceValidationException(string message, Dictionary<string, Exception> innerExceptions)
+        internal EntityDataSourceValidationException(
+            string message,
+            Dictionary<string, Exception> innerExceptions
+        )
             : base(message)
         {
             InitializeExceptionState(innerExceptions);
@@ -108,7 +115,9 @@ namespace System.Web.UI.WebControls
             /// Initializes a new instance of the <see cref="EntityDataSourceValidationExceptionState"/> class.
             /// </summary>
             /// <param name="innerExceptions"></param>
-            public EntityDataSourceValidationExceptionState(Dictionary<string, Exception> innerExceptions)
+            public EntityDataSourceValidationExceptionState(
+                Dictionary<string, Exception> innerExceptions
+            )
             {
                 _innerExceptions = innerExceptions ?? new Dictionary<string, Exception>();
             }
@@ -118,10 +127,7 @@ namespace System.Web.UI.WebControls
             /// </summary>
             public Dictionary<string, Exception> InnerExceptions
             {
-                get
-                {
-                    return _innerExceptions;
-                }
+                get { return _innerExceptions; }
             }
 
             /// <summary>

@@ -39,7 +39,6 @@ using Mono.Cecil;
 
 namespace Mono.Linker.Steps
 {
-
     public class OutputStep : BaseStep
     {
         private Dictionary<UInt16, TargetArchitecture>? architectureMap;
@@ -55,156 +54,199 @@ namespace Mono.Linker.Steps
 
         readonly List<string> assembliesWritten;
 
-        public OutputStep ()
+        public OutputStep()
         {
-            assembliesWritten = new List<string> ();
+            assembliesWritten = new List<string>();
         }
 
-        TargetArchitecture CalculateArchitecture (TargetArchitecture readyToRunArch)
+        TargetArchitecture CalculateArchitecture(TargetArchitecture readyToRunArch)
         {
-            if (architectureMap == null) {
-                architectureMap = new Dictionary<UInt16, TargetArchitecture> ();
-                foreach (var os in Enum.GetValues (typeof (NativeOSOverride))) {
-                    ushort osVal = (ushort) (NativeOSOverride) os;
-                    foreach (var arch in Enum.GetValues (typeof (TargetArchitecture))) {
-                        ushort archVal = (ushort) (TargetArchitecture) arch;
-                        architectureMap.Add ((ushort) (archVal ^ osVal), (TargetArchitecture) arch);
+            if (architectureMap == null)
+            {
+                architectureMap = new Dictionary<UInt16, TargetArchitecture>();
+                foreach (var os in Enum.GetValues(typeof(NativeOSOverride)))
+                {
+                    ushort osVal = (ushort)(NativeOSOverride)os;
+                    foreach (var arch in Enum.GetValues(typeof(TargetArchitecture)))
+                    {
+                        ushort archVal = (ushort)(TargetArchitecture)arch;
+                        architectureMap.Add((ushort)(archVal ^ osVal), (TargetArchitecture)arch);
                     }
                 }
             }
 
-            if (architectureMap.TryGetValue ((ushort) readyToRunArch, out TargetArchitecture pureILArch)) {
+            if (
+                architectureMap.TryGetValue(
+                    (ushort)readyToRunArch,
+                    out TargetArchitecture pureILArch
+                )
+            )
+            {
                 return pureILArch;
             }
-            throw new BadImageFormatException ("unrecognized module attributes");
+            throw new BadImageFormatException("unrecognized module attributes");
         }
 
-        protected override bool ConditionToProcess ()
+        protected override bool ConditionToProcess()
         {
             return Context.ErrorsCount == 0;
         }
 
-        protected override void Process ()
+        protected override void Process()
         {
-            CheckOutputDirectory ();
-            OutputPInvokes ();
-            Tracer.Finish ();
+            CheckOutputDirectory();
+            OutputPInvokes();
+            Tracer.Finish();
         }
 
-        protected override void EndProcess ()
+        protected override void EndProcess()
         {
-            if (Context.AssemblyListFile != null) {
-                using (var w = File.CreateText (Context.AssemblyListFile)) {
-                    w.WriteLine ("[" + String.Join (", ", assembliesWritten.Select (a => "\"" + a + "\"").ToArray ()) + "]");
+            if (Context.AssemblyListFile != null)
+            {
+                using (var w = File.CreateText(Context.AssemblyListFile))
+                {
+                    w.WriteLine(
+                        "["
+                            + String.Join(
+                                ", ",
+                                assembliesWritten.Select(a => "\"" + a + "\"").ToArray()
+                            )
+                            + "]"
+                    );
                 }
             }
         }
 
-        void CheckOutputDirectory ()
+        void CheckOutputDirectory()
         {
-            if (Directory.Exists (Context.OutputDirectory))
+            if (Directory.Exists(Context.OutputDirectory))
                 return;
 
-            Directory.CreateDirectory (Context.OutputDirectory);
+            Directory.CreateDirectory(Context.OutputDirectory);
         }
 
-        protected override void ProcessAssembly (AssemblyDefinition assembly)
+        protected override void ProcessAssembly(AssemblyDefinition assembly)
         {
-            OutputAssembly (assembly);
+            OutputAssembly(assembly);
         }
 
-        protected void WriteAssembly (AssemblyDefinition assembly, string directory)
+        protected void WriteAssembly(AssemblyDefinition assembly, string directory)
         {
-            WriteAssembly (assembly, directory, SaveSymbols (assembly));
+            WriteAssembly(assembly, directory, SaveSymbols(assembly));
         }
 
-        protected virtual void WriteAssembly (AssemblyDefinition assembly, string directory, WriterParameters writerParameters)
+        protected virtual void WriteAssembly(
+            AssemblyDefinition assembly,
+            string directory,
+            WriterParameters writerParameters
+        )
         {
-            foreach (var module in assembly.Modules) {
+            foreach (var module in assembly.Modules)
+            {
                 // Write back pure IL even for crossgen-ed assemblies
-                if (module.IsCrossgened ()) {
+                if (module.IsCrossgened())
+                {
                     module.Attributes |= ModuleAttributes.ILOnly;
                     module.Attributes ^= ModuleAttributes.ILLibrary;
-                    module.Architecture = CalculateArchitecture (module.Architecture);
+                    module.Architecture = CalculateArchitecture(module.Architecture);
                 }
             }
 
-            string outputName = GetAssemblyFileName (assembly, directory);
-            try {
-                assembly.Write (outputName, writerParameters);
-            } catch (Exception e) {
+            string outputName = GetAssemblyFileName(assembly, directory);
+            try
+            {
+                assembly.Write(outputName, writerParameters);
+            }
+            catch (Exception e)
+            {
                 // We should be okay catching everything here, assembly.Write is all in Cecil and most of the state necessary to debug will be captured in assembly
-                throw new LinkerFatalErrorException (MessageContainer.CreateErrorMessage (null, DiagnosticId.FailedToWriteOutput, outputName), e);
+                throw new LinkerFatalErrorException(
+                    MessageContainer.CreateErrorMessage(
+                        null,
+                        DiagnosticId.FailedToWriteOutput,
+                        outputName
+                    ),
+                    e
+                );
             }
         }
 
-        void OutputAssembly (AssemblyDefinition assembly)
+        void OutputAssembly(AssemblyDefinition assembly)
         {
             string directory = Context.OutputDirectory;
 
-            CopyConfigFileIfNeeded (assembly, directory);
+            CopyConfigFileIfNeeded(assembly, directory);
 
-            var action = Annotations.GetAction (assembly);
-            Context.LogMessage ($"Output action: '{action,8}' assembly: '{assembly}'.");
+            var action = Annotations.GetAction(assembly);
+            Context.LogMessage($"Output action: '{action, 8}' assembly: '{assembly}'.");
 
-            switch (action) {
-            case AssemblyAction.Save:
-            case AssemblyAction.Link:
-            case AssemblyAction.AddBypassNGen:
-                WriteAssembly (assembly, directory);
-                CopySatelliteAssembliesIfNeeded (assembly, directory);
-                assembliesWritten.Add (GetOriginalAssemblyFileInfo (assembly).Name);
-                break;
-            case AssemblyAction.Copy:
-                CloseSymbols (assembly);
-                CopyAssembly (assembly, directory);
-                CopySatelliteAssembliesIfNeeded (assembly, directory);
-                assembliesWritten.Add (GetOriginalAssemblyFileInfo (assembly).Name);
-                break;
-            case AssemblyAction.Delete:
-                CloseSymbols (assembly);
-                DeleteAssembly (assembly, directory);
-                break;
-            default:
-                CloseSymbols (assembly);
-                break;
+            switch (action)
+            {
+                case AssemblyAction.Save:
+                case AssemblyAction.Link:
+                case AssemblyAction.AddBypassNGen:
+                    WriteAssembly(assembly, directory);
+                    CopySatelliteAssembliesIfNeeded(assembly, directory);
+                    assembliesWritten.Add(GetOriginalAssemblyFileInfo(assembly).Name);
+                    break;
+                case AssemblyAction.Copy:
+                    CloseSymbols(assembly);
+                    CopyAssembly(assembly, directory);
+                    CopySatelliteAssembliesIfNeeded(assembly, directory);
+                    assembliesWritten.Add(GetOriginalAssemblyFileInfo(assembly).Name);
+                    break;
+                case AssemblyAction.Delete:
+                    CloseSymbols(assembly);
+                    DeleteAssembly(assembly, directory);
+                    break;
+                default:
+                    CloseSymbols(assembly);
+                    break;
             }
         }
 
-        private void OutputPInvokes ()
+        private void OutputPInvokes()
         {
             if (Context.PInvokesListFile == null)
                 return;
 
-            using (var fs = File.Open (Path.Combine (Context.OutputDirectory, Context.PInvokesListFile), FileMode.Create)) {
-                var values = Context.PInvokes.Distinct ().OrderBy (l => l);
+            using (
+                var fs = File.Open(
+                    Path.Combine(Context.OutputDirectory, Context.PInvokesListFile),
+                    FileMode.Create
+                )
+            )
+            {
+                var values = Context.PInvokes.Distinct().OrderBy(l => l);
                 // Ignore warning, since we're just enabling analyzer for dogfooding
 #pragma warning disable IL2026
-                var jsonSerializer = new DataContractJsonSerializer (typeof (List<PInvokeInfo>));
-                jsonSerializer.WriteObject (fs, values);
+                var jsonSerializer = new DataContractJsonSerializer(typeof(List<PInvokeInfo>));
+                jsonSerializer.WriteObject(fs, values);
 #pragma warning restore IL2026
             }
         }
 
-        protected virtual void DeleteAssembly (AssemblyDefinition assembly, string directory)
+        protected virtual void DeleteAssembly(AssemblyDefinition assembly, string directory)
         {
-            var target = GetAssemblyFileName (assembly, directory);
-            if (File.Exists (target)) {
-                File.Delete (target);
-                File.Delete (target + ".mdb");
-                File.Delete (Path.ChangeExtension (target, "pdb"));
-                File.Delete (GetConfigFile (target));
+            var target = GetAssemblyFileName(assembly, directory);
+            if (File.Exists(target))
+            {
+                File.Delete(target);
+                File.Delete(target + ".mdb");
+                File.Delete(Path.ChangeExtension(target, "pdb"));
+                File.Delete(GetConfigFile(target));
             }
         }
 
-        void CloseSymbols (AssemblyDefinition assembly)
+        void CloseSymbols(AssemblyDefinition assembly)
         {
-            Annotations.CloseSymbolReader (assembly);
+            Annotations.CloseSymbolReader(assembly);
         }
 
-        WriterParameters SaveSymbols (AssemblyDefinition assembly)
+        WriterParameters SaveSymbols(AssemblyDefinition assembly)
         {
-            var parameters = new WriterParameters {
+            var parameters = new WriterParameters
+            {
                 DeterministicMvid = Context.DeterministicOutput
             };
 
@@ -215,90 +257,98 @@ namespace Mono.Linker.Steps
                 return parameters;
 
             // Use a string check to avoid a hard dependency on Mono.Cecil.Pdb
-            if (Environment.OSVersion.Platform != PlatformID.Win32NT && assembly.MainModule.SymbolReader.GetType ().FullName == "Mono.Cecil.Pdb.NativePdbReader")
+            if (
+                Environment.OSVersion.Platform != PlatformID.Win32NT
+                && assembly.MainModule.SymbolReader.GetType().FullName
+                    == "Mono.Cecil.Pdb.NativePdbReader"
+            )
                 return parameters;
 
             parameters.WriteSymbols = true;
             return parameters;
         }
 
-
-        void CopySatelliteAssembliesIfNeeded (AssemblyDefinition assembly, string directory)
+        void CopySatelliteAssembliesIfNeeded(AssemblyDefinition assembly, string directory)
         {
             if (!Annotations.ProcessSatelliteAssemblies)
                 return;
 
-            FileInfo original = GetOriginalAssemblyFileInfo (assembly);
-            string resourceFile = GetAssemblyResourceFileName (original.FullName);
+            FileInfo original = GetOriginalAssemblyFileInfo(assembly);
+            string resourceFile = GetAssemblyResourceFileName(original.FullName);
 
-            foreach (var subDirectory in Directory.EnumerateDirectories (original.DirectoryName!)) {
-                var satelliteAssembly = Path.Combine (subDirectory, resourceFile);
-                if (!File.Exists (satelliteAssembly))
+            foreach (var subDirectory in Directory.EnumerateDirectories(original.DirectoryName!))
+            {
+                var satelliteAssembly = Path.Combine(subDirectory, resourceFile);
+                if (!File.Exists(satelliteAssembly))
                     continue;
 
-                string cultureName = subDirectory.Substring (subDirectory.LastIndexOf (Path.DirectorySeparatorChar) + 1);
-                string culturePath = Path.Combine (directory, cultureName);
+                string cultureName = subDirectory.Substring(
+                    subDirectory.LastIndexOf(Path.DirectorySeparatorChar) + 1
+                );
+                string culturePath = Path.Combine(directory, cultureName);
 
-                Directory.CreateDirectory (culturePath);
-                File.Copy (satelliteAssembly, Path.Combine (culturePath, resourceFile), true);
+                Directory.CreateDirectory(culturePath);
+                File.Copy(satelliteAssembly, Path.Combine(culturePath, resourceFile), true);
             }
         }
 
-        void CopyConfigFileIfNeeded (AssemblyDefinition assembly, string directory)
+        void CopyConfigFileIfNeeded(AssemblyDefinition assembly, string directory)
         {
-            string config = GetConfigFile (GetOriginalAssemblyFileInfo (assembly).FullName);
-            if (!File.Exists (config))
+            string config = GetConfigFile(GetOriginalAssemblyFileInfo(assembly).FullName);
+            if (!File.Exists(config))
                 return;
 
-            string target = Path.GetFullPath (GetConfigFile (GetAssemblyFileName (assembly, directory)));
+            string target = Path.GetFullPath(
+                GetConfigFile(GetAssemblyFileName(assembly, directory))
+            );
 
             if (config == target)
                 return;
 
-            File.Copy (config, GetConfigFile (GetAssemblyFileName (assembly, directory)), true);
+            File.Copy(config, GetConfigFile(GetAssemblyFileName(assembly, directory)), true);
         }
 
-        static string GetAssemblyResourceFileName (string assembly)
+        static string GetAssemblyResourceFileName(string assembly)
         {
-            return Path.GetFileNameWithoutExtension (assembly) + ".resources.dll";
+            return Path.GetFileNameWithoutExtension(assembly) + ".resources.dll";
         }
 
-        static string GetConfigFile (string assembly)
+        static string GetConfigFile(string assembly)
         {
             return assembly + ".config";
         }
 
-        FileInfo GetOriginalAssemblyFileInfo (AssemblyDefinition assembly)
+        FileInfo GetOriginalAssemblyFileInfo(AssemblyDefinition assembly)
         {
-            return new FileInfo (Context.GetAssemblyLocation (assembly));
+            return new FileInfo(Context.GetAssemblyLocation(assembly));
         }
 
-        protected virtual void CopyAssembly (AssemblyDefinition assembly, string directory)
+        protected virtual void CopyAssembly(AssemblyDefinition assembly, string directory)
         {
-            FileInfo fi = GetOriginalAssemblyFileInfo (assembly);
-            string target = Path.GetFullPath (Path.Combine (directory, fi.Name));
+            FileInfo fi = GetOriginalAssemblyFileInfo(assembly);
+            string target = Path.GetFullPath(Path.Combine(directory, fi.Name));
             string source = fi.FullName;
 
             if (source == target)
                 return;
 
-            File.Copy (source, target, true);
+            File.Copy(source, target, true);
             if (!Context.LinkSymbols)
                 return;
 
             var mdb = source + ".mdb";
-            if (File.Exists (mdb))
-                File.Copy (mdb, target + ".mdb", true);
+            if (File.Exists(mdb))
+                File.Copy(mdb, target + ".mdb", true);
 
-            var pdb = Path.ChangeExtension (source, "pdb");
-            if (File.Exists (pdb))
-                File.Copy (pdb, Path.ChangeExtension (target, "pdb"), true);
+            var pdb = Path.ChangeExtension(source, "pdb");
+            if (File.Exists(pdb))
+                File.Copy(pdb, Path.ChangeExtension(target, "pdb"), true);
         }
 
-        protected virtual string GetAssemblyFileName (AssemblyDefinition assembly, string directory)
+        protected virtual string GetAssemblyFileName(AssemblyDefinition assembly, string directory)
         {
-            string file = GetOriginalAssemblyFileInfo (assembly).Name;
-            return Path.Combine (directory, file);
+            string file = GetOriginalAssemblyFileInfo(assembly).Name;
+            return Path.Combine(directory, file);
         }
     }
 }

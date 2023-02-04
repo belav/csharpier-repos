@@ -19,7 +19,8 @@ namespace Microsoft.Extensions.Localization;
 /// <remarks>This type is thread-safe.</remarks>
 public partial class ResourceManagerStringLocalizer : IStringLocalizer
 {
-    private readonly ConcurrentDictionary<string, object?> _missingManifestCache = new ConcurrentDictionary<string, object?>();
+    private readonly ConcurrentDictionary<string, object?> _missingManifestCache =
+        new ConcurrentDictionary<string, object?>();
     private readonly IResourceNamesCache _resourceNamesCache;
     private readonly ResourceManager _resourceManager;
     private readonly IResourceStringProvider _resourceStringProvider;
@@ -39,15 +40,15 @@ public partial class ResourceManagerStringLocalizer : IStringLocalizer
         Assembly resourceAssembly,
         string baseName,
         IResourceNamesCache resourceNamesCache,
-        ILogger logger)
+        ILogger logger
+    )
         : this(
             resourceManager,
             new AssemblyWrapper(resourceAssembly),
             baseName,
             resourceNamesCache,
-            logger)
-    {
-    }
+            logger
+        ) { }
 
     /// <summary>
     /// Intended for testing purposes only.
@@ -57,19 +58,20 @@ public partial class ResourceManagerStringLocalizer : IStringLocalizer
         AssemblyWrapper resourceAssemblyWrapper,
         string baseName,
         IResourceNamesCache resourceNamesCache,
-        ILogger logger)
+        ILogger logger
+    )
         : this(
-              resourceManager,
-              new ResourceManagerStringProvider(
-                  resourceNamesCache,
-                  resourceManager,
-                  resourceAssemblyWrapper.Assembly,
-                  baseName),
-              baseName,
-              resourceNamesCache,
-              logger)
-    {
-    }
+            resourceManager,
+            new ResourceManagerStringProvider(
+                resourceNamesCache,
+                resourceManager,
+                resourceAssemblyWrapper.Assembly,
+                baseName
+            ),
+            baseName,
+            resourceNamesCache,
+            logger
+        ) { }
 
     /// <summary>
     /// Intended for testing purposes only.
@@ -79,7 +81,8 @@ public partial class ResourceManagerStringLocalizer : IStringLocalizer
         IResourceStringProvider resourceStringProvider,
         string baseName,
         IResourceNamesCache resourceNamesCache,
-        ILogger logger)
+        ILogger logger
+    )
     {
         if (resourceManager == null)
         {
@@ -125,7 +128,12 @@ public partial class ResourceManagerStringLocalizer : IStringLocalizer
 
             var value = GetStringSafely(name, null);
 
-            return new LocalizedString(name, value ?? name, resourceNotFound: value == null, searchedLocation: _resourceBaseName);
+            return new LocalizedString(
+                name,
+                value ?? name,
+                resourceNotFound: value == null,
+                searchedLocation: _resourceBaseName
+            );
         }
     }
 
@@ -142,7 +150,12 @@ public partial class ResourceManagerStringLocalizer : IStringLocalizer
             var format = GetStringSafely(name, null);
             var value = string.Format(CultureInfo.CurrentCulture, format ?? name, arguments);
 
-            return new LocalizedString(name, value, resourceNotFound: format == null, searchedLocation: _resourceBaseName);
+            return new LocalizedString(
+                name,
+                value,
+                resourceNotFound: format == null,
+                searchedLocation: _resourceBaseName
+            );
         }
     }
 
@@ -156,7 +169,10 @@ public partial class ResourceManagerStringLocalizer : IStringLocalizer
     /// <param name="includeParentCultures">Whether to include parent cultures in the search for a resource.</param>
     /// <param name="culture">The <see cref="CultureInfo"/> to get strings for.</param>
     /// <returns>The strings.</returns>
-    protected IEnumerable<LocalizedString> GetAllStrings(bool includeParentCultures, CultureInfo culture)
+    protected IEnumerable<LocalizedString> GetAllStrings(
+        bool includeParentCultures,
+        CultureInfo culture
+    )
     {
         if (culture == null)
         {
@@ -170,7 +186,12 @@ public partial class ResourceManagerStringLocalizer : IStringLocalizer
         foreach (var name in resourceNames ?? Enumerable.Empty<string>())
         {
             var value = GetStringSafely(name, culture);
-            yield return new LocalizedString(name, value ?? name, resourceNotFound: value == null, searchedLocation: _resourceBaseName);
+            yield return new LocalizedString(
+                name,
+                value ?? name,
+                resourceNotFound: value == null,
+                searchedLocation: _resourceBaseName
+            );
         }
     }
 
@@ -219,7 +240,10 @@ public partial class ResourceManagerStringLocalizer : IStringLocalizer
 
         while (true)
         {
-            var cultureResourceNames = _resourceStringProvider.GetAllResourceStrings(currentCulture, false);
+            var cultureResourceNames = _resourceStringProvider.GetAllResourceStrings(
+                currentCulture,
+                false
+            );
 
             if (cultureResourceNames != null)
             {
@@ -241,7 +265,9 @@ public partial class ResourceManagerStringLocalizer : IStringLocalizer
 
         if (!hasAnyCultures)
         {
-            throw new MissingManifestResourceException(Resources.Localization_MissingManifest_Parent);
+            throw new MissingManifestResourceException(
+                Resources.Localization_MissingManifest_Parent
+            );
         }
 
         return resourceNames;
@@ -249,7 +275,17 @@ public partial class ResourceManagerStringLocalizer : IStringLocalizer
 
     private static partial class Log
     {
-        [LoggerMessage(1, LogLevel.Debug, $"{nameof(ResourceManagerStringLocalizer)} searched for '{{Key}}' in '{{LocationSearched}}' with culture '{{Culture}}'.", EventName = "SearchedLocation")]
-        public static partial void SearchedLocation(ILogger logger, string key, string locationSearched, CultureInfo culture);
+        [LoggerMessage(
+            1,
+            LogLevel.Debug,
+            $"{nameof(ResourceManagerStringLocalizer)} searched for '{{Key}}' in '{{LocationSearched}}' with culture '{{Culture}}'.",
+            EventName = "SearchedLocation"
+        )]
+        public static partial void SearchedLocation(
+            ILogger logger,
+            string key,
+            string locationSearched,
+            CultureInfo culture
+        );
     }
 }

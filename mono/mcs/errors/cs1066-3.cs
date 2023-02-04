@@ -4,12 +4,10 @@
 
 interface I
 {
-    void Method (int i);
+    void Method(int i);
 }
 
 class C : I
 {
-    void I.Method (int x = 9)
-    {
-    }
+    void I.Method(int x = 9) { }
 }

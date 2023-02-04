@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -219,7 +219,6 @@ namespace System.ServiceModel
         Text,
         Mtom,
     }
-
 }
 
 namespace System.ServiceModel // used to be S.SM.Ch
@@ -336,7 +335,6 @@ namespace System.ServiceModel.Channels
         Ordered,
         Unordered,
     }
-
 }
 
 namespace System.ServiceModel.Description
@@ -406,7 +404,6 @@ namespace System.ServiceModel.Security
         MembershipProvider,
         Custom,
     }
-
 }
 
 namespace System.ServiceModel.Security.Tokens

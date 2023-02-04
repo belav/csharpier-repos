@@ -39,7 +39,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             // given names in reverse order.  So, for example, if the strings are ["a", "b"], the query
             // variable is represented by the expression TRANSPARENT.b.a where TRANSPARENT is a parameter
             // of the current lambda expression.
-            public readonly Dictionary<RangeVariableSymbol, ArrayBuilder<string>> allRangeVariables = new Dictionary<RangeVariableSymbol, ArrayBuilder<string>>();
+            public readonly Dictionary<
+                RangeVariableSymbol,
+                ArrayBuilder<string>
+            > allRangeVariables = new Dictionary<RangeVariableSymbol, ArrayBuilder<string>>();
 
             public static RangeVariableMap RangeVariableMap(params RangeVariableSymbol[] parameters)
             {
@@ -61,17 +64,29 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return result;
             }
 
-            internal RangeVariableSymbol AddRangeVariable(Binder binder, SyntaxToken identifier, BindingDiagnosticBag diagnostics)
+            internal RangeVariableSymbol AddRangeVariable(
+                Binder binder,
+                SyntaxToken identifier,
+                BindingDiagnosticBag diagnostics
+            )
             {
                 string name = identifier.ValueText;
-                var result = new RangeVariableSymbol(name, binder.ContainingMemberOrLambda, identifier.GetLocation());
+                var result = new RangeVariableSymbol(
+                    name,
+                    binder.ContainingMemberOrLambda,
+                    identifier.GetLocation()
+                );
                 bool error = false;
 
                 foreach (var existingRangeVariable in allRangeVariables.Keys)
                 {
                     if (existingRangeVariable.Name == name)
                     {
-                        diagnostics.Add(ErrorCode.ERR_QueryDuplicateRangeVariable, identifier.GetLocation(), name);
+                        diagnostics.Add(
+                            ErrorCode.ERR_QueryDuplicateRangeVariable,
+                            identifier.GetLocation(),
+                            name
+                        );
                         error = true;
                     }
                 }
@@ -106,7 +121,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             internal RangeVariableSymbol TransparentRangeVariable(Binder binder)
             {
                 var transparentIdentifier = TransparentRangeVariableName();
-                return new RangeVariableSymbol(transparentIdentifier, binder.ContainingMemberOrLambda, null, true);
+                return new RangeVariableSymbol(
+                    transparentIdentifier,
+                    binder.ContainingMemberOrLambda,
+                    null,
+                    true
+                );
             }
 
             public void Clear()
@@ -114,7 +134,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 fromExpression = null;
                 rangeVariable = null;
                 selectOrGroup = null;
-                foreach (var b in allRangeVariables.Values) b.Free();
+                foreach (var b in allRangeVariables.Values)
+                    b.Free();
                 allRangeVariables.Clear();
                 clauses.Clear();
             }

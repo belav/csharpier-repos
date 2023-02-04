@@ -33,25 +33,24 @@ using MonoTests.System.Threading.Tasks;
 
 namespace MonoTests.System.Collections.Concurrent
 {
-    
-    
     [TestFixture()]
     public class ConcurrentQueueTests
     {
         ConcurrentQueue<int> queue;
-        
+
         [SetUpAttribute]
         public void Setup()
         {
             queue = new ConcurrentQueue<int>();
-            for (int i = 0; i < 10; i++) {
+            for (int i = 0; i < 10; i++)
+            {
                 queue.Enqueue(i);
             }
         }
-        
+
         [Test]
-        [Category ("MultiThreaded")]
-        public void StressEnqueueTestCase ()
+        [Category("MultiThreaded")]
+        public void StressEnqueueTestCase()
         {
             /*ParallelTestHelper.Repeat (delegate {
                 queue = new ConcurrentQueue<int> ();
@@ -75,13 +74,13 @@ namespace MonoTests.System.Collections.Concurrent
                 for (int i = 0; i < threads; i++)
                     Assert.AreEqual (count, values[i], "#" + i);
             });*/
-            
-            CollectionStressTestHelper.AddStressTest (new ConcurrentQueue<int> ());
+
+            CollectionStressTestHelper.AddStressTest(new ConcurrentQueue<int>());
         }
-        
+
         [Test]
-        [Category ("MultiThreaded")]
-        public void StressDequeueTestCase ()
+        [Category("MultiThreaded")]
+        public void StressDequeueTestCase()
         {
             /*ParallelTestHelper.Repeat (delegate {
                 queue = new ConcurrentQueue<int> ();
@@ -113,39 +112,53 @@ namespace MonoTests.System.Collections.Concurrent
                 
                 Assert.AreEqual (expected, actual, "#3");
             });*/
-            
-            CollectionStressTestHelper.RemoveStressTest (new ConcurrentQueue<int> (), CheckOrderingType.InOrder);
+
+            CollectionStressTestHelper.RemoveStressTest(
+                new ConcurrentQueue<int>(),
+                CheckOrderingType.InOrder
+            );
         }
-        
+
         [Test]
-        [Category ("MultiThreaded")]
-        public void StressTryPeekTestCase ()
+        [Category("MultiThreaded")]
+        public void StressTryPeekTestCase()
         {
-            ParallelTestHelper.Repeat (delegate {
-                var queue = new ConcurrentQueue<object> ();
-                queue.Enqueue (new object());
-                
-                const int threads = 10;
-                int threadCounter = 0;
-                bool success = true;
-                
-                ParallelTestHelper.ParallelStressTest (queue, (q) => {
-                    int threadId = Interlocked.Increment (ref threadCounter);
-                    object temp;
-                    if (threadId < threads)
-                    {
-                        while (queue.TryPeek (out temp))
-                            if (temp == null)
-                                success = false;
-                    } else {
-                        queue.TryDequeue (out temp);
-                    }
-                }, threads);
-                
-                Assert.IsTrue (success, "TryPeek returned unexpected null value.");
-            }, 10);
+            ParallelTestHelper.Repeat(
+                delegate
+                {
+                    var queue = new ConcurrentQueue<object>();
+                    queue.Enqueue(new object());
+
+                    const int threads = 10;
+                    int threadCounter = 0;
+                    bool success = true;
+
+                    ParallelTestHelper.ParallelStressTest(
+                        queue,
+                        (q) =>
+                        {
+                            int threadId = Interlocked.Increment(ref threadCounter);
+                            object temp;
+                            if (threadId < threads)
+                            {
+                                while (queue.TryPeek(out temp))
+                                    if (temp == null)
+                                        success = false;
+                            }
+                            else
+                            {
+                                queue.TryDequeue(out temp);
+                            }
+                        },
+                        threads
+                    );
+
+                    Assert.IsTrue(success, "TryPeek returned unexpected null value.");
+                },
+                10
+            );
         }
-        
+
         [Test]
         public void CountTestCase()
         {
@@ -156,18 +169,19 @@ namespace MonoTests.System.Collections.Concurrent
             queue.TryDequeue(out value);
             Assert.AreEqual(8, queue.Count, "#2");
         }
-        
+
         //[Ignore]
         [Test]
         public void EnumerateTestCase()
         {
             string s = string.Empty;
-            foreach (int i in queue) {
+            foreach (int i in queue)
+            {
                 s += i;
             }
             Assert.AreEqual("0123456789", s, "#1 : " + s);
         }
-        
+
         [Test()]
         public void TryPeekTestCase()
         {
@@ -183,7 +197,7 @@ namespace MonoTests.System.Collections.Concurrent
             queue.TryPeek(out value);
             Assert.AreEqual(2, value, "#5 : " + value);
         }
-        
+
         [Test()]
         public void TryDequeueTestCase()
         {
@@ -194,81 +208,83 @@ namespace MonoTests.System.Collections.Concurrent
             Assert.IsTrue(queue.TryDequeue(out value), "#3");
             Assert.AreEqual(1, value, "#4");
         }
-        
+
         [Test()]
         public void TryDequeueEmptyTestCase()
         {
             int value;
-            queue = new ConcurrentQueue<int> ();
+            queue = new ConcurrentQueue<int>();
             queue.Enqueue(1);
             Assert.IsTrue(queue.TryDequeue(out value), "#1");
             Assert.IsFalse(queue.TryDequeue(out value), "#2");
             Assert.IsTrue(queue.IsEmpty, "#3");
         }
-        
+
         [Test]
         public void ToArrayTest()
         {
             int[] array = queue.ToArray();
             string s = string.Empty;
-            foreach (int i in array) {
+            foreach (int i in array)
+            {
                 s += i;
             }
             Assert.AreEqual("0123456789", s, "#1 : " + s);
             queue.CopyTo(array, 0);
             s = string.Empty;
-            foreach (int i in array) {
+            foreach (int i in array)
+            {
                 s += i;
             }
             Assert.AreEqual("0123456789", s, "#2 : " + s);
         }
 
-        [Test, ExpectedException (typeof (ArgumentNullException))]
-        public void ToExistingArray_Null ()
+        [Test, ExpectedException(typeof(ArgumentNullException))]
+        public void ToExistingArray_Null()
         {
-            queue.CopyTo (null, 0);
+            queue.CopyTo(null, 0);
         }
 
-        [Test, ExpectedException (typeof (ArgumentOutOfRangeException))]
-        public void ToExistingArray_OutOfRange ()
+        [Test, ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void ToExistingArray_OutOfRange()
         {
-            queue.CopyTo (new int[3], -1);
+            queue.CopyTo(new int[3], -1);
         }
 
-        [Test, ExpectedException (typeof (ArgumentException))]
-        public void ToExistingArray_IndexOverflow ()
+        [Test, ExpectedException(typeof(ArgumentException))]
+        public void ToExistingArray_IndexOverflow()
         {
-            queue.CopyTo (new int[3], 4);
+            queue.CopyTo(new int[3], 4);
         }
 
-        [Test, ExpectedException (typeof (ArgumentException))]
-        public void ToExistingArray_Overflow ()
+        [Test, ExpectedException(typeof(ArgumentException))]
+        public void ToExistingArray_Overflow()
         {
-            queue.CopyTo (new int[3], 0);
+            queue.CopyTo(new int[3], 0);
         }
 
-        static WeakReference CreateWeakReference (object obj)
+        static WeakReference CreateWeakReference(object obj)
         {
-            return new WeakReference (obj);
+            return new WeakReference(obj);
         }
 
         [Test]
         // This depends on precise stack scanning
-        [Category ("NotWorking")]
-        public void TryDequeueReferenceTest ()
+        [Category("NotWorking")]
+        public void TryDequeueReferenceTest()
         {
-            var obj = new Object ();
+            var obj = new Object();
             var weakReference = CreateWeakReference(obj);
-            var queue = new ConcurrentQueue<object> ();
+            var queue = new ConcurrentQueue<object>();
 
-            queue.Enqueue (obj);
-            queue.TryDequeue (out obj);
+            queue.Enqueue(obj);
+            queue.TryDequeue(out obj);
             obj = null;
 
-            GC.Collect ();
-            GC.WaitForPendingFinalizers ();
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
 
-            Assert.IsFalse (weakReference.IsAlive);
+            Assert.IsFalse(weakReference.IsAlive);
         }
     }
 }

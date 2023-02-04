@@ -29,50 +29,49 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil.Metadata {
-
-    internal sealed class TypeSpecTable : IMetadataTable {
-
+namespace Mono.Cecil.Metadata
+{
+    internal sealed class TypeSpecTable : IMetadataTable
+    {
         public const int RId = 0x1b;
 
         RowCollection m_rows;
 
-        public TypeSpecRow this [int index] {
-            get { return m_rows [index] as TypeSpecRow; }
-            set { m_rows [index] = value; }
+        public TypeSpecRow this[int index]
+        {
+            get { return m_rows[index] as TypeSpecRow; }
+            set { m_rows[index] = value; }
         }
 
-        public RowCollection Rows {
+        public RowCollection Rows
+        {
             get { return m_rows; }
             set { m_rows = value; }
         }
 
-        public int Id {
+        public int Id
+        {
             get { return RId; }
         }
 
-        internal TypeSpecTable ()
-        {
-        }
+        internal TypeSpecTable() { }
 
-        public void Accept (IMetadataTableVisitor visitor)
+        public void Accept(IMetadataTableVisitor visitor)
         {
-            visitor.VisitTypeSpecTable (this);
-            this.Rows.Accept (visitor.GetRowVisitor ());
+            visitor.VisitTypeSpecTable(this);
+            this.Rows.Accept(visitor.GetRowVisitor());
         }
     }
 
-    internal sealed class TypeSpecRow : IMetadataRow {
-
+    internal sealed class TypeSpecRow : IMetadataRow
+    {
         public uint Signature;
 
-        internal TypeSpecRow ()
-        {
-        }
+        internal TypeSpecRow() { }
 
-        public void Accept (IMetadataRowVisitor visitor)
+        public void Accept(IMetadataRowVisitor visitor)
         {
-            visitor.VisitTypeSpecRow (this);
+            visitor.VisitTypeSpecRow(this);
         }
     }
 }

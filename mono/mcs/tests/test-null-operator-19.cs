@@ -2,7 +2,7 @@ using System;
 
 class C
 {
-    public S Acceleration { get; set;}
+    public S Acceleration { get; set; }
 }
 
 struct S
@@ -12,13 +12,13 @@ struct S
 
 class X
 {
-    public static int Main ()
+    public static int Main()
     {
         var c = new C();
 
         var g = c?.Acceleration.X;
-        Console.WriteLine (g.GetType ());
-        if (g.GetType () != typeof(double))
+        Console.WriteLine(g.GetType());
+        if (g.GetType() != typeof(double))
             return 1;
 
         return 0;

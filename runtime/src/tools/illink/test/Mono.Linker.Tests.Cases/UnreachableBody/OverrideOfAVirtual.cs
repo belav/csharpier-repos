@@ -3,18 +3,18 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 
 namespace Mono.Linker.Tests.Cases.UnreachableBody
 {
-    [SetupLinkerArgument ("--enable-opt", "unreachablebodies")]
+    [SetupLinkerArgument("--enable-opt", "unreachablebodies")]
     public class OverrideOfAVirtual
     {
-        public static void Main ()
+        public static void Main()
         {
-            UsedToMarkMethod (null);
+            UsedToMarkMethod(null);
         }
 
         [Kept]
-        static void UsedToMarkMethod (Foo f)
+        static void UsedToMarkMethod(Foo f)
         {
-            f.Method ();
+            f.Method();
         }
 
         [Kept]
@@ -22,29 +22,25 @@ namespace Mono.Linker.Tests.Cases.UnreachableBody
         {
             [Kept]
             [ExpectBodyModified]
-            public virtual void Method ()
+            public virtual void Method()
             {
-                UsedByMethod ();
+                UsedByMethod();
             }
 
-            void UsedByMethod ()
-            {
-            }
+            void UsedByMethod() { }
         }
 
         [Kept]
-        [KeptBaseType (typeof (Base))]
+        [KeptBaseType(typeof(Base))]
         class Foo : Base
         {
             // A callvirt to Base.Method() appears in the IL so this override can be removed entirely
-            public override void Method ()
+            public override void Method()
             {
-                UsedByMethod ();
+                UsedByMethod();
             }
 
-            void UsedByMethod ()
-            {
-            }
+            void UsedByMethod() { }
         }
     }
 }

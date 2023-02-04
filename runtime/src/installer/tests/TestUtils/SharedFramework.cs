@@ -79,7 +79,8 @@ namespace Microsoft.DotNet.CoreSetup.Test
             string testPackage,
             string testPackageVersion,
             JsonObject testAssemblyVersionInfo = null,
-            string testAssembly = null)
+            string testAssembly = null
+        )
         {
             JsonObject depsjson = (JsonObject)JsonObject.Parse(File.ReadAllText(jsonFile));
 
@@ -88,7 +89,8 @@ namespace Microsoft.DotNet.CoreSetup.Test
 
             JsonObject targetsValue = (JsonObject)depsjson["targets"].AsObject().First().Value;
 
-            JsonObject packageDependencies = (JsonObject)targetsValue[fxNameWithVersion]["dependencies"];
+            JsonObject packageDependencies = (JsonObject)
+                targetsValue[fxNameWithVersion]["dependencies"];
             packageDependencies.Add(testPackage, (JsonNode)testPackageVersion);
 
             if (testAssemblyVersionInfo == null)
@@ -96,21 +98,24 @@ namespace Microsoft.DotNet.CoreSetup.Test
                 testAssemblyVersionInfo = new JsonObject();
             }
 
-            targetsValue.Add(testPackageWithVersion, new JsonObject
-            {
-                ["runtime"] = new JsonObject
+            targetsValue.Add(
+                testPackageWithVersion,
+                new JsonObject
                 {
-                    [testAssembly] = testAssemblyVersionInfo
+                    ["runtime"] = new JsonObject { [testAssembly] = testAssemblyVersionInfo }
                 }
-            });
+            );
 
             JsonObject libraries = (JsonObject)depsjson["libraries"];
-            libraries.Add(testPackageWithVersion, new JsonObject
-            {
-                ["type"] = "assemblyreference",
-                ["serviceable"] = false,
-                ["sha512"] = ""
-            });
+            libraries.Add(
+                testPackageWithVersion,
+                new JsonObject
+                {
+                    ["type"] = "assemblyreference",
+                    ["serviceable"] = false,
+                    ["sha512"] = ""
+                }
+            );
 
             File.WriteAllText(jsonFile, depsjson.ToString());
         }

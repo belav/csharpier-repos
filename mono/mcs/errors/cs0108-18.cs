@@ -9,6 +9,6 @@ interface IA
 
 interface IB : IA
 {
-    new void Foo ();
-    void Foo (int a);
+    new void Foo();
+    void Foo(int a);
 }

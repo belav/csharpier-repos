@@ -23,7 +23,7 @@
 // making a combined work based on this library.  Thus, the terms and
 // conditions of the GNU General Public License cover the whole
 // combination.
-// 
+//
 // As a special exception, the copyright holders of this library give you
 // permission to link this library with independent modules to produce an
 // executable, regardless of the license terms of these independent
@@ -38,9 +38,8 @@
 
 using System;
 
-namespace ICSharpCode.SharpZipLib.Zip.Compression.Streams 
+namespace ICSharpCode.SharpZipLib.Zip.Compression.Streams
 {
-    
     /// <summary>
     /// This class allows us to retrieve a specified number of bits from
     /// the input buffer, as well as copy big byte blocks.
@@ -56,16 +55,18 @@ namespace ICSharpCode.SharpZipLib.Zip.Compression.Streams
     ///
     /// authors of the original java version : John Leuner, Jochen Hoenicke
     /// </summary>
-    [System.ObsoleteAttribute("This assembly has been deprecated. Please use https://www.nuget.org/packages/SharpZipLib/ instead.")]
+    [System.ObsoleteAttribute(
+        "This assembly has been deprecated. Please use https://www.nuget.org/packages/SharpZipLib/ instead."
+    )]
     public class StreamManipulator
     {
         private byte[] window;
         private int window_start = 0;
         private int window_end = 0;
-        
+
         private uint buffer = 0;
         private int bits_in_buffer = 0;
-        
+
         /// <summary>
         /// Get the next n bits but don't increase input pointer.  n must be
         /// less or equal 16 and if this call succeeds, you must drop
@@ -76,17 +77,21 @@ namespace ICSharpCode.SharpZipLib.Zip.Compression.Streams
         /// </returns>
         public int PeekBits(int n)
         {
-            if (bits_in_buffer < n) {
-                if (window_start == window_end) {
+            if (bits_in_buffer < n)
+            {
+                if (window_start == window_end)
+                {
                     return -1; // ok
                 }
-                buffer |= (uint)((window[window_start++] & 0xff |
-                                 (window[window_start++] & 0xff) << 8) << bits_in_buffer);
+                buffer |= (uint)(
+                    (window[window_start++] & 0xff | (window[window_start++] & 0xff) << 8)
+                    << bits_in_buffer
+                );
                 bits_in_buffer += 16;
             }
             return (int)(buffer & ((1 << n) - 1));
         }
-        
+
         /// <summary>
         /// Drops the next n bits from the input.  You should have called PeekBits
         /// with a bigger or equal n before, to make sure that enough bits are in
@@ -97,7 +102,7 @@ namespace ICSharpCode.SharpZipLib.Zip.Compression.Streams
             buffer >>= n;
             bits_in_buffer -= n;
         }
-        
+
         /// <summary>
         /// Gets the next n bits and increases input pointer.  This is equivalent
         /// to PeekBits followed by dropBits, except for correct error handling.
@@ -108,12 +113,13 @@ namespace ICSharpCode.SharpZipLib.Zip.Compression.Streams
         public int GetBits(int n)
         {
             int bits = PeekBits(n);
-            if (bits >= 0) {
+            if (bits >= 0)
+            {
                 DropBits(n);
             }
             return bits;
         }
-        
+
         /// <summary>
         /// Gets the number of bits available in the bit buffer.  This must be
         /// only called when a previous PeekBits() returned -1.
@@ -121,24 +127,22 @@ namespace ICSharpCode.SharpZipLib.Zip.Compression.Streams
         /// <returns>
         /// the number of bits available.
         /// </returns>
-        public int AvailableBits {
-            get {
-                return bits_in_buffer;
-            }
+        public int AvailableBits
+        {
+            get { return bits_in_buffer; }
         }
-        
+
         /// <summary>
         /// Gets the number of bytes available.
         /// </summary>
         /// <returns>
         /// The number of bytes available.
         /// </returns>
-        public int AvailableBytes {
-            get {
-                return window_end - window_start + (bits_in_buffer >> 3);
-            }
+        public int AvailableBytes
+        {
+            get { return window_end - window_start + (bits_in_buffer >> 3); }
         }
-        
+
         /// <summary>
         /// Skips to the next byte boundary.
         /// </summary>
@@ -151,12 +155,11 @@ namespace ICSharpCode.SharpZipLib.Zip.Compression.Streams
         /// <summary>
         /// Returns true when SetInput can be called
         /// </summary>
-        public bool IsNeedingInput {
-            get {
-                return window_start == window_end;
-            }
+        public bool IsNeedingInput
+        {
+            get { return window_start == window_end; }
         }
-        
+
         /// <summary>
         /// Copies length bytes from input buffer to output buffer starting
         /// at output[offset].  You have to make sure, that the buffer is
@@ -183,50 +186,53 @@ namespace ICSharpCode.SharpZipLib.Zip.Compression.Streams
         /// </exception>
         public int CopyBytes(byte[] output, int offset, int length)
         {
-            if (length < 0) {
+            if (length < 0)
+            {
                 throw new ArgumentOutOfRangeException("length");
             }
-            if ((bits_in_buffer & 7) != 0) {
+            if ((bits_in_buffer & 7) != 0)
+            {
                 /* bits_in_buffer may only be 0 or a multiple of 8 */
                 throw new InvalidOperationException("Bit buffer is not byte aligned!");
             }
-            
+
             int count = 0;
-            while (bits_in_buffer > 0 && length > 0) {
-                output[offset++] = (byte) buffer;
+            while (bits_in_buffer > 0 && length > 0)
+            {
+                output[offset++] = (byte)buffer;
                 buffer >>= 8;
                 bits_in_buffer -= 8;
                 length--;
                 count++;
             }
-            
-            if (length == 0) {
+
+            if (length == 0)
+            {
                 return count;
             }
-            
+
             int avail = window_end - window_start;
-            if (length > avail) {
+            if (length > avail)
+            {
                 length = avail;
             }
             System.Array.Copy(window, window_start, output, offset, length);
             window_start += length;
-            
-            if (((window_start - window_end) & 1) != 0) {
+
+            if (((window_start - window_end) & 1) != 0)
+            {
                 /* We always want an even number of bytes in input, see peekBits */
                 buffer = (uint)(window[window_start++] & 0xff);
                 bits_in_buffer = 8;
             }
             return count + length;
         }
-        
+
         /// <summary>
         /// Constructs a default StreamManipulator with all buffers empty
         /// </summary>
-        public StreamManipulator()
-        {
-        }
+        public StreamManipulator() { }
 
-        
         /// <summary>
         /// resets state and empties internal buffers
         /// </summary>
@@ -244,25 +250,28 @@ namespace ICSharpCode.SharpZipLib.Zip.Compression.Streams
         /// <param name="len">length of input</param>
         public void SetInput(byte[] buf, int off, int len)
         {
-            if (window_start < window_end) {
+            if (window_start < window_end)
+            {
                 throw new InvalidOperationException("Old input was not completely processed");
             }
-            
+
             int end = off + len;
-            
+
             /* We want to throw an ArrayIndexOutOfBoundsException early.  The
             * check is very tricky: it also handles integer wrap around.
             */
-            if (0 > off || off > end || end > buf.Length) {
+            if (0 > off || off > end || end > buf.Length)
+            {
                 throw new ArgumentOutOfRangeException();
             }
-            
-            if ((len & 1) != 0) {
+
+            if ((len & 1) != 0)
+            {
                 /* We always want an even number of bytes in input, see peekBits */
                 buffer |= (uint)((buf[off++] & 0xff) << bits_in_buffer);
                 bits_in_buffer += 8;
             }
-            
+
             window = buf;
             window_start = off;
             window_end = end;

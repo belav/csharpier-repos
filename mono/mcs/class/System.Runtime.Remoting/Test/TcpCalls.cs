@@ -18,57 +18,56 @@ namespace MonoTests.Remoting
     [TestFixture]
     public class TcpSyncCallTest : SyncCallTest
     {
-        public override ChannelManager CreateChannelManager ()
+        public override ChannelManager CreateChannelManager()
         {
-            return new TcpChannelManager ();
+            return new TcpChannelManager();
         }
     }
 
     [TestFixture]
     public class TcpAsyncCallTest : AsyncCallTest
     {
-        public override ChannelManager CreateChannelManager ()
+        public override ChannelManager CreateChannelManager()
         {
-            return new TcpChannelManager ();
+            return new TcpChannelManager();
         }
     }
 
     [TestFixture]
     public class TcpReflectionCallTest : ReflectionCallTest
     {
-        public override ChannelManager CreateChannelManager ()
+        public override ChannelManager CreateChannelManager()
         {
-            return new TcpChannelManager ();
+            return new TcpChannelManager();
         }
     }
 
     [TestFixture]
     public class TcpDelegateCallTest : DelegateCallTest
     {
-        public override ChannelManager CreateChannelManager ()
+        public override ChannelManager CreateChannelManager()
         {
-            return new TcpChannelManager ();
+            return new TcpChannelManager();
         }
     }
 
     [Serializable]
     public class TcpChannelManager : ChannelManager
     {
-        public override IChannelSender CreateClientChannel ()
+        public override IChannelSender CreateClientChannel()
         {
-            Hashtable props = new Hashtable ();
+            Hashtable props = new Hashtable();
             props["port"] = 0;
             props["bindTo"] = "127.0.0.1";
-            return new TcpChannel (props, null, null);
+            return new TcpChannel(props, null, null);
         }
 
-        public override IChannelReceiver CreateServerChannel ()
+        public override IChannelReceiver CreateServerChannel()
         {
-            Hashtable props = new Hashtable ();
+            Hashtable props = new Hashtable();
             props["port"] = 0;
             props["bindTo"] = "127.0.0.1";
-            return new TcpChannel (props, null, null);
+            return new TcpChannel(props, null, null);
         }
     }
 }
-

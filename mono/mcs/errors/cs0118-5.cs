@@ -8,9 +8,8 @@ class A
 
 class X : A
 {
-    s MyProperty {
-        get {
-            return s;
-        }
+    s MyProperty
+    {
+        get { return s; }
     }
 }

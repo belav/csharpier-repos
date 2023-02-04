@@ -13,7 +13,9 @@ namespace System.CommandLine
     /// </summary>
     /// <remarks>The arity refers to the number of values that can be passed on the command line.
     /// </remarks>
-    [DebuggerDisplay("\\{{" + nameof(MinimumNumberOfValues) + "},{" + nameof(MaximumNumberOfValues) + "}\\}")]
+    [DebuggerDisplay(
+        "\\{{" + nameof(MinimumNumberOfValues) + "},{" + nameof(MaximumNumberOfValues) + "}\\}"
+    )]
     public readonly struct ArgumentArity : IEquatable<ArgumentArity>
     {
         private const int MaximumArity = 100_000;
@@ -34,12 +36,16 @@ namespace System.CommandLine
 
             if (maximumNumberOfValues < minimumNumberOfValues)
             {
-                throw new ArgumentException($"{nameof(maximumNumberOfValues)} must be greater than or equal to {nameof(minimumNumberOfValues)}");
+                throw new ArgumentException(
+                    $"{nameof(maximumNumberOfValues)} must be greater than or equal to {nameof(minimumNumberOfValues)}"
+                );
             }
 
             if (maximumNumberOfValues > MaximumArity)
             {
-                throw new ArgumentException($"{nameof(maximumNumberOfValues)} must be less than or equal to {nameof(MaximumArity)}");
+                throw new ArgumentException(
+                    $"{nameof(maximumNumberOfValues)} must be less than or equal to {nameof(MaximumArity)}"
+                );
             }
 
             MinimumNumberOfValues = minimumNumberOfValues;
@@ -57,26 +63,27 @@ namespace System.CommandLine
         /// </summary>
         public int MaximumNumberOfValues { get; }
 
-        internal bool IsNonDefault { get;  }
+        internal bool IsNonDefault { get; }
 
         /// <inheritdoc />
-        public bool Equals(ArgumentArity other) => 
-            other.MaximumNumberOfValues == MaximumNumberOfValues && 
-            other.MinimumNumberOfValues == MinimumNumberOfValues &&
-            other.IsNonDefault == IsNonDefault;
+        public bool Equals(ArgumentArity other) =>
+            other.MaximumNumberOfValues == MaximumNumberOfValues
+            && other.MinimumNumberOfValues == MinimumNumberOfValues
+            && other.IsNonDefault == IsNonDefault;
 
         /// <inheritdoc />
         public override bool Equals(object? obj) => obj is ArgumentArity arity && Equals(arity);
 
         /// <inheritdoc />
-        public override int GetHashCode()
-            => MaximumNumberOfValues ^ MinimumNumberOfValues ^ IsNonDefault.GetHashCode();
+        public override int GetHashCode() =>
+            MaximumNumberOfValues ^ MinimumNumberOfValues ^ IsNonDefault.GetHashCode();
 
         internal static ArgumentConversionResult? Validate(
             SymbolResult symbolResult,
             Argument argument,
             int minimumNumberOfValues,
-            int maximumNumberOfValues)
+            int maximumNumberOfValues
+        )
         {
             var argumentResult = symbolResult switch
             {
@@ -96,7 +103,8 @@ namespace System.CommandLine
                 return ArgumentConversionResult.Failure(
                     argument,
                     symbolResult.LocalizationResources.RequiredArgumentMissing(symbolResult),
-                    ArgumentConversionResultType.FailedMissingArgument);
+                    ArgumentConversionResultType.FailedMissingArgument
+                );
             }
 
             if (tokenCount > maximumNumberOfValues)
@@ -108,7 +116,8 @@ namespace System.CommandLine
                         return ArgumentConversionResult.Failure(
                             argument,
                             symbolResult!.LocalizationResources.ExpectsOneArgument(symbolResult),
-                            ArgumentConversionResultType.FailedTooManyArguments);
+                            ArgumentConversionResultType.FailedTooManyArguments
+                        );
                     }
                 }
             }
@@ -152,14 +161,10 @@ namespace System.CommandLine
 
             if (type != typeof(string) && typeof(IEnumerable).IsAssignableFrom(type))
             {
-                return parent is Command
-                           ? ZeroOrMore
-                           : OneOrMore;
+                return parent is Command ? ZeroOrMore : OneOrMore;
             }
 
-            if (parent is Command &&
-                (argument.HasDefaultValue ||
-                 type.IsNullable()))
+            if (parent is Command && (argument.HasDefaultValue || type.IsNullable()))
             {
                 return ZeroOrOne;
             }

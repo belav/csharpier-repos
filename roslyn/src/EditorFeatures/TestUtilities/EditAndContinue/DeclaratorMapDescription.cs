@@ -34,7 +34,9 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
         private static readonly Regex s_statementPattern = new Regex(
             @"[<]N[:]      (?<Id>[0-9]+[.][0-9]+)   [>]
               (?<Node>.*)
-              [<][/]N[:]   (\k<Id>)                 [>]", RegexOptions.IgnorePatternWhitespace | RegexOptions.Singleline);
+              [<][/]N[:]   (\k<Id>)                 [>]",
+            RegexOptions.IgnorePatternWhitespace | RegexOptions.Singleline
+        );
 
         internal static ImmutableArray<ImmutableArray<TextSpan>> GetSpans(string src)
         {

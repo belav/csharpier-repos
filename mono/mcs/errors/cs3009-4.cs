@@ -3,12 +3,9 @@
 // Compiler options: -warnaserror -warn:1
 
 using System;
-[assembly:CLSCompliant(true)]
 
-public class C<T>
-{
-}
+[assembly: CLSCompliant(true)]
 
-public class C : C<ulong>
-{
-}
+public class C<T> { }
+
+public class C : C<ulong> { }

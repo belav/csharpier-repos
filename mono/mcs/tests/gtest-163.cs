@@ -4,16 +4,18 @@ using System.Collections.Generic;
 
 public class Foo<T>
 {
-    public IEnumerator<T> getEnumerator (int arg)
+    public IEnumerator<T> getEnumerator(int arg)
     {
-        if (arg == 1) {
+        if (arg == 1)
+        {
             int foo = arg;
-            Console.WriteLine (foo);
+            Console.WriteLine(foo);
         }
 
-        if (arg == 2) {
+        if (arg == 2)
+        {
             int foo = arg;
-            Console.WriteLine (foo);
+            Console.WriteLine(foo);
         }
 
         yield break;
@@ -22,6 +24,5 @@ public class Foo<T>
 
 class X
 {
-    public static void Main ()
-    { }
+    public static void Main() { }
 }

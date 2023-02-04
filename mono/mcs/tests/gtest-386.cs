@@ -5,33 +5,36 @@ public struct MyType
 {
     int value;
 
-    public MyType (int value)
+    public MyType(int value)
     {
         this.value = value;
     }
-    public static MyType operator - (MyType a)
+
+    public static MyType operator -(MyType a)
     {
-        return new MyType (-a.value);
+        return new MyType(-a.value);
     }
 }
 
 class C
 {
-    public static int Main ()
+    public static int Main()
     {
         MyType? x = null;
         MyType? y = -x;
-        
-        checked {
+        checked
+        {
             float? f = float.MinValue;
             f = -f + 1;
             int? i = int.MinValue;
-            try {
+            try
+            {
                 i = -i;
                 return 1;
-            } catch (OverflowException) { }
-        }        
-        
+            }
+            catch (OverflowException) { }
+        }
+
         return 0;
     }
 }

@@ -3,15 +3,15 @@
 
 public class A
 {
-    public static void Main ()
+    public static void Main()
     {
         int i = 9;
         goto a;
-        switch (i) {
-        case 9:
-        a:
-            break;
+        switch (i)
+        {
+            case 9:
+                a:
+                break;
         }
     }
 }
-

@@ -18,7 +18,8 @@ public class DirectiveCSharpTokenizerTest : CSharpTokenizerTestBase
             SyntaxFactory.Token(SyntaxKind.Transition, "@"),
             SyntaxFactory.Token(SyntaxKind.Identifier, "something"),
             SyntaxFactory.Token(SyntaxKind.Whitespace, " "),
-            SyntaxFactory.Token(SyntaxKind.NewLine, "\r\n"));
+            SyntaxFactory.Token(SyntaxKind.NewLine, "\r\n")
+        );
     }
 
     [Fact]
@@ -37,7 +38,8 @@ public class DirectiveCSharpTokenizerTest : CSharpTokenizerTestBase
             SyntaxFactory.Token(SyntaxKind.Identifier, "something"),
             SyntaxFactory.Token(SyntaxKind.Whitespace, "   "),
             SyntaxFactory.Token(SyntaxKind.StringLiteral, "\"value\""),
-            SyntaxFactory.Token(SyntaxKind.NewLine, "\r\n"));
+            SyntaxFactory.Token(SyntaxKind.NewLine, "\r\n")
+        );
     }
 
     internal override object CreateTokenizer(ITextDocument source)

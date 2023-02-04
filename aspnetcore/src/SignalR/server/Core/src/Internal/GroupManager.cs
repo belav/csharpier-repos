@@ -3,7 +3,8 @@
 
 namespace Microsoft.AspNetCore.SignalR.Internal;
 
-internal sealed class GroupManager<THub> : IGroupManager where THub : Hub
+internal sealed class GroupManager<THub> : IGroupManager
+    where THub : Hub
 {
     private readonly HubLifetimeManager<THub> _lifetimeManager;
 
@@ -12,12 +13,20 @@ internal sealed class GroupManager<THub> : IGroupManager where THub : Hub
         _lifetimeManager = lifetimeManager;
     }
 
-    public Task AddToGroupAsync(string connectionId, string groupName, CancellationToken cancellationToken = default)
+    public Task AddToGroupAsync(
+        string connectionId,
+        string groupName,
+        CancellationToken cancellationToken = default
+    )
     {
         return _lifetimeManager.AddToGroupAsync(connectionId, groupName, cancellationToken);
     }
 
-    public Task RemoveFromGroupAsync(string connectionId, string groupName, CancellationToken cancellationToken = default)
+    public Task RemoveFromGroupAsync(
+        string connectionId,
+        string groupName,
+        CancellationToken cancellationToken = default
+    )
     {
         return _lifetimeManager.RemoveFromGroupAsync(connectionId, groupName, cancellationToken);
     }

@@ -55,44 +55,64 @@ namespace MonoTests.System.Web.UI.WebControls
             return VirtualPath;
         }
     }
-    
+
     [TestFixture]
     public class PageParserFilterTests
     {
         [Test]
-        public void Defaults ()
+        public void Defaults()
         {
-            var ppf = new MyPageParserFilter ();
+            var ppf = new MyPageParserFilter();
 
-            Assert.AreEqual (false, ppf.AllowCode, "#A1");
-            Assert.AreEqual (0, ppf.NumberOfControlsAllowed, "#A2");
-            Assert.AreEqual (0, ppf.NumberOfDirectDependenciesAllowed, "#A3");
-            Assert.AreEqual (0, ppf.TotalNumberOfDependenciesAllowed, "#A4");
-            Assert.AreEqual (false, ppf.AllowBaseType (typeof (Page)), "#A5");
-            Assert.AreEqual (false, ppf.AllowControl (typeof (Page), null), "#A6");
-            Assert.AreEqual (false, ppf.AllowServerSideInclude (String.Empty), "#A7");
-            Assert.AreEqual (false, ppf.AllowVirtualReference (String.Empty, VirtualReferenceType.Master), "#A8");
-            Assert.AreEqual (CompilationMode.Auto, ppf.GetCompilationMode (CompilationMode.Auto), "#A9");
-            Assert.AreEqual (null, ppf.GetNoCompileUserControlType (), "#A10");
-            Assert.AreEqual (false, ppf.ProcessCodeConstruct (CodeConstructType.ExpressionSnippet, String.Empty), "#A11");
-            Assert.AreEqual (false, ppf.ProcessDataBindingAttribute (String.Empty, String.Empty, String.Empty), "#A12");
-            Assert.AreEqual (false, ppf.ProcessEventHookup (String.Empty, String.Empty, String.Empty), "#A13");
+            Assert.AreEqual(false, ppf.AllowCode, "#A1");
+            Assert.AreEqual(0, ppf.NumberOfControlsAllowed, "#A2");
+            Assert.AreEqual(0, ppf.NumberOfDirectDependenciesAllowed, "#A3");
+            Assert.AreEqual(0, ppf.TotalNumberOfDependenciesAllowed, "#A4");
+            Assert.AreEqual(false, ppf.AllowBaseType(typeof(Page)), "#A5");
+            Assert.AreEqual(false, ppf.AllowControl(typeof(Page), null), "#A6");
+            Assert.AreEqual(false, ppf.AllowServerSideInclude(String.Empty), "#A7");
+            Assert.AreEqual(
+                false,
+                ppf.AllowVirtualReference(String.Empty, VirtualReferenceType.Master),
+                "#A8"
+            );
+            Assert.AreEqual(
+                CompilationMode.Auto,
+                ppf.GetCompilationMode(CompilationMode.Auto),
+                "#A9"
+            );
+            Assert.AreEqual(null, ppf.GetNoCompileUserControlType(), "#A10");
+            Assert.AreEqual(
+                false,
+                ppf.ProcessCodeConstruct(CodeConstructType.ExpressionSnippet, String.Empty),
+                "#A11"
+            );
+            Assert.AreEqual(
+                false,
+                ppf.ProcessDataBindingAttribute(String.Empty, String.Empty, String.Empty),
+                "#A12"
+            );
+            Assert.AreEqual(
+                false,
+                ppf.ProcessEventHookup(String.Empty, String.Empty, String.Empty),
+                "#A13"
+            );
         }
 
         [Test]
-        [ExpectedException (typeof (NullReferenceException))]
-        public void DefaultsNREX_1 ()
+        [ExpectedException(typeof(NullReferenceException))]
+        public void DefaultsNREX_1()
         {
-            var ppf = new MyPageParserFilter ();
-            ppf.GetLine ();
+            var ppf = new MyPageParserFilter();
+            ppf.GetLine();
         }
 
         [Test]
-        [ExpectedException (typeof (NullReferenceException))]
-        public void DefaultsNREX_2 ()
+        [ExpectedException(typeof(NullReferenceException))]
+        public void DefaultsNREX_2()
         {
-            var ppf = new MyPageParserFilter ();
-            ppf.GetVirtualPath ();
+            var ppf = new MyPageParserFilter();
+            ppf.GetVirtualPath();
         }
     }
 }

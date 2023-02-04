@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,58 +33,66 @@ using System.IO;
 using System.Net.Mime;
 using System.Text;
 
-namespace System.Net.Mail {
+namespace System.Net.Mail
+{
     public class LinkedResource : AttachmentBase
     {
         #region Fields
-        
+
         Uri contentLink;
 
         #endregion // Fields
 
         #region Constructors
 
-        public LinkedResource (string fileName) : base (fileName)
+        public LinkedResource(string fileName)
+            : base(fileName)
         {
             if (fileName == null)
-                throw new ArgumentNullException ();
-        }
-        
-        public LinkedResource (string fileName, ContentType contentType) : base (fileName, contentType)
-        {
-            if (fileName == null)
-                throw new ArgumentNullException ();
-        }
-        
-        public LinkedResource (string fileName, string mediaType) : base (fileName, mediaType)
-        {
-            if (fileName == null)
-                throw new ArgumentNullException ();
+                throw new ArgumentNullException();
         }
 
-        public LinkedResource (Stream contentStream) : base (contentStream)
+        public LinkedResource(string fileName, ContentType contentType)
+            : base(fileName, contentType)
         {
-            if (contentStream == null)
-                throw new ArgumentNullException ();
+            if (fileName == null)
+                throw new ArgumentNullException();
         }
-        
-        public LinkedResource (Stream contentStream, ContentType contentType) : base (contentStream, contentType)
+
+        public LinkedResource(string fileName, string mediaType)
+            : base(fileName, mediaType)
         {
-            if (contentStream == null)
-                throw new ArgumentNullException ();
+            if (fileName == null)
+                throw new ArgumentNullException();
         }
-        
-        public LinkedResource (Stream contentStream, string mediaType) : base (contentStream, mediaType)
+
+        public LinkedResource(Stream contentStream)
+            : base(contentStream)
         {
             if (contentStream == null)
-                throw new ArgumentNullException ();
+                throw new ArgumentNullException();
+        }
+
+        public LinkedResource(Stream contentStream, ContentType contentType)
+            : base(contentStream, contentType)
+        {
+            if (contentStream == null)
+                throw new ArgumentNullException();
+        }
+
+        public LinkedResource(Stream contentStream, string mediaType)
+            : base(contentStream, mediaType)
+        {
+            if (contentStream == null)
+                throw new ArgumentNullException();
         }
 
         #endregion // Constructors
 
         #region Properties
 
-        public Uri ContentLink {
+        public Uri ContentLink
+        {
             get { return contentLink; }
             set { contentLink = value; }
         }
@@ -93,32 +101,39 @@ namespace System.Net.Mail {
 
         #region Methods
 
-        public static LinkedResource CreateLinkedResourceFromString (string content)
+        public static LinkedResource CreateLinkedResourceFromString(string content)
         {
             if (content == null)
-                throw new ArgumentNullException ();
-            MemoryStream ms = new MemoryStream (Encoding.Default.GetBytes (content));
-            LinkedResource lr = new LinkedResource (ms);
+                throw new ArgumentNullException();
+            MemoryStream ms = new MemoryStream(Encoding.Default.GetBytes(content));
+            LinkedResource lr = new LinkedResource(ms);
             lr.TransferEncoding = TransferEncoding.QuotedPrintable;
             return lr;
         }
-        
-        public static LinkedResource CreateLinkedResourceFromString (string content, ContentType contentType)
+
+        public static LinkedResource CreateLinkedResourceFromString(
+            string content,
+            ContentType contentType
+        )
         {
             if (content == null)
-                throw new ArgumentNullException ();
-            MemoryStream ms = new MemoryStream (Encoding.Default.GetBytes (content));
-            LinkedResource lr = new LinkedResource (ms, contentType);
+                throw new ArgumentNullException();
+            MemoryStream ms = new MemoryStream(Encoding.Default.GetBytes(content));
+            LinkedResource lr = new LinkedResource(ms, contentType);
             lr.TransferEncoding = TransferEncoding.QuotedPrintable;
             return lr;
         }
-        
-        public static LinkedResource CreateLinkedResourceFromString (string content, Encoding contentEncoding, string mediaType)
+
+        public static LinkedResource CreateLinkedResourceFromString(
+            string content,
+            Encoding contentEncoding,
+            string mediaType
+        )
         {
             if (content == null)
-                throw new ArgumentNullException ();
-            MemoryStream ms = new MemoryStream (contentEncoding.GetBytes (content));
-            LinkedResource lr = new LinkedResource (ms, mediaType);
+                throw new ArgumentNullException();
+            MemoryStream ms = new MemoryStream(contentEncoding.GetBytes(content));
+            LinkedResource lr = new LinkedResource(ms, mediaType);
             lr.TransferEncoding = TransferEncoding.QuotedPrintable;
             return lr;
         }
@@ -126,4 +141,3 @@ namespace System.Net.Mail {
         #endregion // Methods
     }
 }
-

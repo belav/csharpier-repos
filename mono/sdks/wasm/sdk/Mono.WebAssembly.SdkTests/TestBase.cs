@@ -13,10 +13,11 @@ namespace Mono.WebAssembly.SdkTests
     {
         //public static readonly VisualStudioInstance CurrentVisualStudioInstance = MSBuildLocator.RegisterDefaults ();
 
-        protected MSBuildTestBase ()
+        protected MSBuildTestBase()
         {
-            MSBuildPath = "/Library/Frameworks/Mono.framework/Versions/Current/lib/mono/msbuild/15.0/bin";
-            MSBuildLocator.RegisterMSBuildPath (MSBuildPath);
+            MSBuildPath =
+                "/Library/Frameworks/Mono.framework/Versions/Current/lib/mono/msbuild/15.0/bin";
+            MSBuildLocator.RegisterMSBuildPath(MSBuildPath);
             //MSBuildPath = CurrentVisualStudioInstance.MSBuildPath;
         }
 
@@ -25,46 +26,57 @@ namespace Mono.WebAssembly.SdkTests
 
     public abstract class MSBuildSdkTestBase : MSBuildTestBase, IDisposable
     {
-        static readonly string TestAssemblyPathValue = typeof (MSBuildSdkTestBase).Assembly.ManifestModule.FullyQualifiedName;
+        static readonly string TestAssemblyPathValue = typeof(MSBuildSdkTestBase)
+            .Assembly
+            .ManifestModule
+            .FullyQualifiedName;
 
-        readonly string _testRootPath = Path.Combine (Path.GetTempPath (), Path.GetRandomFileName ());
+        readonly string _testRootPath = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
 
         public string TestAssemblyPath => TestAssemblyPathValue;
 
-        public string TestRootPath {
-            get {
-                Directory.CreateDirectory (_testRootPath);
+        public string TestRootPath
+        {
+            get
+            {
+                Directory.CreateDirectory(_testRootPath);
                 return _testRootPath;
             }
         }
 
-        public void Dispose ()
+        public void Dispose()
         {
-            Dispose (true);
-            GC.SuppressFinalize (this);
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
 
-        protected virtual void Dispose (bool disposing)
+        protected virtual void Dispose(bool disposing)
         {
-            if (disposing) {
-                if (Directory.Exists (TestRootPath)) {
-                    Directory.Delete (TestRootPath, recursive: true);
+            if (disposing)
+            {
+                if (Directory.Exists(TestRootPath))
+                {
+                    Directory.Delete(TestRootPath, recursive: true);
                 }
             }
         }
 
-        protected string GetTempFile (string name)
+        protected string GetTempFile(string name)
         {
-            if (name == null) {
-                throw new ArgumentNullException (nameof (name));
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
             }
 
-            return Path.Combine (TestRootPath, name);
+            return Path.Combine(TestRootPath, name);
         }
 
-        protected string GetTempFileWithExtension (string extension = null)
+        protected string GetTempFileWithExtension(string extension = null)
         {
-            return Path.Combine (TestRootPath, $"{Path.GetRandomFileName ()}{extension ?? string.Empty}");
+            return Path.Combine(
+                TestRootPath,
+                $"{Path.GetRandomFileName()}{extension ?? string.Empty}"
+            );
         }
     }
 }

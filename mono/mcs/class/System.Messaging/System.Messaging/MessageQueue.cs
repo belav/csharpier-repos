@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -42,11 +42,14 @@ using Mono.Messaging;
 
 namespace System.Messaging
 {
-    [TypeConverter (typeof(MessageQueueConverter))]
-    [Editor ("System.Messaging.Design.QueuePathEditor", "System.Drawing.Design.UITypeEditor, " + Consts.AssemblySystem_Drawing)]
-//    [Designer ("Microsoft.VisualStudio.Install.MessageQueueInstallableComponentDesigner, " + Consts.AssemblyMicrosoft_VisualStudio)]
-    [InstallerType (typeof(MessageQueueInstaller))]
-    [DefaultEvent ("ReceiveCompleted")]
+    [TypeConverter(typeof(MessageQueueConverter))]
+    [Editor(
+        "System.Messaging.Design.QueuePathEditor",
+        "System.Drawing.Design.UITypeEditor, " + Consts.AssemblySystem_Drawing
+    )]
+    //    [Designer ("Microsoft.VisualStudio.Install.MessageQueueInstallableComponentDesigner, " + Consts.AssemblyMicrosoft_VisualStudio)]
+    [InstallerType(typeof(MessageQueueInstaller))]
+    [DefaultEvent("ReceiveCompleted")]
     public class MessageQueue : Component, IEnumerable
     {
         #region Fields
@@ -54,7 +57,7 @@ namespace System.Messaging
         public static readonly long InfiniteQueueSize;
         public static readonly TimeSpan InfiniteTimeout = MessagingProviderLocator.InfiniteTimeout;
         private IMessageFormatter formatter;
-        private MessagePropertyFilter messageReadPropertyFilter = new MessagePropertyFilter ();
+        private MessagePropertyFilter messageReadPropertyFilter = new MessagePropertyFilter();
         private readonly IMessageQueue delegateQueue;
 
         #endregion //Fields
@@ -62,1166 +65,1383 @@ namespace System.Messaging
 
         #region Constructor
 
-        public MessageQueue () : this (GetMessageQueue ())
-        {
-        }
+        public MessageQueue()
+            : this(GetMessageQueue()) { }
 
-        public MessageQueue (string path) : this (path, false) 
-        {
-        }
+        public MessageQueue(string path)
+            : this(path, false) { }
 
-        public MessageQueue (string path, bool sharedModeDenyReceive) : 
-            this (GetMessageQueue (path))
-        {
-        }
-        
-        public MessageQueue (string path, QueueAccessMode accessMode) :
-            this (GetMessageQueue (path))
-        {
-        }
+        public MessageQueue(string path, bool sharedModeDenyReceive)
+            : this(GetMessageQueue(path)) { }
 
-        internal MessageQueue (IMessageQueue delegateQueue)
+        public MessageQueue(string path, QueueAccessMode accessMode)
+            : this(GetMessageQueue(path)) { }
+
+        internal MessageQueue(IMessageQueue delegateQueue)
         {
             this.delegateQueue = delegateQueue;
-            formatter = new XmlMessageFormatter ();
-            delegateQueue.PeekCompleted += new CompletedEventHandler (DelegatePeekCompleted);
+            formatter = new XmlMessageFormatter();
+            delegateQueue.PeekCompleted += new CompletedEventHandler(DelegatePeekCompleted);
         }
 
         #endregion //Constructor
 
         #region Properties
 
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        [MessagingDescription ("MQ_Authenticate")]
-        public bool Authenticate {
-            get {
-                return delegateQueue.Authenticate;
-            }
-            set {
-                delegateQueue.Authenticate = value;
-            }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [MessagingDescription("MQ_Authenticate")]
+        public bool Authenticate
+        {
+            get { return delegateQueue.Authenticate; }
+            set { delegateQueue.Authenticate = value; }
         }
 
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        [MessagingDescription ("MQ_BasePriority")]
-        public short BasePriority {
-            get {
-                return delegateQueue.BasePriority;
-            }
-            set {
-                delegateQueue.BasePriority = value;
-            }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [MessagingDescription("MQ_BasePriority")]
+        public short BasePriority
+        {
+            get { return delegateQueue.BasePriority; }
+            set { delegateQueue.BasePriority = value; }
         }
 
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        [Browsable (false)]
-        [MessagingDescription ("MQ_CanRead")]
-        public bool CanRead {
-            get {
-                return delegateQueue.CanRead;
-            }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [Browsable(false)]
+        [MessagingDescription("MQ_CanRead")]
+        public bool CanRead
+        {
+            get { return delegateQueue.CanRead; }
         }
 
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        [Browsable (false)]
-        [MessagingDescription ("MQ_CanWrite")]
-        public bool CanWrite {
-            get {
-                return delegateQueue.CanWrite;
-            }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [Browsable(false)]
+        [MessagingDescription("MQ_CanWrite")]
+        public bool CanWrite
+        {
+            get { return delegateQueue.CanWrite; }
         }
 
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        [MessagingDescription ("MQ_Category")]
-        public Guid Category {
-            get {
-                return delegateQueue.Category;
-            }
-            set {
-                delegateQueue.Category = value;
-            }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [MessagingDescription("MQ_Category")]
+        public Guid Category
+        {
+            get { return delegateQueue.Category; }
+            set { delegateQueue.Category = value; }
         }
 
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        [MessagingDescription ("MQ_CreateTime")]
-        public DateTime CreateTime {
-            get {
-                return delegateQueue.CreateTime;
-            }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [MessagingDescription("MQ_CreateTime")]
+        public DateTime CreateTime
+        {
+            get { return delegateQueue.CreateTime; }
         }
 
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Content)]
-        [Browsable (false)]
-        [MessagingDescription ("MQ_DefaultPropertiesToSend")]
-        public DefaultPropertiesToSend DefaultPropertiesToSend {
-            get {
-                throw new NotImplementedException ();
-            }
-            set {
-                throw new NotImplementedException ();
-            }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
+        [Browsable(false)]
+        [MessagingDescription("MQ_DefaultPropertiesToSend")]
+        public DefaultPropertiesToSend DefaultPropertiesToSend
+        {
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
         }
 
-        [Browsable (false)]
-        [DefaultValue (false)]
-        [MessagingDescription ("MQ_DenySharedReceive")]
-        public bool DenySharedReceive {
-            get {
-                return delegateQueue.DenySharedReceive;
-            }
-            set {
-                delegateQueue.DenySharedReceive = value;
-            }
+        [Browsable(false)]
+        [DefaultValue(false)]
+        [MessagingDescription("MQ_DenySharedReceive")]
+        public bool DenySharedReceive
+        {
+            get { return delegateQueue.DenySharedReceive; }
+            set { delegateQueue.DenySharedReceive = value; }
         }
 
-        [Browsable (false)]
-        public static bool EnableConnectionCache {
-            get {
-                throw new NotImplementedException ();
-            }
-            set {
-                throw new NotImplementedException ();
-            }
+        [Browsable(false)]
+        public static bool EnableConnectionCache
+        {
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
         }
 
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        [MessagingDescription ("MQ_EncryptionRequired")]
-        public EncryptionRequired EncryptionRequired {
-            get {
-                return (EncryptionRequired) delegateQueue.EncryptionRequired;
-            }
-            set {
-                delegateQueue.EncryptionRequired = (Mono.Messaging.EncryptionRequired) value;
-            }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [MessagingDescription("MQ_EncryptionRequired")]
+        public EncryptionRequired EncryptionRequired
+        {
+            get { return (EncryptionRequired)delegateQueue.EncryptionRequired; }
+            set { delegateQueue.EncryptionRequired = (Mono.Messaging.EncryptionRequired)value; }
         }
 
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        [MessagingDescription ("MQ_FormatName")]
-        public string FormatName {
-            get {
-                throw new NotImplementedException ();
-            }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [MessagingDescription("MQ_FormatName")]
+        public string FormatName
+        {
+            get { throw new NotImplementedException(); }
         }
 
-        [Browsable (false)]
-        [DefaultValue (null)]
-        [TypeConverter (typeof(MessageFormatterConverter))]
-        [MessagingDescription ("MQ_Formatter")]
-        public IMessageFormatter Formatter {
-            get {
-                return formatter;
-            }
-            set {
-                formatter = value;
-            }
+        [Browsable(false)]
+        [DefaultValue(null)]
+        [TypeConverter(typeof(MessageFormatterConverter))]
+        [MessagingDescription("MQ_Formatter")]
+        public IMessageFormatter Formatter
+        {
+            get { return formatter; }
+            set { formatter = value; }
         }
 
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        [MessagingDescription ("MQ_GuidId")]
-        public Guid Id {
-            get {
-                return delegateQueue.Id;
-            }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [MessagingDescription("MQ_GuidId")]
+        public Guid Id
+        {
+            get { return delegateQueue.Id; }
         }
 
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        [MessagingDescription ("MQ_Label")]
-        public string Label {
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [MessagingDescription("MQ_Label")]
+        public string Label
+        {
             [MonoTODO]
-            get {
+            get
+            {
                 //return delegateQueue.Label;
-                throw new NotImplementedException ();
+                throw new NotImplementedException();
             }
             [MonoTODO]
-            set {
+            set
+            {
                 //delegateQueue.Label = value;
-                throw new NotImplementedException ();
+                throw new NotImplementedException();
             }
         }
 
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        [MessagingDescription ("MQ_LastModifyTime")]
-        public DateTime LastModifyTime {
-            get {
-                return delegateQueue.LastModifyTime;
-            }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [MessagingDescription("MQ_LastModifyTime")]
+        public DateTime LastModifyTime
+        {
+            get { return delegateQueue.LastModifyTime; }
         }
 
-        [Browsable (false)]
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        [MessagingDescription ("MQ_MachineName")]
-        public string MachineName {
-            get {
-                return delegateQueue.QRef.Host;
-            }
-            set {
-                delegateQueue.QRef = delegateQueue.QRef.SetHost (value);
-            }
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [MessagingDescription("MQ_MachineName")]
+        public string MachineName
+        {
+            get { return delegateQueue.QRef.Host; }
+            set { delegateQueue.QRef = delegateQueue.QRef.SetHost(value); }
         }
 
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 #if !NO_SYSTEM_DRAWING_DEPENDENCY
-        [TypeConverter (typeof(SizeConverter))]
+        [TypeConverter(typeof(SizeConverter))]
 #endif
-        [MessagingDescription ("MQ_MaximumJournalSize")]
-        public long MaximumJournalSize {
-            get {
-                return delegateQueue.MaximumJournalSize;
-            }
-            set {
-                delegateQueue.MaximumJournalSize = value;
-            }
+        [MessagingDescription("MQ_MaximumJournalSize")]
+        public long MaximumJournalSize
+        {
+            get { return delegateQueue.MaximumJournalSize; }
+            set { delegateQueue.MaximumJournalSize = value; }
         }
 
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 #if !NO_SYSTEM_DRAWING_DEPENDENCY
-        [TypeConverter (typeof(SizeConverter))]
+        [TypeConverter(typeof(SizeConverter))]
 #endif
-        [MessagingDescription ("MQ_MaximumQueueSize")]
-        public long MaximumQueueSize {
-            get {
-                return delegateQueue.MaximumQueueSize;
-            }
-            set {
-                delegateQueue.MaximumQueueSize = value;
-            }
+        [MessagingDescription("MQ_MaximumQueueSize")]
+        public long MaximumQueueSize
+        {
+            get { return delegateQueue.MaximumQueueSize; }
+            set { delegateQueue.MaximumQueueSize = value; }
         }
 
-        [Browsable (false)]
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Content)]
-        [MessagingDescription ("MQ_MessageReadPropertyFilter")]
-        public MessagePropertyFilter MessageReadPropertyFilter {
-            get {
-                return messageReadPropertyFilter;
-            }
-            set {
-                messageReadPropertyFilter = value;
-            }
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
+        [MessagingDescription("MQ_MessageReadPropertyFilter")]
+        public MessagePropertyFilter MessageReadPropertyFilter
+        {
+            get { return messageReadPropertyFilter; }
+            set { messageReadPropertyFilter = value; }
         }
 
-        [Editor ("System.Messaging.Design.QueuePathEditor", "System.Drawing.Design.UITypeEditor, " + Consts.AssemblySystem_Drawing)]
-        [Browsable (false)]
-        [DefaultValue ("")]
-        [TypeConverter ("System.Diagnostics.Design.StringValueConverter, " + Consts.AssemblySystem_Design)]
-        [MessagingDescription ("MQ_Path")]
-        public string Path {
-            get {
-                return delegateQueue.QRef.ToString ();
-            }
-            set {
-                delegateQueue.QRef = QueueReference.Parse (value);
-            }
+        [Editor(
+            "System.Messaging.Design.QueuePathEditor",
+            "System.Drawing.Design.UITypeEditor, " + Consts.AssemblySystem_Drawing
+        )]
+        [Browsable(false)]
+        [DefaultValue("")]
+        [TypeConverter(
+            "System.Diagnostics.Design.StringValueConverter, " + Consts.AssemblySystem_Design
+        )]
+        [MessagingDescription("MQ_Path")]
+        public string Path
+        {
+            get { return delegateQueue.QRef.ToString(); }
+            set { delegateQueue.QRef = QueueReference.Parse(value); }
         }
 
-        [Browsable (false)]
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        [MessagingDescription ("MQ_QueueName")]
-        public string QueueName {
-            get {
-                return delegateQueue.QRef.Queue;
-            }
-            set {
-                delegateQueue.QRef = delegateQueue.QRef.SetQueue (value);
-            }
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [MessagingDescription("MQ_QueueName")]
+        public string QueueName
+        {
+            get { return delegateQueue.QRef.Queue; }
+            set { delegateQueue.QRef = delegateQueue.QRef.SetQueue(value); }
         }
 
-        [Browsable (false)]
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        [MessagingDescription ("MQ_ReadHandle")]
-        public IntPtr ReadHandle {
-            get {
-                return delegateQueue.ReadHandle;
-            }
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [MessagingDescription("MQ_ReadHandle")]
+        public IntPtr ReadHandle
+        {
+            get { return delegateQueue.ReadHandle; }
         }
 
-        [Browsable (false)]
-        [DefaultValue (null)]
-        [MessagingDescription ("MQ_SynchronizingObject")]
-        public ISynchronizeInvoke SynchronizingObject {
-            get {
-                return delegateQueue.SynchronizingObject;
-            }
-            set {
-                delegateQueue.SynchronizingObject = value;
-            }
+        [Browsable(false)]
+        [DefaultValue(null)]
+        [MessagingDescription("MQ_SynchronizingObject")]
+        public ISynchronizeInvoke SynchronizingObject
+        {
+            get { return delegateQueue.SynchronizingObject; }
+            set { delegateQueue.SynchronizingObject = value; }
         }
 
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        [MessagingDescription ("MQ_Transactional")]
-        public bool Transactional {
-            get {
-                return delegateQueue.Transactional;
-            }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [MessagingDescription("MQ_Transactional")]
+        public bool Transactional
+        {
+            get { return delegateQueue.Transactional; }
         }
 
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        [MessagingDescription ("MQ_WriteHandle")]
-        public bool UseJournalQueue {
-            get {
-                return delegateQueue.UseJournalQueue;
-            }
-            set {
-                delegateQueue.UseJournalQueue = value;
-            }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [MessagingDescription("MQ_WriteHandle")]
+        public bool UseJournalQueue
+        {
+            get { return delegateQueue.UseJournalQueue; }
+            set { delegateQueue.UseJournalQueue = value; }
         }
 
-        [Browsable (false)]
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        [MessagingDescription ("MQ_WriteHandle")]
-        public IntPtr WriteHandle {
-            get {
-                return delegateQueue.WriteHandle;
-            }
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [MessagingDescription("MQ_WriteHandle")]
+        public IntPtr WriteHandle
+        {
+            get { return delegateQueue.WriteHandle; }
         }
-        
-        internal IMessageQueue DelegateQueue {
-            get {
-                return delegateQueue;
-            }
+
+        internal IMessageQueue DelegateQueue
+        {
+            get { return delegateQueue; }
         }
 
         #endregion //Properties
 
         #region Methods
 
-        public IAsyncResult BeginPeek ()
+        public IAsyncResult BeginPeek()
         {
-            return delegateQueue.BeginPeek ();
+            return delegateQueue.BeginPeek();
         }
 
-        public IAsyncResult BeginPeek (TimeSpan timeout)
+        public IAsyncResult BeginPeek(TimeSpan timeout)
         {
-            return delegateQueue.BeginPeek (timeout);
+            return delegateQueue.BeginPeek(timeout);
         }
 
-        public IAsyncResult BeginPeek (TimeSpan timeout, object stateObject)
+        public IAsyncResult BeginPeek(TimeSpan timeout, object stateObject)
         {
-            return delegateQueue.BeginPeek (timeout, stateObject);
+            return delegateQueue.BeginPeek(timeout, stateObject);
         }
 
-        public IAsyncResult BeginPeek (TimeSpan timeout,
-                                      object stateObject,
-                                      AsyncCallback callback)
+        public IAsyncResult BeginPeek(TimeSpan timeout, object stateObject, AsyncCallback callback)
         {
-            return delegateQueue.BeginPeek (timeout, stateObject, callback);
-        }        
-
-        public IAsyncResult BeginReceive ()
-        {
-            return delegateQueue.BeginReceive ();
+            return delegateQueue.BeginPeek(timeout, stateObject, callback);
         }
 
-        public IAsyncResult BeginReceive (TimeSpan timeout)
+        public IAsyncResult BeginReceive()
         {
-            return delegateQueue.BeginReceive (timeout);
+            return delegateQueue.BeginReceive();
         }
 
-        public IAsyncResult BeginReceive (TimeSpan timeout, object stateObject)
+        public IAsyncResult BeginReceive(TimeSpan timeout)
         {
-            return delegateQueue.BeginReceive (timeout, stateObject);
+            return delegateQueue.BeginReceive(timeout);
         }
 
-        public IAsyncResult BeginReceive (TimeSpan timeout, object stateObject, AsyncCallback callback)
+        public IAsyncResult BeginReceive(TimeSpan timeout, object stateObject)
         {
-            return delegateQueue.BeginReceive (timeout, stateObject, callback);
+            return delegateQueue.BeginReceive(timeout, stateObject);
         }
+
+        public IAsyncResult BeginReceive(
+            TimeSpan timeout,
+            object stateObject,
+            AsyncCallback callback
+        )
+        {
+            return delegateQueue.BeginReceive(timeout, stateObject, callback);
+        }
+
         [MonoTODO]
-        public static void ClearConnectionCache ()
+        public static void ClearConnectionCache()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public void Close ()
+        public void Close()
         {
-            delegateQueue.Close ();
+            delegateQueue.Close();
         }
 
-        public static MessageQueue Create (string path)
+        public static MessageQueue Create(string path)
         {
-            QueueReference qRef = QueueReference.Parse (path);
-            IMessageQueue iMessageQueue = CreateMessageQueue (qRef, false);
-            return new MessageQueue (iMessageQueue);
+            QueueReference qRef = QueueReference.Parse(path);
+            IMessageQueue iMessageQueue = CreateMessageQueue(qRef, false);
+            return new MessageQueue(iMessageQueue);
         }
 
-        public static MessageQueue Create (string path, bool transactional)
+        public static MessageQueue Create(string path, bool transactional)
         {
-            QueueReference qRef = QueueReference.Parse (path);
-            IMessageQueue iMessageQueue = CreateMessageQueue (qRef,
-                                                              transactional);
-            return new MessageQueue (iMessageQueue);
+            QueueReference qRef = QueueReference.Parse(path);
+            IMessageQueue iMessageQueue = CreateMessageQueue(qRef, transactional);
+            return new MessageQueue(iMessageQueue);
         }
 
-        public static void Delete (string path)
+        public static void Delete(string path)
         {
-            QueueReference qRef = QueueReference.Parse (path);
-            MessagingProviderLocator.GetProvider ().DeleteQueue (qRef);
+            QueueReference qRef = QueueReference.Parse(path);
+            MessagingProviderLocator.GetProvider().DeleteQueue(qRef);
         }
 
-        public Message EndPeek (IAsyncResult asyncResult)
+        public Message EndPeek(IAsyncResult asyncResult)
         {
             if (asyncResult == null)
-                throw new ArgumentNullException ();
-            
-            try {                
-                IMessage iMsg = delegateQueue.EndPeek (asyncResult);
+                throw new ArgumentNullException();
+
+            try
+            {
+                IMessage iMsg = delegateQueue.EndPeek(asyncResult);
                 if (iMsg == null)
                     return null;
-                
-                return new Message (iMsg, null, Formatter);
-                
-            } catch (ConnectionException e) {
-                throw new MessageQueueException (MessageQueueErrorCode.QueueNotAvailable, e.Message);
-            } catch (MessageUnavailableException e) {
-                throw new InvalidOperationException (e.Message, e);
-            } catch (MonoMessagingException e) {
-                throw new MessageQueueException (MessageQueueErrorCode.Generic, e.Message);
+
+                return new Message(iMsg, null, Formatter);
             }
-        }
-        
-        public Message EndReceive (IAsyncResult asyncResult)
-        {
-            if (asyncResult == null)
-                throw new ArgumentNullException ();
-            
-            try {                
-                IMessage iMsg = delegateQueue.EndReceive (asyncResult);
-                if (iMsg == null)
-                    return null;
-                
-                return new Message (iMsg, null, Formatter);
-                
-            } catch (ConnectionException e) {
-                throw new MessageQueueException (MessageQueueErrorCode.QueueNotAvailable, e.Message);
-            } catch (MessageUnavailableException e) {
-                throw new InvalidOperationException (e.Message, e);
-            } catch (MonoMessagingException e) {
-                throw new MessageQueueException (MessageQueueErrorCode.Generic, e.Message);
+            catch (ConnectionException e)
+            {
+                throw new MessageQueueException(MessageQueueErrorCode.QueueNotAvailable, e.Message);
+            }
+            catch (MessageUnavailableException e)
+            {
+                throw new InvalidOperationException(e.Message, e);
+            }
+            catch (MonoMessagingException e)
+            {
+                throw new MessageQueueException(MessageQueueErrorCode.Generic, e.Message);
             }
         }
 
-        public static bool Exists (string path)
+        public Message EndReceive(IAsyncResult asyncResult)
         {
-            return Exists (QueueReference.Parse (path));
+            if (asyncResult == null)
+                throw new ArgumentNullException();
+
+            try
+            {
+                IMessage iMsg = delegateQueue.EndReceive(asyncResult);
+                if (iMsg == null)
+                    return null;
+
+                return new Message(iMsg, null, Formatter);
+            }
+            catch (ConnectionException e)
+            {
+                throw new MessageQueueException(MessageQueueErrorCode.QueueNotAvailable, e.Message);
+            }
+            catch (MessageUnavailableException e)
+            {
+                throw new InvalidOperationException(e.Message, e);
+            }
+            catch (MonoMessagingException e)
+            {
+                throw new MessageQueueException(MessageQueueErrorCode.Generic, e.Message);
+            }
         }
-        [MonoTODO]
-        public Message[] GetAllMessages ()
+
+        public static bool Exists(string path)
         {
-            throw new NotImplementedException ();
+            return Exists(QueueReference.Parse(path));
+        }
+
+        [MonoTODO]
+        public Message[] GetAllMessages()
+        {
+            throw new NotImplementedException();
         }
 
         [Obsolete]
-        public IEnumerator GetEnumerator ()
+        public IEnumerator GetEnumerator()
         {
-            return GetMessageEnumerator ();
+            return GetMessageEnumerator();
         }
+
         [MonoTODO]
-        public static Guid GetMachineId (string machineName)
+        public static Guid GetMachineId(string machineName)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [Obsolete]
-        public MessageEnumerator GetMessageEnumerator ()
+        public MessageEnumerator GetMessageEnumerator()
         {
-            return new MessageEnumerator (delegateQueue.GetMessageEnumerator (), Formatter);
-        }
-        
-        [MonoTODO]
-        public static MessageQueueEnumerator GetMessageQueueEnumerator ()
-        {
-            throw new NotImplementedException ();
-        }
-        
-        [MonoTODO]
-        public MessageEnumerator GetMessageEnumerator2 ()
-        {
-            throw new NotImplementedException ();
-        }
-        
-        [MonoTODO]
-        private static ArrayList filteredQueueList (MessageQueueCriteria criteria)
-        {
-            throw new NotImplementedException ();
-        }
-        [MonoTODO]
-        public static MessageQueueEnumerator GetMessageQueueEnumerator (MessageQueueCriteria criteria)
-        {
-            throw new NotImplementedException ();
-        }
-        [MonoTODO]
-        public static MessageQueue[] GetPrivateQueuesByMachine (string machineName)
-        {
-            throw new NotImplementedException ();
+            return new MessageEnumerator(delegateQueue.GetMessageEnumerator(), Formatter);
         }
 
-        public static MessageQueue[] GetPublicQueues ()
+        [MonoTODO]
+        public static MessageQueueEnumerator GetMessageQueueEnumerator()
         {
-            IMessagingProvider provider = MessagingProviderLocator.GetProvider ();
-            IMessageQueue[] imqs = provider.GetPublicQueues ();
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        public MessageEnumerator GetMessageEnumerator2()
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        private static ArrayList filteredQueueList(MessageQueueCriteria criteria)
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        public static MessageQueueEnumerator GetMessageQueueEnumerator(
+            MessageQueueCriteria criteria
+        )
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        public static MessageQueue[] GetPrivateQueuesByMachine(string machineName)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static MessageQueue[] GetPublicQueues()
+        {
+            IMessagingProvider provider = MessagingProviderLocator.GetProvider();
+            IMessageQueue[] imqs = provider.GetPublicQueues();
             MessageQueue[] mqs = new MessageQueue[imqs.Length];
             for (int i = 0; i < imqs.Length; i++)
-                mqs[i] = new MessageQueue (imqs[i]);
+                mqs[i] = new MessageQueue(imqs[i]);
             return mqs;
         }
+
         [MonoTODO]
-        public static MessageQueue[] GetPublicQueues (MessageQueueCriteria criteria)
+        public static MessageQueue[] GetPublicQueues(MessageQueueCriteria criteria)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
+
         [MonoTODO]
-        public static MessageQueue[] GetPublicQueuesByCategory (Guid category)
+        public static MessageQueue[] GetPublicQueuesByCategory(Guid category)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
+
         [MonoTODO]
-        public static MessageQueue[] GetPublicQueuesByLabel (string label)
+        public static MessageQueue[] GetPublicQueuesByLabel(string label)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
+
         [MonoTODO]
-        public static MessageQueue[] GetPublicQueuesByMachine (string machineName)
+        public static MessageQueue[] GetPublicQueuesByMachine(string machineName)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public Message Peek ()
+        public Message Peek()
         {
-            try {
-                IMessage iMsg = delegateQueue.Peek ();
+            try
+            {
+                IMessage iMsg = delegateQueue.Peek();
                 if (iMsg == null)
                     return null;
-                
-                return new Message (iMsg, null, Formatter);
-                
-            } catch (ConnectionException e) {
-                throw new MessageQueueException (MessageQueueErrorCode.QueueNotAvailable, e.Message);
-            } catch (MessageUnavailableException e) {
-                throw new InvalidOperationException (e.Message, e);
-            } catch (MonoMessagingException e) {
-                throw new MessageQueueException (MessageQueueErrorCode.Generic, e.Message);
-            }            
-        }
 
-        public Message Peek (TimeSpan timeout)
-        {
-            try {
-                IMessage iMsg = delegateQueue.Peek (timeout);
-                if (iMsg == null)
-                    return null;
-                
-                return new Message (iMsg, null, Formatter);
-                
-            } catch (ConnectionException e) {
-                throw new MessageQueueException (MessageQueueErrorCode.QueueNotAvailable, e.Message);
-            } catch (MessageUnavailableException e) {
-                throw new InvalidOperationException (e.Message, e);
-            } catch (MonoMessagingException e) {
-                throw new MessageQueueException (MessageQueueErrorCode.Generic, e.Message);
-            }            
-        }
-
-        public Message PeekByCorrelationId (string correlationId)
-        {
-            try {
-                IMessage iMsg = delegateQueue.PeekByCorrelationId (correlationId);
-                if (iMsg == null)
-                    return null;
-                
-                return new Message (iMsg, null, Formatter);
-                
-            } catch (ConnectionException e) {
-                throw new MessageQueueException (MessageQueueErrorCode.QueueNotAvailable, e.Message);
-            } catch (MessageUnavailableException e) {
-                throw new InvalidOperationException (e.Message, e);
-            } catch (MonoMessagingException e) {
-                throw new MessageQueueException (MessageQueueErrorCode.Generic, e.Message);
-            }            
-        }
-
-        public Message PeekByCorrelationId (string correlationId, TimeSpan timeout)
-        {
-            try {
-                IMessage iMsg = delegateQueue.PeekByCorrelationId (correlationId, timeout);
-                if (iMsg == null)
-                    return null;
-                
-                return new Message (iMsg, null, Formatter);
-                
-            } catch (ConnectionException e) {
-                throw new MessageQueueException (MessageQueueErrorCode.QueueNotAvailable, e.Message);
-            } catch (MessageUnavailableException e) {
-                throw new InvalidOperationException (e.Message, e);
-            } catch (MonoMessagingException e) {
-                throw new MessageQueueException (MessageQueueErrorCode.Generic, e.Message);
-            }            
-        }
-
-        public Message PeekById (string id)
-        {
-            try {
-                IMessage iMsg = delegateQueue.PeekById (id);
-                if (iMsg == null)
-                    return null;
-                
-                return new Message (iMsg, null, Formatter);
-                
-            } catch (ConnectionException e) {
-                throw new MessageQueueException (MessageQueueErrorCode.QueueNotAvailable, e.Message);
-            } catch (MessageUnavailableException e) {
-                throw new InvalidOperationException (e.Message, e);
-            } catch (MonoMessagingException e) {
-                throw new MessageQueueException (MessageQueueErrorCode.Generic, e.Message);
-            }            
-        }
-
-        public Message PeekById (string id, TimeSpan timeout)
-        {
-            try {
-                IMessage iMsg = delegateQueue.PeekById (id, timeout);
-                if (iMsg == null)
-                    return null;
-                
-                return new Message (iMsg, null, Formatter);
-                
-            } catch (ConnectionException e) {
-                throw new MessageQueueException (MessageQueueErrorCode.QueueNotAvailable, e.Message);
-            } catch (MessageUnavailableException e) {
-                throw new InvalidOperationException (e.Message, e);
-            } catch (MonoMessagingException e) {
-                throw new MessageQueueException (MessageQueueErrorCode.Generic, e.Message);
-            }            
-        }
-
-        public void Purge ()
-        {
-            delegateQueue.Purge ();
-        }
-
-        public Message Receive ()
-        {
-            try {
-                IMessage iMsg = delegateQueue.Receive ();
-                if (iMsg == null)
-                    return null;
-                
-                return new Message (iMsg, null, Formatter);
-                
-            } catch (ConnectionException e) {
-                throw new MessageQueueException (MessageQueueErrorCode.QueueNotAvailable, e.Message);
-            } catch (MonoMessagingException e) {
-                throw new MessageQueueException (MessageQueueErrorCode.Generic, e.Message);
+                return new Message(iMsg, null, Formatter);
+            }
+            catch (ConnectionException e)
+            {
+                throw new MessageQueueException(MessageQueueErrorCode.QueueNotAvailable, e.Message);
+            }
+            catch (MessageUnavailableException e)
+            {
+                throw new InvalidOperationException(e.Message, e);
+            }
+            catch (MonoMessagingException e)
+            {
+                throw new MessageQueueException(MessageQueueErrorCode.Generic, e.Message);
             }
         }
 
-        public Message Receive (MessageQueueTransaction transaction)
+        public Message Peek(TimeSpan timeout)
         {
-            try {
-                IMessage iMsg = delegateQueue.Receive (transaction.DelegateTx);
+            try
+            {
+                IMessage iMsg = delegateQueue.Peek(timeout);
                 if (iMsg == null)
                     return null;
-                
-                return new Message (iMsg, null, Formatter);
-                
-            } catch (ConnectionException e) {
-                throw new MessageQueueException (MessageQueueErrorCode.QueueNotAvailable, e.Message);
-            } catch (MessageUnavailableException e) {
-                throw new InvalidOperationException (e.Message, e);
-            } catch (MonoMessagingException e) {
-                throw new MessageQueueException (MessageQueueErrorCode.Generic, e.Message);
+
+                return new Message(iMsg, null, Formatter);
+            }
+            catch (ConnectionException e)
+            {
+                throw new MessageQueueException(MessageQueueErrorCode.QueueNotAvailable, e.Message);
+            }
+            catch (MessageUnavailableException e)
+            {
+                throw new InvalidOperationException(e.Message, e);
+            }
+            catch (MonoMessagingException e)
+            {
+                throw new MessageQueueException(MessageQueueErrorCode.Generic, e.Message);
             }
         }
 
-        public Message Receive (MessageQueueTransactionType transactionType)
+        public Message PeekByCorrelationId(string correlationId)
         {
-            try {
-                IMessage iMsg = delegateQueue.Receive ((Mono.Messaging.MessageQueueTransactionType) transactionType);
+            try
+            {
+                IMessage iMsg = delegateQueue.PeekByCorrelationId(correlationId);
                 if (iMsg == null)
                     return null;
-                
-                return new Message (iMsg, null, Formatter);
-                
-            } catch (ConnectionException e) {
-                throw new MessageQueueException (MessageQueueErrorCode.QueueNotAvailable, e.Message);
-            } catch (MessageUnavailableException e) {
-                throw new InvalidOperationException (e.Message, e);
-            } catch (MonoMessagingException e) {
-                throw new MessageQueueException (MessageQueueErrorCode.Generic, e.Message);
+
+                return new Message(iMsg, null, Formatter);
             }
-        }
-        
-        public Message Receive (TimeSpan timeout)
-        {
-            try {
-                IMessage iMsg = delegateQueue.Receive (timeout);
-                if (iMsg == null)
-                    return null;
-                
-                return new Message (iMsg, null, Formatter);
-                
-            } catch (ConnectionException e) {
-                throw new MessageQueueException (MessageQueueErrorCode.QueueNotAvailable, e.Message);
-            } catch (MessageUnavailableException e) {
-                throw new InvalidOperationException (e.Message, e);
-            } catch (MonoMessagingException e) {
-                throw new MessageQueueException (MessageQueueErrorCode.Generic, e.Message);
+            catch (ConnectionException e)
+            {
+                throw new MessageQueueException(MessageQueueErrorCode.QueueNotAvailable, e.Message);
+            }
+            catch (MessageUnavailableException e)
+            {
+                throw new InvalidOperationException(e.Message, e);
+            }
+            catch (MonoMessagingException e)
+            {
+                throw new MessageQueueException(MessageQueueErrorCode.Generic, e.Message);
             }
         }
 
-        public Message Receive (TimeSpan timeout, MessageQueueTransaction transaction)
+        public Message PeekByCorrelationId(string correlationId, TimeSpan timeout)
         {
-            try {
-                IMessage iMsg = delegateQueue.Receive (timeout, transaction.DelegateTx);
+            try
+            {
+                IMessage iMsg = delegateQueue.PeekByCorrelationId(correlationId, timeout);
                 if (iMsg == null)
                     return null;
-                
-                return new Message (iMsg, null, Formatter);
-                
-            } catch (ConnectionException e) {
-                throw new MessageQueueException (MessageQueueErrorCode.QueueNotAvailable, e.Message);
-            } catch (MessageUnavailableException e) {
-                throw new InvalidOperationException (e.Message, e);
-            } catch (MonoMessagingException e) {
-                throw new MessageQueueException (MessageQueueErrorCode.Generic, e.Message);
+
+                return new Message(iMsg, null, Formatter);
+            }
+            catch (ConnectionException e)
+            {
+                throw new MessageQueueException(MessageQueueErrorCode.QueueNotAvailable, e.Message);
+            }
+            catch (MessageUnavailableException e)
+            {
+                throw new InvalidOperationException(e.Message, e);
+            }
+            catch (MonoMessagingException e)
+            {
+                throw new MessageQueueException(MessageQueueErrorCode.Generic, e.Message);
             }
         }
 
-        public Message Receive (TimeSpan timeout, MessageQueueTransactionType transactionType)
+        public Message PeekById(string id)
         {
-            try {
-                IMessage iMsg = delegateQueue.Receive (timeout, 
-                                                       (Mono.Messaging.MessageQueueTransactionType) transactionType);
+            try
+            {
+                IMessage iMsg = delegateQueue.PeekById(id);
                 if (iMsg == null)
                     return null;
-                
-                return new Message (iMsg, null, Formatter);
-                
-            } catch (ConnectionException e) {
-                throw new MessageQueueException (MessageQueueErrorCode.QueueNotAvailable, e.Message);
-            } catch (MessageUnavailableException e) {
-                throw new InvalidOperationException (e.Message, e);
-            } catch (MonoMessagingException e) {
-                throw new MessageQueueException (MessageQueueErrorCode.Generic, e.Message);
+
+                return new Message(iMsg, null, Formatter);
+            }
+            catch (ConnectionException e)
+            {
+                throw new MessageQueueException(MessageQueueErrorCode.QueueNotAvailable, e.Message);
+            }
+            catch (MessageUnavailableException e)
+            {
+                throw new InvalidOperationException(e.Message, e);
+            }
+            catch (MonoMessagingException e)
+            {
+                throw new MessageQueueException(MessageQueueErrorCode.Generic, e.Message);
             }
         }
 
-        public Message ReceiveByCorrelationId (string correlationId)
+        public Message PeekById(string id, TimeSpan timeout)
         {
-            try {
-                IMessage iMsg = delegateQueue.ReceiveByCorrelationId (correlationId);
+            try
+            {
+                IMessage iMsg = delegateQueue.PeekById(id, timeout);
                 if (iMsg == null)
                     return null;
-                
-                return new Message (iMsg, null, Formatter);
 
-            } catch (ConnectionException e) {
-                throw new MessageQueueException (MessageQueueErrorCode.QueueNotAvailable, e.Message);
-            } catch (MessageUnavailableException e) {
-                throw new InvalidOperationException (e.Message, e);
-            } catch (MonoMessagingException e) {
-                throw new MessageQueueException (MessageQueueErrorCode.Generic, e.Message);
+                return new Message(iMsg, null, Formatter);
+            }
+            catch (ConnectionException e)
+            {
+                throw new MessageQueueException(MessageQueueErrorCode.QueueNotAvailable, e.Message);
+            }
+            catch (MessageUnavailableException e)
+            {
+                throw new InvalidOperationException(e.Message, e);
+            }
+            catch (MonoMessagingException e)
+            {
+                throw new MessageQueueException(MessageQueueErrorCode.Generic, e.Message);
             }
         }
 
-        public Message ReceiveByCorrelationId (string correlationId, MessageQueueTransaction transaction)
+        public void Purge()
         {
-            try {
-                IMessage iMsg = delegateQueue.ReceiveByCorrelationId (correlationId, transaction.DelegateTx);
-                if (iMsg == null)
-                    return null;
-                
-                return new Message (iMsg, null, Formatter);
-                
-            } catch (ConnectionException e) {
-                throw new MessageQueueException (MessageQueueErrorCode.QueueNotAvailable, e.Message);
-            } catch (MessageUnavailableException e) {
-                throw new InvalidOperationException (e.Message, e);
-            } catch (MonoMessagingException e) {
-                throw new MessageQueueException (MessageQueueErrorCode.Generic, e.Message);
-            }            
+            delegateQueue.Purge();
         }
 
-        public Message ReceiveByCorrelationId (string correlationId, MessageQueueTransactionType transactionType)
+        public Message Receive()
         {
-            try {
-                IMessage iMsg = delegateQueue.ReceiveByCorrelationId (correlationId, (Mono.Messaging.MessageQueueTransactionType) transactionType);
+            try
+            {
+                IMessage iMsg = delegateQueue.Receive();
                 if (iMsg == null)
                     return null;
 
-                return new Message (iMsg, null, Formatter);
-
-            } catch (ConnectionException e) {
-                throw new MessageQueueException (MessageQueueErrorCode.QueueNotAvailable, e.Message);
-            } catch (MessageUnavailableException e) {
-                throw new InvalidOperationException (e.Message, e);
-            } catch (MonoMessagingException e) {
-                throw new MessageQueueException (MessageQueueErrorCode.Generic, e.Message);
+                return new Message(iMsg, null, Formatter);
+            }
+            catch (ConnectionException e)
+            {
+                throw new MessageQueueException(MessageQueueErrorCode.QueueNotAvailable, e.Message);
+            }
+            catch (MonoMessagingException e)
+            {
+                throw new MessageQueueException(MessageQueueErrorCode.Generic, e.Message);
             }
         }
 
-        public Message ReceiveByCorrelationId (string correlationId, TimeSpan timeout)
+        public Message Receive(MessageQueueTransaction transaction)
         {
-            try {
-                IMessage iMsg = delegateQueue.ReceiveByCorrelationId (correlationId, 
-                                                                      timeout);
-                if (iMsg == null)
-                    return null;
-                
-                return new Message (iMsg, null, Formatter);
-                
-            } catch (ConnectionException e) {
-                throw new MessageQueueException (MessageQueueErrorCode.QueueNotAvailable, e.Message);
-            } catch (MessageUnavailableException e) {
-                throw new InvalidOperationException (e.Message, e);
-            } catch (MonoMessagingException e) {
-                throw new MessageQueueException (MessageQueueErrorCode.Generic, e.Message);
-            }
-        }
-
-        public Message ReceiveByCorrelationId (string correlationId, TimeSpan timeout, MessageQueueTransaction transaction)
-        {
-            try {
-                IMessage iMsg = delegateQueue.ReceiveByCorrelationId (correlationId, timeout, transaction.DelegateTx);
+            try
+            {
+                IMessage iMsg = delegateQueue.Receive(transaction.DelegateTx);
                 if (iMsg == null)
                     return null;
 
-                return new Message (iMsg, null, Formatter);
-
-            } catch (ConnectionException e) {
-                throw new MessageQueueException (MessageQueueErrorCode.QueueNotAvailable, e.Message);
-            } catch (MessageUnavailableException e) {
-                throw new InvalidOperationException (e.Message, e);
-            } catch (MonoMessagingException e) {
-                throw new MessageQueueException (MessageQueueErrorCode.Generic, e.Message);
+                return new Message(iMsg, null, Formatter);
+            }
+            catch (ConnectionException e)
+            {
+                throw new MessageQueueException(MessageQueueErrorCode.QueueNotAvailable, e.Message);
+            }
+            catch (MessageUnavailableException e)
+            {
+                throw new InvalidOperationException(e.Message, e);
+            }
+            catch (MonoMessagingException e)
+            {
+                throw new MessageQueueException(MessageQueueErrorCode.Generic, e.Message);
             }
         }
 
-        public Message ReceiveByCorrelationId (string correlationId, TimeSpan timeout, MessageQueueTransactionType transactionType)
+        public Message Receive(MessageQueueTransactionType transactionType)
         {
-            try {
-                IMessage iMsg = delegateQueue.ReceiveByCorrelationId (correlationId, timeout, (Mono.Messaging.MessageQueueTransactionType) transactionType);
+            try
+            {
+                IMessage iMsg = delegateQueue.Receive(
+                    (Mono.Messaging.MessageQueueTransactionType)transactionType
+                );
                 if (iMsg == null)
                     return null;
 
-                return new Message (iMsg, null, Formatter);
-
-            } catch (ConnectionException e) {
-                throw new MessageQueueException (MessageQueueErrorCode.QueueNotAvailable, e.Message);
-            } catch (MessageUnavailableException e) {
-                throw new InvalidOperationException (e.Message, e);
-            } catch (MonoMessagingException e) {
-                throw new MessageQueueException (MessageQueueErrorCode.Generic, e.Message);
+                return new Message(iMsg, null, Formatter);
+            }
+            catch (ConnectionException e)
+            {
+                throw new MessageQueueException(MessageQueueErrorCode.QueueNotAvailable, e.Message);
+            }
+            catch (MessageUnavailableException e)
+            {
+                throw new InvalidOperationException(e.Message, e);
+            }
+            catch (MonoMessagingException e)
+            {
+                throw new MessageQueueException(MessageQueueErrorCode.Generic, e.Message);
             }
         }
 
-        public Message ReceiveById (string id)
+        public Message Receive(TimeSpan timeout)
         {
-            try {
-                IMessage iMsg = delegateQueue.ReceiveById (id);
+            try
+            {
+                IMessage iMsg = delegateQueue.Receive(timeout);
                 if (iMsg == null)
                     return null;
 
-                return new Message (iMsg, null, Formatter);
-
-            } catch (ConnectionException e) {
-                throw new MessageQueueException (MessageQueueErrorCode.QueueNotAvailable, e.Message);
-            } catch (MessageUnavailableException e) {
-                throw new InvalidOperationException (e.Message, e);
-            } catch (MonoMessagingException e) {
-                throw new MessageQueueException (MessageQueueErrorCode.Generic, e.Message);
+                return new Message(iMsg, null, Formatter);
+            }
+            catch (ConnectionException e)
+            {
+                throw new MessageQueueException(MessageQueueErrorCode.QueueNotAvailable, e.Message);
+            }
+            catch (MessageUnavailableException e)
+            {
+                throw new InvalidOperationException(e.Message, e);
+            }
+            catch (MonoMessagingException e)
+            {
+                throw new MessageQueueException(MessageQueueErrorCode.Generic, e.Message);
             }
         }
 
-        public Message ReceiveById (string id, MessageQueueTransaction transaction)
+        public Message Receive(TimeSpan timeout, MessageQueueTransaction transaction)
         {
-            try {
-                IMessage iMsg = delegateQueue.ReceiveById (id, transaction.DelegateTx);
+            try
+            {
+                IMessage iMsg = delegateQueue.Receive(timeout, transaction.DelegateTx);
                 if (iMsg == null)
                     return null;
 
-                return new Message (iMsg, null, Formatter);
-
-            } catch (ConnectionException e) {
-                throw new MessageQueueException (MessageQueueErrorCode.QueueNotAvailable, e.Message);
-            } catch (MessageUnavailableException e) {
-                throw new InvalidOperationException (e.Message, e);
-            } catch (MonoMessagingException e) {
-                throw new MessageQueueException (MessageQueueErrorCode.Generic, e.Message);
+                return new Message(iMsg, null, Formatter);
+            }
+            catch (ConnectionException e)
+            {
+                throw new MessageQueueException(MessageQueueErrorCode.QueueNotAvailable, e.Message);
+            }
+            catch (MessageUnavailableException e)
+            {
+                throw new InvalidOperationException(e.Message, e);
+            }
+            catch (MonoMessagingException e)
+            {
+                throw new MessageQueueException(MessageQueueErrorCode.Generic, e.Message);
             }
         }
 
-        public Message ReceiveById (string id, MessageQueueTransactionType transactionType)
+        public Message Receive(TimeSpan timeout, MessageQueueTransactionType transactionType)
         {
-            try {
-                IMessage iMsg = delegateQueue.ReceiveById (id, (Mono.Messaging.MessageQueueTransactionType) transactionType);
+            try
+            {
+                IMessage iMsg = delegateQueue.Receive(
+                    timeout,
+                    (Mono.Messaging.MessageQueueTransactionType)transactionType
+                );
                 if (iMsg == null)
                     return null;
 
-                return new Message (iMsg, null, Formatter);
-
-            } catch (ConnectionException e) {
-                throw new MessageQueueException (MessageQueueErrorCode.QueueNotAvailable, e.Message);
-            } catch (MessageUnavailableException e) {
-                throw new InvalidOperationException (e.Message, e);
-            } catch (MonoMessagingException e) {
-                throw new MessageQueueException (MessageQueueErrorCode.Generic, e.Message);
+                return new Message(iMsg, null, Formatter);
+            }
+            catch (ConnectionException e)
+            {
+                throw new MessageQueueException(MessageQueueErrorCode.QueueNotAvailable, e.Message);
+            }
+            catch (MessageUnavailableException e)
+            {
+                throw new InvalidOperationException(e.Message, e);
+            }
+            catch (MonoMessagingException e)
+            {
+                throw new MessageQueueException(MessageQueueErrorCode.Generic, e.Message);
             }
         }
 
-        public Message ReceiveById (string id, TimeSpan timeout)
+        public Message ReceiveByCorrelationId(string correlationId)
         {
-            try {
-                IMessage iMsg = delegateQueue.ReceiveById (id, timeout);
+            try
+            {
+                IMessage iMsg = delegateQueue.ReceiveByCorrelationId(correlationId);
                 if (iMsg == null)
                     return null;
 
-                return new Message (iMsg, null, Formatter);
-
-            } catch (ConnectionException e) {
-                throw new MessageQueueException (MessageQueueErrorCode.QueueNotAvailable, e.Message);
-            } catch (MessageUnavailableException e) {
-                throw new InvalidOperationException (e.Message, e);
-            } catch (MonoMessagingException e) {
-                throw new MessageQueueException (MessageQueueErrorCode.Generic, e.Message);
+                return new Message(iMsg, null, Formatter);
+            }
+            catch (ConnectionException e)
+            {
+                throw new MessageQueueException(MessageQueueErrorCode.QueueNotAvailable, e.Message);
+            }
+            catch (MessageUnavailableException e)
+            {
+                throw new InvalidOperationException(e.Message, e);
+            }
+            catch (MonoMessagingException e)
+            {
+                throw new MessageQueueException(MessageQueueErrorCode.Generic, e.Message);
             }
         }
 
-        public Message ReceiveById (string id, TimeSpan timeout, MessageQueueTransaction transaction)
+        public Message ReceiveByCorrelationId(
+            string correlationId,
+            MessageQueueTransaction transaction
+        )
         {
-            try {
-                IMessage iMsg = delegateQueue.ReceiveById (id, timeout, transaction.DelegateTx);
+            try
+            {
+                IMessage iMsg = delegateQueue.ReceiveByCorrelationId(
+                    correlationId,
+                    transaction.DelegateTx
+                );
                 if (iMsg == null)
                     return null;
 
-                return new Message (iMsg, null, Formatter);
-
-            } catch (ConnectionException e) {
-                throw new MessageQueueException (MessageQueueErrorCode.QueueNotAvailable, e.Message);
-            } catch (MessageUnavailableException e) {
-                throw new InvalidOperationException (e.Message, e);
-            } catch (MonoMessagingException e) {
-                throw new MessageQueueException (MessageQueueErrorCode.Generic, e.Message);
+                return new Message(iMsg, null, Formatter);
+            }
+            catch (ConnectionException e)
+            {
+                throw new MessageQueueException(MessageQueueErrorCode.QueueNotAvailable, e.Message);
+            }
+            catch (MessageUnavailableException e)
+            {
+                throw new InvalidOperationException(e.Message, e);
+            }
+            catch (MonoMessagingException e)
+            {
+                throw new MessageQueueException(MessageQueueErrorCode.Generic, e.Message);
             }
         }
 
-        public Message ReceiveById (string id, TimeSpan timeout, MessageQueueTransactionType transactionType)
+        public Message ReceiveByCorrelationId(
+            string correlationId,
+            MessageQueueTransactionType transactionType
+        )
         {
-            try {
-                IMessage iMsg = delegateQueue.ReceiveById (id, timeout, (Mono.Messaging.MessageQueueTransactionType) transactionType);
+            try
+            {
+                IMessage iMsg = delegateQueue.ReceiveByCorrelationId(
+                    correlationId,
+                    (Mono.Messaging.MessageQueueTransactionType)transactionType
+                );
                 if (iMsg == null)
                     return null;
 
-                return new Message (iMsg, null, Formatter);
-
-            } catch (ConnectionException e) {
-                throw new MessageQueueException (MessageQueueErrorCode.QueueNotAvailable, e.Message);
-            } catch (MessageUnavailableException e) {
-                throw new InvalidOperationException (e.Message, e);
-            } catch (MonoMessagingException e) {
-                throw new MessageQueueException (MessageQueueErrorCode.Generic, e.Message);
+                return new Message(iMsg, null, Formatter);
+            }
+            catch (ConnectionException e)
+            {
+                throw new MessageQueueException(MessageQueueErrorCode.QueueNotAvailable, e.Message);
+            }
+            catch (MessageUnavailableException e)
+            {
+                throw new InvalidOperationException(e.Message, e);
+            }
+            catch (MonoMessagingException e)
+            {
+                throw new MessageQueueException(MessageQueueErrorCode.Generic, e.Message);
             }
         }
+
+        public Message ReceiveByCorrelationId(string correlationId, TimeSpan timeout)
+        {
+            try
+            {
+                IMessage iMsg = delegateQueue.ReceiveByCorrelationId(correlationId, timeout);
+                if (iMsg == null)
+                    return null;
+
+                return new Message(iMsg, null, Formatter);
+            }
+            catch (ConnectionException e)
+            {
+                throw new MessageQueueException(MessageQueueErrorCode.QueueNotAvailable, e.Message);
+            }
+            catch (MessageUnavailableException e)
+            {
+                throw new InvalidOperationException(e.Message, e);
+            }
+            catch (MonoMessagingException e)
+            {
+                throw new MessageQueueException(MessageQueueErrorCode.Generic, e.Message);
+            }
+        }
+
+        public Message ReceiveByCorrelationId(
+            string correlationId,
+            TimeSpan timeout,
+            MessageQueueTransaction transaction
+        )
+        {
+            try
+            {
+                IMessage iMsg = delegateQueue.ReceiveByCorrelationId(
+                    correlationId,
+                    timeout,
+                    transaction.DelegateTx
+                );
+                if (iMsg == null)
+                    return null;
+
+                return new Message(iMsg, null, Formatter);
+            }
+            catch (ConnectionException e)
+            {
+                throw new MessageQueueException(MessageQueueErrorCode.QueueNotAvailable, e.Message);
+            }
+            catch (MessageUnavailableException e)
+            {
+                throw new InvalidOperationException(e.Message, e);
+            }
+            catch (MonoMessagingException e)
+            {
+                throw new MessageQueueException(MessageQueueErrorCode.Generic, e.Message);
+            }
+        }
+
+        public Message ReceiveByCorrelationId(
+            string correlationId,
+            TimeSpan timeout,
+            MessageQueueTransactionType transactionType
+        )
+        {
+            try
+            {
+                IMessage iMsg = delegateQueue.ReceiveByCorrelationId(
+                    correlationId,
+                    timeout,
+                    (Mono.Messaging.MessageQueueTransactionType)transactionType
+                );
+                if (iMsg == null)
+                    return null;
+
+                return new Message(iMsg, null, Formatter);
+            }
+            catch (ConnectionException e)
+            {
+                throw new MessageQueueException(MessageQueueErrorCode.QueueNotAvailable, e.Message);
+            }
+            catch (MessageUnavailableException e)
+            {
+                throw new InvalidOperationException(e.Message, e);
+            }
+            catch (MonoMessagingException e)
+            {
+                throw new MessageQueueException(MessageQueueErrorCode.Generic, e.Message);
+            }
+        }
+
+        public Message ReceiveById(string id)
+        {
+            try
+            {
+                IMessage iMsg = delegateQueue.ReceiveById(id);
+                if (iMsg == null)
+                    return null;
+
+                return new Message(iMsg, null, Formatter);
+            }
+            catch (ConnectionException e)
+            {
+                throw new MessageQueueException(MessageQueueErrorCode.QueueNotAvailable, e.Message);
+            }
+            catch (MessageUnavailableException e)
+            {
+                throw new InvalidOperationException(e.Message, e);
+            }
+            catch (MonoMessagingException e)
+            {
+                throw new MessageQueueException(MessageQueueErrorCode.Generic, e.Message);
+            }
+        }
+
+        public Message ReceiveById(string id, MessageQueueTransaction transaction)
+        {
+            try
+            {
+                IMessage iMsg = delegateQueue.ReceiveById(id, transaction.DelegateTx);
+                if (iMsg == null)
+                    return null;
+
+                return new Message(iMsg, null, Formatter);
+            }
+            catch (ConnectionException e)
+            {
+                throw new MessageQueueException(MessageQueueErrorCode.QueueNotAvailable, e.Message);
+            }
+            catch (MessageUnavailableException e)
+            {
+                throw new InvalidOperationException(e.Message, e);
+            }
+            catch (MonoMessagingException e)
+            {
+                throw new MessageQueueException(MessageQueueErrorCode.Generic, e.Message);
+            }
+        }
+
+        public Message ReceiveById(string id, MessageQueueTransactionType transactionType)
+        {
+            try
+            {
+                IMessage iMsg = delegateQueue.ReceiveById(
+                    id,
+                    (Mono.Messaging.MessageQueueTransactionType)transactionType
+                );
+                if (iMsg == null)
+                    return null;
+
+                return new Message(iMsg, null, Formatter);
+            }
+            catch (ConnectionException e)
+            {
+                throw new MessageQueueException(MessageQueueErrorCode.QueueNotAvailable, e.Message);
+            }
+            catch (MessageUnavailableException e)
+            {
+                throw new InvalidOperationException(e.Message, e);
+            }
+            catch (MonoMessagingException e)
+            {
+                throw new MessageQueueException(MessageQueueErrorCode.Generic, e.Message);
+            }
+        }
+
+        public Message ReceiveById(string id, TimeSpan timeout)
+        {
+            try
+            {
+                IMessage iMsg = delegateQueue.ReceiveById(id, timeout);
+                if (iMsg == null)
+                    return null;
+
+                return new Message(iMsg, null, Formatter);
+            }
+            catch (ConnectionException e)
+            {
+                throw new MessageQueueException(MessageQueueErrorCode.QueueNotAvailable, e.Message);
+            }
+            catch (MessageUnavailableException e)
+            {
+                throw new InvalidOperationException(e.Message, e);
+            }
+            catch (MonoMessagingException e)
+            {
+                throw new MessageQueueException(MessageQueueErrorCode.Generic, e.Message);
+            }
+        }
+
+        public Message ReceiveById(string id, TimeSpan timeout, MessageQueueTransaction transaction)
+        {
+            try
+            {
+                IMessage iMsg = delegateQueue.ReceiveById(id, timeout, transaction.DelegateTx);
+                if (iMsg == null)
+                    return null;
+
+                return new Message(iMsg, null, Formatter);
+            }
+            catch (ConnectionException e)
+            {
+                throw new MessageQueueException(MessageQueueErrorCode.QueueNotAvailable, e.Message);
+            }
+            catch (MessageUnavailableException e)
+            {
+                throw new InvalidOperationException(e.Message, e);
+            }
+            catch (MonoMessagingException e)
+            {
+                throw new MessageQueueException(MessageQueueErrorCode.Generic, e.Message);
+            }
+        }
+
+        public Message ReceiveById(
+            string id,
+            TimeSpan timeout,
+            MessageQueueTransactionType transactionType
+        )
+        {
+            try
+            {
+                IMessage iMsg = delegateQueue.ReceiveById(
+                    id,
+                    timeout,
+                    (Mono.Messaging.MessageQueueTransactionType)transactionType
+                );
+                if (iMsg == null)
+                    return null;
+
+                return new Message(iMsg, null, Formatter);
+            }
+            catch (ConnectionException e)
+            {
+                throw new MessageQueueException(MessageQueueErrorCode.QueueNotAvailable, e.Message);
+            }
+            catch (MessageUnavailableException e)
+            {
+                throw new InvalidOperationException(e.Message, e);
+            }
+            catch (MonoMessagingException e)
+            {
+                throw new MessageQueueException(MessageQueueErrorCode.Generic, e.Message);
+            }
+        }
+
         [MonoTODO]
-        public void Refresh ()
+        public void Refresh()
         {
-            throw new NotImplementedException ();
-        }
-        [MonoTODO]
-        public void ResetPermissions ()
-        {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public void Send (object obj)
+        [MonoTODO]
+        public void ResetPermissions()
         {
-            if (typeof (Message) == obj.GetType ()) {
-                Message m = (Message) obj;
-                if (m.BodyStream == null) {
+            throw new NotImplementedException();
+        }
+
+        public void Send(object obj)
+        {
+            if (typeof(Message) == obj.GetType())
+            {
+                Message m = (Message)obj;
+                if (m.BodyStream == null)
+                {
                     IMessageFormatter f = (m.Formatter == null) ? Formatter : m.Formatter;
-                    f.Write (m, m.Body);
+                    f.Write(m, m.Body);
                 }
 
-                try {
-                    delegateQueue.Send (m.DelegateMessage);
-                } catch (ConnectionException e) {
-                    throw new MessageQueueException (MessageQueueErrorCode.QueueNotAvailable, e.Message);
-                } catch (MonoMessagingException e) {
-                    throw new MessageQueueException (MessageQueueErrorCode.Generic, e.Message);
+                try
+                {
+                    delegateQueue.Send(m.DelegateMessage);
                 }
-            } else {
-                Message m = new Message (obj);
-                Send (m);
+                catch (ConnectionException e)
+                {
+                    throw new MessageQueueException(
+                        MessageQueueErrorCode.QueueNotAvailable,
+                        e.Message
+                    );
+                }
+                catch (MonoMessagingException e)
+                {
+                    throw new MessageQueueException(MessageQueueErrorCode.Generic, e.Message);
+                }
+            }
+            else
+            {
+                Message m = new Message(obj);
+                Send(m);
             }
         }
 
-        public void Send (object obj, MessageQueueTransaction transaction)
+        public void Send(object obj, MessageQueueTransaction transaction)
         {
-            if (typeof (Message) == obj.GetType ()) {
-                Message m = (Message) obj;
-                if (m.BodyStream == null) {
+            if (typeof(Message) == obj.GetType())
+            {
+                Message m = (Message)obj;
+                if (m.BodyStream == null)
+                {
                     IMessageFormatter f = (m.Formatter == null) ? Formatter : m.Formatter;
-                    f.Write (m, m.Body);
+                    f.Write(m, m.Body);
                 }
 
-                try {
-                    delegateQueue.Send (m.DelegateMessage, transaction.DelegateTx);
-                } catch (ConnectionException e) {
-                    throw new MessageQueueException (MessageQueueErrorCode.QueueNotAvailable, e.Message);
-                } catch (MonoMessagingException e) {
-                    throw new MessageQueueException (MessageQueueErrorCode.Generic, e.Message);
+                try
+                {
+                    delegateQueue.Send(m.DelegateMessage, transaction.DelegateTx);
                 }
-            } else {
-                Message m = new Message (obj);
-                Send (m, transaction);
+                catch (ConnectionException e)
+                {
+                    throw new MessageQueueException(
+                        MessageQueueErrorCode.QueueNotAvailable,
+                        e.Message
+                    );
+                }
+                catch (MonoMessagingException e)
+                {
+                    throw new MessageQueueException(MessageQueueErrorCode.Generic, e.Message);
+                }
+            }
+            else
+            {
+                Message m = new Message(obj);
+                Send(m, transaction);
             }
         }
 
-        public void Send (object obj, MessageQueueTransactionType transactionType)
+        public void Send(object obj, MessageQueueTransactionType transactionType)
         {
-            if (typeof (Message) == obj.GetType ()) {
-                Message m = (Message) obj;
-                if (m.BodyStream == null) {
+            if (typeof(Message) == obj.GetType())
+            {
+                Message m = (Message)obj;
+                if (m.BodyStream == null)
+                {
                     IMessageFormatter f = (m.Formatter == null) ? Formatter : m.Formatter;
-                    f.Write (m, m.Body);
+                    f.Write(m, m.Body);
                 }
 
-                try {
-                    delegateQueue.Send (m.DelegateMessage, (Mono.Messaging.MessageQueueTransactionType) transactionType);
-                } catch (ConnectionException e) {
-                    throw new MessageQueueException (MessageQueueErrorCode.QueueNotAvailable, e.Message);
-                } catch (MonoMessagingException e) {
-                    throw new MessageQueueException (MessageQueueErrorCode.Generic, e.Message);
+                try
+                {
+                    delegateQueue.Send(
+                        m.DelegateMessage,
+                        (Mono.Messaging.MessageQueueTransactionType)transactionType
+                    );
                 }
-            } else {
-                Message m = new Message (obj);
-                Send (m, transactionType);
+                catch (ConnectionException e)
+                {
+                    throw new MessageQueueException(
+                        MessageQueueErrorCode.QueueNotAvailable,
+                        e.Message
+                    );
+                }
+                catch (MonoMessagingException e)
+                {
+                    throw new MessageQueueException(MessageQueueErrorCode.Generic, e.Message);
+                }
+            }
+            else
+            {
+                Message m = new Message(obj);
+                Send(m, transactionType);
             }
         }
 
-        public void Send (object obj, string label)
+        public void Send(object obj, string label)
         {
-            if (typeof (Message) == obj.GetType ()) {
-                Message m = (Message) obj;
+            if (typeof(Message) == obj.GetType())
+            {
+                Message m = (Message)obj;
                 m.Label = label;
-                
-                Send (m);
-            } else {
-                Message m = new Message (obj);
-                Send (m, label);
+
+                Send(m);
+            }
+            else
+            {
+                Message m = new Message(obj);
+                Send(m, label);
             }
         }
 
-        public void Send (object obj, string label, MessageQueueTransaction transaction)
+        public void Send(object obj, string label, MessageQueueTransaction transaction)
         {
-            if (typeof (Message) == obj.GetType ()) {
-                Message m = (Message) obj;
+            if (typeof(Message) == obj.GetType())
+            {
+                Message m = (Message)obj;
                 m.Label = label;
-                
-                if (m.BodyStream == null) {
+
+                if (m.BodyStream == null)
+                {
                     IMessageFormatter f = (m.Formatter == null) ? Formatter : m.Formatter;
-                    f.Write (m, m.Body);
+                    f.Write(m, m.Body);
                 }
 
-                try {
-                    delegateQueue.Send (m.DelegateMessage, transaction.DelegateTx);
-                } catch (ConnectionException e) {
-                    throw new MessageQueueException (MessageQueueErrorCode.QueueNotAvailable, e.Message);
-                } catch (MonoMessagingException e) {
-                    throw new MessageQueueException (MessageQueueErrorCode.Generic, e.Message);
+                try
+                {
+                    delegateQueue.Send(m.DelegateMessage, transaction.DelegateTx);
                 }
-            } else {
-                Message m = new Message (obj);
-                Send (m, label, transaction);
+                catch (ConnectionException e)
+                {
+                    throw new MessageQueueException(
+                        MessageQueueErrorCode.QueueNotAvailable,
+                        e.Message
+                    );
+                }
+                catch (MonoMessagingException e)
+                {
+                    throw new MessageQueueException(MessageQueueErrorCode.Generic, e.Message);
+                }
+            }
+            else
+            {
+                Message m = new Message(obj);
+                Send(m, label, transaction);
             }
         }
 
-        public void Send (object obj, string label, MessageQueueTransactionType transactionType)
+        public void Send(object obj, string label, MessageQueueTransactionType transactionType)
         {
-            if (typeof (Message) == obj.GetType ()) {
-                Message m = (Message) obj;
+            if (typeof(Message) == obj.GetType())
+            {
+                Message m = (Message)obj;
                 m.Label = label;
-                Send (m, transactionType);
-            } else {
-                Message m = new Message (obj);
-                Send (m, label, transactionType);
+                Send(m, transactionType);
+            }
+            else
+            {
+                Message m = new Message(obj);
+                Send(m, label, transactionType);
             }
         }
+
         [MonoTODO]
-        public void SetPermissions (AccessControlList dacl)
+        public void SetPermissions(AccessControlList dacl)
         {
-            throw new NotImplementedException ();
-        }
-        [MonoTODO]
-        public void SetPermissions (MessageQueueAccessControlEntry ace)
-        {
-            throw new NotImplementedException ();
-        }
-        [MonoTODO]
-        public void SetPermissions (string user, MessageQueueAccessRights rights)
-        {
-            throw new NotImplementedException ();
-        }
-        [MonoTODO]
-        public void SetPermissions (string user, MessageQueueAccessRights rights, AccessControlEntryType entryType)
-        {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        protected override void Dispose (bool disposing)
+        [MonoTODO]
+        public void SetPermissions(MessageQueueAccessControlEntry ace)
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        public void SetPermissions(string user, MessageQueueAccessRights rights)
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        public void SetPermissions(
+            string user,
+            MessageQueueAccessRights rights,
+            AccessControlEntryType entryType
+        )
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void Dispose(bool disposing)
         {
             //delegateQueue.Dispose ();
         }
 
         #endregion //Methods
 
-        [MessagingDescription ("MQ_PeekCompleted")]
+        [MessagingDescription("MQ_PeekCompleted")]
         public event PeekCompletedEventHandler PeekCompleted;
-        
-        private void DelegatePeekCompleted (object sender, CompletedEventArgs args)
+
+        private void DelegatePeekCompleted(object sender, CompletedEventArgs args)
         {
             if (PeekCompleted == null)
                 return;
-            
-            PeekCompletedEventArgs newArgs = new PeekCompletedEventArgs (this, args.AsyncResult);            
-            PeekCompleted (sender, newArgs);
+
+            PeekCompletedEventArgs newArgs = new PeekCompletedEventArgs(this, args.AsyncResult);
+            PeekCompleted(sender, newArgs);
         }
 
-        [MessagingDescription ("MQ_ReceiveCompleted")]
+        [MessagingDescription("MQ_ReceiveCompleted")]
         public event ReceiveCompletedEventHandler ReceiveCompleted;
-        
-        private void DelegateReceiveCompleted (object sender, CompletedEventArgs args)
+
+        private void DelegateReceiveCompleted(object sender, CompletedEventArgs args)
         {
             if (ReceiveCompleted == null)
                 return;
-            
-            ReceiveCompletedEventArgs newArgs = new ReceiveCompletedEventArgs (this, args.AsyncResult);            
-            ReceiveCompleted (sender, newArgs);
+
+            ReceiveCompletedEventArgs newArgs = new ReceiveCompletedEventArgs(
+                this,
+                args.AsyncResult
+            );
+            ReceiveCompleted(sender, newArgs);
         }
-        
-        private static IMessageQueue GetMessageQueue (string path)
+
+        private static IMessageQueue GetMessageQueue(string path)
         {
-            QueueReference qRef = QueueReference.Parse (path);
-            IMessageQueue q = MessagingProviderLocator
-                .GetProvider ()
-                .GetMessageQueue (qRef);
+            QueueReference qRef = QueueReference.Parse(path);
+            IMessageQueue q = MessagingProviderLocator.GetProvider().GetMessageQueue(qRef);
             return q;
         }
-        
-        private static IMessageQueue GetMessageQueue ()
+
+        private static IMessageQueue GetMessageQueue()
         {
-            return MessagingProviderLocator.GetProvider ()
-                .GetMessageQueue (QueueReference.DEFAULT);
+            return MessagingProviderLocator.GetProvider().GetMessageQueue(QueueReference.DEFAULT);
         }
-        
-        private static IMessageQueue CreateMessageQueue (QueueReference qRef,
-                                                         bool transactional)
+
+        private static IMessageQueue CreateMessageQueue(QueueReference qRef, bool transactional)
         {
-            return MessagingProviderLocator.GetProvider ()
-                .CreateMessageQueue (qRef, transactional);
+            return MessagingProviderLocator.GetProvider().CreateMessageQueue(qRef, transactional);
         }
-        
-        private static bool Exists (QueueReference qRef)
+
+        private static bool Exists(QueueReference qRef)
         {
-            return MessagingProviderLocator.GetProvider ().Exists (qRef);
-        }        
+            return MessagingProviderLocator.GetProvider().Exists(qRef);
+        }
     }
 }

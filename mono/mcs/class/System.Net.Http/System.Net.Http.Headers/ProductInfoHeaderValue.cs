@@ -32,93 +32,95 @@ namespace System.Net.Http.Headers
 {
     public class ProductInfoHeaderValue : ICloneable
     {
-        public ProductInfoHeaderValue (ProductHeaderValue product)
+        public ProductInfoHeaderValue(ProductHeaderValue product)
         {
             if (product == null)
-                throw new ArgumentNullException ();
+                throw new ArgumentNullException();
 
             Product = product;
         }
 
-        public ProductInfoHeaderValue (string comment)
+        public ProductInfoHeaderValue(string comment)
         {
-            Parser.Token.CheckComment (comment);
+            Parser.Token.CheckComment(comment);
             Comment = comment;
         }
 
-        public ProductInfoHeaderValue (string productName, string productVersion)
+        public ProductInfoHeaderValue(string productName, string productVersion)
         {
-            Product = new ProductHeaderValue (productName, productVersion);
+            Product = new ProductHeaderValue(productName, productVersion);
         }
 
-        private ProductInfoHeaderValue ()
-        {
-        }
+        private ProductInfoHeaderValue() { }
 
         public string Comment { get; private set; }
         public ProductHeaderValue Product { get; private set; }
 
-        object ICloneable.Clone ()
+        object ICloneable.Clone()
         {
-            return MemberwiseClone ();
+            return MemberwiseClone();
         }
 
-        public override bool Equals (object obj)
+        public override bool Equals(object obj)
         {
             var source = obj as ProductInfoHeaderValue;
             if (source == null)
                 return false;
 
-            return Product != null ?
-                Product.Equals (source.Product) :
-                source.Comment == Comment;
+            return Product != null ? Product.Equals(source.Product) : source.Comment == Comment;
         }
 
-        public override int GetHashCode ()
+        public override int GetHashCode()
         {
-            return Product != null ?
-                Product.GetHashCode () :
-                Comment.GetHashCode ();
+            return Product != null ? Product.GetHashCode() : Comment.GetHashCode();
         }
 
-        public static ProductInfoHeaderValue Parse (string input)
+        public static ProductInfoHeaderValue Parse(string input)
         {
             ProductInfoHeaderValue value;
-            if (TryParse (input, out value))
+            if (TryParse(input, out value))
                 return value;
 
-            throw new FormatException (input);
+            throw new FormatException(input);
         }
-        
-        public static bool TryParse (string input, out ProductInfoHeaderValue parsedValue)
+
+        public static bool TryParse(string input, out ProductInfoHeaderValue parsedValue)
         {
             parsedValue = null;
 
-            var lexer = new Lexer (input);
-            if (!TryParseElement (lexer, out parsedValue) || parsedValue == null)
+            var lexer = new Lexer(input);
+            if (!TryParseElement(lexer, out parsedValue) || parsedValue == null)
                 return false;
 
-            if (lexer.Scan () != Token.Type.End) {
+            if (lexer.Scan() != Token.Type.End)
+            {
                 parsedValue = null;
                 return false;
-            }    
+            }
 
             return true;
         }
 
-        internal static bool TryParse (string input, int minimalCount, out List<ProductInfoHeaderValue> result)
+        internal static bool TryParse(
+            string input,
+            int minimalCount,
+            out List<ProductInfoHeaderValue> result
+        )
         {
-            var list = new List<ProductInfoHeaderValue> ();
-            var lexer = new Lexer (input);
+            var list = new List<ProductInfoHeaderValue>();
+            var lexer = new Lexer(input);
             result = null;
 
-            while (true) {
+            while (true)
+            {
                 ProductInfoHeaderValue element;
-                if (!TryParseElement (lexer, out element))
+                if (!TryParseElement(lexer, out element))
                     return false;
 
-                if (element == null) {
-                    if (list != null && minimalCount <= list.Count) {
+                if (element == null)
+                {
+                    if (list != null && minimalCount <= list.Count)
+                    {
                         result = list;
                         return true;
                     }
@@ -126,38 +128,41 @@ namespace System.Net.Http.Headers
                     return false;
                 }
 
-                list.Add (element);
+                list.Add(element);
 
                 // Separator parsing
-                switch (lexer.PeekChar ()) {
-                case ' ':
-                case '\t':
-                    lexer.EatChar ();
-                    continue;
-                case -1:
-                    if (minimalCount <= list.Count) {
-                        result = list;
-                        return true;
-                    }
+                switch (lexer.PeekChar())
+                {
+                    case ' ':
+                    case '\t':
+                        lexer.EatChar();
+                        continue;
+                    case -1:
+                        if (minimalCount <= list.Count)
+                        {
+                            result = list;
+                            return true;
+                        }
 
-                    break;
+                        break;
                 }
-                    
+
                 return false;
             }
         }
 
-        static bool TryParseElement (Lexer lexer, out ProductInfoHeaderValue parsedValue)
+        static bool TryParseElement(Lexer lexer, out ProductInfoHeaderValue parsedValue)
         {
             string comment;
             parsedValue = null;
             Token t;
 
-            if (lexer.ScanCommentOptional (out comment, out t)) {
+            if (lexer.ScanCommentOptional(out comment, out t))
+            {
                 if (comment == null)
                     return false;
 
-                parsedValue = new ProductInfoHeaderValue ();
+                parsedValue = new ProductInfoHeaderValue();
                 parsedValue.Comment = comment;
                 return true;
             }
@@ -168,32 +173,34 @@ namespace System.Net.Http.Headers
             if (t != Token.Type.Token)
                 return false;
 
-            var value = new ProductHeaderValue ();
-            value.Name = lexer.GetStringValue (t);
+            var value = new ProductHeaderValue();
+            value.Name = lexer.GetStringValue(t);
 
             var pos = lexer.Position;
-            t = lexer.Scan ();
-            if (t == Token.Type.SeparatorSlash) {
-
-                t = lexer.Scan ();
+            t = lexer.Scan();
+            if (t == Token.Type.SeparatorSlash)
+            {
+                t = lexer.Scan();
                 if (t != Token.Type.Token)
                     return false;
 
-                value.Version = lexer.GetStringValue (t);
-            } else {
+                value.Version = lexer.GetStringValue(t);
+            }
+            else
+            {
                 lexer.Position = pos;
             }
 
-            parsedValue = new ProductInfoHeaderValue (value);
+            parsedValue = new ProductInfoHeaderValue(value);
             return true;
         }
 
-        public override string ToString ()
+        public override string ToString()
         {
             if (Product == null)
                 return Comment;
 
-            return Product.ToString ();
+            return Product.ToString();
         }
     }
 }

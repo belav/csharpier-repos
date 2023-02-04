@@ -18,9 +18,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
         // internal for testing
         internal class PreviewDialogWorkspace : PreviewWorkspace
         {
-            public PreviewDialogWorkspace(Solution solution) : base(solution)
-            {
-            }
+            public PreviewDialogWorkspace(Solution solution)
+                : base(solution) { }
 
             public void CloseDocument(TextDocument document, SourceText text)
             {
@@ -47,14 +46,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
             {
                 private readonly SourceText _text;
 
-                internal PreviewTextLoader(SourceText documentText)
-                    => _text = documentText;
+                internal PreviewTextLoader(SourceText documentText) => _text = documentText;
 
-                public override Task<TextAndVersion> LoadTextAndVersionAsync(LoadTextOptions options, CancellationToken cancellationToken)
-                    => Task.FromResult(LoadTextAndVersionSynchronously(options, cancellationToken));
+                public override Task<TextAndVersion> LoadTextAndVersionAsync(
+                    LoadTextOptions options,
+                    CancellationToken cancellationToken
+                ) => Task.FromResult(LoadTextAndVersionSynchronously(options, cancellationToken));
 
-                internal override TextAndVersion LoadTextAndVersionSynchronously(LoadTextOptions options, CancellationToken cancellationToken)
-                    => TextAndVersion.Create(_text, VersionStamp.Create());
+                internal override TextAndVersion LoadTextAndVersionSynchronously(
+                    LoadTextOptions options,
+                    CancellationToken cancellationToken
+                ) => TextAndVersion.Create(_text, VersionStamp.Create());
             }
         }
     }

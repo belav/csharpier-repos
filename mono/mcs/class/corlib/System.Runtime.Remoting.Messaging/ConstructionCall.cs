@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -39,9 +39,10 @@ using System.Runtime.Remoting.Proxies;
 
 namespace System.Runtime.Remoting.Messaging
 {
-    [Serializable] [CLSCompliant (false)]
-    [System.Runtime.InteropServices.ComVisible (true)]
-    public class ConstructionCall: MethodCall, IConstructionCallMessage
+    [Serializable]
+    [CLSCompliant(false)]
+    [System.Runtime.InteropServices.ComVisible(true)]
+    public class ConstructionCall : MethodCall, IConstructionCallMessage
     {
         IActivator _activator;
         object[] _activationAttributes;
@@ -49,32 +50,33 @@ namespace System.Runtime.Remoting.Messaging
         Type _activationType;
         string _activationTypeName;
         bool _isContextOk;
-        [NonSerialized] RemotingProxy _sourceProxy;
 
-        public ConstructionCall (IMessage m): base (m)
+        [NonSerialized]
+        RemotingProxy _sourceProxy;
+
+        public ConstructionCall(IMessage m)
+            : base(m)
         {
             _activationTypeName = TypeName;
             _isContextOk = true;
         }
 
-        internal ConstructionCall (Type type)
+        internal ConstructionCall(Type type)
         {
             _activationType = type;
             _activationTypeName = type.AssemblyQualifiedName;
             _isContextOk = true;
         }
 
-        public ConstructionCall (Header[] headers): base (headers)
-        {
-        }
+        public ConstructionCall(Header[] headers)
+            : base(headers) { }
 
-        internal ConstructionCall (SerializationInfo info, StreamingContext context): base (info, context)
-        {
-        }
+        internal ConstructionCall(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
 
         internal override void InitDictionary()
         {
-            ConstructionCallDictionary props = new ConstructionCallDictionary (this);
+            ConstructionCallDictionary props = new ConstructionCallDictionary(this);
             ExternalProperties = props;
             InternalProperties = props.GetInternalProperties();
         }
@@ -85,42 +87,44 @@ namespace System.Runtime.Remoting.Messaging
             set { _isContextOk = value; }
         }
 
-        public Type ActivationType 
+        public Type ActivationType
         {
-            get 
-            { 
-                if (_activationType == null) _activationType = Type.GetType (_activationTypeName);
-                return _activationType; 
+            get
+            {
+                if (_activationType == null)
+                    _activationType = Type.GetType(_activationTypeName);
+                return _activationType;
             }
         }
 
-        public string ActivationTypeName 
+        public string ActivationTypeName
         {
             get { return _activationTypeName; }
         }
 
-        public IActivator Activator 
+        public IActivator Activator
         {
             get { return _activator; }
             set { _activator = value; }
         }
 
-        public object [] CallSiteActivationAttributes 
+        public object[] CallSiteActivationAttributes
         {
             get { return _activationAttributes; }
         }
 
-        internal void SetActivationAttributes (object [] attributes)
+        internal void SetActivationAttributes(object[] attributes)
         {
             _activationAttributes = attributes;
         }
 
-        public IList ContextProperties 
+        public IList ContextProperties
         {
-            get 
+            get
             {
-                if (_contextProperties == null) _contextProperties = new ArrayList ();
-                return _contextProperties; 
+                if (_contextProperties == null)
+                    _contextProperties = new ArrayList();
+                return _contextProperties;
             }
         }
 
@@ -128,38 +132,51 @@ namespace System.Runtime.Remoting.Messaging
         {
             switch (key)
             {
-                case "__Activator" : _activator = (IActivator) value; return;
-                case "__CallSiteActivationAttributes" : _activationAttributes = (object[]) value; return;
-                case "__ActivationType" : _activationType = (Type) value; return;
-                case "__ContextProperties" : _contextProperties = (IList) value; return;
-                case "__ActivationTypeName" : _activationTypeName = (string) value; return;
-                default: base.InitMethodProperty (key, value); return;
+                case "__Activator":
+                    _activator = (IActivator)value;
+                    return;
+                case "__CallSiteActivationAttributes":
+                    _activationAttributes = (object[])value;
+                    return;
+                case "__ActivationType":
+                    _activationType = (Type)value;
+                    return;
+                case "__ContextProperties":
+                    _contextProperties = (IList)value;
+                    return;
+                case "__ActivationTypeName":
+                    _activationTypeName = (string)value;
+                    return;
+                default:
+                    base.InitMethodProperty(key, value);
+                    return;
             }
         }
 
-        public override void GetObjectData (SerializationInfo info, StreamingContext context)
+        public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            base.GetObjectData (info, context);
+            base.GetObjectData(info, context);
 
             IList props = _contextProperties;
-            if (props != null && props.Count == 0) props = null;
+            if (props != null && props.Count == 0)
+                props = null;
 
-            info.AddValue ("__Activator", _activator);
-            info.AddValue ("__CallSiteActivationAttributes", _activationAttributes);
-            info.AddValue ("__ActivationType", null);
-            info.AddValue ("__ContextProperties", props);
-            info.AddValue ("__ActivationTypeName", _activationTypeName);
-        } 
-        
-        public override IDictionary Properties 
+            info.AddValue("__Activator", _activator);
+            info.AddValue("__CallSiteActivationAttributes", _activationAttributes);
+            info.AddValue("__ActivationType", null);
+            info.AddValue("__ContextProperties", props);
+            info.AddValue("__ActivationTypeName", _activationTypeName);
+        }
+
+        public override IDictionary Properties
         {
             get { return base.Properties; }
-        }    
+        }
 
         internal RemotingProxy SourceProxy
         {
             get { return _sourceProxy; }
-            set {_sourceProxy = value; }
+            set { _sourceProxy = value; }
         }
     }
 }

@@ -6,10 +6,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,91 +28,99 @@ using System.Reflection.Emit;
 
 namespace Mono.CodeGeneration
 {
-    public class CodeOr: CodeConditionExpression
+    public class CodeOr : CodeConditionExpression
     {
         CodeExpression exp1;
         CodeExpression exp2;
         Type t1;
         Type t2;
-        
-        public CodeOr (CodeExpression exp1, CodeExpression exp2)
+
+        public CodeOr(CodeExpression exp1, CodeExpression exp2)
         {
             this.exp1 = exp1;
             this.exp2 = exp2;
-            
-             if (exp1.GetResultType () != typeof(bool) || exp1.GetResultType () != typeof(bool)) {
+
+            if (exp1.GetResultType() != typeof(bool) || exp1.GetResultType() != typeof(bool))
+            {
                 if (t1 != t2)
-                    throw new InvalidOperationException ("Can't compare values of different primitive types");
+                    throw new InvalidOperationException(
+                        "Can't compare values of different primitive types"
+                    );
             }
         }
-        
-        public override void Generate (ILGenerator gen)
+
+        public override void Generate(ILGenerator gen)
         {
-            Label trueLabel = gen.DefineLabel ();
-            Label endLabel = gen.DefineLabel ();
-            
+            Label trueLabel = gen.DefineLabel();
+            Label endLabel = gen.DefineLabel();
+
             if (exp1 is CodeConditionExpression)
-                ((CodeConditionExpression)exp1).GenerateForBranch (gen, trueLabel, true);
-            else {
-                exp1.Generate (gen);
-                gen.Emit (OpCodes.Brtrue, trueLabel);
-            }
-                
-            exp2.Generate (gen);
-            gen.Emit (OpCodes.Br, endLabel);
-            gen.MarkLabel(trueLabel);
-            gen.Emit (OpCodes.Ldc_I4_1);
-            gen.MarkLabel(endLabel);
-        }
-        
-        public override void GenerateForBranch (ILGenerator gen, Label label, bool branchCase)
-        {
-            Label endLabel = gen.DefineLabel ();
-            exp1.Generate (gen);
-            
-            if (exp1 is CodeConditionExpression) {
-                if (branchCase)
-                    ((CodeConditionExpression)exp1).GenerateForBranch (gen, label, true);
-                else
-                    ((CodeConditionExpression)exp1).GenerateForBranch (gen, endLabel, true);
-            }
-            else {
-                exp1.Generate (gen);
-                if (branchCase)
-                    gen.Emit (OpCodes.Brtrue, label);
-                else
-                    gen.Emit (OpCodes.Brtrue, endLabel);
+                ((CodeConditionExpression)exp1).GenerateForBranch(gen, trueLabel, true);
+            else
+            {
+                exp1.Generate(gen);
+                gen.Emit(OpCodes.Brtrue, trueLabel);
             }
 
-            if (exp2 is CodeConditionExpression) {
-                if (branchCase)
-                    ((CodeConditionExpression)exp2).GenerateForBranch (gen, label, true);
-                else
-                    ((CodeConditionExpression)exp2).GenerateForBranch (gen, label, false);
-            }
-            else {
-                exp2.Generate (gen);
-                if (branchCase)
-                    gen.Emit (OpCodes.Brtrue, label);
-                else
-                    gen.Emit (OpCodes.Brfalse, label);
-            }
-            
+            exp2.Generate(gen);
+            gen.Emit(OpCodes.Br, endLabel);
+            gen.MarkLabel(trueLabel);
+            gen.Emit(OpCodes.Ldc_I4_1);
             gen.MarkLabel(endLabel);
         }
-        
-        public override void PrintCode (CodeWriter cp)
+
+        public override void GenerateForBranch(ILGenerator gen, Label label, bool branchCase)
         {
-            cp.Write ("(");
-            exp1.PrintCode (cp);
-            cp.Write (" || ");
-            exp2.PrintCode (cp);
-            cp.Write (")");
+            Label endLabel = gen.DefineLabel();
+            exp1.Generate(gen);
+
+            if (exp1 is CodeConditionExpression)
+            {
+                if (branchCase)
+                    ((CodeConditionExpression)exp1).GenerateForBranch(gen, label, true);
+                else
+                    ((CodeConditionExpression)exp1).GenerateForBranch(gen, endLabel, true);
+            }
+            else
+            {
+                exp1.Generate(gen);
+                if (branchCase)
+                    gen.Emit(OpCodes.Brtrue, label);
+                else
+                    gen.Emit(OpCodes.Brtrue, endLabel);
+            }
+
+            if (exp2 is CodeConditionExpression)
+            {
+                if (branchCase)
+                    ((CodeConditionExpression)exp2).GenerateForBranch(gen, label, true);
+                else
+                    ((CodeConditionExpression)exp2).GenerateForBranch(gen, label, false);
+            }
+            else
+            {
+                exp2.Generate(gen);
+                if (branchCase)
+                    gen.Emit(OpCodes.Brtrue, label);
+                else
+                    gen.Emit(OpCodes.Brfalse, label);
+            }
+
+            gen.MarkLabel(endLabel);
         }
-        
-        public override Type GetResultType ()
+
+        public override void PrintCode(CodeWriter cp)
         {
-            return typeof (bool);
+            cp.Write("(");
+            exp1.PrintCode(cp);
+            cp.Write(" || ");
+            exp2.PrintCode(cp);
+            cp.Write(")");
+        }
+
+        public override Type GetResultType()
+        {
+            return typeof(bool);
         }
     }
 }

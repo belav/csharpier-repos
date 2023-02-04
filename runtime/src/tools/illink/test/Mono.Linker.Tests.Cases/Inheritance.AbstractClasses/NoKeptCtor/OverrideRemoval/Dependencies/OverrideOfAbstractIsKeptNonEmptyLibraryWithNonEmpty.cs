@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace Mono.Linker.Tests.Cases.Inheritance.AbstractClasses.NoKeptCtor.OverrideRemoval.Dependencies
 {
-    public class OverrideOfAbstractIsKeptNonEmptyLibraryWithNonEmpty :
-        OverrideOfAbstractIsKeptNonEmpty_BaseType
+    public class OverrideOfAbstractIsKeptNonEmptyLibraryWithNonEmpty
+        : OverrideOfAbstractIsKeptNonEmpty_BaseType
     {
         Dependencies.OverrideOfAbstractIsKeptNonEmpty_UnusedType _field;
 
-        public override void Method ()
+        public override void Method()
         {
             _field = null;
         }

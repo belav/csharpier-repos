@@ -3,11 +3,11 @@
 
 partial class C
 {
-    delegate void D ();
+    delegate void D();
 
-    partial void Foo ();
+    partial void Foo();
 
-    void Test ()
+    void Test()
     {
         D d = Foo;
     }

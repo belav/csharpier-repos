@@ -4,7 +4,7 @@
 
 static class Extensions
 {
-    static string Foo (string s, this bool b, int i)
+    static string Foo(string s, this bool b, int i)
     {
         return s;
     }

@@ -9,9 +9,10 @@ enum ObsoleteEnum
     value_B
 }
 
-class MainClass {
-    public static void Main ()
+class MainClass
+{
+    public static void Main()
     {
-        Console.WriteLine (ObsoleteEnum.value_B);
+        Console.WriteLine(ObsoleteEnum.value_B);
     }
 }

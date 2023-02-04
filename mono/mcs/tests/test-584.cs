@@ -6,18 +6,18 @@ public class Style
         set { }
     }
 
-    private static bool LoadCurrentStyle ()
+    private static bool LoadCurrentStyle()
     {
-        return ((CurrentStyle = Load ()) != null);
+        return ((CurrentStyle = Load()) != null);
     }
 
-    public static Style Load ()
+    public static Style Load()
     {
         return null;
     }
-    
-    public static int Main ()
+
+    public static int Main()
     {
-        return LoadCurrentStyle () ? 1 : 0;
-    }    
+        return LoadCurrentStyle() ? 1 : 0;
+    }
 }

@@ -3,13 +3,13 @@
 
 class Test
 {
-    public static explicit operator Test (byte b)
+    public static explicit operator Test(byte b)
     {
         return null;
     }
 
-    static void Main ()
+    static void Main()
     {
-        var a = (Test) 256UL;
+        var a = (Test)256UL;
     }
 }

@@ -20,42 +20,63 @@ namespace ILLink.RoslynAnalyzer.Tests
     /// <typeparam name="TCodeFix">The <see cref="CodeFixProvider"/> to test.</typeparam>
     /// <typeparam name="TTest">The test implementation to use.</typeparam>
     public partial class CSharpCodeFixVerifier<TAnalyzer, TCodeFix>
-           where TAnalyzer : DiagnosticAnalyzer, new()
-           where TCodeFix : Microsoft.CodeAnalysis.CodeFixes.CodeFixProvider, new()
+        where TAnalyzer : DiagnosticAnalyzer, new()
+        where TCodeFix : Microsoft.CodeAnalysis.CodeFixes.CodeFixProvider, new()
     {
         public class Test : CSharpCodeFixTest<TAnalyzer, TCodeFix, XUnitVerifier>
         {
-            public Test ()
+            public Test()
             {
-                SolutionTransforms.Add ((solution, projectId) => {
-                    var compilationOptions = solution.GetProject (projectId)!.CompilationOptions;
-                    compilationOptions = compilationOptions!.WithSpecificDiagnosticOptions (
-                        compilationOptions.SpecificDiagnosticOptions.SetItems (CSharpVerifierHelper.NullableWarnings));
-                    solution = solution.WithProjectCompilationOptions (projectId, compilationOptions);
+                SolutionTransforms.Add(
+                    (solution, projectId) =>
+                    {
+                        var compilationOptions = solution.GetProject(projectId)!.CompilationOptions;
+                        compilationOptions = compilationOptions!.WithSpecificDiagnosticOptions(
+                            compilationOptions.SpecificDiagnosticOptions.SetItems(
+                                CSharpVerifierHelper.NullableWarnings
+                            )
+                        );
+                        solution = solution.WithProjectCompilationOptions(
+                            projectId,
+                            compilationOptions
+                        );
 
-                    return solution;
-                });
+                        return solution;
+                    }
+                );
             }
         }
 
         /// <inheritdoc cref="AnalyzerVerifier{TAnalyzer}.Diagnostic()"/>
-        public static DiagnosticResult Diagnostic ()
-            => CSharpAnalyzerVerifier<TAnalyzer>.Diagnostic ();
+        public static DiagnosticResult Diagnostic() =>
+            CSharpAnalyzerVerifier<TAnalyzer>.Diagnostic();
 
         /// <inheritdoc cref="AnalyzerVerifier{TAnalyzer, TTest}.Diagnostic(string)"/>
-        public static DiagnosticResult Diagnostic (string diagnosticId)
-            => CSharpAnalyzerVerifier<TAnalyzer>.Diagnostic (diagnosticId);
+        public static DiagnosticResult Diagnostic(string diagnosticId) =>
+            CSharpAnalyzerVerifier<TAnalyzer>.Diagnostic(diagnosticId);
 
-        public static DiagnosticResult Diagnostic (DiagnosticId diagnosticId)
-            => CSharpAnalyzerVerifier<TAnalyzer>.Diagnostic (DiagnosticDescriptors.GetDiagnosticDescriptor (diagnosticId));
+        public static DiagnosticResult Diagnostic(DiagnosticId diagnosticId) =>
+            CSharpAnalyzerVerifier<TAnalyzer>.Diagnostic(
+                DiagnosticDescriptors.GetDiagnosticDescriptor(diagnosticId)
+            );
 
         /// <inheritdoc cref="AnalyzerVerifier{TAnalyzer, TTest}.Diagnostic(DiagnosticDescriptor)"/>
-        public static DiagnosticResult Diagnostic (DiagnosticDescriptor descriptor)
-            => CSharpAnalyzerVerifier<TAnalyzer>.Diagnostic (descriptor);
+        public static DiagnosticResult Diagnostic(DiagnosticDescriptor descriptor) =>
+            CSharpAnalyzerVerifier<TAnalyzer>.Diagnostic(descriptor);
 
         /// <inheritdoc cref="AnalyzerVerifier{TAnalyzer, TTest}.VerifyAnalyzerAsync(string, DiagnosticResult[])"/>
-        public static Task VerifyAnalyzerAsync (string source, (string, string)[]? analyzerOptions = null, IEnumerable<MetadataReference>? additionalReferences = null, params DiagnosticResult[] expected)
-            => CSharpAnalyzerVerifier<TAnalyzer>.VerifyAnalyzerAsync (source, analyzerOptions, additionalReferences, expected);
+        public static Task VerifyAnalyzerAsync(
+            string source,
+            (string, string)[]? analyzerOptions = null,
+            IEnumerable<MetadataReference>? additionalReferences = null,
+            params DiagnosticResult[] expected
+        ) =>
+            CSharpAnalyzerVerifier<TAnalyzer>.VerifyAnalyzerAsync(
+                source,
+                analyzerOptions,
+                additionalReferences,
+                expected
+            );
 
         /// <summary>
         /// Verifies the analyzer provides diagnostics which, in combination with the code fix, produce the expected
@@ -64,8 +85,8 @@ namespace ILLink.RoslynAnalyzer.Tests
         /// <param name="source">The source text to test. Any diagnostics are defined in markup.</param>
         /// <param name="fixedSource">The expected fixed source text. Any remaining diagnostics are defined in markup.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public static Task VerifyCodeFixAsync (string source, string fixedSource)
-            => VerifyCodeFixAsync (source, DiagnosticResult.EmptyDiagnosticResults, fixedSource);
+        public static Task VerifyCodeFixAsync(string source, string fixedSource) =>
+            VerifyCodeFixAsync(source, DiagnosticResult.EmptyDiagnosticResults, fixedSource);
 
         /// <summary>
         /// Verifies the analyzer provides diagnostics which, in combination with the code fix, produce the expected
@@ -76,8 +97,11 @@ namespace ILLink.RoslynAnalyzer.Tests
         /// markup.</param>
         /// <param name="fixedSource">The expected fixed source text. Any remaining diagnostics are defined in markup.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public static Task VerifyCodeFixAsync (string source, DiagnosticResult expected, string fixedSource)
-            => VerifyCodeFixAsync (source, new[] { expected }, fixedSource);
+        public static Task VerifyCodeFixAsync(
+            string source,
+            DiagnosticResult expected,
+            string fixedSource
+        ) => VerifyCodeFixAsync(source, new[] { expected }, fixedSource);
 
         /// <summary>
         /// Verifies the analyzer provides diagnostics which, in combination with the code fix, produce the expected
@@ -88,15 +112,16 @@ namespace ILLink.RoslynAnalyzer.Tests
         /// defined in markup.</param>
         /// <param name="fixedSource">The expected fixed source text. Any remaining diagnostics are defined in markup.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public static Task VerifyCodeFixAsync (string source, DiagnosticResult[] expected, string fixedSource)
+        public static Task VerifyCodeFixAsync(
+            string source,
+            DiagnosticResult[] expected,
+            string fixedSource
+        )
         {
-            var test = new Test {
-                TestCode = source,
-                FixedCode = fixedSource,
-            };
+            var test = new Test { TestCode = source, FixedCode = fixedSource, };
 
-            test.ExpectedDiagnostics.AddRange (expected);
-            return test.RunAsync (CancellationToken.None);
+            test.ExpectedDiagnostics.AddRange(expected);
+            return test.RunAsync(CancellationToken.None);
         }
     }
 }

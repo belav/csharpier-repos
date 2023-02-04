@@ -2,9 +2,9 @@ using System;
 
 class Program
 {
-    public static int Main ()
+    public static int Main()
     {
-        dynamic d = new Program ();
+        dynamic d = new Program();
         var p = d as int?;
         if (p != null)
             return 1;

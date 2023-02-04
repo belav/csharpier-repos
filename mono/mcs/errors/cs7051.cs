@@ -5,10 +5,12 @@ using System;
 using System.Security;
 using System.Security.Permissions;
 
-public class Program {
-
-    [SecurityPermission (SecurityAction.RequestMinimum, ControlPrincipal=true, Flags=SecurityPermissionFlag.ControlPrincipal)]
-    static public void Main (string[] args)
-    {
-    }
+public class Program
+{
+    [SecurityPermission(
+        SecurityAction.RequestMinimum,
+        ControlPrincipal = true,
+        Flags = SecurityPermissionFlag.ControlPrincipal
+    )]
+    static public void Main(string[] args) { }
 }

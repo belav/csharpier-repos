@@ -18,32 +18,48 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification
     [ExportLanguageService(typeof(ISyntaxClassificationService), LanguageNames.CSharp), Shared]
     internal class CSharpSyntaxClassificationService : AbstractSyntaxClassificationService
     {
-        private readonly ImmutableArray<ISyntaxClassifier> s_defaultSyntaxClassifiers = ImmutableArray.Create<ISyntaxClassifier>(
-            new NameSyntaxClassifier(),
-            new OperatorOverloadSyntaxClassifier(),
-            new SyntaxTokenClassifier(),
-            new UsingDirectiveSyntaxClassifier(),
-            new DiscardSyntaxClassifier());
+        private readonly ImmutableArray<ISyntaxClassifier> s_defaultSyntaxClassifiers =
+            ImmutableArray.Create<ISyntaxClassifier>(
+                new NameSyntaxClassifier(),
+                new OperatorOverloadSyntaxClassifier(),
+                new SyntaxTokenClassifier(),
+                new UsingDirectiveSyntaxClassifier(),
+                new DiscardSyntaxClassifier()
+            );
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpSyntaxClassificationService()
-        {
-        }
+        public CSharpSyntaxClassificationService() { }
 
-        public override ImmutableArray<ISyntaxClassifier> GetDefaultSyntaxClassifiers()
-            => s_defaultSyntaxClassifiers;
+        public override ImmutableArray<ISyntaxClassifier> GetDefaultSyntaxClassifiers() =>
+            s_defaultSyntaxClassifiers;
 
-        public override void AddLexicalClassifications(SourceText text, TextSpan textSpan, ArrayBuilder<ClassifiedSpan> result, CancellationToken cancellationToken)
-            => ClassificationHelpers.AddLexicalClassifications(text, textSpan, result, cancellationToken);
+        public override void AddLexicalClassifications(
+            SourceText text,
+            TextSpan textSpan,
+            ArrayBuilder<ClassifiedSpan> result,
+            CancellationToken cancellationToken
+        ) =>
+            ClassificationHelpers.AddLexicalClassifications(
+                text,
+                textSpan,
+                result,
+                cancellationToken
+            );
 
-        public override void AddSyntacticClassifications(SyntaxNode root, TextSpan textSpan, ArrayBuilder<ClassifiedSpan> result, CancellationToken cancellationToken)
-            => Worker.CollectClassifiedSpans(root, textSpan, result, cancellationToken);
+        public override void AddSyntacticClassifications(
+            SyntaxNode root,
+            TextSpan textSpan,
+            ArrayBuilder<ClassifiedSpan> result,
+            CancellationToken cancellationToken
+        ) => Worker.CollectClassifiedSpans(root, textSpan, result, cancellationToken);
 
-        public override ClassifiedSpan FixClassification(SourceText rawText, ClassifiedSpan classifiedSpan)
-            => ClassificationHelpers.AdjustStaleClassification(rawText, classifiedSpan);
+        public override ClassifiedSpan FixClassification(
+            SourceText rawText,
+            ClassifiedSpan classifiedSpan
+        ) => ClassificationHelpers.AdjustStaleClassification(rawText, classifiedSpan);
 
-        public override string? GetSyntacticClassificationForIdentifier(SyntaxToken identifier)
-            => ClassificationHelpers.GetSyntacticClassificationForIdentifier(identifier);
+        public override string? GetSyntacticClassificationForIdentifier(SyntaxToken identifier) =>
+            ClassificationHelpers.GetSyntacticClassificationForIdentifier(identifier);
     }
 }

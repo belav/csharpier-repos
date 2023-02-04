@@ -11,7 +11,8 @@ using Roslyn.Test.Utilities;
 using Xunit;
 using VerifyCS = Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions.CSharpCodeFixVerifier<
     Microsoft.CodeAnalysis.Testing.EmptyDiagnosticAnalyzer,
-    Microsoft.CodeAnalysis.CSharp.MakeMethodSynchronous.CSharpMakeMethodSynchronousCodeFixProvider>;
+    Microsoft.CodeAnalysis.CSharp.MakeMethodSynchronous.CSharpMakeMethodSynchronousCodeFixProvider
+>;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.MakeMethodSynchronous
 {
@@ -21,7 +22,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.MakeMethodS
         public async Task TestTaskReturnType()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"
+                @"
 using System.Threading.Tasks;
 
 class C
@@ -30,7 +31,7 @@ class C
     {
     }
 }",
-@"
+                @"
 using System.Threading.Tasks;
 
 class C
@@ -38,14 +39,15 @@ class C
     void Goo()
     {
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeMethodSynchronous)]
         public async Task TestTaskOfTReturnType()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"
+                @"
 using System.Threading.Tasks;
 
 class C
@@ -55,7 +57,7 @@ class C
         return 1;
     }
 }",
-@"
+                @"
 using System.Threading.Tasks;
 
 class C
@@ -64,14 +66,15 @@ class C
     {
         return 1;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeMethodSynchronous)]
         public async Task TestSecondModifier()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"
+                @"
 using System.Threading.Tasks;
 
 class C
@@ -80,7 +83,7 @@ class C
     {
     }
 }",
-@"
+                @"
 using System.Threading.Tasks;
 
 class C
@@ -88,14 +91,15 @@ class C
     public void Goo()
     {
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeMethodSynchronous)]
         public async Task TestFirstModifier()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"
+                @"
 using System.Threading.Tasks;
 
 class C
@@ -104,7 +108,7 @@ class C
     {
     }
 }",
-@"
+                @"
 using System.Threading.Tasks;
 
 class C
@@ -112,14 +116,15 @@ class C
     public void Goo()
     {
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeMethodSynchronous)]
         public async Task TestTrailingTrivia()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"
+                @"
 using System.Threading.Tasks;
 
 class C
@@ -129,7 +134,7 @@ class C
     {
     }
 }",
-@"
+                @"
 using System.Threading.Tasks;
 
 class C
@@ -137,14 +142,15 @@ class C
     void Goo()
     {
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeMethodSynchronous)]
         public async Task TestRenameMethod()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"
+                @"
 using System.Threading.Tasks;
 
 class C
@@ -153,7 +159,7 @@ class C
     {
     }
 }",
-@"
+                @"
 using System.Threading.Tasks;
 
 class C
@@ -161,14 +167,15 @@ class C
     void Goo()
     {
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeMethodSynchronous)]
         public async Task TestRenameMethod1()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"
+                @"
 using System.Threading.Tasks;
 
 class C
@@ -182,7 +189,7 @@ class C
         GooAsync();
     }
 }",
-@"
+                @"
 using System.Threading.Tasks;
 
 class C
@@ -195,14 +202,15 @@ class C
     {
         Goo();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeMethodSynchronous)]
         public async Task TestParenthesizedLambda()
         {
             var source =
-@"
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -215,7 +223,7 @@ class C
     }
 }";
             var expected =
-@"
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -247,7 +255,7 @@ class C
         public async Task TestSimpleLambda()
         {
             var source =
-@"
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -260,7 +268,7 @@ class C
     }
 }";
             var expected =
-@"
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -292,7 +300,7 @@ class C
         public async Task TestLambdaWithExpressionBody()
         {
             var source =
-@"
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -305,7 +313,7 @@ class C
     }
 }";
             var expected =
-@"
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -327,7 +335,10 @@ class C
                     ExpectedDiagnostics =
                     {
                         // /0/Test0.cs(10,18): error CS0029: Cannot implicitly convert type 'int' to 'System.Threading.Tasks.Task<int>'
-                        DiagnosticResult.CompilerError("CS0029").WithLocation(0).WithArguments("int", "System.Threading.Tasks.Task<int>"),
+                        DiagnosticResult
+                            .CompilerError("CS0029")
+                            .WithLocation(0)
+                            .WithArguments("int", "System.Threading.Tasks.Task<int>"),
                         // /0/Test0.cs(10,18): error CS1662: Cannot convert lambda expression to intended delegate type because some of the return types in the block are not implicitly convertible to the delegate return type
                         DiagnosticResult.CompilerError("CS1662").WithLocation(0),
                     },
@@ -339,7 +350,7 @@ class C
         public async Task TestAnonymousMethod()
         {
             var source =
-@"
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -352,7 +363,7 @@ class C
     }
 }";
             var expected =
-@"
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -384,7 +395,7 @@ class C
         public async Task TestFixAll()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"using System.Threading.Tasks;
+                @"using System.Threading.Tasks;
 
 public class Class1
 {
@@ -399,7 +410,7 @@ public class Class1
         return 1;
     }
 }",
-@"using System.Threading.Tasks;
+                @"using System.Threading.Tasks;
 
 public class Class1
 {
@@ -413,7 +424,8 @@ public class Class1
         Goo();
         return 1;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeMethodSynchronous)]
@@ -421,7 +433,7 @@ public class Class1
         public async Task TestRemoveAwaitFromCaller1()
         {
             var source =
-@"using System.Threading.Tasks;
+                @"using System.Threading.Tasks;
 
 public class Class1
 {
@@ -435,7 +447,7 @@ public class Class1
     }
 }";
             var expected =
-@"using System.Threading.Tasks;
+                @"using System.Threading.Tasks;
 
 public class Class1
 {
@@ -452,11 +464,7 @@ public class Class1
             await new VerifyCS.Test
             {
                 TestCode = source,
-                FixedState =
-                {
-                    Sources = { expected },
-                    MarkupHandling = MarkupMode.Allow,
-                },
+                FixedState = { Sources = { expected }, MarkupHandling = MarkupMode.Allow, },
                 CodeFixTestBehaviors = CodeFixTestBehaviors.FixOne,
             }.RunAsync();
         }
@@ -466,7 +474,7 @@ public class Class1
         public async Task TestRemoveAwaitFromCaller2()
         {
             var source =
-@"using System.Threading.Tasks;
+                @"using System.Threading.Tasks;
 
 public class Class1
 {
@@ -480,7 +488,7 @@ public class Class1
     }
 }";
             var expected =
-@"using System.Threading.Tasks;
+                @"using System.Threading.Tasks;
 
 public class Class1
 {
@@ -497,11 +505,7 @@ public class Class1
             await new VerifyCS.Test
             {
                 TestCode = source,
-                FixedState =
-                {
-                    Sources = { expected },
-                    MarkupHandling = MarkupMode.Allow,
-                },
+                FixedState = { Sources = { expected }, MarkupHandling = MarkupMode.Allow, },
                 CodeFixTestBehaviors = CodeFixTestBehaviors.FixOne,
             }.RunAsync();
         }
@@ -511,7 +515,7 @@ public class Class1
         public async Task TestRemoveAwaitFromCaller3()
         {
             var source =
-@"using System.Threading.Tasks;
+                @"using System.Threading.Tasks;
 
 public class Class1
 {
@@ -525,7 +529,7 @@ public class Class1
     }
 }";
             var expected =
-@"using System.Threading.Tasks;
+                @"using System.Threading.Tasks;
 
 public class Class1
 {
@@ -542,11 +546,7 @@ public class Class1
             await new VerifyCS.Test
             {
                 TestCode = source,
-                FixedState =
-                {
-                    Sources = { expected },
-                    MarkupHandling = MarkupMode.Allow,
-                },
+                FixedState = { Sources = { expected }, MarkupHandling = MarkupMode.Allow, },
                 CodeFixTestBehaviors = CodeFixTestBehaviors.FixOne,
             }.RunAsync();
         }
@@ -556,7 +556,7 @@ public class Class1
         public async Task TestRemoveAwaitFromCaller4()
         {
             var source =
-@"using System.Threading.Tasks;
+                @"using System.Threading.Tasks;
 
 public class Class1
 {
@@ -570,7 +570,7 @@ public class Class1
     }
 }";
             var expected =
-@"using System.Threading.Tasks;
+                @"using System.Threading.Tasks;
 
 public class Class1
 {
@@ -587,11 +587,7 @@ public class Class1
             await new VerifyCS.Test
             {
                 TestCode = source,
-                FixedState =
-                {
-                    Sources = { expected },
-                    MarkupHandling = MarkupMode.Allow,
-                },
+                FixedState = { Sources = { expected }, MarkupHandling = MarkupMode.Allow, },
                 CodeFixTestBehaviors = CodeFixTestBehaviors.FixOne,
             }.RunAsync();
         }
@@ -601,7 +597,7 @@ public class Class1
         public async Task TestRemoveAwaitFromCallerNested1()
         {
             var source =
-@"using System.Threading.Tasks;
+                @"using System.Threading.Tasks;
 
 public class Class1
 {
@@ -616,7 +612,7 @@ public class Class1
     }
 }";
             var expected =
-@"using System.Threading.Tasks;
+                @"using System.Threading.Tasks;
 
 public class Class1
 {
@@ -634,11 +630,7 @@ public class Class1
             await new VerifyCS.Test
             {
                 TestCode = source,
-                FixedState =
-                {
-                    Sources = { expected },
-                    MarkupHandling = MarkupMode.Allow,
-                },
+                FixedState = { Sources = { expected }, MarkupHandling = MarkupMode.Allow, },
                 CodeFixTestBehaviors = CodeFixTestBehaviors.FixOne,
             }.RunAsync();
         }
@@ -648,7 +640,7 @@ public class Class1
         public async Task TestRemoveAwaitFromCallerNested()
         {
             var source =
-@"using System.Threading.Tasks;
+                @"using System.Threading.Tasks;
 
 public class Class1
 {
@@ -663,7 +655,7 @@ public class Class1
     }
 }";
             var expected =
-@"using System.Threading.Tasks;
+                @"using System.Threading.Tasks;
 
 public class Class1
 {
@@ -681,11 +673,7 @@ public class Class1
             await new VerifyCS.Test
             {
                 TestCode = source,
-                FixedState =
-                {
-                    Sources = { expected },
-                    MarkupHandling = MarkupMode.Allow,
-                },
+                FixedState = { Sources = { expected }, MarkupHandling = MarkupMode.Allow, },
                 CodeFixTestBehaviors = CodeFixTestBehaviors.FixOne,
             }.RunAsync();
         }
@@ -695,7 +683,7 @@ public class Class1
         public async Task RemoveAsyncInLocalFunction()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"using System.Threading.Tasks;
+                @"using System.Threading.Tasks;
 
 class C
 {
@@ -706,7 +694,7 @@ class C
         }
     }
 }",
-@"using System.Threading.Tasks;
+                @"using System.Threading.Tasks;
 
 class C
 {
@@ -716,7 +704,8 @@ class C
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Theory]
@@ -726,10 +715,13 @@ class C
         [InlineData("void", "void")]
         [Trait(Traits.Feature, Traits.Features.CodeActionsMakeMethodAsynchronous)]
         [WorkItem(18307, "https://github.com/dotnet/roslyn/issues/18307")]
-        public async Task RemoveAsyncInLocalFunctionKeepsTrivia(string asyncReturn, string expectedReturn)
+        public async Task RemoveAsyncInLocalFunctionKeepsTrivia(
+            string asyncReturn,
+            string expectedReturn
+        )
         {
             await VerifyCS.VerifyCodeFixAsync(
-$@"using System;
+                $@"using System;
 using System.Threading.Tasks;
 
 class C
@@ -743,7 +735,7 @@ class C
         }}
     }}
 }}",
-$@"using System;
+                $@"using System;
 using System.Threading.Tasks;
 
 class C
@@ -757,7 +749,8 @@ class C
             throw new NotImplementedException();
         }}
     }}
-}}");
+}}"
+            );
         }
 
         [Theory]
@@ -771,10 +764,14 @@ class C
         [InlineData("public", "void", " void")]
         [Trait(Traits.Feature, Traits.Features.CodeActionsMakeMethodAsynchronous)]
         [WorkItem(18307, "https://github.com/dotnet/roslyn/issues/18307")]
-        public async Task RemoveAsyncKeepsTrivia(string modifiers, string asyncReturn, string expectedReturn)
+        public async Task RemoveAsyncKeepsTrivia(
+            string modifiers,
+            string asyncReturn,
+            string expectedReturn
+        )
         {
             await VerifyCS.VerifyCodeFixAsync(
-$@"using System;
+                $@"using System;
 using System.Threading.Tasks;
 
 class C
@@ -785,7 +782,7 @@ class C
         throw new NotImplementedException();
     }}
 }}",
-$@"using System;
+                $@"using System;
 using System.Threading.Tasks;
 
 class C
@@ -795,14 +792,15 @@ class C
     {{
         throw new NotImplementedException();
     }}
-}}");
+}}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeMethodSynchronous)]
         public async Task MethodWithUsingAwait()
         {
             var source =
-@"class C
+                @"class C
 {
     async System.Threading.Tasks.Task MAsync()
     {
@@ -819,7 +817,10 @@ class C
                 ExpectedDiagnostics =
                 {
                     // /0/Test0.cs(5,22): error CS8410: 'object': type used in an asynchronous using statement must be implicitly convertible to 'System.IAsyncDisposable' or implement a suitable 'DisposeAsync' method.
-                    DiagnosticResult.CompilerError("CS8410").WithLocation(0).WithArguments("object"),
+                    DiagnosticResult
+                        .CompilerError("CS8410")
+                        .WithLocation(0)
+                        .WithArguments("object"),
                 },
                 FixedCode = source,
             }.RunAsync();
@@ -829,7 +830,7 @@ class C
         public async Task MethodWithUsingNoAwait()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"class C
+                @"class C
 {
     async System.Threading.Tasks.Task {|CS1998:MAsync|}()
     {
@@ -840,7 +841,7 @@ class C
 }",
                 // /0/Test0.cs(5,16): error CS1674: 'object': type used in a using statement must be implicitly convertible to 'System.IDisposable'.
                 DiagnosticResult.CompilerError("CS1674").WithLocation(0).WithArguments("object"),
-@"class C
+                @"class C
 {
     void M()
     {
@@ -848,14 +849,15 @@ class C
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeMethodSynchronous)]
         public async Task MethodWithAwaitForEach()
         {
             var source =
-@"class C
+                @"class C
 {
     async System.Threading.Tasks.Task MAsync()
     {
@@ -868,15 +870,19 @@ class C
             await VerifyCS.VerifyCodeFixAsync(
                 source,
                 // /0/Test0.cs(5,33): error CS1061: 'bool' does not contain a definition for 'GetAwaiter' and no accessible extension method 'GetAwaiter' accepting a first argument of type 'bool' could be found (are you missing a using directive or an assembly reference?)
-                DiagnosticResult.CompilerError("CS1061").WithLocation(0).WithArguments("bool", "GetAwaiter"),
-                source);
+                DiagnosticResult
+                    .CompilerError("CS1061")
+                    .WithLocation(0)
+                    .WithArguments("bool", "GetAwaiter"),
+                source
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeMethodSynchronous)]
         public async Task MethodWithForEachNoAwait()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"class C
+                @"class C
 {
     async System.Threading.Tasks.Task {|CS1998:MAsync|}()
     {
@@ -885,7 +891,7 @@ class C
         }
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -893,14 +899,15 @@ class C
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeMethodSynchronous)]
         public async Task MethodWithForEachVariableAwait()
         {
             var source =
-@"class C
+                @"class C
 {
     async System.Threading.Tasks.Task MAsync()
     {
@@ -913,15 +920,19 @@ class C
             await VerifyCS.VerifyCodeFixAsync(
                 source,
                 // /0/Test0.cs(5,38): error CS1061: 'bool' does not contain a definition for 'GetAwaiter' and no accessible extension method 'GetAwaiter' accepting a first argument of type 'bool' could be found (are you missing a using directive or an assembly reference?)
-                DiagnosticResult.CompilerError("CS1061").WithLocation(0).WithArguments("bool", "GetAwaiter"),
-                source);
+                DiagnosticResult
+                    .CompilerError("CS1061")
+                    .WithLocation(0)
+                    .WithArguments("bool", "GetAwaiter"),
+                source
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeMethodSynchronous)]
         public async Task MethodWithForEachVariableNoAwait()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"class C
+                @"class C
 {
     async System.Threading.Tasks.Task {|CS1998:MAsync|}()
     {
@@ -930,7 +941,7 @@ class C
         }
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -938,14 +949,15 @@ class C
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeMethodSynchronous)]
         public async Task TestIAsyncEnumerableReturnType()
         {
             var source =
-@"
+                @"
 using System.Threading.Tasks;
 using System.Collections.Generic;
 
@@ -957,7 +969,7 @@ class C
     }
 }";
             var expected =
-@"
+                @"
 using System.Threading.Tasks;
 using System.Collections.Generic;
 
@@ -981,7 +993,7 @@ class C
         public async Task TestIAsyncEnumeratorReturnTypeOnLocalFunction()
         {
             var source =
-@"
+                @"
 using System.Threading.Tasks;
 using System.Collections.Generic;
 
@@ -996,7 +1008,7 @@ class C
     }
 }";
             var expected =
-@"
+                @"
 using System.Threading.Tasks;
 using System.Collections.Generic;
 

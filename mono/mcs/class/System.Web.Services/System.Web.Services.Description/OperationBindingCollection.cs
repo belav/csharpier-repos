@@ -1,4 +1,4 @@
-// 
+//
 // System.Web.Services.Description.OperationBindingCollection.cs
 //
 // Author:
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,25 +28,26 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace System.Web.Services.Description {
-    public sealed class OperationBindingCollection : ServiceDescriptionBaseCollection {
-
+namespace System.Web.Services.Description
+{
+    public sealed class OperationBindingCollection : ServiceDescriptionBaseCollection
+    {
         #region Constructors
 
-        internal OperationBindingCollection (Binding binding)
-            : base (binding)
-        {
-        }
+        internal OperationBindingCollection(Binding binding)
+            : base(binding) { }
 
         #endregion // Constructors
 
         #region Properties
 
-        public OperationBinding this [int index] {
-            get { 
+        public OperationBinding this[int index]
+        {
+            get
+            {
                 if (index < 0 || index > Count)
-                    throw new ArgumentOutOfRangeException ();
-                return (OperationBinding) List[index]; 
+                    throw new ArgumentOutOfRangeException();
+                return (OperationBinding)List[index];
             }
             set { List[index] = value; }
         }
@@ -55,42 +56,42 @@ namespace System.Web.Services.Description {
 
         #region Methods
 
-        public int Add (OperationBinding bindingOperation) 
+        public int Add(OperationBinding bindingOperation)
         {
-            Insert (Count, bindingOperation);
+            Insert(Count, bindingOperation);
             return (Count - 1);
         }
 
-        public bool Contains (OperationBinding bindingOperation)
+        public bool Contains(OperationBinding bindingOperation)
         {
-            return List.Contains (bindingOperation);
+            return List.Contains(bindingOperation);
         }
 
-        public void CopyTo (OperationBinding[] array, int index) 
+        public void CopyTo(OperationBinding[] array, int index)
         {
-            List.CopyTo (array, index);
+            List.CopyTo(array, index);
         }
 
-        public int IndexOf (OperationBinding bindingOperation)
+        public int IndexOf(OperationBinding bindingOperation)
         {
-            return List.IndexOf (bindingOperation);
+            return List.IndexOf(bindingOperation);
         }
 
-        public void Insert (int index, OperationBinding bindingOperation)
+        public void Insert(int index, OperationBinding bindingOperation)
         {
-            List.Insert (index, bindingOperation);
-        }
-    
-        public void Remove (OperationBinding bindingOperation)
-        {
-            List.Remove (bindingOperation);
+            List.Insert(index, bindingOperation);
         }
 
-        protected override void SetParent (object value, object parent)
+        public void Remove(OperationBinding bindingOperation)
         {
-            ((OperationBinding) value).SetParent ((Binding) parent);
+            List.Remove(bindingOperation);
         }
-            
+
+        protected override void SetParent(object value, object parent)
+        {
+            ((OperationBinding)value).SetParent((Binding)parent);
+        }
+
         #endregion // Methods
     }
 }

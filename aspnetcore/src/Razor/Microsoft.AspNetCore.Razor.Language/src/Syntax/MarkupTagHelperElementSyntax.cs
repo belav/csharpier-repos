@@ -21,9 +21,9 @@ internal sealed partial class MarkupTagHelperElementSyntax
     public MarkupTagHelperElementSyntax WithTagHelperInfo(TagHelperInfo info)
     {
         var annotations = new List<SyntaxAnnotation>(GetAnnotations())
-            {
-                new SyntaxAnnotation(TagHelperInfoKey, info)
-            };
+        {
+            new SyntaxAnnotation(TagHelperInfoKey, info)
+        };
 
         var newGreen = Green.WithAnnotationsGreen(annotations.ToArray());
 

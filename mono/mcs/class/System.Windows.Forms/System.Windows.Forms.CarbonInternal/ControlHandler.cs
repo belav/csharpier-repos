@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,8 +28,10 @@ using System;
 using System.Drawing;
 using System.Runtime.InteropServices;
 
-namespace System.Windows.Forms.CarbonInternal {
-    internal class ControlHandler : EventHandlerBase, IEventHandler {
+namespace System.Windows.Forms.CarbonInternal
+{
+    internal class ControlHandler : EventHandlerBase, IEventHandler
+    {
         internal const uint kEventControlInitialize = 1000;
         internal const uint kEventControlDispose = 1001;
         internal const uint kEventControlGetOptimalBounds = 1003;
@@ -69,7 +71,7 @@ namespace System.Windows.Forms.CarbonInternal {
         internal const uint kEventControlGetPartBounds = 102;
         internal const uint kEventControlSetData = 103;
         internal const uint kEventControlGetData = 104;
-        internal const uint kEventControlGetSizeConstraints= 105;
+        internal const uint kEventControlGetSizeConstraints = 105;
         internal const uint kEventControlGetFrameMetrics = 106;
         internal const uint kEventControlValueFieldChanged = 151;
         internal const uint kEventControlAddedSubControl = 152;
@@ -95,14 +97,30 @@ namespace System.Windows.Forms.CarbonInternal {
         internal const uint typeControlPartCode = 1668313716;
         internal const uint typeBoolean = 1651470188;
 
-        internal ControlHandler (XplatUICarbon driver) : base (driver) {}
+        internal ControlHandler(XplatUICarbon driver)
+            : base(driver) { }
 
-        public bool ProcessEvent (IntPtr callref, IntPtr eventref, IntPtr handle, uint kind, ref MSG msg) {
+        public bool ProcessEvent(
+            IntPtr callref,
+            IntPtr eventref,
+            IntPtr handle,
+            uint kind,
+            ref MSG msg
+        )
+        {
             Hwnd hwnd;
             bool client;
 
-            GetEventParameter (eventref, kEventParamDirectObject, typeControlRef, IntPtr.Zero, (uint) Marshal.SizeOf (typeof (IntPtr)), IntPtr.Zero, ref handle);
-            hwnd = Hwnd.ObjectFromHandle (handle);
+            GetEventParameter(
+                eventref,
+                kEventParamDirectObject,
+                typeControlRef,
+                IntPtr.Zero,
+                (uint)Marshal.SizeOf(typeof(IntPtr)),
+                IntPtr.Zero,
+                ref handle
+            );
+            hwnd = Hwnd.ObjectFromHandle(handle);
 
             if (hwnd == null)
                 return false;
@@ -110,62 +128,84 @@ namespace System.Windows.Forms.CarbonInternal {
             msg.hwnd = hwnd.Handle;
             client = (hwnd.ClientWindow == handle ? true : false);
 
-            switch (kind) {
-                case kEventControlDraw: {
+            switch (kind)
+            {
+                case kEventControlDraw:
+                {
                     IntPtr rgn = IntPtr.Zero;
-                    HIRect bounds = new HIRect ();
-                
-                    GetEventParameter (eventref, kEventParamRgnHandle, typeQDRgnHandle, IntPtr.Zero, (uint) Marshal.SizeOf (typeof (IntPtr)), IntPtr.Zero, ref rgn);
+                    HIRect bounds = new HIRect();
 
-                    if (rgn != IntPtr.Zero) {
-                        Rect rbounds = new Rect ();
-                        
-                        GetRegionBounds (rgn, ref rbounds);
-                        
+                    GetEventParameter(
+                        eventref,
+                        kEventParamRgnHandle,
+                        typeQDRgnHandle,
+                        IntPtr.Zero,
+                        (uint)Marshal.SizeOf(typeof(IntPtr)),
+                        IntPtr.Zero,
+                        ref rgn
+                    );
+
+                    if (rgn != IntPtr.Zero)
+                    {
+                        Rect rbounds = new Rect();
+
+                        GetRegionBounds(rgn, ref rbounds);
+
                         bounds.origin.x = rbounds.left;
                         bounds.origin.y = rbounds.top;
                         bounds.size.width = rbounds.right - rbounds.left;
                         bounds.size.height = rbounds.bottom - rbounds.top;
-                    } else {
-                        HIViewGetBounds (handle, ref bounds);
+                    }
+                    else
+                    {
+                        HIViewGetBounds(handle, ref bounds);
                     }
 
-                    if (!hwnd.visible) {
-                        if (client) {
+                    if (!hwnd.visible)
+                    {
+                        if (client)
+                        {
                             hwnd.expose_pending = false;
-                        } else {
+                        }
+                        else
+                        {
                             hwnd.nc_expose_pending = false;
                         }
-                                                return false;
+                        return false;
                     }
 
-                    if (!client) {
-                        DrawBorders (hwnd);
+                    if (!client)
+                    {
+                        DrawBorders(hwnd);
                     }
 
-                    Driver.AddExpose (hwnd, client, bounds);
+                    Driver.AddExpose(hwnd, client, bounds);
 
                     return true;
                 }
-                case kEventControlVisibilityChanged: {
-                    if (client) {
+                case kEventControlVisibilityChanged:
+                {
+                    if (client)
+                    {
                         msg.message = Msg.WM_SHOWWINDOW;
-                        msg.lParam = (IntPtr) 0;
-                        msg.wParam = (HIViewIsVisible (handle) ? (IntPtr)1 : (IntPtr)0);
+                        msg.lParam = (IntPtr)0;
+                        msg.wParam = (HIViewIsVisible(handle) ? (IntPtr)1 : (IntPtr)0);
                         return true;
                     }
                     return false;
                 }
-                case kEventControlBoundsChanged: {
-                    HIRect view_frame = new HIRect ();
+                case kEventControlBoundsChanged:
+                {
+                    HIRect view_frame = new HIRect();
 
-                    HIViewGetFrame (handle, ref view_frame);
-                    if (!client) {
-                        hwnd.X = (int) view_frame.origin.x;
-                        hwnd.Y = (int) view_frame.origin.y;
-                        hwnd.Width = (int) view_frame.size.width;
-                        hwnd.Height = (int) view_frame.size.height;
-                        Driver.PerformNCCalc (hwnd);
+                    HIViewGetFrame(handle, ref view_frame);
+                    if (!client)
+                    {
+                        hwnd.X = (int)view_frame.origin.x;
+                        hwnd.Y = (int)view_frame.origin.y;
+                        hwnd.Width = (int)view_frame.size.width;
+                        hwnd.Height = (int)view_frame.size.height;
+                        Driver.PerformNCCalc(hwnd);
                     }
 
                     msg.message = Msg.WM_WINDOWPOSCHANGED;
@@ -173,57 +213,99 @@ namespace System.Windows.Forms.CarbonInternal {
 
                     return true;
                 }
-                case kEventControlGetFocusPart: {
+                case kEventControlGetFocusPart:
+                {
                     short pcode = 0;
-                    SetEventParameter (eventref, kEventParamControlPart, typeControlPartCode, (uint)Marshal.SizeOf (typeof (short)), ref pcode);
+                    SetEventParameter(
+                        eventref,
+                        kEventParamControlPart,
+                        typeControlPartCode,
+                        (uint)Marshal.SizeOf(typeof(short)),
+                        ref pcode
+                    );
                     return false;
                 }
-                case kEventControlDragEnter: 
-                case kEventControlDragWithin: 
-                case kEventControlDragLeave: 
-                case kEventControlDragReceive: 
-                    return Dnd.HandleEvent (callref, eventref, handle, kind, ref msg);
+                case kEventControlDragEnter:
+                case kEventControlDragWithin:
+                case kEventControlDragLeave:
+                case kEventControlDragReceive:
+                    return Dnd.HandleEvent(callref, eventref, handle, kind, ref msg);
             }
             return false;
         }
 
-        private void DrawBorders (Hwnd hwnd) {
-            switch (hwnd.border_style) {
-                case FormBorderStyle.Fixed3D: {
+        private void DrawBorders(Hwnd hwnd)
+        {
+            switch (hwnd.border_style)
+            {
+                case FormBorderStyle.Fixed3D:
+                {
                     Graphics g;
 
                     g = Graphics.FromHwnd(hwnd.whole_window);
                     if (hwnd.border_static)
-                        ControlPaint.DrawBorder3D(g, new Rectangle(0, 0, hwnd.Width, hwnd.Height), Border3DStyle.SunkenOuter);
+                        ControlPaint.DrawBorder3D(
+                            g,
+                            new Rectangle(0, 0, hwnd.Width, hwnd.Height),
+                            Border3DStyle.SunkenOuter
+                        );
                     else
-                        ControlPaint.DrawBorder3D(g, new Rectangle(0, 0, hwnd.Width, hwnd.Height), Border3DStyle.Sunken);
+                        ControlPaint.DrawBorder3D(
+                            g,
+                            new Rectangle(0, 0, hwnd.Width, hwnd.Height),
+                            Border3DStyle.Sunken
+                        );
                     g.Dispose();
                     break;
                 }
 
-                case FormBorderStyle.FixedSingle: {
+                case FormBorderStyle.FixedSingle:
+                {
                     Graphics g;
 
                     g = Graphics.FromHwnd(hwnd.whole_window);
-                    ControlPaint.DrawBorder(g, new Rectangle(0, 0, hwnd.Width, hwnd.Height), Color.Black, ButtonBorderStyle.Solid);
+                    ControlPaint.DrawBorder(
+                        g,
+                        new Rectangle(0, 0, hwnd.Width, hwnd.Height),
+                        Color.Black,
+                        ButtonBorderStyle.Solid
+                    );
                     g.Dispose();
                     break;
                 }
             }
         }
-            
-        [DllImport ("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-        static extern int GetRegionBounds (IntPtr rgnhandle, ref Rect region);
-        [DllImport ("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-        static extern int GetEventParameter (IntPtr eventref, uint name, uint type, IntPtr outtype, uint size, IntPtr outsize, ref IntPtr data);
-        [DllImport ("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-        static extern int SetEventParameter (IntPtr eventref, uint name, uint type, uint size, ref short data);
 
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-        static extern int HIViewGetBounds (IntPtr handle, ref HIRect rect);
+        static extern int GetRegionBounds(IntPtr rgnhandle, ref Rect region);
+
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-        static extern int HIViewGetFrame (IntPtr handle, ref HIRect rect);
+        static extern int GetEventParameter(
+            IntPtr eventref,
+            uint name,
+            uint type,
+            IntPtr outtype,
+            uint size,
+            IntPtr outsize,
+            ref IntPtr data
+        );
+
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-        extern static bool HIViewIsVisible (IntPtr vHnd);
+        static extern int SetEventParameter(
+            IntPtr eventref,
+            uint name,
+            uint type,
+            uint size,
+            ref short data
+        );
+
+        [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
+        static extern int HIViewGetBounds(IntPtr handle, ref HIRect rect);
+
+        [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
+        static extern int HIViewGetFrame(IntPtr handle, ref HIRect rect);
+
+        [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
+        extern static bool HIViewIsVisible(IntPtr vHnd);
     }
 }

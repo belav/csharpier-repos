@@ -2,12 +2,12 @@ using System;
 
 class MainClass
 {
-    public static int Main ()
+    public static int Main()
     {
-        DataFrame df1 = new DataFrame ();
-        DataFrame df2 = new DataFrame ();
+        DataFrame df1 = new DataFrame();
+        DataFrame df2 = new DataFrame();
 
-        if (df1 != null) 
+        if (df1 != null)
         {
             return 1;
         }

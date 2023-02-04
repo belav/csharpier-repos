@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,49 +36,41 @@ namespace System.Web.UI.WebControls.Adapters
 {
     public class WebControlAdapter : ControlAdapter
     {
-        public WebControlAdapter ()
+        public WebControlAdapter() { }
+
+        internal WebControlAdapter(WebControl wc)
+            : base(wc) { }
+
+        protected internal override void Render(HtmlTextWriter writer)
         {
-        }
-        
-        internal WebControlAdapter (WebControl wc) : base (wc)
-        {
+            RenderBeginTag(writer);
+            RenderContents(writer);
+            RenderEndTag(writer);
         }
 
-        protected internal override void Render (HtmlTextWriter writer)
+        protected virtual void RenderBeginTag(HtmlTextWriter writer)
         {
-            RenderBeginTag (writer);
-            RenderContents (writer);
-            RenderEndTag (writer);
-        }
-
-        protected virtual void RenderBeginTag (HtmlTextWriter writer)
-        {
-            Control.RenderBeginTag (writer);
+            Control.RenderBeginTag(writer);
         }
 
         protected virtual void RenderContents(HtmlTextWriter writer)
         {
-            Control.RenderContents (writer);
+            Control.RenderContents(writer);
         }
 
         protected virtual void RenderEndTag(HtmlTextWriter writer)
         {
-            Control.RenderEndTag (writer);
+            Control.RenderEndTag(writer);
         }
 
         protected new WebControl Control
         {
-            get {
-                return (WebControl)control;
-            }
+            get { return (WebControl)control; }
         }
 
         protected bool IsEnabled
         {
-            get {
-                return Control.IsEnabled;
-            }
+            get { return Control.IsEnabled; }
         }
     }
 }
-

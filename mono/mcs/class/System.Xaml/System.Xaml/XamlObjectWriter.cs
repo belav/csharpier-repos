@@ -9,10 +9,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -70,19 +70,20 @@ namespace System.Xaml
 {
     public class XamlObjectWriter : XamlWriter, IXamlLineInfoConsumer
     {
-        public XamlObjectWriter (XamlSchemaContext schemaContext)
-            : this (schemaContext, null)
-        {
-        }
+        public XamlObjectWriter(XamlSchemaContext schemaContext)
+            : this(schemaContext, null) { }
 
-        public XamlObjectWriter (XamlSchemaContext schemaContext, XamlObjectWriterSettings settings)
+        public XamlObjectWriter(XamlSchemaContext schemaContext, XamlObjectWriterSettings settings)
         {
             if (schemaContext == null)
-                throw new ArgumentNullException ("schemaContext");
+                throw new ArgumentNullException("schemaContext");
             this.sctx = schemaContext;
-            this.settings = settings ?? new XamlObjectWriterSettings ();
-            var manager = new XamlWriterStateManager<XamlObjectWriterException, XamlObjectWriterException> (false);
-            intl = new XamlObjectWriterInternal (this, sctx, manager);
+            this.settings = settings ?? new XamlObjectWriterSettings();
+            var manager = new XamlWriterStateManager<
+                XamlObjectWriterException,
+                XamlObjectWriterException
+            >(false);
+            intl = new XamlObjectWriterInternal(this, sctx, manager);
         }
 
         XamlSchemaContext sctx;
@@ -93,113 +94,123 @@ namespace System.Xaml
         //int line, column;
         bool lineinfo_was_given;
 
-        internal XamlObjectWriterSettings Settings {
+        internal XamlObjectWriterSettings Settings
+        {
             get { return settings; }
         }
 
-        public virtual object Result {
+        public virtual object Result
+        {
             get { return intl.Result; }
         }
 
-        public INameScope RootNameScope {
+        public INameScope RootNameScope
+        {
             get { return intl.NameScope; }
         }
 
-        public override XamlSchemaContext SchemaContext {
+        public override XamlSchemaContext SchemaContext
+        {
             get { return sctx; }
         }
 
-        public bool ShouldProvideLineInfo {
+        public bool ShouldProvideLineInfo
+        {
             get { return lineinfo_was_given; }
         }
 
-        public void SetLineInfo (int lineNumber, int linePosition)
+        public void SetLineInfo(int lineNumber, int linePosition)
         {
-//            line = lineNumber;
-//            column = linePosition;
+            //            line = lineNumber;
+            //            column = linePosition;
             lineinfo_was_given = true;
         }
-        
-        public void Clear ()
+
+        public void Clear()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        protected override void Dispose (bool disposing)
+        protected override void Dispose(bool disposing)
         {
             if (!disposing)
                 return;
 
-            intl.CloseAll ();
+            intl.CloseAll();
         }
 
-        protected internal virtual void OnAfterBeginInit (object value)
+        protected internal virtual void OnAfterBeginInit(object value)
         {
             if (settings.AfterBeginInitHandler != null)
-                settings.AfterBeginInitHandler (this, new XamlObjectEventArgs (value));
+                settings.AfterBeginInitHandler(this, new XamlObjectEventArgs(value));
         }
 
-        protected internal virtual void OnAfterEndInit (object value)
+        protected internal virtual void OnAfterEndInit(object value)
         {
             if (settings.AfterEndInitHandler != null)
-                settings.AfterEndInitHandler (this, new XamlObjectEventArgs (value));
+                settings.AfterEndInitHandler(this, new XamlObjectEventArgs(value));
         }
 
-        protected internal virtual void OnAfterProperties (object value)
+        protected internal virtual void OnAfterProperties(object value)
         {
             if (settings.AfterPropertiesHandler != null)
-                settings.AfterPropertiesHandler (this, new XamlObjectEventArgs (value));
+                settings.AfterPropertiesHandler(this, new XamlObjectEventArgs(value));
         }
 
-        protected internal virtual void OnBeforeProperties (object value)
+        protected internal virtual void OnBeforeProperties(object value)
         {
             if (settings.BeforePropertiesHandler != null)
-                settings.BeforePropertiesHandler (this, new XamlObjectEventArgs (value));
+                settings.BeforePropertiesHandler(this, new XamlObjectEventArgs(value));
         }
 
-        protected internal virtual bool OnSetValue (object eventSender, XamlMember member, object value)
+        protected internal virtual bool OnSetValue(
+            object eventSender,
+            XamlMember member,
+            object value
+        )
         {
-            if (settings.XamlSetValueHandler != null) {
-                var args = new XamlSetValueEventArgs (member, value);
-                settings.XamlSetValueHandler (eventSender, args);
+            if (settings.XamlSetValueHandler != null)
+            {
+                var args = new XamlSetValueEventArgs(member, value);
+                settings.XamlSetValueHandler(eventSender, args);
                 return args.Handled;
             }
             return false;
         }
 
-        public override void WriteGetObject ()
+        public override void WriteGetObject()
         {
-            intl.WriteGetObject ();
+            intl.WriteGetObject();
         }
 
-        public override void WriteNamespace (NamespaceDeclaration namespaceDeclaration)
+        public override void WriteNamespace(NamespaceDeclaration namespaceDeclaration)
         {
-            intl.WriteNamespace (namespaceDeclaration);
+            intl.WriteNamespace(namespaceDeclaration);
         }
 
-        public override void WriteStartObject (XamlType xamlType)
+        public override void WriteStartObject(XamlType xamlType)
         {
-            intl.WriteStartObject (xamlType);
-        }
-        
-        public override void WriteValue (object value)
-        {
-            intl.WriteValue (value);
-        }
-        
-        public override void WriteStartMember (XamlMember property)
-        {
-            intl.WriteStartMember (property);
-        }
-        
-        public override void WriteEndObject ()
-        {
-            intl.WriteEndObject ();
+            intl.WriteStartObject(xamlType);
         }
 
-        public override void WriteEndMember ()
+        public override void WriteValue(object value)
         {
-            intl.WriteEndMember ();
+            intl.WriteValue(value);
+        }
+
+        public override void WriteStartMember(XamlMember property)
+        {
+            intl.WriteStartMember(property);
+        }
+
+        public override void WriteEndObject()
+        {
+            intl.WriteEndObject();
+        }
+
+        public override void WriteEndMember()
+        {
+            intl.WriteEndMember();
         }
     }
 
@@ -208,419 +219,589 @@ namespace System.Xaml
     {
         const string Xmlns2000Namespace = "http://www.w3.org/2000/xmlns/";
 
-        public XamlObjectWriterInternal (XamlObjectWriter source, XamlSchemaContext schemaContext, XamlWriterStateManager manager)
-            : base (schemaContext, manager)
+        public XamlObjectWriterInternal(
+            XamlObjectWriter source,
+            XamlSchemaContext schemaContext,
+            XamlWriterStateManager manager
+        )
+            : base(schemaContext, manager)
         {
             this.source = source;
             this.sctx = schemaContext;
             var ext = source.Settings.ExternalNameScope;
-            name_scope = ext != null && source.Settings.RegisterNamesOnExternalNamescope ? ext : new NameScope (ext);
+            name_scope =
+                ext != null && source.Settings.RegisterNamesOnExternalNamescope
+                    ? ext
+                    : new NameScope(ext);
         }
-        
+
         XamlObjectWriter source;
         XamlSchemaContext sctx;
         INameScope name_scope;
-        List<NameFixupRequired> pending_name_references = new List<NameFixupRequired> ();
-        AmbientProvider ambient_provider = new AmbientProvider ();
+        List<NameFixupRequired> pending_name_references = new List<NameFixupRequired>();
+        AmbientProvider ambient_provider = new AmbientProvider();
 
-        public INameScope NameScope {
+        public INameScope NameScope
+        {
             get { return name_scope; }
         }
 
         public object Result { get; set; }
-        
-        protected override void OnWriteStartObject ()
+
+        protected override void OnWriteStartObject()
         {
-            var state = object_states.Pop ();
-            if (object_states.Count > 0) {
-                var pstate = object_states.Peek ();
+            var state = object_states.Pop();
+            if (object_states.Count > 0)
+            {
+                var pstate = object_states.Peek();
                 if (CurrentMemberState.Value != null)
-                    throw new XamlDuplicateMemberException (String.Format ("Member '{0}' is already written to current type '{1}'", CurrentMember, pstate.Type));
-            } else {
+                    throw new XamlDuplicateMemberException(
+                        String.Format(
+                            "Member '{0}' is already written to current type '{1}'",
+                            CurrentMember,
+                            pstate.Type
+                        )
+                    );
+            }
+            else
+            {
                 var obj = source.Settings.RootObjectInstance;
-                if (obj != null) {
-                    if (state.Type.UnderlyingType != null && !state.Type.UnderlyingType.IsAssignableFrom (obj.GetType ()))
-                        throw new XamlObjectWriterException (String.Format ("RootObjectInstance type '{0}' is not assignable to '{1}'", obj.GetType (), state.Type));
+                if (obj != null)
+                {
+                    if (
+                        state.Type.UnderlyingType != null
+                        && !state.Type.UnderlyingType.IsAssignableFrom(obj.GetType())
+                    )
+                        throw new XamlObjectWriterException(
+                            String.Format(
+                                "RootObjectInstance type '{0}' is not assignable to '{1}'",
+                                obj.GetType(),
+                                state.Type
+                            )
+                        );
                     state.Value = obj;
                     state.IsInstantiated = true;
                 }
                 root_state = state;
             }
-            object_states.Push (state);
-            if (!state.Type.IsContentValue (service_provider))
-                InitializeObjectIfRequired (true);
+            object_states.Push(state);
+            if (!state.Type.IsContentValue(service_provider))
+                InitializeObjectIfRequired(true);
 
             state.IsXamlWriterCreated = true;
-            source.OnBeforeProperties (state.Value);
+            source.OnBeforeProperties(state.Value);
         }
 
-        protected override void OnWriteGetObject ()
+        protected override void OnWriteGetObject()
         {
-            var state = object_states.Pop ();
+            var state = object_states.Pop();
             var xm = CurrentMember;
-            var instance = xm.Invoker.GetValue (object_states.Peek ().Value);
+            var instance = xm.Invoker.GetValue(object_states.Peek().Value);
             if (instance == null)
-                throw new XamlObjectWriterException (String.Format ("The value  for '{0}' property is null", xm.Name));
+                throw new XamlObjectWriterException(
+                    String.Format("The value  for '{0}' property is null", xm.Name)
+                );
             state.Value = instance;
             state.IsInstantiated = true;
-            object_states.Push (state);
+            object_states.Push(state);
         }
 
-        protected override void OnWriteEndObject ()
+        protected override void OnWriteEndObject()
         {
-            InitializeObjectIfRequired (false); // this is required for such case that there was no StartMember call.
+            InitializeObjectIfRequired(false); // this is required for such case that there was no StartMember call.
 
-            var state = object_states.Pop ();
+            var state = object_states.Pop();
             var obj = state.Value;
-            
-            if (obj is MarkupExtension) {
-                try {
-                    obj = ((MarkupExtension) obj).ProvideValue (service_provider);
-                } catch (XamlObjectWriterException) {
+
+            if (obj is MarkupExtension)
+            {
+                try
+                {
+                    obj = ((MarkupExtension)obj).ProvideValue(service_provider);
+                }
+                catch (XamlObjectWriterException)
+                {
                     throw;
-                } catch (Exception ex) {
-                    throw new XamlObjectWriterException ("An error occured on getting provided value", ex);
+                }
+                catch (Exception ex)
+                {
+                    throw new XamlObjectWriterException(
+                        "An error occured on getting provided value",
+                        ex
+                    );
                 }
             }
-            
+
             // call this (possibly) before the object is added to parent collection. (bug #3003 also expects this)
             if (state.IsXamlWriterCreated)
-                source.OnAfterProperties (obj);
-            
+                source.OnAfterProperties(obj);
+
             var nfr = obj as NameFixupRequired;
-            if (nfr != null && object_states.Count > 0) { // IF the root object to be written is x:Reference, then the Result property will become the NameFixupRequired. That's what .NET also does.
+            if (nfr != null && object_states.Count > 0)
+            { // IF the root object to be written is x:Reference, then the Result property will become the NameFixupRequired. That's what .NET also does.
                 // actually .NET seems to seek "parent" object in its own IXamlNameResolver implementation.
-                var pstate = object_states.Peek ();
+                var pstate = object_states.Peek();
                 nfr.ParentType = pstate.Type;
                 nfr.ParentMember = CurrentMember; // Note that it is a member of the pstate.
                 nfr.ParentValue = pstate.Value;
-                pending_name_references.Add ((NameFixupRequired) obj);
+                pending_name_references.Add((NameFixupRequired)obj);
             }
             else
-                StoreAppropriatelyTypedValue (obj, state.KeyValue);
-            
+                StoreAppropriatelyTypedValue(obj, state.KeyValue);
+
             if (state.Type.IsAmbient)
-                ambient_provider.Pop ();
+                ambient_provider.Pop();
             else
-                HandleEndInit (obj);
-            
-            object_states.Push (state);
-            if (object_states.Count == 1) {
+                HandleEndInit(obj);
+
+            object_states.Push(state);
+            if (object_states.Count == 1)
+            {
                 Result = obj;
-                ResolvePendingReferences ();
+                ResolvePendingReferences();
             }
         }
 
-        Stack<object> escaped_objects = new Stack<object> ();
+        Stack<object> escaped_objects = new Stack<object>();
 
-        protected override void OnWriteStartMember (XamlMember property)
+        protected override void OnWriteStartMember(XamlMember property)
         {
-            if (property == XamlLanguage.PositionalParameters ||
-                property == XamlLanguage.Arguments) {
-                var state = object_states.Peek ();
-                escaped_objects.Push (state.Value);
-                state.Value = new List<object> ();
+            if (property == XamlLanguage.PositionalParameters || property == XamlLanguage.Arguments)
+            {
+                var state = object_states.Peek();
+                escaped_objects.Push(state.Value);
+                state.Value = new List<object>();
             }
-
             // FIXME: this condition needs to be examined. What is known to be prevented are: PositionalParameters, Initialization and Base (the last one sort of indicates there's a lot more).
             else if (!(property is XamlDirective))
-                InitializeObjectIfRequired (false);
+                InitializeObjectIfRequired(false);
         }
 
-        static readonly BindingFlags static_flags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static;
+        static readonly BindingFlags static_flags =
+            BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static;
 
-        protected override void OnWriteEndMember ()
+        protected override void OnWriteEndMember()
         {
             var xm = CurrentMember;
-            var state = object_states.Peek ();
+            var state = object_states.Peek();
 
-            if (xm == XamlLanguage.PositionalParameters) {
-                var l = (List<object>) state.Value;
-                state.Value = escaped_objects.Pop ();
+            if (xm == XamlLanguage.PositionalParameters)
+            {
+                var l = (List<object>)state.Value;
+                state.Value = escaped_objects.Pop();
                 state.IsInstantiated = true;
-                PopulateObject (true, l);
+                PopulateObject(true, l);
                 return;
-            } else if (xm == XamlLanguage.Arguments) {
-                if (state.FactoryMethod != null) {
-                    var contents = (List<object>) state.Value;
-                    var mi = state.Type.UnderlyingType.GetMethods (static_flags).FirstOrDefault (mii => mii.Name == state.FactoryMethod && mii.GetParameters ().Length == contents.Count);
+            }
+            else if (xm == XamlLanguage.Arguments)
+            {
+                if (state.FactoryMethod != null)
+                {
+                    var contents = (List<object>)state.Value;
+                    var mi = state.Type.UnderlyingType
+                        .GetMethods(static_flags)
+                        .FirstOrDefault(
+                            mii =>
+                                mii.Name == state.FactoryMethod
+                                && mii.GetParameters().Length == contents.Count
+                        );
                     if (mi == null)
-                        throw new XamlObjectWriterException (String.Format ("Specified static factory method '{0}' for type '{1}' was not found", state.FactoryMethod, state.Type));
-                    state.Value = mi.Invoke (null, contents.ToArray ());
+                        throw new XamlObjectWriterException(
+                            String.Format(
+                                "Specified static factory method '{0}' for type '{1}' was not found",
+                                state.FactoryMethod,
+                                state.Type
+                            )
+                        );
+                    state.Value = mi.Invoke(null, contents.ToArray());
                 }
                 else
-                    PopulateObject (false, (List<object>) state.Value);
+                    PopulateObject(false, (List<object>)state.Value);
                 state.IsInstantiated = true;
-                escaped_objects.Pop ();
-            } else if (xm == XamlLanguage.Initialization) {
+                escaped_objects.Pop();
+            }
+            else if (xm == XamlLanguage.Initialization)
+            {
                 // ... and no need to do anything. The object value to pop *is* the return value.
-            } else if (xm == XamlLanguage.Name || xm == state.Type.GetAliasedProperty (XamlLanguage.Name)) {
-                string name = (string) CurrentMemberState.Value;
-                name_scope.RegisterName (name, state.Value);
-            } else {
+            }
+            else if (
+                xm == XamlLanguage.Name || xm == state.Type.GetAliasedProperty(XamlLanguage.Name)
+            )
+            {
+                string name = (string)CurrentMemberState.Value;
+                name_scope.RegisterName(name, state.Value);
+            }
+            else
+            {
                 if (xm.IsEvent)
-                    SetEvent (xm, (string) CurrentMemberState.Value);
+                    SetEvent(xm, (string)CurrentMemberState.Value);
                 else if (!xm.IsReadOnly) // exclude read-only object such as collection item.
-                    SetValue (xm, CurrentMemberState.Value);
+                    SetValue(xm, CurrentMemberState.Value);
             }
         }
 
-        void SetEvent (XamlMember member, string value)
+        void SetEvent(XamlMember member, string value)
         {
             if (member.UnderlyingMember == null)
-                throw new XamlObjectWriterException (String.Format ("Event {0} has no underlying member to attach event", member));
+                throw new XamlObjectWriterException(
+                    String.Format("Event {0} has no underlying member to attach event", member)
+                );
 
-            int idx = value.LastIndexOf ('.');
-            var xt = idx < 0 ? root_state.Type : ResolveTypeFromName (value.Substring (0, idx));
+            int idx = value.LastIndexOf('.');
+            var xt = idx < 0 ? root_state.Type : ResolveTypeFromName(value.Substring(0, idx));
             if (xt == null)
-                throw new XamlObjectWriterException (String.Format ("Referenced type {0} in event {1} was not found", value, member));
+                throw new XamlObjectWriterException(
+                    String.Format("Referenced type {0} in event {1} was not found", value, member)
+                );
             if (xt.UnderlyingType == null)
-                throw new XamlObjectWriterException (String.Format ("Referenced type {0} in event {1} has no underlying type", value, member));
-            string mn = idx < 0 ? value : value.Substring (idx + 1);
-            var ev = (EventInfo) member.UnderlyingMember;
+                throw new XamlObjectWriterException(
+                    String.Format(
+                        "Referenced type {0} in event {1} has no underlying type",
+                        value,
+                        member
+                    )
+                );
+            string mn = idx < 0 ? value : value.Substring(idx + 1);
+            var ev = (EventInfo)member.UnderlyingMember;
             // get an appropriate MethodInfo overload whose signature matches the event's handler type.
             // FIXME: this may need more strict match. RuntimeBinder may be useful here.
-            var eventMethodParams = ev.EventHandlerType.GetMethod ("Invoke").GetParameters ();
-            
+            var eventMethodParams = ev.EventHandlerType.GetMethod("Invoke").GetParameters();
+
             var target = root_state.Value;
-            var mi = target.GetType().GetMethod (mn, BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public, null, (from pi in eventMethodParams select pi.ParameterType).ToArray (), null);
+            var mi = target
+                .GetType()
+                .GetMethod(
+                    mn,
+                    BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public,
+                    null,
+                    (from pi in eventMethodParams select pi.ParameterType).ToArray(),
+                    null
+                );
             if (mi == null)
-                throw new XamlObjectWriterException (String.Format ("Referenced value method {0} in type {1} indicated by event {2} was not found", mn, value, member));
-            var obj = object_states.Peek ().Value;
-            ev.AddEventHandler (obj, Delegate.CreateDelegate (ev.EventHandlerType, target, mi));
+                throw new XamlObjectWriterException(
+                    String.Format(
+                        "Referenced value method {0} in type {1} indicated by event {2} was not found",
+                        mn,
+                        value,
+                        member
+                    )
+                );
+            var obj = object_states.Peek().Value;
+            ev.AddEventHandler(obj, Delegate.CreateDelegate(ev.EventHandlerType, target, mi));
         }
 
-        void SetValue (XamlMember member, object value)
+        void SetValue(XamlMember member, object value)
         {
             if (member == XamlLanguage.FactoryMethod)
-                object_states.Peek ().FactoryMethod = (string) value;
+                object_states.Peek().FactoryMethod = (string)value;
             else if (member.IsDirective)
                 return;
             else
-                SetValue (member, object_states.Peek ().Value, value);
-        }
-        
-        void SetValue (XamlMember member, object target, object value)
-        {
-            if (!source.OnSetValue (target, member, value))
-                member.Invoker.SetValue (target, value);
+                SetValue(member, object_states.Peek().Value, value);
         }
 
-        void PopulateObject (bool considerPositionalParameters, IList<object> contents)
+        void SetValue(XamlMember member, object target, object value)
         {
-            var state = object_states.Peek ();
+            if (!source.OnSetValue(target, member, value))
+                member.Invoker.SetValue(target, value);
+        }
 
-            var args = state.Type.GetSortedConstructorArguments ().ToArray ();
-            var argt = args != null ? (IList<XamlType>) (from arg in args select arg.Type).ToArray () : considerPositionalParameters ? state.Type.GetPositionalParameters (contents.Count) : null;
+        void PopulateObject(bool considerPositionalParameters, IList<object> contents)
+        {
+            var state = object_states.Peek();
 
-            var argv = new object [argt.Count];
+            var args = state.Type.GetSortedConstructorArguments().ToArray();
+            var argt =
+                args != null
+                    ? (IList<XamlType>)(from arg in args select arg.Type).ToArray()
+                    : considerPositionalParameters
+                        ? state.Type.GetPositionalParameters(contents.Count)
+                        : null;
+
+            var argv = new object[argt.Count];
             for (int i = 0; i < argv.Length; i++)
-                argv [i] = GetCorrectlyTypedValue (args [i], argt [i], contents [i]);
-            state.Value = state.Type.Invoker.CreateInstance (argv);
+                argv[i] = GetCorrectlyTypedValue(args[i], argt[i], contents[i]);
+            state.Value = state.Type.Invoker.CreateInstance(argv);
             state.IsInstantiated = true;
             if (state.Type.IsAmbient)
-                ambient_provider.Push (new AmbientPropertyValue (CurrentMember, state.Value));
-            HandleBeginInit (state.Value);
+                ambient_provider.Push(new AmbientPropertyValue(CurrentMember, state.Value));
+            HandleBeginInit(state.Value);
         }
 
-        protected override void OnWriteValue (object value)
+        protected override void OnWriteValue(object value)
         {
             if (CurrentMemberState.Value != null)
-                throw new XamlDuplicateMemberException (String.Format ("Member '{0}' is already written to current type '{1}'", CurrentMember, object_states.Peek ().Type));
-            StoreAppropriatelyTypedValue (value, null);
+                throw new XamlDuplicateMemberException(
+                    String.Format(
+                        "Member '{0}' is already written to current type '{1}'",
+                        CurrentMember,
+                        object_states.Peek().Type
+                    )
+                );
+            StoreAppropriatelyTypedValue(value, null);
         }
 
-        protected override void OnWriteNamespace (NamespaceDeclaration nd)
+        protected override void OnWriteNamespace(NamespaceDeclaration nd)
         {
             // nothing to do here.
         }
-        
-        void StoreAppropriatelyTypedValue (object obj, object keyObj)
+
+        void StoreAppropriatelyTypedValue(object obj, object keyObj)
         {
             var ms = CurrentMemberState; // note that this retrieves parent's current property for EndObject.
-            if (ms != null) {
-                var state = object_states.Peek ();
+            if (ms != null)
+            {
+                var state = object_states.Peek();
                 var parent = state.Value;
                 var xt = state.Type;
                 var xm = ms.Member;
-                if (xm == XamlLanguage.Initialization) {
-                    state.Value = GetCorrectlyTypedValue (null, xt, obj);
+                if (xm == XamlLanguage.Initialization)
+                {
+                    state.Value = GetCorrectlyTypedValue(null, xt, obj);
                     state.IsInstantiated = true;
-                } else if (xm.IsEvent) {
-                    ms.Value = (string) obj; // save name of value delegate (method).
+                }
+                else if (xm.IsEvent)
+                {
+                    ms.Value = (string)obj; // save name of value delegate (method).
                     state.IsInstantiated = true;
-                } else if (xm.Type.IsXData) {
-                    var xdata = (XData) obj;
-                    var ixser = xm.Invoker.GetValue (state.Value) as IXmlSerializable;
+                }
+                else if (xm.Type.IsXData)
+                {
+                    var xdata = (XData)obj;
+                    var ixser = xm.Invoker.GetValue(state.Value) as IXmlSerializable;
                     if (ixser != null)
-                        ixser.ReadXml ((XmlReader) xdata.XmlReader);
+                        ixser.ReadXml((XmlReader)xdata.XmlReader);
                 }
                 else if (xm == XamlLanguage.Base)
-                    ms.Value = GetCorrectlyTypedValue (null, xm.Type, obj);
-                else if (xm == XamlLanguage.Name || xm == xt.GetAliasedProperty (XamlLanguage.Name))
-                    ms.Value = GetCorrectlyTypedValue (xm, XamlLanguage.String, obj);
+                    ms.Value = GetCorrectlyTypedValue(null, xm.Type, obj);
+                else if (xm == XamlLanguage.Name || xm == xt.GetAliasedProperty(XamlLanguage.Name))
+                    ms.Value = GetCorrectlyTypedValue(xm, XamlLanguage.String, obj);
                 else if (xm == XamlLanguage.Key)
-                    state.KeyValue = GetCorrectlyTypedValue (null, xt.KeyType, obj);
-                else {
-                    if (!AddToCollectionIfAppropriate (xt, xm, parent, obj, keyObj)) {
+                    state.KeyValue = GetCorrectlyTypedValue(null, xt.KeyType, obj);
+                else
+                {
+                    if (!AddToCollectionIfAppropriate(xt, xm, parent, obj, keyObj))
+                    {
                         if (!xm.IsReadOnly)
-                            ms.Value = GetCorrectlyTypedValue (xm, xm.Type, obj);
+                            ms.Value = GetCorrectlyTypedValue(xm, xm.Type, obj);
                     }
                 }
             }
         }
 
-        bool AddToCollectionIfAppropriate (XamlType xt, XamlMember xm, object parent, object obj, object keyObj)
+        bool AddToCollectionIfAppropriate(
+            XamlType xt,
+            XamlMember xm,
+            object parent,
+            object obj,
+            object keyObj
+        )
         {
             var mt = xm.Type;
-            if (xm == XamlLanguage.Items ||
-                xm == XamlLanguage.PositionalParameters ||
-                xm == XamlLanguage.Arguments) {
+            if (
+                xm == XamlLanguage.Items
+                || xm == XamlLanguage.PositionalParameters
+                || xm == XamlLanguage.Arguments
+            )
+            {
                 if (xt.IsDictionary)
-                    mt.Invoker.AddToDictionary (parent, GetCorrectlyTypedValue (null, xt.KeyType, keyObj), GetCorrectlyTypedValue (null, xt.ItemType, obj));
+                    mt.Invoker.AddToDictionary(
+                        parent,
+                        GetCorrectlyTypedValue(null, xt.KeyType, keyObj),
+                        GetCorrectlyTypedValue(null, xt.ItemType, obj)
+                    );
                 else // collection. Note that state.Type isn't usable for PositionalParameters to identify collection kind.
-                    mt.Invoker.AddToCollection (parent, GetCorrectlyTypedValue (null, xt.ItemType, obj));
+                    mt.Invoker.AddToCollection(parent, GetCorrectlyTypedValue(null, xt.ItemType, obj));
                 return true;
             }
             else
                 return false;
         }
 
-        object GetCorrectlyTypedValue (XamlMember xm, XamlType xt, object value)
+        object GetCorrectlyTypedValue(XamlMember xm, XamlType xt, object value)
         {
-            try {
-                return DoGetCorrectlyTypedValue (xm, xt, value);
-            } catch (XamlObjectWriterException) {
+            try
+            {
+                return DoGetCorrectlyTypedValue(xm, xt, value);
+            }
+            catch (XamlObjectWriterException)
+            {
                 throw;
-            } catch (Exception ex) {
+            }
+            catch (Exception ex)
+            {
                 // For + ex.Message, the runtime should print InnerException message like .NET does.
-                throw new XamlObjectWriterException (String.Format ("Could not convert object \'{0}' (of type {1}) to {2}: ", value, value != null ? (object) value.GetType () : "(null)", xt)  + ex.Message, ex);
+                throw new XamlObjectWriterException(
+                    String.Format(
+                        "Could not convert object \'{0}' (of type {1}) to {2}: ",
+                        value,
+                        value != null ? (object)value.GetType() : "(null)",
+                        xt
+                    ) + ex.Message,
+                    ex
+                );
             }
         }
 
-        // It expects that it is not invoked when there is no value to 
+        // It expects that it is not invoked when there is no value to
         // assign.
         // When it is passed null, then it returns a default instance.
         // For example, passing null as Int32 results in 0.
         // But do not immediately try to instantiate with the type, since the type might be abstract.
-        object DoGetCorrectlyTypedValue (XamlMember xm, XamlType xt, object value)
+        object DoGetCorrectlyTypedValue(XamlMember xm, XamlType xt, object value)
         {
-            if (value == null) {
-                if (xt.IsContentValue (service_provider)) // it is for collection/dictionary key and item
+            if (value == null)
+            {
+                if (xt.IsContentValue(service_provider)) // it is for collection/dictionary key and item
                     return null;
                 else
-                    return xt.IsNullable ? null : xt.Invoker.CreateInstance (new object [0]);
+                    return xt.IsNullable ? null : xt.Invoker.CreateInstance(new object[0]);
             }
             if (xt == null)
                 return value;
 
             // Not sure if this is really required though...
-            var vt = sctx.GetXamlType (value.GetType ());
-            if (vt.CanAssignTo (xt))
+            var vt = sctx.GetXamlType(value.GetType());
+            if (vt.CanAssignTo(xt))
                 return value;
 
             // FIXME: this could be generalized by some means, but I cannot find any.
-            if (xt.UnderlyingType == typeof (XamlType) && value is string)
-                value = ResolveTypeFromName ((string) value);
+            if (xt.UnderlyingType == typeof(XamlType) && value is string)
+                value = ResolveTypeFromName((string)value);
 
             // FIXME: this could be generalized by some means, but I cannot find any.
-            if (xt.UnderlyingType == typeof (Type))
-                value = new TypeExtension ((string) value).ProvideValue (service_provider);
+            if (xt.UnderlyingType == typeof(Type))
+                value = new TypeExtension((string)value).ProvideValue(service_provider);
             if (xt == XamlLanguage.Type && value is string)
-                value = new TypeExtension ((string) value);
-            
-            if (IsAllowedType (xt, value))
+                value = new TypeExtension((string)value);
+
+            if (IsAllowedType(xt, value))
                 return value;
 
             var xtc = (xm != null ? xm.TypeConverter : null) ?? xt.TypeConverter;
-            if (xtc != null && value != null) {
+            if (xtc != null && value != null)
+            {
                 var tc = xtc.ConverterInstance;
-                if (tc != null && tc.CanConvertFrom (value.GetType ()))
-                    value = tc.ConvertFrom (value);
+                if (tc != null && tc.CanConvertFrom(value.GetType()))
+                    value = tc.ConvertFrom(value);
                 return value;
             }
 
-            throw new XamlObjectWriterException (String.Format ("Value '{0}' (of type {1}) is not of or convertible to type {0} (member {3})", value, value != null ? (object) value.GetType () : "(null)", xt, xm));
+            throw new XamlObjectWriterException(
+                String.Format(
+                    "Value '{0}' (of type {1}) is not of or convertible to type {0} (member {3})",
+                    value,
+                    value != null ? (object)value.GetType() : "(null)",
+                    xt,
+                    xm
+                )
+            );
         }
 
-        XamlType ResolveTypeFromName (string name)
+        XamlType ResolveTypeFromName(string name)
         {
-            var nsr = (IXamlNamespaceResolver) service_provider.GetService (typeof (IXamlNamespaceResolver));
-            return sctx.GetXamlType (XamlTypeName.Parse (name, nsr));
+            var nsr = (IXamlNamespaceResolver)
+                service_provider.GetService(typeof(IXamlNamespaceResolver));
+            return sctx.GetXamlType(XamlTypeName.Parse(name, nsr));
         }
 
-        bool IsAllowedType (XamlType xt, object value)
+        bool IsAllowedType(XamlType xt, object value)
         {
-            return  xt == null ||
-                xt.UnderlyingType == null ||
-                xt.UnderlyingType.IsInstanceOfType (value) ||
-                value == null && xt == XamlLanguage.Null ||
-                xt.IsMarkupExtension && IsAllowedType (xt.MarkupExtensionReturnType, value);
+            return xt == null
+                || xt.UnderlyingType == null
+                || xt.UnderlyingType.IsInstanceOfType(value)
+                || value == null && xt == XamlLanguage.Null
+                || xt.IsMarkupExtension && IsAllowedType(xt.MarkupExtensionReturnType, value);
         }
-        
-        void InitializeObjectIfRequired (bool waitForParameters)
+
+        void InitializeObjectIfRequired(bool waitForParameters)
         {
-            var state = object_states.Peek ();
+            var state = object_states.Peek();
             if (state.IsInstantiated)
                 return;
 
-            if (waitForParameters && (state.Type.ConstructionRequiresArguments || state.Type.HasPositionalParameters (service_provider)))
+            if (
+                waitForParameters
+                && (
+                    state.Type.ConstructionRequiresArguments
+                    || state.Type.HasPositionalParameters(service_provider)
+                )
+            )
                 return;
 
             // FIXME: "The default techniques in absence of a factory method are to attempt to find a default constructor, then attempt to find an identified type converter on type, member, or destination type."
             // http://msdn.microsoft.com/en-us/library/system.xaml.xamllanguage.factorymethod%28VS.100%29.aspx
             object obj;
             if (state.FactoryMethod != null) // FIXME: it must be implemented and verified with tests.
-                throw new NotImplementedException ();
+                throw new NotImplementedException();
             else
-                obj = state.Type.Invoker.CreateInstance (null);
+                obj = state.Type.Invoker.CreateInstance(null);
             state.Value = obj;
             state.IsInstantiated = true;
             if (state.Type.IsAmbient)
-                ambient_provider.Push (new AmbientPropertyValue (CurrentMember, obj));
+                ambient_provider.Push(new AmbientPropertyValue(CurrentMember, obj));
             else
-                HandleBeginInit (obj);
+                HandleBeginInit(obj);
         }
 
-        internal IXamlNameResolver name_resolver {
-            get { return (IXamlNameResolver) service_provider.GetService (typeof (IXamlNameResolver)); }
+        internal IXamlNameResolver name_resolver
+        {
+            get
+            {
+                return (IXamlNameResolver)service_provider.GetService(typeof(IXamlNameResolver));
+            }
         }
 
-        internal override IAmbientProvider AmbientProvider {
+        internal override IAmbientProvider AmbientProvider
+        {
             get { return ambient_provider; }
         }
 
-        void ResolvePendingReferences ()
+        void ResolvePendingReferences()
         {
-            foreach (var fixup in pending_name_references) {
-                foreach (var name in fixup.Names) {
+            foreach (var fixup in pending_name_references)
+            {
+                foreach (var name in fixup.Names)
+                {
                     bool isFullyInitialized;
                     // FIXME: sort out relationship between name_scope and name_resolver. (unify to name_resolver, probably)
-                    var obj = name_scope.FindName (name) ?? name_resolver.Resolve (name, out isFullyInitialized);
+                    var obj =
+                        name_scope.FindName(name)
+                        ?? name_resolver.Resolve(name, out isFullyInitialized);
                     if (obj == null)
-                        throw new XamlObjectWriterException (String.Format ("Unresolved object reference '{0}' was found", name));
-                    if (!AddToCollectionIfAppropriate (fixup.ParentType, fixup.ParentMember, fixup.ParentValue, obj, null)) // FIXME: is keyObj always null?
-                        SetValue (fixup.ParentMember, fixup.ParentValue, obj);
+                        throw new XamlObjectWriterException(
+                            String.Format("Unresolved object reference '{0}' was found", name)
+                        );
+                    if (
+                        !AddToCollectionIfAppropriate(
+                            fixup.ParentType,
+                            fixup.ParentMember,
+                            fixup.ParentValue,
+                            obj,
+                            null
+                        )
+                    ) // FIXME: is keyObj always null?
+                        SetValue(fixup.ParentMember, fixup.ParentValue, obj);
                 }
             }
         }
-        
-        void HandleBeginInit (object value)
+
+        void HandleBeginInit(object value)
         {
             var si = value as ISupportInitialize;
             if (si == null)
                 return;
-            si.BeginInit ();
-            source.OnAfterBeginInit (value);
+            si.BeginInit();
+            source.OnAfterBeginInit(value);
         }
-        
-        void HandleEndInit (object value)
+
+        void HandleEndInit(object value)
         {
             var si = value as ISupportInitialize;
             if (si == null)
                 return;
-            si.EndInit ();
-            source.OnAfterEndInit (value);
+            si.EndInit();
+            source.OnAfterEndInit(value);
         }
     }
 }

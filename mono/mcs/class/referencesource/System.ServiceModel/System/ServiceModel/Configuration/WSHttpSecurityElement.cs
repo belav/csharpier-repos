@@ -15,7 +15,10 @@ namespace System.ServiceModel.Configuration
 
     public sealed partial class WSHttpSecurityElement : ServiceModelConfigurationElement
     {
-        [ConfigurationProperty(ConfigurationStrings.Mode, DefaultValue = WSHttpSecurity.DefaultMode)]
+        [ConfigurationProperty(
+            ConfigurationStrings.Mode,
+            DefaultValue = WSHttpSecurity.DefaultMode
+        )]
         [ServiceModelEnumValidator(typeof(SecurityModeHelper))]
         public SecurityMode Mode
         {
@@ -32,7 +35,10 @@ namespace System.ServiceModel.Configuration
         [ConfigurationProperty(ConfigurationStrings.Message)]
         public NonDualMessageSecurityOverHttpElement Message
         {
-            get { return (NonDualMessageSecurityOverHttpElement)base[ConfigurationStrings.Message]; }
+            get
+            {
+                return (NonDualMessageSecurityOverHttpElement)base[ConfigurationStrings.Message];
+            }
         }
 
         internal void ApplyConfiguration(WSHttpSecurity security)

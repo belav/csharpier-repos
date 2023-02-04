@@ -9,9 +9,16 @@ namespace System.Linq
 {
     public static partial class Enumerable
     {
-        public static IEnumerable<TSource> Union<TSource>(this IEnumerable<TSource> first, IEnumerable<TSource> second) => Union(first, second, comparer: null);
+        public static IEnumerable<TSource> Union<TSource>(
+            this IEnumerable<TSource> first,
+            IEnumerable<TSource> second
+        ) => Union(first, second, comparer: null);
 
-        public static IEnumerable<TSource> Union<TSource>(this IEnumerable<TSource> first, IEnumerable<TSource> second, IEqualityComparer<TSource>? comparer)
+        public static IEnumerable<TSource> Union<TSource>(
+            this IEnumerable<TSource> first,
+            IEnumerable<TSource> second,
+            IEqualityComparer<TSource>? comparer
+        )
         {
             if (first == null)
             {
@@ -23,7 +30,11 @@ namespace System.Linq
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.second);
             }
 
-            return first is UnionIterator<TSource> union && AreEqualityComparersEqual(comparer, union._comparer) ? union.Union(second) : new UnionIterator2<TSource>(first, second, comparer);
+            return
+                first is UnionIterator<TSource> union
+                && AreEqualityComparersEqual(comparer, union._comparer)
+                ? union.Union(second)
+                : new UnionIterator2<TSource>(first, second, comparer);
         }
 
         /// <summary>Produces the set union of two sequences according to a specified key selector function.</summary>
@@ -39,7 +50,11 @@ namespace System.Linq
         /// <para>The default equality comparer, <see cref="EqualityComparer{T}.Default" />, is used to compare values.</para>
         /// <para>When the object returned by this method is enumerated, <see cref="O:Enumerable.UnionBy" /> enumerates <paramref name="first" /> and <paramref name="second" /> in that order and yields each element that has not already been yielded.</para>
         /// </remarks>
-        public static IEnumerable<TSource> UnionBy<TSource, TKey>(this IEnumerable<TSource> first, IEnumerable<TSource> second, Func<TSource, TKey> keySelector) => UnionBy(first, second, keySelector, null);
+        public static IEnumerable<TSource> UnionBy<TSource, TKey>(
+            this IEnumerable<TSource> first,
+            IEnumerable<TSource> second,
+            Func<TSource, TKey> keySelector
+        ) => UnionBy(first, second, keySelector, null);
 
         /// <summary>Produces the set union of two sequences according to a specified key selector function.</summary>
         /// <typeparam name="TSource">The type of the elements of the input sequences.</typeparam>
@@ -55,7 +70,12 @@ namespace System.Linq
         /// <para>If <paramref name="comparer" /> is <see langword="null" />, the default equality comparer, <see cref="EqualityComparer{T}.Default" />, is used to compare values.</para>
         /// <para>When the object returned by this method is enumerated, <see cref="O:Enumerable.UnionBy" /> enumerates <paramref name="first" /> and <paramref name="second" /> in that order and yields each element that has not already been yielded.</para>
         /// </remarks>
-        public static IEnumerable<TSource> UnionBy<TSource, TKey>(this IEnumerable<TSource> first, IEnumerable<TSource> second, Func<TSource, TKey> keySelector, IEqualityComparer<TKey>? comparer)
+        public static IEnumerable<TSource> UnionBy<TSource, TKey>(
+            this IEnumerable<TSource> first,
+            IEnumerable<TSource> second,
+            Func<TSource, TKey> keySelector,
+            IEqualityComparer<TKey>? comparer
+        )
         {
             if (first is null)
             {
@@ -73,7 +93,12 @@ namespace System.Linq
             return UnionByIterator(first, second, keySelector, comparer);
         }
 
-        private static IEnumerable<TSource> UnionByIterator<TSource, TKey>(IEnumerable<TSource> first, IEnumerable<TSource> second, Func<TSource, TKey> keySelector, IEqualityComparer<TKey>? comparer)
+        private static IEnumerable<TSource> UnionByIterator<TSource, TKey>(
+            IEnumerable<TSource> first,
+            IEnumerable<TSource> second,
+            Func<TSource, TKey> keySelector,
+            IEqualityComparer<TKey>? comparer
+        )
         {
             var set = new HashSet<TKey>(DefaultInternalSetCapacity, comparer);
 
@@ -167,7 +192,11 @@ namespace System.Linq
             {
                 if (_state == 1)
                 {
-                    for (IEnumerable<TSource>? enumerable = GetEnumerable(0); enumerable != null; enumerable = GetEnumerable(_state - 1))
+                    for (
+                        IEnumerable<TSource>? enumerable = GetEnumerable(0);
+                        enumerable != null;
+                        enumerable = GetEnumerable(_state - 1)
+                    )
                     {
                         IEnumerator<TSource> enumerator = enumerable.GetEnumerator();
                         SetEnumerator(enumerator);
@@ -214,7 +243,11 @@ namespace System.Linq
             private readonly IEnumerable<TSource> _first;
             private readonly IEnumerable<TSource> _second;
 
-            public UnionIterator2(IEnumerable<TSource> first, IEnumerable<TSource> second, IEqualityComparer<TSource>? comparer)
+            public UnionIterator2(
+                IEnumerable<TSource> first,
+                IEnumerable<TSource> second,
+                IEqualityComparer<TSource>? comparer
+            )
                 : base(comparer)
             {
                 Debug.Assert(first != null);
@@ -223,7 +256,8 @@ namespace System.Linq
                 _second = second;
             }
 
-            public override Iterator<TSource> Clone() => new UnionIterator2<TSource>(_first, _second, _comparer);
+            public override Iterator<TSource> Clone() =>
+                new UnionIterator2<TSource>(_first, _second, _comparer);
 
             internal override IEnumerable<TSource>? GetEnumerable(int index)
             {
@@ -238,7 +272,9 @@ namespace System.Linq
 
             internal override UnionIterator<TSource> Union(IEnumerable<TSource> next)
             {
-                var sources = new SingleLinkedNode<IEnumerable<TSource>>(_first).Add(_second).Add(next);
+                var sources = new SingleLinkedNode<IEnumerable<TSource>>(_first)
+                    .Add(_second)
+                    .Add(next);
                 return new UnionIteratorN<TSource>(sources, 2, _comparer);
             }
         }
@@ -252,7 +288,11 @@ namespace System.Linq
             private readonly SingleLinkedNode<IEnumerable<TSource>> _sources;
             private readonly int _headIndex;
 
-            public UnionIteratorN(SingleLinkedNode<IEnumerable<TSource>> sources, int headIndex, IEqualityComparer<TSource>? comparer)
+            public UnionIteratorN(
+                SingleLinkedNode<IEnumerable<TSource>> sources,
+                int headIndex,
+                IEqualityComparer<TSource>? comparer
+            )
                 : base(comparer)
             {
                 Debug.Assert(headIndex >= 2);
@@ -262,9 +302,11 @@ namespace System.Linq
                 _headIndex = headIndex;
             }
 
-            public override Iterator<TSource> Clone() => new UnionIteratorN<TSource>(_sources, _headIndex, _comparer);
+            public override Iterator<TSource> Clone() =>
+                new UnionIteratorN<TSource>(_sources, _headIndex, _comparer);
 
-            internal override IEnumerable<TSource>? GetEnumerable(int index) => index > _headIndex ? null : _sources.GetNode(_headIndex - index).Item;
+            internal override IEnumerable<TSource>? GetEnumerable(int index) =>
+                index > _headIndex ? null : _sources.GetNode(_headIndex - index).Item;
 
             internal override UnionIterator<TSource> Union(IEnumerable<TSource> next)
             {

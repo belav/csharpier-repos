@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,25 +36,19 @@ namespace System.Web.UI.WebControls.Adapters
 {
     public class HierarchicalDataBoundControlAdapter : WebControlAdapter
     {
-        public HierarchicalDataBoundControlAdapter ()
-        {
-        }
+        public HierarchicalDataBoundControlAdapter() { }
 
-        internal HierarchicalDataBoundControlAdapter (HierarchicalDataBoundControl c) : base (c)
-        {
-        }
+        internal HierarchicalDataBoundControlAdapter(HierarchicalDataBoundControl c)
+            : base(c) { }
 
-        protected internal virtual void PerformDataBinding ()
+        protected internal virtual void PerformDataBinding()
         {
-            Control.PerformDataBinding ();
+            Control.PerformDataBinding();
         }
 
         protected new HierarchicalDataBoundControl Control
         {
-            get {
-                return (HierarchicalDataBoundControl)control;
-            }
+            get { return (HierarchicalDataBoundControl)control; }
         }
     }
 }
-

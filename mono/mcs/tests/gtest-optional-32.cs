@@ -2,17 +2,17 @@ using System;
 
 abstract class A
 {
-    public abstract int[] Foo (params int[] args);
+    public abstract int[] Foo(params int[] args);
 }
 
 class B : A
 {
-    public override int[] Foo (int[] args = null)
+    public override int[] Foo(int[] args = null)
     {
         return args;
     }
 
-    static int Main ()
+    static int Main()
     {
         var b = new B();
         if (b.Foo().Length != 0)

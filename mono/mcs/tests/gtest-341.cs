@@ -4,7 +4,7 @@ using System;
 
 public class C : IA
 {
-    public int GetLength ()
+    public int GetLength()
     {
         return 0;
     }
@@ -12,7 +12,5 @@ public class C : IA
 
 public class Tests
 {
-    public static void Main ()
-    {
-    }
+    public static void Main() { }
 }

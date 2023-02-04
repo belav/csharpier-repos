@@ -30,16 +30,19 @@ public class StartupBase<TUser, TContext>
             options.CheckConsentNeeded = context => true;
         });
 
-        services.AddDbContext<TContext>(options =>
-            options
-                .ConfigureWarnings(b => b.Log(CoreEventId.ManyServiceProvidersCreatedWarning))
-                //.UseSqlServer(
-                //    Configuration.GetConnectionString("DefaultConnection"),
-                //    sqlOptions => sqlOptions.MigrationsAssembly("Identity.DefaultUI.WebSite")
-                //));
-                .UseSqlite("DataSource=:memory:"));
+        services.AddDbContext<TContext>(
+            options =>
+                options
+                    .ConfigureWarnings(b => b.Log(CoreEventId.ManyServiceProvidersCreatedWarning))
+                    //.UseSqlServer(
+                    //    Configuration.GetConnectionString("DefaultConnection"),
+                    //    sqlOptions => sqlOptions.MigrationsAssembly("Identity.DefaultUI.WebSite")
+                    //));
+                    .UseSqlite("DataSource=:memory:")
+        );
 
-        services.AddDefaultIdentity<TUser>()
+        services
+            .AddDefaultIdentity<TUser>()
             .AddRoles<IdentityRole>()
             .AddEntityFrameworkStores<TContext>();
 
@@ -109,7 +112,9 @@ public class StartupBase<TUser, TContext>
                 case NullFileProvider:
                     break;
                 default:
-                    throw new InvalidOperationException($"Unknown provider '{currentProvider.GetType().Name}'");
+                    throw new InvalidOperationException(
+                        $"Unknown provider '{currentProvider.GetType().Name}'"
+                    );
             }
         }
     }

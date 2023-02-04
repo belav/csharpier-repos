@@ -7,44 +7,45 @@
 */
 using System;
 
-class list <T> {
-    public static void bar ()
+class list<T>
+{
+    public static void bar()
     {
-        gen<int, T[][]>.foo ();
-        gen<int[][], T>.foo ();
-        gen<int, T[][,]>.foo ();
-        gen<T[,,], int>.foo ();
+        gen<int, T[][]>.foo();
+        gen<int[][], T>.foo();
+        gen<int, T[][,]>.foo();
+        gen<T[,,], int>.foo();
     }
 }
 
-class list_two <D> {
-    public static void bar ()
+class list_two<D>
+{
+    public static void bar()
     {
-        gen<int, D[][]>.foo ();
-        gen<int[][], D>.foo ();
-        gen<int, D[][,]>.foo ();
-        gen<D[,,], int>.foo ();
+        gen<int, D[][]>.foo();
+        gen<int[][], D>.foo();
+        gen<int, D[][,]>.foo();
+        gen<D[,,], int>.foo();
     }
 }
 
-class list_three <F> {
-    public static void bar ()
+class list_three<F>
+{
+    public static void bar()
     {
-        gen<int, F[][]>.foo ();
-        gen<int[][], F>.foo ();
-        gen<int, F[][,]>.foo ();
-        gen<F[,,], int>.foo ();
+        gen<int, F[][]>.foo();
+        gen<int[][], F>.foo();
+        gen<int, F[][,]>.foo();
+        gen<F[,,], int>.foo();
     }
 }
 
-class gen <Q, R> {
-    public static void foo () 
-    {
-    }
+class gen<Q, R>
+{
+    public static void foo() { }
 }
 
-class Test {
-    public static void Main ()
-    {
-    }
+class Test
+{
+    public static void Main() { }
 }

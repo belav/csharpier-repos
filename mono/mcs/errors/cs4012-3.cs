@@ -5,15 +5,13 @@
 using System;
 using System.Threading.Tasks;
 
-public ref struct S
-{
-}
+public ref struct S { }
 
 class C
 {
-    public async void Test ()
+    public async void Test()
     {
-        var tr = new S ();
-        await Task.Factory.StartNew (() => 6);
+        var tr = new S();
+        await Task.Factory.StartNew(() => 6);
     }
 }

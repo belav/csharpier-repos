@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,110 +34,115 @@ namespace Cairo
     {
         IntPtr handle;
 
-        public FontOptions () : this (NativeMethods.cairo_font_options_create ())
+        public FontOptions()
+            : this(NativeMethods.cairo_font_options_create()) { }
+
+        ~FontOptions()
         {
+            Dispose(false);
         }
 
-        ~FontOptions ()
-        {
-            Dispose (false);
-        }
-
-        internal FontOptions (IntPtr handle)
+        internal FontOptions(IntPtr handle)
         {
             this.handle = handle;
             if (CairoDebug.Enabled)
-                CairoDebug.OnAllocated (handle);
+                CairoDebug.OnAllocated(handle);
         }
 
-        public FontOptions Copy ()
+        public FontOptions Copy()
         {
-            return new FontOptions (NativeMethods.cairo_font_options_copy (handle));
+            return new FontOptions(NativeMethods.cairo_font_options_copy(handle));
         }
 
-        [Obsolete ("Use Dispose()")]
-        public void Destroy ()
+        [Obsolete("Use Dispose()")]
+        public void Destroy()
         {
-            Dispose ();
+            Dispose();
         }
 
-        public void Dispose ()
+        public void Dispose()
         {
-            Dispose (true);
-            GC.SuppressFinalize (this);
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
 
-        protected virtual void Dispose (bool disposing)
+        protected virtual void Dispose(bool disposing)
         {
             if (!disposing || CairoDebug.Enabled)
-                CairoDebug.OnDisposed<FontOptions> (handle, disposing);
+                CairoDebug.OnDisposed<FontOptions>(handle, disposing);
 
-            if (!disposing|| handle == IntPtr.Zero)
+            if (!disposing || handle == IntPtr.Zero)
                 return;
 
-            NativeMethods.cairo_font_options_destroy (handle);
+            NativeMethods.cairo_font_options_destroy(handle);
             handle = IntPtr.Zero;
         }
 
-        public static bool operator == (FontOptions options, FontOptions other)
+        public static bool operator ==(FontOptions options, FontOptions other)
         {
-            return Equals (options, other);
+            return Equals(options, other);
         }
 
-        public static bool operator != (FontOptions options, FontOptions other)
+        public static bool operator !=(FontOptions options, FontOptions other)
         {
             return !(options == other);
         }
 
-        public override bool Equals (object other)
+        public override bool Equals(object other)
         {
-            return Equals (other as FontOptions);
+            return Equals(other as FontOptions);
         }
 
-        bool Equals (FontOptions options)
+        bool Equals(FontOptions options)
         {
-            return options != null && NativeMethods.cairo_font_options_equal (Handle, options.Handle);
+            return options != null
+                && NativeMethods.cairo_font_options_equal(Handle, options.Handle);
         }
 
-        public IntPtr Handle {
+        public IntPtr Handle
+        {
             get { return handle; }
         }
 
-        public override int GetHashCode ()
+        public override int GetHashCode()
         {
-            return (int) NativeMethods.cairo_font_options_hash (handle);
+            return (int)NativeMethods.cairo_font_options_hash(handle);
         }
-        
-        public void Merge (FontOptions other)
+
+        public void Merge(FontOptions other)
         {
             if (other == null)
-                throw new ArgumentNullException ("other");
-            NativeMethods.cairo_font_options_merge (handle, other.Handle);
+                throw new ArgumentNullException("other");
+            NativeMethods.cairo_font_options_merge(handle, other.Handle);
         }
 
-        public Antialias Antialias {
-            get { return NativeMethods.cairo_font_options_get_antialias (handle); }
-            set { NativeMethods.cairo_font_options_set_antialias (handle, value); }
+        public Antialias Antialias
+        {
+            get { return NativeMethods.cairo_font_options_get_antialias(handle); }
+            set { NativeMethods.cairo_font_options_set_antialias(handle, value); }
         }
 
-        public HintMetrics HintMetrics {
-            get { return NativeMethods.cairo_font_options_get_hint_metrics (handle);}
-            set { NativeMethods.cairo_font_options_set_hint_metrics (handle, value); }
+        public HintMetrics HintMetrics
+        {
+            get { return NativeMethods.cairo_font_options_get_hint_metrics(handle); }
+            set { NativeMethods.cairo_font_options_set_hint_metrics(handle, value); }
         }
 
-        public HintStyle HintStyle {
-            get { return NativeMethods.cairo_font_options_get_hint_style (handle);}
-            set { NativeMethods.cairo_font_options_set_hint_style (handle, value); }
+        public HintStyle HintStyle
+        {
+            get { return NativeMethods.cairo_font_options_get_hint_style(handle); }
+            set { NativeMethods.cairo_font_options_set_hint_style(handle, value); }
         }
 
-        public Status Status {
-            get { return NativeMethods.cairo_font_options_status (handle); }
+        public Status Status
+        {
+            get { return NativeMethods.cairo_font_options_status(handle); }
         }
 
-        public SubpixelOrder SubpixelOrder {
-            get { return NativeMethods.cairo_font_options_get_subpixel_order (handle);}
-            set { NativeMethods.cairo_font_options_set_subpixel_order (handle, value); }
+        public SubpixelOrder SubpixelOrder
+        {
+            get { return NativeMethods.cairo_font_options_get_subpixel_order(handle); }
+            set { NativeMethods.cairo_font_options_set_subpixel_order(handle, value); }
         }
     }
 }
-

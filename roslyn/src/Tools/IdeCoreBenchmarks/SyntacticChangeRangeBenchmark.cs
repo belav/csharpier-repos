@@ -29,8 +29,13 @@ namespace IdeCoreBenchmarks
         [GlobalSetup]
         public void GlobalSetup()
         {
-            var roslynRoot = Environment.GetEnvironmentVariable(Program.RoslynRootPathEnvVariableName);
-            var csFilePath = Path.Combine(roslynRoot, @"src\Compilers\CSharp\Portable\Generated\BoundNodes.xml.Generated.cs");
+            var roslynRoot = Environment.GetEnvironmentVariable(
+                Program.RoslynRootPathEnvVariableName
+            );
+            var csFilePath = Path.Combine(
+                roslynRoot,
+                @"src\Compilers\CSharp\Portable\Generated\BoundNodes.xml.Generated.cs"
+            );
 
             if (!File.Exists(csFilePath))
                 throw new FileNotFoundException(csFilePath);
@@ -70,26 +75,46 @@ namespace IdeCoreBenchmarks
         public void SimpleEditAtMiddle()
         {
             var newRoot = WithSimpleEditAtMiddle();
-            SyntacticChangeRangeComputer.ComputeSyntacticChangeRange(_root, newRoot, TimeSpan.MaxValue, CancellationToken.None);
+            SyntacticChangeRangeComputer.ComputeSyntacticChangeRange(
+                _root,
+                newRoot,
+                TimeSpan.MaxValue,
+                CancellationToken.None
+            );
         }
 
         [Benchmark]
         public void DestabalizingEditAtMiddle()
         {
             var newRoot = WithDestabalizingEditAtMiddle();
-            SyntacticChangeRangeComputer.ComputeSyntacticChangeRange(_root, newRoot, TimeSpan.MaxValue, CancellationToken.None);
+            SyntacticChangeRangeComputer.ComputeSyntacticChangeRange(
+                _root,
+                newRoot,
+                TimeSpan.MaxValue,
+                CancellationToken.None
+            );
         }
 
         [Benchmark]
         public void SimpleEditAtMiddle_NoParse()
         {
-            SyntacticChangeRangeComputer.ComputeSyntacticChangeRange(_root, _rootWithSimpleEdit, TimeSpan.MaxValue, CancellationToken.None);
+            SyntacticChangeRangeComputer.ComputeSyntacticChangeRange(
+                _root,
+                _rootWithSimpleEdit,
+                TimeSpan.MaxValue,
+                CancellationToken.None
+            );
         }
 
         [Benchmark]
         public void DestabalizingEditAtMiddle_NoParse()
         {
-            SyntacticChangeRangeComputer.ComputeSyntacticChangeRange(_root, _rootWithComplexEdit, TimeSpan.MaxValue, CancellationToken.None);
+            SyntacticChangeRangeComputer.ComputeSyntacticChangeRange(
+                _root,
+                _rootWithComplexEdit,
+                TimeSpan.MaxValue,
+                CancellationToken.None
+            );
         }
     }
 }

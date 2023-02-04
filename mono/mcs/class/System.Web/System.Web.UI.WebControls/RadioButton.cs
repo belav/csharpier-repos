@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,109 +30,115 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Security.Permissions;
 
-namespace System.Web.UI.WebControls {
-
+namespace System.Web.UI.WebControls
+{
     // CAS
-    [AspNetHostingPermissionAttribute (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermissionAttribute (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermissionAttribute(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermissionAttribute(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
     // attributes
-    [Designer ("System.Web.UI.Design.WebControls.CheckBoxDesigner, " + Consts.AssemblySystem_Design, "System.ComponentModel.Design.IDesigner")]
+    [Designer(
+        "System.Web.UI.Design.WebControls.CheckBoxDesigner, " + Consts.AssemblySystem_Design,
+        "System.ComponentModel.Design.IDesigner"
+    )]
     [SupportsEventValidation]
-    public class RadioButton : CheckBox , IPostBackDataHandler
+    public class RadioButton : CheckBox, IPostBackDataHandler
     {
-        public RadioButton () : base ("radio")
-        {
-        }
+        public RadioButton()
+            : base("radio") { }
 
-        [DefaultValue ("")]
-        [Themeable (false)]
-        [WebSysDescription ("")]
-        [WebCategory ("Behavior")]
+        [DefaultValue("")]
+        [Themeable(false)]
+        [WebSysDescription("")]
+        [WebCategory("Behavior")]
         public virtual string GroupName
         {
-            get {
-                return (ViewState.GetString ("GroupName",
-                                 String.Empty));
-            }
-            set {
-                ViewState["GroupName"] = value;
-            }
+            get { return (ViewState.GetString("GroupName", String.Empty)); }
+            set { ViewState["GroupName"] = value; }
         }
 
-        internal override string NameAttribute 
+        internal override string NameAttribute
         {
-            get {
+            get
+            {
                 string unique = UniqueID;
                 string gn = GroupName;
                 if (gn.Length == 0)
                     return unique;
                 int colon = -1;
-                if (unique != null) {
-                    colon = unique.LastIndexOf (IdSeparator);
+                if (unique != null)
+                {
+                    colon = unique.LastIndexOf(IdSeparator);
                 }
-                
+
                 if (colon == -1)
                     return gn;
-                
-                return unique.Substring (0, colon + 1) + gn;
+
+                return unique.Substring(0, colon + 1) + gn;
             }
         }
 
-        internal string ValueAttribute {
-            get {
-                string val = (string)ViewState ["Value"];
+        internal string ValueAttribute
+        {
+            get
+            {
+                string val = (string)ViewState["Value"];
                 if (val != null)
                     return val;
-                
+
                 string id = ID;
-                if (!String.IsNullOrEmpty (id))
+                if (!String.IsNullOrEmpty(id))
                     return id;
                 else
                     return UniqueID;
             }
-            set {
-                ViewState["Value"] = value;
-            }
+            set { ViewState["Value"] = value; }
         }
 
-        internal override void InternalAddAttributesToRender (HtmlTextWriter w, bool enabled)
+        internal override void InternalAddAttributesToRender(HtmlTextWriter w, bool enabled)
         {
             Page page = Page;
             if (page != null)
-                page.ClientScript.RegisterForEventValidation (NameAttribute, ValueAttribute);
-            base.InternalAddAttributesToRender (w, enabled);
-            w.AddAttribute (HtmlTextWriterAttribute.Value, ValueAttribute);
+                page.ClientScript.RegisterForEventValidation(NameAttribute, ValueAttribute);
+            base.InternalAddAttributesToRender(w, enabled);
+            w.AddAttribute(HtmlTextWriterAttribute.Value, ValueAttribute);
         }
 
-        protected internal
-        override void OnPreRender (EventArgs e)
+        protected internal override void OnPreRender(EventArgs e)
         {
-            base.OnPreRender (e);
+            base.OnPreRender(e);
         }
 
-        protected override
-        bool LoadPostData (string postDataKey, NameValueCollection postCollection) 
+        protected override bool LoadPostData(string postDataKey, NameValueCollection postCollection)
         {
-            string value = postCollection [NameAttribute];
+            string value = postCollection[NameAttribute];
             bool checkedOnClient = value == ValueAttribute;
-            ValidateEvent (NameAttribute, value);
+            ValidateEvent(NameAttribute, value);
             if (Checked == checkedOnClient)
                 return false;
 
             Checked = checkedOnClient;
-            return checkedOnClient;            
+            return checkedOnClient;
         }
 
-        protected override void RaisePostDataChangedEvent ()
+        protected override void RaisePostDataChangedEvent()
         {
             if (CausesValidation)
-                Page.Validate (ValidationGroup);
-            OnCheckedChanged (EventArgs.Empty);
+                Page.Validate(ValidationGroup);
+            OnCheckedChanged(EventArgs.Empty);
         }
-        
-        bool IPostBackDataHandler.LoadPostData (string postDataKey, NameValueCollection postCollection)
+
+        bool IPostBackDataHandler.LoadPostData(
+            string postDataKey,
+            NameValueCollection postCollection
+        )
         {
-            return LoadPostData (postDataKey, postCollection);
+            return LoadPostData(postDataKey, postCollection);
         }
     }
 }

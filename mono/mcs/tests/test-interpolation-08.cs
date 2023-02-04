@@ -3,9 +3,10 @@ using System.Collections.Generic;
 
 public class Program
 {
-    public static int Main ()
+    public static int Main()
     {
-        var x = $@"({
+        var x =
+            $@"({
                 new Dictionary<int, object> {
                     { 1, "bbb" }
                 }.Count

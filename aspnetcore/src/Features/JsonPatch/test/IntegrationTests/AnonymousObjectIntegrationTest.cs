@@ -24,19 +24,17 @@ public class AnonymousObjectIntegrationTest
         });
 
         // Assert
-        Assert.Equal("The target location specified by path segment 'NewProperty' was not found.",
-            exception.Message);
+        Assert.Equal(
+            "The target location specified by path segment 'NewProperty' was not found.",
+            exception.Message
+        );
     }
 
     [Fact]
     public void AddNewProperty_ToNestedAnonymousObject_ShouldFail()
     {
         // Arrange
-        dynamic targetObject = new
-        {
-            Test = 1,
-            nested = new { }
-        };
+        dynamic targetObject = new { Test = 1, nested = new { } };
 
         var patchDocument = new JsonPatchDocument();
         patchDocument.Add("Nested/NewInt", 1);
@@ -48,18 +46,17 @@ public class AnonymousObjectIntegrationTest
         });
 
         // Assert
-        Assert.Equal("The target location specified by path segment 'NewInt' was not found.",
-            exception.Message);
+        Assert.Equal(
+            "The target location specified by path segment 'NewInt' was not found.",
+            exception.Message
+        );
     }
 
     [Fact]
     public void AddDoesNotReplace()
     {
         // Arrange
-        var targetObject = new
-        {
-            StringProperty = "A"
-        };
+        var targetObject = new { StringProperty = "A" };
 
         var patchDocument = new JsonPatchDocument();
         patchDocument.Add("StringProperty", "B");
@@ -71,18 +68,17 @@ public class AnonymousObjectIntegrationTest
         });
 
         // Assert
-        Assert.Equal("The property at path 'StringProperty' could not be updated.",
-            exception.Message);
+        Assert.Equal(
+            "The property at path 'StringProperty' could not be updated.",
+            exception.Message
+        );
     }
 
     [Fact]
     public void RemoveProperty_ShouldFail()
     {
         // Arrange
-        dynamic targetObject = new
-        {
-            Test = 1
-        };
+        dynamic targetObject = new { Test = 1 };
 
         var patchDocument = new JsonPatchDocument();
         patchDocument.Remove("Test");
@@ -94,19 +90,14 @@ public class AnonymousObjectIntegrationTest
         });
 
         // Assert
-        Assert.Equal("The property at path 'Test' could not be updated.",
-            exception.Message);
+        Assert.Equal("The property at path 'Test' could not be updated.", exception.Message);
     }
 
     [Fact]
     public void ReplaceProperty_ShouldFail()
     {
         // Arrange
-        var targetObject = new
-        {
-            StringProperty = "A",
-            AnotherStringProperty = "B"
-        };
+        var targetObject = new { StringProperty = "A", AnotherStringProperty = "B" };
 
         var patchDocument = new JsonPatchDocument();
         patchDocument.Replace("StringProperty", "AnotherStringProperty");
@@ -118,19 +109,17 @@ public class AnonymousObjectIntegrationTest
         });
 
         // Assert
-        Assert.Equal("The property at path 'StringProperty' could not be updated.",
-            exception.Message);
+        Assert.Equal(
+            "The property at path 'StringProperty' could not be updated.",
+            exception.Message
+        );
     }
 
     [Fact]
     public void MoveProperty_ShouldFail()
     {
         // Arrange
-        var targetObject = new
-        {
-            StringProperty = "A",
-            AnotherStringProperty = "B"
-        };
+        var targetObject = new { StringProperty = "A", AnotherStringProperty = "B" };
 
         var patchDocument = new JsonPatchDocument();
         patchDocument.Move("StringProperty", "AnotherStringProperty");
@@ -142,19 +131,17 @@ public class AnonymousObjectIntegrationTest
         });
 
         // Assert
-        Assert.Equal("The property at path 'StringProperty' could not be updated.",
-            exception.Message);
+        Assert.Equal(
+            "The property at path 'StringProperty' could not be updated.",
+            exception.Message
+        );
     }
 
     [Fact]
     public void TestStringProperty_IsSuccessful()
     {
         // Arrange
-        var targetObject = new
-        {
-            StringProperty = "A",
-            AnotherStringProperty = "B"
-        };
+        var targetObject = new { StringProperty = "A", AnotherStringProperty = "B" };
 
         var patchDocument = new JsonPatchDocument();
         patchDocument.Test("StringProperty", "A");
@@ -167,11 +154,7 @@ public class AnonymousObjectIntegrationTest
     public void TestStringProperty_Fails()
     {
         // Arrange
-        var targetObject = new
-        {
-            StringProperty = "A",
-            AnotherStringProperty = "B"
-        };
+        var targetObject = new { StringProperty = "A", AnotherStringProperty = "B" };
 
         var patchDocument = new JsonPatchDocument();
         patchDocument.Test("StringProperty", "B");
@@ -183,7 +166,9 @@ public class AnonymousObjectIntegrationTest
         });
 
         // Assert
-        Assert.Equal("The current value 'A' at path 'StringProperty' is not equal to the test value 'B'.",
-            exception.Message);
+        Assert.Equal(
+            "The current value 'A' at path 'StringProperty' is not equal to the test value 'B'.",
+            exception.Message
+        );
     }
 }

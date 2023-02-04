@@ -1,4 +1,4 @@
-// 
+//
 // System.Web.Services.Protocols.DiscoveryReferenceCollection.cs
 //
 // Author:
@@ -17,10 +17,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,50 +32,52 @@
 
 using System.Collections;
 
-namespace System.Web.Services.Discovery {
-    public sealed class DiscoveryReferenceCollection : CollectionBase {
-
+namespace System.Web.Services.Discovery
+{
+    public sealed class DiscoveryReferenceCollection : CollectionBase
+    {
         #region Constructors
 
-        public DiscoveryReferenceCollection () 
-            : base ()
-        {
-        }
-        
+        public DiscoveryReferenceCollection()
+            : base() { }
+
         #endregion // Constructors
 
         #region Properties
 
-        public DiscoveryReference this [int i] {
-            get { 
+        public DiscoveryReference this[int i]
+        {
+            get
+            {
                 if (i < 0 || i >= Count)
-                    throw new ArgumentOutOfRangeException ();
-                return (DiscoveryReference) InnerList [i]; 
+                    throw new ArgumentOutOfRangeException();
+                return (DiscoveryReference)InnerList[i];
             }
-            set {
+            set
+            {
                 if (i < 0 || i >= Count)
-                    throw new ArgumentOutOfRangeException ();
-                InnerList [i] = value;
+                    throw new ArgumentOutOfRangeException();
+                InnerList[i] = value;
             }
         }
-        
+
         #endregion // Properties
 
         #region Methods
 
-        public int Add (DiscoveryReference value)
+        public int Add(DiscoveryReference value)
         {
-            return InnerList.Add (value);
+            return InnerList.Add(value);
         }
 
-        public bool Contains (DiscoveryReference value)
+        public bool Contains(DiscoveryReference value)
         {
-            return InnerList.Contains (value);
+            return InnerList.Contains(value);
         }
-        
-        public void Remove (DiscoveryReference value)
+
+        public void Remove(DiscoveryReference value)
         {
-            InnerList.Remove (value);
+            InnerList.Remove(value);
         }
 
         #endregion // Methods

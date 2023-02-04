@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -44,102 +44,68 @@ namespace System.Net.Sockets
         EndPoint remote_ep;
         Socket current_socket;
 
-        internal SocketAsyncResult socket_async_result = new SocketAsyncResult ();
+        internal SocketAsyncResult socket_async_result = new SocketAsyncResult();
 
-        public Exception ConnectByNameError {
-            get;
-            private set;
-        }
+        public Exception ConnectByNameError { get; private set; }
 
-        public Socket AcceptSocket {
-            get;
-            set;
-        }
+        public Socket AcceptSocket { get; set; }
 
-        public int BytesTransferred {
-            get;
-            private set;
-        }
+        public int BytesTransferred { get; private set; }
 
-        public bool DisconnectReuseSocket {
-            get;
-            set;
-        }
+        public bool DisconnectReuseSocket { get; set; }
 
-        public SocketAsyncOperation LastOperation {
-            get;
-            private set;
-        }
+        public SocketAsyncOperation LastOperation { get; private set; }
 
-        public EndPoint RemoteEndPoint {
+        public EndPoint RemoteEndPoint
+        {
             get { return remote_ep; }
             set { remote_ep = value; }
         }
 
-        public IPPacketInformation ReceiveMessageFromPacketInfo {
-            get;
-            private set;
-        }
+        public IPPacketInformation ReceiveMessageFromPacketInfo { get; private set; }
 
-        public SendPacketsElement[] SendPacketsElements {
-            get;
-            set;
-        }
+        public SendPacketsElement[] SendPacketsElements { get; set; }
 
-        public TransmitFileOptions SendPacketsFlags {
-            get;
-            set;
-        }
+        public TransmitFileOptions SendPacketsFlags { get; set; }
 
-        [MonoTODO ("unused property")]
-        public int SendPacketsSendSize {
-            get;
-            set;
-        }
+        [MonoTODO("unused property")]
+        public int SendPacketsSendSize { get; set; }
 
-        public SocketError SocketError {
-            get;
-            set;
-        }
+        public SocketError SocketError { get; set; }
 
-        public SocketFlags SocketFlags {
-            get;
-            set;
-        }
+        public SocketFlags SocketFlags { get; set; }
 
-        public object UserToken {
-            get;
-            set;
-        }
+        public object UserToken { get; set; }
 
-        public Socket ConnectSocket {
-            get {
-                switch (SocketError) {
-                case SocketError.AccessDenied:
-                    return null;
-                default:
-                    return current_socket;
+        public Socket ConnectSocket
+        {
+            get
+            {
+                switch (SocketError)
+                {
+                    case SocketError.AccessDenied:
+                        return null;
+                    default:
+                        return current_socket;
                 }
             }
         }
 
         public event EventHandler<SocketAsyncEventArgs> Completed;
 
-        public SocketAsyncEventArgs ()
+        public SocketAsyncEventArgs()
         {
             SendPacketsSendSize = -1;
         }
 
-        internal SocketAsyncEventArgs (bool flowExecutionContext)
+        internal SocketAsyncEventArgs(bool flowExecutionContext) { }
+
+        ~SocketAsyncEventArgs()
         {
+            Dispose(false);
         }
 
-        ~SocketAsyncEventArgs ()
-        {
-            Dispose (false);
-        }
-
-        void Dispose (bool disposing)
+        void Dispose(bool disposing)
         {
             disposed = true;
 
@@ -147,98 +113,111 @@ namespace System.Net.Sockets
                 return;
         }
 
-        public void Dispose ()
+        public void Dispose()
         {
-            Dispose (true);
-            GC.SuppressFinalize (this);
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
 
-        internal void SetConnectByNameError (Exception error)
+        internal void SetConnectByNameError(Exception error)
         {
             ConnectByNameError = error;
         }
 
-        internal void SetBytesTransferred (int value)
+        internal void SetBytesTransferred(int value)
         {
             BytesTransferred = value;
         }
 
-        internal Socket CurrentSocket {
+        internal Socket CurrentSocket
+        {
             get { return current_socket; }
         }
 
-        internal void SetCurrentSocket (Socket socket)
+        internal void SetCurrentSocket(Socket socket)
         {
             current_socket = socket;
         }
 
-        internal void SetLastOperation (SocketAsyncOperation op)
+        internal void SetLastOperation(SocketAsyncOperation op)
         {
             if (disposed)
-                throw new ObjectDisposedException ("System.Net.Sockets.SocketAsyncEventArgs");
-            if (Interlocked.Exchange (ref in_progress, 1) != 0)
-                throw new InvalidOperationException ("Operation already in progress");
+                throw new ObjectDisposedException("System.Net.Sockets.SocketAsyncEventArgs");
+            if (Interlocked.Exchange(ref in_progress, 1) != 0)
+                throw new InvalidOperationException("Operation already in progress");
 
             LastOperation = op;
         }
 
-        internal void Complete_internal ()
+        internal void Complete_internal()
         {
             in_progress = 0;
-            OnCompleted (this);
+            OnCompleted(this);
         }
 
-        protected virtual void OnCompleted (SocketAsyncEventArgs e)
+        protected virtual void OnCompleted(SocketAsyncEventArgs e)
         {
             if (e == null)
                 return;
-            
+
             EventHandler<SocketAsyncEventArgs> handler = e.Completed;
             if (handler != null)
-                handler (e.current_socket, e);
+                handler(e.current_socket, e);
         }
 
-        internal void StartOperationCommon (Socket socket)
+        internal void StartOperationCommon(Socket socket)
         {
             current_socket = socket;
         }
 
-        internal void StartOperationWrapperConnect (MultipleConnectAsync args)
+        internal void StartOperationWrapperConnect(MultipleConnectAsync args)
         {
-            SetLastOperation (SocketAsyncOperation.Connect);
+            SetLastOperation(SocketAsyncOperation.Connect);
 
             //m_MultipleConnect = args;
         }
 
-        internal void FinishConnectByNameSyncFailure (Exception exception, int bytesTransferred, SocketFlags flags)
+        internal void FinishConnectByNameSyncFailure(
+            Exception exception,
+            int bytesTransferred,
+            SocketFlags flags
+        )
         {
-            SetResults (exception, bytesTransferred, flags);
+            SetResults(exception, bytesTransferred, flags);
 
             if (current_socket != null)
                 current_socket.is_connected = false;
-            
-            Complete_internal ();
+
+            Complete_internal();
         }
 
-        internal void FinishOperationAsyncFailure (Exception exception, int bytesTransferred, SocketFlags flags)
+        internal void FinishOperationAsyncFailure(
+            Exception exception,
+            int bytesTransferred,
+            SocketFlags flags
+        )
         {
-            SetResults (exception, bytesTransferred, flags);
+            SetResults(exception, bytesTransferred, flags);
 
             if (current_socket != null)
                 current_socket.is_connected = false;
-            
-            Complete_internal ();
+
+            Complete_internal();
         }
 
-        internal void FinishWrapperConnectSuccess (Socket connectSocket, int bytesTransferred, SocketFlags flags)
+        internal void FinishWrapperConnectSuccess(
+            Socket connectSocket,
+            int bytesTransferred,
+            SocketFlags flags
+        )
         {
             SetResults(SocketError.Success, bytesTransferred, flags);
             current_socket = connectSocket;
 
-            Complete_internal ();
+            Complete_internal();
         }
 
-        internal void SetResults (SocketError socketError, int bytesTransferred, SocketFlags flags)
+        internal void SetResults(SocketError socketError, int bytesTransferred, SocketFlags flags)
         {
             SocketError = socketError;
             ConnectByNameError = null;
@@ -246,7 +225,7 @@ namespace System.Net.Sockets
             SocketFlags = flags;
         }
 
-        internal void SetResults (Exception exception, int bytesTransferred, SocketFlags flags)
+        internal void SetResults(Exception exception, int bytesTransferred, SocketFlags flags)
         {
             ConnectByNameError = exception;
             BytesTransferred = bytesTransferred;

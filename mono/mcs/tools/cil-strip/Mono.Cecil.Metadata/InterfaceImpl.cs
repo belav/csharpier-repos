@@ -29,51 +29,50 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil.Metadata {
-
-    internal sealed class InterfaceImplTable : IMetadataTable {
-
+namespace Mono.Cecil.Metadata
+{
+    internal sealed class InterfaceImplTable : IMetadataTable
+    {
         public const int RId = 0x09;
 
         RowCollection m_rows;
 
-        public InterfaceImplRow this [int index] {
-            get { return m_rows [index] as InterfaceImplRow; }
-            set { m_rows [index] = value; }
+        public InterfaceImplRow this[int index]
+        {
+            get { return m_rows[index] as InterfaceImplRow; }
+            set { m_rows[index] = value; }
         }
 
-        public RowCollection Rows {
+        public RowCollection Rows
+        {
             get { return m_rows; }
             set { m_rows = value; }
         }
 
-        public int Id {
+        public int Id
+        {
             get { return RId; }
         }
 
-        internal InterfaceImplTable ()
-        {
-        }
+        internal InterfaceImplTable() { }
 
-        public void Accept (IMetadataTableVisitor visitor)
+        public void Accept(IMetadataTableVisitor visitor)
         {
-            visitor.VisitInterfaceImplTable (this);
-            this.Rows.Accept (visitor.GetRowVisitor ());
+            visitor.VisitInterfaceImplTable(this);
+            this.Rows.Accept(visitor.GetRowVisitor());
         }
     }
 
-    internal sealed class InterfaceImplRow : IMetadataRow {
-
+    internal sealed class InterfaceImplRow : IMetadataRow
+    {
         public uint Class;
         public MetadataToken Interface;
 
-        internal InterfaceImplRow ()
-        {
-        }
+        internal InterfaceImplRow() { }
 
-        public void Accept (IMetadataRowVisitor visitor)
+        public void Accept(IMetadataRowVisitor visitor)
         {
-            visitor.VisitInterfaceImplRow (this);
+            visitor.VisitInterfaceImplRow(this);
         }
     }
 }

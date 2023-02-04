@@ -37,8 +37,7 @@ using System.Web.UI.HtmlControls;
 
 namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
 {
-    public class DataGridPagerStyle_PrevPageText
-        : GHTBaseWeb 
+    public class DataGridPagerStyle_PrevPageText : GHTBaseWeb
     {
         protected System.Web.UI.WebControls.DataGrid DataGrid1;
         protected GHTWebControls.GHTSubTest GHTSubTest1;
@@ -48,8 +47,9 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
         protected GHTWebControls.GHTSubTest GHTSubTest3;
         protected System.Web.UI.WebControls.DataGrid DataGrid4;
         protected GHTWebControls.GHTSubTest Ghtsubtest4;
+
         #region Web Form Designer generated code
-        override protected void OnInit(EventArgs e) 
+        override protected void OnInit(EventArgs e)
         {
             //
             // CODEGEN: This call is required by the ASP.NET Web Form Designer.
@@ -57,19 +57,18 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             InitializeComponent();
             base.OnInit(e);
         }
-        
+
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent() 
-        {    
+        private void InitializeComponent()
+        {
             this.Load += new System.EventHandler(this.Page_Load);
-
         }
         #endregion
 
-        private void Page_Load(object sender, System.EventArgs e) 
+        private void Page_Load(object sender, System.EventArgs e)
         {
             //Put user code to initialize the page here
 
@@ -77,57 +76,61 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             GHTTestBegin(frm);
 
             GHTActiveSubTest = GHTSubTest1;
-            try 
+            try
             {
                 DataGrid1.DataSource = GHTTests.GHDataSources.DSDataTable(1, 3);
                 DataGrid1.AllowPaging = true;
-                DataGrid1.DataBind();;
+                DataGrid1.DataBind();
+                ;
                 GHTSubTestAddResult(DataGrid1.PagerStyle.Position.ToString());
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }
 
             GHTActiveSubTest = GHTSubTest2;
-            try 
+            try
             {
                 DataGrid2.DataSource = GHTTests.GHDataSources.DSDataTable(1, 3);
                 DataGrid2.AllowPaging = true;
                 DataGrid2.PagerStyle.PrevPageText = "Prev Page";
-                DataGrid2.DataBind();;
+                DataGrid2.DataBind();
+                ;
                 GHTSubTestAddResult(DataGrid2.PagerStyle.PrevPageText);
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }
 
             GHTActiveSubTest = GHTSubTest3;
-            try 
+            try
             {
                 DataGrid3.DataSource = GHTTests.GHDataSources.DSDataTable(1, 3);
                 DataGrid3.AllowPaging = true;
                 DataGrid3.PagerStyle.PrevPageText = "";
-                DataGrid3.DataBind();;
+                DataGrid3.DataBind();
+                ;
                 GHTSubTestAddResult(DataGrid3.PagerStyle.PrevPageText);
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }
 
             GHTActiveSubTest = Ghtsubtest4;
-            try 
+            try
             {
                 DataGrid4.DataSource = GHTTests.GHDataSources.DSDataTable(1, 3);
                 DataGrid4.AllowPaging = true;
                 DataGrid4.PagerStyle.Mode = PagerMode.NumericPages;
                 DataGrid4.PagerStyle.PrevPageText = "Prev";
-                DataGrid4.DataBind();;
+                DataGrid4.DataBind();
+                ;
                 GHTSubTestAddResult(DataGrid4.PagerStyle.PrevPageText);
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }

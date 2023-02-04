@@ -6,7 +6,7 @@ using System.Reflection;
 
 [assembly: AssemblyKeyName("")]
 
-public class Blah {
-    public static void Main () { }
+public class Blah
+{
+    public static void Main() { }
 }
-

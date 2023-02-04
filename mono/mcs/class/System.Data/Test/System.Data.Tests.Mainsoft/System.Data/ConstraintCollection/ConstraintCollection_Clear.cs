@@ -3,9 +3,9 @@
 //   Erez Lotan       <erezl@mainsoft.com>
 //   Oren Gurfinkel   <oreng@mainsoft.com>
 //   Ofer Borstein
-// 
+//
 // Copyright (c) 2004 Mainsoft Co.
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
 // "Software"), to deal in the Software without restriction, including
@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,93 +35,95 @@ using GHTUtils.Base;
 
 namespace tests.system_data_dll.System_Data
 {
-[TestFixture] public class ConstraintCollection_Clear : GHTBase
-{
-    [Test] public void Main()
+    [TestFixture]
+    public class ConstraintCollection_Clear : GHTBase
     {
-        ConstraintCollection_Clear tc = new ConstraintCollection_Clear();
-        Exception exp = null;
-        try
+        [Test]
+        public void Main()
         {
-            tc.BeginTest("ConstraintCollection_Clear");
-            tc.run();
-        }
-        catch(Exception ex)
-        {
-            exp = ex;
-        }
-        finally
-        {
-            tc.EndTest(exp);
-        }
-        
-    }
-
-    //Activate This Construntor to log All To Standard output
-    //public TestClass():base(true){}
-
-    //Activate this constructor to log Failures to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
-
-
-    //Activate this constructor to log All to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
-
-    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
-
-    public void run()
-    {
-        Exception exp = null;
-        try
-        {
-            BeginCase("ConstraintCollection_Clear");
-            ConstraintCollection_Clear1();
-        } 
-        catch(Exception ex)
-        {
-            exp = ex;
-        }
-        finally
-        {
-            EndCase(exp);
-            exp = null;
+            ConstraintCollection_Clear tc = new ConstraintCollection_Clear();
+            Exception exp = null;
+            try
+            {
+                tc.BeginTest("ConstraintCollection_Clear");
+                tc.run();
+            }
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                tc.EndTest(exp);
+            }
         }
 
-        try
+        //Activate This Construntor to log All To Standard output
+        //public TestClass():base(true){}
+
+        //Activate this constructor to log Failures to a log file
+        //public TestClass(System.IO.TextWriter tw):base(tw, false){}
+
+
+        //Activate this constructor to log All to a log file
+        //public TestClass(System.IO.TextWriter tw):base(tw, true){}
+
+        //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+
+        public void run()
         {
-            BeginCase("ConstraintCollection_Clear");
-            ConstraintCollection_Clear2();
-        } 
-        catch(Exception ex)
-        {
-            exp = ex;
+            Exception exp = null;
+            try
+            {
+                BeginCase("ConstraintCollection_Clear");
+                ConstraintCollection_Clear1();
+            }
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                EndCase(exp);
+                exp = null;
+            }
+
+            try
+            {
+                BeginCase("ConstraintCollection_Clear");
+                ConstraintCollection_Clear2();
+            }
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                EndCase(exp);
+                exp = null;
+            }
         }
-        finally
+
+        private void ConstraintCollection_Clear1()
         {
-            EndCase(exp);
-            exp = null;
+            DataSet ds = GHTUtils.DataProvider.CreateForigenConstraint();
+            foreach (DataTable dt in ds.Tables)
+            {
+                dt.Constraints.Clear();
+            }
+            Compare(ds.Tables[0].Constraints.Count, 0);
+            Compare(ds.Tables[0].Constraints.Count, 0);
         }
-    }
-    private void ConstraintCollection_Clear1()
-    {
-        DataSet ds = GHTUtils.DataProvider.CreateForigenConstraint();
-        foreach(DataTable dt in ds.Tables)
+
+        private void ConstraintCollection_Clear2()
         {
+            DataTable dt = GHTUtils.DataProvider.CreateUniqueConstraint();
+            int rowsCount = dt.Rows.Count;
             dt.Constraints.Clear();
+            DataRow dr = dt.NewRow();
+            dr[0] = 1;
+            dt.Rows.Add(dr);
+            Compare(dt.Rows.Count, rowsCount + 1); //Just checking that no expection ocuured
         }
-        Compare(ds.Tables[0].Constraints.Count,0);
-        Compare(ds.Tables[0].Constraints.Count,0);
-
     }
-    private void ConstraintCollection_Clear2()
-    {
-        DataTable dt = GHTUtils.DataProvider.CreateUniqueConstraint();
-        int rowsCount = dt.Rows.Count;
-        dt.Constraints.Clear();
-        DataRow dr = dt.NewRow();
-        dr[0] = 1;
-        dt.Rows.Add(dr);
-        Compare(dt.Rows.Count,rowsCount+1); //Just checking that no expection ocuured
-    }
-}
 }

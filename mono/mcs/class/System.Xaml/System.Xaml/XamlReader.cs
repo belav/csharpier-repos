@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,59 +36,63 @@ namespace System.Xaml
         public abstract XamlSchemaContext SchemaContext { get; }
         public abstract XamlType Type { get; }
         public abstract object Value { get; }
-        
-        public void Close ()
+
+        public void Close()
         {
-            Dispose (true);
+            Dispose(true);
         }
-        
-        protected virtual void Dispose (bool disposing)
+
+        protected virtual void Dispose(bool disposing)
         {
             IsDisposed = true;
         }
-        
-        void IDisposable.Dispose ()
+
+        void IDisposable.Dispose()
         {
-            Dispose (true);
+            Dispose(true);
         }
-        
-        public abstract bool Read ();
-        
-        public virtual XamlReader ReadSubtree ()
+
+        public abstract bool Read();
+
+        public virtual XamlReader ReadSubtree()
         {
-            return new XamlSubtreeReader (this);
+            return new XamlSubtreeReader(this);
         }
-        
-        public virtual void Skip ()
+
+        public virtual void Skip()
         {
             int count = 0;
-            switch (NodeType) {
-            case XamlNodeType.StartMember:
-            case XamlNodeType.StartObject:
-            case XamlNodeType.GetObject:
-                count++;
-                while (Read ()) {
-                    switch (NodeType) {
-                    case XamlNodeType.StartMember:
-                    case XamlNodeType.GetObject:
-                    case XamlNodeType.StartObject:
-                        count++;
-                        continue;
-                    case XamlNodeType.EndMember:
-                    case XamlNodeType.EndObject:
-                        count--;
-                        if (count == 0) {
-                            Read ();
-                            return;
+            switch (NodeType)
+            {
+                case XamlNodeType.StartMember:
+                case XamlNodeType.StartObject:
+                case XamlNodeType.GetObject:
+                    count++;
+                    while (Read())
+                    {
+                        switch (NodeType)
+                        {
+                            case XamlNodeType.StartMember:
+                            case XamlNodeType.GetObject:
+                            case XamlNodeType.StartObject:
+                                count++;
+                                continue;
+                            case XamlNodeType.EndMember:
+                            case XamlNodeType.EndObject:
+                                count--;
+                                if (count == 0)
+                                {
+                                    Read();
+                                    return;
+                                }
+                                continue;
                         }
-                        continue;
                     }
-                }
-                return;
+                    return;
 
-            default:
-                Read ();
-                return;
+                default:
+                    Read();
+                    return;
             }
         }
     }

@@ -1,6 +1,6 @@
-// 
+//
 // Copyright (c) 2006 Mainsoft Co.
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
 // "Software"), to deal in the Software without restriction, including
@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -44,7 +44,7 @@ namespace MonoTests.System.Data.OracleClient
         Exception exp;
 
         [SetUp]
-        public void SetUp ()
+        public void SetUp()
         {
             connectionString = ConnectedDataProvider.ConnectionString;
         }
@@ -59,15 +59,21 @@ namespace MonoTests.System.Data.OracleClient
         public static void Main()
         {
             OracleDataReader_GetDateTime tc = new OracleDataReader_GetDateTime();
-            tc.SetUp ();
+            tc.SetUp();
             Exception exp = null;
             try
             {
                 tc.BeginTest("OracleDataReader_GetDateTime");
                 tc.run();
             }
-            catch(Exception ex){exp = ex;}
-            finally    {tc.EndTest(exp);}
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                tc.EndTest(exp);
+            }
         }
 
         public void run()
@@ -85,18 +91,25 @@ namespace MonoTests.System.Data.OracleClient
                 //prepare data
                 base.PrepareDataForTesting(connectionString);
 
-                con = new OracleConnection (connectionString);
+                con = new OracleConnection(connectionString);
 
                 con.Open();
-                cmd = new OracleCommand("Select BirthDate From Employees where EmployeeID = 100", con);
+                cmd = new OracleCommand(
+                    "Select BirthDate From Employees where EmployeeID = 100",
+                    con
+                );
                 rdr = cmd.ExecuteReader();
                 rdr.Read();
                 DateTime dt = rdr.GetDateTime(0); //will be 1988-May-31 15:33:44
-                Compare(dt,new DateTime(1988,5,31,15,33,44,00));
-            } catch(Exception ex) {
+                Compare(dt, new DateTime(1988, 5, 31, 15, 33, 44, 00));
+            }
+            catch (Exception ex)
+            {
                 exp = ex;
-            } finally {
-                EndCase(exp); 
+            }
+            finally
+            {
+                EndCase(exp);
                 if (rdr != null && !rdr.IsClosed)
                     rdr.Close();
                 exp = null;
@@ -110,7 +123,7 @@ namespace MonoTests.System.Data.OracleClient
             exp = null;
             string[] dateColumns;
             DateTime[] expectedValues;
-            
+
             InitMinDates(out dateColumns, out expectedValues);
             try
             {
@@ -122,9 +135,9 @@ namespace MonoTests.System.Data.OracleClient
                 rdr = cmd.ExecuteReader();
                 Compare(true, rdr.HasRows);
                 bool b = rdr.Read();
-                for (int i=0; i<dateColumns.Length && i<expectedValues.Length; i++)
+                for (int i = 0; i < dateColumns.Length && i < expectedValues.Length; i++)
                 {
-                    int j=-1;
+                    int j = -1;
                     j = rdr.GetOrdinal(dateColumns[i]);
                     //DateTime result = rdr.GetDateTime(j);
                     object result = rdr.GetValue(j);
@@ -148,32 +161,43 @@ namespace MonoTests.System.Data.OracleClient
                 }
             }
         }
-        
+
         private void InitMinDates(out string[] columns, out DateTime[] values)
         {
-            switch(ConnectedDataProvider.GetDbType())
+            switch (ConnectedDataProvider.GetDbType())
             {
                 case DataBaseServer.SQLServer:
                 case DataBaseServer.Sybase:
-                    columns = new string[] {"T_DATETIME", "T_SMALLDATETIME"};
-                    values = new DateTime[] {new DateTime(1753, 01, 01,00, 00, 00),        //    01/01/1753 00:00:00.000
-                                                                  new DateTime(1900, 01, 01,00, 00, 00)};        //    01/01/1900 00:00
+                    columns = new string[] { "T_DATETIME", "T_SMALLDATETIME" };
+                    values = new DateTime[]
+                    {
+                        new DateTime(1753, 01, 01, 00, 00, 00), //    01/01/1753 00:00:00.000
+                        new DateTime(1900, 01, 01, 00, 00, 00)
+                    }; //    01/01/1900 00:00
                     break;
                 case DataBaseServer.Oracle:
-                    columns = new string[] {"T_DATE"};
-                    values = new DateTime[] {new DateTime(0001, 01, 01,00, 00, 00)}; //01-Jan-0001 12:00:00 AM
+                    columns = new string[] { "T_DATE" };
+                    values = new DateTime[] { new DateTime(0001, 01, 01, 00, 00, 00) }; //01-Jan-0001 12:00:00 AM
                     break;
                 case DataBaseServer.PostgreSQL:
-                    columns = new string[] {"T_TIMESTAMP"};
-                    values = new DateTime[] {new DateTime(1753, 01, 01,00, 00, 00)}; //01-Jan-1753 12:00:00 AM
+                    columns = new string[] { "T_TIMESTAMP" };
+                    values = new DateTime[] { new DateTime(1753, 01, 01, 00, 00, 00) }; //01-Jan-1753 12:00:00 AM
                     break;
                 case DataBaseServer.DB2:
-                    columns = new string[] {"T_DATE", "T_TIMESTAMP"};
-                    values = new DateTime[] {new DateTime(0001, 01, 01),        //    1/1/0001
-                                                                  new DateTime(0001, 01, 01, 00,00,00,0)};    //    1/1/0001 00:00:00.000
+                    columns = new string[] { "T_DATE", "T_TIMESTAMP" };
+                    values = new DateTime[]
+                    {
+                        new DateTime(0001, 01, 01), //    1/1/0001
+                        new DateTime(0001, 01, 01, 00, 00, 00, 0)
+                    }; //    1/1/0001 00:00:00.000
                     break;
                 default:
-                    throw new ApplicationException(string.Format("GHT ERROR: Unknown DB server [{0}].",ConnectedDataProvider.GetDbType()));
+                    throw new ApplicationException(
+                        string.Format(
+                            "GHT ERROR: Unknown DB server [{0}].",
+                            ConnectedDataProvider.GetDbType()
+                        )
+                    );
             }
         }
 
@@ -181,7 +205,7 @@ namespace MonoTests.System.Data.OracleClient
         {
             StringBuilder sqlBuilder = new StringBuilder();
             sqlBuilder.Append("SELECT ");
-            foreach(string col in dateColumns)
+            foreach (string col in dateColumns)
             {
                 sqlBuilder.Append(col + ", ");
             }

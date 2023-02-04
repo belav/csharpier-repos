@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -40,66 +40,74 @@ namespace System.ServiceModel
     [MonoTODO]
     public sealed class FederatedMessageSecurityOverHttp
     {
-        SecurityAlgorithmSuite algorithm =
-            SecurityAlgorithmSuite.Default;
+        SecurityAlgorithmSuite algorithm = SecurityAlgorithmSuite.Default;
         SecurityKeyType issued_key_type;
         string issued_token_type;
-        EndpointAddress issuer_address, metadata_address;
+        EndpointAddress issuer_address,
+            metadata_address;
         Binding issuer_binding;
-        bool establish_sec_ctx = true, negotiate = true;
-        Collection<ClaimTypeRequirement> claim_type_reqs =
-            new Collection<ClaimTypeRequirement> ();
-        Collection<XmlElement> request_params = new Collection<XmlElement> ();
+        bool establish_sec_ctx = true,
+            negotiate = true;
+        Collection<ClaimTypeRequirement> claim_type_reqs = new Collection<ClaimTypeRequirement>();
+        Collection<XmlElement> request_params = new Collection<XmlElement>();
 
-        internal FederatedMessageSecurityOverHttp ()
+        internal FederatedMessageSecurityOverHttp() { }
+
+        public SecurityAlgorithmSuite AlgorithmSuite
         {
-        }
-
-        public SecurityAlgorithmSuite AlgorithmSuite {
             get { return algorithm; }
             set { algorithm = value; }
         }
 
-        public bool EstablishSecurityContext {
+        public bool EstablishSecurityContext
+        {
             get { return establish_sec_ctx; }
             set { establish_sec_ctx = value; }
         }
 
-        public SecurityKeyType IssuedKeyType {
+        public SecurityKeyType IssuedKeyType
+        {
             get { return issued_key_type; }
             set { issued_key_type = value; }
         }
 
-        public string IssuedTokenType {
+        public string IssuedTokenType
+        {
             get { return issued_token_type; }
             set { issued_token_type = value; }
         }
 
-        public EndpointAddress IssuerAddress {
+        public EndpointAddress IssuerAddress
+        {
             get { return issuer_address; }
             set { issuer_address = value; }
         }
 
-        public Binding IssuerBinding {
+        public Binding IssuerBinding
+        {
             get { return issuer_binding; }
             set { issuer_binding = value; }
         }
 
-        public EndpointAddress IssuerMetadataAddress {
+        public EndpointAddress IssuerMetadataAddress
+        {
             get { return metadata_address; }
             set { metadata_address = value; }
         }
 
-        public bool NegotiateServiceCredential {
+        public bool NegotiateServiceCredential
+        {
             get { return negotiate; }
             set { negotiate = value; }
         }
 
-        public Collection<ClaimTypeRequirement> ClaimTypeRequirements {
+        public Collection<ClaimTypeRequirement> ClaimTypeRequirements
+        {
             get { return claim_type_reqs; }
         }
 
-        public Collection<XmlElement> TokenRequestParameters {
+        public Collection<XmlElement> TokenRequestParameters
+        {
             get { return request_params; }
         }
     }

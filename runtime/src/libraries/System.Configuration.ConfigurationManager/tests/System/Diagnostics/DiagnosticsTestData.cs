@@ -6,7 +6,7 @@ namespace System.DiagnosticsTests
     public static class DiagnosticsTestData
     {
         public static string Sample =
-@"<configuration>  
+            @"<configuration>  
   <system.diagnostics>  
     <sources>  
       <source name=""TraceSourceApp""

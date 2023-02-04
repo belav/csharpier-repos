@@ -37,7 +37,8 @@ public class HstsOptions
     /// <summary>
     /// A list of host names that will not add the HSTS header.
     /// </summary>
-    public IList<string> ExcludedHosts { get; } = new List<string>
+    public IList<string> ExcludedHosts { get; } =
+        new List<string>
         {
             "localhost",
             "127.0.0.1", // ipv4

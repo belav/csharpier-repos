@@ -7,16 +7,10 @@ namespace TestAttributesCollecting
 {
     class A : Attribute
     {
-        public A (int a)
-        {
-        }
+        public A(int a) { }
     }
 
-    partial class G1<[A (1)]T>
-    {
-    }
+    partial class G1<[A(1)] T> { }
 
-    partial class G1<[A (2)]T>
-    {
-    }
+    partial class G1<[A(2)] T> { }
 }

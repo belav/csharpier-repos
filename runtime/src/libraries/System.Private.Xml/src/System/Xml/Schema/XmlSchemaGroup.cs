@@ -21,9 +21,11 @@ namespace System.Xml.Schema
             set { _name = value; }
         }
 
-        [XmlElement("choice", typeof(XmlSchemaChoice)),
-         XmlElement("all", typeof(XmlSchemaAll)),
-         XmlElement("sequence", typeof(XmlSchemaSequence))]
+        [
+            XmlElement("choice", typeof(XmlSchemaChoice)),
+            XmlElement("all", typeof(XmlSchemaAll)),
+            XmlElement("sequence", typeof(XmlSchemaSequence))
+        ]
         public XmlSchemaGroupBase? Particle
         {
             get { return _particle; }
@@ -71,7 +73,9 @@ namespace System.Xml.Schema
 
         internal override XmlSchemaObject Clone()
         {
-            System.Diagnostics.Debug.Fail("Should never call Clone() on XmlSchemaGroup. Call Clone(XmlSchema) instead.");
+            System.Diagnostics.Debug.Fail(
+                "Should never call Clone() on XmlSchemaGroup. Call Clone(XmlSchema) instead."
+            );
             return Clone(null);
         }
 
@@ -80,7 +84,9 @@ namespace System.Xml.Schema
             XmlSchemaGroup newGroup = (XmlSchemaGroup)MemberwiseClone();
             if (XmlSchemaComplexType.HasParticleRef(_particle, parentSchema))
             {
-                newGroup._particle = XmlSchemaComplexType.CloneParticle(_particle, parentSchema) as XmlSchemaGroupBase;
+                newGroup._particle =
+                    XmlSchemaComplexType.CloneParticle(_particle, parentSchema)
+                    as XmlSchemaGroupBase;
             }
             newGroup._canonicalParticle = XmlSchemaParticle.Empty;
             return newGroup;

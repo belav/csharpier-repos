@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,9 +35,9 @@ namespace System.Windows.Forms.Design.Behavior
     public sealed class SnapLine
     {
         [MonoTODO]
-        public static bool ShouldSnap (SnapLine line1, SnapLine line2)
+        public static bool ShouldSnap(SnapLine line1, SnapLine line2)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         SnapLineType type;
@@ -46,86 +46,89 @@ namespace System.Windows.Forms.Design.Behavior
         SnapLinePriority priority;
 
         [MonoTODO]
-        public SnapLine (SnapLineType type, int offset)
-            : this (type, offset, null)
-        {
-        }
+        public SnapLine(SnapLineType type, int offset)
+            : this(type, offset, null) { }
 
         [MonoTODO]
-        public SnapLine (SnapLineType type, int offset, string filter)
-            : this (type, offset, filter, default (SnapLinePriority))
-        {
-        }
+        public SnapLine(SnapLineType type, int offset, string filter)
+            : this(type, offset, filter, default(SnapLinePriority)) { }
 
         [MonoTODO]
-        public SnapLine (SnapLineType type, int offset, SnapLinePriority priority)
-            : this (type, offset, null, priority)
-        {
-        }
+        public SnapLine(SnapLineType type, int offset, SnapLinePriority priority)
+            : this(type, offset, null, priority) { }
 
         [MonoTODO]
-        public SnapLine (SnapLineType type, int offset, string filter, SnapLinePriority priority)
+        public SnapLine(SnapLineType type, int offset, string filter, SnapLinePriority priority)
         {
-            this.type =type;
+            this.type = type;
             this.offset = offset;
             this.filter = filter;
             this.priority = priority;
         }
 
-        public string Filter {
+        public string Filter
+        {
             get { return filter; }
         }
 
-        public bool IsHorizontal {
-            get {
-                switch (SnapLineType) {
-                case SnapLineType.Top:
-                case SnapLineType.Bottom:
-                case SnapLineType.Horizontal:
-                case SnapLineType.Baseline:
-                    return true;
-                default:
-                    return false;
+        public bool IsHorizontal
+        {
+            get
+            {
+                switch (SnapLineType)
+                {
+                    case SnapLineType.Top:
+                    case SnapLineType.Bottom:
+                    case SnapLineType.Horizontal:
+                    case SnapLineType.Baseline:
+                        return true;
+                    default:
+                        return false;
                 }
             }
         }
 
-        public bool IsVertical {
-            get {
-                switch (SnapLineType) {
-                case SnapLineType.Left:
-                case SnapLineType.Right:
-                case SnapLineType.Vertical:
-                    return true;
-                default:
-                    return false;
+        public bool IsVertical
+        {
+            get
+            {
+                switch (SnapLineType)
+                {
+                    case SnapLineType.Left:
+                    case SnapLineType.Right:
+                    case SnapLineType.Vertical:
+                        return true;
+                    default:
+                        return false;
                 }
             }
         }
 
-        public int Offset {
+        public int Offset
+        {
             get { return offset; }
         }
 
-        public SnapLinePriority Priority {
+        public SnapLinePriority Priority
+        {
             get { return priority; }
         }
 
-        public SnapLineType SnapLineType {
+        public SnapLineType SnapLineType
+        {
             get { return type; }
         }
 
         [MonoTODO]
-        public void AdjustOffset (int adjustment)
+        public void AdjustOffset(int adjustment)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public override string ToString ()
+        public override string ToString()
         {
-            return base.ToString ();
+            return base.ToString();
         }
     }
 }
-

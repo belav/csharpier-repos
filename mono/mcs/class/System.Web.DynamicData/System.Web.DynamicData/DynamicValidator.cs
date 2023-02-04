@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -43,30 +43,40 @@ using System.Web.UI.WebControls;
 
 namespace System.Web.DynamicData
 {
-    [ToolboxBitmap (typeof(DynamicValidator), "DynamicValidator.ico")]
-    [AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [ToolboxBitmap(typeof(DynamicValidator), "DynamicValidator.ico")]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
     public class DynamicValidator : BaseValidator
     {
         IDynamicDataSource dynamicDataSource;
 
-        IDynamicDataSource DynamicDataSource {
-            get {
+        IDynamicDataSource DynamicDataSource
+        {
+            get
+            {
                 if (dynamicDataSource == null)
-                    dynamicDataSource = this.FindDataSourceControl ();
+                    dynamicDataSource = this.FindDataSourceControl();
 
                 return dynamicDataSource;
             }
         }
-        
-        [Themeable (false)]
-        [Browsable (false)]
+
+        [Themeable(false)]
+        [Browsable(false)]
         public MetaColumn Column { get; set; }
 
-        [Themeable (false)]
-        [Browsable (false)]
-        public string ColumnName {
-            get {
+        [Themeable(false)]
+        [Browsable(false)]
+        public string ColumnName
+        {
+            get
+            {
                 // LAMESPEC: returns Column.Name if Column is not null, String.Empty
                 // otherwise
                 MetaColumn column = Column;
@@ -74,50 +84,51 @@ namespace System.Web.DynamicData
             }
         }
 
-        protected virtual Exception ValidationException { get; set; }        
+        protected virtual Exception ValidationException { get; set; }
 
-        protected override bool ControlPropertiesValid ()
+        protected override bool ControlPropertiesValid()
         {
-            return base.ControlPropertiesValid () && DynamicDataSource != null;
+            return base.ControlPropertiesValid() && DynamicDataSource != null;
         }
 
         [MonoTODO]
-        protected override bool EvaluateIsValid ()
+        protected override bool EvaluateIsValid()
         {
             Exception ex = ValidationException;
-            if (ex != null) {
-                ErrorMessage = HttpUtility.HtmlEncode (ex.Message);
+            if (ex != null)
+            {
+                ErrorMessage = HttpUtility.HtmlEncode(ex.Message);
                 return false;
             }
 
             string controlToValidate = ControlToValidate;
-            if (String.IsNullOrEmpty (controlToValidate))
+            if (String.IsNullOrEmpty(controlToValidate))
                 return true;
 
-            GetControlValidationValue (controlToValidate);
+            GetControlValidationValue(controlToValidate);
 
             return true;
         }
 
-        void HandleException (object sender, DynamicValidatorEventArgs args)
+        void HandleException(object sender, DynamicValidatorEventArgs args)
         {
             if (args == null)
                 return;
-            
-            ValidateException (args.Exception);
+
+            ValidateException(args.Exception);
         }
-        
-        protected override void OnInit (EventArgs e)
+
+        protected override void OnInit(EventArgs e)
         {
             IDynamicDataSource dds = DynamicDataSource;
             if (dds != null)
                 dds.Exception += HandleException;
-            
-            base.OnInit (e);
+
+            base.OnInit(e);
         }
 
         [MonoTODO]
-        protected virtual void ValidateException (Exception exception)
+        protected virtual void ValidateException(Exception exception)
         {
             // http://forums.asp.net/p/1287649/2478409.aspx#2478409
             //

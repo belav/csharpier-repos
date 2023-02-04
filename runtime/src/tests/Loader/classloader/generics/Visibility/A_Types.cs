@@ -3,9 +3,10 @@
 
 using System;
 
-public class C2Public{}
-public struct S2Public{}
+public class C2Public { }
 
-public class C2Private{}
-public struct S2Private{}
+public struct S2Public { }
 
+public class C2Private { }
+
+public struct S2Private { }

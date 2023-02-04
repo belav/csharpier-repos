@@ -17,13 +17,14 @@ internal sealed class NamingPreferencesReadFallback : IVisualStudioStorageReadFa
 {
     [ImportingConstructor]
     [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    public NamingPreferencesReadFallback()
-    {
-    }
+    public NamingPreferencesReadFallback() { }
 
     public Optional<object?> TryRead(string? language, TryReadValueDelegate readValue)
     {
         Contract.ThrowIfNull(language);
-        return readValue($"TextEditor.{language}.Specific.NamingPreferences", typeof(NamingStylePreferences));
+        return readValue(
+            $"TextEditor.{language}.Specific.NamingPreferences",
+            typeof(NamingStylePreferences)
+        );
     }
 }

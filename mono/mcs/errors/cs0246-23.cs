@@ -4,7 +4,7 @@
 
 class X
 {
-    public X ()
+    public X()
     {
         var? u = i;
     }

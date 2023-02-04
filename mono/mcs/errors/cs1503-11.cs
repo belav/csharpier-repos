@@ -3,12 +3,12 @@
 
 class C
 {
-    void Foo ()
+    void Foo()
     {
-        InstanceArgList (null);
+        InstanceArgList(null);
     }
-    
-    int InstanceArgList (__arglist)
+
+    int InstanceArgList(__arglist)
     {
         return 54;
     }

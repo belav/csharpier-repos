@@ -2,7 +2,7 @@ using System.Runtime.InteropServices;
 
 namespace System
 {
-    [StructLayout (LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential)]
     public abstract class MarshalByRefObject
     {
 #region Keep this code, it is used by the runtime
@@ -11,23 +11,21 @@ namespace System
 #pragma warning restore 169, 649
 #endregion
 
-        protected MarshalByRefObject ()
+        protected MarshalByRefObject() { }
+
+        public object GetLifetimeService()
         {
+            throw new PlatformNotSupportedException();
         }
 
-        public object GetLifetimeService ()
+        public virtual object InitializeLifetimeService()
         {
-            throw new PlatformNotSupportedException ();
+            throw new PlatformNotSupportedException();
         }
 
-        public virtual object InitializeLifetimeService ()
+        protected MarshalByRefObject MemberwiseClone(bool cloneIdentity)
         {
-            throw new PlatformNotSupportedException ();
-        }
-
-        protected MarshalByRefObject MemberwiseClone (bool cloneIdentity)
-        {
-            throw new PlatformNotSupportedException ();
+            throw new PlatformNotSupportedException();
         }
     }
 }

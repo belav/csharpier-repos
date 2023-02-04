@@ -3,11 +3,9 @@
 
 class X
 {
-    static string Foo (object arg)
+    static string Foo(object arg)
     {
-        if (arg is string s) {
-
-        }
+        if (arg is string s) { }
 
         return s;
     }

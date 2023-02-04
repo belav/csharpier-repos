@@ -16,7 +16,12 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
 {
     internal static class LightBulbHelper
     {
-        public static async Task<bool> WaitForLightBulbSessionAsync(TestServices testServices, ILightBulbBroker broker, IWpfTextView view, CancellationToken cancellationToken)
+        public static async Task<bool> WaitForLightBulbSessionAsync(
+            TestServices testServices,
+            ILightBulbBroker broker,
+            IWpfTextView view,
+            CancellationToken cancellationToken
+        )
         {
             await testServices.Editor.WaitForEditorOperationsAsync(cancellationToken);
             var active = broker.IsLightBulbSessionActive(view);
@@ -27,11 +32,21 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
             return true;
         }
 
-        public static async Task<IEnumerable<SuggestedActionSet>> WaitForItemsAsync(TestServices testServices, ILightBulbBroker broker, IWpfTextView view, CancellationToken cancellationToken)
+        public static async Task<IEnumerable<SuggestedActionSet>> WaitForItemsAsync(
+            TestServices testServices,
+            ILightBulbBroker broker,
+            IWpfTextView view,
+            CancellationToken cancellationToken
+        )
         {
             while (true)
             {
-                var items = await TryWaitForItemsAsync(testServices, broker, view, cancellationToken);
+                var items = await TryWaitForItemsAsync(
+                    testServices,
+                    broker,
+                    view,
+                    cancellationToken
+                );
                 if (items is not null)
                     return items;
 
@@ -40,13 +55,20 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
             }
         }
 
-        private static async Task<IEnumerable<SuggestedActionSet>?> TryWaitForItemsAsync(TestServices testServices, ILightBulbBroker broker, IWpfTextView view, CancellationToken cancellationToken)
+        private static async Task<IEnumerable<SuggestedActionSet>?> TryWaitForItemsAsync(
+            TestServices testServices,
+            ILightBulbBroker broker,
+            IWpfTextView view,
+            CancellationToken cancellationToken
+        )
         {
             var activeSession = broker.GetSession(view);
             if (activeSession == null)
             {
                 var bufferType = view.TextBuffer.ContentType.DisplayName;
-                throw new InvalidOperationException($"No expanded light bulb session found after View.ShowSmartTag.  Buffer content type={bufferType}");
+                throw new InvalidOperationException(
+                    $"No expanded light bulb session found after View.ShowSmartTag.  Buffer content type={bufferType}"
+                );
             }
 
             var asyncSession = (IAsyncLightBulbSession)activeSession;
@@ -66,7 +88,11 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
                 else if (e.Status == QuerySuggestedActionCompletionStatus.Canceled)
                     tcs.TrySetCanceled();
                 else
-                    tcs.TrySetException(new InvalidOperationException($"Light bulb transitioned to non-complete state: {e.Status}"));
+                    tcs.TrySetException(
+                        new InvalidOperationException(
+                            $"Light bulb transitioned to non-complete state: {e.Status}"
+                        )
+                    );
 
                 asyncSession.SuggestedActionsUpdated -= handler;
             };
@@ -81,7 +107,12 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
             // Calling PopulateWithData ensures the underlying session will call SuggestedActionsUpdated at least once
             // with the latest data computed.  This is needed so that if the lightbulb computation is already complete
             // that we hear about the results.
-            await asyncSession.PopulateWithDataAsync(overrideRequestedActionCategories: null, operationContext: null).ConfigureAwait(false);
+            await asyncSession
+                .PopulateWithDataAsync(
+                    overrideRequestedActionCategories: null,
+                    operationContext: null
+                )
+                .ConfigureAwait(false);
 
             try
             {
@@ -96,7 +127,9 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
                     return null;
                 }
 
-                throw new OperationCanceledException($"IDE version '{version}' unexpectedly dismissed the light bulb.");
+                throw new OperationCanceledException(
+                    $"IDE version '{version}' unexpectedly dismissed the light bulb."
+                );
             }
         }
     }

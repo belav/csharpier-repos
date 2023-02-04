@@ -7,17 +7,17 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 
 namespace Mono.Linker.Tests.Cases.Serialization
 {
-    [Reference ("System.Xml.ReaderWriter.dll")]
-    [Reference ("System.Xml.XmlSerializer.dll")]
+    [Reference("System.Xml.ReaderWriter.dll")]
+    [Reference("System.Xml.XmlSerializer.dll")]
     public class CanDisableSerializationDiscovery
     {
-        public static void Main ()
+        public static void Main()
         {
-            var ser = new XmlSerializer (typeof (AttributedType));
+            var ser = new XmlSerializer(typeof(AttributedType));
         }
 
         [Kept]
-        [KeptAttributeAttribute (typeof (XmlRootAttribute))]
+        [KeptAttributeAttribute(typeof(XmlRootAttribute))]
         [XmlRoot]
         class AttributedType
         {

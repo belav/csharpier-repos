@@ -3,9 +3,9 @@
 //   Erez Lotan       <erezl@mainsoft.com>
 //   Oren Gurfinkel   <oreng@mainsoft.com>
 //   Ofer Borstein
-// 
+//
 // Copyright (c) 2004 Mainsoft Co.
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
 // "Software"), to deal in the Software without restriction, including
@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,7 +28,6 @@
 
 using NUnit.Framework;
 
-
 using System;
 using System.Data;
 
@@ -37,79 +36,91 @@ using GHTUtils.Base;
 
 namespace tests.system_data_dll.System_Data
 {
-[TestFixture] public class DataTable_OnRemoveColumn_D : GHTBase
-{
-    [Test] public void Main()
+    [TestFixture]
+    public class DataTable_OnRemoveColumn_D : GHTBase
     {
-        DataTable_OnRemoveColumn_D tc = new DataTable_OnRemoveColumn_D();
-        Exception exp = null;
-        try
+        [Test]
+        public void Main()
         {
-            tc.BeginTest("DataTable_OnRemoveColumn_D");
-            tc.run();
-        }
-        catch(Exception ex)
-        {
-            exp = ex;
-        }
-        finally
-        {
-            tc.EndTest(exp);
-        }
-    }
-
-    //Activate This Construntor to log All To Standard output
-    //public TestClass():base(true){}
-
-    //Activate this constructor to log Failures to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
-
-
-    //Activate this constructor to log All to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
-
-    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
-
-    //private DataRowAction drExpectedAction;
-    public void run()
-    {
-        Exception exp = null;
-        ProtectedTestClass dt = new ProtectedTestClass(); 
-
-        try
-        {
-            Exception tmpEx = null;
-            base.BeginCase("OnRemoveColumn ");
+            DataTable_OnRemoveColumn_D tc = new DataTable_OnRemoveColumn_D();
+            Exception exp = null;
             try
             {
-                dt.OnRemoveColumn_Test();
+                tc.BeginTest("DataTable_OnRemoveColumn_D");
+                tc.run();
             }
-            catch(Exception ex)    {tmpEx = ex;}
-            finally    
+            catch (Exception ex)
             {
-                base.Compare(tmpEx ,null);
-            } 
+                exp = ex;
+            }
+            finally
+            {
+                tc.EndTest(exp);
+            }
         }
-        catch(Exception ex)    {exp = ex;}
-        finally    {base.EndCase(exp); exp = null;}
-    }
+
+        //Activate This Construntor to log All To Standard output
+        //public TestClass():base(true){}
+
+        //Activate this constructor to log Failures to a log file
+        //public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
-    class ProtectedTestClass : DataTable
-    {
-        public ProtectedTestClass() : base()
+        //Activate this constructor to log All to a log file
+        //public TestClass(System.IO.TextWriter tw):base(tw, true){}
+
+        //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+
+        //private DataRowAction drExpectedAction;
+        public void run()
         {
-            this.Columns.Add("Id",typeof(int));
-            this.Columns.Add("Value",typeof(string));
-            this.Rows.Add(new object[] {1,"one"});
-            this.Rows.Add(new object[] {2,"two"});
-            this.AcceptChanges();
+            Exception exp = null;
+            ProtectedTestClass dt = new ProtectedTestClass();
+
+            try
+            {
+                Exception tmpEx = null;
+                base.BeginCase("OnRemoveColumn ");
+                try
+                {
+                    dt.OnRemoveColumn_Test();
+                }
+                catch (Exception ex)
+                {
+                    tmpEx = ex;
+                }
+                finally
+                {
+                    base.Compare(tmpEx, null);
+                }
+            }
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                base.EndCase(exp);
+                exp = null;
+            }
         }
 
-        public void OnRemoveColumn_Test()
+        class ProtectedTestClass : DataTable
         {
-            base.OnRemoveColumn(this.Columns[0]); 
+            public ProtectedTestClass()
+                : base()
+            {
+                this.Columns.Add("Id", typeof(int));
+                this.Columns.Add("Value", typeof(string));
+                this.Rows.Add(new object[] { 1, "one" });
+                this.Rows.Add(new object[] { 2, "two" });
+                this.AcceptChanges();
+            }
+
+            public void OnRemoveColumn_Test()
+            {
+                base.OnRemoveColumn(this.Columns[0]);
+            }
         }
     }
-}
 }

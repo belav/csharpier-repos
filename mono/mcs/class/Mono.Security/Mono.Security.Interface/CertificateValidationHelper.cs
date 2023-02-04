@@ -42,7 +42,12 @@ namespace Mono.Security.Interface
         int error_code;
         MonoSslPolicyErrors? policy_errors;
 
-        public ValidationResult (bool trusted, bool user_denied, int error_code, MonoSslPolicyErrors? policy_errors)
+        public ValidationResult(
+            bool trusted,
+            bool user_denied,
+            int error_code,
+            MonoSslPolicyErrors? policy_errors
+        )
         {
             this.trusted = trusted;
             this.user_denied = user_denied;
@@ -50,26 +55,30 @@ namespace Mono.Security.Interface
             this.policy_errors = policy_errors;
         }
 
-        internal ValidationResult (bool trusted, bool user_denied, int error_code)
+        internal ValidationResult(bool trusted, bool user_denied, int error_code)
         {
             this.trusted = trusted;
             this.user_denied = user_denied;
             this.error_code = error_code;
         }
 
-        public bool Trusted {
+        public bool Trusted
+        {
             get { return trusted; }
         }
 
-        public bool UserDenied {
+        public bool UserDenied
+        {
             get { return user_denied; }
         }
 
-        public int ErrorCode {
+        public int ErrorCode
+        {
             get { return error_code; }
         }
 
-        public MonoSslPolicyErrors? PolicyErrors {
+        public MonoSslPolicyErrors? PolicyErrors
+        {
             get { return policy_errors; }
         }
     }
@@ -79,21 +88,27 @@ namespace Mono.Security.Interface
      */
     public interface ICertificateValidator
     {
-        MonoTlsSettings Settings {
-            get;
-        }
+        MonoTlsSettings Settings { get; }
 
         /*
          * Returns `true` if a client certificate has been selected (which could be `null`).
          */
-        bool SelectClientCertificate (
-            string targetHost, X509CertificateCollection localCertificates, X509Certificate remoteCertificate,
-            string[] acceptableIssuers, out X509Certificate clientCertificate);
+        bool SelectClientCertificate(
+            string targetHost,
+            X509CertificateCollection localCertificates,
+            X509Certificate remoteCertificate,
+            string[] acceptableIssuers,
+            out X509Certificate clientCertificate
+        );
 
         /*
          * If @serverMode is true, then we're a server and want to validate a certificate that we received from a client.
          */
-        ValidationResult ValidateCertificate (string targetHost, bool serverMode, X509CertificateCollection certificates);
+        ValidationResult ValidateCertificate(
+            string targetHost,
+            bool serverMode,
+            X509CertificateCollection certificates
+        );
     }
 
     public static class CertificateValidationHelper
@@ -102,39 +117,44 @@ namespace Mono.Security.Interface
         static readonly bool noX509Chain;
         static readonly bool supportsTrustAnchors;
 
-        static CertificateValidationHelper ()
+        static CertificateValidationHelper()
         {
-            #if MONOTOUCH || XAMMAC
+#if MONOTOUCH || XAMMAC
             noX509Chain = true;
             supportsTrustAnchors = true;
-            #elif MONODROID
+#elif MONODROID
             noX509Chain = true;
             supportsTrustAnchors = false;
-            #else
-            if (File.Exists (SecurityLibrary)) {
+#else
+            if (File.Exists(SecurityLibrary))
+            {
                 noX509Chain = true;
                 supportsTrustAnchors = true;
-            } else {
+            }
+            else
+            {
                 noX509Chain = false;
                 supportsTrustAnchors = false;
             }
-            #endif
+#endif
         }
 
-        public static bool SupportsX509Chain {
+        public static bool SupportsX509Chain
+        {
             get { return !noX509Chain; }
         }
 
-        public static bool SupportsTrustAnchors {
+        public static bool SupportsTrustAnchors
+        {
             get { return supportsTrustAnchors; }
         }
 
         /*
          * Use this overloaded version in user code.
          */
-        public static ICertificateValidator GetValidator (MonoTlsSettings settings)
+        public static ICertificateValidator GetValidator(MonoTlsSettings settings)
         {
-            return (ICertificateValidator)NoReflectionHelper.GetDefaultValidator (settings);
+            return (ICertificateValidator)NoReflectionHelper.GetDefaultValidator(settings);
         }
     }
 }

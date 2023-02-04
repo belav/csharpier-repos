@@ -12,6 +12,11 @@ internal static partial class Interop
         internal const uint CTMF_INCLUDE_APPCONTAINER = 0x00000001;
 
         [LibraryImport(Interop.Libraries.Kernel32, SetLastError = true)]
-        internal static partial bool CheckTokenMembershipEx(SafeAccessTokenHandle TokenHandle, byte[] SidToCheck, uint Flags, ref bool IsMember);
+        internal static partial bool CheckTokenMembershipEx(
+            SafeAccessTokenHandle TokenHandle,
+            byte[] SidToCheck,
+            uint Flags,
+            ref bool IsMember
+        );
     }
 }

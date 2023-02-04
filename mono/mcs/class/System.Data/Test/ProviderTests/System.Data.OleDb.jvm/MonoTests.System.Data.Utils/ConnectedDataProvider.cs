@@ -3,9 +3,9 @@
 //   Erez Lotan       <erezl@mainsoft.com>
 //   Oren Gurfinkel   <oreng@mainsoft.com>
 //   Ofer Borstein
-// 
+//
 // Copyright (c) 2004 Mainsoft Co.
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
 // "Software"), to deal in the Software without restriction, including
@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,18 +28,20 @@
 
 using System;
 using System.Data;
-using System.Data.OleDb ;
+using System.Data.OleDb;
 using System.IO;
 using System.Collections;
 using Sys = System;
 using MonoTests.System.Data.Utils.Data;
 
 // Provide All Data required by the diffderent tests e.g.DataTable, DataRow ...
-namespace MonoTests.System.Data.Utils {
+namespace MonoTests.System.Data.Utils
+{
     /// <summary>
     /// Types of Database Servers that tests can be run on.
     /// </summary>
-    public enum DataBaseServer {
+    public enum DataBaseServer
+    {
         SQLServer,
         Oracle,
         DB2,
@@ -48,11 +50,12 @@ namespace MonoTests.System.Data.Utils {
         Unknown
     }
 
-    public class ConnectedDataProvider {
-
+    public class ConnectedDataProvider
+    {
         #region Private
         //A string containing all printable charachters.
-        private const string SAMPLE_STRING = "abcdefghijklmnopqrstuvwxyz1234567890~!@#$%^&*()_+-=[]\\|;:,./<>? ";
+        private const string SAMPLE_STRING =
+            "abcdefghijklmnopqrstuvwxyz1234567890~!@#$%^&*()_+-=[]\\|;:,./<>? ";
         #endregion
 
         #region Public
@@ -60,46 +63,47 @@ namespace MonoTests.System.Data.Utils {
         /// Name of the table in the database, that contain columns of simple types.
         /// </summary>
         public const string SIMPLE_TYPES_TABLE_NAME = "TYPES_SIMPLE";
+
         /// <summary>
         /// Name of the table in the database, that contain columns of extended types.
         /// </summary>
         public const string EXTENDED_TYPES_TABLE_NAME = "TYPES_EXTENDED";
+
         /// <summary>
         /// Name of the table in the database, that contain columns of DB specific types.
         /// </summary>
         public const string SPECIFIC_TYPES_TABLE_NAME = "TYPES_SPECIFIC";
         #endregion
 
-        public static string ConnectionString {
-            get {
-                return Sys.Configuration.ConfigurationSettings.AppSettings["ConnectionString"];
-            }
+        public static string ConnectionString
+        {
+            get { return Sys.Configuration.ConfigurationSettings.AppSettings["ConnectionString"]; }
         }
 
         //    SQLClient does not allow to use the Provider token
         //    since Provider is always the first parameter(in GHT framework),
         //    we trim it.
-        public static string ConnectionStringSQLClient {
-            get {
-                return ConnectionString.Substring(ConnectionString.IndexOf(";"));
-            }
+        public static string ConnectionStringSQLClient
+        {
+            get { return ConnectionString.Substring(ConnectionString.IndexOf(";")); }
         }
-    
 
         /// <summary>
         /// Resolves the type of DB server specified by the "ADOConString.txt" file.
         /// </summary>
         /// <returns>The type of DB server specified by the "ADOConString.txt" file.</returns>
-        public static DataBaseServer GetDbType() {
+        public static DataBaseServer GetDbType()
+        {
             return ConnectedDataProvider.GetDbType(ConnectedDataProvider.ConnectionString);
         }
-        
+
         /// <summary>
         /// Resolves the type of DB server that the specified connection refers.
         /// </summary>
         /// <param name="OleCon">A valid connection object to a DataBase.</param>
         /// <returns>The type of DB server that the specified connection refers to.</returns>
-        public static DataBaseServer GetDbType(Sys.Data.OleDb.OleDbConnection OleCon) {
+        public static DataBaseServer GetDbType(Sys.Data.OleDb.OleDbConnection OleCon)
+        {
             return ConnectedDataProvider.GetDbType(OleCon.ConnectionString);
         }
 
@@ -108,22 +112,32 @@ namespace MonoTests.System.Data.Utils {
         /// </summary>
         /// <param name="ConnectionString">A valid connection string to a DataBase server.</param>
         /// <returns>The type of DB server that the specified connection string refers to.</returns>
-        public static DataBaseServer GetDbType(string ConnectionString) {
-            if (ConnectionString.ToUpper().IndexOf("PROVIDER=SQLOLEDB") >= 0) return DataBaseServer.SQLServer ;
-            if (ConnectionString.ToUpper().IndexOf("SYBASE") >= 0) return DataBaseServer.Sybase ;
-            if (ConnectionString.ToUpper().IndexOf("PROVIDER=MSDAORA") >= 0) return DataBaseServer.Oracle;
-            if (ConnectionString.ToUpper().IndexOf("PROVIDER=IBMDADB2") >= 0) return DataBaseServer.DB2;
-            if (ConnectionString.ToUpper().IndexOf("POSTGRESQL") >= 0) return DataBaseServer.PostgreSQL;
-            return DataBaseServer.Unknown ;
+        public static DataBaseServer GetDbType(string ConnectionString)
+        {
+            if (ConnectionString.ToUpper().IndexOf("PROVIDER=SQLOLEDB") >= 0)
+                return DataBaseServer.SQLServer;
+            if (ConnectionString.ToUpper().IndexOf("SYBASE") >= 0)
+                return DataBaseServer.Sybase;
+            if (ConnectionString.ToUpper().IndexOf("PROVIDER=MSDAORA") >= 0)
+                return DataBaseServer.Oracle;
+            if (ConnectionString.ToUpper().IndexOf("PROVIDER=IBMDADB2") >= 0)
+                return DataBaseServer.DB2;
+            if (ConnectionString.ToUpper().IndexOf("POSTGRESQL") >= 0)
+                return DataBaseServer.PostgreSQL;
+            return DataBaseServer.Unknown;
         }
 
         /// <summary>
         /// Creates a DbTypeParametersCollection with default types and data for the TYPES_SIMPLE table.
         /// </summary>
         /// <returns>The initialized DbTypeParametersCollection</returns>
-        public static DbTypeParametersCollection GetSimpleDbTypesParameters() {
-            DbTypeParametersCollection row = new DbTypeParametersCollection(SIMPLE_TYPES_TABLE_NAME);
-            switch (ConnectedDataProvider.GetDbType(ConnectedDataProvider.ConnectionString)) {
+        public static DbTypeParametersCollection GetSimpleDbTypesParameters()
+        {
+            DbTypeParametersCollection row = new DbTypeParametersCollection(
+                SIMPLE_TYPES_TABLE_NAME
+            );
+            switch (ConnectedDataProvider.GetDbType(ConnectedDataProvider.ConnectionString))
+            {
                     #region SQLServer
                 case MonoTests.System.Data.Utils.DataBaseServer.SQLServer:
                     row.Add("bit", true, 1);
@@ -131,7 +145,7 @@ namespace MonoTests.System.Data.Utils {
                     row.Add("smallint", (Int16)77, 2);
                     row.Add("int", (Int32)2525, 4);
                     row.Add("bigint", (Int64)25251414, 8);
-                    row.Add("decimal", 10M, 9);    //(Decimal)10
+                    row.Add("decimal", 10M, 9); //(Decimal)10
                     row.Add("numeric", 123123M, 9); //(Decimal)123123
                     row.Add("float", 17.1414257, 8);
                     row.Add("real", (float)0.71425, 4);
@@ -149,7 +163,7 @@ namespace MonoTests.System.Data.Utils {
                     row.Add("SMALLINT", (Int16)77, 2);
                     row.Add("INT", (Int32)2525, 4);
                     //row.Add("BIGINT", (Int64)25251414, 8);
-                    row.Add("DECIMAL", 10M, 9);    //(Decimal)10
+                    row.Add("DECIMAL", 10M, 9); //(Decimal)10
                     row.Add("NUMERIC", 123123M, 9); //(Decimal)123123
                     row.Add("FLOAT", 17.1414257, 8);
                     row.Add("REAL", (float)0.71425, 4);
@@ -162,8 +176,8 @@ namespace MonoTests.System.Data.Utils {
 
                     #region ORACLE
                 case MonoTests.System.Data.Utils.DataBaseServer.Oracle:
-                    row.Add("NUMBER", 21M, 22);    //(Decimal)21
-                    row.Add("LONG", SAMPLE_STRING, 2147483647);    //Default data type in .NET is system.String.
+                    row.Add("NUMBER", 21M, 22); //(Decimal)21
+                    row.Add("LONG", SAMPLE_STRING, 2147483647); //Default data type in .NET is system.String.
                     row.Add("FLOAT", 1.234, 22);
                     row.Add("VARCHAR", "qwertasdfg", 10);
                     row.Add("NVARCHAR", "qwertasdfg", 20);
@@ -188,8 +202,8 @@ namespace MonoTests.System.Data.Utils {
 
                     #region PostgreSQL
                 case MonoTests.System.Data.Utils.DataBaseServer.PostgreSQL:
-                    
-                    // PostgreSQL ODBC Type BOOL returns String with value "1" 
+
+                    // PostgreSQL ODBC Type BOOL returns String with value "1"
                     // so we don't run it on .NET
                     //                    if (!GHTEnvironment.IsJavaRunTime())
                     //                    {
@@ -214,27 +228,136 @@ namespace MonoTests.System.Data.Utils {
             }
             return row;
         }
+
         /// <summary>
         /// Creates a DbTypeParametersCollection with default types and data for the TYPES_EXTENDED table.
         /// </summary>
         /// <returns>The initialized DbTypeParametersCollection</returns>
-        public static DbTypeParametersCollection GetExtendedDbTypesParameters() {
-            DbTypeParametersCollection row = new DbTypeParametersCollection(EXTENDED_TYPES_TABLE_NAME);
-            switch (ConnectedDataProvider.GetDbType(ConnectedDataProvider.ConnectionString)) {
+        public static DbTypeParametersCollection GetExtendedDbTypesParameters()
+        {
+            DbTypeParametersCollection row = new DbTypeParametersCollection(
+                EXTENDED_TYPES_TABLE_NAME
+            );
+            switch (ConnectedDataProvider.GetDbType(ConnectedDataProvider.ConnectionString))
+            {
                     #region SQLServer
                 case MonoTests.System.Data.Utils.DataBaseServer.SQLServer:
                     row.Add("text", SAMPLE_STRING, 16);
                     row.Add("ntext", SAMPLE_STRING, 16);
-                    row.Add("binary", new byte[]    {0x00, 0x12, 0x34, 0x56, 0x78, 0x9A, 0xBC, 0xDE, 0xFF, 0xF0,
-                                                        0x00, 0x12, 0x34, 0x56, 0x78, 0x9A, 0xBC, 0xDE, 0xFF, 0xF0,
-                                                        0x00, 0x12, 0x34, 0x56, 0x78, 0x9A, 0xBC, 0xDE, 0xFF, 0xF0,
-                                                        0x00, 0x12, 0x34, 0x56, 0x78, 0x9A, 0xBC, 0xDE, 0xFF, 0xF0,
-                                                        0x00, 0x12, 0x34, 0x56, 0x78, 0x9A, 0xBC, 0xDE, 0xFF, 0xF0}, 50);
-                    row.Add("varbinary", new byte[]    {0x00, 0x12, 0x34, 0x56, 0x78, 0x9A, 0xBC, 0xDE, 0xFF, 0xF0,
-                                                        0x00, 0x12, 0x34, 0x56, 0x78, 0x9A, 0xBC, 0xDE, 0xFF, 0xF0,
-                                                        0x00, 0x12, 0x34, 0x56, 0x78, 0x9A, 0xBC, 0xDE, 0xFF, 0xF0,
-                                                        0x00, 0x12, 0x34, 0x56, 0x78, 0x9A, 0xBC, 0xDE, 0xFF, 0xF0,
-                                                        0x00, 0x12, 0x34, 0x56, 0x78, 0x9A, 0xBC, 0xDE, 0xFF, 0xF0}, 50);
+                    row.Add(
+                        "binary",
+                        new byte[]
+                        {
+                            0x00,
+                            0x12,
+                            0x34,
+                            0x56,
+                            0x78,
+                            0x9A,
+                            0xBC,
+                            0xDE,
+                            0xFF,
+                            0xF0,
+                            0x00,
+                            0x12,
+                            0x34,
+                            0x56,
+                            0x78,
+                            0x9A,
+                            0xBC,
+                            0xDE,
+                            0xFF,
+                            0xF0,
+                            0x00,
+                            0x12,
+                            0x34,
+                            0x56,
+                            0x78,
+                            0x9A,
+                            0xBC,
+                            0xDE,
+                            0xFF,
+                            0xF0,
+                            0x00,
+                            0x12,
+                            0x34,
+                            0x56,
+                            0x78,
+                            0x9A,
+                            0xBC,
+                            0xDE,
+                            0xFF,
+                            0xF0,
+                            0x00,
+                            0x12,
+                            0x34,
+                            0x56,
+                            0x78,
+                            0x9A,
+                            0xBC,
+                            0xDE,
+                            0xFF,
+                            0xF0
+                        },
+                        50
+                    );
+                    row.Add(
+                        "varbinary",
+                        new byte[]
+                        {
+                            0x00,
+                            0x12,
+                            0x34,
+                            0x56,
+                            0x78,
+                            0x9A,
+                            0xBC,
+                            0xDE,
+                            0xFF,
+                            0xF0,
+                            0x00,
+                            0x12,
+                            0x34,
+                            0x56,
+                            0x78,
+                            0x9A,
+                            0xBC,
+                            0xDE,
+                            0xFF,
+                            0xF0,
+                            0x00,
+                            0x12,
+                            0x34,
+                            0x56,
+                            0x78,
+                            0x9A,
+                            0xBC,
+                            0xDE,
+                            0xFF,
+                            0xF0,
+                            0x00,
+                            0x12,
+                            0x34,
+                            0x56,
+                            0x78,
+                            0x9A,
+                            0xBC,
+                            0xDE,
+                            0xFF,
+                            0xF0,
+                            0x00,
+                            0x12,
+                            0x34,
+                            0x56,
+                            0x78,
+                            0x9A,
+                            0xBC,
+                            0xDE,
+                            0xFF,
+                            0xF0
+                        },
+                        50
+                    );
                     row.Add("datetime", new DateTime(2004, 8, 9, 20, 30, 15, 500), 8);
                     row.Add("smalldatetime", new DateTime(2004, 8, 9, 20, 30, 00), 4);
                     break;
@@ -245,17 +368,121 @@ namespace MonoTests.System.Data.Utils {
                     row.Add("TEXT", SAMPLE_STRING, 16);
                     //There is probably a bug in the jdbc driver , we've tried to insert this string using
                     //sybase command tool and it gave the same result (3850)
-                    row.Add("NTEXT", SAMPLE_STRING.Trim() , 16);
-                    row.Add("BINARY", new byte[]    {0x00, 0x12, 0x34, 0x56, 0x78, 0x9A, 0xBC, 0xDE, 0xFF, 0xF0,
-                                                        0x00, 0x12, 0x34, 0x56, 0x78, 0x9A, 0xBC, 0xDE, 0xFF, 0xF0,
-                                                        0x00, 0x12, 0x34, 0x56, 0x78, 0x9A, 0xBC, 0xDE, 0xFF, 0xF0,
-                                                        0x00, 0x12, 0x34, 0x56, 0x78, 0x9A, 0xBC, 0xDE, 0xFF, 0xF0,
-                                                        0x00, 0x12, 0x34, 0x56, 0x78, 0x9A, 0xBC, 0xDE, 0xFF, 0xF0}, 50);
-                    row.Add("VARBINARY", new byte[]    {0x00, 0x12, 0x34, 0x56, 0x78, 0x9A, 0xBC, 0xDE, 0xFF, 0xF0,
-                                                        0x00, 0x12, 0x34, 0x56, 0x78, 0x9A, 0xBC, 0xDE, 0xFF, 0xF0,
-                                                        0x00, 0x12, 0x34, 0x56, 0x78, 0x9A, 0xBC, 0xDE, 0xFF, 0xF0,
-                                                        0x00, 0x12, 0x34, 0x56, 0x78, 0x9A, 0xBC, 0xDE, 0xFF, 0xF0,
-                                                        0x00, 0x12, 0x34, 0x56, 0x78, 0x9A, 0xBC, 0xDE, 0xFF, 0xF0}, 50);
+                    row.Add("NTEXT", SAMPLE_STRING.Trim(), 16);
+                    row.Add(
+                        "BINARY",
+                        new byte[]
+                        {
+                            0x00,
+                            0x12,
+                            0x34,
+                            0x56,
+                            0x78,
+                            0x9A,
+                            0xBC,
+                            0xDE,
+                            0xFF,
+                            0xF0,
+                            0x00,
+                            0x12,
+                            0x34,
+                            0x56,
+                            0x78,
+                            0x9A,
+                            0xBC,
+                            0xDE,
+                            0xFF,
+                            0xF0,
+                            0x00,
+                            0x12,
+                            0x34,
+                            0x56,
+                            0x78,
+                            0x9A,
+                            0xBC,
+                            0xDE,
+                            0xFF,
+                            0xF0,
+                            0x00,
+                            0x12,
+                            0x34,
+                            0x56,
+                            0x78,
+                            0x9A,
+                            0xBC,
+                            0xDE,
+                            0xFF,
+                            0xF0,
+                            0x00,
+                            0x12,
+                            0x34,
+                            0x56,
+                            0x78,
+                            0x9A,
+                            0xBC,
+                            0xDE,
+                            0xFF,
+                            0xF0
+                        },
+                        50
+                    );
+                    row.Add(
+                        "VARBINARY",
+                        new byte[]
+                        {
+                            0x00,
+                            0x12,
+                            0x34,
+                            0x56,
+                            0x78,
+                            0x9A,
+                            0xBC,
+                            0xDE,
+                            0xFF,
+                            0xF0,
+                            0x00,
+                            0x12,
+                            0x34,
+                            0x56,
+                            0x78,
+                            0x9A,
+                            0xBC,
+                            0xDE,
+                            0xFF,
+                            0xF0,
+                            0x00,
+                            0x12,
+                            0x34,
+                            0x56,
+                            0x78,
+                            0x9A,
+                            0xBC,
+                            0xDE,
+                            0xFF,
+                            0xF0,
+                            0x00,
+                            0x12,
+                            0x34,
+                            0x56,
+                            0x78,
+                            0x9A,
+                            0xBC,
+                            0xDE,
+                            0xFF,
+                            0xF0,
+                            0x00,
+                            0x12,
+                            0x34,
+                            0x56,
+                            0x78,
+                            0x9A,
+                            0xBC,
+                            0xDE,
+                            0xFF,
+                            0xF0
+                        },
+                        50
+                    );
                     row.Add("DATETIME", new DateTime(2004, 8, 9, 20, 30, 15, 500), 8);
                     row.Add("SMALLDATETIME", new DateTime(2004, 8, 9, 20, 30, 00), 4);
                     break;
@@ -263,20 +490,120 @@ namespace MonoTests.System.Data.Utils {
 
                     #region ORACLE
                 case MonoTests.System.Data.Utils.DataBaseServer.Oracle:
-                    row.Add("RAW", new byte[]    {0x00, 0x12, 0x34, 0x56, 0x78, 0x9A, 0xBC, 0xDE, 0xFF, 0xF0}, 10);
-                    row.Add("LONGRAW", new byte[]    {0x00, 0x12, 0x34, 0x56, 0x78, 0x9A, 0xBC, 0xDE, 0xFF, 0xF0
-                                                        ,0x00, 0x12, 0x34, 0x56, 0x78, 0x9A, 0xBC, 0xDE, 0xFF, 0xF0
-                                                        ,0x00, 0x12, 0x34, 0x56, 0x78, 0x9A, 0xBC, 0xDE, 0xFF, 0xF0
-                                                        ,0x00, 0x12, 0x34, 0x56, 0x78, 0x9A, 0xBC, 0xDE, 0xFF, 0xF0
-                                                        ,0x00, 0x12, 0x34, 0x56, 0x78, 0x9A, 0xBC, 0xDE, 0xFF, 0xF0
-                                                        ,0x00, 0x12, 0x34, 0x56, 0x78, 0x9A, 0xBC, 0xDE, 0xFF, 0xF0
-                                                        ,0x00, 0x12, 0x34, 0x56, 0x78, 0x9A, 0xBC, 0xDE, 0xFF, 0xF0
-                                                        ,0x00, 0x12, 0x34, 0x56, 0x78, 0x9A, 0xBC, 0xDE, 0xFF, 0xF0
-                                                        ,0x00, 0x12, 0x34, 0x56, 0x78, 0x9A, 0xBC, 0xDE, 0xFF, 0xF0
-                                                        ,0x00, 0x12, 0x34, 0x56, 0x78, 0x9A, 0xBC, 0xDE, 0xFF, 0xF0
-                                                    }, 100);
+                    row.Add(
+                        "RAW",
+                        new byte[] { 0x00, 0x12, 0x34, 0x56, 0x78, 0x9A, 0xBC, 0xDE, 0xFF, 0xF0 },
+                        10
+                    );
+                    row.Add(
+                        "LONGRAW",
+                        new byte[]
+                        {
+                            0x00,
+                            0x12,
+                            0x34,
+                            0x56,
+                            0x78,
+                            0x9A,
+                            0xBC,
+                            0xDE,
+                            0xFF,
+                            0xF0,
+                            0x00,
+                            0x12,
+                            0x34,
+                            0x56,
+                            0x78,
+                            0x9A,
+                            0xBC,
+                            0xDE,
+                            0xFF,
+                            0xF0,
+                            0x00,
+                            0x12,
+                            0x34,
+                            0x56,
+                            0x78,
+                            0x9A,
+                            0xBC,
+                            0xDE,
+                            0xFF,
+                            0xF0,
+                            0x00,
+                            0x12,
+                            0x34,
+                            0x56,
+                            0x78,
+                            0x9A,
+                            0xBC,
+                            0xDE,
+                            0xFF,
+                            0xF0,
+                            0x00,
+                            0x12,
+                            0x34,
+                            0x56,
+                            0x78,
+                            0x9A,
+                            0xBC,
+                            0xDE,
+                            0xFF,
+                            0xF0,
+                            0x00,
+                            0x12,
+                            0x34,
+                            0x56,
+                            0x78,
+                            0x9A,
+                            0xBC,
+                            0xDE,
+                            0xFF,
+                            0xF0,
+                            0x00,
+                            0x12,
+                            0x34,
+                            0x56,
+                            0x78,
+                            0x9A,
+                            0xBC,
+                            0xDE,
+                            0xFF,
+                            0xF0,
+                            0x00,
+                            0x12,
+                            0x34,
+                            0x56,
+                            0x78,
+                            0x9A,
+                            0xBC,
+                            0xDE,
+                            0xFF,
+                            0xF0,
+                            0x00,
+                            0x12,
+                            0x34,
+                            0x56,
+                            0x78,
+                            0x9A,
+                            0xBC,
+                            0xDE,
+                            0xFF,
+                            0xF0,
+                            0x00,
+                            0x12,
+                            0x34,
+                            0x56,
+                            0x78,
+                            0x9A,
+                            0xBC,
+                            0xDE,
+                            0xFF,
+                            0xF0
+                        },
+                        100
+                    );
                     row.Add("DATE", new DateTime(2004, 8, 9, 20, 30, 15), 7);
-                    
+
                     // The .NET Framework provides support for Oracle LOBs in the OracleClient namespace, but not in the OleDb namespace.
                     // Since Visual MainWin does not support the OracleClient namespace, a partial support for this important feature is provided in the OleDb namespace.
                     // See ms-help://MS.VSCC.2003/VMW.GH.1033/ghdoc/vmwdoc_ADONET_data_access_limitations_51.htm
@@ -288,48 +615,198 @@ namespace MonoTests.System.Data.Utils {
                     row.Add("DATE", new DateTime(2004, 8, 9, 20, 30, 15, 500).Date);
                     row.Add("TIME", new TimeSpan(20, 30, 15));
                     row.Add("TIMESTAMP", new DateTime(2004, 8, 9, 20, 30, 15, 500));
-                    row.Add("BLOB", new byte[]    {0x00, 0x12, 0x34, 0x56, 0x78, 0x9A, 0xBC, 0xDE, 0xFF, 0xF0
-                                                    ,0x00, 0x12, 0x34, 0x56, 0x78, 0x9A, 0xBC, 0xDE, 0xFF, 0xF0
-                                                    ,0x00, 0x12, 0x34, 0x56, 0x78, 0x9A, 0xBC, 0xDE, 0xFF, 0xF0
-                                                    ,0x00, 0x12, 0x34, 0x56, 0x78, 0x9A, 0xBC, 0xDE, 0xFF, 0xF0
-                                                    ,0x00, 0x12, 0x34, 0x56, 0x78, 0x9A, 0xBC, 0xDE, 0xFF, 0xF0
-                                                    ,0x00, 0x12, 0x34, 0x56, 0x78, 0x9A, 0xBC, 0xDE, 0xFF, 0xF0
-                                                    ,0x00, 0x12, 0x34, 0x56, 0x78, 0x9A, 0xBC, 0xDE, 0xFF, 0xF0
-                                                    ,0x00, 0x12, 0x34, 0x56, 0x78, 0x9A, 0xBC, 0xDE, 0xFF, 0xF0
-                                                    ,0x00, 0x12, 0x34, 0x56, 0x78, 0x9A, 0xBC, 0xDE, 0xFF, 0xF0
-                                                    ,0x00, 0x12, 0x34, 0x56, 0x78, 0x9A, 0xBC, 0xDE, 0xFF, 0xF0
-                                                });
-                    row.Add("CLOB", SAMPLE_STRING
-                        + SAMPLE_STRING
-                        + SAMPLE_STRING
-                        + SAMPLE_STRING
-                        + SAMPLE_STRING
-                        + SAMPLE_STRING
-                        );
-                    row.Add("DBCLOB", SAMPLE_STRING
-                        + SAMPLE_STRING
-                        + SAMPLE_STRING
-                        + SAMPLE_STRING
-                        + SAMPLE_STRING
-                        + SAMPLE_STRING
-                        );
+                    row.Add(
+                        "BLOB",
+                        new byte[]
+                        {
+                            0x00,
+                            0x12,
+                            0x34,
+                            0x56,
+                            0x78,
+                            0x9A,
+                            0xBC,
+                            0xDE,
+                            0xFF,
+                            0xF0,
+                            0x00,
+                            0x12,
+                            0x34,
+                            0x56,
+                            0x78,
+                            0x9A,
+                            0xBC,
+                            0xDE,
+                            0xFF,
+                            0xF0,
+                            0x00,
+                            0x12,
+                            0x34,
+                            0x56,
+                            0x78,
+                            0x9A,
+                            0xBC,
+                            0xDE,
+                            0xFF,
+                            0xF0,
+                            0x00,
+                            0x12,
+                            0x34,
+                            0x56,
+                            0x78,
+                            0x9A,
+                            0xBC,
+                            0xDE,
+                            0xFF,
+                            0xF0,
+                            0x00,
+                            0x12,
+                            0x34,
+                            0x56,
+                            0x78,
+                            0x9A,
+                            0xBC,
+                            0xDE,
+                            0xFF,
+                            0xF0,
+                            0x00,
+                            0x12,
+                            0x34,
+                            0x56,
+                            0x78,
+                            0x9A,
+                            0xBC,
+                            0xDE,
+                            0xFF,
+                            0xF0,
+                            0x00,
+                            0x12,
+                            0x34,
+                            0x56,
+                            0x78,
+                            0x9A,
+                            0xBC,
+                            0xDE,
+                            0xFF,
+                            0xF0,
+                            0x00,
+                            0x12,
+                            0x34,
+                            0x56,
+                            0x78,
+                            0x9A,
+                            0xBC,
+                            0xDE,
+                            0xFF,
+                            0xF0,
+                            0x00,
+                            0x12,
+                            0x34,
+                            0x56,
+                            0x78,
+                            0x9A,
+                            0xBC,
+                            0xDE,
+                            0xFF,
+                            0xF0,
+                            0x00,
+                            0x12,
+                            0x34,
+                            0x56,
+                            0x78,
+                            0x9A,
+                            0xBC,
+                            0xDE,
+                            0xFF,
+                            0xF0
+                        }
+                    );
+                    row.Add(
+                        "CLOB",
+                        SAMPLE_STRING
+                            + SAMPLE_STRING
+                            + SAMPLE_STRING
+                            + SAMPLE_STRING
+                            + SAMPLE_STRING
+                            + SAMPLE_STRING
+                    );
+                    row.Add(
+                        "DBCLOB",
+                        SAMPLE_STRING
+                            + SAMPLE_STRING
+                            + SAMPLE_STRING
+                            + SAMPLE_STRING
+                            + SAMPLE_STRING
+                            + SAMPLE_STRING
+                    );
                     break;
                     #endregion
 
                     #region PostgreSQL
                 case MonoTests.System.Data.Utils.DataBaseServer.PostgreSQL:
-                    row.Add("BYTEA", new byte[]    {0x00, 0x12, 0x34, 0x56, 0x78, 0x9A, 0xBC, 0xDE, 0xFF, 0xF0,
-                                                    0x00, 0x12, 0x34, 0x56, 0x78, 0x9A, 0xBC, 0xDE, 0xFF, 0xF0,
-                                                    0x00, 0x12, 0x34, 0x56, 0x78, 0x9A, 0xBC, 0xDE, 0xFF, 0xF0,
-                                                    0x00, 0x12, 0x34, 0x56, 0x78, 0x9A, 0xBC, 0xDE, 0xFF, 0xF0,
-                                                    0x00, 0x12, 0x34, 0x56, 0x78, 0x9A, 0xBC, 0xDE, 0xFF, 0xF0}, 50);
+                    row.Add(
+                        "BYTEA",
+                        new byte[]
+                        {
+                            0x00,
+                            0x12,
+                            0x34,
+                            0x56,
+                            0x78,
+                            0x9A,
+                            0xBC,
+                            0xDE,
+                            0xFF,
+                            0xF0,
+                            0x00,
+                            0x12,
+                            0x34,
+                            0x56,
+                            0x78,
+                            0x9A,
+                            0xBC,
+                            0xDE,
+                            0xFF,
+                            0xF0,
+                            0x00,
+                            0x12,
+                            0x34,
+                            0x56,
+                            0x78,
+                            0x9A,
+                            0xBC,
+                            0xDE,
+                            0xFF,
+                            0xF0,
+                            0x00,
+                            0x12,
+                            0x34,
+                            0x56,
+                            0x78,
+                            0x9A,
+                            0xBC,
+                            0xDE,
+                            0xFF,
+                            0xF0,
+                            0x00,
+                            0x12,
+                            0x34,
+                            0x56,
+                            0x78,
+                            0x9A,
+                            0xBC,
+                            0xDE,
+                            0xFF,
+                            0xF0
+                        },
+                        50
+                    );
                     row.Add("DATE", new DateTime(2004, 8, 9));
-                    row.Add("TEXT", "abcdefg", 16); 
-                    row.Add("TIME", new Sys.TimeSpan(02,02,02));
+                    row.Add("TEXT", "abcdefg", 16);
+                    row.Add("TIME", new Sys.TimeSpan(02, 02, 02));
                     row.Add("TIMESTAMP", new DateTime(2004, 8, 9, 20, 30, 15, 500), 8);
                     break;
                     #endregion
-
             }
             return row;
         }

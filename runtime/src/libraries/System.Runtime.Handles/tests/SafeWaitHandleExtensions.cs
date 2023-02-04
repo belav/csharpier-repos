@@ -10,8 +10,7 @@ public partial class SafeWaitHandleExtensionsTests
 {
     public class MyWaitHandle : WaitHandle
     {
-        public MyWaitHandle()
-        { }
+        public MyWaitHandle() { }
     }
 
     [Fact]
@@ -40,7 +39,7 @@ public partial class SafeWaitHandleExtensionsTests
         swh = wh.GetSafeWaitHandle();
         Assert.NotNull(swh);
         Assert.Equal(new IntPtr(-1), swh.DangerousGetHandle());
-        
+
         // Prevent finalization. Closing of the bogus handle has unpredictable results.
         swhExpected.SetHandleAsInvalid();
     }
@@ -51,6 +50,8 @@ public partial class SafeWaitHandleExtensionsTests
         WaitHandle wh = null;
 
         Assert.Throws<ArgumentNullException>(() => wh.GetSafeWaitHandle());
-        Assert.Throws<ArgumentNullException>(() => wh.SetSafeWaitHandle(new SafeWaitHandle(IntPtr.Zero, false)));
+        Assert.Throws<ArgumentNullException>(
+            () => wh.SetSafeWaitHandle(new SafeWaitHandle(IntPtr.Zero, false))
+        );
     }
 }

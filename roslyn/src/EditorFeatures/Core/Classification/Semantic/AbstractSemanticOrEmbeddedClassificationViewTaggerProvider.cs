@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.Classification
     /// in the editor.  We use a view tagger so that we can only classify what's in view, and not
     /// the whole file.
     /// </summary>
-    internal abstract class AbstractSemanticOrEmbeddedClassificationViewTaggerProvider : AsynchronousViewTaggerProvider<IClassificationTag>
+    internal abstract class AbstractSemanticOrEmbeddedClassificationViewTaggerProvider
+        : AsynchronousViewTaggerProvider<IClassificationTag>
     {
         private readonly ClassificationTypeMap _typeMap;
         private readonly IGlobalOptionService _globalOptions;
@@ -39,8 +40,10 @@ namespace Microsoft.CodeAnalysis.Classification
 
         // We want to track text changes so that we can try to only reclassify a method body if
         // all edits were contained within one.
-        protected sealed override TaggerTextChangeBehavior TextChangeBehavior => TaggerTextChangeBehavior.TrackTextChanges;
-        protected sealed override ImmutableArray<IOption2> Options { get; } = ImmutableArray.Create<IOption2>(InternalFeatureOnOffOptions.SemanticColorizer);
+        protected sealed override TaggerTextChangeBehavior TextChangeBehavior =>
+            TaggerTextChangeBehavior.TrackTextChanges;
+        protected sealed override ImmutableArray<IOption2> Options { get; } =
+            ImmutableArray.Create<IOption2>(InternalFeatureOnOffOptions.SemanticColorizer);
 
         protected AbstractSemanticOrEmbeddedClassificationViewTaggerProvider(
             IThreadingContext threadingContext,
@@ -48,8 +51,14 @@ namespace Microsoft.CodeAnalysis.Classification
             IGlobalOptionService globalOptions,
             ITextBufferVisibilityTracker? visibilityTracker,
             IAsynchronousOperationListenerProvider listenerProvider,
-            ClassificationType type)
-            : base(threadingContext, globalOptions, visibilityTracker, listenerProvider.GetListener(FeatureAttribute.Classification))
+            ClassificationType type
+        )
+            : base(
+                threadingContext,
+                globalOptions,
+                visibilityTracker,
+                listenerProvider.GetListener(FeatureAttribute.Classification)
+            )
         {
             _typeMap = typeMap;
             _globalOptions = globalOptions;
@@ -58,14 +67,17 @@ namespace Microsoft.CodeAnalysis.Classification
 
         protected sealed override TaggerDelay EventChangeDelay => TaggerDelay.Short;
 
-        protected sealed override ITaggerEventSource CreateEventSource(ITextView? textView, ITextBuffer subjectBuffer)
+        protected sealed override ITaggerEventSource CreateEventSource(
+            ITextView? textView,
+            ITextBuffer subjectBuffer
+        )
         {
             this.ThreadingContext.ThrowIfNotOnUIThread();
             Contract.ThrowIfNull(textView);
 
             // Note: we don't listen for OnTextChanged.  They'll get reported by the ViewSpan changing and also the
-            // SemanticChange notification. 
-            // 
+            // SemanticChange notification.
+            //
             // Note: because we use frozen-partial documents for semantic classification, we may end up with incomplete
             // semantics (esp. during solution load).  Because of this, we also register to hear when the full
             // compilation is available so that reclassify and bring ourselves up to date.
@@ -75,10 +87,17 @@ namespace Microsoft.CodeAnalysis.Classification
                 TaggerEventSources.OnViewSpanChanged(ThreadingContext, textView),
                 TaggerEventSources.OnWorkspaceChanged(subjectBuffer, AsyncListener),
                 TaggerEventSources.OnDocumentActiveContextChanged(subjectBuffer),
-                TaggerEventSources.OnGlobalOptionChanged(_globalOptions, ClassificationOptionsStorage.ClassifyReassignedVariables));
+                TaggerEventSources.OnGlobalOptionChanged(
+                    _globalOptions,
+                    ClassificationOptionsStorage.ClassifyReassignedVariables
+                )
+            );
         }
 
-        protected sealed override IEnumerable<SnapshotSpan> GetSpansToTag(ITextView? textView, ITextBuffer subjectBuffer)
+        protected sealed override IEnumerable<SnapshotSpan> GetSpansToTag(
+            ITextView? textView,
+            ITextBuffer subjectBuffer
+        )
         {
             this.ThreadingContext.ThrowIfNotOnUIThread();
             Contract.ThrowIfNull(textView);
@@ -94,7 +113,9 @@ namespace Microsoft.CodeAnalysis.Classification
         }
 
         protected sealed override Task ProduceTagsAsync(
-            TaggerContext<IClassificationTag> context, CancellationToken cancellationToken)
+            TaggerContext<IClassificationTag> context,
+            CancellationToken cancellationToken
+        )
         {
             Debug.Assert(context.SpansToTag.IsSingle());
 
@@ -113,21 +134,33 @@ namespace Microsoft.CodeAnalysis.Classification
 
             // The LSP client will handle producing tags when running under the LSP editor.
             // Our tagger implementation should return nothing to prevent conflicts.
-            var workspaceContextService = document.Project.Solution.Services.GetRequiredService<IWorkspaceContextService>();
+            var workspaceContextService =
+                document.Project.Solution.Services.GetRequiredService<IWorkspaceContextService>();
             if (workspaceContextService?.IsInLspEditorContext() == true)
                 return Task.CompletedTask;
 
             // If the LSP semantic tokens feature flag is enabled, return nothing to prevent conflicts.
-            var isLspSemanticTokensEnabled = _globalOptions.GetOption(LspOptions.LspSemanticTokensFeatureFlag);
+            var isLspSemanticTokensEnabled = _globalOptions.GetOption(
+                LspOptions.LspSemanticTokensFeatureFlag
+            );
             if (isLspSemanticTokensEnabled)
                 return Task.CompletedTask;
 
-            var classificationOptions = _globalOptions.GetClassificationOptions(document.Project.Language);
+            var classificationOptions = _globalOptions.GetClassificationOptions(
+                document.Project.Language
+            );
             return ClassificationUtilities.ProduceTagsAsync(
-                context, spanToTag, classificationService, _typeMap, classificationOptions, _type, cancellationToken);
+                context,
+                spanToTag,
+                classificationService,
+                _typeMap,
+                classificationOptions,
+                _type,
+                cancellationToken
+            );
         }
 
-        protected override bool TagEquals(IClassificationTag tag1, IClassificationTag tag2)
-            => tag1.ClassificationType.Classification == tag2.ClassificationType.Classification;
+        protected override bool TagEquals(IClassificationTag tag1, IClassificationTag tag2) =>
+            tag1.ClassificationType.Classification == tag2.ClassificationType.Classification;
     }
 }

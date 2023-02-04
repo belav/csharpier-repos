@@ -23,7 +23,7 @@ namespace System.Workflow.ComponentModel.Design
     #region ActivityHostDesigner Class
     /// <summary>
     /// Base class used to display inlined workflows. This class is for internal use.
-    /// 
+    ///
 
     internal abstract class ActivityHostDesigner : SequentialActivityDesigner
     {
@@ -35,9 +35,7 @@ namespace System.Workflow.ComponentModel.Design
         #endregion
 
         #region Constructor
-        public ActivityHostDesigner()
-        {
-        }
+        public ActivityHostDesigner() { }
         #endregion
 
         #region Properties
@@ -80,17 +78,14 @@ namespace System.Workflow.ComponentModel.Design
                 }
                 catch
                 {
-                    // tried to apply serialized state to the wrong hosted activity... ignore 
+                    // tried to apply serialized state to the wrong hosted activity... ignore
                 }
             }
 
             PerformLayout();
         }
 
-        protected abstract Activity RootActivity
-        {
-            get;
-        }
+        protected abstract Activity RootActivity { get; }
         #endregion
 
         #region Private Properties
@@ -101,23 +96,25 @@ namespace System.Workflow.ComponentModel.Design
         #region Methods
 
         #region Public Methods
-        public override bool CanInsertActivities(HitTestInfo insertLocation, ReadOnlyCollection<Activity> activitiesToInsert)
+        public override bool CanInsertActivities(
+            HitTestInfo insertLocation,
+            ReadOnlyCollection<Activity> activitiesToInsert
+        )
         {
             return false;
         }
 
-        public override void InsertActivities(HitTestInfo insertLocation, ReadOnlyCollection<Activity> activitiesToInsert)
-        {
-        }
+        public override void InsertActivities(
+            HitTestInfo insertLocation,
+            ReadOnlyCollection<Activity> activitiesToInsert
+        ) { }
 
         public override bool CanRemoveActivities(ReadOnlyCollection<Activity> activitiesToRemove)
         {
             return false;
         }
 
-        public override void RemoveActivities(ReadOnlyCollection<Activity> activitiesToRemove)
-        {
-        }
+        public override void RemoveActivities(ReadOnlyCollection<Activity> activitiesToRemove) { }
         #endregion
 
         #region Protected Methods
@@ -157,9 +154,12 @@ namespace System.Workflow.ComponentModel.Design
                 // mark persistence for invoked workflow
                 writer.Write(true);
 
-                IDesignerHost designerHost = this.containedDesignSurface.GetService(typeof(IDesignerHost)) as IDesignerHost;
+                IDesignerHost designerHost =
+                    this.containedDesignSurface.GetService(typeof(IDesignerHost)) as IDesignerHost;
                 if (designerHost == null)
-                    throw new Exception(SR.GetString(SR.General_MissingService, typeof(IDesignerHost).FullName));
+                    throw new Exception(
+                        SR.GetString(SR.General_MissingService, typeof(IDesignerHost).FullName)
+                    );
 
                 DesignerHelpers.SerializeDesignerStates(designerHost, writer);
             }
@@ -182,9 +182,13 @@ namespace System.Workflow.ComponentModel.Design
 
                 if (this.containedDesignSurface != null)
                 {
-                    IDesignerHost designerHost = this.containedDesignSurface.GetService(typeof(IDesignerHost)) as IDesignerHost;
+                    IDesignerHost designerHost =
+                        this.containedDesignSurface.GetService(typeof(IDesignerHost))
+                        as IDesignerHost;
                     if (designerHost == null)
-                        throw new Exception(SR.GetString(SR.General_MissingService, typeof(IDesignerHost).FullName));
+                        throw new Exception(
+                            SR.GetString(SR.General_MissingService, typeof(IDesignerHost).FullName)
+                        );
                     DesignerHelpers.DeserializeDesignerStates(designerHost, reader);
                 }
             }
@@ -200,7 +204,10 @@ namespace System.Workflow.ComponentModel.Design
                 this.containedDesignSurface = new ContainedDesignSurface(Activity.Site, this);
                 if (this.containedDesignSurface.IsLoaded == false)
                     this.containedDesignSurface.BeginLoad(this.containedLoader);
-                return ActivityDesigner.GetSafeRootDesigner(this.containedDesignSurface.GetService(typeof(IDesignerHost)) as IServiceProvider) as IWorkflowRootDesigner;
+                return ActivityDesigner.GetSafeRootDesigner(
+                        this.containedDesignSurface.GetService(typeof(IDesignerHost))
+                            as IServiceProvider
+                    ) as IWorkflowRootDesigner;
             }
             else
             {
@@ -219,7 +226,10 @@ namespace System.Workflow.ComponentModel.Design
             #region Members and Constructor
             private CompositeActivityDesigner parentDesigner;
 
-            internal ContainedDesignSurface(IServiceProvider parentServiceProvider, CompositeActivityDesigner parentDesigner)
+            internal ContainedDesignSurface(
+                IServiceProvider parentServiceProvider,
+                CompositeActivityDesigner parentDesigner
+            )
                 : base(parentServiceProvider)
             {
                 this.parentDesigner = parentDesigner;
@@ -289,10 +299,7 @@ namespace System.Workflow.ComponentModel.Design
 
             public override string FileName
             {
-                get
-                {
-                    return String.Empty;
-                }
+                get { return String.Empty; }
             }
 
             public override TextReader GetFileReader(string filePath)
@@ -305,9 +312,7 @@ namespace System.Workflow.ComponentModel.Design
                 return null;
             }
 
-            public override void ForceReload()
-            {
-            }
+            public override void ForceReload() { }
 
             protected override void PerformLoad(IDesignerSerializationManager serializationManager)
             {
@@ -319,9 +324,7 @@ namespace System.Workflow.ComponentModel.Design
                 }
             }
 
-            public override void Flush()
-            {
-            }
+            public override void Flush() { }
             #endregion
         }
         #endregion
@@ -335,8 +338,20 @@ namespace System.Workflow.ComponentModel.Design
     internal sealed class InvokeWorkflowDesigner : ActivityHostDesigner
     {
         #region members and initializers
-        internal const string InvokeWorkflowRef = "System.Workflow.Activities.InvokeWorkflowActivity, " + AssemblyRef.ActivitiesAssemblyRef;
-        private static readonly ArrayList ReservedParameterNames = new ArrayList(new string[] { "Name", "Enabled", "Description", "TargetWorkflow", "Invoking", "ParameterBindings" });
+        internal const string InvokeWorkflowRef =
+            "System.Workflow.Activities.InvokeWorkflowActivity, "
+            + AssemblyRef.ActivitiesAssemblyRef;
+        private static readonly ArrayList ReservedParameterNames = new ArrayList(
+            new string[]
+            {
+                "Name",
+                "Enabled",
+                "Description",
+                "TargetWorkflow",
+                "Invoking",
+                "ParameterBindings"
+            }
+        );
 
         private Type targetWorkflowType = null;
 
@@ -369,29 +384,52 @@ namespace System.Workflow.ComponentModel.Design
             {
                 try
                 {
-                    foreach (PropertyInfo parameterProperty in this.targetWorkflowType.GetProperties())
+                    foreach (
+                        PropertyInfo parameterProperty in this.targetWorkflowType.GetProperties()
+                    )
                     {
                         if (!parameterProperty.CanWrite)
                             continue;
 
-                        if (parameterProperty.DeclaringType == typeof(DependencyObject) ||
-                            parameterProperty.DeclaringType == typeof(Activity) ||
-                            parameterProperty.DeclaringType == typeof(CompositeActivity) ||
-                            ((parameterProperty.DeclaringType == Type.GetType(DesignerHelpers.SequentialWorkflowTypeRef) ||
-                             parameterProperty.DeclaringType == Type.GetType(DesignerHelpers.StateMachineWorkflowTypeRef)) &&
-                             string.Equals(parameterProperty.Name, "DynamicUpdateCondition", StringComparison.Ordinal)))
+                        if (
+                            parameterProperty.DeclaringType == typeof(DependencyObject)
+                            || parameterProperty.DeclaringType == typeof(Activity)
+                            || parameterProperty.DeclaringType == typeof(CompositeActivity)
+                            || (
+                                (
+                                    parameterProperty.DeclaringType
+                                        == Type.GetType(DesignerHelpers.SequentialWorkflowTypeRef)
+                                    || parameterProperty.DeclaringType
+                                        == Type.GetType(DesignerHelpers.StateMachineWorkflowTypeRef)
+                                )
+                                && string.Equals(
+                                    parameterProperty.Name,
+                                    "DynamicUpdateCondition",
+                                    StringComparison.Ordinal
+                                )
+                            )
+                        )
                             continue;
 
                         bool ignoreProperty = false;
                         Type dependencyObjectType = this.targetWorkflowType;
-                        while (dependencyObjectType != null && dependencyObjectType is DesignTimeType)
+                        while (
+                            dependencyObjectType != null && dependencyObjectType is DesignTimeType
+                        )
                             dependencyObjectType = dependencyObjectType.BaseType;
 
                         if (dependencyObjectType != null)
                         {
-                            foreach (DependencyProperty dependencyProperty in DependencyProperty.FromType(dependencyObjectType))
+                            foreach (
+                                DependencyProperty dependencyProperty in DependencyProperty.FromType(
+                                    dependencyObjectType
+                                )
+                            )
                             {
-                                if (dependencyProperty.Name == parameterProperty.Name && dependencyProperty.DefaultMetadata.IsMetaProperty)
+                                if (
+                                    dependencyProperty.Name == parameterProperty.Name
+                                    && dependencyProperty.DefaultMetadata.IsMetaProperty
+                                )
                                 {
                                     ignoreProperty = true;
                                     break;
@@ -401,7 +439,13 @@ namespace System.Workflow.ComponentModel.Design
 
                         if (!ignoreProperty)
                         {
-                            PropertyDescriptor prop = new ParameterInfoBasedPropertyDescriptor(Type.GetType(InvokeWorkflowRef), parameterProperty.Name, parameterProperty.PropertyType, ReservedParameterNames.Contains(parameterProperty.Name), DesignOnlyAttribute.Yes);
+                            PropertyDescriptor prop = new ParameterInfoBasedPropertyDescriptor(
+                                Type.GetType(InvokeWorkflowRef),
+                                parameterProperty.Name,
+                                parameterProperty.PropertyType,
+                                ReservedParameterNames.Contains(parameterProperty.Name),
+                                DesignOnlyAttribute.Yes
+                            );
                             properties[prop.Name] = prop;
                         }
                     }
@@ -412,6 +456,7 @@ namespace System.Workflow.ComponentModel.Design
                 }
             }
         }
+
         protected override void OnActivityChanged(ActivityChangedEventArgs e)
         {
             base.OnActivityChanged(e);
@@ -423,10 +468,17 @@ namespace System.Workflow.ComponentModel.Design
                     //We need to clear the parameter bindings if target workflow type changes
                     if (e.OldValue != e.NewValue && Activity != null)
                     {
-                        PropertyInfo parameterProperty = Activity.GetType().GetProperty("ParameterBindings", BindingFlags.Instance | BindingFlags.Public);
+                        PropertyInfo parameterProperty = Activity
+                            .GetType()
+                            .GetProperty(
+                                "ParameterBindings",
+                                BindingFlags.Instance | BindingFlags.Public
+                            );
                         if (parameterProperty != null)
                         {
-                            WorkflowParameterBindingCollection bindings = parameterProperty.GetValue(Activity, null) as WorkflowParameterBindingCollection;
+                            WorkflowParameterBindingCollection bindings =
+                                parameterProperty.GetValue(Activity, null)
+                                as WorkflowParameterBindingCollection;
                             if (bindings != null)
                                 bindings.Clear();
                         }
@@ -445,7 +497,22 @@ namespace System.Workflow.ComponentModel.Design
                 return;
 
             ITypeFilterProvider typeFilterProvider = Activity as ITypeFilterProvider;
-            Type workflowType = Activity.GetType().InvokeMember("TargetWorkflow", BindingFlags.GetProperty | BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.Instance | BindingFlags.FlattenHierarchy | BindingFlags.ExactBinding, null, Activity, new object[] { }, CultureInfo.InvariantCulture) as Type;
+            Type workflowType =
+                Activity
+                    .GetType()
+                    .InvokeMember(
+                        "TargetWorkflow",
+                        BindingFlags.GetProperty
+                            | BindingFlags.DeclaredOnly
+                            | BindingFlags.Public
+                            | BindingFlags.Instance
+                            | BindingFlags.FlattenHierarchy
+                            | BindingFlags.ExactBinding,
+                        null,
+                        Activity,
+                        new object[] { },
+                        CultureInfo.InvariantCulture
+                    ) as Type;
             if (workflowType != null && typeFilterProvider.CanFilterType(workflowType, false))
             {
                 ITypeProvider typeProvider = (ITypeProvider)GetService(typeof(ITypeProvider));
@@ -453,7 +520,9 @@ namespace System.Workflow.ComponentModel.Design
                 {
                     Type updatedWorkflowType = null;
                     if (workflowType.Assembly == null && typeProvider.LocalAssembly != null)
-                        updatedWorkflowType = typeProvider.LocalAssembly.GetType(workflowType.FullName);
+                        updatedWorkflowType = typeProvider.LocalAssembly.GetType(
+                            workflowType.FullName
+                        );
                     else
                         updatedWorkflowType = typeProvider.GetType(workflowType.FullName);
 

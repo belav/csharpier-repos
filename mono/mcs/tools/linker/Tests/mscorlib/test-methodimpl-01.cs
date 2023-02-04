@@ -3,14 +3,12 @@ using System.Runtime.CompilerServices;
 
 public class C
 {
-    public static int Main ()
+    public static int Main()
     {
-        Sync ();
+        Sync();
         return 0;
     }
 
     [MethodImplAttribute(MethodImplOptions.Synchronized)]
-    static void Sync ()
-    {
-    }
+    static void Sync() { }
 }

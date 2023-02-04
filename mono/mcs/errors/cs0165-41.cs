@@ -5,7 +5,7 @@ using System;
 
 class Program
 {
-    public static void Main ()
+    public static void Main()
     {
         int a;
         string s = "";

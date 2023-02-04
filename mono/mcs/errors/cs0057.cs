@@ -3,16 +3,17 @@
 
 using System;
 
-class ErrorCS0057 {
-    public ErrorCS0057 () {}
+class ErrorCS0057
+{
+    public ErrorCS0057() { }
 }
 
-public class Foo {
-    public static implicit operator Foo(ErrorCS0057 bar) {
-        return new Foo ();
+public class Foo
+{
+    public static implicit operator Foo(ErrorCS0057 bar)
+    {
+        return new Foo();
     }
 
-    public static void Main () {
-    }
+    public static void Main() { }
 }
-

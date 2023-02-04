@@ -6,33 +6,34 @@ class MyDisposable : IDisposable
     static int next_id;
     int id = ++next_id;
 
-    public void Dispose ()
-    { }
+    public void Dispose() { }
 
-    public int ID {
+    public int ID
+    {
         get { return id; }
     }
 
-    public override string ToString ()
+    public override string ToString()
     {
-        return String.Format ("{0} ({1})", GetType (), id);
+        return String.Format("{0} ({1})", GetType(), id);
     }
 }
 
 class X
 {
-    public static IEnumerable<int> Test (int a)
+    public static IEnumerable<int> Test(int a)
     {
         MyDisposable d;
-        using (d = new MyDisposable ()) {
+        using (d = new MyDisposable())
+        {
             yield return a;
             yield return d.ID;
         }
     }
 
-    public static void Main ()
+    public static void Main()
     {
-        foreach (int a in Test (5))
-            Console.WriteLine (a);
+        foreach (int a in Test(5))
+            Console.WriteLine(a);
     }
 }

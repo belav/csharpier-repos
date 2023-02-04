@@ -8,26 +8,22 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
     {
         public static readonly IProgressTracker Instance = new NoOpProgressTracker();
 
-        private NoOpProgressTracker()
-        {
-        }
+        private NoOpProgressTracker() { }
 
-        public string? Description { get => null; set { } }
+        public string? Description
+        {
+            get => null;
+            set { }
+        }
 
         public int CompletedItems => 0;
 
         public int TotalItems => 0;
 
-        public void AddItems(int count)
-        {
-        }
+        public void AddItems(int count) { }
 
-        public void Clear()
-        {
-        }
+        public void Clear() { }
 
-        public void ItemCompleted()
-        {
-        }
+        public void ItemCompleted() { }
     }
 }

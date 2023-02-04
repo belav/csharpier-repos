@@ -40,10 +40,9 @@ using System.Web.UI.HtmlControls;
 
 namespace GHTTests.System_Web_dll.System_Web
 {
-    public class HttpRequest_Cookies
-        : GHTBaseWeb 
+    public class HttpRequest_Cookies : GHTBaseWeb
     {
-        private void Page_Load(object sender, System.EventArgs e) 
+        private void Page_Load(object sender, System.EventArgs e)
         {
             System.Web.UI.HtmlControls.HtmlForm frm = (HtmlForm)FindControl("Form1");
             GHTTestBegin(frm);
@@ -51,33 +50,37 @@ namespace GHTTests.System_Web_dll.System_Web
             // testing if the Context object is set
             // ===================================
             GHTSubTestBegin("Request.Cookies1");
-            try 
+            try
             {
                 if (Request.Cookies == null)
                     GHTSubTestAddResult("Failed");
                 else
                     GHTSubTestAddResult("Success");
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
-                GHTSubTestAddResult("unxpected " + ex.GetType().Name + " exception was caught-" + ex.Message);
-                }
+                GHTSubTestAddResult(
+                    "unxpected " + ex.GetType().Name + " exception was caught-" + ex.Message
+                );
+            }
 
             GHTSubTestEnd();
 
             // ===================================
-            // testing if the objects return is from the 
+            // testing if the objects return is from the
             // correct type
             // ===================================
             GHTSubTestBegin("Request.Cookies2");
-            try 
+            try
             {
                 HttpCookieCollection cookie = Request.Cookies;
                 GHTSubTestAddResult("success");
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
-                GHTSubTestAddResult("Unxpected " + ex.GetType().Name + " exception was caught-" + ex.Message);
+                GHTSubTestAddResult(
+                    "Unxpected " + ex.GetType().Name + " exception was caught-" + ex.Message
+                );
             }
 
             GHTSubTestEnd();
@@ -92,17 +95,18 @@ namespace GHTTests.System_Web_dll.System_Web
             HttpCookie MyCookie;
             MyCookie = new HttpCookie("MyCookie", "MyCookieValue");
             Response.Cookies.Add(MyCookie);
-            try 
+            try
             {
                 HttpCookieCollection Cookies = Request.Cookies;
                 foreach (System.Web.HttpCookie cookie in Cookies)
                     if (cookie.Name == "MyCookie")
                         GHTSubTestAddResult(cookie.Name + " - " + cookie.Value);
             }
-
-            catch (Exception ex) 
+            catch (Exception ex)
             {
-                GHTSubTestAddResult("Unxpected " + ex.GetType().Name + " exception was caught-" + ex.Message);
+                GHTSubTestAddResult(
+                    "Unxpected " + ex.GetType().Name + " exception was caught-" + ex.Message
+                );
             }
 
             GHTSubTestEnd();
@@ -114,15 +118,17 @@ namespace GHTTests.System_Web_dll.System_Web
             // in the HTTPColkiesCollction object
             // ===================================
             GHTSubTestBegin("Request.Cookies4");
-            try 
+            try
             {
                 System.Web.HttpCookieCollection Cookies = Request.Cookies;
                 string currentKey = "MyCookie";
                 GHTSubTestAddResult(Cookies[currentKey].Name + " - " + Cookies[currentKey].Value);
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
-                GHTSubTestAddResult("Unxpected " + ex.GetType().Name + " exception was caught-" + ex.Message);
+                GHTSubTestAddResult(
+                    "Unxpected " + ex.GetType().Name + " exception was caught-" + ex.Message
+                );
             }
 
             GHTSubTestEnd();
@@ -138,13 +144,13 @@ namespace GHTTests.System_Web_dll.System_Web
             InitializeComponent();
             base.OnInit(e);
         }
-        
+
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
-        {    
+        {
             this.Load += new System.EventHandler(this.Page_Load);
         }
         #endregion

@@ -37,11 +37,10 @@ using GHTWebControls;
 
 namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
 {
-    public class WebControl_Attributes
-        : GHTWebControlBase
+    public class WebControl_Attributes : GHTWebControlBase
     {
         #region Web Form Designer generated code
-        override protected void OnInit(EventArgs e) 
+        override protected void OnInit(EventArgs e)
         {
             //
             // CODEGEN: This call is required by the ASP.NET Web Form Designer.
@@ -49,15 +48,14 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             InitializeComponent();
             base.OnInit(e);
         }
-        
+
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent() 
-        {    
+        private void InitializeComponent()
+        {
             this.Load += new System.EventHandler(this.Page_Load);
-
         }
         #endregion
 
@@ -118,17 +116,19 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
         protected System.Web.UI.WebControls.Table Table3;
         protected GHTWebControls.GHTSubTest GHTSubTest57;
 
-        protected static Item [] m_dataSource = new Item[] { 
-                                                               new Item(1, "aaa"), 
-                                                               new Item(2, "bbb"), 
-                                                               new Item(3, "ccc"), 
-                                                               new Item(4, "ddd"), 
-                                                               new Item(5, "eee"), 
-                                                               new Item(6, "fff")};
-
-        private void Page_Load(object sender, System.EventArgs e) 
+        protected static Item[] m_dataSource = new Item[]
         {
-            HtmlForm frm  = (HtmlForm)FindControl("Form1");
+            new Item(1, "aaa"),
+            new Item(2, "bbb"),
+            new Item(3, "ccc"),
+            new Item(4, "ddd"),
+            new Item(5, "eee"),
+            new Item(6, "fff")
+        };
+
+        private void Page_Load(object sender, System.EventArgs e)
+        {
+            HtmlForm frm = (HtmlForm)FindControl("Form1");
             GHTTestBegin(frm);
             foreach (Type currentType in TypesToTest)
             {
@@ -154,14 +154,19 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
                     while (enumerator1.MoveNext())
                     {
                         string text1 = (string)(enumerator1.Current);
-                        this.GHTSubTestAddResult("Attribute - Name: " + text1 + " Value: " + this.TestedControl.Attributes[text1]);
+                        this.GHTSubTestAddResult(
+                            "Attribute - Name: "
+                                + text1
+                                + " Value: "
+                                + this.TestedControl.Attributes[text1]
+                        );
                     }
                 }
                 finally
                 {
                     if (enumerator1 is IDisposable)
                     {
-                        ((IDisposable) enumerator1).Dispose();
+                        ((IDisposable)enumerator1).Dispose();
                     }
                 }
             }
@@ -174,7 +179,6 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             }
             this.GHTSubTestEnd();
         }
- 
 
         private void RunDesignTimeTests()
         {
@@ -191,77 +195,77 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
                 GHTSubTest test1 = this.GHTSubTest25;
                 WebControl control1 = this.Button1;
                 this.AddAttributes(ref test1, ref control1);
-                this.Button1 = (Button) control1;
+                this.Button1 = (Button)control1;
                 this.GHTSubTest25 = test1;
                 test1 = this.GHTSubTest26;
                 control1 = this.CheckBox1;
                 this.AddAttributes(ref test1, ref control1);
-                this.CheckBox1 = (CheckBox) control1;
+                this.CheckBox1 = (CheckBox)control1;
                 this.GHTSubTest26 = test1;
                 test1 = this.GHTSubTest28;
                 control1 = this.HyperLink1;
                 this.AddAttributes(ref test1, ref control1);
-                this.HyperLink1 = (HyperLink) control1;
+                this.HyperLink1 = (HyperLink)control1;
                 this.GHTSubTest28 = test1;
                 test1 = this.GHTSubTest30;
                 control1 = this.Image1;
                 this.AddAttributes(ref test1, ref control1);
-                this.Image1 = (Image) control1;
+                this.Image1 = (Image)control1;
                 this.GHTSubTest30 = test1;
                 test1 = this.GHTSubTest32;
                 control1 = this.ImageButton1;
                 this.AddAttributes(ref test1, ref control1);
-                this.ImageButton1 = (ImageButton) control1;
+                this.ImageButton1 = (ImageButton)control1;
                 this.GHTSubTest32 = test1;
                 test1 = this.GHTSubTest34;
                 control1 = this.Label1;
                 this.AddAttributes(ref test1, ref control1);
-                this.Label1 = (Label) control1;
+                this.Label1 = (Label)control1;
                 this.GHTSubTest34 = test1;
                 test1 = this.GHTSubTest36;
                 control1 = this.LinkButton1;
                 this.AddAttributes(ref test1, ref control1);
-                this.LinkButton1 = (LinkButton) control1;
+                this.LinkButton1 = (LinkButton)control1;
                 this.GHTSubTest36 = test1;
                 test1 = this.GHTSubTest37;
                 control1 = this.Panel1;
                 this.AddAttributes(ref test1, ref control1);
-                this.Panel1 = (Panel) control1;
+                this.Panel1 = (Panel)control1;
                 this.GHTSubTest37 = test1;
                 test1 = this.GHTSubTest38;
                 control1 = this.RadioButton1;
                 this.AddAttributes(ref test1, ref control1);
-                this.RadioButton1 = (RadioButton) control1;
+                this.RadioButton1 = (RadioButton)control1;
                 this.GHTSubTest38 = test1;
                 test1 = this.GHTSubTest39;
                 control1 = this.TextBox1;
                 this.AddAttributes(ref test1, ref control1);
-                this.TextBox1 = (TextBox) control1;
+                this.TextBox1 = (TextBox)control1;
                 this.GHTSubTest39 = test1;
                 test1 = this.GHTSubTest40;
                 control1 = this.DropDownList1;
                 this.AddAttributes(ref test1, ref control1);
-                this.DropDownList1 = (DropDownList) control1;
+                this.DropDownList1 = (DropDownList)control1;
                 this.GHTSubTest40 = test1;
                 test1 = this.GHTSubTest41;
                 control1 = this.ListBox1;
                 this.AddAttributes(ref test1, ref control1);
-                this.ListBox1 = (ListBox) control1;
+                this.ListBox1 = (ListBox)control1;
                 this.GHTSubTest41 = test1;
                 test1 = this.GHTSubTest42;
                 control1 = this.RadioButtonList1;
                 this.AddAttributes(ref test1, ref control1);
-                this.RadioButtonList1 = (RadioButtonList) control1;
+                this.RadioButtonList1 = (RadioButtonList)control1;
                 this.GHTSubTest42 = test1;
                 test1 = this.GHTSubTest43;
                 control1 = this.CheckBoxList1;
                 this.AddAttributes(ref test1, ref control1);
-                this.CheckBoxList1 = (CheckBoxList) control1;
+                this.CheckBoxList1 = (CheckBoxList)control1;
                 this.GHTSubTest43 = test1;
                 test1 = this.GHTSubTest50;
                 control1 = this.DataGrid1;
                 this.AddAttributes(ref test1, ref control1);
-                this.DataGrid1 = (DataGrid) control1;
+                this.DataGrid1 = (DataGrid)control1;
                 this.GHTSubTest50 = test1;
                 test1 = this.GHTSubTest51;
                 control1 = this.DataGrid2.Items[0];
@@ -270,7 +274,7 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
                 test1 = this.GHTSubTest52;
                 control1 = this.DataList1;
                 this.AddAttributes(ref test1, ref control1);
-                this.DataList1 = (DataList) control1;
+                this.DataList1 = (DataList)control1;
                 this.GHTSubTest52 = test1;
                 test1 = this.GHTSubTest53;
                 control1 = this.DataList2.Items[0];
@@ -279,22 +283,22 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
                 test1 = this.GHTSubTest54;
                 control1 = this.Table1;
                 this.AddAttributes(ref test1, ref control1);
-                this.Table1 = (Table) control1;
+                this.Table1 = (Table)control1;
                 this.GHTSubTest54 = test1;
                 test1 = this.GHTSubTest55;
                 control1 = this.Table5;
                 this.AddAttributes(ref test1, ref control1);
-                this.Table5 = (Table) control1;
+                this.Table5 = (Table)control1;
                 this.GHTSubTest55 = test1;
                 test1 = this.GHTSubTest56;
                 control1 = this.Table2;
                 this.AddAttributes(ref test1, ref control1);
-                this.Table2 = (Table) control1;
+                this.Table2 = (Table)control1;
                 this.GHTSubTest56 = test1;
                 test1 = this.GHTSubTest57;
                 control1 = this.Table3;
                 this.AddAttributes(ref test1, ref control1);
-                this.Table3 = (Table) control1;
+                this.Table3 = (Table)control1;
                 this.GHTSubTest57 = test1;
             }
             catch (Exception exception2)
@@ -313,7 +317,6 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
                 // ProjectData.ClearProjectError();
             }
         }
- 
 
         private void AddAttributes(ref GHTSubTest a_currentSubTest, ref WebControl a_toTest)
         {
@@ -327,14 +330,16 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
                     while (enumerator1.MoveNext())
                     {
                         string text1 = (string)(enumerator1.Current);
-                        this.GHTSubTestAddResult("Attribute - Name: " + text1 + " Value: " + a_toTest.Attributes[text1]);
+                        this.GHTSubTestAddResult(
+                            "Attribute - Name: " + text1 + " Value: " + a_toTest.Attributes[text1]
+                        );
                     }
                 }
                 finally
                 {
                     if (enumerator1 is IDisposable)
                     {
-                        ((IDisposable) enumerator1).Dispose();
+                        ((IDisposable)enumerator1).Dispose();
                     }
                 }
             }
@@ -346,6 +351,5 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
                 // ProjectData.ClearProjectError();
             }
         }
- 
     }
 }

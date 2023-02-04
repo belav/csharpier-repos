@@ -3,8 +3,10 @@
 // Compiler options: -warnaserror -warn:1
 
 using System;
-[assembly:CLSCompliant(true)]
 
-public interface I {
-        ulong this[bool index] { get; }
+[assembly: CLSCompliant(true)]
+
+public interface I
+{
+    ulong this[bool index] { get; }
 }

@@ -12,12 +12,17 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.Internal.EmbeddedLang
         : AbstractProjectExtensionProvider<
             AspNetCoreDocumentHighlighterExtensionProvider,
             IAspNetCoreEmbeddedLanguageDocumentHighlighter,
-            ExportAspNetCoreEmbeddedLanguageDocumentHighlighterAttribute>
+            ExportAspNetCoreEmbeddedLanguageDocumentHighlighterAttribute
+        >
     {
-        protected override ImmutableArray<string> GetLanguages(ExportAspNetCoreEmbeddedLanguageDocumentHighlighterAttribute exportAttribute)
-            => ImmutableArray.Create(exportAttribute.Language);
+        protected override ImmutableArray<string> GetLanguages(
+            ExportAspNetCoreEmbeddedLanguageDocumentHighlighterAttribute exportAttribute
+        ) => ImmutableArray.Create(exportAttribute.Language);
 
-        protected override bool TryGetExtensionsFromReference(AnalyzerReference reference, out ImmutableArray<IAspNetCoreEmbeddedLanguageDocumentHighlighter> extensions)
+        protected override bool TryGetExtensionsFromReference(
+            AnalyzerReference reference,
+            out ImmutableArray<IAspNetCoreEmbeddedLanguageDocumentHighlighter> extensions
+        )
         {
             extensions = default;
             return false;

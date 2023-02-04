@@ -12,7 +12,5 @@ public sealed class SD<K, V>
         }
     }
 
-    private class A 
-    {
-    }
+    private class A { }
 }

@@ -30,6 +30,7 @@ public class DefaultAuthorizationHandlerProvider : IAuthorizationHandlerProvider
     }
 
     /// <inheritdoc />
-    public Task<IEnumerable<IAuthorizationHandler>> GetHandlersAsync(AuthorizationHandlerContext context)
-        => _handlersTask;
+    public Task<IEnumerable<IAuthorizationHandler>> GetHandlersAsync(
+        AuthorizationHandlerContext context
+    ) => _handlersTask;
 }

@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -55,7 +55,11 @@ namespace System.ServiceModel.Description
     {
         class ContractExportMap
         {
-            public ContractExportMap (QName qname, ContractDescription contract, List<IWsdlExportExtension> results)
+            public ContractExportMap(
+                QName qname,
+                ContractDescription contract,
+                List<IWsdlExportExtension> results
+            )
             {
                 QName = qname;
                 Contract = contract;
@@ -69,7 +73,7 @@ namespace System.ServiceModel.Description
 
         class EndpointExportMap
         {
-            public EndpointExportMap (string name, ServiceEndpoint endpoint)
+            public EndpointExportMap(string name, ServiceEndpoint endpoint)
             {
                 Name = name;
                 Endpoint = endpoint;
@@ -85,250 +89,327 @@ namespace System.ServiceModel.Description
         Dictionary<ContractDescription, ContractExportMap> exported_contracts;
         List<EndpointExportMap> exported_endpoints;
 
-        public override MetadataSet GetGeneratedMetadata ()
+        public override MetadataSet GetGeneratedMetadata()
         {
             if (metadata != null)
                 return metadata;
 
-            metadata = new MetadataSet ();
+            metadata = new MetadataSet();
             foreach (WSServiceDescription sd in GeneratedWsdlDocuments)
-                metadata.MetadataSections.Add (
-                    MetadataSection.CreateFromServiceDescription (sd));
+                metadata.MetadataSections.Add(MetadataSection.CreateFromServiceDescription(sd));
 
-            foreach (XmlSchema xs in GeneratedXmlSchemas.Schemas ())
+            foreach (XmlSchema xs in GeneratedXmlSchemas.Schemas())
                 if (xs.TargetNamespace != XmlSchema.Namespace)
-                    metadata.MetadataSections.Add (
-                        MetadataSection.CreateFromSchema (xs));
-                
+                    metadata.MetadataSections.Add(MetadataSection.CreateFromSchema(xs));
+
             return metadata;
         }
 
-        public override void ExportContract (ContractDescription contract)
+        public override void ExportContract(ContractDescription contract)
         {
-            ExportContractInternal (contract);
+            ExportContractInternal(contract);
         }
 
-        ContractExportMap ExportContractInternal (ContractDescription contract)
+        ContractExportMap ExportContractInternal(ContractDescription contract)
         {
-            if (ExportedContracts.ContainsKey (contract))
-                return ExportedContracts [contract];
+            if (ExportedContracts.ContainsKey(contract))
+                return ExportedContracts[contract];
 
-            QName qname = new QName (contract.Name, contract.Namespace);
-            if (ExportedContracts.Any (m => m.Value.QName == qname))
-                throw new ArgumentException (String.Format (
-                    "A ContractDescription with Namespace : {0} and Name : {1} has already been exported.",
-                    contract.Namespace, contract.Name));
+            QName qname = new QName(contract.Name, contract.Namespace);
+            if (ExportedContracts.Any(m => m.Value.QName == qname))
+                throw new ArgumentException(
+                    String.Format(
+                        "A ContractDescription with Namespace : {0} and Name : {1} has already been exported.",
+                        contract.Namespace,
+                        contract.Name
+                    )
+                );
 
-            WSServiceDescription sd = GetServiceDescription (contract.Namespace);
+            WSServiceDescription sd = GetServiceDescription(contract.Namespace);
 
-            List<IWsdlExportExtension> extensions = new List<IWsdlExportExtension> ();
-            foreach (IWsdlExportExtension extn in contract.Behaviors.FindAll<IWsdlExportExtension> ())
-                extensions.Add (extn);
+            List<IWsdlExportExtension> extensions = new List<IWsdlExportExtension>();
+            foreach (
+                IWsdlExportExtension extn in contract.Behaviors.FindAll<IWsdlExportExtension>()
+            )
+                extensions.Add(extn);
 
-            XmlDocument xdoc = new XmlDocument ();
+            XmlDocument xdoc = new XmlDocument();
 
-            PortType ws_port = new PortType ();
+            PortType ws_port = new PortType();
             ws_port.Name = contract.Name;
 
-            foreach (OperationDescription sm_op in contract.Operations) {
-                Operation ws_op = new Operation ();
+            foreach (OperationDescription sm_op in contract.Operations)
+            {
+                Operation ws_op = new Operation();
                 ws_op.Name = sm_op.Name;
 
-                foreach (MessageDescription sm_md in sm_op.Messages) {
+                foreach (MessageDescription sm_md in sm_op.Messages)
+                {
                     //OperationMessage
                     OperationMessage ws_opmsg;
-                    WSMessage ws_msg = new WSMessage ();
+                    WSMessage ws_msg = new WSMessage();
                     MessagePart ws_msgpart;
-                    if (sm_md.Direction == MessageDirection.Input) {
-                        ws_opmsg = new OperationInput ();
-                        ws_msg.Name = String.Concat (ws_port.Name, "_", ws_op.Name, "_", "InputMessage");
-                        ws_msgpart = ExportMessageBodyDescription (sm_md.Body, ws_op.Name, sd.TargetNamespace);
-                    } else {
-                        ws_opmsg = new OperationOutput ();
-                        ws_msg.Name = String.Concat (ws_port.Name, "_", ws_op.Name, "_", "OutputMessage");
-                        ws_msgpart = ExportMessageBodyDescription (sm_md.Body, ws_op.Name + "Response", sd.TargetNamespace);
+                    if (sm_md.Direction == MessageDirection.Input)
+                    {
+                        ws_opmsg = new OperationInput();
+                        ws_msg.Name = String.Concat(
+                            ws_port.Name,
+                            "_",
+                            ws_op.Name,
+                            "_",
+                            "InputMessage"
+                        );
+                        ws_msgpart = ExportMessageBodyDescription(
+                            sm_md.Body,
+                            ws_op.Name,
+                            sd.TargetNamespace
+                        );
                     }
-                    ws_msg.Parts.Add (ws_msgpart);    
+                    else
+                    {
+                        ws_opmsg = new OperationOutput();
+                        ws_msg.Name = String.Concat(
+                            ws_port.Name,
+                            "_",
+                            ws_op.Name,
+                            "_",
+                            "OutputMessage"
+                        );
+                        ws_msgpart = ExportMessageBodyDescription(
+                            sm_md.Body,
+                            ws_op.Name + "Response",
+                            sd.TargetNamespace
+                        );
+                    }
+                    ws_msg.Parts.Add(ws_msgpart);
 
                     /* FIXME: Faults */
 
                     //Action
-                    XmlAttribute attr = xdoc.CreateAttribute ("wsaw", "Action", "http://www.w3.org/2006/05/addressing/wsdl");
+                    XmlAttribute attr = xdoc.CreateAttribute(
+                        "wsaw",
+                        "Action",
+                        "http://www.w3.org/2006/05/addressing/wsdl"
+                    );
                     attr.Value = sm_md.Action;
-                    ws_opmsg.ExtensibleAttributes = new XmlAttribute [] { attr };
-                    
+                    ws_opmsg.ExtensibleAttributes = new XmlAttribute[] { attr };
+
                     //FIXME: Set .Input & .Output
 
-                    ws_opmsg.Message = new QName (ws_msg.Name, sd.TargetNamespace);
-                    ws_op.Messages.Add (ws_opmsg);
-                    sd.Messages.Add (ws_msg);
+                    ws_opmsg.Message = new QName(ws_msg.Name, sd.TargetNamespace);
+                    ws_op.Messages.Add(ws_opmsg);
+                    sd.Messages.Add(ws_msg);
                 }
 
-                ws_port.Operations.Add (ws_op);
+                ws_port.Operations.Add(ws_op);
 
-                foreach (IWsdlExportExtension extn in sm_op.Behaviors.FindAll<IWsdlExportExtension> ())
-                    extensions.Add (extn);
+                foreach (
+                    IWsdlExportExtension extn in sm_op.Behaviors.FindAll<IWsdlExportExtension>()
+                )
+                    extensions.Add(extn);
             }
 
             //Add Imports for <types
-            XmlSchema xs_import = new XmlSchema ();
-            xs_import.TargetNamespace = String.Concat (
-                    contract.Namespace, 
-                    contract.Namespace.EndsWith ("/") ? "" : "/",
-                    "Imports");
-            foreach (XmlSchema schema in GeneratedXmlSchemas.Schemas ()) {
-                XmlSchemaImport imp = new XmlSchemaImport ();
+            XmlSchema xs_import = new XmlSchema();
+            xs_import.TargetNamespace = String.Concat(
+                contract.Namespace,
+                contract.Namespace.EndsWith("/") ? "" : "/",
+                "Imports"
+            );
+            foreach (XmlSchema schema in GeneratedXmlSchemas.Schemas())
+            {
+                XmlSchemaImport imp = new XmlSchemaImport();
                 imp.Namespace = schema.TargetNamespace;
-                xs_import.Includes.Add (imp);
+                xs_import.Includes.Add(imp);
             }
-            sd.Types.Schemas.Add (xs_import);
+            sd.Types.Schemas.Add(xs_import);
 
-            sd.PortTypes.Add (ws_port);
-            var map = new ContractExportMap (qname, contract, extensions);
-            ExportedContracts.Add (contract, map);
+            sd.PortTypes.Add(ws_port);
+            var map = new ContractExportMap(qname, contract, extensions);
+            ExportedContracts.Add(contract, map);
 
-            WsdlContractConversionContext context = new WsdlContractConversionContext (contract, ws_port);
+            WsdlContractConversionContext context = new WsdlContractConversionContext(
+                contract,
+                ws_port
+            );
             foreach (IWsdlExportExtension extn in extensions)
-                extn.ExportContract (this, context);
+                extn.ExportContract(this, context);
 
             return map;
         }
 
-        public override void ExportEndpoint (ServiceEndpoint endpoint)
+        public override void ExportEndpoint(ServiceEndpoint endpoint)
         {
-            ExportEndpoint_Internal (endpoint);
+            ExportEndpoint_Internal(endpoint);
         }
 
-        EndpointExportMap ExportEndpoint_Internal (ServiceEndpoint endpoint)
+        EndpointExportMap ExportEndpoint_Internal(ServiceEndpoint endpoint)
         {
-            var map = ExportedEndpoints.FirstOrDefault (m => m.Endpoint == endpoint);
+            var map = ExportedEndpoints.FirstOrDefault(m => m.Endpoint == endpoint);
             if (map != null)
                 return map;
 
             int index = 0;
-            var baseName = String.Concat (endpoint.Binding.Name, "_", endpoint.Contract.Name);
+            var baseName = String.Concat(endpoint.Binding.Name, "_", endpoint.Contract.Name);
             var name = baseName;
-            while (ExportedEndpoints.Exists (m => m.Name == name))
-                name = String.Concat (baseName, (++index).ToString ());
+            while (ExportedEndpoints.Exists(m => m.Name == name))
+                name = String.Concat(baseName, (++index).ToString());
 
-            map = new EndpointExportMap (name, endpoint);
-            ExportedEndpoints.Add (map);
+            map = new EndpointExportMap(name, endpoint);
+            ExportedEndpoints.Add(map);
 
-            var contract = ExportContractInternal (endpoint.Contract);
+            var contract = ExportContractInternal(endpoint.Contract);
 
             //FIXME: Namespace
-            WSServiceDescription sd = GetServiceDescription ("http://tempuri.org/");
-            if (sd.TargetNamespace != endpoint.Contract.Namespace) {
-                sd.Namespaces.Add ("i0", endpoint.Contract.Namespace);
+            WSServiceDescription sd = GetServiceDescription("http://tempuri.org/");
+            if (sd.TargetNamespace != endpoint.Contract.Namespace)
+            {
+                sd.Namespaces.Add("i0", endpoint.Contract.Namespace);
 
                 //Import
-                Import import = new Import ();
+                Import import = new Import();
                 import.Namespace = endpoint.Contract.Namespace;
 
-                sd.Imports.Add (import);
+                sd.Imports.Add(import);
             }
-            
-            if (endpoint.Binding == null)
-                throw new ArgumentException (String.Format (
-                    "Binding for ServiceEndpoint named '{0}' is null",
-                    endpoint.Name));
 
-            var extensions = new List<IWsdlExportExtension> ();
-            var extensionTypes = new Dictionary<Type, IWsdlExportExtension> ();
-            if (contract.Results != null) {
-                foreach (var extension in contract.Results) {
-                    var type = extension.GetType ();
-                    if (extensionTypes.ContainsKey (type))
+            if (endpoint.Binding == null)
+                throw new ArgumentException(
+                    String.Format("Binding for ServiceEndpoint named '{0}' is null", endpoint.Name)
+                );
+
+            var extensions = new List<IWsdlExportExtension>();
+            var extensionTypes = new Dictionary<Type, IWsdlExportExtension>();
+            if (contract.Results != null)
+            {
+                foreach (var extension in contract.Results)
+                {
+                    var type = extension.GetType();
+                    if (extensionTypes.ContainsKey(type))
                         continue;
-                    extensionTypes.Add (type, extension);
-                    extensions.Add (extension);
+                    extensionTypes.Add(type, extension);
+                    extensions.Add(extension);
                 }
             }
 
-            var bindingElements = endpoint.Binding.CreateBindingElements ();
-            foreach (var element in bindingElements) {
+            var bindingElements = endpoint.Binding.CreateBindingElements();
+            foreach (var element in bindingElements)
+            {
                 var extension = element as IWsdlExportExtension;
                 if (extension == null)
                     continue;
-                var type = extension.GetType ();
-                if (extensionTypes.ContainsKey (type))
+                var type = extension.GetType();
+                if (extensionTypes.ContainsKey(type))
                     continue;
-                extensionTypes.Add (type, extension);
-                extensions.Add (extension);
+                extensionTypes.Add(type, extension);
+                extensions.Add(extension);
             }
 
             //ExportBinding
-            WSBinding ws_binding = new WSBinding ();
-            
-            //<binding name = .. 
+            WSBinding ws_binding = new WSBinding();
+
+            //<binding name = ..
             ws_binding.Name = name;
 
             //<binding type = ..
-            ws_binding.Type = new QName (endpoint.Contract.Name, endpoint.Contract.Namespace);
-            sd.Bindings.Add (ws_binding);
+            ws_binding.Type = new QName(endpoint.Contract.Name, endpoint.Contract.Namespace);
+            sd.Bindings.Add(ws_binding);
 
             //    <operation
-            foreach (OperationDescription sm_op in endpoint.Contract.Operations) {
-                var op_binding = CreateOperationBinding (endpoint, sm_op);
-                ws_binding.Operations.Add (op_binding);
+            foreach (OperationDescription sm_op in endpoint.Contract.Operations)
+            {
+                var op_binding = CreateOperationBinding(endpoint, sm_op);
+                ws_binding.Operations.Add(op_binding);
             }
 
             //Add <service
-            Port ws_port = ExportService (sd, ws_binding, endpoint.Address);
+            Port ws_port = ExportService(sd, ws_binding, endpoint.Address);
 
             //Call IWsdlExportExtension.ExportEndpoint
-            WsdlContractConversionContext contract_context = new WsdlContractConversionContext (
-                endpoint.Contract, sd.PortTypes [endpoint.Contract.Name]);
-            WsdlEndpointConversionContext endpoint_context = new WsdlEndpointConversionContext (
-                contract_context, endpoint, ws_port, ws_binding);
+            WsdlContractConversionContext contract_context = new WsdlContractConversionContext(
+                endpoint.Contract,
+                sd.PortTypes[endpoint.Contract.Name]
+            );
+            WsdlEndpointConversionContext endpoint_context = new WsdlEndpointConversionContext(
+                contract_context,
+                endpoint,
+                ws_port,
+                ws_binding
+            );
 
-            foreach (var extension in extensions) {
-                try {
-                    extension.ExportEndpoint (this, endpoint_context);
-                } catch (Exception ex) {
-                    var error = AddError (
-                        "Failed to export endpoint '{0}': wsdl exporter '{1}' " +
-                        "threw an exception: {2}", endpoint.Name, extension.GetType (), ex);
-                    throw new MetadataExportException (error, ex);
+            foreach (var extension in extensions)
+            {
+                try
+                {
+                    extension.ExportEndpoint(this, endpoint_context);
+                }
+                catch (Exception ex)
+                {
+                    var error = AddError(
+                        "Failed to export endpoint '{0}': wsdl exporter '{1}' "
+                            + "threw an exception: {2}",
+                        endpoint.Name,
+                        extension.GetType(),
+                        ex
+                    );
+                    throw new MetadataExportException(error, ex);
                 }
             }
 
-            try {
-                ExportPolicy (endpoint, ws_binding);
-            } catch (MetadataExportException) {
+            try
+            {
+                ExportPolicy(endpoint, ws_binding);
+            }
+            catch (MetadataExportException)
+            {
                 throw;
-            } catch (Exception ex) {
-                var error = AddError (
-                    "Failed to export endpoint '{0}': unhandled exception " +
-                    "while exporting policy: {1}", endpoint.Name, ex);
-                throw new MetadataExportException (error, ex);
+            }
+            catch (Exception ex)
+            {
+                var error = AddError(
+                    "Failed to export endpoint '{0}': unhandled exception "
+                        + "while exporting policy: {1}",
+                    endpoint.Name,
+                    ex
+                );
+                throw new MetadataExportException(error, ex);
             }
 
             return map;
         }
 
-        OperationBinding CreateOperationBinding (ServiceEndpoint endpoint, OperationDescription sm_op)
+        OperationBinding CreateOperationBinding(
+            ServiceEndpoint endpoint,
+            OperationDescription sm_op
+        )
         {
-            OperationBinding op_binding = new OperationBinding ();
+            OperationBinding op_binding = new OperationBinding();
             op_binding.Name = sm_op.Name;
-            
-            foreach (MessageDescription sm_md in sm_op.Messages) {
-                if (sm_md.Direction == MessageDirection.Input) {
+
+            foreach (MessageDescription sm_md in sm_op.Messages)
+            {
+                if (sm_md.Direction == MessageDirection.Input)
+                {
                     //<input
-                    CreateInputBinding (endpoint, op_binding, sm_md);
-                } else {
+                    CreateInputBinding(endpoint, op_binding, sm_md);
+                }
+                else
+                {
                     //<output
-                    CreateOutputBinding (endpoint, op_binding, sm_md);
+                    CreateOutputBinding(endpoint, op_binding, sm_md);
                 }
             }
 
             return op_binding;
         }
 
-        void CreateInputBinding (ServiceEndpoint endpoint, OperationBinding op_binding,
-                                 MessageDescription sm_md)
+        void CreateInputBinding(
+            ServiceEndpoint endpoint,
+            OperationBinding op_binding,
+            MessageDescription sm_md
+        )
         {
-            var in_binding = new InputBinding ();
+            var in_binding = new InputBinding();
             op_binding.Input = in_binding;
 
             var message_version = endpoint.Binding.MessageVersion ?? MessageVersion.None;
@@ -337,30 +418,38 @@ namespace System.ServiceModel.Description
 
             SoapBodyBinding soap_body_binding;
             SoapOperationBinding soap_operation_binding;
-            if (message_version.Envelope == EnvelopeVersion.Soap11) {
-                soap_body_binding = new SoapBodyBinding ();
-                soap_operation_binding = new SoapOperationBinding ();
-            } else if (message_version.Envelope == EnvelopeVersion.Soap12) {
-                soap_body_binding = new Soap12BodyBinding ();
-                soap_operation_binding = new Soap12OperationBinding ();
-            } else {
-                throw new InvalidOperationException ();
+            if (message_version.Envelope == EnvelopeVersion.Soap11)
+            {
+                soap_body_binding = new SoapBodyBinding();
+                soap_operation_binding = new SoapOperationBinding();
+            }
+            else if (message_version.Envelope == EnvelopeVersion.Soap12)
+            {
+                soap_body_binding = new Soap12BodyBinding();
+                soap_operation_binding = new Soap12OperationBinding();
+            }
+            else
+            {
+                throw new InvalidOperationException();
             }
 
             soap_body_binding.Use = SoapBindingUse.Literal;
-            in_binding.Extensions.Add (soap_body_binding);
-                
+            in_binding.Extensions.Add(soap_body_binding);
+
             //Set Action
             //<operation > <soap:operation soapAction .. >
             soap_operation_binding.SoapAction = sm_md.Action;
             soap_operation_binding.Style = SoapBindingStyle.Document;
-            op_binding.Extensions.Add (soap_operation_binding);
+            op_binding.Extensions.Add(soap_operation_binding);
         }
 
-        void CreateOutputBinding (ServiceEndpoint endpoint, OperationBinding op_binding,
-                                  MessageDescription sm_md)
+        void CreateOutputBinding(
+            ServiceEndpoint endpoint,
+            OperationBinding op_binding,
+            MessageDescription sm_md
+        )
         {
-            var out_binding = new OutputBinding ();
+            var out_binding = new OutputBinding();
             op_binding.Output = out_binding;
 
             var message_version = endpoint.Binding.MessageVersion ?? MessageVersion.None;
@@ -368,230 +457,268 @@ namespace System.ServiceModel.Description
                 return;
 
             SoapBodyBinding soap_body_binding;
-            if (message_version.Envelope == EnvelopeVersion.Soap11) {
-                soap_body_binding = new SoapBodyBinding ();
-            } else if (message_version.Envelope == EnvelopeVersion.Soap12) {
-                soap_body_binding = new Soap12BodyBinding ();
-            } else {
-                throw new InvalidOperationException ();
+            if (message_version.Envelope == EnvelopeVersion.Soap11)
+            {
+                soap_body_binding = new SoapBodyBinding();
+            }
+            else if (message_version.Envelope == EnvelopeVersion.Soap12)
+            {
+                soap_body_binding = new Soap12BodyBinding();
+            }
+            else
+            {
+                throw new InvalidOperationException();
             }
 
             soap_body_binding.Use = SoapBindingUse.Literal;
-            out_binding.Extensions.Add (soap_body_binding);
+            out_binding.Extensions.Add(soap_body_binding);
         }
-        
-        Port ExportService (WSServiceDescription sd, WSBinding ws_binding, EndpointAddress address)
+
+        Port ExportService(WSServiceDescription sd, WSBinding ws_binding, EndpointAddress address)
         {
             if (address == null)
                 return null;
 
-            Service ws_svc = GetService (sd, "service");
+            Service ws_svc = GetService(sd, "service");
             sd.Name = "service";
 
-            Port ws_port = new Port ();
+            Port ws_port = new Port();
             ws_port.Name = ws_binding.Name;
-            ws_port.Binding = new QName (ws_binding.Name, sd.TargetNamespace);
+            ws_port.Binding = new QName(ws_binding.Name, sd.TargetNamespace);
 
-            ws_svc.Ports.Add (ws_port);
+            ws_svc.Ports.Add(ws_port);
 
             return ws_port;
         }
 
-        Service GetService (WSServiceDescription sd, string name)
+        Service GetService(WSServiceDescription sd, string name)
         {
-            Service svc = sd.Services [name];
+            Service svc = sd.Services[name];
             if (svc != null)
                 return svc;
 
-            svc = new Service ();
+            svc = new Service();
             svc.Name = name;
-            sd.Services.Add (svc);
+            sd.Services.Add(svc);
 
             return svc;
         }
 
-        WSServiceDescription GetServiceDescription (string ns)
+        WSServiceDescription GetServiceDescription(string ns)
         {
-            foreach (WSServiceDescription sd in GeneratedWsdlDocuments) {
+            foreach (WSServiceDescription sd in GeneratedWsdlDocuments)
+            {
                 if (sd.TargetNamespace == ns)
                     return sd;
             }
 
-            WSServiceDescription ret = new WSServiceDescription ();
+            WSServiceDescription ret = new WSServiceDescription();
             ret.TargetNamespace = ns;
-            ret.Namespaces = GetNamespaces (ns);
-            GeneratedWsdlDocuments.Add (ret);
+            ret.Namespaces = GetNamespaces(ns);
+            GeneratedWsdlDocuments.Add(ret);
 
             metadata = null;
 
             return ret;
         }
 
-        public ServiceDescriptionCollection GeneratedWsdlDocuments {
-            get {
+        public ServiceDescriptionCollection GeneratedWsdlDocuments
+        {
+            get
+            {
                 if (wsdl_colln == null)
-                    wsdl_colln = new ServiceDescriptionCollection ();
+                    wsdl_colln = new ServiceDescriptionCollection();
                 return wsdl_colln;
             }
         }
 
-        public XmlSchemaSet GeneratedXmlSchemas {
+        public XmlSchemaSet GeneratedXmlSchemas
+        {
             get { return XsdExporter.Schemas; }
         }
 
-        public void ExportEndpoints (
+        public void ExportEndpoints(
             IEnumerable<ServiceEndpoint> endpoints,
-            XmlQualifiedName wsdlServiceQName)
+            XmlQualifiedName wsdlServiceQName
+        )
         {
             if (endpoints == null)
-                throw new ArgumentNullException ("endpoints");
+                throw new ArgumentNullException("endpoints");
             if (wsdlServiceQName == null)
-                throw new ArgumentNullException ("wsdlServiceQName");
+                throw new ArgumentNullException("wsdlServiceQName");
 
-            foreach (ServiceEndpoint ep in endpoints) {
+            foreach (ServiceEndpoint ep in endpoints)
+            {
                 if (ep.Contract.Name == ServiceMetadataBehavior.MexContractName)
                     continue;
 
-                ExportEndpoint (ep);
+                ExportEndpoint(ep);
             }
         }
 
-        XsdDataContractExporter XsdExporter {
-            get {
+        XsdDataContractExporter XsdExporter
+        {
+            get
+            {
                 if (xsd_exporter == null)
-                    xsd_exporter = new XsdDataContractExporter ();
+                    xsd_exporter = new XsdDataContractExporter();
                 return xsd_exporter;
             }
         }
 
-        Dictionary<ContractDescription, ContractExportMap> ExportedContracts {
-            get {
+        Dictionary<ContractDescription, ContractExportMap> ExportedContracts
+        {
+            get
+            {
                 if (exported_contracts == null)
-                    exported_contracts = new Dictionary<ContractDescription, ContractExportMap> ();
+                    exported_contracts = new Dictionary<ContractDescription, ContractExportMap>();
                 return exported_contracts;
             }
         }
-        
-        List<EndpointExportMap> ExportedEndpoints {
-            get {
+
+        List<EndpointExportMap> ExportedEndpoints
+        {
+            get
+            {
                 if (exported_endpoints == null)
-                    exported_endpoints = new List<EndpointExportMap> ();
+                    exported_endpoints = new List<EndpointExportMap>();
                 return exported_endpoints;
             }
         }
-        
-        XmlSerializerNamespaces GetNamespaces (string target_namespace)
-        {
-            XmlSerializerNamespaces namespaces = new XmlSerializerNamespaces ();
 
-            namespaces.Add ("soap", "http://schemas.xmlsoap.org/wsdl/soap/");
-            namespaces.Add ("wsu", "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd");
-            namespaces.Add ("soapenc", "http://schemas.xmlsoap.org/soap/encoding/");
-            namespaces.Add ("tns", target_namespace);
-            namespaces.Add ("wsa", "http://schemas.xmlsoap.org/ws/2004/08/addressing");
-            namespaces.Add ("wsp", "http://schemas.xmlsoap.org/ws/2004/09/policy");
-            namespaces.Add ("wsap", "http://schemas.xmlsoap.org/ws/2004/08/addressing/policy");
-            namespaces.Add ("msc", "http://schemas.microsoft.com/ws/2005/12/wsdl/contract");
-            namespaces.Add ("wsaw", "http://www.w3.org/2006/05/addressing/wsdl");
-            namespaces.Add ("soap12", "http://schemas.xmlsoap.org/wsdl/soap12/");
-            namespaces.Add ("wsa10", "http://www.w3.org/2005/08/addressing");
-            namespaces.Add ("wsdl", "http://schemas.xmlsoap.org/wsdl/");
+        XmlSerializerNamespaces GetNamespaces(string target_namespace)
+        {
+            XmlSerializerNamespaces namespaces = new XmlSerializerNamespaces();
+
+            namespaces.Add("soap", "http://schemas.xmlsoap.org/wsdl/soap/");
+            namespaces.Add(
+                "wsu",
+                "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"
+            );
+            namespaces.Add("soapenc", "http://schemas.xmlsoap.org/soap/encoding/");
+            namespaces.Add("tns", target_namespace);
+            namespaces.Add("wsa", "http://schemas.xmlsoap.org/ws/2004/08/addressing");
+            namespaces.Add("wsp", "http://schemas.xmlsoap.org/ws/2004/09/policy");
+            namespaces.Add("wsap", "http://schemas.xmlsoap.org/ws/2004/08/addressing/policy");
+            namespaces.Add("msc", "http://schemas.microsoft.com/ws/2005/12/wsdl/contract");
+            namespaces.Add("wsaw", "http://www.w3.org/2006/05/addressing/wsdl");
+            namespaces.Add("soap12", "http://schemas.xmlsoap.org/wsdl/soap12/");
+            namespaces.Add("wsa10", "http://www.w3.org/2005/08/addressing");
+            namespaces.Add("wsdl", "http://schemas.xmlsoap.org/wsdl/");
 
             return namespaces;
         }
 
-        MessagePart ExportMessageBodyDescription (MessageBodyDescription msgbody, string name, string ns)
+        MessagePart ExportMessageBodyDescription(
+            MessageBodyDescription msgbody,
+            string name,
+            string ns
+        )
         {
-            MessagePart msgpart = new MessagePart ();
-            string part_name = IsTypeMessage (msgbody);
+            MessagePart msgpart = new MessagePart();
+            string part_name = IsTypeMessage(msgbody);
 
-            if (part_name != null) {
+            if (part_name != null)
+            {
                 msgpart.Name = part_name;
-                msgpart.Type = ExportTypeMessage (); //FIXME: Cache this
-            } else {
+                msgpart.Type = ExportTypeMessage(); //FIXME: Cache this
+            }
+            else
+            {
                 msgpart.Name = "parameters";
-                msgpart.Element = ExportParameters (msgbody, name, ns);
+                msgpart.Element = ExportParameters(msgbody, name, ns);
             }
             return msgpart;
         }
 
         /* Sets the @name if the param or return type is SMMessage */
-        string IsTypeMessage (MessageBodyDescription msgbody)
+        string IsTypeMessage(MessageBodyDescription msgbody)
         {
             MessagePartDescription part = null;
 
             if (msgbody.Parts.Count == 0)
                 part = msgbody.ReturnValue;
             else if (msgbody.Parts.Count == 1)
-                part = msgbody.Parts [0];
+                part = msgbody.Parts[0];
 
-            if (part != null && (part.Type.FullName == typeof (SMMessage).FullName))
+            if (part != null && (part.Type.FullName == typeof(SMMessage).FullName))
                 return part.Name;
 
             return null;
         }
 
-        QName ExportParameters (MessageBodyDescription msgbody, string name, string ns)
+        QName ExportParameters(MessageBodyDescription msgbody, string name, string ns)
         {
-            XmlSchema xs = GetSchema (ns);
+            XmlSchema xs = GetSchema(ns);
             //FIXME: Extract to a HasElement method ?
-            foreach (XmlSchemaObject o in xs.Items) {
+            foreach (XmlSchemaObject o in xs.Items)
+            {
                 XmlSchemaElement e = o as XmlSchemaElement;
                 if (e == null)
                     continue;
 
                 if (e.Name == name)
-                    throw new InvalidOperationException (String.Format (
-                        "Message element named '{0}:{1}' has already been exported.",
-                        ns, name));
+                    throw new InvalidOperationException(
+                        String.Format(
+                            "Message element named '{0}:{1}' has already been exported.",
+                            ns,
+                            name
+                        )
+                    );
             }
-                
+
             //Create the element for "parameters"
-            XmlSchemaElement schema_element = new XmlSchemaElement ();
+            XmlSchemaElement schema_element = new XmlSchemaElement();
             schema_element.Name = name;
 
-            XmlSchemaComplexType complex_type = new XmlSchemaComplexType ();
+            XmlSchemaComplexType complex_type = new XmlSchemaComplexType();
             //Generate Sequence representing the message/parameters
             //FIXME: MessageContractAttribute
-        
-            XmlSchemaSequence sequence = new XmlSchemaSequence ();
+
+            XmlSchemaSequence sequence = new XmlSchemaSequence();
             XmlSchemaElement element = null;
 
-            if (msgbody.ReturnValue == null) {
+            if (msgbody.ReturnValue == null)
+            {
                 //parameters
-                foreach (MessagePartDescription part in msgbody.Parts) {
+                foreach (MessagePartDescription part in msgbody.Parts)
+                {
                     if (part.Type == null)
                         //FIXME: Eg. when WsdlImporter is used to import a wsdl
-                        throw new NotImplementedException ();
-                    
-                    element = GetSchemaElementForPart (part, xs);
-                    sequence.Items.Add (element);
+                        throw new NotImplementedException();
+
+                    element = GetSchemaElementForPart(part, xs);
+                    sequence.Items.Add(element);
                 }
-            } else {
+            }
+            else
+            {
                 //ReturnValue
-                if (msgbody.ReturnValue.Type != typeof (void)) {
-                    element = GetSchemaElementForPart (msgbody.ReturnValue, xs);
-                    sequence.Items.Add (element);
+                if (msgbody.ReturnValue.Type != typeof(void))
+                {
+                    element = GetSchemaElementForPart(msgbody.ReturnValue, xs);
+                    sequence.Items.Add(element);
                 }
             }
 
             complex_type.Particle = sequence;
             schema_element.SchemaType = complex_type;
 
-            xs.Items.Add (schema_element);
-            GeneratedXmlSchemas.Reprocess (xs);
+            xs.Items.Add(schema_element);
+            GeneratedXmlSchemas.Reprocess(xs);
 
-            return new QName (schema_element.Name, xs.TargetNamespace);
+            return new QName(schema_element.Name, xs.TargetNamespace);
         }
 
         //Exports <xs:type for SMMessage
         //FIXME: complex type for this can be made static
-        QName ExportTypeMessage ()
+        QName ExportTypeMessage()
         {
-            XmlSchema xs = GetSchema ("http://schemas.microsoft.com/Message");
-            QName qname = new QName ("MessageBody", xs.TargetNamespace);
+            XmlSchema xs = GetSchema("http://schemas.microsoft.com/Message");
+            QName qname = new QName("MessageBody", xs.TargetNamespace);
 
-            foreach (XmlSchemaObject o in xs.Items) {
+            foreach (XmlSchemaObject o in xs.Items)
+            {
                 XmlSchemaComplexType ct = o as XmlSchemaComplexType;
                 if (ct == null)
                     continue;
@@ -601,36 +728,38 @@ namespace System.ServiceModel.Description
                     return qname;
             }
 
-            XmlSchemaComplexType complex_type = new XmlSchemaComplexType ();
+            XmlSchemaComplexType complex_type = new XmlSchemaComplexType();
             complex_type.Name = "MessageBody";
-            XmlSchemaSequence sequence = new XmlSchemaSequence ();
+            XmlSchemaSequence sequence = new XmlSchemaSequence();
 
-            XmlSchemaAny any = new XmlSchemaAny ();
+            XmlSchemaAny any = new XmlSchemaAny();
             any.MinOccurs = 0;
             any.MaxOccursString = "unbounded";
             any.Namespace = "##any";
 
-            sequence.Items.Add (any);
+            sequence.Items.Add(any);
             complex_type.Particle = sequence;
 
-            xs.Items.Add (complex_type);
-            GeneratedXmlSchemas.Reprocess (xs);
-            
+            xs.Items.Add(complex_type);
+            GeneratedXmlSchemas.Reprocess(xs);
+
             return qname;
         }
 
-        XmlSchemaElement GetSchemaElementForPart (MessagePartDescription part, XmlSchema schema)
+        XmlSchemaElement GetSchemaElementForPart(MessagePartDescription part, XmlSchema schema)
         {
-            XmlSchemaElement element = new XmlSchemaElement ();
+            XmlSchemaElement element = new XmlSchemaElement();
 
             element.Name = part.Name;
-            XsdExporter.Export (part.Type);
-            element.SchemaTypeName = XsdExporter.GetSchemaTypeName (part.Type);
-            AddImport (schema, element.SchemaTypeName.Namespace);
+            XsdExporter.Export(part.Type);
+            element.SchemaTypeName = XsdExporter.GetSchemaTypeName(part.Type);
+            AddImport(schema, element.SchemaTypeName.Namespace);
 
             //FIXME: nillable, minOccurs
-            if (XsdExporter.GetSchemaType (part.Type) is XmlSchemaComplexType ||
-                part.Type == typeof (string))
+            if (
+                XsdExporter.GetSchemaType(part.Type) is XmlSchemaComplexType
+                || part.Type == typeof(string)
+            )
                 element.IsNillable = true;
             element.MinOccurs = 0;
 
@@ -638,12 +767,13 @@ namespace System.ServiceModel.Description
         }
 
         //FIXME: Replace with a dictionary ?
-        void AddImport (XmlSchema schema, string ns)
+        void AddImport(XmlSchema schema, string ns)
         {
             if (ns == XmlSchema.Namespace || schema.TargetNamespace == ns)
                 return;
 
-            foreach (XmlSchemaObject o in schema.Includes) {
+            foreach (XmlSchemaObject o in schema.Includes)
+            {
                 XmlSchemaImport import = o as XmlSchemaImport;
                 if (import == null)
                     continue;
@@ -654,73 +784,81 @@ namespace System.ServiceModel.Description
             if (ns == string.Empty)
                 return;
 
-            XmlSchemaImport imp = new XmlSchemaImport ();
+            XmlSchemaImport imp = new XmlSchemaImport();
             imp.Namespace = ns;
-            schema.Includes.Add (imp);
+            schema.Includes.Add(imp);
         }
 
-        XmlSchema GetSchema (string ns)
+        XmlSchema GetSchema(string ns)
         {
-            ICollection colln = GeneratedXmlSchemas.Schemas (ns);
-            if (colln.Count > 0) { 
+            ICollection colln = GeneratedXmlSchemas.Schemas(ns);
+            if (colln.Count > 0)
+            {
                 if (colln.Count > 1)
-                    throw new Exception ("More than 1 schema found for ns = " + ns);
+                    throw new Exception("More than 1 schema found for ns = " + ns);
                 //FIXME: HORRIBLE!
                 foreach (object o in colln)
                     return (o as XmlSchema);
             }
 
-            XmlSchema schema = new XmlSchema ();
+            XmlSchema schema = new XmlSchema();
             schema.TargetNamespace = ns;
             schema.ElementFormDefault = XmlSchemaForm.Qualified;
-            GeneratedXmlSchemas.Add (schema);
+            GeneratedXmlSchemas.Add(schema);
 
             return schema;
         }
 
-        PolicyConversionContext ExportPolicy (ServiceEndpoint endpoint, WSBinding binding)
+        PolicyConversionContext ExportPolicy(ServiceEndpoint endpoint, WSBinding binding)
         {
-            var context = new CustomPolicyConversionContext (endpoint);
+            var context = new CustomPolicyConversionContext(endpoint);
 
-            var elements = endpoint.Binding.CreateBindingElements ();
-            foreach (var element in elements) {
+            var elements = endpoint.Binding.CreateBindingElements();
+            foreach (var element in elements)
+            {
                 var exporter = element as IPolicyExportExtension;
                 if (exporter == null)
                     continue;
 
-                try {
-                    exporter.ExportPolicy (this, context);
-                } catch (Exception ex) {
-                    var error = AddError (
-                        "Failed to export endpoint '{0}': policy exporter " +
-                        "'{1}' threw an exception: {2}", endpoint.Name,
-                        element.GetType (), ex);
-                    throw new MetadataExportException (error, ex);
+                try
+                {
+                    exporter.ExportPolicy(this, context);
+                }
+                catch (Exception ex)
+                {
+                    var error = AddError(
+                        "Failed to export endpoint '{0}': policy exporter "
+                            + "'{1}' threw an exception: {2}",
+                        endpoint.Name,
+                        element.GetType(),
+                        ex
+                    );
+                    throw new MetadataExportException(error, ex);
                 }
             }
 
-            var assertions = context.GetBindingAssertions ();
+            var assertions = context.GetBindingAssertions();
             if (assertions.Count == 0)
                 return context;
 
-            var doc = new XmlDocument ();
-            var policy = doc.CreateElement ("wsp", "Policy", PolicyImportHelper.PolicyNS);
-            doc.AppendChild (policy);
+            var doc = new XmlDocument();
+            var policy = doc.CreateElement("wsp", "Policy", PolicyImportHelper.PolicyNS);
+            doc.AppendChild(policy);
 
-            var exactlyOne = doc.CreateElement ("wsp", "ExactlyOne", PolicyImportHelper.PolicyNS);
-            var all = doc.CreateElement ("wsp", "All", PolicyImportHelper.PolicyNS);
+            var exactlyOne = doc.CreateElement("wsp", "ExactlyOne", PolicyImportHelper.PolicyNS);
+            var all = doc.CreateElement("wsp", "All", PolicyImportHelper.PolicyNS);
 
-            policy.AppendChild (exactlyOne);
-            exactlyOne.AppendChild (all);
+            policy.AppendChild(exactlyOne);
+            exactlyOne.AppendChild(all);
 
-            foreach (var assertion in assertions) {
-                var imported = doc.ImportNode (assertion, true);
-                all.AppendChild (imported);
+            foreach (var assertion in assertions)
+            {
+                var imported = doc.ImportNode(assertion, true);
+                all.AppendChild(imported);
             }
 
-            binding.Extensions.Add (policy);
+            binding.Extensions.Add(policy);
             return context;
         }
-
     }
 }

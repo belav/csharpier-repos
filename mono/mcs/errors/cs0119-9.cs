@@ -3,14 +3,12 @@
 
 class A
 {
-    public class D
-    {
-    }
+    public class D { }
 }
 
 class B
 {
-    public B ()
+    public B()
     {
         A.D = 2;
     }

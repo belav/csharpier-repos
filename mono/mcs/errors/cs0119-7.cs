@@ -3,7 +3,7 @@
 
 class C
 {
-    static void Main ()
+    static void Main()
     {
         throw Main;
     }

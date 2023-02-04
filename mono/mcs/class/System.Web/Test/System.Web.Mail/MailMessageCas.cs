@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -37,32 +37,33 @@ using System.Text;
 using System.Web;
 using System.Web.Mail;
 
-namespace MonoCasTests.System.Web.Mail {
-
+namespace MonoCasTests.System.Web.Mail
+{
     [TestFixture]
-    [Category ("CAS")]
-    public class MailMessageCas : AspNetHostingMinimal {
-
+    [Category("CAS")]
+    public class MailMessageCas : AspNetHostingMinimal
+    {
         private MailAttachment attachment;
 
         [TestFixtureSetUp]
-        public void FixtureSetUp ()
+        public void FixtureSetUp()
         {
-            string fname = Path.GetTempFileName ();
-            using (FileStream fs = File.OpenWrite (fname)) {
-                fs.WriteByte (0);
-                fs.Close ();
+            string fname = Path.GetTempFileName();
+            using (FileStream fs = File.OpenWrite(fname))
+            {
+                fs.WriteByte(0);
+                fs.Close();
             }
-            attachment = new MailAttachment (fname);
+            attachment = new MailAttachment(fname);
         }
 
         [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void MailMessage_Deny_Unrestricted ()
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void MailMessage_Deny_Unrestricted()
         {
-            MailMessage msg = new MailMessage ();
+            MailMessage msg = new MailMessage();
             // we can include attachments (if created without the deny)
-            msg.Attachments.Add (attachment);
+            msg.Attachments.Add(attachment);
             msg.Bcc = "bcc@localhost.com";
             msg.Body = "Hola!";
             msg.BodyEncoding = Encoding.ASCII;
@@ -79,8 +80,9 @@ namespace MonoCasTests.System.Web.Mail {
 
         // LinkDemand tests
 
-        public override Type Type {
-            get { return typeof (MailMessage); }
+        public override Type Type
+        {
+            get { return typeof(MailMessage); }
         }
     }
 }

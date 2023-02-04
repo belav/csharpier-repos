@@ -52,7 +52,9 @@ namespace TestLibrary
         {
             int ret = -100;
             string baseDir = Path.GetDirectoryName(basePath);
-            string outputDir = System.IO.Path.GetFullPath(Path.Combine(reportBase, Path.GetDirectoryName(assemblyPath)));
+            string outputDir = System.IO.Path.GetFullPath(
+                Path.Combine(reportBase, Path.GetDirectoryName(assemblyPath))
+            );
             string outputFile = Path.Combine(outputDir, "output.txt");
             string errorFile = Path.Combine(outputDir, "error.txt");
             string testExecutable = null;
@@ -64,11 +66,17 @@ namespace TestLibrary
 
                 if (OperatingSystem.IsWindows())
                 {
-                    testExecutable = Path.Combine(baseDir, Path.ChangeExtension(assemblyPath, ".cmd"));
+                    testExecutable = Path.Combine(
+                        baseDir,
+                        Path.ChangeExtension(assemblyPath, ".cmd")
+                    );
                 }
                 else
                 {
-                    testExecutable = Path.Combine(baseDir, Path.ChangeExtension(assemblyPath.Replace("\\", "/"), ".sh"));
+                    testExecutable = Path.Combine(
+                        baseDir,
+                        Path.ChangeExtension(assemblyPath.Replace("\\", "/"), ".sh")
+                    );
                 }
 
                 if (!File.Exists(testExecutable))
@@ -79,7 +87,14 @@ namespace TestLibrary
 
                 System.IO.Directory.CreateDirectory(outputDir);
 
-                ret = wrapper.RunTest(testExecutable, outputFile, errorFile, Assembly.GetEntryAssembly()!.FullName!, testBinaryBase, outputDir);
+                ret = wrapper.RunTest(
+                    testExecutable,
+                    outputFile,
+                    errorFile,
+                    Assembly.GetEntryAssembly()!.FullName!,
+                    testBinaryBase,
+                    outputDir
+                );
             }
             catch (Exception ex)
             {
@@ -138,7 +153,10 @@ namespace TestLibrary
                     Console.WriteLine(line);
                 }
 
-                Assert.True(ret == CoreclrTestWrapperLib.EXIT_SUCCESS_CODE, string.Join(Environment.NewLine, testOutput));
+                Assert.True(
+                    ret == CoreclrTestWrapperLib.EXIT_SUCCESS_CODE,
+                    string.Join(Environment.NewLine, testOutput)
+                );
             }
         }
     }

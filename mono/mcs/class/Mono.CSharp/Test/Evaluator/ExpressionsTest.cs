@@ -39,64 +39,66 @@ namespace MonoTests.EvaluatorTest
     public class ExpressionsTest : EvaluatorFixture
     {
         [Test]
-        public void StatementExpression_1 ()
+        public void StatementExpression_1()
         {
-            Evaluator.Run ("System.Console.WriteLine (100)");
+            Evaluator.Run("System.Console.WriteLine (100)");
         }
 
         [Test]
-        public void StatementExpression_2 ()
+        public void StatementExpression_2()
         {
-            Evaluator.Run ("var a = new int [] {1,2,3}; var b = a.Length;");
+            Evaluator.Run("var a = new int [] {1,2,3}; var b = a.Length;");
         }
 
         [Test]
-        public void AnonymousType ()
+        public void AnonymousType()
         {
-            Evaluator.Run ("var foo = new { Bar = \"baz\" };");
+            Evaluator.Run("var foo = new { Bar = \"baz\" };");
         }
 
         [Test]
-        public void Simple ()
+        public void Simple()
         {
             object res;
-            res = Evaluator.Evaluate ("\"foo\" == \"bar\";");
-            Assert.AreEqual (false, res, "CompareString");
+            res = Evaluator.Evaluate("\"foo\" == \"bar\";");
+            Assert.AreEqual(false, res, "CompareString");
 
-            res = Evaluator.Evaluate ("var a = 1; a+2;");
-            Assert.AreEqual (3, res, "CompareInt");
+            res = Evaluator.Evaluate("var a = 1; a+2;");
+            Assert.AreEqual(3, res, "CompareInt");
 
-            res = Evaluator.Evaluate ("2 * 4;");
-            Assert.AreEqual (8, res, "Multiply");
+            res = Evaluator.Evaluate("2 * 4;");
+            Assert.AreEqual(8, res, "Multiply");
         }
 
         [Test]
-        public void UsingAfterError ()
+        public void UsingAfterError()
         {
-            try {
-                Evaluator.Evaluate ("File.OpenRead (\"/etc/passwd\");");
-                Assert.Fail ("#1");
-            } catch {
+            try
+            {
+                Evaluator.Evaluate("File.OpenRead (\"/etc/passwd\");");
+                Assert.Fail("#1");
             }
+            catch { }
 
-            Evaluator.Run ("using System.IO;");
-            Evaluator.Evaluate ("File.Exists (\"/etc/passwd\");");
+            Evaluator.Run("using System.IO;");
+            Evaluator.Evaluate("File.Exists (\"/etc/passwd\");");
         }
 
         [Test]
-        public void UsingWithError ()
+        public void UsingWithError()
         {
-            try {
-                Evaluator.Run ("using System.DateTime;");
-                Assert.Fail ("#1");
-            } catch {
+            try
+            {
+                Evaluator.Run("using System.DateTime;");
+                Assert.Fail("#1");
             }
+            catch { }
 
-            Evaluator.Evaluate ("1+1");
+            Evaluator.Evaluate("1+1");
         }
 
         [Test]
-        public void UsingAlias ()
+        public void UsingAlias()
         {
             Evaluator.Run("using System;");
             Evaluator.Run("using MyConsole = System.Console;");
@@ -104,104 +106,112 @@ namespace MonoTests.EvaluatorTest
         }
 
         [Test]
-        public void WithTypeBuilders ()
+        public void WithTypeBuilders()
         {
             object res;
-            Evaluator.Run ("var a = new { A = 1 };");
-            res = Evaluator.Evaluate ("a.ToString ();");
-            Assert.AreEqual ("{ A = 1 }", res, "#1");
+            Evaluator.Run("var a = new { A = 1 };");
+            res = Evaluator.Evaluate("a.ToString ();");
+            Assert.AreEqual("{ A = 1 }", res, "#1");
         }
 
         [Test]
-        public void LinqExpressions ()
+        public void LinqExpressions()
         {
-            Evaluator.Run ("using System; using System.Linq;");
+            Evaluator.Run("using System; using System.Linq;");
 
-            Evaluator.Run ("var a = new int[]{1,2,3};");
+            Evaluator.Run("var a = new int[]{1,2,3};");
 
-            object res = Evaluator.Evaluate ("from x in a select x + 1;");
+            object res = Evaluator.Evaluate("from x in a select x + 1;");
 
-            Assert.AreEqual (new int[] { 2, 3, 4 }, ((IEnumerable<int>) res).ToArray ());
+            Assert.AreEqual(new int[] { 2, 3, 4 }, ((IEnumerable<int>)res).ToArray());
         }
 
         [Test]
-        public void LinqExpressionStatements ()
+        public void LinqExpressionStatements()
         {
-            Evaluator.Run ("using System; using System.Linq;");
+            Evaluator.Run("using System; using System.Linq;");
 
-            Evaluator.Run ("var first_scope = new int [] {1,2,3};");
-            Evaluator.Run ("var second_scope = from x in first_scope select x;");
+            Evaluator.Run("var first_scope = new int [] {1,2,3};");
+            Evaluator.Run("var second_scope = from x in first_scope select x;");
         }
 
         [Test]
-        public void ReferenceLoading ()
+        public void ReferenceLoading()
         {
-            Evaluator.ReferenceAssembly (typeof (ExpressionsTest).Assembly);
-            object res = Evaluator.Evaluate ("typeof (MonoTests.EvaluatorTest.ExpressionsTest) != null;");
-            Assert.AreEqual (true, res, "#1");
+            Evaluator.ReferenceAssembly(typeof(ExpressionsTest).Assembly);
+            object res = Evaluator.Evaluate(
+                "typeof (MonoTests.EvaluatorTest.ExpressionsTest) != null;"
+            );
+            Assert.AreEqual(true, res, "#1");
         }
 
         [Test]
-        public void PartialExpression ()
+        public void PartialExpression()
         {
             object eval_result;
             bool result_set;
-            string sres = Evaluator.Evaluate ("1+", out eval_result, out result_set);
-            Assert.IsFalse (result_set, "No result should have been set");
-            Assert.AreEqual ("1+", sres, "The result should have been the input string, since we have a partial input");
+            string sres = Evaluator.Evaluate("1+", out eval_result, out result_set);
+            Assert.IsFalse(result_set, "No result should have been set");
+            Assert.AreEqual(
+                "1+",
+                sres,
+                "The result should have been the input string, since we have a partial input"
+            );
         }
 
         [Test]
-        public void GotoWithUnreachableStatement ()
+        public void GotoWithUnreachableStatement()
         {
-            Evaluator.Run ("using System;");
+            Evaluator.Run("using System;");
 
-            string code = "var x = new Action(() => {" +
-            "Console.WriteLine(\"beforeGoto\");" +
-            "goto L;" +
-        "L:" +
-            "Console.WriteLine(\"afterGoto\");" +
-            "});";
+            string code =
+                "var x = new Action(() => {"
+                + "Console.WriteLine(\"beforeGoto\");"
+                + "goto L;"
+                + "L:"
+                + "Console.WriteLine(\"afterGoto\");"
+                + "});";
 
-            Assert.IsTrue (Evaluator.Run (code), "#1");
-            Assert.IsTrue (Evaluator.Run ("x();"), "#2");
+            Assert.IsTrue(Evaluator.Run(code), "#1");
+            Assert.IsTrue(Evaluator.Run("x();"), "#2");
         }
 
         [Test]
-        public void CapturedLocalVariable ()
+        public void CapturedLocalVariable()
         {
-            Evaluator.Run ("using System;");
+            Evaluator.Run("using System;");
 
             var res = Evaluator.Evaluate("var x = 123; Action a = () => x++; a(); x;");
-            Assert.AreEqual (124, res);    
+            Assert.AreEqual(124, res);
         }
 
         [Test]
         [Category("AndroidSdksNotWorking")]
-        public void DynamicStatement ()
+        public void DynamicStatement()
         {
-            Evaluator.Run ("dynamic d = 1;");
-            Evaluator.Run ("d = 'a';");
-            Evaluator.Run ("d.GetType ();");
+            Evaluator.Run("dynamic d = 1;");
+            Evaluator.Run("d = 'a';");
+            Evaluator.Run("d.GetType ();");
         }
 
         [Test]
-        public void AwaitExpression ()
+        public void AwaitExpression()
         {
             Evaluator.WaitOnTask = true;
-            var res = Evaluator.Evaluate("var res = await System.Threading.Tasks.Task.FromResult (1) + await System.Threading.Tasks.Task.FromResult (2);");
-            res = Evaluator.Evaluate ("res;");
-            Assert.AreEqual (3, res, "#1");
+            var res = Evaluator.Evaluate(
+                "var res = await System.Threading.Tasks.Task.FromResult (1) + await System.Threading.Tasks.Task.FromResult (2);"
+            );
+            res = Evaluator.Evaluate("res;");
+            Assert.AreEqual(3, res, "#1");
         }
 
         [Test]
-        public void UsingStatic ()
+        public void UsingStatic()
         {
-            Evaluator.Run ("using static System.String;");
+            Evaluator.Run("using static System.String;");
             var res = Evaluator.Evaluate("Join (\"--\", new [] { \"a\", \"b\" } );");
-            Assert.AreEqual ("a--b", res);
+            Assert.AreEqual("a--b", res);
         }
-
     }
 }
 #endif

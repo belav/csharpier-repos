@@ -1,5 +1,5 @@
 //
-// Tests for System.Web.UI.WebControls.DataGridItem 
+// Tests for System.Web.UI.WebControls.DataGridItem
 //
 // Author:
 //    Peter Dennis Bartok (pbartok@novell.com)
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -40,22 +40,25 @@ using System.Web.UI.WebControls;
 
 namespace MonoTests.System.Web.UI.WebControls
 {
-    [TestFixture]    
-    public class DataGridItemTest {
-        public class DataGridItemTestClass : DataGridItem {
-            public DataGridItemTestClass(int itemIndex, int dataSetIndex, ListItemType itemType) : base(itemIndex, dataSetIndex, itemType) {
-            }
+    [TestFixture]
+    public class DataGridItemTest
+    {
+        public class DataGridItemTestClass : DataGridItem
+        {
+            public DataGridItemTestClass(int itemIndex, int dataSetIndex, ListItemType itemType)
+                : base(itemIndex, dataSetIndex, itemType) { }
 
-            public void SetType (ListItemType type) {
+            public void SetType(ListItemType type)
+            {
                 base.SetItemType(type);
             }
         }
 
         [Test]
-        public void Defaults ()
+        public void Defaults()
         {
-            DataGridItem    i;
-            string        s;
+            DataGridItem i;
+            string s;
 
             i = new DataGridItem(123, 456, ListItemType.Pager);
             s = "blah";
@@ -69,11 +72,11 @@ namespace MonoTests.System.Web.UI.WebControls
             Assert.AreEqual("blah", i.DataItem, "D5");
         }
 
-
         [Test]
-        public void Methods () {
-            DataGridItemTestClass    i;
-            string            s;
+        public void Methods()
+        {
+            DataGridItemTestClass i;
+            string s;
 
             i = new DataGridItemTestClass(123, 456, ListItemType.Pager);
             s = "blah";
@@ -83,14 +86,13 @@ namespace MonoTests.System.Web.UI.WebControls
             Assert.AreEqual(ListItemType.Pager, i.ItemType, "M1");
             i.SetType(ListItemType.Header);
             Assert.AreEqual(ListItemType.Header, i.ItemType, "M2");
-
-            
         }
 
         [Test]
-        public void ValidEnum () {
-            DataGridItemTestClass    i;
-            string            s;
+        public void ValidEnum()
+        {
+            DataGridItemTestClass i;
+            string s;
 
             i = new DataGridItemTestClass(123, 456, (ListItemType)27051977);
         }

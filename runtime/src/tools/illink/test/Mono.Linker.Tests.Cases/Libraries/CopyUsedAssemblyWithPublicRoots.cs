@@ -4,24 +4,18 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 namespace Mono.Linker.Tests.Cases.Libraries
 {
     [Kept]
-    [KeptMember (".ctor()")]
-    [SetupLinkerAction ("copyused", "test")]
+    [KeptMember(".ctor()")]
+    [SetupLinkerAction("copyused", "test")]
     [SetupLinkerLinkPublicAndFamily]
     public class CopyUsedAssemblyWithPublicRoots
     {
         [Kept]
-        public static void Main ()
-        {
-        }
+        public static void Main() { }
 
         [Kept]
-        public void UnusedPublicMethod ()
-        {
-        }
+        public void UnusedPublicMethod() { }
 
         [Kept]
-        private void UnusedPrivateMethod ()
-        {
-        }
+        private void UnusedPrivateMethod() { }
     }
 }

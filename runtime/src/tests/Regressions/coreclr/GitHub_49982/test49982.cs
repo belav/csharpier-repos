@@ -12,9 +12,7 @@ using System.Runtime.InteropServices;
 
 class Program
 {
-    private class MockEndPoint : EndPoint
-    {
-    }
+    private class MockEndPoint : EndPoint { }
 
     private sealed class ExtendedSocketException : SocketException
     {
@@ -25,7 +23,7 @@ class Program
         {
             _endPoint = endPoint;
         }
-        
+
         public bool EndPointEquals(EndPoint? endPoint)
         {
             return _endPoint == endPoint;

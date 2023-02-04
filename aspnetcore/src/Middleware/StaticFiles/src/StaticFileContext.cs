@@ -41,7 +41,14 @@ internal struct StaticFileContext
 
     private RequestType _requestType;
 
-    public StaticFileContext(HttpContext context, StaticFileOptions options, ILogger logger, IFileProvider fileProvider, string? contentType, PathString subPath)
+    public StaticFileContext(
+        HttpContext context,
+        StaticFileOptions options,
+        ILogger logger,
+        IFileProvider fileProvider,
+        string? contentType,
+        PathString subPath
+    )
     {
         if (subPath.Value == null)
         {
@@ -121,7 +128,15 @@ internal struct StaticFileContext
 
             DateTimeOffset last = _fileInfo.LastModified;
             // Truncate to the second.
-            _lastModified = new DateTimeOffset(last.Year, last.Month, last.Day, last.Hour, last.Minute, last.Second, last.Offset).ToUniversalTime();
+            _lastModified = new DateTimeOffset(
+                last.Year,
+                last.Month,
+                last.Day,
+                last.Hour,
+                last.Minute,
+                last.Second,
+                last.Offset
+            ).ToUniversalTime();
 
             long etagHash = _lastModified.ToFileTime() ^ _length;
             _etag = new EntityTagHeaderValue('\"' + Convert.ToString(etagHash, 16) + '\"');
@@ -151,7 +166,10 @@ internal struct StaticFileContext
             _ifMatchState = PreconditionState.PreconditionFailed;
             foreach (var etag in ifMatch)
             {
-                if (etag.Equals(EntityTagHeaderValue.Any) || etag.Compare(_etag, useStrongComparison: true))
+                if (
+                    etag.Equals(EntityTagHeaderValue.Any)
+                    || etag.Compare(_etag, useStrongComparison: true)
+                )
                 {
                     _ifMatchState = PreconditionState.ShouldProcess;
                     break;
@@ -166,7 +184,10 @@ internal struct StaticFileContext
             _ifNoneMatchState = PreconditionState.ShouldProcess;
             foreach (var etag in ifNoneMatch)
             {
-                if (etag.Equals(EntityTagHeaderValue.Any) || etag.Compare(_etag, useStrongComparison: true))
+                if (
+                    etag.Equals(EntityTagHeaderValue.Any)
+                    || etag.Compare(_etag, useStrongComparison: true)
+                )
                 {
                     _ifNoneMatchState = PreconditionState.NotModified;
                     break;
@@ -185,7 +206,9 @@ internal struct StaticFileContext
         if (ifModifiedSince.HasValue && ifModifiedSince <= now)
         {
             bool modified = ifModifiedSince < _lastModified;
-            _ifModifiedSinceState = modified ? PreconditionState.ShouldProcess : PreconditionState.NotModified;
+            _ifModifiedSinceState = modified
+                ? PreconditionState.ShouldProcess
+                : PreconditionState.NotModified;
         }
 
         // 14.28 If-Unmodified-Since
@@ -193,7 +216,9 @@ internal struct StaticFileContext
         if (ifUnmodifiedSince.HasValue && ifUnmodifiedSince <= now)
         {
             bool unmodified = ifUnmodifiedSince >= _lastModified;
-            _ifUnmodifiedSinceState = unmodified ? PreconditionState.ShouldProcess : PreconditionState.PreconditionFailed;
+            _ifUnmodifiedSinceState = unmodified
+                ? PreconditionState.ShouldProcess
+                : PreconditionState.PreconditionFailed;
         }
     }
 
@@ -215,7 +240,11 @@ internal struct StaticFileContext
                     IsRangeRequest = false;
                 }
             }
-            else if (_etag != null && ifRangeHeader.EntityTag != null && !ifRangeHeader.EntityTag.Compare(_etag, useStrongComparison: true))
+            else if (
+                _etag != null
+                && ifRangeHeader.EntityTag != null
+                && !ifRangeHeader.EntityTag.Compare(_etag, useStrongComparison: true)
+            )
             {
                 IsRangeRequest = false;
             }
@@ -234,7 +263,12 @@ internal struct StaticFileContext
             return;
         }
 
-        (var isRangeRequest, var range) = RangeHelper.ParseRange(_context, RequestHeaders, _length, _logger);
+        (var isRangeRequest, var range) = RangeHelper.ParseRange(
+            _context,
+            RequestHeaders,
+            _length,
+            _logger
+        );
 
         _range = range;
         IsRangeRequest = isRangeRequest;
@@ -265,7 +299,10 @@ internal struct StaticFileContext
             _response.ContentLength = _length;
         }
 
-        if (_options.OnPrepareResponse != StaticFileOptions._defaultOnPrepareResponse || _options.OnPrepareResponseAsync != StaticFileOptions._defaultOnPrepareResponseAsync)
+        if (
+            _options.OnPrepareResponse != StaticFileOptions._defaultOnPrepareResponse
+            || _options.OnPrepareResponseAsync != StaticFileOptions._defaultOnPrepareResponseAsync
+        )
         {
             var context = new StaticFileResponseContext(_context, _fileInfo);
             _options.OnPrepareResponse(context);
@@ -274,8 +311,13 @@ internal struct StaticFileContext
         return Task.CompletedTask;
     }
 
-    public PreconditionState GetPreconditionState()
-        => GetMaxPreconditionState(_ifMatchState, _ifNoneMatchState, _ifModifiedSinceState, _ifUnmodifiedSinceState);
+    public PreconditionState GetPreconditionState() =>
+        GetMaxPreconditionState(
+            _ifMatchState,
+            _ifNoneMatchState,
+            _ifModifiedSinceState,
+            _ifUnmodifiedSinceState
+        );
 
     private static PreconditionState GetMaxPreconditionState(params PreconditionState[] states)
     {
@@ -380,9 +422,16 @@ internal struct StaticFileContext
 
         try
         {
-            var logPath = !string.IsNullOrEmpty(_fileInfo.PhysicalPath) ? _fileInfo.PhysicalPath : SubPath;
+            var logPath = !string.IsNullOrEmpty(_fileInfo.PhysicalPath)
+                ? _fileInfo.PhysicalPath
+                : SubPath;
             _logger.SendingFileRange(_response.Headers.ContentRange, logPath);
-            await _context.Response.SendFileAsync(_fileInfo, start, length, _context.RequestAborted);
+            await _context.Response.SendFileAsync(
+                _fileInfo,
+                start,
+                length,
+                _context.RequestAborted
+            );
         }
         catch (OperationCanceledException ex)
         {
@@ -392,7 +441,11 @@ internal struct StaticFileContext
     }
 
     // Note: This assumes ranges have been normalized to absolute byte offsets.
-    private ContentRangeHeaderValue ComputeContentRange(RangeItemHeaderValue range, out long start, out long length)
+    private ContentRangeHeaderValue ComputeContentRange(
+        RangeItemHeaderValue range,
+        out long start,
+        out long length
+    )
     {
         start = range.From!.Value;
         var end = range.To!.Value;

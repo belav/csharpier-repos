@@ -11,7 +11,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
 {
     internal static class RuleSetDocumentExtensions
     {
-        internal static void SetSeverity(this XDocument ruleSet, string analyzerId, string ruleId, ReportDiagnostic value)
+        internal static void SetSeverity(
+            this XDocument ruleSet,
+            string analyzerId,
+            string ruleId,
+            ReportDiagnostic value
+        )
         {
             var newAction = ConvertReportDiagnosticToAction(value);
 
@@ -32,9 +37,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
             }
 
             var allMatchingRules = ruleSet.Root
-                                       .Descendants("Rule")
-                                       .Where(r => r.Attribute("Id").Value.Equals(ruleId))
-                                       .ToList();
+                .Descendants("Rule")
+                .Where(r => r.Attribute("Id").Value.Equals(ruleId))
+                .ToList();
 
             foreach (var matchingRule in allMatchingRules)
             {
@@ -77,31 +82,38 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
         private static XElement FindOrCreateRuleElement(XElement rules, string id)
         {
             var ruleElement = rules
-                              .Elements("Rule")
-                              .FirstOrDefault(r => r.Attribute("Id").Value.Equals(id));
+                .Elements("Rule")
+                .FirstOrDefault(r => r.Attribute("Id").Value.Equals(id));
 
             if (ruleElement == null)
             {
-                ruleElement = new XElement("Rule",
-                                    new XAttribute("Id", id),
-                                    new XAttribute("Action", "Warning"));
+                ruleElement = new XElement(
+                    "Rule",
+                    new XAttribute("Id", id),
+                    new XAttribute("Action", "Warning")
+                );
                 rules.Add(ruleElement);
             }
 
             return ruleElement;
         }
 
-        private static XElement FindOrCreateRulesElement(XDocument ruleSetDocument, string analyzerID)
+        private static XElement FindOrCreateRulesElement(
+            XDocument ruleSetDocument,
+            string analyzerID
+        )
         {
             var rulesElement = ruleSetDocument.Root
-                               .Elements("Rules")
-                               .FirstOrDefault(r => r.Attribute("AnalyzerId").Value.Equals(analyzerID));
+                .Elements("Rules")
+                .FirstOrDefault(r => r.Attribute("AnalyzerId").Value.Equals(analyzerID));
 
             if (rulesElement == null)
             {
-                rulesElement = new XElement("Rules",
-                                    new XAttribute("AnalyzerId", analyzerID),
-                                    new XAttribute("RuleNamespace", analyzerID));
+                rulesElement = new XElement(
+                    "Rules",
+                    new XAttribute("AnalyzerId", analyzerID),
+                    new XAttribute("RuleNamespace", analyzerID)
+                );
                 ruleSetDocument.Root.Add(rulesElement);
             }
 

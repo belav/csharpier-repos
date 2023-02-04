@@ -15,9 +15,7 @@ public class ListLoggerFactory : ILoggerFactory
     private bool _disposed;
 
     public ListLoggerFactory()
-        : this(_ => true)
-    {
-    }
+        : this(_ => true) { }
 
     public ListLoggerFactory(Func<string, bool> shouldLogCategory)
     {
@@ -25,7 +23,13 @@ public class ListLoggerFactory : ILoggerFactory
         Logger = new ListLogger();
     }
 
-    public List<(LogLevel Level, EventId Id, string Message, object State, Exception Exception)> Log => Logger.LoggedEvents;
+    public List<(
+        LogLevel Level,
+        EventId Id,
+        string Message,
+        object State,
+        Exception Exception
+    )> Log => Logger.LoggedEvents;
     protected ListLogger Logger { get; set; }
 
     public virtual void Clear() => Logger.Clear();
@@ -39,9 +43,7 @@ public class ListLoggerFactory : ILoggerFactory
     {
         CheckDisposed();
 
-        return !_shouldLogCategory(name)
-            ? (ILogger)NullLogger.Instance
-            : Logger;
+        return !_shouldLogCategory(name) ? (ILogger)NullLogger.Instance : Logger;
     }
 
     private void CheckDisposed()
@@ -65,8 +67,8 @@ public class ListLoggerFactory : ILoggerFactory
 
         public ITestOutputHelper TestOutputHelper { get; set; }
 
-        public List<(LogLevel, EventId, string, object, Exception)> LoggedEvents { get; }
-            = new List<(LogLevel, EventId, string, object, Exception)>();
+        public List<(LogLevel, EventId, string, object, Exception)> LoggedEvents { get; } =
+            new List<(LogLevel, EventId, string, object, Exception)>();
 
         public void Clear()
         {
@@ -77,7 +79,12 @@ public class ListLoggerFactory : ILoggerFactory
         }
 
         public void Log<TState>(
-            LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
+            LogLevel logLevel,
+            EventId eventId,
+            TState state,
+            Exception exception,
+            Func<TState, Exception, string> formatter
+        )
         {
             lock (_sync) // Guard against tests with explicit concurrency
             {

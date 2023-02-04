@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -46,47 +46,53 @@ namespace System.ServiceModel.Channels.Http
     {
         // static members
 
-        static readonly List<HttpListenerManagerTable> instances = new List<HttpListenerManagerTable> ();
+        static readonly List<HttpListenerManagerTable> instances =
+            new List<HttpListenerManagerTable>();
 
-        public static HttpListenerManagerTable GetOrCreate (object serviceHostKey)
+        public static HttpListenerManagerTable GetOrCreate(object serviceHostKey)
         {
-            var m = instances.FirstOrDefault (p => p.ServiceHostKey == serviceHostKey);
-            if (m == null) {
-                m = new HttpListenerManagerTable (serviceHostKey);
-                instances.Add (m);
+            var m = instances.FirstOrDefault(p => p.ServiceHostKey == serviceHostKey);
+            if (m == null)
+            {
+                m = new HttpListenerManagerTable(serviceHostKey);
+                instances.Add(m);
             }
             return m;
         }
-        
+
         // instance members
 
-        HttpListenerManagerTable (object serviceHostKey)
+        HttpListenerManagerTable(object serviceHostKey)
         {
-            ServiceHostKey = serviceHostKey ?? new object ();
-            listeners = new Dictionary<Uri, HttpListenerManager> ();
+            ServiceHostKey = serviceHostKey ?? new object();
+            listeners = new Dictionary<Uri, HttpListenerManager>();
         }
-        
-        Dictionary<Uri,HttpListenerManager> listeners;
+
+        Dictionary<Uri, HttpListenerManager> listeners;
 
         public object ServiceHostKey { get; private set; }
 
-        public HttpListenerManager GetOrCreateManager (Uri uri, HttpTransportBindingElement element)
+        public HttpListenerManager GetOrCreateManager(Uri uri, HttpTransportBindingElement element)
         {
-            var m = listeners.FirstOrDefault (p => p.Key.Equals (uri)).Value;
-            if (m == null) {
+            var m = listeners.FirstOrDefault(p => p.Key.Equals(uri)).Value;
+            if (m == null)
+            {
                 // Two special cases
                 string absolutePath = uri.AbsolutePath;
-                if (absolutePath.EndsWith ("/js", StringComparison.Ordinal) ||
-                    absolutePath.EndsWith ("/jsdebug", StringComparison.Ordinal))
-                    return CreateListenerManager (uri, element);
-                
+                if (
+                    absolutePath.EndsWith("/js", StringComparison.Ordinal)
+                    || absolutePath.EndsWith("/jsdebug", StringComparison.Ordinal)
+                )
+                    return CreateListenerManager(uri, element);
+
                 // Try without the query, if any
                 UriBuilder ub = null;
-                if (!String.IsNullOrEmpty (uri.Query)) {
-                    ub = new UriBuilder (uri);
+                if (!String.IsNullOrEmpty(uri.Query))
+                {
+                    ub = new UriBuilder(uri);
                     ub.Query = null;
 
-                    m = listeners.FirstOrDefault (p => p.Key.Equals (ub.Uri)).Value;
+                    m = listeners.FirstOrDefault(p => p.Key.Equals(ub.Uri)).Value;
                     if (m != null)
                         return m;
                 }
@@ -95,41 +101,47 @@ namespace System.ServiceModel.Channels.Http
                 // of the Uri - this is the operation being called in, the remaining
                 // left-hand side of the absolute path should be the service
                 // endpoint address
-                if (ub == null) {
-                    ub = new UriBuilder (uri);
+                if (ub == null)
+                {
+                    ub = new UriBuilder(uri);
                     ub.Query = null;
                 }
-                
-                int lastSlash = absolutePath.LastIndexOf ('/');
-                if (lastSlash != -1) {
-                    ub.Path = absolutePath.Substring (0, lastSlash);
-                    m = listeners.FirstOrDefault (p => p.Key.Equals (ub.Uri)).Value;
+
+                int lastSlash = absolutePath.LastIndexOf('/');
+                if (lastSlash != -1)
+                {
+                    ub.Path = absolutePath.Substring(0, lastSlash);
+                    m = listeners.FirstOrDefault(p => p.Key.Equals(ub.Uri)).Value;
                     if (m != null)
                         return m;
                 }
 
-                // Lastly, try to match the listener to the start of the current request path 
+                // Lastly, try to match the listener to the start of the current request path
                 // This is to support WCF methods with path parameters in UriTemplate annotation
-                m = listeners.FirstOrDefault (p => absolutePath.StartsWith (p.Key.AbsolutePath, StringComparison.Ordinal)).Value;
+                m = listeners
+                    .FirstOrDefault(
+                        p => absolutePath.StartsWith(p.Key.AbsolutePath, StringComparison.Ordinal)
+                    )
+                    .Value;
                 if (m != null)
                     return m;
             }
-            
+
             if (m == null)
-                return CreateListenerManager (uri, element);
-            
+                return CreateListenerManager(uri, element);
+
             return m;
         }
 
-        HttpListenerManager CreateListenerManager (Uri uri, HttpTransportBindingElement element)
+        HttpListenerManager CreateListenerManager(Uri uri, HttpTransportBindingElement element)
         {
             HttpListenerManager m;
-            
+
             if (ServiceHostingEnvironmentInternal.InAspNet)
-                m = new AspNetHttpListenerManager (uri);
+                m = new AspNetHttpListenerManager(uri);
             else
-                m = new HttpStandaloneListenerManager (uri, element);
-            listeners [uri] = m;
+                m = new HttpStandaloneListenerManager(uri, element);
+            listeners[uri] = m;
 
             return m;
         }

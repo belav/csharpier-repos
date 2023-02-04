@@ -5,20 +5,21 @@ namespace Mono.Linker.Tests.Cases.UnreachableBlock.Dependencies
 {
     public class AssemblyWithUnreachableBlocks
     {
-        public AssemblyWithUnreachableBlocks ()
+        public AssemblyWithUnreachableBlocks()
         {
-            TestProperty ();
+            TestProperty();
         }
 
-        static void TestProperty ()
+        static void TestProperty()
         {
             if (PropBool)
-                NeverReached ();
+                NeverReached();
         }
 
-        static void NeverReached () { }
+        static void NeverReached() { }
 
-        static bool PropBool {
+        static bool PropBool
+        {
             get => false;
         }
     }

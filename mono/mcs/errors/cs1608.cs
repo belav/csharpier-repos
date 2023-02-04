@@ -3,7 +3,5 @@
 
 using System.Runtime.CompilerServices;
 
-[RequiredAttribute (typeof (object))]
-class ClassMain {
-}
-
+[RequiredAttribute(typeof(object))]
+class ClassMain { }

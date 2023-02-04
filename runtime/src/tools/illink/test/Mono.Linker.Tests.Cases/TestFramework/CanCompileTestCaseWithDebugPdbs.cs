@@ -4,22 +4,20 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 
 namespace Mono.Linker.Tests.Cases.TestFramework
 {
-    [SetupCompileArgument ("/debug:pdbonly")]
+    [SetupCompileArgument("/debug:pdbonly")]
     class CanCompileTestCaseWithDebugPdbs
     {
-        static void Main ()
+        static void Main()
         {
-            new Foo ().Method ();
+            new Foo().Method();
         }
 
         [Kept]
-        [KeptMember (".ctor()")]
+        [KeptMember(".ctor()")]
         class Foo
         {
             [Kept]
-            public void Method ()
-            {
-            }
+            public void Method() { }
         }
     }
 }

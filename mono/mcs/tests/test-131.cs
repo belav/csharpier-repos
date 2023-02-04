@@ -1,28 +1,28 @@
 using System;
 
-public class SimpleAttribute : Attribute {
-
+public class SimpleAttribute : Attribute
+{
     string n;
-    
-    public SimpleAttribute (string name)
+
+    public SimpleAttribute(string name)
     {
         n = name;
     }
 }
 
-public class Blah {
-
-    public enum Foo {
-
+public class Blah
+{
+    public enum Foo
+    {
         A,
 
-        [Simple ("second")]
+        [Simple("second")]
         B,
 
         C
     }
 
-    public static int Main ()
+    public static int Main()
     {
         //
         // We need a better test which does reflection to check if the
@@ -31,5 +31,4 @@ public class Blah {
 
         return 0;
     }
-
 }

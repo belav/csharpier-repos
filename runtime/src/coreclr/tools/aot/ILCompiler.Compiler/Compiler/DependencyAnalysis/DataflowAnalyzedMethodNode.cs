@@ -23,7 +23,9 @@ namespace ILCompiler.DependencyAnalysis
         public DataflowAnalyzedMethodNode(MethodIL methodIL)
         {
             Debug.Assert(methodIL.OwningMethod.IsTypicalMethodDefinition);
-            Debug.Assert(!CompilerGeneratedState.IsNestedFunctionOrStateMachineMember(methodIL.OwningMethod));
+            Debug.Assert(
+                !CompilerGeneratedState.IsNestedFunctionOrStateMachineMember(methodIL.OwningMethod)
+            );
             _methodIL = methodIL;
         }
 
@@ -32,7 +34,12 @@ namespace ILCompiler.DependencyAnalysis
             var mdManager = (UsageBasedMetadataManager)factory.MetadataManager;
             try
             {
-                return Dataflow.ReflectionMethodBodyScanner.ScanAndProcessReturnValue(factory, mdManager.FlowAnnotations, mdManager.Logger, _methodIL);
+                return Dataflow.ReflectionMethodBodyScanner.ScanAndProcessReturnValue(
+                    factory,
+                    mdManager.FlowAnnotations,
+                    mdManager.Logger,
+                    _methodIL
+                );
             }
             catch (TypeSystemException)
             {
@@ -51,7 +58,15 @@ namespace ILCompiler.DependencyAnalysis
         public override bool HasDynamicDependencies => false;
         public override bool HasConditionalStaticDependencies => false;
         public override bool StaticDependenciesAreComputed => true;
-        public override IEnumerable<CombinedDependencyListEntry> GetConditionalStaticDependencies(NodeFactory context) => null;
-        public override IEnumerable<CombinedDependencyListEntry> SearchDynamicDependencies(List<DependencyNodeCore<NodeFactory>> markedNodes, int firstNode, NodeFactory context) => null;
+
+        public override IEnumerable<CombinedDependencyListEntry> GetConditionalStaticDependencies(
+            NodeFactory context
+        ) => null;
+
+        public override IEnumerable<CombinedDependencyListEntry> SearchDynamicDependencies(
+            List<DependencyNodeCore<NodeFactory>> markedNodes,
+            int firstNode,
+            NodeFactory context
+        ) => null;
     }
 }

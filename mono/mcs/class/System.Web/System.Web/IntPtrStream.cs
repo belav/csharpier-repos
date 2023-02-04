@@ -23,10 +23,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -39,96 +39,102 @@
 using System.Runtime.InteropServices;
 using System.IO;
 
-namespace System.Web {
-
-    internal class IntPtrStream : Stream {
-        unsafe byte *base_address;
+namespace System.Web
+{
+    internal class IntPtrStream : Stream
+    {
+        unsafe byte* base_address;
         int size;
         int position;
         bool owns;
 
-        public IntPtrStream (IntPtr base_address, int size)
+        public IntPtrStream(IntPtr base_address, int size)
         {
-            unsafe {
-                this.base_address = (byte*)((void *)base_address);
+            unsafe
+            {
+                this.base_address = (byte*)((void*)base_address);
             }
             this.size = size;
             owns = true;
         }
 
-        public IntPtrStream (Stream stream)
+        public IntPtrStream(Stream stream)
         {
-            IntPtrStream st = (IntPtrStream) stream;
+            IntPtrStream st = (IntPtrStream)stream;
             this.size = st.size;
-            unsafe {
+            unsafe
+            {
                 this.base_address = st.base_address;
             }
         }
 
-        protected IntPtr BaseAddress {
-            get {
-                unsafe  { return (IntPtr) base_address; }
+        protected IntPtr BaseAddress
+        {
+            get
+            {
+                unsafe
+                {
+                    return (IntPtr)base_address;
+                }
             }
         }
 
-        protected int Size {
+        protected int Size
+        {
             get { return size; }
         }
 
-        public override bool CanRead {
-            get {
-                return true;
-            }
+        public override bool CanRead
+        {
+            get { return true; }
         }
 
-        public override bool CanSeek {
-            get {
-                return true;
-            }
+        public override bool CanSeek
+        {
+            get { return true; }
         }
 
-        public override bool CanWrite {
-            get {
-                return false;
-            }
+        public override bool CanWrite
+        {
+            get { return false; }
         }
 
-        public override long Position {
-            get {
-                return position;
-            }
-
-            set {
+        public override long Position
+        {
+            get { return position; }
+            set
+            {
                 if (position < 0)
-                    throw new ArgumentOutOfRangeException ("Position", "Can not be negative");
+                    throw new ArgumentOutOfRangeException("Position", "Can not be negative");
                 if (position > size)
-                    throw new ArgumentOutOfRangeException ("Position", "Pointer falls out of range");
+                    throw new ArgumentOutOfRangeException("Position", "Pointer falls out of range");
 
-                position = (int) value;
+                position = (int)value;
             }
         }
 
-        public override long Length {
-            get {
-                return size;
-            }
+        public override long Length
+        {
+            get { return size; }
         }
 
-        public override int Read (byte [] buffer, int offset, int count)
+        public override int Read(byte[] buffer, int offset, int count)
         {
             if (buffer == null)
-                throw new ArgumentNullException ("buffer");
+                throw new ArgumentNullException("buffer");
 
             if (offset < 0 || count < 0)
-                throw new ArgumentOutOfRangeException ("offset or count less than zero.");
+                throw new ArgumentOutOfRangeException("offset or count less than zero.");
 
-            if (buffer.Length - offset < count )
-                throw new ArgumentException ("offset+count",
-                                  "The size of the buffer is less than offset + count.");
-
-            unsafe {
+            if (buffer.Length - offset < count)
+                throw new ArgumentException(
+                    "offset+count",
+                    "The size of the buffer is less than offset + count."
+                );
+            unsafe
+            {
                 if (base_address == null)
-                    throw new ObjectDisposedException ("Stream has been closed");
+                    throw new ObjectDisposedException("Stream has been closed");
             }
 
             if (position >= size || count == 0)
@@ -136,114 +142,119 @@ namespace System.Web {
 
             if (position > size - count)
                 count = size - position;
-
-            unsafe {
-                Marshal.Copy ((IntPtr) (base_address + position), buffer, offset, count);
+            unsafe
+            {
+                Marshal.Copy((IntPtr)(base_address + position), buffer, offset, count);
             }
             position += count;
             return count;
         }
 
-        public override int ReadByte ()
+        public override int ReadByte()
         {
             if (position >= size)
                 return -1;
-
-            unsafe {
+            unsafe
+            {
                 if (base_address == null)
-                    throw new ObjectDisposedException ("Stream has been closed");
+                    throw new ObjectDisposedException("Stream has been closed");
             }
-
-            unsafe {
-                return base_address [position++];
+            unsafe
+            {
+                return base_address[position++];
             }
         }
 
-        public override long Seek (long offset, SeekOrigin loc)
+        public override long Seek(long offset, SeekOrigin loc)
         {
             // It's funny that they don't throw this exception for < Int32.MinValue
-            if (offset > (long) Int32.MaxValue)
-                throw new ArgumentOutOfRangeException ("Offset out of range. " + offset);
-
-            unsafe {
+            if (offset > (long)Int32.MaxValue)
+                throw new ArgumentOutOfRangeException("Offset out of range. " + offset);
+            unsafe
+            {
                 if (base_address == null)
-                    throw new ObjectDisposedException ("Stream has been closed");
+                    throw new ObjectDisposedException("Stream has been closed");
             }
 
             int ref_point;
-            switch (loc) {
-            case SeekOrigin.Begin:
-                if (offset < 0)
-                    throw new IOException ("Attempted to seek before start of MemoryStream.");
-                ref_point = 0;
-                break;
-            case SeekOrigin.Current:
-                ref_point = position;
-                break;
-            case SeekOrigin.End:
-                ref_point = size;
-                break;
-            default:
-                throw new ArgumentException ("loc", "Invalid SeekOrigin");
+            switch (loc)
+            {
+                case SeekOrigin.Begin:
+                    if (offset < 0)
+                        throw new IOException("Attempted to seek before start of MemoryStream.");
+                    ref_point = 0;
+                    break;
+                case SeekOrigin.Current:
+                    ref_point = position;
+                    break;
+                case SeekOrigin.End:
+                    ref_point = size;
+                    break;
+                default:
+                    throw new ArgumentException("loc", "Invalid SeekOrigin");
             }
-
-            checked {
-                try {
-                    ref_point += (int) offset;
-                } catch {
-                    throw new ArgumentOutOfRangeException ("Too large seek destination");
+            checked
+            {
+                try
+                {
+                    ref_point += (int)offset;
                 }
-                
+                catch
+                {
+                    throw new ArgumentOutOfRangeException("Too large seek destination");
+                }
+
                 if (ref_point < 0)
-                    throw new IOException ("Attempted to seek before start of MemoryStream.");
+                    throw new IOException("Attempted to seek before start of MemoryStream.");
             }
 
             position = ref_point;
             return position;
         }
-        
-        public override void SetLength (long value)
+
+        public override void SetLength(long value)
         {
-            throw new NotSupportedException ("This stream can not change its size");
+            throw new NotSupportedException("This stream can not change its size");
         }
 
-        public override void Write (byte [] buffer, int offset, int count)
+        public override void Write(byte[] buffer, int offset, int count)
         {
-            throw new NotSupportedException ("This stream can not change its size");
+            throw new NotSupportedException("This stream can not change its size");
         }
 
-        public override void WriteByte (byte value)
+        public override void WriteByte(byte value)
         {
-            throw new NotSupportedException ("This stream can not change its size");
-        }
-        
-        public override void Flush ()
-        {
+            throw new NotSupportedException("This stream can not change its size");
         }
 
-        public override void Close ()
+        public override void Flush() { }
+
+        public override void Close()
         {
-            if (owns) {
-                unsafe {
-                    IntPtr ptr = (IntPtr) base_address;
+            if (owns)
+            {
+                unsafe
+                {
+                    IntPtr ptr = (IntPtr)base_address;
                     if (ptr != IntPtr.Zero)
-                        Marshal.FreeHGlobal (ptr);
+                        Marshal.FreeHGlobal(ptr);
                     base_address = null;
                 }
             }
         }
 
-        ~IntPtrStream ()
+        ~IntPtrStream()
         {
-            if (owns) {
-                unsafe {
-                    IntPtr ptr = (IntPtr) base_address;
+            if (owns)
+            {
+                unsafe
+                {
+                    IntPtr ptr = (IntPtr)base_address;
                     if (ptr != IntPtr.Zero)
-                        Marshal.FreeHGlobal (ptr);
+                        Marshal.FreeHGlobal(ptr);
                     base_address = null;
                 }
             }
         }
     }
 }
-

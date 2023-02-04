@@ -12,7 +12,7 @@ namespace Exchange
     {
         /// <summary>
         /// The main entry point for the application.
-        /// </summary>        
+        /// </summary>
         static int Main(string[] args)
         {
             int rValue = 0;
@@ -48,7 +48,10 @@ namespace Exchange
         private int newValueA = 0;
         private int newValueB = Int32.MinValue;
         private bool success;
-        public ThreadSafe(): this(10000) { }
+
+        public ThreadSafe()
+            : this(10000) { }
+
         public ThreadSafe(int loops)
         {
             success = true;
@@ -66,15 +69,15 @@ namespace Exchange
             signal.WaitOne();
             for (int i = 0; i < numberOfIterations; i++)
                 Interlocked.Exchange(ref totalValue, newValueA);
-
         }
+
         public void ThreadWorkerB()
         {
             signal.WaitOne();
             for (int i = 0; i < numberOfIterations; i++)
                 Interlocked.Exchange(ref totalValue, newValueB);
-
         }
+
         public void ThreadChecker()
         {
             signal.WaitOne();
@@ -93,10 +96,7 @@ namespace Exchange
 
         public bool Pass
         {
-            get
-            {
-                return (success);
-            }
+            get { return (success); }
         }
     }
 }

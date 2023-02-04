@@ -64,7 +64,8 @@ internal sealed class FileStreamResult : FileResult, IResult
                 EnableRangeProcessing,
                 LastModified,
                 EntityTag,
-                logger);
+                logger
+            );
 
             if (!serveBody)
             {

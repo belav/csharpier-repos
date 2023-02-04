@@ -13,7 +13,12 @@ internal sealed partial class ServerSentEventsTransport
 
     private static partial class Log
     {
-        [LoggerMessage(1, LogLevel.Information, "Starting transport. Transfer mode: {TransferFormat}.", EventName = "StartTransport")]
+        [LoggerMessage(
+            1,
+            LogLevel.Information,
+            "Starting transport. Transfer mode: {TransferFormat}.",
+            EventName = "StartTransport"
+        )]
         public static partial void StartTransport(ILogger logger, TransferFormat transferFormat);
 
         [LoggerMessage(2, LogLevel.Debug, "Transport stopped.", EventName = "TransportStopped")]
@@ -22,10 +27,20 @@ internal sealed partial class ServerSentEventsTransport
         [LoggerMessage(3, LogLevel.Debug, "Starting receive loop.", EventName = "StartReceive")]
         public static partial void StartReceive(ILogger logger);
 
-        [LoggerMessage(6, LogLevel.Information, "Transport is stopping.", EventName = "TransportStopping")]
+        [LoggerMessage(
+            6,
+            LogLevel.Information,
+            "Transport is stopping.",
+            EventName = "TransportStopping"
+        )]
         public static partial void TransportStopping(ILogger logger);
 
-        [LoggerMessage(7, LogLevel.Debug, "Passing message to application. Payload size: {Count}.", EventName = "MessageToApplication")]
+        [LoggerMessage(
+            7,
+            LogLevel.Debug,
+            "Passing message to application. Payload size: {Count}.",
+            EventName = "MessageToApplication"
+        )]
         public static partial void MessageToApplication(ILogger logger, int count);
 
         [LoggerMessage(5, LogLevel.Debug, "Receive loop canceled.", EventName = "ReceiveCanceled")]
@@ -34,10 +49,20 @@ internal sealed partial class ServerSentEventsTransport
         [LoggerMessage(4, LogLevel.Debug, "Receive loop stopped.", EventName = "ReceiveStopped")]
         public static partial void ReceiveStopped(ILogger logger);
 
-        [LoggerMessage(8, LogLevel.Debug, "Server-Sent Event Stream ended.", EventName = "EventStreamEnded")]
+        [LoggerMessage(
+            8,
+            LogLevel.Debug,
+            "Server-Sent Event Stream ended.",
+            EventName = "EventStreamEnded"
+        )]
         public static partial void EventStreamEnded(ILogger logger);
 
-        [LoggerMessage(9, LogLevel.Debug, "Received {Count} bytes. Parsing SSE frame.", EventName = "ParsingSSE")]
+        [LoggerMessage(
+            9,
+            LogLevel.Debug,
+            "Received {Count} bytes. Parsing SSE frame.",
+            EventName = "ParsingSSE"
+        )]
         public static partial void ParsingSSE(ILogger logger, long count);
     }
 }

@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,92 +29,112 @@
 
 using System.Globalization;
 
-namespace System.Security.Permissions {
-
-    [AttributeUsage (AttributeTargets.Assembly | AttributeTargets.Class |
-        AttributeTargets.Struct | AttributeTargets.Constructor | AttributeTargets.Method, 
-        AllowMultiple = true, Inherited = false)]
+namespace System.Security.Permissions
+{
+    [AttributeUsage(
+        AttributeTargets.Assembly
+            | AttributeTargets.Class
+            | AttributeTargets.Struct
+            | AttributeTargets.Constructor
+            | AttributeTargets.Method,
+        AllowMultiple = true,
+        Inherited = false
+    )]
     [Serializable]
-    public sealed class DataProtectionPermissionAttribute : CodeAccessSecurityAttribute {
-
+    public sealed class DataProtectionPermissionAttribute : CodeAccessSecurityAttribute
+    {
         private DataProtectionPermissionFlags _flags;
 
-        public DataProtectionPermissionAttribute (SecurityAction action)
-            : base (action) 
+        public DataProtectionPermissionAttribute(SecurityAction action)
+            : base(action) { }
+
+        public DataProtectionPermissionFlags Flags
         {
-        }
-
-
-        public DataProtectionPermissionFlags Flags {
             get { return _flags; }
-            set {
-                if ((value & DataProtectionPermissionFlags.AllFlags) != value) {
-                    string msg = String.Format (Locale.GetText ("Invalid flags {0}"), value);
-                    throw new ArgumentException (msg, "DataProtectionPermissionFlags");
+            set
+            {
+                if ((value & DataProtectionPermissionFlags.AllFlags) != value)
+                {
+                    string msg = String.Format(Locale.GetText("Invalid flags {0}"), value);
+                    throw new ArgumentException(msg, "DataProtectionPermissionFlags");
                 }
 
                 _flags = value;
             }
         }
 
-        public bool ProtectData {
+        public bool ProtectData
+        {
             get { return ((_flags & DataProtectionPermissionFlags.ProtectData) != 0); }
-            set {
-                if (value) {
+            set
+            {
+                if (value)
+                {
                     _flags |= DataProtectionPermissionFlags.ProtectData;
                 }
-                else {
+                else
+                {
                     _flags &= ~DataProtectionPermissionFlags.ProtectData;
                 }
             }
         }
 
-        public bool UnprotectData {
+        public bool UnprotectData
+        {
             get { return ((_flags & DataProtectionPermissionFlags.UnprotectData) != 0); }
-            set {
-                if (value) {
+            set
+            {
+                if (value)
+                {
                     _flags |= DataProtectionPermissionFlags.UnprotectData;
                 }
-                else {
+                else
+                {
                     _flags &= ~DataProtectionPermissionFlags.UnprotectData;
                 }
             }
         }
 
-        public bool ProtectMemory {
+        public bool ProtectMemory
+        {
             get { return ((_flags & DataProtectionPermissionFlags.ProtectMemory) != 0); }
-            set {
-                if (value) {
+            set
+            {
+                if (value)
+                {
                     _flags |= DataProtectionPermissionFlags.ProtectMemory;
                 }
-                else {
+                else
+                {
                     _flags &= ~DataProtectionPermissionFlags.ProtectMemory;
                 }
             }
         }
 
-        public bool UnprotectMemory {
+        public bool UnprotectMemory
+        {
             get { return ((_flags & DataProtectionPermissionFlags.UnprotectMemory) != 0); }
-            set {
-                if (value) {
+            set
+            {
+                if (value)
+                {
                     _flags |= DataProtectionPermissionFlags.UnprotectMemory;
                 }
-                else {
+                else
+                {
                     _flags &= ~DataProtectionPermissionFlags.UnprotectMemory;
                 }
             }
         }
 
-
-        public override IPermission CreatePermission ()
+        public override IPermission CreatePermission()
         {
             DataProtectionPermission perm = null;
             if (this.Unrestricted)
-                perm = new DataProtectionPermission (PermissionState.Unrestricted);
+                perm = new DataProtectionPermission(PermissionState.Unrestricted);
             else
-                perm = new DataProtectionPermission (_flags);
+                perm = new DataProtectionPermission(_flags);
             return perm;
         }
     }
 }
-

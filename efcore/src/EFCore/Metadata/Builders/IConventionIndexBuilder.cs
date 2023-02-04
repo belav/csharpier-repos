@@ -44,7 +44,10 @@ public interface IConventionIndexBuilder : IConventionAnnotatableBuilder
     /// <param name="descending">A set of values indicating whether each corresponding index column has descending sort order.</param>
     /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
     /// <returns>The same builder instance if the uniqueness was configured, <see langword="null" /> otherwise.</returns>
-    IConventionIndexBuilder? IsDescending(IReadOnlyList<bool>? descending, bool fromDataAnnotation = false);
+    IConventionIndexBuilder? IsDescending(
+        IReadOnlyList<bool>? descending,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether this index sort order can be configured from the current configuration source.

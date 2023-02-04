@@ -3,21 +3,17 @@
 // Compiler options: -warnaserror -warn:1
 
 using System;
-[assembly: CLSCompliant (true)]
+
+[assembly: CLSCompliant(true)]
 
 public class Base<T>
 {
-    public void Test (int a)
-    {
-    }
-    public void Test (ref int b)
-    {
-    }
+    public void Test(int a) { }
+
+    public void Test(ref int b) { }
 }
 
 public class CLSClass : Base<int>
 {
-    public void Test ()
-    {
-    }
+    public void Test() { }
 }

@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -44,22 +44,28 @@ namespace System.Web.Script.Services
 
         readonly ScriptingProfileServiceSection _section;
 
-        public ProfileService () {
-            _section = (ScriptingProfileServiceSection) WebConfigurationManager.GetSection ("system.web.extensions/scripting/webServices/profileService");
+        public ProfileService()
+        {
+            _section = (ScriptingProfileServiceSection)
+                WebConfigurationManager.GetSection(
+                    "system.web.extensions/scripting/webServices/profileService"
+                );
         }
 
-        ScriptingProfileServiceSection ScriptingProfileServiceSection {
-            get {
+        ScriptingProfileServiceSection ScriptingProfileServiceSection
+        {
+            get
+            {
                 if (_section == null || !_section.Enabled)
-                    throw new InvalidOperationException ("Profile service is disabled.");
+                    throw new InvalidOperationException("Profile service is disabled.");
 
                 return _section;
             }
         }
 
-        public IDictionary <string, object> GetProfileDictionary (string[] properties)
+        public IDictionary<string, object> GetProfileDictionary(string[] properties)
         {
-            var ret = new Dictionary <string, object> ();
+            var ret = new Dictionary<string, object>();
 
             int len = properties != null ? properties.Length : 0;
             if (len <= 0)
@@ -69,86 +75,114 @@ namespace System.Web.Script.Services
             string name;
             int dot;
             object value;
-            
-            for (int i = 0; i < len; i++) {
-                name = properties [i];
-                dot = name.IndexOf ('.');
-                value = (dot > 0) ? profile.GetProfileGroup (name.Substring (0, dot)).GetPropertyValue (name.Substring (dot + 1)) : profile.GetPropertyValue (name);
-                ret.Add (name, value);
+
+            for (int i = 0; i < len; i++)
+            {
+                name = properties[i];
+                dot = name.IndexOf('.');
+                value =
+                    (dot > 0)
+                        ? profile
+                            .GetProfileGroup(name.Substring(0, dot))
+                            .GetPropertyValue(name.Substring(dot + 1))
+                        : profile.GetPropertyValue(name);
+                ret.Add(name, value);
             }
 
             return ret;
         }
-        
+
         [WebMethod()]
-        public IDictionary<string, object> GetAllPropertiesForCurrentUser (bool authenticatedUserOnly) {
-            return GetProfileDictionary (ScriptingProfileServiceSection.ReadAccessProperties);
+        public IDictionary<string, object> GetAllPropertiesForCurrentUser(
+            bool authenticatedUserOnly
+        )
+        {
+            return GetProfileDictionary(ScriptingProfileServiceSection.ReadAccessProperties);
         }
 
-        [WebMethod ()]
-        public IDictionary<string, object> GetPropertiesForCurrentUser (string [] properties, bool authenticatedUserOnly) {
+        [WebMethod()]
+        public IDictionary<string, object> GetPropertiesForCurrentUser(
+            string[] properties,
+            bool authenticatedUserOnly
+        )
+        {
             if (properties == null)
-                return GetAllPropertiesForCurrentUser (authenticatedUserOnly);
+                return GetAllPropertiesForCurrentUser(authenticatedUserOnly);
 
-            string [] raProps = ScriptingProfileServiceSection.ReadAccessPropertiesNoCopy;
+            string[] raProps = ScriptingProfileServiceSection.ReadAccessPropertiesNoCopy;
 
             List<string> list = null;
-            for (int i = 0; i < properties.Length; i++) {
-                string prop = properties [i];
+            for (int i = 0; i < properties.Length; i++)
+            {
+                string prop = properties[i];
                 if (prop == null)
-                    throw new ArgumentNullException ("properties[" + i + "]");
+                    throw new ArgumentNullException("properties[" + i + "]");
 
-                if (IsPropertyConfigured(raProps, prop)) {
+                if (IsPropertyConfigured(raProps, prop))
+                {
                     if (list != null)
                         list.Add(prop);
                 }
-                else if (list == null) {
-                    list = new List<string> (properties.Length - 1);
+                else if (list == null)
+                {
+                    list = new List<string>(properties.Length - 1);
                     for (int k = 0; k < i; k++)
-                        list.Add (properties [k]);
+                        list.Add(properties[k]);
                 }
             }
 
-            return GetProfileDictionary (list != null ? list.ToArray () : properties);
+            return GetProfileDictionary(list != null ? list.ToArray() : properties);
         }
 
-        [WebMethod ()]
-        public string [] SetPropertiesForCurrentUser (Dictionary<string, object> values, bool authenticatedUserOnly) {
+        [WebMethod()]
+        public string[] SetPropertiesForCurrentUser(
+            Dictionary<string, object> values,
+            bool authenticatedUserOnly
+        )
+        {
             if (values == null)
-                return new string [] { };
+                return new string[] { };
 
-            string [] waProps = ScriptingProfileServiceSection.WriteAccessPropertiesNoCopy;
+            string[] waProps = ScriptingProfileServiceSection.WriteAccessPropertiesNoCopy;
 
-            List<string> list = new List<string> ();
+            List<string> list = new List<string>();
             ProfileBase profile = HttpContext.Current.Profile;
-            foreach (KeyValuePair<string, object> pair in values) {
-                try {
+            foreach (KeyValuePair<string, object> pair in values)
+            {
+                try
+                {
                     string name = pair.Key;
-                    if (!IsPropertyConfigured (waProps, name))
+                    if (!IsPropertyConfigured(waProps, name))
                         continue;
 
-                    int dot = name.IndexOf ('.');
+                    int dot = name.IndexOf('.');
                     if (dot > 0)
-                        profile.GetProfileGroup (name.Substring (0, dot))
-                            .SetPropertyValue (name.Substring (dot + 1), pair.Value);
+                        profile
+                            .GetProfileGroup(name.Substring(0, dot))
+                            .SetPropertyValue(name.Substring(dot + 1), pair.Value);
                     else
-                        profile.SetPropertyValue (name, pair.Value);
+                        profile.SetPropertyValue(name, pair.Value);
                 }
-                catch {
-                    list.Add (pair.Key);
+                catch
+                {
+                    list.Add(pair.Key);
                 }
             }
 
-            return list.ToArray ();
+            return list.ToArray();
         }
 
-        static bool IsPropertyConfigured (string [] configuredProperties, string propertyToCheck) {
+        static bool IsPropertyConfigured(string[] configuredProperties, string propertyToCheck)
+        {
             if (configuredProperties == null)
                 return false;
 
             bool found = false;
             for (int i = 0; !found && i < configuredProperties.Length; i++)
-                found = configuredProperties [i].Equals (propertyToCheck, StringComparison.OrdinalIgnoreCase);
+                found = configuredProperties[i].Equals(
+                    propertyToCheck,
+                    StringComparison.OrdinalIgnoreCase
+                );
 
             return found;
         }

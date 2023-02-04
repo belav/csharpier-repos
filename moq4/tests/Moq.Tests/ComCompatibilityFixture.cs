@@ -20,7 +20,11 @@ namespace Moq.Tests
             // do a quick test for `method.IsSpecialName` before performing more costly checks.
 
             var @event = typeof(IButtonEvents_Event).GetEvent(nameof(IButtonEvents_Event.Click));
-            Assert.All(@event.GetAccessors(), accessor => Assert.False(accessor.IsSpecialName, "Accessor is marked as `specialname`."));
+            Assert.All(
+                @event.GetAccessors(),
+                accessor =>
+                    Assert.False(accessor.IsSpecialName, "Accessor is marked as `specialname`.")
+            );
         }
 
         // The following two tests verify whether Moq can deal with events that are defined in
@@ -62,7 +66,11 @@ namespace Moq.Tests
         public void COM_interop_type_property_has_accessors_that_are_marked_as_specialname()
         {
             var property = typeof(IHasProperty).GetProperty(nameof(IHasProperty.Property));
-            Assert.All(property.GetAccessors(), accessor => Assert.True(accessor.IsSpecialName, "Accessor is not marked as `specialname`."));
+            Assert.All(
+                property.GetAccessors(),
+                accessor =>
+                    Assert.True(accessor.IsSpecialName, "Accessor is not marked as `specialname`.")
+            );
         }
 
         [Fact]
@@ -85,7 +93,11 @@ namespace Moq.Tests
         public void COM_interop_type_indexer_has_accessors_that_are_marked_as_specialname()
         {
             var indexer = typeof(IHasIndexer).GetProperty("Item");
-            Assert.All(indexer.GetAccessors(), accessor => Assert.True(accessor.IsSpecialName, "Accessor is not marked as `specialname`."));
+            Assert.All(
+                indexer.GetAccessors(),
+                accessor =>
+                    Assert.True(accessor.IsSpecialName, "Accessor is not marked as `specialname`.")
+            );
         }
 
         [Fact]

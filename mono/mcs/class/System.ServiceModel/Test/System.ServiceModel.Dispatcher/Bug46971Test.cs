@@ -36,32 +36,43 @@ namespace MonoTests.System.ServiceModel.Dispatcher
     [global::System.SerializableAttribute()]
     [global::System.Diagnostics.DebuggerStepThroughAttribute()]
     [global::System.ComponentModel.DesignerCategoryAttribute("code")]
-    [global::System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.onvif.org/ver10/schema")]
-    public partial class VideoSource
-    {
-    }
+    [global::System.Xml.Serialization.XmlTypeAttribute(
+        Namespace = "http://www.onvif.org/ver10/schema"
+    )]
+    public partial class VideoSource { }
 
     [global::System.Diagnostics.DebuggerStepThroughAttribute()]
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-    [global::System.ServiceModel.MessageContractAttribute(WrapperName = "GetVideoSources", WrapperNamespace = "http://www.onvif.org/ver10/media/wsdl", IsWrapped = true)]
-    public partial class GetVideoSourcesRequest
-    {
-    }
+    [global::System.ComponentModel.EditorBrowsableAttribute(
+        global::System.ComponentModel.EditorBrowsableState.Advanced
+    )]
+    [global::System.ServiceModel.MessageContractAttribute(
+        WrapperName = "GetVideoSources",
+        WrapperNamespace = "http://www.onvif.org/ver10/media/wsdl",
+        IsWrapped = true
+    )]
+    public partial class GetVideoSourcesRequest { }
 
     [global::System.Diagnostics.DebuggerStepThroughAttribute()]
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-    [global::System.ServiceModel.MessageContractAttribute(WrapperName = "GetVideoSourcesResponse", WrapperNamespace = "http://www.onvif.org/ver10/media/wsdl", IsWrapped = true)]
+    [global::System.ComponentModel.EditorBrowsableAttribute(
+        global::System.ComponentModel.EditorBrowsableState.Advanced
+    )]
+    [global::System.ServiceModel.MessageContractAttribute(
+        WrapperName = "GetVideoSourcesResponse",
+        WrapperNamespace = "http://www.onvif.org/ver10/media/wsdl",
+        IsWrapped = true
+    )]
     public partial class GetVideoSourcesResponse
     {
-        [global::System.ServiceModel.MessageBodyMemberAttribute(Namespace = "http://www.onvif.org/ver10/media/wsdl", Order = 0)]
+        [global::System.ServiceModel.MessageBodyMemberAttribute(
+            Namespace = "http://www.onvif.org/ver10/media/wsdl",
+            Order = 0
+        )]
         [global::System.Xml.Serialization.XmlElementAttribute("VideoSources")]
         public VideoSource[] VideoSources;
 
-        public GetVideoSourcesResponse()
-        {
-        }
+        public GetVideoSourcesResponse() { }
 
         public GetVideoSourcesResponse(VideoSource[] VideoSources)
         {
@@ -70,16 +81,23 @@ namespace MonoTests.System.ServiceModel.Dispatcher
     }
 
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [global::System.ServiceModel.ServiceContractAttribute(Namespace = "http://www.onvif.org/ver10/media/wsdl", ConfigurationName = "Media.Media")]
+    [global::System.ServiceModel.ServiceContractAttribute(
+        Namespace = "http://www.onvif.org/ver10/media/wsdl",
+        ConfigurationName = "Media.Media"
+    )]
     public interface IMedia
     {
         // CODEGEN: Parameter 'VideoSources' requires additional schema information that cannot be captured using the parameter mode. The specific attribute is 'System.Xml.Serialization.XmlElementAttribute'.
-        [global::System.ServiceModel.OperationContractAttribute(Action = "http://www.onvif.org/ver10/media/wsdl/GetVideoSources/")]
+        [global::System.ServiceModel.OperationContractAttribute(
+            Action = "http://www.onvif.org/ver10/media/wsdl/GetVideoSources/"
+        )]
         [global::System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults = true)]
         [return: global::System.ServiceModel.MessageParameterAttribute(Name = "VideoSources")]
         GetVideoSourcesResponse GetVideoSources(GetVideoSourcesRequest request);
 
-        [global::System.ServiceModel.OperationContractAttribute(Action = "http://www.onvif.org/ver10/media/wsdl/GetVideoSources/")]
+        [global::System.ServiceModel.OperationContractAttribute(
+            Action = "http://www.onvif.org/ver10/media/wsdl/GetVideoSources/"
+        )]
         Task<GetVideoSourcesResponse> GetVideoSourcesAsync(GetVideoSourcesRequest request);
     }
 
@@ -90,7 +108,7 @@ namespace MonoTests.System.ServiceModel.Dispatcher
         {
             var response = new GetVideoSourcesResponse();
 
-            response.VideoSources = new VideoSource[] { new VideoSource () };
+            response.VideoSources = new VideoSource[] { new VideoSource() };
             return response;
         }
 
@@ -104,17 +122,23 @@ namespace MonoTests.System.ServiceModel.Dispatcher
     public class Bug46971
     {
         [Test]
-        public void Bug46971_Test ()
+        public void Bug46971_Test()
         {
             // Init service
-            int port = NetworkHelpers.FindFreePort ();
-            ServiceHost serviceHost = new ServiceHost (typeof (MediaService), new Uri ("http://localhost:" + port + "/Onvif/service_media"));
-            
-            try {
-                serviceHost.Open ();
-                serviceHost.Close ();
-            } catch (Exception ex) {
-                Assert.Fail (ex.Message);
+            int port = NetworkHelpers.FindFreePort();
+            ServiceHost serviceHost = new ServiceHost(
+                typeof(MediaService),
+                new Uri("http://localhost:" + port + "/Onvif/service_media")
+            );
+
+            try
+            {
+                serviceHost.Open();
+                serviceHost.Close();
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail(ex.Message);
             }
         }
     }

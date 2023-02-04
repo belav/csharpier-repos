@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,48 +33,37 @@ namespace System.Management
 {
     public class PutOptions : ManagementOptions, ICloneable
     {
-        public PutOptions ()
-        {
-        }
+        public PutOptions() { }
 
-        public PutOptions (ManagementNamedValueCollection context)
-        {
-        }
+        public PutOptions(ManagementNamedValueCollection context) { }
 
-        public PutOptions (ManagementNamedValueCollection context,
-                   TimeSpan timeout,
-                   bool useAmendedQualifiers,
-                   PutType putType)
-        {
-        }
+        public PutOptions(
+            ManagementNamedValueCollection context,
+            TimeSpan timeout,
+            bool useAmendedQualifiers,
+            PutType putType
+        ) { }
 
         [MonoTODO]
-        public override object Clone ()
+        public override object Clone()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public PutType Type {
+        public PutType Type
+        {
             [MonoTODO]
-            get {
-                throw new NotImplementedException ();
-            }
+            get { throw new NotImplementedException(); }
             [MonoTODO]
-            set {
-                throw new NotImplementedException ();
-            }
+            set { throw new NotImplementedException(); }
         }
 
-        public bool UseAmendedQualifiers {
+        public bool UseAmendedQualifiers
+        {
             [MonoTODO]
-            get {
-                throw new NotImplementedException ();
-            }
+            get { throw new NotImplementedException(); }
             [MonoTODO]
-            set {
-                throw new NotImplementedException ();
-            }
+            set { throw new NotImplementedException(); }
         }
     }
 }
-

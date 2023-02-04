@@ -32,14 +32,13 @@ using System.Security.Permissions;
 namespace System.Security.Policy
 {
     [Serializable]
-    [PermissionSetAttribute (SecurityAction.InheritanceDemand, Unrestricted = true)]
+    [PermissionSetAttribute(SecurityAction.InheritanceDemand, Unrestricted = true)]
     public abstract class EvidenceBase
     {
-        [SecurityPermissionAttribute (SecurityAction.Assert, SerializationFormatter = true)]
-        public virtual EvidenceBase Clone ()
+        [SecurityPermissionAttribute(SecurityAction.Assert, SerializationFormatter = true)]
+        public virtual EvidenceBase Clone()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
     }
 }
-

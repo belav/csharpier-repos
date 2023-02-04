@@ -5,20 +5,21 @@ namespace Mono.Linker.Tests.Cases.Interop.InternalCalls
 {
     class UnusedFieldsOfTypesWhenHasThisAreNotRemoved
     {
-        public static void Main ()
+        public static void Main()
         {
-            A a = new A ();
-            a.SomeMethod ();
+            A a = new A();
+            a.SomeMethod();
         }
 
-        [KeptMember (".ctor()")]
+        [KeptMember(".ctor()")]
         class A
         {
-            [Kept] private int field1;
+            [Kept]
+            private int field1;
 
             [Kept]
-            [MethodImpl (MethodImplOptions.InternalCall)]
-            public extern void SomeMethod ();
+            [MethodImpl(MethodImplOptions.InternalCall)]
+            public extern void SomeMethod();
         }
     }
 }

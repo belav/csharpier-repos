@@ -5,14 +5,14 @@ using System;
 
 class X
 {
-    static void Foo<T> () where T : class
-    {
-    }
+    static void Foo<T>()
+        where T : class { }
 
-    public static void Main ()
+    public static void Main()
     {
-        Action a = () => {
-            Foo<wrong> ();
+        Action a = () =>
+        {
+            Foo<wrong>();
         };
     }
 }

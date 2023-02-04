@@ -1,6 +1,6 @@
 //
 // GetFrameworkSdkPath.cs: Gets path to SDK.
-// 
+//
 // Author:
 //   Marek Sieradzki (marek.sieradzki@gmail.com)
 //
@@ -29,30 +29,27 @@
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
 
-namespace Microsoft.Build.Tasks {
-    public class GetFrameworkSdkPath : TaskExtension {
-        
-        string    path;
-    
-        public GetFrameworkSdkPath ()
-        {
-        }
+namespace Microsoft.Build.Tasks
+{
+    public class GetFrameworkSdkPath : TaskExtension
+    {
+        string path;
 
-        public override bool Execute ()
+        public GetFrameworkSdkPath() { }
+
+        public override bool Execute()
         {
-            path = ToolLocationHelper.GetPathToDotNetFrameworkSdk (TargetDotNetFrameworkVersion.Version20);
+            path = ToolLocationHelper.GetPathToDotNetFrameworkSdk(
+                TargetDotNetFrameworkVersion.Version20
+            );
             return true;
         }
 
         [Output]
-        public string Path {
-            get {
-                return path;
-            }
-            set {
-                path = value;
-            }
+        public string Path
+        {
+            get { return path; }
+            set { path = value; }
         }
     }
 }
-

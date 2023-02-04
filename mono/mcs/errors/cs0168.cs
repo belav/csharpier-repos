@@ -4,8 +4,8 @@
 
 class Main
 {
-   public void Method (int i)
-   {
-       long p;
-   }
+    public void Method(int i)
+    {
+        long p;
+    }
 }

@@ -6,39 +6,45 @@ using System.Threading.Tasks;
 
 public static class ExceptionHelper
 {
-    public static async Task ConditionalCatchExceptThreadAbortAsync (Func<Task>
-        funcTask, Action<Exception> conditionalCatchAction)
+    public static async Task ConditionalCatchExceptThreadAbortAsync(
+        Func<Task> funcTask,
+        Action<Exception> conditionalCatchAction
+    )
     {
-        funcTask ();
+        funcTask();
         return;
     }
 }
 
 class ATask
 {
-    readonly object _asyncTaskCancellationSource = new object ();
+    readonly object _asyncTaskCancellationSource = new object();
 
     readonly object aname;
 
-    public async Task<bool> OnDoWorkAsync ()
+    public async Task<bool> OnDoWorkAsync()
     {
-        await ExceptionHelper.ConditionalCatchExceptThreadAbortAsync (
-            async () => {
-                if (_asyncTaskCancellationSource != null) {
+        await ExceptionHelper.ConditionalCatchExceptThreadAbortAsync(
+            async () =>
+            {
+                if (_asyncTaskCancellationSource != null)
+                {
                     string item = null;
 
-                    await ExceptionHelper.ConditionalCatchExceptThreadAbortAsync (
-                        async () => {
-                            Console.WriteLine (aname);
+                    await ExceptionHelper.ConditionalCatchExceptThreadAbortAsync(
+                        async () =>
+                        {
+                            Console.WriteLine(aname);
                         },
-                        (e) => {
-                            Console.WriteLine (item);
+                        (e) =>
+                        {
+                            Console.WriteLine(item);
                         }
                     );
                 }
             },
             null
-            );
+        );
 
         return true;
     }
@@ -46,9 +52,9 @@ class ATask
 
 public class Tests
 {
-    public static void Main ()
+    public static void Main()
     {
-        var a = new ATask ();
-        var res = a.OnDoWorkAsync ().Result;
+        var a = new ATask();
+        var res = a.OnDoWorkAsync().Result;
     }
 }

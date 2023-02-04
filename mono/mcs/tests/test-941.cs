@@ -1,6 +1,6 @@
 public class GotoCodeFlowBug
 {
-    public static void Test (bool cond, out int x)
+    public static void Test(bool cond, out int x)
     {
         if (cond)
         {
@@ -10,7 +10,7 @@ public class GotoCodeFlowBug
         x = 0;
     }
 
-    public static void Test2 (bool cond, out int x)
+    public static void Test2(bool cond, out int x)
     {
         if (cond)
         {
@@ -24,7 +24,5 @@ public class GotoCodeFlowBug
         x = 0;
     }
 
-    public static void Main ()
-    {
-    }
+    public static void Main() { }
 }

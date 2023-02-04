@@ -20,8 +20,7 @@ namespace System.CommandLine.Tests.Binding
 
             var modelDescriptor = ModelDescriptor.FromType(type);
 
-            modelDescriptor
-                .PropertyDescriptors
+            modelDescriptor.PropertyDescriptors
                 .Single()
                 .GetDefaultValue()
                 .Should()

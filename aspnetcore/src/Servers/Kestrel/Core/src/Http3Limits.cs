@@ -27,7 +27,11 @@ public class Http3Limits
         {
             if (value <= 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(value), value, CoreStrings.GreaterThanZeroRequired);
+                throw new ArgumentOutOfRangeException(
+                    nameof(value),
+                    value,
+                    CoreStrings.GreaterThanZeroRequired
+                );
             }
 
             _headerTableSize = value;
@@ -47,7 +51,11 @@ public class Http3Limits
         {
             if (value <= 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(value), value, CoreStrings.GreaterThanZeroRequired);
+                throw new ArgumentOutOfRangeException(
+                    nameof(value),
+                    value,
+                    CoreStrings.GreaterThanZeroRequired
+                );
             }
 
             _maxRequestHeaderFieldSize = value;

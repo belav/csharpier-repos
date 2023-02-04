@@ -38,19 +38,18 @@ namespace WebMatrix.Data
     {
         readonly Dictionary<string, object> fields;
 
-        internal DynamicRecord (Dictionary<string, object> fields)
+        internal DynamicRecord(Dictionary<string, object> fields)
         {
             this.fields = fields;
-            Columns = new List<string> (fields.Keys).AsReadOnly ();
+            Columns = new List<string>(fields.Keys).AsReadOnly();
         }
 
-        public IList<string> Columns {
-            get;
-            private set;
-        }
+        public IList<string> Columns { get; private set; }
 
-        public object this[string name] {
-            get {
+        public object this[string name]
+        {
+            get
+            {
                 var retval = fields[name];
 
                 if (retval == DBNull.Value)
@@ -60,8 +59,10 @@ namespace WebMatrix.Data
             }
         }
 
-        public object this[int index] {
-            get {                
+        public object this[int index]
+        {
+            get
+            {
                 var retval = fields[Columns[index]];
 
                 if (retval == DBNull.Value)
@@ -71,14 +72,14 @@ namespace WebMatrix.Data
             }
         }
 
-        public override IEnumerable<string> GetDynamicMemberNames ()
+        public override IEnumerable<string> GetDynamicMemberNames()
         {
             return fields.Keys;
         }
 
-        public override bool TryGetMember (GetMemberBinder binder, out object result)
+        public override bool TryGetMember(GetMemberBinder binder, out object result)
         {
-            bool success = fields.TryGetValue (binder.Name, out result);
+            bool success = fields.TryGetValue(binder.Name, out result);
 
             if (result == DBNull.Value)
                 result = null;
@@ -86,65 +87,64 @@ namespace WebMatrix.Data
             return success;
         }
 
-        AttributeCollection ICustomTypeDescriptor.GetAttributes ()
+        AttributeCollection ICustomTypeDescriptor.GetAttributes()
         {
             return null;
         }
 
-        string ICustomTypeDescriptor.GetClassName ()
+        string ICustomTypeDescriptor.GetClassName()
         {
             return null;
         }
 
-        string ICustomTypeDescriptor.GetComponentName ()
+        string ICustomTypeDescriptor.GetComponentName()
         {
             return null;
         }
 
-        TypeConverter ICustomTypeDescriptor.GetConverter ()
+        TypeConverter ICustomTypeDescriptor.GetConverter()
         {
             return null;
         }
 
-        EventDescriptor ICustomTypeDescriptor.GetDefaultEvent ()
+        EventDescriptor ICustomTypeDescriptor.GetDefaultEvent()
         {
             return null;
         }
 
-        PropertyDescriptor ICustomTypeDescriptor.GetDefaultProperty ()
+        PropertyDescriptor ICustomTypeDescriptor.GetDefaultProperty()
         {
             return null;
         }
 
-        Object ICustomTypeDescriptor.GetEditor (Type editorBaseType)
+        Object ICustomTypeDescriptor.GetEditor(Type editorBaseType)
         {
             return null;
         }
 
-        Object ICustomTypeDescriptor.GetPropertyOwner (PropertyDescriptor pd)
+        Object ICustomTypeDescriptor.GetPropertyOwner(PropertyDescriptor pd)
         {
             return null;
         }
 
-        EventDescriptorCollection ICustomTypeDescriptor.GetEvents ()
+        EventDescriptorCollection ICustomTypeDescriptor.GetEvents()
         {
             return null;
         }
 
-        EventDescriptorCollection ICustomTypeDescriptor.GetEvents (Attribute[] attributes)
+        EventDescriptorCollection ICustomTypeDescriptor.GetEvents(Attribute[] attributes)
         {
             return null;
         }
 
-        PropertyDescriptorCollection ICustomTypeDescriptor.GetProperties ()
+        PropertyDescriptorCollection ICustomTypeDescriptor.GetProperties()
         {
             return null;
         }
 
-        PropertyDescriptorCollection ICustomTypeDescriptor.GetProperties (Attribute[] attributes)
+        PropertyDescriptorCollection ICustomTypeDescriptor.GetProperties(Attribute[] attributes)
         {
             return null;
         }
     }
 }
-

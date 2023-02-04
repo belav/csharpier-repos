@@ -26,20 +26,21 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil {
-
-    internal sealed class ReferenceType : TypeSpecification {
-
-        public override string Name {
-            get { return string.Concat (base.Name, "&"); }
-        }
-
-        public override string FullName {
-            get { return string.Concat (base.FullName, "&"); }
-        }
-
-        public ReferenceType (TypeReference type) : base (type)
+namespace Mono.Cecil
+{
+    internal sealed class ReferenceType : TypeSpecification
+    {
+        public override string Name
         {
+            get { return string.Concat(base.Name, "&"); }
         }
+
+        public override string FullName
+        {
+            get { return string.Concat(base.FullName, "&"); }
+        }
+
+        public ReferenceType(TypeReference type)
+            : base(type) { }
     }
 }

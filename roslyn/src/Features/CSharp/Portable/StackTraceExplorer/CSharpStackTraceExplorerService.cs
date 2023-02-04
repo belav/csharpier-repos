@@ -20,9 +20,7 @@ namespace Microsoft.CodeAnalysis.CSharp.StackTraceExplorer
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpStackTraceExplorerService()
-        {
-        }
+        public CSharpStackTraceExplorerService() { }
 
         public string GetTypeMetadataName(string className)
         {
@@ -35,7 +33,9 @@ namespace Microsoft.CodeAnalysis.CSharp.StackTraceExplorer
             return GetGenericNameWithArity(typeNameSyntax);
         }
 
-        private static string GetMetadataNameOfQualifiedNameSyntax(QualifiedNameSyntax originalSyntax)
+        private static string GetMetadataNameOfQualifiedNameSyntax(
+            QualifiedNameSyntax originalSyntax
+        )
         {
             SyntaxNode syntax = originalSyntax;
             Stack<string> parts = new();
@@ -74,7 +74,9 @@ namespace Microsoft.CodeAnalysis.CSharp.StackTraceExplorer
             var declaration = SyntaxFactory.ParseMemberDeclaration($"void {methodName}");
             if (declaration is MethodDeclarationSyntax methodDeclarationSyntax)
             {
-                var paramList = methodDeclarationSyntax.ParameterList.Parameters.Select(p => p.Type?.ToString());
+                var paramList = methodDeclarationSyntax.ParameterList.Parameters.Select(
+                    p => p.Type?.ToString()
+                );
                 return $"{methodDeclarationSyntax.Identifier}{methodDeclarationSyntax.TypeParameterList}({paramList.Join(", ")})";
             }
 

@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
     {
         public static async Task<ImmutableArray<INamespaceSymbol>> GetGlobalNamespacesAsync(
             this Solution solution,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var results = ArrayBuilder<INamespaceSymbol>.GetInstance();
 
@@ -25,7 +26,9 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 var project = solution.GetProject(projectId)!;
                 if (project.SupportsCompilation)
                 {
-                    var compilation = await project.GetCompilationAsync(cancellationToken).ConfigureAwait(false);
+                    var compilation = await project
+                        .GetCompilationAsync(cancellationToken)
+                        .ConfigureAwait(false);
 #nullable disable // Can 'compilation' be null here?
                     results.Add(compilation.Assembly.GlobalNamespace);
 #nullable enable
@@ -35,10 +38,17 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             return results.ToImmutableAndFree();
         }
 
-        public static TextDocumentKind? GetDocumentKind(this Solution solution, DocumentId documentId)
-            => solution.GetTextDocument(documentId)?.Kind;
+        public static TextDocumentKind? GetDocumentKind(
+            this Solution solution,
+            DocumentId documentId
+        ) => solution.GetTextDocument(documentId)?.Kind;
 
-        public static Solution WithTextDocumentText(this Solution solution, DocumentId documentId, SourceText text, PreservationMode mode = PreservationMode.PreserveIdentity)
+        public static Solution WithTextDocumentText(
+            this Solution solution,
+            DocumentId documentId,
+            SourceText text,
+            PreservationMode mode = PreservationMode.PreserveIdentity
+        )
         {
             var documentKind = solution.GetDocumentKind(documentId);
             switch (documentKind)
@@ -53,16 +63,24 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                     return solution.WithAdditionalDocumentText(documentId, text, mode);
 
                 case null:
-                    throw new InvalidOperationException(WorkspaceExtensionsResources.The_solution_does_not_contain_the_specified_document);
+                    throw new InvalidOperationException(
+                        WorkspaceExtensionsResources.The_solution_does_not_contain_the_specified_document
+                    );
 
                 default:
                     throw ExceptionUtilities.UnexpectedValue(documentKind);
             }
         }
 
-        public static ImmutableArray<DocumentId> FilterDocumentIdsByLanguage(this Solution solution, ImmutableArray<DocumentId> documentIds, string language)
-            => documentIds.WhereAsArray(
-                (documentId, args) => args.solution.GetDocument(documentId)?.Project.Language == args.language,
-                (solution, language));
+        public static ImmutableArray<DocumentId> FilterDocumentIdsByLanguage(
+            this Solution solution,
+            ImmutableArray<DocumentId> documentIds,
+            string language
+        ) =>
+            documentIds.WhereAsArray(
+                (documentId, args) =>
+                    args.solution.GetDocument(documentId)?.Project.Language == args.language,
+                (solution, language)
+            );
     }
 }

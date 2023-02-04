@@ -27,7 +27,8 @@ namespace ILCompiler
 
         private readonly InstructionEncoder _types = new InstructionEncoder(new BlobBuilder());
 
-        private Dictionary<MethodDesc, (string MangledName, int Size, int GcInfoSize)> _methods = new();
+        private Dictionary<MethodDesc, (string MangledName, int Size, int GcInfoSize)> _methods =
+            new();
         private Dictionary<MethodDesc, int> _methodEhInfo = new();
         private Dictionary<string, int> _blobs = new();
 
@@ -42,11 +43,13 @@ namespace ILCompiler
             _emitter.AllowUseOfAddGlobalMethod();
         }
 
-        internal override void Begin()
-        {
-        }
+        internal override void Begin() { }
 
-        protected override void DumpObjectNode(NameMangler mangler, ObjectNode node, ObjectData objectData)
+        protected override void DumpObjectNode(
+            NameMangler mangler,
+            ObjectNode node,
+            ObjectData objectData
+        )
         {
             string mangledName = null;
             if (node is ISymbolNode symbol)
@@ -63,7 +66,10 @@ namespace ILCompiler
                     break;
                 case IMethodBodyNode methodBody:
                     var codeInfo = (INodeWithCodeInfo)node;
-                    _methods.Add(methodBody.Method, (mangledName, objectData.Data.Length, codeInfo.GCInfo.Length));
+                    _methods.Add(
+                        methodBody.Method,
+                        (mangledName, objectData.Data.Length, codeInfo.GCInfo.Length)
+                    );
                     break;
                 case MethodExceptionHandlingInfoNode ehInfoNode:
                     _methodEhInfo.Add(ehInfoNode.Method, objectData.Data.Length);
@@ -77,7 +83,11 @@ namespace ILCompiler
             }
         }
 
-        private void SerializeSimpleEntry(InstructionEncoder encoder, TypeSystemEntity entity, ObjectData blob)
+        private void SerializeSimpleEntry(
+            InstructionEncoder encoder,
+            TypeSystemEntity entity,
+            ObjectData blob
+        )
         {
             encoder.OpCode(ILOpCode.Ldtoken);
             encoder.Token(_emitter.EmitMetadataHandleForTypeSystemEntity(entity));

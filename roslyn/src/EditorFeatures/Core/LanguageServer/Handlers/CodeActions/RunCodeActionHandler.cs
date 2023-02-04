@@ -28,7 +28,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
     /// TO-DO: Currently, any ApplyChangesOperation that adds or removes a document must also be
     /// applied as a command due to an LSP bug (see https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1147293/).
     /// Commands must be applied from the UI thread in VS.
-    /// 
+    ///
     /// TODO - This must be moved to the MS.CA.LanguageServer.Protocol project once the
     /// UI thread dependencies are resolved and <see cref="IThreadingContext"/> references are removed.
     /// See https://github.com/dotnet/roslyn/issues/55142
@@ -48,7 +48,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             ICodeFixService codeFixService,
             ICodeRefactoringService codeRefactoringService,
             IGlobalOptionService globalOptions,
-            IThreadingContext threadingContext)
+            IThreadingContext threadingContext
+        )
         {
             _codeFixService = codeFixService;
             _codeRefactoringService = codeRefactoringService;
@@ -61,7 +62,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
         public override bool MutatesSolutionState => true;
         public override bool RequiresLSPSolution => true;
 
-        public override LSP.TextDocumentIdentifier GetTextDocumentIdentifier(LSP.ExecuteCommandParams request)
+        public override LSP.TextDocumentIdentifier GetTextDocumentIdentifier(
+            LSP.ExecuteCommandParams request
+        )
         {
             var runRequest = ((JToken)request.Arguments.Single()).ToObject<CodeActionResolveData>();
             Assumes.Present(runRequest);
@@ -69,7 +72,11 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             return runRequest.TextDocument;
         }
 
-        public override async Task<object> HandleRequestAsync(LSP.ExecuteCommandParams request, RequestContext context, CancellationToken cancellationToken)
+        public override async Task<object> HandleRequestAsync(
+            LSP.ExecuteCommandParams request,
+            RequestContext context,
+            CancellationToken cancellationToken
+        )
         {
             var document = context.Document;
             Contract.ThrowIfNull(document);
@@ -80,13 +87,27 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             var options = _globalOptions.GetCodeActionOptionsProvider();
 
             var codeActionsCache = context.GetRequiredLspService<CodeActionsCache>();
-            var codeActions = await CodeActionHelpers.GetCodeActionsAsync(
-                codeActionsCache, document, runRequest.Range, options, _codeFixService, _codeRefactoringService, cancellationToken).ConfigureAwait(false);
+            var codeActions = await CodeActionHelpers
+                .GetCodeActionsAsync(
+                    codeActionsCache,
+                    document,
+                    runRequest.Range,
+                    options,
+                    _codeFixService,
+                    _codeRefactoringService,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
-            var actionToRun = CodeActionHelpers.GetCodeActionToResolve(runRequest.UniqueIdentifier, codeActions);
+            var actionToRun = CodeActionHelpers.GetCodeActionToResolve(
+                runRequest.UniqueIdentifier,
+                codeActions
+            );
             Contract.ThrowIfNull(actionToRun);
 
-            var operations = await actionToRun.GetOperationsAsync(cancellationToken).ConfigureAwait(false);
+            var operations = await actionToRun
+                .GetOperationsAsync(cancellationToken)
+                .ConfigureAwait(false);
 
             // TODO - This UI thread dependency should be removed.
             // https://github.com/dotnet/roslyn/projects/45#card-20619668

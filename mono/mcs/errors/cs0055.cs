@@ -3,16 +3,17 @@
 
 using System;
 
-class ErrorCS0055 {
-    public ErrorCS0055 () {}
+class ErrorCS0055
+{
+    public ErrorCS0055() { }
 }
 
-public class Foo {
-    public int this[ErrorCS0055 e] {
+public class Foo
+{
+    public int this[ErrorCS0055 e]
+    {
         get { return 5; }
     }
 
-    public static void Main () {
-    }
+    public static void Main() { }
 }
-

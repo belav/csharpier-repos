@@ -5,27 +5,23 @@ namespace Mono.Linker.Tests.Cases.Interop.InternalCalls
 {
     class UnusedDefaultConstructorOfTypePassedByRefIsNotRemoved
     {
-        public static void Main ()
+        public static void Main()
         {
-            var a = new A (1);
-            SomeMethod (ref a);
+            var a = new A(1);
+            SomeMethod(ref a);
         }
 
         class A
         {
             [Kept]
-            public A ()
-            {
-            }
+            public A() { }
 
             [Kept]
-            public A (int other)
-            {
-            }
+            public A(int other) { }
         }
 
         [Kept]
-        [MethodImpl (MethodImplOptions.InternalCall)]
-        static extern void SomeMethod (ref A a);
+        [MethodImpl(MethodImplOptions.InternalCall)]
+        static extern void SomeMethod(ref A a);
     }
 }

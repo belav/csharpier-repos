@@ -2,11 +2,9 @@
 
 public class C
 {
-    [Derived ()]
-    [Derived ()]
+    [Derived()]
+    [Derived()]
     int I { get; set; }
 
-    public static void Main ()
-    {
-    }
+    public static void Main() { }
 }

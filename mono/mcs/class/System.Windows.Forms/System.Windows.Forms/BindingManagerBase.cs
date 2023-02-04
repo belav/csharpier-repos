@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,13 +34,10 @@ namespace System.Windows.Forms
 {
     public abstract class BindingManagerBase
     {
-        private BindingsCollection    bindings;
+        private BindingsCollection bindings;
         internal bool transfering_data; /* true if we're pushing or pulling data */
-
         #region Public Constructors
-        public BindingManagerBase()
-        {
-        }
+        public BindingManagerBase() { }
         #endregion    // Public Constructors
 
         #region Protected Instance Fields
@@ -50,32 +47,28 @@ namespace System.Windows.Forms
         #endregion    // Protected Instance Fields
 
         #region Public Instance Properties
-        public BindingsCollection Bindings {
-            get {
-                if (bindings == null) {
-                    bindings = new BindingsCollection ();
+        public BindingsCollection Bindings
+        {
+            get
+            {
+                if (bindings == null)
+                {
+                    bindings = new BindingsCollection();
                 }
                 return bindings;
             }
         }
 
-        public abstract int Count {
-            get;
+        public abstract int Count { get; }
+
+        public abstract object Current { get; }
+
+        public bool IsBindingSuspended
+        {
+            get { return IsSuspended; }
         }
 
-        public abstract object Current {
-            get;
-        }
-
-        public bool IsBindingSuspended {
-            get {
-                return IsSuspended;
-            }
-        }
-
-        public abstract int Position {
-            get; set;
-        }
+        public abstract int Position { get; set; }
         #endregion    // Public Instance Properties
 
         #region Public Instance Methods
@@ -87,12 +80,12 @@ namespace System.Windows.Forms
 
         public virtual PropertyDescriptorCollection GetItemProperties()
         {
-            return GetItemPropertiesInternal ();
+            return GetItemPropertiesInternal();
         }
-        
-        internal virtual PropertyDescriptorCollection GetItemPropertiesInternal ()
+
+        internal virtual PropertyDescriptorCollection GetItemPropertiesInternal()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         public abstract void RemoveAt(int index);
@@ -102,96 +95,115 @@ namespace System.Windows.Forms
         public abstract void SuspendBinding();
         #endregion    // Public Instance Methods
 
-        internal virtual bool IsSuspended {
-            get {
-                return false;
-            }
+        internal virtual bool IsSuspended
+        {
+            get { return false; }
         }
 
         #region Protected Instance Methods
-        [MonoTODO ("Not implemented, will throw NotImplementedException")]
-        protected internal virtual PropertyDescriptorCollection GetItemProperties (ArrayList dataSources, ArrayList listAccessors)
+        [MonoTODO("Not implemented, will throw NotImplementedException")]
+        protected internal virtual PropertyDescriptorCollection GetItemProperties(
+            ArrayList dataSources,
+            ArrayList listAccessors
+        )
         {
             throw new NotImplementedException();
         }
 
-        [MonoTODO ("Not implemented, will throw NotImplementedException")]
-        protected virtual PropertyDescriptorCollection GetItemProperties (Type listType, int offset, ArrayList dataSources, ArrayList listAccessors)
+        [MonoTODO("Not implemented, will throw NotImplementedException")]
+        protected virtual PropertyDescriptorCollection GetItemProperties(
+            Type listType,
+            int offset,
+            ArrayList dataSources,
+            ArrayList listAccessors
+        )
         {
             throw new NotImplementedException();
         }
 
-        protected internal abstract string GetListName (ArrayList listAccessors);
+        protected internal abstract string GetListName(ArrayList listAccessors);
 
-        protected internal abstract void OnCurrentChanged (EventArgs e);
+        protected internal abstract void OnCurrentChanged(EventArgs e);
 
         protected void PullData()
         {
-            try {
-                if (!transfering_data) {
+            try
+            {
+                if (!transfering_data)
+                {
                     transfering_data = true;
-                    UpdateIsBinding ();
+                    UpdateIsBinding();
                 }
-                foreach (Binding binding in Bindings) {
-                    binding.PullData ();
+                foreach (Binding binding in Bindings)
+                {
+                    binding.PullData();
                 }
-            } finally {
+            }
+            finally
+            {
                 transfering_data = false;
             }
         }
 
         protected void PushData()
         {
-            try {
-                if (!transfering_data) {
+            try
+            {
+                if (!transfering_data)
+                {
                     transfering_data = true;
-                    UpdateIsBinding ();
+                    UpdateIsBinding();
                 }
-                foreach (Binding binding in Bindings) {
-                    binding.PushData ();
+                foreach (Binding binding in Bindings)
+                {
+                    binding.PushData();
                 }
-            } finally {
+            }
+            finally
+            {
                 transfering_data = false;
             }
         }
 
-
-        protected void OnBindingComplete (BindingCompleteEventArgs args)
+        protected void OnBindingComplete(BindingCompleteEventArgs args)
         {
             if (BindingComplete != null)
-                BindingComplete (this, args);
+                BindingComplete(this, args);
         }
 
-        protected abstract void OnCurrentItemChanged (EventArgs e);
+        protected abstract void OnCurrentItemChanged(EventArgs e);
 
-        protected void OnDataError (Exception e)
+        protected void OnDataError(Exception e)
         {
             if (DataError != null)
-                DataError (this, new BindingManagerDataErrorEventArgs (e));
+                DataError(this, new BindingManagerDataErrorEventArgs(e));
         }
 
         protected abstract void UpdateIsBinding();
         #endregion    // Protected Instance Methods
 
-        internal void AddBinding (Binding binding)
+        internal void AddBinding(Binding binding)
         {
-            if (Bindings.Contains (binding))
+            if (Bindings.Contains(binding))
                 return;
-            Bindings.Add (binding);
+            Bindings.Add(binding);
         }
 
         #region Events
-        public event EventHandler CurrentChanged {
+        public event EventHandler CurrentChanged
+        {
             add { onCurrentChangedHandler += value; }
             remove { onCurrentChangedHandler -= value; }
         }
 
-        public event EventHandler PositionChanged {
+        public event EventHandler PositionChanged
+        {
             add { onPositionChangedHandler += value; }
             remove { onPositionChangedHandler -= value; }
         }
 
-        public event EventHandler CurrentItemChanged {
+        public event EventHandler CurrentItemChanged
+        {
             add { onCurrentItemChangedHandler += value; }
             remove { onCurrentItemChangedHandler -= value; }
         }

@@ -10,10 +10,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -38,18 +38,22 @@ namespace MonoTests.System.ServiceModel.Discovery
     public class AnnouncementEndpointTest
     {
         [Test]
-        public void DefaultValues ()
+        public void DefaultValues()
         {
-            var de = new AnnouncementEndpoint ();
-            Assert.AreEqual (DiscoveryVersion.WSDiscovery11, de.DiscoveryVersion, "#1");
-            Assert.AreEqual (TimeSpan.Zero, de.MaxAnnouncementDelay, "#2");
-            Assert.IsNotNull (de.Contract, "#11"); // some version-dependent internal type.
-            Assert.AreEqual ("http://docs.oasis-open.org/ws-dd/ns/discovery/2009/01", de.Contract.Namespace, "#11-2");
-            Assert.AreEqual ("Client", de.Contract.Name, "#11-3");
-            Assert.IsNull (de.Binding, "#12");
-            Assert.IsNull (de.Address, "#13");
-            Assert.IsNull (de.ListenUri, "#14");
-            Assert.AreEqual (0, de.Behaviors.Count, "#15");
+            var de = new AnnouncementEndpoint();
+            Assert.AreEqual(DiscoveryVersion.WSDiscovery11, de.DiscoveryVersion, "#1");
+            Assert.AreEqual(TimeSpan.Zero, de.MaxAnnouncementDelay, "#2");
+            Assert.IsNotNull(de.Contract, "#11"); // some version-dependent internal type.
+            Assert.AreEqual(
+                "http://docs.oasis-open.org/ws-dd/ns/discovery/2009/01",
+                de.Contract.Namespace,
+                "#11-2"
+            );
+            Assert.AreEqual("Client", de.Contract.Name, "#11-3");
+            Assert.IsNull(de.Binding, "#12");
+            Assert.IsNull(de.Address, "#13");
+            Assert.IsNull(de.ListenUri, "#14");
+            Assert.AreEqual(0, de.Behaviors.Count, "#15");
         }
     }
 }

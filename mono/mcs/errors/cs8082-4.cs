@@ -3,8 +3,8 @@
 
 class C
 {
-    void Foo ()
+    void Foo()
     {
-        var s = nameof (1.ToString);
+        var s = nameof(1.ToString);
     }
 }

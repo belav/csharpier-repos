@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -38,70 +38,75 @@ using NUnit.Framework;
 
 namespace StandAloneTests.Locations
 {
-    [TestCase ("Locations", "Configuration <location> tests.")]
+    [TestCase("Locations", "Configuration <location> tests.")]
     public sealed class Locations : ITestCase
     {
-        public string PhysicalPath {
-            get { return Path.Combine (Consts.BasePhysicalDir, "Locations"); }
+        public string PhysicalPath
+        {
+            get { return Path.Combine(Consts.BasePhysicalDir, "Locations"); }
         }
-        
-        public string VirtualPath  {
+
+        public string VirtualPath
+        {
             get { return "/"; }
         }
 
-        public bool SetUp (List <TestRunItem> runItems)
+        public bool SetUp(List<TestRunItem> runItems)
         {
-            runItems.Add (new TestRunItem ("Default.aspx", Default_Aspx));
-            runItems.Add (new TestRunItem ("Stuff.aspx", Stuff_Aspx));
-            runItems.Add (new TestRunItem ("sub/Default.aspx", Sub_Default_Aspx));
-            runItems.Add (new TestRunItem ("sub/Stuff.aspx", Sub_Stuff_Aspx));
-            runItems.Add (new TestRunItem ("sub/sub/Default.aspx", Sub_Sub_Default_Aspx));
-            runItems.Add (new TestRunItem ("sub/sub/Stuff.aspx", Sub_Sub_Stuff_Aspx));
-            
+            runItems.Add(new TestRunItem("Default.aspx", Default_Aspx));
+            runItems.Add(new TestRunItem("Stuff.aspx", Stuff_Aspx));
+            runItems.Add(new TestRunItem("sub/Default.aspx", Sub_Default_Aspx));
+            runItems.Add(new TestRunItem("sub/Stuff.aspx", Sub_Stuff_Aspx));
+            runItems.Add(new TestRunItem("sub/sub/Default.aspx", Sub_Sub_Default_Aspx));
+            runItems.Add(new TestRunItem("sub/sub/Stuff.aspx", Sub_Sub_Stuff_Aspx));
+
             return true;
         }
 
-        void Default_Aspx (string result, TestRunItem runItem)
+        void Default_Aspx(string result, TestRunItem runItem)
         {
             string originalHtml = "/Hello";
-            Helpers.ExtractAndCompareCodeFromHtml (result, originalHtml, "#A1");
+            Helpers.ExtractAndCompareCodeFromHtml(result, originalHtml, "#A1");
         }
 
-        void Stuff_Aspx (string result, TestRunItem runItem)
+        void Stuff_Aspx(string result, TestRunItem runItem)
         {
-            string originalHtml = @"<pre id=""settings"">        /Web.config [1]: '[toplevel]'
+            string originalHtml =
+                @"<pre id=""settings"">        /Web.config [1]: '[toplevel]'
         /Web.config [2]: 'Stuff.aspx'
 </pre>";
-            Helpers.ExtractAndCompareCodeFromHtml (result, originalHtml, "#A1");
+            Helpers.ExtractAndCompareCodeFromHtml(result, originalHtml, "#A1");
         }
 
-        void Sub_Default_Aspx (string result, TestRunItem runItem)
+        void Sub_Default_Aspx(string result, TestRunItem runItem)
         {
             string originalHtml = "/sub/Hello";
-            Helpers.ExtractAndCompareCodeFromHtml (result, originalHtml, "#A1");
+            Helpers.ExtractAndCompareCodeFromHtml(result, originalHtml, "#A1");
         }
 
-        void Sub_Stuff_Aspx (string result, TestRunItem runItem)
+        void Sub_Stuff_Aspx(string result, TestRunItem runItem)
         {
-            string originalHtml = @"<pre id=""settings"">        /Web.config [1]: '[toplevel]'
+            string originalHtml =
+                @"<pre id=""settings"">        /Web.config [1]: '[toplevel]'
         /Web.config [3]: 'sub'
     /sub/Web.config [1]: '[toplevel]'
         /Web.config [4]: 'sub/Stuff.aspx'
     /sub/Web.config [2]: 'Stuff.aspx'
 </pre>";
 
-            Helpers.ExtractAndCompareCodeFromHtml (result, originalHtml, "#A1");
+            Helpers.ExtractAndCompareCodeFromHtml(result, originalHtml, "#A1");
         }
 
-        void Sub_Sub_Default_Aspx (string result, TestRunItem runItem)
+        void Sub_Sub_Default_Aspx(string result, TestRunItem runItem)
         {
             string originalHtml = "/sub/sub/Hello";
-            Helpers.ExtractAndCompareCodeFromHtml (result, originalHtml, "#A1");
+            Helpers.ExtractAndCompareCodeFromHtml(result, originalHtml, "#A1");
         }
 
-        void Sub_Sub_Stuff_Aspx (string result, TestRunItem runItem)
+        void Sub_Sub_Stuff_Aspx(string result, TestRunItem runItem)
         {
-            string originalHtml = @"<pre id=""settings"">        /Web.config [1]: '[toplevel]'
+            string originalHtml =
+                @"<pre id=""settings"">        /Web.config [1]: '[toplevel]'
         /Web.config [3]: 'sub'
     /sub/Web.config [1]: '[toplevel]'
         /Web.config [6]: 'sub/sub'
@@ -112,7 +117,7 @@ namespace StandAloneTests.Locations
 /sub/sub/Web.config [2]: 'Stuff.aspx'
 </pre>";
 
-            Helpers.ExtractAndCompareCodeFromHtml (result, originalHtml, "#A1");
+            Helpers.ExtractAndCompareCodeFromHtml(result, originalHtml, "#A1");
         }
     }
 }

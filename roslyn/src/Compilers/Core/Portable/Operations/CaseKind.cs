@@ -40,4 +40,3 @@ namespace Microsoft.CodeAnalysis.Operations
         Pattern = 0x5
     }
 }
-

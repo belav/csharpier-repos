@@ -20,7 +20,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Scripting.Hosting.UnitTests
 {
     public class CsiTests : TestBase
     {
-        private static readonly string s_compilerVersion = CommonCompiler.GetProductVersion(typeof(Csi));
+        private static readonly string s_compilerVersion = CommonCompiler.GetProductVersion(
+            typeof(Csi)
+        );
         private string CsiPath => typeof(Csi).GetTypeInfo().Assembly.Location;
 
         /// <summary>
@@ -30,10 +32,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Scripting.Hosting.UnitTests
         public void CurrentWorkingDirectory1()
         {
             var dir = Temp.CreateDirectory();
-            dir.CreateFile("a.csx").WriteAllText(@"Console.Write(Environment.CurrentDirectory + ';' + typeof(C).Name);");
+            dir.CreateFile("a.csx")
+                .WriteAllText(
+                    @"Console.Write(Environment.CurrentDirectory + ';' + typeof(C).Name);"
+                );
             dir.CreateFile("C.dll").WriteAllBytes(TestResources.General.C1);
 
-            var result = ProcessUtilities.Run(CsiPath, "/r:C.dll a.csx", workingDirectory: dir.Path);
+            var result = ProcessUtilities.Run(
+                CsiPath,
+                "/r:C.dll a.csx",
+                workingDirectory: dir.Path
+            );
             AssertEx.AssertEqualToleratingWhitespaceDifferences(dir.Path + ";C", result.Output);
             Assert.False(result.ContainsErrors);
         }
@@ -45,8 +54,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Scripting.Hosting.UnitTests
             dir.CreateFile("a.csx").WriteAllText(@"int X = 1;");
             dir.CreateFile("C.dll").WriteAllBytes(TestResources.General.C1);
 
-            var result = ProcessUtilities.Run(CsiPath, "", stdInput:
-$@"#load ""a.csx""
+            var result = ProcessUtilities.Run(
+                CsiPath,
+                "",
+                stdInput: $@"#load ""a.csx""
 #r ""C.dll""
 Directory.SetCurrentDirectory(@""{dir.Path}"")
 #load ""a.csx""
@@ -54,9 +65,11 @@ Directory.SetCurrentDirectory(@""{dir.Path}"")
 X
 new C()
 Environment.Exit(0)
-");
+"
+            );
 
-            var expected = $@"
+            var expected =
+                $@"
 {string.Format(CSharpScriptingResources.LogoLine1, s_compilerVersion)}
 {CSharpScriptingResources.LogoLine2}
 
@@ -66,15 +79,18 @@ Environment.Exit(0)
 > 
 ";
             // The German translation (and possibly others) contains an en dash (0x2013),
-            // but csi.exe outputs it as a hyphen-minus (0x002d). We need to fix up the 
+            // but csi.exe outputs it as a hyphen-minus (0x002d). We need to fix up the
             // expected string before we can compare it to the actual output.
             expected = expected.Replace((char)0x2013, (char)0x002d); // EN DASH -> HYPHEN-MINUS
             AssertEx.AssertEqualToleratingWhitespaceDifferences(expected, result.Output);
 
-            AssertEx.AssertEqualToleratingWhitespaceDifferences($@"
+            AssertEx.AssertEqualToleratingWhitespaceDifferences(
+                $@"
 (1,7): error CS1504: {string.Format(CSharpResources.ERR_NoSourceFile, "a.csx", CSharpResources.CouldNotFindFile)}
 (1,1): error CS0006: {string.Format(CSharpResources.ERR_NoMetadataFile, "C.dll")}
-", result.Errors);
+",
+                result.Errors
+            );
 
             Assert.Equal(0, result.ExitCode);
         }
@@ -91,7 +107,12 @@ Environment.Exit(0)
             var dir = Temp.CreateDirectory();
             dir.CreateFile("C.dll").WriteAllBytes(TestResources.General.C1);
 
-            var result = ProcessUtilities.Run(CsiPath, "/r:C.dll a.csx", workingDirectory: cwd.Path, additionalEnvironmentVars: new[] { KeyValuePairUtil.Create("LIB", dir.Path) });
+            var result = ProcessUtilities.Run(
+                CsiPath,
+                "/r:C.dll a.csx",
+                workingDirectory: cwd.Path,
+                additionalEnvironmentVars: new[] { KeyValuePairUtil.Create("LIB", dir.Path) }
+            );
 
             // error CS0006: Metadata file 'C.dll' could not be found
             Assert.True(result.Errors.StartsWith("error CS0006", StringComparison.Ordinal));
@@ -107,7 +128,11 @@ Environment.Exit(0)
             var cwd = Temp.CreateDirectory();
             cwd.CreateFile("a.csx").WriteAllText(@"Console.Write(typeof(DataSet).Name);");
 
-            var result = ProcessUtilities.Run(CsiPath, "/r:System.Data.dll /u:System.Data;System a.csx", workingDirectory: cwd.Path);
+            var result = ProcessUtilities.Run(
+                CsiPath,
+                "/r:System.Data.dll /u:System.Data;System a.csx",
+                workingDirectory: cwd.Path
+            );
 
             AssertEx.AssertEqualToleratingWhitespaceDifferences("DataSet", result.Output);
             Assert.False(result.ContainsErrors);
@@ -116,7 +141,8 @@ Environment.Exit(0)
         [Fact]
         public void DefaultUsings()
         {
-            var source = @"
+            var source =
+                @"
 dynamic d = new ExpandoObject();
 Process p = new Process();
 Expression<Func<int>> e = () => 1;
@@ -141,7 +167,8 @@ Console.Write(""OK"");
         [Fact]
         public void LineNumber_Information_On_Exception()
         {
-            var source = @"Console.WriteLine(""OK"");
+            var source =
+                @"Console.WriteLine(""OK"");
 throw new Exception(""Error!"");
 ";
 
@@ -152,10 +179,13 @@ throw new Exception(""Error!"");
 
             Assert.True(result.ContainsErrors);
             AssertEx.AssertEqualToleratingWhitespaceDifferences("OK", result.Output);
-            AssertEx.AssertEqualToleratingWhitespaceDifferences($@"
+            AssertEx.AssertEqualToleratingWhitespaceDifferences(
+                $@"
 System.Exception: Error!
    + <Initialize>.MoveNext(){string.Format(ScriptingResources.AtFileLine, $"{cwd}{Path.DirectorySeparatorChar}a.csx", "2")}
-", result.Errors);
+",
+                result.Errors
+            );
         }
     }
 }

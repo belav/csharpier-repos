@@ -26,31 +26,29 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil {
-
-    internal abstract class PropertyReference : MemberReference {
-
+namespace Mono.Cecil
+{
+    internal abstract class PropertyReference : MemberReference
+    {
         TypeReference m_propertyType;
         protected ParameterDefinitionCollection m_parameters;
 
-        public TypeReference PropertyType {
+        public TypeReference PropertyType
+        {
             get { return m_propertyType; }
             set { m_propertyType = value; }
         }
 
-        public abstract bool HasParameters {
-            get;
-        }
+        public abstract bool HasParameters { get; }
 
-        public abstract ParameterDefinitionCollection Parameters {
-            get;
-        }
+        public abstract ParameterDefinitionCollection Parameters { get; }
 
-        public PropertyReference (string name, TypeReference propertyType) : base (name)
+        public PropertyReference(string name, TypeReference propertyType)
+            : base(name)
         {
             m_propertyType = propertyType;
         }
 
-        public abstract PropertyDefinition Resolve ();
+        public abstract PropertyDefinition Resolve();
     }
 }

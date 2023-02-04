@@ -3,12 +3,14 @@
 
 public class Test
 {
-        public static string Foo {
-                get {
-                        string s;
-                        if (0 == 1 && (s = "") == "a" || s == "")
-                                return s;
-                        return " ";
-                }
+    public static string Foo
+    {
+        get
+        {
+            string s;
+            if (0 == 1 && (s = "") == "a" || s == "")
+                return s;
+            return " ";
         }
+    }
 }

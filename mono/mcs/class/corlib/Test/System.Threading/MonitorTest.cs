@@ -12,327 +12,331 @@ using NUnit.Framework;
 using System;
 using System.Threading;
 
-namespace MonoTests.System.Threading {
-
+namespace MonoTests.System.Threading
+{
     [TestFixture]
-    public class MonitorTest {
-
-        TimeSpan Infinite = new TimeSpan (-10000);    // -10000 ticks == -1 ms
-        TimeSpan SmallNegative = new TimeSpan (-2);    // between 0 and -1.0 (infinite) ms
-        TimeSpan Negative = new TimeSpan (-20000);    // really negative
-        TimeSpan MaxValue = TimeSpan.FromMilliseconds ((long) Int32.MaxValue);
-        TimeSpan TooLarge = TimeSpan.FromMilliseconds ((long) Int32.MaxValue + 1);
+    public class MonitorTest
+    {
+        TimeSpan Infinite = new TimeSpan(-10000); // -10000 ticks == -1 ms
+        TimeSpan SmallNegative = new TimeSpan(-2); // between 0 and -1.0 (infinite) ms
+        TimeSpan Negative = new TimeSpan(-20000); // really negative
+        TimeSpan MaxValue = TimeSpan.FromMilliseconds((long)Int32.MaxValue);
+        TimeSpan TooLarge = TimeSpan.FromMilliseconds((long)Int32.MaxValue + 1);
 
         [Test]
-        [ExpectedException (typeof (SynchronizationLockException))]
-        [Category ("NotWorking")] // test fails under MS FX 2.0 - maybe that worked on 1.x ?
-        public void ExitNoEnter ()
+        [ExpectedException(typeof(SynchronizationLockException))]
+        [Category("NotWorking")] // test fails under MS FX 2.0 - maybe that worked on 1.x ?
+        public void ExitNoEnter()
         {
-            object o = new object ();
-            Monitor.Exit (o);
+            object o = new object();
+            Monitor.Exit(o);
         }
 
         [Test]
-        [ExpectedException (typeof (SynchronizationLockException))]
-        [Category ("NotWorking")] // test fails under MS FX 2.0 - maybe that worked on 1.x ?
-        public void OneEnterSeveralExits ()
+        [ExpectedException(typeof(SynchronizationLockException))]
+        [Category("NotWorking")] // test fails under MS FX 2.0 - maybe that worked on 1.x ?
+        public void OneEnterSeveralExits()
         {
-            object o = new object ();
-            Monitor.Enter (o);
-            Monitor.Exit (o);
+            object o = new object();
+            Monitor.Enter(o);
+            Monitor.Exit(o);
             // fails here
-            Monitor.Exit (o);
-            Monitor.Exit (o);
-            Monitor.Exit (o);
+            Monitor.Exit(o);
+            Monitor.Exit(o);
+            Monitor.Exit(o);
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void Enter_Null ()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void Enter_Null()
         {
-            Monitor.Enter (null);
+            Monitor.Enter(null);
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void Exit_Null ()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void Exit_Null()
         {
-            Monitor.Exit (null);
+            Monitor.Exit(null);
         }
 
         [Test]
-        public void Enter_Exit ()
+        public void Enter_Exit()
         {
-            object o = new object ();
-            Monitor.Enter (o);
-            try {
-                Assert.IsNotNull (o);
+            object o = new object();
+            Monitor.Enter(o);
+            try
+            {
+                Assert.IsNotNull(o);
             }
-            finally {
-                Monitor.Exit (o);
-            }
-        }
-
-        [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void Pulse_Null ()
-        {
-            Monitor.Pulse (null);
-        }
-
-        [Test]
-        [ExpectedException (typeof (SynchronizationLockException))]
-        public void Pulse_Unlocked ()
-        {
-            object o = new object ();
-            Monitor.Pulse (o);
-        }
-
-        [Test]
-        public void Pulse ()
-        {
-            object o = new object ();
-            lock (o) {
-                Monitor.Pulse (o);
+            finally
+            {
+                Monitor.Exit(o);
             }
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void PulseAll_Null ()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void Pulse_Null()
         {
-            Monitor.PulseAll (null);
+            Monitor.Pulse(null);
         }
 
         [Test]
-        [ExpectedException (typeof (SynchronizationLockException))]
-        public void PulseAll_Unlocked ()
+        [ExpectedException(typeof(SynchronizationLockException))]
+        public void Pulse_Unlocked()
         {
-            object o = new object ();
-            Monitor.PulseAll (o);
+            object o = new object();
+            Monitor.Pulse(o);
         }
 
         [Test]
-        public void PulseAll ()
+        public void Pulse()
         {
-            object o = new object ();
-            lock (o) {
-                Monitor.PulseAll (o);
+            object o = new object();
+            lock (o)
+            {
+                Monitor.Pulse(o);
             }
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void TryEnter_Null ()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void PulseAll_Null()
         {
-            Monitor.TryEnter (null);
+            Monitor.PulseAll(null);
         }
 
         [Test]
-        public void TryEnter ()
+        [ExpectedException(typeof(SynchronizationLockException))]
+        public void PulseAll_Unlocked()
         {
-            object o = new object ();
-            Assert.IsTrue (Monitor.TryEnter (o), "TryEnter");
-            Assert.IsTrue (Monitor.TryEnter (o), "TryEnter-2");
+            object o = new object();
+            Monitor.PulseAll(o);
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void TryEnter_Null_Int ()
+        public void PulseAll()
         {
-            Monitor.TryEnter (null, Timeout.Infinite);
+            object o = new object();
+            lock (o)
+            {
+                Monitor.PulseAll(o);
+            }
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentOutOfRangeException))]
-        public void TryEnter_Int_Negative ()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void TryEnter_Null()
         {
-            object o = new object ();
-            Monitor.TryEnter (o, -2);
+            Monitor.TryEnter(null);
         }
 
         [Test]
-        public void TryEnter_Int ()
+        public void TryEnter()
         {
-            object o = new object ();
-            Assert.IsTrue (Monitor.TryEnter (o, 1), "TryEnter");
-            Assert.IsTrue (Monitor.TryEnter (o, 2), "TryEnter-2");
+            object o = new object();
+            Assert.IsTrue(Monitor.TryEnter(o), "TryEnter");
+            Assert.IsTrue(Monitor.TryEnter(o), "TryEnter-2");
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void TryEnter_Null_TimeSpan ()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void TryEnter_Null_Int()
         {
-            Monitor.TryEnter (null, Timeout.Infinite);
+            Monitor.TryEnter(null, Timeout.Infinite);
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentOutOfRangeException))]
-        public void TryEnter_TimeSpan_Negative ()
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void TryEnter_Int_Negative()
         {
-            object o = new object ();
-            Monitor.TryEnter (o, Negative);
+            object o = new object();
+            Monitor.TryEnter(o, -2);
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentOutOfRangeException))]
-        public void TryEnter_TimeSpan_TooLarge ()
+        public void TryEnter_Int()
         {
-            object o = new object ();
-            Monitor.TryEnter (o, TooLarge);
+            object o = new object();
+            Assert.IsTrue(Monitor.TryEnter(o, 1), "TryEnter");
+            Assert.IsTrue(Monitor.TryEnter(o, 2), "TryEnter-2");
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentOutOfRangeException))]
-        public void TryEnter_Null_TimeSpan_TooLarge ()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void TryEnter_Null_TimeSpan()
+        {
+            Monitor.TryEnter(null, Timeout.Infinite);
+        }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void TryEnter_TimeSpan_Negative()
+        {
+            object o = new object();
+            Monitor.TryEnter(o, Negative);
+        }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void TryEnter_TimeSpan_TooLarge()
+        {
+            object o = new object();
+            Monitor.TryEnter(o, TooLarge);
+        }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void TryEnter_Null_TimeSpan_TooLarge()
         {
             // exception ordering test
-            Monitor.TryEnter (null, TooLarge);
+            Monitor.TryEnter(null, TooLarge);
         }
 
         [Test]
-        public void TryEnter_TimeSpan ()
+        public void TryEnter_TimeSpan()
         {
-            object o = new object ();
-            Assert.IsTrue (Monitor.TryEnter (o, Infinite), "TryEnter");
-            Assert.IsTrue (Monitor.TryEnter (o, SmallNegative), "TryEnter-2");
-            Assert.IsTrue (Monitor.TryEnter (o, MaxValue), "TryEnter-3");
-        }
-
-
-        [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void Wait_Null ()
-        {
-            Monitor.Wait (null);
+            object o = new object();
+            Assert.IsTrue(Monitor.TryEnter(o, Infinite), "TryEnter");
+            Assert.IsTrue(Monitor.TryEnter(o, SmallNegative), "TryEnter-2");
+            Assert.IsTrue(Monitor.TryEnter(o, MaxValue), "TryEnter-3");
         }
 
         [Test]
-        [ExpectedException (typeof (SynchronizationLockException))]
-        public void Wait_Unlocked ()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void Wait_Null()
         {
-            object o = new object ();
-            Assert.IsTrue (Monitor.Wait (o), "Wait");
+            Monitor.Wait(null);
+        }
+
+        [Test]
+        [ExpectedException(typeof(SynchronizationLockException))]
+        public void Wait_Unlocked()
+        {
+            object o = new object();
+            Assert.IsTrue(Monitor.Wait(o), "Wait");
         }
 
         // [Test] that would be Infinite
-        public void Wait ()
+        public void Wait()
         {
-            object o = new object ();
-            lock (o) {
-                Assert.IsFalse (Monitor.Wait (o), "Wait");
+            object o = new object();
+            lock (o)
+            {
+                Assert.IsFalse(Monitor.Wait(o), "Wait");
             }
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void Wait_Null_Int ()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void Wait_Null_Int()
         {
-            Monitor.Wait (null, Timeout.Infinite);
+            Monitor.Wait(null, Timeout.Infinite);
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentOutOfRangeException))]
-        public void Wait_Int_Negative ()
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void Wait_Int_Negative()
         {
-            object o = new object ();
-            Monitor.Wait (o, -2);
+            object o = new object();
+            Monitor.Wait(o, -2);
         }
 
         [Test]
-        [ExpectedException (typeof (SynchronizationLockException))]
-        public void Wait_Int_Unlocked ()
+        [ExpectedException(typeof(SynchronizationLockException))]
+        public void Wait_Int_Unlocked()
         {
-            object o = new object ();
-            Assert.IsTrue (Monitor.Wait (o, 1), "Wait");
+            object o = new object();
+            Assert.IsTrue(Monitor.Wait(o, 1), "Wait");
         }
 
         [Test]
-        public void Wait_Int ()
+        public void Wait_Int()
         {
-            object o = new object ();
-            lock (o) {
-                Assert.IsFalse (Monitor.Wait (o, 1), "Wait");
+            object o = new object();
+            lock (o)
+            {
+                Assert.IsFalse(Monitor.Wait(o, 1), "Wait");
             }
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void Wait_Null_TimeSpan ()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void Wait_Null_TimeSpan()
         {
-            Monitor.Wait (null, Timeout.Infinite);
+            Monitor.Wait(null, Timeout.Infinite);
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentOutOfRangeException))]
-        public void Wait_TimeSpan_Negative ()
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void Wait_TimeSpan_Negative()
         {
-            object o = new object ();
-            Monitor.Wait (o, Negative);
+            object o = new object();
+            Monitor.Wait(o, Negative);
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentOutOfRangeException))]
-        public void Wait_TimeSpan_TooLarge ()
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void Wait_TimeSpan_TooLarge()
         {
-            object o = new object ();
-            Monitor.Wait (o, TooLarge);
+            object o = new object();
+            Monitor.Wait(o, TooLarge);
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentOutOfRangeException))]
-        public void Wait_Null_TimeSpan_TooLarge ()
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void Wait_Null_TimeSpan_TooLarge()
         {
             // exception ordering test
-            Monitor.Wait (null, TooLarge);
+            Monitor.Wait(null, TooLarge);
         }
 
         [Test]
-        [ExpectedException (typeof (SynchronizationLockException))]
-        public void Wait_TimeSpan_Unlocked ()
+        [ExpectedException(typeof(SynchronizationLockException))]
+        public void Wait_TimeSpan_Unlocked()
         {
-            object o = new object ();
-            Assert.IsTrue (Monitor.Wait (o, Infinite), "Wait");
+            object o = new object();
+            Assert.IsTrue(Monitor.Wait(o, Infinite), "Wait");
         }
 
         [Test]
-        public void Wait_TimeSpan ()
+        public void Wait_TimeSpan()
         {
-            object o = new object ();
-            lock (o) {
-                Assert.IsFalse (Monitor.Wait (o, SmallNegative), "Wait");
+            object o = new object();
+            lock (o)
+            {
+                Assert.IsFalse(Monitor.Wait(o, SmallNegative), "Wait");
             }
         }
+
         [Test]
-        public void Enter_bool ()
+        public void Enter_bool()
         {
-            object o = new object ();
+            object o = new object();
             bool taken = false;
-            Monitor.Enter (o, ref taken);
-            Assert.IsTrue (taken, "Monitor.Enter (obj, ref taken)");
+            Monitor.Enter(o, ref taken);
+            Assert.IsTrue(taken, "Monitor.Enter (obj, ref taken)");
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentException))]
-        public void Enter_bool_argcheck ()
+        [ExpectedException(typeof(ArgumentException))]
+        public void Enter_bool_argcheck()
         {
-            object o = new object ();
+            object o = new object();
             bool taken = true;
-            Monitor.Enter (o, ref taken);
+            Monitor.Enter(o, ref taken);
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentException))]
-        public void Enter_bool_argcheck_fastpath ()
+        [ExpectedException(typeof(ArgumentException))]
+        public void Enter_bool_argcheck_fastpath()
         {
-            object o = new object ();
+            object o = new object();
             bool taken = false;
-            Monitor.Enter (o, ref taken);
+            Monitor.Enter(o, ref taken);
             taken = true;
-            Monitor.Enter (o, ref taken);
+            Monitor.Enter(o, ref taken);
         }
-
-
     }
 }
-

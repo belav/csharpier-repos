@@ -13,7 +13,9 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
     {
         private readonly AbstractLanguageServer<RequestContext> _languageServer;
 
-        public RazorLanguageServerTargetWrapper(AbstractLanguageServer<RequestContext> languageServer)
+        public RazorLanguageServerTargetWrapper(
+            AbstractLanguageServer<RequestContext> languageServer
+        )
         {
             _languageServer = languageServer;
         }

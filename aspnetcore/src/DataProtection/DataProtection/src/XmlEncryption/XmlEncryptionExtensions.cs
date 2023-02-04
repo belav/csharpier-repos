@@ -36,7 +36,10 @@ internal static unsafe class XmlEncryptionExtensions
 
         while (true)
         {
-            var elementWhichRequiresDecryption = doc.Descendants(XmlConstants.EncryptedSecretElementName).FirstOrDefault();
+            var elementWhichRequiresDecryption = doc.Descendants(
+                    XmlConstants.EncryptedSecretElementName
+                )
+                .FirstOrDefault();
             if (elementWhichRequiresDecryption == null)
             {
                 // All encryption is finished.
@@ -47,9 +50,14 @@ internal static unsafe class XmlEncryptionExtensions
             // the original document or other data structures. The element we pass to
             // the decryptor should be the child of the 'encryptedSecret' element.
             var clonedElementWhichRequiresDecryption = new XElement(elementWhichRequiresDecryption);
-            string decryptorTypeName = (string)clonedElementWhichRequiresDecryption.Attribute(XmlConstants.DecryptorTypeAttributeName)!;
+            string decryptorTypeName = (string)
+                clonedElementWhichRequiresDecryption.Attribute(
+                    XmlConstants.DecryptorTypeAttributeName
+                )!;
             var decryptorInstance = CreateDecryptor(activator, decryptorTypeName);
-            var decryptedElement = decryptorInstance.Decrypt(clonedElementWhichRequiresDecryption.Elements().Single());
+            var decryptedElement = decryptorInstance.Decrypt(
+                clonedElementWhichRequiresDecryption.Elements().Single()
+            );
 
             // Put a placeholder into the original document so that we can continue our
             // search for elements which need to be decrypted.
@@ -67,10 +75,17 @@ internal static unsafe class XmlEncryptionExtensions
         return doc.Root!;
     }
 
-    [UnconditionalSuppressMessage("Trimmer", "IL2057", Justification = "Type.GetType result is only useful with types that are referenced by DataProtection assembly.")]
+    [UnconditionalSuppressMessage(
+        "Trimmer",
+        "IL2057",
+        Justification = "Type.GetType result is only useful with types that are referenced by DataProtection assembly."
+    )]
     private static IXmlDecryptor CreateDecryptor(IActivator activator, string decryptorTypeName)
     {
-        var resolvedTypeName = TypeForwardingActivator.TryForwardTypeName(decryptorTypeName, out var forwardedTypeName)
+        var resolvedTypeName = TypeForwardingActivator.TryForwardTypeName(
+            decryptorTypeName,
+            out var forwardedTypeName
+        )
             ? forwardedTypeName
             : decryptorTypeName;
         var type = Type.GetType(resolvedTypeName, throwOnError: false);
@@ -115,7 +130,8 @@ internal static unsafe class XmlEncryptionExtensions
 
         while (true)
         {
-            var elementWhichRequiresEncryption = doc.Descendants().FirstOrDefault(DoesSingleElementRequireEncryption);
+            var elementWhichRequiresEncryption = doc.Descendants()
+                .FirstOrDefault(DoesSingleElementRequireEncryption);
             if (elementWhichRequiresEncryption == null)
             {
                 // All encryption is finished.
@@ -144,9 +160,15 @@ internal static unsafe class XmlEncryptionExtensions
             //   <element />
             // </enc:encryptedSecret>
             entry.Key.ReplaceWith(
-                new XElement(XmlConstants.EncryptedSecretElementName,
-                    new XAttribute(XmlConstants.DecryptorTypeAttributeName, entry.Value.DecryptorType.AssemblyQualifiedName!),
-                    entry.Value.EncryptedElement));
+                new XElement(
+                    XmlConstants.EncryptedSecretElementName,
+                    new XAttribute(
+                        XmlConstants.DecryptorTypeAttributeName,
+                        entry.Value.DecryptorType.AssemblyQualifiedName!
+                    ),
+                    entry.Value.EncryptedElement
+                )
+            );
         }
         return doc.Root;
     }
@@ -166,7 +188,9 @@ internal static unsafe class XmlEncryptionExtensions
         {
             try
             {
-                return new Secret(new ArraySegment<byte>(underlyingBuffer, 0, checked((int)memoryStream.Length)));
+                return new Secret(
+                    new ArraySegment<byte>(underlyingBuffer, 0, checked((int)memoryStream.Length))
+                );
             }
             finally
             {

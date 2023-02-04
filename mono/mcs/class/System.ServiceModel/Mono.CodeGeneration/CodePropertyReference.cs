@@ -6,10 +6,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,35 +28,35 @@ using System.Reflection.Emit;
 
 namespace Mono.CodeGeneration
 {
-    public class CodePropertyReference: CodeValueReference
+    public class CodePropertyReference : CodeValueReference
     {
         CodeExpression target;
         PropertyInfo property;
-        
-        public CodePropertyReference (CodeExpression target, PropertyInfo property)
+
+        public CodePropertyReference(CodeExpression target, PropertyInfo property)
         {
             this.target = target;
-            this.property = property;        
+            this.property = property;
         }
-        
-        public override void Generate (ILGenerator gen)
+
+        public override void Generate(ILGenerator gen)
         {
-            CodeGenerationHelper.GenerateMethodCall (gen, target, property.GetGetMethod());
+            CodeGenerationHelper.GenerateMethodCall(gen, target, property.GetGetMethod());
         }
-        
-        public override void GenerateSet (ILGenerator gen, CodeExpression value)
+
+        public override void GenerateSet(ILGenerator gen, CodeExpression value)
         {
-            CodeGenerationHelper.GenerateMethodCall (gen, target, property.GetSetMethod(), value);
+            CodeGenerationHelper.GenerateMethodCall(gen, target, property.GetSetMethod(), value);
         }
-        
-        public override void PrintCode (CodeWriter cp)
+
+        public override void PrintCode(CodeWriter cp)
         {
-            target.PrintCode (cp);
-            cp.Write (".");
-            cp.Write (property.Name);
+            target.PrintCode(cp);
+            cp.Write(".");
+            cp.Write(property.Name);
         }
-        
-        public override Type GetResultType ()
+
+        public override Type GetResultType()
         {
             return property.PropertyType;
         }

@@ -12,10 +12,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,92 +32,108 @@ using System.ServiceModel;
 namespace System.ServiceModel.Channels
 {
     [MonoTODO]
-    public abstract class ChannelListenerBase : ChannelManagerBase, 
-        IChannelListener, ICommunicationObject,
-        IDefaultCommunicationTimeouts
+    public abstract class ChannelListenerBase
+        : ChannelManagerBase,
+            IChannelListener,
+            ICommunicationObject,
+            IDefaultCommunicationTimeouts
     {
         IDefaultCommunicationTimeouts timeouts;
         KeyedByTypeCollection<object> properties;
 
-        protected ChannelListenerBase ()
-            : this (DefaultCommunicationTimeouts.Instance)
-        {
-        }
+        protected ChannelListenerBase()
+            : this(DefaultCommunicationTimeouts.Instance) { }
 
-        protected ChannelListenerBase (
-            IDefaultCommunicationTimeouts timeouts)
+        protected ChannelListenerBase(IDefaultCommunicationTimeouts timeouts)
         {
             this.timeouts = timeouts;
         }
 
         public abstract Uri Uri { get; }
 
-        protected internal override TimeSpan DefaultCloseTimeout {
+        protected internal override TimeSpan DefaultCloseTimeout
+        {
             get { return timeouts.CloseTimeout; }
         }
 
-        protected internal override TimeSpan DefaultOpenTimeout {
+        protected internal override TimeSpan DefaultOpenTimeout
+        {
             get { return timeouts.OpenTimeout; }
         }
 
-        protected internal override TimeSpan DefaultReceiveTimeout {
+        protected internal override TimeSpan DefaultReceiveTimeout
+        {
             get { return timeouts.ReceiveTimeout; }
         }
 
-        protected internal override TimeSpan DefaultSendTimeout {
+        protected internal override TimeSpan DefaultSendTimeout
+        {
             get { return timeouts.SendTimeout; }
         }
 
-        TimeSpan IDefaultCommunicationTimeouts.CloseTimeout {
+        TimeSpan IDefaultCommunicationTimeouts.CloseTimeout
+        {
             get { return timeouts.CloseTimeout; }
         }
 
-        TimeSpan IDefaultCommunicationTimeouts.OpenTimeout {
+        TimeSpan IDefaultCommunicationTimeouts.OpenTimeout
+        {
             get { return timeouts.OpenTimeout; }
         }
 
-        TimeSpan IDefaultCommunicationTimeouts.ReceiveTimeout {
+        TimeSpan IDefaultCommunicationTimeouts.ReceiveTimeout
+        {
             get { return timeouts.ReceiveTimeout; }
         }
 
-        TimeSpan IDefaultCommunicationTimeouts.SendTimeout {
+        TimeSpan IDefaultCommunicationTimeouts.SendTimeout
+        {
             get { return timeouts.SendTimeout; }
         }
 
-        internal virtual KeyedByTypeCollection<object> Properties {
-            get {
+        internal virtual KeyedByTypeCollection<object> Properties
+        {
+            get
+            {
                 if (properties == null)
-                    properties = new KeyedByTypeCollection<object> ();
+                    properties = new KeyedByTypeCollection<object>();
                 return properties;
             }
         }
 
-        public virtual T GetProperty<T> () where T : class
+        public virtual T GetProperty<T>()
+            where T : class
         {
-            return properties != null ? properties.Find<T> () : null;
+            return properties != null ? properties.Find<T>() : null;
         }
 
-        public IAsyncResult BeginWaitForChannel (
-            TimeSpan timeout, AsyncCallback callback, object state)
+        public IAsyncResult BeginWaitForChannel(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
-            return OnBeginWaitForChannel (timeout, callback, state);
+            return OnBeginWaitForChannel(timeout, callback, state);
         }
 
-        public bool EndWaitForChannel (IAsyncResult result)
+        public bool EndWaitForChannel(IAsyncResult result)
         {
-            return OnEndWaitForChannel (result);
+            return OnEndWaitForChannel(result);
         }
 
-        public bool WaitForChannel (TimeSpan timeout)
+        public bool WaitForChannel(TimeSpan timeout)
         {
-            return OnWaitForChannel (timeout);
+            return OnWaitForChannel(timeout);
         }
 
-        protected abstract IAsyncResult OnBeginWaitForChannel (
-            TimeSpan timeout, AsyncCallback callback, object state);
+        protected abstract IAsyncResult OnBeginWaitForChannel(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        );
 
-        protected abstract bool OnEndWaitForChannel (IAsyncResult result);
+        protected abstract bool OnEndWaitForChannel(IAsyncResult result);
 
-        protected abstract bool OnWaitForChannel (TimeSpan timeout);
+        protected abstract bool OnWaitForChannel(TimeSpan timeout);
     }
 }

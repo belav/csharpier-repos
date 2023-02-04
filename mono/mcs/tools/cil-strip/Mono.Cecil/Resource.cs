@@ -26,66 +26,92 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil {
-
+namespace Mono.Cecil
+{
     using System.Collections;
 
-    internal abstract class Resource : IAnnotationProvider, IReflectionStructureVisitable {
-
+    internal abstract class Resource : IAnnotationProvider, IReflectionStructureVisitable
+    {
         string m_name;
         ManifestResourceAttributes m_attributes;
         IDictionary m_annotations;
 
-        public string Name {
+        public string Name
+        {
             get { return m_name; }
             set { m_name = value; }
         }
 
-        public ManifestResourceAttributes Flags {
+        public ManifestResourceAttributes Flags
+        {
             get { return m_attributes; }
             set { m_attributes = value; }
         }
 
-        IDictionary IAnnotationProvider.Annotations {
-            get {
+        IDictionary IAnnotationProvider.Annotations
+        {
+            get
+            {
                 if (m_annotations == null)
-                    m_annotations = new Hashtable ();
+                    m_annotations = new Hashtable();
                 return m_annotations;
             }
         }
 
         #region ManifestResourceAttributes
 
-        public bool IsPublic {
-            get { return (m_attributes & ManifestResourceAttributes.VisibilityMask) == ManifestResourceAttributes.Public; }
-            set {
-                if (value) {
+        public bool IsPublic
+        {
+            get
+            {
+                return (m_attributes & ManifestResourceAttributes.VisibilityMask)
+                    == ManifestResourceAttributes.Public;
+            }
+            set
+            {
+                if (value)
+                {
                     m_attributes &= ~ManifestResourceAttributes.VisibilityMask;
                     m_attributes |= ManifestResourceAttributes.Public;
-                } else
-                    m_attributes &= ~(ManifestResourceAttributes.VisibilityMask & ManifestResourceAttributes.Public);
+                }
+                else
+                    m_attributes &= ~(
+                        ManifestResourceAttributes.VisibilityMask
+                        & ManifestResourceAttributes.Public
+                    );
             }
         }
 
-        public bool IsPrivate {
-            get { return (m_attributes & ManifestResourceAttributes.VisibilityMask) == ManifestResourceAttributes.Private; }
-            set {
-                if (value) {
+        public bool IsPrivate
+        {
+            get
+            {
+                return (m_attributes & ManifestResourceAttributes.VisibilityMask)
+                    == ManifestResourceAttributes.Private;
+            }
+            set
+            {
+                if (value)
+                {
                     m_attributes &= ~ManifestResourceAttributes.VisibilityMask;
                     m_attributes |= ManifestResourceAttributes.Private;
-                } else
-                    m_attributes &= ~(ManifestResourceAttributes.VisibilityMask & ManifestResourceAttributes.Private);
+                }
+                else
+                    m_attributes &= ~(
+                        ManifestResourceAttributes.VisibilityMask
+                        & ManifestResourceAttributes.Private
+                    );
             }
         }
 
         #endregion
 
-        internal Resource (string name, ManifestResourceAttributes attributes)
+        internal Resource(string name, ManifestResourceAttributes attributes)
         {
             m_name = name;
             m_attributes = attributes;
         }
 
-        public abstract void Accept (IReflectionStructureVisitor visitor);
+        public abstract void Accept(IReflectionStructureVisitor visitor);
     }
 }

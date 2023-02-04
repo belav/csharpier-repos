@@ -29,11 +29,11 @@
 
 namespace Microsoft.Build.Utilities
 {
-    public enum HostObjectInitializationStatus {
+    public enum HostObjectInitializationStatus
+    {
         UseHostObjectToExecute,
         UseAlternateToolToExecute,
         NoActionReturnSuccess,
         NoActionReturnFailure
     }
 }
-

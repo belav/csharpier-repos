@@ -12,6 +12,6 @@ class X
         /// <summary>
         /// foo
         /// </summary>
-        public static void Main() {}
+        public static void Main() { }
     }
 }

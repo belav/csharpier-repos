@@ -8,7 +8,5 @@ class TestAttribute : Attribute
     public int[,] a;
 }
 
-[Test (a = null)]
-class C
-{
-}
+[Test(a = null)]
+class C { }

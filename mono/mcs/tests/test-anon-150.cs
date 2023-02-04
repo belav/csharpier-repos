@@ -1,8 +1,8 @@
 class M
 {
-    public static int Main ()
+    public static int Main()
     {
-        new SomeGenericClass<int>().FailsToCompile ();
+        new SomeGenericClass<int>().FailsToCompile();
         return 0;
     }
 }
@@ -10,21 +10,26 @@ class M
 class SomeGenericClass<SomeType>
 {
     object someValue;
-    delegate void SomeHandlerType ();
+    delegate void SomeHandlerType();
 
-    void Invoke (SomeHandlerType h)
+    void Invoke(SomeHandlerType h)
     {
-        h ();
+        h();
     }
 
-    public void FailsToCompile ()
+    public void FailsToCompile()
     {
-        Invoke (delegate {
-            object someObject = 1;
-            Invoke (delegate {
-                someValue = someObject;
-            });
-        });
+        Invoke(
+            delegate
+            {
+                object someObject = 1;
+                Invoke(
+                    delegate
+                    {
+                        someValue = someObject;
+                    }
+                );
+            }
+        );
     }
 }
-

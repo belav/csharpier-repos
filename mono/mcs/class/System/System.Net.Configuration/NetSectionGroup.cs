@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,56 +33,60 @@
 
 using System.Configuration;
 
-namespace System.Net.Configuration 
+namespace System.Net.Configuration
 {
     public sealed class NetSectionGroup : ConfigurationSectionGroup
     {
         #region Constructors
 
         [MonoTODO]
-        public NetSectionGroup ()
-        {
-        }
+        public NetSectionGroup() { }
 
         #endregion // Constructors
 
         #region Properties
 
-        [ConfigurationProperty ("authenticationModules")]
-        public AuthenticationModulesSection AuthenticationModules {
-            get { return (AuthenticationModulesSection) Sections ["authenticationModules"]; }
+        [ConfigurationProperty("authenticationModules")]
+        public AuthenticationModulesSection AuthenticationModules
+        {
+            get { return (AuthenticationModulesSection)Sections["authenticationModules"]; }
         }
 
-        [ConfigurationProperty ("connectionManagement")]
-        public ConnectionManagementSection ConnectionManagement {
-            get { return (ConnectionManagementSection) Sections ["connectionManagement"]; }
+        [ConfigurationProperty("connectionManagement")]
+        public ConnectionManagementSection ConnectionManagement
+        {
+            get { return (ConnectionManagementSection)Sections["connectionManagement"]; }
         }
 
-        [ConfigurationProperty ("defaultProxy")]
-        public DefaultProxySection DefaultProxy {
-            get { return (DefaultProxySection) Sections ["defaultProxy"]; }
+        [ConfigurationProperty("defaultProxy")]
+        public DefaultProxySection DefaultProxy
+        {
+            get { return (DefaultProxySection)Sections["defaultProxy"]; }
         }
 
         // for some reason MS doesn't provide a ConfigurationProperty for this property...
         //[ConfigurationProperty ("mailSettings")]
-        public MailSettingsSectionGroup MailSettings {
-            get { return (MailSettingsSectionGroup) SectionGroups ["mailSettings"]; }
+        public MailSettingsSectionGroup MailSettings
+        {
+            get { return (MailSettingsSectionGroup)SectionGroups["mailSettings"]; }
         }
 
-        [ConfigurationProperty ("requestCaching")]
-        public RequestCachingSection RequestCaching {
-            get { return (RequestCachingSection) Sections ["requestCaching"]; }
+        [ConfigurationProperty("requestCaching")]
+        public RequestCachingSection RequestCaching
+        {
+            get { return (RequestCachingSection)Sections["requestCaching"]; }
         }
 
-        
-        [ConfigurationProperty ("settings")]
-        public SettingsSection Settings {
-            get { return (SettingsSection) Sections ["settings"]; }
+        [ConfigurationProperty("settings")]
+        public SettingsSection Settings
+        {
+            get { return (SettingsSection)Sections["settings"]; }
         }
 
-        [ConfigurationProperty ("webRequestModules")]
-        public WebRequestModulesSection WebRequestModules {
-            get { return (WebRequestModulesSection) Sections ["webRequestModules"]; }
+        [ConfigurationProperty("webRequestModules")]
+        public WebRequestModulesSection WebRequestModules
+        {
+            get { return (WebRequestModulesSection)Sections["webRequestModules"]; }
         }
 
         #endregion // Properties
@@ -90,9 +94,9 @@ namespace System.Net.Configuration
         #region Methods
 
         [MonoTODO]
-        public static NetSectionGroup GetSectionGroup (System.Configuration.Configuration config)
+        public static NetSectionGroup GetSectionGroup(System.Configuration.Configuration config)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         #endregion // Methods

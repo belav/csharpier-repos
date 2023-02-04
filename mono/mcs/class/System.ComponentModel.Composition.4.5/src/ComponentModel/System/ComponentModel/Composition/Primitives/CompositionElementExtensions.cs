@@ -14,6 +14,7 @@ namespace System.ComponentModel.Composition.Primitives
             return SerializableCompositionElement.FromICompositionElement(element);
         }
 #endif //FEATURE_SERIALIZATION
+
         public static ICompositionElement ToElement(this Export export)
         {
             // First try the export

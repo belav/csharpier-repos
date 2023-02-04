@@ -8,37 +8,43 @@ namespace Mono.Linker.Tests.Cases.Attributes.Csc
     /// <summary>
     /// This explicit csc test exists to ensure that csc adds references in this scenario
     /// </summary>
-    [SetupCSharpCompilerToUse ("csc")]
-    [SetupCompileBefore ("LibraryWithType.dll", new[] { typeof (TypeDefinedInReference) })]
-    [SetupCompileBefore ("LibraryWithAttribute.dll", new[] { typeof (AttributeDefinedInReference) })]
-    [KeptTypeInAssembly ("LibraryWithType.dll", typeof (TypeDefinedInReference))]
-    [RemovedMemberInAssembly ("LibraryWithType.dll", typeof (TypeDefinedInReference), "Unused()")]
-    [KeptMemberInAssembly ("LibraryWithAttribute.dll", typeof (AttributeDefinedInReference), ".ctor()")]
-    [KeptMemberInAssembly ("LibraryWithAttribute.dll", typeof (AttributeDefinedInReference), "FieldType")]
-    [KeptDelegateCacheField ("0", nameof (FooOnMyEvent))]
+    [SetupCSharpCompilerToUse("csc")]
+    [SetupCompileBefore("LibraryWithType.dll", new[] { typeof(TypeDefinedInReference) })]
+    [SetupCompileBefore("LibraryWithAttribute.dll", new[] { typeof(AttributeDefinedInReference) })]
+    [KeptTypeInAssembly("LibraryWithType.dll", typeof(TypeDefinedInReference))]
+    [RemovedMemberInAssembly("LibraryWithType.dll", typeof(TypeDefinedInReference), "Unused()")]
+    [KeptMemberInAssembly(
+        "LibraryWithAttribute.dll",
+        typeof(AttributeDefinedInReference),
+        ".ctor()"
+    )]
+    [KeptMemberInAssembly(
+        "LibraryWithAttribute.dll",
+        typeof(AttributeDefinedInReference),
+        "FieldType"
+    )]
+    [KeptDelegateCacheField("0", nameof(FooOnMyEvent))]
     public class OnlyTypeUsedInAssemblyIsTypeOnAttributeFieldOnEvent
     {
-        public static void Main ()
+        public static void Main()
         {
-            var foo = new Foo ();
+            var foo = new Foo();
             foo.MyEvent += FooOnMyEvent;
         }
 
         [Kept]
-        private static void FooOnMyEvent (object sender, EventArgs e)
-        {
-        }
+        private static void FooOnMyEvent(object sender, EventArgs e) { }
 
         [Kept]
-        [KeptMember (".ctor()")]
+        [KeptMember(".ctor()")]
         class Foo
         {
             [Kept]
             [KeptBackingField]
             [KeptEventAddMethod]
             [KeptEventRemoveMethod]
-            [KeptAttributeAttribute (typeof (AttributeDefinedInReference))]
-            [AttributeDefinedInReference (FieldType = typeof (TypeDefinedInReference))]
+            [KeptAttributeAttribute(typeof(AttributeDefinedInReference))]
+            [AttributeDefinedInReference(FieldType = typeof(TypeDefinedInReference))]
             public event EventHandler MyEvent;
         }
     }

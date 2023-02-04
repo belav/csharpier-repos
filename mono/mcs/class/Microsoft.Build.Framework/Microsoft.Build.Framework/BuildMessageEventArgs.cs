@@ -29,30 +29,29 @@
 
 using System;
 
-namespace Microsoft.Build.Framework {
+namespace Microsoft.Build.Framework
+{
     [Serializable]
-    public class BuildMessageEventArgs : BuildEventArgs {
-    
+    public class BuildMessageEventArgs : BuildEventArgs
+    {
         MessageImportance importance;
-        
-        protected BuildMessageEventArgs ()
-        {
-        }
 
-        public BuildMessageEventArgs (string message,
-                          string helpKeyword,
-                          string senderName,
-                          MessageImportance importance)
-            : base (message, helpKeyword, senderName)
+        protected BuildMessageEventArgs() { }
+
+        public BuildMessageEventArgs(
+            string message,
+            string helpKeyword,
+            string senderName,
+            MessageImportance importance
+        )
+            : base(message, helpKeyword, senderName)
         {
             this.importance = importance;
         }
 
-        public MessageImportance Importance {
-            get {
-                return importance;
-            }
+        public MessageImportance Importance
+        {
+            get { return importance; }
         }
     }
 }
-

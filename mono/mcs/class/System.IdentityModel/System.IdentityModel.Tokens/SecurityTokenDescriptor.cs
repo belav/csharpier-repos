@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -37,7 +37,7 @@ namespace System.IdentityModel.Tokens
 {
     public class SecurityTokenDescriptor
     {
-        private Dictionary<string, Object> properties = new Dictionary<string, object> ();
+        private Dictionary<string, Object> properties = new Dictionary<string, object>();
 
         public string AppliesToAddress { get; set; }
         public SecurityKeyIdentifierClause AttachedReference { get; set; }
@@ -45,7 +45,10 @@ namespace System.IdentityModel.Tokens
         public EncryptingCredentials EncryptingCredentials { get; set; }
         public Lifetime Lifetime { get; set; }
         public ProofDescriptor Proof { get; set; }
-        public Dictionary<string, Object> Properties { get { return properties; } }
+        public Dictionary<string, Object> Properties
+        {
+            get { return properties; }
+        }
         public string ReplyToAddress { get; set; }
         public SigningCredentials SigningCredentials { get; set; }
         public ClaimsIdentity Subject { get; set; }
@@ -55,18 +58,21 @@ namespace System.IdentityModel.Tokens
         public SecurityKeyIdentifierClause UnattachedReference { get; set; }
 
         [MonoTODO]
-        public void AddAuthenticationClaims (string authType) {
-            throw new NotImplementedException ();
+        public void AddAuthenticationClaims(string authType)
+        {
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void AddAuthenticationClaims (string authType, DateTime time) {
-            throw new NotImplementedException ();
+        public void AddAuthenticationClaims(string authType, DateTime time)
+        {
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public virtual void ApplyTo (RequestSecurityTokenResponse response) {
-            throw new NotImplementedException ();
+        public virtual void ApplyTo(RequestSecurityTokenResponse response)
+        {
+            throw new NotImplementedException();
         }
     }
 }

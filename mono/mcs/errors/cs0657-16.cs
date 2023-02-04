@@ -5,16 +5,14 @@
 using System;
 
 [AttributeUsage(AttributeTargets.All)]
-public class TestAttribute: Attribute
-{
-}
+public class TestAttribute : Attribute { }
 
 class C
 {
-    event ResolveEventHandler field { 
+    event ResolveEventHandler field
+    {
         [event: Test]
-        add {}
-        remove {}
-            
+        add { }
+        remove { }
     }
 }

@@ -7,23 +7,19 @@ namespace Mono.Linker.Tests.Cases.CommandLine
     /// <summary>
     /// This test will use only keep used attributes, which is disabled by default, to infer that the rsp file worked
     /// </summary>
-    [SetupLinkerResponseFileAttribute ("Dependencies/ResponseFilesWork.rsp")]
+    [SetupLinkerResponseFileAttribute("Dependencies/ResponseFilesWork.rsp")]
     public class ResponseFilesWork
     {
-        public static void Main ()
+        public static void Main()
         {
-            new Bar ();
+            new Bar();
         }
 
         [Kept]
-        [KeptMember (".ctor()")]
+        [KeptMember(".ctor()")]
         [Foo]
-        class Bar
-        {
-        }
+        class Bar { }
 
-        class FooAttribute : Attribute
-        {
-        }
+        class FooAttribute : Attribute { }
     }
 }

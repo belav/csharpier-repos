@@ -39,69 +39,81 @@ namespace System.ComponentModel.Design.Serialization
 {
     public class TypeCodeDomSerializer : CodeDomSerializerBase
     {
+        public TypeCodeDomSerializer() { }
 
-        public TypeCodeDomSerializer ()
-        {
-        }
-
-        public virtual CodeTypeDeclaration Serialize (IDesignerSerializationManager manager, object root, ICollection members)
+        public virtual CodeTypeDeclaration Serialize(
+            IDesignerSerializationManager manager,
+            object root,
+            ICollection members
+        )
         {
             if (root == null)
-                throw new ArgumentNullException ("root");
+                throw new ArgumentNullException("root");
             if (manager == null)
-                throw new ArgumentNullException ("manager");
+                throw new ArgumentNullException("manager");
 
-            RootContext rootContext = new RootContext (new CodeThisReferenceExpression (), root);
-            StatementContext statementContext = new StatementContext ();
+            RootContext rootContext = new RootContext(new CodeThisReferenceExpression(), root);
+            StatementContext statementContext = new StatementContext();
             if (members != null)
-                statementContext.StatementCollection.Populate (members);
-            statementContext.StatementCollection.Populate (root);
-            CodeTypeDeclaration declaration = new CodeTypeDeclaration (manager.GetName (root));
+                statementContext.StatementCollection.Populate(members);
+            statementContext.StatementCollection.Populate(root);
+            CodeTypeDeclaration declaration = new CodeTypeDeclaration(manager.GetName(root));
 
-            manager.Context.Push (rootContext);
-            manager.Context.Push (statementContext);
-            manager.Context.Push (declaration);
+            manager.Context.Push(rootContext);
+            manager.Context.Push(statementContext);
+            manager.Context.Push(declaration);
 
-            if (members != null) {
+            if (members != null)
+            {
                 foreach (object member in members)
-                    base.SerializeToExpression (manager, member);
+                    base.SerializeToExpression(manager, member);
             }
-            base.SerializeToExpression (manager, root);
+            base.SerializeToExpression(manager, root);
 
-            manager.Context.Pop ();
-            manager.Context.Pop ();
-            manager.Context.Pop ();
+            manager.Context.Pop();
+            manager.Context.Pop();
+            manager.Context.Pop();
 
             return declaration;
         }
 
         // TODO - http://msdn2.microsoft.com/en-us/library/system.componentmodel.design.serialization.typecodedomserializer.deserialize.aspx
         //
-        public virtual object Deserialize (IDesignerSerializationManager manager, CodeTypeDeclaration declaration)
+        public virtual object Deserialize(
+            IDesignerSerializationManager manager,
+            CodeTypeDeclaration declaration
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        protected virtual CodeMemberMethod GetInitializeMethod (IDesignerSerializationManager manager, CodeTypeDeclaration declaration, object value)
+        protected virtual CodeMemberMethod GetInitializeMethod(
+            IDesignerSerializationManager manager,
+            CodeTypeDeclaration declaration,
+            object value
+        )
         {
             if (value == null)
-                throw new ArgumentNullException ("value");
+                throw new ArgumentNullException("value");
             if (declaration == null)
-                throw new ArgumentNullException ("declaration");
+                throw new ArgumentNullException("declaration");
             if (manager == null)
-                throw new ArgumentNullException ("manager");
+                throw new ArgumentNullException("manager");
 
-            return new CodeConstructor ();
+            return new CodeConstructor();
         }
 
-        protected virtual CodeMemberMethod[] GetInitializeMethods (IDesignerSerializationManager manager, CodeTypeDeclaration declaration)
+        protected virtual CodeMemberMethod[] GetInitializeMethods(
+            IDesignerSerializationManager manager,
+            CodeTypeDeclaration declaration
+        )
         {
             if (manager == null)
-                throw new ArgumentNullException ("manager");
+                throw new ArgumentNullException("manager");
             if (declaration == null)
-                throw new ArgumentNullException ("declaration");
+                throw new ArgumentNullException("declaration");
 
-            return (new CodeMemberMethod[] { new CodeConstructor () });
+            return (new CodeMemberMethod[] { new CodeConstructor() });
         }
     }
 }

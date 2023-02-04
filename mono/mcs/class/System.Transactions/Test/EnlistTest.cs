@@ -18,83 +18,88 @@ using System.Transactions;
 using NUnit.Framework;
 using NUnit.Framework.Constraints;
 
-namespace MonoTests.System.Transactions {
-
+namespace MonoTests.System.Transactions
+{
     [TestFixture]
-    public class EnlistTest {
-
+    public class EnlistTest
+    {
         #region Vol1_Dur0
 
         /* Single volatile resource, SPC happens */
         [Test]
-        public void Vol1_Dur0 ()
+        public void Vol1_Dur0()
         {
-            IntResourceManager irm = new IntResourceManager (1);
+            IntResourceManager irm = new IntResourceManager(1);
             irm.UseSingle = true;
-            using (TransactionScope scope = new TransactionScope ()) {
+            using (TransactionScope scope = new TransactionScope())
+            {
                 irm.Value = 2;
 
-                scope.Complete ();
+                scope.Complete();
             }
-            irm.CheckSPC ("irm");
+            irm.CheckSPC("irm");
         }
 
         [Test]
-        public void Vol1_Dur0_2PC ()
+        public void Vol1_Dur0_2PC()
         {
-            IntResourceManager irm = new IntResourceManager (1);
+            IntResourceManager irm = new IntResourceManager(1);
 
-            using (TransactionScope scope = new TransactionScope ()) {
+            using (TransactionScope scope = new TransactionScope())
+            {
                 irm.Value = 2;
 
-                scope.Complete ();
+                scope.Complete();
             }
-            irm.Check2PC ("irm");
+            irm.Check2PC("irm");
         }
 
         /* Single volatile resource, SPC happens */
         [Test]
-        public void Vol1_Dur0_Fail1 ()
+        public void Vol1_Dur0_Fail1()
         {
-            IntResourceManager irm = new IntResourceManager (1);
+            IntResourceManager irm = new IntResourceManager(1);
             irm.UseSingle = true;
-            using (TransactionScope scope = new TransactionScope ()) {
+            using (TransactionScope scope = new TransactionScope())
+            {
                 irm.Value = 2;
 
                 /* Not completing this..
                 scope.Complete ();*/
             }
 
-            irm.Check ( 0, 0, 0, 1, 0, 0, 0, "irm" );
+            irm.Check(0, 0, 0, 1, 0, 0, 0, "irm");
         }
 
         [Test]
-        [ExpectedException ( typeof ( TransactionAbortedException ) )]
-        public void Vol1_Dur0_Fail2 ()
+        [ExpectedException(typeof(TransactionAbortedException))]
+        public void Vol1_Dur0_Fail2()
         {
-            IntResourceManager irm = new IntResourceManager (1);
+            IntResourceManager irm = new IntResourceManager(1);
 
             irm.FailPrepare = true;
 
-            using (TransactionScope scope = new TransactionScope ()) {
+            using (TransactionScope scope = new TransactionScope())
+            {
                 irm.Value = 2;
 
-                scope.Complete ();
+                scope.Complete();
             }
         }
 
         [Test]
-        [ExpectedException ( typeof ( TransactionAbortedException ) )]
-        public void Vol1_Dur0_Fail3 ()
+        [ExpectedException(typeof(TransactionAbortedException))]
+        public void Vol1_Dur0_Fail3()
         {
-            IntResourceManager irm = new IntResourceManager (1);
+            IntResourceManager irm = new IntResourceManager(1);
             irm.UseSingle = true;
             irm.FailSPC = true;
 
-            using (TransactionScope scope = new TransactionScope ()) {
+            using (TransactionScope scope = new TransactionScope())
+            {
                 irm.Value = 2;
 
-                scope.Complete ();
+                scope.Complete();
             }
         }
 
@@ -104,21 +109,22 @@ namespace MonoTests.System.Transactions {
 
         /* >1 volatile, 2PC */
         [Test]
-        public void Vol2_Dur0_SPC ()
+        public void Vol2_Dur0_SPC()
         {
-            IntResourceManager irm = new IntResourceManager (1);
-            IntResourceManager irm2 = new IntResourceManager (3);
+            IntResourceManager irm = new IntResourceManager(1);
+            IntResourceManager irm2 = new IntResourceManager(3);
 
             irm.UseSingle = true;
             irm2.UseSingle = true;
-            using (TransactionScope scope = new TransactionScope ()) {
+            using (TransactionScope scope = new TransactionScope())
+            {
                 irm.Value = 2;
                 irm2.Value = 6;
 
-                scope.Complete ();
+                scope.Complete();
             }
-            irm.Check2PC ( "irm" );
-            irm2.Check2PC ( "irm2" );
+            irm.Check2PC("irm");
+            irm2.Check2PC("irm2");
         }
 
         #endregion
@@ -126,46 +132,48 @@ namespace MonoTests.System.Transactions {
         #region Vol0_Dur1
         /* 1 durable */
         [Test]
-        public void Vol0_Dur1 ()
+        public void Vol0_Dur1()
         {
-            IntResourceManager irm = new IntResourceManager (1);
+            IntResourceManager irm = new IntResourceManager(1);
             irm.Type = ResourceManagerType.Durable;
             irm.UseSingle = true;
 
-            using (TransactionScope scope = new TransactionScope ()) {
+            using (TransactionScope scope = new TransactionScope())
+            {
                 irm.Value = 2;
 
-                scope.Complete ();
+                scope.Complete();
             }
 
-            irm.CheckSPC ( "irm" );
+            irm.CheckSPC("irm");
         }
 
         /* We support only 1 durable with 2PC
          * On .net, this becomes a distributed transaction
-         */ 
+         */
         [Test]
-        [Category ("NotWorking")]
-        public void Vol0_Dur1_2PC ()
+        [Category("NotWorking")]
+        public void Vol0_Dur1_2PC()
         {
-            IntResourceManager irm = new IntResourceManager (1);
+            IntResourceManager irm = new IntResourceManager(1);
 
             /* Durable resource enlisted with a IEnlistedNotification
              * object
              */
             irm.Type = ResourceManagerType.Durable;
 
-            using (TransactionScope scope = new TransactionScope ()) {
+            using (TransactionScope scope = new TransactionScope())
+            {
                 irm.Value = 2;
 
-                scope.Complete ();
+                scope.Complete();
             }
         }
 
         [Test]
-        public void Vol0_Dur1_Fail ()
+        public void Vol0_Dur1_Fail()
         {
-            IntResourceManager irm = new IntResourceManager ( 1 );
+            IntResourceManager irm = new IntResourceManager(1);
 
             /* Durable resource enlisted with a IEnlistedNotification
              * object
@@ -173,88 +181,95 @@ namespace MonoTests.System.Transactions {
             irm.Type = ResourceManagerType.Durable;
             irm.FailSPC = true;
             irm.UseSingle = true;
-            try {
-                using (TransactionScope scope = new TransactionScope ()) {
+            try
+            {
+                using (TransactionScope scope = new TransactionScope())
+                {
                     irm.Value = 2;
 
-                    scope.Complete ();
+                    scope.Complete();
                 }
             }
-            catch (TransactionAbortedException) {
-                irm.Check ( 1, 0, 0, 0, 0, 0, 0, "irm" );
+            catch (TransactionAbortedException)
+            {
+                irm.Check(1, 0, 0, 0, 0, 0, 0, "irm");
                 return;
             }
 
-            Assert.Fail ();
+            Assert.Fail();
         }
         #endregion
 
         #region Vol2_Dur1
         /* >1vol + 1 durable */
         [Test]
-        public void Vol2_Dur1 ()
+        public void Vol2_Dur1()
         {
-            IntResourceManager [] irm = new IntResourceManager [4];
-            irm [0] = new IntResourceManager ( 1 );
-            irm [1] = new IntResourceManager ( 3 );
-            irm [2] = new IntResourceManager ( 5 );
-            irm [3] = new IntResourceManager ( 7 );
+            IntResourceManager[] irm = new IntResourceManager[4];
+            irm[0] = new IntResourceManager(1);
+            irm[1] = new IntResourceManager(3);
+            irm[2] = new IntResourceManager(5);
+            irm[3] = new IntResourceManager(7);
 
-            irm [0].Type = ResourceManagerType.Durable;
-            for ( int i = 0; i < 4; i++ )
-                irm [i].UseSingle = true;
+            irm[0].Type = ResourceManagerType.Durable;
+            for (int i = 0; i < 4; i++)
+                irm[i].UseSingle = true;
 
-            using (TransactionScope scope = new TransactionScope ()) {
-                irm [0].Value = 2;
-                irm [1].Value = 6;
-                irm [2].Value = 10;
-                irm [3].Value = 14;
+            using (TransactionScope scope = new TransactionScope())
+            {
+                irm[0].Value = 2;
+                irm[1].Value = 6;
+                irm[2].Value = 10;
+                irm[3].Value = 14;
 
-                scope.Complete ();
+                scope.Complete();
             }
 
-            irm [0].CheckSPC ( "irm [0]" );
+            irm[0].CheckSPC("irm [0]");
 
             /* Volatile RMs get 2PC */
             for (int i = 1; i < 4; i++)
-                irm [i].Check2PC ( "irm [" + i + "]" );
+                irm[i].Check2PC("irm [" + i + "]");
         }
 
         /* >1vol + 1 durable
          * Durable fails SPC
          */
         [Test]
-        public void Vol2_Dur1_Fail1 ()
+        public void Vol2_Dur1_Fail1()
         {
-            IntResourceManager [] irm = new IntResourceManager [4];
-            irm [0] = new IntResourceManager (1);
-            irm [1] = new IntResourceManager (3);
-            irm [2] = new IntResourceManager (5);
-            irm [3] = new IntResourceManager (7);
+            IntResourceManager[] irm = new IntResourceManager[4];
+            irm[0] = new IntResourceManager(1);
+            irm[1] = new IntResourceManager(3);
+            irm[2] = new IntResourceManager(5);
+            irm[3] = new IntResourceManager(7);
 
-            irm [0].Type = ResourceManagerType.Durable;
-            irm [0].FailSPC = true;
+            irm[0].Type = ResourceManagerType.Durable;
+            irm[0].FailSPC = true;
 
-            for ( int i = 0; i < 4; i++ )
-                irm [i].UseSingle = true;
+            for (int i = 0; i < 4; i++)
+                irm[i].UseSingle = true;
 
             /* Durable RM irm[0] does Abort on SPC, so
              * all volatile RMs get Rollback */
-            try {
-                using (TransactionScope scope = new TransactionScope ()) {
-                    irm [0].Value = 2;
-                    irm [1].Value = 6;
-                    irm [2].Value = 10;
-                    irm [3].Value = 14;
+            try
+            {
+                using (TransactionScope scope = new TransactionScope())
+                {
+                    irm[0].Value = 2;
+                    irm[1].Value = 6;
+                    irm[2].Value = 10;
+                    irm[3].Value = 14;
 
-                    scope.Complete ();
+                    scope.Complete();
                 }
             }
-            catch (TransactionAbortedException) {
-                irm [0].CheckSPC ( "irm [0]" );
+            catch (TransactionAbortedException)
+            {
+                irm[0].CheckSPC("irm [0]");
                 /* Volatile RMs get 2PC Prepare, and then get rolled back */
                 for (int i = 1; i < 4; i++)
-                    irm [i].Check ( 0, 1, 0, 1, 0, 0, 0, "irm [" + i + "]" );
+                    irm[i].Check(0, 1, 0, 1, 0, 0, 0, "irm [" + i + "]");
 
                 return;
             }
@@ -262,57 +277,12 @@ namespace MonoTests.System.Transactions {
             Assert.Fail();
         }
 
-        /* >1vol + 1 durable 
+        /* >1vol + 1 durable
          * durable doesn't complete SPC
          */
         [Test]
-        [Ignore ( "Correct this test, it should throw TimeOutException or something" )]
-        public void Vol2_Dur1_Fail2 ()
-        {
-            TransactionAbortedException exception = null;
-            IntResourceManager [] irm = new IntResourceManager [4];
-            irm [0] = new IntResourceManager (1);
-            irm [1] = new IntResourceManager (3);
-            irm [2] = new IntResourceManager (5);
-            irm [3] = new IntResourceManager (7);
-
-            irm [0].Type = ResourceManagerType.Durable;
-            irm [0].IgnoreSPC = true;
-
-            for ( int i = 0; i < 4; i++ )
-                irm [i].UseSingle = true;
-
-            /* Durable RM irm[2] does on SPC, so
-             * all volatile RMs get Rollback */
-            try {
-                using (TransactionScope scope = new TransactionScope ( TransactionScopeOption.Required, new TimeSpan ( 0, 0, 5 ) )) {
-                    irm [0].Value = 2;
-                    irm [1].Value = 6;
-                    irm [2].Value = 10;
-                    irm [3].Value = 14;
-
-                    scope.Complete ();
-                }
-            }
-            catch (TransactionAbortedException ex) {
-                irm [0].CheckSPC ( "irm [0]" );
-
-                /* Volatile RMs get 2PC Prepare, and then get rolled back */
-                for (int i = 1; i < 4; i++)
-                    irm [i].Check ( 0, 1, 0, 1, 0, 0, 0, "irm [" + i + "]" );
-
-                exception = ex;
-            }
-
-            Assert.IsNotNull(exception, "Expected TransactionAbortedException not thrown!");
-            Assert.IsNotNull(exception.InnerException, "TransactionAbortedException has no inner exception!");
-            Assert.AreEqual(typeof(TimeoutException), exception.InnerException.GetType());
-        }
-
-        /* Same as Vol2_Dur1_Fail2, but with a volatile manager timming out */
-        [Test]
-        [Ignore ( "Correct this test, it should throw TimeOutException or something" )]
-        public void Vol2_Dur1_Fail2b()
+        [Ignore("Correct this test, it should throw TimeOutException or something")]
+        public void Vol2_Dur1_Fail2()
         {
             TransactionAbortedException exception = null;
             IntResourceManager[] irm = new IntResourceManager[4];
@@ -321,8 +291,8 @@ namespace MonoTests.System.Transactions {
             irm[2] = new IntResourceManager(5);
             irm[3] = new IntResourceManager(7);
 
+            irm[0].Type = ResourceManagerType.Durable;
             irm[0].IgnoreSPC = true;
-            irm[1].Type = ResourceManagerType.Durable;
 
             for (int i = 0; i < 4; i++)
                 irm[i].UseSingle = true;
@@ -331,7 +301,12 @@ namespace MonoTests.System.Transactions {
              * all volatile RMs get Rollback */
             try
             {
-                using (TransactionScope scope = new TransactionScope(TransactionScopeOption.Required, new TimeSpan(0, 0, 5)))
+                using (
+                    TransactionScope scope = new TransactionScope(
+                        TransactionScopeOption.Required,
+                        new TimeSpan(0, 0, 5)
+                    )
+                )
                 {
                     irm[0].Value = 2;
                     irm[1].Value = 6;
@@ -353,7 +328,66 @@ namespace MonoTests.System.Transactions {
             }
 
             Assert.IsNotNull(exception, "Expected TransactionAbortedException not thrown!");
-            Assert.IsNotNull(exception.InnerException, "TransactionAbortedException has no inner exception!");
+            Assert.IsNotNull(
+                exception.InnerException,
+                "TransactionAbortedException has no inner exception!"
+            );
+            Assert.AreEqual(typeof(TimeoutException), exception.InnerException.GetType());
+        }
+
+        /* Same as Vol2_Dur1_Fail2, but with a volatile manager timming out */
+        [Test]
+        [Ignore("Correct this test, it should throw TimeOutException or something")]
+        public void Vol2_Dur1_Fail2b()
+        {
+            TransactionAbortedException exception = null;
+            IntResourceManager[] irm = new IntResourceManager[4];
+            irm[0] = new IntResourceManager(1);
+            irm[1] = new IntResourceManager(3);
+            irm[2] = new IntResourceManager(5);
+            irm[3] = new IntResourceManager(7);
+
+            irm[0].IgnoreSPC = true;
+            irm[1].Type = ResourceManagerType.Durable;
+
+            for (int i = 0; i < 4; i++)
+                irm[i].UseSingle = true;
+
+            /* Durable RM irm[2] does on SPC, so
+             * all volatile RMs get Rollback */
+            try
+            {
+                using (
+                    TransactionScope scope = new TransactionScope(
+                        TransactionScopeOption.Required,
+                        new TimeSpan(0, 0, 5)
+                    )
+                )
+                {
+                    irm[0].Value = 2;
+                    irm[1].Value = 6;
+                    irm[2].Value = 10;
+                    irm[3].Value = 14;
+
+                    scope.Complete();
+                }
+            }
+            catch (TransactionAbortedException ex)
+            {
+                irm[0].CheckSPC("irm [0]");
+
+                /* Volatile RMs get 2PC Prepare, and then get rolled back */
+                for (int i = 1; i < 4; i++)
+                    irm[i].Check(0, 1, 0, 1, 0, 0, 0, "irm [" + i + "]");
+
+                exception = ex;
+            }
+
+            Assert.IsNotNull(exception, "Expected TransactionAbortedException not thrown!");
+            Assert.IsNotNull(
+                exception.InnerException,
+                "TransactionAbortedException has no inner exception!"
+            );
             Assert.AreEqual(typeof(TimeoutException), exception.InnerException.GetType());
         }
 
@@ -361,299 +395,343 @@ namespace MonoTests.System.Transactions {
          * Volatile fails Prepare
          */
         [Test]
-        public void Vol2_Dur1_Fail3 ()
+        public void Vol2_Dur1_Fail3()
         {
-            IntResourceManager [] irm = new IntResourceManager [4];
-            irm [0] = new IntResourceManager ( 1 );
-            irm [1] = new IntResourceManager ( 3 );
-            irm [2] = new IntResourceManager ( 5 );
-            irm [3] = new IntResourceManager ( 7 );
+            IntResourceManager[] irm = new IntResourceManager[4];
+            irm[0] = new IntResourceManager(1);
+            irm[1] = new IntResourceManager(3);
+            irm[2] = new IntResourceManager(5);
+            irm[3] = new IntResourceManager(7);
 
-            irm [0].Type = ResourceManagerType.Durable;
-            irm [2].FailPrepare = true;
+            irm[0].Type = ResourceManagerType.Durable;
+            irm[2].FailPrepare = true;
 
-            for ( int i = 0; i < 4; i++ )
-                irm [i].UseSingle = true;
+            for (int i = 0; i < 4; i++)
+                irm[i].UseSingle = true;
 
             /* Durable RM irm[2] does on SPC, so
              * all volatile RMs get Rollback */
-            try {
-                using (TransactionScope scope = new TransactionScope ()) {
-                    irm [0].Value = 2;
-                    irm [1].Value = 6;
-                    irm [2].Value = 10;
-                    irm [3].Value = 14;
+            try
+            {
+                using (TransactionScope scope = new TransactionScope())
+                {
+                    irm[0].Value = 2;
+                    irm[1].Value = 6;
+                    irm[2].Value = 10;
+                    irm[3].Value = 14;
 
-                    scope.Complete ();
+                    scope.Complete();
                 }
             }
-            catch (TransactionAbortedException) {
-                irm [0].Check ( 0, 0, 0, 1, 0, 0, 0, "irm [0]");
+            catch (TransactionAbortedException)
+            {
+                irm[0].Check(0, 0, 0, 1, 0, 0, 0, "irm [0]");
 
                 /* irm [1] & [2] get prepare,
                  * [2] -> ForceRollback,
                  * [1] & [3] get rollback,
                  * [0](durable) gets rollback */
-                irm [1].Check ( 0, 1, 0, 1, 0, 0, 0, "irm [1]" );
-                irm [2].Check ( 0, 1, 0, 0, 0, 0, 0, "irm [2]" );
-                irm [3].Check ( 0, 0, 0, 1, 0, 0, 0, "irm [3]" );
+                irm[1].Check(0, 1, 0, 1, 0, 0, 0, "irm [1]");
+                irm[2].Check(0, 1, 0, 0, 0, 0, 0, "irm [2]");
+                irm[3].Check(0, 0, 0, 1, 0, 0, 0, "irm [3]");
 
                 return;
             }
 
-            Assert.Fail ( "Expected TransactionAbortedException" );
+            Assert.Fail("Expected TransactionAbortedException");
         }
 
         [Test]
-        public void Vol2_Dur1_Fail4 ()
+        public void Vol2_Dur1_Fail4()
         {
-            IntResourceManager [] irm = new IntResourceManager [2];
-            irm [0] = new IntResourceManager ( 1 );
-            irm [1] = new IntResourceManager ( 3 );
+            IntResourceManager[] irm = new IntResourceManager[2];
+            irm[0] = new IntResourceManager(1);
+            irm[1] = new IntResourceManager(3);
 
-            irm [0].Type = ResourceManagerType.Durable;
-            irm [0].FailSPC = true;
-            irm [0].FailWithException = true;
+            irm[0].Type = ResourceManagerType.Durable;
+            irm[0].FailSPC = true;
+            irm[0].FailWithException = true;
 
-            for ( int i = 0; i < 2; i++ )
-                irm [i].UseSingle = true;
+            for (int i = 0; i < 2; i++)
+                irm[i].UseSingle = true;
 
             /* Durable RM irm[2] does on SPC, so
              * all volatile RMs get Rollback */
-            try {
-                using ( TransactionScope scope = new TransactionScope () ) {
-                    irm [0].Value = 2;
-                    irm [1].Value = 6;
+            try
+            {
+                using (TransactionScope scope = new TransactionScope())
+                {
+                    irm[0].Value = 2;
+                    irm[1].Value = 6;
 
-                    scope.Complete ();
+                    scope.Complete();
                 }
             }
-            catch ( TransactionAbortedException e) {
-                Assert.IsNotNull ( e.InnerException, "Expected e.InnerException == NotSupportedException, but got None");
-                Assert.AreEqual ( typeof ( NotSupportedException ), e.InnerException.GetType (), "Expected e.InnerException == NotSupportedException, but got " + e.GetType () );
+            catch (TransactionAbortedException e)
+            {
+                Assert.IsNotNull(
+                    e.InnerException,
+                    "Expected e.InnerException == NotSupportedException, but got None"
+                );
+                Assert.AreEqual(
+                    typeof(NotSupportedException),
+                    e.InnerException.GetType(),
+                    "Expected e.InnerException == NotSupportedException, but got " + e.GetType()
+                );
 
-                irm [0].Check ( 1, 0, 0, 0, 0, 0, 0, "irm [0]" );
-                irm [1].Check ( 0, 1, 0, 1, 0, 0, 0, "irm [1]" );
+                irm[0].Check(1, 0, 0, 0, 0, 0, 0, "irm [0]");
+                irm[1].Check(0, 1, 0, 1, 0, 0, 0, "irm [1]");
                 return;
             }
 
-            Assert.Fail ( "Expected TransactionAbortedException" );
+            Assert.Fail("Expected TransactionAbortedException");
         }
 
         [Test]
-        public void Vol2_Dur1_Fail5 ()
+        public void Vol2_Dur1_Fail5()
         {
-            CommittableTransaction ct = new CommittableTransaction ();
-            IntResourceManager [] irm = new IntResourceManager [2];
-            irm [0] = new IntResourceManager ( 1 );
-            irm [1] = new IntResourceManager ( 3 );
+            CommittableTransaction ct = new CommittableTransaction();
+            IntResourceManager[] irm = new IntResourceManager[2];
+            irm[0] = new IntResourceManager(1);
+            irm[1] = new IntResourceManager(3);
 
             Transaction.Current = ct;
-            irm [0].Type = ResourceManagerType.Durable;
-            irm [0].FailSPC = true;
-            irm [0].FailWithException = true;
+            irm[0].Type = ResourceManagerType.Durable;
+            irm[0].FailSPC = true;
+            irm[0].FailWithException = true;
 
-            for ( int i = 0; i < 2; i++ )
-                irm [i].UseSingle = true;
+            for (int i = 0; i < 2; i++)
+                irm[i].UseSingle = true;
 
             /* Durable RM irm[2] does on SPC, so
              * all volatile RMs get Rollback */
-            
-            using ( TransactionScope scope = new TransactionScope () ) {
-                irm [0].Value = 2;
-                irm [1].Value = 6;
 
-                scope.Complete ();
+            using (TransactionScope scope = new TransactionScope())
+            {
+                irm[0].Value = 2;
+                irm[1].Value = 6;
+
+                scope.Complete();
             }
 
-            try {
-                ct.Commit ();
+            try
+            {
+                ct.Commit();
             }
-            catch ( TransactionAbortedException e ) {
-                Assert.IsNotNull ( e.InnerException, "Expected e.InnerException == NotSupportedException, but got None" );
-                Assert.AreEqual ( typeof ( NotSupportedException ), e.InnerException.GetType (), "Expected e.InnerException == NotSupportedException, but got " + e.GetType () );
+            catch (TransactionAbortedException e)
+            {
+                Assert.IsNotNull(
+                    e.InnerException,
+                    "Expected e.InnerException == NotSupportedException, but got None"
+                );
+                Assert.AreEqual(
+                    typeof(NotSupportedException),
+                    e.InnerException.GetType(),
+                    "Expected e.InnerException == NotSupportedException, but got " + e.GetType()
+                );
 
-                irm [0].Check ( 1, 0, 0, 0, 0, 0, 0, "irm [0]" );
-                irm [1].Check ( 0, 1, 0, 1, 0, 0, 0, "irm [1]" );
-                try {
-                    ct.Commit ();
+                irm[0].Check(1, 0, 0, 0, 0, 0, 0, "irm [0]");
+                irm[1].Check(0, 1, 0, 1, 0, 0, 0, "irm [1]");
+                try
+                {
+                    ct.Commit();
                 }
-                catch (InvalidOperationException x ) {
-                    Assert.IsNull ( x.InnerException);
+                catch (InvalidOperationException x)
+                {
+                    Assert.IsNull(x.InnerException);
                     Transaction.Current = null;
                     return;
                 }
-                Assert.Fail ( "Should not be reached" );
+                Assert.Fail("Should not be reached");
             }
 
-            Assert.Fail ( "Expected TransactionAbortedException" );
+            Assert.Fail("Expected TransactionAbortedException");
         }
 
         #endregion
 
         #region Promotable Single Phase Enlistment
         [Test]
-        public void Vol0_Dur0_Pspe1 ()
+        public void Vol0_Dur0_Pspe1()
         {
-            IntResourceManager irm = new IntResourceManager (1);
+            IntResourceManager irm = new IntResourceManager(1);
             irm.Type = ResourceManagerType.Promotable;
-            using (TransactionScope scope = new TransactionScope ()) {
+            using (TransactionScope scope = new TransactionScope())
+            {
                 irm.Value = 2;
 
-                scope.Complete ();
+                scope.Complete();
             }
-            irm.Check ( 1, 0, 0, 0, 0, 1, 0, "irm" );
+            irm.Check(1, 0, 0, 0, 0, 1, 0, "irm");
         }
 
         [Test]
-        public void Vol1_Dur0_Pspe1 ()
+        public void Vol1_Dur0_Pspe1()
         {
-            IntResourceManager irm0 = new IntResourceManager (1);
-            IntResourceManager irm1 = new IntResourceManager (1);
+            IntResourceManager irm0 = new IntResourceManager(1);
+            IntResourceManager irm1 = new IntResourceManager(1);
             irm1.Type = ResourceManagerType.Promotable;
-            using (TransactionScope scope = new TransactionScope ()) {
+            using (TransactionScope scope = new TransactionScope())
+            {
                 irm0.Value = 2;
                 irm1.Value = 8;
 
-                scope.Complete ();
+                scope.Complete();
             }
-            irm1.Check ( 1, 0, 0, 0, 0, 1, 0, "irm1" );
+            irm1.Check(1, 0, 0, 0, 0, 1, 0, "irm1");
         }
 
         [Test]
-        public void Vol0_Dur1_Pspe1 ()
+        public void Vol0_Dur1_Pspe1()
         {
-            IntResourceManager irm0 = new IntResourceManager (1);
-            IntResourceManager irm1 = new IntResourceManager (1);
+            IntResourceManager irm0 = new IntResourceManager(1);
+            IntResourceManager irm1 = new IntResourceManager(1);
             irm0.Type = ResourceManagerType.Durable;
             irm0.UseSingle = true;
             irm1.Type = ResourceManagerType.Promotable;
-            using (TransactionScope scope = new TransactionScope ()) {
+            using (TransactionScope scope = new TransactionScope())
+            {
                 irm0.Value = 8;
                 irm1.Value = 2;
-                Assert.AreEqual(0, irm1.NumEnlistFailed, "PSPE enlist did not fail although durable RM was already enlisted");
+                Assert.AreEqual(
+                    0,
+                    irm1.NumEnlistFailed,
+                    "PSPE enlist did not fail although durable RM was already enlisted"
+                );
             }
         }
 
         [Test]
-        public void Vol0_Dur0_Pspe2 ()
+        public void Vol0_Dur0_Pspe2()
         {
-            IntResourceManager irm0 = new IntResourceManager (1);
-            IntResourceManager irm1 = new IntResourceManager (1);
+            IntResourceManager irm0 = new IntResourceManager(1);
+            IntResourceManager irm1 = new IntResourceManager(1);
             irm0.Type = ResourceManagerType.Promotable;
             irm1.Type = ResourceManagerType.Promotable;
-            using (TransactionScope scope = new TransactionScope ()) {
+            using (TransactionScope scope = new TransactionScope())
+            {
                 irm0.Value = 8;
                 irm1.Value = 2;
-                Assert.AreEqual(0, irm1.NumEnlistFailed, "PSPE enlist did not fail although PSPE RM was already enlisted");
+                Assert.AreEqual(
+                    0,
+                    irm1.NumEnlistFailed,
+                    "PSPE enlist did not fail although PSPE RM was already enlisted"
+                );
             }
         }
         #endregion
 
         #region Others
-        /* >1vol  
+        /* >1vol
          * > 1 durable, On .net this becomes a distributed transaction
-         * We don't support this in mono yet. 
+         * We don't support this in mono yet.
          */
         [Test]
-        [Category ("NotWorking")]
-        public void Vol0_Dur2 ()
+        [Category("NotWorking")]
+        public void Vol0_Dur2()
         {
-            IntResourceManager [] irm = new IntResourceManager [2];
-            irm [0] = new IntResourceManager ( 1 );
-            irm [1] = new IntResourceManager ( 3 );
+            IntResourceManager[] irm = new IntResourceManager[2];
+            irm[0] = new IntResourceManager(1);
+            irm[1] = new IntResourceManager(3);
 
-            irm [0].Type = ResourceManagerType.Durable;
-            irm [1].Type = ResourceManagerType.Durable;
+            irm[0].Type = ResourceManagerType.Durable;
+            irm[1].Type = ResourceManagerType.Durable;
 
-            for ( int i = 0; i < 2; i++ )
-                irm [i].UseSingle = true;
+            for (int i = 0; i < 2; i++)
+                irm[i].UseSingle = true;
 
-            using (TransactionScope scope = new TransactionScope ()) {
-                irm [0].Value = 2;
-                irm [1].Value = 6;
+            using (TransactionScope scope = new TransactionScope())
+            {
+                irm[0].Value = 2;
+                irm[1].Value = 6;
 
-                scope.Complete ();
+                scope.Complete();
             }
         }
 
         [Test]
-        public void TransactionDispose ()
+        public void TransactionDispose()
         {
-            CommittableTransaction ct = new CommittableTransaction ();
-            IntResourceManager irm = new IntResourceManager (1);
+            CommittableTransaction ct = new CommittableTransaction();
+            IntResourceManager irm = new IntResourceManager(1);
             irm.Type = ResourceManagerType.Durable;
 
-            ct.Dispose ();
-            irm.Check  (0, 0, 0, 0, "Dispose transaction");
+            ct.Dispose();
+            irm.Check(0, 0, 0, 0, "Dispose transaction");
         }
 
         [Test]
-        public void TransactionDispose2 ()
+        public void TransactionDispose2()
         {
-            CommittableTransaction ct = new CommittableTransaction ();
-            IntResourceManager irm = new IntResourceManager (1);
+            CommittableTransaction ct = new CommittableTransaction();
+            IntResourceManager irm = new IntResourceManager(1);
 
             Transaction.Current = ct;
             irm.Value = 5;
 
-            try {
-                ct.Dispose ();
-            } finally {
+            try
+            {
+                ct.Dispose();
+            }
+            finally
+            {
                 Transaction.Current = null;
             }
 
-            irm.Check (0, 0, 1, 0, "Dispose transaction");
-            Assert.AreEqual (1, irm.Value);
+            irm.Check(0, 0, 1, 0, "Dispose transaction");
+            Assert.AreEqual(1, irm.Value);
         }
 
         [Test]
-        public void TransactionDispose3 ()
+        public void TransactionDispose3()
         {
-            CommittableTransaction ct = new CommittableTransaction ();
-            IntResourceManager irm = new IntResourceManager (1);
+            CommittableTransaction ct = new CommittableTransaction();
+            IntResourceManager irm = new IntResourceManager(1);
 
-            try {
+            try
+            {
                 Transaction.Current = ct;
                 irm.Value = 5;
-                ct.Commit ();
-                ct.Dispose ();
-            } finally {
+                ct.Commit();
+                ct.Dispose();
+            }
+            finally
+            {
                 Transaction.Current = null;
             }
 
-            irm.Check (1, 1, 0, 0, "Dispose transaction");
-            Assert.AreEqual (5, irm.Value);
+            irm.Check(1, 1, 0, 0, "Dispose transaction");
+            Assert.AreEqual(5, irm.Value);
         }
         #endregion
 
         #region TransactionCompleted
         [Test]
-        public void TransactionCompleted_Committed ()
+        public void TransactionCompleted_Committed()
         {
             bool called = false;
-            using (var ts = new TransactionScope ())
+            using (var ts = new TransactionScope())
             {
                 var tr = Transaction.Current;
                 tr.TransactionCompleted += (s, e) => called = true;
-                ts.Complete ();
+                ts.Complete();
             }
 
-            Assert.IsTrue (called, "TransactionCompleted event handler not called!");
+            Assert.IsTrue(called, "TransactionCompleted event handler not called!");
         }
 
         [Test]
-        public void TransactionCompleted_Rollback ()
+        public void TransactionCompleted_Rollback()
         {
             bool called = false;
-            using (var ts = new TransactionScope ())
+            using (var ts = new TransactionScope())
             {
                 var tr = Transaction.Current;
                 tr.TransactionCompleted += (s, e) => called = true;
                 // Not calling ts.Complete() on purpose..
             }
 
-            Assert.IsTrue (called, "TransactionCompleted event handler not called!");
+            Assert.IsTrue(called, "TransactionCompleted event handler not called!");
         }
         #endregion
 
@@ -674,7 +752,11 @@ namespace MonoTests.System.Transactions {
             {
                 rm.Value = 2;
                 var tr = Transaction.Current;
-                tr.TransactionCompleted += (s, e) => { called = true; status = e.Transaction.TransactionInformation.Status; };
+                tr.TransactionCompleted += (s, e) =>
+                {
+                    called = true;
+                    status = e.Transaction.TransactionInformation.Status;
+                };
                 ts.Complete();
             }
 
@@ -688,16 +770,17 @@ namespace MonoTests.System.Transactions {
         {
             bool called = false;
             TransactionStatus status = TransactionStatus.Active;
-            var rm = new IntResourceManager(1)
-            {
-                Type = ResourceManagerType.Volatile,
-            };
+            var rm = new IntResourceManager(1) { Type = ResourceManagerType.Volatile, };
 
             using (var ts = new TransactionScope())
             {
                 rm.Value = 2;
                 var tr = Transaction.Current;
-                tr.TransactionCompleted += (s, e) => { called = true; status = e.Transaction.TransactionInformation.Status; };
+                tr.TransactionCompleted += (s, e) =>
+                {
+                    called = true;
+                    status = e.Transaction.TransactionInformation.Status;
+                };
                 ts.Complete();
             }
 
@@ -711,16 +794,17 @@ namespace MonoTests.System.Transactions {
         {
             bool called = false;
             TransactionStatus status = TransactionStatus.Active;
-            var rm = new IntResourceManager(1)
-            {
-                Type = ResourceManagerType.Volatile,
-            };
+            var rm = new IntResourceManager(1) { Type = ResourceManagerType.Volatile, };
 
             using (var ts = new TransactionScope())
             {
                 rm.Value = 2;
                 var tr = Transaction.Current;
-                tr.TransactionCompleted += (s, e) => { called = true; status = e.Transaction.TransactionInformation.Status; };
+                tr.TransactionCompleted += (s, e) =>
+                {
+                    called = true;
+                    status = e.Transaction.TransactionInformation.Status;
+                };
                 // Not calling ts.Complete() on purpose..
             }
 
@@ -750,7 +834,11 @@ namespace MonoTests.System.Transactions {
                 {
                     rm.Value = 2;
                     var tr = Transaction.Current;
-                    tr.TransactionCompleted += (s, e) => { called = true; status = e.Transaction.TransactionInformation.Status; };
+                    tr.TransactionCompleted += (s, e) =>
+                    {
+                        called = true;
+                        status = e.Transaction.TransactionInformation.Status;
+                    };
                     ts.Complete();
                 }
             }
@@ -764,9 +852,17 @@ namespace MonoTests.System.Transactions {
             Assert.IsTrue(called, "TransactionCompleted event handler not called!");
             Assert.AreEqual(TransactionStatus.Aborted, status, "TransactionStatus != Aborted");
             Assert.IsNotNull(ex, "Exception not thrown");
-            Assert.That (ex, InstanceOf( typeof(TransactionAbortedException)), "Invalid exception thrown");
+            Assert.That(
+                ex,
+                InstanceOf(typeof(TransactionAbortedException)),
+                "Invalid exception thrown"
+            );
             Assert.IsNotNull(ex.InnerException, "InnerException is null");
-            Assert.That (ex.InnerException, InstanceOf( typeof(NotSupportedException)), "Invalid inner exception thrown");
+            Assert.That(
+                ex.InnerException,
+                InstanceOf(typeof(NotSupportedException)),
+                "Invalid inner exception thrown"
+            );
         }
 
         [Test]
@@ -788,7 +884,11 @@ namespace MonoTests.System.Transactions {
                 {
                     rm.Value = 2;
                     var tr = Transaction.Current;
-                    tr.TransactionCompleted += (s, e) => { called = true; status = e.Transaction.TransactionInformation.Status; };
+                    tr.TransactionCompleted += (s, e) =>
+                    {
+                        called = true;
+                        status = e.Transaction.TransactionInformation.Status;
+                    };
                     ts.Complete();
                 }
             }
@@ -807,9 +907,17 @@ namespace MonoTests.System.Transactions {
             InstanceOf(typeof(NotSupportedException), ex, "Invalid exception thrown");
 #else
             // Mono wrapps the exception into a TransactionAbortedException.
-            Assert.That (ex, InstanceOf( typeof(TransactionAbortedException)), "Invalid type of exception thrown");
+            Assert.That(
+                ex,
+                InstanceOf(typeof(TransactionAbortedException)),
+                "Invalid type of exception thrown"
+            );
             Assert.IsNotNull(ex.InnerException, "InnerException not thrown");
-            Assert.That (ex.InnerException, InstanceOf( typeof(NotSupportedException)), "Invalid inner exception thrown");
+            Assert.That(
+                ex.InnerException,
+                InstanceOf(typeof(NotSupportedException)),
+                "Invalid inner exception thrown"
+            );
 #endif
         }
 
@@ -832,7 +940,11 @@ namespace MonoTests.System.Transactions {
                 {
                     rm.Value = 2;
                     var tr = Transaction.Current;
-                    tr.TransactionCompleted += (s, e) => { called = true; status = e.Transaction.TransactionInformation.Status; };
+                    tr.TransactionCompleted += (s, e) =>
+                    {
+                        called = true;
+                        status = e.Transaction.TransactionInformation.Status;
+                    };
                     // Not calling ts.Complete() on purpose..
                 }
             }
@@ -847,7 +959,7 @@ namespace MonoTests.System.Transactions {
             Assert.IsFalse(called, "TransactionCompleted event handler _was_ called!?!?!");
             Assert.IsNotNull(ex, "Exception not thrown");
             // MS.NET will relay the exception thrown by RM instead of wrapping it on a TransactionAbortedException.
-            Assert.That (ex, InstanceOf( typeof(NotSupportedException)), "Invalid exception thrown");
+            Assert.That(ex, InstanceOf(typeof(NotSupportedException)), "Invalid exception thrown");
         }
 
         [Test]
@@ -869,7 +981,11 @@ namespace MonoTests.System.Transactions {
                 {
                     rm.Value = 2;
                     var tr = Transaction.Current;
-                    tr.TransactionCompleted += (s, e) => { called = true; status = e.Transaction.TransactionInformation.Status; };
+                    tr.TransactionCompleted += (s, e) =>
+                    {
+                        called = true;
+                        status = e.Transaction.TransactionInformation.Status;
+                    };
                     ts.Complete();
                 }
             }
@@ -882,9 +998,17 @@ namespace MonoTests.System.Transactions {
 
             Assert.IsTrue(called, "TransactionCompleted event handler not called!");
             Assert.IsNotNull(ex, "Exception not thrown");
-            Assert.That (ex, InstanceOf( typeof(TransactionAbortedException)), "Invalid exception thrown");
+            Assert.That(
+                ex,
+                InstanceOf(typeof(TransactionAbortedException)),
+                "Invalid exception thrown"
+            );
             Assert.IsNotNull(ex.InnerException, "InnerException is null");
-            Assert.That (ex.InnerException, InstanceOf( typeof(NotSupportedException)), "Invalid inner exception thrown");
+            Assert.That(
+                ex.InnerException,
+                InstanceOf(typeof(NotSupportedException)),
+                "Invalid inner exception thrown"
+            );
             Assert.AreEqual(TransactionStatus.Aborted, status, "TransactionStatus != Aborted");
         }
         #endregion
@@ -911,7 +1035,11 @@ namespace MonoTests.System.Transactions {
                 rm1.Value = 11;
                 rm2.Value = 22;
                 var tr = Transaction.Current;
-                tr.TransactionCompleted += (s, e) => { called = true; status = e.Transaction.TransactionInformation.Status; };
+                tr.TransactionCompleted += (s, e) =>
+                {
+                    called = true;
+                    status = e.Transaction.TransactionInformation.Status;
+                };
                 ts.Complete();
             }
 
@@ -929,21 +1057,19 @@ namespace MonoTests.System.Transactions {
         {
             TransactionStatus status = TransactionStatus.Active;
             bool called = false;
-            var rm1 = new IntResourceManager(1)
-            {
-                Type = ResourceManagerType.Volatile
-            };
-            var rm2 = new IntResourceManager(1)
-            {
-                Type = ResourceManagerType.Volatile
-            };
+            var rm1 = new IntResourceManager(1) { Type = ResourceManagerType.Volatile };
+            var rm2 = new IntResourceManager(1) { Type = ResourceManagerType.Volatile };
 
             using (var ts = new TransactionScope())
             {
                 rm1.Value = 11;
                 rm2.Value = 22;
                 var tr = Transaction.Current;
-                tr.TransactionCompleted += (s, e) => { called = true; status = e.Transaction.TransactionInformation.Status; };
+                tr.TransactionCompleted += (s, e) =>
+                {
+                    called = true;
+                    status = e.Transaction.TransactionInformation.Status;
+                };
                 ts.Complete();
             }
             rm1.Check(0, 1, 1, 0, 0, 0, 0, "rm1");
@@ -958,21 +1084,19 @@ namespace MonoTests.System.Transactions {
         {
             TransactionStatus status = TransactionStatus.Active;
             bool called = false;
-            var rm1 = new IntResourceManager(1)
-            {
-                Type = ResourceManagerType.Volatile
-            };
-            var rm2 = new IntResourceManager(1)
-            {
-                Type = ResourceManagerType.Volatile
-            };
+            var rm1 = new IntResourceManager(1) { Type = ResourceManagerType.Volatile };
+            var rm2 = new IntResourceManager(1) { Type = ResourceManagerType.Volatile };
 
             using (var ts = new TransactionScope())
             {
                 rm1.Value = 11;
                 rm2.Value = 22;
                 var tr = Transaction.Current;
-                tr.TransactionCompleted += (s, e) => { called = true; status = e.Transaction.TransactionInformation.Status; };
+                tr.TransactionCompleted += (s, e) =>
+                {
+                    called = true;
+                    status = e.Transaction.TransactionInformation.Status;
+                };
                 // Not calling ts.Complete() on purpose..
             }
 
@@ -1011,7 +1135,11 @@ namespace MonoTests.System.Transactions {
                     rm2.Value = 22;
 
                     var tr = Transaction.Current;
-                    tr.TransactionCompleted += (s, e) => { called = true; status = e.Transaction.TransactionInformation.Status; };
+                    tr.TransactionCompleted += (s, e) =>
+                    {
+                        called = true;
+                        status = e.Transaction.TransactionInformation.Status;
+                    };
                     ts.Complete();
                 }
             }
@@ -1030,12 +1158,25 @@ namespace MonoTests.System.Transactions {
             Assert.IsNotNull(ex, "Exception not thrown");
 #if MS_EXCEPTIONS_BEHAVIOR
             // MS.NET will relay the exception thrown by RM instead of wrapping it on a TransactionAbortedException.
-            Assert.AreEqual(rm1.ThrowThisException, ex, "Exception does not come from the expected RM");
+            Assert.AreEqual(
+                rm1.ThrowThisException,
+                ex,
+                "Exception does not come from the expected RM"
+            );
 #else
             // Mono wrapps the exception into a TransactionAbortedException.
-            Assert.That (ex, InstanceOf( typeof(TransactionAbortedException)), "Invalid type of exception thrown");
+            Assert.That(
+                ex,
+                InstanceOf(typeof(TransactionAbortedException)),
+                "Invalid type of exception thrown"
+            );
             Assert.IsNotNull(ex.InnerException, "InnerException not thrown");
-            Assert.AreEqual(rm1.ThrowThisException, ex.InnerException, "Exception does not come from the expected RM \n Ex: {0}", ex);
+            Assert.AreEqual(
+                rm1.ThrowThisException,
+                ex.InnerException,
+                "Exception does not come from the expected RM \n Ex: {0}",
+                ex
+            );
 #endif
         }
 
@@ -1051,10 +1192,7 @@ namespace MonoTests.System.Transactions {
                 ThrowThisException = new InvalidOperationException("rm1"),
                 Type = ResourceManagerType.Volatile
             };
-            var rm2 = new IntResourceManager(2)
-            {
-                Type = ResourceManagerType.Volatile
-            };
+            var rm2 = new IntResourceManager(2) { Type = ResourceManagerType.Volatile };
 
             try
             {
@@ -1081,12 +1219,26 @@ namespace MonoTests.System.Transactions {
             Assert.IsNotNull(ex, "Exception not thrown");
 #if MS_EXCEPTIONS_BEHAVIOR
             // MS.NET will relay the exception thrown by RM instead of wrapping it on a TransactionAbortedException.
-            Assert.AreEqual(rm1.ThrowThisException, ex, "Exception does not come from the expected RM \n Ex: {0}", ex);
+            Assert.AreEqual(
+                rm1.ThrowThisException,
+                ex,
+                "Exception does not come from the expected RM \n Ex: {0}",
+                ex
+            );
 #else
             // Mono wrapps the exception into a TransactionAbortedException.
-            Assert.That (ex, InstanceOf( typeof(TransactionAbortedException)), "Invalid type of exception thrown");
+            Assert.That(
+                ex,
+                InstanceOf(typeof(TransactionAbortedException)),
+                "Invalid type of exception thrown"
+            );
             Assert.IsNotNull(ex.InnerException, "InnerException not thrown");
-            Assert.AreEqual(rm1.ThrowThisException, ex.InnerException, "Exception does not come from the expected RM \n Ex: {0}", ex);
+            Assert.AreEqual(
+                rm1.ThrowThisException,
+                ex.InnerException,
+                "Exception does not come from the expected RM \n Ex: {0}",
+                ex
+            );
 #endif
         }
 
@@ -1102,10 +1254,7 @@ namespace MonoTests.System.Transactions {
                 ThrowThisException = new InvalidOperationException("rm1"),
                 Type = ResourceManagerType.Volatile
             };
-            var rm2 = new IntResourceManager(2)
-            {
-                Type = ResourceManagerType.Volatile
-            };
+            var rm2 = new IntResourceManager(2) { Type = ResourceManagerType.Volatile };
 
             try
             {
@@ -1131,8 +1280,12 @@ namespace MonoTests.System.Transactions {
             Assert.IsFalse(called, "TransactionCompleted event handler _was_ called!?!?!");
             Assert.IsNotNull(ex, "Exception not thrown");
             // MS.NET will relay the exception thrown by RM instead of wrapping it on a TransactionAbortedException.
-            Assert.AreEqual(rm1.ThrowThisException, ex, "Exception does not come from the expected RM \n Ex: {0}", ex);
-
+            Assert.AreEqual(
+                rm1.ThrowThisException,
+                ex,
+                "Exception does not come from the expected RM \n Ex: {0}",
+                ex
+            );
         }
 
         [Test]
@@ -1148,10 +1301,7 @@ namespace MonoTests.System.Transactions {
                 ThrowThisException = new InvalidOperationException("rm1"),
                 Type = ResourceManagerType.Volatile
             };
-            var rm2 = new IntResourceManager(2)
-            {
-                Type = ResourceManagerType.Volatile
-            };
+            var rm2 = new IntResourceManager(2) { Type = ResourceManagerType.Volatile };
 
             try
             {
@@ -1161,7 +1311,11 @@ namespace MonoTests.System.Transactions {
                     rm2.Value = 22;
 
                     var tr = Transaction.Current;
-                    tr.TransactionCompleted += (s, e) => { called = true; status = e.Transaction.TransactionInformation.Status; };
+                    tr.TransactionCompleted += (s, e) =>
+                    {
+                        called = true;
+                        status = e.Transaction.TransactionInformation.Status;
+                    };
                     ts.Complete();
                 }
             }
@@ -1175,9 +1329,17 @@ namespace MonoTests.System.Transactions {
 
             Assert.IsTrue(called, "TransactionCompleted event handler not called!");
             Assert.IsNotNull(ex, "Exception not thrown");
-            Assert.That (ex, InstanceOf( typeof(TransactionAbortedException)), "Invalid exception thrown");
+            Assert.That(
+                ex,
+                InstanceOf(typeof(TransactionAbortedException)),
+                "Invalid exception thrown"
+            );
             Assert.IsNotNull(ex.InnerException, "InnerException is null");
-            Assert.That (ex.InnerException, InstanceOf( typeof(InvalidOperationException)), "Invalid inner exception thrown");
+            Assert.That(
+                ex.InnerException,
+                InstanceOf(typeof(InvalidOperationException)),
+                "Invalid inner exception thrown"
+            );
             Assert.AreEqual(TransactionStatus.Aborted, status, "TransactionStatus != Aborted");
         }
 
@@ -1187,10 +1349,7 @@ namespace MonoTests.System.Transactions {
             TransactionStatus status = TransactionStatus.Active;
             bool called = false;
             Exception ex = null;
-            var rm1 = new IntResourceManager(1)
-            {
-                Type = ResourceManagerType.Volatile
-            };
+            var rm1 = new IntResourceManager(1) { Type = ResourceManagerType.Volatile };
             var rm2 = new IntResourceManager(2)
             {
                 FailPrepare = true,
@@ -1206,7 +1365,11 @@ namespace MonoTests.System.Transactions {
                     rm2.Value = 22;
 
                     var tr = Transaction.Current;
-                    tr.TransactionCompleted += (s, e) => { called = true; status = e.Transaction.TransactionInformation.Status; };
+                    tr.TransactionCompleted += (s, e) =>
+                    {
+                        called = true;
+                        status = e.Transaction.TransactionInformation.Status;
+                    };
                     ts.Complete();
                 }
             }
@@ -1220,9 +1383,17 @@ namespace MonoTests.System.Transactions {
 
             Assert.IsTrue(called, "TransactionCompleted event handler not called!");
             Assert.IsNotNull(ex, "Exception not thrown");
-            Assert.That (ex, InstanceOf( typeof(TransactionAbortedException)), "Invalid exception thrown");
+            Assert.That(
+                ex,
+                InstanceOf(typeof(TransactionAbortedException)),
+                "Invalid exception thrown"
+            );
             Assert.IsNotNull(ex.InnerException, "InnerException is null");
-            Assert.That (ex.InnerException, InstanceOf( typeof(NotSupportedException)), "Invalid inner exception thrown");
+            Assert.That(
+                ex.InnerException,
+                InstanceOf(typeof(NotSupportedException)),
+                "Invalid inner exception thrown"
+            );
             Assert.AreEqual(TransactionStatus.Aborted, status, "TransactionStatus != Aborted");
         }
 
@@ -1255,7 +1426,11 @@ namespace MonoTests.System.Transactions {
                     rm2.Value = 22;
 
                     var tr = Transaction.Current;
-                    tr.TransactionCompleted += (s, e) => { called = true; status = e.Transaction.TransactionInformation.Status; };
+                    tr.TransactionCompleted += (s, e) =>
+                    {
+                        called = true;
+                        status = e.Transaction.TransactionInformation.Status;
+                    };
                     ts.Complete();
                 }
             }
@@ -1272,12 +1447,25 @@ namespace MonoTests.System.Transactions {
             Assert.IsNotNull(ex, "Exception not thrown");
 #if MS_EXCEPTIONS_BEHAVIOR
             // MS.NET will relay the exception thrown by RM instead of wrapping it on a TransactionAbortedException.
-            Assert.AreEqual(rm2.ThrowThisException, ex, "Exception does not come from the expected RM");
+            Assert.AreEqual(
+                rm2.ThrowThisException,
+                ex,
+                "Exception does not come from the expected RM"
+            );
 #else
             // Mono wrapps the exception into a TransactionAbortedException.
-            Assert.That (ex, InstanceOf( typeof(TransactionAbortedException)), "Invalid type of exception thrown");
+            Assert.That(
+                ex,
+                InstanceOf(typeof(TransactionAbortedException)),
+                "Invalid type of exception thrown"
+            );
             Assert.IsNotNull(ex.InnerException, "InnerException not thrown");
-            Assert.AreEqual(rm2.ThrowThisException, ex.InnerException, "Exception does not come from the expected RM \n Ex: {0}", ex.InnerException);
+            Assert.AreEqual(
+                rm2.ThrowThisException,
+                ex.InnerException,
+                "Exception does not come from the expected RM \n Ex: {0}",
+                ex.InnerException
+            );
 #endif
         }
 
@@ -1310,7 +1498,11 @@ namespace MonoTests.System.Transactions {
                     rm2.Value = 22;
 
                     var tr = Transaction.Current;
-                    tr.TransactionCompleted += (s, e) => { called = true; status = e.Transaction.TransactionInformation.Status; };
+                    tr.TransactionCompleted += (s, e) =>
+                    {
+                        called = true;
+                        status = e.Transaction.TransactionInformation.Status;
+                    };
                     ts.Complete();
                 }
             }
@@ -1327,24 +1519,35 @@ namespace MonoTests.System.Transactions {
             Assert.IsNotNull(ex, "Exception not thrown");
 #if MS_EXCEPTIONS_BEHAVIOR
             // MS.NET will relay the exception thrown by RM instead of wrapping it on a TransactionAbortedException.
-            Assert.AreEqual(rm1.ThrowThisException, ex, "Exception does not come from the expected RM");
+            Assert.AreEqual(
+                rm1.ThrowThisException,
+                ex,
+                "Exception does not come from the expected RM"
+            );
 #else
             // Mono wrapps the exception into a TransactionAbortedException.
-            Assert.That (ex, InstanceOf( typeof(TransactionAbortedException)), "Invalid type of exception thrown");
+            Assert.That(
+                ex,
+                InstanceOf(typeof(TransactionAbortedException)),
+                "Invalid type of exception thrown"
+            );
             Assert.IsNotNull(ex.InnerException, "InnerException not thrown");
-            Assert.AreEqual(rm1.ThrowThisException, ex.InnerException, "Exception does not come from the expected RM \n Ex: {0}", ex);
+            Assert.AreEqual(
+                rm1.ThrowThisException,
+                ex.InnerException,
+                "Exception does not come from the expected RM \n Ex: {0}",
+                ex
+            );
 #endif
         }
 
-
         #endregion
 
         #endregion
 
-        public static InstanceOfTypeConstraint InstanceOf (Type expectedType)
+        public static InstanceOfTypeConstraint InstanceOf(Type expectedType)
         {
-            return new InstanceOfTypeConstraint (expectedType);
+            return new InstanceOfTypeConstraint(expectedType);
         }
     }
 }
-

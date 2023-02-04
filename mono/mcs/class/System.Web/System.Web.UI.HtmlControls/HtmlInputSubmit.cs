@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,27 +32,28 @@ using System.Security.Permissions;
 namespace System.Web.UI.HtmlControls
 {
     // CAS
-    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
     // attributes
-    [DefaultEventAttribute ("ServerClick")]
+    [DefaultEventAttribute("ServerClick")]
     [SupportsEventValidation]
     public class HtmlInputSubmit : HtmlInputButton, IPostBackEventHandler
     {
-        public HtmlInputSubmit ()
-            : base ("submit")
-        {
-        }
+        public HtmlInputSubmit()
+            : base("submit") { }
 
-        public HtmlInputSubmit (string type)
-            : base (type)
+        public HtmlInputSubmit(string type)
+            : base(type) { }
+
+        void IPostBackEventHandler.RaisePostBackEvent(string eventArgument)
         {
-        }
-        
-        void IPostBackEventHandler.RaisePostBackEvent (string eventArgument)
-        {
-            base.RaisePostBackEvent (eventArgument);
+            base.RaisePostBackEvent(eventArgument);
         }
     }
 }
-

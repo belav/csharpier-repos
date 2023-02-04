@@ -2,19 +2,19 @@ using System;
 
 class Test
 {
-    public static void Main ()
+    public static void Main()
     {
         string s = "test me";
         foreach (char c in s)
-            Console.WriteLine (c);
+            Console.WriteLine(c);
 
-        Foo ();
+        Foo();
     }
 
-    static void Foo ()
+    static void Foo()
     {
-        string [,] s = new string [,] { { "a", "b" }, { "c", "d" } };
+        string[,] s = new string[,] { { "a", "b" }, { "c", "d" } };
         foreach (string c in s)
-            Console.WriteLine (c [0]);
+            Console.WriteLine(c[0]);
     }
 }

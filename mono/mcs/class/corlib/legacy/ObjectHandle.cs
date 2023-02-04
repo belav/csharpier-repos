@@ -8,19 +8,19 @@ namespace System.Runtime.Remoting
 #pragma warning restore 169, 649
 #endregion
 
-        public ObjectHandle (object o)
+        public ObjectHandle(object o)
         {
-            throw new PlatformNotSupportedException ();
+            throw new PlatformNotSupportedException();
         }
 
-        public override object InitializeLifetimeService ()
+        public override object InitializeLifetimeService()
         {
-            throw new PlatformNotSupportedException ();
+            throw new PlatformNotSupportedException();
         }
 
-        public object Unwrap ()
+        public object Unwrap()
         {
-            throw new PlatformNotSupportedException ();
+            throw new PlatformNotSupportedException();
         }
     }
 }

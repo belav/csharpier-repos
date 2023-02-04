@@ -4,7 +4,7 @@ namespace BrokenOverrideProperty
 {
     abstract class BaseClass
     {
-        protected BaseClass (string text)
+        protected BaseClass(string text)
         {
             Whatever = text;
         }
@@ -16,26 +16,25 @@ namespace BrokenOverrideProperty
     {
         public string CalledValue;
 
-        public DerivedClass (string text) : base (text)
-        {
-        }
+        public DerivedClass(string text)
+            : base(text) { }
 
-        public override string Whatever {
-            get {
-                return "DerivedClass";
-            }
-            set {
+        public override string Whatever
+        {
+            get { return "DerivedClass"; }
+            set
+            {
                 CalledValue = value;
-                Console.WriteLine ("set called with {0}", value);
+                Console.WriteLine("set called with {0}", value);
             }
         }
     }
 
     class MainClass
     {
-        public static int Main ()
+        public static int Main()
         {
-            var klass = new DerivedClass ("test-value");
+            var klass = new DerivedClass("test-value");
             if (klass.CalledValue != "test-value")
                 return 1;
 

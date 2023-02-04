@@ -3,12 +3,12 @@
 
 // <Area> Nullable - Box-Unbox </Area>
 // <Title> Nullable type with unbox box expr  </Title>
-// <Description>  
+// <Description>
 // checking type of NestedStructGen<int> using is operator
-// </Description> 
-// <RelatedBugs> </RelatedBugs>  
+// </Description>
+// <RelatedBugs> </RelatedBugs>
 //<Expects Status=success></Expects>
-// <Code> 
+// <Code>
 
 
 using System.Runtime.InteropServices;
@@ -18,12 +18,18 @@ internal class NullableTest
 {
     private static bool BoxUnboxToNQ(ValueType o)
     {
-        return Helper.Compare((NestedStructGen<int>)o, Helper.Create(default(NestedStructGen<int>)));
+        return Helper.Compare(
+            (NestedStructGen<int>)o,
+            Helper.Create(default(NestedStructGen<int>))
+        );
     }
 
     private static bool BoxUnboxToQ(ValueType o)
     {
-        return Helper.Compare((NestedStructGen<int>?)o, Helper.Create(default(NestedStructGen<int>)));
+        return Helper.Compare(
+            (NestedStructGen<int>?)o,
+            Helper.Create(default(NestedStructGen<int>))
+        );
     }
 
     private static int Main()
@@ -36,5 +42,3 @@ internal class NullableTest
             return ExitCode.Failed;
     }
 }
-
-

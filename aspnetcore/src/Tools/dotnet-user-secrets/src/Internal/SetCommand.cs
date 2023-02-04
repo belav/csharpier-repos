@@ -11,10 +11,15 @@ namespace Microsoft.Extensions.SecretManager.Tools.Internal;
 
 internal sealed class SetCommand
 {
-    public static void Configure(CommandLineApplication command, CommandLineOptions options, IConsole console)
+    public static void Configure(
+        CommandLineApplication command,
+        CommandLineOptions options,
+        IConsole console
+    )
     {
         command.Description = "Sets the user secret to the specified value";
-        command.ExtendedHelpText = @"
+        command.ExtendedHelpText =
+            @"
 Additional Info:
   This command will also handle piped input. Piped input is expected to be a valid JSON format.
 
@@ -43,12 +48,18 @@ Examples:
             {
                 if (string.IsNullOrEmpty(nameArg.Value))
                 {
-                    throw new CommandParsingException(command, Resources.FormatError_MissingArgument("name"));
+                    throw new CommandParsingException(
+                        command,
+                        Resources.FormatError_MissingArgument("name")
+                    );
                 }
 
                 if (valueArg.Value == null)
                 {
-                    throw new CommandParsingException(command, Resources.FormatError_MissingArgument("value"));
+                    throw new CommandParsingException(
+                        command,
+                        Resources.FormatError_MissingArgument("value")
+                    );
                 }
 
                 options.Command = new ForOneValueStrategy(nameArg.Value, valueArg.Value);
@@ -78,7 +89,9 @@ Examples:
                 context.SecretStore.Set(k.Key, k.Value);
             }
 
-            context.Reporter.Output(Resources.FormatMessage_Saved_Secrets(provider.CurrentData.Count));
+            context.Reporter.Output(
+                Resources.FormatMessage_Saved_Secrets(provider.CurrentData.Count)
+            );
 
             context.SecretStore.Save();
         }

@@ -15,12 +15,18 @@ namespace Microsoft.CodeAnalysis.Editor
         ITextBufferAssociatedViewService AssociatedViewService { get; }
 
         Task<SolutionPreviewResult?> GetPreviewsAsync(
-            Workspace workspace, ImmutableArray<CodeActionOperation> operations, CancellationToken cancellationToken);
+            Workspace workspace,
+            ImmutableArray<CodeActionOperation> operations,
+            CancellationToken cancellationToken
+        );
 
         Task<bool> ApplyAsync(
-            Workspace workspace, Document fromDocument,
+            Workspace workspace,
+            Document fromDocument,
             ImmutableArray<CodeActionOperation> operations,
-            string title, IProgressTracker progressTracker,
-            CancellationToken cancellationToken);
+            string title,
+            IProgressTracker progressTracker,
+            CancellationToken cancellationToken
+        );
     }
 }

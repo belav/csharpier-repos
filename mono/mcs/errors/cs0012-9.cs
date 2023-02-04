@@ -4,8 +4,8 @@
 
 class Test
 {
-    public static void Main ()
+    public static void Main()
     {
-        A.M<string> ();
+        A.M<string>();
     }
 }

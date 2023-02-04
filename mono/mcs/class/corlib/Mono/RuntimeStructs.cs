@@ -14,14 +14,17 @@ using System.Runtime.InteropServices;
 
 #pragma warning disable 169
 
-namespace Mono {
+namespace Mono
+{
     //
     // Managed representations of mono runtime types
     //
-    internal static class RuntimeStructs {
+    internal static class RuntimeStructs
+    {
         // class-internals.h MonoRemoteClass
         [StructLayout(LayoutKind.Sequential)]
-        internal unsafe struct RemoteClass {
+        internal unsafe struct RemoteClass
+        {
             internal IntPtr default_vtable;
             internal IntPtr xdomain_vtable;
             internal MonoClass* proxy_class;
@@ -31,11 +34,11 @@ namespace Mono {
             // MonoClass* interfaces [];
         }
 
-        internal struct MonoClass {
-        }
+        internal struct MonoClass { }
 
         // class-internals.h MonoGenericParamInfo
-        internal unsafe struct GenericParamInfo {
+        internal unsafe struct GenericParamInfo
+        {
             internal MonoClass* pklass;
             internal IntPtr name;
             internal ushort flags;
@@ -44,7 +47,8 @@ namespace Mono {
         }
 
         // glib.h GPtrArray
-        internal unsafe struct GPtrArray {
+        internal unsafe struct GPtrArray
+        {
             internal IntPtr* data;
             internal int len;
         }
@@ -59,11 +63,14 @@ namespace Mono {
         internal IntPtr culture;
         internal IntPtr hash_value;
         internal IntPtr public_key;
-        internal fixed byte public_key_token [MONO_PUBLIC_KEY_TOKEN_LENGTH];
+        internal fixed byte public_key_token[MONO_PUBLIC_KEY_TOKEN_LENGTH];
         internal uint hash_alg;
         internal uint hash_len;
         internal uint flags;
-        internal ushort major, minor, build, revision;
+        internal ushort major,
+            minor,
+            build,
+            revision;
         internal ushort arch;
     }
 
@@ -71,9 +78,7 @@ namespace Mono {
     // See mini-generic-sharing.c
     // We use these instead of the normal ValueTuple types to avoid linking in the
     // c# methods belonging to those types
-    internal struct ValueTuple
-    {
-    }
+    internal struct ValueTuple { }
 
     internal struct ValueTuple<T1>
     {
@@ -112,8 +117,6 @@ namespace Mono {
 
     internal class NullByRefReturnException : Exception
     {
-        public NullByRefReturnException ()
-        {
-        }
+        public NullByRefReturnException() { }
     }
 }

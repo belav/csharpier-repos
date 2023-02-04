@@ -6,31 +6,22 @@ namespace Testing
     /// <summary>
     /// comment for interface
     /// </summary>
-    public interface InterfaceTest
-    {
-    }
+    public interface InterfaceTest { }
 
     /// <summary>
     /// incorrect markup comment for interface
     /// </incorrect>
-    public interface InterfaceTest2
-    {
-    }
+    public interface InterfaceTest2 { }
 
     /**
         <summary>
         Java style comment for interface
         </summary>
     */
-    public interface InterfaceTest3
-    {
-    }
+    public interface InterfaceTest3 { }
 
     public class Test
     {
-        public static void Main ()
-        {
-        }
+        public static void Main() { }
     }
 }
-

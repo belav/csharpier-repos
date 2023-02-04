@@ -6,17 +6,15 @@ namespace MonoTest
     {
         class B<TB>
         {
-            static void foo ()
-            {
-            }
+            static void foo() { }
 
             class C
             {
-                static void bar ()
+                static void bar()
                 {
-                    foo ();
-                    B<C>.foo ();
-                    A<C>.B<C>.foo ();
+                    foo();
+                    B<C>.foo();
+                    A<C>.B<C>.foo();
                 }
             }
         }
@@ -24,9 +22,6 @@ namespace MonoTest
 
     class Program
     {
-        public static void Main ()
-        {
-        }
+        public static void Main() { }
     }
 }
-

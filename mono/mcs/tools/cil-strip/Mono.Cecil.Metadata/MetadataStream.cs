@@ -26,10 +26,10 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil.Metadata {
-
-    internal class MetadataStream : IMetadataVisitable {
-
+namespace Mono.Cecil.Metadata
+{
+    internal class MetadataStream : IMetadataVisitable
+    {
         public const string Strings = "#Strings";
         public const string Tables = "#~";
         public const string IncrementalTables = "#-";
@@ -40,50 +40,53 @@ namespace Mono.Cecil.Metadata {
         MetadataStreamHeader m_header;
         MetadataHeap m_heap;
 
-        public MetadataStreamHeader Header {
+        public MetadataStreamHeader Header
+        {
             get { return m_header; }
             set { m_header = value; }
         }
 
-        public MetadataHeap Heap {
+        public MetadataHeap Heap
+        {
             get { return m_heap; }
             set { m_heap = value; }
         }
 
-        internal MetadataStream ()
+        internal MetadataStream()
         {
-            m_header = new MetadataStreamHeader (this);
+            m_header = new MetadataStreamHeader(this);
         }
 
-        public void Accept (IMetadataVisitor visitor)
+        public void Accept(IMetadataVisitor visitor)
         {
-            visitor.VisitMetadataStream (this);
+            visitor.VisitMetadataStream(this);
 
-            m_header.Accept (visitor);
+            m_header.Accept(visitor);
             if (m_heap != null)
-                m_heap.Accept (visitor);
+                m_heap.Accept(visitor);
         }
 
-        internal class MetadataStreamHeader : IMetadataVisitable {
-
+        internal class MetadataStreamHeader : IMetadataVisitable
+        {
             public uint Offset;
             public uint Size;
             public string Name;
 
             private MetadataStream m_stream;
 
-            public MetadataStream Stream {
+            public MetadataStream Stream
+            {
                 get { return m_stream; }
             }
 
-            internal MetadataStreamHeader (MetadataStream stream)
+            internal MetadataStreamHeader(MetadataStream stream)
             {
                 m_stream = stream;
             }
 
-            public void Accept (IMetadataVisitor visitor)
+            public void Accept(IMetadataVisitor visitor)
             {
-                visitor.VisitMetadataStreamHeader (this);
+                visitor.VisitMetadataStreamHeader(this);
             }
         }
     }

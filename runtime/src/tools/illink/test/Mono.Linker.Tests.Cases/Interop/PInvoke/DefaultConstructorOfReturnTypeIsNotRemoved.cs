@@ -3,24 +3,22 @@ using Mono.Linker.Tests.Cases.Expectations.Assertions;
 
 namespace Mono.Linker.Tests.Cases.Interop.PInvoke
 {
-    [KeptModuleReference ("Unused")]
+    [KeptModuleReference("Unused")]
     class DefaultConstructorOfReturnTypeIsNotRemoved
     {
-        public static void Main ()
+        public static void Main()
         {
-            var a = SomeMethod ();
+            var a = SomeMethod();
         }
 
         class A
         {
             [Kept]
-            public A ()
-            {
-            }
+            public A() { }
         }
 
         [Kept]
-        [DllImport ("Unused")]
-        private static extern A SomeMethod ();
+        [DllImport("Unused")]
+        private static extern A SomeMethod();
     }
 }

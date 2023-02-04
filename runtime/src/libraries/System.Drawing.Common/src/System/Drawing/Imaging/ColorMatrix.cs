@@ -86,6 +86,7 @@ namespace System.Drawing.Imaging
             get { return _matrix00; }
             set { _matrix00 = value; }
         }
+
         /// <summary>
         /// Represents the element at the 0th row and 1st column of this <see cref='ColorMatrix'/>.
         /// </summary>
@@ -302,7 +303,6 @@ namespace System.Drawing.Imaging
             set { _matrix44 = value; }
         }
 
-
         /// <summary>
         /// Initializes a new instance of the <see cref='ColorMatrix'/> class with the elements in the specified matrix.
         /// </summary>
@@ -382,11 +382,7 @@ namespace System.Drawing.Imaging
         /// </summary>
         public float this[int row, int column]
         {
-            get
-            {
-                return GetMatrix()[row][column];
-            }
-
+            get { return GetMatrix()[row][column]; }
             set
             {
                 float[][] tempMatrix = GetMatrix();
@@ -400,13 +396,23 @@ namespace System.Drawing.Imaging
         internal ref float GetPinnableReference() => ref _matrix00;
 
 #if NET7_0_OR_GREATER
-        [CustomMarshaller(typeof(ColorMatrix), MarshalMode.ManagedToUnmanagedIn, typeof(PinningMarshaller))]
+        [CustomMarshaller(
+            typeof(ColorMatrix),
+            MarshalMode.ManagedToUnmanagedIn,
+            typeof(PinningMarshaller)
+        )]
         internal static unsafe class PinningMarshaller
         {
-            public static ref float GetPinnableReference(ColorMatrix managed) => ref (managed is null ? ref Unsafe.NullRef<float>() : ref managed.GetPinnableReference());
+            public static ref float GetPinnableReference(ColorMatrix managed) =>
+                ref (
+                    managed is null
+                        ? ref Unsafe.NullRef<float>()
+                        : ref managed.GetPinnableReference()
+                );
 
             // All usages in our currently supported scenarios will always go through GetPinnableReference
-            public static float* ConvertToUnmanaged(ColorMatrix _) => throw new UnreachableException();
+            public static float* ConvertToUnmanaged(ColorMatrix _) =>
+                throw new UnreachableException();
         }
 #endif
     }

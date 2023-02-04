@@ -18,15 +18,18 @@ public class StartupUsingRouter
     {
         app.UseRouter(routes =>
         {
-            routes.MapRoute("/plaintext", (httpContext) =>
-            {
-                var response = httpContext.Response;
-                var payloadLength = _helloWorldPayload.Length;
-                response.StatusCode = 200;
-                response.ContentType = "text/plain";
-                response.ContentLength = payloadLength;
-                return response.Body.WriteAsync(_helloWorldPayload, 0, payloadLength);
-            });
+            routes.MapRoute(
+                "/plaintext",
+                (httpContext) =>
+                {
+                    var response = httpContext.Response;
+                    var payloadLength = _helloWorldPayload.Length;
+                    response.StatusCode = 200;
+                    response.ContentType = "text/plain";
+                    response.ContentLength = payloadLength;
+                    return response.Body.WriteAsync(_helloWorldPayload, 0, payloadLength);
+                }
+            );
         });
     }
 }

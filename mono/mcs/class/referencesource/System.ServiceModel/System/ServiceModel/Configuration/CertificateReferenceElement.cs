@@ -15,11 +15,12 @@ namespace System.ServiceModel.Configuration
 
     public sealed partial class CertificateReferenceElement : ConfigurationElement
     {
-        public CertificateReferenceElement()
-        {
-        }
+        public CertificateReferenceElement() { }
 
-        [ConfigurationProperty(ConfigurationStrings.StoreName, DefaultValue = EndpointIdentity.defaultStoreName)]
+        [ConfigurationProperty(
+            ConfigurationStrings.StoreName,
+            DefaultValue = EndpointIdentity.defaultStoreName
+        )]
         [StandardRuntimeEnumValidator(typeof(StoreName))]
         public StoreName StoreName
         {
@@ -27,7 +28,10 @@ namespace System.ServiceModel.Configuration
             set { base[ConfigurationStrings.StoreName] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.StoreLocation, DefaultValue = EndpointIdentity.defaultStoreLocation)]
+        [ConfigurationProperty(
+            ConfigurationStrings.StoreLocation,
+            DefaultValue = EndpointIdentity.defaultStoreLocation
+        )]
         [StandardRuntimeEnumValidator(typeof(StoreLocation))]
         public StoreLocation StoreLocation
         {
@@ -35,7 +39,10 @@ namespace System.ServiceModel.Configuration
             set { base[ConfigurationStrings.StoreLocation] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.X509FindType, DefaultValue = EndpointIdentity.defaultX509FindType)]
+        [ConfigurationProperty(
+            ConfigurationStrings.X509FindType,
+            DefaultValue = EndpointIdentity.defaultX509FindType
+        )]
         [StandardRuntimeEnumValidator(typeof(X509FindType))]
         public X509FindType X509FindType
         {
@@ -65,5 +72,4 @@ namespace System.ServiceModel.Configuration
             set { base[ConfigurationStrings.IsChainIncluded] = value; }
         }
     }
-
 }

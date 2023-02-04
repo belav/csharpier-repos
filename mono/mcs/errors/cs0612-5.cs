@@ -5,22 +5,17 @@
 using System;
 
 [Obsolete]
-interface O2
-{
-}
+interface O2 { }
 
 #pragma warning disable 612
 class A
 {
-    public virtual void Foo<T> () where T : O2
-    {
-    }
+    public virtual void Foo<T>()
+        where T : O2 { }
 }
 #pragma warning restore 612
 
 class B : A
 {
-    public override void Foo<U> ()
-    {
-    }
+    public override void Foo<U>() { }
 }

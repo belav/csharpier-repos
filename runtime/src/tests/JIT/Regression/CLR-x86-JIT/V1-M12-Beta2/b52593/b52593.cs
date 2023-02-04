@@ -4,9 +4,11 @@
 namespace Test
 {
     using System;
+
     public class App
     {
         private static void Method1(TypedReference param1, object obj) { }
+
         public static int Main()
         {
             int[] an = { 0 };

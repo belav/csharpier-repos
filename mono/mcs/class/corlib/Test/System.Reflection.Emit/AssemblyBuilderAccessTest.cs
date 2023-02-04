@@ -17,21 +17,21 @@ namespace MonoTests.System.Reflection.Emit
     public class AssemblyBuilderAccessTest
     {
         [Test]
-        public void RunTest ()
+        public void RunTest()
         {
-            Assert.AreEqual((int) AssemblyBuilderAccess.Run, 1);
+            Assert.AreEqual((int)AssemblyBuilderAccess.Run, 1);
         }
-        
+
         [Test]
-        public void RunAndSaveTest ()
+        public void RunAndSaveTest()
         {
-            Assert.AreEqual ((int) AssemblyBuilderAccess.RunAndSave, 3);
+            Assert.AreEqual((int)AssemblyBuilderAccess.RunAndSave, 3);
         }
-        
+
         [Test]
         public void SaveTest()
         {
-            Assert.AreEqual ((int) AssemblyBuilderAccess.Save, 2);
-        }        
+            Assert.AreEqual((int)AssemblyBuilderAccess.Save, 2);
+        }
     }
 }

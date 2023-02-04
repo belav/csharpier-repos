@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,9 +31,8 @@
 using System;
 using System.Configuration;
 
-
-namespace System.Web.Configuration {
-
+namespace System.Web.Configuration
+{
     public sealed class IdentitySection : ConfigurationSection
     {
         static ConfigurationProperty impersonateProp;
@@ -41,56 +40,56 @@ namespace System.Web.Configuration {
         static ConfigurationProperty userNameProp;
         static ConfigurationPropertyCollection properties;
 
-        static IdentitySection ()
+        static IdentitySection()
         {
-            impersonateProp = new ConfigurationProperty ("impersonate", typeof (bool), false);
-            passwordProp = new ConfigurationProperty ("password", typeof (string), "");
-            userNameProp = new ConfigurationProperty ("userName", typeof (string), "");
-            properties = new ConfigurationPropertyCollection ();
+            impersonateProp = new ConfigurationProperty("impersonate", typeof(bool), false);
+            passwordProp = new ConfigurationProperty("password", typeof(string), "");
+            userNameProp = new ConfigurationProperty("userName", typeof(string), "");
+            properties = new ConfigurationPropertyCollection();
 
-            properties.Add (impersonateProp);
-            properties.Add (passwordProp);
-            properties.Add (userNameProp);
+            properties.Add(impersonateProp);
+            properties.Add(passwordProp);
+            properties.Add(userNameProp);
         }
 
-        [MonoTODO ("why override this?")]
-        protected internal override object GetRuntimeObject ()
+        [MonoTODO("why override this?")]
+        protected internal override object GetRuntimeObject()
         {
             return this;
         }
 
-        protected internal override void Reset (ConfigurationElement parentElement)
-        {
-        }
+        protected internal override void Reset(ConfigurationElement parentElement) { }
 
-        protected internal override void Unmerge (ConfigurationElement sourceElement, ConfigurationElement parentElement, ConfigurationSaveMode saveMode)
-        {
-        }
+        protected internal override void Unmerge(
+            ConfigurationElement sourceElement,
+            ConfigurationElement parentElement,
+            ConfigurationSaveMode saveMode
+        ) { }
 
-        [ConfigurationProperty ("impersonate", DefaultValue = "False")]
-        public bool Impersonate {
-            get { return (bool) base [impersonateProp];}
+        [ConfigurationProperty("impersonate", DefaultValue = "False")]
+        public bool Impersonate
+        {
+            get { return (bool)base[impersonateProp]; }
             set { base[impersonateProp] = value; }
         }
 
-        [ConfigurationProperty ("password", DefaultValue = "")]
-        public string Password {
-            get { return (string) base [passwordProp];}
+        [ConfigurationProperty("password", DefaultValue = "")]
+        public string Password
+        {
+            get { return (string)base[passwordProp]; }
             set { base[passwordProp] = value; }
         }
 
-        [ConfigurationProperty ("userName", DefaultValue = "")]
-        public string UserName {
-            get { return (string) base [userNameProp];}
+        [ConfigurationProperty("userName", DefaultValue = "")]
+        public string UserName
+        {
+            get { return (string)base[userNameProp]; }
             set { base[userNameProp] = value; }
         }
 
-        protected internal override ConfigurationPropertyCollection Properties {
+        protected internal override ConfigurationPropertyCollection Properties
+        {
             get { return properties; }
         }
-
     }
-
 }
-
-

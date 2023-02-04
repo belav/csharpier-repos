@@ -6,34 +6,31 @@ namespace Mono.Linker.Tests.Cases.Basic
 {
     public class UnusedFieldsOfStructsAreKept
     {
-        public static void Main ()
+        public static void Main()
         {
-            A a = new A ();
-            PreventCompilerOptimization (a);
-            R r = new R ();
+            A a = new A();
+            PreventCompilerOptimization(a);
+            R r = new R();
         }
 
         [Kept]
-        static void PreventCompilerOptimization (A a)
-        {
-        }
+        static void PreventCompilerOptimization(A a) { }
 
         [Kept]
         struct A
         {
             [Kept]
             private int UnusedField1;
+
             [Kept]
             private int UnusedField2;
 
-            public void UnusedMethod ()
-            {
-            }
+            public void UnusedMethod() { }
         }
 
-        [KeptAttributeAttribute (typeof (IsByRefLikeAttribute))]
-        [KeptAttributeAttribute (typeof (CompilerFeatureRequiredAttribute))]
-        [KeptAttributeAttribute (typeof (ObsoleteAttribute))]
+        [KeptAttributeAttribute(typeof(IsByRefLikeAttribute))]
+        [KeptAttributeAttribute(typeof(CompilerFeatureRequiredAttribute))]
+        [KeptAttributeAttribute(typeof(ObsoleteAttribute))]
         ref struct R
         {
             [Kept]
@@ -66,9 +63,9 @@ namespace Mono.Linker.Tests.Cases.Basic
         }
 
         [Kept]
-        [KeptAttributeAttribute (typeof (IsByRefLikeAttribute))]
-        [KeptAttributeAttribute (typeof (CompilerFeatureRequiredAttribute))]
-        [KeptAttributeAttribute (typeof (ObsoleteAttribute))]
+        [KeptAttributeAttribute(typeof(IsByRefLikeAttribute))]
+        [KeptAttributeAttribute(typeof(CompilerFeatureRequiredAttribute))]
+        [KeptAttributeAttribute(typeof(ObsoleteAttribute))]
         ref struct ReferencedRefStruct
         {
             [Kept]

@@ -8,51 +8,65 @@ namespace ILLink.RoslynAnalyzer
 {
     public static class DiagnosticDescriptors
     {
-        public static DiagnosticDescriptor GetDiagnosticDescriptor (DiagnosticId diagnosticId)
+        public static DiagnosticDescriptor GetDiagnosticDescriptor(DiagnosticId diagnosticId)
         {
-            var diagnosticString = new DiagnosticString (diagnosticId);
-            return new DiagnosticDescriptor (diagnosticId.AsString (),
-                diagnosticString.GetTitleFormat (),
-                diagnosticString.GetMessageFormat (),
-                diagnosticId.GetDiagnosticCategory (),
+            var diagnosticString = new DiagnosticString(diagnosticId);
+            return new DiagnosticDescriptor(
+                diagnosticId.AsString(),
+                diagnosticString.GetTitleFormat(),
+                diagnosticString.GetMessageFormat(),
+                diagnosticId.GetDiagnosticCategory(),
                 DiagnosticSeverity.Warning,
-                true);
+                true
+            );
         }
 
-        public static DiagnosticDescriptor GetDiagnosticDescriptor (DiagnosticId diagnosticId, DiagnosticString diagnosticString)
-            => new DiagnosticDescriptor (diagnosticId.AsString (),
-                diagnosticString.GetTitle (),
-                diagnosticString.GetMessage (),
-                diagnosticId.GetDiagnosticCategory (),
+        public static DiagnosticDescriptor GetDiagnosticDescriptor(
+            DiagnosticId diagnosticId,
+            DiagnosticString diagnosticString
+        ) =>
+            new DiagnosticDescriptor(
+                diagnosticId.AsString(),
+                diagnosticString.GetTitle(),
+                diagnosticString.GetMessage(),
+                diagnosticId.GetDiagnosticCategory(),
                 DiagnosticSeverity.Warning,
-                true);
+                true
+            );
 
-        public static DiagnosticDescriptor GetDiagnosticDescriptor (DiagnosticId diagnosticId,
+        public static DiagnosticDescriptor GetDiagnosticDescriptor(
+            DiagnosticId diagnosticId,
             LocalizableResourceString? lrsTitle = null,
             LocalizableResourceString? lrsMessage = null,
             string? diagnosticCategory = null,
             DiagnosticSeverity diagnosticSeverity = DiagnosticSeverity.Warning,
             bool isEnabledByDefault = true,
-            string? helpLinkUri = null)
+            string? helpLinkUri = null
+        )
         {
-            if (lrsTitle == null || lrsMessage == null) {
-                var diagnosticString = new DiagnosticString (diagnosticId);
-                return new DiagnosticDescriptor (diagnosticId.AsString (),
-                    diagnosticString.GetTitleFormat (),
-                    diagnosticString.GetMessageFormat (),
-                    diagnosticCategory ?? diagnosticId.GetDiagnosticCategory (),
+            if (lrsTitle == null || lrsMessage == null)
+            {
+                var diagnosticString = new DiagnosticString(diagnosticId);
+                return new DiagnosticDescriptor(
+                    diagnosticId.AsString(),
+                    diagnosticString.GetTitleFormat(),
+                    diagnosticString.GetMessageFormat(),
+                    diagnosticCategory ?? diagnosticId.GetDiagnosticCategory(),
                     diagnosticSeverity,
                     isEnabledByDefault,
-                    helpLinkUri);
+                    helpLinkUri
+                );
             }
 
-            return new DiagnosticDescriptor (diagnosticId.AsString (),
+            return new DiagnosticDescriptor(
+                diagnosticId.AsString(),
                 lrsTitle!,
                 lrsMessage!,
-                diagnosticCategory ?? diagnosticId.GetDiagnosticCategory (),
+                diagnosticCategory ?? diagnosticId.GetDiagnosticCategory(),
                 diagnosticSeverity,
                 isEnabledByDefault,
-                helpLinkUri);
+                helpLinkUri
+            );
         }
     }
 }

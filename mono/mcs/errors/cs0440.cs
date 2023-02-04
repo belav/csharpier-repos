@@ -4,16 +4,18 @@
 
 using global = Foo;
 
-namespace Foo {
+namespace Foo
+{
     class A { }
 }
 
 class A { }
 
-class X {
-    static void Main ()
+class X
+{
+    static void Main()
     {
-        A a = new global::A ();
-        System.Console.WriteLine (a.GetType ());
+        A a = new global::A();
+        System.Console.WriteLine(a.GetType());
     }
 }

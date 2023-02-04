@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -38,376 +38,413 @@ using System.Text;
 using System.Web;
 using System.Web.Caching;
 
-namespace MonoCasTests.System.Web {
-
+namespace MonoCasTests.System.Web
+{
     [TestFixture]
-    [Category ("CAS")]
-    public class HttpResponseCas : AspNetHostingMinimal {
-
+    [Category("CAS")]
+    public class HttpResponseCas : AspNetHostingMinimal
+    {
         private StringWriter writer;
         private String fname;
         private FileStream fs;
         private IntPtr handle;
 
         [TestFixtureSetUp]
-        public void FixtureSetUp ()
+        public void FixtureSetUp()
         {
             // running at full-trust
-            writer = new StringWriter ();
+            writer = new StringWriter();
         }
 
         [SetUp]
-        public override void SetUp ()
+        public override void SetUp()
         {
             // running at full-trust too
-            base.SetUp ();
+            base.SetUp();
 
-            fname = Path.GetTempFileName ();
-            fs = new FileStream (fname, FileMode.Open, FileAccess.Read);
+            fname = Path.GetTempFileName();
+            fs = new FileStream(fname, FileMode.Open, FileAccess.Read);
             handle = fs.Handle;
         }
 
         [TearDown]
-        public void TearDown ()
+        public void TearDown()
         {
-            try {
+            try
+            {
                 if (fs != null)
-                    fs.Close ();
+                    fs.Close();
                 handle = IntPtr.Zero;
-                if (File.Exists (fname))
-                    File.Delete (fname);
+                if (File.Exists(fname))
+                    File.Delete(fname);
             }
-            catch {
-            }
+            catch { }
         }
 
         [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Properties_Deny_Unrestricted ()
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Properties_Deny_Unrestricted()
         {
-            HttpResponse response = new HttpResponse (writer);
+            HttpResponse response = new HttpResponse(writer);
 
-            response.Buffer = false;            
-            Assert.IsFalse (response.Buffer, "Buffer");
+            response.Buffer = false;
+            Assert.IsFalse(response.Buffer, "Buffer");
 
             response.BufferOutput = false;
-            Assert.IsFalse (response.BufferOutput, "BufferOutput");
+            Assert.IsFalse(response.BufferOutput, "BufferOutput");
 
-            Assert.IsNotNull (response.Cache, "Cache");
+            Assert.IsNotNull(response.Cache, "Cache");
 
             response.CacheControl = "public";
-            Assert.AreEqual ("public", response.CacheControl, "CacheControl");
+            Assert.AreEqual("public", response.CacheControl, "CacheControl");
 
             response.ContentEncoding = Encoding.UTF8;
-            Assert.AreEqual (Encoding.UTF8, response.ContentEncoding, "ContentEncoding");
+            Assert.AreEqual(Encoding.UTF8, response.ContentEncoding, "ContentEncoding");
 
             response.ContentType = String.Empty;
-            Assert.AreEqual (String.Empty, response.ContentType, "ContentType");
+            Assert.AreEqual(String.Empty, response.ContentType, "ContentType");
 
             response.Charset = Encoding.UTF8.WebName;
-            Assert.AreEqual (Encoding.UTF8.WebName, response.Charset, "Charset");
+            Assert.AreEqual(Encoding.UTF8.WebName, response.Charset, "Charset");
 
-            Assert.IsNotNull (response.Cookies, "Cookies");
+            Assert.IsNotNull(response.Cookies, "Cookies");
 
-            try {
+            try
+            {
                 response.Expires = 2;
             }
-            catch (NullReferenceException) {
+            catch (NullReferenceException)
+            {
                 // ms
             }
-            Assert.IsTrue (response.Expires > 0, "Expires");
+            Assert.IsTrue(response.Expires > 0, "Expires");
 
             response.ExpiresAbsolute = DateTime.MinValue;
-            Assert.AreEqual (DateTime.MinValue, response.ExpiresAbsolute, "ExpiresAbsolute");
+            Assert.AreEqual(DateTime.MinValue, response.ExpiresAbsolute, "ExpiresAbsolute");
 
-            Assert.IsTrue (response.IsClientConnected, "IsClientConnected");
-            Assert.IsNotNull (response.Output, "Ouput");
+            Assert.IsTrue(response.IsClientConnected, "IsClientConnected");
+            Assert.IsNotNull(response.Output, "Ouput");
 
             response.RedirectLocation = String.Empty;
-            Assert.AreEqual (String.Empty, response.RedirectLocation, "RedirectLocation");
+            Assert.AreEqual(String.Empty, response.RedirectLocation, "RedirectLocation");
 
             response.Status = "501 Not Ok";
-            Assert.AreEqual ("501 Not Ok", response.Status, "Status");
+            Assert.AreEqual("501 Not Ok", response.Status, "Status");
 
             response.StatusCode = 501;
-            Assert.AreEqual (501, response.StatusCode, "StatusCode");
+            Assert.AreEqual(501, response.StatusCode, "StatusCode");
 
             response.StatusDescription = "Not Ok";
-            Assert.AreEqual ("Not Ok", response.StatusDescription, "StatusDescription");
+            Assert.AreEqual("Not Ok", response.StatusDescription, "StatusDescription");
 
             response.SuppressContent = false;
-            Assert.IsFalse (response.SuppressContent, "SuppressContent");
+            Assert.IsFalse(response.SuppressContent, "SuppressContent");
             response.HeaderEncoding = Encoding.UTF8;
-            Assert.AreEqual (Encoding.UTF8, response.HeaderEncoding, "HeaderEncoding");
+            Assert.AreEqual(Encoding.UTF8, response.HeaderEncoding, "HeaderEncoding");
 
-            Assert.IsFalse (response.IsRequestBeingRedirected, "IsRequestBeingRedirected");
+            Assert.IsFalse(response.IsRequestBeingRedirected, "IsRequestBeingRedirected");
         }
 
         [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Filter_Deny_Unrestricted ()
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Filter_Deny_Unrestricted()
         {
-            HttpResponse response = new HttpResponse (writer);
-            try {
-                response.Filter = new MemoryStream ();
+            HttpResponse response = new HttpResponse(writer);
+            try
+            {
+                response.Filter = new MemoryStream();
             }
-            catch (HttpException) {
+            catch (HttpException)
+            {
                 // ms
             }
 
-            Assert.IsNull (response.Filter, "Filter");
+            Assert.IsNull(response.Filter, "Filter");
         }
 
         [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void OutputStream_Deny_Unrestricted ()
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void OutputStream_Deny_Unrestricted()
         {
-            HttpResponse response = new HttpResponse (writer);
-            try {
-                Assert.IsNotNull (response.OutputStream, "OutputStream");
+            HttpResponse response = new HttpResponse(writer);
+            try
+            {
+                Assert.IsNotNull(response.OutputStream, "OutputStream");
             }
-            catch (HttpException) {
+            catch (HttpException)
+            {
                 // ms 2.0
             }
         }
 
-        private string Callback (HttpContext context)
+        private string Callback(HttpContext context)
         {
             return string.Empty;
         }
 
         [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Methods_Deny_Unrestricted ()
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Methods_Deny_Unrestricted()
         {
-            HttpResponse response = new HttpResponse (writer);
-            response.AddCacheItemDependencies (new ArrayList ());
-            response.AddCacheItemDependency (String.Empty);
-            response.AddFileDependencies (new ArrayList ());
-            response.AddFileDependency (fname);
-            response.AddCacheDependency (new CacheDependency[0]);
-            response.AddCacheItemDependencies (new string [0]);
-            response.AddFileDependencies (new string [0]);
+            HttpResponse response = new HttpResponse(writer);
+            response.AddCacheItemDependencies(new ArrayList());
+            response.AddCacheItemDependency(String.Empty);
+            response.AddFileDependencies(new ArrayList());
+            response.AddFileDependency(fname);
+            response.AddCacheDependency(new CacheDependency[0]);
+            response.AddCacheItemDependencies(new string[0]);
+            response.AddFileDependencies(new string[0]);
 
-            try {
-                response.AppendCookie (new HttpCookie ("mono"));
+            try
+            {
+                response.AppendCookie(new HttpCookie("mono"));
             }
-            catch (NullReferenceException) {
-                // ms 
-            }
-
-            try {
-                Assert.IsNull (response.ApplyAppPathModifier (null), "ApplyAppPathModifier");
-            }
-            catch (NullReferenceException) {
-                // ms 
+            catch (NullReferenceException)
+            {
+                // ms
             }
 
-            try {
-                response.Clear ();
+            try
+            {
+                Assert.IsNull(response.ApplyAppPathModifier(null), "ApplyAppPathModifier");
             }
-            catch (NullReferenceException) {
-                // ms 
-            }
-        
-            try {
-                response.ClearContent ();
-            }
-            catch (NullReferenceException) {
-                // ms 
-            }
-        
-            try {
-                response.ClearHeaders ();
-            }
-            catch (NullReferenceException) {
-                // ms 
+            catch (NullReferenceException)
+            {
+                // ms
             }
 
-            try {
-                response.Redirect ("http://www.mono-project.com");
+            try
+            {
+                response.Clear();
             }
-            catch (NullReferenceException) {
-                // ms 
-            }
-            try {
-                response.Redirect ("http://www.mono-project.com", false);
-            }
-            catch (NullReferenceException) {
-                // ms 
+            catch (NullReferenceException)
+            {
+                // ms
             }
 
-            try {
-                response.SetCookie (new HttpCookie ("mono"));
+            try
+            {
+                response.ClearContent();
             }
-            catch (NullReferenceException) {
-                // ms 
+            catch (NullReferenceException)
+            {
+                // ms
             }
 
-            response.Write (String.Empty);
-            response.Write (Char.MinValue);
-            response.Write (new char[0], 0, 0);
-            response.Write (this);
-            response.WriteSubstitution (new HttpResponseSubstitutionCallback (Callback));
-
-            response.Flush ();
-
-            response.Close ();
-
-            try {
-                response.End ();
+            try
+            {
+                response.ClearHeaders();
             }
-            catch (NullReferenceException) {
-                // ms 
+            catch (NullReferenceException)
+            {
+                // ms
+            }
+
+            try
+            {
+                response.Redirect("http://www.mono-project.com");
+            }
+            catch (NullReferenceException)
+            {
+                // ms
+            }
+            try
+            {
+                response.Redirect("http://www.mono-project.com", false);
+            }
+            catch (NullReferenceException)
+            {
+                // ms
+            }
+
+            try
+            {
+                response.SetCookie(new HttpCookie("mono"));
+            }
+            catch (NullReferenceException)
+            {
+                // ms
+            }
+
+            response.Write(String.Empty);
+            response.Write(Char.MinValue);
+            response.Write(new char[0], 0, 0);
+            response.Write(this);
+            response.WriteSubstitution(new HttpResponseSubstitutionCallback(Callback));
+
+            response.Flush();
+
+            response.Close();
+
+            try
+            {
+                response.End();
+            }
+            catch (NullReferenceException)
+            {
+                // ms
             }
         }
 
         [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void AppendHeader_Deny_Unrestricted ()
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void AppendHeader_Deny_Unrestricted()
         {
-            HttpResponse response = new HttpResponse (writer);
-            response.AppendHeader ("monkey", "mono");
+            HttpResponse response = new HttpResponse(writer);
+            response.AppendHeader("monkey", "mono");
         }
 
         [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void AddHeader_Deny_Unrestricted ()
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void AddHeader_Deny_Unrestricted()
         {
-            HttpResponse response = new HttpResponse (writer);
-            try {
-                response.AddHeader (String.Empty, String.Empty);
+            HttpResponse response = new HttpResponse(writer);
+            try
+            {
+                response.AddHeader(String.Empty, String.Empty);
             }
-            catch (HttpException) {
+            catch (HttpException)
+            {
                 // ms 2.0
             }
         }
 
         [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void BinaryWrite_Deny_Unrestricted ()
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void BinaryWrite_Deny_Unrestricted()
         {
-            HttpResponse response = new HttpResponse (writer);
-            try {
-                response.BinaryWrite (new byte[0]);
+            HttpResponse response = new HttpResponse(writer);
+            try
+            {
+                response.BinaryWrite(new byte[0]);
             }
-            catch (HttpException) {
-                // ms 
-            }
-        }
-
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Pics_Deny_Unrestricted ()
-        {
-            HttpResponse response = new HttpResponse (writer);
-            try {
-                response.Pics (String.Empty);
-            }
-            catch (HttpException) {
-                // ms 
+            catch (HttpException)
+            {
+                // ms
             }
         }
 
         [Test]
-        [AspNetHostingPermission (SecurityAction.Deny, Level = AspNetHostingPermissionLevel.Medium)]
-        [ExpectedException (typeof (SecurityException))]
-        public void AppendToLog_Deny_Medium ()
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Pics_Deny_Unrestricted()
         {
-            HttpResponse response = new HttpResponse (writer);
-            response.AppendToLog ("mono");
+            HttpResponse response = new HttpResponse(writer);
+            try
+            {
+                response.Pics(String.Empty);
+            }
+            catch (HttpException)
+            {
+                // ms
+            }
         }
 
         [Test]
-        [AspNetHostingPermission (SecurityAction.PermitOnly, Level = AspNetHostingPermissionLevel.Medium)]
-        public void AppendToLog_PermitOnly_Medium ()
+        [AspNetHostingPermission(SecurityAction.Deny, Level = AspNetHostingPermissionLevel.Medium)]
+        [ExpectedException(typeof(SecurityException))]
+        public void AppendToLog_Deny_Medium()
         {
-            HttpResponse response = new HttpResponse (writer);
-            response.AppendToLog ("mono");
+            HttpResponse response = new HttpResponse(writer);
+            response.AppendToLog("mono");
         }
 
         [Test]
-        [FileIOPermission (SecurityAction.Deny, Unrestricted = true)]
-        [ExpectedException (typeof (SecurityException))]
-        public void TransmitFile_Deny_FileIOPermission ()
+        [AspNetHostingPermission(
+            SecurityAction.PermitOnly,
+            Level = AspNetHostingPermissionLevel.Medium
+        )]
+        public void AppendToLog_PermitOnly_Medium()
         {
-            HttpResponse response = new HttpResponse (writer);
-            response.TransmitFile (fname);
+            HttpResponse response = new HttpResponse(writer);
+            response.AppendToLog("mono");
         }
 
         [Test]
-        [FileIOPermission (SecurityAction.PermitOnly, Unrestricted = true)]
-        public void TransmitFile_PermitOnly_FileIOPermission ()
+        [FileIOPermission(SecurityAction.Deny, Unrestricted = true)]
+        [ExpectedException(typeof(SecurityException))]
+        public void TransmitFile_Deny_FileIOPermission()
         {
-            HttpResponse response = new HttpResponse (writer);
-            response.TransmitFile (fname);
+            HttpResponse response = new HttpResponse(writer);
+            response.TransmitFile(fname);
         }
 
         [Test]
-        [FileIOPermission (SecurityAction.Deny, Unrestricted = true)]
-        [ExpectedException (typeof (SecurityException))]
-        public void WriteFile_String_Deny_FileIOPermission ()
+        [FileIOPermission(SecurityAction.PermitOnly, Unrestricted = true)]
+        public void TransmitFile_PermitOnly_FileIOPermission()
         {
-            HttpResponse response = new HttpResponse (writer);
-            response.WriteFile (fname);
+            HttpResponse response = new HttpResponse(writer);
+            response.TransmitFile(fname);
         }
 
         [Test]
-        [FileIOPermission (SecurityAction.Deny, Unrestricted = true)]
-        [ExpectedException (typeof (SecurityException))]
-        public void WriteFile_StringBool_Deny_FileIOPermission ()
+        [FileIOPermission(SecurityAction.Deny, Unrestricted = true)]
+        [ExpectedException(typeof(SecurityException))]
+        public void WriteFile_String_Deny_FileIOPermission()
         {
-            HttpResponse response = new HttpResponse (writer);
-            response.WriteFile (fname, false);
+            HttpResponse response = new HttpResponse(writer);
+            response.WriteFile(fname);
         }
 
         [Test]
-        [FileIOPermission (SecurityAction.Deny, Unrestricted = true)]
-        [ExpectedException (typeof (SecurityException))]
-        public void WriteFile_StringIntInt_Deny_FileIOPermission ()
+        [FileIOPermission(SecurityAction.Deny, Unrestricted = true)]
+        [ExpectedException(typeof(SecurityException))]
+        public void WriteFile_StringBool_Deny_FileIOPermission()
         {
-            HttpResponse response = new HttpResponse (writer);
-            response.WriteFile (fname, 0, 1);
+            HttpResponse response = new HttpResponse(writer);
+            response.WriteFile(fname, false);
         }
 
         [Test]
-        [FileIOPermission (SecurityAction.PermitOnly, Unrestricted = true)]
-        public void WriteFile_PermitOnly_FileIOPermission ()
+        [FileIOPermission(SecurityAction.Deny, Unrestricted = true)]
+        [ExpectedException(typeof(SecurityException))]
+        public void WriteFile_StringIntInt_Deny_FileIOPermission()
         {
-            HttpResponse response = new HttpResponse (writer);
-            response.WriteFile (fname);
-            response.WriteFile (fname, false);
-            response.WriteFile (fname, 0, 0);
+            HttpResponse response = new HttpResponse(writer);
+            response.WriteFile(fname, 0, 1);
         }
 
         [Test]
-        [SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
-        [ExpectedException (typeof (SecurityException))]
-        public void WriteFile_Deny_UnmanagedCode ()
+        [FileIOPermission(SecurityAction.PermitOnly, Unrestricted = true)]
+        public void WriteFile_PermitOnly_FileIOPermission()
         {
-            HttpResponse response = new HttpResponse (writer);
-            response.WriteFile (handle, 0, 1);
+            HttpResponse response = new HttpResponse(writer);
+            response.WriteFile(fname);
+            response.WriteFile(fname, false);
+            response.WriteFile(fname, 0, 0);
         }
 
         [Test]
-        [SecurityPermission (SecurityAction.PermitOnly, UnmanagedCode = true)]
-        public void WriteFile_PermitOnly_UnmanagedCode ()
+        [SecurityPermission(SecurityAction.Deny, UnmanagedCode = true)]
+        [ExpectedException(typeof(SecurityException))]
+        public void WriteFile_Deny_UnmanagedCode()
         {
-            HttpResponse response = new HttpResponse (writer);
-            response.WriteFile (handle, 0, 1);
+            HttpResponse response = new HttpResponse(writer);
+            response.WriteFile(handle, 0, 1);
+        }
+
+        [Test]
+        [SecurityPermission(SecurityAction.PermitOnly, UnmanagedCode = true)]
+        public void WriteFile_PermitOnly_UnmanagedCode()
+        {
+            HttpResponse response = new HttpResponse(writer);
+            response.WriteFile(handle, 0, 1);
         }
 
         // LinkDemand
 
-        public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
+        public override object CreateControl(
+            SecurityAction action,
+            AspNetHostingPermissionLevel level
+        )
         {
-            ConstructorInfo ci = this.Type.GetConstructor (new Type[1] { typeof (TextWriter) });
-            Assert.IsNotNull (ci, ".ctor(TextWriter)");
-            return ci.Invoke (new object[1] { writer });
+            ConstructorInfo ci = this.Type.GetConstructor(new Type[1] { typeof(TextWriter) });
+            Assert.IsNotNull(ci, ".ctor(TextWriter)");
+            return ci.Invoke(new object[1] { writer });
         }
 
-        public override Type Type {
-            get { return typeof (HttpResponse); }
+        public override Type Type
+        {
+            get { return typeof(HttpResponse); }
         }
     }
 }

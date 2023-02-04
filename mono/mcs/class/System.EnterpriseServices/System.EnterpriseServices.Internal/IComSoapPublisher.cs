@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,54 +36,60 @@ namespace System.EnterpriseServices.Internal
     public interface IComSoapPublisher
     {
         [DispId(6)]
-        void CreateMailBox (
+        void CreateMailBox(
             [MarshalAs(UnmanagedType.BStr)] string RootMailServer,
             [MarshalAs(UnmanagedType.BStr)] string MailBox,
             [MarshalAs(UnmanagedType.BStr)] out string SmtpName,
             [MarshalAs(UnmanagedType.BStr)] out string Domain,
             [MarshalAs(UnmanagedType.BStr)] out string PhysicalPath,
-            [MarshalAs(UnmanagedType.BStr)] out string Error);
+            [MarshalAs(UnmanagedType.BStr)] out string Error
+        );
 
         [DispId(4)]
-        void CreateVirtualRoot (
+        void CreateVirtualRoot(
             [MarshalAs(UnmanagedType.BStr)] string Operation,
             [MarshalAs(UnmanagedType.BStr)] string FullUrl,
             [MarshalAs(UnmanagedType.BStr)] out string BaseUrl,
             [MarshalAs(UnmanagedType.BStr)] out string VirtualRoot,
             [MarshalAs(UnmanagedType.BStr)] out string PhysicalPath,
-            [MarshalAs(UnmanagedType.BStr)] out string Error);
+            [MarshalAs(UnmanagedType.BStr)] out string Error
+        );
 
         [DispId(7)]
-        void DeleteMailBox (
+        void DeleteMailBox(
             [MarshalAs(UnmanagedType.BStr)] string RootMailServer,
             [MarshalAs(UnmanagedType.BStr)] string MailBox,
-            [MarshalAs(UnmanagedType.BStr)] out string Error);
+            [MarshalAs(UnmanagedType.BStr)] out string Error
+        );
 
         [DispId(5)]
-        void DeleteVirtualRoot (
+        void DeleteVirtualRoot(
             [MarshalAs(UnmanagedType.BStr)] string RootWebServer,
             [MarshalAs(UnmanagedType.BStr)] string FullUrl,
-            [MarshalAs(UnmanagedType.BStr)] out string Error);
+            [MarshalAs(UnmanagedType.BStr)] out string Error
+        );
 
         [DispId(13)]
-        void GacInstall ([MarshalAs(UnmanagedType.BStr)] string AssemblyPath);
+        void GacInstall([MarshalAs(UnmanagedType.BStr)] string AssemblyPath);
 
         [DispId(14)]
-        void GacRemove ([MarshalAs(UnmanagedType.BStr)] string AssemblyPath);
+        void GacRemove([MarshalAs(UnmanagedType.BStr)] string AssemblyPath);
 
         [DispId(15)]
-        void GetAssemblyNameForCache (
+        void GetAssemblyNameForCache(
             [MarshalAs(UnmanagedType.BStr)] string TypeLibPath,
-            [MarshalAs(UnmanagedType.BStr)] out string CachePath);
+            [MarshalAs(UnmanagedType.BStr)] out string CachePath
+        );
 
         [return: MarshalAs(UnmanagedType.BStr)]
         [DispId(10)]
-        string GetTypeNameFromProgId (
+        string GetTypeNameFromProgId(
             [MarshalAs(UnmanagedType.BStr)] string AssemblyPath,
-            [MarshalAs(UnmanagedType.BStr)] string ProgId);
+            [MarshalAs(UnmanagedType.BStr)] string ProgId
+        );
 
         [DispId(9)]
-        void ProcessClientTlb (
+        void ProcessClientTlb(
             [MarshalAs(UnmanagedType.BStr)] string ProgId,
             [MarshalAs(UnmanagedType.BStr)] string SrcTlbPath,
             [MarshalAs(UnmanagedType.BStr)] string PhysicalPath,
@@ -93,22 +99,24 @@ namespace System.EnterpriseServices.Internal
             [MarshalAs(UnmanagedType.BStr)] string Transport,
             [MarshalAs(UnmanagedType.BStr)] out string AssemblyName,
             [MarshalAs(UnmanagedType.BStr)] out string TypeName,
-            [MarshalAs(UnmanagedType.BStr)] out string Error);
+            [MarshalAs(UnmanagedType.BStr)] out string Error
+        );
 
         [DispId(8)]
-        void ProcessServerTlb (
+        void ProcessServerTlb(
             [MarshalAs(UnmanagedType.BStr)] string ProgId,
             [MarshalAs(UnmanagedType.BStr)] string SrcTlbPath,
             [MarshalAs(UnmanagedType.BStr)] string PhysicalPath,
             [MarshalAs(UnmanagedType.BStr)] string Operation,
             [MarshalAs(UnmanagedType.BStr)] out string AssemblyName,
             [MarshalAs(UnmanagedType.BStr)] out string TypeName,
-            [MarshalAs(UnmanagedType.BStr)] out string Error);
+            [MarshalAs(UnmanagedType.BStr)] out string Error
+        );
 
         [DispId(11)]
-        void RegisterAssembly ([MarshalAs(UnmanagedType.BStr)] string AssemblyPath);
+        void RegisterAssembly([MarshalAs(UnmanagedType.BStr)] string AssemblyPath);
 
         [DispId(12)]
-        void UnRegisterAssembly ([MarshalAs(UnmanagedType.BStr)] string AssemblyPath);
+        void UnRegisterAssembly([MarshalAs(UnmanagedType.BStr)] string AssemblyPath);
     }
 }

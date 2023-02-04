@@ -12,6 +12,7 @@ internal class LocallocTest
 {
     private static bool s_testFailed = false;
     private static int s_locallocSize = 0;
+
     public static unsafe int Main()
     {
         ulong local1 = Global.INITIAL_VALUE;
@@ -33,9 +34,7 @@ internal class LocallocTest
             unwindTest1();
             return 1;
         }
-        catch
-        {
-        }
+        catch { }
         if (s_testFailed)
             return 1;
 
@@ -82,7 +81,17 @@ internal class LocallocTest
         return;
     }
 
-    private unsafe void unwindTest2(int i1, int i2, int i3, int i4, int i5, int i6, int i7, int i8, int i9)
+    private unsafe void unwindTest2(
+        int i1,
+        int i2,
+        int i3,
+        int i4,
+        int i5,
+        int i6,
+        int i7,
+        int i8,
+        int i9
+    )
     {
 #if LOCALLOC_SMALL
         Int32* intArray3 = stackalloc Int32[1];

@@ -30,9 +30,8 @@ namespace System.CommandLine
         /// </summary>
         /// <param name="name">The name of the command.</param>
         /// <param name="description">The description of the command, shown in help.</param>
-        public Command(string name, string? description = null) : base(name, description)
-        {
-        }
+        public Command(string name, string? description = null)
+            : base(name, description) { }
 
         /// <summary>
         /// Gets the child symbols.
@@ -57,12 +56,12 @@ namespace System.CommandLine
         /// </summary>
         public IList<Argument> Arguments => _arguments ??= new(this);
 
-        internal bool HasArguments => _arguments is not null && _arguments.Count > 0 ;
+        internal bool HasArguments => _arguments is not null && _arguments.Count > 0;
 
         /// <summary>
         /// Represents all of the options for the command, including global options that have been applied to any of the command's ancestors.
         /// </summary>
-        public IList<Option> Options => _options ??= new (this);
+        public IList<Option> Options => _options ??= new(this);
 
         internal bool HasOptions => _options is not null && _options.Count > 0;
 
@@ -77,7 +76,7 @@ namespace System.CommandLine
         /// Validators to the command. Validators can be used
         /// to create custom validation logic.
         /// </summary>
-        public List<Action<CommandResult>> Validators => _validators ??= new ();
+        public List<Action<CommandResult>> Validators => _validators ??= new();
 
         internal bool HasValidators => _validators is not null && _validators.Count > 0;
 
@@ -210,8 +209,8 @@ namespace System.CommandLine
             }
 
             return completions
-                   .OrderBy(item => item.SortText.IndexOfCaseInsensitive(context.WordToComplete))
-                   .ThenBy(symbol => symbol.Label, StringComparer.OrdinalIgnoreCase);
+                .OrderBy(item => item.SortText.IndexOfCaseInsensitive(context.WordToComplete))
+                .ThenBy(symbol => symbol.Label, StringComparer.OrdinalIgnoreCase);
 
             void AddCompletionsFor(IdentifierSymbol identifier)
             {
@@ -219,10 +218,15 @@ namespace System.CommandLine
                 {
                     foreach (var alias in identifier.Aliases)
                     {
-                        if (alias is { } &&
-                            alias.ContainsCaseInsensitive(textToMatch))
+                        if (alias is { } && alias.ContainsCaseInsensitive(textToMatch))
                         {
-                            completions.Add(new CompletionItem(alias, CompletionItemKind.Keyword, detail: identifier.Description));
+                            completions.Add(
+                                new CompletionItem(
+                                    alias,
+                                    CompletionItemKind.Keyword,
+                                    detail: identifier.Description
+                                )
+                            );
                         }
                     }
                 }

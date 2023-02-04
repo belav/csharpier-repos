@@ -1,6 +1,5 @@
-// Extra test date for CS3013.cs 
+// Extra test date for CS3013.cs
 
 using System;
 
-public class CLSClass {
-}
+public class CLSClass { }

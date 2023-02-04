@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,7 +35,7 @@ using System.ComponentModel;
 
 namespace System.Web.UI.WebControls
 {
-    public sealed class TreeNodeStyle: Style
+    public sealed class TreeNodeStyle : Style
     {
         const string CHILD_PADD = "ChildNodesPadding";
         const string HORZ_PADD = "HorizontalPadding";
@@ -52,143 +52,179 @@ namespace System.Web.UI.WebControls
             NodeSpacing = 0x00080000,
             VerticalPadding = 0x00100000,
         }
-        
-        public TreeNodeStyle ()
-            : base ()
-        {
-        }
 
-        public TreeNodeStyle (StateBag bag)
-            : base (bag)
-        {
-        }
+        public TreeNodeStyle()
+            : base() { }
 
-        [DefaultValue ("")]
+        public TreeNodeStyle(StateBag bag)
+            : base(bag) { }
+
+        [DefaultValue("")]
         [UrlProperty]
-        [NotifyParentProperty (true)]
-        [Editor ("System.Web.UI.Design.ImageUrlEditor, " + Consts.AssemblySystem_Design, typeof (System.Drawing.Design.UITypeEditor))]
-        public string ImageUrl {
-            get {
-                if (!CheckBit ((int) TreeNodeStyles.ImageUrl))
+        [NotifyParentProperty(true)]
+        [Editor(
+            "System.Web.UI.Design.ImageUrlEditor, " + Consts.AssemblySystem_Design,
+            typeof(System.Drawing.Design.UITypeEditor)
+        )]
+        public string ImageUrl
+        {
+            get
+            {
+                if (!CheckBit((int)TreeNodeStyles.ImageUrl))
                     return String.Empty;
-                return ViewState.GetString (IMG_URL, String.Empty);
+                return ViewState.GetString(IMG_URL, String.Empty);
             }
-            set {
-                if(value == null)
+            set
+            {
+                if (value == null)
                     throw new ArgumentNullException("value");
-                ViewState [IMG_URL] = value;
-                SetBit ((int) TreeNodeStyles.ImageUrl);
+                ViewState[IMG_URL] = value;
+                SetBit((int)TreeNodeStyles.ImageUrl);
             }
         }
 
-        [DefaultValue (0)]
-        [NotifyParentProperty (true)]
-        public Unit ChildNodesPadding {
-            get {
-                if (!CheckBit ((int) TreeNodeStyles.ChildNodesPadding))
+        [DefaultValue(0)]
+        [NotifyParentProperty(true)]
+        public Unit ChildNodesPadding
+        {
+            get
+            {
+                if (!CheckBit((int)TreeNodeStyles.ChildNodesPadding))
                     return 0;
-                return ViewState [CHILD_PADD] == null ? 0 : (Unit) ViewState [CHILD_PADD];
+                return ViewState[CHILD_PADD] == null ? 0 : (Unit)ViewState[CHILD_PADD];
             }
-            set {
-                ViewState [CHILD_PADD] = value;
-                SetBit ((int) TreeNodeStyles.ChildNodesPadding);
+            set
+            {
+                ViewState[CHILD_PADD] = value;
+                SetBit((int)TreeNodeStyles.ChildNodesPadding);
             }
         }
 
-        [DefaultValue (0)]
-        [NotifyParentProperty (true)]
-        public Unit HorizontalPadding {
-            get {
-                if (!CheckBit ((int) TreeNodeStyles.HorizontalPadding))
+        [DefaultValue(0)]
+        [NotifyParentProperty(true)]
+        public Unit HorizontalPadding
+        {
+            get
+            {
+                if (!CheckBit((int)TreeNodeStyles.HorizontalPadding))
                     return 0;
-                return ViewState [HORZ_PADD] == null ? 0 : (Unit) ViewState [HORZ_PADD];
+                return ViewState[HORZ_PADD] == null ? 0 : (Unit)ViewState[HORZ_PADD];
             }
-            set {
+            set
+            {
                 ViewState[HORZ_PADD] = value;
-                SetBit ((int) TreeNodeStyles.HorizontalPadding);
+                SetBit((int)TreeNodeStyles.HorizontalPadding);
             }
         }
 
-        [DefaultValue (0)]
-        [NotifyParentProperty (true)]
-        public Unit VerticalPadding {
-            get {
-                if (!CheckBit ((int) TreeNodeStyles.VerticalPadding))
+        [DefaultValue(0)]
+        [NotifyParentProperty(true)]
+        public Unit VerticalPadding
+        {
+            get
+            {
+                if (!CheckBit((int)TreeNodeStyles.VerticalPadding))
                     return 0;
-                return ViewState [VERT_PADD] == null ? 0 : (Unit) ViewState [VERT_PADD];
+                return ViewState[VERT_PADD] == null ? 0 : (Unit)ViewState[VERT_PADD];
             }
-            set {
-                ViewState [VERT_PADD] = value;
-                SetBit ((int) TreeNodeStyles.VerticalPadding);
+            set
+            {
+                ViewState[VERT_PADD] = value;
+                SetBit((int)TreeNodeStyles.VerticalPadding);
             }
         }
 
-        [DefaultValue (0)]
-        [NotifyParentProperty (true)]
-        public Unit NodeSpacing {
-            get {
-                if (!CheckBit ((int) TreeNodeStyles.NodeSpacing))
+        [DefaultValue(0)]
+        [NotifyParentProperty(true)]
+        public Unit NodeSpacing
+        {
+            get
+            {
+                if (!CheckBit((int)TreeNodeStyles.NodeSpacing))
                     return 0;
-                return ViewState [SPACING] == null ? 0 : (Unit) ViewState [SPACING];
+                return ViewState[SPACING] == null ? 0 : (Unit)ViewState[SPACING];
             }
-            set {
-                ViewState [SPACING] = value;
-                SetBit ((int) TreeNodeStyles.NodeSpacing);
+            set
+            {
+                ViewState[SPACING] = value;
+                SetBit((int)TreeNodeStyles.NodeSpacing);
             }
         }
-        
-        public override void CopyFrom (Style s)
+
+        public override void CopyFrom(Style s)
         {
             if (s == null || s.IsEmpty)
                 return;
 
-            base.CopyFrom (s);
+            base.CopyFrom(s);
             TreeNodeStyle from = s as TreeNodeStyle;
             if (from == null)
                 return;
 
-            if (from.CheckBit ((int) TreeNodeStyles.ChildNodesPadding))
+            if (from.CheckBit((int)TreeNodeStyles.ChildNodesPadding))
                 ChildNodesPadding = from.ChildNodesPadding;
 
-            if (from.CheckBit ((int) TreeNodeStyles.HorizontalPadding))
+            if (from.CheckBit((int)TreeNodeStyles.HorizontalPadding))
                 HorizontalPadding = from.HorizontalPadding;
 
-            if (from.CheckBit ((int) TreeNodeStyles.ImageUrl))
+            if (from.CheckBit((int)TreeNodeStyles.ImageUrl))
                 ImageUrl = from.ImageUrl;
 
-            if (from.CheckBit ((int) TreeNodeStyles.NodeSpacing))
+            if (from.CheckBit((int)TreeNodeStyles.NodeSpacing))
                 NodeSpacing = from.NodeSpacing;
 
-            if (from.CheckBit ((int) TreeNodeStyles.VerticalPadding))
+            if (from.CheckBit((int)TreeNodeStyles.VerticalPadding))
                 VerticalPadding = from.VerticalPadding;
         }
-        
+
         public override void MergeWith(Style s)
         {
-            if(s != null && !s.IsEmpty)
+            if (s != null && !s.IsEmpty)
             {
-                if (IsEmpty) {
-                    CopyFrom (s);
+                if (IsEmpty)
+                {
+                    CopyFrom(s);
                     return;
                 }
                 base.MergeWith(s);
 
                 TreeNodeStyle with = s as TreeNodeStyle;
-                if (with == null) return;
-                
-                if (with.CheckBit ((int) TreeNodeStyles.ChildNodesPadding) && !CheckBit ((int) TreeNodeStyles.ChildNodesPadding)) {
+                if (with == null)
+                    return;
+
+                if (
+                    with.CheckBit((int)TreeNodeStyles.ChildNodesPadding)
+                    && !CheckBit((int)TreeNodeStyles.ChildNodesPadding)
+                )
+                {
                     ChildNodesPadding = with.ChildNodesPadding;
                 }
-                if (with.CheckBit ((int) TreeNodeStyles.HorizontalPadding) && !CheckBit ((int) TreeNodeStyles.HorizontalPadding)) {
+                if (
+                    with.CheckBit((int)TreeNodeStyles.HorizontalPadding)
+                    && !CheckBit((int)TreeNodeStyles.HorizontalPadding)
+                )
+                {
                     HorizontalPadding = with.HorizontalPadding;
                 }
-                if (with.CheckBit ((int) TreeNodeStyles.ImageUrl) && !CheckBit ((int) TreeNodeStyles.ImageUrl)) {
+                if (
+                    with.CheckBit((int)TreeNodeStyles.ImageUrl)
+                    && !CheckBit((int)TreeNodeStyles.ImageUrl)
+                )
+                {
                     ImageUrl = with.ImageUrl;
                 }
-                if (with.CheckBit ((int) TreeNodeStyles.NodeSpacing) && !CheckBit ((int) TreeNodeStyles.NodeSpacing)) {
+                if (
+                    with.CheckBit((int)TreeNodeStyles.NodeSpacing)
+                    && !CheckBit((int)TreeNodeStyles.NodeSpacing)
+                )
+                {
                     NodeSpacing = with.NodeSpacing;
                 }
-                if (with.CheckBit ((int) TreeNodeStyles.VerticalPadding) && !CheckBit ((int) TreeNodeStyles.VerticalPadding)) {
+                if (
+                    with.CheckBit((int)TreeNodeStyles.VerticalPadding)
+                    && !CheckBit((int)TreeNodeStyles.VerticalPadding)
+                )
+                {
                     VerticalPadding = with.VerticalPadding;
                 }
             }
@@ -196,30 +232,35 @@ namespace System.Web.UI.WebControls
 
         public override void Reset()
         {
-            if (CheckBit ((int) TreeNodeStyles.ChildNodesPadding))
+            if (CheckBit((int)TreeNodeStyles.ChildNodesPadding))
                 ViewState.Remove(CHILD_PADD);
-            if (CheckBit ((int) TreeNodeStyles.HorizontalPadding))
+            if (CheckBit((int)TreeNodeStyles.HorizontalPadding))
                 ViewState.Remove(HORZ_PADD);
-            if (CheckBit ((int) TreeNodeStyles.ImageUrl))
+            if (CheckBit((int)TreeNodeStyles.ImageUrl))
                 ViewState.Remove(IMG_URL);
-            if (CheckBit ((int) TreeNodeStyles.NodeSpacing))
+            if (CheckBit((int)TreeNodeStyles.NodeSpacing))
                 ViewState.Remove(SPACING);
-            if (CheckBit ((int) TreeNodeStyles.VerticalPadding))
+            if (CheckBit((int)TreeNodeStyles.VerticalPadding))
                 ViewState.Remove(VERT_PADD);
             base.Reset();
         }
 
-        protected override void FillStyleAttributes (CssStyleCollection attributes, IUrlResolutionService urlResolver) {
-            base.FillStyleAttributes (attributes, urlResolver);
-            if (CheckBit ((int) TreeNodeStyles.HorizontalPadding)) {
-                attributes.Add (HtmlTextWriterStyle.PaddingLeft, HorizontalPadding.ToString ());
-                attributes.Add (HtmlTextWriterStyle.PaddingRight, HorizontalPadding.ToString ());
+        protected override void FillStyleAttributes(
+            CssStyleCollection attributes,
+            IUrlResolutionService urlResolver
+        )
+        {
+            base.FillStyleAttributes(attributes, urlResolver);
+            if (CheckBit((int)TreeNodeStyles.HorizontalPadding))
+            {
+                attributes.Add(HtmlTextWriterStyle.PaddingLeft, HorizontalPadding.ToString());
+                attributes.Add(HtmlTextWriterStyle.PaddingRight, HorizontalPadding.ToString());
             }
-            if (CheckBit ((int) TreeNodeStyles.VerticalPadding)) {
-                attributes.Add (HtmlTextWriterStyle.PaddingTop, VerticalPadding.ToString ());
-                attributes.Add (HtmlTextWriterStyle.PaddingBottom, VerticalPadding.ToString ());
+            if (CheckBit((int)TreeNodeStyles.VerticalPadding))
+            {
+                attributes.Add(HtmlTextWriterStyle.PaddingTop, VerticalPadding.ToString());
+                attributes.Add(HtmlTextWriterStyle.PaddingBottom, VerticalPadding.ToString());
             }
         }
     }
 }
-

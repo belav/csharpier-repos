@@ -35,119 +35,142 @@ using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
 using Mono.XBuild.Utilities;
 
-namespace Microsoft.Build.BuildEngine {
-    public class Target : IEnumerable {
-    
+namespace Microsoft.Build.BuildEngine
+{
+    public class Target : IEnumerable
+    {
         TargetBatchingImpl batchingImpl;
-        BuildState    buildState;
-        Engine        engine;
-        ImportedProject    importedProject;
-        string        name;
-        Project        project;
-        XmlElement    targetElement;
-        List <XmlElement>    onErrorElements;
-        List <IBuildTask>    buildTasks;
-        
-        internal Target (XmlElement targetElement, Project project, ImportedProject importedProject)
+        BuildState buildState;
+        Engine engine;
+        ImportedProject importedProject;
+        string name;
+        Project project;
+        XmlElement targetElement;
+        List<XmlElement> onErrorElements;
+        List<IBuildTask> buildTasks;
+
+        internal Target(XmlElement targetElement, Project project, ImportedProject importedProject)
         {
             if (project == null)
-                throw new ArgumentNullException ("project");
+                throw new ArgumentNullException("project");
             if (targetElement == null)
-                throw new ArgumentNullException ("targetElement");
+                throw new ArgumentNullException("targetElement");
 
             this.targetElement = targetElement;
-            this.name = targetElement.GetAttribute ("Name");
+            this.name = targetElement.GetAttribute("Name");
 
             this.project = project;
             this.engine = project.ParentEngine;
             this.importedProject = importedProject;
 
-            this.onErrorElements  = new List <XmlElement> ();
+            this.onErrorElements = new List<XmlElement>();
             this.buildState = BuildState.NotStarted;
-            this.buildTasks = new List <IBuildTask> ();
-            this.batchingImpl = new TargetBatchingImpl (project, this.targetElement);
+            this.buildTasks = new List<IBuildTask>();
+            this.batchingImpl = new TargetBatchingImpl(project, this.targetElement);
 
             bool onErrorFound = false;
-            foreach (XmlNode xn in targetElement.ChildNodes) {
-                if (xn is XmlElement) {
-                    XmlElement xe = (XmlElement) xn;
-                    if (xe.Name == "OnError") {
-                        onErrorElements.Add (xe);
+            foreach (XmlNode xn in targetElement.ChildNodes)
+            {
+                if (xn is XmlElement)
+                {
+                    XmlElement xe = (XmlElement)xn;
+                    if (xe.Name == "OnError")
+                    {
+                        onErrorElements.Add(xe);
                         onErrorFound = true;
-                    } else if (onErrorFound)
-                        throw new InvalidProjectFileException (
-                            "The element <OnError> must be last under element <Target>. Found element <Error> instead.");
-                    else if (xe.Name == "ItemGroup") {
-                        var group = new BuildTaskItemGroup (xe, this);
-                        buildTasks.AddRange (group.Items);
+                    }
+                    else if (onErrorFound)
+                        throw new InvalidProjectFileException(
+                            "The element <OnError> must be last under element <Target>. Found element <Error> instead."
+                        );
+                    else if (xe.Name == "ItemGroup")
+                    {
+                        var group = new BuildTaskItemGroup(xe, this);
+                        buildTasks.AddRange(group.Items);
                         continue;
-                    } else if (xe.Name == "PropertyGroup") {
-                        buildTasks.Add (new BuildTaskPropertyGroup (xe, this));
+                    }
+                    else if (xe.Name == "PropertyGroup")
+                    {
+                        buildTasks.Add(new BuildTaskPropertyGroup(xe, this));
                         continue;
                     }
                     else
-                        buildTasks.Add (new BuildTask (xe, this));
+                        buildTasks.Add(new BuildTask(xe, this));
                 }
             }
         }
 
         [MonoTODO]
-        public BuildTask AddNewTask (string taskName)
+        public BuildTask AddNewTask(string taskName)
         {
             if (taskName == null)
-                throw new ArgumentNullException ("taskName");
-        
-            XmlElement task = project.XmlDocument.CreateElement (taskName, Project.XmlNamespace);
-            targetElement.AppendChild (task);
-            BuildTask bt = new BuildTask (task, this);
-            buildTasks.Add (bt);
-            
+                throw new ArgumentNullException("taskName");
+
+            XmlElement task = project.XmlDocument.CreateElement(taskName, Project.XmlNamespace);
+            targetElement.AppendChild(task);
+            BuildTask bt = new BuildTask(task, this);
+            buildTasks.Add(bt);
+
             return bt;
         }
 
-        public IEnumerator GetEnumerator ()
+        public IEnumerator GetEnumerator()
         {
-            return buildTasks.ToArray ().GetEnumerator ();
+            return buildTasks.ToArray().GetEnumerator();
         }
 
         // FIXME: shouldn't we remove it from XML?
-        public void RemoveTask (BuildTask taskElement)
+        public void RemoveTask(BuildTask taskElement)
         {
             if (taskElement == null)
-                throw new ArgumentNullException ("taskElement");
-            buildTasks.Remove (taskElement);
+                throw new ArgumentNullException("taskElement");
+            buildTasks.Remove(taskElement);
         }
 
-        bool Build ()
+        bool Build()
         {
-            return Build (null);
+            return Build(null);
         }
 
-        internal bool Build (string built_targets_key)
+        internal bool Build(string built_targets_key)
         {
             bool executeOnErrors;
-            return Build (built_targets_key, null, out executeOnErrors);
+            return Build(built_targets_key, null, out executeOnErrors);
         }
 
-        bool Build (string built_targets_key, string parentTarget, out bool executeOnErrors)
+        bool Build(string built_targets_key, string parentTarget, out bool executeOnErrors)
         {
             string message;
             if (parentTarget != null)
-                message = string.Format ("\"{0}\" in project \"{1}\" (\"{2}\"); \"{3}\" depends on it", Name, project.FullFileName, TargetFile, parentTarget);
+                message = string.Format(
+                    "\"{0}\" in project \"{1}\" (\"{2}\"); \"{3}\" depends on it",
+                    Name,
+                    project.FullFileName,
+                    TargetFile,
+                    parentTarget
+                );
             else
-                message = string.Format ("\"{0}\" in project \"{1}\" (\"{2}\")", Name, project.FullFileName, TargetFile);
+                message = string.Format(
+                    "\"{0}\" in project \"{1}\" (\"{2}\")",
+                    Name,
+                    project.FullFileName,
+                    TargetFile
+                );
 
-            project.PushThisFileProperty (TargetFile);
-            try {
-                LogMessage (MessageImportance.Low, "Building target {0}.", message);
-                return BuildActual (built_targets_key, out executeOnErrors);
-            } finally {
-                LogMessage (MessageImportance.Low, "Done building target {0}.", message);
-                project.PopThisFileProperty ();
+            project.PushThisFileProperty(TargetFile);
+            try
+            {
+                LogMessage(MessageImportance.Low, "Building target {0}.", message);
+                return BuildActual(built_targets_key, out executeOnErrors);
+            }
+            finally
+            {
+                LogMessage(MessageImportance.Low, "Done building target {0}.", message);
+                project.PopThisFileProperty();
             }
         }
 
-        bool BuildActual (string built_targets_key, out bool executeOnErrors)
+        bool BuildActual(string built_targets_key, out bool executeOnErrors)
         {
             bool result = false;
             executeOnErrors = false;
@@ -155,118 +178,143 @@ namespace Microsoft.Build.BuildEngine {
             // built targets are keyed by the particular set of global
             // properties. So, a different set could allow a target
             // to run again
-            built_targets_key = project.GetKeyForTarget (Name);
-            if (project.ParentEngine.BuiltTargetsOutputByName.ContainsKey (built_targets_key)) {
-                LogTargetSkipped ();
+            built_targets_key = project.GetKeyForTarget(Name);
+            if (project.ParentEngine.BuiltTargetsOutputByName.ContainsKey(built_targets_key))
+            {
+                LogTargetSkipped();
                 return true;
             }
 
             // Push a null/empty batch, effectively clearing it
-            project.PushBatch (null, null);
-            if (!ConditionParser.ParseAndEvaluate (Condition, Project)) {
-                LogMessage (MessageImportance.Low,
-                        "Target {0} skipped due to false condition: {1}",
-                        Name, Condition);
-                project.PopBatch ();
+            project.PushBatch(null, null);
+            if (!ConditionParser.ParseAndEvaluate(Condition, Project))
+            {
+                LogMessage(
+                    MessageImportance.Low,
+                    "Target {0} skipped due to false condition: {1}",
+                    Name,
+                    Condition
+                );
+                project.PopBatch();
                 return true;
             }
 
-            try {
+            try
+            {
                 buildState = BuildState.Started;
 
-                result = BuildDependencies (out executeOnErrors) &&
-                        BuildBeforeThisTargets (out executeOnErrors) &&
-                        DoBuild (out executeOnErrors) && // deps & Before targets built fine, do main build
-                        BuildAfterThisTargets (out executeOnErrors);
+                result =
+                    BuildDependencies(out executeOnErrors)
+                    && BuildBeforeThisTargets(out executeOnErrors)
+                    && DoBuild(out executeOnErrors)
+                    && // deps & Before targets built fine, do main build
+                    BuildAfterThisTargets(out executeOnErrors);
 
                 buildState = BuildState.Finished;
-            } catch (Exception e) {
-                LogError ("Error building target {0}: {1}", Name, e.ToString ());
+            }
+            catch (Exception e)
+            {
+                LogError("Error building target {0}: {1}", Name, e.ToString());
                 return false;
-            } finally {
-                project.PopBatch ();
+            }
+            finally
+            {
+                project.PopBatch();
             }
 
-            ITaskItem[] outputs = (ITaskItem[]) OutputsAsITaskItems.Clone ();
-            foreach (ITaskItem item in outputs) {
-                item.SetMetadata ("MSBuildProjectFile", TargetFile);
-                item.SetMetadata ("MSBuildTargetName", Name);
+            ITaskItem[] outputs = (ITaskItem[])OutputsAsITaskItems.Clone();
+            foreach (ITaskItem item in outputs)
+            {
+                item.SetMetadata("MSBuildProjectFile", TargetFile);
+                item.SetMetadata("MSBuildTargetName", Name);
             }
-            project.ParentEngine.BuiltTargetsOutputByName [built_targets_key] = outputs;
+            project.ParentEngine.BuiltTargetsOutputByName[built_targets_key] = outputs;
 
             return result;
         }
 
-        bool BuildDependencies (out bool executeOnErrors)
+        bool BuildDependencies(out bool executeOnErrors)
         {
             executeOnErrors = false;
 
-            if (String.IsNullOrEmpty (DependsOnTargets))
+            if (String.IsNullOrEmpty(DependsOnTargets))
                 return true;
 
-            var expr = new Expression ();
-            expr.Parse (DependsOnTargets, ParseOptions.AllowItemsNoMetadataAndSplit);
-            string [] targetNames = (string []) expr.ConvertTo (Project, typeof (string []));
+            var expr = new Expression();
+            expr.Parse(DependsOnTargets, ParseOptions.AllowItemsNoMetadataAndSplit);
+            string[] targetNames = (string[])expr.ConvertTo(Project, typeof(string[]));
 
-            bool result = BuildOtherTargets (targetNames,
-                            tname => engine.LogError ("Target '{0}', a dependency of target '{1}', not found.",
-                                        tname, Name),
-                            out executeOnErrors);
+            bool result = BuildOtherTargets(
+                targetNames,
+                tname =>
+                    engine.LogError(
+                        "Target '{0}', a dependency of target '{1}', not found.",
+                        tname,
+                        Name
+                    ),
+                out executeOnErrors
+            );
             if (!result && executeOnErrors)
-                ExecuteOnErrors ();
+                ExecuteOnErrors();
 
             return result;
         }
 
-        bool BuildBeforeThisTargets (out bool executeOnErrors)
+        bool BuildBeforeThisTargets(out bool executeOnErrors)
         {
             executeOnErrors = false;
-            bool result = BuildOtherTargets (BeforeThisTargets, null, out executeOnErrors);
+            bool result = BuildOtherTargets(BeforeThisTargets, null, out executeOnErrors);
             if (!result && executeOnErrors)
-                ExecuteOnErrors ();
+                ExecuteOnErrors();
 
             return result;
         }
 
-        bool BuildAfterThisTargets (out bool executeOnErrors)
+        bool BuildAfterThisTargets(out bool executeOnErrors)
         {
             executeOnErrors = false;
             //missing_target handler not required as these are picked from actual target's
             //"Before/AfterTargets attributes!
-            bool result = BuildOtherTargets (AfterThisTargets, null, out executeOnErrors);
+            bool result = BuildOtherTargets(AfterThisTargets, null, out executeOnErrors);
             if (!result && executeOnErrors)
-                ExecuteOnErrors ();
+                ExecuteOnErrors();
 
             return result;
         }
 
-        bool BuildOtherTargets (IEnumerable<string> targetNames, Action<string> missing_target, out bool executeOnErrors)
+        bool BuildOtherTargets(
+            IEnumerable<string> targetNames,
+            Action<string> missing_target,
+            out bool executeOnErrors
+        )
         {
             executeOnErrors = false;
             if (targetNames == null)
                 // nothing to build
                 return true;
 
-            foreach (string target_name in targetNames) {
-                var t = project.Targets [target_name.Trim ()];
-                if (t == null) {
+            foreach (string target_name in targetNames)
+            {
+                var t = project.Targets[target_name.Trim()];
+                if (t == null)
+                {
                     if (missing_target != null)
-                        missing_target (target_name);
+                        missing_target(target_name);
                     return false;
                 }
 
                 if (t.BuildState == BuildState.NotStarted)
-                    if (!t.Build (null, Name, out executeOnErrors))
+                    if (!t.Build(null, Name, out executeOnErrors))
                         return false;
 
                 if (t.BuildState == BuildState.Started)
-                    throw new InvalidProjectFileException ("Cycle in target dependencies detected");
+                    throw new InvalidProjectFileException("Cycle in target dependencies detected");
             }
 
             return true;
         }
-        
-        bool DoBuild (out bool executeOnErrors)
+
+        bool DoBuild(out bool executeOnErrors)
         {
             executeOnErrors = false;
             bool result = true;
@@ -274,149 +322,196 @@ namespace Microsoft.Build.BuildEngine {
             if (BuildTasks.Count == 0)
                 // nothing to do
                 return true;
-        
-            try {
-                result = batchingImpl.Build (this, out executeOnErrors);
-            } catch (Exception e) {
-                LogError ("Error building target {0}: {1}", Name, e.Message);
-                LogMessage (MessageImportance.Low, "Error building target {0}: {1}", Name, e.ToString ());
+
+            try
+            {
+                result = batchingImpl.Build(this, out executeOnErrors);
+            }
+            catch (Exception e)
+            {
+                LogError("Error building target {0}: {1}", Name, e.Message);
+                LogMessage(
+                    MessageImportance.Low,
+                    "Error building target {0}: {1}",
+                    Name,
+                    e.ToString()
+                );
                 return false;
             }
 
             if (executeOnErrors == true)
-                ExecuteOnErrors ();
-                
+                ExecuteOnErrors();
+
             return result;
         }
-        
-        void ExecuteOnErrors ()
-        {
-            foreach (XmlElement onError in onErrorElements) {
-                if (onError.GetAttribute ("ExecuteTargets") == String.Empty)
-                    throw new InvalidProjectFileException ("ExecuteTargets attribute is required in OnError element.");
 
-                string on_error_condition = onError.GetAttribute ("Condition");
-                if (!ConditionParser.ParseAndEvaluate (on_error_condition, Project)) {
-                    LogMessage (MessageImportance.Low,
+        void ExecuteOnErrors()
+        {
+            foreach (XmlElement onError in onErrorElements)
+            {
+                if (onError.GetAttribute("ExecuteTargets") == String.Empty)
+                    throw new InvalidProjectFileException(
+                        "ExecuteTargets attribute is required in OnError element."
+                    );
+
+                string on_error_condition = onError.GetAttribute("Condition");
+                if (!ConditionParser.ParseAndEvaluate(on_error_condition, Project))
+                {
+                    LogMessage(
+                        MessageImportance.Low,
                         "OnError for target {0} skipped due to false condition: {1}",
-                        Name, on_error_condition);
+                        Name,
+                        on_error_condition
+                    );
                     continue;
                 }
 
-                string[] targetsToExecute = onError.GetAttribute ("ExecuteTargets").Split (';');
+                string[] targetsToExecute = onError.GetAttribute("ExecuteTargets").Split(';');
                 foreach (string t in targetsToExecute)
-                    this.project.Targets [t].Build ();
+                    this.project.Targets[t].Build();
             }
         }
 
-        void LogTargetSkipped ()
+        void LogTargetSkipped()
         {
             BuildMessageEventArgs bmea;
-            bmea = new BuildMessageEventArgs (String.Format (
-                        "Target {0} skipped, as it has already been built.", Name),
-                    null, null, MessageImportance.Low);
+            bmea = new BuildMessageEventArgs(
+                String.Format("Target {0} skipped, as it has already been built.", Name),
+                null,
+                null,
+                MessageImportance.Low
+            );
 
-            project.ParentEngine.EventSource.FireMessageRaised (this, bmea);
+            project.ParentEngine.EventSource.FireMessageRaised(this, bmea);
         }
 
-        void LogError (string message, params object [] messageArgs)
+        void LogError(string message, params object[] messageArgs)
         {
             if (message == null)
-                throw new ArgumentException ("message");
+                throw new ArgumentException("message");
 
-            BuildErrorEventArgs beea = new BuildErrorEventArgs (
-                null, null, null, 0, 0, 0, 0, String.Format (message, messageArgs),
-                null, null);
-            engine.EventSource.FireErrorRaised (this, beea);
+            BuildErrorEventArgs beea = new BuildErrorEventArgs(
+                null,
+                null,
+                null,
+                0,
+                0,
+                0,
+                0,
+                String.Format(message, messageArgs),
+                null,
+                null
+            );
+            engine.EventSource.FireErrorRaised(this, beea);
         }
 
-        void LogMessage (MessageImportance importance, string message, params object [] messageArgs)
+        void LogMessage(MessageImportance importance, string message, params object[] messageArgs)
         {
             if (message == null)
-                throw new ArgumentNullException ("message");
+                throw new ArgumentNullException("message");
 
-            BuildMessageEventArgs bmea = new BuildMessageEventArgs (
-                String.Format (message, messageArgs), null,
-                null, importance);
-            engine.EventSource.FireMessageRaised (this, bmea);
-        }
-    
-        public string Condition {
-            get { return targetElement.GetAttribute ("Condition"); }
-            set { targetElement.SetAttribute ("Condition", value); }
+            BuildMessageEventArgs bmea = new BuildMessageEventArgs(
+                String.Format(message, messageArgs),
+                null,
+                null,
+                importance
+            );
+            engine.EventSource.FireMessageRaised(this, bmea);
         }
 
-        public string DependsOnTargets {
-            get { return targetElement.GetAttribute ("DependsOnTargets"); }
-            set { targetElement.SetAttribute ("DependsOnTargets", value); }
+        public string Condition
+        {
+            get { return targetElement.GetAttribute("Condition"); }
+            set { targetElement.SetAttribute("Condition", value); }
         }
 
-        public bool IsImported {
+        public string DependsOnTargets
+        {
+            get { return targetElement.GetAttribute("DependsOnTargets"); }
+            set { targetElement.SetAttribute("DependsOnTargets", value); }
+        }
+
+        public bool IsImported
+        {
             get { return importedProject != null; }
         }
 
-        public string Name {
+        public string Name
+        {
             get { return name; }
         }
-        
-        internal Project Project {
+
+        internal Project Project
+        {
             get { return project; }
         }
 
-        internal string TargetFile {
-            get {
+        internal string TargetFile
+        {
+            get
+            {
                 if (importedProject != null)
                     return importedProject.FullFileName;
                 return project != null ? project.FullFileName : String.Empty;
             }
         }
 
-        internal string BeforeTargets {
-            get { return targetElement.GetAttribute ("BeforeTargets"); }
+        internal string BeforeTargets
+        {
+            get { return targetElement.GetAttribute("BeforeTargets"); }
         }
 
-        internal string AfterTargets {
-            get { return targetElement.GetAttribute ("AfterTargets"); }
+        internal string AfterTargets
+        {
+            get { return targetElement.GetAttribute("AfterTargets"); }
         }
 
         internal List<string> BeforeThisTargets { get; set; }
         internal List<string> AfterThisTargets { get; set; }
 
-        internal List<IBuildTask> BuildTasks {
+        internal List<IBuildTask> BuildTasks
+        {
             get { return buildTasks; }
         }
 
-        internal Engine Engine {
+        internal Engine Engine
+        {
             get { return engine; }
         }
-        
-        internal BuildState BuildState {
+
+        internal BuildState BuildState
+        {
             get { return buildState; }
         }
 
-        public string Outputs {
-            get { return targetElement.GetAttribute ("Outputs"); }
-            set { targetElement.SetAttribute ("Outputs", value); }
+        public string Outputs
+        {
+            get { return targetElement.GetAttribute("Outputs"); }
+            set { targetElement.SetAttribute("Outputs", value); }
         }
 
-        ITaskItem [] OutputsAsITaskItems {
-            get {
-                var outputs = targetElement.GetAttribute ("Returns");
-                if (string.IsNullOrEmpty (outputs)) {
-                    outputs = targetElement.GetAttribute ("Outputs");
-                    if (string.IsNullOrEmpty (outputs))
-                        return new ITaskItem [0];
+        ITaskItem[] OutputsAsITaskItems
+        {
+            get
+            {
+                var outputs = targetElement.GetAttribute("Returns");
+                if (string.IsNullOrEmpty(outputs))
+                {
+                    outputs = targetElement.GetAttribute("Outputs");
+                    if (string.IsNullOrEmpty(outputs))
+                        return new ITaskItem[0];
                 }
 
-                Expression e = new Expression ();
-                e.Parse (outputs, ParseOptions.AllowItemsNoMetadataAndSplit);
+                Expression e = new Expression();
+                e.Parse(outputs, ParseOptions.AllowItemsNoMetadataAndSplit);
 
-                return (ITaskItem []) e.ConvertTo (project, typeof (ITaskItem []));
+                return (ITaskItem[])e.ConvertTo(project, typeof(ITaskItem[]));
             }
         }
     }
-    
-    internal enum BuildState {
+
+    internal enum BuildState
+    {
         NotStarted,
         Started,
         Finished,

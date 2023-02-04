@@ -49,7 +49,8 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.JsonPath
         public void Example()
         {
             #region Usage
-            JObject o = JObject.Parse(@"{
+            JObject o = JObject.Parse(
+                @"{
               'Stores': [
                 'Lambton Quay',
                 'Willis Street'
@@ -78,7 +79,8 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.JsonPath
                   ]
                 }
               ]
-            }");
+            }"
+            );
 
             // manufacturer with the name 'Acme Co'
             JToken acme = o.SelectToken("$.Manufacturers[?(@.Name == 'Acme Co')]");
@@ -87,7 +89,9 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.JsonPath
             // { "Name": "Acme Co", Products: [{ "Name": "Anvil", "Price": 50 }] }
 
             // name of all products priced 50 and above
-            IEnumerable<JToken> pricyProducts = o.SelectTokens("$..Products[?(@.Price >= 50)].Name");
+            IEnumerable<JToken> pricyProducts = o.SelectTokens(
+                "$..Products[?(@.Price >= 50)].Name"
+            );
 
             foreach (JToken item in pricyProducts)
             {
@@ -97,7 +101,8 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.JsonPath
             // Elbow Grease
             #endregion
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""Name"": ""Acme Co"",
   ""Products"": [
     {
@@ -105,7 +110,9 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.JsonPath
       ""Price"": 50
     }
   ]
-}", acme.ToString());
+}",
+                acme.ToString()
+            );
 
             Assert.AreEqual("Anvil", (string)pricyProducts.ElementAt(0));
             Assert.AreEqual("Elbow Grease", (string)pricyProducts.ElementAt(1));

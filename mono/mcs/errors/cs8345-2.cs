@@ -2,9 +2,7 @@
 // Line: 11
 // Compiler options: -langversion:latest
 
-public ref struct S
-{
-}
+public ref struct S { }
 
 ref struct Test
 {

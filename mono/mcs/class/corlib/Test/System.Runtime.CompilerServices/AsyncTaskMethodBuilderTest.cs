@@ -42,24 +42,24 @@ namespace MonoTests.System.Runtime.CompilerServices
         // For some reason MT excludes CallContext handling
 
         [Test]
-        public void CallContextFlow ()
+        public void CallContextFlow()
         {
-            CallContext.LogicalSetData ("name0", "0");
+            CallContext.LogicalSetData("name0", "0");
 
-            Assert.IsTrue (Task.WhenAll (Work ("A"), Work ("B")).Wait (4000), "#0");
-            Assert.IsNull (CallContext.LogicalGetData ("A"), "#A");
-            Assert.IsNull (CallContext.LogicalGetData ("B"), "#B");
+            Assert.IsTrue(Task.WhenAll(Work("A"), Work("B")).Wait(4000), "#0");
+            Assert.IsNull(CallContext.LogicalGetData("A"), "#A");
+            Assert.IsNull(CallContext.LogicalGetData("B"), "#B");
         }
 
-        static async Task Work (string name)
+        static async Task Work(string name)
         {
-            Assert.AreEqual ("0", CallContext.LogicalGetData ("name0"), "#1" + name);
-            CallContext.LogicalSetData ("name", name);
+            Assert.AreEqual("0", CallContext.LogicalGetData("name0"), "#1" + name);
+            CallContext.LogicalSetData("name", name);
 
-            await Task.Delay (10);
+            await Task.Delay(10);
 
-            var found = CallContext.LogicalGetData ("name");
-            Assert.AreEqual (name, found, "#2" + name);
+            var found = CallContext.LogicalGetData("name");
+            Assert.AreEqual(name, found, "#2" + name);
         }
 #endif
     }

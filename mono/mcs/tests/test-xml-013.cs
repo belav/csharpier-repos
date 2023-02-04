@@ -5,14 +5,13 @@ namespace Testing
 {
     public class Test
     {
-        public static void Main ()
-        {
-        }
+        public static void Main() { }
 
         /// <summary>
         /// comment for public property
         /// </summary>
-        public string PublicProperty {
+        public string PublicProperty
+        {
             /// <summary>
             /// On public getter - no effect
             /// </summary>
@@ -26,7 +25,8 @@ namespace Testing
         /// <summary>
         /// incorrect comment for public property
         /// </incorrect>
-        public string PublicProperty2 {
+        public string PublicProperty2
+        {
             get { return null; }
         }
 
@@ -35,7 +35,8 @@ namespace Testing
         Javadoc comment for public property
         </summary>
         */
-        public string PublicProperty3 {
+        public string PublicProperty3
+        {
             /**
             <summary>
             On public getter - no effect
@@ -51,4 +52,3 @@ namespace Testing
         }
     }
 }
-

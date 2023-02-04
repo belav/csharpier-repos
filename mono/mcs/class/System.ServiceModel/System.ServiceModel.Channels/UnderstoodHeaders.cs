@@ -12,10 +12,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,35 +34,36 @@ namespace System.ServiceModel.Channels
 {
     public sealed class UnderstoodHeaders : IEnumerable<MessageHeaderInfo>, IEnumerable
     {
-        List <MessageHeaderInfo> headers;
-        
-        internal UnderstoodHeaders ()
+        List<MessageHeaderInfo> headers;
+
+        internal UnderstoodHeaders()
         {
-            headers = new List<MessageHeaderInfo> ();
-        }
-        public void Add (MessageHeaderInfo headerInfo)
-        {
-            headers.Add (headerInfo);
+            headers = new List<MessageHeaderInfo>();
         }
 
-        public bool Contains (MessageHeaderInfo headerInfo)
+        public void Add(MessageHeaderInfo headerInfo)
         {
-            return headers.Contains (headerInfo);
+            headers.Add(headerInfo);
         }
 
-        public IEnumerator<MessageHeaderInfo> GetEnumerator ()
+        public bool Contains(MessageHeaderInfo headerInfo)
         {
-            return headers.GetEnumerator ();
+            return headers.Contains(headerInfo);
         }
 
-        public void Remove (MessageHeaderInfo headerInfo)
+        public IEnumerator<MessageHeaderInfo> GetEnumerator()
         {
-            headers.Remove (headerInfo);
+            return headers.GetEnumerator();
         }
 
-        IEnumerator IEnumerable.GetEnumerator ()
+        public void Remove(MessageHeaderInfo headerInfo)
         {
-            return headers.GetEnumerator ();
+            headers.Remove(headerInfo);
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return headers.GetEnumerator();
         }
     }
 }

@@ -4,27 +4,25 @@ namespace Mono.Linker.Tests.Cases.Inheritance.Complex.NoKeptCtor
 {
     public class OverrideOfAbstractAndInterfaceMethodWhenInterfaceRemoved2
     {
-        public static void Main ()
+        public static void Main()
         {
             Foo b = null;
-            HelperToKeepLocalAtCompileTime (b);
+            HelperToKeepLocalAtCompileTime(b);
             // Use IBar in another method so that IBar can be removed from Foo
-            HelperToMarkIBar ();
+            HelperToMarkIBar();
         }
 
         [Kept]
-        static void HelperToKeepLocalAtCompileTime (Foo f)
+        static void HelperToKeepLocalAtCompileTime(Foo f) { }
+
+        [Kept]
+        static void HelperToMarkIBar()
         {
+            GetAnIBar().Method();
         }
 
         [Kept]
-        static void HelperToMarkIBar ()
-        {
-            GetAnIBar ().Method ();
-        }
-
-        [Kept]
-        static IBar GetAnIBar ()
+        static IBar GetAnIBar()
         {
             return null;
         }
@@ -32,28 +30,26 @@ namespace Mono.Linker.Tests.Cases.Inheritance.Complex.NoKeptCtor
         [Kept]
         abstract class Base
         {
-            public abstract void Method ();
+            public abstract void Method();
         }
 
         [Kept]
-        [KeptBaseType (typeof (Base))]
+        [KeptBaseType(typeof(Base))]
         class Foo : Base, IBar
         {
-            public override void Method ()
+            public override void Method()
             {
-                UsedByOverride ();
+                UsedByOverride();
             }
 
-            void UsedByOverride ()
-            {
-            }
+            void UsedByOverride() { }
         }
 
         [Kept]
         interface IBar
         {
             [Kept]
-            void Method ();
+            void Method();
         }
     }
 }

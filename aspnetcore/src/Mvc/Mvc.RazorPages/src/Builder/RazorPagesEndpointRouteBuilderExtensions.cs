@@ -22,7 +22,9 @@ public static class RazorPagesEndpointRouteBuilderExtensions
     /// </summary>
     /// <param name="endpoints">The <see cref="IEndpointRouteBuilder"/>.</param>
     /// <returns>An <see cref="PageActionEndpointConventionBuilder"/> for endpoints associated with Razor Pages.</returns>
-    public static PageActionEndpointConventionBuilder MapRazorPages(this IEndpointRouteBuilder endpoints)
+    public static PageActionEndpointConventionBuilder MapRazorPages(
+        this IEndpointRouteBuilder endpoints
+    )
     {
         if (endpoints == null)
         {
@@ -58,7 +60,10 @@ public static class RazorPagesEndpointRouteBuilderExtensions
     /// will be available.
     /// </para>
     /// </remarks>
-    public static IEndpointConventionBuilder MapFallbackToPage(this IEndpointRouteBuilder endpoints, string page)
+    public static IEndpointConventionBuilder MapFallbackToPage(
+        this IEndpointRouteBuilder endpoints,
+        string page
+    )
     {
         if (endpoints == null)
         {
@@ -122,7 +127,8 @@ public static class RazorPagesEndpointRouteBuilderExtensions
     public static IEndpointConventionBuilder MapFallbackToPage(
         this IEndpointRouteBuilder endpoints,
         [StringSyntax("Route")] string pattern,
-        string page)
+        string page
+    )
     {
         if (endpoints == null)
         {
@@ -188,7 +194,8 @@ public static class RazorPagesEndpointRouteBuilderExtensions
     public static IEndpointConventionBuilder MapFallbackToAreaPage(
         this IEndpointRouteBuilder endpoints,
         string page,
-        string area)
+        string area
+    )
     {
         if (endpoints == null)
         {
@@ -254,7 +261,8 @@ public static class RazorPagesEndpointRouteBuilderExtensions
         this IEndpointRouteBuilder endpoints,
         [StringSyntax("Route")] string pattern,
         string page,
-        string area)
+        string area
+    )
     {
         if (endpoints == null)
         {
@@ -309,7 +317,10 @@ public static class RazorPagesEndpointRouteBuilderExtensions
     /// Register <typeparamref name="TTransformer"/> with the desired service lifetime in <c>ConfigureServices</c>.
     /// </para>
     /// </remarks>
-    public static void MapDynamicPageRoute<TTransformer>(this IEndpointRouteBuilder endpoints, [StringSyntax("Route")] string pattern)
+    public static void MapDynamicPageRoute<TTransformer>(
+        this IEndpointRouteBuilder endpoints,
+        [StringSyntax("Route")] string pattern
+    )
         where TTransformer : DynamicRouteValueTransformer
     {
         MapDynamicPageRoute<TTransformer>(endpoints, pattern, state: null);
@@ -333,7 +344,11 @@ public static class RazorPagesEndpointRouteBuilderExtensions
     /// Register <typeparamref name="TTransformer"/> with the desired service lifetime in <c>ConfigureServices</c>.
     /// </para>
     /// </remarks>
-    public static void MapDynamicPageRoute<TTransformer>(this IEndpointRouteBuilder endpoints, [StringSyntax("Route")] string pattern, object? state)
+    public static void MapDynamicPageRoute<TTransformer>(
+        this IEndpointRouteBuilder endpoints,
+        [StringSyntax("Route")] string pattern,
+        object? state
+    )
         where TTransformer : DynamicRouteValueTransformer
     {
         if (endpoints == null)
@@ -374,7 +389,12 @@ public static class RazorPagesEndpointRouteBuilderExtensions
     /// Register <typeparamref name="TTransformer"/> with the desired service lifetime in <c>ConfigureServices</c>.
     /// </para>
     /// </remarks>
-    public static void MapDynamicPageRoute<TTransformer>(this IEndpointRouteBuilder endpoints, [StringSyntax("Route")] string pattern, object state, int order)
+    public static void MapDynamicPageRoute<TTransformer>(
+        this IEndpointRouteBuilder endpoints,
+        [StringSyntax("Route")] string pattern,
+        object state,
+        int order
+    )
         where TTransformer : DynamicRouteValueTransformer
     {
         if (endpoints == null)
@@ -393,16 +413,20 @@ public static class RazorPagesEndpointRouteBuilderExtensions
         var pageDataSource = GetOrCreateDataSource(endpoints);
         RegisterInCache(endpoints.ServiceProvider, pageDataSource);
 
-        pageDataSource.AddDynamicPageEndpoint(endpoints, pattern, typeof(TTransformer), state, order);
+        pageDataSource.AddDynamicPageEndpoint(
+            endpoints,
+            pattern,
+            typeof(TTransformer),
+            state,
+            order
+        );
     }
 
     private static DynamicPageMetadata CreateDynamicPageMetadata(string page, string? area)
     {
-        return new DynamicPageMetadata(new RouteValueDictionary()
-            {
-                { "page", page },
-                { "area", area }
-            });
+        return new DynamicPageMetadata(
+            new RouteValueDictionary() { { "page", page }, { "area", area } }
+        );
     }
 
     private static void EnsureRazorPagesServices(IEndpointRouteBuilder endpoints)
@@ -410,28 +434,42 @@ public static class RazorPagesEndpointRouteBuilderExtensions
         var marker = endpoints.ServiceProvider.GetService<PageActionEndpointDataSourceFactory>();
         if (marker == null)
         {
-            throw new InvalidOperationException(Mvc.Core.Resources.FormatUnableToFindServices(
-                nameof(IServiceCollection),
-                "AddRazorPages",
-                "ConfigureServices(...)"));
+            throw new InvalidOperationException(
+                Mvc.Core.Resources.FormatUnableToFindServices(
+                    nameof(IServiceCollection),
+                    "AddRazorPages",
+                    "ConfigureServices(...)"
+                )
+            );
         }
     }
 
-    private static PageActionEndpointDataSource GetOrCreateDataSource(IEndpointRouteBuilder endpoints)
+    private static PageActionEndpointDataSource GetOrCreateDataSource(
+        IEndpointRouteBuilder endpoints
+    )
     {
-        var dataSource = endpoints.DataSources.OfType<PageActionEndpointDataSource>().FirstOrDefault();
+        var dataSource = endpoints.DataSources
+            .OfType<PageActionEndpointDataSource>()
+            .FirstOrDefault();
         if (dataSource == null)
         {
-            var orderProviderCache = endpoints.ServiceProvider.GetRequiredService<OrderedEndpointsSequenceProviderCache>();
-            var factory = endpoints.ServiceProvider.GetRequiredService<PageActionEndpointDataSourceFactory>();
-            dataSource = factory.Create(orderProviderCache.GetOrCreateOrderedEndpointsSequenceProvider(endpoints));
+            var orderProviderCache =
+                endpoints.ServiceProvider.GetRequiredService<OrderedEndpointsSequenceProviderCache>();
+            var factory =
+                endpoints.ServiceProvider.GetRequiredService<PageActionEndpointDataSourceFactory>();
+            dataSource = factory.Create(
+                orderProviderCache.GetOrCreateOrderedEndpointsSequenceProvider(endpoints)
+            );
             endpoints.DataSources.Add(dataSource);
         }
 
         return dataSource;
     }
 
-    private static void RegisterInCache(IServiceProvider serviceProvider, PageActionEndpointDataSource dataSource)
+    private static void RegisterInCache(
+        IServiceProvider serviceProvider,
+        PageActionEndpointDataSource dataSource
+    )
     {
         var cache = serviceProvider.GetRequiredService<DynamicPageEndpointSelectorCache>();
         cache.AddDataSource(dataSource);

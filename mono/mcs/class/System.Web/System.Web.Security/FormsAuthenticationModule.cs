@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -38,65 +38,65 @@ using System.Web.Util;
 namespace System.Web.Security
 {
     // CAS - no InheritanceDemand here as the class is sealed
-    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
     public sealed class FormsAuthenticationModule : IHttpModule
     {
-        static readonly object authenticateEvent = new object ();
+        static readonly object authenticateEvent = new object();
 
         // Config values
-        private static bool      _fAuthChecked;
-        private static bool      _fAuthRequired;
+        private static bool _fAuthChecked;
+        private static bool _fAuthRequired;
 
         AuthenticationSection _config = null;
         bool isConfigInitialized = false;
-        EventHandlerList events = new EventHandlerList ();
-    
-        internal static bool FormsAuthRequired {
-            get {
-                return _fAuthRequired;
-            }
+        EventHandlerList events = new EventHandlerList();
+
+        internal static bool FormsAuthRequired
+        {
+            get { return _fAuthRequired; }
         }
 
-        public event FormsAuthenticationEventHandler Authenticate {
-            add { events.AddHandler (authenticateEvent, value); }
-            remove { events.RemoveHandler (authenticateEvent, value); }
-        }
-        
-        void InitConfig (HttpContext context)
+        public event FormsAuthenticationEventHandler Authenticate
         {
-            if(isConfigInitialized)
+            add { events.AddHandler(authenticateEvent, value); }
+            remove { events.RemoveHandler(authenticateEvent, value); }
+        }
+
+        void InitConfig(HttpContext context)
+        {
+            if (isConfigInitialized)
                 return;
-            _config = (AuthenticationSection) WebConfigurationManager.GetSection ("system.web/authentication");
+            _config = (AuthenticationSection)
+                WebConfigurationManager.GetSection("system.web/authentication");
 
             // authentication is an app level setting only
             // so we can read app config early on in an attempt to try and
             // skip wiring up event delegates
-            if (!_fAuthChecked) {
+            if (!_fAuthChecked)
+            {
                 _fAuthRequired = (_config.Mode == AuthenticationMode.Forms);
                 _fAuthChecked = true;
             }
             isConfigInitialized = true;
         }
 
-        [SecurityPermission (SecurityAction.Demand, UnmanagedCode = true)]
-        public FormsAuthenticationModule ()
+        [SecurityPermission(SecurityAction.Demand, UnmanagedCode = true)]
+        public FormsAuthenticationModule() { }
+
+        public void Dispose() { }
+
+        public void Init(HttpApplication app)
         {
+            app.AuthenticateRequest += new EventHandler(OnAuthenticateRequest);
+            app.EndRequest += new EventHandler(OnEndRequest);
         }
 
-        public void Dispose ()
+        void OnAuthenticateRequest(object sender, EventArgs args)
         {
-        }
-
-        public void Init (HttpApplication app)
-        {
-
-            app.AuthenticateRequest += new EventHandler (OnAuthenticateRequest);
-            app.EndRequest += new EventHandler (OnEndRequest);
-        }
-
-        void OnAuthenticateRequest (object sender, EventArgs args)
-        {
-            HttpApplication app = (HttpApplication) sender;
+            HttpApplication app = (HttpApplication)sender;
             HttpContext context = app.Context;
 
             string cookieName;
@@ -104,8 +104,9 @@ namespace System.Web.Security
             string loginPage;
             bool slidingExpiration;
 
-            InitConfig (context);
-            if (_config == null || _config.Mode != AuthenticationMode.Forms) {
+            InitConfig(context);
+            if (_config == null || _config.Mode != AuthenticationMode.Forms)
+            {
                 return;
             }
 
@@ -114,44 +115,63 @@ namespace System.Web.Security
             loginPage = _config.Forms.LoginUrl;
             slidingExpiration = _config.Forms.SlidingExpiration;
 
-            if (!VirtualPathUtility.IsRooted (loginPage))
+            if (!VirtualPathUtility.IsRooted(loginPage))
                 loginPage = "~/" + loginPage;
 
             string reqPath = String.Empty;
             string loginPath = null;
-            try {
+            try
+            {
                 reqPath = context.Request.PhysicalPath;
-                loginPath = context.Request.MapPath (loginPage);
-            } catch {} // ignore
+                loginPath = context.Request.MapPath(loginPage);
+            }
+            catch { } // ignore
 
-            context.SkipAuthorization = String.Compare (reqPath, loginPath, RuntimeHelpers.CaseInsensitive, Helpers.InvariantCulture) == 0;
-            
+            context.SkipAuthorization =
+                String.Compare(
+                    reqPath,
+                    loginPath,
+                    RuntimeHelpers.CaseInsensitive,
+                    Helpers.InvariantCulture
+                ) == 0;
+
             //TODO: need to check that the handler is System.Web.Handlers.AssemblyResourceLoader type
             string filePath = context.Request.FilePath;
-            if (filePath.Length > 15 && String.CompareOrdinal ("WebResource.axd", 0, filePath, filePath.Length - 15, 15) == 0)
+            if (
+                filePath.Length > 15
+                && String.CompareOrdinal("WebResource.axd", 0, filePath, filePath.Length - 15, 15)
+                    == 0
+            )
                 context.SkipAuthorization = true;
 
-            FormsAuthenticationEventArgs formArgs = new FormsAuthenticationEventArgs (context);
-            FormsAuthenticationEventHandler eh = events [authenticateEvent] as FormsAuthenticationEventHandler;
+            FormsAuthenticationEventArgs formArgs = new FormsAuthenticationEventArgs(context);
+            FormsAuthenticationEventHandler eh =
+                events[authenticateEvent] as FormsAuthenticationEventHandler;
             if (eh != null)
-                eh (this, formArgs);
+                eh(this, formArgs);
 
             bool contextUserNull = (context.User == null);
-            if (formArgs.User != null || !contextUserNull) {
+            if (formArgs.User != null || !contextUserNull)
+            {
                 if (contextUserNull)
                     context.User = formArgs.User;
                 return;
             }
-                
-            HttpCookie cookie = context.Request.Cookies [cookieName];
-            if (cookie == null || (cookie.Expires != DateTime.MinValue && cookie.Expires < DateTime.Now))
+
+            HttpCookie cookie = context.Request.Cookies[cookieName];
+            if (
+                cookie == null
+                || (cookie.Expires != DateTime.MinValue && cookie.Expires < DateTime.Now)
+            )
                 return;
 
             FormsAuthenticationTicket ticket = null;
-            try {
-                ticket = FormsAuthentication.Decrypt (cookie.Value);
+            try
+            {
+                ticket = FormsAuthentication.Decrypt(cookie.Value);
             }
-            catch (ArgumentException) {
+            catch (ArgumentException)
+            {
                 // incorrect cookie value, suppress the exception
                 return;
             }
@@ -160,42 +180,47 @@ namespace System.Web.Security
 
             FormsAuthenticationTicket oldticket = ticket;
             if (slidingExpiration)
-                ticket = FormsAuthentication.RenewTicketIfOld (ticket);
+                ticket = FormsAuthentication.RenewTicketIfOld(ticket);
 
-            context.User = new GenericPrincipal (new FormsIdentity (ticket), new string [0]);
+            context.User = new GenericPrincipal(new FormsIdentity(ticket), new string[0]);
 
-            if (cookie.Expires == DateTime.MinValue && oldticket == ticket) 
+            if (cookie.Expires == DateTime.MinValue && oldticket == ticket)
                 return;
 
-            cookie.Value = FormsAuthentication.Encrypt (ticket);
+            cookie.Value = FormsAuthentication.Encrypt(ticket);
             cookie.Path = cookiePath;
             if (ticket.IsPersistent)
                 cookie.Expires = ticket.Expiration;
 
-            context.Response.Cookies.Add (cookie);
+            context.Response.Cookies.Add(cookie);
         }
 
-        void OnEndRequest (object sender, EventArgs args)
+        void OnEndRequest(object sender, EventArgs args)
         {
-            HttpApplication app = (HttpApplication) sender;
+            HttpApplication app = (HttpApplication)sender;
             HttpContext context = app.Context;
-            if (context.Response.StatusCode != 401 || context.Request.QueryString ["ReturnUrl"] != null)
+            if (
+                context.Response.StatusCode != 401
+                || context.Request.QueryString["ReturnUrl"] != null
+            )
                 return;
 
-            if (context.Response.StatusCode == 401 && context.Response.SuppressFormsAuthenticationRedirect)
+            if (
+                context.Response.StatusCode == 401
+                && context.Response.SuppressFormsAuthenticationRedirect
+            )
                 return;
 
             string loginPage;
-            InitConfig (context);
+            InitConfig(context);
             loginPage = _config.Forms.LoginUrl;
             if (_config == null || _config.Mode != AuthenticationMode.Forms)
                 return;
 
-            StringBuilder login = new StringBuilder ();
-            login.Append (UrlUtils.Combine (context.Request.ApplicationPath, loginPage));
-            login.AppendFormat ("?ReturnUrl={0}", HttpUtility.UrlEncode (context.Request.RawUrl));
-            context.Response.Redirect (login.ToString (), false);
+            StringBuilder login = new StringBuilder();
+            login.Append(UrlUtils.Combine(context.Request.ApplicationPath, loginPage));
+            login.AppendFormat("?ReturnUrl={0}", HttpUtility.UrlEncode(context.Request.RawUrl));
+            context.Response.Redirect(login.ToString(), false);
         }
     }
 }
-

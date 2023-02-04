@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,51 +36,61 @@ using System.Web.Security;
 
 namespace System.Web.Configuration
 {
-    public sealed class HttpModulesSection: ConfigurationSection
+    public sealed class HttpModulesSection : ConfigurationSection
     {
         static ConfigurationPropertyCollection properties;
         static ConfigurationProperty modulesProp;
 
-        static HttpModulesSection ()
+        static HttpModulesSection()
         {
-            properties = new ConfigurationPropertyCollection ();
-            modulesProp = new ConfigurationProperty ("", typeof (HttpModuleActionCollection), null,
-                                 null, PropertyHelper.DefaultValidator,
-                                 ConfigurationPropertyOptions.IsDefaultCollection);
-            properties.Add (modulesProp);
+            properties = new ConfigurationPropertyCollection();
+            modulesProp = new ConfigurationProperty(
+                "",
+                typeof(HttpModuleActionCollection),
+                null,
+                null,
+                PropertyHelper.DefaultValidator,
+                ConfigurationPropertyOptions.IsDefaultCollection
+            );
+            properties.Add(modulesProp);
         }
 
-        [ConfigurationProperty ("", Options = ConfigurationPropertyOptions.IsDefaultCollection)]
-        public HttpModuleActionCollection Modules {
-            get {
-                return (HttpModuleActionCollection) base [modulesProp];
-            }
+        [ConfigurationProperty("", Options = ConfigurationPropertyOptions.IsDefaultCollection)]
+        public HttpModuleActionCollection Modules
+        {
+            get { return (HttpModuleActionCollection)base[modulesProp]; }
         }
 
-        protected internal override ConfigurationPropertyCollection Properties {
-            get {
-                return properties;
-            }
+        protected internal override ConfigurationPropertyCollection Properties
+        {
+            get { return properties; }
         }
 
         /* stolen from the 1.0 S.W.Config ModulesConfiguration.cs */
-        internal HttpModuleCollection LoadModules (HttpApplication app)
+        internal HttpModuleCollection LoadModules(HttpApplication app)
         {
-            HttpModuleCollection coll = new HttpModuleCollection ();
+            HttpModuleCollection coll = new HttpModuleCollection();
             Type type;
-            
-            foreach (HttpModuleAction item in Modules){
-                type = HttpApplication.LoadType (item.Type);
-                
-                if (type == null) {
+
+            foreach (HttpModuleAction item in Modules)
+            {
+                type = HttpApplication.LoadType(item.Type);
+
+                if (type == null)
+                {
                     /* XXX should we throw here? */
                     continue;
                 }
-                IHttpModule module = (IHttpModule) Activator.CreateInstance (type,
-                                                 BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance,
-                                                 null, null, null);
-                module.Init (app);
-                coll.AddModule (item.Name, module);
+                IHttpModule module = (IHttpModule)
+                    Activator.CreateInstance(
+                        type,
+                        BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance,
+                        null,
+                        null,
+                        null
+                    );
+                module.Init(app);
+                coll.AddModule(item.Name, module);
             }
 
             /* XXX the 1.x config stuff does this
@@ -88,14 +98,12 @@ namespace System.Web.Configuration
              * here, but this keeps things working in much
              * the same fashion in 2.0-land. */
             {
-                IHttpModule module = new DefaultAuthenticationModule ();
-                module.Init (app);
-                coll.AddModule ("DefaultAuthentication", module);
+                IHttpModule module = new DefaultAuthenticationModule();
+                module.Init(app);
+                coll.AddModule("DefaultAuthentication", module);
             }
 
             return coll;
         }
-
     }
 }
-

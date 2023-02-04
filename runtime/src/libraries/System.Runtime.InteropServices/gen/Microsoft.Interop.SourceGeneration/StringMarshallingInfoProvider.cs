@@ -8,7 +8,6 @@ using Microsoft.CodeAnalysis;
 
 namespace Microsoft.Interop
 {
-
     /// <summary>
     /// This class supports generating marshalling info for the <see cref="string"/> type.
     /// This includes support for the <c>System.Runtime.InteropServices.StringMarshalling</c> enum.
@@ -20,7 +19,12 @@ namespace Microsoft.Interop
         private readonly AttributeData _stringMarshallingCustomAttribute;
         private readonly DefaultMarshallingInfo _defaultMarshallingInfo;
 
-        public StringMarshallingInfoProvider(Compilation compilation, IGeneratorDiagnostics diagnostics, AttributeData stringMarshallingCustomAttribute, DefaultMarshallingInfo defaultMarshallingInfo)
+        public StringMarshallingInfoProvider(
+            Compilation compilation,
+            IGeneratorDiagnostics diagnostics,
+            AttributeData stringMarshallingCustomAttribute,
+            DefaultMarshallingInfo defaultMarshallingInfo
+        )
         {
             _compilation = compilation;
             _diagnostics = diagnostics;
@@ -28,9 +32,15 @@ namespace Microsoft.Interop
             _defaultMarshallingInfo = defaultMarshallingInfo;
         }
 
-        public bool CanProvideMarshallingInfoForType(ITypeSymbol type) => type.SpecialType == SpecialType.System_String;
+        public bool CanProvideMarshallingInfoForType(ITypeSymbol type) =>
+            type.SpecialType == SpecialType.System_String;
 
-        public MarshallingInfo GetMarshallingInfo(ITypeSymbol type, int indirectionDepth, UseSiteAttributeProvider useSiteAttributes, GetMarshallingInfoCallback marshallingInfoCallback)
+        public MarshallingInfo GetMarshallingInfo(
+            ITypeSymbol type,
+            int indirectionDepth,
+            UseSiteAttributeProvider useSiteAttributes,
+            GetMarshallingInfoCallback marshallingInfoCallback
+        )
         {
             if (_defaultMarshallingInfo.CharEncoding == CharEncoding.Undefined)
             {
@@ -41,7 +51,12 @@ namespace Microsoft.Interop
                 if (_defaultMarshallingInfo.StringMarshallingCustomType is not null)
                 {
                     CountInfo countInfo = NoCountInfo.Instance;
-                    if (useSiteAttributes.TryGetUseSiteAttributeInfo(indirectionDepth, out var useSiteInfo))
+                    if (
+                        useSiteAttributes.TryGetUseSiteAttributeInfo(
+                            indirectionDepth,
+                            out var useSiteInfo
+                        )
+                    )
                     {
                         countInfo = useSiteInfo.CountInfo;
                     }
@@ -54,7 +69,8 @@ namespace Microsoft.Interop
                         indirectionDepth,
                         countInfo,
                         _diagnostics,
-                        _compilation);
+                        _compilation
+                    );
                 }
             }
             else
@@ -62,8 +78,18 @@ namespace Microsoft.Interop
                 // No marshalling info was computed, but a character encoding was provided.
                 return _defaultMarshallingInfo.CharEncoding switch
                 {
-                    CharEncoding.Utf16 => CreateStringMarshallingInfo(_compilation, type, TypeNames.Utf16StringMarshaller),
-                    CharEncoding.Utf8 => CreateStringMarshallingInfo(_compilation, type, TypeNames.Utf8StringMarshaller),
+                    CharEncoding.Utf16
+                        => CreateStringMarshallingInfo(
+                            _compilation,
+                            type,
+                            TypeNames.Utf16StringMarshaller
+                        ),
+                    CharEncoding.Utf8
+                        => CreateStringMarshallingInfo(
+                            _compilation,
+                            type,
+                            TypeNames.Utf8StringMarshaller
+                        ),
                     _ => throw new InvalidOperationException()
                 };
             }
@@ -74,7 +100,8 @@ namespace Microsoft.Interop
         public static MarshallingInfo CreateStringMarshallingInfo(
             Compilation compilation,
             ITypeSymbol type,
-            string marshallerName)
+            string marshallerName
+        )
         {
             INamedTypeSymbol? stringMarshaller = compilation.GetTypeByMetadataName(marshallerName);
             if (stringMarshaller is null)
@@ -82,11 +109,21 @@ namespace Microsoft.Interop
 
             if (ManualTypeMarshallingHelper.HasEntryPointMarshallerAttribute(stringMarshaller))
             {
-                if (ManualTypeMarshallingHelper.TryGetValueMarshallersFromEntryType(stringMarshaller, type, compilation, out CustomTypeMarshallers? marshallers))
+                if (
+                    ManualTypeMarshallingHelper.TryGetValueMarshallersFromEntryType(
+                        stringMarshaller,
+                        type,
+                        compilation,
+                        out CustomTypeMarshallers? marshallers
+                    )
+                )
                 {
                     return new NativeMarshallingAttributeInfo(
-                        EntryPointType: ManagedTypeInfo.CreateTypeInfoForTypeSymbol(stringMarshaller),
-                        Marshallers: marshallers.Value);
+                        EntryPointType: ManagedTypeInfo.CreateTypeInfoForTypeSymbol(
+                            stringMarshaller
+                        ),
+                        Marshallers: marshallers.Value
+                    );
                 }
             }
 

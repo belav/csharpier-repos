@@ -8,7 +8,7 @@ public class A
 
 public class B : A
 {
-    public B ()
+    public B()
     {
         base.X = 1;
     }

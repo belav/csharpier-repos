@@ -18,10 +18,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,73 +35,89 @@ using System.Runtime.InteropServices;
 using System.IO;
 using System.Globalization;
 
-namespace System.Net.NetworkInformation {
-
+namespace System.Net.NetworkInformation
+{
     internal class LinuxNetworkInterfaceAPI : UnixNetworkInterfaceAPI
     {
         const int AF_INET = 2;
         const int AF_INET6 = 10;
         const int AF_PACKET = 17;
 
-        static void FreeInterfaceAddresses (IntPtr ifap)
+        static void FreeInterfaceAddresses(IntPtr ifap)
         {
 #if MONODROID
-            AndroidPlatform.FreeInterfaceAddresses (ifap);
+            AndroidPlatform.FreeInterfaceAddresses(ifap);
 #else
-            freeifaddrs (ifap);
+            freeifaddrs(ifap);
 #endif
         }
 
-        static int GetInterfaceAddresses (out IntPtr ifap)
+        static int GetInterfaceAddresses(out IntPtr ifap)
         {
 #if MONODROID
-            return AndroidPlatform.GetInterfaceAddresses (out ifap);
+            return AndroidPlatform.GetInterfaceAddresses(out ifap);
 #else
-            return getifaddrs (out ifap);
+            return getifaddrs(out ifap);
 #endif
         }
 
-        public override NetworkInterface [] GetAllNetworkInterfaces ()
+        public override NetworkInterface[] GetAllNetworkInterfaces()
         {
-
-            var interfaces = new Dictionary <string, LinuxNetworkInterface> ();
+            var interfaces = new Dictionary<string, LinuxNetworkInterface>();
             IntPtr ifap;
-            if (GetInterfaceAddresses (out ifap) != 0)
-                throw new SystemException ("getifaddrs() failed");
+            if (GetInterfaceAddresses(out ifap) != 0)
+                throw new SystemException("getifaddrs() failed");
 
-            try {
+            try
+            {
                 IntPtr next = ifap;
-                while (next != IntPtr.Zero) {
-                    ifaddrs   addr = (ifaddrs) Marshal.PtrToStructure (next, typeof (ifaddrs));
+                while (next != IntPtr.Zero)
+                {
+                    ifaddrs addr = (ifaddrs)Marshal.PtrToStructure(next, typeof(ifaddrs));
                     IPAddress address = IPAddress.None;
-                    string    name = addr.ifa_name;
-                    int       index = -1;
-                    byte[]    macAddress = null;
+                    string name = addr.ifa_name;
+                    int index = -1;
+                    byte[] macAddress = null;
                     NetworkInterfaceType type = NetworkInterfaceType.Unknown;
-                    int       nullNameCount = 0;
+                    int nullNameCount = 0;
 
-                    if (addr.ifa_addr != IntPtr.Zero) {
-                        sockaddr_in sockaddr = (sockaddr_in) Marshal.PtrToStructure (addr.ifa_addr, typeof (sockaddr_in));
+                    if (addr.ifa_addr != IntPtr.Zero)
+                    {
+                        sockaddr_in sockaddr = (sockaddr_in)
+                            Marshal.PtrToStructure(addr.ifa_addr, typeof(sockaddr_in));
 
-                        if (sockaddr.sin_family == AF_INET6) {
-                            sockaddr_in6 sockaddr6 = (sockaddr_in6) Marshal.PtrToStructure (addr.ifa_addr, typeof (sockaddr_in6));
-                            address = new IPAddress (sockaddr6.sin6_addr.u6_addr8, sockaddr6.sin6_scope_id);
-                        } else if (sockaddr.sin_family == AF_INET) {
-                            address = new IPAddress (sockaddr.sin_addr);
-                        } else if (sockaddr.sin_family == AF_PACKET) {
-                            sockaddr_ll sockaddrll = (sockaddr_ll) Marshal.PtrToStructure (addr.ifa_addr, typeof (sockaddr_ll));
-                            if (((int)sockaddrll.sll_halen) > sockaddrll.sll_addr.Length){
+                        if (sockaddr.sin_family == AF_INET6)
+                        {
+                            sockaddr_in6 sockaddr6 = (sockaddr_in6)
+                                Marshal.PtrToStructure(addr.ifa_addr, typeof(sockaddr_in6));
+                            address = new IPAddress(
+                                sockaddr6.sin6_addr.u6_addr8,
+                                sockaddr6.sin6_scope_id
+                            );
+                        }
+                        else if (sockaddr.sin_family == AF_INET)
+                        {
+                            address = new IPAddress(sockaddr.sin_addr);
+                        }
+                        else if (sockaddr.sin_family == AF_PACKET)
+                        {
+                            sockaddr_ll sockaddrll = (sockaddr_ll)
+                                Marshal.PtrToStructure(addr.ifa_addr, typeof(sockaddr_ll));
+                            if (((int)sockaddrll.sll_halen) > sockaddrll.sll_addr.Length)
+                            {
                                 next = addr.ifa_next;
                                 continue;
                             }
 
-                            macAddress = new byte [(int) sockaddrll.sll_halen];
-                            Array.Copy (sockaddrll.sll_addr, 0, macAddress, 0, macAddress.Length);
+                            macAddress = new byte[(int)sockaddrll.sll_halen];
+                            Array.Copy(sockaddrll.sll_addr, 0, macAddress, 0, macAddress.Length);
                             index = sockaddrll.sll_ifindex;
 
                             int hwtype = (int)sockaddrll.sll_hatype;
-                            if (Enum.IsDefined (typeof (LinuxArpHardware), hwtype)) {
-                                switch ((LinuxArpHardware)hwtype) {
+                            if (Enum.IsDefined(typeof(LinuxArpHardware), hwtype))
+                            {
+                                switch ((LinuxArpHardware)hwtype)
+                                {
                                     case LinuxArpHardware.EETHER:
                                         goto case LinuxArpHardware.ETHER;
 
@@ -152,53 +168,62 @@ namespace System.Net.NetworkInformation {
 
                     LinuxNetworkInterface iface = null;
 
-                    if (String.IsNullOrEmpty (name))
-                        name = "\0" + (++nullNameCount).ToString ();
+                    if (String.IsNullOrEmpty(name))
+                        name = "\0" + (++nullNameCount).ToString();
 
-                    if (!interfaces.TryGetValue (name, out iface)) {
-                        iface = new LinuxNetworkInterface (name);
-                        interfaces.Add (name, iface);
+                    if (!interfaces.TryGetValue(name, out iface))
+                    {
+                        iface = new LinuxNetworkInterface(name);
+                        interfaces.Add(name, iface);
                     }
 
-                    if (!address.Equals (IPAddress.None))
-                        iface.AddAddress (address);
+                    if (!address.Equals(IPAddress.None))
+                        iface.AddAddress(address);
 
-                    if (macAddress != null || type == NetworkInterfaceType.Loopback) {
-                        if (type == NetworkInterfaceType.Ethernet) {
-                            if (Directory.Exists(iface.IfacePath + "wireless")) {
+                    if (macAddress != null || type == NetworkInterfaceType.Loopback)
+                    {
+                        if (type == NetworkInterfaceType.Ethernet)
+                        {
+                            if (Directory.Exists(iface.IfacePath + "wireless"))
+                            {
                                 type = NetworkInterfaceType.Wireless80211;
                             }
                         }
-                        iface.SetLinkLayerInfo (index, macAddress, type);
+                        iface.SetLinkLayerInfo(index, macAddress, type);
                     }
 
                     next = addr.ifa_next;
                 }
-            } finally {
-                FreeInterfaceAddresses (ifap);
+            }
+            finally
+            {
+                FreeInterfaceAddresses(ifap);
             }
 
-            NetworkInterface [] result = new NetworkInterface [interfaces.Count];
+            NetworkInterface[] result = new NetworkInterface[interfaces.Count];
             int x = 0;
-            foreach (NetworkInterface thisInterface in interfaces.Values) {
-                result [x] = thisInterface;
+            foreach (NetworkInterface thisInterface in interfaces.Values)
+            {
+                result[x] = thisInterface;
                 x++;
             }
             return result;
         }
 
-        public override int GetLoopbackInterfaceIndex ()
+        public override int GetLoopbackInterfaceIndex()
         {
-            return if_nametoindex ("lo");
+            return if_nametoindex("lo");
         }
 
-        public override IPAddress GetNetMask (IPAddress address)
+        public override IPAddress GetNetMask(IPAddress address)
         {
-            foreach (ifaddrs networkInteface in GetNetworkInterfaces()) {
+            foreach (ifaddrs networkInteface in GetNetworkInterfaces())
+            {
                 if (networkInteface.ifa_addr == IntPtr.Zero)
                     continue;
 
-                var sockaddr = (sockaddr_in)Marshal.PtrToStructure(networkInteface.ifa_addr, typeof(sockaddr_in));
+                var sockaddr = (sockaddr_in)
+                    Marshal.PtrToStructure(networkInteface.ifa_addr, typeof(sockaddr_in));
 
                 if (sockaddr.sin_family != AF_INET)
                     continue;
@@ -206,7 +231,8 @@ namespace System.Net.NetworkInformation {
                 if (!address.Equals(new IPAddress(sockaddr.sin_addr)))
                     continue;
 
-                var netmask = (sockaddr_in)Marshal.PtrToStructure(networkInteface.ifa_netmask, typeof(sockaddr_in));
+                var netmask = (sockaddr_in)
+                    Marshal.PtrToStructure(networkInteface.ifa_netmask, typeof(sockaddr_in));
                 return new IPAddress(netmask.sin_addr);
             }
 
@@ -217,17 +243,21 @@ namespace System.Net.NetworkInformation {
         {
             IntPtr ifap = IntPtr.Zero;
 
-            try {
+            try
+            {
                 if (GetInterfaceAddresses(out ifap) != 0)
                     yield break;
 
                 var next = ifap;
-                while (next != IntPtr.Zero) {
+                while (next != IntPtr.Zero)
+                {
                     var addr = (ifaddrs)Marshal.PtrToStructure(next, typeof(ifaddrs));
                     yield return addr;
                     next = addr.ifa_next;
                 }
-            } finally {
+            }
+            finally
+            {
                 if (ifap != IntPtr.Zero)
                     FreeInterfaceAddresses(ifap);
             }
@@ -243,56 +273,63 @@ namespace System.Net.NetworkInformation {
     sealed class LinuxNetworkInterface : UnixNetworkInterface
     {
         //NetworkInterfaceType type;
-        string               iface_path;
-        string               iface_operstate_path;
-        string               iface_flags_path;
+        string iface_path;
+        string iface_operstate_path;
+        string iface_flags_path;
 
 #if MONODROID
-        [DllImport ("__Internal")]
-        static extern int _monodroid_get_android_api_level ();
+        [DllImport("__Internal")]
+        static extern int _monodroid_get_android_api_level();
 
-        [DllImport ("__Internal")]
-        static extern bool _monodroid_get_network_interface_up_state (string ifname, ref bool is_up);
+        [DllImport("__Internal")]
+        static extern bool _monodroid_get_network_interface_up_state(string ifname, ref bool is_up);
 
-        [DllImport ("__Internal")]
-        static extern bool _monodroid_get_network_interface_supports_multicast (string ifname, ref bool supports_multicast);
+        [DllImport("__Internal")]
+        static extern bool _monodroid_get_network_interface_supports_multicast(
+            string ifname,
+            ref bool supports_multicast
+        );
 
         bool android_use_java_api;
 #endif
 
-        internal string IfacePath {
+        internal string IfacePath
+        {
             get { return iface_path; }
         }
 
-        internal LinuxNetworkInterface (string name)
-            : base (name)
+        internal LinuxNetworkInterface(string name)
+            : base(name)
         {
             iface_path = "/sys/class/net/" + name + "/";
             iface_operstate_path = iface_path + "operstate";
             iface_flags_path = iface_path + "flags";
 #if MONODROID
-            android_use_java_api = _monodroid_get_android_api_level () >= 24;
+            android_use_java_api = _monodroid_get_android_api_level() >= 24;
 #endif
         }
 
-        public override IPInterfaceProperties GetIPProperties ()
+        public override IPInterfaceProperties GetIPProperties()
         {
             if (ipproperties == null)
-                ipproperties = new LinuxIPInterfaceProperties (this, addresses);
+                ipproperties = new LinuxIPInterfaceProperties(this, addresses);
             return ipproperties;
         }
 
-        public override IPv4InterfaceStatistics GetIPv4Statistics ()
+        public override IPv4InterfaceStatistics GetIPv4Statistics()
         {
             if (ipv4stats == null)
-                ipv4stats = new LinuxIPv4InterfaceStatistics (this);
+                ipv4stats = new LinuxIPv4InterfaceStatistics(this);
             return ipv4stats;
         }
 
-        public override OperationalStatus OperationalStatus {
-            get {
+        public override OperationalStatus OperationalStatus
+        {
+            get
+            {
 #if MONODROID
-                if (android_use_java_api) {
+                if (android_use_java_api)
+                {
                     // Starting from API 24 (Android 7 "Nougat") Android restricts access to many
                     // files in the /sys filesystem (see https://code.google.com/p/android/issues/detail?id=205565
                     // for more information) and therefore we are forced to call into Java API in
@@ -302,19 +339,21 @@ namespace System.Net.NetworkInformation {
                     // it requires an instance of the Android Context class which is not available
                     // to us here.
                     bool is_up = false;
-                    if (_monodroid_get_network_interface_up_state (Name, ref is_up))
+                    if (_monodroid_get_network_interface_up_state(Name, ref is_up))
                         return is_up ? OperationalStatus.Up : OperationalStatus.Down;
                     else
                         return OperationalStatus.Unknown;
                 }
 #endif
-                if (!Directory.Exists (iface_path))
+                if (!Directory.Exists(iface_path))
                     return OperationalStatus.Unknown;
 
-                try {
-                    string s = ReadLine (iface_operstate_path);
+                try
+                {
+                    string s = ReadLine(iface_operstate_path);
 
-                    switch (s){
+                    switch (s)
+                    {
                         case "unknown":
                             return OperationalStatus.Unknown;
 
@@ -336,48 +375,59 @@ namespace System.Net.NetworkInformation {
                         case "up":
                             return OperationalStatus.Up;
                     }
-                } catch {
                 }
+                catch { }
                 return OperationalStatus.Unknown;
             }
         }
 
-        public override bool SupportsMulticast {
-            get {
+        public override bool SupportsMulticast
+        {
+            get
+            {
 #if MONODROID
-                if (android_use_java_api) {
+                if (android_use_java_api)
+                {
                     // Starting from API 24 (Android 7 "Nougat") Android restricts access to many
                     // files in the /sys filesystem (see https://code.google.com/p/android/issues/detail?id=205565
                     // for more information) and therefore we are forced to call into Java API in
                     // order to get the information.
                     bool supports_multicast = false;
-                    _monodroid_get_network_interface_supports_multicast (Name, ref supports_multicast);
+                    _monodroid_get_network_interface_supports_multicast(
+                        Name,
+                        ref supports_multicast
+                    );
                     return supports_multicast;
                 }
 #endif
-                if (!Directory.Exists (iface_path))
+                if (!Directory.Exists(iface_path))
                     return false;
 
-                try {
-                    string s = ReadLine (iface_flags_path);
-                    if (s.Length > 2 && s [0] == '0' && s [1] == 'x')
-                        s = s.Substring (2);
+                try
+                {
+                    string s = ReadLine(iface_flags_path);
+                    if (s.Length > 2 && s[0] == '0' && s[1] == 'x')
+                        s = s.Substring(2);
 
-                    ulong f = UInt64.Parse (s, NumberStyles.HexNumber);
+                    ulong f = UInt64.Parse(s, NumberStyles.HexNumber);
 
                     // Hardcoded, only useful for Linux.
                     return ((f & 0x1000) == 0x1000);
-                } catch {
+                }
+                catch
+                {
                     return false;
                 }
             }
         }
 
-        internal static string ReadLine (string path)
+        internal static string ReadLine(string path)
         {
-            using (FileStream fs = File.OpenRead (path)){
-                using (StreamReader sr = new StreamReader (fs)){
-                    return sr.ReadLine ();
+            using (FileStream fs = File.OpenRead(path))
+            {
+                using (StreamReader sr = new StreamReader(fs))
+                {
+                    return sr.ReadLine();
                 }
             }
         }

@@ -7,6 +7,7 @@ using System.Runtime.CompilerServices;
 namespace SimpleArray_01
 {
     public delegate void RngTest();
+
     internal class Class1
     {
         private static int Main()
@@ -50,6 +51,7 @@ namespace SimpleArray_01
             return bResult;
         }
     }
+
     internal class Test
     {
         /********************************************************************************************

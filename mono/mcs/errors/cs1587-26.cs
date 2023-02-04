@@ -8,6 +8,7 @@ namespace TopNS
 {
     class Foo
     {
-        public /** invalid comment in field decl */ int field;
+        public
+        /** invalid comment in field decl */int field;
     }
 }

@@ -3,7 +3,7 @@
 
 class C
 {
-    dynamic M (dynamic d)
+    dynamic M(dynamic d)
     {
         return this || d;
     }

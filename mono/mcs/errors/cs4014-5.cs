@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 class C
 {
-    public static async Task<T> Test<T> ()
+    public static async Task<T> Test<T>()
     {
-        return await Task.FromResult (default (T));
+        return await Task.FromResult(default(T));
     }
 
-    static void Main ()
+    static void Main()
     {
-        Test<object> ();
+        Test<object>();
     }
 }

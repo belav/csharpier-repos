@@ -5,16 +5,13 @@ using System;
 
 class GenericClass<T>
 {
-    public GenericClass (GenericClass<T> g = null, A a = null)
-    {
-    }
+    public GenericClass(GenericClass<T> g = null, A a = null) { }
 }
 
 class DerivedClass<T> : GenericClass<T>
 {
-    public DerivedClass (GenericClass<T> g) : base(g)
-    {
-    }
+    public DerivedClass(GenericClass<T> g)
+        : base(g) { }
 }
 
 public struct A

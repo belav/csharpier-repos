@@ -10,15 +10,9 @@ public class SqliteBuilderExtensionsTest
     {
         var modelBuilder = CreateConventionModelBuilder();
 
-        modelBuilder
-            .Entity<Customer>()
-            .Property(e => e.Geometry)
-            .HasSrid(1);
+        modelBuilder.Entity<Customer>().Property(e => e.Geometry).HasSrid(1);
 
-        var property = modelBuilder
-            .Entity<Customer>()
-            .Property(e => e.Geometry)
-            .Metadata;
+        var property = modelBuilder.Entity<Customer>().Property(e => e.Geometry).Metadata;
 
         Assert.Equal(1, property.GetSrid());
     }
@@ -28,15 +22,9 @@ public class SqliteBuilderExtensionsTest
     {
         var modelBuilder = CreateConventionModelBuilder();
 
-        modelBuilder
-            .Entity<Customer>()
-            .Property<string>("Geometry")
-            .HasSrid(1);
+        modelBuilder.Entity<Customer>().Property<string>("Geometry").HasSrid(1);
 
-        var property = modelBuilder
-            .Entity<Customer>()
-            .Property<string>("Geometry")
-            .Metadata;
+        var property = modelBuilder.Entity<Customer>().Property<string>("Geometry").Metadata;
 
         Assert.Equal(1, property.GetSrid());
     }
@@ -46,10 +34,7 @@ public class SqliteBuilderExtensionsTest
     {
         var modelBuilder = ((IConventionModel)CreateConventionModelBuilder().Model).Builder;
 
-        modelBuilder
-            .Entity(typeof(Customer))
-            .Property(typeof(string), "Geometry")
-            .HasSrid(1);
+        modelBuilder.Entity(typeof(Customer)).Property(typeof(string), "Geometry").HasSrid(1);
 
         var property = modelBuilder
             .Entity(typeof(Customer))
@@ -59,8 +44,8 @@ public class SqliteBuilderExtensionsTest
         Assert.Equal(1, property.GetSrid());
     }
 
-    protected virtual ModelBuilder CreateConventionModelBuilder()
-        => SqliteTestHelpers.Instance.CreateConventionBuilder();
+    protected virtual ModelBuilder CreateConventionModelBuilder() =>
+        SqliteTestHelpers.Instance.CreateConventionBuilder();
 
     private class Customer
     {

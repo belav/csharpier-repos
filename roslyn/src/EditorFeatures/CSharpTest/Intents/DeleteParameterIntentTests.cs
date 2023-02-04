@@ -18,7 +18,7 @@ public class DeleteParameterIntentTests : IntentTestsBase
     public async Task TestDeleteParameterIntentAsync()
     {
         var initialText =
-@"class C
+            @"class C
 {
     void M()
     {
@@ -30,7 +30,7 @@ public class DeleteParameterIntentTests : IntentTestsBase
     }
 }";
         var currentText =
-@"class C
+            @"class C
 {
     void M()
     {
@@ -42,7 +42,7 @@ public class DeleteParameterIntentTests : IntentTestsBase
     }
 }";
         var expectedText =
-@"class C
+            @"class C
 {
     void M()
     {
@@ -54,14 +54,20 @@ public class DeleteParameterIntentTests : IntentTestsBase
     }
 }";
 
-        await VerifyExpectedTextAsync(WellKnownIntents.DeleteParameter, initialText, currentText, expectedText).ConfigureAwait(false);
+        await VerifyExpectedTextAsync(
+                WellKnownIntents.DeleteParameter,
+                initialText,
+                currentText,
+                expectedText
+            )
+            .ConfigureAwait(false);
     }
 
     [Fact]
     public async Task TestDeleteParameterOnDefinitionIntentAsync()
     {
         var initialText =
-@"class C
+            @"class C
 {
     void M()
     {
@@ -73,7 +79,7 @@ public class DeleteParameterIntentTests : IntentTestsBase
     }
 }";
         var currentText =
-@"class C
+            @"class C
 {
     void M()
     {
@@ -85,7 +91,7 @@ public class DeleteParameterIntentTests : IntentTestsBase
     }
 }";
         var expectedText =
-@"class C
+            @"class C
 {
     void M()
     {
@@ -97,13 +103,20 @@ public class DeleteParameterIntentTests : IntentTestsBase
     }
 }";
 
-        await VerifyExpectedTextAsync(WellKnownIntents.DeleteParameter, initialText, currentText, expectedText).ConfigureAwait(false);
+        await VerifyExpectedTextAsync(
+                WellKnownIntents.DeleteParameter,
+                initialText,
+                currentText,
+                expectedText
+            )
+            .ConfigureAwait(false);
     }
 
     [Fact]
     public async Task TestDeleteSecondParameterIntentAsync()
     {
-        var initialText = @"class C
+        var initialText =
+            @"class C
 {
     void M()
     {
@@ -115,7 +128,7 @@ public class DeleteParameterIntentTests : IntentTestsBase
     }
 }";
         var currentText =
-@"class C
+            @"class C
 {
     void M()
     {
@@ -127,7 +140,7 @@ public class DeleteParameterIntentTests : IntentTestsBase
     }
 }";
         var expectedText =
-@"class C
+            @"class C
 {
     void M()
     {
@@ -139,13 +152,20 @@ public class DeleteParameterIntentTests : IntentTestsBase
     }
 }";
 
-        await VerifyExpectedTextAsync(WellKnownIntents.DeleteParameter, initialText, currentText, expectedText).ConfigureAwait(false);
+        await VerifyExpectedTextAsync(
+                WellKnownIntents.DeleteParameter,
+                initialText,
+                currentText,
+                expectedText
+            )
+            .ConfigureAwait(false);
     }
 
     [Fact]
     public async Task TestDeleteLastParameterAsync()
     {
-        var initialText = @"class C
+        var initialText =
+            @"class C
 {
     void M()
     {
@@ -157,7 +177,7 @@ public class DeleteParameterIntentTests : IntentTestsBase
     }
 }";
         var currentText =
-@"class C
+            @"class C
 {
     void M()
     {
@@ -169,7 +189,7 @@ public class DeleteParameterIntentTests : IntentTestsBase
     }
 }";
         var expectedText =
-@"class C
+            @"class C
 {
     void M()
     {
@@ -181,13 +201,20 @@ public class DeleteParameterIntentTests : IntentTestsBase
     }
 }";
 
-        await VerifyExpectedTextAsync(WellKnownIntents.DeleteParameter, initialText, currentText, expectedText).ConfigureAwait(false);
+        await VerifyExpectedTextAsync(
+                WellKnownIntents.DeleteParameter,
+                initialText,
+                currentText,
+                expectedText
+            )
+            .ConfigureAwait(false);
     }
 
     [Fact]
     public async Task TestDeleteThisParameterAsync()
     {
-        var initialText = @"public class Foo
+        var initialText =
+            @"public class Foo
 {
     static void Bar()
     {
@@ -204,7 +231,7 @@ public static class FooExtensions
     }
 }";
         var currentText =
-@"public class Foo
+            @"public class Foo
 {
     static void Bar()
     {
@@ -221,13 +248,15 @@ public static class FooExtensions
     }
 }";
 
-        await VerifyIntentMissingAsync(WellKnownIntents.DeleteParameter, initialText, currentText).ConfigureAwait(false);
+        await VerifyIntentMissingAsync(WellKnownIntents.DeleteParameter, initialText, currentText)
+            .ConfigureAwait(false);
     }
 
     [Fact]
     public async Task TestDeleteParameterInExtensionMethodAsync()
     {
-        var initialText = @"public class Foo
+        var initialText =
+            @"public class Foo
 {
     static void Bar()
     {
@@ -244,7 +273,7 @@ public static class FooExtensions
     }
 }";
         var currentText =
-@"public class Foo
+            @"public class Foo
 {
     static void Bar()
     {
@@ -261,7 +290,7 @@ public static class FooExtensions
     }
 }";
         var expectedText =
-@"public class Foo
+            @"public class Foo
 {
     static void Bar()
     {
@@ -278,13 +307,20 @@ public static class FooExtensions
     }
 }";
 
-        await VerifyExpectedTextAsync(WellKnownIntents.DeleteParameter, initialText, currentText, expectedText).ConfigureAwait(false);
+        await VerifyExpectedTextAsync(
+                WellKnownIntents.DeleteParameter,
+                initialText,
+                currentText,
+                expectedText
+            )
+            .ConfigureAwait(false);
     }
 
     [Fact]
     public async Task TestDeleteParameterOnDefinitionAsync()
     {
-        var initialText = @"public class Foo
+        var initialText =
+            @"public class Foo
 {
     static void Bar()
     {
@@ -301,7 +337,7 @@ public static class FooExtensions
     }
 }";
         var currentText =
-@"public class Foo
+            @"public class Foo
 {
     static void Bar()
     {
@@ -318,7 +354,7 @@ public static class FooExtensions
     }
 }";
         var expectedText =
-@"public class Foo
+            @"public class Foo
 {
     static void Bar()
     {
@@ -335,14 +371,20 @@ public static class FooExtensions
     }
 }";
 
-        await VerifyExpectedTextAsync(WellKnownIntents.DeleteParameter, initialText, currentText, expectedText).ConfigureAwait(false);
+        await VerifyExpectedTextAsync(
+                WellKnownIntents.DeleteParameter,
+                initialText,
+                currentText,
+                expectedText
+            )
+            .ConfigureAwait(false);
     }
 
     [Fact]
     public async Task TestDeleteParamsParameterAsync()
     {
         var initialText =
-@"class C
+            @"class C
 {
     void M()
     {
@@ -354,7 +396,7 @@ public static class FooExtensions
     }
 }";
         var currentText =
-@"class C
+            @"class C
 {
     void M()
     {
@@ -366,7 +408,7 @@ public static class FooExtensions
     }
 }";
         var expectedText =
-@"class C
+            @"class C
 {
     void M()
     {
@@ -378,14 +420,20 @@ public static class FooExtensions
     }
 }";
 
-        await VerifyExpectedTextAsync(WellKnownIntents.DeleteParameter, initialText, currentText, expectedText).ConfigureAwait(false);
+        await VerifyExpectedTextAsync(
+                WellKnownIntents.DeleteParameter,
+                initialText,
+                currentText,
+                expectedText
+            )
+            .ConfigureAwait(false);
     }
 
     [Fact]
     public async Task TestDeleteParameterBeforeParamsAsync()
     {
         var initialText =
-@"class C
+            @"class C
 {
     void M()
     {
@@ -397,7 +445,7 @@ public static class FooExtensions
     }
 }";
         var currentText =
-@"class C
+            @"class C
 {
     void M()
     {
@@ -409,7 +457,7 @@ public static class FooExtensions
     }
 }";
         var expectedText =
-@"class C
+            @"class C
 {
     void M()
     {
@@ -421,14 +469,20 @@ public static class FooExtensions
     }
 }";
 
-        await VerifyExpectedTextAsync(WellKnownIntents.DeleteParameter, initialText, currentText, expectedText).ConfigureAwait(false);
+        await VerifyExpectedTextAsync(
+                WellKnownIntents.DeleteParameter,
+                initialText,
+                currentText,
+                expectedText
+            )
+            .ConfigureAwait(false);
     }
 
     [Fact]
     public async Task TestDeleteParameterOnStaticExtensionInvocationAsync()
     {
         var initialText =
-@"public static class AExtension
+            @"public static class AExtension
 {
     public static void Method(this A c, int i)
     {
@@ -444,7 +498,7 @@ public class A
     }
 }";
         var currentText =
-@"public static class AExtension
+            @"public static class AExtension
 {
     public static void Method(this A c, int i)
     {
@@ -460,7 +514,7 @@ public class A
     }
 }";
         var expectedText =
-@"public static class AExtension
+            @"public static class AExtension
 {
     public static void Method(this A c)
     {
@@ -476,14 +530,20 @@ public class A
     }
 }";
 
-        await VerifyExpectedTextAsync(WellKnownIntents.DeleteParameter, initialText, currentText, expectedText).ConfigureAwait(false);
+        await VerifyExpectedTextAsync(
+                WellKnownIntents.DeleteParameter,
+                initialText,
+                currentText,
+                expectedText
+            )
+            .ConfigureAwait(false);
     }
 
     [Fact]
     public async Task TestDeleteParameterOnConstructorInvocationAsync()
     {
         var initialText =
-@"public class A
+            @"public class A
 {
     public A(int i, string s)
     {
@@ -496,7 +556,7 @@ public class A
     }
 }";
         var currentText =
-@"public class A
+            @"public class A
 {
     public A(int i, string s)
     {
@@ -509,7 +569,7 @@ public class A
     }
 }";
         var expectedText =
-@"public class A
+            @"public class A
 {
     public A(int i)
     {
@@ -522,6 +582,12 @@ public class A
     }
 }";
 
-        await VerifyExpectedTextAsync(WellKnownIntents.DeleteParameter, initialText, currentText, expectedText).ConfigureAwait(false);
+        await VerifyExpectedTextAsync(
+                WellKnownIntents.DeleteParameter,
+                initialText,
+                currentText,
+                expectedText
+            )
+            .ConfigureAwait(false);
     }
 }

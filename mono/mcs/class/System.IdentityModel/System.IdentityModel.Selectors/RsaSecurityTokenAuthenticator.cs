@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -37,29 +37,30 @@ using System.Xml;
 
 namespace System.IdentityModel.Selectors
 {
-    public class RsaSecurityTokenAuthenticator
-        : SecurityTokenAuthenticator
+    public class RsaSecurityTokenAuthenticator : SecurityTokenAuthenticator
     {
-        public RsaSecurityTokenAuthenticator ()
-        {
-        }
+        public RsaSecurityTokenAuthenticator() { }
 
-        protected override bool CanValidateTokenCore (SecurityToken token)
+        protected override bool CanValidateTokenCore(SecurityToken token)
         {
             return token is RsaSecurityToken;
         }
 
-        [MonoTODO ("hmm, what to validate?")]
-        protected override ReadOnlyCollection<IAuthorizationPolicy>
-            ValidateTokenCore (SecurityToken token)
+        [MonoTODO("hmm, what to validate?")]
+        protected override ReadOnlyCollection<IAuthorizationPolicy> ValidateTokenCore(
+            SecurityToken token
+        )
         {
             RsaSecurityToken rt = token as RsaSecurityToken;
             if (rt == null)
-                throw new InvalidOperationException ("Security token '{0}' cannot be validated by this security token authenticator.");
+                throw new InvalidOperationException(
+                    "Security token '{0}' cannot be validated by this security token authenticator."
+                );
 
-            IAuthorizationPolicy policy =
-                new RsaAuthorizationPolicy (rt.Rsa);
-            return new ReadOnlyCollection<IAuthorizationPolicy> (new IAuthorizationPolicy [] {policy});
+            IAuthorizationPolicy policy = new RsaAuthorizationPolicy(rt.Rsa);
+            return new ReadOnlyCollection<IAuthorizationPolicy>(
+                new IAuthorizationPolicy[] { policy }
+            );
         }
 
         class RsaAuthorizationPolicy : IAuthorizationPolicy
@@ -67,23 +68,25 @@ namespace System.IdentityModel.Selectors
             string id;
             RSA rsa;
 
-            public RsaAuthorizationPolicy (RSA rsa)
+            public RsaAuthorizationPolicy(RSA rsa)
             {
-                id = new UniqueId ().ToString ();
+                id = new UniqueId().ToString();
             }
 
-            public ClaimSet Issuer {
+            public ClaimSet Issuer
+            {
                 get { return ClaimSet.System; }
             }
 
-            public string Id {
+            public string Id
+            {
                 get { return id; }
             }
 
-            public bool Evaluate (EvaluationContext ec, ref Object state)
+            public bool Evaluate(EvaluationContext ec, ref Object state)
             {
-                ec.AddClaimSet (this, new DefaultClaimSet (Claim.CreateRsaClaim (rsa)));
-                ec.RecordExpirationTime (DateTime.MaxValue.AddDays (-1));
+                ec.AddClaimSet(this, new DefaultClaimSet(Claim.CreateRsaClaim(rsa)));
+                ec.RecordExpirationTime(DateTime.MaxValue.AddDays(-1));
                 return true;
             }
         }

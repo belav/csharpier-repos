@@ -18,9 +18,21 @@ public static class TestProject
 
         var projectDirectory = Path.Combine(repoRoot, "src", "Razor", directoryHint, "test");
 
-        if (string.Equals(directoryHint, "Microsoft.AspNetCore.Razor.Language.Test", StringComparison.Ordinal))
+        if (
+            string.Equals(
+                directoryHint,
+                "Microsoft.AspNetCore.Razor.Language.Test",
+                StringComparison.Ordinal
+            )
+        )
         {
-            projectDirectory = Path.Combine(repoRoot, "src", "Razor", "Microsoft.AspNetCore.Razor.Language", "test");
+            projectDirectory = Path.Combine(
+                repoRoot,
+                "src",
+                "Razor",
+                "Microsoft.AspNetCore.Razor.Language",
+                "test"
+            );
         }
 
         return projectDirectory;
@@ -36,9 +48,21 @@ public static class TestProject
 
         var assemblyName = type.Assembly.GetName().Name;
         var projectDirectory = Path.Combine(repoRoot, "src", "Razor", assemblyName, "test");
-        if (string.Equals(assemblyName, "Microsoft.AspNetCore.Razor.Language.Test", StringComparison.Ordinal))
+        if (
+            string.Equals(
+                assemblyName,
+                "Microsoft.AspNetCore.Razor.Language.Test",
+                StringComparison.Ordinal
+            )
+        )
         {
-            projectDirectory = Path.Combine(repoRoot, "src", "Razor", "Microsoft.AspNetCore.Razor.Language", "test");
+            projectDirectory = Path.Combine(
+                repoRoot,
+                "src",
+                "Razor",
+                "Microsoft.AspNetCore.Razor.Language",
+                "test"
+            );
         }
 
         return projectDirectory;
@@ -55,8 +79,7 @@ public static class TestProject
                 return fileInfo.DirectoryName;
             }
             directoryInfo = directoryInfo.Parent;
-        }
-        while (directoryInfo.Parent != null);
+        } while (directoryInfo.Parent != null);
 
         return null;
     }

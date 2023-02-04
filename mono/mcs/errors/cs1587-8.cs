@@ -7,9 +7,8 @@ using System;
 namespace TopNS
 {
     /// more invalid comment on namespace; inside namespace
-    namespace ChildNS {
-        class Test {
-        }
+    namespace ChildNS
+    {
+        class Test { }
     }
-
 }

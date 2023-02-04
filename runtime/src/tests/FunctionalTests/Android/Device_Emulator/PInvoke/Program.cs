@@ -9,7 +9,9 @@ using System.Runtime.InteropServices;
 public static class Program
 {
     [DllImport("__Internal")]
-    unsafe private static extern void invoke_external_native_api(delegate* unmanaged<void> callback);
+    unsafe private static extern void invoke_external_native_api(
+        delegate* unmanaged<void> callback
+    );
 
     private static int counter = 1;
 
@@ -21,7 +23,8 @@ public static class Program
 
     public static int Main()
     {
-        unsafe {
+        unsafe
+        {
             delegate* unmanaged<void> unmanagedPtr = &Callback;
             invoke_external_native_api(unmanagedPtr);
         }

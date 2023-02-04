@@ -22,15 +22,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         public async Task PP_IfTrue(TestHost testHost)
         {
             var code =
-@"#if true
+                @"#if true
 #endif";
-            await TestInMethodAsync(code,
+            await TestInMethodAsync(
+                code,
                 testHost,
                 PPKeyword("#"),
                 PPKeyword("if"),
                 Keyword("true"),
                 PPKeyword("#"),
-                PPKeyword("endif"));
+                PPKeyword("endif")
+            );
         }
 
         [Theory]
@@ -38,16 +40,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         public async Task PP_IfTrueWithComment(TestHost testHost)
         {
             var code =
-@"#if true //Goo
+                @"#if true //Goo
 #endif";
-            await TestInMethodAsync(code,
+            await TestInMethodAsync(
+                code,
                 testHost,
                 PPKeyword("#"),
                 PPKeyword("if"),
                 Keyword("true"),
                 Comment("//Goo"),
                 PPKeyword("#"),
-                PPKeyword("endif"));
+                PPKeyword("endif")
+            );
         }
 
         [Theory]
@@ -55,15 +59,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         public async Task PP_IfFalse(TestHost testHost)
         {
             var code =
-@"#if false
+                @"#if false
 #endif";
-            await TestInMethodAsync(code,
+            await TestInMethodAsync(
+                code,
                 testHost,
                 PPKeyword("#"),
                 PPKeyword("if"),
                 Keyword("false"),
                 PPKeyword("#"),
-                PPKeyword("endif"));
+                PPKeyword("endif")
+            );
         }
 
         [Theory]
@@ -71,15 +77,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         public async Task PP_IfGOO(TestHost testHost)
         {
             var code =
-@"#if GOO
+                @"#if GOO
 #endif";
-            await TestInMethodAsync(code,
+            await TestInMethodAsync(
+                code,
                 testHost,
                 PPKeyword("#"),
                 PPKeyword("if"),
                 Identifier("GOO"),
                 PPKeyword("#"),
-                PPKeyword("endif"));
+                PPKeyword("endif")
+            );
         }
 
         [Theory]
@@ -87,16 +95,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         public async Task PP_IfNotTrue(TestHost testHost)
         {
             var code =
-@"#if !true
+                @"#if !true
 #endif";
-            await TestInMethodAsync(code,
+            await TestInMethodAsync(
+                code,
                 testHost,
                 PPKeyword("#"),
                 PPKeyword("if"),
                 Operators.Exclamation,
                 Keyword("true"),
                 PPKeyword("#"),
-                PPKeyword("endif"));
+                PPKeyword("endif")
+            );
         }
 
         [Theory]
@@ -104,16 +114,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         public async Task PP_IfNotFalse(TestHost testHost)
         {
             var code =
-@"#if !false
+                @"#if !false
 #endif";
-            await TestInMethodAsync(code,
+            await TestInMethodAsync(
+                code,
                 testHost,
                 PPKeyword("#"),
                 PPKeyword("if"),
                 Operators.Exclamation,
                 Keyword("false"),
                 PPKeyword("#"),
-                PPKeyword("endif"));
+                PPKeyword("endif")
+            );
         }
 
         [Theory]
@@ -121,16 +133,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         public async Task PP_IfNotGOO(TestHost testHost)
         {
             var code =
-@"#if !GOO
+                @"#if !GOO
 #endif";
-            await TestInMethodAsync(code,
+            await TestInMethodAsync(
+                code,
                 testHost,
                 PPKeyword("#"),
                 PPKeyword("if"),
                 Operators.Exclamation,
                 Identifier("GOO"),
                 PPKeyword("#"),
-                PPKeyword("endif"));
+                PPKeyword("endif")
+            );
         }
 
         [Theory]
@@ -138,9 +152,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         public async Task PP_IfTrueWithParens(TestHost testHost)
         {
             var code =
-@"#if (true)
+                @"#if (true)
 #endif";
-            await TestInMethodAsync(code,
+            await TestInMethodAsync(
+                code,
                 testHost,
                 PPKeyword("#"),
                 PPKeyword("if"),
@@ -148,7 +163,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Keyword("true"),
                 Punctuation.CloseParen,
                 PPKeyword("#"),
-                PPKeyword("endif"));
+                PPKeyword("endif")
+            );
         }
 
         [Theory]
@@ -156,9 +172,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         public async Task PP_IfFalseWithParens(TestHost testHost)
         {
             var code =
-@"#if (false)
+                @"#if (false)
 #endif";
-            await TestInMethodAsync(code,
+            await TestInMethodAsync(
+                code,
                 testHost,
                 PPKeyword("#"),
                 PPKeyword("if"),
@@ -166,7 +183,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Keyword("false"),
                 Punctuation.CloseParen,
                 PPKeyword("#"),
-                PPKeyword("endif"));
+                PPKeyword("endif")
+            );
         }
 
         [Theory]
@@ -174,9 +192,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         public async Task PP_IfGOOWithParens(TestHost testHost)
         {
             var code =
-@"#if (GOO)
+                @"#if (GOO)
 #endif";
-            await TestInMethodAsync(code,
+            await TestInMethodAsync(
+                code,
                 testHost,
                 PPKeyword("#"),
                 PPKeyword("if"),
@@ -184,7 +203,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Identifier("GOO"),
                 Punctuation.CloseParen,
                 PPKeyword("#"),
-                PPKeyword("endif"));
+                PPKeyword("endif")
+            );
         }
 
         [Theory]
@@ -192,10 +212,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         public async Task PP_IfOrExpression(TestHost testHost)
         {
             var code =
-@"#if GOO || BAR
+                @"#if GOO || BAR
 #endif";
 
-            await TestInMethodAsync(code,
+            await TestInMethodAsync(
+                code,
                 testHost,
                 PPKeyword("#"),
                 PPKeyword("if"),
@@ -203,7 +224,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Operators.BarBar,
                 Identifier("BAR"),
                 PPKeyword("#"),
-                PPKeyword("endif"));
+                PPKeyword("endif")
+            );
         }
 
         [Theory]
@@ -211,10 +233,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         public async Task PP_IfAndExpression(TestHost testHost)
         {
             var code =
-@"#if GOO && BAR
+                @"#if GOO && BAR
 #endif";
 
-            await TestInMethodAsync(code,
+            await TestInMethodAsync(
+                code,
                 testHost,
                 PPKeyword("#"),
                 PPKeyword("if"),
@@ -222,7 +245,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Operators.AmpersandAmpersand,
                 Identifier("BAR"),
                 PPKeyword("#"),
-                PPKeyword("endif"));
+                PPKeyword("endif")
+            );
         }
 
         [Theory]
@@ -230,10 +254,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         public async Task PP_IfOrAndExpression(TestHost testHost)
         {
             var code =
-@"#if GOO || BAR && BAZ
+                @"#if GOO || BAR && BAZ
 #endif";
 
-            await TestInMethodAsync(code,
+            await TestInMethodAsync(
+                code,
                 testHost,
                 PPKeyword("#"),
                 PPKeyword("if"),
@@ -243,7 +268,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Operators.AmpersandAmpersand,
                 Identifier("BAZ"),
                 PPKeyword("#"),
-                PPKeyword("endif"));
+                PPKeyword("endif")
+            );
         }
 
         [Theory]
@@ -251,10 +277,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         public async Task PP_IfOrExpressionWithParens(TestHost testHost)
         {
             var code =
-@"#if (GOO || BAR)
+                @"#if (GOO || BAR)
 #endif";
 
-            await TestInMethodAsync(code,
+            await TestInMethodAsync(
+                code,
                 testHost,
                 PPKeyword("#"),
                 PPKeyword("if"),
@@ -264,7 +291,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Identifier("BAR"),
                 Punctuation.CloseParen,
                 PPKeyword("#"),
-                PPKeyword("endif"));
+                PPKeyword("endif")
+            );
         }
 
         [Theory]
@@ -272,10 +300,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         public async Task PP_IfAndExpressionWithParens(TestHost testHost)
         {
             var code =
-@"#if (GOO && BAR)
+                @"#if (GOO && BAR)
 #endif";
 
-            await TestInMethodAsync(code,
+            await TestInMethodAsync(
+                code,
                 testHost,
                 PPKeyword("#"),
                 PPKeyword("if"),
@@ -285,7 +314,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Identifier("BAR"),
                 Punctuation.CloseParen,
                 PPKeyword("#"),
-                PPKeyword("endif"));
+                PPKeyword("endif")
+            );
         }
 
         [Theory]
@@ -293,10 +323,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         public async Task PP_IfOrAndExpressionWithParens(TestHost testHost)
         {
             var code =
-@"#if GOO || (BAR && BAZ)
+                @"#if GOO || (BAR && BAZ)
 #endif";
 
-            await TestInMethodAsync(code,
+            await TestInMethodAsync(
+                code,
                 testHost,
                 PPKeyword("#"),
                 PPKeyword("if"),
@@ -308,29 +339,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Identifier("BAZ"),
                 Punctuation.CloseParen,
                 PPKeyword("#"),
-                PPKeyword("endif"));
+                PPKeyword("endif")
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task PP_If1(TestHost testHost)
         {
-            await TestAsync("#if goo",
+            await TestAsync(
+                "#if goo",
                 testHost,
                 PPKeyword("#"),
                 PPKeyword("if"),
-                Identifier("goo"));
+                Identifier("goo")
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task PP_If2(TestHost testHost)
         {
-            await TestAsync(" #if goo",
+            await TestAsync(
+                " #if goo",
                 testHost,
                 PPKeyword("#"),
                 PPKeyword("if"),
-                Identifier("goo"));
+                Identifier("goo")
+            );
         }
 
         [Theory]
@@ -338,15 +374,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         public async Task PP_If3(TestHost testHost)
         {
             var code =
-@"#if goo
+                @"#if goo
 #endif";
-            await TestAsync(code,
+            await TestAsync(
+                code,
                 testHost,
                 PPKeyword("#"),
                 PPKeyword("if"),
                 Identifier("goo"),
                 PPKeyword("#"),
-                PPKeyword("endif"));
+                PPKeyword("endif")
+            );
         }
 
         [Theory]
@@ -354,14 +392,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         public async Task PP_If4(TestHost testHost)
         {
             var code =
-@"#if
+                @"#if
 #endif";
-            await TestAsync(code,
+            await TestAsync(
+                code,
                 testHost,
                 PPKeyword("#"),
                 PPKeyword("if"),
                 PPKeyword("#"),
-                PPKeyword("endif"));
+                PPKeyword("endif")
+            );
         }
 
         [Theory]
@@ -369,19 +409,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         public async Task PP_If5(TestHost testHost)
         {
             var code =
-@"#if
+                @"#if
 aoeu
 aoeu
 #endif";
-            await TestAsync(code,
+            await TestAsync(
+                code,
                 testHost,
                 PPKeyword("#"),
                 PPKeyword("if"),
-                Inactive(@"aoeu
+                Inactive(
+                    @"aoeu
 aoeu
-"),
+"
+                ),
                 PPKeyword("#"),
-                PPKeyword("endif"));
+                PPKeyword("endif")
+            );
         }
 
         [Theory]
@@ -389,16 +433,18 @@ aoeu
         public async Task PP_If6(TestHost testHost)
         {
             var code =
-@"#if
+                @"#if
 #else
 aeu";
-            await TestAsync(code,
+            await TestAsync(
+                code,
                 testHost,
                 PPKeyword("#"),
                 PPKeyword("if"),
                 PPKeyword("#"),
                 PPKeyword("else"),
-                Identifier("aeu"));
+                Identifier("aeu")
+            );
         }
 
         [Theory]
@@ -406,11 +452,12 @@ aeu";
         public async Task PP_If7(TestHost testHost)
         {
             var code =
-@"#if
+                @"#if
 #else
 #endif
 aeu";
-            await TestAsync(code,
+            await TestAsync(
+                code,
                 testHost,
                 PPKeyword("#"),
                 PPKeyword("if"),
@@ -418,7 +465,8 @@ aeu";
                 PPKeyword("else"),
                 PPKeyword("#"),
                 PPKeyword("endif"),
-                Identifier("aeu"));
+                Identifier("aeu")
+            );
         }
 
         [Theory, WorkItem(44423, "https://github.com/dotnet/roslyn/issues/44423")]
@@ -426,7 +474,7 @@ aeu";
         public async Task PP_If8(bool script, TestHost testHost)
         {
             var code =
-@"#if
+                @"#if
 #else
 aoeu
 aoeu
@@ -450,7 +498,8 @@ aeu";
                 Identifier("aou"),
                 PPKeyword("#"),
                 PPKeyword("endif"),
-                script ? Field("aeu") : Identifier("aeu"));
+                script ? Field("aeu") : Identifier("aeu")
+            );
         }
 
         [Theory, WorkItem(44423, "https://github.com/dotnet/roslyn/issues/44423")]
@@ -458,7 +507,7 @@ aeu";
         public async Task PP_If9(bool script, TestHost testHost)
         {
             var code =
-@"#if //Goo1
+                @"#if //Goo1
 #else //Goo2
 aoeu
 aoeu
@@ -485,71 +534,74 @@ aeu";
                 PPKeyword("#"),
                 PPKeyword("endif"),
                 Comment("//Goo3"),
-                script ? Field("aeu") : Identifier("aeu"));
+                script ? Field("aeu") : Identifier("aeu")
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task PP_Region1(TestHost testHost)
         {
-            await TestAsync("#region Goo",
+            await TestAsync(
+                "#region Goo",
                 testHost,
                 PPKeyword("#"),
                 PPKeyword("region"),
-                PPText("Goo"));
+                PPText("Goo")
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task PP_Region2(TestHost testHost)
         {
-            await TestAsync("   #region goo",
+            await TestAsync(
+                "   #region goo",
                 testHost,
                 PPKeyword("#"),
                 PPKeyword("region"),
-                PPText("goo"));
+                PPText("goo")
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task PP_EndRegion1(TestHost testHost)
         {
-            await TestAsync("#endregion",
-                testHost,
-                PPKeyword("#"),
-                PPKeyword("endregion"));
+            await TestAsync("#endregion", testHost, PPKeyword("#"), PPKeyword("endregion"));
         }
 
         [Theory]
         [CombinatorialData]
         public async Task PP_EndRegion2(TestHost testHost)
         {
-            await TestAsync("   #endregion",
-                testHost,
-                PPKeyword("#"),
-                PPKeyword("endregion"));
+            await TestAsync("   #endregion", testHost, PPKeyword("#"), PPKeyword("endregion"));
         }
 
         [Theory]
         [CombinatorialData]
         public async Task PP_EndRegion3(TestHost testHost)
         {
-            await TestAsync("#endregion adsf",
+            await TestAsync(
+                "#endregion adsf",
                 testHost,
                 PPKeyword("#"),
                 PPKeyword("endregion"),
-                PPText("adsf"));
+                PPText("adsf")
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task PP_EndRegion4(TestHost testHost)
         {
-            await TestAsync("   #endregion adsf",
+            await TestAsync(
+                "   #endregion adsf",
                 testHost,
                 PPKeyword("#"),
                 PPKeyword("endregion"),
-                PPText("adsf"));
+                PPText("adsf")
+            );
         }
 
         [Theory]
@@ -557,13 +609,14 @@ aeu";
         public async Task PP_RegionEndRegion1(TestHost testHost)
         {
             await TestAsync(
-@"#region
+                @"#region
 #endregion",
                 testHost,
                 PPKeyword("#"),
                 PPKeyword("region"),
                 PPKeyword("#"),
-                PPKeyword("endregion"));
+                PPKeyword("endregion")
+            );
         }
 
         [Theory]
@@ -571,14 +624,15 @@ aeu";
         public async Task PP_CommentAfterRegion1(TestHost testHost)
         {
             await TestAsync(
-@"#region adsf //comment
+                @"#region adsf //comment
 #endregion",
                 testHost,
                 PPKeyword("#"),
                 PPKeyword("region"),
                 PPText("adsf //comment"),
                 PPKeyword("#"),
-                PPKeyword("endregion"));
+                PPKeyword("endregion")
+            );
         }
 
         [Theory]
@@ -586,14 +640,15 @@ aeu";
         public async Task PP_CommentAfterRegion2(TestHost testHost)
         {
             await TestAsync(
-@"#region //comment
+                @"#region //comment
 #endregion",
                 testHost,
                 PPKeyword("#"),
                 PPKeyword("region"),
                 PPText("//comment"),
                 PPKeyword("#"),
-                PPKeyword("endregion"));
+                PPKeyword("endregion")
+            );
         }
 
         [Theory]
@@ -601,14 +656,15 @@ aeu";
         public async Task PP_CommentAfterEndRegion1(TestHost testHost)
         {
             await TestAsync(
-@"#region
+                @"#region
 #endregion adsf //comment",
                 testHost,
                 PPKeyword("#"),
                 PPKeyword("region"),
                 PPKeyword("#"),
                 PPKeyword("endregion"),
-                PPText("adsf //comment"));
+                PPText("adsf //comment")
+            );
         }
 
         [Theory]
@@ -616,14 +672,15 @@ aeu";
         public async Task PP_CommentAfterEndRegion2(TestHost testHost)
         {
             await TestAsync(
-@"#region
+                @"#region
 #endregion //comment",
                 testHost,
                 PPKeyword("#"),
                 PPKeyword("region"),
                 PPKeyword("#"),
                 PPKeyword("endregion"),
-                Comment("//comment"));
+                Comment("//comment")
+            );
         }
 
         [Theory]
@@ -631,7 +688,7 @@ aeu";
         public async Task PP_DeclarationDirectives(TestHost testHost)
         {
             await TestAsync(
-@"#define A
+                @"#define A
 #undef B",
                 testHost,
                 PPKeyword("#"),
@@ -639,7 +696,8 @@ aeu";
                 Identifier("A"),
                 PPKeyword("#"),
                 PPKeyword("undef"),
-                Identifier("B"));
+                Identifier("B")
+            );
         }
 
         [Theory]
@@ -647,11 +705,12 @@ aeu";
         public async Task PP_IfElseEndIfDirectives(TestHost testHost)
         {
             var code =
-@"#if true
+                @"#if true
 #elif DEBUG
 #else
 #endif";
-            await TestAsync(code,
+            await TestAsync(
+                code,
                 testHost,
                 PPKeyword("#"),
                 PPKeyword("if"),
@@ -662,7 +721,8 @@ aeu";
                 PPKeyword("#"),
                 PPKeyword("else"),
                 PPKeyword("#"),
-                PPKeyword("endif"));
+                PPKeyword("endif")
+            );
         }
 
         [Theory]
@@ -670,11 +730,7 @@ aeu";
         public async Task PP_DefineDirective(TestHost testHost)
         {
             var code = @"#define GOO";
-            await TestAsync(code,
-                testHost,
-                PPKeyword("#"),
-                PPKeyword("define"),
-                Identifier("GOO"));
+            await TestAsync(code, testHost, PPKeyword("#"), PPKeyword("define"), Identifier("GOO"));
         }
 
         [Theory]
@@ -682,11 +738,7 @@ aeu";
         public async Task PP_DefineDirectiveWithCommentAndNoName(TestHost testHost)
         {
             var code = @"#define //Goo";
-            await TestAsync(code,
-                testHost,
-                PPKeyword("#"),
-                PPKeyword("define"),
-                Comment("//Goo"));
+            await TestAsync(code, testHost, PPKeyword("#"), PPKeyword("define"), Comment("//Goo"));
         }
 
         [Theory]
@@ -694,12 +746,14 @@ aeu";
         public async Task PP_DefineDirectiveWithComment(TestHost testHost)
         {
             var code = @"#define GOO //Goo";
-            await TestAsync(code,
+            await TestAsync(
+                code,
                 testHost,
                 PPKeyword("#"),
                 PPKeyword("define"),
                 Identifier("GOO"),
-                Comment("//Goo"));
+                Comment("//Goo")
+            );
         }
 
         [Theory]
@@ -708,11 +762,7 @@ aeu";
         {
             var code = @"#undef GOO";
 
-            await TestAsync(code,
-                testHost,
-                PPKeyword("#"),
-                PPKeyword("undef"),
-                Identifier("GOO"));
+            await TestAsync(code, testHost, PPKeyword("#"), PPKeyword("undef"), Identifier("GOO"));
         }
 
         [Theory]
@@ -720,11 +770,7 @@ aeu";
         public async Task PP_UndefDirectiveWithCommentAndNoName(TestHost testHost)
         {
             var code = @"#undef //Goo";
-            await TestAsync(code,
-                testHost,
-                PPKeyword("#"),
-                PPKeyword("undef"),
-                Comment("//Goo"));
+            await TestAsync(code, testHost, PPKeyword("#"), PPKeyword("undef"), Comment("//Goo"));
         }
 
         [Theory]
@@ -732,12 +778,14 @@ aeu";
         public async Task PP_UndefDirectiveWithComment(TestHost testHost)
         {
             var code = @"#undef GOO //Goo";
-            await TestAsync(code,
+            await TestAsync(
+                code,
                 testHost,
                 PPKeyword("#"),
                 PPKeyword("undef"),
                 Identifier("GOO"),
-                Comment("//Goo"));
+                Comment("//Goo")
+            );
         }
 
         [Theory]
@@ -746,11 +794,7 @@ aeu";
         {
             var code = @"#error GOO";
 
-            await TestAsync(code,
-                testHost,
-                PPKeyword("#"),
-                PPKeyword("error"),
-                PPText("GOO"));
+            await TestAsync(code, testHost, PPKeyword("#"), PPKeyword("error"), PPText("GOO"));
         }
 
         [Theory]
@@ -759,11 +803,13 @@ aeu";
         {
             var code = @"#error GOO //Goo";
 
-            await TestAsync(code,
+            await TestAsync(
+                code,
                 testHost,
                 PPKeyword("#"),
                 PPKeyword("error"),
-                PPText("GOO //Goo"));
+                PPText("GOO //Goo")
+            );
         }
 
         [Theory]
@@ -772,11 +818,7 @@ aeu";
         {
             var code = @"#warning GOO";
 
-            await TestAsync(code,
-                testHost,
-                PPKeyword("#"),
-                PPKeyword("warning"),
-                PPText("GOO"));
+            await TestAsync(code, testHost, PPKeyword("#"), PPKeyword("warning"), PPText("GOO"));
         }
 
         [Theory]
@@ -785,11 +827,13 @@ aeu";
         {
             var code = @"#warning GOO //Goo";
 
-            await TestAsync(code,
+            await TestAsync(
+                code,
                 testHost,
                 PPKeyword("#"),
                 PPKeyword("warning"),
-                PPText("GOO //Goo"));
+                PPText("GOO //Goo")
+            );
         }
 
         [Theory]
@@ -798,11 +842,7 @@ aeu";
         {
             var code = @"#line hidden";
 
-            await TestAsync(code,
-                testHost,
-                PPKeyword("#"),
-                PPKeyword("line"),
-                PPKeyword("hidden"));
+            await TestAsync(code, testHost, PPKeyword("#"), PPKeyword("line"), PPKeyword("hidden"));
         }
 
         [Theory]
@@ -811,12 +851,14 @@ aeu";
         {
             var code = @"#line hidden //Goo";
 
-            await TestAsync(code,
+            await TestAsync(
+                code,
                 testHost,
                 PPKeyword("#"),
                 PPKeyword("line"),
                 PPKeyword("hidden"),
-                Comment("//Goo"));
+                Comment("//Goo")
+            );
         }
 
         [Theory]
@@ -825,11 +867,13 @@ aeu";
         {
             var code = @"#line default";
 
-            await TestAsync(code,
+            await TestAsync(
+                code,
                 testHost,
                 PPKeyword("#"),
                 PPKeyword("line"),
-                PPKeyword("default"));
+                PPKeyword("default")
+            );
         }
 
         [Theory]
@@ -838,12 +882,14 @@ aeu";
         {
             var code = @"#line default //Goo";
 
-            await TestAsync(code,
+            await TestAsync(
+                code,
                 testHost,
                 PPKeyword("#"),
                 PPKeyword("line"),
                 PPKeyword("default"),
-                Comment("//Goo"));
+                Comment("//Goo")
+            );
         }
 
         [Theory]
@@ -852,11 +898,7 @@ aeu";
         {
             var code = @"#line 100";
 
-            await TestAsync(code,
-                testHost,
-                PPKeyword("#"),
-                PPKeyword("line"),
-                Number("100"));
+            await TestAsync(code, testHost, PPKeyword("#"), PPKeyword("line"), Number("100"));
         }
 
         [Theory]
@@ -865,12 +907,14 @@ aeu";
         {
             var code = @"#line 100 //Goo";
 
-            await TestAsync(code,
+            await TestAsync(
+                code,
                 testHost,
                 PPKeyword("#"),
                 PPKeyword("line"),
                 Number("100"),
-                Comment("//Goo"));
+                Comment("//Goo")
+            );
         }
 
         [Theory]
@@ -879,12 +923,14 @@ aeu";
         {
             var code = @"#line 100 ""C:\Goo""";
 
-            await TestAsync(code,
+            await TestAsync(
+                code,
                 testHost,
                 PPKeyword("#"),
                 PPKeyword("line"),
                 Number("100"),
-                String("\"C:\\Goo\""));
+                String("\"C:\\Goo\"")
+            );
         }
 
         [Theory]
@@ -893,13 +939,15 @@ aeu";
         {
             var code = @"#line 100 ""C:\Goo"" //Goo";
 
-            await TestAsync(code,
+            await TestAsync(
+                code,
                 testHost,
                 PPKeyword("#"),
                 PPKeyword("line"),
                 Number("100"),
                 String("\"C:\\Goo\""),
-                Comment("//Goo"));
+                Comment("//Goo")
+            );
         }
 
         [Theory]
@@ -908,7 +956,8 @@ aeu";
         {
             var code = @"#line (1, 2) - (3, 4) 5 ""file.txt""";
 
-            await TestAsync(code,
+            await TestAsync(
+                code,
                 testHost,
                 PPKeyword("#"),
                 PPKeyword("line"),
@@ -924,7 +973,8 @@ aeu";
                 Number("4"),
                 Punctuation.CloseParen,
                 Number("5"),
-                String("\"file.txt\""));
+                String("\"file.txt\"")
+            );
         }
 
         [Theory]
@@ -933,7 +983,8 @@ aeu";
         {
             var code = @"#line (1, 2) - (3, 4) """" //comment";
 
-            await TestAsync(code,
+            await TestAsync(
+                code,
                 testHost,
                 PPKeyword("#"),
                 PPKeyword("line"),
@@ -949,7 +1000,8 @@ aeu";
                 Number("4"),
                 Punctuation.CloseParen,
                 String("\"\""),
-                Comment("//comment"));
+                Comment("//comment")
+            );
         }
 
         [Theory]
@@ -958,11 +1010,13 @@ aeu";
         {
             var code = @"#nullable enable";
 
-            await TestAsync(code,
+            await TestAsync(
+                code,
                 testHost,
                 PPKeyword("#"),
                 PPKeyword("nullable"),
-                PPKeyword("enable"));
+                PPKeyword("enable")
+            );
         }
 
         [Theory]
@@ -971,12 +1025,14 @@ aeu";
         {
             var code = @"#nullable enable //Goo";
 
-            await TestAsync(code,
+            await TestAsync(
+                code,
                 testHost,
                 PPKeyword("#"),
                 PPKeyword("nullable"),
                 PPKeyword("enable"),
-                Comment("//Goo"));
+                Comment("//Goo")
+            );
         }
 
         [Theory]
@@ -985,12 +1041,14 @@ aeu";
         {
             var code = @"#nullable enable warnings";
 
-            await TestAsync(code,
+            await TestAsync(
+                code,
                 testHost,
                 PPKeyword("#"),
                 PPKeyword("nullable"),
                 PPKeyword("enable"),
-                PPKeyword("warnings"));
+                PPKeyword("warnings")
+            );
         }
 
         [Theory]
@@ -999,13 +1057,15 @@ aeu";
         {
             var code = @"#nullable enable warnings //Goo";
 
-            await TestAsync(code,
+            await TestAsync(
+                code,
                 testHost,
                 PPKeyword("#"),
                 PPKeyword("nullable"),
                 PPKeyword("enable"),
                 PPKeyword("warnings"),
-                Comment("//Goo"));
+                Comment("//Goo")
+            );
         }
 
         [Theory]
@@ -1014,12 +1074,14 @@ aeu";
         {
             var code = @"#nullable enable annotations";
 
-            await TestAsync(code,
+            await TestAsync(
+                code,
                 testHost,
                 PPKeyword("#"),
                 PPKeyword("nullable"),
                 PPKeyword("enable"),
-                PPKeyword("annotations"));
+                PPKeyword("annotations")
+            );
         }
 
         [Theory]
@@ -1028,13 +1090,15 @@ aeu";
         {
             var code = @"#nullable enable annotations //Goo";
 
-            await TestAsync(code,
+            await TestAsync(
+                code,
                 testHost,
                 PPKeyword("#"),
                 PPKeyword("nullable"),
                 PPKeyword("enable"),
                 PPKeyword("annotations"),
-                Comment("//Goo"));
+                Comment("//Goo")
+            );
         }
 
         [Theory]
@@ -1043,11 +1107,13 @@ aeu";
         {
             var code = @"#nullable disable";
 
-            await TestAsync(code,
+            await TestAsync(
+                code,
                 testHost,
                 PPKeyword("#"),
                 PPKeyword("nullable"),
-                PPKeyword("disable"));
+                PPKeyword("disable")
+            );
         }
 
         [Theory]
@@ -1056,12 +1122,14 @@ aeu";
         {
             var code = @"#nullable disable //Goo";
 
-            await TestAsync(code,
+            await TestAsync(
+                code,
                 testHost,
                 PPKeyword("#"),
                 PPKeyword("nullable"),
                 PPKeyword("disable"),
-                Comment("//Goo"));
+                Comment("//Goo")
+            );
         }
 
         [Theory]
@@ -1069,12 +1137,13 @@ aeu";
         public async Task PP_PragmaChecksum1(TestHost testHost)
         {
             await TestAsync(
-@"#pragma checksum stuff",
+                @"#pragma checksum stuff",
                 testHost,
                 PPKeyword("#"),
                 PPKeyword("pragma"),
                 PPKeyword("checksum"),
-                PPText("stuff"));
+                PPText("stuff")
+            );
         }
 
         [Theory]
@@ -1082,14 +1151,15 @@ aeu";
         public async Task PP_PragmaChecksum2(TestHost testHost)
         {
             await TestAsync(
-@"#pragma checksum ""file.txt"" ""{00000000-0000-0000-0000-000000000000}"" ""2453""",
+                @"#pragma checksum ""file.txt"" ""{00000000-0000-0000-0000-000000000000}"" ""2453""",
                 testHost,
                 PPKeyword("#"),
                 PPKeyword("pragma"),
                 PPKeyword("checksum"),
                 String("\"file.txt\""),
                 String("\"{00000000-0000-0000-0000-000000000000}\""),
-                String("\"2453\""));
+                String("\"2453\"")
+            );
         }
 
         [Theory]
@@ -1097,7 +1167,7 @@ aeu";
         public async Task PP_PragmaChecksum3(TestHost testHost)
         {
             await TestAsync(
-@"#pragma checksum ""file.txt"" ""{00000000-0000-0000-0000-000000000000}"" ""2453"" // Goo",
+                @"#pragma checksum ""file.txt"" ""{00000000-0000-0000-0000-000000000000}"" ""2453"" // Goo",
                 testHost,
                 PPKeyword("#"),
                 PPKeyword("pragma"),
@@ -1105,7 +1175,8 @@ aeu";
                 String("\"file.txt\""),
                 String("\"{00000000-0000-0000-0000-000000000000}\""),
                 String("\"2453\""),
-                Comment("// Goo"));
+                Comment("// Goo")
+            );
         }
 
         [Theory]
@@ -1114,13 +1185,15 @@ aeu";
         {
             var code = @"#pragma warning disable 100";
 
-            await TestAsync(code,
+            await TestAsync(
+                code,
                 testHost,
                 PPKeyword("#"),
                 PPKeyword("pragma"),
                 PPKeyword("warning"),
                 PPKeyword("disable"),
-                Number("100"));
+                Number("100")
+            );
         }
 
         [Theory]
@@ -1129,14 +1202,16 @@ aeu";
         {
             var code = @"#pragma warning disable 100 //Goo";
 
-            await TestAsync(code,
+            await TestAsync(
+                code,
                 testHost,
                 PPKeyword("#"),
                 PPKeyword("pragma"),
                 PPKeyword("warning"),
                 PPKeyword("disable"),
                 Number("100"),
-                Comment("//Goo"));
+                Comment("//Goo")
+            );
         }
 
         [Theory]
@@ -1146,13 +1221,15 @@ aeu";
         {
             var code = @"#pragma warning disable //Goo";
 
-            await TestAsync(code,
+            await TestAsync(
+                code,
                 testHost,
                 PPKeyword("#"),
                 PPKeyword("pragma"),
                 PPKeyword("warning"),
                 PPKeyword("disable"),
-                Comment("//Goo"));
+                Comment("//Goo")
+            );
         }
 
         [Theory]
@@ -1161,13 +1238,15 @@ aeu";
         {
             var code = @"#pragma warning restore 100";
 
-            await TestAsync(code,
+            await TestAsync(
+                code,
                 testHost,
                 PPKeyword("#"),
                 PPKeyword("pragma"),
                 PPKeyword("warning"),
                 PPKeyword("restore"),
-                Number("100"));
+                Number("100")
+            );
         }
 
         [Theory]
@@ -1176,14 +1255,16 @@ aeu";
         {
             var code = @"#pragma warning restore 100 //Goo";
 
-            await TestAsync(code,
+            await TestAsync(
+                code,
                 testHost,
                 PPKeyword("#"),
                 PPKeyword("pragma"),
                 PPKeyword("warning"),
                 PPKeyword("restore"),
                 Number("100"),
-                Comment("//Goo"));
+                Comment("//Goo")
+            );
         }
 
         [Theory]
@@ -1193,13 +1274,15 @@ aeu";
         {
             var code = @"#pragma warning restore //Goo";
 
-            await TestAsync(code,
+            await TestAsync(
+                code,
                 testHost,
                 PPKeyword("#"),
                 PPKeyword("pragma"),
                 PPKeyword("warning"),
                 PPKeyword("restore"),
-                Comment("//Goo"));
+                Comment("//Goo")
+            );
         }
 
         [Theory]
@@ -1208,7 +1291,8 @@ aeu";
         {
             var code = @"#pragma warning disable 100, 101";
 
-            await TestAsync(code,
+            await TestAsync(
+                code,
                 testHost,
                 PPKeyword("#"),
                 PPKeyword("pragma"),
@@ -1216,7 +1300,8 @@ aeu";
                 PPKeyword("disable"),
                 Number("100"),
                 Punctuation.Comma,
-                Number("101"));
+                Number("101")
+            );
         }
 
         [Theory]
@@ -1225,7 +1310,8 @@ aeu";
         {
             var code = @"#pragma warning restore 100, 101";
 
-            await TestAsync(code,
+            await TestAsync(
+                code,
                 testHost,
                 PPKeyword("#"),
                 PPKeyword("pragma"),
@@ -1233,7 +1319,8 @@ aeu";
                 PPKeyword("restore"),
                 Number("100"),
                 Punctuation.Comma,
-                Number("101"));
+                Number("101")
+            );
         }
 
         [Theory]
@@ -1242,7 +1329,8 @@ aeu";
         {
             var code = @"#pragma warning disable 100, 101, 102";
 
-            await TestAsync(code,
+            await TestAsync(
+                code,
                 testHost,
                 PPKeyword("#"),
                 PPKeyword("pragma"),
@@ -1252,7 +1340,8 @@ aeu";
                 Punctuation.Comma,
                 Number("101"),
                 Punctuation.Comma,
-                Number("102"));
+                Number("102")
+            );
         }
 
         [Theory]
@@ -1261,7 +1350,8 @@ aeu";
         {
             var code = @"#pragma warning restore 100, 101, 102";
 
-            await TestAsync(code,
+            await TestAsync(
+                code,
                 testHost,
                 PPKeyword("#"),
                 PPKeyword("pragma"),
@@ -1271,7 +1361,8 @@ aeu";
                 Punctuation.Comma,
                 Number("101"),
                 Punctuation.Comma,
-                Number("102"));
+                Number("102")
+            );
         }
 
         [Theory]
@@ -1281,8 +1372,16 @@ aeu";
             await TestInMethodAsync(
                 code: @"M2(out var _);",
                 testHost: testHost,
- expected: Classifications(Identifier("M2"), Punctuation.OpenParen, Keyword("out"), Identifier("var"),
-                    Keyword("_"), Punctuation.CloseParen, Punctuation.Semicolon));
+                expected: Classifications(
+                    Identifier("M2"),
+                    Punctuation.OpenParen,
+                    Keyword("out"),
+                    Identifier("var"),
+                    Keyword("_"),
+                    Punctuation.CloseParen,
+                    Punctuation.Semicolon
+                )
+            );
         }
 
         [Theory]
@@ -1292,8 +1391,19 @@ aeu";
             await TestInMethodAsync(
                 code: @"switch (1) { case int _: }",
                 testHost: testHost,
- expected: Classifications(ControlKeyword("switch"), Punctuation.OpenParen, Number("1"), Punctuation.CloseParen,
-                    Punctuation.OpenCurly, ControlKeyword("case"), Keyword("int"), Keyword("_"), Punctuation.Colon, Punctuation.CloseCurly));
+                expected: Classifications(
+                    ControlKeyword("switch"),
+                    Punctuation.OpenParen,
+                    Number("1"),
+                    Punctuation.CloseParen,
+                    Punctuation.OpenCurly,
+                    ControlKeyword("case"),
+                    Keyword("int"),
+                    Keyword("_"),
+                    Punctuation.Colon,
+                    Punctuation.CloseCurly
+                )
+            );
         }
 
         [Theory]
@@ -1303,9 +1413,22 @@ aeu";
             await TestInMethodAsync(
                 code: @"var (x, _) = (1, 2);",
                 testHost: testHost,
- expected: Classifications(Identifier("var"), Punctuation.OpenParen, Local("x"), Punctuation.Comma,
-                    Keyword("_"), Punctuation.CloseParen, Operators.Equals, Punctuation.OpenParen, Number("1"),
-                    Punctuation.Comma, Number("2"), Punctuation.CloseParen, Punctuation.Semicolon));
+                expected: Classifications(
+                    Identifier("var"),
+                    Punctuation.OpenParen,
+                    Local("x"),
+                    Punctuation.Comma,
+                    Keyword("_"),
+                    Punctuation.CloseParen,
+                    Operators.Equals,
+                    Punctuation.OpenParen,
+                    Number("1"),
+                    Punctuation.Comma,
+                    Number("2"),
+                    Punctuation.CloseParen,
+                    Punctuation.Semicolon
+                )
+            );
         }
 
         [Theory]
@@ -1315,9 +1438,23 @@ aeu";
             await TestInMethodAsync(
                 code: @"(var _, var _) = (1, 2);",
                 testHost: testHost,
- expected: Classifications(Punctuation.OpenParen, Identifier("var"), Keyword("_"), Punctuation.Comma,
-                    Identifier("var"), Keyword("_"), Punctuation.CloseParen, Operators.Equals, Punctuation.OpenParen,
-                    Number("1"), Punctuation.Comma, Number("2"), Punctuation.CloseParen, Punctuation.Semicolon));
+                expected: Classifications(
+                    Punctuation.OpenParen,
+                    Identifier("var"),
+                    Keyword("_"),
+                    Punctuation.Comma,
+                    Identifier("var"),
+                    Keyword("_"),
+                    Punctuation.CloseParen,
+                    Operators.Equals,
+                    Punctuation.OpenParen,
+                    Number("1"),
+                    Punctuation.Comma,
+                    Number("2"),
+                    Punctuation.CloseParen,
+                    Punctuation.Semicolon
+                )
+            );
         }
 
         [Theory]
@@ -1327,10 +1464,24 @@ aeu";
             await TestInMethodAsync(
                 code: @"int x; (_, x) = (1, 2);",
                 testHost: testHost,
- expected: Classifications(Keyword("int"), Local("x"), Punctuation.Semicolon, Punctuation.OpenParen,
-                    Identifier("_"), Punctuation.Comma, Identifier("x"), Punctuation.CloseParen, Operators.Equals,
-                    Punctuation.OpenParen, Number("1"), Punctuation.Comma, Number("2"), Punctuation.CloseParen,
-                    Punctuation.Semicolon));
+                expected: Classifications(
+                    Keyword("int"),
+                    Local("x"),
+                    Punctuation.Semicolon,
+                    Punctuation.OpenParen,
+                    Identifier("_"),
+                    Punctuation.Comma,
+                    Identifier("x"),
+                    Punctuation.CloseParen,
+                    Operators.Equals,
+                    Punctuation.OpenParen,
+                    Number("1"),
+                    Punctuation.Comma,
+                    Number("2"),
+                    Punctuation.CloseParen,
+                    Punctuation.Semicolon
+                )
+            );
         }
 
         [Theory]
@@ -1340,8 +1491,15 @@ aeu";
             await TestInMethodAsync(
                 code: @"M2(out _);",
                 testHost: testHost,
- expected: Classifications(Identifier("M2"), Punctuation.OpenParen, Keyword("out"), Identifier("_"), Punctuation.CloseParen,
-                    Punctuation.Semicolon));
+                expected: Classifications(
+                    Identifier("M2"),
+                    Punctuation.OpenParen,
+                    Keyword("out"),
+                    Identifier("_"),
+                    Punctuation.CloseParen,
+                    Punctuation.Semicolon
+                )
+            );
         }
 
         [Theory]
@@ -1351,7 +1509,13 @@ aeu";
             await TestInMethodAsync(
                 code: @"_ = 1;",
                 testHost: testHost,
- expected: Classifications(Identifier("_"), Operators.Equals, Number("1"), Punctuation.Semicolon));
+                expected: Classifications(
+                    Identifier("_"),
+                    Operators.Equals,
+                    Number("1"),
+                    Punctuation.Semicolon
+                )
+            );
         }
 
         [Theory]
@@ -1361,8 +1525,17 @@ aeu";
             await TestInMethodAsync(
                 code: @"x = (_) => 1;",
                 testHost: testHost,
- expected: Classifications(Identifier("x"), Operators.Equals, Punctuation.OpenParen, Parameter("_"), Punctuation.CloseParen,
-                    Operators.EqualsGreaterThan, Number("1"), Punctuation.Semicolon));
+                expected: Classifications(
+                    Identifier("x"),
+                    Operators.Equals,
+                    Punctuation.OpenParen,
+                    Parameter("_"),
+                    Punctuation.CloseParen,
+                    Operators.EqualsGreaterThan,
+                    Number("1"),
+                    Punctuation.Semicolon
+                )
+            );
         }
 
         [Theory]
@@ -1372,18 +1545,38 @@ aeu";
             await TestInMethodAsync(
                 code: @"x = (_, _) => 1;",
                 testHost: testHost,
- expected: Classifications(Identifier("x"), Operators.Equals, Punctuation.OpenParen, Parameter("_"), Punctuation.Comma, Parameter("_"), Punctuation.CloseParen,
-                    Operators.EqualsGreaterThan, Number("1"), Punctuation.Semicolon));
+                expected: Classifications(
+                    Identifier("x"),
+                    Operators.Equals,
+                    Punctuation.OpenParen,
+                    Parameter("_"),
+                    Punctuation.Comma,
+                    Parameter("_"),
+                    Punctuation.CloseParen,
+                    Operators.EqualsGreaterThan,
+                    Number("1"),
+                    Punctuation.Semicolon
+                )
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task UnderscoreInAssignment(TestHost testHost)
         {
-            await TestInMethodAsync(code: @"int _; _ = 1;",
+            await TestInMethodAsync(
+                code: @"int _; _ = 1;",
                 testHost: testHost,
- expected: Classifications(Keyword("int"), Local("_"), Punctuation.Semicolon, Identifier("_"), Operators.Equals,
-                    Number("1"), Punctuation.Semicolon));
+                expected: Classifications(
+                    Keyword("int"),
+                    Local("_"),
+                    Punctuation.Semicolon,
+                    Identifier("_"),
+                    Operators.Equals,
+                    Number("1"),
+                    Punctuation.Semicolon
+                )
+            );
         }
     }
 }

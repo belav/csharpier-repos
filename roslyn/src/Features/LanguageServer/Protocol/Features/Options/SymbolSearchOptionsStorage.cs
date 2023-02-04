@@ -8,17 +8,29 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
 {
     internal static class SymbolSearchOptionsStorage
     {
-        internal static SymbolSearchOptions GetSymbolSearchOptions(this IGlobalOptionService globalOptions, string language)
-            => new()
+        internal static SymbolSearchOptions GetSymbolSearchOptions(
+            this IGlobalOptionService globalOptions,
+            string language
+        ) =>
+            new()
             {
-                SearchReferenceAssemblies = globalOptions.GetOption(SearchReferenceAssemblies, language),
+                SearchReferenceAssemblies = globalOptions.GetOption(
+                    SearchReferenceAssemblies,
+                    language
+                ),
                 SearchNuGetPackages = globalOptions.GetOption(SearchNuGetPackages, language)
             };
 
         public static PerLanguageOption2<bool> SearchReferenceAssemblies =
-            new("SymbolSearchOptions_SuggestForTypesInReferenceAssemblies", SymbolSearchOptions.Default.SearchReferenceAssemblies);
+            new(
+                "SymbolSearchOptions_SuggestForTypesInReferenceAssemblies",
+                SymbolSearchOptions.Default.SearchReferenceAssemblies
+            );
 
         public static PerLanguageOption2<bool> SearchNuGetPackages =
-            new("SymbolSearchOptions_SuggestForTypesInNuGetPackages", SymbolSearchOptions.Default.SearchNuGetPackages);
+            new(
+                "SymbolSearchOptions_SuggestForTypesInNuGetPackages",
+                SymbolSearchOptions.Default.SearchNuGetPackages
+            );
     }
 }

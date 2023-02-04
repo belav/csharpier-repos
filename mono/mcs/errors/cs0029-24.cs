@@ -2,9 +2,10 @@
 // Line : 8
 // Compiler options: -unsafe
 
-class T {
-    static unsafe int Main ()
+class T
+{
+    static unsafe int Main()
     {
-        int *a = default(T);
+        int* a = default(T);
     }
 }

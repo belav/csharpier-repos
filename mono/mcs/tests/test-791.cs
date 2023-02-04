@@ -5,41 +5,37 @@ namespace testApp
 {
     public interface IA
     {
-        bool GetEnumerator ();
+        bool GetEnumerator();
     }
 
-    public interface IC : IA, IEnumerable
-    {
-    }
+    public interface IC : IA, IEnumerable { }
 
     public class TestApp : IC
     {
-        public static int Main ()
+        public static int Main()
         {
-            IC ic = new TestApp ();
-            foreach (int v in ic) {
-            }
+            IC ic = new TestApp();
+            foreach (int v in ic) { }
 
             return 0;
         }
 
         #region IA Members
 
-        public bool GetEnumerator ()
+        public bool GetEnumerator()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         #endregion
 
         #region IEnumerable Members
 
-        IEnumerator IEnumerable.GetEnumerator ()
+        IEnumerator IEnumerable.GetEnumerator()
         {
-            return new int[0].GetEnumerator ();
+            return new int[0].GetEnumerator();
         }
 
         #endregion
     }
 }
-

@@ -22,13 +22,14 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 {
     internal partial class Editor_InProc
     {
-        public string[] GetNavBarItems(int comboBoxIndex)
-            => ExecuteOnActiveView(v =>
-                GetNavigationBarComboBoxes(v)[comboBoxIndex]
-                .Items
-                .OfType<object>()
-                .Select(i => i?.ToString() ?? "")
-                .ToArray());
+        public string[] GetNavBarItems(int comboBoxIndex) =>
+            ExecuteOnActiveView(
+                v =>
+                    GetNavigationBarComboBoxes(v)[comboBoxIndex].Items
+                        .OfType<object>()
+                        .Select(i => i?.ToString() ?? "")
+                        .ToArray()
+            );
 
         private List<ComboBox> GetNavigationBarComboBoxes(IWpfTextView textView)
         {
@@ -40,7 +41,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
         private static UIElement? GetNavbar(IWpfTextView textView)
         {
             // Visual Studio 2019
-            var editorAdaptersFactoryService = GetComponentModelService<IVsEditorAdaptersFactoryService>();
+            var editorAdaptersFactoryService =
+                GetComponentModelService<IVsEditorAdaptersFactoryService>();
             var viewAdapter = editorAdaptersFactoryService.GetViewAdapter(textView);
             Contract.ThrowIfNull(viewAdapter);
 
@@ -118,7 +120,12 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 
             var guidService = typeof(SVsWindowFrame).GUID;
             riid = typeof(IVsWindowFrame).GUID;
-            if (ErrorHandler.Failed(oleServiceProvider.QueryService(ref guidService, ref riid, out var ppvObject)) || ppvObject == IntPtr.Zero)
+            if (
+                ErrorHandler.Failed(
+                    oleServiceProvider.QueryService(ref guidService, ref riid, out var ppvObject)
+                )
+                || ppvObject == IntPtr.Zero
+            )
             {
                 return null;
             }
@@ -134,7 +141,10 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             }
 
             riid = typeof(IVsCodeWindow).GUID;
-            if (ErrorHandler.Failed(frame.QueryViewInterface(ref riid, out ppvObject)) || ppvObject == IntPtr.Zero)
+            if (
+                ErrorHandler.Failed(frame.QueryViewInterface(ref riid, out ppvObject))
+                || ppvObject == IntPtr.Zero
+            )
             {
                 return null;
             }

@@ -23,8 +23,7 @@ public class AzureADAuthenticationBuilderExtensionsTests
         services.AddSingleton<ILoggerFactory>(new NullLoggerFactory());
 
         // Act
-        services.AddAuthentication()
-            .AddAzureAD(o => { });
+        services.AddAuthentication().AddAzureAD(o => { });
         var provider = services.BuildServiceProvider();
 
         // Assert
@@ -41,7 +40,8 @@ public class AzureADAuthenticationBuilderExtensionsTests
         services.AddSingleton<ILoggerFactory>(new NullLoggerFactory());
 
         // Act
-        services.AddAuthentication()
+        services
+            .AddAuthentication()
             .AddAzureAD(o =>
             {
                 o.Instance = "https://login.microsoftonline.com";
@@ -74,9 +74,13 @@ public class AzureADAuthenticationBuilderExtensionsTests
         Assert.Equal("/signin-oidc", openIdOptions.CallbackPath);
         Assert.Equal(AzureADDefaults.CookieScheme, openIdOptions.SignInScheme);
 
-        var cookieAuthenticationOptionsMonitor = provider.GetService<IOptionsMonitor<CookieAuthenticationOptions>>();
+        var cookieAuthenticationOptionsMonitor = provider.GetService<
+            IOptionsMonitor<CookieAuthenticationOptions>
+        >();
         Assert.NotNull(cookieAuthenticationOptionsMonitor);
-        var cookieAuthenticationOptions = cookieAuthenticationOptionsMonitor.Get(AzureADDefaults.CookieScheme);
+        var cookieAuthenticationOptions = cookieAuthenticationOptionsMonitor.Get(
+            AzureADDefaults.CookieScheme
+        );
         Assert.Equal("/AzureAD/Account/SignIn/AzureAD", cookieAuthenticationOptions.LoginPath);
         Assert.Equal("/AzureAD/Account/SignOut/AzureAD", cookieAuthenticationOptions.LogoutPath);
         Assert.Equal("/AzureAD/Account/AccessDenied", cookieAuthenticationOptions.AccessDeniedPath);
@@ -91,7 +95,8 @@ public class AzureADAuthenticationBuilderExtensionsTests
         services.AddSingleton<ILoggerFactory>(new NullLoggerFactory());
 
         // Act
-        services.AddAuthentication()
+        services
+            .AddAuthentication()
             .AddAzureAD(o =>
             {
                 o.Instance = "https://login.microsoftonline.com";
@@ -102,15 +107,21 @@ public class AzureADAuthenticationBuilderExtensionsTests
                 o.TenantId = "Common";
             });
 
-        services.Configure<OpenIdConnectOptions>(AzureADDefaults.OpenIdScheme, o =>
-        {
-            o.Authority = "https://overriden.com";
-        });
+        services.Configure<OpenIdConnectOptions>(
+            AzureADDefaults.OpenIdScheme,
+            o =>
+            {
+                o.Authority = "https://overriden.com";
+            }
+        );
 
-        services.Configure<CookieAuthenticationOptions>(AzureADDefaults.CookieScheme, o =>
-        {
-            o.AccessDeniedPath = "/Overriden";
-        });
+        services.Configure<CookieAuthenticationOptions>(
+            AzureADDefaults.CookieScheme,
+            o =>
+            {
+                o.AccessDeniedPath = "/Overriden";
+            }
+        );
 
         var provider = services.BuildServiceProvider();
 
@@ -121,9 +132,13 @@ public class AzureADAuthenticationBuilderExtensionsTests
         Assert.Equal("ClientId", openIdOptions.ClientId);
         Assert.Equal($"https://overriden.com", openIdOptions.Authority);
 
-        var cookieAuthenticationOptionsMonitor = provider.GetService<IOptionsMonitor<CookieAuthenticationOptions>>();
+        var cookieAuthenticationOptionsMonitor = provider.GetService<
+            IOptionsMonitor<CookieAuthenticationOptions>
+        >();
         Assert.NotNull(cookieAuthenticationOptionsMonitor);
-        var cookieAuthenticationOptions = cookieAuthenticationOptionsMonitor.Get(AzureADDefaults.CookieScheme);
+        var cookieAuthenticationOptions = cookieAuthenticationOptionsMonitor.Get(
+            AzureADDefaults.CookieScheme
+        );
         Assert.Equal("/AzureAD/Account/SignIn/AzureAD", cookieAuthenticationOptions.LoginPath);
         Assert.Equal("/Overriden", cookieAuthenticationOptions.AccessDeniedPath);
     }
@@ -136,7 +151,8 @@ public class AzureADAuthenticationBuilderExtensionsTests
         services.AddSingleton<ILoggerFactory>(new NullLoggerFactory());
 
         // Act
-        services.AddAuthentication()
+        services
+            .AddAuthentication()
             .AddOpenIdConnect()
             .AddCookie()
             .AddAzureAD(o =>
@@ -149,15 +165,21 @@ public class AzureADAuthenticationBuilderExtensionsTests
                 o.TenantId = "Common";
             });
 
-        services.Configure<OpenIdConnectOptions>(AzureADDefaults.OpenIdScheme, o =>
-        {
-            o.Authority = "https://overriden.com";
-        });
+        services.Configure<OpenIdConnectOptions>(
+            AzureADDefaults.OpenIdScheme,
+            o =>
+            {
+                o.Authority = "https://overriden.com";
+            }
+        );
 
-        services.Configure<CookieAuthenticationOptions>(AzureADDefaults.CookieScheme, o =>
-        {
-            o.AccessDeniedPath = "/Overriden";
-        });
+        services.Configure<CookieAuthenticationOptions>(
+            AzureADDefaults.CookieScheme,
+            o =>
+            {
+                o.AccessDeniedPath = "/Overriden";
+            }
+        );
 
         var provider = services.BuildServiceProvider();
 
@@ -168,9 +190,13 @@ public class AzureADAuthenticationBuilderExtensionsTests
         Assert.Equal("ClientId", openIdOptions.ClientId);
         Assert.Equal($"https://overriden.com", openIdOptions.Authority);
 
-        var cookieAuthenticationOptionsMonitor = provider.GetService<IOptionsMonitor<CookieAuthenticationOptions>>();
+        var cookieAuthenticationOptionsMonitor = provider.GetService<
+            IOptionsMonitor<CookieAuthenticationOptions>
+        >();
         Assert.NotNull(cookieAuthenticationOptionsMonitor);
-        var cookieAuthenticationOptions = cookieAuthenticationOptionsMonitor.Get(AzureADDefaults.CookieScheme);
+        var cookieAuthenticationOptions = cookieAuthenticationOptionsMonitor.Get(
+            AzureADDefaults.CookieScheme
+        );
         Assert.Equal("/AzureAD/Account/SignIn/AzureAD", cookieAuthenticationOptions.LoginPath);
         Assert.Equal("/Overriden", cookieAuthenticationOptions.AccessDeniedPath);
     }
@@ -182,16 +208,15 @@ public class AzureADAuthenticationBuilderExtensionsTests
         var services = new ServiceCollection();
         services.AddSingleton<ILoggerFactory>(new NullLoggerFactory());
 
-        services.AddAuthentication()
-            .AddAzureAD(o => { })
-            .AddAzureAD(o => { });
+        services.AddAuthentication().AddAzureAD(o => { }).AddAzureAD(o => { });
 
         var provider = services.BuildServiceProvider();
         var azureADOptionsMonitor = provider.GetService<IOptionsMonitor<AzureADOptions>>();
 
         // Act & Assert
         var exception = Assert.Throws<InvalidOperationException>(
-            () => azureADOptionsMonitor.Get(AzureADDefaults.AuthenticationScheme));
+            () => azureADOptionsMonitor.Get(AzureADDefaults.AuthenticationScheme)
+        );
 
         Assert.Equal("A scheme with the name 'AzureAD' was already added.", exception.Message);
     }
@@ -203,19 +228,22 @@ public class AzureADAuthenticationBuilderExtensionsTests
         var services = new ServiceCollection();
         services.AddSingleton<ILoggerFactory>(new NullLoggerFactory());
 
-        services.AddAuthentication()
+        services
+            .AddAuthentication()
             .AddAzureAD(o => { })
             .AddAzureAD("Custom", AzureADDefaults.OpenIdScheme, "Cookie", null, o => { });
 
         var provider = services.BuildServiceProvider();
         var azureADOptionsMonitor = provider.GetService<IOptionsMonitor<AzureADOptions>>();
 
-        var expectedMessage = $"The Open ID Connect scheme 'AzureADOpenID' can't be associated with the Azure Active Directory scheme 'Custom'. " +
-            "The Open ID Connect scheme 'AzureADOpenID' is already mapped to the Azure Active Directory scheme 'AzureAD'";
+        var expectedMessage =
+            $"The Open ID Connect scheme 'AzureADOpenID' can't be associated with the Azure Active Directory scheme 'Custom'. "
+            + "The Open ID Connect scheme 'AzureADOpenID' is already mapped to the Azure Active Directory scheme 'AzureAD'";
 
         // Act & Assert
         var exception = Assert.Throws<InvalidOperationException>(
-            () => azureADOptionsMonitor.Get(AzureADDefaults.AuthenticationScheme));
+            () => azureADOptionsMonitor.Get(AzureADDefaults.AuthenticationScheme)
+        );
 
         Assert.Equal(expectedMessage, exception.Message);
     }
@@ -227,19 +255,22 @@ public class AzureADAuthenticationBuilderExtensionsTests
         var services = new ServiceCollection();
         services.AddSingleton<ILoggerFactory>(new NullLoggerFactory());
 
-        services.AddAuthentication()
+        services
+            .AddAuthentication()
             .AddAzureAD(o => { })
             .AddAzureAD("Custom", "OpenID", AzureADDefaults.CookieScheme, null, o => { });
 
         var provider = services.BuildServiceProvider();
         var azureADOptionsMonitor = provider.GetService<IOptionsMonitor<AzureADOptions>>();
 
-        var expectedMessage = $"The cookie scheme 'AzureADCookie' can't be associated with the Azure Active Directory scheme 'Custom'. " +
-            "The cookie scheme 'AzureADCookie' is already mapped to the Azure Active Directory scheme 'AzureAD'";
+        var expectedMessage =
+            $"The cookie scheme 'AzureADCookie' can't be associated with the Azure Active Directory scheme 'Custom'. "
+            + "The cookie scheme 'AzureADCookie' is already mapped to the Azure Active Directory scheme 'AzureAD'";
 
         // Act & Assert
         var exception = Assert.Throws<InvalidOperationException>(
-            () => azureADOptionsMonitor.Get(AzureADDefaults.AuthenticationScheme));
+            () => azureADOptionsMonitor.Get(AzureADDefaults.AuthenticationScheme)
+        );
 
         Assert.Equal(expectedMessage, exception.Message);
     }
@@ -251,8 +282,7 @@ public class AzureADAuthenticationBuilderExtensionsTests
         var services = new ServiceCollection();
         services.AddSingleton<ILoggerFactory>(new NullLoggerFactory());
 
-        services.AddAuthentication()
-            .AddAzureAD(o => { });
+        services.AddAuthentication().AddAzureAD(o => { });
 
         var provider = services.BuildServiceProvider();
         var azureADOptionsMonitor = provider.GetService<IOptionsMonitor<AzureADOptions>>();
@@ -261,7 +291,8 @@ public class AzureADAuthenticationBuilderExtensionsTests
 
         // Act & Assert
         var exception = Assert.Throws<OptionsValidationException>(
-            () => azureADOptionsMonitor.Get(AzureADDefaults.AuthenticationScheme));
+            () => azureADOptionsMonitor.Get(AzureADDefaults.AuthenticationScheme)
+        );
 
         Assert.Contains(expectedMessage, exception.Failures);
     }
@@ -272,9 +303,7 @@ public class AzureADAuthenticationBuilderExtensionsTests
         var services = new ServiceCollection();
         services.AddSingleton<ILoggerFactory>(new NullLoggerFactory());
 
-        services.AddAuthentication()
-            .AddAzureAD(o => { })
-            .AddCookie("other");
+        services.AddAuthentication().AddAzureAD(o => { }).AddCookie("other");
 
         var provider = services.BuildServiceProvider();
         var cookieAuthOptions = provider.GetService<IOptionsMonitor<CookieAuthenticationOptions>>();
@@ -290,8 +319,7 @@ public class AzureADAuthenticationBuilderExtensionsTests
         services.AddSingleton<ILoggerFactory>(new NullLoggerFactory());
 
         // Act
-        services.AddAuthentication()
-            .AddAzureADBearer(o => { });
+        services.AddAuthentication().AddAzureADBearer(o => { });
         var provider = services.BuildServiceProvider();
 
         // Assert
@@ -307,7 +335,8 @@ public class AzureADAuthenticationBuilderExtensionsTests
         services.AddSingleton<ILoggerFactory>(new NullLoggerFactory());
 
         // Act
-        services.AddAuthentication()
+        services
+            .AddAuthentication()
             .AddAzureADBearer(o =>
             {
                 o.Instance = "https://login.microsoftonline.com/";
@@ -342,7 +371,8 @@ public class AzureADAuthenticationBuilderExtensionsTests
         services.AddSingleton<ILoggerFactory>(new NullLoggerFactory());
 
         // Act
-        services.AddAuthentication()
+        services
+            .AddAuthentication()
             .AddAzureADBearer(o =>
             {
                 o.Instance = "https://login.microsoftonline.com/";
@@ -352,10 +382,13 @@ public class AzureADAuthenticationBuilderExtensionsTests
                 o.TenantId = "TenantId";
             });
 
-        services.Configure<JwtBearerOptions>(AzureADDefaults.JwtBearerAuthenticationScheme, o =>
-        {
-            o.Audience = "http://overriden.com";
-        });
+        services.Configure<JwtBearerOptions>(
+            AzureADDefaults.JwtBearerAuthenticationScheme,
+            o =>
+            {
+                o.Audience = "http://overriden.com";
+            }
+        );
 
         var provider = services.BuildServiceProvider();
 
@@ -375,7 +408,8 @@ public class AzureADAuthenticationBuilderExtensionsTests
         services.AddSingleton<ILoggerFactory>(new NullLoggerFactory());
 
         // Act
-        services.AddAuthentication()
+        services
+            .AddAuthentication()
             .AddJwtBearer()
             .AddAzureADBearer(o =>
             {
@@ -386,10 +420,13 @@ public class AzureADAuthenticationBuilderExtensionsTests
                 o.TenantId = "TenantId";
             });
 
-        services.Configure<JwtBearerOptions>(AzureADDefaults.JwtBearerAuthenticationScheme, o =>
-        {
-            o.Audience = "http://overriden.com";
-        });
+        services.Configure<JwtBearerOptions>(
+            AzureADDefaults.JwtBearerAuthenticationScheme,
+            o =>
+            {
+                o.Audience = "http://overriden.com";
+            }
+        );
 
         var provider = services.BuildServiceProvider();
 
@@ -408,18 +445,20 @@ public class AzureADAuthenticationBuilderExtensionsTests
         var services = new ServiceCollection();
         services.AddSingleton<ILoggerFactory>(new NullLoggerFactory());
 
-        services.AddAuthentication()
-            .AddAzureADBearer(o => { })
-            .AddAzureADBearer(o => { });
+        services.AddAuthentication().AddAzureADBearer(o => { }).AddAzureADBearer(o => { });
 
         var provider = services.BuildServiceProvider();
         var azureADOptionsMonitor = provider.GetService<IOptionsMonitor<AzureADOptions>>();
 
         // Act & Assert
         var exception = Assert.Throws<InvalidOperationException>(
-            () => azureADOptionsMonitor.Get(AzureADDefaults.AuthenticationScheme));
+            () => azureADOptionsMonitor.Get(AzureADDefaults.AuthenticationScheme)
+        );
 
-        Assert.Equal("A scheme with the name 'AzureADBearer' was already added.", exception.Message);
+        Assert.Equal(
+            "A scheme with the name 'AzureADBearer' was already added.",
+            exception.Message
+        );
     }
 
     [Fact]
@@ -429,19 +468,22 @@ public class AzureADAuthenticationBuilderExtensionsTests
         var services = new ServiceCollection();
         services.AddSingleton<ILoggerFactory>(new NullLoggerFactory());
 
-        services.AddAuthentication()
+        services
+            .AddAuthentication()
             .AddAzureADBearer(o => { })
             .AddAzureADBearer("Custom", AzureADDefaults.JwtBearerAuthenticationScheme, o => { });
 
         var provider = services.BuildServiceProvider();
         var azureADOptionsMonitor = provider.GetService<IOptionsMonitor<AzureADOptions>>();
 
-        var expectedMessage = $"The JSON Web Token Bearer scheme 'AzureADJwtBearer' can't be associated with the Azure Active Directory scheme 'Custom'. " +
-            "The JSON Web Token Bearer scheme 'AzureADJwtBearer' is already mapped to the Azure Active Directory scheme 'AzureADBearer'";
+        var expectedMessage =
+            $"The JSON Web Token Bearer scheme 'AzureADJwtBearer' can't be associated with the Azure Active Directory scheme 'Custom'. "
+            + "The JSON Web Token Bearer scheme 'AzureADJwtBearer' is already mapped to the Azure Active Directory scheme 'AzureADBearer'";
 
         // Act & Assert
         var exception = Assert.Throws<InvalidOperationException>(
-            () => azureADOptionsMonitor.Get(AzureADDefaults.AuthenticationScheme));
+            () => azureADOptionsMonitor.Get(AzureADDefaults.AuthenticationScheme)
+        );
 
         Assert.Equal(expectedMessage, exception.Message);
     }
@@ -453,8 +495,7 @@ public class AzureADAuthenticationBuilderExtensionsTests
         var services = new ServiceCollection();
         services.AddSingleton<ILoggerFactory>(new NullLoggerFactory());
 
-        services.AddAuthentication()
-            .AddAzureADBearer(o => { });
+        services.AddAuthentication().AddAzureADBearer(o => { });
 
         var provider = services.BuildServiceProvider();
         var azureADOptionsMonitor = provider.GetService<IOptionsMonitor<AzureADOptions>>();
@@ -463,7 +504,8 @@ public class AzureADAuthenticationBuilderExtensionsTests
 
         // Act & Assert
         var exception = Assert.Throws<OptionsValidationException>(
-            () => azureADOptionsMonitor.Get(AzureADDefaults.AuthenticationScheme));
+            () => azureADOptionsMonitor.Get(AzureADDefaults.AuthenticationScheme)
+        );
 
         Assert.Contains(expectedMessage, exception.Failures);
     }
@@ -474,9 +516,7 @@ public class AzureADAuthenticationBuilderExtensionsTests
         var services = new ServiceCollection();
         services.AddSingleton<ILoggerFactory>(new NullLoggerFactory());
 
-        services.AddAuthentication()
-            .AddAzureADBearer(o => { })
-            .AddJwtBearer("other", o => { });
+        services.AddAuthentication().AddAzureADBearer(o => { }).AddJwtBearer("other", o => { });
 
         var provider = services.BuildServiceProvider();
         var jwtOptions = provider.GetService<IOptionsMonitor<JwtBearerOptions>>();
@@ -490,13 +530,18 @@ public class AzureADAuthenticationBuilderExtensionsTests
         var services = new ServiceCollection();
         services.AddSingleton<ILoggerFactory>(new NullLoggerFactory());
 
-        services.AddAuthentication()
+        services
+            .AddAuthentication()
             .AddAzureAD(o => { })
-            .AddOpenIdConnect("other", null, o =>
-            {
-                o.ClientId = "ClientId";
-                o.Authority = "https://authority.com";
-            });
+            .AddOpenIdConnect(
+                "other",
+                null,
+                o =>
+                {
+                    o.ClientId = "ClientId";
+                    o.Authority = "https://authority.com";
+                }
+            );
 
         var provider = services.BuildServiceProvider();
         var openIdConnectOptions = provider.GetService<IOptionsMonitor<OpenIdConnectOptions>>();

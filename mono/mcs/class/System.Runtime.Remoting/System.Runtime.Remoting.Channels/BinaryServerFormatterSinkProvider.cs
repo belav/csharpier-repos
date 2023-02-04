@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,64 +34,67 @@ using System.Runtime.InteropServices;
 
 namespace System.Runtime.Remoting.Channels
 {
-    public class BinaryServerFormatterSinkProvider :
-        IServerFormatterSinkProvider, IServerChannelSinkProvider
+    public class BinaryServerFormatterSinkProvider
+        : IServerFormatterSinkProvider,
+            IServerChannelSinkProvider
     {
         IServerChannelSinkProvider next = null;
         BinaryCore _binaryCore;
-        
-        internal static string[] AllowedProperties = new string [] { "includeVersions", "strictBinding", "typeFilterLevel" };
 
-        public BinaryServerFormatterSinkProvider ()
+        internal static string[] AllowedProperties = new string[]
+        {
+            "includeVersions",
+            "strictBinding",
+            "typeFilterLevel"
+        };
+
+        public BinaryServerFormatterSinkProvider()
         {
             _binaryCore = BinaryCore.DefaultInstance;
         }
 
-        public BinaryServerFormatterSinkProvider (IDictionary properties,
-                              ICollection providerData)
+        public BinaryServerFormatterSinkProvider(IDictionary properties, ICollection providerData)
         {
-            _binaryCore = new BinaryCore (this, properties, AllowedProperties);
+            _binaryCore = new BinaryCore(this, properties, AllowedProperties);
         }
 
         public IServerChannelSinkProvider Next
         {
-            get {
-                return next;
-            }
-
-            set {
-                next = value;
-            }
+            get { return next; }
+            set { next = value; }
         }
 
         [ComVisible(false)]
         public TypeFilterLevel TypeFilterLevel
         {
             get { return _binaryCore.TypeFilterLevel; }
-            set 
+            set
             {
-                IDictionary props = (IDictionary) ((ICloneable)_binaryCore.Properties).Clone ();
-                props ["typeFilterLevel"] = value;
-                _binaryCore = new BinaryCore (this, props, AllowedProperties);
+                IDictionary props = (IDictionary)((ICloneable)_binaryCore.Properties).Clone();
+                props["typeFilterLevel"] = value;
+                _binaryCore = new BinaryCore(this, props, AllowedProperties);
             }
         }
 
-        public IServerChannelSink CreateSink (IChannelReceiver channel)
+        public IServerChannelSink CreateSink(IChannelReceiver channel)
         {
             IServerChannelSink next_sink = null;
             BinaryServerFormatterSink result;
-            
+
             if (next != null)
-                next_sink = next.CreateSink (channel);
-            
-            result = new BinaryServerFormatterSink (BinaryServerFormatterSink.Protocol.Other,
-                                next_sink, channel);
+                next_sink = next.CreateSink(channel);
+
+            result = new BinaryServerFormatterSink(
+                BinaryServerFormatterSink.Protocol.Other,
+                next_sink,
+                channel
+            );
 
             result.BinaryCore = _binaryCore;
             return result;
         }
 
-        public void GetChannelData (IChannelDataStore channelData)
+        public void GetChannelData(IChannelDataStore channelData)
         {
             // Nothing to add here
         }

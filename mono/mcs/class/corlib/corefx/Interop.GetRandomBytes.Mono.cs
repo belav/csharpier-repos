@@ -7,30 +7,32 @@ internal partial class Interop
 {
     static class MonoGetRandomBytesFallback
     {
-        static object _rngAccess = new object ();
+        static object _rngAccess = new object();
         static RNGCryptoServiceProvider _rng;
 
-        internal static void GetRandomBytes (byte[] buffer)
+        internal static void GetRandomBytes(byte[] buffer)
         {
-            lock (_rngAccess) {
+            lock (_rngAccess)
+            {
                 if (_rng == null)
-                    _rng = new RNGCryptoServiceProvider ();
-                _rng.GetBytes (buffer);
+                    _rng = new RNGCryptoServiceProvider();
+                _rng.GetBytes(buffer);
             }
         }
 
-        internal static unsafe void GetRandomBytes (byte* buffer, int length)
+        internal static unsafe void GetRandomBytes(byte* buffer, int length)
         {
-            lock (_rngAccess) {
+            lock (_rngAccess)
+            {
                 if (_rng == null)
-                    _rng = new RNGCryptoServiceProvider ();
-                _rng.GetBytes (buffer, (IntPtr)length);
+                    _rng = new RNGCryptoServiceProvider();
+                _rng.GetBytes(buffer, (IntPtr)length);
             }
         }
     }
 
-    internal static unsafe void GetRandomBytes (byte* buffer, int length)
+    internal static unsafe void GetRandomBytes(byte* buffer, int length)
     {
-        MonoGetRandomBytesFallback.GetRandomBytes (buffer, length);
+        MonoGetRandomBytesFallback.GetRandomBytes(buffer, length);
     }
 }

@@ -7,16 +7,20 @@ using System.Runtime.CompilerServices;
 namespace SimpleArray_01
 {
     public delegate void RngTest();
+
     internal class Class1
     {
         private static int Main()
         {
             int retVal = 100;
             int testNum = 0;
-            RngTest[] Tests ={  new RngTest(Test.Test1),
-                                 new RngTest(Test.Test2),
-                                 new RngTest(Test.Test3),
-                                 new RngTest(Test.Test4)};
+            RngTest[] Tests =
+            {
+                new RngTest(Test.Test1),
+                new RngTest(Test.Test2),
+                new RngTest(Test.Test3),
+                new RngTest(Test.Test4)
+            };
 
             foreach (RngTest test in Tests)
             {
@@ -53,6 +57,7 @@ namespace SimpleArray_01
             return bResult;
         }
     }
+
     internal class Test
     {
         /********************************************************************************************
@@ -92,6 +97,7 @@ namespace SimpleArray_01
                 foo(ref index);
             }
         }
+
         /********************************************************************************************
         * RngChk shall not be eliminated if induction vairable is modified through function call in the inner loop
         ********************************************************************************************/

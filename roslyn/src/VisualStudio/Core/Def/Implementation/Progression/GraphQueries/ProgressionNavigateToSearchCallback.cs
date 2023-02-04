@@ -17,7 +17,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
             private readonly IGraphContext _context;
             private readonly GraphBuilder _graphBuilder;
 
-            public ProgressionNavigateToSearchCallback(IGraphContext context, GraphBuilder graphBuilder)
+            public ProgressionNavigateToSearchCallback(
+                IGraphContext context,
+                GraphBuilder graphBuilder
+            )
             {
                 _context = context;
                 _graphBuilder = graphBuilder;
@@ -29,12 +32,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                 // information along to progression.  That will happen in GraphQueryManager.PopulateContextGraphAsync
             }
 
-            public void ReportProgress(int current, int maximum)
-                => _context.ReportProgress(current, maximum, null);
+            public void ReportProgress(int current, int maximum) =>
+                _context.ReportProgress(current, maximum, null);
 
-            public async Task AddItemAsync(Project project, INavigateToSearchResult result, CancellationToken cancellationToken)
+            public async Task AddItemAsync(
+                Project project,
+                INavigateToSearchResult result,
+                CancellationToken cancellationToken
+            )
             {
-                var node = await _graphBuilder.CreateNodeAsync(result, cancellationToken).ConfigureAwait(false);
+                var node = await _graphBuilder
+                    .CreateNodeAsync(result, cancellationToken)
+                    .ConfigureAwait(false);
                 if (node != null)
                 {
                     // _context.OutputNodes is not threadsafe.  So ensure only one navto callback can mutate it at a time.

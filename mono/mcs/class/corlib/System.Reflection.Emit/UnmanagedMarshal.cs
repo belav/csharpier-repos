@@ -1,4 +1,3 @@
-
 //
 // Copyright (C) 2004 Novell, Inc (http://www.novell.com)
 //
@@ -9,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,13 +35,14 @@ using System.Reflection.Emit;
 using System.Runtime.InteropServices;
 using System;
 
-namespace System.Reflection.Emit {
-
-    [Obsolete ("An alternate API is available: Emit the MarshalAs custom attribute instead.")]
-    [ComVisible (true)]
+namespace System.Reflection.Emit
+{
+    [Obsolete("An alternate API is available: Emit the MarshalAs custom attribute instead.")]
+    [ComVisible(true)]
     [Serializable]
-    [StructLayout (LayoutKind.Sequential)]
-    public sealed class UnmanagedMarshal {
+    [StructLayout(LayoutKind.Sequential)]
+    public sealed class UnmanagedMarshal
+    {
 #pragma warning disable 169, 414
         private int count;
         private UnmanagedType t;
@@ -54,22 +54,27 @@ namespace System.Reflection.Emit {
         private int param_num;
         private bool has_size;
 #pragma warning restore 169, 414
-        
-        private UnmanagedMarshal (UnmanagedType maint, int cnt) {
+
+        private UnmanagedMarshal(UnmanagedType maint, int cnt)
+        {
             count = cnt;
             t = maint;
             tbase = maint;
         }
-        private UnmanagedMarshal (UnmanagedType maint, UnmanagedType elemt) {
+
+        private UnmanagedMarshal(UnmanagedType maint, UnmanagedType elemt)
+        {
             count = 0;
             t = maint;
             tbase = elemt;
         }
-        
-        public UnmanagedType BaseType {
-            get {
+
+        public UnmanagedType BaseType
+        {
+            get
+            {
                 if (t == UnmanagedType.LPArray)
-                    throw new ArgumentException ();
+                    throw new ArgumentException();
 
 #if FEATURE_COMINTEROP
                 if (t == UnmanagedType.SafeArray)
@@ -79,36 +84,43 @@ namespace System.Reflection.Emit {
             }
         }
 
-        public int ElementCount {
-            get {return count;}
+        public int ElementCount
+        {
+            get { return count; }
         }
 
-        public UnmanagedType GetUnmanagedType {
-            get {return t;}
+        public UnmanagedType GetUnmanagedType
+        {
+            get { return t; }
         }
 
-        public Guid IIDGuid {
-            get {return new Guid (guid);}
+        public Guid IIDGuid
+        {
+            get { return new Guid(guid); }
         }
 
-        public static UnmanagedMarshal DefineByValArray( int elemCount) {
-            return new UnmanagedMarshal (UnmanagedType.ByValArray, elemCount);
+        public static UnmanagedMarshal DefineByValArray(int elemCount)
+        {
+            return new UnmanagedMarshal(UnmanagedType.ByValArray, elemCount);
         }
 
-        public static UnmanagedMarshal DefineByValTStr( int elemCount) {
-            return new UnmanagedMarshal (UnmanagedType.ByValTStr, elemCount);
+        public static UnmanagedMarshal DefineByValTStr(int elemCount)
+        {
+            return new UnmanagedMarshal(UnmanagedType.ByValTStr, elemCount);
         }
 
-        public static UnmanagedMarshal DefineLPArray( UnmanagedType elemType) {
-            return new UnmanagedMarshal (UnmanagedType.LPArray, elemType);
+        public static UnmanagedMarshal DefineLPArray(UnmanagedType elemType)
+        {
+            return new UnmanagedMarshal(UnmanagedType.LPArray, elemType);
         }
 #if FEATURE_COMINTEROP
         public static UnmanagedMarshal DefineSafeArray( UnmanagedType elemType) {
             return new UnmanagedMarshal (UnmanagedType.SafeArray, elemType);
         }
 #endif
-        public static UnmanagedMarshal DefineUnmanagedMarshal( UnmanagedType unmanagedType) {
-            return new UnmanagedMarshal (unmanagedType, unmanagedType);
+        public static UnmanagedMarshal DefineUnmanagedMarshal(UnmanagedType unmanagedType)
+        {
+            return new UnmanagedMarshal(unmanagedType, unmanagedType);
         }
 #if FEATURE_COMINTEROP
         internal static UnmanagedMarshal DefineCustom (Type typeref, string cookie, string mtype, Guid id) {
@@ -122,10 +134,15 @@ namespace System.Reflection.Emit {
                 res.guid = id.ToString ();
             return res;
         }
-#endif        
+#endif
         // sizeConst and sizeParamIndex can be -1 meaning they are not specified
-        internal static UnmanagedMarshal DefineLPArrayInternal (UnmanagedType elemType, int sizeConst, int sizeParamIndex) {
-            UnmanagedMarshal res = new UnmanagedMarshal (UnmanagedType.LPArray, elemType);
+        internal static UnmanagedMarshal DefineLPArrayInternal(
+            UnmanagedType elemType,
+            int sizeConst,
+            int sizeParamIndex
+        )
+        {
+            UnmanagedMarshal res = new UnmanagedMarshal(UnmanagedType.LPArray, elemType);
             res.count = sizeConst;
             res.param_num = sizeParamIndex;
             res.has_size = true;

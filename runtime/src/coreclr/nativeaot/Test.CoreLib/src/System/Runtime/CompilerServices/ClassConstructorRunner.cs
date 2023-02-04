@@ -9,13 +9,19 @@ namespace System.Runtime.CompilerServices
 {
     internal static class ClassConstructorRunner
     {
-        private static unsafe object CheckStaticClassConstructionReturnGCStaticBase(ref StaticClassConstructionContext context, object gcStaticBase)
+        private static unsafe object CheckStaticClassConstructionReturnGCStaticBase(
+            ref StaticClassConstructionContext context,
+            object gcStaticBase
+        )
         {
             CheckStaticClassConstruction(ref context);
             return gcStaticBase;
         }
 
-        private static unsafe IntPtr CheckStaticClassConstructionReturnNonGCStaticBase(ref StaticClassConstructionContext context, IntPtr nonGcStaticBase)
+        private static unsafe IntPtr CheckStaticClassConstructionReturnNonGCStaticBase(
+            ref StaticClassConstructionContext context,
+            IntPtr nonGcStaticBase
+        )
         {
             CheckStaticClassConstruction(ref context);
             return nonGcStaticBase;
@@ -32,7 +38,9 @@ namespace System.Runtime.CompilerServices
         // The context structure passed by reference lives in the image of one of the application's modules.
         // The contents are thus fixed (do not require pinning) and the address can be used as a unique
         // identifier for the context.
-        private static unsafe void CheckStaticClassConstruction(ref StaticClassConstructionContext context)
+        private static unsafe void CheckStaticClassConstruction(
+            ref StaticClassConstructionContext context
+        )
         {
             // This is a simplistic placeholder implementation. For instance it uses a busy wait spinlock and
             // does not handle recursion.
@@ -66,7 +74,7 @@ namespace System.Runtime.CompilerServices
                     // threads trying to do the same thing will spin waiting for us to transition the state to
                     // 1.
 
-                    ((delegate*<void>)context.cctorMethodAddress)();
+                    ((delegate* <void>)context.cctorMethodAddress)();
 
                     // Insert a memory barrier here to order any writes executed as part of static class
                     // construction above with respect to the initialized flag update we're about to make

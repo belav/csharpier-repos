@@ -40,13 +40,11 @@ namespace MonoTests.System.Web
     {
         sealed class DummyHttpTaskAsyncHandler : HttpTaskAsyncHandler
         {
-            public DummyHttpTaskAsyncHandler ()
-            {
-            }
+            public DummyHttpTaskAsyncHandler() { }
 
-            public override Task ProcessRequestAsync (HttpContext context)
+            public override Task ProcessRequestAsync(HttpContext context)
             {
-                throw new AssertionException ("Should not be called.");
+                throw new AssertionException("Should not be called.");
             }
         }
 
@@ -55,76 +53,79 @@ namespace MonoTests.System.Web
             readonly Func<Task> taskFactory;
             readonly HttpContext expectedContext;
 
-            public TestHttpTaskAsyncHandler (Func<Task> taskFactory, HttpContext expectedContext)
+            public TestHttpTaskAsyncHandler(Func<Task> taskFactory, HttpContext expectedContext)
             {
                 this.taskFactory = taskFactory;
                 this.expectedContext = expectedContext;
             }
 
-            public override Task ProcessRequestAsync (HttpContext context)
+            public override Task ProcessRequestAsync(HttpContext context)
             {
-                Assert.AreSame (expectedContext, context, "TestHttpTaskAsyncHandler#A01");
+                Assert.AreSame(expectedContext, context, "TestHttpTaskAsyncHandler#A01");
 
-                return taskFactory ();
+                return taskFactory();
             }
         }
 
         IHttpAsyncHandler handler;
         HttpContext expectedContext;
 
-        protected override void SetNullArguments ()
+        protected override void SetNullArguments()
         {
             expectedContext = null;
         }
 
-        protected override IAsyncResult GetAsyncResult (Func<Task> taskFactory, AsyncCallback callback, object state)
+        protected override IAsyncResult GetAsyncResult(
+            Func<Task> taskFactory,
+            AsyncCallback callback,
+            object state
+        )
         {
-            Assert.IsNull (handler, "GetAsyncResult#A01");
+            Assert.IsNull(handler, "GetAsyncResult#A01");
 
-            handler = new TestHttpTaskAsyncHandler (taskFactory, expectedContext);
-            return handler.BeginProcessRequest (expectedContext, callback, state);
+            handler = new TestHttpTaskAsyncHandler(taskFactory, expectedContext);
+            return handler.BeginProcessRequest(expectedContext, callback, state);
         }
 
-        protected override void Wait (IAsyncResult result)
+        protected override void Wait(IAsyncResult result)
         {
-            Assert.IsNotNull (handler, "Wait#A01");
+            Assert.IsNotNull(handler, "Wait#A01");
 
-            handler.EndProcessRequest (result);
+            handler.EndProcessRequest(result);
         }
 
-        protected override void TestSetUp ()
+        protected override void TestSetUp()
         {
-            base.TestSetUp ();
+            base.TestSetUp();
 
             handler = null;
 
-            var request = new HttpRequest (string.Empty, "http://localhost/", string.Empty);
-            var response = new HttpResponse (TextWriter.Null);
-            expectedContext = new HttpContext (request, response);
+            var request = new HttpRequest(string.Empty, "http://localhost/", string.Empty);
+            var response = new HttpResponse(TextWriter.Null);
+            expectedContext = new HttpContext(request, response);
         }
 
         [Test]
-        public void IsReusable ()
+        public void IsReusable()
         {
-            var handler = new DummyHttpTaskAsyncHandler ();
-            Assert.IsFalse (handler.IsReusable, "#A01");
+            var handler = new DummyHttpTaskAsyncHandler();
+            Assert.IsFalse(handler.IsReusable, "#A01");
         }
 
         [Test]
-        [ExpectedException (typeof (NotSupportedException))]
-        public void ProcessRequest ()
+        [ExpectedException(typeof(NotSupportedException))]
+        public void ProcessRequest()
         {
-            var handler = new DummyHttpTaskAsyncHandler ();
-            handler.ProcessRequest (expectedContext);
+            var handler = new DummyHttpTaskAsyncHandler();
+            handler.ProcessRequest(expectedContext);
         }
 
         [Test]
-        [ExpectedException (typeof (NotSupportedException))]
-        public void ProcessRequest_NullContext ()
+        [ExpectedException(typeof(NotSupportedException))]
+        public void ProcessRequest_NullContext()
         {
-            var handler = new DummyHttpTaskAsyncHandler ();
-            handler.ProcessRequest (null);
+            var handler = new DummyHttpTaskAsyncHandler();
+            handler.ProcessRequest(null);
         }
     }
 }
-

@@ -18,7 +18,11 @@ internal sealed class SwaggathererApplication : CommandLineApplication
     {
         Invoke = InvokeCore;
 
-        HttpMethods = Option("-m|--method", "allow multiple endpoints with different http method", CommandOptionType.NoValue);
+        HttpMethods = Option(
+            "-m|--method",
+            "allow multiple endpoints with different http method",
+            CommandOptionType.NoValue
+        );
         Input = Option("-i", "input swagger 2.0 JSON file", CommandOptionType.MultipleValue);
         InputDirectory = Option("-d", "input directory", CommandOptionType.SingleValue);
         Output = Option("-o", "output", CommandOptionType.SingleValue);
@@ -56,7 +60,13 @@ internal sealed class SwaggathererApplication : CommandLineApplication
 
         if (InputDirectory.HasValue())
         {
-            Input.Values.AddRange(Directory.EnumerateFiles(InputDirectory.Value(), "*.json", SearchOption.AllDirectories));
+            Input.Values.AddRange(
+                Directory.EnumerateFiles(
+                    InputDirectory.Value(),
+                    "*.json",
+                    SearchOption.AllDirectories
+                )
+            );
         }
 
         Console.WriteLine($"Processing {Input.Values.Count} files...");
@@ -72,7 +82,9 @@ internal sealed class SwaggathererApplication : CommandLineApplication
         {
             if (HasComplexSegment(entries[i]))
             {
-                Out.WriteLine("Skipping route with complex segment: " + entries[i].Template.TemplateText);
+                Out.WriteLine(
+                    "Skipping route with complex segment: " + entries[i].Template.TemplateText
+                );
                 entries.RemoveAt(i);
             }
         }
@@ -109,7 +121,9 @@ internal sealed class SwaggathererApplication : CommandLineApplication
             entries[i].RequestUrl = GenerateRequestUrl(entries[i].Template);
             if (entries[i].RequestUrl == null)
             {
-                Out.WriteLine("Failed to create a request for: " + entries[i].Template.TemplateText);
+                Out.WriteLine(
+                    "Failed to create a request for: " + entries[i].Template.TemplateText
+                );
                 entries.RemoveAt(i);
                 continue;
             }
@@ -155,12 +169,14 @@ internal sealed class SwaggathererApplication : CommandLineApplication
                 {
                     var template = basePath + path.Name;
                     var parsed = TemplateParser.Parse(template);
-                    entries.Add(new RouteEntry()
-                    {
-                        Method = HttpMethods.HasValue() ? method.Name.ToString() : null,
-                        Template = parsed,
-                        Precedence = RoutePrecedence.ComputeInbound(parsed),
-                    });
+                    entries.Add(
+                        new RouteEntry()
+                        {
+                            Method = HttpMethods.HasValue() ? method.Name.ToString() : null,
+                            Template = parsed,
+                            Precedence = RoutePrecedence.ComputeInbound(parsed),
+                        }
+                    );
                 }
             }
         }
@@ -190,17 +206,26 @@ internal sealed class SwaggathererApplication : CommandLineApplication
             var isSame = true;
             for (var k = 0; k < entry.Template.Segments.Count; k++)
             {
-                if (!string.Equals(
-                    entry.Template.Segments[k].Parts[0].Text,
-                    other.Template.Segments[k].Parts[0].Text,
-                    StringComparison.OrdinalIgnoreCase))
+                if (
+                    !string.Equals(
+                        entry.Template.Segments[k].Parts[0].Text,
+                        other.Template.Segments[k].Parts[0].Text,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 {
                     isSame = false;
                     break;
                 }
 
-                if (HttpMethods.HasValue() &&
-                    !string.Equals(entry.Method, other.Method, StringComparison.OrdinalIgnoreCase))
+                if (
+                    HttpMethods.HasValue()
+                    && !string.Equals(
+                        entry.Method,
+                        other.Method,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 {
                     isSame = false;
                     break;
@@ -219,16 +244,24 @@ internal sealed class SwaggathererApplication : CommandLineApplication
     private static void Sort(List<RouteEntry> entries)
     {
         // We need to sort these in precedence order for the linear matchers.
-        entries.Sort((x, y) =>
-        {
-            var comparison = RoutePrecedence.ComputeInbound(x.Template).CompareTo(RoutePrecedence.ComputeInbound(y.Template));
-            if (comparison != 0)
+        entries.Sort(
+            (x, y) =>
             {
-                return comparison;
-            }
+                var comparison = RoutePrecedence
+                    .ComputeInbound(x.Template)
+                    .CompareTo(RoutePrecedence.ComputeInbound(y.Template));
+                if (comparison != 0)
+                {
+                    return comparison;
+                }
 
-            return string.Compare(x.Template.TemplateText, y.Template.TemplateText, StringComparison.Ordinal);
-        });
+                return string.Compare(
+                    x.Template.TemplateText,
+                    y.Template.TemplateText,
+                    StringComparison.Ordinal
+                );
+            }
+        );
     }
 
     private static string GenerateRequestUrl(RouteTemplate template)

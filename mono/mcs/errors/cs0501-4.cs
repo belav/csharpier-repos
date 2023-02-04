@@ -3,5 +3,9 @@
 
 class X
 {
-    public int Mine { get; set {} }
+    public int Mine
+    {
+        get;
+        set { }
+    }
 }

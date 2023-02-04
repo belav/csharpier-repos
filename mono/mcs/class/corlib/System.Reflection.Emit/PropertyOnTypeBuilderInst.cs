@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -38,50 +38,60 @@ namespace System.Reflection.Emit
     /*
      * This class represents a property of an instantiation of a generic type builder.
      */
-    [StructLayout (LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential)]
     internal class PropertyOnTypeBuilderInst : PropertyInfo
     {
         TypeBuilderInstantiation instantiation;
         PropertyInfo prop;
 
-        internal PropertyOnTypeBuilderInst (TypeBuilderInstantiation instantiation, PropertyInfo prop)
+        internal PropertyOnTypeBuilderInst(
+            TypeBuilderInstantiation instantiation,
+            PropertyInfo prop
+        )
         {
             this.instantiation = instantiation;
             this.prop = prop;
         }
 
-        public override PropertyAttributes Attributes { 
-            get { throw new NotSupportedException (); }
+        public override PropertyAttributes Attributes
+        {
+            get { throw new NotSupportedException(); }
         }
 
-        public override bool CanRead { 
-            get { throw new NotSupportedException (); }
+        public override bool CanRead
+        {
+            get { throw new NotSupportedException(); }
         }
 
-        public override bool CanWrite { 
-            get { throw new NotSupportedException (); }
+        public override bool CanWrite
+        {
+            get { throw new NotSupportedException(); }
         }
 
-        public override Type PropertyType { 
-            get { return instantiation.InflateType (prop.PropertyType); }
+        public override Type PropertyType
+        {
+            get { return instantiation.InflateType(prop.PropertyType); }
         }
 
-        public override Type DeclaringType { 
-            get { return instantiation.InflateType (prop.DeclaringType); }
+        public override Type DeclaringType
+        {
+            get { return instantiation.InflateType(prop.DeclaringType); }
         }
 
-        public override Type ReflectedType { 
+        public override Type ReflectedType
+        {
             get { return instantiation; }
         }
 
-        public override string Name { 
+        public override string Name
+        {
             get { return prop.Name; }
         }
 
-        public override MethodInfo[] GetAccessors (bool nonPublic)
+        public override MethodInfo[] GetAccessors(bool nonPublic)
         {
-            MethodInfo getter = GetGetMethod (nonPublic);
-            MethodInfo setter = GetSetMethod (nonPublic);
+            MethodInfo getter = GetGetMethod(nonPublic);
+            MethodInfo setter = GetSetMethod(nonPublic);
 
             int methods = 0;
             if (getter != null)
@@ -89,73 +99,87 @@ namespace System.Reflection.Emit
             if (setter != null)
                 ++methods;
 
-            MethodInfo[] res = new MethodInfo [methods];
+            MethodInfo[] res = new MethodInfo[methods];
 
             methods = 0;
             if (getter != null)
-                res [methods++] = getter;
+                res[methods++] = getter;
             if (setter != null)
-                res [methods] = setter;
+                res[methods] = setter;
 
             return res;
         }
 
-
-        public override MethodInfo GetGetMethod (bool nonPublic)
+        public override MethodInfo GetGetMethod(bool nonPublic)
         {
-            MethodInfo mi = prop.GetGetMethod (nonPublic);
-            if (mi != null && prop.DeclaringType == instantiation.generic_type) {
-                mi = TypeBuilder.GetMethod (instantiation, mi);
+            MethodInfo mi = prop.GetGetMethod(nonPublic);
+            if (mi != null && prop.DeclaringType == instantiation.generic_type)
+            {
+                mi = TypeBuilder.GetMethod(instantiation, mi);
             }
-            return mi; 
+            return mi;
         }
 
         public override ParameterInfo[] GetIndexParameters()
         {
-            MethodInfo method = GetGetMethod (true);
+            MethodInfo method = GetGetMethod(true);
             if (method != null)
-                return method.GetParameters ();
+                return method.GetParameters();
 
             return EmptyArray<ParameterInfo>.Value;
         }
 
-        public override MethodInfo GetSetMethod (bool nonPublic)
+        public override MethodInfo GetSetMethod(bool nonPublic)
         {
-            MethodInfo mi = prop.GetSetMethod (nonPublic);
-            if (mi != null && prop.DeclaringType == instantiation.generic_type) {
-                mi = TypeBuilder.GetMethod (instantiation, mi);
+            MethodInfo mi = prop.GetSetMethod(nonPublic);
+            if (mi != null && prop.DeclaringType == instantiation.generic_type)
+            {
+                mi = TypeBuilder.GetMethod(instantiation, mi);
             }
-            return mi; 
+            return mi;
         }
 
-        public override string ToString ()
+        public override string ToString()
         {
             return String.Format("{0} {1}", PropertyType, Name);
         }
 
-        public override object GetValue (object obj, BindingFlags invokeAttr, Binder binder, object[] index, CultureInfo culture)
+        public override object GetValue(
+            object obj,
+            BindingFlags invokeAttr,
+            Binder binder,
+            object[] index,
+            CultureInfo culture
+        )
         {
-            throw new NotSupportedException ();
+            throw new NotSupportedException();
         }
 
-        public override void SetValue (object obj, object value, BindingFlags invokeAttr, Binder binder, object[] index, CultureInfo culture)
+        public override void SetValue(
+            object obj,
+            object value,
+            BindingFlags invokeAttr,
+            Binder binder,
+            object[] index,
+            CultureInfo culture
+        )
         {
-            throw new NotSupportedException ();
+            throw new NotSupportedException();
         }
 
-        public override bool IsDefined( Type attributeType, bool inherit)
+        public override bool IsDefined(Type attributeType, bool inherit)
         {
-            throw new NotSupportedException ();
+            throw new NotSupportedException();
         }
 
         public override object[] GetCustomAttributes(bool inherit)
         {
-            throw new NotSupportedException ();
+            throw new NotSupportedException();
         }
 
         public override object[] GetCustomAttributes(Type attributeType, bool inherit)
         {
-            throw new NotSupportedException ();
+            throw new NotSupportedException();
         }
     }
 }

@@ -3,12 +3,14 @@
 //
 
 using System;
+
 public struct AA
 {
     public static int Main()
     {
         bool f = false;
-        if (f) f = false;
+        if (f)
+            f = false;
         else
         {
             int n = 0;

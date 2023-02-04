@@ -13,6 +13,7 @@ namespace MonoTests.System.Data.SqlClient
     {
         SqlConnection con;
         SqlCommand cmd;
+
         public static void Main()
         {
             SqlCommandBuilder_DeriveParameters_S tc = new SqlCommandBuilder_DeriveParameters_S();
@@ -23,25 +24,29 @@ namespace MonoTests.System.Data.SqlClient
                 tc.BeginTest("DeriveParameters");
                 tc.run();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                exp=ex;
+                exp = ex;
             }
             finally
             {
                 // Every Test must End with EndTest
                 tc.EndTest(exp);
             }
-            
-            
         }
 
         [SetUp]
         public void setUp()
         {
-            if (ConnectedDataProvider.GetDbType() != DataBaseServer.SQLServer) {
+            if (ConnectedDataProvider.GetDbType() != DataBaseServer.SQLServer)
+            {
                 //All tests in this class are only for MSSQLServer.
-                Log(string.Format("All tests in this class are only for MSSQLServer and cannot be tested on {0}", ConnectedDataProvider.GetDbType()));
+                Log(
+                    string.Format(
+                        "All tests in this class are only for MSSQLServer and cannot be tested on {0}",
+                        ConnectedDataProvider.GetDbType()
+                    )
+                );
                 return;
             }
 
@@ -55,9 +60,15 @@ namespace MonoTests.System.Data.SqlClient
         [TearDown]
         public void tearDown()
         {
-            if (ConnectedDataProvider.GetDbType() != DataBaseServer.SQLServer) {
+            if (ConnectedDataProvider.GetDbType() != DataBaseServer.SQLServer)
+            {
                 //All tests in this class are only for MSSQLServer.
-                Log(string.Format("All tests in this class are only for MSSQLServer and cannot be tested on {0}", ConnectedDataProvider.GetDbType()));
+                Log(
+                    string.Format(
+                        "All tests in this class are only for MSSQLServer and cannot be tested on {0}",
+                        ConnectedDataProvider.GetDbType()
+                    )
+                );
                 return;
             }
 
@@ -65,7 +76,6 @@ namespace MonoTests.System.Data.SqlClient
             {
                 con.Close();
             }
-
         }
 
         public void run()
@@ -73,15 +83,18 @@ namespace MonoTests.System.Data.SqlClient
             if (ConnectedDataProvider.GetDbType() != DataBaseServer.SQLServer)
             {
                 //All tests in this class are only for MSSQLServer.
-                Log(string.Format("All tests in this class are only for MSSQLServer and cannot be tested on {0}", ConnectedDataProvider.GetDbType()));
+                Log(
+                    string.Format(
+                        "All tests in this class are only for MSSQLServer and cannot be tested on {0}",
+                        ConnectedDataProvider.GetDbType()
+                    )
+                );
                 return;
             }
 
             setUp();
             test();
             tearDown();
-
-            
         }
 
         [Test]
@@ -90,7 +103,12 @@ namespace MonoTests.System.Data.SqlClient
             if (ConnectedDataProvider.GetDbType() != DataBaseServer.SQLServer)
             {
                 //All tests in this class are only for MSSQLServer.
-                Log(string.Format("All tests in this class are only for MSSQLServer and cannot be tested on {0}", ConnectedDataProvider.GetDbType()));
+                Log(
+                    string.Format(
+                        "All tests in this class are only for MSSQLServer and cannot be tested on {0}",
+                        ConnectedDataProvider.GetDbType()
+                    )
+                );
                 return;
             }
 
@@ -98,11 +116,11 @@ namespace MonoTests.System.Data.SqlClient
             BeginCase("Checking with sp that doesn't exsits ");
             try
             {
-                cmd = new SqlCommand("NotExists",con);
+                cmd = new SqlCommand("NotExists", con);
                 cmd.CommandType = CommandType.StoredProcedure;
                 SqlCommandBuilder.DeriveParameters(cmd);
-            } 
-            catch(InvalidOperationException ex)
+            }
+            catch (InvalidOperationException ex)
             {
                 ExpectedExceptionCaught(ex);
                 exp = ex;
@@ -116,7 +134,6 @@ namespace MonoTests.System.Data.SqlClient
                 EndCase(null);
                 exp = null;
             }
-
         }
 
         //Activate This Construntor to log All To Standard output
@@ -129,6 +146,5 @@ namespace MonoTests.System.Data.SqlClient
         //public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
         //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
-
     }
 }

@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -21,15 +21,10 @@ namespace Castle.DynamicProxy.Tests.Classes
     public class HasNonInheritableAttribute
     {
         [NonInheritable]
-        public virtual void OnMethod()
-        {
-        }
+        public virtual void OnMethod() { }
 
         [NonInheritable]
-        public virtual string OnProperty
-        {
-            get; set;
-        }
+        public virtual string OnProperty { get; set; }
 
         [return: NonInheritable]
         public virtual int OnReturn()
@@ -37,27 +32,19 @@ namespace Castle.DynamicProxy.Tests.Classes
             return 1;
         }
 
-        public virtual void OnParameter([NonInheritable] int arg)
-        {
-        }
+        public virtual void OnParameter([NonInheritable] int arg) { }
 
-        public virtual void OnGenericArgument<[NonInheritable] T>()
-        {
-        }
+        public virtual void OnGenericArgument<[NonInheritable] T>() { }
     }
 
     [ComplexNonInheritableAttribute(1, 2, true, "class", FileAccess.Write)]
     public class AttributedClass2
     {
         [ComplexNonInheritableAttribute(2, 3, "Do1", Access = FileAccess.ReadWrite)]
-        public virtual void Do1()
-        {
-        }
+        public virtual void Do1() { }
 
         [ComplexNonInheritableAttribute(3, 4, "Do2", IsSomething = true)]
-        public virtual void Do2()
-        {
-        }
+        public virtual void Do2() { }
     }
 
 #if FEATURE_SERIALIZATION
@@ -66,7 +53,8 @@ namespace Castle.DynamicProxy.Tests.Classes
     [AttributeUsage(AttributeTargets.All, Inherited = false)]
     public class ComplexNonInheritableAttribute : Attribute
     {
-        public int id, num;
+        public int id,
+            num;
         public bool isSomething;
         public string name;
         public FileAccess access;
@@ -78,7 +66,13 @@ namespace Castle.DynamicProxy.Tests.Classes
             this.name = name;
         }
 
-        public ComplexNonInheritableAttribute(int id, int num, bool isSomething, string name, FileAccess access)
+        public ComplexNonInheritableAttribute(
+            int id,
+            int num,
+            bool isSomething,
+            string name,
+            FileAccess access
+        )
         {
             this.id = id;
             this.num = num;

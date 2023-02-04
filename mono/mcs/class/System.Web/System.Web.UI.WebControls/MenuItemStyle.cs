@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,7 +35,7 @@ using System.ComponentModel;
 
 namespace System.Web.UI.WebControls
 {
-    public sealed class MenuItemStyle: Style
+    public sealed class MenuItemStyle : Style
     {
         [Flags]
         enum MenuItemStyles
@@ -45,119 +45,136 @@ namespace System.Web.UI.WebControls
             ItemSpacing = 0x00040000,
         }
 
-        public MenuItemStyle ()
-            : base ()
-        {
-        }
+        public MenuItemStyle()
+            : base() { }
 
-        public MenuItemStyle (StateBag bag)
-            : base (bag)
-        {
-        }
+        public MenuItemStyle(StateBag bag)
+            : base(bag) { }
 
-        [DefaultValue (typeof (Unit), "")]
-        [NotifyParentProperty (true)]
-        public Unit HorizontalPadding {
-            get {
-                if (CheckBit ((int) MenuItemStyles.HorizontalPadding))
-                    return (Unit) (ViewState ["HorizontalPadding"]);
+        [DefaultValue(typeof(Unit), "")]
+        [NotifyParentProperty(true)]
+        public Unit HorizontalPadding
+        {
+            get
+            {
+                if (CheckBit((int)MenuItemStyles.HorizontalPadding))
+                    return (Unit)(ViewState["HorizontalPadding"]);
                 return Unit.Empty;
             }
-            set {
+            set
+            {
                 ViewState["HorizontalPadding"] = value;
-                SetBit ((int) MenuItemStyles.HorizontalPadding);
+                SetBit((int)MenuItemStyles.HorizontalPadding);
             }
         }
 
-        [DefaultValue (typeof (Unit), "")]
-        [NotifyParentProperty (true)]
-        public Unit VerticalPadding {
-            get {
-                if (CheckBit ((int) MenuItemStyles.VerticalPadding))
-                    return (Unit) (ViewState ["VerticalPadding"]);
+        [DefaultValue(typeof(Unit), "")]
+        [NotifyParentProperty(true)]
+        public Unit VerticalPadding
+        {
+            get
+            {
+                if (CheckBit((int)MenuItemStyles.VerticalPadding))
+                    return (Unit)(ViewState["VerticalPadding"]);
                 return Unit.Empty;
             }
-            set {
+            set
+            {
                 ViewState["VerticalPadding"] = value;
-                SetBit ((int) MenuItemStyles.VerticalPadding);
+                SetBit((int)MenuItemStyles.VerticalPadding);
             }
         }
 
-        [DefaultValue (typeof (Unit), "")]
-        [NotifyParentProperty (true)]
-        public Unit ItemSpacing {
-            get {
-                if (CheckBit ((int) MenuItemStyles.ItemSpacing))
-                    return (Unit) (ViewState ["ItemSpacing"]);
+        [DefaultValue(typeof(Unit), "")]
+        [NotifyParentProperty(true)]
+        public Unit ItemSpacing
+        {
+            get
+            {
+                if (CheckBit((int)MenuItemStyles.ItemSpacing))
+                    return (Unit)(ViewState["ItemSpacing"]);
                 return Unit.Empty;
             }
-            set {
+            set
+            {
                 ViewState["ItemSpacing"] = value;
-                SetBit ((int) MenuItemStyles.ItemSpacing);
+                SetBit((int)MenuItemStyles.ItemSpacing);
             }
         }
 
-        public override void CopyFrom (Style s)
+        public override void CopyFrom(Style s)
         {
             if (s == null || s.IsEmpty)
                 return;
 
-            base.CopyFrom (s);
+            base.CopyFrom(s);
             MenuItemStyle from = s as MenuItemStyle;
             if (from == null)
                 return;
 
-            if (from.CheckBit ((int) MenuItemStyles.HorizontalPadding))
+            if (from.CheckBit((int)MenuItemStyles.HorizontalPadding))
                 HorizontalPadding = from.HorizontalPadding;
 
-            if (from.CheckBit ((int) MenuItemStyles.ItemSpacing))
+            if (from.CheckBit((int)MenuItemStyles.ItemSpacing))
                 ItemSpacing = from.ItemSpacing;
 
-            if (from.CheckBit ((int) MenuItemStyles.VerticalPadding))
+            if (from.CheckBit((int)MenuItemStyles.VerticalPadding))
                 VerticalPadding = from.VerticalPadding;
         }
-        
+
         public override void MergeWith(Style s)
         {
             if ((s == null) || (s.IsEmpty))
                 return;
 
-            base.MergeWith (s);
+            base.MergeWith(s);
             MenuItemStyle with = s as MenuItemStyle;
             if (with == null)
                 return;
 
-            if (!CheckBit ((int) MenuItemStyles.HorizontalPadding) && with.CheckBit ((int) MenuItemStyles.HorizontalPadding))
+            if (
+                !CheckBit((int)MenuItemStyles.HorizontalPadding)
+                && with.CheckBit((int)MenuItemStyles.HorizontalPadding)
+            )
                 HorizontalPadding = with.HorizontalPadding;
 
-            if (!CheckBit ((int) MenuItemStyles.ItemSpacing) && with.CheckBit ((int) MenuItemStyles.ItemSpacing))
+            if (
+                !CheckBit((int)MenuItemStyles.ItemSpacing)
+                && with.CheckBit((int)MenuItemStyles.ItemSpacing)
+            )
                 ItemSpacing = with.ItemSpacing;
 
-            if (!CheckBit ((int) MenuItemStyles.VerticalPadding) && with.CheckBit ((int) MenuItemStyles.VerticalPadding))
+            if (
+                !CheckBit((int)MenuItemStyles.VerticalPadding)
+                && with.CheckBit((int)MenuItemStyles.VerticalPadding)
+            )
                 VerticalPadding = with.VerticalPadding;
-                
         }
 
         public override void Reset()
         {
-            ViewState.Remove ("HorizontalPadding");
-            ViewState.Remove ("ItemSpacing");
-            ViewState.Remove ("VerticalPadding");
+            ViewState.Remove("HorizontalPadding");
+            ViewState.Remove("ItemSpacing");
+            ViewState.Remove("VerticalPadding");
             base.Reset();
         }
-        
-        protected override void FillStyleAttributes (CssStyleCollection attributes, IUrlResolutionService urlResolver)
+
+        protected override void FillStyleAttributes(
+            CssStyleCollection attributes,
+            IUrlResolutionService urlResolver
+        )
         {
-            base.FillStyleAttributes (attributes, urlResolver);
-            if (CheckBit ((int) MenuItemStyles.HorizontalPadding)) {
-                attributes.Add (HtmlTextWriterStyle.PaddingLeft, HorizontalPadding.ToString ());
-                attributes.Add (HtmlTextWriterStyle.PaddingRight, HorizontalPadding.ToString ());
+            base.FillStyleAttributes(attributes, urlResolver);
+            if (CheckBit((int)MenuItemStyles.HorizontalPadding))
+            {
+                attributes.Add(HtmlTextWriterStyle.PaddingLeft, HorizontalPadding.ToString());
+                attributes.Add(HtmlTextWriterStyle.PaddingRight, HorizontalPadding.ToString());
             }
-            if (CheckBit ((int) MenuItemStyles.VerticalPadding)) {
-                attributes.Add (HtmlTextWriterStyle.PaddingTop, VerticalPadding.ToString ());
-                attributes.Add (HtmlTextWriterStyle.PaddingBottom, VerticalPadding.ToString ());
+            if (CheckBit((int)MenuItemStyles.VerticalPadding))
+            {
+                attributes.Add(HtmlTextWriterStyle.PaddingTop, VerticalPadding.ToString());
+                attributes.Add(HtmlTextWriterStyle.PaddingBottom, VerticalPadding.ToString());
             }
         }
     }
 }
-

@@ -43,7 +43,10 @@ public class StringOutputFormatter : TextOutputFormatter
     }
 
     /// <inheritdoc/>
-    public override Task WriteResponseBodyAsync(OutputFormatterWriteContext context, Encoding encoding)
+    public override Task WriteResponseBodyAsync(
+        OutputFormatterWriteContext context,
+        Encoding encoding
+    )
     {
         if (context == null)
         {

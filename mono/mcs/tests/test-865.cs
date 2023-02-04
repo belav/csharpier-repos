@@ -1,31 +1,22 @@
 class C
 {
-    public static void Main ()
+    public static void Main()
     {
-        Create (false);
+        Create(false);
     }
 
-    static IA Create (bool arg)
+    static IA Create(bool arg)
     {
         // Verifier issue
-        IA runner = arg ? new B2 () : (IA) new B1 ();
+        IA runner = arg ? new B2() : (IA)new B1();
         return runner;
     }
 }
 
-interface IA
-{
+interface IA { }
 
-}
+class B2 : IA { }
 
-class B2 : IA
-{
-}
+class B1 : B { }
 
-class B1 : B
-{
-}
-
-class B : IA
-{
-}
+class B : IA { }

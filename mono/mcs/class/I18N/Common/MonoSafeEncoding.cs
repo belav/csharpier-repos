@@ -3,10 +3,10 @@
 //
 // Author:
 //    Atsushi Enomoto <atsushi@ximian.com>
-//  Pablo Ruiz García <pruiz@netway.org>
+//  Pablo Ruiz Garcï¿½a <pruiz@netway.org>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
-// Copyright (C) 2011 Pablo Ruiz García
+// Copyright (C) 2011 Pablo Ruiz Garcï¿½a
 //
 using System;
 using System.Runtime.InteropServices;
@@ -20,18 +20,17 @@ namespace I18N.Common
     {
         readonly int win_code_page;
 
-        public MonoSafeEncoding (int codePage)
-            : this (codePage, 0)
-        {
-        }
+        public MonoSafeEncoding(int codePage)
+            : this(codePage, 0) { }
 
         public MonoSafeEncoding(int codePage, int windowsCodePage)
-            : base (codePage)
-        { 
+            : base(codePage)
+        {
             win_code_page = windowsCodePage;
         }
 
-        public override int WindowsCodePage {
+        public override int WindowsCodePage
+        {
             get { return win_code_page != 0 ? win_code_page : base.WindowsCodePage; }
         }
 
@@ -49,59 +48,92 @@ namespace I18N.Common
         /// <remarks>
         /// Only state-full encoders need to implement this method (ie. ISO-2022-JP)
         /// </remarks>
-        protected virtual int GetBytesInternal(char[] chars, int charIndex, int charCount, 
-            byte[] bytes, int byteIndex, bool flush, object state)
+        protected virtual int GetBytesInternal(
+            char[] chars,
+            int charIndex,
+            int charCount,
+            byte[] bytes,
+            int byteIndex,
+            bool flush,
+            object state
+        )
         {
-            throw new NotImplementedException("Statefull encoding is not implemented (yet?) by this encoding class.");
+            throw new NotImplementedException(
+                "Statefull encoding is not implemented (yet?) by this encoding class."
+            );
         }
 
-        public void HandleFallback(ref EncoderFallbackBuffer buffer,
-            char[] chars, ref int charIndex, ref int charCount,
-            byte[] bytes, ref int byteIndex, ref int byteCount, object state)
+        public void HandleFallback(
+            ref EncoderFallbackBuffer buffer,
+            char[] chars,
+            ref int charIndex,
+            ref int charCount,
+            byte[] bytes,
+            ref int byteIndex,
+            ref int byteCount,
+            object state
+        )
         {
             if (buffer == null)
                 buffer = EncoderFallback.CreateFallbackBuffer();
 
-            if (charCount > 1 && (Char.IsSurrogate(chars[charIndex]) && Char.IsSurrogate(chars[charIndex + 1])))
+            if (
+                charCount > 1
+                && (Char.IsSurrogate(chars[charIndex]) && Char.IsSurrogate(chars[charIndex + 1]))
+            )
             {
-                buffer.Fallback (chars[charIndex], chars[charIndex + 1], charIndex);
+                buffer.Fallback(chars[charIndex], chars[charIndex + 1], charIndex);
                 charIndex++;
                 charCount--;
             }
             else
-                buffer.Fallback (chars[charIndex], charIndex);
+                buffer.Fallback(chars[charIndex], charIndex);
 
             char[] tmp = new char[buffer.Remaining];
             int idx = 0;
             while (buffer.Remaining > 0)
                 tmp[idx++] = buffer.GetNextChar();
 
-            var len = state == null ?
-                GetBytes(tmp, 0, tmp.Length, bytes, byteIndex)
-                : GetBytesInternal(tmp, 0, tmp.Length, bytes, byteIndex, true, state);
+            var len =
+                state == null
+                    ? GetBytes(tmp, 0, tmp.Length, bytes, byteIndex)
+                    : GetBytesInternal(tmp, 0, tmp.Length, bytes, byteIndex, true, state);
             byteIndex += len;
             byteCount -= len;
         }
-
     }
 
-        public abstract class MonoSafeEncoder : Encoder
+    public abstract class MonoSafeEncoder : Encoder
+    {
+        MonoSafeEncoding encoding;
+
+        public MonoSafeEncoder(MonoSafeEncoding encoding)
         {
-            MonoSafeEncoding encoding;
-
-            public MonoSafeEncoder (MonoSafeEncoding encoding)
-            {
-                this.encoding = encoding;
-            }
-
-            public void HandleFallback(
-                char[] chars, ref int charIndex, ref int charCount,
-                byte[] bytes, ref int byteIndex, ref int byteCount, object state)
-            {
-                EncoderFallbackBuffer buffer = FallbackBuffer;
-                encoding.HandleFallback(ref buffer, chars, ref charIndex, ref charCount,
-                    bytes, ref byteIndex, ref byteCount, state);
-            }
+            this.encoding = encoding;
         }
+
+        public void HandleFallback(
+            char[] chars,
+            ref int charIndex,
+            ref int charCount,
+            byte[] bytes,
+            ref int byteIndex,
+            ref int byteCount,
+            object state
+        )
+        {
+            EncoderFallbackBuffer buffer = FallbackBuffer;
+            encoding.HandleFallback(
+                ref buffer,
+                chars,
+                ref charIndex,
+                ref charCount,
+                bytes,
+                ref byteIndex,
+                ref byteCount,
+                state
+            );
+        }
+    }
 #endif
 }

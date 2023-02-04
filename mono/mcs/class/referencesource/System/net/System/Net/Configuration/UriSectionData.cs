@@ -18,7 +18,7 @@ namespace System.Configuration
 
         public UriSectionData()
         {
-            schemeSettings = new Dictionary<string, SchemeSettingInternal>();            
+            schemeSettings = new Dictionary<string, SchemeSettingInternal>();
         }
 
         public UriIdnScope? IdnScope

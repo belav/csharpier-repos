@@ -2,13 +2,12 @@
 // Line: 12
 // Compiler options: -unsafe
 
-class X <Y> {
-}
+class X<Y> { }
 
-unsafe class A {
-
-    static void Main ()
+unsafe class A
+{
+    static void Main()
     {
-        int size = sizeof (X<A>);
+        int size = sizeof(X<A>);
     }
 }

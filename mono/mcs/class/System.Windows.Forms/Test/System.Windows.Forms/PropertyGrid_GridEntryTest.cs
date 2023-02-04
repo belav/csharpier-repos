@@ -24,28 +24,35 @@ namespace MonoTests.System.Windows.Forms
         public void CheckGridItem(INestedObj ownerObject, string propertyName, GridItem gridItem)
         {
             var context = gridItem as ITypeDescriptorContext;
-            Assert.NotNull (gridItem, "gridItem is null (propertyName={0})", propertyName);
-            Assert.NotNull (context, "gridItem is not ITypeDescriptorContext (propertyName={0})", propertyName);
+            Assert.NotNull(gridItem, "gridItem is null (propertyName={0})", propertyName);
+            Assert.NotNull(
+                context,
+                "gridItem is not ITypeDescriptorContext (propertyName={0})",
+                propertyName
+            );
 
-            Assert.AreEqual (gridItem.Label, propertyName);
+            Assert.AreEqual(gridItem.Label, propertyName);
 
-            Assert.AreSame (context.Instance, ownerObject);
-            Assert.AreEqual (context.PropertyDescriptor.PropertyType, ownerObject.PropertyAsINestedObj.GetType());
-            Assert.AreEqual (context.PropertyDescriptor.Name, propertyName);
+            Assert.AreSame(context.Instance, ownerObject);
+            Assert.AreEqual(
+                context.PropertyDescriptor.PropertyType,
+                ownerObject.PropertyAsINestedObj.GetType()
+            );
+            Assert.AreEqual(context.PropertyDescriptor.Name, propertyName);
         }
 
         [Test]
         public void ITypeDescriptorContextTest()
         {
-            PropertyGrid pg = new PropertyGrid ();
+            PropertyGrid pg = new PropertyGrid();
 
-            var rootObj = new NestedObj0 ();
-            rootObj.Property1 = new NestedObj1 ();
-            rootObj.Property1.Property2 = new NestedObj2 ();
-            rootObj.Property1.Property2.Property3 = new NestedObj3 ();
+            var rootObj = new NestedObj0();
+            rootObj.Property1 = new NestedObj1();
+            rootObj.Property1.Property2 = new NestedObj2();
+            rootObj.Property1.Property2.Property3 = new NestedObj3();
             pg.SelectedObject = rootObj;
 
-            GridItem gridItem_Property1 = pg.GetRootItem ();
+            GridItem gridItem_Property1 = pg.GetRootItem();
             INestedObj ownerOf_Property1 = rootObj;
             CheckGridItem(ownerOf_Property1, "Property1", gridItem_Property1);
 
@@ -61,24 +68,24 @@ namespace MonoTests.System.Windows.Forms
         [Test]
         public void CustomExpandableConverterTest()
         {
-            PropertyGrid pg = new PropertyGrid ();
+            PropertyGrid pg = new PropertyGrid();
 
-            var rootObj = new ConverterTestRootObject ();
+            var rootObj = new ConverterTestRootObject();
             pg.SelectedObject = rootObj;
 
-            GridItem customExpandableGridItem = pg.GetRootItem ();
-            Assert.AreEqual ("CustomExpandableProperty", customExpandableGridItem.Label);
+            GridItem customExpandableGridItem = pg.GetRootItem();
+            Assert.AreEqual("CustomExpandableProperty", customExpandableGridItem.Label);
 
             var substitutedGridItems = customExpandableGridItem.GridItems;
-            Assert.AreEqual (1, substitutedGridItems.Count);
-            Assert.NotNull (substitutedGridItems["SomeProperty"]);
+            Assert.AreEqual(1, substitutedGridItems.Count);
+            Assert.NotNull(substitutedGridItems["SomeProperty"]);
         }
     }
 
     public static class PropertyGridExtentions
     {
         // Returns non-Category root `GridItem`.
-        public static GridItem GetRootItem (this PropertyGrid pg)
+        public static GridItem GetRootItem(this PropertyGrid pg)
         {
             GridItem gridItem = pg.SelectedGridItem;
             Assert.NotNull(gridItem, "No one GridItem is Selected in the PropertyGrid");
@@ -94,7 +101,7 @@ namespace MonoTests.System.Windows.Forms
 
     #region Test Environment: ITypeDescriptorContextTest
 
-    [TypeConverter (typeof (ExpandableObjectConverter))]
+    [TypeConverter(typeof(ExpandableObjectConverter))]
     public interface INestedObj
     {
         INestedObj PropertyAsINestedObj { get; }
@@ -105,42 +112,54 @@ namespace MonoTests.System.Windows.Forms
     {
         public NestedObj1 Property1 { get; set; }
 
-        [Browsable (false)]
-        public INestedObj PropertyAsINestedObj { get { return Property1; } }
+        [Browsable(false)]
+        public INestedObj PropertyAsINestedObj
+        {
+            get { return Property1; }
+        }
     }
 
     class NestedObj1 : INestedObj
     {
         public NestedObj2 Property2 { get; set; }
 
-        [Browsable (false)]
-        public INestedObj PropertyAsINestedObj { get { return Property2; } }
+        [Browsable(false)]
+        public INestedObj PropertyAsINestedObj
+        {
+            get { return Property2; }
+        }
     }
 
     class NestedObj2 : INestedObj
     {
         public NestedObj3 Property3 { get; set; }
 
-        [Browsable (false)]
-        public INestedObj PropertyAsINestedObj { get { return Property3; } }
+        [Browsable(false)]
+        public INestedObj PropertyAsINestedObj
+        {
+            get { return Property3; }
+        }
     }
 
     class NestedObj3 : INestedObj
     {
-        [Browsable (false)]
-        public INestedObj PropertyAsINestedObj { get { return null; } }
+        [Browsable(false)]
+        public INestedObj PropertyAsINestedObj
+        {
+            get { return null; }
+        }
     }
 
     #endregion  // Test Environment: ITypeDescriptorContextTest
 
     #region Test Environment: CustomExpandableConverter
 
-    [TypeConverter (typeof (ExpandableObjectConverter))]
+    [TypeConverter(typeof(ExpandableObjectConverter))]
     public class ConverterTestRootObject
     {
         public ConverterTestPropertiesHolder propertiesHolder = new ConverterTestPropertiesHolder();
 
-        [TypeConverter (typeof (CustomExpandableConverter))]
+        [TypeConverter(typeof(CustomExpandableConverter))]
         public string CustomExpandableProperty { get; set; }
 
         public ConverterTestRootObject()
@@ -156,15 +175,19 @@ namespace MonoTests.System.Windows.Forms
 
     public class CustomExpandableConverter : TypeConverter
     {
-        public override bool GetPropertiesSupported (ITypeDescriptorContext context)
+        public override bool GetPropertiesSupported(ITypeDescriptorContext context)
         {
             return true;
         }
 
-        public override PropertyDescriptorCollection GetProperties (ITypeDescriptorContext context, object value, Attribute[] attributes)
+        public override PropertyDescriptorCollection GetProperties(
+            ITypeDescriptorContext context,
+            object value,
+            Attribute[] attributes
+        )
         {
             ConverterTestRootObject testObject = context.Instance as ConverterTestRootObject;
-            return TypeDescriptor.GetProperties (testObject.propertiesHolder);
+            return TypeDescriptor.GetProperties(testObject.propertiesHolder);
         }
     }
 

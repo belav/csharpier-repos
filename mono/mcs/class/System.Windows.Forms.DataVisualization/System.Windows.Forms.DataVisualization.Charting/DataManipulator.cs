@@ -10,10 +10,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,297 +33,447 @@ namespace System.Windows.Forms.DataVisualization.Charting
         public bool FilterSetEmptyPoints { get; set; }
 
         [MonoTODO]
-        public DataSet ExportSeriesValues ()
+        public DataSet ExportSeriesValues()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public DataSet ExportSeriesValues (Series series)
+        public DataSet ExportSeriesValues(Series series)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public DataSet ExportSeriesValues (string seriesNames)
+        public DataSet ExportSeriesValues(string seriesNames)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void Filter (IDataPointFilter filterInterface, string inputSeriesNames)
+        public void Filter(IDataPointFilter filterInterface, string inputSeriesNames)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void Filter (IDataPointFilter filterInterface, Series inputSeries)
+        public void Filter(IDataPointFilter filterInterface, Series inputSeries)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void Filter (CompareMethod compareMethod, double compareValue, string inputSeriesNames)
+        public void Filter(
+            CompareMethod compareMethod,
+            double compareValue,
+            string inputSeriesNames
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void Filter (CompareMethod compareMethod, double compareValue, Series inputSeries)
+        public void Filter(CompareMethod compareMethod, double compareValue, Series inputSeries)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void Filter (DateRangeType dateRange, string rangeElements, string inputSeriesNames)
+        public void Filter(DateRangeType dateRange, string rangeElements, string inputSeriesNames)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void Filter (DateRangeType dateRange, string rangeElements, Series inputSeries)
+        public void Filter(DateRangeType dateRange, string rangeElements, Series inputSeries)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void Filter (IDataPointFilter filterInterface, string inputSeriesNames, string outputSeriesNames)
+        public void Filter(
+            IDataPointFilter filterInterface,
+            string inputSeriesNames,
+            string outputSeriesNames
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void Filter (IDataPointFilter filterInterface, Series inputSeries, Series outputSeries)
+        public void Filter(
+            IDataPointFilter filterInterface,
+            Series inputSeries,
+            Series outputSeries
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void Filter (CompareMethod compareMethod, double compareValue, string inputSeriesNames, string outputSeriesNames)
+        public void Filter(
+            CompareMethod compareMethod,
+            double compareValue,
+            string inputSeriesNames,
+            string outputSeriesNames
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void Filter (CompareMethod compareMethod, double compareValue, Series inputSeries, Series outputSeries)
+        public void Filter(
+            CompareMethod compareMethod,
+            double compareValue,
+            Series inputSeries,
+            Series outputSeries
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void Filter (DateRangeType dateRange, string rangeElements, string inputSeriesNames, string outputSeriesNames)
+        public void Filter(
+            DateRangeType dateRange,
+            string rangeElements,
+            string inputSeriesNames,
+            string outputSeriesNames
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void Filter (DateRangeType dateRange, string rangeElements, Series inputSeries, Series outputSeries)
+        public void Filter(
+            DateRangeType dateRange,
+            string rangeElements,
+            Series inputSeries,
+            Series outputSeries
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void Filter (CompareMethod compareMethod, double compareValue, string inputSeriesNames, string outputSeriesNames, string usingValue)
+        public void Filter(
+            CompareMethod compareMethod,
+            double compareValue,
+            string inputSeriesNames,
+            string outputSeriesNames,
+            string usingValue
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void Filter (CompareMethod compareMethod, double compareValue, Series inputSeries, Series outputSeries, string usingValue)
+        public void Filter(
+            CompareMethod compareMethod,
+            double compareValue,
+            Series inputSeries,
+            Series outputSeries,
+            string usingValue
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void FilterTopN (int pointCount, string inputSeriesNames)
+        public void FilterTopN(int pointCount, string inputSeriesNames)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void FilterTopN (int pointCount, Series inputSeries)
+        public void FilterTopN(int pointCount, Series inputSeries)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void FilterTopN (int pointCount, string inputSeriesNames, string outputSeriesNames)
+        public void FilterTopN(int pointCount, string inputSeriesNames, string outputSeriesNames)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void FilterTopN (int pointCount, Series inputSeries, Series outputSeries)
+        public void FilterTopN(int pointCount, Series inputSeries, Series outputSeries)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void FilterTopN (int pointCount, string inputSeriesNames, string outputSeriesNames, string usingValue)
+        public void FilterTopN(
+            int pointCount,
+            string inputSeriesNames,
+            string outputSeriesNames,
+            string usingValue
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void FilterTopN (int pointCount, Series inputSeries, Series outputSeries, string usingValue)
+        public void FilterTopN(
+            int pointCount,
+            Series inputSeries,
+            Series outputSeries,
+            string usingValue
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void FilterTopN (int pointCount, string inputSeriesNames, string outputSeriesNames, string usingValue, bool getTopValues)
+        public void FilterTopN(
+            int pointCount,
+            string inputSeriesNames,
+            string outputSeriesNames,
+            string usingValue,
+            bool getTopValues
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void FilterTopN (int pointCount, Series inputSeries, Series outputSeries, string usingValue, bool getTopValues)
+        public void FilterTopN(
+            int pointCount,
+            Series inputSeries,
+            Series outputSeries,
+            string usingValue,
+            bool getTopValues
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void Group (string formula, double interval, IntervalType intervalType, string inputSeriesName)
+        public void Group(
+            string formula,
+            double interval,
+            IntervalType intervalType,
+            string inputSeriesName
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void Group (string formula, double interval, IntervalType intervalType, Series inputSeries)
+        public void Group(
+            string formula,
+            double interval,
+            IntervalType intervalType,
+            Series inputSeries
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void Group (string formula, double interval, IntervalType intervalType, string inputSeriesName, string outputSeriesName)
+        public void Group(
+            string formula,
+            double interval,
+            IntervalType intervalType,
+            string inputSeriesName,
+            string outputSeriesName
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void Group (string formula, double interval, IntervalType intervalType, Series inputSeries, Series outputSeries)
+        public void Group(
+            string formula,
+            double interval,
+            IntervalType intervalType,
+            Series inputSeries,
+            Series outputSeries
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void Group (string formula, double interval, IntervalType intervalType, double intervalOffset, IntervalType intervalOffsetType, string inputSeriesName)
+        public void Group(
+            string formula,
+            double interval,
+            IntervalType intervalType,
+            double intervalOffset,
+            IntervalType intervalOffsetType,
+            string inputSeriesName
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void Group (string formula, double interval, IntervalType intervalType, double intervalOffset, IntervalType intervalOffsetType, Series inputSeries)
+        public void Group(
+            string formula,
+            double interval,
+            IntervalType intervalType,
+            double intervalOffset,
+            IntervalType intervalOffsetType,
+            Series inputSeries
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void Group (string formula, double interval, IntervalType intervalType, double intervalOffset, IntervalType intervalOffsetType, string inputSeriesName, string outputSeriesName)
+        public void Group(
+            string formula,
+            double interval,
+            IntervalType intervalType,
+            double intervalOffset,
+            IntervalType intervalOffsetType,
+            string inputSeriesName,
+            string outputSeriesName
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void Group (string formula, double interval, IntervalType intervalType, double intervalOffset, IntervalType intervalOffsetType, Series inputSeries, Series outputSeries)
+        public void Group(
+            string formula,
+            double interval,
+            IntervalType intervalType,
+            double intervalOffset,
+            IntervalType intervalOffsetType,
+            Series inputSeries,
+            Series outputSeries
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void GroupByAxisLabel (string formula, string inputSeriesName)
+        public void GroupByAxisLabel(string formula, string inputSeriesName)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void GroupByAxisLabel (string formula, Series inputSeries)
+        public void GroupByAxisLabel(string formula, Series inputSeries)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void GroupByAxisLabel (string formula, string inputSeriesName, string outputSeriesName)
+        public void GroupByAxisLabel(
+            string formula,
+            string inputSeriesName,
+            string outputSeriesName
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void GroupByAxisLabel (string formula, Series inputSeries, Series outputSeries)
+        public void GroupByAxisLabel(string formula, Series inputSeries, Series outputSeries)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void InsertEmptyPoints (double interval, IntervalType intervalType, string seriesName)
+        public void InsertEmptyPoints(double interval, IntervalType intervalType, string seriesName)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void InsertEmptyPoints (double interval, IntervalType intervalType, Series series)
+        public void InsertEmptyPoints(double interval, IntervalType intervalType, Series series)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void InsertEmptyPoints (double interval, IntervalType intervalType, double intervalOffset, IntervalType intervalOffsetType, string seriesName)
+        public void InsertEmptyPoints(
+            double interval,
+            IntervalType intervalType,
+            double intervalOffset,
+            IntervalType intervalOffsetType,
+            string seriesName
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void InsertEmptyPoints (double interval, IntervalType intervalType, double intervalOffset, IntervalType intervalOffsetType, Series series)
+        public void InsertEmptyPoints(
+            double interval,
+            IntervalType intervalType,
+            double intervalOffset,
+            IntervalType intervalOffsetType,
+            Series series
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void InsertEmptyPoints (double interval, IntervalType intervalType, double intervalOffset, IntervalType intervalOffsetType, double fromXValue, double toXValue, string seriesName)
+        public void InsertEmptyPoints(
+            double interval,
+            IntervalType intervalType,
+            double intervalOffset,
+            IntervalType intervalOffsetType,
+            double fromXValue,
+            double toXValue,
+            string seriesName
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void InsertEmptyPoints (double interval, IntervalType intervalType, double intervalOffset, IntervalType intervalOffsetType, double fromXValue, double toXValue, Series series)
+        public void InsertEmptyPoints(
+            double interval,
+            IntervalType intervalType,
+            double intervalOffset,
+            IntervalType intervalOffsetType,
+            double fromXValue,
+            double toXValue,
+            Series series
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void Sort (IComparer<DataPoint> comparer, string seriesName)
+        public void Sort(IComparer<DataPoint> comparer, string seriesName)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void Sort (IComparer<DataPoint> comparer, Series series)
+        public void Sort(IComparer<DataPoint> comparer, Series series)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void Sort (PointSortOrder pointSortOrder, string seriesName)
+        public void Sort(PointSortOrder pointSortOrder, string seriesName)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void Sort (PointSortOrder pointSortOrder, Series series)
+        public void Sort(PointSortOrder pointSortOrder, Series series)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void Sort (PointSortOrder pointSortOrder, string sortBy, string seriesName)
+        public void Sort(PointSortOrder pointSortOrder, string sortBy, string seriesName)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void Sort (PointSortOrder pointSortOrder, string sortBy, Series series)
+        public void Sort(PointSortOrder pointSortOrder, string sortBy, Series series)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
     }
 }

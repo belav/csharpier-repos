@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,17 +31,23 @@ namespace System.Runtime.InteropServices
 {
     [Obsolete]
     [ComImport]
-    [Guid ("00000102-0000-0000-c000-000000000046")]
-    [InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
+    [Guid("00000102-0000-0000-c000-000000000046")]
+    [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
     public interface UCOMIEnumMoniker
     {
         [PreserveSig]
-        int Next (int celt, [Out, MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 0)] UCOMIMoniker[] rgelt, out int pceltFetched);
+        int Next(
+            int celt,
+            [Out, MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 0)] UCOMIMoniker[] rgelt,
+            out int pceltFetched
+        );
+
         [PreserveSig]
-        int Skip (int celt);
+        int Skip(int celt);
+
         [PreserveSig]
-        int Reset ();
-        void Clone (out UCOMIEnumMoniker ppenum);
+        int Reset();
+        void Clone(out UCOMIEnumMoniker ppenum);
     }
 }
 #endif

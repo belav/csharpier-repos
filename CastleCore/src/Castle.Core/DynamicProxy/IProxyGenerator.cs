@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -57,7 +57,10 @@ namespace Castle.DynamicProxy
         ///   This method uses <see cref = "IProxyBuilder" /> implementation to generate a proxy type.
         ///   As such caller should expect any type of exception that given <see cref = "IProxyBuilder" /> implementation may throw.
         /// </remarks>
-        TInterface CreateInterfaceProxyWithTarget<TInterface>(TInterface target, params IInterceptor[] interceptors)
+        TInterface CreateInterfaceProxyWithTarget<TInterface>(
+            TInterface target,
+            params IInterceptor[] interceptors
+        )
             where TInterface : class;
 
         /// <summary>
@@ -85,8 +88,11 @@ namespace Castle.DynamicProxy
         ///   This method uses <see cref = "IProxyBuilder" /> implementation to generate a proxy type.
         ///   As such caller should expect any type of exception that given <see cref = "IProxyBuilder" /> implementation may throw.
         /// </remarks>
-        TInterface CreateInterfaceProxyWithTarget<TInterface>(TInterface target, ProxyGenerationOptions options,
-                                                              params IInterceptor[] interceptors)
+        TInterface CreateInterfaceProxyWithTarget<TInterface>(
+            TInterface target,
+            ProxyGenerationOptions options,
+            params IInterceptor[] interceptors
+        )
             where TInterface : class;
 
         /// <summary>
@@ -116,7 +122,11 @@ namespace Castle.DynamicProxy
         ///   This method uses <see cref = "IProxyBuilder" /> implementation to generate a proxy type.
         ///   As such caller should expect any type of exception that given <see cref = "IProxyBuilder" /> implementation may throw.
         /// </remarks>
-        object CreateInterfaceProxyWithTarget(Type interfaceToProxy, object target, params IInterceptor[] interceptors);
+        object CreateInterfaceProxyWithTarget(
+            Type interfaceToProxy,
+            object target,
+            params IInterceptor[] interceptors
+        );
 
         /// <summary>
         ///   Creates proxy object intercepting calls to members of interface <paramref name = "interfaceToProxy" /> on <paramref
@@ -146,8 +156,12 @@ namespace Castle.DynamicProxy
         ///   This method uses <see cref = "IProxyBuilder" /> implementation to generate a proxy type.
         ///   As such caller should expect any type of exception that given <see cref = "IProxyBuilder" /> implementation may throw.
         /// </remarks>
-        object CreateInterfaceProxyWithTarget(Type interfaceToProxy, object target, ProxyGenerationOptions options,
-                                              params IInterceptor[] interceptors);
+        object CreateInterfaceProxyWithTarget(
+            Type interfaceToProxy,
+            object target,
+            ProxyGenerationOptions options,
+            params IInterceptor[] interceptors
+        );
 
         /// <summary>
         ///   Creates proxy object intercepting calls to members of interface <paramref name = "interfaceToProxy" /> on <paramref
@@ -179,8 +193,12 @@ namespace Castle.DynamicProxy
         ///   This method uses <see cref = "IProxyBuilder" /> implementation to generate a proxy type.
         ///   As such caller should expect any type of exception that given <see cref = "IProxyBuilder" /> implementation may throw.
         /// </remarks>
-        object CreateInterfaceProxyWithTarget(Type interfaceToProxy, Type[] additionalInterfacesToProxy, object target,
-                                              params IInterceptor[] interceptors);
+        object CreateInterfaceProxyWithTarget(
+            Type interfaceToProxy,
+            Type[] additionalInterfacesToProxy,
+            object target,
+            params IInterceptor[] interceptors
+        );
 
         /// <summary>
         ///   Creates proxy object intercepting calls to members of interface <paramref name = "interfaceToProxy" /> on <paramref
@@ -213,10 +231,13 @@ namespace Castle.DynamicProxy
         ///   This method uses <see cref = "IProxyBuilder" /> implementation to generate a proxy type.
         ///   As such caller should expect any type of exception that given <see cref = "IProxyBuilder" /> implementation may throw.
         /// </remarks>
-        object CreateInterfaceProxyWithTarget(Type interfaceToProxy, Type[] additionalInterfacesToProxy,
-                                              object target,
-                                              ProxyGenerationOptions options,
-                                              params IInterceptor[] interceptors);
+        object CreateInterfaceProxyWithTarget(
+            Type interfaceToProxy,
+            Type[] additionalInterfacesToProxy,
+            object target,
+            ProxyGenerationOptions options,
+            params IInterceptor[] interceptors
+        );
 
         /// <summary>
         ///   Creates proxy object intercepting calls to members of interface <paramref name = "interfaceToProxy" /> on <paramref
@@ -245,8 +266,11 @@ namespace Castle.DynamicProxy
         ///   This method uses <see cref = "IProxyBuilder" /> implementation to generate a proxy type.
         ///   As such caller should expect any type of exception that given <see cref = "IProxyBuilder" /> implementation may throw.
         /// </remarks>
-        object CreateInterfaceProxyWithTargetInterface(Type interfaceToProxy, object target,
-                                                       params IInterceptor[] interceptors);
+        object CreateInterfaceProxyWithTargetInterface(
+            Type interfaceToProxy,
+            object target,
+            params IInterceptor[] interceptors
+        );
 
         /// <summary>
         ///   Creates proxy object intercepting calls to members of interface <typeparamref name = "TInterface" /> on <paramref
@@ -271,8 +295,10 @@ namespace Castle.DynamicProxy
         ///   This method uses <see cref = "IProxyBuilder" /> implementation to generate a proxy type.
         ///   As such caller should expect any type of exception that given <see cref = "IProxyBuilder" /> implementation may throw.
         /// </remarks>
-        TInterface CreateInterfaceProxyWithTargetInterface<TInterface>(TInterface target,
-                                                                       params IInterceptor[] interceptors)
+        TInterface CreateInterfaceProxyWithTargetInterface<TInterface>(
+            TInterface target,
+            params IInterceptor[] interceptors
+        )
             where TInterface : class;
 
         /// <summary>
@@ -299,9 +325,11 @@ namespace Castle.DynamicProxy
         ///   This method uses <see cref = "IProxyBuilder" /> implementation to generate a proxy type.
         ///   As such caller should expect any type of exception that given <see cref = "IProxyBuilder" /> implementation may throw.
         /// </remarks>
-        TInterface CreateInterfaceProxyWithTargetInterface<TInterface>(TInterface target,
-                                                                       ProxyGenerationOptions options,
-                                                                       params IInterceptor[] interceptors)
+        TInterface CreateInterfaceProxyWithTargetInterface<TInterface>(
+            TInterface target,
+            ProxyGenerationOptions options,
+            params IInterceptor[] interceptors
+        )
             where TInterface : class;
 
         /// <summary>
@@ -334,8 +362,12 @@ namespace Castle.DynamicProxy
         ///   This method uses <see cref = "IProxyBuilder" /> implementation to generate a proxy type.
         ///   As such caller should expect any type of exception that given <see cref = "IProxyBuilder" /> implementation may throw.
         /// </remarks>
-        object CreateInterfaceProxyWithTargetInterface(Type interfaceToProxy, Type[] additionalInterfacesToProxy,
-                                                       object target, params IInterceptor[] interceptors);
+        object CreateInterfaceProxyWithTargetInterface(
+            Type interfaceToProxy,
+            Type[] additionalInterfacesToProxy,
+            object target,
+            params IInterceptor[] interceptors
+        );
 
         /// <summary>
         ///   Creates proxy object intercepting calls to members of interface <paramref name = "interfaceToProxy" /> on <paramref
@@ -365,9 +397,12 @@ namespace Castle.DynamicProxy
         ///   This method uses <see cref = "IProxyBuilder" /> implementation to generate a proxy type.
         ///   As such caller should expect any type of exception that given <see cref = "IProxyBuilder" /> implementation may throw.
         /// </remarks>
-        object CreateInterfaceProxyWithTargetInterface(Type interfaceToProxy, object target,
-                                                       ProxyGenerationOptions options,
-                                                       params IInterceptor[] interceptors);
+        object CreateInterfaceProxyWithTargetInterface(
+            Type interfaceToProxy,
+            object target,
+            ProxyGenerationOptions options,
+            params IInterceptor[] interceptors
+        );
 
         /// <summary>
         ///   Creates proxy object intercepting calls to members of interface <paramref name = "interfaceToProxy" /> on <paramref name = "target" /> object with given <paramref name = "interceptors" />.
@@ -393,10 +428,13 @@ namespace Castle.DynamicProxy
         ///   This method uses <see cref = "IProxyBuilder" /> implementation to generate a proxy type.
         ///   As such caller should expect any type of exception that given <see cref = "IProxyBuilder" /> implementation may throw.
         /// </remarks>
-        object CreateInterfaceProxyWithTargetInterface(Type interfaceToProxy,
-                                                       Type[] additionalInterfacesToProxy,
-                                                       object target, ProxyGenerationOptions options,
-                                                       params IInterceptor[] interceptors);
+        object CreateInterfaceProxyWithTargetInterface(
+            Type interfaceToProxy,
+            Type[] additionalInterfacesToProxy,
+            object target,
+            ProxyGenerationOptions options,
+            params IInterceptor[] interceptors
+        );
 
         /// <summary>
         ///   Creates proxy object intercepting calls to members of interface <typeparamref name = "TInterface" /> on target object generated at runtime with given <paramref
@@ -465,8 +503,10 @@ namespace Castle.DynamicProxy
         ///   This method uses <see cref = "IProxyBuilder" /> implementation to generate a proxy type.
         ///   As such caller should expect any type of exception that given <see cref = "IProxyBuilder" /> implementation may throw.
         /// </remarks>
-        TInterface CreateInterfaceProxyWithoutTarget<TInterface>(ProxyGenerationOptions options,
-                                                                 params IInterceptor[] interceptors)
+        TInterface CreateInterfaceProxyWithoutTarget<TInterface>(
+            ProxyGenerationOptions options,
+            params IInterceptor[] interceptors
+        )
             where TInterface : class;
 
         /// <summary>
@@ -513,7 +553,10 @@ namespace Castle.DynamicProxy
         ///   This method uses <see cref = "IProxyBuilder" /> implementation to generate a proxy type.
         ///   As such caller should expect any type of exception that given <see cref = "IProxyBuilder" /> implementation may throw.
         /// </remarks>
-        object CreateInterfaceProxyWithoutTarget(Type interfaceToProxy, params IInterceptor[] interceptors);
+        object CreateInterfaceProxyWithoutTarget(
+            Type interfaceToProxy,
+            params IInterceptor[] interceptors
+        );
 
         /// <summary>
         ///   Creates proxy object intercepting calls to members of interface <paramref name = "interfaceToProxy" /> on target object generated at runtime with given <paramref
@@ -539,8 +582,11 @@ namespace Castle.DynamicProxy
         ///   This method uses <see cref = "IProxyBuilder" /> implementation to generate a proxy type.
         ///   As such caller should expect any type of exception that given <see cref = "IProxyBuilder" /> implementation may throw.
         /// </remarks>
-        object CreateInterfaceProxyWithoutTarget(Type interfaceToProxy, Type[] additionalInterfacesToProxy,
-                                                 params IInterceptor[] interceptors);
+        object CreateInterfaceProxyWithoutTarget(
+            Type interfaceToProxy,
+            Type[] additionalInterfacesToProxy,
+            params IInterceptor[] interceptors
+        );
 
         /// <summary>
         ///   Creates proxy object intercepting calls to members of interface <paramref name = "interfaceToProxy" /> on target object generated at runtime with given <paramref
@@ -562,8 +608,11 @@ namespace Castle.DynamicProxy
         ///   This method uses <see cref = "IProxyBuilder" /> implementation to generate a proxy type.
         ///   As such caller should expect any type of exception that given <see cref = "IProxyBuilder" /> implementation may throw.
         /// </remarks>
-        object CreateInterfaceProxyWithoutTarget(Type interfaceToProxy, ProxyGenerationOptions options,
-                                                 params IInterceptor[] interceptors);
+        object CreateInterfaceProxyWithoutTarget(
+            Type interfaceToProxy,
+            ProxyGenerationOptions options,
+            params IInterceptor[] interceptors
+        );
 
         /// <summary>
         ///   Creates proxy object intercepting calls to members of interface <paramref name = "interfaceToProxy" /> on target object generated at runtime with given <paramref
@@ -590,9 +639,12 @@ namespace Castle.DynamicProxy
         ///   This method uses <see cref = "IProxyBuilder" /> implementation to generate a proxy type.
         ///   As such caller should expect any type of exception that given <see cref = "IProxyBuilder" /> implementation may throw.
         /// </remarks>
-        object CreateInterfaceProxyWithoutTarget(Type interfaceToProxy, Type[] additionalInterfacesToProxy,
-                                                 ProxyGenerationOptions options,
-                                                 params IInterceptor[] interceptors);
+        object CreateInterfaceProxyWithoutTarget(
+            Type interfaceToProxy,
+            Type[] additionalInterfacesToProxy,
+            ProxyGenerationOptions options,
+            params IInterceptor[] interceptors
+        );
 
         /// <summary>
         ///   Creates proxy object intercepting calls to virtual members of type <typeparamref name = "TClass" /> on newly created instance of that type with given <paramref
@@ -634,8 +686,12 @@ namespace Castle.DynamicProxy
         ///   This method uses <see cref = "IProxyBuilder" /> implementation to generate a proxy type.
         ///   As such caller should expect any type of exception that given <see cref = "IProxyBuilder" /> implementation may throw.
         /// </remarks>
-        TClass CreateClassProxyWithTarget<TClass>(TClass target, ProxyGenerationOptions options,
-                                                  params IInterceptor[] interceptors) where TClass : class;
+        TClass CreateClassProxyWithTarget<TClass>(
+            TClass target,
+            ProxyGenerationOptions options,
+            params IInterceptor[] interceptors
+        )
+            where TClass : class;
 
         /// <summary>
         ///   Creates proxy object intercepting calls to virtual members of type <paramref name = "classToProxy" /> on newly created instance of that type with given <paramref
@@ -659,8 +715,12 @@ namespace Castle.DynamicProxy
         ///   This method uses <see cref = "IProxyBuilder" /> implementation to generate a proxy type.
         ///   As such caller should expect any type of exception that given <see cref = "IProxyBuilder" /> implementation may throw.
         /// </remarks>
-        object CreateClassProxyWithTarget(Type classToProxy, Type[] additionalInterfacesToProxy, object target,
-                                          params IInterceptor[] interceptors);
+        object CreateClassProxyWithTarget(
+            Type classToProxy,
+            Type[] additionalInterfacesToProxy,
+            object target,
+            params IInterceptor[] interceptors
+        );
 
         /// <summary>
         ///   Creates proxy object intercepting calls to virtual members of type <paramref name = "classToProxy" /> on newly created instance of that type with given <paramref
@@ -685,8 +745,13 @@ namespace Castle.DynamicProxy
         ///   This method uses <see cref = "IProxyBuilder" /> implementation to generate a proxy type.
         ///   As such caller should expect any type of exception that given <see cref = "IProxyBuilder" /> implementation may throw.
         /// </remarks>
-        object CreateClassProxyWithTarget(Type classToProxy, object target, ProxyGenerationOptions options,
-                                          object[] constructorArguments, params IInterceptor[] interceptors);
+        object CreateClassProxyWithTarget(
+            Type classToProxy,
+            object target,
+            ProxyGenerationOptions options,
+            object[] constructorArguments,
+            params IInterceptor[] interceptors
+        );
 
         /// <summary>
         ///   Creates proxy object intercepting calls to virtual members of type <paramref name = "classToProxy" /> on newly created instance of that type with given <paramref
@@ -710,8 +775,12 @@ namespace Castle.DynamicProxy
         ///   This method uses <see cref = "IProxyBuilder" /> implementation to generate a proxy type.
         ///   As such caller should expect any type of exception that given <see cref = "IProxyBuilder" /> implementation may throw.
         /// </remarks>
-        object CreateClassProxyWithTarget(Type classToProxy, object target, object[] constructorArguments,
-                                          params IInterceptor[] interceptors);
+        object CreateClassProxyWithTarget(
+            Type classToProxy,
+            object target,
+            object[] constructorArguments,
+            params IInterceptor[] interceptors
+        );
 
         /// <summary>
         ///   Creates proxy object intercepting calls to virtual members of type <paramref name = "classToProxy" /> on newly created instance of that type with given <paramref
@@ -734,7 +803,11 @@ namespace Castle.DynamicProxy
         ///   This method uses <see cref = "IProxyBuilder" /> implementation to generate a proxy type.
         ///   As such caller should expect any type of exception that given <see cref = "IProxyBuilder" /> implementation may throw.
         /// </remarks>
-        object CreateClassProxyWithTarget(Type classToProxy, object target, params IInterceptor[] interceptors);
+        object CreateClassProxyWithTarget(
+            Type classToProxy,
+            object target,
+            params IInterceptor[] interceptors
+        );
 
         /// <summary>
         ///   Creates proxy object intercepting calls to virtual members of type <paramref name = "classToProxy" /> on newly created instance of that type with given <paramref
@@ -758,8 +831,12 @@ namespace Castle.DynamicProxy
         ///   This method uses <see cref = "IProxyBuilder" /> implementation to generate a proxy type.
         ///   As such caller should expect any type of exception that given <see cref = "IProxyBuilder" /> implementation may throw.
         /// </remarks>
-        object CreateClassProxyWithTarget(Type classToProxy, object target, ProxyGenerationOptions options,
-                                          params IInterceptor[] interceptors);
+        object CreateClassProxyWithTarget(
+            Type classToProxy,
+            object target,
+            ProxyGenerationOptions options,
+            params IInterceptor[] interceptors
+        );
 
         /// <summary>
         ///   Creates proxy object intercepting calls to virtual members of type <paramref name = "classToProxy" /> on newly created instance of that type with given <paramref
@@ -785,8 +862,13 @@ namespace Castle.DynamicProxy
         ///   This method uses <see cref = "IProxyBuilder" /> implementation to generate a proxy type.
         ///   As such caller should expect any type of exception that given <see cref = "IProxyBuilder" /> implementation may throw.
         /// </remarks>
-        object CreateClassProxyWithTarget(Type classToProxy, Type[] additionalInterfacesToProxy, object target,
-                                          ProxyGenerationOptions options, params IInterceptor[] interceptors);
+        object CreateClassProxyWithTarget(
+            Type classToProxy,
+            Type[] additionalInterfacesToProxy,
+            object target,
+            ProxyGenerationOptions options,
+            params IInterceptor[] interceptors
+        );
 
         /// <summary>
         ///   Creates proxy object intercepting calls to virtual members of type <paramref name = "classToProxy" /> on newly created instance of that type with given <paramref
@@ -814,9 +896,14 @@ namespace Castle.DynamicProxy
         ///   This method uses <see cref = "IProxyBuilder" /> implementation to generate a proxy type.
         ///   As such caller should expect any type of exception that given <see cref = "IProxyBuilder" /> implementation may throw.
         /// </remarks>
-        object CreateClassProxyWithTarget(Type classToProxy, Type[] additionalInterfacesToProxy, object target,
-                                          ProxyGenerationOptions options, object[] constructorArguments,
-                                          params IInterceptor[] interceptors);
+        object CreateClassProxyWithTarget(
+            Type classToProxy,
+            Type[] additionalInterfacesToProxy,
+            object target,
+            ProxyGenerationOptions options,
+            object[] constructorArguments,
+            params IInterceptor[] interceptors
+        );
 
         /// <summary>
         ///   Creates proxy object intercepting calls to virtual members of type <typeparamref name = "TClass" /> on newly created instance of that type with given <paramref
@@ -835,7 +922,8 @@ namespace Castle.DynamicProxy
         ///   This method uses <see cref = "IProxyBuilder" /> implementation to generate a proxy type.
         ///   As such caller should expect any type of exception that given <see cref = "IProxyBuilder" /> implementation may throw.
         /// </remarks>
-        TClass CreateClassProxy<TClass>(params IInterceptor[] interceptors) where TClass : class;
+        TClass CreateClassProxy<TClass>(params IInterceptor[] interceptors)
+            where TClass : class;
 
         /// <summary>
         ///   Creates proxy object intercepting calls to virtual members of type <typeparamref name = "TClass" /> on newly created instance of that type with given <paramref
@@ -855,7 +943,10 @@ namespace Castle.DynamicProxy
         ///   This method uses <see cref = "IProxyBuilder" /> implementation to generate a proxy type.
         ///   As such caller should expect any type of exception that given <see cref = "IProxyBuilder" /> implementation may throw.
         /// </remarks>
-        TClass CreateClassProxy<TClass>(ProxyGenerationOptions options, params IInterceptor[] interceptors)
+        TClass CreateClassProxy<TClass>(
+            ProxyGenerationOptions options,
+            params IInterceptor[] interceptors
+        )
             where TClass : class;
 
         /// <summary>
@@ -879,8 +970,11 @@ namespace Castle.DynamicProxy
         ///   This method uses <see cref = "IProxyBuilder" /> implementation to generate a proxy type.
         ///   As such caller should expect any type of exception that given <see cref = "IProxyBuilder" /> implementation may throw.
         /// </remarks>
-        object CreateClassProxy(Type classToProxy, Type[] additionalInterfacesToProxy,
-                                params IInterceptor[] interceptors);
+        object CreateClassProxy(
+            Type classToProxy,
+            Type[] additionalInterfacesToProxy,
+            params IInterceptor[] interceptors
+        );
 
         /// <summary>
         ///   Creates proxy object intercepting calls to virtual members of type <paramref name = "classToProxy" /> on newly created instance of that type with given <paramref
@@ -904,8 +998,12 @@ namespace Castle.DynamicProxy
         ///   This method uses <see cref = "IProxyBuilder" /> implementation to generate a proxy type.
         ///   As such caller should expect any type of exception that given <see cref = "IProxyBuilder" /> implementation may throw.
         /// </remarks>
-        object CreateClassProxy(Type classToProxy, ProxyGenerationOptions options, object[] constructorArguments,
-                                params IInterceptor[] interceptors);
+        object CreateClassProxy(
+            Type classToProxy,
+            ProxyGenerationOptions options,
+            object[] constructorArguments,
+            params IInterceptor[] interceptors
+        );
 
         /// <summary>
         ///   Creates proxy object intercepting calls to virtual members of type <paramref name = "classToProxy" /> on newly created instance of that type with given <paramref
@@ -928,7 +1026,11 @@ namespace Castle.DynamicProxy
         ///   This method uses <see cref = "IProxyBuilder" /> implementation to generate a proxy type.
         ///   As such caller should expect any type of exception that given <see cref = "IProxyBuilder" /> implementation may throw.
         /// </remarks>
-        object CreateClassProxy(Type classToProxy, object[] constructorArguments, params IInterceptor[] interceptors);
+        object CreateClassProxy(
+            Type classToProxy,
+            object[] constructorArguments,
+            params IInterceptor[] interceptors
+        );
 
         /// <summary>
         ///   Creates proxy object intercepting calls to virtual members of type <paramref name = "classToProxy" /> on newly created instance of that type with given <paramref
@@ -973,7 +1075,11 @@ namespace Castle.DynamicProxy
         ///   This method uses <see cref = "IProxyBuilder" /> implementation to generate a proxy type.
         ///   As such caller should expect any type of exception that given <see cref = "IProxyBuilder" /> implementation may throw.
         /// </remarks>
-        object CreateClassProxy(Type classToProxy, ProxyGenerationOptions options, params IInterceptor[] interceptors);
+        object CreateClassProxy(
+            Type classToProxy,
+            ProxyGenerationOptions options,
+            params IInterceptor[] interceptors
+        );
 
         /// <summary>
         ///   Creates proxy object intercepting calls to virtual members of type <paramref name = "classToProxy" /> on newly created instance of that type with given <paramref
@@ -998,8 +1104,12 @@ namespace Castle.DynamicProxy
         ///   This method uses <see cref = "IProxyBuilder" /> implementation to generate a proxy type.
         ///   As such caller should expect any type of exception that given <see cref = "IProxyBuilder" /> implementation may throw.
         /// </remarks>
-        object CreateClassProxy(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options,
-                                params IInterceptor[] interceptors);
+        object CreateClassProxy(
+            Type classToProxy,
+            Type[] additionalInterfacesToProxy,
+            ProxyGenerationOptions options,
+            params IInterceptor[] interceptors
+        );
 
         /// <summary>
         ///   Creates proxy object intercepting calls to virtual members of type <paramref name = "classToProxy" /> on newly created instance of that type with given <paramref
@@ -1026,8 +1136,12 @@ namespace Castle.DynamicProxy
         ///   This method uses <see cref = "IProxyBuilder" /> implementation to generate a proxy type.
         ///   As such caller should expect any type of exception that given <see cref = "IProxyBuilder" /> implementation may throw.
         /// </remarks>
-        object CreateClassProxy(Type classToProxy, Type[] additionalInterfacesToProxy,
-                                ProxyGenerationOptions options,
-                                object[] constructorArguments, params IInterceptor[] interceptors);
+        object CreateClassProxy(
+            Type classToProxy,
+            Type[] additionalInterfacesToProxy,
+            ProxyGenerationOptions options,
+            object[] constructorArguments,
+            params IInterceptor[] interceptors
+        );
     }
 }

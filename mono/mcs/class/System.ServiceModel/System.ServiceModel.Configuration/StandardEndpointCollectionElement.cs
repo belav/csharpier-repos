@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -56,72 +56,92 @@ using ConfigurationType = System.Configuration.Configuration;
 
 namespace System.ServiceModel.Configuration
 {
-    public class StandardEndpointCollectionElement<TStandardEndpoint, TEndpointConfiguration> : EndpointCollectionElement
+    public class StandardEndpointCollectionElement<TStandardEndpoint, TEndpointConfiguration>
+        : EndpointCollectionElement
         where TStandardEndpoint : ServiceEndpoint
         where TEndpointConfiguration : StandardEndpointElement, new()
     {
         static ConfigurationPropertyCollection properties;
-        static ConfigurationProperty endpoints = new ConfigurationProperty ("",
-                typeof (StandardEndpointElementCollection<TEndpointConfiguration>), null, null, null,
-                ConfigurationPropertyOptions.IsDefaultCollection);
+        static ConfigurationProperty endpoints = new ConfigurationProperty(
+            "",
+            typeof(StandardEndpointElementCollection<TEndpointConfiguration>),
+            null,
+            null,
+            null,
+            ConfigurationPropertyOptions.IsDefaultCollection
+        );
 
+        static StandardEndpointCollectionElement() { }
 
-        static StandardEndpointCollectionElement ()
+        void FillProperties(ConfigurationPropertyCollection baseProps)
         {
-        }
-        
-        void FillProperties (ConfigurationPropertyCollection baseProps)
-        {
-            properties = new ConfigurationPropertyCollection ();
+            properties = new ConfigurationPropertyCollection();
             foreach (ConfigurationProperty prop in baseProps)
-                properties.Add (prop);
-            properties.Add (endpoints);
+                properties.Add(prop);
+            properties.Add(endpoints);
         }
-        
-        public override ReadOnlyCollection<StandardEndpointElement> ConfiguredEndpoints {
-            get {
-                var l = new List<StandardEndpointElement> ();
+
+        public override ReadOnlyCollection<StandardEndpointElement> ConfiguredEndpoints
+        {
+            get
+            {
+                var l = new List<StandardEndpointElement>();
                 foreach (StandardEndpointElement e in Endpoints)
-                    l.Add (e);
-                return new ReadOnlyCollection<StandardEndpointElement> (l);
+                    l.Add(e);
+                return new ReadOnlyCollection<StandardEndpointElement>(l);
             }
         }
 
-        [ConfigurationPropertyAttribute("", Options = ConfigurationPropertyOptions.IsDefaultCollection)]
-        public StandardEndpointElementCollection<TEndpointConfiguration> Endpoints {
-            get { return (StandardEndpointElementCollection<TEndpointConfiguration>) base [endpoints]; }
+        [ConfigurationPropertyAttribute(
+            "",
+            Options = ConfigurationPropertyOptions.IsDefaultCollection
+        )]
+        public StandardEndpointElementCollection<TEndpointConfiguration> Endpoints
+        {
+            get
+            {
+                return (StandardEndpointElementCollection<TEndpointConfiguration>)base[endpoints];
+            }
         }
 
-        public override Type EndpointType {
-            get { return typeof (TStandardEndpoint); }
+        public override Type EndpointType
+        {
+            get { return typeof(TStandardEndpoint); }
         }
-        
-        protected override ConfigurationPropertyCollection Properties {
-            get {
+
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get
+            {
                 if (properties == null)
                     lock (endpoints)
                         if (properties == null)
-                            FillProperties (base.Properties);
+                            FillProperties(base.Properties);
                 return properties;
             }
         }
 
-        public override bool ContainsKey (string name)
+        public override bool ContainsKey(string name)
         {
             foreach (StandardEndpointElement e in Endpoints)
                 if (e.Name == name)
                     return true;
             return false;
         }
-        
-        protected internal override StandardEndpointElement GetDefaultStandardEndpointElement ()
+
+        protected internal override StandardEndpointElement GetDefaultStandardEndpointElement()
         {
-            return (StandardEndpointElement) Activator.CreateInstance (typeof (TEndpointConfiguration));
+            return (StandardEndpointElement)
+                Activator.CreateInstance(typeof(TEndpointConfiguration));
         }
-        
-        protected internal override bool TryAdd (string name, ServiceEndpoint endpoint, ConfigurationType config)
+
+        protected internal override bool TryAdd(
+            string name,
+            ServiceEndpoint endpoint,
+            ConfigurationType config
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
     }
 }

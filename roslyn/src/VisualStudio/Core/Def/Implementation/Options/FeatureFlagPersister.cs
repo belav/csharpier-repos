@@ -32,7 +32,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
                 return false;
             }
 
-            var location = optionKey.Option.StorageLocations.OfType<FeatureFlagStorageLocation>().FirstOrDefault();
+            var location = optionKey.Option.StorageLocations
+                .OfType<FeatureFlagStorageLocation>()
+                .FirstOrDefault();
             if (location == null)
             {
                 value = null;
@@ -63,7 +65,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
                 return false;
             }
 
-            var location = optionKey.Option.StorageLocations.OfType<FeatureFlagStorageLocation>().FirstOrDefault();
+            var location = optionKey.Option.StorageLocations
+                .OfType<FeatureFlagStorageLocation>()
+                .FirstOrDefault();
             if (location == null)
             {
                 return false;

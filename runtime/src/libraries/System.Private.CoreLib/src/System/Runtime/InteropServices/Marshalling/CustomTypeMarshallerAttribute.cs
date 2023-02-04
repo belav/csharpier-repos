@@ -14,7 +14,10 @@ namespace System.Runtime.InteropServices.Marshalling
     [AttributeUsage(AttributeTargets.Struct)]
     public sealed class CustomTypeMarshallerAttribute : Attribute
     {
-        public CustomTypeMarshallerAttribute(Type managedType, CustomTypeMarshallerKind marshallerKind = CustomTypeMarshallerKind.Value)
+        public CustomTypeMarshallerAttribute(
+            Type managedType,
+            CustomTypeMarshallerKind marshallerKind = CustomTypeMarshallerKind.Value
+        )
         {
             ManagedType = managedType;
             MarshallerKind = marshallerKind;
@@ -39,7 +42,8 @@ namespace System.Runtime.InteropServices.Marshalling
         /// The marshalling directions this custom type marshaller supports.
         /// </summary>
         /// <remarks>Default is <see cref="CustomTypeMarshallerDirection.Ref"/></remarks>
-        public CustomTypeMarshallerDirection Direction { get; set; } = CustomTypeMarshallerDirection.Ref;
+        public CustomTypeMarshallerDirection Direction { get; set; } =
+            CustomTypeMarshallerDirection.Ref;
 
         /// <summary>
         /// The optional features for the <see cref="MarshallerKind"/> that the marshaller supports.
@@ -50,8 +54,6 @@ namespace System.Runtime.InteropServices.Marshalling
         /// This type is used as a placeholder for the first generic parameter when generic parameters cannot be used
         /// to identify the managed type (i.e. when the marshaller type is generic over T and the managed type is T[])
         /// </summary>
-        public struct GenericPlaceholder
-        {
-        }
+        public struct GenericPlaceholder { }
     }
 }

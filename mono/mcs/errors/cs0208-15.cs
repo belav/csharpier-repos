@@ -4,9 +4,7 @@
 
 struct S<T>
 {
-    public struct N
-    {
-    }
+    public struct N { }
 }
 
 unsafe class Test

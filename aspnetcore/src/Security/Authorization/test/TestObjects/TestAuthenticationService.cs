@@ -24,13 +24,21 @@ public class TestAuthenticationService : IAuthenticationService
         var identity = context.User.Identities.SingleOrDefault(i => i.AuthenticationType == scheme);
         if (identity != null)
         {
-            return Task.FromResult(AuthenticateResult.Success(new AuthenticationTicket(new ClaimsPrincipal(identity), scheme)));
+            return Task.FromResult(
+                AuthenticateResult.Success(
+                    new AuthenticationTicket(new ClaimsPrincipal(identity), scheme)
+                )
+            );
         }
 
         return Task.FromResult(AuthenticateResult.Fail("Denied"));
     }
 
-    public Task ChallengeAsync(HttpContext context, string scheme, AuthenticationProperties properties)
+    public Task ChallengeAsync(
+        HttpContext context,
+        string scheme,
+        AuthenticationProperties properties
+    )
     {
         ChallengeCount++;
         return Task.CompletedTask;
@@ -42,12 +50,21 @@ public class TestAuthenticationService : IAuthenticationService
         return Task.CompletedTask;
     }
 
-    public Task SignInAsync(HttpContext context, string scheme, ClaimsPrincipal principal, AuthenticationProperties properties)
+    public Task SignInAsync(
+        HttpContext context,
+        string scheme,
+        ClaimsPrincipal principal,
+        AuthenticationProperties properties
+    )
     {
         throw new NotImplementedException();
     }
 
-    public Task SignOutAsync(HttpContext context, string scheme, AuthenticationProperties properties)
+    public Task SignOutAsync(
+        HttpContext context,
+        string scheme,
+        AuthenticationProperties properties
+    )
     {
         throw new NotImplementedException();
     }

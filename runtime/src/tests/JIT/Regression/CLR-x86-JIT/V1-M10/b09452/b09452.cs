@@ -25,11 +25,9 @@ namespace DefaultNamespace
             //            IL_000b:  newobj instance void System.Object::.ctor()
             //            IL_0010:  call instance void class System.Object[,]::Set(int32,int32,class System.Object)
 
-            //            IL_0015:  ret 
+            //            IL_0015:  ret
 
             return 100;
         } // main
-
     } // X
-
 }

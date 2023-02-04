@@ -5,29 +5,25 @@ namespace Mono.Linker.Tests.Cases.Inheritance.Interfaces.OnReferenceType.NoKeptC
 {
     public class ComInterfaceTypeRemovedWhenOnlyUsedByClassWithOnlyStaticMethod
     {
-        public static void Main ()
+        public static void Main()
         {
-            StaticMethodOnlyUsed.StaticMethod ();
+            StaticMethodOnlyUsed.StaticMethod();
         }
 
         [ComImport]
-        [Guid ("D7BB1889-3AB7-4681-A115-60CA9158FECA")]
+        [Guid("D7BB1889-3AB7-4681-A115-60CA9158FECA")]
         interface IUnusedInterface
         {
-            void Foo ();
+            void Foo();
         }
 
         [Kept]
         class StaticMethodOnlyUsed : IUnusedInterface
         {
-            public void Foo ()
-            {
-            }
+            public void Foo() { }
 
             [Kept]
-            public static void StaticMethod ()
-            {
-            }
+            public static void StaticMethod() { }
         }
     }
 }

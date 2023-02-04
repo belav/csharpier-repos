@@ -19,10 +19,11 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
             {
                 private readonly Dictionary<ProjectId, WorkItem> _projectWorkQueue = new();
 
-                public AsyncProjectWorkItemQueue(SolutionCrawlerProgressReporter progressReporter, Workspace workspace)
-                    : base(progressReporter, workspace)
-                {
-                }
+                public AsyncProjectWorkItemQueue(
+                    SolutionCrawlerProgressReporter progressReporter,
+                    Workspace workspace
+                )
+                    : base(progressReporter, workspace) { }
 
                 protected override int WorkItemCount_NoLock => _projectWorkQueue.Count;
 
@@ -48,8 +49,11 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                 }
 
                 protected override bool TryTakeAnyWork_NoLock(
-                    ProjectId? preferableProjectId, ProjectDependencyGraph dependencyGraph, IDiagnosticAnalyzerService? analyzerService,
-                    out WorkItem workItem)
+                    ProjectId? preferableProjectId,
+                    ProjectDependencyGraph dependencyGraph,
+                    IDiagnosticAnalyzerService? analyzerService,
+                    out WorkItem workItem
+                )
                 {
                     // there must be at least one item in the map when this is called unless host is shutting down.
                     if (_projectWorkQueue.Count == 0)
@@ -58,7 +62,12 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                         return false;
                     }
 
-                    var projectId = GetBestProjectId_NoLock(_projectWorkQueue, preferableProjectId, dependencyGraph, analyzerService);
+                    var projectId = GetBestProjectId_NoLock(
+                        _projectWorkQueue,
+                        preferableProjectId,
+                        dependencyGraph,
+                        analyzerService
+                    );
                     if (TryTake_NoLock(projectId, out workItem))
                     {
                         return true;
@@ -77,7 +86,13 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     if (_projectWorkQueue.TryGetValue(key, out var existingWorkItem))
                     {
                         // replace it.
-                        _projectWorkQueue[key] = existingWorkItem.With(item.InvocationReasons, item.ActiveMember, item.SpecificAnalyzers, item.IsRetry, item.AsyncToken);
+                        _projectWorkQueue[key] = existingWorkItem.With(
+                            item.InvocationReasons,
+                            item.ActiveMember,
+                            item.SpecificAnalyzers,
+                            item.IsRetry,
+                            item.AsyncToken
+                        );
                         return false;
                     }
 

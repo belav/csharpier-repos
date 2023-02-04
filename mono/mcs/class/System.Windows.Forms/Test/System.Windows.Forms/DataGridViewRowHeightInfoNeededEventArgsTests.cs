@@ -12,7 +12,7 @@ namespace MonoTests.System.Windows.Forms
     {
         struct RowInfo
         {
-            public RowInfo (DataGridViewRowHeightInfoNeededEventArgs e)
+            public RowInfo(DataGridViewRowHeightInfoNeededEventArgs e)
             {
                 Height = e.Height;
                 MinimumHeight = e.MinimumHeight;
@@ -26,28 +26,32 @@ namespace MonoTests.System.Windows.Forms
         {
             public RowInfo RowInfo;
 
-            protected override void OnRowHeightInfoNeeded (DataGridViewRowHeightInfoNeededEventArgs e)
+            protected override void OnRowHeightInfoNeeded(
+                DataGridViewRowHeightInfoNeededEventArgs e
+            )
             {
-                base.OnRowHeightInfoNeeded (e);
-                RowInfo = new RowInfo (e);
+                base.OnRowHeightInfoNeeded(e);
+                RowInfo = new RowInfo(e);
             }
         }
 
         [Test]
         [Category("NotWorking")]
-        public void HeightCantBeLessThanCurrentMinimumHeight ()
+        public void HeightCantBeLessThanCurrentMinimumHeight()
         {
-            using (var dgv = new DummyDataGridView ()) {
+            using (var dgv = new DummyDataGridView())
+            {
                 // Setup
                 dgv.VirtualMode = true;
                 dgv.RowCount = 1;
-                dgv.Rows [0].MinimumHeight = 5;
-                dgv.Rows [0].Height = 10;
-                dgv.RowHeightInfoNeeded += (sender, e) => {
+                dgv.Rows[0].MinimumHeight = 5;
+                dgv.Rows[0].Height = 10;
+                dgv.RowHeightInfoNeeded += (sender, e) =>
+                {
                     e.Height = 2;
                     e.MinimumHeight = 2;
                 };
-                dgv.UpdateRowHeightInfo (0, false);
+                dgv.UpdateRowHeightInfo(0, false);
 
                 // Execute - this triggers the RowHeightInfoNeeded event
                 // This test doesn't work because of different implementation details in .NET
@@ -63,39 +67,40 @@ namespace MonoTests.System.Windows.Forms
                 // changing the behaviour in Mono. Even more so since there is an easy
                 // workaround: simply swapping the two lines in the RowHeighInfoNeeded event
                 // handler works around the problem.
-                var dummy = dgv.Rows [0].Height;
+                var dummy = dgv.Rows[0].Height;
 
                 // Verify
                 var rowHeightInfo = dgv.RowInfo;
-                Assert.AreEqual (5, rowHeightInfo.Height, "#A1"); // 5 because of buggy .NET behaviour
-                Assert.AreEqual (2, rowHeightInfo.MinimumHeight, "#A2");
+                Assert.AreEqual(5, rowHeightInfo.Height, "#A1"); // 5 because of buggy .NET behaviour
+                Assert.AreEqual(2, rowHeightInfo.MinimumHeight, "#A2");
             }
         }
 
         [Test]
-        public void SettingHeightAfterChangingMinimumHeight ()
+        public void SettingHeightAfterChangingMinimumHeight()
         {
-            using (var dgv = new DummyDataGridView ()) {
+            using (var dgv = new DummyDataGridView())
+            {
                 // Setup
                 dgv.VirtualMode = true;
                 dgv.RowCount = 1;
-                dgv.Rows [0].MinimumHeight = 5;
-                dgv.Rows [0].Height = 10;
-                dgv.RowHeightInfoNeeded += (sender, e) => {
+                dgv.Rows[0].MinimumHeight = 5;
+                dgv.Rows[0].Height = 10;
+                dgv.RowHeightInfoNeeded += (sender, e) =>
+                {
                     e.MinimumHeight = 2;
                     e.Height = 2;
                 };
-                dgv.UpdateRowHeightInfo (0, false);
+                dgv.UpdateRowHeightInfo(0, false);
 
                 // Execute - this triggers the RowHeightInfoNeeded event
-                var dummy = dgv.Rows [0].Height;
+                var dummy = dgv.Rows[0].Height;
 
                 // Verify
                 var rowHeightInfo = dgv.RowInfo;
-                Assert.AreEqual (2, rowHeightInfo.Height, "#B1");
-                Assert.AreEqual (2, rowHeightInfo.MinimumHeight, "#B2");
+                Assert.AreEqual(2, rowHeightInfo.Height, "#B1");
+                Assert.AreEqual(2, rowHeightInfo.MinimumHeight, "#B2");
             }
         }
     }
 }
-

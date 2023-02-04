@@ -7,15 +7,17 @@ public abstract partial class Foo
 
 public sealed partial class Foo
 {
-    public string Id { get { return myId; } }
+    public string Id
+    {
+        get { return myId; }
+    }
 }
 
 public class PartialAbstractCompilationError
 {
-    public static void Main ()
+    public static void Main()
     {
-        System.Console.WriteLine (typeof (Foo).IsSealed);
-        System.Console.WriteLine (typeof (Foo).IsAbstract);
+        System.Console.WriteLine(typeof(Foo).IsSealed);
+        System.Console.WriteLine(typeof(Foo).IsAbstract);
     }
 }
-

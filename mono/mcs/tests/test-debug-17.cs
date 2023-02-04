@@ -3,20 +3,16 @@ using System.Linq.Expressions;
 
 class C
 {
-    public static void Main ()
+    public static void Main() { }
+
+    void Test_1()
     {
-    }
-    
-    void Test_1 ()
-    {
-        Expression<Func<int, int, int>> e = 
-            (a, b) =>
-            a + b;
-        
+        Expression<Func<int, int, int>> e = (a, b) => a + b;
+
         return;
     }
-    
-    void Test_2 ()
+
+    void Test_2()
     {
         Expression<Func<Expression<Func<int>>>> e = () => () => 2;
     }

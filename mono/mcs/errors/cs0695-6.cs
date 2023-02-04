@@ -3,18 +3,12 @@
 
 class C<T>
 {
-    public interface I
-    {
-    }
-    
-    public class N : C<string>
-    {
-    }
+    public interface I { }
+
+    public class N : C<string> { }
 }
 
 class Test<T> : C<T>
 {
-    class TestN : I, N.I
-    {
-    }
+    class TestN : I, N.I { }
 }

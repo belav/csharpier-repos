@@ -10,15 +10,13 @@ enum Enum
 
 class A : Attribute
 {
-    public A (object e)
-    {
-    }
+    public A(object e) { }
 }
 
 class C
 {
-    [A (Enum.Test)]
-    int Enum ()
+    [A(Enum.Test)]
+    int Enum()
     {
         return 0;
     }

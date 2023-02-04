@@ -26,12 +26,12 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil.Cil {
-
+namespace Mono.Cecil.Cil
+{
     using Mono.Cecil;
 
-    internal sealed class ExceptionHandler : ICodeVisitable {
-
+    internal sealed class ExceptionHandler : ICodeVisitable
+    {
         Instruction m_tryStart;
         Instruction m_tryEnd;
         Instruction m_filterStart;
@@ -42,54 +42,62 @@ namespace Mono.Cecil.Cil {
         TypeReference m_catchType;
         ExceptionHandlerType m_type;
 
-        public Instruction TryStart {
+        public Instruction TryStart
+        {
             get { return m_tryStart; }
             set { m_tryStart = value; }
         }
 
-        public Instruction TryEnd {
+        public Instruction TryEnd
+        {
             get { return m_tryEnd; }
             set { m_tryEnd = value; }
         }
 
-        public Instruction FilterStart {
+        public Instruction FilterStart
+        {
             get { return m_filterStart; }
             set { m_filterStart = value; }
         }
 
-        public Instruction FilterEnd {
+        public Instruction FilterEnd
+        {
             get { return m_filterEnd; }
             set { m_filterEnd = value; }
         }
 
-        public Instruction HandlerStart {
+        public Instruction HandlerStart
+        {
             get { return m_handlerStart; }
             set { m_handlerStart = value; }
         }
 
-        public Instruction HandlerEnd {
+        public Instruction HandlerEnd
+        {
             get { return m_handlerEnd; }
             set { m_handlerEnd = value; }
         }
 
-        public TypeReference CatchType {
+        public TypeReference CatchType
+        {
             get { return m_catchType; }
             set { m_catchType = value; }
         }
 
-        public ExceptionHandlerType Type {
+        public ExceptionHandlerType Type
+        {
             get { return m_type; }
             set { m_type = value; }
         }
 
-        public ExceptionHandler (ExceptionHandlerType type)
+        public ExceptionHandler(ExceptionHandlerType type)
         {
             m_type = type;
         }
 
-        public void Accept (ICodeVisitor visitor)
+        public void Accept(ICodeVisitor visitor)
         {
-            visitor.VisitExceptionHandler (this);
+            visitor.VisitExceptionHandler(this);
         }
     }
 }

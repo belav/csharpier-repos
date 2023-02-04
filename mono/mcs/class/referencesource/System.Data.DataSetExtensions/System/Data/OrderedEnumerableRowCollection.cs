@@ -16,7 +16,6 @@ using System.Diagnostics;
 
 namespace System.Data
 {
-
     /// <summary>
     /// This class provides a wrapper for DataTables representing an ordered sequence.
     /// </summary>
@@ -25,10 +24,10 @@ namespace System.Data
         /// <summary>
         /// Copy Constructor that sets enumerableRows to the one given in the input
         /// </summary>
-        internal OrderedEnumerableRowCollection(EnumerableRowCollection<TRow> enumerableTable, IEnumerable<TRow> enumerableRows)
-            : base(enumerableTable, enumerableRows, null)
-        {
-
-        }
+        internal OrderedEnumerableRowCollection(
+            EnumerableRowCollection<TRow> enumerableTable,
+            IEnumerable<TRow> enumerableRows
+        )
+            : base(enumerableTable, enumerableRows, null) { }
     }
 }

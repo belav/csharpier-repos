@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -40,39 +40,43 @@ namespace System.Xml.Query
         #region Constructors
 
         [MonoTODO]
-        protected XmlQueryException (SerializationInfo info, StreamingContext context)
-            : base (info, context)
+        protected XmlQueryException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public XmlQueryException ()
-            : base ("An XML Query Exception has occurred.")
-        {
-        }
+        public XmlQueryException()
+            : base("An XML Query Exception has occurred.") { }
 
-        public XmlQueryException (string res)
-            : this (res, null, null, null)
-        {
-        }
+        public XmlQueryException(string res)
+            : this(res, null, null, null) { }
 
-        public XmlQueryException (string resource, Exception exception)
-            : this (resource, null, null, exception)
-        {
-        }
+        public XmlQueryException(string resource, Exception exception)
+            : this(resource, null, null, exception) { }
 
-        internal XmlQueryException (string message, IXmlLineInfo lineInfo, string sourceUri, Exception innerException)
-            : base (BuildMessage (message, lineInfo, sourceUri), innerException)
-        {
-        }
+        internal XmlQueryException(
+            string message,
+            IXmlLineInfo lineInfo,
+            string sourceUri,
+            Exception innerException
+        )
+            : base(BuildMessage(message, lineInfo, sourceUri), innerException) { }
 
-        static string BuildMessage (string message, IXmlLineInfo li, string sourceUri)
+        static string BuildMessage(string message, IXmlLineInfo li, string sourceUri)
         {
-            if (li != null && li.HasLineInfo ()) {
-                message = String.Format ("{0}. Location: {1} ({2}, {3}).", message, sourceUri, li.LineNumber, li.LinePosition);
+            if (li != null && li.HasLineInfo())
+            {
+                message = String.Format(
+                    "{0}. Location: {1} ({2}, {3}).",
+                    message,
+                    sourceUri,
+                    li.LineNumber,
+                    li.LinePosition
+                );
             }
             else if (sourceUri != null)
-                message = String.Format ("{0}. Location: {1}", message, sourceUri);
+                message = String.Format("{0}. Location: {1}", message, sourceUri);
             return message;
         }
 
@@ -81,17 +85,20 @@ namespace System.Xml.Query
         #region Properties
 
         [MonoTODO]
-        public int LineNumber {
-            get { throw new NotImplementedException (); }
+        public int LineNumber
+        {
+            get { throw new NotImplementedException(); }
         }
 
         [MonoTODO]
-        public int LinePosition {
-            get { throw new NotImplementedException (); }
+        public int LinePosition
+        {
+            get { throw new NotImplementedException(); }
         }
-    
+
         [MonoTODO]
-        public string SourceUri {
+        public string SourceUri
+        {
             get { throw new NotImplementedException(); }
         }
 
@@ -100,11 +107,10 @@ namespace System.Xml.Query
         #region Methods
 
         [MonoTODO]
-        public override void GetObjectData (SerializationInfo info, StreamingContext context)
+        public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             throw new NotImplementedException();
         }
         #endregion // Methods
     }
 }
-

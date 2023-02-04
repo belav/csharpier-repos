@@ -29,65 +29,71 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil {
-
+namespace Mono.Cecil
+{
     using System;
     using System.Collections;
 
     using Mono.Cecil.Cil;
 
-    internal sealed class AssemblyNameReferenceCollection : CollectionBase, IReflectionStructureVisitable {
-
+    internal sealed class AssemblyNameReferenceCollection
+        : CollectionBase,
+            IReflectionStructureVisitable
+    {
         ModuleDefinition m_container;
 
-        public AssemblyNameReference this [int index] {
-            get { return List [index] as AssemblyNameReference; }
-            set { List [index] = value; }
+        public AssemblyNameReference this[int index]
+        {
+            get { return List[index] as AssemblyNameReference; }
+            set { List[index] = value; }
         }
 
-        public ModuleDefinition Container {
+        public ModuleDefinition Container
+        {
             get { return m_container; }
         }
 
-        public AssemblyNameReferenceCollection (ModuleDefinition container)
+        public AssemblyNameReferenceCollection(ModuleDefinition container)
         {
             m_container = container;
         }
 
-        public void Add (AssemblyNameReference value)
+        public void Add(AssemblyNameReference value)
         {
-            List.Add (value);
+            List.Add(value);
         }
 
-        public bool Contains (AssemblyNameReference value)
+        public bool Contains(AssemblyNameReference value)
         {
-            return List.Contains (value);
+            return List.Contains(value);
         }
 
-        public int IndexOf (AssemblyNameReference value)
+        public int IndexOf(AssemblyNameReference value)
         {
-            return List.IndexOf (value);
+            return List.IndexOf(value);
         }
 
-        public void Insert (int index, AssemblyNameReference value)
+        public void Insert(int index, AssemblyNameReference value)
         {
-            List.Insert (index, value);
+            List.Insert(index, value);
         }
 
-        public void Remove (AssemblyNameReference value)
+        public void Remove(AssemblyNameReference value)
         {
-            List.Remove (value);
+            List.Remove(value);
         }
 
-        protected override void OnValidate (object o)
+        protected override void OnValidate(object o)
         {
-            if (! (o is AssemblyNameReference))
-                throw new ArgumentException ("Must be of type " + typeof (AssemblyNameReference).FullName);
+            if (!(o is AssemblyNameReference))
+                throw new ArgumentException(
+                    "Must be of type " + typeof(AssemblyNameReference).FullName
+                );
         }
 
-        public void Accept (IReflectionStructureVisitor visitor)
+        public void Accept(IReflectionStructureVisitor visitor)
         {
-            visitor.VisitAssemblyNameReferenceCollection (this);
+            visitor.VisitAssemblyNameReferenceCollection(this);
         }
     }
 }

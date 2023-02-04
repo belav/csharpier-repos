@@ -37,7 +37,6 @@ namespace C5UnitTests.SortingTests
 
         int length;
 
-
         [SetUp]
         public void Init()
         {
@@ -49,7 +48,6 @@ namespace C5UnitTests.SortingTests
                 a[i] = ran.Next();
         }
 
-
         [Test]
         public void HeapSort()
         {
@@ -58,7 +56,6 @@ namespace C5UnitTests.SortingTests
                 Assert.IsTrue(a[i - 1] <= a[i], "Inversion at " + i);
         }
 
-
         [Test]
         public void IntroSort()
         {
@@ -66,7 +63,6 @@ namespace C5UnitTests.SortingTests
             for (int i = 1; i < length; i++)
                 Assert.IsTrue(a[i - 1] <= a[i], "Inversion at " + i);
         }
-
 
         [Test]
         public void InsertionSort()
@@ -81,12 +77,12 @@ namespace C5UnitTests.SortingTests
                 Assert.IsTrue(a[i - 1] <= a[i], "Inversion at " + i);
         }
 
-
         [TearDown]
-        public void Dispose() { ic = null; }
+        public void Dispose()
+        {
+            ic = null;
+        }
     }
-
-
 
     [TestFixture]
     public class SortRandomDuplicates
@@ -99,7 +95,6 @@ namespace C5UnitTests.SortingTests
 
         int length;
 
-
         [SetUp]
         public void Init()
         {
@@ -111,7 +106,6 @@ namespace C5UnitTests.SortingTests
                 a[i] = ran.Next(3, 23);
         }
 
-
         [Test]
         public void HeapSort()
         {
@@ -120,7 +114,6 @@ namespace C5UnitTests.SortingTests
                 Assert.IsTrue(a[i - 1] <= a[i], "Inversion at " + i);
         }
 
-
         [Test]
         public void IntroSort()
         {
@@ -128,7 +121,6 @@ namespace C5UnitTests.SortingTests
             for (int i = 1; i < length; i++)
                 Assert.IsTrue(a[i - 1] <= a[i], "Inversion at " + i);
         }
-
 
         [Test]
         public void InsertionSort()
@@ -143,12 +135,14 @@ namespace C5UnitTests.SortingTests
                 Assert.IsTrue(a[i - 1] <= a[i], "Inversion at " + i);
         }
 
-
         [TearDown]
-        public void Dispose() { ic = null; a = null; ran = null; }
+        public void Dispose()
+        {
+            ic = null;
+            a = null;
+            ran = null;
+        }
     }
-
-
 
     [TestFixture]
     public class SortIncreasing
@@ -158,7 +152,6 @@ namespace C5UnitTests.SortingTests
         int[] a;
 
         int length;
-
 
         [SetUp]
         public void Init()
@@ -170,7 +163,6 @@ namespace C5UnitTests.SortingTests
                 a[i] = i;
         }
 
-
         [Test]
         public void HeapSort()
         {
@@ -179,7 +171,6 @@ namespace C5UnitTests.SortingTests
                 Assert.IsTrue(a[i - 1] <= a[i], "Inversion at " + i);
         }
 
-
         [Test]
         public void IntroSort()
         {
@@ -187,7 +178,6 @@ namespace C5UnitTests.SortingTests
             for (int i = 1; i < length; i++)
                 Assert.IsTrue(a[i - 1] <= a[i], "Inversion at " + i);
         }
-
 
         [Test]
         public void InsertionSort()
@@ -202,12 +192,13 @@ namespace C5UnitTests.SortingTests
                 Assert.IsTrue(a[i - 1] <= a[i], "Inversion at " + i);
         }
 
-
         [TearDown]
-        public void Dispose() { ic = null; a = null; }
+        public void Dispose()
+        {
+            ic = null;
+            a = null;
+        }
     }
-
-
 
     [TestFixture]
     public class SortDecreasing
@@ -217,7 +208,6 @@ namespace C5UnitTests.SortingTests
         int[] a;
 
         int length;
-
 
         [SetUp]
         public void Init()
@@ -229,7 +219,6 @@ namespace C5UnitTests.SortingTests
                 a[i] = -i;
         }
 
-
         [Test]
         public void HeapSort()
         {
@@ -238,7 +227,6 @@ namespace C5UnitTests.SortingTests
                 Assert.IsTrue(a[i - 1] <= a[i], "Inversion at " + i);
         }
 
-
         [Test]
         public void IntroSort()
         {
@@ -246,7 +234,6 @@ namespace C5UnitTests.SortingTests
             for (int i = 1; i < length; i++)
                 Assert.IsTrue(a[i - 1] <= a[i], "Inversion at " + i);
         }
-
 
         [Test]
         public void InsertionSort()
@@ -261,8 +248,11 @@ namespace C5UnitTests.SortingTests
                 Assert.IsTrue(a[i - 1] <= a[i], "Inversion at " + i);
         }
 
-
         [TearDown]
-        public void Dispose() { ic = null; a = null; }
+        public void Dispose()
+        {
+            ic = null;
+            a = null;
+        }
     }
 }

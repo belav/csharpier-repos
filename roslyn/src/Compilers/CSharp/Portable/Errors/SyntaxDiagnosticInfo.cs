@@ -12,7 +12,10 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         static SyntaxDiagnosticInfo()
         {
-            ObjectBinder.RegisterTypeReader(typeof(SyntaxDiagnosticInfo), r => new SyntaxDiagnosticInfo(r));
+            ObjectBinder.RegisterTypeReader(
+                typeof(SyntaxDiagnosticInfo),
+                r => new SyntaxDiagnosticInfo(r)
+            );
         }
 
         internal readonly int Offset;
@@ -27,23 +30,22 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         internal SyntaxDiagnosticInfo(int offset, int width, ErrorCode code)
-            : this(offset, width, code, Array.Empty<object>())
-        {
-        }
+            : this(offset, width, code, Array.Empty<object>()) { }
 
         internal SyntaxDiagnosticInfo(ErrorCode code, params object[] args)
-            : this(0, 0, code, args)
-        {
-        }
+            : this(0, 0, code, args) { }
 
         internal SyntaxDiagnosticInfo(ErrorCode code)
-            : this(0, 0, code)
-        {
-        }
+            : this(0, 0, code) { }
 
         public SyntaxDiagnosticInfo WithOffset(int offset)
         {
-            return new SyntaxDiagnosticInfo(offset, this.Width, (ErrorCode)this.Code, this.Arguments);
+            return new SyntaxDiagnosticInfo(
+                offset,
+                this.Width,
+                (ErrorCode)this.Code,
+                this.Arguments
+            );
         }
 
         #region Serialization

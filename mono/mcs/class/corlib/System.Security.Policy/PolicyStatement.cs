@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,123 +31,131 @@
 using System.Runtime.InteropServices;
 using System.Security.Permissions;
 
-namespace System.Security.Policy {
-
+namespace System.Security.Policy
+{
     [Serializable]
-    [ComVisible (true)]
-    public sealed class PolicyStatement : ISecurityEncodable, ISecurityPolicyEncodable {
-
+    [ComVisible(true)]
+    public sealed class PolicyStatement : ISecurityEncodable, ISecurityPolicyEncodable
+    {
         private PermissionSet perms;
         private PolicyStatementAttribute attrs;
 
-        public PolicyStatement (PermissionSet permSet) :
-            this (permSet, PolicyStatementAttribute.Nothing)
-        {
-        }
+        public PolicyStatement(PermissionSet permSet)
+            : this(permSet, PolicyStatementAttribute.Nothing) { }
 
-        public PolicyStatement (PermissionSet permSet, PolicyStatementAttribute attributes) 
+        public PolicyStatement(PermissionSet permSet, PolicyStatementAttribute attributes)
         {
-            if (permSet != null) {
-                this.perms = permSet.Copy ();
-                this.perms.SetReadOnly (true);
+            if (permSet != null)
+            {
+                this.perms = permSet.Copy();
+                this.perms.SetReadOnly(true);
             }
             this.attrs = attributes;
         }
-        
-        public PermissionSet PermissionSet {
-            get {
-                if (perms == null) {
-                    perms = new PermissionSet (PermissionState.None);
-                    perms.SetReadOnly (true);
+
+        public PermissionSet PermissionSet
+        {
+            get
+            {
+                if (perms == null)
+                {
+                    perms = new PermissionSet(PermissionState.None);
+                    perms.SetReadOnly(true);
                 }
                 return perms;
             }
             set { perms = value; }
         }
-        
-        public PolicyStatementAttribute Attributes {
-            get { return attrs; }
-            set {
-                // note: yes it's a flag but all possible values have a corresponding name
-                switch (value) {
-                case PolicyStatementAttribute.Nothing:
-                case PolicyStatementAttribute.Exclusive:
-                case PolicyStatementAttribute.LevelFinal:
-                case PolicyStatementAttribute.All:
-                    attrs = value;
-                    break;
-                default:
-                    string msg = Locale.GetText ("Invalid value for {0}.");
-                    throw new ArgumentException (String.Format (msg, "PolicyStatementAttribute"));
-                }
-            }
-        }
 
-        public string AttributeString {
-            get {
-                switch (attrs) {
-                case PolicyStatementAttribute.Exclusive:
-                    return "Exclusive";
-                case PolicyStatementAttribute.LevelFinal:
-                    return "LevelFinal";
-                case PolicyStatementAttribute.All:
-                    return "Exclusive LevelFinal";
-                default:
-                    return String.Empty;
-                }
-            }
-        }
-
-        public PolicyStatement Copy ()
+        public PolicyStatementAttribute Attributes
         {
-            return new PolicyStatement (perms, attrs);
+            get { return attrs; }
+            set
+            {
+                // note: yes it's a flag but all possible values have a corresponding name
+                switch (value)
+                {
+                    case PolicyStatementAttribute.Nothing:
+                    case PolicyStatementAttribute.Exclusive:
+                    case PolicyStatementAttribute.LevelFinal:
+                    case PolicyStatementAttribute.All:
+                        attrs = value;
+                        break;
+                    default:
+                        string msg = Locale.GetText("Invalid value for {0}.");
+                        throw new ArgumentException(String.Format(msg, "PolicyStatementAttribute"));
+                }
+            }
+        }
+
+        public string AttributeString
+        {
+            get
+            {
+                switch (attrs)
+                {
+                    case PolicyStatementAttribute.Exclusive:
+                        return "Exclusive";
+                    case PolicyStatementAttribute.LevelFinal:
+                        return "LevelFinal";
+                    case PolicyStatementAttribute.All:
+                        return "Exclusive LevelFinal";
+                    default:
+                        return String.Empty;
+                }
+            }
+        }
+
+        public PolicyStatement Copy()
+        {
+            return new PolicyStatement(perms, attrs);
         }
 
         // ISecurityEncodable
 
-        public void FromXml (SecurityElement et)
+        public void FromXml(SecurityElement et)
         {
-            FromXml (et, null);
+            FromXml(et, null);
         }
 
-        public void FromXml (SecurityElement et, PolicyLevel level)
+        public void FromXml(SecurityElement et, PolicyLevel level)
         {
             if (et == null)
-                throw new ArgumentNullException ("et");
+                throw new ArgumentNullException("et");
             if (et.Tag != "PolicyStatement")
-                throw new ArgumentException (Locale.GetText ("Invalid tag."));
+                throw new ArgumentException(Locale.GetText("Invalid tag."));
 
-
-            string attributes = et.Attribute ("Attributes");
-            if (attributes != null) {
-                attrs = (PolicyStatementAttribute) Enum.Parse (
-                    typeof (PolicyStatementAttribute), attributes);
+            string attributes = et.Attribute("Attributes");
+            if (attributes != null)
+            {
+                attrs = (PolicyStatementAttribute)
+                    Enum.Parse(typeof(PolicyStatementAttribute), attributes);
             }
 
-            SecurityElement permissions = et.SearchForChildByTag ("PermissionSet");
-            PermissionSet.FromXml (permissions);
-        }
-        
-        public SecurityElement ToXml ()
-        {
-            return ToXml (null);
+            SecurityElement permissions = et.SearchForChildByTag("PermissionSet");
+            PermissionSet.FromXml(permissions);
         }
 
-        public SecurityElement ToXml (PolicyLevel level)
+        public SecurityElement ToXml()
         {
-            SecurityElement element = new SecurityElement ("PolicyStatement");
-            element.AddAttribute ("version", "1");
+            return ToXml(null);
+        }
+
+        public SecurityElement ToXml(PolicyLevel level)
+        {
+            SecurityElement element = new SecurityElement("PolicyStatement");
+            element.AddAttribute("version", "1");
 
             if (attrs != PolicyStatementAttribute.Nothing)
-                element.AddAttribute ("Attributes", attrs.ToString ());
-            
-            element.AddChild (PermissionSet.ToXml ());
+                element.AddAttribute("Attributes", attrs.ToString());
+
+            element.AddChild(PermissionSet.ToXml());
 
             return element;
         }
 
-        [ComVisible (false)]
-        public override bool Equals (object obj)
+        [ComVisible(false)]
+        public override bool Equals(object obj)
         {
             if (obj == null)
                 return false;
@@ -155,19 +163,19 @@ namespace System.Security.Policy {
             if (ps == null)
                 return false;
 
-            return (PermissionSet.Equals (obj) && (attrs == ps.attrs));
+            return (PermissionSet.Equals(obj) && (attrs == ps.attrs));
         }
 
-        [ComVisible (false)]
-        public override int GetHashCode ()
+        [ComVisible(false)]
+        public override int GetHashCode()
         {
             // return same hash code if two PolicyStatement are equals
-            return (PermissionSet.GetHashCode () ^ (int) attrs);
+            return (PermissionSet.GetHashCode() ^ (int)attrs);
         }
 
-        internal static PolicyStatement Empty ()
+        internal static PolicyStatement Empty()
         {
-            return new PolicyStatement (new PermissionSet (PermissionState.None));
+            return new PolicyStatement(new PermissionSet(PermissionState.None));
         }
     }
 }

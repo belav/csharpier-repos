@@ -2,22 +2,24 @@ using System;
 
 class ClassMain
 {
-    delegate void D (int i);
-    
-    public static void Main ()
+    delegate void D(int i);
+
+    public static void Main()
     {
-        if (true) {
+        if (true)
+        {
             const bool test = false;
-        } else {
+        }
+        else
+        {
             test = false;
         }
-        
-        D d = delegate (int test) { };
+
+        D d = delegate(int test) { };
     }
-    
-    static bool test { 
-        set {
-        }
+
+    static bool test
+    {
+        set { }
     }
 }
-

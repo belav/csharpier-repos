@@ -1,6 +1,6 @@
 //-------------------------------------------------------------
-// <copyright company=’Microsoft Corporation’>
-//   Copyright © Microsoft Corporation. All Rights Reserved.
+// <copyright company=ï¿½Microsoft Corporationï¿½>
+//   Copyright ï¿½ Microsoft Corporation. All Rights Reserved.
 // </copyright>
 //-------------------------------------------------------------
 // @owner=alexgor, deliant
@@ -11,11 +11,11 @@
 //
 //    Classes:    ChartGraphics
 //
-//  Purpose:    Chart graphic class is used for drawing Chart 
-//                elements as Rectangles, Pie slices, lines, areas 
-//                etc. This class is used in all classes where 
-//                drawing is necessary. The GDI+ graphic class is 
-//                used throw this class. Encapsulates a GDI+ chart 
+//  Purpose:    Chart graphic class is used for drawing Chart
+//                elements as Rectangles, Pie slices, lines, areas
+//                etc. This class is used in all classes where
+//                drawing is necessary. The GDI+ graphic class is
+//                used throw this class. Encapsulates a GDI+ chart
 //                drawing functionality
 //
 //    Reviewed:    GS - Jul 31, 2002
@@ -34,20 +34,19 @@ using System.Drawing.Imaging;
 using System.Diagnostics.CodeAnalysis;
 
 #if Microsoft_CONTROL
-    using System.Windows.Forms.DataVisualization.Charting.Utilities;
-    using System.Windows.Forms.DataVisualization.Charting.Borders3D;
+using System.Windows.Forms.DataVisualization.Charting.Utilities;
+using System.Windows.Forms.DataVisualization.Charting.Borders3D;
 #else
-    using System.Web.UI.DataVisualization.Charting.Utilities;
-    using System.Web.UI.DataVisualization.Charting.Borders3D;
+using System.Web.UI.DataVisualization.Charting.Utilities;
+using System.Web.UI.DataVisualization.Charting.Borders3D;
 #endif
 
 #endregion
 
 #if Microsoft_CONTROL
-    namespace System.Windows.Forms.DataVisualization.Charting
+namespace System.Windows.Forms.DataVisualization.Charting
 #else
 namespace System.Web.UI.DataVisualization.Charting
-
 #endif
 {
     #region Enumerations
@@ -76,7 +75,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// LightToDark bar/column style.
         /// </summary>
         LightToDark,
-        
+
         /// <summary>
         /// Wedge bar/column style.
         /// </summary>
@@ -113,24 +112,29 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Line style not set
         /// </summary>
         NotSet,
+
         /// <summary>
-        /// Specifies a line consisting of dashes. 
+        /// Specifies a line consisting of dashes.
         /// </summary>
         Dash,
+
         /// <summary>
-        /// Specifies a line consisting of a repeating pattern of dash-dot. 
+        /// Specifies a line consisting of a repeating pattern of dash-dot.
         /// </summary>
         DashDot,
+
         /// <summary>
-        /// Specifies a line consisting of a repeating pattern of dash-dot-dot. 
+        /// Specifies a line consisting of a repeating pattern of dash-dot-dot.
         /// </summary>
         DashDotDot,
+
         /// <summary>
-        /// Specifies a line consisting of dots. 
+        /// Specifies a line consisting of dots.
         /// </summary>
         Dot,
+
         /// <summary>
-        /// Specifies a solid line. 
+        /// Specifies a solid line.
         /// </summary>
         Solid,
     }
@@ -138,39 +142,45 @@ namespace System.Web.UI.DataVisualization.Charting
     #endregion
 
     /// <summary>
-    /// The ChartGraphics class provides all chart drawing capabilities. 
-    /// It contains methods for drawing 2D primitives and also exposes 
-    /// all ChartGraphics3D class methods for 3D shapes. Only this 
+    /// The ChartGraphics class provides all chart drawing capabilities.
+    /// It contains methods for drawing 2D primitives and also exposes
+    /// all ChartGraphics3D class methods for 3D shapes. Only this
     /// class should be used for any drawing in the chart.
     /// </summary>
 #if ASPPERM_35
-    [AspNetHostingPermission(System.Security.Permissions.SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(System.Security.Permissions.SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission(
+        System.Security.Permissions.SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        System.Security.Permissions.SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
 #endif
     public partial class ChartGraphics : ChartElement
     {
         #region Fields
 
         // Common Elements
-        private CommonElements        _common;
+        private CommonElements _common;
 
         // Reusable objects
-        private Pen                 _pen;
-        private SolidBrush            _solidBrush;
-        private Matrix                _myMatrix;
-    
+        private Pen _pen;
+        private SolidBrush _solidBrush;
+        private Matrix _myMatrix;
+
         // Private fields which represents picture size
-        private int                    _width;
-        private int                    _height;
-        
+        private int _width;
+        private int _height;
+
         // Indicates that smoothing is applied while drawing shadows
-        internal bool                softShadows = true;
+        internal bool softShadows = true;
 
         // Anti aliasing flags
-        private    AntiAliasingStyles        _antiAliasing = AntiAliasingStyles.All;
+        private AntiAliasingStyles _antiAliasing = AntiAliasingStyles.All;
 
         // True if rendering into the metafile
-        internal bool                IsMetafile = false;
+        internal bool IsMetafile = false;
 
         #endregion
 
@@ -184,20 +194,21 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="style">Line style.</param>
         /// <param name="firstPointF">A Point that represents the first point to connect.</param>
         /// <param name="secondPointF">A Point that represents the second point to connect.</param>
-        internal void DrawLineRel( 
-            Color color, 
-            int width, 
-            ChartDashStyle style, 
-            PointF firstPointF, 
-            PointF secondPointF 
-            )
+        internal void DrawLineRel(
+            Color color,
+            int width,
+            ChartDashStyle style,
+            PointF firstPointF,
+            PointF secondPointF
+        )
         {
             DrawLineAbs(
-                color, 
-                width, 
-                style, 
-                GetAbsolutePoint(firstPointF), 
-                GetAbsolutePoint(secondPointF) );
+                color,
+                width,
+                style,
+                GetAbsolutePoint(firstPointF),
+                GetAbsolutePoint(secondPointF)
+            );
         }
 
         /// <summary>
@@ -208,58 +219,59 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="style">Line style.</param>
         /// <param name="firstPoint">A Point that represents the first point to connect.</param>
         /// <param name="secondPoint">A Point that represents the second point to connect.</param>
-        internal void DrawLineAbs( 
-            Color color, 
-            int width, 
-            ChartDashStyle style, 
-            PointF firstPoint, 
-            PointF secondPoint 
-            )
+        internal void DrawLineAbs(
+            Color color,
+            int width,
+            ChartDashStyle style,
+            PointF firstPoint,
+            PointF secondPoint
+        )
         {
             // Do not draw line if width is 0 or style not set
-            if( width == 0 || style == ChartDashStyle.NotSet )
+            if (width == 0 || style == ChartDashStyle.NotSet)
             {
                 return;
             }
 
             // Set a line color
-            if(_pen.Color != color)
+            if (_pen.Color != color)
             {
                 _pen.Color = color;
             }
 
             // Set a line width
-            if(_pen.Width != width)
+            if (_pen.Width != width)
             {
                 _pen.Width = width;
             }
 
             // Set a line style
-            if(_pen.DashStyle != GetPenStyle( style ))
+            if (_pen.DashStyle != GetPenStyle(style))
             {
-                _pen.DashStyle = GetPenStyle( style );
+                _pen.DashStyle = GetPenStyle(style);
             }
 
-            // Remember SmoothingMode and turn off anti aliasing for 
+            // Remember SmoothingMode and turn off anti aliasing for
             // vertical or horizontal lines usinig 1 pixel dashed pen.
-            // This prevents anialiasing from completly smoothing the 
+            // This prevents anialiasing from completly smoothing the
             // dashed line.
             SmoothingMode oldSmoothingMode = this.SmoothingMode;
-            if(width <= 1 && style != ChartDashStyle.Solid)
+            if (width <= 1 && style != ChartDashStyle.Solid)
             {
-                if(firstPoint.X == secondPoint.X ||
-                    firstPoint.Y == secondPoint.Y)
+                if (firstPoint.X == secondPoint.X || firstPoint.Y == secondPoint.Y)
                 {
                     this.SmoothingMode = SmoothingMode.Default;
                 }
             }
 
             // Draw a line
-            this.DrawLine(_pen, 
-                (float)Math.Round(firstPoint.X), 
-                (float)Math.Round(firstPoint.Y), 
-                (float)Math.Round(secondPoint.X), 
-                (float)Math.Round(secondPoint.Y) );
+            this.DrawLine(
+                _pen,
+                (float)Math.Round(firstPoint.X),
+                (float)Math.Round(firstPoint.Y),
+                (float)Math.Round(secondPoint.X),
+                (float)Math.Round(secondPoint.Y)
+            );
 
             // Return old smoothing mode
             this.SmoothingMode = oldSmoothingMode;
@@ -272,27 +284,28 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="width">Line width.</param>
         /// <param name="style">Line style.</param>
         /// <param name="firstPoint">A Point that represents the first point to connect.</param>
-        /// <param name="secondPoint">A Point that represents the second point to connect.</param>        
+        /// <param name="secondPoint">A Point that represents the second point to connect.</param>
         /// <param name="shadowColor">Shadow Color.</param>
         /// <param name="shadowOffset">Shadow Offset.</param>
-        internal void DrawLineRel(    
-            Color color, 
-            int width, 
-            ChartDashStyle style, 
-            PointF firstPoint, 
-            PointF secondPoint, 
-            Color shadowColor, 
-            int shadowOffset  
-            )
+        internal void DrawLineRel(
+            Color color,
+            int width,
+            ChartDashStyle style,
+            PointF firstPoint,
+            PointF secondPoint,
+            Color shadowColor,
+            int shadowOffset
+        )
         {
-            DrawLineAbs(    
-                color, 
-                width, 
-                style, 
-                GetAbsolutePoint(firstPoint), 
-                GetAbsolutePoint(secondPoint), 
-                shadowColor, 
-                shadowOffset );
+            DrawLineAbs(
+                color,
+                width,
+                style,
+                GetAbsolutePoint(firstPoint),
+                GetAbsolutePoint(secondPoint),
+                shadowColor,
+                shadowOffset
+            );
         }
 
         /// <summary>
@@ -302,41 +315,47 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="width">Line width.</param>
         /// <param name="style">Line style.</param>
         /// <param name="firstPoint">A Point that represents the first point to connect.</param>
-        /// <param name="secondPoint">A Point that represents the second point to connect.</param>        
+        /// <param name="secondPoint">A Point that represents the second point to connect.</param>
         /// <param name="shadowColor">Shadow Color.</param>
         /// <param name="shadowOffset">Shadow Offset.</param>
-        internal void DrawLineAbs(    
-            Color color, 
-            int width, 
-            ChartDashStyle style, 
-            PointF firstPoint, 
-            PointF secondPoint, 
-            Color shadowColor, 
-            int shadowOffset  
-            )
+        internal void DrawLineAbs(
+            Color color,
+            int width,
+            ChartDashStyle style,
+            PointF firstPoint,
+            PointF secondPoint,
+            Color shadowColor,
+            int shadowOffset
+        )
         {
-            if(shadowOffset != 0)
+            if (shadowOffset != 0)
             {
                 // Shadow color
                 Color shColor;
 
-                // Make shadow semi transparent 
+                // Make shadow semi transparent
                 // if alpha value not used
-                if( shadowColor.A != 255 )
+                if (shadowColor.A != 255)
                     shColor = shadowColor;
                 else
-                    shColor = Color.FromArgb(color.A/2, shadowColor);
+                    shColor = Color.FromArgb(color.A / 2, shadowColor);
 
                 // Set shadow line position
-                PointF firstShadow = new PointF( firstPoint.X + shadowOffset, firstPoint.Y + shadowOffset);
-                PointF secondShadow = new PointF( secondPoint.X + shadowOffset, secondPoint.Y + shadowOffset );
+                PointF firstShadow = new PointF(
+                    firstPoint.X + shadowOffset,
+                    firstPoint.Y + shadowOffset
+                );
+                PointF secondShadow = new PointF(
+                    secondPoint.X + shadowOffset,
+                    secondPoint.Y + shadowOffset
+                );
 
                 // Draw Shadow of Line
-                DrawLineAbs( shColor, width, style, firstShadow, secondShadow );
+                DrawLineAbs(shColor, width, style, firstShadow, secondShadow);
             }
 
             // Draw Line
-            DrawLineAbs( color, width, style, firstPoint, secondPoint );
+            DrawLineAbs(color, width, style, firstPoint, secondPoint);
         }
 
         #endregion
@@ -350,19 +369,15 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="backColor">Back Color.</param>
         /// <param name="foreColor">Fore Color.</param>
         /// <returns>Brush</returns>
-        internal Brush GetHatchBrush( 
-            ChartHatchStyle hatchStyle, 
-            Color backColor, 
-            Color foreColor 
-            )
+        internal Brush GetHatchBrush(ChartHatchStyle hatchStyle, Color backColor, Color foreColor)
         {
-            // Convert Chart Hatch Style enum 
+            // Convert Chart Hatch Style enum
             // to Hatch Style enum.
             HatchStyle hatch;
-            hatch = (HatchStyle)Enum.Parse(typeof(HatchStyle),hatchStyle.ToString());
-            
+            hatch = (HatchStyle)Enum.Parse(typeof(HatchStyle), hatchStyle.ToString());
+
             // Create Hatch Brush
-            return new HatchBrush( hatch, foreColor, backColor );
+            return new HatchBrush(hatch, foreColor, backColor);
         }
 
         /// <summary>
@@ -374,60 +389,78 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="backColor">Image background color.</param>
         /// <returns>Textured brush.</returns>
         internal Brush GetTextureBrush(
-            string name, 
-            Color backImageTransparentColor, 
+            string name,
+            Color backImageTransparentColor,
             ChartImageWrapMode mode,
             Color backColor
-            )
+        )
         {
             // Load a image
-           System.Drawing.Image image = _common.ImageLoader.LoadImage( name );
+            System.Drawing.Image image = _common.ImageLoader.LoadImage(name);
 
             // Create a brush
             ImageAttributes attrib = new ImageAttributes();
-            attrib.SetWrapMode((mode == ChartImageWrapMode.Unscaled) ? WrapMode.Clamp : ((WrapMode)mode));
-            if(backImageTransparentColor != Color.Empty)
+            attrib.SetWrapMode(
+                (mode == ChartImageWrapMode.Unscaled) ? WrapMode.Clamp : ((WrapMode)mode)
+            );
+            if (backImageTransparentColor != Color.Empty)
             {
-                attrib.SetColorKey(backImageTransparentColor, backImageTransparentColor, ColorAdjustType.Default);
+                attrib.SetColorKey(
+                    backImageTransparentColor,
+                    backImageTransparentColor,
+                    ColorAdjustType.Default
+                );
             }
 
             // If image is a metafile background must be filled first
             // Solves issue that background is not cleared correctly
-            if(backImageTransparentColor == Color.Empty &&
-                image is Metafile &&
-                backColor != Color.Transparent)
+            if (
+                backImageTransparentColor == Color.Empty
+                && image is Metafile
+                && backColor != Color.Transparent
+            )
             {
                 TextureBrush backFilledBrush = null;
                 Bitmap bitmap = new Bitmap(image.Width, image.Height);
-                using(Graphics graphics = Graphics.FromImage(bitmap))
+                using (Graphics graphics = Graphics.FromImage(bitmap))
                 {
-                    using(SolidBrush backBrush = new SolidBrush(backColor))
+                    using (SolidBrush backBrush = new SolidBrush(backColor))
                     {
                         graphics.FillRectangle(backBrush, 0, 0, image.Width, image.Height);
                         graphics.DrawImageUnscaled(image, 0, 0);
-                        backFilledBrush= new TextureBrush( bitmap, new RectangleF(0,0,image.Width,image.Height), attrib); 
+                        backFilledBrush = new TextureBrush(
+                            bitmap,
+                            new RectangleF(0, 0, image.Width, image.Height),
+                            attrib
+                        );
                     }
                 }
 
                 return backFilledBrush;
             }
-                       
-            
+
             TextureBrush textureBrush;
 
             if (ImageLoader.DoDpisMatch(image, this.Graphics))
-                textureBrush = new TextureBrush(image, new RectangleF(0, 0, image.Width, image.Height), attrib);
-            else  // if the image dpi does not match the graphics dpi we have to scale the image    
+                textureBrush = new TextureBrush(
+                    image,
+                    new RectangleF(0, 0, image.Width, image.Height),
+                    attrib
+                );
+            else // if the image dpi does not match the graphics dpi we have to scale the image
             {
                 Image scaledImage = ImageLoader.GetScaledImage(image, this.Graphics);
-                textureBrush = new TextureBrush(scaledImage, new RectangleF(0, 0, scaledImage.Width, scaledImage.Height), attrib);
+                textureBrush = new TextureBrush(
+                    scaledImage,
+                    new RectangleF(0, 0, scaledImage.Width, scaledImage.Height),
+                    attrib
+                );
                 scaledImage.Dispose();
             }
-            
-            return textureBrush;
 
+            return textureBrush;
         }
-                
+
         /// <summary>
         /// This method creates a gradient brush.
         /// </summary>
@@ -436,12 +469,12 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="secondColor">Second color.</param>
         /// <param name="type ">Gradient type .</param>
         /// <returns>Gradient Brush</returns>
-        internal Brush GetGradientBrush( 
-            RectangleF rectangle, 
-            Color firstColor, 
-            Color secondColor, 
+        internal Brush GetGradientBrush(
+            RectangleF rectangle,
+            Color firstColor,
+            Color secondColor,
             GradientStyle type
-            )
+        )
         {
             // Increse the brush rectangle by 1 pixel to ensure the fit
             rectangle.Inflate(1f, 1f);
@@ -449,11 +482,11 @@ namespace System.Web.UI.DataVisualization.Charting
             Brush gradientBrush = null;
             float angle = 0;
 
-            // Function which create gradient brush fires exception if 
+            // Function which create gradient brush fires exception if
             // rectangle size is zero.
-            if( rectangle.Height == 0 || rectangle.Width == 0 )
+            if (rectangle.Height == 0 || rectangle.Width == 0)
             {
-                gradientBrush = new SolidBrush( Color.Black );
+                gradientBrush = new SolidBrush(Color.Black);
                 return gradientBrush;
             }
 
@@ -461,49 +494,76 @@ namespace System.Web.UI.DataVisualization.Charting
             // Linear Gradient
             // *******************************************
             // Check linear type .
-            if( type == GradientStyle.LeftRight || type == GradientStyle.VerticalCenter )
+            if (type == GradientStyle.LeftRight || type == GradientStyle.VerticalCenter)
             {
                 angle = 0;
             }
-            else if( type == GradientStyle.TopBottom || type == GradientStyle.HorizontalCenter )
+            else if (type == GradientStyle.TopBottom || type == GradientStyle.HorizontalCenter)
             {
                 angle = 90;
             }
-            else if(  type == GradientStyle.DiagonalLeft )
+            else if (type == GradientStyle.DiagonalLeft)
             {
-                angle = (float)(Math.Atan(rectangle.Width / rectangle.Height)* 180 / Math.PI); 
+                angle = (float)(Math.Atan(rectangle.Width / rectangle.Height) * 180 / Math.PI);
             }
-            else if(  type == GradientStyle.DiagonalRight )
+            else if (type == GradientStyle.DiagonalRight)
             {
-                angle = (float)(180 - Math.Atan(rectangle.Width / rectangle.Height)* 180 / Math.PI); 
+                angle = (float)(
+                    180 - Math.Atan(rectangle.Width / rectangle.Height) * 180 / Math.PI
+                );
             }
-            
+
             // Create a linear gradient brush
-            if( type == GradientStyle.TopBottom || type == GradientStyle.LeftRight 
-                || type == GradientStyle.DiagonalLeft || type == GradientStyle.DiagonalRight
-                || type == GradientStyle.HorizontalCenter || type == GradientStyle.VerticalCenter )
+            if (
+                type == GradientStyle.TopBottom
+                || type == GradientStyle.LeftRight
+                || type == GradientStyle.DiagonalLeft
+                || type == GradientStyle.DiagonalRight
+                || type == GradientStyle.HorizontalCenter
+                || type == GradientStyle.VerticalCenter
+            )
             {
-                RectangleF tempRect = new RectangleF(rectangle.X,rectangle.Y,rectangle.Width,rectangle.Height);
+                RectangleF tempRect = new RectangleF(
+                    rectangle.X,
+                    rectangle.Y,
+                    rectangle.Width,
+                    rectangle.Height
+                );
                 // For Horizontal and vertical center gradient types
-                if( type == GradientStyle.HorizontalCenter )
+                if (type == GradientStyle.HorizontalCenter)
                 {
                     // Resize and wrap gradient
                     tempRect.Height = tempRect.Height / 2F;
-                    LinearGradientBrush linearGradientBrush = new LinearGradientBrush(tempRect, firstColor, secondColor, angle);
+                    LinearGradientBrush linearGradientBrush = new LinearGradientBrush(
+                        tempRect,
+                        firstColor,
+                        secondColor,
+                        angle
+                    );
                     gradientBrush = linearGradientBrush;
                     linearGradientBrush.WrapMode = WrapMode.TileFlipX;
                 }
-                else if( type == GradientStyle.VerticalCenter )
+                else if (type == GradientStyle.VerticalCenter)
                 {
                     // Resize and wrap gradient
                     tempRect.Width = tempRect.Width / 2F;
-                    LinearGradientBrush linearGradientBrush = new LinearGradientBrush(tempRect, firstColor, secondColor, angle);
+                    LinearGradientBrush linearGradientBrush = new LinearGradientBrush(
+                        tempRect,
+                        firstColor,
+                        secondColor,
+                        angle
+                    );
                     gradientBrush = linearGradientBrush;
                     linearGradientBrush.WrapMode = WrapMode.TileFlipX;
                 }
                 else
                 {
-                    gradientBrush = new LinearGradientBrush( rectangle, firstColor, secondColor, angle );
+                    gradientBrush = new LinearGradientBrush(
+                        rectangle,
+                        firstColor,
+                        secondColor,
+                        angle
+                    );
                 }
                 return gradientBrush;
             }
@@ -511,12 +571,12 @@ namespace System.Web.UI.DataVisualization.Charting
             // *******************************************
             // Gradient is not linear : From Center.
             // *******************************************
-            
+
             // Create a path
             GraphicsPath path = new GraphicsPath();
 
             // Add a rectangle to the path
-            path.AddRectangle( rectangle );
+            path.AddRectangle(rectangle);
 
             // Create a gradient brush
             PathGradientBrush pathGradientBrush = new PathGradientBrush(path);
@@ -526,10 +586,10 @@ namespace System.Web.UI.DataVisualization.Charting
             pathGradientBrush.CenterColor = firstColor;
 
             // Set the Surround color
-            Color[] colors = {secondColor};
+            Color[] colors = { secondColor };
             pathGradientBrush.SurroundColors = colors;
-            
-            if( path != null )
+
+            if (path != null)
             {
                 path.Dispose();
             }
@@ -538,22 +598,22 @@ namespace System.Web.UI.DataVisualization.Charting
         }
 
         /// <summary>
-        /// This method creates a gradient brush for pie. This gradient is one 
+        /// This method creates a gradient brush for pie. This gradient is one
         /// of the types used only with pie and doughnut.
         /// </summary>
         /// <param name="rectangle">A rectangle which has to be filled with a gradient color</param>
         /// <param name="firstColor">First color</param>
         /// <param name="secondColor">Second color</param>
         /// <returns>Gradient Brush</returns>
-        internal Brush GetPieGradientBrush( 
-            RectangleF rectangle, 
-            Color firstColor, 
-            Color secondColor 
-            )
+        internal Brush GetPieGradientBrush(
+            RectangleF rectangle,
+            Color firstColor,
+            Color secondColor
+        )
         {
             // Create a path that consists of a single ellipse.
             GraphicsPath path = new GraphicsPath();
-            path.AddEllipse( rectangle );
+            path.AddEllipse(rectangle);
 
             // Use the path to construct a brush.
             PathGradientBrush gradientBrush = new PathGradientBrush(path);
@@ -561,19 +621,18 @@ namespace System.Web.UI.DataVisualization.Charting
             // Set the color at the center of the path.
             gradientBrush.CenterColor = firstColor;
 
-            // Set the color along the entire boundary 
+            // Set the color along the entire boundary
             // of the path to aqua.
-            Color[] colors = {secondColor};
+            Color[] colors = { secondColor };
 
             gradientBrush.SurroundColors = colors;
 
-            if( path != null )
+            if (path != null)
             {
                 path.Dispose();
             }
 
             return gradientBrush;
-
         }
 
         /// <summary>
@@ -581,10 +640,10 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         /// <param name="style">Chart Line style.</param>
         /// <returns>GDI+ line style.</returns>
-        internal DashStyle GetPenStyle( ChartDashStyle style )
+        internal DashStyle GetPenStyle(ChartDashStyle style)
         {
-            // Convert to chart line styles. The custom style doesn’t exist.
-            switch( style )
+            // Convert to chart line styles. The custom style doesnï¿½t exist.
+            switch (style)
             {
                 case ChartDashStyle.Dash:
                     return DashStyle.Dash;
@@ -623,9 +682,15 @@ namespace System.Web.UI.DataVisualization.Charting
             // overflow check
             for (int pointIndex = 0; pointIndex < numberOfCornersX2; pointIndex++)
             {
-                tempPoints[0] = new PointF(rect.X + rect.Width/2f, (outside == true) ? rect.Y : rect.Y + rect.Height/4f);
-                Matrix    matrix = new Matrix();
-                matrix.RotateAt(pointIndex*(360f/(numberOfCorners*2f)), new PointF(rect.X + rect.Width/2f, rect.Y + rect.Height/2f));
+                tempPoints[0] = new PointF(
+                    rect.X + rect.Width / 2f,
+                    (outside == true) ? rect.Y : rect.Y + rect.Height / 4f
+                );
+                Matrix matrix = new Matrix();
+                matrix.RotateAt(
+                    pointIndex * (360f / (numberOfCorners * 2f)),
+                    new PointF(rect.X + rect.Width / 2f, rect.Y + rect.Height / 2f)
+                );
                 matrix.TransformPoints(tempPoints);
                 points[pointIndex] = tempPoints[0];
                 outside = !outside;
@@ -649,20 +714,33 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="shadowColor">Marker shadow color.</param>
         /// <param name="imageScaleRect">Rectangle to which marker image should be scaled.</param>
         internal void DrawMarkerRel(
-            PointF point, 
-            MarkerStyle markerStyle, 
-            int markerSize, 
-            Color markerColor, 
-            Color markerBorderColor, 
-            int markerBorderSize, 
-            string markerImage, 
-            Color markerImageTransparentColor, 
-            int shadowSize, 
-            Color shadowColor, 
+            PointF point,
+            MarkerStyle markerStyle,
+            int markerSize,
+            Color markerColor,
+            Color markerBorderColor,
+            int markerBorderSize,
+            string markerImage,
+            Color markerImageTransparentColor,
+            int shadowSize,
+            Color shadowColor,
             RectangleF imageScaleRect
-            )
+        )
         {
-            DrawMarkerAbs(this.GetAbsolutePoint(point), markerStyle, markerSize, markerColor, markerBorderColor, markerBorderSize, markerImage, markerImageTransparentColor, shadowSize, shadowColor, imageScaleRect, false);
+            DrawMarkerAbs(
+                this.GetAbsolutePoint(point),
+                markerStyle,
+                markerSize,
+                markerColor,
+                markerBorderColor,
+                markerBorderSize,
+                markerImage,
+                markerImageTransparentColor,
+                shadowSize,
+                shadowColor,
+                imageScaleRect,
+                false
+            );
         }
 
         /// <summary>
@@ -681,31 +759,31 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="imageScaleRect">Rectangle to which marker image should be scaled.</param>
         /// <param name="forceAntiAlias">Always use anti aliasing when drawing the marker.</param>
         internal void DrawMarkerAbs(
-            PointF point, 
-            MarkerStyle markerStyle, 
-            int markerSize, 
-            Color markerColor, 
-            Color markerBorderColor, 
-            int markerBorderSize, 
-            string markerImage, 
-            Color markerImageTransparentColor, 
-            int shadowSize, 
-            Color shadowColor, 
-            RectangleF imageScaleRect, 
+            PointF point,
+            MarkerStyle markerStyle,
+            int markerSize,
+            Color markerColor,
+            Color markerBorderColor,
+            int markerBorderSize,
+            string markerImage,
+            Color markerImageTransparentColor,
+            int shadowSize,
+            Color shadowColor,
+            RectangleF imageScaleRect,
             bool forceAntiAlias
-            )
+        )
         {
             // Hide border when zero width specified
-            if(markerBorderSize <= 0)
+            if (markerBorderSize <= 0)
             {
                 markerBorderColor = Color.Transparent;
             }
 
             // Draw image instead of standart markers
-            if(markerImage.Length > 0)
+            if (markerImage.Length > 0)
             {
                 // Get image
-                System.Drawing.Image image = _common.ImageLoader.LoadImage( markerImage );
+                System.Drawing.Image image = _common.ImageLoader.LoadImage(markerImage);
 
                 if (image != null)
                 {
@@ -728,14 +806,22 @@ namespace System.Web.UI.DataVisualization.Charting
                     ImageAttributes attrib = new ImageAttributes();
                     if (markerImageTransparentColor != Color.Empty)
                     {
-                        attrib.SetColorKey(markerImageTransparentColor, markerImageTransparentColor, ColorAdjustType.Default);
+                        attrib.SetColorKey(
+                            markerImageTransparentColor,
+                            markerImageTransparentColor,
+                            ColorAdjustType.Default
+                        );
                     }
 
                     // Draw image shadow
                     if (shadowSize != 0 && shadowColor != Color.Empty)
                     {
                         ImageAttributes attribShadow = new ImageAttributes();
-                        attribShadow.SetColorKey(markerImageTransparentColor, markerImageTransparentColor, ColorAdjustType.Default);
+                        attribShadow.SetColorKey(
+                            markerImageTransparentColor,
+                            markerImageTransparentColor,
+                            ColorAdjustType.Default
+                        );
                         ColorMatrix colorMatrix = new ColorMatrix();
                         colorMatrix.Matrix00 = 0.25f; // Red
                         colorMatrix.Matrix11 = 0.25f; // Green
@@ -744,32 +830,48 @@ namespace System.Web.UI.DataVisualization.Charting
                         colorMatrix.Matrix44 = 1.0f; // w
                         attribShadow.SetColorMatrix(colorMatrix);
 
-                        this.DrawImage(image,
-                            new Rectangle((int)rect.X + shadowSize, (int)rect.Y + shadowSize, (int)rect.Width, (int)rect.Height),
-                            0, 0, image.Width, image.Height,
+                        this.DrawImage(
+                            image,
+                            new Rectangle(
+                                (int)rect.X + shadowSize,
+                                (int)rect.Y + shadowSize,
+                                (int)rect.Width,
+                                (int)rect.Height
+                            ),
+                            0,
+                            0,
+                            image.Width,
+                            image.Height,
                             GraphicsUnit.Pixel,
-                            attribShadow);
+                            attribShadow
+                        );
                     }
 
                     // Draw image
-                    this.DrawImage(image,
+                    this.DrawImage(
+                        image,
                         new Rectangle((int)rect.X, (int)rect.Y, (int)rect.Width, (int)rect.Height),
-                        0, 0, image.Width, image.Height,
+                        0,
+                        0,
+                        image.Width,
+                        image.Height,
                         GraphicsUnit.Pixel,
-                        attrib);
+                        attrib
+                    );
                 }
             }
-
             // Draw standart marker using style, size and color
-            else if(markerStyle != MarkerStyle.None && markerSize > 0 && markerColor != Color.Empty)
+            else if (
+                markerStyle != MarkerStyle.None && markerSize > 0 && markerColor != Color.Empty
+            )
             {
                 // Enable antialising
                 SmoothingMode oldSmoothingMode = this.SmoothingMode;
-                if(forceAntiAlias)
+                if (forceAntiAlias)
                 {
                     this.SmoothingMode = SmoothingMode.AntiAlias;
                 }
-                
+
                 // Create solid color brush
                 using (SolidBrush brush = new SolidBrush(markerColor))
                 {
@@ -787,347 +889,421 @@ namespace System.Web.UI.DataVisualization.Charting
                         case (MarkerStyle.Star5):
                         case (MarkerStyle.Star6):
                         case (MarkerStyle.Star10):
+                        {
+                            // Set number of corners
+                            int cornerNumber = 4;
+                            if (markerStyle == MarkerStyle.Star5)
                             {
-                                // Set number of corners
-                                int cornerNumber = 4;
-                                if (markerStyle == MarkerStyle.Star5)
-                                {
-                                    cornerNumber = 5;
-                                }
-                                else if (markerStyle == MarkerStyle.Star6)
-                                {
-                                    cornerNumber = 6;
-                                }
-                                else if (markerStyle == MarkerStyle.Star10)
-                                {
-                                    cornerNumber = 10;
-                                }
-
-                                // Get star polygon
-                                PointF[] points = CreateStarPolygon(rect, cornerNumber);
-
-                                // Draw shadow
-                                if (shadowSize != 0 && shadowColor != Color.Empty)
-                                {
-                                    Matrix translateMatrix = this.Transform.Clone();
-                                    translateMatrix.Translate(shadowSize, shadowSize);
-                                    Matrix oldMatrix = this.Transform;
-                                    this.Transform = translateMatrix;
-
-                                    this.FillPolygon(new SolidBrush((shadowColor.A != 255) ? shadowColor : Color.FromArgb(markerColor.A / 2, shadowColor)), points);
-
-                                    this.Transform = oldMatrix;
-                                }
-
-                                // Draw star
-                                this.FillPolygon(brush, points);
-                                this.DrawPolygon(new Pen(markerBorderColor, markerBorderSize), points);
-                                break;
+                                cornerNumber = 5;
                             }
+                            else if (markerStyle == MarkerStyle.Star6)
+                            {
+                                cornerNumber = 6;
+                            }
+                            else if (markerStyle == MarkerStyle.Star10)
+                            {
+                                cornerNumber = 10;
+                            }
+
+                            // Get star polygon
+                            PointF[] points = CreateStarPolygon(rect, cornerNumber);
+
+                            // Draw shadow
+                            if (shadowSize != 0 && shadowColor != Color.Empty)
+                            {
+                                Matrix translateMatrix = this.Transform.Clone();
+                                translateMatrix.Translate(shadowSize, shadowSize);
+                                Matrix oldMatrix = this.Transform;
+                                this.Transform = translateMatrix;
+
+                                this.FillPolygon(
+                                    new SolidBrush(
+                                        (shadowColor.A != 255)
+                                            ? shadowColor
+                                            : Color.FromArgb(markerColor.A / 2, shadowColor)
+                                    ),
+                                    points
+                                );
+
+                                this.Transform = oldMatrix;
+                            }
+
+                            // Draw star
+                            this.FillPolygon(brush, points);
+                            this.DrawPolygon(new Pen(markerBorderColor, markerBorderSize), points);
+                            break;
+                        }
                         case (MarkerStyle.Circle):
+                        {
+                            // Draw marker shadow
+                            if (shadowSize != 0 && shadowColor != Color.Empty)
                             {
-                                // Draw marker shadow
-                                if (shadowSize != 0 && shadowColor != Color.Empty)
+                                if (!softShadows)
                                 {
-                                    if (!softShadows)
+                                    using (
+                                        SolidBrush shadowBrush = new SolidBrush(
+                                            (shadowColor.A != 255)
+                                                ? shadowColor
+                                                : Color.FromArgb(markerColor.A / 2, shadowColor)
+                                        )
+                                    )
                                     {
-                                        using (SolidBrush shadowBrush = new SolidBrush((shadowColor.A != 255) ? shadowColor : Color.FromArgb(markerColor.A / 2, shadowColor)))
-                                        {
-                                            RectangleF shadowRect = rect;
-                                            shadowRect.X += shadowSize;
-                                            shadowRect.Y += shadowSize;
-                                            this.FillEllipse(shadowBrush, shadowRect);
-                                        }
+                                        RectangleF shadowRect = rect;
+                                        shadowRect.X += shadowSize;
+                                        shadowRect.Y += shadowSize;
+                                        this.FillEllipse(shadowBrush, shadowRect);
                                     }
-                                    else
+                                }
+                                else
+                                {
+                                    // Add circle to the graphics path
+                                    using (GraphicsPath path = new GraphicsPath())
                                     {
-                                        // Add circle to the graphics path
-                                        using (GraphicsPath path = new GraphicsPath())
+                                        path.AddEllipse(
+                                            rect.X + shadowSize - 1,
+                                            rect.Y + shadowSize - 1,
+                                            rect.Width + 2,
+                                            rect.Height + 2
+                                        );
+
+                                        // Create path brush
+                                        using (
+                                            PathGradientBrush shadowBrush = new PathGradientBrush(
+                                                path
+                                            )
+                                        )
                                         {
-                                            path.AddEllipse(rect.X + shadowSize - 1, rect.Y + shadowSize - 1, rect.Width + 2, rect.Height + 2);
+                                            shadowBrush.CenterColor = shadowColor;
 
-                                            // Create path brush
-                                            using (PathGradientBrush shadowBrush = new PathGradientBrush(path))
+                                            // Set the color along the entire boundary of the path
+                                            Color[] colors = { Color.Transparent };
+                                            shadowBrush.SurroundColors = colors;
+                                            shadowBrush.CenterPoint = new PointF(point.X, point.Y);
+
+                                            // Define brush focus scale
+                                            PointF focusScale = new PointF(
+                                                1 - 2f * shadowSize / rect.Width,
+                                                1 - 2f * shadowSize / rect.Height
+                                            );
+                                            if (focusScale.X < 0)
                                             {
-                                                shadowBrush.CenterColor = shadowColor;
-
-                                                // Set the color along the entire boundary of the path
-                                                Color[] colors = { Color.Transparent };
-                                                shadowBrush.SurroundColors = colors;
-                                                shadowBrush.CenterPoint = new PointF(point.X, point.Y);
-
-                                                // Define brush focus scale
-                                                PointF focusScale = new PointF(1 - 2f * shadowSize / rect.Width, 1 - 2f * shadowSize / rect.Height);
-                                                if (focusScale.X < 0)
-                                                {
-                                                    focusScale.X = 0;
-                                                }
-                                                if (focusScale.Y < 0)
-                                                {
-                                                    focusScale.Y = 0;
-                                                }
-                                                shadowBrush.FocusScales = focusScale;
-
-                                                // Draw shadow
-                                                this.FillPath(shadowBrush, path);
+                                                focusScale.X = 0;
                                             }
+                                            if (focusScale.Y < 0)
+                                            {
+                                                focusScale.Y = 0;
+                                            }
+                                            shadowBrush.FocusScales = focusScale;
+
+                                            // Draw shadow
+                                            this.FillPath(shadowBrush, path);
                                         }
                                     }
                                 }
-
-                                this.FillEllipse(brush, rect);
-                                this.DrawEllipse(new Pen(markerBorderColor, markerBorderSize), rect);
-                                break;
                             }
+
+                            this.FillEllipse(brush, rect);
+                            this.DrawEllipse(new Pen(markerBorderColor, markerBorderSize), rect);
+                            break;
+                        }
                         case (MarkerStyle.Square):
+                        {
+                            // Draw marker shadow
+                            if (shadowSize != 0 && shadowColor != Color.Empty)
                             {
-                                // Draw marker shadow
-                                if (shadowSize != 0 && shadowColor != Color.Empty)
-                                {
-                                    FillRectangleShadowAbs(rect, shadowColor, shadowSize, shadowColor);
-                                }
-
-                                this.FillRectangle(brush, rect);
-                                this.DrawRectangle(new Pen(markerBorderColor, markerBorderSize), (int)Math.Round(rect.X, 0), (int)Math.Round(rect.Y, 0), (int)Math.Round(rect.Width, 0), (int)Math.Round(rect.Height, 0));
-                                break;
+                                FillRectangleShadowAbs(rect, shadowColor, shadowSize, shadowColor);
                             }
+
+                            this.FillRectangle(brush, rect);
+                            this.DrawRectangle(
+                                new Pen(markerBorderColor, markerBorderSize),
+                                (int)Math.Round(rect.X, 0),
+                                (int)Math.Round(rect.Y, 0),
+                                (int)Math.Round(rect.Width, 0),
+                                (int)Math.Round(rect.Height, 0)
+                            );
+                            break;
+                        }
                         case (MarkerStyle.Cross):
+                        {
+                            // Calculate cross line width and size
+                            float crossLineWidth = (float)Math.Ceiling(markerSize / 4F);
+                            float crossSize = markerSize; // * (float)Math.Sin(45f/180f*Math.PI);
+
+                            // Calculate cross coordinates
+                            PointF[] points = new PointF[12];
+                            points[0].X = point.X - crossSize / 2F;
+                            points[0].Y = point.Y + crossLineWidth / 2F;
+                            points[1].X = point.X - crossSize / 2F;
+                            points[1].Y = point.Y - crossLineWidth / 2F;
+
+                            points[2].X = point.X - crossLineWidth / 2F;
+                            points[2].Y = point.Y - crossLineWidth / 2F;
+                            points[3].X = point.X - crossLineWidth / 2F;
+                            points[3].Y = point.Y - crossSize / 2F;
+                            points[4].X = point.X + crossLineWidth / 2F;
+                            points[4].Y = point.Y - crossSize / 2F;
+
+                            points[5].X = point.X + crossLineWidth / 2F;
+                            points[5].Y = point.Y - crossLineWidth / 2F;
+                            points[6].X = point.X + crossSize / 2F;
+                            points[6].Y = point.Y - crossLineWidth / 2F;
+                            points[7].X = point.X + crossSize / 2F;
+                            points[7].Y = point.Y + crossLineWidth / 2F;
+
+                            points[8].X = point.X + crossLineWidth / 2F;
+                            points[8].Y = point.Y + crossLineWidth / 2F;
+                            points[9].X = point.X + crossLineWidth / 2F;
+                            points[9].Y = point.Y + crossSize / 2F;
+                            points[10].X = point.X - crossLineWidth / 2F;
+                            points[10].Y = point.Y + crossSize / 2F;
+                            points[11].X = point.X - crossLineWidth / 2F;
+                            points[11].Y = point.Y + crossLineWidth / 2F;
+
+                            // Rotate cross coordinates 45 degrees
+                            Matrix rotationMatrix = new Matrix();
+                            rotationMatrix.RotateAt(45, point);
+                            rotationMatrix.TransformPoints(points);
+
+                            // Draw shadow
+                            if (shadowSize != 0 && shadowColor != Color.Empty)
                             {
-                                // Calculate cross line width and size
-                                float crossLineWidth = (float)Math.Ceiling(markerSize / 4F);
-                                float crossSize = markerSize;// * (float)Math.Sin(45f/180f*Math.PI);
-
-                                // Calculate cross coordinates
-                                PointF[] points = new PointF[12];
-                                points[0].X = point.X - crossSize / 2F;
-                                points[0].Y = point.Y + crossLineWidth / 2F;
-                                points[1].X = point.X - crossSize / 2F;
-                                points[1].Y = point.Y - crossLineWidth / 2F;
-
-                                points[2].X = point.X - crossLineWidth / 2F;
-                                points[2].Y = point.Y - crossLineWidth / 2F;
-                                points[3].X = point.X - crossLineWidth / 2F;
-                                points[3].Y = point.Y - crossSize / 2F;
-                                points[4].X = point.X + crossLineWidth / 2F;
-                                points[4].Y = point.Y - crossSize / 2F;
-
-                                points[5].X = point.X + crossLineWidth / 2F;
-                                points[5].Y = point.Y - crossLineWidth / 2F;
-                                points[6].X = point.X + crossSize / 2F;
-                                points[6].Y = point.Y - crossLineWidth / 2F;
-                                points[7].X = point.X + crossSize / 2F;
-                                points[7].Y = point.Y + crossLineWidth / 2F;
-
-                                points[8].X = point.X + crossLineWidth / 2F;
-                                points[8].Y = point.Y + crossLineWidth / 2F;
-                                points[9].X = point.X + crossLineWidth / 2F;
-                                points[9].Y = point.Y + crossSize / 2F;
-                                points[10].X = point.X - crossLineWidth / 2F;
-                                points[10].Y = point.Y + crossSize / 2F;
-                                points[11].X = point.X - crossLineWidth / 2F;
-                                points[11].Y = point.Y + crossLineWidth / 2F;
-
-                                // Rotate cross coordinates 45 degrees
-                                Matrix rotationMatrix = new Matrix();
-                                rotationMatrix.RotateAt(45, point);
-                                rotationMatrix.TransformPoints(points);
-
-                                // Draw shadow
-                                if (shadowSize != 0 && shadowColor != Color.Empty)
-                                {
-                                    // Create translation matrix
-                                    Matrix translateMatrix = this.Transform.Clone();
-                                    translateMatrix.Translate(
-                                        (softShadows) ? shadowSize + 1 : shadowSize,
-                                        (softShadows) ? shadowSize + 1 : shadowSize);
-                                    Matrix oldMatrix = this.Transform;
-                                    this.Transform = translateMatrix;
-
-                                    if (!softShadows)
-                                    {
-                                        using (Brush softShadowBrush = new SolidBrush((shadowColor.A != 255) ? shadowColor : Color.FromArgb(markerColor.A / 2, shadowColor)))
-                                        {
-                                            this.FillPolygon(softShadowBrush, points);
-                                        }
-                                    }
-                                    else
-                                    {
-                                        // Add polygon to the graphics path
-                                        using (GraphicsPath path = new GraphicsPath())
-                                        {
-                                            path.AddPolygon(points);
-
-                                            // Create path brush
-                                            using (PathGradientBrush shadowBrush = new PathGradientBrush(path))
-                                            {
-                                                shadowBrush.CenterColor = shadowColor;
-
-                                                // Set the color along the entire boundary of the path
-                                                Color[] colors = { Color.Transparent };
-                                                shadowBrush.SurroundColors = colors;
-                                                shadowBrush.CenterPoint = new PointF(point.X, point.Y);
-
-                                                // Define brush focus scale
-                                                PointF focusScale = new PointF(1 - 2f * shadowSize / rect.Width, 1 - 2f * shadowSize / rect.Height);
-                                                if (focusScale.X < 0)
-                                                {
-                                                    focusScale.X = 0;
-                                                }
-                                                if (focusScale.Y < 0)
-                                                {
-                                                    focusScale.Y = 0;
-                                                }
-                                                shadowBrush.FocusScales = focusScale;
-
-                                                // Draw shadow
-                                                this.FillPath(shadowBrush, path);
-                                            }
-                                        }
-                                    }
-
-                                    this.Transform = oldMatrix;
-                                }
-
                                 // Create translation matrix
-                                Matrix translateMatrixShape = this.Transform.Clone();
-                                Matrix oldMatrixShape = this.Transform;
-                                this.Transform = translateMatrixShape;
+                                Matrix translateMatrix = this.Transform.Clone();
+                                translateMatrix.Translate(
+                                    (softShadows) ? shadowSize + 1 : shadowSize,
+                                    (softShadows) ? shadowSize + 1 : shadowSize
+                                );
+                                Matrix oldMatrix = this.Transform;
+                                this.Transform = translateMatrix;
 
-                                this.FillPolygon(brush, points);
-                                this.DrawPolygon(new Pen(markerBorderColor, markerBorderSize), points);
-
-                                this.Transform = oldMatrixShape;
-
-                                break;
-                            }
-                        case (MarkerStyle.Diamond):
-                            {
-                                PointF[] points = new PointF[4];
-                                points[0].X = rect.X;
-                                points[0].Y = rect.Y + rect.Height / 2F;
-                                points[1].X = rect.X + rect.Width / 2F;
-                                points[1].Y = rect.Top;
-                                points[2].X = rect.Right;
-                                points[2].Y = rect.Y + rect.Height / 2F;
-                                points[3].X = rect.X + rect.Width / 2F;
-                                points[3].Y = rect.Bottom;
-
-                                // Draw shadow
-                                if (shadowSize != 0 && shadowColor != Color.Empty)
+                                if (!softShadows)
                                 {
-                                    Matrix translateMatrix = this.Transform.Clone();
-                                    translateMatrix.Translate((softShadows) ? 0 : shadowSize,
-                                        (softShadows) ? 0 : shadowSize);
-                                    Matrix oldMatrix = this.Transform;
-                                    this.Transform = translateMatrix;
-
-                                    if (!softShadows)
+                                    using (
+                                        Brush softShadowBrush = new SolidBrush(
+                                            (shadowColor.A != 255)
+                                                ? shadowColor
+                                                : Color.FromArgb(markerColor.A / 2, shadowColor)
+                                        )
+                                    )
                                     {
-                                        using (Brush softShadowBrush = new SolidBrush((shadowColor.A != 255) ? shadowColor : Color.FromArgb(markerColor.A / 2, shadowColor)))
-                                        {
-                                            this.FillPolygon(softShadowBrush, points);
-                                        }
+                                        this.FillPolygon(softShadowBrush, points);
                                     }
-                                    else
-                                    {
-                                        // Calculate diamond size
-                                        float diamondSize = markerSize * (float)Math.Sin(45f / 180f * Math.PI);
-
-                                        // Calculate diamond rectangle position
-                                        RectangleF diamondRect = RectangleF.Empty;
-                                        diamondRect.X = point.X - ((float)diamondSize) / 2F;
-                                        diamondRect.Y = point.Y - ((float)diamondSize) / 2F - shadowSize;
-                                        diamondRect.Width = diamondSize;
-                                        diamondRect.Height = diamondSize;
-
-                                        // Set rotation matrix to 45 
-                                        translateMatrix.RotateAt(45, point);
-                                        this.Transform = translateMatrix;
-
-                                        FillRectangleShadowAbs(diamondRect, shadowColor, shadowSize, shadowColor);
-                                    }
-
-
-                                    this.Transform = oldMatrix;
                                 }
-
-                                this.FillPolygon(brush, points);
-                                this.DrawPolygon(new Pen(markerBorderColor, markerBorderSize), points);
-                                break;
-                            }
-                        case (MarkerStyle.Triangle):
-                            {
-                                PointF[] points = new PointF[3];
-                                points[0].X = rect.X;
-                                points[0].Y = rect.Bottom;
-                                points[1].X = rect.X + rect.Width / 2F;
-                                points[1].Y = rect.Top;
-                                points[2].X = rect.Right;
-                                points[2].Y = rect.Bottom;
-
-                                // Draw image shadow
-                                if (shadowSize != 0 && shadowColor != Color.Empty)
+                                else
                                 {
-                                    Matrix translateMatrix = this.Transform.Clone();
-                                    translateMatrix.Translate((softShadows) ? shadowSize - 1 : shadowSize,
-                                        (softShadows) ? shadowSize + 1 : shadowSize);
-                                    Matrix oldMatrix = this.Transform;
-                                    this.Transform = translateMatrix;
-
-                                    if (!softShadows)
+                                    // Add polygon to the graphics path
+                                    using (GraphicsPath path = new GraphicsPath())
                                     {
-                                        using (Brush softShadowBrush = new SolidBrush((shadowColor.A != 255) ? shadowColor : Color.FromArgb(markerColor.A / 2, shadowColor)))
-                                        {
-                                            this.FillPolygon(softShadowBrush, points);
-                                        }
-                                    }
-                                    else
-                                    {
-                                        // Add polygon to the graphics path
-                                        GraphicsPath path = new GraphicsPath();
                                         path.AddPolygon(points);
 
                                         // Create path brush
-                                        PathGradientBrush shadowBrush = new PathGradientBrush(path);
-                                        shadowBrush.CenterColor = shadowColor;
-
-                                        // Set the color along the entire boundary of the path
-                                        Color[] colors = { Color.Transparent };
-                                        shadowBrush.SurroundColors = colors;
-                                        shadowBrush.CenterPoint = new PointF(point.X, point.Y);
-
-                                        // Define brush focus scale
-                                        PointF focusScale = new PointF(1 - 2f * shadowSize / rect.Width, 1 - 2f * shadowSize / rect.Height);
-                                        if (focusScale.X < 0)
+                                        using (
+                                            PathGradientBrush shadowBrush = new PathGradientBrush(
+                                                path
+                                            )
+                                        )
                                         {
-                                            focusScale.X = 0;
-                                        }
-                                        if (focusScale.Y < 0)
-                                        {
-                                            focusScale.Y = 0;
-                                        }
-                                        shadowBrush.FocusScales = focusScale;
+                                            shadowBrush.CenterColor = shadowColor;
 
-                                        // Draw shadow
-                                        this.FillPath(shadowBrush, path);
+                                            // Set the color along the entire boundary of the path
+                                            Color[] colors = { Color.Transparent };
+                                            shadowBrush.SurroundColors = colors;
+                                            shadowBrush.CenterPoint = new PointF(point.X, point.Y);
+
+                                            // Define brush focus scale
+                                            PointF focusScale = new PointF(
+                                                1 - 2f * shadowSize / rect.Width,
+                                                1 - 2f * shadowSize / rect.Height
+                                            );
+                                            if (focusScale.X < 0)
+                                            {
+                                                focusScale.X = 0;
+                                            }
+                                            if (focusScale.Y < 0)
+                                            {
+                                                focusScale.Y = 0;
+                                            }
+                                            shadowBrush.FocusScales = focusScale;
+
+                                            // Draw shadow
+                                            this.FillPath(shadowBrush, path);
+                                        }
                                     }
-
-                                    this.Transform = oldMatrix;
                                 }
 
-                                this.FillPolygon(brush, points);
-                                this.DrawPolygon(new Pen(markerBorderColor, markerBorderSize), points);
-                                break;
+                                this.Transform = oldMatrix;
                             }
-                        default:
+
+                            // Create translation matrix
+                            Matrix translateMatrixShape = this.Transform.Clone();
+                            Matrix oldMatrixShape = this.Transform;
+                            this.Transform = translateMatrixShape;
+
+                            this.FillPolygon(brush, points);
+                            this.DrawPolygon(new Pen(markerBorderColor, markerBorderSize), points);
+
+                            this.Transform = oldMatrixShape;
+
+                            break;
+                        }
+                        case (MarkerStyle.Diamond):
+                        {
+                            PointF[] points = new PointF[4];
+                            points[0].X = rect.X;
+                            points[0].Y = rect.Y + rect.Height / 2F;
+                            points[1].X = rect.X + rect.Width / 2F;
+                            points[1].Y = rect.Top;
+                            points[2].X = rect.Right;
+                            points[2].Y = rect.Y + rect.Height / 2F;
+                            points[3].X = rect.X + rect.Width / 2F;
+                            points[3].Y = rect.Bottom;
+
+                            // Draw shadow
+                            if (shadowSize != 0 && shadowColor != Color.Empty)
                             {
-                                throw (new InvalidOperationException(SR.ExceptionGraphicsMarkerStyleUnknown));
+                                Matrix translateMatrix = this.Transform.Clone();
+                                translateMatrix.Translate(
+                                    (softShadows) ? 0 : shadowSize,
+                                    (softShadows) ? 0 : shadowSize
+                                );
+                                Matrix oldMatrix = this.Transform;
+                                this.Transform = translateMatrix;
+
+                                if (!softShadows)
+                                {
+                                    using (
+                                        Brush softShadowBrush = new SolidBrush(
+                                            (shadowColor.A != 255)
+                                                ? shadowColor
+                                                : Color.FromArgb(markerColor.A / 2, shadowColor)
+                                        )
+                                    )
+                                    {
+                                        this.FillPolygon(softShadowBrush, points);
+                                    }
+                                }
+                                else
+                                {
+                                    // Calculate diamond size
+                                    float diamondSize =
+                                        markerSize * (float)Math.Sin(45f / 180f * Math.PI);
+
+                                    // Calculate diamond rectangle position
+                                    RectangleF diamondRect = RectangleF.Empty;
+                                    diamondRect.X = point.X - ((float)diamondSize) / 2F;
+                                    diamondRect.Y =
+                                        point.Y - ((float)diamondSize) / 2F - shadowSize;
+                                    diamondRect.Width = diamondSize;
+                                    diamondRect.Height = diamondSize;
+
+                                    // Set rotation matrix to 45
+                                    translateMatrix.RotateAt(45, point);
+                                    this.Transform = translateMatrix;
+
+                                    FillRectangleShadowAbs(
+                                        diamondRect,
+                                        shadowColor,
+                                        shadowSize,
+                                        shadowColor
+                                    );
+                                }
+
+                                this.Transform = oldMatrix;
                             }
+
+                            this.FillPolygon(brush, points);
+                            this.DrawPolygon(new Pen(markerBorderColor, markerBorderSize), points);
+                            break;
+                        }
+                        case (MarkerStyle.Triangle):
+                        {
+                            PointF[] points = new PointF[3];
+                            points[0].X = rect.X;
+                            points[0].Y = rect.Bottom;
+                            points[1].X = rect.X + rect.Width / 2F;
+                            points[1].Y = rect.Top;
+                            points[2].X = rect.Right;
+                            points[2].Y = rect.Bottom;
+
+                            // Draw image shadow
+                            if (shadowSize != 0 && shadowColor != Color.Empty)
+                            {
+                                Matrix translateMatrix = this.Transform.Clone();
+                                translateMatrix.Translate(
+                                    (softShadows) ? shadowSize - 1 : shadowSize,
+                                    (softShadows) ? shadowSize + 1 : shadowSize
+                                );
+                                Matrix oldMatrix = this.Transform;
+                                this.Transform = translateMatrix;
+
+                                if (!softShadows)
+                                {
+                                    using (
+                                        Brush softShadowBrush = new SolidBrush(
+                                            (shadowColor.A != 255)
+                                                ? shadowColor
+                                                : Color.FromArgb(markerColor.A / 2, shadowColor)
+                                        )
+                                    )
+                                    {
+                                        this.FillPolygon(softShadowBrush, points);
+                                    }
+                                }
+                                else
+                                {
+                                    // Add polygon to the graphics path
+                                    GraphicsPath path = new GraphicsPath();
+                                    path.AddPolygon(points);
+
+                                    // Create path brush
+                                    PathGradientBrush shadowBrush = new PathGradientBrush(path);
+                                    shadowBrush.CenterColor = shadowColor;
+
+                                    // Set the color along the entire boundary of the path
+                                    Color[] colors = { Color.Transparent };
+                                    shadowBrush.SurroundColors = colors;
+                                    shadowBrush.CenterPoint = new PointF(point.X, point.Y);
+
+                                    // Define brush focus scale
+                                    PointF focusScale = new PointF(
+                                        1 - 2f * shadowSize / rect.Width,
+                                        1 - 2f * shadowSize / rect.Height
+                                    );
+                                    if (focusScale.X < 0)
+                                    {
+                                        focusScale.X = 0;
+                                    }
+                                    if (focusScale.Y < 0)
+                                    {
+                                        focusScale.Y = 0;
+                                    }
+                                    shadowBrush.FocusScales = focusScale;
+
+                                    // Draw shadow
+                                    this.FillPath(shadowBrush, path);
+                                }
+
+                                this.Transform = oldMatrix;
+                            }
+
+                            this.FillPolygon(brush, points);
+                            this.DrawPolygon(new Pen(markerBorderColor, markerBorderSize), points);
+                            break;
+                        }
+                        default:
+                        {
+                            throw (
+                                new InvalidOperationException(
+                                    SR.ExceptionGraphicsMarkerStyleUnknown
+                                )
+                            );
+                        }
                     }
                 }
 
                 // Restore SmoothingMode
-                if(forceAntiAlias)
+                if (forceAntiAlias)
                 {
                     this.SmoothingMode = oldSmoothingMode;
                 }
@@ -1135,11 +1311,11 @@ namespace System.Web.UI.DataVisualization.Charting
         }
 
         #endregion
-    
+
         #region String Methods
 
         /// <summary>
-        /// Measures the specified string when drawn with the specified 
+        /// Measures the specified string when drawn with the specified
         /// Font object and formatted with the specified StringFormat object.
         /// </summary>
         /// <param name="text">String to measure.</param>
@@ -1154,12 +1330,12 @@ namespace System.Web.UI.DataVisualization.Charting
             SizeF layoutArea,
             StringFormat stringFormat,
             TextOrientation textOrientation
-            )
+        )
         {
             // Current implementation of the stacked text will simply insert a new
             // line character between all characters in the original string. This
-            // apporach will not allow to show multiple lines of stacked text or 
-            // correctly handle text wrapping. 
+            // apporach will not allow to show multiple lines of stacked text or
+            // correctly handle text wrapping.
             if (textOrientation == TextOrientation.Stacked)
             {
                 text = GetStackedText(text);
@@ -1168,8 +1344,8 @@ namespace System.Web.UI.DataVisualization.Charting
         }
 
         /// <summary>
-        /// Measures the specified text string when drawn with 
-        /// the specified Font object and formatted with the 
+        /// Measures the specified text string when drawn with
+        /// the specified Font object and formatted with the
         /// specified StringFormat object.
         /// </summary>
         /// <param name="text">The string to measure</param>
@@ -1179,16 +1355,17 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="textOrientation">Text orientation.</param>
         /// <returns>A SizeF structure that represents the size of text as drawn with font.</returns>
         internal SizeF MeasureStringRel(
-            string text, 
-            Font font, 
-            SizeF layoutArea, 
+            string text,
+            Font font,
+            SizeF layoutArea,
             StringFormat stringFormat,
-            TextOrientation textOrientation)
+            TextOrientation textOrientation
+        )
         {
             // Current implementation of the stacked text will simply insert a new
             // line character between all characters in the original string. This
-            // apporach will not allow to show multiple lines of stacked text or 
-            // correctly handle text wrapping. 
+            // apporach will not allow to show multiple lines of stacked text or
+            // correctly handle text wrapping.
             if (textOrientation == TextOrientation.Stacked)
             {
                 text = GetStackedText(text);
@@ -1212,12 +1389,12 @@ namespace System.Web.UI.DataVisualization.Charting
             RectangleF rect,
             StringFormat format,
             TextOrientation textOrientation
-            )
+        )
         {
             // Current implementation of the stacked text will simply insert a new
             // line character between all characters in the original string. This
-            // apporach will not allow to show multiple lines of stacked text or 
-            // correctly handle text wrapping. 
+            // apporach will not allow to show multiple lines of stacked text or
+            // correctly handle text wrapping.
             if (textOrientation == TextOrientation.Stacked)
             {
                 text = GetStackedText(text);
@@ -1243,12 +1420,12 @@ namespace System.Web.UI.DataVisualization.Charting
             System.Drawing.StringFormat format,
             int angle,
             TextOrientation textOrientation
-            )
+        )
         {
             // Current implementation of the stacked text will simply insert a new
             // line character between all characters in the original string. This
-            // apporach will not allow to show multiple lines of stacked text or 
-            // correctly handle text wrapping. 
+            // apporach will not allow to show multiple lines of stacked text or
+            // correctly handle text wrapping.
             if (textOrientation == TextOrientation.Stacked)
             {
                 text = GetStackedText(text);
@@ -1273,12 +1450,12 @@ namespace System.Web.UI.DataVisualization.Charting
             RectangleF position,
             System.Drawing.StringFormat format,
             TextOrientation textOrientation
-            )
+        )
         {
             // Current implementation of the stacked text will simply insert a new
             // line character between all characters in the original string. This
-            // apporach will not allow to show multiple lines of stacked text or 
-            // correctly handle text wrapping. 
+            // apporach will not allow to show multiple lines of stacked text or
+            // correctly handle text wrapping.
             if (textOrientation == TextOrientation.Stacked)
             {
                 text = GetStackedText(text);
@@ -1325,43 +1502,45 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="series">Series</param>
         /// <param name="point">Point</param>
         /// <param name="pointIndex">Point index in series</param>
-        internal void DrawPointLabelStringRel( 
+        internal void DrawPointLabelStringRel(
             CommonElements common,
-            string text, 
-            System.Drawing.Font font, 
-            System.Drawing.Brush brush, 
-            RectangleF position, 
-            System.Drawing.StringFormat format, 
+            string text,
+            System.Drawing.Font font,
+            System.Drawing.Brush brush,
+            RectangleF position,
+            System.Drawing.StringFormat format,
             int angle,
             RectangleF backPosition,
-            Color backColor, 
-            Color borderColor, 
-            int borderWidth, 
+            Color backColor,
+            Color borderColor,
+            int borderWidth,
             ChartDashStyle borderDashStyle,
             Series series,
             DataPoint point,
-            int pointIndex)
+            int pointIndex
+        )
         {
             // Start Svg/Flash Selection mode
-            this.StartHotRegion( point, true );
+            this.StartHotRegion(point, true);
 
             // Draw background
-            DrawPointLabelBackground( 
+            DrawPointLabelBackground(
                 common,
                 angle,
                 PointF.Empty,
                 backPosition,
-                backColor, 
-                borderColor, 
-                borderWidth, 
+                backColor,
+                borderColor,
+                borderWidth,
                 borderDashStyle,
                 series,
                 point,
-                pointIndex);
+                pointIndex
+            );
 
             // End Svg/Flash Selection mode
-            this.EndHotRegion( );
-            
+            this.EndHotRegion();
+
             point._lastLabelText = text;
             // Draw text
             if (IsRightToLeft)
@@ -1377,7 +1556,7 @@ namespace System.Web.UI.DataVisualization.Charting
                     {
                         fmt.Alignment = StringAlignment.Far;
                     }
-                    DrawStringRel(text,font,brush,position,fmt,angle);
+                    DrawStringRel(text, font, brush, position, fmt, angle);
                 }
             }
             else
@@ -1402,42 +1581,44 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="series">Series</param>
         /// <param name="point">Point</param>
         /// <param name="pointIndex">Point index in series</param>
-        internal void DrawPointLabelStringRel( 
+        internal void DrawPointLabelStringRel(
             CommonElements common,
-            string text, 
-            System.Drawing.Font font, 
-            System.Drawing.Brush brush, 
-            PointF position, 
-            System.Drawing.StringFormat format, 
+            string text,
+            System.Drawing.Font font,
+            System.Drawing.Brush brush,
+            PointF position,
+            System.Drawing.StringFormat format,
             int angle,
             RectangleF backPosition,
-            Color backColor, 
-            Color borderColor, 
-            int borderWidth, 
+            Color backColor,
+            Color borderColor,
+            int borderWidth,
             ChartDashStyle borderDashStyle,
             Series series,
             DataPoint point,
-            int pointIndex)
+            int pointIndex
+        )
         {
             // Start Svg/Flash Selection mode
-            this.StartHotRegion( point, true );
+            this.StartHotRegion(point, true);
 
             // Draw background
-            DrawPointLabelBackground( 
+            DrawPointLabelBackground(
                 common,
                 angle,
-                position, 
+                position,
                 backPosition,
-                backColor, 
-                borderColor, 
-                borderWidth, 
+                backColor,
+                borderColor,
+                borderWidth,
                 borderDashStyle,
                 series,
                 point,
-                pointIndex);
+                pointIndex
+            );
 
             // End Svg/Flash Selection mode
-            this.EndHotRegion( );
+            this.EndHotRegion();
 
             point._lastLabelText = text;
             // Draw text
@@ -1454,11 +1635,11 @@ namespace System.Web.UI.DataVisualization.Charting
                     {
                         fmt.Alignment = StringAlignment.Far;
                     }
-                    DrawStringRel(text,font,brush,position,fmt,angle);
+                    DrawStringRel(text, font, brush, position, fmt, angle);
                 }
             }
             else
-                DrawStringRel(text,font,brush,position,format,angle);
+                DrawStringRel(text, font, brush, position, format, angle);
         }
 
         /// <summary>
@@ -1475,29 +1656,33 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="series">Series</param>
         /// <param name="point">Point</param>
         /// <param name="pointIndex">Point index in series</param>
-        private void DrawPointLabelBackground( 
+        private void DrawPointLabelBackground(
             CommonElements common,
             int angle,
             PointF textPosition,
             RectangleF backPosition,
-            Color backColor, 
-            Color borderColor, 
-            int borderWidth, 
+            Color backColor,
+            Color borderColor,
+            int borderWidth,
             ChartDashStyle borderDashStyle,
             Series series,
             DataPoint point,
-            int pointIndex)
+            int pointIndex
+        )
         {
             // Draw background
-            if(!backPosition.IsEmpty)
+            if (!backPosition.IsEmpty)
             {
                 RectangleF backPositionAbs = this.Round(this.GetAbsoluteRectangle(backPosition));
 
                 // Get rotation point
                 PointF rotationPoint = PointF.Empty;
-                if(textPosition.IsEmpty)
+                if (textPosition.IsEmpty)
                 {
-                    rotationPoint = new PointF(backPositionAbs.X + backPositionAbs.Width/2f, backPositionAbs.Y + backPositionAbs.Height/2f);
+                    rotationPoint = new PointF(
+                        backPositionAbs.X + backPositionAbs.Width / 2f,
+                        backPositionAbs.Y + backPositionAbs.Height / 2f
+                    );
                 }
                 else
                 {
@@ -1506,7 +1691,7 @@ namespace System.Web.UI.DataVisualization.Charting
 
                 // Create a matrix and rotate it.
                 _myMatrix = this.Transform.Clone();
-                _myMatrix.RotateAt( angle, rotationPoint );
+                _myMatrix.RotateAt(angle, rotationPoint);
 
                 // Save old state
                 GraphicsState graphicsState = this.Save();
@@ -1515,33 +1700,36 @@ namespace System.Web.UI.DataVisualization.Charting
                 this.Transform = _myMatrix;
 
                 // Check for empty colors
-                if( !backColor.IsEmpty ||
-                    !borderColor.IsEmpty)
+                if (!backColor.IsEmpty || !borderColor.IsEmpty)
                 {
                     // Fill box around the label
-                    using(Brush    brush = new SolidBrush(backColor))
+                    using (Brush brush = new SolidBrush(backColor))
                     {
                         this.FillRectangle(brush, backPositionAbs);
                     }
 
-                    // deliant: Fix VSTS #156433    (2)    Data Label Border in core always shows when the style is set to NotSet    
+                    // deliant: Fix VSTS #156433    (2)    Data Label Border in core always shows when the style is set to NotSet
                     // Draw box border
-                    if(  borderWidth > 0 &&
-                        !borderColor.IsEmpty && borderDashStyle != ChartDashStyle.NotSet)
+                    if (
+                        borderWidth > 0
+                        && !borderColor.IsEmpty
+                        && borderDashStyle != ChartDashStyle.NotSet
+                    )
                     {
                         AntiAliasingStyles saveAntiAliasing = this.AntiAliasing;
                         try
                         {
-                            this.AntiAliasing = AntiAliasingStyles.None;                        
-                            using(Pen pen = new Pen(borderColor, borderWidth))
+                            this.AntiAliasing = AntiAliasingStyles.None;
+                            using (Pen pen = new Pen(borderColor, borderWidth))
                             {
-                                pen.DashStyle = GetPenStyle( borderDashStyle );
+                                pen.DashStyle = GetPenStyle(borderDashStyle);
                                 this.DrawRectangle(
-                                    pen, 
-                                    backPositionAbs.X, 
-                                    backPositionAbs.Y, 
-                                    backPositionAbs.Width, 
-                                    backPositionAbs.Height);
+                                    pen,
+                                    backPositionAbs.X,
+                                    backPositionAbs.Y,
+                                    backPositionAbs.Width,
+                                    backPositionAbs.Height
+                                );
                             }
                         }
                         finally
@@ -1553,26 +1741,36 @@ namespace System.Web.UI.DataVisualization.Charting
                 else
                 {
                     // Draw invisible rectangle to handle tooltips
-                    using(Brush    brush = new SolidBrush(Color.Transparent))
+                    using (Brush brush = new SolidBrush(Color.Transparent))
                     {
                         this.FillRectangle(brush, backPositionAbs);
                     }
                 }
-            
 
                 // Restore old state
                 this.Restore(graphicsState);
 
                 // Add point label hot region
-                if( common != null &&
-                    common.ProcessModeRegions)
+                if (common != null && common.ProcessModeRegions)
                 {
 #if !Microsoft_CONTROL
                     // Remember all point attributes
-                    string oldToolTip = point.IsCustomPropertySet( CommonCustomProperties.ToolTip) ?  point.ToolTip : null;
-                    string oldUrl = point.IsCustomPropertySet( CommonCustomProperties.Url) ?  point.Url : null;
-                    string oldMapAreaAttributes = point.IsCustomPropertySet( CommonCustomProperties.MapAreaAttributes) ?  point.MapAreaAttributes : null;
-                    string oldPostback = point.IsCustomPropertySet( CommonCustomProperties.PostBackValue) ?  point.PostBackValue : null;
+                    string oldToolTip = point.IsCustomPropertySet(CommonCustomProperties.ToolTip)
+                        ? point.ToolTip
+                        : null;
+                    string oldUrl = point.IsCustomPropertySet(CommonCustomProperties.Url)
+                        ? point.Url
+                        : null;
+                    string oldMapAreaAttributes = point.IsCustomPropertySet(
+                        CommonCustomProperties.MapAreaAttributes
+                    )
+                        ? point.MapAreaAttributes
+                        : null;
+                    string oldPostback = point.IsCustomPropertySet(
+                        CommonCustomProperties.PostBackValue
+                    )
+                        ? point.PostBackValue
+                        : null;
                     object oldTag = point.Tag;
                     // Set label attributes into the point attribute.
                     // Workaround for the AddHotRegion method limitation.
@@ -1583,13 +1781,14 @@ namespace System.Web.UI.DataVisualization.Charting
 #endif // !Microsoft_CONTROL
 
                     // Insert area
-                    if(angle == 0)
+                    if (angle == 0)
                     {
-                        common.HotRegionsList.AddHotRegion( 
+                        common.HotRegionsList.AddHotRegion(
                             backPosition,
                             point,
                             series.Name,
-                            pointIndex );
+                            pointIndex
+                        );
                     }
                     else
                     {
@@ -1606,24 +1805,39 @@ namespace System.Web.UI.DataVisualization.Charting
                                 this,
                                 point,
                                 series.Name,
-                                pointIndex);
+                                pointIndex
+                            );
                         }
                     }
 
 #if !Microsoft_CONTROL
                     // Restore all point attributes
-                    if (oldToolTip != null) point.ToolTip = oldToolTip; else point.ResetToolTip();
-                    if (oldUrl != null) point.Url = oldUrl; else point.ResetUrl();
-                    if (oldMapAreaAttributes != null) point.MapAreaAttributes = oldMapAreaAttributes; else point.ResetMapAreaAttributes();
-                    if (oldPostback != null) point.PostBackValue = oldPostback; else point.ResetPostBackValue();
+                    if (oldToolTip != null)
+                        point.ToolTip = oldToolTip;
+                    else
+                        point.ResetToolTip();
+                    if (oldUrl != null)
+                        point.Url = oldUrl;
+                    else
+                        point.ResetUrl();
+                    if (oldMapAreaAttributes != null)
+                        point.MapAreaAttributes = oldMapAreaAttributes;
+                    else
+                        point.ResetMapAreaAttributes();
+                    if (oldPostback != null)
+                        point.PostBackValue = oldPostback;
+                    else
+                        point.ResetPostBackValue();
                     point.Tag = oldTag;
 #endif // !Microsoft_CONTROL
 
-                    // Set new hot region element type 
+                    // Set new hot region element type
                     if (common.HotRegionsList.List != null && common.HotRegionsList.List.Count > 0)
                     {
-                        ((HotRegion)common.HotRegionsList.List[common.HotRegionsList.List.Count - 1]).Type = 
-                            ChartElementType.DataPointLabel;
+                        (
+                            (HotRegion)
+                                common.HotRegionsList.List[common.HotRegionsList.List.Count - 1]
+                        ).Type = ChartElementType.DataPointLabel;
                     }
                 }
             }
@@ -1638,22 +1852,16 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="position">Text Position.</param>
         /// <param name="format">Format and text alignment.</param>
         /// <param name="angle">Text angle.</param>
-        internal void DrawStringRel( 
-            string text, 
-            System.Drawing.Font font, 
-            System.Drawing.Brush brush, 
-            PointF position, 
-            System.Drawing.StringFormat format, 
-            int angle 
-            )
+        internal void DrawStringRel(
+            string text,
+            System.Drawing.Font font,
+            System.Drawing.Brush brush,
+            PointF position,
+            System.Drawing.StringFormat format,
+            int angle
+        )
         {
-            DrawStringAbs( 
-                text, 
-                font, 
-                brush, 
-                GetAbsolutePoint(position), 
-                format, 
-                angle);
+            DrawStringAbs(text, font, brush, GetAbsolutePoint(position), format, angle);
         }
 
         /// <summary>
@@ -1665,19 +1873,19 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="absPosition">Text Position.</param>
         /// <param name="format">Format and text alignment.</param>
         /// <param name="angle">Text angle.</param>
-        internal void DrawStringAbs( 
-            string text, 
-            System.Drawing.Font font, 
-            System.Drawing.Brush brush, 
-            PointF absPosition, 
-            System.Drawing.StringFormat format, 
-            int angle 
-            )
+        internal void DrawStringAbs(
+            string text,
+            System.Drawing.Font font,
+            System.Drawing.Brush brush,
+            PointF absPosition,
+            System.Drawing.StringFormat format,
+            int angle
+        )
         {
             // Create a matrix and rotate it.
             _myMatrix = this.Transform.Clone();
             _myMatrix.RotateAt(angle, absPosition);
-    
+
             // Save aold state
             GraphicsState graphicsState = this.Save();
 
@@ -1693,14 +1901,14 @@ namespace System.Web.UI.DataVisualization.Charting
             */
 
             // Draw a string
-            this.DrawString( text, font, brush, absPosition , format );
+            this.DrawString(text, font, brush, absPosition, format);
 
             // Restore old state
             this.Restore(graphicsState);
         }
 
         /// <summary>
-        /// This method is used by the axis title hot region generation code. 
+        /// This method is used by the axis title hot region generation code.
         /// It transforms the centered rectangle the same way as the Axis title text.
         /// </summary>
         /// <param name="center">Title center</param>
@@ -1710,16 +1918,18 @@ namespace System.Web.UI.DataVisualization.Charting
         internal GraphicsPath GetTranformedTextRectPath(PointF center, SizeF size, int angle)
         {
             // Text hot area is 10px greater than the size of text
-            size.Width += 10; 
+            size.Width += 10;
             size.Height += 10;
-            
+
             // Get the absolute center and create the centered rectangle points
-            PointF absCenter = GetAbsolutePoint(center);            
-            PointF[] points = new PointF[] {
-                new PointF(absCenter.X - size.Width / 2f, absCenter.Y - size.Height / 2f), 
-                new PointF(absCenter.X + size.Width / 2f, absCenter.Y - size.Height / 2f), 
-                new PointF(absCenter.X + size.Width / 2f, absCenter.Y + size.Height / 2f), 
-                new PointF(absCenter.X - size.Width / 2f, absCenter.Y + size.Height / 2f)};
+            PointF absCenter = GetAbsolutePoint(center);
+            PointF[] points = new PointF[]
+            {
+                new PointF(absCenter.X - size.Width / 2f, absCenter.Y - size.Height / 2f),
+                new PointF(absCenter.X + size.Width / 2f, absCenter.Y - size.Height / 2f),
+                new PointF(absCenter.X + size.Width / 2f, absCenter.Y + size.Height / 2f),
+                new PointF(absCenter.X - size.Width / 2f, absCenter.Y + size.Height / 2f)
+            };
 
             //Prepare the same tranformation matrix as used for the axis title
             Matrix matrix = this.Transform.Clone();
@@ -1733,9 +1943,6 @@ namespace System.Web.UI.DataVisualization.Charting
             path.CloseAllFigures();
             return path;
         }
-
-
-
 
         /// <summary>
         /// Draw label string.
@@ -1756,23 +1963,24 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="label">Custom Label Item</param>
         /// <param name="truncatedLeft">Label is truncated on the left.</param>
         /// <param name="truncatedRight">Label is truncated on the right.</param>
-        internal void DrawLabelStringRel( 
-            Axis axis, 
-            int labelRowIndex, 
-            LabelMarkStyle labelMark, 
+        internal void DrawLabelStringRel(
+            Axis axis,
+            int labelRowIndex,
+            LabelMarkStyle labelMark,
             Color markColor,
-            string text, 
+            string text,
             string image,
             Color imageTransparentColor,
-            System.Drawing.Font font, 
-            System.Drawing.Brush brush, 
-            RectangleF position, 
-            System.Drawing.StringFormat format, 
-            int angle, 
+            System.Drawing.Font font,
+            System.Drawing.Brush brush,
+            RectangleF position,
+            System.Drawing.StringFormat format,
+            int angle,
             RectangleF boundaryRect,
             CustomLabel label,
             bool truncatedLeft,
-            bool truncatedRight)
+            bool truncatedRight
+        )
         {
             Matrix oldTransform;
             using (StringFormat drawingFormat = (StringFormat)format.Clone())
@@ -1809,7 +2017,13 @@ namespace System.Web.UI.DataVisualization.Charting
                 CommonElements common = axis.Common;
                 if (common.ProcessModeRegions)
                 {
-                    common.HotRegionsList.AddHotRegion(Rectangle.Round(absPosition), label, ChartElementType.AxisLabels, false, true);
+                    common.HotRegionsList.AddHotRegion(
+                        Rectangle.Round(absPosition),
+                        label,
+                        ChartElementType.AxisLabels,
+                        false,
+                        true
+                    );
                 }
 
                 //********************************************************************
@@ -1829,12 +2043,8 @@ namespace System.Web.UI.DataVisualization.Charting
                     {
                         angle = 90;
                     }
-                    else if (axis.AxisPosition == AxisPosition.Top)
-                    {
-                    }
-                    else if (axis.AxisPosition == AxisPosition.Bottom)
-                    {
-                    }
+                    else if (axis.AxisPosition == AxisPosition.Top) { }
+                    else if (axis.AxisPosition == AxisPosition.Bottom) { }
                 }
 
                 //********************************************************************
@@ -1865,12 +2075,20 @@ namespace System.Web.UI.DataVisualization.Charting
                 //********************************************************************
                 //** Adjust rectangle for horisontal axis
                 //********************************************************************
-                if ((axis.AxisPosition == AxisPosition.Top || axis.AxisPosition == AxisPosition.Bottom) &&
-                    angle != 0)
+                if (
+                    (
+                        axis.AxisPosition == AxisPosition.Top
+                        || axis.AxisPosition == AxisPosition.Bottom
+                    )
+                    && angle != 0
+                )
                 {
                     // Get rectangle center
                     rotationPoint.X = absPosition.X + absPosition.Width / 2F;
-                    rotationPoint.Y = (axis.AxisPosition == AxisPosition.Top) ? absPosition.Bottom : absPosition.Y;
+                    rotationPoint.Y =
+                        (axis.AxisPosition == AxisPosition.Top)
+                            ? absPosition.Bottom
+                            : absPosition.Y;
 
                     // Rotate rectangle 90 degrees
                     RectangleF newRect = RectangleF.Empty;
@@ -1921,8 +2139,12 @@ namespace System.Web.UI.DataVisualization.Charting
                 //********************************************************************
                 //** 90 degrees is a special case for vertical axes
                 //********************************************************************
-                if ((axis.AxisPosition == AxisPosition.Left || axis.AxisPosition == AxisPosition.Right) &&
-                    (angle == 90 || angle == -90))
+                if (
+                    (
+                        axis.AxisPosition == AxisPosition.Left
+                        || axis.AxisPosition == AxisPosition.Right
+                    ) && (angle == 90 || angle == -90)
+                )
                 {
                     // Get rectangle center
                     rotationPoint.X = absPosition.X + absPosition.Width / 2F;
@@ -1978,9 +2200,14 @@ namespace System.Web.UI.DataVisualization.Charting
                 RectangleF labelRect = Rectangle.Empty;
                 float offsetY = 0f;
                 float offsetX = 0f;
-                
+
                 // Measure text size
-                labelSize = this.MeasureString(text.Replace("\\n", "\n"), font, absPosition.Size, drawingFormat);
+                labelSize = this.MeasureString(
+                    text.Replace("\\n", "\n"),
+                    font,
+                    absPosition.Size,
+                    drawingFormat
+                );
 
                 // Calculate text rectangle
                 labelRect.Width = labelSize.Width;
@@ -2015,8 +2242,10 @@ namespace System.Web.UI.DataVisualization.Charting
                 if (angle != 0 && angle != 90 && angle != -90)
                 {
                     // Adjust label rectangle so it will not overlap the plotting area
-                    offsetY = (float)Math.Sin((90 - angle) / 180F * Math.PI) * labelRect.Height / 2F;
-                    offsetX = (float)Math.Sin((Math.Abs(angle)) / 180F * Math.PI) * labelRect.Height / 2F;
+                    offsetY =
+                        (float)Math.Sin((90 - angle) / 180F * Math.PI) * labelRect.Height / 2F;
+                    offsetX =
+                        (float)Math.Sin((Math.Abs(angle)) / 180F * Math.PI) * labelRect.Height / 2F;
 
                     if (axis.AxisPosition == AxisPosition.Left)
                     {
@@ -2070,10 +2299,14 @@ namespace System.Web.UI.DataVisualization.Charting
                             this.Transform = oldTransform;
                             RectangleF truncateRect = region.GetBounds(Graphics);
 
-                            float sizeChange = truncateRect.Width / (float)Math.Cos(Math.Abs(angle) / 180F * Math.PI);
+                            float sizeChange =
+                                truncateRect.Width
+                                / (float)Math.Cos(Math.Abs(angle) / 180F * Math.PI);
                             if (axis.AxisPosition == AxisPosition.Left)
                             {
-                                sizeChange -= labelRect.Height * (float)Math.Tan(Math.Abs(angle) / 180F * Math.PI);
+                                sizeChange -=
+                                    labelRect.Height
+                                    * (float)Math.Tan(Math.Abs(angle) / 180F * Math.PI);
                                 absPosition.Y = labelRect.Y;
                                 absPosition.X = labelRect.X + sizeChange;
                                 absPosition.Width = labelRect.Width - sizeChange;
@@ -2081,7 +2314,9 @@ namespace System.Web.UI.DataVisualization.Charting
                             }
                             else if (axis.AxisPosition == AxisPosition.Right)
                             {
-                                sizeChange -= labelRect.Height * (float)Math.Tan(Math.Abs(angle) / 180F * Math.PI);
+                                sizeChange -=
+                                    labelRect.Height
+                                    * (float)Math.Tan(Math.Abs(angle) / 180F * Math.PI);
                                 absPosition.Y = labelRect.Y;
                                 absPosition.X = labelRect.X;
                                 absPosition.Width = labelRect.Width - sizeChange;
@@ -2119,8 +2354,11 @@ namespace System.Web.UI.DataVisualization.Charting
                 //********************************************************************
                 //** Reserve space on the left for the label iamge
                 //********************************************************************
-                RectangleF absPositionWithoutImage = new RectangleF(absPosition.Location, absPosition.Size);
-                
+                RectangleF absPositionWithoutImage = new RectangleF(
+                    absPosition.Location,
+                    absPosition.Size
+                );
+
                 System.Drawing.Image labelImage = null;
                 SizeF imageAbsSize = new SizeF();
 
@@ -2130,7 +2368,11 @@ namespace System.Web.UI.DataVisualization.Charting
 
                     if (labelImage != null)
                     {
-                        ImageLoader.GetAdjustedImageSize(labelImage, this.Graphics, ref imageAbsSize);
+                        ImageLoader.GetAdjustedImageSize(
+                            labelImage,
+                            this.Graphics,
+                            ref imageAbsSize
+                        );
 
                         // Adjust label position using image size
                         absPositionWithoutImage.Width -= imageAbsSize.Width;
@@ -2141,7 +2383,6 @@ namespace System.Web.UI.DataVisualization.Charting
                     {
                         absPositionWithoutImage.Width = 1f;
                     }
-
                 }
 
                 //********************************************************************
@@ -2154,7 +2395,8 @@ namespace System.Web.UI.DataVisualization.Charting
                         text.Replace("\\n", "\n"),
                         font,
                         absPositionWithoutImage.Size,
-                        drawingFormat);
+                        drawingFormat
+                    );
 
                     // Adjust for label image
                     SizeF labelSizeWithImage = new SizeF(labelSize.Width, labelSize.Height);
@@ -2172,7 +2414,8 @@ namespace System.Web.UI.DataVisualization.Charting
                         labelMark,
                         truncatedLeft,
                         truncatedRight,
-                        oldTransform);
+                        oldTransform
+                    );
                 }
 
                 //********************************************************************
@@ -2219,10 +2462,9 @@ namespace System.Web.UI.DataVisualization.Charting
                 //********************************************************************
                 if (IsRightToLeft)
                 {
-                    // label alignment on the axis should appear as not RTL. 
+                    // label alignment on the axis should appear as not RTL.
                     using (StringFormat fmt = (StringFormat)drawingFormat.Clone())
                     {
-
                         if (fmt.Alignment == StringAlignment.Far)
                         {
                             fmt.Alignment = StringAlignment.Near;
@@ -2231,16 +2473,23 @@ namespace System.Web.UI.DataVisualization.Charting
                         {
                             fmt.Alignment = StringAlignment.Far;
                         }
-                        this.DrawString(text.Replace("\\n", "\n"), font, brush,
-                        absPositionWithoutImage,
-                        fmt);
-
+                        this.DrawString(
+                            text.Replace("\\n", "\n"),
+                            font,
+                            brush,
+                            absPositionWithoutImage,
+                            fmt
+                        );
                     }
                 }
                 else
-                    this.DrawString(text.Replace("\\n", "\n"), font, brush,
-                    absPositionWithoutImage,
-                    drawingFormat);
+                    this.DrawString(
+                        text.Replace("\\n", "\n"),
+                        font,
+                        brush,
+                        absPositionWithoutImage,
+                        drawingFormat
+                    );
 
                 // Add separate hot region for the label
                 if (common.ProcessModeRegions)
@@ -2266,7 +2515,8 @@ namespace System.Web.UI.DataVisualization.Charting
                             mapAreaAttributes,
                             postbackValue,
                             label,
-                            ChartElementType.AxisLabels);
+                            ChartElementType.AxisLabels
+                        );
                     }
                 }
 
@@ -2282,32 +2532,40 @@ namespace System.Web.UI.DataVisualization.Charting
                             text.Replace("\\n", "\n"),
                             font,
                             absPositionWithoutImage.Size,
-                            drawingFormat);
+                            drawingFormat
+                        );
                     }
 
                     // Calculate image rectangle
                     RectangleF imageRect = new RectangleF(
-                        absPosition.X + (absPosition.Width - imageAbsSize.Width - labelSize.Width) / 2,
+                        absPosition.X
+                            + (absPosition.Width - imageAbsSize.Width - labelSize.Width) / 2,
                         absPosition.Y + (absPosition.Height - imageAbsSize.Height) / 2,
                         imageAbsSize.Width,
-                        imageAbsSize.Height);
+                        imageAbsSize.Height
+                    );
 
                     if (drawingFormat.LineAlignment == StringAlignment.Center)
                     {
-                        imageRect.Y = absPosition.Y + (absPosition.Height - imageAbsSize.Height) / 2;
+                        imageRect.Y =
+                            absPosition.Y + (absPosition.Height - imageAbsSize.Height) / 2;
                     }
                     else if (drawingFormat.LineAlignment == StringAlignment.Far)
                     {
-                        imageRect.Y = absPosition.Bottom - (labelSize.Height + imageAbsSize.Height) / 2;
+                        imageRect.Y =
+                            absPosition.Bottom - (labelSize.Height + imageAbsSize.Height) / 2;
                     }
                     else if (drawingFormat.LineAlignment == StringAlignment.Near)
                     {
-                        imageRect.Y = absPosition.Top + (labelSize.Height - imageAbsSize.Height) / 2;
+                        imageRect.Y =
+                            absPosition.Top + (labelSize.Height - imageAbsSize.Height) / 2;
                     }
 
                     if (drawingFormat.Alignment == StringAlignment.Center)
                     {
-                        imageRect.X = absPosition.X + (absPosition.Width - imageAbsSize.Width - labelSize.Width) / 2;
+                        imageRect.X =
+                            absPosition.X
+                            + (absPosition.Width - imageAbsSize.Width - labelSize.Width) / 2;
                     }
                     else if (drawingFormat.Alignment == StringAlignment.Far)
                     {
@@ -2322,16 +2580,24 @@ namespace System.Web.UI.DataVisualization.Charting
                     ImageAttributes attrib = new ImageAttributes();
                     if (imageTransparentColor != Color.Empty)
                     {
-                        attrib.SetColorKey(imageTransparentColor, imageTransparentColor, ColorAdjustType.Default);
+                        attrib.SetColorKey(
+                            imageTransparentColor,
+                            imageTransparentColor,
+                            ColorAdjustType.Default
+                        );
                     }
 
                     // Draw image
                     this.DrawImage(
                         labelImage,
                         Rectangle.Round(imageRect),
-                        0, 0, labelImage.Width, labelImage.Height,
+                        0,
+                        0,
+                        labelImage.Width,
+                        labelImage.Height,
                         GraphicsUnit.Pixel,
-                        attrib);
+                        attrib
+                    );
 
                     // Add separate hot region for the label image
                     if (common.ProcessModeRegions)
@@ -2357,14 +2623,15 @@ namespace System.Web.UI.DataVisualization.Charting
                                 imageMapAreaAttributes,
                                 postbackValue,
                                 label,
-                                ChartElementType.AxisLabelImage);
+                                ChartElementType.AxisLabelImage
+                            );
                         }
                     }
                 }
             }
 
             // Set Old Angle
-            if(oldTransform != null)
+            if (oldTransform != null)
             {
                 this.Transform = oldTransform;
             }
@@ -2380,25 +2647,29 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="truncatedRight">Label is truncated on the right.</param>
         /// <param name="originalTransform">Original transformation matrix.</param>
         private void DrawSecondRowLabelBoxMark(
-            Axis axis, 
+            Axis axis,
             Color markColor,
-            RectangleF absPosition, 
+            RectangleF absPosition,
             bool truncatedLeft,
             bool truncatedRight,
-            Matrix originalTransform)
+            Matrix originalTransform
+        )
         {
             // Remeber current and then reset original matrix
             Matrix curentMatrix = this.Transform;
-            if(originalTransform != null)
+            if (originalTransform != null)
             {
                 this.Transform = originalTransform;
             }
 
             // Calculate center of the text rectangle
-            PointF    centerNotRound = new PointF(absPosition.X + absPosition.Width/2F, absPosition.Y + absPosition.Height/2F);
+            PointF centerNotRound = new PointF(
+                absPosition.X + absPosition.Width / 2F,
+                absPosition.Y + absPosition.Height / 2F
+            );
 
             // Rotate rectangle 90 degrees
-            if( axis.AxisPosition == AxisPosition.Left || axis.AxisPosition == AxisPosition.Right)
+            if (axis.AxisPosition == AxisPosition.Left || axis.AxisPosition == AxisPosition.Right)
             {
                 RectangleF newRect = RectangleF.Empty;
                 newRect.X = centerNotRound.X - absPosition.Height / 2F;
@@ -2421,84 +2692,126 @@ namespace System.Web.UI.DataVisualization.Charting
             absPositionRounded.Height = (int)Math.Round(absPosition.Bottom) - absPositionRounded.Y;
 
             // Create pen
-            Pen    markPen = new Pen(
-                (markColor.IsEmpty) ? axis.MajorTickMark.LineColor : markColor, 
-                axis.MajorTickMark.LineWidth);
+            Pen markPen = new Pen(
+                (markColor.IsEmpty) ? axis.MajorTickMark.LineColor : markColor,
+                axis.MajorTickMark.LineWidth
+            );
 
             // Set pen style
-            markPen.DashStyle = GetPenStyle( axis.MajorTickMark.LineDashStyle );
+            markPen.DashStyle = GetPenStyle(axis.MajorTickMark.LineDashStyle);
 
             // Draw top/bottom lines
-            if( axis.AxisPosition == AxisPosition.Left || axis.AxisPosition == AxisPosition.Right)
+            if (axis.AxisPosition == AxisPosition.Left || axis.AxisPosition == AxisPosition.Right)
             {
-                this.DrawLine(markPen, absPositionRounded.Left, absPositionRounded.Top, absPositionRounded.Left, absPositionRounded.Bottom);
-                this.DrawLine(markPen, absPositionRounded.Right, absPositionRounded.Top, absPositionRounded.Right, absPositionRounded.Bottom);
+                this.DrawLine(
+                    markPen,
+                    absPositionRounded.Left,
+                    absPositionRounded.Top,
+                    absPositionRounded.Left,
+                    absPositionRounded.Bottom
+                );
+                this.DrawLine(
+                    markPen,
+                    absPositionRounded.Right,
+                    absPositionRounded.Top,
+                    absPositionRounded.Right,
+                    absPositionRounded.Bottom
+                );
             }
             else
             {
-                this.DrawLine(markPen, absPositionRounded.Left, absPositionRounded.Top, absPositionRounded.Right, absPositionRounded.Top);
-                this.DrawLine(markPen, absPositionRounded.Left, absPositionRounded.Bottom, absPositionRounded.Right, absPositionRounded.Bottom);
+                this.DrawLine(
+                    markPen,
+                    absPositionRounded.Left,
+                    absPositionRounded.Top,
+                    absPositionRounded.Right,
+                    absPositionRounded.Top
+                );
+                this.DrawLine(
+                    markPen,
+                    absPositionRounded.Left,
+                    absPositionRounded.Bottom,
+                    absPositionRounded.Right,
+                    absPositionRounded.Bottom
+                );
             }
 
             // Draw left line
-            if(!truncatedLeft)
+            if (!truncatedLeft)
             {
-                if( axis.AxisPosition == AxisPosition.Left || axis.AxisPosition == AxisPosition.Right)
+                if (
+                    axis.AxisPosition == AxisPosition.Left
+                    || axis.AxisPosition == AxisPosition.Right
+                )
                 {
                     this.DrawLine(
-                        markPen, 
-                        (axis.AxisPosition == AxisPosition.Left) ? absPositionRounded.Left : absPositionRounded.Right, 
-                        absPositionRounded.Bottom, 
-                        axisPositionAbs.X, 
-                        absPositionRounded.Bottom);
+                        markPen,
+                        (axis.AxisPosition == AxisPosition.Left)
+                            ? absPositionRounded.Left
+                            : absPositionRounded.Right,
+                        absPositionRounded.Bottom,
+                        axisPositionAbs.X,
+                        absPositionRounded.Bottom
+                    );
                 }
                 else
                 {
                     this.DrawLine(
-                        markPen, 
-                        absPositionRounded.Left, 
-                        (axis.AxisPosition == AxisPosition.Top) ? absPositionRounded.Top : absPositionRounded.Bottom, 
-                        absPositionRounded.Left, 
-                        axisPositionAbs.Y);
+                        markPen,
+                        absPositionRounded.Left,
+                        (axis.AxisPosition == AxisPosition.Top)
+                            ? absPositionRounded.Top
+                            : absPositionRounded.Bottom,
+                        absPositionRounded.Left,
+                        axisPositionAbs.Y
+                    );
                 }
             }
 
             // Draw right line
-            if(!truncatedRight)
+            if (!truncatedRight)
             {
-                if( axis.AxisPosition == AxisPosition.Left || axis.AxisPosition == AxisPosition.Right)
+                if (
+                    axis.AxisPosition == AxisPosition.Left
+                    || axis.AxisPosition == AxisPosition.Right
+                )
                 {
                     this.DrawLine(
-                        markPen, 
-                        (axis.AxisPosition == AxisPosition.Left) ? absPositionRounded.Left : absPositionRounded.Right, 
-                        absPositionRounded.Top, 
-                        axisPositionAbs.X, 
-                        absPositionRounded.Top);
+                        markPen,
+                        (axis.AxisPosition == AxisPosition.Left)
+                            ? absPositionRounded.Left
+                            : absPositionRounded.Right,
+                        absPositionRounded.Top,
+                        axisPositionAbs.X,
+                        absPositionRounded.Top
+                    );
                 }
                 else
                 {
                     this.DrawLine(
-                        markPen, 
-                        absPositionRounded.Right, 
-                        (axis.AxisPosition == AxisPosition.Top) ? absPositionRounded.Top : absPositionRounded.Bottom, 
-                        absPositionRounded.Right, 
-                        axisPositionAbs.Y);
+                        markPen,
+                        absPositionRounded.Right,
+                        (axis.AxisPosition == AxisPosition.Top)
+                            ? absPositionRounded.Top
+                            : absPositionRounded.Bottom,
+                        absPositionRounded.Right,
+                        axisPositionAbs.Y
+                    );
                 }
             }
 
             // Dispose Pen
-            if( markPen != null )
+            if (markPen != null)
             {
                 markPen.Dispose();
             }
 
             // Restore currentmatrix
-            if(originalTransform != null)
+            if (originalTransform != null)
             {
                 this.Transform = curentMatrix;
             }
         }
-
 
         /// <summary>
         /// Draw marks for the labels in second row
@@ -2512,109 +2825,118 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="truncatedRight">Label is truncated on the right.</param>
         /// <param name="oldTransform">Original transformation matrix.</param>
         private void DrawSecondRowLabelMark(
-            Axis axis, 
+            Axis axis,
             Color markColor,
-            RectangleF absPosition, 
-            SizeF labelSize, 
+            RectangleF absPosition,
+            SizeF labelSize,
             LabelMarkStyle labelMark,
             bool truncatedLeft,
             bool truncatedRight,
-            Matrix oldTransform)
+            Matrix oldTransform
+        )
         {
             // Do not draw marking line if width is 0 and style or color are not set
-            if( axis.MajorTickMark.LineWidth == 0 || 
-                axis.MajorTickMark.LineDashStyle == ChartDashStyle.NotSet ||
-                axis.MajorTickMark.LineColor == Color.Empty)
+            if (
+                axis.MajorTickMark.LineWidth == 0
+                || axis.MajorTickMark.LineDashStyle == ChartDashStyle.NotSet
+                || axis.MajorTickMark.LineColor == Color.Empty
+            )
             {
                 return;
             }
 
-            // Remember SmoothingMode and turn off anti aliasing for 
+            // Remember SmoothingMode and turn off anti aliasing for
             // vertical or horizontal lines of the label markers.
             SmoothingMode oldSmoothingMode = this.SmoothingMode;
             this.SmoothingMode = SmoothingMode.None;
 
-
             // Draw box marker
-            if(labelMark == LabelMarkStyle.Box)
+            if (labelMark == LabelMarkStyle.Box)
             {
                 DrawSecondRowLabelBoxMark(
-                    axis, 
+                    axis,
                     markColor,
-                    absPosition, 
+                    absPosition,
                     truncatedLeft,
                     truncatedRight,
-                    oldTransform);
+                    oldTransform
+                );
             }
             else
-
             {
                 // Calculate center of the text rectangle
-                Point    center = Point.Round(new PointF(absPosition.X + absPosition.Width/2F, absPosition.Y + absPosition.Height/2F));
+                Point center = Point.Round(
+                    new PointF(
+                        absPosition.X + absPosition.Width / 2F,
+                        absPosition.Y + absPosition.Height / 2F
+                    )
+                );
 
                 // Round position to achieve crisp lines with antialiasing
                 Rectangle absPositionRounded = Rectangle.Round(absPosition);
 
                 // Make sure the right and bottom position is not shifted during rounding
-                absPositionRounded.Width = (int)Math.Round(absPosition.Right) - absPositionRounded.X;
-                absPositionRounded.Height = (int)Math.Round(absPosition.Bottom) - absPositionRounded.Y;
-
+                absPositionRounded.Width =
+                    (int)Math.Round(absPosition.Right) - absPositionRounded.X;
+                absPositionRounded.Height =
+                    (int)Math.Round(absPosition.Bottom) - absPositionRounded.Y;
 
                 // Arrays of points for the left and right marking lines
-                PointF[]    leftLine = new PointF[3];
-                PointF[]    rightLine = new PointF[3];
+                PointF[] leftLine = new PointF[3];
+                PointF[] rightLine = new PointF[3];
 
                 // Calculate marking lines coordinates
                 leftLine[0].X = absPositionRounded.Left;
                 leftLine[0].Y = absPositionRounded.Bottom;
                 leftLine[1].X = absPositionRounded.Left;
                 leftLine[1].Y = center.Y;
-                leftLine[2].X = (float)Math.Round((double)center.X - labelSize.Width/2F - 1F);
+                leftLine[2].X = (float)Math.Round((double)center.X - labelSize.Width / 2F - 1F);
                 leftLine[2].Y = center.Y;
 
                 rightLine[0].X = absPositionRounded.Right;
                 rightLine[0].Y = absPositionRounded.Bottom;
                 rightLine[1].X = absPositionRounded.Right;
                 rightLine[1].Y = center.Y;
-                rightLine[2].X = (float)Math.Round((double)center.X + labelSize.Width/2F - 1F);
+                rightLine[2].X = (float)Math.Round((double)center.X + labelSize.Width / 2F - 1F);
                 rightLine[2].Y = center.Y;
 
-                if(axis.AxisPosition == AxisPosition.Bottom)
+                if (axis.AxisPosition == AxisPosition.Bottom)
                 {
                     leftLine[0].Y = absPositionRounded.Top;
                     rightLine[0].Y = absPositionRounded.Top;
                 }
 
                 // Remove third point to draw only side marks
-                if(labelMark == LabelMarkStyle.SideMark)
+                if (labelMark == LabelMarkStyle.SideMark)
                 {
                     leftLine[2] = leftLine[1];
                     rightLine[2] = rightLine[1];
                 }
 
-                if(truncatedLeft)
+                if (truncatedLeft)
                 {
                     leftLine[0] = leftLine[1];
                 }
-                if(truncatedRight)
+                if (truncatedRight)
                 {
                     rightLine[0] = rightLine[1];
                 }
 
                 // Create pen
-                Pen    markPen = new Pen(
-                    (markColor.IsEmpty) ? axis.MajorTickMark.LineColor : markColor, 
-                    axis.MajorTickMark.LineWidth);
+                Pen markPen = new Pen(
+                    (markColor.IsEmpty) ? axis.MajorTickMark.LineColor : markColor,
+                    axis.MajorTickMark.LineWidth
+                );
 
                 // Set pen style
-                markPen.DashStyle = GetPenStyle( axis.MajorTickMark.LineDashStyle );
+                markPen.DashStyle = GetPenStyle(axis.MajorTickMark.LineDashStyle);
 
                 // Draw marking lines
                 this.DrawLines(markPen, leftLine);
                 this.DrawLines(markPen, rightLine);
 
                 // Dispose Pen
-                if( markPen != null )
+                if (markPen != null)
                 {
                     markPen.Dispose();
                 }
@@ -2625,27 +2947,27 @@ namespace System.Web.UI.DataVisualization.Charting
         }
 
         /// <summary>
-        /// Measures the specified text string when drawn with 
-        /// the specified Font object and formatted with the 
+        /// Measures the specified text string when drawn with
+        /// the specified Font object and formatted with the
         /// specified StringFormat object.
         /// </summary>
         /// <param name="text">The string to measure</param>
         /// <param name="font">The Font object used to determine the size of the text string. </param>
         /// <returns>A SizeF structure that represents the size of text as drawn with font.</returns>
-        internal SizeF MeasureStringRel( string text, Font font )
+        internal SizeF MeasureStringRel(string text, Font font)
         {
             SizeF newSize;
 
             // Measure string
-            newSize = this.MeasureString( text, font );
+            newSize = this.MeasureString(text, font);
 
             // Convert to relative Coordinates
-            return GetRelativeSize( newSize );
+            return GetRelativeSize(newSize);
         }
 
         /// <summary>
-        /// Measures the specified text string when drawn with 
-        /// the specified Font object and formatted with the 
+        /// Measures the specified text string when drawn with
+        /// the specified Font object and formatted with the
         /// specified StringFormat object.
         /// </summary>
         /// <param name="text">The string to measure</param>
@@ -2653,37 +2975,43 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="layoutArea">A SizeF structure that specifies the layout rectangle for the text. </param>
         /// <param name="stringFormat">A StringFormat object that represents formatting information, such as line spacing, for the text string. </param>
         /// <returns>A SizeF structure that represents the size of text as drawn with font.</returns>
-        internal SizeF MeasureStringRel( string text, Font font, SizeF layoutArea, StringFormat stringFormat )
+        internal SizeF MeasureStringRel(
+            string text,
+            Font font,
+            SizeF layoutArea,
+            StringFormat stringFormat
+        )
         {
-            SizeF size, newSize;
+            SizeF size,
+                newSize;
 
             // Get absolute coordinates
-            size = GetAbsoluteSize( layoutArea );
+            size = GetAbsoluteSize(layoutArea);
 
-            newSize = this.MeasureString( text, font, size, stringFormat );
+            newSize = this.MeasureString(text, font, size, stringFormat);
 
             // Convert to relative Coordinates
-            return GetRelativeSize( newSize );
+            return GetRelativeSize(newSize);
         }
 
         /// <summary>
-        /// Measures the specified text string when drawn with 
-        /// the specified Font object and formatted with the 
+        /// Measures the specified text string when drawn with
+        /// the specified Font object and formatted with the
         /// specified StringFormat object.
         /// </summary>
         /// <param name="text">The string to measure</param>
         /// <param name="font">The Font object used to determine the size of the text string. </param>
         /// <returns>A SizeF structure that represents the size of text as drawn with font.</returns>
-        internal Size MeasureStringAbs( string text, Font font )
+        internal Size MeasureStringAbs(string text, Font font)
         {
             // Measure string
-            SizeF size = this.MeasureString( text, font );
-            return new Size( (int)Math.Ceiling(size.Width), (int)Math.Ceiling(size.Height));
+            SizeF size = this.MeasureString(text, font);
+            return new Size((int)Math.Ceiling(size.Width), (int)Math.Ceiling(size.Height));
         }
 
         /// <summary>
-        /// Measures the specified text string when drawn with 
-        /// the specified Font object and formatted with the 
+        /// Measures the specified text string when drawn with
+        /// the specified Font object and formatted with the
         /// specified StringFormat object.
         /// </summary>
         /// <param name="text">The string to measure</param>
@@ -2691,16 +3019,21 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="layoutArea">A SizeF structure that specifies the layout rectangle for the text. </param>
         /// <param name="stringFormat">A StringFormat object that represents formatting information, such as line spacing, for the text string. </param>
         /// <returns>A SizeF structure that represents the size of text as drawn with font.</returns>
-        internal Size MeasureStringAbs( string text, Font font, SizeF layoutArea, StringFormat stringFormat )
+        internal Size MeasureStringAbs(
+            string text,
+            Font font,
+            SizeF layoutArea,
+            StringFormat stringFormat
+        )
         {
-            SizeF size = this.MeasureString( text, font, layoutArea, stringFormat );
-            return new Size( (int)Math.Ceiling(size.Width), (int)Math.Ceiling(size.Height));
+            SizeF size = this.MeasureString(text, font, layoutArea, stringFormat);
+            return new Size((int)Math.Ceiling(size.Width), (int)Math.Ceiling(size.Height));
         }
 
         /// <summary>
-        /// Draws the specified text string at the specified location 
-        /// with the specified Brush object and font. The formatting 
-        /// properties in the specified StringFormat object are applied 
+        /// Draws the specified text string at the specified location
+        /// with the specified Brush object and font. The formatting
+        /// properties in the specified StringFormat object are applied
         /// to the text.
         /// </summary>
         /// <param name="text">A string object that specifies the text to draw.</param>
@@ -2708,18 +3041,24 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="brush">A Brush object that determines the color and/or texture of the drawn text.</param>
         /// <param name="layoutRectangle">A RectangleF structure that specifies the location of the drawn text.</param>
         /// <param name="format">A StringFormat object that specifies formatting properties, such as line spacing and alignment, that are applied to the drawn text.</param>
-        internal void DrawStringRel( string text, Font font, Brush brush,    RectangleF layoutRectangle,    StringFormat format    )
+        internal void DrawStringRel(
+            string text,
+            Font font,
+            Brush brush,
+            RectangleF layoutRectangle,
+            StringFormat format
+        )
         {
             RectangleF rect;
 
             // Check that rectangle is not empty
-            if(layoutRectangle.Width == 0 || layoutRectangle.Height == 0)
+            if (layoutRectangle.Width == 0 || layoutRectangle.Height == 0)
             {
                 return;
             }
 
             // Get absolute coordinates
-            rect = GetAbsoluteRectangle( layoutRectangle );
+            rect = GetAbsoluteRectangle(layoutRectangle);
 
             // Draw text with anti-aliasing
             /*
@@ -2733,14 +3072,13 @@ namespace System.Web.UI.DataVisualization.Charting
             }
             */
 
-            this.DrawString( text, font, brush, rect, format );
+            this.DrawString(text, font, brush, rect, format);
         }
 
-        
         /// <summary>
-        /// Draws the specified text string at the specified location 
-        /// with the specified angle and with the specified Brush object and font. The 
-        /// formatting properties in the specified StringFormat object are applied 
+        /// Draws the specified text string at the specified location
+        /// with the specified angle and with the specified Brush object and font. The
+        /// formatting properties in the specified StringFormat object are applied
         /// to the text.
         /// </summary>
         /// <param name="text">A string object that specifies the text to draw.</param>
@@ -2749,14 +3087,14 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="layoutRectangle">A RectangleF structure that specifies the location of the drawn text.</param>
         /// <param name="format">A StringFormat object that specifies formatting properties, such as line spacing and alignment, that are applied to the drawn text.</param>
         /// <param name="angle">A angle of the text</param>
-        internal void DrawStringRel( 
-            string text, 
-            Font font, 
-            Brush brush,    
-            RectangleF layoutRectangle,    
-            StringFormat format, 
-            int angle    
-            )
+        internal void DrawStringRel(
+            string text,
+            Font font,
+            Brush brush,
+            RectangleF layoutRectangle,
+            StringFormat format,
+            int angle
+        )
         {
             RectangleF rect;
             SizeF size;
@@ -2764,36 +3102,35 @@ namespace System.Web.UI.DataVisualization.Charting
             PointF rotationCenter = PointF.Empty;
 
             // Check that rectangle is not empty
-            if(layoutRectangle.Width == 0 || layoutRectangle.Height == 0)
+            if (layoutRectangle.Width == 0 || layoutRectangle.Height == 0)
             {
                 return;
             }
 
             // Get absolute coordinates
-            rect = GetAbsoluteRectangle( layoutRectangle );
+            rect = GetAbsoluteRectangle(layoutRectangle);
 
-            size = this.MeasureString( text, font, rect.Size, format );
-
+            size = this.MeasureString(text, font, rect.Size, format);
 
             // Find the center of rotation
-            if( format.Alignment == StringAlignment.Near )
+            if (format.Alignment == StringAlignment.Near)
             { // Near
                 rotationCenter.X = rect.X + size.Width / 2;
-                rotationCenter.Y = ( rect.Bottom + rect.Top ) / 2;
+                rotationCenter.Y = (rect.Bottom + rect.Top) / 2;
             }
-            else if( format.Alignment == StringAlignment.Far )
+            else if (format.Alignment == StringAlignment.Far)
             { // Far
                 rotationCenter.X = rect.Right - size.Width / 2;
-                rotationCenter.Y = ( rect.Bottom + rect.Top ) / 2;
+                rotationCenter.Y = (rect.Bottom + rect.Top) / 2;
             }
             else
             { // Center
-                rotationCenter.X = ( rect.Left + rect.Right ) / 2;
-                rotationCenter.Y = ( rect.Bottom + rect.Top ) / 2;
+                rotationCenter.X = (rect.Left + rect.Right) / 2;
+                rotationCenter.Y = (rect.Bottom + rect.Top) / 2;
             }
             // Create a matrix and rotate it.
             _myMatrix = this.Transform.Clone();
-            _myMatrix.RotateAt( angle, rotationCenter);
+            _myMatrix.RotateAt(angle, rotationCenter);
 
             // Old angle
             oldTransform = this.Transform;
@@ -2813,7 +3150,7 @@ namespace System.Web.UI.DataVisualization.Charting
             }
             */
 
-            this.DrawString( text, font, brush, rect, format );
+            this.DrawString(text, font, brush, rect, format);
 
             // Set Old Angle
             this.Transform = oldTransform;
@@ -2829,20 +3166,24 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="barDrawingStyle">Bar drawing style.</param>
         /// <param name="isVertical">True if a vertical bar.</param>
         /// <param name="rect">Rectangle position.</param>
-        internal void DrawRectangleBarStyle(BarDrawingStyle barDrawingStyle, bool isVertical, RectangleF rect)
+        internal void DrawRectangleBarStyle(
+            BarDrawingStyle barDrawingStyle,
+            bool isVertical,
+            RectangleF rect
+        )
         {
             // Check if non-default bar drawing style is specified
-            if(barDrawingStyle != BarDrawingStyle.Default)
+            if (barDrawingStyle != BarDrawingStyle.Default)
             {
                 // Check column/bar size
-                if(rect.Width > 0 && rect.Height > 0)
+                if (rect.Width > 0 && rect.Height > 0)
                 {
                     // Draw gradient(s)
-                    if(barDrawingStyle == BarDrawingStyle.Cylinder)
+                    if (barDrawingStyle == BarDrawingStyle.Cylinder)
                     {
                         // Calculate gradient position
                         RectangleF gradientRect = rect;
-                        if(isVertical)
+                        if (isVertical)
                         {
                             gradientRect.Width *= 0.3f;
                         }
@@ -2850,25 +3191,25 @@ namespace System.Web.UI.DataVisualization.Charting
                         {
                             gradientRect.Height *= 0.3f;
                         }
-                        if(gradientRect.Width > 0 && gradientRect.Height > 0)
+                        if (gradientRect.Width > 0 && gradientRect.Height > 0)
                         {
-                            this.FillRectangleAbs( 
-                                gradientRect, 
+                            this.FillRectangleAbs(
+                                gradientRect,
                                 Color.Transparent,
-                                ChartHatchStyle.None, 
-                                string.Empty, 
-                                ChartImageWrapMode.Scaled, 
+                                ChartHatchStyle.None,
+                                string.Empty,
+                                ChartImageWrapMode.Scaled,
                                 Color.Empty,
                                 ChartImageAlignmentStyle.Center,
-                                (isVertical) ? GradientStyle.LeftRight : GradientStyle.TopBottom, 
+                                (isVertical) ? GradientStyle.LeftRight : GradientStyle.TopBottom,
                                 Color.FromArgb(120, Color.White),
-                                Color.Empty, 
-                                0, 
-                                ChartDashStyle.NotSet, 
-                                PenAlignment.Inset );
+                                Color.Empty,
+                                0,
+                                ChartDashStyle.NotSet,
+                                PenAlignment.Inset
+                            );
 
-                        
-                            if(isVertical)
+                            if (isVertical)
                             {
                                 gradientRect.X += gradientRect.Width + 1f;
                                 gradientRect.Width = rect.Right - gradientRect.X;
@@ -2879,51 +3220,57 @@ namespace System.Web.UI.DataVisualization.Charting
                                 gradientRect.Height = rect.Bottom - gradientRect.Y;
                             }
 
-                            this.FillRectangleAbs( 
-                                gradientRect, 
+                            this.FillRectangleAbs(
+                                gradientRect,
                                 Color.FromArgb(120, Color.White),
-                                ChartHatchStyle.None, 
-                                string.Empty, 
-                                ChartImageWrapMode.Scaled, 
+                                ChartHatchStyle.None,
+                                string.Empty,
+                                ChartImageWrapMode.Scaled,
                                 Color.Empty,
                                 ChartImageAlignmentStyle.Center,
-                                (isVertical) ? GradientStyle.LeftRight : GradientStyle.TopBottom, 
+                                (isVertical) ? GradientStyle.LeftRight : GradientStyle.TopBottom,
                                 Color.FromArgb(150, Color.Black),
-                                Color.Empty, 
-                                0, 
-                                ChartDashStyle.NotSet, 
-                                PenAlignment.Inset );
-
+                                Color.Empty,
+                                0,
+                                ChartDashStyle.NotSet,
+                                PenAlignment.Inset
+                            );
                         }
                     }
-                    else if(barDrawingStyle == BarDrawingStyle.Emboss)
+                    else if (barDrawingStyle == BarDrawingStyle.Emboss)
                     {
                         // Calculate width of shadows used to create the effect
                         float shadowSize = 3f;
-                        if(rect.Width < 6f || rect.Height < 6f)
+                        if (rect.Width < 6f || rect.Height < 6f)
                         {
                             shadowSize = 1f;
                         }
-                        else if(rect.Width < 15f || rect.Height < 15f)
+                        else if (rect.Width < 15f || rect.Height < 15f)
                         {
                             shadowSize = 2f;
                         }
 
                         // Create and draw left/top path
-                        using(GraphicsPath path = new GraphicsPath())
+                        using (GraphicsPath path = new GraphicsPath())
                         {
                             // Add shadow polygon to the path
-                            PointF[] points = new PointF[] {
-                                                               new PointF(rect.Left, rect.Bottom),
-                                                               new PointF(rect.Left, rect.Top),
-                                                               new PointF(rect.Right, rect.Top),
-                                                               new PointF(rect.Right - shadowSize, rect.Top + shadowSize),
-                                                               new PointF(rect.Left + shadowSize, rect.Top + shadowSize),
-                                                               new PointF(rect.Left + shadowSize, rect.Bottom - shadowSize) };
+                            PointF[] points = new PointF[]
+                            {
+                                new PointF(rect.Left, rect.Bottom),
+                                new PointF(rect.Left, rect.Top),
+                                new PointF(rect.Right, rect.Top),
+                                new PointF(rect.Right - shadowSize, rect.Top + shadowSize),
+                                new PointF(rect.Left + shadowSize, rect.Top + shadowSize),
+                                new PointF(rect.Left + shadowSize, rect.Bottom - shadowSize)
+                            };
                             path.AddPolygon(points);
 
                             // Create brush
-                            using(SolidBrush leftTopBrush = new SolidBrush(Color.FromArgb(100, Color.White)))
+                            using (
+                                SolidBrush leftTopBrush = new SolidBrush(
+                                    Color.FromArgb(100, Color.White)
+                                )
+                            )
                             {
                                 // Fill shadow path on the left-bottom side of the bar
                                 this.FillPath(leftTopBrush, path);
@@ -2931,35 +3278,41 @@ namespace System.Web.UI.DataVisualization.Charting
                         }
 
                         // Create and draw top/right path
-                        using(GraphicsPath path = new GraphicsPath())
+                        using (GraphicsPath path = new GraphicsPath())
                         {
                             // Add shadow polygon to the path
-                            PointF[] points = new PointF[] {
-                                                               new PointF(rect.Right, rect.Top),
-                                                               new PointF(rect.Right, rect.Bottom),
-                                                               new PointF(rect.Left, rect.Bottom),
-                                                               new PointF(rect.Left + shadowSize, rect.Bottom - shadowSize),
-                                                               new PointF(rect.Right - shadowSize, rect.Bottom - shadowSize),
-                                                               new PointF(rect.Right - shadowSize, rect.Top + shadowSize) };
+                            PointF[] points = new PointF[]
+                            {
+                                new PointF(rect.Right, rect.Top),
+                                new PointF(rect.Right, rect.Bottom),
+                                new PointF(rect.Left, rect.Bottom),
+                                new PointF(rect.Left + shadowSize, rect.Bottom - shadowSize),
+                                new PointF(rect.Right - shadowSize, rect.Bottom - shadowSize),
+                                new PointF(rect.Right - shadowSize, rect.Top + shadowSize)
+                            };
                             path.AddPolygon(points);
 
                             // Create brush
-                            using(SolidBrush bottomRightBrush = new SolidBrush(Color.FromArgb(80, Color.Black)))
+                            using (
+                                SolidBrush bottomRightBrush = new SolidBrush(
+                                    Color.FromArgb(80, Color.Black)
+                                )
+                            )
                             {
                                 // Fill shadow path on the left-bottom side of the bar
                                 this.FillPath(bottomRightBrush, path);
                             }
                         }
                     }
-                    else if(barDrawingStyle == BarDrawingStyle.LightToDark)
+                    else if (barDrawingStyle == BarDrawingStyle.LightToDark)
                     {
                         // Calculate width of shadows used to create the effect
                         float shadowSize = 4f;
-                        if(rect.Width < 6f || rect.Height < 6f)
+                        if (rect.Width < 6f || rect.Height < 6f)
                         {
                             shadowSize = 2f;
                         }
-                        else if(rect.Width < 15f || rect.Height < 15f)
+                        else if (rect.Width < 15f || rect.Height < 15f)
                         {
                             shadowSize = 3f;
                         }
@@ -2967,37 +3320,41 @@ namespace System.Web.UI.DataVisualization.Charting
                         // Calculate gradient position
                         RectangleF gradientRect = rect;
                         gradientRect.Inflate(-shadowSize, -shadowSize);
-                        if(isVertical)
+                        if (isVertical)
                         {
                             gradientRect.Height = (float)Math.Floor(gradientRect.Height / 3f);
                         }
                         else
                         {
-                            gradientRect.X = gradientRect.Right - (float)Math.Floor(gradientRect.Width / 3f);
+                            gradientRect.X =
+                                gradientRect.Right - (float)Math.Floor(gradientRect.Width / 3f);
                             gradientRect.Width = (float)Math.Floor(gradientRect.Width / 3f);
                         }
-                        if(gradientRect.Width > 0 && gradientRect.Height > 0)
+                        if (gradientRect.Width > 0 && gradientRect.Height > 0)
                         {
-                            this.FillRectangleAbs( 
-                                gradientRect, 
-                                (isVertical) ? Color.FromArgb(120, Color.White) : Color.Transparent, 
-                                ChartHatchStyle.None, 
-                                string.Empty, 
-                                ChartImageWrapMode.Scaled, 
+                            this.FillRectangleAbs(
+                                gradientRect,
+                                (isVertical) ? Color.FromArgb(120, Color.White) : Color.Transparent,
+                                ChartHatchStyle.None,
+                                string.Empty,
+                                ChartImageWrapMode.Scaled,
                                 Color.Empty,
                                 ChartImageAlignmentStyle.Center,
-                                (isVertical) ? GradientStyle.TopBottom : GradientStyle.LeftRight, 
-                                (isVertical) ? Color.Transparent : Color.FromArgb(120, Color.White), 
-                                Color.Empty, 
-                                0, 
-                                ChartDashStyle.NotSet, 
-                                PenAlignment.Inset );
+                                (isVertical) ? GradientStyle.TopBottom : GradientStyle.LeftRight,
+                                (isVertical) ? Color.Transparent : Color.FromArgb(120, Color.White),
+                                Color.Empty,
+                                0,
+                                ChartDashStyle.NotSet,
+                                PenAlignment.Inset
+                            );
 
                             gradientRect = rect;
                             gradientRect.Inflate(-shadowSize, -shadowSize);
-                            if(isVertical)
+                            if (isVertical)
                             {
-                                gradientRect.Y = gradientRect.Bottom - (float)Math.Floor(gradientRect.Height / 3f);
+                                gradientRect.Y =
+                                    gradientRect.Bottom
+                                    - (float)Math.Floor(gradientRect.Height / 3f);
                                 gradientRect.Height = (float)Math.Floor(gradientRect.Height / 3f);
                             }
                             else
@@ -3005,158 +3362,237 @@ namespace System.Web.UI.DataVisualization.Charting
                                 gradientRect.Width = (float)Math.Floor(gradientRect.Width / 3f);
                             }
 
-
-                            this.FillRectangleAbs( 
-                                gradientRect, 
-                                (!isVertical) ? Color.FromArgb(80, Color.Black) : Color.Transparent, 
-                                ChartHatchStyle.None, 
-                                string.Empty, 
-                                ChartImageWrapMode.Scaled, 
+                            this.FillRectangleAbs(
+                                gradientRect,
+                                (!isVertical) ? Color.FromArgb(80, Color.Black) : Color.Transparent,
+                                ChartHatchStyle.None,
+                                string.Empty,
+                                ChartImageWrapMode.Scaled,
                                 Color.Empty,
                                 ChartImageAlignmentStyle.Center,
-                                (isVertical) ? GradientStyle.TopBottom : GradientStyle.LeftRight, 
-                                (!isVertical) ? Color.Transparent : Color.FromArgb(80, Color.Black), 
-                                Color.Empty, 
-                                0, 
-                                ChartDashStyle.NotSet, 
-                                PenAlignment.Inset );
-
+                                (isVertical) ? GradientStyle.TopBottom : GradientStyle.LeftRight,
+                                (!isVertical) ? Color.Transparent : Color.FromArgb(80, Color.Black),
+                                Color.Empty,
+                                0,
+                                ChartDashStyle.NotSet,
+                                PenAlignment.Inset
+                            );
                         }
                     }
-                    else if(barDrawingStyle == BarDrawingStyle.Wedge)
+                    else if (barDrawingStyle == BarDrawingStyle.Wedge)
                     {
                         // Calculate wedge size to fit the rectangle
                         float size = (isVertical) ? rect.Width / 2f : rect.Height / 2f;
-                        if(isVertical && 2f * size > rect.Height)
+                        if (isVertical && 2f * size > rect.Height)
                         {
-                            size = rect.Height/2f;
+                            size = rect.Height / 2f;
                         }
-                        if(!isVertical && 2f * size > rect.Width)
+                        if (!isVertical && 2f * size > rect.Width)
                         {
-                            size = rect.Width/2f;
+                            size = rect.Width / 2f;
                         }
 
                         // Draw left/bottom shadow
                         RectangleF gradientRect = rect;
-                        using(GraphicsPath path = new GraphicsPath())
+                        using (GraphicsPath path = new GraphicsPath())
                         {
-                            if(isVertical)
+                            if (isVertical)
                             {
-                                path.AddLine(gradientRect.X + gradientRect.Width/2f, gradientRect.Y + size, gradientRect.X + gradientRect.Width/2f, gradientRect.Bottom - size);
-                                path.AddLine(gradientRect.X + gradientRect.Width/2f, gradientRect.Bottom - size, gradientRect.Right, gradientRect.Bottom);
-                                path.AddLine(gradientRect.Right, gradientRect.Bottom, gradientRect.Right, gradientRect.Y);
+                                path.AddLine(
+                                    gradientRect.X + gradientRect.Width / 2f,
+                                    gradientRect.Y + size,
+                                    gradientRect.X + gradientRect.Width / 2f,
+                                    gradientRect.Bottom - size
+                                );
+                                path.AddLine(
+                                    gradientRect.X + gradientRect.Width / 2f,
+                                    gradientRect.Bottom - size,
+                                    gradientRect.Right,
+                                    gradientRect.Bottom
+                                );
+                                path.AddLine(
+                                    gradientRect.Right,
+                                    gradientRect.Bottom,
+                                    gradientRect.Right,
+                                    gradientRect.Y
+                                );
                             }
                             else
                             {
-                                path.AddLine(gradientRect.X + size, gradientRect.Y + gradientRect.Height/2f, gradientRect.Right - size, gradientRect.Y + gradientRect.Height/2f);
-                                path.AddLine(gradientRect.Right - size, gradientRect.Y + gradientRect.Height/2f, gradientRect.Right, gradientRect.Bottom);
-                                path.AddLine(gradientRect.Right, gradientRect.Bottom, gradientRect.Left, gradientRect.Bottom);
+                                path.AddLine(
+                                    gradientRect.X + size,
+                                    gradientRect.Y + gradientRect.Height / 2f,
+                                    gradientRect.Right - size,
+                                    gradientRect.Y + gradientRect.Height / 2f
+                                );
+                                path.AddLine(
+                                    gradientRect.Right - size,
+                                    gradientRect.Y + gradientRect.Height / 2f,
+                                    gradientRect.Right,
+                                    gradientRect.Bottom
+                                );
+                                path.AddLine(
+                                    gradientRect.Right,
+                                    gradientRect.Bottom,
+                                    gradientRect.Left,
+                                    gradientRect.Bottom
+                                );
                             }
                             path.CloseAllFigures();
 
                             // Create brush and fill path
-                            using(SolidBrush brush = new SolidBrush(Color.FromArgb(90, Color.Black)))
+                            using (
+                                SolidBrush brush = new SolidBrush(Color.FromArgb(90, Color.Black))
+                            )
                             {
                                 this.FillPath(brush, path);
                             }
                         }
 
                         // Draw top/right triangle
-                        using(GraphicsPath path = new GraphicsPath())
+                        using (GraphicsPath path = new GraphicsPath())
                         {
-                            if(isVertical)
+                            if (isVertical)
                             {
-                                path.AddLine(gradientRect.X, gradientRect.Y, gradientRect.X + gradientRect.Width/2f, gradientRect.Y + size);
-                                path.AddLine(gradientRect.X + gradientRect.Width/2f, gradientRect.Y + size, gradientRect.Right, gradientRect.Y);
+                                path.AddLine(
+                                    gradientRect.X,
+                                    gradientRect.Y,
+                                    gradientRect.X + gradientRect.Width / 2f,
+                                    gradientRect.Y + size
+                                );
+                                path.AddLine(
+                                    gradientRect.X + gradientRect.Width / 2f,
+                                    gradientRect.Y + size,
+                                    gradientRect.Right,
+                                    gradientRect.Y
+                                );
                             }
                             else
                             {
-                                path.AddLine(gradientRect.Right, gradientRect.Y, gradientRect.Right - size, gradientRect.Y + gradientRect.Height / 2f);
-                                path.AddLine(gradientRect.Right - size, gradientRect.Y + gradientRect.Height / 2f, gradientRect.Right, gradientRect.Bottom);
+                                path.AddLine(
+                                    gradientRect.Right,
+                                    gradientRect.Y,
+                                    gradientRect.Right - size,
+                                    gradientRect.Y + gradientRect.Height / 2f
+                                );
+                                path.AddLine(
+                                    gradientRect.Right - size,
+                                    gradientRect.Y + gradientRect.Height / 2f,
+                                    gradientRect.Right,
+                                    gradientRect.Bottom
+                                );
                             }
 
                             // Create brush and fill path
-                            using(SolidBrush brush = new SolidBrush(Color.FromArgb(50, Color.Black)))
+                            using (
+                                SolidBrush brush = new SolidBrush(Color.FromArgb(50, Color.Black))
+                            )
                             {
                                 // Fill shadow path on the left-bottom side of the bar
                                 this.FillPath(brush, path);
 
                                 // Draw Lines
-                                using(Pen penDark = new Pen(Color.FromArgb(20, Color.Black), 1))
+                                using (Pen penDark = new Pen(Color.FromArgb(20, Color.Black), 1))
                                 {
                                     this.DrawPath(penDark, path);
-                                    if(isVertical)
+                                    if (isVertical)
                                     {
                                         this.DrawLine(
-                                            penDark, 
-                                            rect.X + rect.Width/2f, 
+                                            penDark,
+                                            rect.X + rect.Width / 2f,
                                             rect.Y + size,
-                                            rect.X + rect.Width/2f, 
-                                            rect.Bottom - size);
+                                            rect.X + rect.Width / 2f,
+                                            rect.Bottom - size
+                                        );
                                     }
                                     else
                                     {
                                         this.DrawLine(
-                                            penDark, 
-                                            rect.X + size, 
-                                            rect.Y + rect.Height/2f,
-                                            rect.X + size, 
-                                            rect.Bottom - rect.Height/2f);
+                                            penDark,
+                                            rect.X + size,
+                                            rect.Y + rect.Height / 2f,
+                                            rect.X + size,
+                                            rect.Bottom - rect.Height / 2f
+                                        );
                                     }
                                 }
 
                                 // Draw Lines
-                                using(Pen pen = new Pen(Color.FromArgb(40, Color.White), 1))
+                                using (Pen pen = new Pen(Color.FromArgb(40, Color.White), 1))
                                 {
                                     this.DrawPath(pen, path);
-                                    if(isVertical)
+                                    if (isVertical)
                                     {
                                         this.DrawLine(
-                                            pen, 
-                                            rect.X + rect.Width/2f, 
+                                            pen,
+                                            rect.X + rect.Width / 2f,
                                             rect.Y + size,
-                                            rect.X + rect.Width/2f, 
-                                            rect.Bottom - size);
+                                            rect.X + rect.Width / 2f,
+                                            rect.Bottom - size
+                                        );
                                     }
                                     else
                                     {
                                         this.DrawLine(
-                                            pen, 
-                                            rect.X + size, 
-                                            rect.Y + rect.Height/2f,
-                                            rect.X + size, 
-                                            rect.Bottom - rect.Height/2f);
+                                            pen,
+                                            rect.X + size,
+                                            rect.Y + rect.Height / 2f,
+                                            rect.X + size,
+                                            rect.Bottom - rect.Height / 2f
+                                        );
                                     }
                                 }
                             }
                         }
 
                         // Draw bottom/left triangle
-                        using(GraphicsPath path = new GraphicsPath())
+                        using (GraphicsPath path = new GraphicsPath())
                         {
-                            if(isVertical)
+                            if (isVertical)
                             {
-                                path.AddLine(gradientRect.X, gradientRect.Bottom, gradientRect.X + gradientRect.Width/2f, gradientRect.Bottom - size);
-                                path.AddLine(gradientRect.X + gradientRect.Width/2f, gradientRect.Bottom - size, gradientRect.Right, gradientRect.Bottom);
+                                path.AddLine(
+                                    gradientRect.X,
+                                    gradientRect.Bottom,
+                                    gradientRect.X + gradientRect.Width / 2f,
+                                    gradientRect.Bottom - size
+                                );
+                                path.AddLine(
+                                    gradientRect.X + gradientRect.Width / 2f,
+                                    gradientRect.Bottom - size,
+                                    gradientRect.Right,
+                                    gradientRect.Bottom
+                                );
                             }
                             else
                             {
-                                path.AddLine(gradientRect.X, gradientRect.Y, gradientRect.X + size, gradientRect.Y + gradientRect.Height / 2f);
-                                path.AddLine(gradientRect.X + size, gradientRect.Y + gradientRect.Height / 2f, gradientRect.X, gradientRect.Bottom);
+                                path.AddLine(
+                                    gradientRect.X,
+                                    gradientRect.Y,
+                                    gradientRect.X + size,
+                                    gradientRect.Y + gradientRect.Height / 2f
+                                );
+                                path.AddLine(
+                                    gradientRect.X + size,
+                                    gradientRect.Y + gradientRect.Height / 2f,
+                                    gradientRect.X,
+                                    gradientRect.Bottom
+                                );
                             }
 
                             // Create brush
-                            using(SolidBrush brush = new SolidBrush(Color.FromArgb(50, Color.Black)))
+                            using (
+                                SolidBrush brush = new SolidBrush(Color.FromArgb(50, Color.Black))
+                            )
                             {
                                 // Fill shadow path on the left-bottom side of the bar
                                 this.FillPath(brush, path);
 
                                 // Draw edges
-                                using(Pen penDark = new Pen(Color.FromArgb(20, Color.Black), 1))
+                                using (Pen penDark = new Pen(Color.FromArgb(20, Color.Black), 1))
                                 {
                                     this.DrawPath(penDark, path);
                                 }
-                                using(Pen pen = new Pen(Color.FromArgb(40, Color.White), 1))
+                                using (Pen pen = new Pen(Color.FromArgb(40, Color.White), 1))
                                 {
                                     this.DrawPath(pen, path);
                                 }
@@ -3187,45 +3623,48 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="penAlignment">Pen Alignment</param>
         /// <param name="barDrawingStyle">Bar drawing style.</param>
         /// <param name="isVertical">True if a vertical bar.</param>
-        internal void FillRectangleRel( RectangleF rectF, 
-            Color backColor, 
-            ChartHatchStyle backHatchStyle, 
-            string backImage, 
-            ChartImageWrapMode backImageWrapMode, 
+        internal void FillRectangleRel(
+            RectangleF rectF,
+            Color backColor,
+            ChartHatchStyle backHatchStyle,
+            string backImage,
+            ChartImageWrapMode backImageWrapMode,
             Color backImageTransparentColor,
             ChartImageAlignmentStyle backImageAlign,
-            GradientStyle backGradientStyle, 
-            Color backSecondaryColor, 
-            Color borderColor, 
-            int borderWidth, 
-            ChartDashStyle borderDashStyle, 
-            Color shadowColor, 
+            GradientStyle backGradientStyle,
+            Color backSecondaryColor,
+            Color borderColor,
+            int borderWidth,
+            ChartDashStyle borderDashStyle,
+            Color shadowColor,
             int shadowOffset,
             PenAlignment penAlignment,
             BarDrawingStyle barDrawingStyle,
-            bool isVertical)
+            bool isVertical
+        )
         {
-            this.FillRectangleRel( 
-                rectF, 
-                backColor, 
-                backHatchStyle, 
-                backImage, 
-                backImageWrapMode, 
+            this.FillRectangleRel(
+                rectF,
+                backColor,
+                backHatchStyle,
+                backImage,
+                backImageWrapMode,
                 backImageTransparentColor,
                 backImageAlign,
-                backGradientStyle, 
-                backSecondaryColor, 
-                borderColor, 
-                borderWidth, 
-                borderDashStyle, 
-                shadowColor, 
+                backGradientStyle,
+                backSecondaryColor,
+                borderColor,
+                borderWidth,
+                borderDashStyle,
+                shadowColor,
                 shadowOffset,
                 penAlignment,
                 false,
                 0,
                 false,
                 barDrawingStyle,
-                isVertical);
+                isVertical
+            );
         }
 
         /// <summary>
@@ -3246,43 +3685,46 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="shadowColor">Shadow Color</param>
         /// <param name="shadowOffset">Shadow Offset</param>
         /// <param name="penAlignment">Pen Alignment</param>
-        internal void FillRectangleRel( RectangleF rectF, 
-            Color backColor, 
-            ChartHatchStyle backHatchStyle, 
-            string backImage, 
-            ChartImageWrapMode backImageWrapMode, 
+        internal void FillRectangleRel(
+            RectangleF rectF,
+            Color backColor,
+            ChartHatchStyle backHatchStyle,
+            string backImage,
+            ChartImageWrapMode backImageWrapMode,
             Color backImageTransparentColor,
             ChartImageAlignmentStyle backImageAlign,
-            GradientStyle backGradientStyle, 
-            Color backSecondaryColor, 
-            Color borderColor, 
-            int borderWidth, 
-            ChartDashStyle borderDashStyle, 
-            Color shadowColor, 
+            GradientStyle backGradientStyle,
+            Color backSecondaryColor,
+            Color borderColor,
+            int borderWidth,
+            ChartDashStyle borderDashStyle,
+            Color shadowColor,
             int shadowOffset,
-            PenAlignment penAlignment )
+            PenAlignment penAlignment
+        )
         {
-            this.FillRectangleRel( 
-                rectF, 
-                backColor, 
-                backHatchStyle, 
-                backImage, 
-                backImageWrapMode, 
+            this.FillRectangleRel(
+                rectF,
+                backColor,
+                backHatchStyle,
+                backImage,
+                backImageWrapMode,
                 backImageTransparentColor,
                 backImageAlign,
-                backGradientStyle, 
-                backSecondaryColor, 
-                borderColor, 
-                borderWidth, 
-                borderDashStyle, 
-                shadowColor, 
+                backGradientStyle,
+                backSecondaryColor,
+                borderColor,
+                borderWidth,
+                borderDashStyle,
+                shadowColor,
                 shadowOffset,
                 penAlignment,
                 false,
                 0,
                 false,
                 BarDrawingStyle.Default,
-                true);
+                true
+            );
         }
 
         /// <summary>
@@ -3306,49 +3748,51 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="circular">Draw circular shape inside the rectangle.</param>
         /// <param name="circularSectorsCount">Number of sectors in circle when drawing the polygon.</param>
         /// <param name="circle3D">3D Circle must be drawn.</param>
-        internal void FillRectangleRel( RectangleF rectF, 
-            Color backColor, 
-            ChartHatchStyle backHatchStyle, 
-            string backImage, 
-            ChartImageWrapMode backImageWrapMode, 
+        internal void FillRectangleRel(
+            RectangleF rectF,
+            Color backColor,
+            ChartHatchStyle backHatchStyle,
+            string backImage,
+            ChartImageWrapMode backImageWrapMode,
             Color backImageTransparentColor,
             ChartImageAlignmentStyle backImageAlign,
-            GradientStyle backGradientStyle, 
-            Color backSecondaryColor, 
-            Color borderColor, 
-            int borderWidth, 
-            ChartDashStyle borderDashStyle, 
-            Color shadowColor, 
+            GradientStyle backGradientStyle,
+            Color backSecondaryColor,
+            Color borderColor,
+            int borderWidth,
+            ChartDashStyle borderDashStyle,
+            Color shadowColor,
             int shadowOffset,
             PenAlignment penAlignment,
             bool circular,
-            int    circularSectorsCount,
-            bool circle3D)
+            int circularSectorsCount,
+            bool circle3D
+        )
         {
-            this.FillRectangleRel( 
-                rectF, 
-                backColor, 
-                backHatchStyle, 
-                backImage, 
-                backImageWrapMode, 
+            this.FillRectangleRel(
+                rectF,
+                backColor,
+                backHatchStyle,
+                backImage,
+                backImageWrapMode,
                 backImageTransparentColor,
                 backImageAlign,
-                backGradientStyle, 
-                backSecondaryColor, 
-                borderColor, 
-                borderWidth, 
-                borderDashStyle, 
-                shadowColor, 
+                backGradientStyle,
+                backSecondaryColor,
+                borderColor,
+                borderWidth,
+                borderDashStyle,
+                shadowColor,
                 shadowOffset,
                 penAlignment,
                 circular,
                 circularSectorsCount,
                 circle3D,
                 BarDrawingStyle.Default,
-                true);
+                true
+            );
         }
 
-        
         /// <summary>
         /// Draws rectangle or circle (inside rectangle) with shadow.
         /// </summary>
@@ -3372,97 +3816,100 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="circle3D">3D Circle must be drawn.</param>
         /// <param name="barDrawingStyle">Bar drawing style.</param>
         /// <param name="isVertical">True if a vertical bar.</param>
-        internal void FillRectangleRel( RectangleF rectF, 
-            Color backColor, 
-            ChartHatchStyle backHatchStyle, 
-            string backImage, 
-            ChartImageWrapMode backImageWrapMode, 
+        internal void FillRectangleRel(
+            RectangleF rectF,
+            Color backColor,
+            ChartHatchStyle backHatchStyle,
+            string backImage,
+            ChartImageWrapMode backImageWrapMode,
             Color backImageTransparentColor,
             ChartImageAlignmentStyle backImageAlign,
-            GradientStyle backGradientStyle, 
-            Color backSecondaryColor, 
-            Color borderColor, 
-            int borderWidth, 
-            ChartDashStyle borderDashStyle, 
-            Color shadowColor, 
+            GradientStyle backGradientStyle,
+            Color backSecondaryColor,
+            Color borderColor,
+            int borderWidth,
+            ChartDashStyle borderDashStyle,
+            Color shadowColor,
             int shadowOffset,
             PenAlignment penAlignment,
             bool circular,
-            int    circularSectorsCount,
+            int circularSectorsCount,
             bool circle3D,
             BarDrawingStyle barDrawingStyle,
-            bool isVertical)
+            bool isVertical
+        )
         {
             Brush brush = null;
             Brush backBrush = null;
 
             // Remember SmoothingMode and turn off anti aliasing
             SmoothingMode oldSmoothingMode = this.SmoothingMode;
-            if(!circular)
+            if (!circular)
             {
                 this.SmoothingMode = SmoothingMode.Default;
             }
 
             // Color is empty
-            if( backColor.IsEmpty ) 
+            if (backColor.IsEmpty)
             {
                 backColor = Color.White;
             }
 
-            if( backSecondaryColor.IsEmpty ) 
+            if (backSecondaryColor.IsEmpty)
             {
                 backSecondaryColor = Color.White;
             }
 
-            if( borderColor.IsEmpty || borderDashStyle == ChartDashStyle.NotSet) 
+            if (borderColor.IsEmpty || borderDashStyle == ChartDashStyle.NotSet)
             {
                 borderWidth = 0;
             }
-        
+
             // Get absolute coordinates
-            RectangleF rect = GetAbsoluteRectangle( rectF );
-            
+            RectangleF rect = GetAbsoluteRectangle(rectF);
+
             // Rectangle width and height can not be very small value
-            if( rect.Width < 1.0F && rect.Width > 0.0F )
+            if (rect.Width < 1.0F && rect.Width > 0.0F)
             {
                 rect.Width = 1.0F;
             }
 
-            if( rect.Height < 1.0F && rect.Height > 0.0F )
+            if (rect.Height < 1.0F && rect.Height > 0.0F)
             {
                 rect.Height = 1.0F;
             }
 
             // Round the values
-            rect = Round( rect );
+            rect = Round(rect);
 
             // For inset alignment resize fill rectangle
             RectangleF fillRect;
-            if( penAlignment == PenAlignment.Inset  &&
-                borderWidth > 0)
+            if (penAlignment == PenAlignment.Inset && borderWidth > 0)
             {
                 // SVG and Metafiles do not support inset pen styles - use same rectangle
-                if( this.ActiveRenderingType == RenderingType.Svg ||
-                    this.IsMetafile)
+                if (this.ActiveRenderingType == RenderingType.Svg || this.IsMetafile)
                 {
-                    fillRect = new RectangleF( rect.X, rect.Y, rect.Width, rect.Height);
+                    fillRect = new RectangleF(rect.X, rect.Y, rect.Width, rect.Height);
                 }
-                else if (this.Graphics.Transform.Elements[0] != 1f ||
-                    this.Graphics.Transform.Elements[3] != 1f)
+                else if (
+                    this.Graphics.Transform.Elements[0] != 1f
+                    || this.Graphics.Transform.Elements[3] != 1f
+                )
                 {
                     // Do not reduce filling rectangle if scaling is used in the graphics
-                    // transformations. Rounding may cause a 1 pixel gap between the border 
+                    // transformations. Rounding may cause a 1 pixel gap between the border
                     // and the filling.
-                    fillRect = new RectangleF( rect.X, rect.Y, rect.Width, rect.Height);
+                    fillRect = new RectangleF(rect.X, rect.Y, rect.Width, rect.Height);
                 }
                 else
                 {
                     // The fill rectangle is resized because of border size.
-                    fillRect = new RectangleF( 
-                        rect.X + borderWidth, 
-                        rect.Y + borderWidth, 
-                        rect.Width - borderWidth * 2f + 1, 
-                        rect.Height - borderWidth * 2f + 1);
+                    fillRect = new RectangleF(
+                        rect.X + borderWidth,
+                        rect.Y + borderWidth,
+                        rect.Width - borderWidth * 2f + 1,
+                        rect.Height - borderWidth * 2f + 1
+                    );
                 }
             }
             else
@@ -3473,37 +3920,45 @@ namespace System.Web.UI.DataVisualization.Charting
 
             // Fix for issue #6714:
             // Make sure the rectangle coordinates fit the control. In same cases rectangle width or
-            // hight ca be extremly large. Drawing such a rectangle may cause an overflow exception. 
-            // The code below restricts the maximum size to double the chart size. See issue 
+            // hight ca be extremly large. Drawing such a rectangle may cause an overflow exception.
+            // The code below restricts the maximum size to double the chart size. See issue
             // description for more information. -AG.
-            if(fillRect.Width > 2f * this._width)
+            if (fillRect.Width > 2f * this._width)
             {
                 fillRect.Width = 2f * this._width;
             }
-            if(fillRect.Height > 2f * this._height)
+            if (fillRect.Height > 2f * this._height)
             {
                 fillRect.Height = 2f * this._height;
             }
 
-
-            if( backImage.Length > 0 && backImageWrapMode != ChartImageWrapMode.Unscaled && backImageWrapMode != ChartImageWrapMode.Scaled)
+            if (
+                backImage.Length > 0
+                && backImageWrapMode != ChartImageWrapMode.Unscaled
+                && backImageWrapMode != ChartImageWrapMode.Scaled
+            )
             {
                 backBrush = brush;
-                brush = GetTextureBrush(backImage, backImageTransparentColor, backImageWrapMode, backColor);
+                brush = GetTextureBrush(
+                    backImage,
+                    backImageTransparentColor,
+                    backImageWrapMode,
+                    backColor
+                );
             }
-            else if( backHatchStyle != ChartHatchStyle.None )
+            else if (backHatchStyle != ChartHatchStyle.None)
             {
-                brush = GetHatchBrush( backHatchStyle, backColor, backSecondaryColor );
+                brush = GetHatchBrush(backHatchStyle, backColor, backSecondaryColor);
             }
-            else if( backGradientStyle != GradientStyle.None )
+            else if (backGradientStyle != GradientStyle.None)
             {
                 // If a gradient type  is set create a brush with gradient
-                brush = GetGradientBrush( rect, backColor, backSecondaryColor, backGradientStyle );
+                brush = GetGradientBrush(rect, backColor, backSecondaryColor, backGradientStyle);
             }
             else
             {
                 // Set a bar color.
-                if(backColor == Color.Empty || backColor == Color.Transparent)
+                if (backColor == Color.Empty || backColor == Color.Transparent)
                 {
                     brush = null;
                 }
@@ -3514,19 +3969,36 @@ namespace System.Web.UI.DataVisualization.Charting
             }
 
             // Draw shadow
-            FillRectangleShadowAbs( rect, shadowColor, shadowOffset, backColor, circular, circularSectorsCount );
+            FillRectangleShadowAbs(
+                rect,
+                shadowColor,
+                shadowOffset,
+                backColor,
+                circular,
+                circularSectorsCount
+            );
 
             // Draw rectangle image
-            if( backImage.Length > 0 && (backImageWrapMode == ChartImageWrapMode.Unscaled || backImageWrapMode == ChartImageWrapMode.Scaled))
+            if (
+                backImage.Length > 0
+                && (
+                    backImageWrapMode == ChartImageWrapMode.Unscaled
+                    || backImageWrapMode == ChartImageWrapMode.Scaled
+                )
+            )
             {
                 // Load image
-                System.Drawing.Image image = _common.ImageLoader.LoadImage( backImage );
+                System.Drawing.Image image = _common.ImageLoader.LoadImage(backImage);
 
                 // Prepare image properties (transparent color)
                 ImageAttributes attrib = new ImageAttributes();
-                if(backImageTransparentColor != Color.Empty)
+                if (backImageTransparentColor != Color.Empty)
                 {
-                    attrib.SetColorKey(backImageTransparentColor, backImageTransparentColor, ColorAdjustType.Default);
+                    attrib.SetColorKey(
+                        backImageTransparentColor,
+                        backImageTransparentColor,
+                        ColorAdjustType.Default
+                    );
                 }
 
                 // Draw scaled image
@@ -3539,7 +4011,7 @@ namespace System.Web.UI.DataVisualization.Charting
                 SizeF imageAbsSize = new SizeF();
 
                 // Calculate unscaled image position
-                if(backImageWrapMode == ChartImageWrapMode.Unscaled)
+                if (backImageWrapMode == ChartImageWrapMode.Unscaled)
                 {
                     ImageLoader.GetAdjustedImageSize(image, this.Graphics, ref imageAbsSize);
 
@@ -3547,76 +4019,101 @@ namespace System.Web.UI.DataVisualization.Charting
                     imageRect.Width = Math.Min(fillRect.Width, imageAbsSize.Width);
                     imageRect.Height = Math.Min(fillRect.Height, imageAbsSize.Height);
 
-                       // Adjust position with alignment property
-                    if(imageRect.Width < fillRect.Width)
+                    // Adjust position with alignment property
+                    if (imageRect.Width < fillRect.Width)
                     {
-                        if(backImageAlign == ChartImageAlignmentStyle.BottomRight ||
-                            backImageAlign == ChartImageAlignmentStyle.Right ||
-                            backImageAlign == ChartImageAlignmentStyle.TopRight)
+                        if (
+                            backImageAlign == ChartImageAlignmentStyle.BottomRight
+                            || backImageAlign == ChartImageAlignmentStyle.Right
+                            || backImageAlign == ChartImageAlignmentStyle.TopRight
+                        )
                         {
                             imageRect.X = fillRect.Right - imageRect.Width;
                         }
-                        else if(backImageAlign == ChartImageAlignmentStyle.Bottom ||
-                            backImageAlign == ChartImageAlignmentStyle.Center ||
-                            backImageAlign == ChartImageAlignmentStyle.Top)
+                        else if (
+                            backImageAlign == ChartImageAlignmentStyle.Bottom
+                            || backImageAlign == ChartImageAlignmentStyle.Center
+                            || backImageAlign == ChartImageAlignmentStyle.Top
+                        )
                         {
-                            imageRect.X = fillRect.X + (fillRect.Width - imageRect.Width)/2;
+                            imageRect.X = fillRect.X + (fillRect.Width - imageRect.Width) / 2;
                         }
                     }
-                    if(imageRect.Height < fillRect.Height)
+                    if (imageRect.Height < fillRect.Height)
                     {
-                        if(backImageAlign == ChartImageAlignmentStyle.BottomRight ||
-                            backImageAlign == ChartImageAlignmentStyle.Bottom ||
-                            backImageAlign == ChartImageAlignmentStyle.BottomLeft)
+                        if (
+                            backImageAlign == ChartImageAlignmentStyle.BottomRight
+                            || backImageAlign == ChartImageAlignmentStyle.Bottom
+                            || backImageAlign == ChartImageAlignmentStyle.BottomLeft
+                        )
                         {
                             imageRect.Y = fillRect.Bottom - imageRect.Height;
                         }
-                        else if(backImageAlign == ChartImageAlignmentStyle.Left ||
-                            backImageAlign == ChartImageAlignmentStyle.Center ||
-                            backImageAlign == ChartImageAlignmentStyle.Right)
+                        else if (
+                            backImageAlign == ChartImageAlignmentStyle.Left
+                            || backImageAlign == ChartImageAlignmentStyle.Center
+                            || backImageAlign == ChartImageAlignmentStyle.Right
+                        )
                         {
-                            imageRect.Y = fillRect.Y + (fillRect.Height - imageRect.Height)/2;
+                            imageRect.Y = fillRect.Y + (fillRect.Height - imageRect.Height) / 2;
                         }
                     }
-
                 }
 
                 // Fill background with brush
-                if(brush != null)
+                if (brush != null)
                 {
-                    if(circular)
-                        this.DrawCircleAbs( null, brush, fillRect, circularSectorsCount, circle3D );
+                    if (circular)
+                        this.DrawCircleAbs(null, brush, fillRect, circularSectorsCount, circle3D);
                     else
-                        this.FillRectangle( brush, fillRect );
-                }
-                 
-                // Draw image
-                this.DrawImage(image, 
-                    new Rectangle((int)Math.Round(imageRect.X),(int)Math.Round(imageRect.Y), (int)Math.Round(imageRect.Width), (int)Math.Round(imageRect.Height)),
-                    0, 0,
-                    (backImageWrapMode == ChartImageWrapMode.Unscaled) ? imageRect.Width * image.Width / imageAbsSize.Width : image.Width,
-                    (backImageWrapMode == ChartImageWrapMode.Unscaled) ? imageRect.Height * image.Height / imageAbsSize.Height : image.Height,
-                    GraphicsUnit.Pixel, 
-                    attrib);
-            }
-                // Draw rectangle
-            else
-            {
-                if(backBrush != null && backImageTransparentColor != Color.Empty)
-                {
-                    // Fill background with brush
-                    if(circular)
-                        this.DrawCircleAbs( null, backBrush, fillRect, circularSectorsCount, circle3D );
-                    else
-                        this.FillRectangle( backBrush, fillRect );
+                        this.FillRectangle(brush, fillRect);
                 }
 
-                if(brush != null)
+                // Draw image
+                this.DrawImage(
+                    image,
+                    new Rectangle(
+                        (int)Math.Round(imageRect.X),
+                        (int)Math.Round(imageRect.Y),
+                        (int)Math.Round(imageRect.Width),
+                        (int)Math.Round(imageRect.Height)
+                    ),
+                    0,
+                    0,
+                    (backImageWrapMode == ChartImageWrapMode.Unscaled)
+                        ? imageRect.Width * image.Width / imageAbsSize.Width
+                        : image.Width,
+                    (backImageWrapMode == ChartImageWrapMode.Unscaled)
+                        ? imageRect.Height * image.Height / imageAbsSize.Height
+                        : image.Height,
+                    GraphicsUnit.Pixel,
+                    attrib
+                );
+            }
+            // Draw rectangle
+            else
+            {
+                if (backBrush != null && backImageTransparentColor != Color.Empty)
                 {
-                    if(circular)
-                        this.DrawCircleAbs( null, brush, fillRect, circularSectorsCount, circle3D );
+                    // Fill background with brush
+                    if (circular)
+                        this.DrawCircleAbs(
+                            null,
+                            backBrush,
+                            fillRect,
+                            circularSectorsCount,
+                            circle3D
+                        );
                     else
-                        this.FillRectangle( brush, fillRect );
+                        this.FillRectangle(backBrush, fillRect);
+                }
+
+                if (brush != null)
+                {
+                    if (circular)
+                        this.DrawCircleAbs(null, brush, fillRect, circularSectorsCount, circle3D);
+                    else
+                        this.FillRectangle(brush, fillRect);
                 }
             }
 
@@ -3624,54 +4121,54 @@ namespace System.Web.UI.DataVisualization.Charting
             this.DrawRectangleBarStyle(barDrawingStyle, isVertical, fillRect);
 
             // Draw border
-            if( borderWidth > 0 && borderDashStyle != ChartDashStyle.NotSet)
+            if (borderWidth > 0 && borderDashStyle != ChartDashStyle.NotSet)
             {
                 // Set a border line color
-                if(_pen.Color != borderColor)
+                if (_pen.Color != borderColor)
                 {
                     _pen.Color = borderColor;
                 }
-            
+
                 // Set a border line width
-                if(_pen.Width != borderWidth)
+                if (_pen.Width != borderWidth)
                 {
                     _pen.Width = borderWidth;
                 }
 
                 // Set pen alignment
-                if(_pen.Alignment != penAlignment)
+                if (_pen.Alignment != penAlignment)
                 {
                     _pen.Alignment = penAlignment;
                 }
 
                 // Set a border line style
-                if(_pen.DashStyle != GetPenStyle( borderDashStyle ))
+                if (_pen.DashStyle != GetPenStyle(borderDashStyle))
                 {
-                    _pen.DashStyle = GetPenStyle( borderDashStyle );
+                    _pen.DashStyle = GetPenStyle(borderDashStyle);
                 }
 
                 // Draw border
-                if(circular)
+                if (circular)
                 {
-                    this.DrawCircleAbs( _pen, null, rect, circularSectorsCount, false );
+                    this.DrawCircleAbs(_pen, null, rect, circularSectorsCount, false);
                 }
                 else
                 {
-                    // NOTE: Rectangle with single pixel inset border is drawn 1 pixel larger 
+                    // NOTE: Rectangle with single pixel inset border is drawn 1 pixel larger
                     // in the .Net Framework. Increase size by 1 pixel to solve the issue.
-                    if(_pen.Alignment == PenAlignment.Inset && _pen.Width > 1f)
+                    if (_pen.Alignment == PenAlignment.Inset && _pen.Width > 1f)
                     {
                         rect.Width += 1;
                         rect.Height += 1;
                     }
 
                     // Draw rectangle
-                    this.DrawRectangle( _pen, rect.X, rect.Y, rect.Width, rect.Height );
+                    this.DrawRectangle(_pen, rect.X, rect.Y, rect.Width, rect.Height);
                 }
             }
 
             // Dispose Image and Gradient
-            if(brush != null)
+            if (brush != null)
             {
                 brush.Dispose();
             }
@@ -3687,19 +4184,14 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="shadowColor">Shadow Color</param>
         /// <param name="shadowOffset">Shadow Offset</param>
         /// <param name="backColor">Back Color</param>
-        internal void FillRectangleShadowAbs( 
-            RectangleF rect, 
-            Color shadowColor, 
-            float shadowOffset, 
-            Color backColor)
+        internal void FillRectangleShadowAbs(
+            RectangleF rect,
+            Color shadowColor,
+            float shadowOffset,
+            Color backColor
+        )
         {
-            FillRectangleShadowAbs( 
-                rect, 
-                shadowColor, 
-                shadowOffset, 
-                backColor,
-                false,
-                0);
+            FillRectangleShadowAbs(rect, shadowColor, shadowOffset, backColor, false, 0);
         }
 
         /// <summary>
@@ -3711,16 +4203,17 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="backColor">Back Color</param>
         /// <param name="circular">Draw circular shape inside the rectangle.</param>
         /// <param name="circularSectorsCount">Number of sectors in circle when drawing the polygon.</param>
-        internal void FillRectangleShadowAbs( 
-            RectangleF rect, 
-            Color shadowColor, 
-            float shadowOffset, 
+        internal void FillRectangleShadowAbs(
+            RectangleF rect,
+            Color shadowColor,
+            float shadowOffset,
             Color backColor,
             bool circular,
-            int    circularSectorsCount)
+            int circularSectorsCount
+        )
         {
             // Do not draw shadoe for empty rectangle
-            if(rect.Height == 0 || rect.Width == 0 || shadowOffset == 0)
+            if (rect.Height == 0 || rect.Width == 0 || shadowOffset == 0)
             {
                 return;
             }
@@ -3743,17 +4236,23 @@ namespace System.Web.UI.DataVisualization.Charting
                 region.Xor(rect);
                 this.Clip = region;
             }
-            
+
             // Draw usual or "soft" shadows
-            if(!softShadows || circularSectorsCount > 2)
+            if (!softShadows || circularSectorsCount > 2)
             {
                 RectangleF absolute;
                 RectangleF offset = RectangleF.Empty;
 
-                absolute = Round( rect );
+                absolute = Round(rect);
 
                 // Change shadow color
-                using (SolidBrush shadowBrush = new SolidBrush((shadowColor.A != 255) ? shadowColor : Color.FromArgb(backColor.A / 2, shadowColor)))
+                using (
+                    SolidBrush shadowBrush = new SolidBrush(
+                        (shadowColor.A != 255)
+                            ? shadowColor
+                            : Color.FromArgb(backColor.A / 2, shadowColor)
+                    )
+                )
                 {
                     // Shadow Position
                     offset.X = absolute.X + shadowOffset;
@@ -3770,70 +4269,136 @@ namespace System.Web.UI.DataVisualization.Charting
             }
             else
             {
-
                 RectangleF absolute;
                 RectangleF offset = RectangleF.Empty;
 
-                absolute = Round( rect );
-                
+                absolute = Round(rect);
 
                 // Shadow Position
                 offset.X = absolute.X + shadowOffset - 1;
                 offset.Y = absolute.Y + shadowOffset - 1;
                 offset.Width = absolute.Width + 2;
                 offset.Height = absolute.Height + 2;
-                
+
                 // Calculate rounded rect radius
-                float    radius = shadowOffset * 0.7f;
+                float radius = shadowOffset * 0.7f;
                 radius = (float)Math.Max(radius, 2f);
-                radius = (float)Math.Min(radius, offset.Width/4f);
-                radius = (float)Math.Min(radius, offset.Height/4f);
+                radius = (float)Math.Min(radius, offset.Width / 4f);
+                radius = (float)Math.Min(radius, offset.Height / 4f);
                 radius = (float)Math.Ceiling(radius);
-                if(circular)
+                if (circular)
                 {
-                    radius = offset.Width/2f;
+                    radius = offset.Width / 2f;
                 }
 
                 // Create rounded rectangle path
                 GraphicsPath path = new GraphicsPath();
-                if(circular && offset.Width != offset.Height)
+                if (circular && offset.Width != offset.Height)
                 {
-                    float    radiusX = offset.Width/2f;
-                    float    radiusY = offset.Height/2f;
-                    path.AddLine(offset.X+radiusX, offset.Y, offset.Right-radiusX, offset.Y);
-                    path.AddArc(offset.Right-2f*radiusX, offset.Y, 2f*radiusX, 2f*radiusY, 270, 90);
-                    path.AddLine(offset.Right, offset.Y + radiusY, offset.Right, offset.Bottom - radiusY);
-                    path.AddArc(offset.Right-2f*radiusX, offset.Bottom-2f*radiusY, 2f*radiusX, 2f*radiusY, 0, 90);
-                    path.AddLine(offset.Right-radiusX, offset.Bottom, offset.X + radiusX, offset.Bottom);
-                    path.AddArc(offset.X, offset.Bottom-2f*radiusY, 2f*radiusX, 2f*radiusY, 90, 90);
-                    path.AddLine(offset.X, offset.Bottom-radiusY, offset.X, offset.Y+radiusY);
-                    path.AddArc(offset.X, offset.Y, 2f*radiusX, 2f*radiusY, 180, 90);
+                    float radiusX = offset.Width / 2f;
+                    float radiusY = offset.Height / 2f;
+                    path.AddLine(offset.X + radiusX, offset.Y, offset.Right - radiusX, offset.Y);
+                    path.AddArc(
+                        offset.Right - 2f * radiusX,
+                        offset.Y,
+                        2f * radiusX,
+                        2f * radiusY,
+                        270,
+                        90
+                    );
+                    path.AddLine(
+                        offset.Right,
+                        offset.Y + radiusY,
+                        offset.Right,
+                        offset.Bottom - radiusY
+                    );
+                    path.AddArc(
+                        offset.Right - 2f * radiusX,
+                        offset.Bottom - 2f * radiusY,
+                        2f * radiusX,
+                        2f * radiusY,
+                        0,
+                        90
+                    );
+                    path.AddLine(
+                        offset.Right - radiusX,
+                        offset.Bottom,
+                        offset.X + radiusX,
+                        offset.Bottom
+                    );
+                    path.AddArc(
+                        offset.X,
+                        offset.Bottom - 2f * radiusY,
+                        2f * radiusX,
+                        2f * radiusY,
+                        90,
+                        90
+                    );
+                    path.AddLine(offset.X, offset.Bottom - radiusY, offset.X, offset.Y + radiusY);
+                    path.AddArc(offset.X, offset.Y, 2f * radiusX, 2f * radiusY, 180, 90);
                 }
                 else
                 {
-                    path.AddLine(offset.X+radius, offset.Y, offset.Right-radius, offset.Y);
-                    path.AddArc(offset.Right-2f*radius, offset.Y, 2f*radius, 2f*radius, 270, 90);
-                    path.AddLine(offset.Right, offset.Y + radius, offset.Right, offset.Bottom - radius);
-                    path.AddArc(offset.Right-2f*radius, offset.Bottom-2f*radius, 2f*radius, 2f*radius, 0, 90);
-                    path.AddLine(offset.Right-radius, offset.Bottom, offset.X + radius, offset.Bottom);
-                    path.AddArc(offset.X, offset.Bottom-2f*radius, 2f*radius, 2f*radius, 90, 90);
-                    path.AddLine(offset.X, offset.Bottom-radius, offset.X, offset.Y+radius);
-                    path.AddArc(offset.X, offset.Y, 2f*radius, 2f*radius, 180, 90);
+                    path.AddLine(offset.X + radius, offset.Y, offset.Right - radius, offset.Y);
+                    path.AddArc(
+                        offset.Right - 2f * radius,
+                        offset.Y,
+                        2f * radius,
+                        2f * radius,
+                        270,
+                        90
+                    );
+                    path.AddLine(
+                        offset.Right,
+                        offset.Y + radius,
+                        offset.Right,
+                        offset.Bottom - radius
+                    );
+                    path.AddArc(
+                        offset.Right - 2f * radius,
+                        offset.Bottom - 2f * radius,
+                        2f * radius,
+                        2f * radius,
+                        0,
+                        90
+                    );
+                    path.AddLine(
+                        offset.Right - radius,
+                        offset.Bottom,
+                        offset.X + radius,
+                        offset.Bottom
+                    );
+                    path.AddArc(
+                        offset.X,
+                        offset.Bottom - 2f * radius,
+                        2f * radius,
+                        2f * radius,
+                        90,
+                        90
+                    );
+                    path.AddLine(offset.X, offset.Bottom - radius, offset.X, offset.Y + radius);
+                    path.AddArc(offset.X, offset.Y, 2f * radius, 2f * radius, 180, 90);
                 }
 
                 PathGradientBrush shadowBrush = new PathGradientBrush(path);
                 shadowBrush.CenterColor = shadowColor;
 
                 // Set the color along the entire boundary of the path
-                Color[] colors = {Color.Transparent};
+                Color[] colors = { Color.Transparent };
                 shadowBrush.SurroundColors = colors;
-                shadowBrush.CenterPoint = new PointF(offset.X + offset.Width/2f, offset.Y + offset.Height/2f);
+                shadowBrush.CenterPoint = new PointF(
+                    offset.X + offset.Width / 2f,
+                    offset.Y + offset.Height / 2f
+                );
 
                 // Define brush focus scale
-                PointF focusScale = new PointF(1-2f*shadowOffset/offset.Width, 1-2f*shadowOffset/offset.Height);
-                if(focusScale.X < 0)
+                PointF focusScale = new PointF(
+                    1 - 2f * shadowOffset / offset.Width,
+                    1 - 2f * shadowOffset / offset.Height
+                );
+                if (focusScale.X < 0)
                     focusScale.X = 0;
-                if(focusScale.Y < 0)
+                if (focusScale.Y < 0)
                     focusScale.Y = 0;
                 shadowBrush.FocusScales = focusScale;
 
@@ -3858,15 +4423,18 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <returns>Graphics path of the polygon circle.</returns>
         internal GraphicsPath GetPolygonCirclePath(RectangleF position, int polygonSectorsNumber)
         {
-            PointF            firstPoint = new PointF(position.X + position.Width/2f, position.Y);
-            PointF            centerPoint = new PointF(position.X + position.Width/2f, position.Y + position.Height/2f);
-            float            sectorSize = 0f;
-            GraphicsPath    path = new GraphicsPath();
-            PointF            prevPoint = PointF.Empty;
-            float            curentSector = 0f;
+            PointF firstPoint = new PointF(position.X + position.Width / 2f, position.Y);
+            PointF centerPoint = new PointF(
+                position.X + position.Width / 2f,
+                position.Y + position.Height / 2f
+            );
+            float sectorSize = 0f;
+            GraphicsPath path = new GraphicsPath();
+            PointF prevPoint = PointF.Empty;
+            float curentSector = 0f;
 
             // Get sector size
-            if(polygonSectorsNumber <= 2)
+            if (polygonSectorsNumber <= 2)
             {
                 // Circle sector size
                 sectorSize = 1f;
@@ -3878,18 +4446,18 @@ namespace System.Web.UI.DataVisualization.Charting
             }
 
             // Loop throug all sectors
-            for(curentSector = 0f; curentSector < 360f; curentSector += sectorSize)
+            for (curentSector = 0f; curentSector < 360f; curentSector += sectorSize)
             {
                 // Create matrix
                 Matrix matrix = new Matrix();
                 matrix.RotateAt(curentSector, centerPoint);
 
                 // Get point and rotate it
-                PointF[]    points = new PointF[] { firstPoint };
+                PointF[] points = new PointF[] { firstPoint };
                 matrix.TransformPoints(points);
 
                 // Add point into the path
-                if(!prevPoint.IsEmpty)
+                if (!prevPoint.IsEmpty)
                 {
                     path.AddLine(prevPoint, points[0]);
                 }
@@ -3911,31 +4479,39 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="position">Circle position.</param>
         /// <param name="polygonSectorsNumber">Number of sectors for the polygon.</param>
         /// <param name="circle3D">Indicates that circle should be 3D..</param>
-        internal void DrawCircleAbs(Pen pen, Brush brush, RectangleF position, int polygonSectorsNumber, bool circle3D)
+        internal void DrawCircleAbs(
+            Pen pen,
+            Brush brush,
+            RectangleF position,
+            int polygonSectorsNumber,
+            bool circle3D
+        )
         {
-            bool    fill3DCircle = (circle3D && brush != null);
+            bool fill3DCircle = (circle3D && brush != null);
 
             // Draw 2D circle
-            if(polygonSectorsNumber <= 2 && !fill3DCircle)
+            if (polygonSectorsNumber <= 2 && !fill3DCircle)
             {
-                if(brush != null)
+                if (brush != null)
                 {
                     this.FillEllipse(brush, position);
                 }
-                if(pen != null)
+                if (pen != null)
                 {
                     this.DrawEllipse(pen, position);
                 }
             }
-
-                // Draw circle as polygon with specified number of sectors
+            // Draw circle as polygon with specified number of sectors
             else
             {
-                PointF            firstPoint = new PointF(position.X + position.Width/2f, position.Y);
-                PointF            centerPoint = new PointF(position.X + position.Width/2f, position.Y + position.Height/2f);
-                float            sectorSize = 0f;
-                PointF            prevPoint = PointF.Empty;
-                float            curentSector = 0f;
+                PointF firstPoint = new PointF(position.X + position.Width / 2f, position.Y);
+                PointF centerPoint = new PointF(
+                    position.X + position.Width / 2f,
+                    position.Y + position.Height / 2f
+                );
+                float sectorSize = 0f;
+                PointF prevPoint = PointF.Empty;
+                float curentSector = 0f;
 
                 using (GraphicsPath path = new GraphicsPath())
                 {
@@ -3979,7 +4555,13 @@ namespace System.Web.UI.DataVisualization.Charting
                             {
                                 path.AddLine(points[0], centerPoint);
                                 path.AddLine(centerPoint, prevPoint);
-                                using (Brush sectorBrush = GetSector3DBrush(brush, curentSector, sectorSize))
+                                using (
+                                    Brush sectorBrush = GetSector3DBrush(
+                                        brush,
+                                        curentSector,
+                                        sectorSize
+                                    )
+                                )
                                 {
                                     this.FillPath(sectorBrush, path);
                                 }
@@ -3999,7 +4581,9 @@ namespace System.Web.UI.DataVisualization.Charting
                         path.AddLine(prevPoint, firstPoint);
                         path.AddLine(firstPoint, centerPoint);
                         path.AddLine(centerPoint, prevPoint);
-                        using (Brush sectorBrush = GetSector3DBrush(brush, curentSector, sectorSize))
+                        using (
+                            Brush sectorBrush = GetSector3DBrush(brush, curentSector, sectorSize)
+                        )
                         {
                             this.FillPath(sectorBrush, path);
                         }
@@ -4020,7 +4604,7 @@ namespace System.Web.UI.DataVisualization.Charting
                     {
                         this.DrawPath(pen, path);
                     }
-                }                
+                }
             }
         }
 
@@ -4031,25 +4615,28 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="curentSector">Sector position.</param>
         /// <param name="sectorSize">Sector size.</param>
         /// <returns>3D brush.</returns>
-        [SuppressMessage("Microsoft.Performance", "CA1800:DoNotCastUnnecessarily",
-            Justification = "Too large of a code change to justify making this change")]
+        [SuppressMessage(
+            "Microsoft.Performance",
+            "CA1800:DoNotCastUnnecessarily",
+            Justification = "Too large of a code change to justify making this change"
+        )]
         internal Brush GetSector3DBrush(Brush brush, float curentSector, float sectorSize)
         {
             // Get color from the brush
-            Color    brushColor = Color.Gray;
-            if(brush is HatchBrush)
+            Color brushColor = Color.Gray;
+            if (brush is HatchBrush)
             {
                 brushColor = ((HatchBrush)brush).BackgroundColor;
             }
-            else if(brush is LinearGradientBrush)
+            else if (brush is LinearGradientBrush)
             {
                 brushColor = ((LinearGradientBrush)brush).LinearColors[0];
             }
-            else if(brush is PathGradientBrush)
+            else if (brush is PathGradientBrush)
             {
                 brushColor = ((PathGradientBrush)brush).CenterColor;
             }
-            else if(brush is SolidBrush)
+            else if (brush is SolidBrush)
             {
                 brushColor = ((SolidBrush)brush).Color;
             }
@@ -4059,20 +4646,20 @@ namespace System.Web.UI.DataVisualization.Charting
 
             // Make adjustment for polygon circle with 5 segments
             // to avoid the issue that bottom segment is too dark
-            if(sectorSize == 72f && curentSector == 180f)
+            if (sectorSize == 72f && curentSector == 180f)
             {
                 curentSector *= 0.8f;
             }
 
-            // No angles more than 180 
-            if(curentSector > 180)
+            // No angles more than 180
+            if (curentSector > 180)
             {
                 curentSector = 360f - curentSector;
             }
             curentSector = curentSector / 180F;
 
             // Get brush
-            brushColor = GetBrightGradientColor( brushColor, curentSector);
+            brushColor = GetBrightGradientColor(brushColor, curentSector);
 
             // Get brush
             return new SolidBrush(brushColor);
@@ -4084,20 +4671,24 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="beginColor">Start color for gradient.</param>
         /// <param name="position">Position used between Start and end color.</param>
         /// <returns>Calculated Gradient color from gradient position</returns>
-        internal Color GetBrightGradientColor( Color beginColor, double position )
+        internal Color GetBrightGradientColor(Color beginColor, double position)
         {
             double brightness = 0.5;
-            if( position < brightness )
+            if (position < brightness)
             {
-                return GetGradientColor( Color.FromArgb(beginColor.A,255,255,255), beginColor, 1 - brightness + position );
+                return GetGradientColor(
+                    Color.FromArgb(beginColor.A, 255, 255, 255),
+                    beginColor,
+                    1 - brightness + position
+                );
             }
-            else if( -brightness + position < 1 )
+            else if (-brightness + position < 1)
             {
-                return GetGradientColor( beginColor, Color.Black, -brightness + position);
+                return GetGradientColor(beginColor, Color.Black, -brightness + position);
             }
             else
             {
-                return Color.FromArgb( beginColor.A, 0, 0, 0 );
+                return Color.FromArgb(beginColor.A, 0, 0, 0);
             }
         }
 
@@ -4117,19 +4708,21 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="borderWidth">Border Width</param>
         /// <param name="borderDashStyle">Border Style</param>
         /// <param name="penAlignment">Border is outside or inside rectangle</param>
-        internal void FillRectangleAbs( RectangleF rect, 
-            Color backColor, 
-            ChartHatchStyle backHatchStyle, 
-            string backImage, 
-            ChartImageWrapMode backImageWrapMode, 
+        internal void FillRectangleAbs(
+            RectangleF rect,
+            Color backColor,
+            ChartHatchStyle backHatchStyle,
+            string backImage,
+            ChartImageWrapMode backImageWrapMode,
             Color backImageTransparentColor,
             ChartImageAlignmentStyle backImageAlign,
-            GradientStyle backGradientStyle, 
-            Color backSecondaryColor, 
-            Color borderColor, 
-            int borderWidth, 
-            ChartDashStyle borderDashStyle, 
-            PenAlignment penAlignment )
+            GradientStyle backGradientStyle,
+            Color backSecondaryColor,
+            Color borderColor,
+            int borderWidth,
+            ChartDashStyle borderDashStyle,
+            PenAlignment penAlignment
+        )
         {
             Brush brush = null;
             Brush backBrush = null;
@@ -4139,18 +4732,18 @@ namespace System.Web.UI.DataVisualization.Charting
             this.SmoothingMode = SmoothingMode.None;
 
             // Color is empty
-            if( backColor.IsEmpty ) 
+            if (backColor.IsEmpty)
                 backColor = Color.White;
 
-            if( backSecondaryColor.IsEmpty ) 
+            if (backSecondaryColor.IsEmpty)
                 backSecondaryColor = Color.White;
 
-            if( borderColor.IsEmpty ) 
+            if (borderColor.IsEmpty)
             {
                 borderColor = Color.White;
                 borderWidth = 0;
             }
-        
+
             // Set a border line color
             _pen.Color = borderColor;
 
@@ -4161,9 +4754,9 @@ namespace System.Web.UI.DataVisualization.Charting
             _pen.Alignment = penAlignment;
 
             // Set a border line style
-            _pen.DashStyle = GetPenStyle( borderDashStyle );
+            _pen.DashStyle = GetPenStyle(borderDashStyle);
 
-            if( backGradientStyle == GradientStyle.None )
+            if (backGradientStyle == GradientStyle.None)
             {
                 // Set a bar color.
                 _solidBrush.Color = backColor;
@@ -4172,42 +4765,65 @@ namespace System.Web.UI.DataVisualization.Charting
             else
             {
                 // If a gradient type  is set create a brush with gradient
-                brush = GetGradientBrush( rect, backColor, backSecondaryColor, backGradientStyle );
+                brush = GetGradientBrush(rect, backColor, backSecondaryColor, backGradientStyle);
             }
 
-            if( backHatchStyle != ChartHatchStyle.None )
+            if (backHatchStyle != ChartHatchStyle.None)
             {
-                brush = GetHatchBrush( backHatchStyle, backColor, backSecondaryColor );
+                brush = GetHatchBrush(backHatchStyle, backColor, backSecondaryColor);
             }
 
-            if( backImage.Length > 0 && backImageWrapMode != ChartImageWrapMode.Unscaled && backImageWrapMode != ChartImageWrapMode.Scaled)
+            if (
+                backImage.Length > 0
+                && backImageWrapMode != ChartImageWrapMode.Unscaled
+                && backImageWrapMode != ChartImageWrapMode.Scaled
+            )
             {
                 backBrush = brush;
-                brush = GetTextureBrush(backImage, backImageTransparentColor, backImageWrapMode, backColor );
+                brush = GetTextureBrush(
+                    backImage,
+                    backImageTransparentColor,
+                    backImageWrapMode,
+                    backColor
+                );
             }
 
             // For inset alignment resize fill rectangle
             RectangleF fillRect;
-            
+
             // The fill rectangle is same
-            fillRect = new RectangleF( rect.X + borderWidth, rect.Y + borderWidth, rect.Width - borderWidth * 2, rect.Height - borderWidth * 2 );
+            fillRect = new RectangleF(
+                rect.X + borderWidth,
+                rect.Y + borderWidth,
+                rect.Width - borderWidth * 2,
+                rect.Height - borderWidth * 2
+            );
 
             // FillRectangle and DrawRectangle works differently with RectangleF.
             fillRect.Width += 1;
             fillRect.Height += 1;
 
             // Draw rectangle image
-            if( backImage.Length > 0 && (backImageWrapMode == ChartImageWrapMode.Unscaled || backImageWrapMode == ChartImageWrapMode.Scaled))
+            if (
+                backImage.Length > 0
+                && (
+                    backImageWrapMode == ChartImageWrapMode.Unscaled
+                    || backImageWrapMode == ChartImageWrapMode.Scaled
+                )
+            )
             {
                 // Load image
-                System.Drawing.Image image = _common.ImageLoader.LoadImage( backImage );
-                                
+                System.Drawing.Image image = _common.ImageLoader.LoadImage(backImage);
 
                 // Prepare image properties (transparent color)
                 ImageAttributes attrib = new ImageAttributes();
-                if(backImageTransparentColor != Color.Empty)
+                if (backImageTransparentColor != Color.Empty)
                 {
-                    attrib.SetColorKey(backImageTransparentColor, backImageTransparentColor, ColorAdjustType.Default);
+                    attrib.SetColorKey(
+                        backImageTransparentColor,
+                        backImageTransparentColor,
+                        ColorAdjustType.Default
+                    );
                 }
 
                 // Draw scaled image
@@ -4218,7 +4834,7 @@ namespace System.Web.UI.DataVisualization.Charting
                 imageRect.Height = fillRect.Height;
 
                 // Draw unscaled image using align property
-                if(backImageWrapMode == ChartImageWrapMode.Unscaled)
+                if (backImageWrapMode == ChartImageWrapMode.Unscaled)
                 {
                     SizeF imageAbsSize = new SizeF();
 
@@ -4229,79 +4845,100 @@ namespace System.Web.UI.DataVisualization.Charting
                     imageRect.Height = imageAbsSize.Height;
 
                     // Adjust position with alignment property
-                    if(imageRect.Width < fillRect.Width)
+                    if (imageRect.Width < fillRect.Width)
                     {
-                        if(backImageAlign == ChartImageAlignmentStyle.BottomRight ||
-                            backImageAlign == ChartImageAlignmentStyle.Right ||
-                            backImageAlign == ChartImageAlignmentStyle.TopRight)
+                        if (
+                            backImageAlign == ChartImageAlignmentStyle.BottomRight
+                            || backImageAlign == ChartImageAlignmentStyle.Right
+                            || backImageAlign == ChartImageAlignmentStyle.TopRight
+                        )
                         {
                             imageRect.X = fillRect.Right - imageRect.Width;
                         }
-                        else if(backImageAlign == ChartImageAlignmentStyle.Bottom ||
-                            backImageAlign == ChartImageAlignmentStyle.Center ||
-                            backImageAlign == ChartImageAlignmentStyle.Top)
+                        else if (
+                            backImageAlign == ChartImageAlignmentStyle.Bottom
+                            || backImageAlign == ChartImageAlignmentStyle.Center
+                            || backImageAlign == ChartImageAlignmentStyle.Top
+                        )
                         {
-                            imageRect.X = fillRect.X + (fillRect.Width - imageRect.Width)/2;
+                            imageRect.X = fillRect.X + (fillRect.Width - imageRect.Width) / 2;
                         }
                     }
-                    if(imageRect.Height < fillRect.Height)
+                    if (imageRect.Height < fillRect.Height)
                     {
-                        if(backImageAlign == ChartImageAlignmentStyle.BottomRight ||
-                            backImageAlign == ChartImageAlignmentStyle.Bottom ||
-                            backImageAlign == ChartImageAlignmentStyle.BottomLeft)
+                        if (
+                            backImageAlign == ChartImageAlignmentStyle.BottomRight
+                            || backImageAlign == ChartImageAlignmentStyle.Bottom
+                            || backImageAlign == ChartImageAlignmentStyle.BottomLeft
+                        )
                         {
                             imageRect.Y = fillRect.Bottom - imageRect.Height;
                         }
-                        else if(backImageAlign == ChartImageAlignmentStyle.Left ||
-                            backImageAlign == ChartImageAlignmentStyle.Center ||
-                            backImageAlign == ChartImageAlignmentStyle.Right)
+                        else if (
+                            backImageAlign == ChartImageAlignmentStyle.Left
+                            || backImageAlign == ChartImageAlignmentStyle.Center
+                            || backImageAlign == ChartImageAlignmentStyle.Right
+                        )
                         {
-                            imageRect.Y = fillRect.Y + (fillRect.Height - imageRect.Height)/2;
+                            imageRect.Y = fillRect.Y + (fillRect.Height - imageRect.Height) / 2;
                         }
                     }
-
                 }
 
                 // Fill background with brush
-                this.FillRectangle( brush, rect.X, rect.Y, rect.Width + 1, rect.Height + 1);
+                this.FillRectangle(brush, rect.X, rect.Y, rect.Width + 1, rect.Height + 1);
 
                 // Draw image
-                this.DrawImage(image, 
-                    new Rectangle((int)Math.Round(imageRect.X),(int)Math.Round(imageRect.Y), (int)Math.Round(imageRect.Width), (int)Math.Round(imageRect.Height)),
-                    0, 0, image.Width, image.Height,
-                    GraphicsUnit.Pixel, 
-                    attrib);
+                this.DrawImage(
+                    image,
+                    new Rectangle(
+                        (int)Math.Round(imageRect.X),
+                        (int)Math.Round(imageRect.Y),
+                        (int)Math.Round(imageRect.Width),
+                        (int)Math.Round(imageRect.Height)
+                    ),
+                    0,
+                    0,
+                    image.Width,
+                    image.Height,
+                    GraphicsUnit.Pixel,
+                    attrib
+                );
             }
-                // Draw rectangle
+            // Draw rectangle
             else
             {
-                if(backBrush != null && backImageTransparentColor != Color.Empty)
+                if (backBrush != null && backImageTransparentColor != Color.Empty)
                 {
                     // Fill background with brush
-                    this.FillRectangle( backBrush, rect.X, rect.Y, rect.Width + 1, rect.Height + 1 );
+                    this.FillRectangle(backBrush, rect.X, rect.Y, rect.Width + 1, rect.Height + 1);
                 }
-                this.FillRectangle( brush, rect.X, rect.Y, rect.Width + 1, rect.Height + 1 );
+                this.FillRectangle(brush, rect.X, rect.Y, rect.Width + 1, rect.Height + 1);
             }
 
             // Set pen alignment
-            if(borderDashStyle != ChartDashStyle.NotSet)
+            if (borderDashStyle != ChartDashStyle.NotSet)
             {
-                if( borderWidth > 1 )
-                    this.DrawRectangle( _pen, rect.X, rect.Y, rect.Width + 1, rect.Height + 1 );
-                else if( borderWidth == 1 )
-                    this.DrawRectangle( _pen, rect.X, rect.Y, rect.Width, rect.Height );
+                if (borderWidth > 1)
+                    this.DrawRectangle(_pen, rect.X, rect.Y, rect.Width + 1, rect.Height + 1);
+                else if (borderWidth == 1)
+                    this.DrawRectangle(_pen, rect.X, rect.Y, rect.Width, rect.Height);
             }
 
             // Dispose Image and Gradient
-            if( backGradientStyle != GradientStyle.None )
+            if (backGradientStyle != GradientStyle.None)
             {
                 brush.Dispose();
             }
-            if( backImage.Length > 0 && backImageWrapMode != ChartImageWrapMode.Unscaled && backImageWrapMode != ChartImageWrapMode.Scaled)
+            if (
+                backImage.Length > 0
+                && backImageWrapMode != ChartImageWrapMode.Unscaled
+                && backImageWrapMode != ChartImageWrapMode.Scaled
+            )
             {
                 brush.Dispose();
             }
-            if( backHatchStyle != ChartHatchStyle.None )
+            if (backHatchStyle != ChartHatchStyle.None)
             {
                 brush.Dispose();
             }
@@ -4328,32 +4965,32 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="penAlignment">Border is outside or inside rectangle</param>
         /// <param name="shadowOffset">Shadow offset.</param>
         /// <param name="shadowColor">Shadow color.</param>
-        internal void DrawPathAbs( 
-            GraphicsPath path, 
-            Color backColor, 
-            ChartHatchStyle backHatchStyle, 
-            string backImage, 
-            ChartImageWrapMode backImageWrapMode, 
+        internal void DrawPathAbs(
+            GraphicsPath path,
+            Color backColor,
+            ChartHatchStyle backHatchStyle,
+            string backImage,
+            ChartImageWrapMode backImageWrapMode,
             Color backImageTransparentColor,
             ChartImageAlignmentStyle backImageAlign,
-            GradientStyle backGradientStyle, 
-            Color backSecondaryColor, 
-            Color borderColor, 
-            int borderWidth, 
-            ChartDashStyle borderDashStyle, 
+            GradientStyle backGradientStyle,
+            Color backSecondaryColor,
+            Color borderColor,
+            int borderWidth,
+            ChartDashStyle borderDashStyle,
             PenAlignment penAlignment,
             int shadowOffset,
-            Color shadowColor)
+            Color shadowColor
+        )
         {
             // Draw patj shadow
-            if(shadowOffset != 0 && shadowColor != Color.Transparent)
+            if (shadowOffset != 0 && shadowColor != Color.Transparent)
             {
                 // Save graphics state and apply translate transformation
                 GraphicsState graphicsState = this.Save();
                 this.TranslateTransform(shadowOffset, shadowOffset);
 
-                if(backColor == Color.Transparent &&
-                    backSecondaryColor.IsEmpty )
+                if (backColor == Color.Transparent && backSecondaryColor.IsEmpty)
                 {
                     this.DrawPathAbs(
                         path,
@@ -4368,7 +5005,8 @@ namespace System.Web.UI.DataVisualization.Charting
                         shadowColor,
                         borderWidth,
                         borderDashStyle,
-                        PenAlignment.Center);
+                        PenAlignment.Center
+                    );
                 }
                 else
                 {
@@ -4385,7 +5023,8 @@ namespace System.Web.UI.DataVisualization.Charting
                         Color.Transparent,
                         0,
                         ChartDashStyle.NotSet,
-                        PenAlignment.Center);
+                        PenAlignment.Center
+                    );
                 }
 
                 // Restore graphics state
@@ -4395,18 +5034,19 @@ namespace System.Web.UI.DataVisualization.Charting
             // Draw path
             this.DrawPathAbs(
                 path,
-                backColor, 
-                backHatchStyle, 
-                backImage, 
-                backImageWrapMode, 
+                backColor,
+                backHatchStyle,
+                backImage,
+                backImageWrapMode,
                 backImageTransparentColor,
                 backImageAlign,
-                backGradientStyle, 
-                backSecondaryColor, 
-                borderColor, 
-                borderWidth, 
-                borderDashStyle, 
-                penAlignment);
+                backGradientStyle,
+                backSecondaryColor,
+                borderColor,
+                borderWidth,
+                borderDashStyle,
+                penAlignment
+            );
         }
 
         /// <summary>
@@ -4425,43 +5065,45 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="borderWidth">Border Width</param>
         /// <param name="borderDashStyle">Border Style</param>
         /// <param name="penAlignment">Border is outside or inside rectangle</param>
-        internal void DrawPathAbs( GraphicsPath path, 
-            Color backColor, 
-            ChartHatchStyle backHatchStyle, 
-            string backImage, 
-            ChartImageWrapMode backImageWrapMode, 
+        internal void DrawPathAbs(
+            GraphicsPath path,
+            Color backColor,
+            ChartHatchStyle backHatchStyle,
+            string backImage,
+            ChartImageWrapMode backImageWrapMode,
             Color backImageTransparentColor,
             ChartImageAlignmentStyle backImageAlign,
-            GradientStyle backGradientStyle, 
-            Color backSecondaryColor, 
-            Color borderColor, 
-            int borderWidth, 
-            ChartDashStyle borderDashStyle, 
-            PenAlignment penAlignment )
+            GradientStyle backGradientStyle,
+            Color backSecondaryColor,
+            Color borderColor,
+            int borderWidth,
+            ChartDashStyle borderDashStyle,
+            PenAlignment penAlignment
+        )
         {
             Brush brush = null;
             Brush backBrush = null;
 
             // Color is empty
-            if( backColor.IsEmpty ) 
+            if (backColor.IsEmpty)
                 backColor = Color.White;
 
-            if( backSecondaryColor.IsEmpty ) 
+            if (backSecondaryColor.IsEmpty)
                 backSecondaryColor = Color.White;
 
-            if( borderColor.IsEmpty ) 
+            if (borderColor.IsEmpty)
             {
                 borderColor = Color.White;
                 borderWidth = 0;
             }
-        
+
             // Set pen properties
             _pen.Color = borderColor;
             _pen.Width = borderWidth;
             _pen.Alignment = penAlignment;
-            _pen.DashStyle = GetPenStyle( borderDashStyle );
+            _pen.DashStyle = GetPenStyle(borderDashStyle);
 
-            if( backGradientStyle == GradientStyle.None )
+            if (backGradientStyle == GradientStyle.None)
             {
                 // Set solid brush color.
                 _solidBrush.Color = backColor;
@@ -4471,39 +5113,59 @@ namespace System.Web.UI.DataVisualization.Charting
             {
                 // If a gradient type  is set create a brush with gradient
                 RectangleF pathRect = path.GetBounds();
-                pathRect.Inflate(new SizeF(2,2));
-                brush = GetGradientBrush( 
-                    pathRect, 
-                    backColor, 
-                    backSecondaryColor, 
-                    backGradientStyle );
+                pathRect.Inflate(new SizeF(2, 2));
+                brush = GetGradientBrush(
+                    pathRect,
+                    backColor,
+                    backSecondaryColor,
+                    backGradientStyle
+                );
             }
 
-            if( backHatchStyle != ChartHatchStyle.None )
+            if (backHatchStyle != ChartHatchStyle.None)
             {
-                brush = GetHatchBrush( backHatchStyle, backColor, backSecondaryColor );
+                brush = GetHatchBrush(backHatchStyle, backColor, backSecondaryColor);
             }
 
-            if( backImage.Length > 0 && backImageWrapMode != ChartImageWrapMode.Unscaled && backImageWrapMode != ChartImageWrapMode.Scaled)
+            if (
+                backImage.Length > 0
+                && backImageWrapMode != ChartImageWrapMode.Unscaled
+                && backImageWrapMode != ChartImageWrapMode.Scaled
+            )
             {
                 backBrush = brush;
-                brush = GetTextureBrush(backImage, backImageTransparentColor, backImageWrapMode, backColor );
+                brush = GetTextureBrush(
+                    backImage,
+                    backImageTransparentColor,
+                    backImageWrapMode,
+                    backColor
+                );
             }
 
             // For inset alignment resize fill rectangle
             RectangleF fillRect = path.GetBounds();
-            
+
             // Draw rectangle image
-            if( backImage.Length > 0 && (backImageWrapMode == ChartImageWrapMode.Unscaled || backImageWrapMode == ChartImageWrapMode.Scaled))
+            if (
+                backImage.Length > 0
+                && (
+                    backImageWrapMode == ChartImageWrapMode.Unscaled
+                    || backImageWrapMode == ChartImageWrapMode.Scaled
+                )
+            )
             {
                 // Load image
-System.Drawing.Image image = _common.ImageLoader.LoadImage( backImage );
+                System.Drawing.Image image = _common.ImageLoader.LoadImage(backImage);
 
                 // Prepare image properties (transparent color)
                 ImageAttributes attrib = new ImageAttributes();
-                if(backImageTransparentColor != Color.Empty)
+                if (backImageTransparentColor != Color.Empty)
                 {
-                    attrib.SetColorKey(backImageTransparentColor, backImageTransparentColor, ColorAdjustType.Default);
+                    attrib.SetColorKey(
+                        backImageTransparentColor,
+                        backImageTransparentColor,
+                        ColorAdjustType.Default
+                    );
                 }
 
                 // Draw scaled image
@@ -4514,7 +5176,7 @@ System.Drawing.Image image = _common.ImageLoader.LoadImage( backImage );
                 imageRect.Height = fillRect.Height;
 
                 // Draw unscaled image using align property
-                if(backImageWrapMode == ChartImageWrapMode.Unscaled)
+                if (backImageWrapMode == ChartImageWrapMode.Unscaled)
                 {
                     SizeF imageSize = new SizeF();
 
@@ -4525,68 +5187,88 @@ System.Drawing.Image image = _common.ImageLoader.LoadImage( backImage );
                     imageRect.Height = imageSize.Height;
 
                     // Adjust position with alignment property
-                    if(imageRect.Width < fillRect.Width)
+                    if (imageRect.Width < fillRect.Width)
                     {
-                        if(backImageAlign == ChartImageAlignmentStyle.BottomRight ||
-                            backImageAlign == ChartImageAlignmentStyle.Right ||
-                            backImageAlign == ChartImageAlignmentStyle.TopRight)
+                        if (
+                            backImageAlign == ChartImageAlignmentStyle.BottomRight
+                            || backImageAlign == ChartImageAlignmentStyle.Right
+                            || backImageAlign == ChartImageAlignmentStyle.TopRight
+                        )
                         {
                             imageRect.X = fillRect.Right - imageRect.Width;
                         }
-                        else if(backImageAlign == ChartImageAlignmentStyle.Bottom ||
-                            backImageAlign == ChartImageAlignmentStyle.Center ||
-                            backImageAlign == ChartImageAlignmentStyle.Top)
+                        else if (
+                            backImageAlign == ChartImageAlignmentStyle.Bottom
+                            || backImageAlign == ChartImageAlignmentStyle.Center
+                            || backImageAlign == ChartImageAlignmentStyle.Top
+                        )
                         {
-                            imageRect.X = fillRect.X + (fillRect.Width - imageRect.Width)/2;
+                            imageRect.X = fillRect.X + (fillRect.Width - imageRect.Width) / 2;
                         }
                     }
-                    if(imageRect.Height < fillRect.Height)
+                    if (imageRect.Height < fillRect.Height)
                     {
-                        if(backImageAlign == ChartImageAlignmentStyle.BottomRight ||
-                            backImageAlign == ChartImageAlignmentStyle.Bottom ||
-                            backImageAlign == ChartImageAlignmentStyle.BottomLeft)
+                        if (
+                            backImageAlign == ChartImageAlignmentStyle.BottomRight
+                            || backImageAlign == ChartImageAlignmentStyle.Bottom
+                            || backImageAlign == ChartImageAlignmentStyle.BottomLeft
+                        )
                         {
                             imageRect.Y = fillRect.Bottom - imageRect.Height;
                         }
-                        else if(backImageAlign == ChartImageAlignmentStyle.Left ||
-                            backImageAlign == ChartImageAlignmentStyle.Center ||
-                            backImageAlign == ChartImageAlignmentStyle.Right)
+                        else if (
+                            backImageAlign == ChartImageAlignmentStyle.Left
+                            || backImageAlign == ChartImageAlignmentStyle.Center
+                            || backImageAlign == ChartImageAlignmentStyle.Right
+                        )
                         {
-                            imageRect.Y = fillRect.Y + (fillRect.Height - imageRect.Height)/2;
+                            imageRect.Y = fillRect.Y + (fillRect.Height - imageRect.Height) / 2;
                         }
                     }
-
                 }
 
                 // Fill background with brush
-                this.FillPath( brush, path );
+                this.FillPath(brush, path);
 
                 // Draw image
                 Region oldClipRegion = this.Clip;
                 this.Clip = new Region(path);
-                this.DrawImage(image, 
-                    new Rectangle((int)Math.Round(imageRect.X),(int)Math.Round(imageRect.Y), (int)Math.Round(imageRect.Width), (int)Math.Round(imageRect.Height)),
-                    0, 0, image.Width, image.Height,
-                    GraphicsUnit.Pixel, 
-                    attrib);
+                this.DrawImage(
+                    image,
+                    new Rectangle(
+                        (int)Math.Round(imageRect.X),
+                        (int)Math.Round(imageRect.Y),
+                        (int)Math.Round(imageRect.Width),
+                        (int)Math.Round(imageRect.Height)
+                    ),
+                    0,
+                    0,
+                    image.Width,
+                    image.Height,
+                    GraphicsUnit.Pixel,
+                    attrib
+                );
                 this.Clip = oldClipRegion;
             }
-            
-                // Draw rectangle
+            // Draw rectangle
             else
             {
-                if(backBrush != null && backImageTransparentColor != Color.Empty)
+                if (backBrush != null && backImageTransparentColor != Color.Empty)
                 {
                     // Fill background with brush
-                    this.FillPath( backBrush, path);
+                    this.FillPath(backBrush, path);
                 }
-                this.FillPath( brush, path);
+                this.FillPath(brush, path);
             }
 
             // Draw border
-            if(borderColor != Color.Empty && borderWidth > 0 && borderDashStyle != ChartDashStyle.NotSet)
+            if (
+                borderColor != Color.Empty
+                && borderWidth > 0
+                && borderDashStyle != ChartDashStyle.NotSet
+            )
             {
-                this.DrawPath( _pen, path );
+                this.DrawPath(_pen, path);
             }
         }
 
@@ -4602,31 +5284,40 @@ System.Drawing.Image image = _common.ImageLoader.LoadImage( backImage );
         /// <param name="backGradientStyle">Gradient type </param>
         /// <param name="backSecondaryColor">Gradient End Color</param>
         /// <returns>New brush object.</returns>
-        internal Brush CreateBrush( 
+        internal Brush CreateBrush(
             RectangleF rect,
-            Color backColor, 
-            ChartHatchStyle backHatchStyle, 
-            string backImage, 
-            ChartImageWrapMode backImageWrapMode, 
+            Color backColor,
+            ChartHatchStyle backHatchStyle,
+            string backImage,
+            ChartImageWrapMode backImageWrapMode,
             Color backImageTransparentColor,
-            GradientStyle backGradientStyle, 
+            GradientStyle backGradientStyle,
             Color backSecondaryColor
-            )
+        )
         {
             Brush brush = new SolidBrush(backColor);
 
-            if( backImage.Length > 0 && backImageWrapMode != ChartImageWrapMode.Unscaled && backImageWrapMode != ChartImageWrapMode.Scaled)
+            if (
+                backImage.Length > 0
+                && backImageWrapMode != ChartImageWrapMode.Unscaled
+                && backImageWrapMode != ChartImageWrapMode.Scaled
+            )
             {
-                brush = GetTextureBrush(backImage, backImageTransparentColor, backImageWrapMode, backColor );
+                brush = GetTextureBrush(
+                    backImage,
+                    backImageTransparentColor,
+                    backImageWrapMode,
+                    backColor
+                );
             }
-            else if( backHatchStyle != ChartHatchStyle.None )
+            else if (backHatchStyle != ChartHatchStyle.None)
             {
-                brush = GetHatchBrush( backHatchStyle, backColor, backSecondaryColor );
+                brush = GetHatchBrush(backHatchStyle, backColor, backSecondaryColor);
             }
-            else if( backGradientStyle != GradientStyle.None )
+            else if (backGradientStyle != GradientStyle.None)
             {
                 // If a gradient type  is set create a brush with gradient
-                brush = GetGradientBrush( rect, backColor, backSecondaryColor, backGradientStyle );
+                brush = GetGradientBrush(rect, backColor, backSecondaryColor, backGradientStyle);
             }
 
             return brush;
@@ -4637,81 +5328,80 @@ System.Drawing.Image image = _common.ImageLoader.LoadImage( backImage );
         #region Coordinates converter
 
         /// <summary>
-        /// This method takes a RectangleF structure that is using absolute coordinates 
+        /// This method takes a RectangleF structure that is using absolute coordinates
         /// and returns a RectangleF object that uses relative coordinates.
         /// </summary>
         /// <param name="rectangle">RectangleF structure in absolute coordinates.</param>
         /// <returns>RectangleF structure in relative coordinates.</returns>
-        public RectangleF GetRelativeRectangle( RectangleF rectangle )
+        public RectangleF GetRelativeRectangle(RectangleF rectangle)
         {
             // Check arguments
             if (rectangle == null)
                 throw new ArgumentNullException("rectangle");
-            
+
             RectangleF relative = RectangleF.Empty;
 
             // Convert absolute coordinates to relative coordinates
-            relative.X = rectangle.X * 100F / ((float)(_width - 1)); 
-            relative.Y = rectangle.Y * 100F / ((float)(_height - 1)); 
-            relative.Width = rectangle.Width * 100F / ((float)(_width - 1)); 
-            relative.Height = rectangle.Height * 100F / ((float)(_height - 1)); 
+            relative.X = rectangle.X * 100F / ((float)(_width - 1));
+            relative.Y = rectangle.Y * 100F / ((float)(_height - 1));
+            relative.Width = rectangle.Width * 100F / ((float)(_width - 1));
+            relative.Height = rectangle.Height * 100F / ((float)(_height - 1));
 
             // Return Relative coordinates
             return relative;
         }
 
         /// <summary>
-        /// This method takes a PointF object that is using absolute coordinates 
+        /// This method takes a PointF object that is using absolute coordinates
         /// and returns a PointF object that uses relative coordinates.
         /// </summary>
         /// <param name="point">PointF object in absolute coordinates.</param>
         /// <returns>PointF object in relative coordinates.</returns>
-        public PointF GetRelativePoint( PointF point )
+        public PointF GetRelativePoint(PointF point)
         {
             // Check arguments
             if (point == null)
                 throw new ArgumentNullException("point");
-            
+
             PointF relative = PointF.Empty;
 
             // Convert absolute coordinates to relative coordinates
-            relative.X = point.X * 100F / ((float)(_width - 1)); 
-            relative.Y = point.Y * 100F / ((float)(_height - 1)); 
-            
+            relative.X = point.X * 100F / ((float)(_width - 1));
+            relative.Y = point.Y * 100F / ((float)(_height - 1));
+
             // Return Relative coordinates
             return relative;
         }
 
-
         /// <summary>
-        /// This method takes a SizeF object that uses absolute coordinates 
+        /// This method takes a SizeF object that uses absolute coordinates
         /// and returns a SizeF object that uses relative coordinates.
         /// </summary>
         /// <param name="size">SizeF object in absolute coordinates.</param>
         /// <returns>SizeF object in relative coordinates.</returns>
-        public SizeF GetRelativeSize( SizeF size )
+        public SizeF GetRelativeSize(SizeF size)
         {
             // Check arguments
             if (size == null)
-                throw new ArgumentNullException("size"); 
-            
+                throw new ArgumentNullException("size");
+
             SizeF relative = SizeF.Empty;
 
             // Convert absolute coordinates to relative coordinates
-            relative.Width = size.Width * 100F / ((float)(_width - 1)); 
-            relative.Height = size.Height * 100F / ((float)(_height - 1)); 
-            
+            relative.Width = size.Width * 100F / ((float)(_width - 1));
+            relative.Height = size.Height * 100F / ((float)(_height - 1));
+
             // Return relative coordinates
             return relative;
         }
 
         /// <summary>
-        /// This method takes a PointF object and converts its relative coordinates 
+        /// This method takes a PointF object and converts its relative coordinates
         /// to absolute coordinates.
         /// </summary>
         /// <param name="point">PointF object in relative coordinates.</param>
         /// <returns>PointF object in absolute coordinates.</returns>
-        public PointF GetAbsolutePoint( PointF point )
+        public PointF GetAbsolutePoint(PointF point)
         {
             // Check arguments
             if (point == null)
@@ -4720,20 +5410,20 @@ System.Drawing.Image image = _common.ImageLoader.LoadImage( backImage );
             PointF absolute = PointF.Empty;
 
             // Convert relative coordinates to absolute coordinates
-            absolute.X = point.X * (_width - 1) / 100F; 
-            absolute.Y = point.Y * (_height - 1) / 100F; 
+            absolute.X = point.X * (_width - 1) / 100F;
+            absolute.Y = point.Y * (_height - 1) / 100F;
 
             // Return Absolute coordinates
             return absolute;
         }
 
         /// <summary>
-        /// This method takes a RectangleF structure and converts its relative coordinates 
+        /// This method takes a RectangleF structure and converts its relative coordinates
         /// to absolute coordinates.
         /// </summary>
         /// <param name="rectangle">RectangleF object in relative coordinates.</param>
         /// <returns>RectangleF object in absolute coordinates.</returns>
-        public RectangleF GetAbsoluteRectangle( RectangleF rectangle )
+        public RectangleF GetAbsoluteRectangle(RectangleF rectangle)
         {
             // Check arguments
             if (rectangle == null)
@@ -4742,10 +5432,10 @@ System.Drawing.Image image = _common.ImageLoader.LoadImage( backImage );
             RectangleF absolute = RectangleF.Empty;
 
             // Convert relative coordinates to absolute coordinates
-            absolute.X = rectangle.X * (_width - 1) / 100F; 
-            absolute.Y = rectangle.Y * (_height - 1) / 100F; 
-            absolute.Width = rectangle.Width * (_width - 1) / 100F; 
-            absolute.Height = rectangle.Height * (_height - 1) / 100F; 
+            absolute.X = rectangle.X * (_width - 1) / 100F;
+            absolute.Y = rectangle.Y * (_height - 1) / 100F;
+            absolute.Width = rectangle.Width * (_width - 1) / 100F;
+            absolute.Height = rectangle.Height * (_height - 1) / 100F;
 
             // Return Absolute coordinates
             return absolute;
@@ -4757,23 +5447,22 @@ System.Drawing.Image image = _common.ImageLoader.LoadImage( backImage );
         /// </summary>
         /// <param name="size">SizeF object in relative coordinates.</param>
         /// <returns>SizeF object in absolute coordinates.</returns>
-        public SizeF GetAbsoluteSize( SizeF size )
+        public SizeF GetAbsoluteSize(SizeF size)
         {
             // Check arguments
             if (size == null)
-                throw new ArgumentNullException("size"); 
-            
+                throw new ArgumentNullException("size");
+
             SizeF absolute = SizeF.Empty;
 
             // Convert relative coordinates to absolute coordinates
-            absolute.Width = size.Width * (_width - 1) / 100F; 
-            absolute.Height = size.Height * (_height - 1) / 100F; 
-            
+            absolute.Width = size.Width * (_width - 1) / 100F;
+            absolute.Height = size.Height * (_height - 1) / 100F;
+
             // Return Absolute coordinates
             return absolute;
         }
 
-    
         #endregion
 
         #region Border drawing helper methods
@@ -4788,14 +5477,45 @@ System.Drawing.Image image = _common.ImageLoader.LoadImage( backImage );
         {
             // Create rounded rectangle path
             GraphicsPath path = new GraphicsPath();
-            path.AddLine(rect.X+cornerRadius[0], rect.Y, rect.Right-cornerRadius[1], rect.Y);
-            path.AddArc(rect.Right-2f*cornerRadius[1], rect.Y, 2f*cornerRadius[1], 2f*cornerRadius[2], 270, 90);
-            path.AddLine(rect.Right, rect.Y + cornerRadius[2], rect.Right, rect.Bottom - cornerRadius[3]);
-            path.AddArc(rect.Right-2f*cornerRadius[4], rect.Bottom-2f*cornerRadius[3], 2f*cornerRadius[4], 2f*cornerRadius[3], 0, 90);
-            path.AddLine(rect.Right-cornerRadius[4], rect.Bottom, rect.X + cornerRadius[5], rect.Bottom);
-            path.AddArc(rect.X, rect.Bottom-2f*cornerRadius[6], 2f*cornerRadius[5], 2f*cornerRadius[6], 90, 90);
-            path.AddLine(rect.X, rect.Bottom-cornerRadius[6], rect.X, rect.Y+cornerRadius[7]);
-            path.AddArc(rect.X, rect.Y, 2f*cornerRadius[0], 2f*cornerRadius[7], 180, 90);
+            path.AddLine(rect.X + cornerRadius[0], rect.Y, rect.Right - cornerRadius[1], rect.Y);
+            path.AddArc(
+                rect.Right - 2f * cornerRadius[1],
+                rect.Y,
+                2f * cornerRadius[1],
+                2f * cornerRadius[2],
+                270,
+                90
+            );
+            path.AddLine(
+                rect.Right,
+                rect.Y + cornerRadius[2],
+                rect.Right,
+                rect.Bottom - cornerRadius[3]
+            );
+            path.AddArc(
+                rect.Right - 2f * cornerRadius[4],
+                rect.Bottom - 2f * cornerRadius[3],
+                2f * cornerRadius[4],
+                2f * cornerRadius[3],
+                0,
+                90
+            );
+            path.AddLine(
+                rect.Right - cornerRadius[4],
+                rect.Bottom,
+                rect.X + cornerRadius[5],
+                rect.Bottom
+            );
+            path.AddArc(
+                rect.X,
+                rect.Bottom - 2f * cornerRadius[6],
+                2f * cornerRadius[5],
+                2f * cornerRadius[6],
+                90,
+                90
+            );
+            path.AddLine(rect.X, rect.Bottom - cornerRadius[6], rect.X, rect.Y + cornerRadius[7]);
+            path.AddArc(rect.X, rect.Y, 2f * cornerRadius[0], 2f * cornerRadius[7], 180, 90);
 
             return path;
         }
@@ -4809,7 +5529,14 @@ System.Drawing.Image image = _common.ImageLoader.LoadImage( backImage );
         /// <param name="centerColor">Center color.</param>
         /// <param name="surroundColor">Surrounding color.</param>
         /// <param name="shadowScale">Shadow scale value.</param>
-        internal void DrawRoundedRectShadowAbs(RectangleF rect, float[] cornerRadius, float radius, Color centerColor, Color surroundColor, float shadowScale)
+        internal void DrawRoundedRectShadowAbs(
+            RectangleF rect,
+            float[] cornerRadius,
+            float radius,
+            Color centerColor,
+            Color surroundColor,
+            float shadowScale
+        )
         {
             // Create rounded rectangle path
             GraphicsPath path = CreateRoundedRectPath(rect, cornerRadius);
@@ -4819,18 +5546,24 @@ System.Drawing.Image image = _common.ImageLoader.LoadImage( backImage );
             shadowBrush.CenterColor = centerColor;
 
             // Set the color along the entire boundary of the path
-            Color[] colors = {surroundColor};
+            Color[] colors = { surroundColor };
             shadowBrush.SurroundColors = colors;
-            shadowBrush.CenterPoint = new PointF(rect.X + rect.Width/2f, rect.Y + rect.Height/2f);
+            shadowBrush.CenterPoint = new PointF(
+                rect.X + rect.Width / 2f,
+                rect.Y + rect.Height / 2f
+            );
 
             // Define brush focus scale
-            PointF focusScale = new PointF(1-shadowScale*radius/rect.Width, 1-shadowScale*radius/rect.Height);
+            PointF focusScale = new PointF(
+                1 - shadowScale * radius / rect.Width,
+                1 - shadowScale * radius / rect.Height
+            );
             shadowBrush.FocusScales = focusScale;
 
             // Draw rounded rectangle
             this.FillPath(shadowBrush, path);
 
-            if( path != null )
+            if (path != null)
             {
                 path.Dispose();
             }
@@ -4853,25 +5586,37 @@ System.Drawing.Image image = _common.ImageLoader.LoadImage( backImage );
         /// <param name="borderWidth">Border Width</param>
         /// <param name="borderDashStyle">Border Style</param>
         internal void Draw3DBorderRel(
-            BorderSkin borderSkin, 
-            RectangleF rect, 
-            Color backColor, 
-            ChartHatchStyle backHatchStyle, 
-            string backImage, 
-            ChartImageWrapMode backImageWrapMode, 
+            BorderSkin borderSkin,
+            RectangleF rect,
+            Color backColor,
+            ChartHatchStyle backHatchStyle,
+            string backImage,
+            ChartImageWrapMode backImageWrapMode,
             Color backImageTransparentColor,
             ChartImageAlignmentStyle backImageAlign,
-            GradientStyle backGradientStyle, 
-            Color backSecondaryColor, 
-            Color borderColor, 
-            int borderWidth, 
-            ChartDashStyle borderDashStyle)
+            GradientStyle backGradientStyle,
+            Color backSecondaryColor,
+            Color borderColor,
+            int borderWidth,
+            ChartDashStyle borderDashStyle
+        )
         {
-            Draw3DBorderAbs(borderSkin, GetAbsoluteRectangle(rect), backColor, backHatchStyle, 
-                backImage, backImageWrapMode, backImageTransparentColor, backImageAlign, backGradientStyle, 
-                backSecondaryColor, borderColor, borderWidth, borderDashStyle);
+            Draw3DBorderAbs(
+                borderSkin,
+                GetAbsoluteRectangle(rect),
+                backColor,
+                backHatchStyle,
+                backImage,
+                backImageWrapMode,
+                backImageTransparentColor,
+                backImageAlign,
+                backGradientStyle,
+                backSecondaryColor,
+                borderColor,
+                borderWidth,
+                borderDashStyle
+            );
         }
-
 
         /// <summary>
         /// Draws 3D border in absolute coordinates.
@@ -4890,35 +5635,56 @@ System.Drawing.Image image = _common.ImageLoader.LoadImage( backImage );
         /// <param name="borderWidth">Border Width</param>
         /// <param name="borderDashStyle">Border Style</param>
         internal void Draw3DBorderAbs(
-            BorderSkin borderSkin, 
-            RectangleF absRect, 
-            Color backColor, 
-            ChartHatchStyle backHatchStyle, 
-            string backImage, 
-            ChartImageWrapMode backImageWrapMode, 
+            BorderSkin borderSkin,
+            RectangleF absRect,
+            Color backColor,
+            ChartHatchStyle backHatchStyle,
+            string backImage,
+            ChartImageWrapMode backImageWrapMode,
             Color backImageTransparentColor,
             ChartImageAlignmentStyle backImageAlign,
-            GradientStyle backGradientStyle, 
-            Color backSecondaryColor, 
-            Color borderColor, 
-            int borderWidth, 
-            ChartDashStyle borderDashStyle)
+            GradientStyle backGradientStyle,
+            Color backSecondaryColor,
+            Color borderColor,
+            int borderWidth,
+            ChartDashStyle borderDashStyle
+        )
         {
             // Check input parameters
-            if(_common == null || borderSkin.SkinStyle == BorderSkinStyle.None || absRect.Width == 0 || absRect.Height == 0)
+            if (
+                _common == null
+                || borderSkin.SkinStyle == BorderSkinStyle.None
+                || absRect.Width == 0
+                || absRect.Height == 0
+            )
             {
                 return;
             }
 
             // Find required border interface
-            IBorderType    borderTypeInterface = _common.BorderTypeRegistry.GetBorderType(borderSkin.SkinStyle.ToString());
-            if(borderTypeInterface != null)
+            IBorderType borderTypeInterface = _common.BorderTypeRegistry.GetBorderType(
+                borderSkin.SkinStyle.ToString()
+            );
+            if (borderTypeInterface != null)
             {
                 borderTypeInterface.Resolution = this.Graphics.DpiX;
                 // Draw border
-                borderTypeInterface.DrawBorder(this, borderSkin, absRect, backColor, backHatchStyle, backImage, backImageWrapMode, 
-                    backImageTransparentColor, backImageAlign, backGradientStyle, backSecondaryColor, 
-                    borderColor, borderWidth, borderDashStyle);
+                borderTypeInterface.DrawBorder(
+                    this,
+                    borderSkin,
+                    absRect,
+                    backColor,
+                    backHatchStyle,
+                    backImage,
+                    backImageWrapMode,
+                    backImageTransparentColor,
+                    backImageAlign,
+                    backGradientStyle,
+                    backSecondaryColor,
+                    borderColor,
+                    borderWidth,
+                    borderDashStyle
+                );
             }
         }
 
@@ -4936,23 +5702,31 @@ System.Drawing.Image image = _common.ImageLoader.LoadImage( backImage );
             // Get column drawing style
             PieDrawingStyle pieDrawingStyle = PieDrawingStyle.Default;
             string styleName = point[CustomPropertyName.PieDrawingStyle];
-            if(styleName != null)
+            if (styleName != null)
             {
-                if(String.Compare(styleName, "Default", StringComparison.OrdinalIgnoreCase) == 0)
+                if (String.Compare(styleName, "Default", StringComparison.OrdinalIgnoreCase) == 0)
                 {
                     pieDrawingStyle = PieDrawingStyle.Default;
                 }
-                else if (String.Compare(styleName, "SoftEdge", StringComparison.OrdinalIgnoreCase) == 0)
+                else if (
+                    String.Compare(styleName, "SoftEdge", StringComparison.OrdinalIgnoreCase) == 0
+                )
                 {
                     pieDrawingStyle = PieDrawingStyle.SoftEdge;
                 }
-                else if (String.Compare(styleName, "Concave", StringComparison.OrdinalIgnoreCase) == 0)
+                else if (
+                    String.Compare(styleName, "Concave", StringComparison.OrdinalIgnoreCase) == 0
+                )
                 {
                     pieDrawingStyle = PieDrawingStyle.Concave;
-                }                    
+                }
                 else
                 {
-                    throw( new InvalidOperationException(SR.ExceptionCustomAttributeValueInvalid( styleName, "PieDrawingStyle")));
+                    throw (
+                        new InvalidOperationException(
+                            SR.ExceptionCustomAttributeValueInvalid(styleName, "PieDrawingStyle")
+                        )
+                    );
                 }
             }
             return pieDrawingStyle;
@@ -4978,105 +5752,142 @@ System.Drawing.Image image = _common.ImageLoader.LoadImage( backImage );
         /// <param name="doughnut">True if Doughnut is drawn instead of pie</param>
         /// <param name="doughnutRadius">Internal radius of the doughnut</param>
         /// <param name="pieDrawingStyle">Pie drawing style.</param>
-        internal void DrawPieRel( 
-            RectangleF rect, 
+        internal void DrawPieRel(
+            RectangleF rect,
             float startAngle,
             float sweepAngle,
-            Color backColor, 
-            ChartHatchStyle backHatchStyle, 
-            string backImage, 
-            ChartImageWrapMode backImageWrapMode, 
+            Color backColor,
+            ChartHatchStyle backHatchStyle,
+            string backImage,
+            ChartImageWrapMode backImageWrapMode,
             Color backImageTransparentColor,
-            GradientStyle backGradientStyle, 
-            Color backSecondaryColor, 
-            Color borderColor, 
-            int borderWidth, 
-            ChartDashStyle borderDashStyle, 
+            GradientStyle backGradientStyle,
+            Color backSecondaryColor,
+            Color borderColor,
+            int borderWidth,
+            ChartDashStyle borderDashStyle,
             bool shadow,
             bool doughnut,
             float doughnutRadius,
             PieDrawingStyle pieDrawingStyle
-            )
+        )
         {
-            Pen borderPen = null;    // Pen
-            Brush fillBrush;        // Brush
+            Pen borderPen = null; // Pen
+            Brush fillBrush; // Brush
 
             // Get absolute rectangle
-            RectangleF absRect = GetAbsoluteRectangle( rect );
+            RectangleF absRect = GetAbsoluteRectangle(rect);
 
-            if( doughnutRadius == 100.0 )
+            if (doughnutRadius == 100.0)
             {
                 doughnut = false;
             }
 
-            if( doughnutRadius == 0.0 )
+            if (doughnutRadius == 0.0)
             {
                 return;
             }
 
             // Create Brush
-            if( backHatchStyle != ChartHatchStyle.None )
+            if (backHatchStyle != ChartHatchStyle.None)
             {
                 // Create Hatch Brush
-                fillBrush = GetHatchBrush( backHatchStyle, backColor, backSecondaryColor );
+                fillBrush = GetHatchBrush(backHatchStyle, backColor, backSecondaryColor);
             }
-            else if( backGradientStyle != GradientStyle.None ) 
-            { 
+            else if (backGradientStyle != GradientStyle.None)
+            {
                 // Create gradient brush
-                if( backGradientStyle == GradientStyle.Center )
+                if (backGradientStyle == GradientStyle.Center)
                 {
-                    fillBrush = GetPieGradientBrush( absRect, backColor, backSecondaryColor );
+                    fillBrush = GetPieGradientBrush(absRect, backColor, backSecondaryColor);
                 }
                 else
                 {
                     using (GraphicsPath path = new GraphicsPath())
                     {
-                        path.AddPie(absRect.X, absRect.Y, absRect.Width, absRect.Height, startAngle, sweepAngle);
-                        fillBrush = GetGradientBrush(path.GetBounds(), backColor, backSecondaryColor, backGradientStyle);
+                        path.AddPie(
+                            absRect.X,
+                            absRect.Y,
+                            absRect.Width,
+                            absRect.Height,
+                            startAngle,
+                            sweepAngle
+                        );
+                        fillBrush = GetGradientBrush(
+                            path.GetBounds(),
+                            backColor,
+                            backSecondaryColor,
+                            backGradientStyle
+                        );
                     }
                 }
             }
-            else if( backImage.Length > 0 && backImageWrapMode != ChartImageWrapMode.Unscaled && backImageWrapMode != ChartImageWrapMode.Scaled )
-            { 
+            else if (
+                backImage.Length > 0
+                && backImageWrapMode != ChartImageWrapMode.Unscaled
+                && backImageWrapMode != ChartImageWrapMode.Scaled
+            )
+            {
                 // Create textured brush
-                fillBrush = GetTextureBrush(backImage, backImageTransparentColor, backImageWrapMode, backColor );
+                fillBrush = GetTextureBrush(
+                    backImage,
+                    backImageTransparentColor,
+                    backImageWrapMode,
+                    backColor
+                );
             }
             else
             {
                 // Create solid brush
-                fillBrush = new SolidBrush( backColor );
+                fillBrush = new SolidBrush(backColor);
             }
 
             // Create border Pen
-            borderPen = new Pen( borderColor, borderWidth );
-            
+            borderPen = new Pen(borderColor, borderWidth);
+
             // Set a border line style
-            borderPen.DashStyle = GetPenStyle( borderDashStyle );
+            borderPen.DashStyle = GetPenStyle(borderDashStyle);
 
             // Use rounded line joins
             borderPen.LineJoin = LineJoin.Round;
 
             // Draw Doughnut
-            if( doughnut )
+            if (doughnut)
             {
                 using (GraphicsPath path = new GraphicsPath())
                 {
-
-                    path.AddArc(absRect.X + absRect.Width * doughnutRadius / 200 - 1, absRect.Y + absRect.Height * doughnutRadius / 200 - 1, absRect.Width - absRect.Width * doughnutRadius / 100 + 2, absRect.Height - absRect.Height * doughnutRadius / 100 + 2, startAngle, sweepAngle);
-                    path.AddArc(absRect.X, absRect.Y, absRect.Width, absRect.Height, startAngle + sweepAngle, -sweepAngle);
+                    path.AddArc(
+                        absRect.X + absRect.Width * doughnutRadius / 200 - 1,
+                        absRect.Y + absRect.Height * doughnutRadius / 200 - 1,
+                        absRect.Width - absRect.Width * doughnutRadius / 100 + 2,
+                        absRect.Height - absRect.Height * doughnutRadius / 100 + 2,
+                        startAngle,
+                        sweepAngle
+                    );
+                    path.AddArc(
+                        absRect.X,
+                        absRect.Y,
+                        absRect.Width,
+                        absRect.Height,
+                        startAngle + sweepAngle,
+                        -sweepAngle
+                    );
 
                     path.CloseFigure();
 
                     this.FillPath(fillBrush, path);
 
-
                     // Draw Pie gradien effects
-                    this.DrawPieGradientEffects(pieDrawingStyle, absRect, startAngle, sweepAngle, doughnutRadius);
+                    this.DrawPieGradientEffects(
+                        pieDrawingStyle,
+                        absRect,
+                        startAngle,
+                        sweepAngle,
+                        doughnutRadius
+                    );
 
                     // Draw Doughnut Border
-                    if (!shadow &&
-                        borderWidth > 0 &&
-                        borderDashStyle != ChartDashStyle.NotSet)
+                    if (!shadow && borderWidth > 0 && borderDashStyle != ChartDashStyle.NotSet)
                     {
                         this.DrawPath(borderPen, path);
                     }
@@ -5084,90 +5895,132 @@ System.Drawing.Image image = _common.ImageLoader.LoadImage( backImage );
             }
             else // Draw Pie
             {
-
                 // Draw Soft shadow for pie slice
-                if( shadow && softShadows )
+                if (shadow && softShadows)
                 {
-                    DrawPieSoftShadow( startAngle, sweepAngle, absRect, backColor );
+                    DrawPieSoftShadow(startAngle, sweepAngle, absRect, backColor);
                 }
-                else 
+                else
                 {
                     // Fill Pie for normal shadow or colored pie slice
-                    this.FillPie( fillBrush, absRect.X, absRect.Y, absRect.Width, absRect.Height, startAngle, sweepAngle );
+                    this.FillPie(
+                        fillBrush,
+                        absRect.X,
+                        absRect.Y,
+                        absRect.Width,
+                        absRect.Height,
+                        startAngle,
+                        sweepAngle
+                    );
 
                     // Draw Pie gradien effects
-                    this.DrawPieGradientEffects( pieDrawingStyle, absRect, startAngle, sweepAngle, -1f);
+                    this.DrawPieGradientEffects(
+                        pieDrawingStyle,
+                        absRect,
+                        startAngle,
+                        sweepAngle,
+                        -1f
+                    );
                 }
 
-                
                 // Draw Pie Border
-                if( !shadow  &&
-                    borderWidth > 0 &&
-                    borderDashStyle != ChartDashStyle.NotSet)
+                if (!shadow && borderWidth > 0 && borderDashStyle != ChartDashStyle.NotSet)
                 {
-                    this.DrawPie( borderPen, absRect.X, absRect.Y, absRect.Width, absRect.Height, startAngle, sweepAngle );
+                    this.DrawPie(
+                        borderPen,
+                        absRect.X,
+                        absRect.Y,
+                        absRect.Width,
+                        absRect.Height,
+                        startAngle,
+                        sweepAngle
+                    );
                 }
             }
 
             // Dispose graphics objects
-            if( borderPen != null )
+            if (borderPen != null)
             {
                 borderPen.Dispose();
             }
 
-            if( fillBrush != null )
+            if (fillBrush != null)
             {
                 fillBrush.Dispose();
             }
         }
 
-        private void DrawPieGradientEffects( 
-            PieDrawingStyle pieDrawingStyle, 
-            RectangleF position, 
-            float startAngle, 
+        private void DrawPieGradientEffects(
+            PieDrawingStyle pieDrawingStyle,
+            RectangleF position,
+            float startAngle,
             float sweepAngle,
-            float doughnutRadius)
+            float doughnutRadius
+        )
         {
-            if(pieDrawingStyle == PieDrawingStyle.Concave)
+            if (pieDrawingStyle == PieDrawingStyle.Concave)
             {
-                // Calculate the size of the shadow. Note: For Doughnut chart shadow is drawn 
+                // Calculate the size of the shadow. Note: For Doughnut chart shadow is drawn
                 // twice on the outside and inside radius.
                 float minSize = (float)Math.Min(position.Width, position.Height);
                 float shadowSize = minSize * 0.05f;
-            
+
                 // Create brush path
                 RectangleF gradientPath = position;
                 gradientPath.Inflate(-shadowSize, -shadowSize);
-                using(GraphicsPath brushPath = new GraphicsPath())
+                using (GraphicsPath brushPath = new GraphicsPath())
                 {
                     brushPath.AddEllipse(gradientPath);
 
                     // Create shadow path
-                    using(GraphicsPath path = new GraphicsPath())
+                    using (GraphicsPath path = new GraphicsPath())
                     {
-                        if(doughnutRadius < 0f)
+                        if (doughnutRadius < 0f)
                         {
                             path.AddPie(Rectangle.Round(gradientPath), startAngle, sweepAngle);
                         }
                         else
                         {
-                            path.AddArc( 
-                                gradientPath.X + position.Width * doughnutRadius /200 - 1 - shadowSize, 
-                                gradientPath.Y + position.Height * doughnutRadius /200 - 1 - shadowSize, 
-                                gradientPath.Width - position.Width * doughnutRadius / 100 + 2 + 2f * shadowSize, 
-                                gradientPath.Height - position.Height * doughnutRadius / 100 + 2 + 2f * shadowSize, 
-                                startAngle, 
-                                sweepAngle );
-                            path.AddArc( gradientPath.X, gradientPath.Y, gradientPath.Width, gradientPath.Height, startAngle + sweepAngle, -sweepAngle );
+                            path.AddArc(
+                                gradientPath.X
+                                    + position.Width * doughnutRadius / 200
+                                    - 1
+                                    - shadowSize,
+                                gradientPath.Y
+                                    + position.Height * doughnutRadius / 200
+                                    - 1
+                                    - shadowSize,
+                                gradientPath.Width
+                                    - position.Width * doughnutRadius / 100
+                                    + 2
+                                    + 2f * shadowSize,
+                                gradientPath.Height
+                                    - position.Height * doughnutRadius / 100
+                                    + 2
+                                    + 2f * shadowSize,
+                                startAngle,
+                                sweepAngle
+                            );
+                            path.AddArc(
+                                gradientPath.X,
+                                gradientPath.Y,
+                                gradientPath.Width,
+                                gradientPath.Height,
+                                startAngle + sweepAngle,
+                                -sweepAngle
+                            );
                         }
 
                         // Create linear gradient brush
                         gradientPath.Inflate(1f, 1f);
-                        using(LinearGradientBrush brush = new LinearGradientBrush(
-                                  gradientPath, 
-                                  Color.Red,
-                                  Color.Green, 
-                                  LinearGradientMode.Vertical) )
+                        using (
+                            LinearGradientBrush brush = new LinearGradientBrush(
+                                gradientPath,
+                                Color.Red,
+                                Color.Green,
+                                LinearGradientMode.Vertical
+                            )
+                        )
                         {
                             ColorBlend colorBlend = new ColorBlend(3);
                             colorBlend.Colors[0] = Color.FromArgb(100, Color.Black);
@@ -5179,37 +6032,50 @@ System.Drawing.Image image = _common.ImageLoader.LoadImage( backImage );
                             brush.InterpolationColors = colorBlend;
 
                             // Fill shadow
-                            this.FillPath( brush, path );
-
+                            this.FillPath(brush, path);
                         }
                     }
-                }            
+                }
             }
-            else if(pieDrawingStyle == PieDrawingStyle.SoftEdge)
+            else if (pieDrawingStyle == PieDrawingStyle.SoftEdge)
             {
-                // Calculate the size of the shadow. Note: For Doughnut chart shadow is drawn 
+                // Calculate the size of the shadow. Note: For Doughnut chart shadow is drawn
                 // twice on the outside and inside radius.
                 float minSize = (float)Math.Min(position.Width, position.Height);
-                float shadowSize = minSize/10f;
-                if(doughnutRadius > 0f)
+                float shadowSize = minSize / 10f;
+                if (doughnutRadius > 0f)
                 {
                     shadowSize = (minSize * doughnutRadius / 100f) / 8f;
                 }
 
                 // Create brush path
-                using(GraphicsPath brushPath = new GraphicsPath())
+                using (GraphicsPath brushPath = new GraphicsPath())
                 {
                     brushPath.AddEllipse(position);
 
                     // Create shadow path
-                    using(GraphicsPath path = new GraphicsPath())
+                    using (GraphicsPath path = new GraphicsPath())
                     {
-                        path.AddArc( position.X + shadowSize, position.Y + shadowSize, position.Width - shadowSize * 2f, position.Height - shadowSize * 2f, startAngle, sweepAngle );
-                        path.AddArc( position.X, position.Y, position.Width, position.Height, startAngle + sweepAngle, -sweepAngle );
+                        path.AddArc(
+                            position.X + shadowSize,
+                            position.Y + shadowSize,
+                            position.Width - shadowSize * 2f,
+                            position.Height - shadowSize * 2f,
+                            startAngle,
+                            sweepAngle
+                        );
+                        path.AddArc(
+                            position.X,
+                            position.Y,
+                            position.Width,
+                            position.Height,
+                            startAngle + sweepAngle,
+                            -sweepAngle
+                        );
                         path.CloseFigure();
 
                         // Create shadow brush
-                        using( PathGradientBrush brush = new PathGradientBrush(brushPath) )
+                        using (PathGradientBrush brush = new PathGradientBrush(brushPath))
                         {
                             brush.CenterColor = Color.Transparent;
                             brush.SurroundColors = new Color[] { Color.FromArgb(100, Color.Black) };
@@ -5224,29 +6090,50 @@ System.Drawing.Image image = _common.ImageLoader.LoadImage( backImage );
                             brush.Blend = blend;
 
                             // Fill shadow
-                            this.FillPath( brush, path );
+                            this.FillPath(brush, path);
                         }
                     }
 
                     // Draw inner shadow for the doughnut chart
-                    if(doughnutRadius > 0f)
+                    if (doughnutRadius > 0f)
                     {
                         // Create brush path
-                        using(GraphicsPath brushInsidePath = new GraphicsPath())
+                        using (GraphicsPath brushInsidePath = new GraphicsPath())
                         {
                             RectangleF innerPosition = position;
-                            innerPosition.Inflate(- position.Width * doughnutRadius / 200f + shadowSize, -position.Height * doughnutRadius / 200f + shadowSize);
+                            innerPosition.Inflate(
+                                -position.Width * doughnutRadius / 200f + shadowSize,
+                                -position.Height * doughnutRadius / 200f + shadowSize
+                            );
                             brushInsidePath.AddEllipse(innerPosition);
 
                             // Create shadow path
-                            using(GraphicsPath path = new GraphicsPath())
+                            using (GraphicsPath path = new GraphicsPath())
                             {
-                                path.AddArc( innerPosition.X + shadowSize, innerPosition.Y + shadowSize, innerPosition.Width - 2f * shadowSize, innerPosition.Height - 2f * shadowSize, startAngle, sweepAngle );
-                                path.AddArc( innerPosition.X, innerPosition.Y, innerPosition.Width, innerPosition.Height, startAngle + sweepAngle, -sweepAngle );
+                                path.AddArc(
+                                    innerPosition.X + shadowSize,
+                                    innerPosition.Y + shadowSize,
+                                    innerPosition.Width - 2f * shadowSize,
+                                    innerPosition.Height - 2f * shadowSize,
+                                    startAngle,
+                                    sweepAngle
+                                );
+                                path.AddArc(
+                                    innerPosition.X,
+                                    innerPosition.Y,
+                                    innerPosition.Width,
+                                    innerPosition.Height,
+                                    startAngle + sweepAngle,
+                                    -sweepAngle
+                                );
                                 path.CloseFigure();
 
                                 // Create shadow brush
-                                using( PathGradientBrush brushInner = new PathGradientBrush(brushInsidePath) )
+                                using (
+                                    PathGradientBrush brushInner = new PathGradientBrush(
+                                        brushInsidePath
+                                    )
+                                )
                                 {
                                     brushInner.CenterColor = Color.FromArgb(100, Color.Black);
                                     brushInner.SurroundColors = new Color[] { Color.Transparent };
@@ -5261,7 +6148,7 @@ System.Drawing.Image image = _common.ImageLoader.LoadImage( backImage );
                                     brushInner.Blend = blend;
 
                                     // Fill shadow
-                                    this.FillPath( brushInner, path );
+                                    this.FillPath(brushInner, path);
                                 }
                             }
                         }
@@ -5271,36 +6158,48 @@ System.Drawing.Image image = _common.ImageLoader.LoadImage( backImage );
         }
 
         /// <summary>
-        /// The soft shadow of the pie 
+        /// The soft shadow of the pie
         /// </summary>
         /// <param name="startAngle">Angle measured in degrees clockwise from the x-axis to the first side of the pie shape.</param>
         /// <param name="sweepAngle">Angle measured in degrees clockwise from the startAngle parameter to the second side of the pie shape.</param>
         /// <param name="absRect">Rectangle of the pie in absolute coordinates</param>
         /// <param name="backColor">Fill color</param>
-        private void DrawPieSoftShadow( float startAngle, float sweepAngle, RectangleF absRect, Color backColor )
+        private void DrawPieSoftShadow(
+            float startAngle,
+            float sweepAngle,
+            RectangleF absRect,
+            Color backColor
+        )
         {
             GraphicsPath path = new GraphicsPath();
-            
-            path.AddEllipse( absRect.X, absRect.Y, absRect.Width, absRect.Height );
 
-            PathGradientBrush brush = new PathGradientBrush( path );
-        
-            Color[] colors = {
-                                Color.FromArgb( 0, backColor ),
-                                Color.FromArgb( backColor.A, backColor ),   
-                                Color.FromArgb( backColor.A, backColor )}; 
+            path.AddEllipse(absRect.X, absRect.Y, absRect.Width, absRect.Height);
 
-            float[] relativePositions = {
-                                            0f,       
-                                            0.05f,     
-                                            1.0f};    // at the center point.
+            PathGradientBrush brush = new PathGradientBrush(path);
+
+            Color[] colors =
+            {
+                Color.FromArgb(0, backColor),
+                Color.FromArgb(backColor.A, backColor),
+                Color.FromArgb(backColor.A, backColor)
+            };
+
+            float[] relativePositions = { 0f, 0.05f, 1.0f }; // at the center point.
 
             ColorBlend colorBlend = new ColorBlend();
             colorBlend.Colors = colors;
             colorBlend.Positions = relativePositions;
             brush.InterpolationColors = colorBlend;
 
-            this.FillPie( brush, absRect.X, absRect.Y, absRect.Width, absRect.Height, startAngle, sweepAngle );
+            this.FillPie(
+                brush,
+                absRect.X,
+                absRect.Y,
+                absRect.Width,
+                absRect.Height,
+                startAngle,
+                sweepAngle
+            );
         }
 
         #endregion
@@ -5318,10 +6217,19 @@ System.Drawing.Image image = _common.ImageLoader.LoadImage( backImage );
         /// <param name="lineDashStyle">Line Dash style</param>
         /// <param name="shift">Distance from the chart area</param>
         /// <param name="size">Arrow size</param>
-        internal void DrawArrowRel( PointF position, ArrowOrientation orientation, AxisArrowStyle type, Color color, int lineWidth, ChartDashStyle lineDashStyle, double shift, double size )
+        internal void DrawArrowRel(
+            PointF position,
+            ArrowOrientation orientation,
+            AxisArrowStyle type,
+            Color color,
+            int lineWidth,
+            ChartDashStyle lineDashStyle,
+            double shift,
+            double size
+        )
         {
             // Check if arrow should be drawn
-            if(type == AxisArrowStyle.None)
+            if (type == AxisArrowStyle.None)
             {
                 return;
             }
@@ -5338,7 +6246,14 @@ System.Drawing.Image image = _common.ImageLoader.LoadImage( backImage );
                 // Arrow type is triangle
                 if (type == AxisArrowStyle.Triangle)
                 {
-                    points = GetArrowShape(absolutePosition, orientation, shift, size, type, ref endPoint);
+                    points = GetArrowShape(
+                        absolutePosition,
+                        orientation,
+                        shift,
+                        size,
+                        type,
+                        ref endPoint
+                    );
 
                     endPoint = GetRelativePoint(endPoint);
 
@@ -5347,12 +6262,18 @@ System.Drawing.Image image = _common.ImageLoader.LoadImage( backImage );
 
                     // Draw arrow
                     this.FillPolygon(brush, points);
-
                 }
                 // Arrow type is sharp triangle
                 else if (type == AxisArrowStyle.SharpTriangle)
                 {
-                    points = GetArrowShape(absolutePosition, orientation, shift, size, type, ref endPoint);
+                    points = GetArrowShape(
+                        absolutePosition,
+                        orientation,
+                        shift,
+                        size,
+                        type,
+                        ref endPoint
+                    );
 
                     endPoint = GetRelativePoint(endPoint);
 
@@ -5361,12 +6282,18 @@ System.Drawing.Image image = _common.ImageLoader.LoadImage( backImage );
 
                     // Draw arrow
                     this.FillPolygon(brush, points);
-
                 }
                 // Arrow type is 'Lines'
                 else if (type == AxisArrowStyle.Lines)
                 {
-                    points = GetArrowShape(absolutePosition, orientation, shift, size, type, ref endPoint);
+                    points = GetArrowShape(
+                        absolutePosition,
+                        orientation,
+                        shift,
+                        size,
+                        type,
+                        ref endPoint
+                    );
 
                     points[0] = GetRelativePoint(points[0]);
                     points[1] = GetRelativePoint(points[1]);
@@ -5378,14 +6305,13 @@ System.Drawing.Image image = _common.ImageLoader.LoadImage( backImage );
                     DrawLineRel(color, lineWidth, lineDashStyle, position, endPoint);
                     DrawLineRel(color, lineWidth, lineDashStyle, points[0], points[2]);
                     DrawLineRel(color, lineWidth, lineDashStyle, points[1], points[2]);
-
                 }
             }
         }
 
         /// <summary>
-        /// This function calculates points for polygon, which represents 
-        /// shape of an arrow. There are four different orientations 
+        /// This function calculates points for polygon, which represents
+        /// shape of an arrow. There are four different orientations
         /// of arrow and three arrow types.
         /// </summary>
         /// <param name="position">Arrow position</param>
@@ -5395,25 +6321,32 @@ System.Drawing.Image image = _common.ImageLoader.LoadImage( backImage );
         /// <param name="type">Arrow style.</param>
         /// <param name="endPoint">End point of the axis and the beginning of arrow</param>
         /// <returns>Polygon points</returns>
-        private PointF[] GetArrowShape( PointF position, ArrowOrientation orientation, double shift, double size, AxisArrowStyle type, ref PointF endPoint )
+        private PointF[] GetArrowShape(
+            PointF position,
+            ArrowOrientation orientation,
+            double shift,
+            double size,
+            AxisArrowStyle type,
+            ref PointF endPoint
+        )
         {
             PointF[] points = new PointF[3]; // Polygon points
             double sharp; // Size for sharp triangle
 
             // Four different orientations for AxisArrowStyle
-            switch( orientation )
+            switch (orientation)
             {
-                    // Top orientation
+                // Top orientation
                 case ArrowOrientation.Top:
                     // Get absolute size for arrow
-                    // Arrow size has to have the same shape when width and height 
-                    // are changed. When the picture is resized, width of the chart 
+                    // Arrow size has to have the same shape when width and height
+                    // are changed. When the picture is resized, width of the chart
                     // picture is used only for arrow size.
-                    size = GetAbsoluteSize( new SizeF((float)size, (float)size) ).Width;
-                    shift = GetAbsoluteSize( new SizeF((float)shift,(float)shift) ).Height;
+                    size = GetAbsoluteSize(new SizeF((float)size, (float)size)).Width;
+                    shift = GetAbsoluteSize(new SizeF((float)shift, (float)shift)).Height;
 
                     // Size for sharp and regular triangle
-                    if( type == AxisArrowStyle.SharpTriangle )
+                    if (type == AxisArrowStyle.SharpTriangle)
                         sharp = size * 4;
                     else
                         sharp = size * 2;
@@ -5426,23 +6359,23 @@ System.Drawing.Image image = _common.ImageLoader.LoadImage( backImage );
                     points[2].Y = position.Y - (float)shift - (float)sharp;
                     // End of the axis line
                     endPoint.X = position.X;
-                    if( type == AxisArrowStyle.SharpTriangle || type == AxisArrowStyle.Triangle )
+                    if (type == AxisArrowStyle.SharpTriangle || type == AxisArrowStyle.Triangle)
                         endPoint.Y = points[1].Y;
                     else
                         endPoint.Y = points[2].Y;
-                    
+
                     break;
-                    // Bottom orientation
+                // Bottom orientation
                 case ArrowOrientation.Bottom:
                     // Get absolute size for arrow
-                    // Arrow size has to have the same shape when width and height 
-                    // are changed. When the picture is resized, width of the chart 
+                    // Arrow size has to have the same shape when width and height
+                    // are changed. When the picture is resized, width of the chart
                     // picture is used only for arrow size.
-                    size = GetAbsoluteSize( new SizeF((float)size, (float)size) ).Width;
-                    shift = GetAbsoluteSize( new SizeF((float)shift,(float)shift) ).Height;
+                    size = GetAbsoluteSize(new SizeF((float)size, (float)size)).Width;
+                    shift = GetAbsoluteSize(new SizeF((float)shift, (float)shift)).Height;
 
                     // Size for sharp and regular triangle
-                    if( type == AxisArrowStyle.SharpTriangle )
+                    if (type == AxisArrowStyle.SharpTriangle)
                         sharp = size * 4;
                     else
                         sharp = size * 2;
@@ -5455,19 +6388,19 @@ System.Drawing.Image image = _common.ImageLoader.LoadImage( backImage );
                     points[2].Y = position.Y + (float)shift + (float)sharp;
                     // End of the axis line
                     endPoint.X = position.X;
-                    if( type == AxisArrowStyle.SharpTriangle || type == AxisArrowStyle.Triangle )
+                    if (type == AxisArrowStyle.SharpTriangle || type == AxisArrowStyle.Triangle)
                         endPoint.Y = points[1].Y;
                     else
                         endPoint.Y = points[2].Y;
                     break;
-                    // Left orientation
+                // Left orientation
                 case ArrowOrientation.Left:
                     // Get absolute size for arrow
-                    size = GetAbsoluteSize( new SizeF((float)size, (float)size) ).Width;
-                    shift = GetAbsoluteSize( new SizeF((float)shift,(float)shift) ).Width;
+                    size = GetAbsoluteSize(new SizeF((float)size, (float)size)).Width;
+                    shift = GetAbsoluteSize(new SizeF((float)shift, (float)shift)).Width;
 
                     // Size for sharp and regular triangle
-                    if( type == AxisArrowStyle.SharpTriangle )
+                    if (type == AxisArrowStyle.SharpTriangle)
                         sharp = size * 4;
                     else
                         sharp = size * 2;
@@ -5480,19 +6413,19 @@ System.Drawing.Image image = _common.ImageLoader.LoadImage( backImage );
                     points[2].X = position.X - (float)shift - (float)sharp;
                     // End of the axis line
                     endPoint.Y = position.Y;
-                    if( type == AxisArrowStyle.SharpTriangle || type == AxisArrowStyle.Triangle )
+                    if (type == AxisArrowStyle.SharpTriangle || type == AxisArrowStyle.Triangle)
                         endPoint.X = points[1].X;
                     else
                         endPoint.X = points[2].X;
                     break;
-                    // Right orientation
+                // Right orientation
                 case ArrowOrientation.Right:
                     // Get absolute size for arrow
-                    size = GetAbsoluteSize( new SizeF((float)size, (float)size) ).Width;
-                    shift = GetAbsoluteSize( new SizeF((float)shift,(float)shift) ).Width;
+                    size = GetAbsoluteSize(new SizeF((float)size, (float)size)).Width;
+                    shift = GetAbsoluteSize(new SizeF((float)shift, (float)shift)).Width;
 
                     // Size for sharp and regular triangle
-                    if( type == AxisArrowStyle.SharpTriangle )
+                    if (type == AxisArrowStyle.SharpTriangle)
                         sharp = size * 4;
                     else
                         sharp = size * 2;
@@ -5505,7 +6438,7 @@ System.Drawing.Image image = _common.ImageLoader.LoadImage( backImage );
                     points[2].X = position.X + (float)shift + (float)sharp;
                     // End of the axis line
                     endPoint.Y = position.Y;
-                    if( type == AxisArrowStyle.SharpTriangle || type == AxisArrowStyle.Triangle )
+                    if (type == AxisArrowStyle.SharpTriangle || type == AxisArrowStyle.Triangle)
                         endPoint.X = points[1].X;
                     else
                         endPoint.X = points[2].X;
@@ -5516,7 +6449,7 @@ System.Drawing.Image image = _common.ImageLoader.LoadImage( backImage );
         }
 
         #endregion
-        
+
         #region Other methods and properties
 
         /// <summary>
@@ -5529,36 +6462,48 @@ System.Drawing.Image image = _common.ImageLoader.LoadImage( backImage );
             // Get column drawing style
             BarDrawingStyle barDrawingStyle = BarDrawingStyle.Default;
             string styleName = point[CustomPropertyName.DrawingStyle];
-            if(styleName != null)
+            if (styleName != null)
             {
-                if(String.Compare(styleName, "Default", StringComparison.OrdinalIgnoreCase) == 0)
+                if (String.Compare(styleName, "Default", StringComparison.OrdinalIgnoreCase) == 0)
                 {
                     barDrawingStyle = BarDrawingStyle.Default;
                 }
-                else if (String.Compare(styleName, "Cylinder", StringComparison.OrdinalIgnoreCase) == 0)
+                else if (
+                    String.Compare(styleName, "Cylinder", StringComparison.OrdinalIgnoreCase) == 0
+                )
                 {
                     barDrawingStyle = BarDrawingStyle.Cylinder;
                 }
-                else if (String.Compare(styleName, "Emboss", StringComparison.OrdinalIgnoreCase) == 0)
+                else if (
+                    String.Compare(styleName, "Emboss", StringComparison.OrdinalIgnoreCase) == 0
+                )
                 {
                     barDrawingStyle = BarDrawingStyle.Emboss;
                 }
-                else if (String.Compare(styleName, "LightToDark", StringComparison.OrdinalIgnoreCase) == 0)
+                else if (
+                    String.Compare(styleName, "LightToDark", StringComparison.OrdinalIgnoreCase)
+                    == 0
+                )
                 {
                     barDrawingStyle = BarDrawingStyle.LightToDark;
                 }
-                else if (String.Compare(styleName, "Wedge", StringComparison.OrdinalIgnoreCase) == 0)
+                else if (
+                    String.Compare(styleName, "Wedge", StringComparison.OrdinalIgnoreCase) == 0
+                )
                 {
                     barDrawingStyle = BarDrawingStyle.Wedge;
                 }
                 else
                 {
-                    throw (new InvalidOperationException(SR.ExceptionCustomAttributeValueInvalid(styleName, "DrawingStyle")));
+                    throw (
+                        new InvalidOperationException(
+                            SR.ExceptionCustomAttributeValueInvalid(styleName, "DrawingStyle")
+                        )
+                    );
                 }
             }
             return barDrawingStyle;
         }
-
 
         /// <summary>
         /// Find rounding coordinates for a rectangle
@@ -5567,14 +6512,14 @@ System.Drawing.Image image = _common.ImageLoader.LoadImage( backImage );
         /// <returns>Rounded rectangle</returns>
         internal RectangleF Round(RectangleF rect)
         {
-            float    left = (float)Math.Round( (double)rect.Left );
-            float    right = (float)Math.Round( (double)rect.Right );
-            float    top = (float)Math.Round( (double)rect.Top );
-            float    bottom = (float)Math.Round( (double)rect.Bottom );
+            float left = (float)Math.Round((double)rect.Left);
+            float right = (float)Math.Round((double)rect.Right);
+            float top = (float)Math.Round((double)rect.Top);
+            float bottom = (float)Math.Round((double)rect.Bottom);
 
-            return new RectangleF( left, top, right - left, bottom - top ); 
+            return new RectangleF(left, top, right - left, bottom - top);
         }
-        
+
         /// <summary>
         /// This method takes a given axis value for a specified axis and returns the relative pixel value.
         /// </summary>
@@ -5582,19 +6527,27 @@ System.Drawing.Image image = _common.ImageLoader.LoadImage( backImage );
         /// <param name="axis">An AxisName enum value that identifies the relevant axis.</param>
         /// <param name="axisValue">The axis value that needs to be converted to a relative pixel value.</param>
         /// <returns>The converted axis value, in relative pixel coordinates.</returns>
-        public double GetPositionFromAxis( string chartAreaName, AxisName axis, double axisValue )
+        public double GetPositionFromAxis(string chartAreaName, AxisName axis, double axisValue)
         {
-            if( axis == AxisName.X )
-                return _common.ChartPicture.ChartAreas[chartAreaName].AxisX.GetLinearPosition( axisValue );
+            if (axis == AxisName.X)
+                return _common.ChartPicture.ChartAreas[chartAreaName].AxisX.GetLinearPosition(
+                    axisValue
+                );
 
-            if( axis == AxisName.X2 )
-                return _common.ChartPicture.ChartAreas[chartAreaName].AxisX2.GetLinearPosition( axisValue );
+            if (axis == AxisName.X2)
+                return _common.ChartPicture.ChartAreas[chartAreaName].AxisX2.GetLinearPosition(
+                    axisValue
+                );
 
-            if( axis == AxisName.Y )
-                return _common.ChartPicture.ChartAreas[chartAreaName].AxisY.GetLinearPosition( axisValue );
+            if (axis == AxisName.Y)
+                return _common.ChartPicture.ChartAreas[chartAreaName].AxisY.GetLinearPosition(
+                    axisValue
+                );
 
-            if( axis == AxisName.Y2 )
-                return _common.ChartPicture.ChartAreas[chartAreaName].AxisY2.GetLinearPosition( axisValue );
+            if (axis == AxisName.Y2)
+                return _common.ChartPicture.ChartAreas[chartAreaName].AxisY2.GetLinearPosition(
+                    axisValue
+                );
 
             return 0;
         }
@@ -5604,7 +6557,7 @@ System.Drawing.Image image = _common.ImageLoader.LoadImage( backImage );
         /// </summary>
         /// <param name="width">Width</param>
         /// <param name="height">Height</param>
-        internal void SetPictureSize( int width, int height )
+        internal void SetPictureSize(int width, int height)
         {
             this._width = width;
             this._height = height;
@@ -5631,20 +6584,17 @@ System.Drawing.Image image = _common.ImageLoader.LoadImage( backImage );
         /// </summary>
         internal AntiAliasingStyles AntiAliasing
         {
-            get
-            {
-                return _antiAliasing;
-            }
+            get { return _antiAliasing; }
             set
             {
                 _antiAliasing = value;
 
                 // Graphics mode not set
-                if( Graphics == null )
+                if (Graphics == null)
                     return;
 
                 // Convert Chart's anti alias enumeration to GDI+ SmoothingMode
-                if( (_antiAliasing & AntiAliasingStyles.Graphics) == AntiAliasingStyles.Graphics )
+                if ((_antiAliasing & AntiAliasingStyles.Graphics) == AntiAliasingStyles.Graphics)
                 {
                     this.SmoothingMode = SmoothingMode.AntiAlias;
                 }
@@ -5664,15 +6614,15 @@ System.Drawing.Image image = _common.ImageLoader.LoadImage( backImage );
         }
 
         /// <summary>
-        /// Sets the clipping region of this Graphics object 
+        /// Sets the clipping region of this Graphics object
         /// to the rectangle specified by a RectangleF structure.
         /// </summary>
         /// <param name="region">Region rectangle</param>
-        internal void SetClip( RectangleF region )
+        internal void SetClip(RectangleF region)
         {
-            this.SetClipAbs( GetAbsoluteRectangle( region ) );
+            this.SetClipAbs(GetAbsoluteRectangle(region));
         }
-    
+
         #endregion
 
         #region Color manipulation methods
@@ -5684,14 +6634,18 @@ System.Drawing.Image image = _common.ImageLoader.LoadImage( backImage );
         /// <param name="endColor">The color from the gradient end.</param>
         /// <param name="relativePosition">The relative position.</param>
         /// <returns>Result color.</returns>
-        static internal Color GetGradientColor(Color beginColor, Color endColor, double relativePosition)
+        static internal Color GetGradientColor(
+            Color beginColor,
+            Color endColor,
+            double relativePosition
+        )
         {
             // Check if position is valid
-            if(relativePosition < 0 || relativePosition > 1 || double.IsNaN(relativePosition))
+            if (relativePosition < 0 || relativePosition > 1 || double.IsNaN(relativePosition))
             {
                 return beginColor;
             }
-            
+
             // Extracts Begin color
             int nBRed = beginColor.R;
             int nBGreen = beginColor.G;
@@ -5708,17 +6662,17 @@ System.Drawing.Image image = _common.ImageLoader.LoadImage( backImage );
             double dRBlue = nBBlue + (nEBlue - nBBlue) * relativePosition;
 
             // Make sure colors are in range from 0 to 255
-            if(dRRed > 255.0)
+            if (dRRed > 255.0)
                 dRRed = 255.0;
-            if(dRRed < 0.0)
+            if (dRRed < 0.0)
                 dRRed = 0.0;
-            if(dRGreen > 255.0)
+            if (dRGreen > 255.0)
                 dRGreen = 255.0;
-            if(dRGreen < 0.0)
+            if (dRGreen < 0.0)
                 dRGreen = 0.0;
-            if(dRBlue > 255.0)
+            if (dRBlue > 255.0)
                 dRBlue = 255.0;
-            if(dRBlue < 0.0)
+            if (dRBlue < 0.0)
                 dRBlue = 0.0;
 
             // Return a gradient color position
@@ -5729,7 +6683,7 @@ System.Drawing.Image image = _common.ImageLoader.LoadImage( backImage );
 
         #region RightToLeft
         /// <summary>
-        /// Returns chart right to left flag 
+        /// Returns chart right to left flag
         /// </summary>
         internal bool IsRightToLeft
         {
@@ -5742,7 +6696,7 @@ System.Drawing.Image image = _common.ImageLoader.LoadImage( backImage );
                 return Common.ChartPicture.RightToLeft == RightToLeft.Yes;
             }
         }
-        
+
         #endregion //RightToLeft
 
         #region IDisposable Members
@@ -5753,7 +6707,7 @@ System.Drawing.Image image = _common.ImageLoader.LoadImage( backImage );
         protected override void Dispose(bool disposing)
         {
             if (disposing)
-            {   
+            {
                 // Free up managed resources
                 if (_pen != null)
                 {

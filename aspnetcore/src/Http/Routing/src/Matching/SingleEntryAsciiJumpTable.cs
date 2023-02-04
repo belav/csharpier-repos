@@ -16,7 +16,8 @@ internal sealed class SingleEntryAsciiJumpTable : JumpTable
         int defaultDestination,
         int exitDestination,
         string text,
-        int destination)
+        int destination
+    )
     {
         _defaultDestination = defaultDestination;
         _exitDestination = exitDestination;

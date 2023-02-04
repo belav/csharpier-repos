@@ -13,18 +13,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 ///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see>, and
 ///     <see href="https://aka.ms/efcore-docs-cosmos">Accessing Azure Cosmos DB with EF Core</see> for more information and examples.
 /// </remarks>
-public class CosmosKeyDiscoveryConvention :
-    KeyDiscoveryConvention,
-    IEntityTypeAnnotationChangedConvention
+public class CosmosKeyDiscoveryConvention
+    : KeyDiscoveryConvention,
+        IEntityTypeAnnotationChangedConvention
 {
     /// <summary>
     ///     Creates a new instance of <see cref="CosmosKeyDiscoveryConvention" />.
     /// </summary>
     /// <param name="dependencies">Parameter object containing dependencies for this convention.</param>
     public CosmosKeyDiscoveryConvention(ProviderConventionSetBuilderDependencies dependencies)
-        : base(dependencies)
-    {
-    }
+        : base(dependencies) { }
 
     /// <summary>
     ///     Called after an annotation is changed on an entity type.
@@ -39,7 +37,8 @@ public class CosmosKeyDiscoveryConvention :
         string name,
         IConventionAnnotation? annotation,
         IConventionAnnotation? oldAnnotation,
-        IConventionContext<IConventionAnnotation> context)
+        IConventionContext<IConventionAnnotation> context
+    )
     {
         if (name == CosmosAnnotationNames.PartitionKeyName)
         {
@@ -48,7 +47,10 @@ public class CosmosKeyDiscoveryConvention :
     }
 
     /// <inheritdoc />
-    protected override void ProcessKeyProperties(IList<IConventionProperty> keyProperties, IConventionEntityType entityType)
+    protected override void ProcessKeyProperties(
+        IList<IConventionProperty> keyProperties,
+        IConventionEntityType entityType
+    )
     {
         if (keyProperties.Count == 0)
         {
@@ -59,8 +61,7 @@ public class CosmosKeyDiscoveryConvention :
         if (partitionKey != null)
         {
             var partitionKeyProperty = entityType.FindProperty(partitionKey);
-            if (partitionKeyProperty != null
-                && !keyProperties.Contains(partitionKeyProperty))
+            if (partitionKeyProperty != null && !keyProperties.Contains(partitionKeyProperty))
             {
                 keyProperties.Add(partitionKeyProperty);
             }

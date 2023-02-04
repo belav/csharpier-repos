@@ -26,9 +26,10 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil {
-
-    internal enum NativeType {
+namespace Mono.Cecil
+{
+    internal enum NativeType
+    {
         NONE = 0x66,
 
         BOOLEAN = 0x02,

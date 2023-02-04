@@ -23,9 +23,7 @@ namespace System.IdentityModel.Tokens
         /// Creates an instance of <see cref="X509NTAuthChainTrustValidator"/>
         /// </summary>
         public X509NTAuthChainTrustValidator()
-            : this(false, null)
-        {
-        }
+            : this(false, null) { }
 
         /// <summary>
         /// Creates an instance of <see cref="X509NTAuthChainTrustValidator"/>
@@ -51,7 +49,10 @@ namespace System.IdentityModel.Tokens
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("certificate");
             }
 
-            X509CertificateChain chain = new X509CertificateChain(this.useMachineContext, (uint)this.chainPolicyOID);
+            X509CertificateChain chain = new X509CertificateChain(
+                this.useMachineContext,
+                (uint)this.chainPolicyOID
+            );
             if (this.chainPolicy != null)
             {
                 chain.ChainPolicy = this.chainPolicy;
@@ -64,7 +65,10 @@ namespace System.IdentityModel.Tokens
                         SR.GetString(
                             SR.ID4070,
                             X509Util.GetCertificateId(certificate),
-                            GetChainStatusInformation(chain.ChainStatus))));
+                            GetChainStatusInformation(chain.ChainStatus)
+                        )
+                    )
+                );
             }
         }
 

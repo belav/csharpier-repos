@@ -34,13 +34,12 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Cairo {
-
+namespace Cairo
+{
     public struct Color
     {
-        public Color(double r, double g, double b) : this (r, g, b, 1.0)
-        {
-        }
+        public Color(double r, double g, double b)
+            : this(r, g, b, 1.0) { }
 
         public Color(double r, double g, double b, double a)
         {
@@ -50,24 +49,31 @@ namespace Cairo {
             this.a = a;
         }
 
-        double r, g, b, a;
+        double r,
+            g,
+            b,
+            a;
 
-        public double R {
+        public double R
+        {
             get { return r; }
             set { r = value; }
         }
 
-        public double G {
+        public double G
+        {
             get { return g; }
             set { g = value; }
         }
 
-        public double B {
+        public double B
+        {
             get { return b; }
             set { b = value; }
         }
 
-        public double A {
+        public double A
+        {
             get { return a; }
             set { a = value; }
         }

@@ -12,28 +12,56 @@ namespace System.Formats.Tar.Tests
         [Fact]
         public void Constructor_InvalidEntryName()
         {
-            Assert.Throws<ArgumentNullException>(() => new PaxTarEntry(TarEntryType.RegularFile, entryName: null));
-            Assert.Throws<ArgumentException>(() => new PaxTarEntry(TarEntryType.RegularFile, entryName: string.Empty));
+            Assert.Throws<ArgumentNullException>(
+                () => new PaxTarEntry(TarEntryType.RegularFile, entryName: null)
+            );
+            Assert.Throws<ArgumentException>(
+                () => new PaxTarEntry(TarEntryType.RegularFile, entryName: string.Empty)
+            );
         }
 
         [Fact]
         public void Constructor_UnsupportedEntryTypes()
         {
-            Assert.Throws<ArgumentException>(() => new PaxTarEntry((TarEntryType)byte.MaxValue, InitialEntryName));
+            Assert.Throws<ArgumentException>(
+                () => new PaxTarEntry((TarEntryType)byte.MaxValue, InitialEntryName)
+            );
 
-            Assert.Throws<ArgumentException>(() => new PaxTarEntry(TarEntryType.ContiguousFile, InitialEntryName));
-            Assert.Throws<ArgumentException>(() => new PaxTarEntry(TarEntryType.DirectoryList, InitialEntryName));
-            Assert.Throws<ArgumentException>(() => new PaxTarEntry(TarEntryType.LongLink, InitialEntryName));
-            Assert.Throws<ArgumentException>(() => new PaxTarEntry(TarEntryType.LongPath, InitialEntryName));
-            Assert.Throws<ArgumentException>(() => new PaxTarEntry(TarEntryType.MultiVolume, InitialEntryName));
-            Assert.Throws<ArgumentException>(() => new PaxTarEntry(TarEntryType.V7RegularFile, InitialEntryName));
-            Assert.Throws<ArgumentException>(() => new PaxTarEntry(TarEntryType.RenamedOrSymlinked, InitialEntryName));
-            Assert.Throws<ArgumentException>(() => new PaxTarEntry(TarEntryType.SparseFile, InitialEntryName));
-            Assert.Throws<ArgumentException>(() => new PaxTarEntry(TarEntryType.TapeVolume, InitialEntryName));
+            Assert.Throws<ArgumentException>(
+                () => new PaxTarEntry(TarEntryType.ContiguousFile, InitialEntryName)
+            );
+            Assert.Throws<ArgumentException>(
+                () => new PaxTarEntry(TarEntryType.DirectoryList, InitialEntryName)
+            );
+            Assert.Throws<ArgumentException>(
+                () => new PaxTarEntry(TarEntryType.LongLink, InitialEntryName)
+            );
+            Assert.Throws<ArgumentException>(
+                () => new PaxTarEntry(TarEntryType.LongPath, InitialEntryName)
+            );
+            Assert.Throws<ArgumentException>(
+                () => new PaxTarEntry(TarEntryType.MultiVolume, InitialEntryName)
+            );
+            Assert.Throws<ArgumentException>(
+                () => new PaxTarEntry(TarEntryType.V7RegularFile, InitialEntryName)
+            );
+            Assert.Throws<ArgumentException>(
+                () => new PaxTarEntry(TarEntryType.RenamedOrSymlinked, InitialEntryName)
+            );
+            Assert.Throws<ArgumentException>(
+                () => new PaxTarEntry(TarEntryType.SparseFile, InitialEntryName)
+            );
+            Assert.Throws<ArgumentException>(
+                () => new PaxTarEntry(TarEntryType.TapeVolume, InitialEntryName)
+            );
 
             // The user should not be creating these entries manually in pax
-            Assert.Throws<ArgumentException>(() => new PaxTarEntry(TarEntryType.ExtendedAttributes, InitialEntryName));
-            Assert.Throws<ArgumentException>(() => new PaxTarEntry(TarEntryType.GlobalExtendedAttributes, InitialEntryName));
+            Assert.Throws<ArgumentException>(
+                () => new PaxTarEntry(TarEntryType.ExtendedAttributes, InitialEntryName)
+            );
+            Assert.Throws<ArgumentException>(
+                () => new PaxTarEntry(TarEntryType.GlobalExtendedAttributes, InitialEntryName)
+            );
         }
 
         [Fact]
@@ -79,7 +107,10 @@ namespace System.Formats.Tar.Tests
         [Fact]
         public void SupportedEntryType_CharacterDevice()
         {
-            PaxTarEntry characterDevice = new PaxTarEntry(TarEntryType.CharacterDevice, InitialEntryName);
+            PaxTarEntry characterDevice = new PaxTarEntry(
+                TarEntryType.CharacterDevice,
+                InitialEntryName
+            );
             SetCharacterDevice(characterDevice);
             VerifyCharacterDevice(characterDevice);
         }

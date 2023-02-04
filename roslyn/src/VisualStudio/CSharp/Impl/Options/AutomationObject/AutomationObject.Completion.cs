@@ -16,8 +16,19 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Options
 
         public int HighlightMatchingPortionsOfCompletionListItems
         {
-            get { return GetBooleanOption(CompletionViewOptions.HighlightMatchingPortionsOfCompletionListItems); }
-            set { SetBooleanOption(CompletionViewOptions.HighlightMatchingPortionsOfCompletionListItems, value); }
+            get
+            {
+                return GetBooleanOption(
+                    CompletionViewOptions.HighlightMatchingPortionsOfCompletionListItems
+                );
+            }
+            set
+            {
+                SetBooleanOption(
+                    CompletionViewOptions.HighlightMatchingPortionsOfCompletionListItems,
+                    value
+                );
+            }
         }
 
         public int ShowCompletionItemFilters
@@ -28,8 +39,14 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Options
 
         public int ShowItemsFromUnimportedNamespaces
         {
-            get { return GetBooleanOption(CompletionOptionsStorage.ShowItemsFromUnimportedNamespaces); }
-            set { SetBooleanOption(CompletionOptionsStorage.ShowItemsFromUnimportedNamespaces, value); }
+            get
+            {
+                return GetBooleanOption(CompletionOptionsStorage.ShowItemsFromUnimportedNamespaces);
+            }
+            set
+            {
+                SetBooleanOption(CompletionOptionsStorage.ShowItemsFromUnimportedNamespaces, value);
+            }
         }
 
         public int InsertNewlineOnEnterWithWholeWord

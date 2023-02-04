@@ -10,7 +10,5 @@ namespace Microsoft.Interop
     /// <summary>
     /// An exception that should be thrown on code-paths that are unreachable.
     /// </summary>
-    internal sealed class UnreachableException : Exception
-    {
-    }
+    internal sealed class UnreachableException : Exception { }
 }

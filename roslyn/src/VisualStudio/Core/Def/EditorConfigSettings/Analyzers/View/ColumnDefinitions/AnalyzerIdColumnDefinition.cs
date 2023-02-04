@@ -17,9 +17,7 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Analyzers
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public AnalyzerIdColumnDefinition()
-        {
-        }
+        public AnalyzerIdColumnDefinition() { }
 
         public override string Name => Id;
         public override string DisplayName => ServicesVSResources.Id;

@@ -14,6 +14,6 @@ namespace System.Drawing.Drawing2D
         CloseSubpath = 0x80, // closed flag
 
         // Path types used for advanced path.
-        Bezier3 = 3,    // cubic Bezier
+        Bezier3 = 3, // cubic Bezier
     }
 }

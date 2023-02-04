@@ -3,11 +3,12 @@
 
 class X
 {
-    public static void Main ()
+    public static void Main()
     {
         int i = 0;
         int u;
-        switch (i) {
+        switch (i)
+        {
             case 1:
                 A1:
                 goto case 2;

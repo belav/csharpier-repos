@@ -19,10 +19,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
             SourceModuleSymbol sourceModule,
             EmitOptions emitOptions,
             Cci.ModulePropertiesForSerialization serializationProperties,
-            IEnumerable<ResourceDescription> manifestResources)
-            : base(sourceModule, emitOptions, OutputKind.NetModule, serializationProperties, manifestResources)
-        {
-        }
+            IEnumerable<ResourceDescription> manifestResources
+        )
+            : base(
+                sourceModule,
+                emitOptions,
+                OutputKind.NetModule,
+                serializationProperties,
+                manifestResources
+            ) { }
 
         internal override SynthesizedAttributeData SynthesizeEmbeddedAttribute()
         {
@@ -30,7 +35,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
             throw ExceptionUtilities.Unreachable();
         }
 
-        protected override void AddEmbeddedResourcesFromAddedModules(ArrayBuilder<Cci.ManagedResource> builder, DiagnosticBag diagnostics)
+        protected override void AddEmbeddedResourcesFromAddedModules(
+            ArrayBuilder<Cci.ManagedResource> builder,
+            DiagnosticBag diagnostics
+        )
         {
             throw ExceptionUtilities.Unreachable();
         }
@@ -38,7 +46,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
         public override EmitBaseline? PreviousGeneration => null;
         public override SymbolChanges? EncSymbolChanges => null;
 
-        public override IEnumerable<Cci.IFileReference> GetFiles(EmitContext context) => SpecializedCollections.EmptyEnumerable<Cci.IFileReference>();
+        public override IEnumerable<Cci.IFileReference> GetFiles(EmitContext context) =>
+            SpecializedCollections.EmptyEnumerable<Cci.IFileReference>();
+
         public override ISourceAssemblySymbolInternal? SourceAssemblyOpt => null;
     }
 }

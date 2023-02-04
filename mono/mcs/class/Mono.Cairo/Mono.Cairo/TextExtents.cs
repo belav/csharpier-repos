@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,7 +33,7 @@ using System.Runtime.InteropServices;
 
 namespace Cairo
 {
-    [StructLayout (LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential)]
     public struct TextExtents
     {
         double xbearing;
@@ -42,55 +42,71 @@ namespace Cairo
         double height;
         double xadvance;
         double yadvance;
-        
-        public double XBearing {
+
+        public double XBearing
+        {
             get { return xbearing; }
             set { xbearing = value; }
         }
-        
-        public double YBearing {
+
+        public double YBearing
+        {
             get { return ybearing; }
             set { ybearing = value; }
         }
-        
-        public double Width {
+
+        public double Width
+        {
             get { return width; }
             set { width = value; }
         }
-        
-        public double Height {
+
+        public double Height
+        {
             get { return height; }
             set { height = value; }
         }
-        
-        public double XAdvance {
+
+        public double XAdvance
+        {
             get { return xadvance; }
             set { xadvance = value; }
         }
-        
-        public double YAdvance {
+
+        public double YAdvance
+        {
             get { return yadvance; }
             set { yadvance = value; }
         }
 
-        public override bool Equals (object obj)
+        public override bool Equals(object obj)
         {
             if (obj is TextExtents)
                 return this == (TextExtents)obj;
             return false;
         }
 
-        public override int GetHashCode ()
+        public override int GetHashCode()
         {
-            return (int)XBearing ^ (int)YBearing ^ (int)Width ^ (int)Height ^ (int)XAdvance ^ (int)YAdvance;
+            return (int)XBearing
+                ^ (int)YBearing
+                ^ (int)Width
+                ^ (int)Height
+                ^ (int)XAdvance
+                ^ (int)YAdvance;
         }
 
-        public static bool operator == (TextExtents extents, TextExtents other)
+        public static bool operator ==(TextExtents extents, TextExtents other)
         {
-            return extents.XBearing == other.XBearing && extents.YBearing == other.YBearing && extents.Width == other.Width && extents.Height == other.Height && extents.XAdvance == other.XAdvance && extents.YAdvance == other.YAdvance;
+            return extents.XBearing == other.XBearing
+                && extents.YBearing == other.YBearing
+                && extents.Width == other.Width
+                && extents.Height == other.Height
+                && extents.XAdvance == other.XAdvance
+                && extents.YAdvance == other.YAdvance;
         }
 
-        public static bool operator != (TextExtents extents, TextExtents other)
+        public static bool operator !=(TextExtents extents, TextExtents other)
         {
             return !(extents == other);
         }

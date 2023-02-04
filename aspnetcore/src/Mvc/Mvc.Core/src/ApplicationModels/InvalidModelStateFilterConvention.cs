@@ -12,7 +12,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels;
 /// </summary>
 public class InvalidModelStateFilterConvention : IActionModelConvention
 {
-    private readonly ModelStateInvalidFilterFactory _filterFactory = new ModelStateInvalidFilterFactory();
+    private readonly ModelStateInvalidFilterFactory _filterFactory =
+        new ModelStateInvalidFilterFactory();
 
     /// <inheritdoc />
     public void Apply(ActionModel action)

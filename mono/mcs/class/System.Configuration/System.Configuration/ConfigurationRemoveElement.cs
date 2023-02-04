@@ -11,10 +11,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,18 +36,23 @@ namespace System.Configuration
     {
         sealed class ConfigurationRemoveElement : ConfigurationElement
         {
-            readonly ConfigurationPropertyCollection properties = new ConfigurationPropertyCollection ();
+            readonly ConfigurationPropertyCollection properties =
+                new ConfigurationPropertyCollection();
             readonly ConfigurationElement _origElement;
             readonly ConfigurationElementCollection _origCollection;
 
-            internal ConfigurationRemoveElement (ConfigurationElement origElement, ConfigurationElementCollection origCollection)
+            internal ConfigurationRemoveElement(
+                ConfigurationElement origElement,
+                ConfigurationElementCollection origCollection
+            )
             {
                 _origElement = origElement;
                 _origCollection = origCollection;
 
                 foreach (ConfigurationProperty p in origElement.Properties)
-                    if (p.IsKey) {
-                        properties.Add (p);
+                    if (p.IsKey)
+                    {
+                        properties.Add(p);
                     }
             }
 
@@ -56,9 +61,9 @@ namespace System.Configuration
                 get
                 {
                     foreach (ConfigurationProperty p in Properties)
-                        _origElement [p] = this [p];
+                        _origElement[p] = this[p];
 
-                    return _origCollection.GetElementKey (_origElement);
+                    return _origCollection.GetElementKey(_origElement);
                 }
             }
 

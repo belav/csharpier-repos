@@ -12,10 +12,11 @@ internal static partial class SyntaxValueProviderExtensions
 {
     private sealed class ImmutableArrayValueComparer<T> : IEqualityComparer<ImmutableArray<T>>
     {
-        public static readonly IEqualityComparer<ImmutableArray<T>> Instance = new ImmutableArrayValueComparer<T>();
+        public static readonly IEqualityComparer<ImmutableArray<T>> Instance =
+            new ImmutableArrayValueComparer<T>();
 
-        public bool Equals(ImmutableArray<T> x, ImmutableArray<T> y)
-            => x.SequenceEqual(y, EqualityComparer<T>.Default);
+        public bool Equals(ImmutableArray<T> x, ImmutableArray<T> y) =>
+            x.SequenceEqual(y, EqualityComparer<T>.Default);
 
         public int GetHashCode(ImmutableArray<T> obj)
         {

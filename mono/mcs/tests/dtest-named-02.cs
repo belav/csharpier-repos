@@ -4,31 +4,31 @@ public class Test
 {
     static int counter;
 
-    static int M1 ()
+    static int M1()
     {
         if (counter != 2)
-            throw new ApplicationException ();
+            throw new ApplicationException();
 
         return counter++;
     }
 
-    static int M2 ()
+    static int M2()
     {
         if (counter != 3)
-            throw new ApplicationException ();
+            throw new ApplicationException();
 
         return counter++;
     }
 
-    static dynamic M3 ()
+    static dynamic M3()
     {
         if (counter != 1)
-            throw new ApplicationException ();
+            throw new ApplicationException();
 
         return counter++;
     }
 
-    static int Foo (int a, int b, int c)
+    static int Foo(int a, int b, int c)
     {
         if (a != 2)
             return 1;
@@ -42,9 +42,9 @@ public class Test
         return 0;
     }
 
-    public static int Main ()
+    public static int Main()
     {
         counter = 1;
-        return Foo (c: M3 (), a: M1 (), b: M2 ());
+        return Foo(c: M3(), a: M1(), b: M2());
     }
 }

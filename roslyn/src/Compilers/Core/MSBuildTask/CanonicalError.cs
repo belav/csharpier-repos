@@ -52,10 +52,9 @@ namespace Microsoft.CodeAnalysis.BuildTasks
     internal static class CanonicalError
     {
         // Defines the main pattern for matching messages.
-        private static readonly Regex s_originCategoryCodeTextExpression = new Regex
-             (
-                // Beginning of line and any amount of whitespace.
-                @"^\s*"
+        private static readonly Regex s_originCategoryCodeTextExpression = new Regex(
+            // Beginning of line and any amount of whitespace.
+            @"^\s*"
                 // Match a [optional project number prefix 'ddd>'], single letter + colon + remaining filename, or
                 // string with no colon followed by a colon.
                 + @"(((?<ORIGIN>(((\d+>)?[a-zA-Z]?:[^:]*)|([^:]*))):)"
@@ -65,16 +64,17 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                 + "(?<SUBCATEGORY>(()|([^:]*? )))"
                 // Match 'error' or 'warning'.
                 + @"(?<CATEGORY>(error|warning))"
-                // Match anything starting with a space that's not a colon/space, followed by a colon. 
+                // Match anything starting with a space that's not a colon/space, followed by a colon.
                 // Error code is optional in which case "error"/"warning" can be followed immediately by a colon.
                 + @"( \s*(?<CODE>[^: ]*))?\s*:"
                 // Whatever's left on this line, including colons.
                 + "(?<TEXT>.*)$",
-                RegexOptions.IgnoreCase
-             );
+            RegexOptions.IgnoreCase
+        );
 
         // Matches and extracts filename and location from an 'origin' element.
-        private static readonly Regex s_filenameLocationFromOrigin = new Regex(@"
+        private static readonly Regex s_filenameLocationFromOrigin = new Regex(
+            @"
                 ^                                           # Beginning of line
                 (\d+>)?                                     # Optional ddd> project number prefix
                 (?<FILENAME>.*)                             # Match anything.
@@ -82,39 +82,47 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                 (?<LOCATION>[\,,0-9,-]*)                    # Match any combination of numbers and ',' and '-'
                 \)\s*                                       # Find the closing paren then any amount of spaces.
                 $                                           # End-of-line",
-                RegexOptions.IgnoreCase | RegexOptions.IgnorePatternWhitespace);
+            RegexOptions.IgnoreCase | RegexOptions.IgnorePatternWhitespace
+        );
 
         // Matches location that is a simple number.
         // Example: line
-        private static readonly Regex s_lineFromLocation = new Regex(@"
+        private static readonly Regex s_lineFromLocation = new Regex(
+            @"
                 ^                                           # Beginning of line
                 (?<LINE>[0-9]*)                             # Match any number.
                 $                                           # End-of-line",
-                RegexOptions.IgnoreCase | RegexOptions.IgnorePatternWhitespace);
+            RegexOptions.IgnoreCase | RegexOptions.IgnorePatternWhitespace
+        );
 
         // Matches location that is a range of lines.
         // Example: line-line
-        private static readonly Regex s_lineLineFromLocation = new Regex(@"
+        private static readonly Regex s_lineLineFromLocation = new Regex(
+            @"
                 ^                                           # Beginning of line
                 (?<LINE>[0-9]*)                             # Match any number.
                 -                                           # Dash
                 (?<ENDLINE>[0-9]*)                          # Match any number.
                 $                                           # End-of-line",
-                RegexOptions.IgnoreCase | RegexOptions.IgnorePatternWhitespace);
+            RegexOptions.IgnoreCase | RegexOptions.IgnorePatternWhitespace
+        );
 
         // Matches location that is a line and column
         // Example: line,col
-        private static readonly Regex s_lineColFromLocation = new Regex(@"
+        private static readonly Regex s_lineColFromLocation = new Regex(
+            @"
                 ^                                           # Beginning of line
                 (?<LINE>[0-9]*)                             # Match any number.
                 ,                                           # Comma
                 (?<COLUMN>[0-9]*)                           # Match any number.
                 $                                           # End-of-line",
-                RegexOptions.IgnoreCase | RegexOptions.IgnorePatternWhitespace);
+            RegexOptions.IgnoreCase | RegexOptions.IgnorePatternWhitespace
+        );
 
         // Matches location that is a line and column-range
         // Example: line,col-col
-        private static readonly Regex s_lineColColFromLocation = new Regex(@"
+        private static readonly Regex s_lineColColFromLocation = new Regex(
+            @"
                 ^                                           # Beginning of line
                 (?<LINE>[0-9]*)                             # Match any number.
                 ,                                           # Comma
@@ -122,11 +130,13 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                 -                                           # Dash
                 (?<ENDCOLUMN>[0-9]*)                        # Match any number.
                 $                                           # End-of-line",
-                RegexOptions.IgnoreCase | RegexOptions.IgnorePatternWhitespace);
+            RegexOptions.IgnoreCase | RegexOptions.IgnorePatternWhitespace
+        );
 
         // Matches location that is line,col,line,col
         // Example: line,col,line,col
-        private static readonly Regex s_lineColLineColFromLocation = new Regex(@"
+        private static readonly Regex s_lineColLineColFromLocation = new Regex(
+            @"
                 ^                                           # Beginning of line
                 (?<LINE>[0-9]*)                             # Match any number.
                 ,                                           # Comma
@@ -136,7 +146,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                 ,                                           # Comma
                 (?<ENDCOLUMN>[0-9]*)                        # Match any number.
                 $                                           # End-of-line",
-                RegexOptions.IgnoreCase | RegexOptions.IgnorePatternWhitespace);
+            RegexOptions.IgnoreCase | RegexOptions.IgnorePatternWhitespace
+        );
 
         /// <summary>
         /// Represents the parts of a decomposed canonical message.
@@ -161,9 +172,7 @@ namespace Microsoft.CodeAnalysis.BuildTasks
             /// <summary>
             /// Initializes a new instance of the <see cref="Parts"/> class.
             /// </summary>
-            internal Parts()
-            {
-            }
+            internal Parts() { }
 
             /// <summary>
             /// Name of the file or tool (not localized)
@@ -213,20 +222,26 @@ namespace Microsoft.CodeAnalysis.BuildTasks
 #if NEVER
             internal new string ToString()
             {
-                return String.Format
-                (
-                     "Origin='{0}'\n"
-                    +"Filename='{1}'\n"
-                    +"Line='{2}'\n"
-                    +"Column='{3}'\n"
-                    +"EndLine='{4}'\n"
-                    +"EndColumn='{5}'\n"
-                    +"Category='{6}'\n"
-                    +"Subcategory='{7}'\n"
-                    +"Text='{8}'\n"
-                    , origin, line, column, endLine, endColumn, category.ToString(), subcategory, code, text
+                return String.Format(
+                    "Origin='{0}'\n"
+                        + "Filename='{1}'\n"
+                        + "Line='{2}'\n"
+                        + "Column='{3}'\n"
+                        + "EndLine='{4}'\n"
+                        + "EndColumn='{5}'\n"
+                        + "Category='{6}'\n"
+                        + "Subcategory='{7}'\n"
+                        + "Text='{8}'\n",
+                    origin,
+                    line,
+                    column,
+                    endLine,
+                    endColumn,
+                    category.ToString(),
+                    subcategory,
+                    code,
+                    text
                 );
-
             }
 #endif
         }
@@ -241,7 +256,12 @@ namespace Microsoft.CodeAnalysis.BuildTasks
         private static int ConvertToIntWithDefault(string value)
         {
             int result;
-            bool success = int.TryParse(value, NumberStyles.Integer, CultureInfo.InvariantCulture, out result);
+            bool success = int.TryParse(
+                value,
+                NumberStyles.Integer,
+                CultureInfo.InvariantCulture,
+                out result
+            );
 
             if (!success || (result < 0))
             {
@@ -261,7 +281,7 @@ namespace Microsoft.CodeAnalysis.BuildTasks
         internal static Parts? Parse(string message)
         {
             // An unusually long string causes pathologically slow Regex back-tracking.
-            // To avoid that, only scan the first 400 characters. That's enough for 
+            // To avoid that, only scan the first 400 characters. That's enough for
             // the longest possible prefix: MAX_PATH, plus a huge subcategory string, and an error location.
             // After the regex is done, we can append the overflow.
             string messageOverflow = String.Empty;
@@ -272,10 +292,12 @@ namespace Microsoft.CodeAnalysis.BuildTasks
             }
 
             // If a tool has a large amount of output that isn't an error or warning (eg., "dir /s %hugetree%")
-            // the regex below is slow. It's faster to pre-scan for "warning" and "error" 
+            // the regex below is slow. It's faster to pre-scan for "warning" and "error"
             // and bail out if neither are present.
-            if (message.IndexOf("warning", StringComparison.OrdinalIgnoreCase) == -1 &&
-                message.IndexOf("error", StringComparison.OrdinalIgnoreCase) == -1)
+            if (
+                message.IndexOf("warning", StringComparison.OrdinalIgnoreCase) == -1
+                && message.IndexOf("error", StringComparison.OrdinalIgnoreCase) == -1
+            )
             {
                 return null;
             }
@@ -287,7 +309,7 @@ namespace Microsoft.CodeAnalysis.BuildTasks
             //      Main.cs(17,20):Command line warning CS0168: The variable 'goo' is declared but never used
             //      -------------- ------------ ------- ------  ----------------------------------------------
             //      Origin         SubCategory  Cat.    Code    Text
-            // 
+            //
             // To accommodate absolute filenames in Origin, tolerate a colon in the second position
             // as long as its preceded by a letter.
             //
@@ -355,42 +377,66 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                     match = s_lineFromLocation.Match(location);
                     if (match.Success)
                     {
-                        parsedMessage.line = ConvertToIntWithDefault(match.Groups["LINE"].Value.Trim());
+                        parsedMessage.line = ConvertToIntWithDefault(
+                            match.Groups["LINE"].Value.Trim()
+                        );
                     }
                     else
                     {
                         match = s_lineLineFromLocation.Match(location);
                         if (match.Success)
                         {
-                            parsedMessage.line = ConvertToIntWithDefault(match.Groups["LINE"].Value.Trim());
-                            parsedMessage.endLine = ConvertToIntWithDefault(match.Groups["ENDLINE"].Value.Trim());
+                            parsedMessage.line = ConvertToIntWithDefault(
+                                match.Groups["LINE"].Value.Trim()
+                            );
+                            parsedMessage.endLine = ConvertToIntWithDefault(
+                                match.Groups["ENDLINE"].Value.Trim()
+                            );
                         }
                         else
                         {
                             match = s_lineColFromLocation.Match(location);
                             if (match.Success)
                             {
-                                parsedMessage.line = ConvertToIntWithDefault(match.Groups["LINE"].Value.Trim());
-                                parsedMessage.column = ConvertToIntWithDefault(match.Groups["COLUMN"].Value.Trim());
+                                parsedMessage.line = ConvertToIntWithDefault(
+                                    match.Groups["LINE"].Value.Trim()
+                                );
+                                parsedMessage.column = ConvertToIntWithDefault(
+                                    match.Groups["COLUMN"].Value.Trim()
+                                );
                             }
                             else
                             {
                                 match = s_lineColColFromLocation.Match(location);
                                 if (match.Success)
                                 {
-                                    parsedMessage.line = ConvertToIntWithDefault(match.Groups["LINE"].Value.Trim());
-                                    parsedMessage.column = ConvertToIntWithDefault(match.Groups["COLUMN"].Value.Trim());
-                                    parsedMessage.endColumn = ConvertToIntWithDefault(match.Groups["ENDCOLUMN"].Value.Trim());
+                                    parsedMessage.line = ConvertToIntWithDefault(
+                                        match.Groups["LINE"].Value.Trim()
+                                    );
+                                    parsedMessage.column = ConvertToIntWithDefault(
+                                        match.Groups["COLUMN"].Value.Trim()
+                                    );
+                                    parsedMessage.endColumn = ConvertToIntWithDefault(
+                                        match.Groups["ENDCOLUMN"].Value.Trim()
+                                    );
                                 }
                                 else
                                 {
                                     match = s_lineColLineColFromLocation.Match(location);
                                     if (match.Success)
                                     {
-                                        parsedMessage.line = ConvertToIntWithDefault(match.Groups["LINE"].Value.Trim());
-                                        parsedMessage.column = ConvertToIntWithDefault(match.Groups["COLUMN"].Value.Trim());
-                                        parsedMessage.endLine = ConvertToIntWithDefault(match.Groups["ENDLINE"].Value.Trim());
-                                        parsedMessage.endColumn = ConvertToIntWithDefault(match.Groups["ENDCOLUMN"].Value.Trim());
+                                        parsedMessage.line = ConvertToIntWithDefault(
+                                            match.Groups["LINE"].Value.Trim()
+                                        );
+                                        parsedMessage.column = ConvertToIntWithDefault(
+                                            match.Groups["COLUMN"].Value.Trim()
+                                        );
+                                        parsedMessage.endLine = ConvertToIntWithDefault(
+                                            match.Groups["ENDLINE"].Value.Trim()
+                                        );
+                                        parsedMessage.endColumn = ConvertToIntWithDefault(
+                                            match.Groups["ENDCOLUMN"].Value.Trim()
+                                        );
                                     }
                                 }
                             }

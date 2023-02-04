@@ -10,12 +10,11 @@ class Program
 
     class Frobber : IFrobber
     {
-        public void Frob()
-        {
-        }
+        public void Frob() { }
     }
 
-    class Foo<T> where T : IFrobber
+    class Foo<T>
+        where T : IFrobber
     {
         public static void FrobAll(T[,] arr)
         {

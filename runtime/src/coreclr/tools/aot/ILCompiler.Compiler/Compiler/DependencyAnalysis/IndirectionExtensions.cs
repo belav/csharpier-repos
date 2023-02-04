@@ -13,15 +13,31 @@ namespace ILCompiler.DependencyAnalysis
         /// <param name="symbol">symbol to reference</param>
         /// <param name="indirectionBit">value to OR in to the reloc to represent to runtime code that this pointer is an indirection. Defaults to IndirectionConstants.IndirectionCellPointer</param>
         /// <param name="delta">Delta from symbol start for value</param>
-        public static void EmitPointerRelocOrIndirectionReference(ref this ObjectDataBuilder builder, ISymbolNode symbol, int delta = 0, int indirectionBit = IndirectionConstants.IndirectionCellPointer)
+        public static void EmitPointerRelocOrIndirectionReference(
+            ref this ObjectDataBuilder builder,
+            ISymbolNode symbol,
+            int delta = 0,
+            int indirectionBit = IndirectionConstants.IndirectionCellPointer
+        )
         {
             if (symbol.RepresentsIndirectionCell)
                 delta |= indirectionBit;
 
-            builder.EmitReloc(symbol, (builder.TargetPointerSize == 8) ? RelocType.IMAGE_REL_BASED_DIR64 : RelocType.IMAGE_REL_BASED_HIGHLOW, delta);
+            builder.EmitReloc(
+                symbol,
+                (builder.TargetPointerSize == 8)
+                    ? RelocType.IMAGE_REL_BASED_DIR64
+                    : RelocType.IMAGE_REL_BASED_HIGHLOW,
+                delta
+            );
         }
 
-        public static void EmitRelativeRelocOrIndirectionReference(ref this ObjectDataBuilder builder, ISymbolNode symbol, int delta = 0, int indirectionBit = IndirectionConstants.IndirectionCellPointer)
+        public static void EmitRelativeRelocOrIndirectionReference(
+            ref this ObjectDataBuilder builder,
+            ISymbolNode symbol,
+            int delta = 0,
+            int indirectionBit = IndirectionConstants.IndirectionCellPointer
+        )
         {
             if (symbol.RepresentsIndirectionCell)
                 delta |= indirectionBit;

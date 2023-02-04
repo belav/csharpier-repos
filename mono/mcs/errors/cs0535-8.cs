@@ -5,36 +5,27 @@ using System;
 
 public interface IA
 {
-    object this[int arg] {
-        get;
-        set;
-    }
+    object this[int arg] { get; set; }
 }
 
 public abstract class CA : IA
 {
-    public abstract object this[int arg] {
-        get;
-        set;
-    }
+    public abstract object this[int arg] { get; set; }
 }
 
-public  partial class CB : CA
+public partial class CB : CA
 {
-    public override object this[int arg] {
-        get {
-            throw new NotImplementedException ();
-        }
-        set {
-        }
+    public override object this[int arg]
+    {
+        get { throw new NotImplementedException(); }
+        set { }
     }
 }
 
 public class CC : CB, IA
 {
-    public new object this[int arg] {
-        get {
-            throw new NotImplementedException ();
-        }
+    public new object this[int arg]
+    {
+        get { throw new NotImplementedException(); }
     }
 }

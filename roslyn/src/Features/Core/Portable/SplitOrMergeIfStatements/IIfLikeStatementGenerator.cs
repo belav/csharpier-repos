@@ -59,7 +59,11 @@ namespace Microsoft.CodeAnalysis.SplitOrMergeIfStatements
         /// Inserts <paramref name="elseIfClause"/> as a new else-if clause directly below
         /// <paramref name="afterIfOrElseIf"/>, between it and any of its existing else-if clauses.
         /// </summary>
-        void InsertElseIfClause(SyntaxEditor editor, SyntaxNode afterIfOrElseIf, SyntaxNode elseIfClause);
+        void InsertElseIfClause(
+            SyntaxEditor editor,
+            SyntaxNode afterIfOrElseIf,
+            SyntaxNode elseIfClause
+        );
 
         /// <summary>
         /// Removes <paramref name="elseIfClause"/> from a sequence of else-if clauses, preserving any subsequent clauses.

@@ -6,9 +6,9 @@ using System;
 
 class Main
 {
-   public void Method (int i)
-   {
-       if (5 == 5 || i > 10)
-       Console.WriteLine ("TEST");
-   }
+    public void Method(int i)
+    {
+        if (5 == 5 || i > 10)
+            Console.WriteLine("TEST");
+    }
 }

@@ -34,16 +34,15 @@ namespace System.Security.Cryptography.X509Certificates
 
         public OidCollection CertificatePolicy => _certificatePolicy ??= new OidCollection();
 
-        public X509Certificate2Collection ExtraStore => _extraStore ??= new X509Certificate2Collection();
+        public X509Certificate2Collection ExtraStore =>
+            _extraStore ??= new X509Certificate2Collection();
 
-        public X509Certificate2Collection CustomTrustStore => _customTrustStore ??= new X509Certificate2Collection();
+        public X509Certificate2Collection CustomTrustStore =>
+            _customTrustStore ??= new X509Certificate2Collection();
 
         public X509RevocationMode RevocationMode
         {
-            get
-            {
-                return _revocationMode;
-            }
+            get { return _revocationMode; }
             set
             {
                 if (value < X509RevocationMode.NoCheck || value > X509RevocationMode.Offline)
@@ -54,13 +53,13 @@ namespace System.Security.Cryptography.X509Certificates
 
         public X509RevocationFlag RevocationFlag
         {
-            get
-            {
-                return _revocationFlag;
-            }
+            get { return _revocationFlag; }
             set
             {
-                if (value < X509RevocationFlag.EndCertificateOnly || value > X509RevocationFlag.ExcludeRoot)
+                if (
+                    value < X509RevocationFlag.EndCertificateOnly
+                    || value > X509RevocationFlag.ExcludeRoot
+                )
                     throw new ArgumentException(SR.Format(SR.Arg_EnumIllegalVal, nameof(value)));
                 _revocationFlag = value;
             }
@@ -68,10 +67,7 @@ namespace System.Security.Cryptography.X509Certificates
 
         public X509VerificationFlags VerificationFlags
         {
-            get
-            {
-                return _verificationFlags;
-            }
+            get { return _verificationFlags; }
             set
             {
                 if (value < X509VerificationFlags.NoFlag || value > X509VerificationFlags.AllFlags)
@@ -82,10 +78,7 @@ namespace System.Security.Cryptography.X509Certificates
 
         public X509ChainTrustMode TrustMode
         {
-            get
-            {
-                return _trustMode;
-            }
+            get { return _trustMode; }
             set
             {
                 if (value < X509ChainTrustMode.System || value > X509ChainTrustMode.CustomRootTrust)

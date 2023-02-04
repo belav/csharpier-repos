@@ -18,19 +18,28 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.Features.Completion
         /// </summary>
         public ImmutableArray<char> NonInsertCharacters { get; }
 
-        private XamlCommitCharacters(ImmutableArray<char> characters, ImmutableArray<char> nonInsertCharacters)
+        private XamlCommitCharacters(
+            ImmutableArray<char> characters,
+            ImmutableArray<char> nonInsertCharacters
+        )
         {
             Characters = characters;
             NonInsertCharacters = nonInsertCharacters;
         }
 
-        public static XamlCommitCharacters Create(ImmutableArray<char> characters, ImmutableArray<char> nonInsertCharacters)
-            => new(characters, nonInsertCharacters);
+        public static XamlCommitCharacters Create(
+            ImmutableArray<char> characters,
+            ImmutableArray<char> nonInsertCharacters
+        ) => new(characters, nonInsertCharacters);
 
-        public static XamlCommitCharacters Create(ImmutableArray<char> characters, params char[] nonInsertCharacters)
-            => new(characters, nonInsertCharacters?.ToImmutableArray() ?? ImmutableArray<char>.Empty);
+        public static XamlCommitCharacters Create(
+            ImmutableArray<char> characters,
+            params char[] nonInsertCharacters
+        ) => new(characters, nonInsertCharacters?.ToImmutableArray() ?? ImmutableArray<char>.Empty);
 
-        public static XamlCommitCharacters Create(char[] characters, params char[] nonInsertCharacters)
-            => Create(characters.ToImmutableArray(), nonInsertCharacters);
+        public static XamlCommitCharacters Create(
+            char[] characters,
+            params char[] nonInsertCharacters
+        ) => Create(characters.ToImmutableArray(), nonInsertCharacters);
     }
 }

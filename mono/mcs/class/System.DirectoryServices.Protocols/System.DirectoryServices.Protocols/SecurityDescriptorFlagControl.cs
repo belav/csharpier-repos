@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,15 +33,15 @@ namespace System.DirectoryServices.Protocols
     public class SecurityDescriptorFlagControl : DirectoryControl
     {
         [MonoTODO]
-        public SecurityDescriptorFlagControl ()
-            : base (null, null, false, false)
+        public SecurityDescriptorFlagControl()
+            : base(null, null, false, false)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public SecurityDescriptorFlagControl (SecurityMasks masks)
-            : this ()
+        public SecurityDescriptorFlagControl(SecurityMasks masks)
+            : this()
         {
             SecurityMasks = masks;
         }
@@ -49,9 +49,9 @@ namespace System.DirectoryServices.Protocols
         public SecurityMasks SecurityMasks { get; set; }
 
         [MonoTODO]
-        public override byte [] GetValue ()
+        public override byte[] GetValue()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
     }
 }

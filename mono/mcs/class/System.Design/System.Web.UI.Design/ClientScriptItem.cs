@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,9 +35,13 @@ namespace System.Web.UI.Design
 {
     public sealed class ClientScriptItem
     {
-        string text, source, language, type, id;
+        string text,
+            source,
+            language,
+            type,
+            id;
 
-        public ClientScriptItem (string text, string source, string language, string type, string id)
+        public ClientScriptItem(string text, string source, string language, string type, string id)
         {
             this.text = text;
             this.source = source;
@@ -46,25 +50,29 @@ namespace System.Web.UI.Design
             this.id = id;
         }
 
-        public string Id {
+        public string Id
+        {
             get { return id; }
         }
 
-        public string Language {
+        public string Language
+        {
             get { return language; }
         }
 
-        public string Source {
+        public string Source
+        {
             get { return source; }
         }
 
-        public string Text {
+        public string Text
+        {
             get { return text; }
         }
 
-        public string Type{
+        public string Type
+        {
             get { return type; }
         }
     }
 }
-

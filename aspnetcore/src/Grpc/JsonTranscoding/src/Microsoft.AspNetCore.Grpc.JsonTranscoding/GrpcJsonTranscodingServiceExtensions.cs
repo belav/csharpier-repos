@@ -28,8 +28,18 @@ public static class GrpcJsonTranscodingServiceExtensions
             throw new ArgumentNullException(nameof(builder));
         }
 
-        builder.Services.TryAddEnumerable(ServiceDescriptor.Singleton(typeof(IServiceMethodProvider<>), typeof(JsonTranscodingServiceMethodProvider<>)));
-        builder.Services.TryAddEnumerable(ServiceDescriptor.Singleton<IConfigureOptions<GrpcJsonTranscodingOptions>, GrpcJsonTranscodingOptionsSetup>());
+        builder.Services.TryAddEnumerable(
+            ServiceDescriptor.Singleton(
+                typeof(IServiceMethodProvider<>),
+                typeof(JsonTranscodingServiceMethodProvider<>)
+            )
+        );
+        builder.Services.TryAddEnumerable(
+            ServiceDescriptor.Singleton<
+                IConfigureOptions<GrpcJsonTranscodingOptions>,
+                GrpcJsonTranscodingOptionsSetup
+            >()
+        );
         builder.Services.TryAddSingleton<DescriptorRegistry>();
 
         return builder;
@@ -41,7 +51,10 @@ public static class GrpcJsonTranscodingServiceExtensions
     /// <param name="builder">The <see cref="IGrpcServerBuilder"/>.</param>
     /// <param name="configureOptions">An <see cref="Action{GrpcJsonTranscodingOptions}"/> to configure the provided <see cref="GrpcJsonTranscodingOptions"/>.</param>
     /// <returns>The same instance of the <see cref="IGrpcServerBuilder"/> for chaining.</returns>
-    public static IGrpcServerBuilder AddJsonTranscoding(this IGrpcServerBuilder builder, Action<GrpcJsonTranscodingOptions> configureOptions)
+    public static IGrpcServerBuilder AddJsonTranscoding(
+        this IGrpcServerBuilder builder,
+        Action<GrpcJsonTranscodingOptions> configureOptions
+    )
     {
         if (builder == null)
         {
@@ -53,7 +66,8 @@ public static class GrpcJsonTranscodingServiceExtensions
         return builder.AddJsonTranscoding();
     }
 
-    private sealed class GrpcJsonTranscodingOptionsSetup : IConfigureOptions<GrpcJsonTranscodingOptions>
+    private sealed class GrpcJsonTranscodingOptionsSetup
+        : IConfigureOptions<GrpcJsonTranscodingOptions>
     {
         private readonly DescriptorRegistry _descriptorRegistry;
 

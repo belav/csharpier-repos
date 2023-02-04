@@ -11,18 +11,21 @@ namespace Microsoft.CodeAnalysis.Host
 {
     internal sealed class NoOpPersistentStorageService : IChecksummedPersistentStorageService
     {
-        private static readonly IChecksummedPersistentStorageService Instance = new NoOpPersistentStorageService();
+        private static readonly IChecksummedPersistentStorageService Instance =
+            new NoOpPersistentStorageService();
 
-        private NoOpPersistentStorageService()
-        {
-        }
+        private NoOpPersistentStorageService() { }
 
-        public static IChecksummedPersistentStorageService GetOrThrow(IPersistentStorageConfiguration configuration)
-            => configuration.ThrowOnFailure
+        public static IChecksummedPersistentStorageService GetOrThrow(
+            IPersistentStorageConfiguration configuration
+        ) =>
+            configuration.ThrowOnFailure
                 ? throw new InvalidOperationException("Database was not supported")
                 : Instance;
 
-        public ValueTask<IChecksummedPersistentStorage> GetStorageAsync(SolutionKey solutionKey, CancellationToken cancellationToken)
-            => new(NoOpPersistentStorage.GetOrThrow(throwOnFailure: false));
+        public ValueTask<IChecksummedPersistentStorage> GetStorageAsync(
+            SolutionKey solutionKey,
+            CancellationToken cancellationToken
+        ) => new(NoOpPersistentStorage.GetOrThrow(throwOnFailure: false));
     }
 }

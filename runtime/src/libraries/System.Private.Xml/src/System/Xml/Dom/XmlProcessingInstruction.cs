@@ -14,7 +14,8 @@ namespace System.Xml
         private readonly string _target;
         private string _data;
 
-        protected internal XmlProcessingInstruction(string target, string? data, XmlDocument doc) : base(doc)
+        protected internal XmlProcessingInstruction(string target, string? data, XmlDocument doc)
+            : base(doc)
         {
             ArgumentNullException.ThrowIfNull(target);
 
@@ -54,7 +55,14 @@ namespace System.Xml
             {
                 XmlNode? parent = ParentNode;
                 string val = value ?? string.Empty;
-                XmlNodeChangedEventArgs? args = GetEventArgs(this, parent, parent, _data, val, XmlNodeChangedAction.Change);
+                XmlNodeChangedEventArgs? args = GetEventArgs(
+                    this,
+                    parent,
+                    parent,
+                    _data,
+                    val,
+                    XmlNodeChangedAction.Change
+                );
 
                 if (args != null)
                 {

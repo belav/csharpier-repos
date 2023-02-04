@@ -1,4 +1,3 @@
-
 //
 // Copyright (C) 2004 Novell, Inc (http://www.novell.com)
 //
@@ -9,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -39,39 +38,54 @@ using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-namespace System.Reflection.Emit {
-
+namespace System.Reflection.Emit
+{
 #if !MOBILE
-    [ComVisible (true)]
-    [ComDefaultInterface (typeof (_FieldBuilder))]
-    [ClassInterface (ClassInterfaceType.None)]
+    [ComVisible(true)]
+    [ComDefaultInterface(typeof(_FieldBuilder))]
+    [ClassInterface(ClassInterfaceType.None)]
     partial class FieldBuilder : _FieldBuilder
     {
-        void _FieldBuilder.GetIDsOfNames ([In] ref Guid riid, IntPtr rgszNames, uint cNames, uint lcid, IntPtr rgDispId)
+        void _FieldBuilder.GetIDsOfNames(
+            [In] ref Guid riid,
+            IntPtr rgszNames,
+            uint cNames,
+            uint lcid,
+            IntPtr rgDispId
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        void _FieldBuilder.GetTypeInfo (uint iTInfo, uint lcid, IntPtr ppTInfo)
+        void _FieldBuilder.GetTypeInfo(uint iTInfo, uint lcid, IntPtr ppTInfo)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        void _FieldBuilder.GetTypeInfoCount (out uint pcTInfo)
+        void _FieldBuilder.GetTypeInfoCount(out uint pcTInfo)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        void _FieldBuilder.Invoke (uint dispIdMember, [In] ref Guid riid, uint lcid, short wFlags, IntPtr pDispParams, IntPtr pVarResult, IntPtr pExcepInfo, IntPtr puArgErr)
+        void _FieldBuilder.Invoke(
+            uint dispIdMember,
+            [In] ref Guid riid,
+            uint lcid,
+            short wFlags,
+            IntPtr pDispParams,
+            IntPtr pVarResult,
+            IntPtr pExcepInfo,
+            IntPtr puArgErr
+        )
         {
-            throw new NotImplementedException ();
-        }        
+            throw new NotImplementedException();
+        }
     }
 #endif
 
-    [StructLayout (LayoutKind.Sequential)]
-    public sealed partial class FieldBuilder : FieldInfo {
-    
+    [StructLayout(LayoutKind.Sequential)]
+    public sealed partial class FieldBuilder : FieldInfo
+    {
 #pragma warning disable 169, 414
         private FieldAttributes attrs;
         private Type type;
@@ -87,10 +101,17 @@ namespace System.Reflection.Emit {
         private Type[] modOpt;
 #pragma warning restore 169, 414
 
-        internal FieldBuilder (TypeBuilder tb, string fieldName, Type type, FieldAttributes attributes, Type[] modReq, Type[] modOpt)
+        internal FieldBuilder(
+            TypeBuilder tb,
+            string fieldName,
+            Type type,
+            FieldAttributes attributes,
+            Type[] modReq,
+            Type[] modOpt
+        )
         {
             if (type == null)
-                throw new ArgumentNullException ("type");
+                throw new ArgumentNullException("type");
 
             attrs = attributes;
             name = fieldName;
@@ -100,175 +121,218 @@ namespace System.Reflection.Emit {
             offset = -1;
             typeb = tb;
 
-            ((ModuleBuilder) tb.Module).RegisterToken (this, GetToken ().Token);
+            ((ModuleBuilder)tb.Module).RegisterToken(this, GetToken().Token);
         }
 
-        public override FieldAttributes Attributes {
+        public override FieldAttributes Attributes
+        {
             get { return attrs; }
         }
 
-        public override Type DeclaringType {
+        public override Type DeclaringType
+        {
             get { return typeb; }
         }
 
-        public override RuntimeFieldHandle FieldHandle {
-            get {
-                throw CreateNotSupportedException ();
-            }
+        public override RuntimeFieldHandle FieldHandle
+        {
+            get { throw CreateNotSupportedException(); }
         }
 
-        public override Type FieldType {
+        public override Type FieldType
+        {
             get { return type; }
         }
 
-        public override string Name {
+        public override string Name
+        {
             get { return name; }
         }
 
-        public override Type ReflectedType {
+        public override Type ReflectedType
+        {
             get { return typeb; }
         }
 
-        public override object[] GetCustomAttributes(bool inherit) {
+        public override object[] GetCustomAttributes(bool inherit)
+        {
             /*
              * On MS.NET, this always returns not_supported, but we can't do this
-             * since there would be no way to obtain custom attributes of 
+             * since there would be no way to obtain custom attributes of
              * dynamically created ctors.
              */
             if (typeb.is_created)
-                return MonoCustomAttrs.GetCustomAttributes (this, inherit);
+                return MonoCustomAttrs.GetCustomAttributes(this, inherit);
             else
-                throw CreateNotSupportedException ();
+                throw CreateNotSupportedException();
         }
 
-        public override object[] GetCustomAttributes(Type attributeType, bool inherit) {
+        public override object[] GetCustomAttributes(Type attributeType, bool inherit)
+        {
             if (typeb.is_created)
-                return MonoCustomAttrs.GetCustomAttributes (this, attributeType, inherit);
+                return MonoCustomAttrs.GetCustomAttributes(this, attributeType, inherit);
             else
-                throw CreateNotSupportedException ();
+                throw CreateNotSupportedException();
         }
 
-        public override int MetadataToken { get { return ((ModuleBuilder) typeb.Module).GetToken (this); } }
-
-        public FieldToken GetToken() {
-            return new FieldToken (MetadataToken);
+        public override int MetadataToken
+        {
+            get { return ((ModuleBuilder)typeb.Module).GetToken(this); }
         }
 
-        public override object GetValue(object obj) {
-            throw CreateNotSupportedException ();
+        public FieldToken GetToken()
+        {
+            return new FieldToken(MetadataToken);
         }
 
-        public override bool IsDefined( Type attributeType, bool inherit) {
-            throw CreateNotSupportedException ();
+        public override object GetValue(object obj)
+        {
+            throw CreateNotSupportedException();
         }
 
-        internal override int GetFieldOffset () {
+        public override bool IsDefined(Type attributeType, bool inherit)
+        {
+            throw CreateNotSupportedException();
+        }
+
+        internal override int GetFieldOffset()
+        {
             /* FIXME: */
             return 0;
         }
 
-        internal void SetRVAData (byte[] data) {
-            rva_data = (byte[])data.Clone ();
+        internal void SetRVAData(byte[] data)
+        {
+            rva_data = (byte[])data.Clone();
         }
 
-        public void SetConstant( object defaultValue) {
-            RejectIfCreated ();
+        public void SetConstant(object defaultValue)
+        {
+            RejectIfCreated();
 
             /*if (defaultValue.GetType() != type)
                 throw new ArgumentException ("Constant doesn't match field type");*/
             def_value = defaultValue;
         }
 
-        public void SetCustomAttribute (CustomAttributeBuilder customBuilder) {
-            RejectIfCreated ();
+        public void SetCustomAttribute(CustomAttributeBuilder customBuilder)
+        {
+            RejectIfCreated();
 
             if (customBuilder == null)
-                throw new ArgumentNullException ("customBuilder");
+                throw new ArgumentNullException("customBuilder");
 
             string attrname = customBuilder.Ctor.ReflectedType.FullName;
-            if (attrname == "System.Runtime.InteropServices.FieldOffsetAttribute") {
+            if (attrname == "System.Runtime.InteropServices.FieldOffsetAttribute")
+            {
                 byte[] data = customBuilder.Data;
-                offset = (int)data [2];
-                offset |= ((int)data [3]) << 8;
-                offset |= ((int)data [4]) << 16;
-                offset |= ((int)data [5]) << 24;
+                offset = (int)data[2];
+                offset |= ((int)data[3]) << 8;
+                offset |= ((int)data[4]) << 16;
+                offset |= ((int)data[5]) << 24;
                 return;
-            } else if (attrname == "System.NonSerializedAttribute") {
+            }
+            else if (attrname == "System.NonSerializedAttribute")
+            {
                 attrs |= FieldAttributes.NotSerialized;
                 return;
-            } else if (attrname == "System.Runtime.CompilerServices.SpecialNameAttribute") {
+            }
+            else if (attrname == "System.Runtime.CompilerServices.SpecialNameAttribute")
+            {
                 attrs |= FieldAttributes.SpecialName;
                 return;
-            } else if (attrname == "System.Runtime.InteropServices.MarshalAsAttribute") {
+            }
+            else if (attrname == "System.Runtime.InteropServices.MarshalAsAttribute")
+            {
                 attrs |= FieldAttributes.HasFieldMarshal;
-                marshal_info = CustomAttributeBuilder.get_umarshal (customBuilder, true);
+                marshal_info = CustomAttributeBuilder.get_umarshal(customBuilder, true);
                 /* FIXME: check for errors */
                 return;
             }
-            if (cattrs != null) {
-                CustomAttributeBuilder[] new_array = new CustomAttributeBuilder [cattrs.Length + 1];
-                cattrs.CopyTo (new_array, 0);
-                new_array [cattrs.Length] = customBuilder;
+            if (cattrs != null)
+            {
+                CustomAttributeBuilder[] new_array = new CustomAttributeBuilder[cattrs.Length + 1];
+                cattrs.CopyTo(new_array, 0);
+                new_array[cattrs.Length] = customBuilder;
                 cattrs = new_array;
-            } else {
-                cattrs = new CustomAttributeBuilder [1];
-                cattrs [0] = customBuilder;
+            }
+            else
+            {
+                cattrs = new CustomAttributeBuilder[1];
+                cattrs[0] = customBuilder;
             }
         }
 
-        [ComVisible (true)]
-        public void SetCustomAttribute( ConstructorInfo con, byte[] binaryAttribute) {
-            RejectIfCreated ();
-            SetCustomAttribute (new CustomAttributeBuilder (con, binaryAttribute));
+        [ComVisible(true)]
+        public void SetCustomAttribute(ConstructorInfo con, byte[] binaryAttribute)
+        {
+            RejectIfCreated();
+            SetCustomAttribute(new CustomAttributeBuilder(con, binaryAttribute));
         }
 
-        [Obsolete ("An alternate API is available: Emit the MarshalAs custom attribute instead.")]
-        public void SetMarshal( UnmanagedMarshal unmanagedMarshal) {
-            RejectIfCreated ();
+        [Obsolete("An alternate API is available: Emit the MarshalAs custom attribute instead.")]
+        public void SetMarshal(UnmanagedMarshal unmanagedMarshal)
+        {
+            RejectIfCreated();
             marshal_info = unmanagedMarshal;
             attrs |= FieldAttributes.HasFieldMarshal;
         }
 
-        public void SetOffset( int iOffset) {
-            RejectIfCreated ();
+        public void SetOffset(int iOffset)
+        {
+            RejectIfCreated();
             if (iOffset < 0)
-                throw new ArgumentException ("Negative field offset is not allowed");
+                throw new ArgumentException("Negative field offset is not allowed");
             offset = iOffset;
         }
 
-        public override void SetValue( object obj, object val, BindingFlags invokeAttr, Binder binder, CultureInfo culture) {
-            throw CreateNotSupportedException ();
-        }
-
-        private Exception CreateNotSupportedException ()
+        public override void SetValue(
+            object obj,
+            object val,
+            BindingFlags invokeAttr,
+            Binder binder,
+            CultureInfo culture
+        )
         {
-            return new NotSupportedException ("The invoked member is not supported in a dynamic module.");
+            throw CreateNotSupportedException();
         }
 
-        private void RejectIfCreated ()
+        private Exception CreateNotSupportedException()
+        {
+            return new NotSupportedException(
+                "The invoked member is not supported in a dynamic module."
+            );
+        }
+
+        private void RejectIfCreated()
         {
             if (typeb.is_created)
-                throw new InvalidOperationException ("Unable to change after type has been created.");
+                throw new InvalidOperationException(
+                    "Unable to change after type has been created."
+                );
         }
 
-        internal void ResolveUserTypes () {
-            type = TypeBuilder.ResolveUserType (type);
-            TypeBuilder.ResolveUserTypes (modReq);
-            TypeBuilder.ResolveUserTypes (modOpt);
+        internal void ResolveUserTypes()
+        {
+            type = TypeBuilder.ResolveUserType(type);
+            TypeBuilder.ResolveUserTypes(modReq);
+            TypeBuilder.ResolveUserTypes(modOpt);
             if (marshal_info != null)
-                marshal_info.marshaltyperef = TypeBuilder.ResolveUserType (marshal_info.marshaltyperef);
+                marshal_info.marshaltyperef = TypeBuilder.ResolveUserType(
+                    marshal_info.marshaltyperef
+                );
         }
 
-        internal FieldInfo RuntimeResolve () {
+        internal FieldInfo RuntimeResolve()
+        {
             // typeb.CreateType() populates this.handle
-            var type_handle = new RuntimeTypeHandle (typeb.CreateType () as RuntimeType);
-            return FieldInfo.GetFieldFromHandle (handle, type_handle);
+            var type_handle = new RuntimeTypeHandle(typeb.CreateType() as RuntimeType);
+            return FieldInfo.GetFieldFromHandle(handle, type_handle);
         }
 
-        public override Module Module {
-            get {
-                return base.Module;
-            }
+        public override Module Module
+        {
+            get { return base.Module; }
         }
     }
 }

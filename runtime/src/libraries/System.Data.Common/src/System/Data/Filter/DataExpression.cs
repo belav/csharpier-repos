@@ -11,20 +11,19 @@ namespace System.Data
 {
     internal sealed class DataExpression : IFilter
     {
-        internal string? _originalExpression;  // original, unoptimized string
+        internal string? _originalExpression; // original, unoptimized string
 
         private readonly bool _parsed;
         private bool _bound;
         private ExpressionNode? _expr;
         private DataTable? _table;
         private readonly StorageType _storageType;
-        private readonly Type? _dataType;  // This set if the expression is part of ExpressionCoulmn
+        private readonly Type? _dataType; // This set if the expression is part of ExpressionCoulmn
         private DataColumn[] _dependency = Array.Empty<DataColumn>();
 
         [RequiresUnreferencedCode("Members of types used in the expression might be trimmed")]
-        internal DataExpression(DataTable? table, string? expression) : this(table, expression, null)
-        {
-        }
+        internal DataExpression(DataTable? table, string? expression)
+            : this(table, expression, null) { }
 
         [RequiresUnreferencedCode("Members of types used in the expression might be trimmed")]
         internal DataExpression(DataTable? table, string? expression, Type? type)
@@ -68,18 +67,12 @@ namespace System.Data
 
         internal ExpressionNode? ExpressionNode
         {
-            get
-            {
-                return _expr;
-            }
+            get { return _expr; }
         }
 
         internal bool HasValue
         {
-            get
-            {
-                return (null != _expr);
-            }
+            get { return (null != _expr); }
         }
 
         internal void Bind(DataTable? table)
@@ -118,8 +111,11 @@ namespace System.Data
             return Evaluate((DataRow?)null, DataRowVersion.Default);
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "Constructors taking expression are marked as unsafe")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "Constructors taking expression are marked as unsafe"
+        )]
         internal object Evaluate(DataRow? row, DataRowVersion version)
         {
             object? result;
@@ -141,7 +137,12 @@ namespace System.Data
                         if (StorageType.Object != _storageType)
                         {
                             // TODO: _dataType can be null, probably a bug
-                            result = SqlConvert.ChangeType2(result, _storageType, _dataType!, _table!.FormatProvider);
+                            result = SqlConvert.ChangeType2(
+                                result,
+                                _storageType,
+                                _dataType!,
+                                _table!.FormatProvider
+                            );
                         }
                     }
                     catch (Exception e) when (ADP.IsCatchableExceptionType(e))
@@ -163,8 +164,11 @@ namespace System.Data
             return Evaluate(rows, DataRowVersion.Default);
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "Constructors taking expression are marked as unsafe")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "Constructors taking expression are marked as unsafe"
+        )]
         internal object Evaluate(DataRow[] rows, DataRowVersion version)
         {
             if (!_bound)
@@ -191,8 +195,11 @@ namespace System.Data
             }
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "Constructors taking expression are marked as unsafe")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "Constructors taking expression are marked as unsafe"
+        )]
         public bool Invoke(DataRow row, DataRowVersion version)
         {
             if (_expr == null)
@@ -217,7 +224,10 @@ namespace System.Data
 
         internal DataColumn[] GetDependency()
         {
-            Debug.Assert(_dependency != null, "GetDependencies: null, we should have created an empty list");
+            Debug.Assert(
+                _dependency != null,
+                "GetDependencies: null, we should have created an empty list"
+            );
             return _dependency;
         }
 

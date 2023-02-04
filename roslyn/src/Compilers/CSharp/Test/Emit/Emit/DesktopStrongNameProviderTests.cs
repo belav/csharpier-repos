@@ -34,16 +34,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void EmitWithCustomTempPath()
         {
-            string src = @"
+            string src =
+                @"
 class C
 {
     public static void Main(string[] args) { }
 }";
             var tempDir = Temp.CreateDirectory();
-            var provider = new DesktopStrongNameProvider(ImmutableArray<string>.Empty, new VirtualizedStrongNameFileSystem(tempDir.Path));
+            var provider = new DesktopStrongNameProvider(
+                ImmutableArray<string>.Empty,
+                new VirtualizedStrongNameFileSystem(tempDir.Path)
+            );
 
-            var options = TestOptions
-                .DebugExe
+            var options = TestOptions.DebugExe
                 .WithStrongNameProvider(provider)
                 .WithCryptoKeyFile(SigningTestHelpers.KeyPairFile);
             var comp = CreateCompilation(src, options: options);
@@ -53,14 +56,17 @@ class C
         [Fact]
         public void EmitWithDefaultTempPath()
         {
-            string src = @"
+            string src =
+                @"
 class C
 {
     public static void Main(string[] args) { }
 }";
-            var provider = new DesktopStrongNameProvider(ImmutableArray<string>.Empty, new VirtualizedStrongNameFileSystem());
-            var options = TestOptions
-                .DebugExe
+            var provider = new DesktopStrongNameProvider(
+                ImmutableArray<string>.Empty,
+                new VirtualizedStrongNameFileSystem()
+            );
+            var options = TestOptions.DebugExe
                 .WithStrongNameProvider(provider)
                 .WithCryptoKeyFile(SigningTestHelpers.KeyPairFile);
             var comp = CreateCompilation(src, options: options);

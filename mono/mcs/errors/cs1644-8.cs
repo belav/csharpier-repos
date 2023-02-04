@@ -6,7 +6,8 @@ class C
 {
     string program;
 
-    internal string Program {
+    internal string Program
+    {
         get { return program ?? string.Empty; }
     }
 }

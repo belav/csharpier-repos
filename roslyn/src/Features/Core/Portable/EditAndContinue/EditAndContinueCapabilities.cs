@@ -62,16 +62,26 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             {
                 caps |= capability switch
                 {
-                    nameof(EditAndContinueCapabilities.Baseline) => EditAndContinueCapabilities.Baseline,
-                    nameof(EditAndContinueCapabilities.AddMethodToExistingType) => EditAndContinueCapabilities.AddMethodToExistingType,
-                    nameof(EditAndContinueCapabilities.AddStaticFieldToExistingType) => EditAndContinueCapabilities.AddStaticFieldToExistingType,
-                    nameof(EditAndContinueCapabilities.AddInstanceFieldToExistingType) => EditAndContinueCapabilities.AddInstanceFieldToExistingType,
-                    nameof(EditAndContinueCapabilities.NewTypeDefinition) => EditAndContinueCapabilities.NewTypeDefinition,
-                    nameof(EditAndContinueCapabilities.ChangeCustomAttributes) => EditAndContinueCapabilities.ChangeCustomAttributes,
-                    nameof(EditAndContinueCapabilities.UpdateParameters) => EditAndContinueCapabilities.UpdateParameters,
+                    nameof(EditAndContinueCapabilities.Baseline)
+                        => EditAndContinueCapabilities.Baseline,
+                    nameof(EditAndContinueCapabilities.AddMethodToExistingType)
+                        => EditAndContinueCapabilities.AddMethodToExistingType,
+                    nameof(EditAndContinueCapabilities.AddStaticFieldToExistingType)
+                        => EditAndContinueCapabilities.AddStaticFieldToExistingType,
+                    nameof(EditAndContinueCapabilities.AddInstanceFieldToExistingType)
+                        => EditAndContinueCapabilities.AddInstanceFieldToExistingType,
+                    nameof(EditAndContinueCapabilities.NewTypeDefinition)
+                        => EditAndContinueCapabilities.NewTypeDefinition,
+                    nameof(EditAndContinueCapabilities.ChangeCustomAttributes)
+                        => EditAndContinueCapabilities.ChangeCustomAttributes,
+                    nameof(EditAndContinueCapabilities.UpdateParameters)
+                        => EditAndContinueCapabilities.UpdateParameters,
 
                     // To make it eaiser for  runtimes to specify more broad capabilities
-                    "AddDefinitionToExistingType" => EditAndContinueCapabilities.AddMethodToExistingType | EditAndContinueCapabilities.AddStaticFieldToExistingType | EditAndContinueCapabilities.AddInstanceFieldToExistingType,
+                    "AddDefinitionToExistingType"
+                        => EditAndContinueCapabilities.AddMethodToExistingType
+                            | EditAndContinueCapabilities.AddStaticFieldToExistingType
+                            | EditAndContinueCapabilities.AddInstanceFieldToExistingType,
 
                     _ => EditAndContinueCapabilities.None
                 };
@@ -80,7 +90,9 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             return caps;
         }
 
-        public static ImmutableArray<string> ToStringArray(this EditAndContinueCapabilities capabilities)
+        public static ImmutableArray<string> ToStringArray(
+            this EditAndContinueCapabilities capabilities
+        )
         {
             using var _ = ArrayBuilder<string>.GetInstance(out var builder);
 

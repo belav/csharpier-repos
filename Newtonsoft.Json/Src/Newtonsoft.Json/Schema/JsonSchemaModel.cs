@@ -32,7 +32,9 @@ using Newtonsoft.Json.Utilities;
 
 namespace Newtonsoft.Json.Schema
 {
-    [Obsolete("JSON Schema validation has been moved to its own package. See https://www.newtonsoft.com/jsonschema for more details.")]
+    [Obsolete(
+        "JSON Schema validation has been moved to its own package. See https://www.newtonsoft.com/jsonschema for more details."
+    )]
     internal class JsonSchemaModel
     {
         public bool Required { get; set; }
@@ -98,8 +100,10 @@ namespace Newtonsoft.Json.Schema
 
             model.MinimumItems = MathUtils.Max(model.MinimumItems, schema.MinimumItems);
             model.MaximumItems = MathUtils.Min(model.MaximumItems, schema.MaximumItems);
-            model.PositionalItemsValidation = model.PositionalItemsValidation || schema.PositionalItemsValidation;
-            model.AllowAdditionalProperties = model.AllowAdditionalProperties && schema.AllowAdditionalProperties;
+            model.PositionalItemsValidation =
+                model.PositionalItemsValidation || schema.PositionalItemsValidation;
+            model.AllowAdditionalProperties =
+                model.AllowAdditionalProperties && schema.AllowAdditionalProperties;
             model.AllowAdditionalItems = model.AllowAdditionalItems && schema.AllowAdditionalItems;
             model.UniqueItems = model.UniqueItems || schema.UniqueItems;
             if (schema.Enum != null)

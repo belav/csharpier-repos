@@ -32,8 +32,8 @@ using System.Threading.Tasks;
 using MonoTests.Helpers;
 using NUnit.Framework;
 
-namespace MonoTests.System {
-
+namespace MonoTests.System
+{
     public interface SizedObject
     {
         long ExpectedSize();
@@ -54,7 +54,7 @@ namespace MonoTests.System {
 
         public long ExpectedSize()
         {
-            return 4*IntPtr.Size;
+            return 4 * IntPtr.Size;
         }
     }
 
@@ -67,7 +67,7 @@ namespace MonoTests.System {
 
         public long ExpectedSize()
         {
-            return 6*IntPtr.Size;
+            return 6 * IntPtr.Size;
         }
     }
 
@@ -84,59 +84,65 @@ namespace MonoTests.System {
 
         public long ExpectedSize()
         {
-            return (long)(10*IntPtr.Size);
+            return (long)(10 * IntPtr.Size);
         }
     }
 
     [TestFixture]
-    public class GCTest {
+    public class GCTest
+    {
         class MyFinalizeObject
         {
             public volatile static int finalized;
 
-            ~MyFinalizeObject ()
+            ~MyFinalizeObject()
             {
-                if (finalized++ == 0) {
-                    GC.ReRegisterForFinalize (this);
+                if (finalized++ == 0)
+                {
+                    GC.ReRegisterForFinalize(this);
                 }
             }
         }
 
-        static void Run_ReRegisterForFinalizeTest ()
+        static void Run_ReRegisterForFinalizeTest()
         {
-            var m = new WeakReference<MyFinalizeObject> (new MyFinalizeObject ());
-            m.SetTarget (null);
+            var m = new WeakReference<MyFinalizeObject>(new MyFinalizeObject());
+            m.SetTarget(null);
         }
 
         [Test]
-        [Category ("MultiThreaded")]
-        public void ReRegisterForFinalizeTest ()
+        [Category("MultiThreaded")]
+        public void ReRegisterForFinalizeTest()
         {
-            FinalizerHelpers.PerformNoPinAction (delegate () {
-                Run_ReRegisterForFinalizeTest ();
-            });
-            var t = Task.Factory.StartNew (() => {
-                do {
-                    GC.Collect ();
-                    GC.WaitForPendingFinalizers ();
-                    Task.Yield ();
+            FinalizerHelpers.PerformNoPinAction(
+                delegate()
+                {
+                    Run_ReRegisterForFinalizeTest();
+                }
+            );
+            var t = Task.Factory.StartNew(() =>
+            {
+                do
+                {
+                    GC.Collect();
+                    GC.WaitForPendingFinalizers();
+                    Task.Yield();
                 } while (MyFinalizeObject.finalized != 2);
             });
 
-            Assert.IsTrue (t.Wait (5000));
+            Assert.IsTrue(t.Wait(5000));
         }
-
 
         [Test]
         public static void TestGetBytesAllocatedForCurrentThread()
         {
-
-            Func<SizedObject>[] objectAllocators = {
-                                                      () => new NoPointer(),
-                                                      () => new TwoPointer(),
-                                                      () => new FourPointer(),
-                                                      () => new EightPointer()
-                                                 };
+            Func<SizedObject>[] objectAllocators =
+            {
+                () => new NoPointer(),
+                () => new TwoPointer(),
+                () => new FourPointer(),
+                () => new EightPointer()
+            };
 
             Random r = new Random();
 
@@ -158,12 +164,13 @@ namespace MonoTests.System {
 
             for (int i = 0; i < 10000000; i++)
             {
-                expectedSize += objectAllocators[r.Next(0, objectAllocators.Length) ]().ExpectedSize();
+                expectedSize += objectAllocators[r.Next(0, objectAllocators.Length)]()
+                    .ExpectedSize();
             }
 
             long bytesAfterAlloc = GC.GetAllocatedBytesForCurrentThread();
 
             Assert.AreEqual(expectedSize, bytesAfterAlloc - bytesBeforeAlloc);
         }
-    }    
+    }
 }

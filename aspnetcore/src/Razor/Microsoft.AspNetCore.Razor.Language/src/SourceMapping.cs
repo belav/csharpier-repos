@@ -32,8 +32,7 @@ public sealed class SourceMapping : IEquatable<SourceMapping>
             return false;
         }
 
-        return OriginalSpan.Equals(other.OriginalSpan) &&
-            GeneratedSpan.Equals(other.GeneratedSpan);
+        return OriginalSpan.Equals(other.OriginalSpan) && GeneratedSpan.Equals(other.GeneratedSpan);
     }
 
     public override int GetHashCode()

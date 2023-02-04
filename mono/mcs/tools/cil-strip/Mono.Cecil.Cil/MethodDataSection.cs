@@ -26,9 +26,10 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil.Cil {
-
-    internal enum MethodDataSection : ushort {
+namespace Mono.Cecil.Cil
+{
+    internal enum MethodDataSection : ushort
+    {
         EHTable = 0x1,
         OptILTable = 0x2,
         FatFormat = 0x40,

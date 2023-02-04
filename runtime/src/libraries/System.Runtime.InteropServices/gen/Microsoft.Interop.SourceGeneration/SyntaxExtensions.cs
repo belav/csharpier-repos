@@ -13,7 +13,10 @@ namespace Microsoft.Interop
 {
     public static class SyntaxExtensions
     {
-        private static FixedStatementSyntax AddStatementWithoutEmptyStatements(this FixedStatementSyntax fixedStatement, StatementSyntax childStatement)
+        private static FixedStatementSyntax AddStatementWithoutEmptyStatements(
+            this FixedStatementSyntax fixedStatement,
+            StatementSyntax childStatement
+        )
         {
             if (fixedStatement.Statement.IsKind(SyntaxKind.EmptyStatement))
             {
@@ -36,7 +39,9 @@ namespace Microsoft.Interop
 
             if (childStatement.IsKind(SyntaxKind.Block))
             {
-                block = block.WithStatements(block.Statements.AddRange(((BlockSyntax)childStatement).Statements));
+                block = block.WithStatements(
+                    block.Statements.AddRange(((BlockSyntax)childStatement).Statements)
+                );
             }
             else
             {
@@ -46,17 +51,24 @@ namespace Microsoft.Interop
             return fixedStatement.WithStatement(block);
         }
 
-        public static StatementSyntax NestFixedStatements(this ImmutableArray<FixedStatementSyntax> fixedStatements, StatementSyntax innerStatement)
+        public static StatementSyntax NestFixedStatements(
+            this ImmutableArray<FixedStatementSyntax> fixedStatements,
+            StatementSyntax innerStatement
+        )
         {
             StatementSyntax nestedStatement = innerStatement;
             if (!fixedStatements.IsEmpty)
             {
                 int i = fixedStatements.Length - 1;
-                nestedStatement = fixedStatements[i].AddStatementWithoutEmptyStatements(WrapStatementInBlock(nestedStatement));
+                nestedStatement = fixedStatements[i].AddStatementWithoutEmptyStatements(
+                    WrapStatementInBlock(nestedStatement)
+                );
                 i--;
                 for (; i >= 0; i--)
                 {
-                    nestedStatement = fixedStatements[i].AddStatementWithoutEmptyStatements(nestedStatement);
+                    nestedStatement = fixedStatements[i].AddStatementWithoutEmptyStatements(
+                        nestedStatement
+                    );
                 }
             }
             return nestedStatement;
@@ -81,7 +93,10 @@ namespace Microsoft.Interop
             return new SyntaxTokenList(strippedTokens);
         }
 
-        public static SyntaxTokenList AddToModifiers(this SyntaxTokenList modifiers, SyntaxKind modifierToAdd)
+        public static SyntaxTokenList AddToModifiers(
+            this SyntaxTokenList modifiers,
+            SyntaxKind modifierToAdd
+        )
         {
             if (modifiers.IndexOf(modifierToAdd) >= 0)
                 return modifiers;

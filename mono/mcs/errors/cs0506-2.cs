@@ -3,11 +3,12 @@
 
 using System;
 
-class BaseClass {
-        protected event EventHandler Test;
+class BaseClass
+{
+    protected event EventHandler Test;
 }
 
-class DerivedClass: BaseClass {
-        protected override event EventHandler Test;
+class DerivedClass : BaseClass
+{
+    protected override event EventHandler Test;
 }
-

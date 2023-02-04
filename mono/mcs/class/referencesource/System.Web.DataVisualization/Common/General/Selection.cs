@@ -1,6 +1,6 @@
 //-------------------------------------------------------------
-// <copyright company=’Microsoft Corporation’>
-//   Copyright © Microsoft Corporation. All Rights Reserved.
+// <copyright company=ï¿½Microsoft Corporationï¿½>
+//   Copyright ï¿½ Microsoft Corporation. All Rights Reserved.
 // </copyright>
 //-------------------------------------------------------------
 // @owner=alexgor, deliant
@@ -9,7 +9,7 @@
 //
 //  Namespace:    DataVisualization.Charting
 //
-//    Classes:    Selection, HitTestResult, ToolTipEventArgs, 
+//    Classes:    Selection, HitTestResult, ToolTipEventArgs,
 //                HotRegionElement, Hot Region
 //
 //  Purpose:    This file contains methods used for Win Form selection
@@ -34,9 +34,8 @@ using System.Text;
 using System.Collections.ObjectModel;
 
 #if Microsoft_CONTROL
-    using System.Windows.Forms;
+using System.Windows.Forms;
 #endif
-
 
 #endregion
 
@@ -49,7 +48,7 @@ namespace System.Web.UI.DataVisualization.Charting
     #region Enumerations
 
 
-    // Plase keep the folowing enumaration in chart layering order - ex. ChartArea is under DataPoint 
+    // Plase keep the folowing enumaration in chart layering order - ex. ChartArea is under DataPoint
     /// <summary>
     /// An enumeration of types of Chart Element.
     /// </summary>
@@ -66,7 +65,7 @@ namespace System.Web.UI.DataVisualization.Charting
         Title,
 
         /// <summary>
-        /// Plotting area (chart area excluding axes, labels, etc.).  
+        /// Plotting area (chart area excluding axes, labels, etc.).
         /// Also excludes the regions that data points may occupy.
         /// </summary>
         PlottingArea,
@@ -106,7 +105,6 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         AxisTitle,
 
-
 #if Microsoft_CONTROL
 
         /// <summary>
@@ -115,33 +113,33 @@ namespace System.Web.UI.DataVisualization.Charting
         ScrollBarThumbTracker,
 
         /// <summary>
-        /// A scrollbar small decrement button.  A "down arrow" 
-        /// button for a vertical scrollbar, or a "left arrow" 
+        /// A scrollbar small decrement button.  A "down arrow"
+        /// button for a vertical scrollbar, or a "left arrow"
         /// button for a horizontal scroll bar.
         /// </summary>
         ScrollBarSmallDecrement,
 
         /// <summary>
-        /// A scrollbar small increment button.  An "up arrow" 
-        /// button for a vertical scrollbar, or a "right arrow" 
+        /// A scrollbar small increment button.  An "up arrow"
+        /// button for a vertical scrollbar, or a "right arrow"
         /// button for a horizontal scroll bar.
         /// </summary>
         ScrollBarSmallIncrement,
 
         /// <summary>
-        /// The background of a scrollbar that will result in 
-        /// a large decrement in the scale view size when clicked.  
-        /// This is the background below the thumb for 
-        /// a vertical scrollbar, and to the left of 
+        /// The background of a scrollbar that will result in
+        /// a large decrement in the scale view size when clicked.
+        /// This is the background below the thumb for
+        /// a vertical scrollbar, and to the left of
         /// the thumb for a horizontal scrollbar.
         /// </summary>
         ScrollBarLargeDecrement,
 
         /// <summary>
-        /// The background of a scrollbar that will result in 
-        /// a large increment in the scale view size when clicked.  
-        /// This is the background above the thumb for 
-        /// a vertical scrollbar, and to the right of 
+        /// The background of a scrollbar that will result in
+        /// a large increment in the scale view size when clicked.
+        /// This is the background above the thumb for
+        /// a vertical scrollbar, and to the right of
         /// the thumb for a horizontal scrollbar.
         /// </summary>
         ScrollBarLargeIncrement,
@@ -150,7 +148,6 @@ namespace System.Web.UI.DataVisualization.Charting
         /// The zoom reset button of a scrollbar.
         /// </summary>
         ScrollBarZoomReset,
-
 #endif // Microsoft_CONTROL
 
         /// <summary>
@@ -164,7 +161,7 @@ namespace System.Web.UI.DataVisualization.Charting
         DataPointLabel,
 
         /// <summary>
-        /// The area inside a Legend object.  Does not include 
+        /// The area inside a Legend object.  Does not include
         /// the space occupied by legend items.
         /// </summary>
         LegendArea,
@@ -184,13 +181,10 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         LegendItem,
 
-
         /// <summary>
         /// Chart annotation object.
         /// </summary>
         Annotation,
-
-
     }
 
     /// <summary>
@@ -226,17 +220,15 @@ namespace System.Web.UI.DataVisualization.Charting
         #region Fields
 
         // Private data members, which store properties values
-        private GraphicsPath        _path = null;
-        private bool                _relativeCoordinates = true;
-        private RectangleF            _boundingRectangle = RectangleF.Empty;
-        private object                _selectedObject = null;
-        private int                    _pointIndex = -1;
-        private string                _seriesName = "";
-        private ChartElementType    _type = ChartElementType.Nothing;
+        private GraphicsPath _path = null;
+        private bool _relativeCoordinates = true;
+        private RectangleF _boundingRectangle = RectangleF.Empty;
+        private object _selectedObject = null;
+        private int _pointIndex = -1;
+        private string _seriesName = "";
+        private ChartElementType _type = ChartElementType.Nothing;
 
-
-        private object                _selectedSubObject = null;
-
+        private object _selectedSubObject = null;
 
         #endregion // Fields
 
@@ -247,30 +239,18 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         internal GraphicsPath Path
         {
-            get
-            {
-                return _path;
-            }
-            set
-            {
-                _path = value;
-            }
+            get { return _path; }
+            set { _path = value; }
         }
 
         /// <summary>
-        /// Relative coordinates are used 
+        /// Relative coordinates are used
         /// to define region
         /// </summary>
         internal bool RelativeCoordinates
         {
-            get
-            {
-                return _relativeCoordinates;
-            }
-            set
-            {
-                _relativeCoordinates = value;
-            }
+            get { return _relativeCoordinates; }
+            set { _relativeCoordinates = value; }
         }
 
         /// <summary>
@@ -278,14 +258,8 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         internal RectangleF BoundingRectangle
         {
-            get
-            {
-                return _boundingRectangle;
-            }
-            set
-            {
-                _boundingRectangle = value;
-            }
+            get { return _boundingRectangle; }
+            set { _boundingRectangle = value; }
         }
 
         /// <summary>
@@ -293,48 +267,26 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         internal object SelectedObject
         {
-            get
-            {
-                return _selectedObject;
-            }
-            set
-            {
-                _selectedObject = value;
-            }
+            get { return _selectedObject; }
+            set { _selectedObject = value; }
         }
-
-
 
         /// <summary>
         /// Sub-Object which is presented with this region
         /// </summary>
         internal object SelectedSubObject
         {
-            get
-            {
-                return _selectedSubObject;
-            }
-            set
-            {
-                _selectedSubObject = value;
-            }
+            get { return _selectedSubObject; }
+            set { _selectedSubObject = value; }
         }
-
-
 
         /// <summary>
         /// Index of the data point which is presented with this region
         /// </summary>
         internal int PointIndex
         {
-            get
-            {
-                return _pointIndex;
-            }
-            set
-            {
-                _pointIndex = value;
-            }
+            get { return _pointIndex; }
+            set { _pointIndex = value; }
         }
 
         /// <summary>
@@ -342,14 +294,8 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         internal string SeriesName
         {
-            get
-            {
-                return _seriesName;
-            }
-            set
-            {
-                _seriesName = value;
-            }
+            get { return _seriesName; }
+            set { _seriesName = value; }
         }
 
         /// <summary>
@@ -357,14 +303,8 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         internal ChartElementType Type
         {
-            get
-            {
-                return _type;
-            }
-            set
-            {
-                _type = value;
-            }
+            get { return _type; }
+            set { _type = value; }
         }
 
         #endregion // Properties
@@ -397,16 +337,17 @@ namespace System.Web.UI.DataVisualization.Charting
         #endregion
 
         #region Methods
-        
+
         /// <summary>
         /// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
         /// </summary>
         /// <returns>
         /// A <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
         /// </returns>
-        public override string  ToString()
+        public override string ToString()
         {
-            string objectType = this.SelectedObject != null ? this.SelectedObject.ToString() : "null";
+            string objectType =
+                this.SelectedObject != null ? this.SelectedObject.ToString() : "null";
             if (this.SelectedObject == null && !String.IsNullOrEmpty(this.SeriesName))
             {
                 objectType = this.SeriesName;
@@ -418,7 +359,7 @@ namespace System.Web.UI.DataVisualization.Charting
     }
 
     /// <summary>
-    /// This class is used to fill and 
+    /// This class is used to fill and
     /// manage collection with Hot Regions
     /// </summary>
     internal class HotRegionsList : IDisposable
@@ -441,38 +382,34 @@ namespace System.Web.UI.DataVisualization.Charting
         private CommonElements _common = null;
 
 #if Microsoft_CONTROL
-        
+
         /// <summary>
         /// True if hit test function is called
         /// </summary>
-        internal bool                    hitTestCalled = false;
+        internal bool hitTestCalled = false;
 
 #endif // Microsoft_CONTROL
-        
         #endregion // Fields
 
         #region Properties
 
         /// <summary>
-        /// Flag used for processing chart types. It could 
+        /// Flag used for processing chart types. It could
         /// be Paint, HotRegion or both mode.
         /// </summary>
         internal ProcessMode ProcessChartMode
         {
-            get
-            {
-                return _processChartMode;
-            }
+            get { return _processChartMode; }
             set
             {
                 _processChartMode = value;
-                if(this._common != null)
+                if (this._common != null)
                 {
-                    this._common.processModePaint = 
-                        (_processChartMode & ProcessMode.Paint ) == ProcessMode.Paint;
-                    this._common.processModeRegions = 
-                        ( _processChartMode & ProcessMode.HotRegions ) == ProcessMode.HotRegions ||
-                        ( _processChartMode & ProcessMode.ImageMaps ) == ProcessMode.ImageMaps;
+                    this._common.processModePaint =
+                        (_processChartMode & ProcessMode.Paint) == ProcessMode.Paint;
+                    this._common.processModeRegions =
+                        (_processChartMode & ProcessMode.HotRegions) == ProcessMode.HotRegions
+                        || (_processChartMode & ProcessMode.ImageMaps) == ProcessMode.ImageMaps;
                 }
             }
         }
@@ -482,10 +419,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         internal ArrayList List
         {
-            get
-            {
-                return _regionList;
-            }
+            get { return _regionList; }
         }
 
         #endregion // Properties
@@ -496,7 +430,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Constructor
         /// </summary>
         /// <param name="common">Reference to the CommonElements</param>
-        internal HotRegionsList( CommonElements common )
+        internal HotRegionsList(CommonElements common)
         {
             this._common = common;
         }
@@ -508,33 +442,37 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="point">Data Point</param>
         /// <param name="seriesName">Data Series</param>
         /// <param name="pointIndex">Index of an Data Point in the series</param>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters")]
-        public void AddHotRegion( 
-            RectangleF rectSize, 
-            DataPoint point, 
-            string seriesName, 
-            int pointIndex 
-            )
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Design",
+            "CA1011:ConsiderPassingBaseTypesAsParameters"
+        )]
+        public void AddHotRegion(
+            RectangleF rectSize,
+            DataPoint point,
+            string seriesName,
+            int pointIndex
+        )
         {
-            
 #if !Microsoft_CONTROL
-            if( ( ProcessChartMode & ProcessMode.ImageMaps ) == ProcessMode.ImageMaps )
+            if ((ProcessChartMode & ProcessMode.ImageMaps) == ProcessMode.ImageMaps)
             {
                 if (_common.ChartPicture.IsMapEnabled == true)
                 {
-                    if(point.ToolTip.Length > 0 || 
-                        point.Url.Length > 0 ||
-                        point.MapAreaAttributes.Length > 0 ||
-                        point.PostBackValue.Length > 0 
-                        )
+                    if (
+                        point.ToolTip.Length > 0
+                        || point.Url.Length > 0
+                        || point.MapAreaAttributes.Length > 0
+                        || point.PostBackValue.Length > 0
+                    )
                     {
                         MapArea area = new MapArea(
-                                point.ReplaceKeywords(point.ToolTip), 
-                                point.ReplaceKeywords(point.Url), 
-                                point.ReplaceKeywords(point.MapAreaAttributes),
-                                point.ReplaceKeywords(point.PostBackValue),
-                                rectSize,
-                                point.Tag);
+                            point.ReplaceKeywords(point.ToolTip),
+                            point.ReplaceKeywords(point.Url),
+                            point.ReplaceKeywords(point.MapAreaAttributes),
+                            point.ReplaceKeywords(point.PostBackValue),
+                            rectSize,
+                            point.Tag
+                        );
                         area.IsCustom = false;
                         _common.ChartPicture.MapAreas.Insert(0, area);
                     }
@@ -542,30 +480,28 @@ namespace System.Web.UI.DataVisualization.Charting
             }
 #endif // !Microsoft_CONTROL
 
-            if( ( ProcessChartMode & ProcessMode.HotRegions ) == ProcessMode.HotRegions )
+            if ((ProcessChartMode & ProcessMode.HotRegions) == ProcessMode.HotRegions)
             {
                 HotRegion region = new HotRegion();
-                
+
                 region.BoundingRectangle = rectSize;
                 region.SeriesName = seriesName;
                 region.PointIndex = pointIndex;
                 region.Type = ChartElementType.DataPoint;
                 region.RelativeCoordinates = true;
 
-
-
                 // Use index of the original data point
-                if(point != null && point.IsCustomPropertySet("OriginalPointIndex"))
+                if (point != null && point.IsCustomPropertySet("OriginalPointIndex"))
                 {
-                    region.PointIndex = int.Parse(point["OriginalPointIndex"], CultureInfo.InvariantCulture);
+                    region.PointIndex = int.Parse(
+                        point["OriginalPointIndex"],
+                        CultureInfo.InvariantCulture
+                    );
                 }
-                
 
-
-                _regionList.Add( region );
+                _regionList.Add(region);
             }
         }
-
 
         /// <summary>
         /// Adds the hot region.
@@ -576,57 +512,66 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="point">Selected data point</param>
         /// <param name="seriesName">Name of the series.</param>
         /// <param name="pointIndex">Index of the point.</param>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "graph")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Usage",
+            "CA1801:ReviewUnusedParameters",
+            MessageId = "graph"
+        )]
         internal void AddHotRegion(
-            GraphicsPath path, 
+            GraphicsPath path,
             bool relativePath,
             ChartGraphics graph,
-            DataPoint point, 
-            string seriesName, 
-            int pointIndex 
-            ) 
+            DataPoint point,
+            string seriesName,
+            int pointIndex
+        )
         {
-            if( path == null )
+            if (path == null)
             {
                 return;
             }
 #if !Microsoft_CONTROL
-            if( ( ProcessChartMode & ProcessMode.ImageMaps ) == ProcessMode.ImageMaps )
+            if ((ProcessChartMode & ProcessMode.ImageMaps) == ProcessMode.ImageMaps)
             {
                 if (_common.ChartPicture.IsMapEnabled == true)
                 {
-                    if(point.ToolTip.Length > 0 || 
-                        point.Url.Length > 0 ||
-                        point.MapAreaAttributes.Length > 0 ||
-                        point.PostBackValue.Length > 0
-                        )
+                    if (
+                        point.ToolTip.Length > 0
+                        || point.Url.Length > 0
+                        || point.MapAreaAttributes.Length > 0
+                        || point.PostBackValue.Length > 0
+                    )
                     {
                         int prevMapAreaCount = _common.ChartPicture.MapAreas.Count;
                         _common.ChartPicture.MapAreas.InsertPath(
                             0,
-                            point.ReplaceKeywords(point.ToolTip), 
-                            point.ReplaceKeywords(point.Url), 
+                            point.ReplaceKeywords(point.ToolTip),
+                            point.ReplaceKeywords(point.Url),
                             point.ReplaceKeywords(point.MapAreaAttributes),
                             point.ReplaceKeywords(point.PostBackValue),
                             path,
                             !relativePath,
                             graph
-                            );
-
+                        );
 
                         // Set map area type
-                        for (int i = 0; i < _common.ChartPicture.MapAreas.Count - prevMapAreaCount; i++)
-                            ((IChartMapArea)_common.ChartPicture.MapAreas[i]).Tag = ((IChartMapArea)point).Tag;
+                        for (
+                            int i = 0;
+                            i < _common.ChartPicture.MapAreas.Count - prevMapAreaCount;
+                            i++
+                        )
+                            ((IChartMapArea)_common.ChartPicture.MapAreas[i]).Tag = (
+                                (IChartMapArea)point
+                            ).Tag;
                     }
                 }
             }
 #endif // !Microsoft_CONTROL
 
-            if( ( ProcessChartMode & ProcessMode.HotRegions ) == ProcessMode.HotRegions )
+            if ((ProcessChartMode & ProcessMode.HotRegions) == ProcessMode.HotRegions)
             {
-                        
                 HotRegion region = new HotRegion();
-                        
+
                 region.SeriesName = seriesName;
                 region.PointIndex = pointIndex;
                 region.Type = ChartElementType.DataPoint;
@@ -634,18 +579,16 @@ namespace System.Web.UI.DataVisualization.Charting
                 region.BoundingRectangle = path.GetBounds();
                 region.RelativeCoordinates = relativePath;
 
-
-
                 // Use index of the original data point
-                if(point != null && point.IsCustomPropertySet("OriginalPointIndex"))
+                if (point != null && point.IsCustomPropertySet("OriginalPointIndex"))
                 {
-                    region.PointIndex = int.Parse(point["OriginalPointIndex"], CultureInfo.InvariantCulture);
+                    region.PointIndex = int.Parse(
+                        point["OriginalPointIndex"],
+                        CultureInfo.InvariantCulture
+                    );
                 }
-                
 
-
-                _regionList.Add( region );
-
+                _regionList.Add(region);
             }
         }
 
@@ -660,56 +603,70 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="seriesName">Name of the series.</param>
         /// <param name="pointIndex">Index of the point.</param>
         [
-        System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "graph"),
-        System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "insertIndex")
+            System.Diagnostics.CodeAnalysis.SuppressMessage(
+                "Microsoft.Usage",
+                "CA1801:ReviewUnusedParameters",
+                MessageId = "graph"
+            ),
+            System.Diagnostics.CodeAnalysis.SuppressMessage(
+                "Microsoft.Usage",
+                "CA1801:ReviewUnusedParameters",
+                MessageId = "insertIndex"
+            )
         ]
         internal void AddHotRegion(
             int insertIndex,
-            GraphicsPath path, 
+            GraphicsPath path,
             bool relativePath,
             ChartGraphics graph,
-            DataPoint point, 
-            string seriesName, 
-            int pointIndex 
-            ) 
+            DataPoint point,
+            string seriesName,
+            int pointIndex
+        )
         {
 #if !Microsoft_CONTROL
-            if( ( ProcessChartMode & ProcessMode.ImageMaps ) == ProcessMode.ImageMaps )
+            if ((ProcessChartMode & ProcessMode.ImageMaps) == ProcessMode.ImageMaps)
             {
                 if (_common.ChartPicture.IsMapEnabled == true)
                 {
-                    if(point.ToolTip.Length > 0 || 
-                        point.Url.Length > 0 ||
-                        point.MapAreaAttributes.Length > 0 ||
-                        point.PostBackValue.Length > 0)
-
+                    if (
+                        point.ToolTip.Length > 0
+                        || point.Url.Length > 0
+                        || point.MapAreaAttributes.Length > 0
+                        || point.PostBackValue.Length > 0
+                    )
                     {
                         int prevMapAreaCount = _common.ChartPicture.MapAreas.Count;
 
                         _common.ChartPicture.MapAreas.InsertPath(
                             insertIndex,
-                            point.ReplaceKeywords(point.ToolTip), 
-                            point.ReplaceKeywords(point.Url), 
+                            point.ReplaceKeywords(point.ToolTip),
+                            point.ReplaceKeywords(point.Url),
                             point.ReplaceKeywords(point.MapAreaAttributes),
                             point.ReplaceKeywords(point.PostBackValue),
                             path,
                             !relativePath,
                             graph
-                            );
+                        );
 
                         // Set map area type
-                        for (int i = insertIndex; i < _common.ChartPicture.MapAreas.Count - prevMapAreaCount; i++)
-                            ((IChartMapArea)_common.ChartPicture.MapAreas[i]).Tag = ((IChartMapArea)point).Tag;
+                        for (
+                            int i = insertIndex;
+                            i < _common.ChartPicture.MapAreas.Count - prevMapAreaCount;
+                            i++
+                        )
+                            ((IChartMapArea)_common.ChartPicture.MapAreas[i]).Tag = (
+                                (IChartMapArea)point
+                            ).Tag;
                     }
                 }
             }
 #endif // !Microsoft_CONTROL
 
-            if( ( ProcessChartMode & ProcessMode.HotRegions ) == ProcessMode.HotRegions )
+            if ((ProcessChartMode & ProcessMode.HotRegions) == ProcessMode.HotRegions)
             {
-                        
                 HotRegion region = new HotRegion();
-                        
+
                 region.SeriesName = seriesName;
                 region.PointIndex = pointIndex;
                 region.Type = ChartElementType.DataPoint;
@@ -717,18 +674,16 @@ namespace System.Web.UI.DataVisualization.Charting
                 region.BoundingRectangle = path.GetBounds();
                 region.RelativeCoordinates = relativePath;
 
-
-
                 // Use index of the original data point
-                if(point != null && point.IsCustomPropertySet("OriginalPointIndex"))
+                if (point != null && point.IsCustomPropertySet("OriginalPointIndex"))
                 {
-                    region.PointIndex = int.Parse(point["OriginalPointIndex"], CultureInfo.InvariantCulture);
+                    region.PointIndex = int.Parse(
+                        point["OriginalPointIndex"],
+                        CultureInfo.InvariantCulture
+                    );
                 }
-                
 
-
-                _regionList.Add( region );
-
+                _regionList.Add(region);
             }
         }
 
@@ -741,41 +696,52 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="point">Selected data point</param>
         /// <param name="seriesName">Data Series</param>
         /// <param name="pointIndex">Index of an Data Point in the series</param>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "coord")]
-        internal void AddHotRegion( GraphicsPath path, bool relativePath, float [] coord, DataPoint point, string seriesName, int pointIndex )
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Usage",
+            "CA1801:ReviewUnusedParameters",
+            MessageId = "coord"
+        )]
+        internal void AddHotRegion(
+            GraphicsPath path,
+            bool relativePath,
+            float[] coord,
+            DataPoint point,
+            string seriesName,
+            int pointIndex
+        )
         {
-
 #if !Microsoft_CONTROL
-            if( ( ProcessChartMode & ProcessMode.ImageMaps ) == ProcessMode.ImageMaps )
+            if ((ProcessChartMode & ProcessMode.ImageMaps) == ProcessMode.ImageMaps)
             {
                 if (_common.ChartPicture.IsMapEnabled == true)
                 {
-                    if(point.ToolTip.Length > 0 || 
-                        point.Url.Length > 0 ||
-                        point.MapAreaAttributes.Length > 0 ||
-                        point.PostBackValue.Length > 0)
+                    if (
+                        point.ToolTip.Length > 0
+                        || point.Url.Length > 0
+                        || point.MapAreaAttributes.Length > 0
+                        || point.PostBackValue.Length > 0
+                    )
                     {
                         MapArea area = new MapArea(
-                                MapAreaShape.Polygon,
-                                point.ReplaceKeywords(point.ToolTip),
-                                point.ReplaceKeywords(point.Url),
-                                point.ReplaceKeywords(point.MapAreaAttributes),
-                                point.ReplaceKeywords(point.PostBackValue),
-                                coord,
-                                point.Tag);
+                            MapAreaShape.Polygon,
+                            point.ReplaceKeywords(point.ToolTip),
+                            point.ReplaceKeywords(point.Url),
+                            point.ReplaceKeywords(point.MapAreaAttributes),
+                            point.ReplaceKeywords(point.PostBackValue),
+                            coord,
+                            point.Tag
+                        );
                         area.IsCustom = false;
-                        _common.ChartPicture.MapAreas.Insert(0,area);
-
+                        _common.ChartPicture.MapAreas.Insert(0, area);
                     }
                 }
             }
 #endif // !Microsoft_CONTROL
 
-            if( ( ProcessChartMode & ProcessMode.HotRegions ) == ProcessMode.HotRegions )
+            if ((ProcessChartMode & ProcessMode.HotRegions) == ProcessMode.HotRegions)
             {
-                
                 HotRegion region = new HotRegion();
-                
+
                 region.SeriesName = seriesName;
                 region.PointIndex = pointIndex;
                 region.Type = ChartElementType.DataPoint;
@@ -783,20 +749,17 @@ namespace System.Web.UI.DataVisualization.Charting
                 region.BoundingRectangle = path.GetBounds();
                 region.RelativeCoordinates = relativePath;
 
-
-
                 // Use index of the original data point
-                if(point != null && point.IsCustomPropertySet("OriginalPointIndex"))
+                if (point != null && point.IsCustomPropertySet("OriginalPointIndex"))
                 {
-                    region.PointIndex = int.Parse(point["OriginalPointIndex"], CultureInfo.InvariantCulture);
+                    region.PointIndex = int.Parse(
+                        point["OriginalPointIndex"],
+                        CultureInfo.InvariantCulture
+                    );
                 }
-                
 
-
-                _regionList.Add( region );
-
+                _regionList.Add(region);
             }
-
         }
 
         /// <summary>
@@ -810,57 +773,70 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="point">Selected data point</param>
         /// <param name="seriesName">Data Series</param>
         /// <param name="pointIndex">Index of an Data Point in the series</param>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "insertIndex")]
-        internal void AddHotRegion( int insertIndex, ChartGraphics graph, float x, float y, float radius, DataPoint point, string seriesName, int pointIndex )
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Usage",
+            "CA1801:ReviewUnusedParameters",
+            MessageId = "insertIndex"
+        )]
+        internal void AddHotRegion(
+            int insertIndex,
+            ChartGraphics graph,
+            float x,
+            float y,
+            float radius,
+            DataPoint point,
+            string seriesName,
+            int pointIndex
+        )
         {
-
 #if !Microsoft_CONTROL
-            if( ( ProcessChartMode & ProcessMode.ImageMaps ) == ProcessMode.ImageMaps )
+            if ((ProcessChartMode & ProcessMode.ImageMaps) == ProcessMode.ImageMaps)
             {
                 if (_common.ChartPicture.IsMapEnabled == true)
                 {
-                    if(point.ToolTip.Length > 0 || 
-                        point.Url.Length > 0 ||
-                        point.MapAreaAttributes.Length > 0 ||
-                        point.PostBackValue.Length > 0 )
+                    if (
+                        point.ToolTip.Length > 0
+                        || point.Url.Length > 0
+                        || point.MapAreaAttributes.Length > 0
+                        || point.PostBackValue.Length > 0
+                    )
                     {
+                        float[] circCoord = new float[3];
+                        circCoord[0] = x;
+                        circCoord[1] = y;
+                        circCoord[2] = radius;
 
-                    float[]    circCoord = new float[3];
-                    circCoord[0] = x;
-                    circCoord[1] = y;
-                    circCoord[2] = radius;
-
-                    MapArea area = new MapArea(
+                        MapArea area = new MapArea(
                             MapAreaShape.Circle,
                             point.ReplaceKeywords(point.ToolTip),
                             point.ReplaceKeywords(point.Url),
                             point.ReplaceKeywords(point.MapAreaAttributes),
                             point.ReplaceKeywords(point.PostBackValue),
                             circCoord,
-                            point.Tag);
-                    area.IsCustom = false;
-                    // Insert area
-                    _common.ChartPicture.MapAreas.Insert(insertIndex,area);
-
+                            point.Tag
+                        );
+                        area.IsCustom = false;
+                        // Insert area
+                        _common.ChartPicture.MapAreas.Insert(insertIndex, area);
                     }
                 }
             }
 #endif // !Microsoft_CONTROL
 
-            if( ( ProcessChartMode & ProcessMode.HotRegions ) == ProcessMode.HotRegions )
+            if ((ProcessChartMode & ProcessMode.HotRegions) == ProcessMode.HotRegions)
             {
                 HotRegion region = new HotRegion();
 
-                PointF circleCenter = graph.GetAbsolutePoint( new PointF( x, y ) );
-                SizeF circleRadius = graph.GetAbsoluteSize( new SizeF( radius, radius ) );
+                PointF circleCenter = graph.GetAbsolutePoint(new PointF(x, y));
+                SizeF circleRadius = graph.GetAbsoluteSize(new SizeF(radius, radius));
 
                 GraphicsPath path = new GraphicsPath();
-                path.AddEllipse( 
-                    circleCenter.X - circleRadius.Width, 
+                path.AddEllipse(
+                    circleCenter.X - circleRadius.Width,
                     circleCenter.Y - circleRadius.Width,
-                    2 *  circleRadius.Width, 
-                    2 *  circleRadius.Width 
-                    );
+                    2 * circleRadius.Width,
+                    2 * circleRadius.Width
+                );
                 region.BoundingRectangle = path.GetBounds();
                 region.SeriesName = seriesName;
                 region.Type = ChartElementType.DataPoint;
@@ -868,20 +844,18 @@ namespace System.Web.UI.DataVisualization.Charting
                 region.Path = path;
                 region.RelativeCoordinates = false;
 
-
-
                 // Use index of the original data point
-                if(point != null && point.IsCustomPropertySet("OriginalPointIndex"))
+                if (point != null && point.IsCustomPropertySet("OriginalPointIndex"))
                 {
-                    region.PointIndex = int.Parse(point["OriginalPointIndex"], CultureInfo.InvariantCulture);
+                    region.PointIndex = int.Parse(
+                        point["OriginalPointIndex"],
+                        CultureInfo.InvariantCulture
+                    );
                 }
-                
 
-
-                _regionList.Add( region );
+                _regionList.Add(region);
             }
         }
-
 
         /// <summary>
         /// Add Hot region to the collection.
@@ -895,55 +869,81 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="type">AxisName of the object which present hot region</param>
         /// <param name="series">Selected series</param>
         [
-        System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "hRef"),
-        System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "mapAreaAttributes"),
-        System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "postBackValue"),
-        System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "toolTip")
+            System.Diagnostics.CodeAnalysis.SuppressMessage(
+                "Microsoft.Usage",
+                "CA1801:ReviewUnusedParameters",
+                MessageId = "hRef"
+            ),
+            System.Diagnostics.CodeAnalysis.SuppressMessage(
+                "Microsoft.Usage",
+                "CA1801:ReviewUnusedParameters",
+                MessageId = "mapAreaAttributes"
+            ),
+            System.Diagnostics.CodeAnalysis.SuppressMessage(
+                "Microsoft.Usage",
+                "CA1801:ReviewUnusedParameters",
+                MessageId = "postBackValue"
+            ),
+            System.Diagnostics.CodeAnalysis.SuppressMessage(
+                "Microsoft.Usage",
+                "CA1801:ReviewUnusedParameters",
+                MessageId = "toolTip"
+            )
         ]
-        internal void AddHotRegion( RectangleF rectArea, string toolTip, string hRef, string mapAreaAttributes, string postBackValue, object selectedObject, ChartElementType type, string series )
+        internal void AddHotRegion(
+            RectangleF rectArea,
+            string toolTip,
+            string hRef,
+            string mapAreaAttributes,
+            string postBackValue,
+            object selectedObject,
+            ChartElementType type,
+            string series
+        )
         {
 #if !Microsoft_CONTROL
-            if( ( ProcessChartMode & ProcessMode.ImageMaps ) == ProcessMode.ImageMaps )
+            if ((ProcessChartMode & ProcessMode.ImageMaps) == ProcessMode.ImageMaps)
             {
                 // Add items to the image map collection
                 if (_common.ChartPicture.IsMapEnabled == true)
                 {
-                    if(toolTip.Length > 0 || 
-                        hRef.Length > 0 ||
-                        mapAreaAttributes.Length > 0 ||
-                        postBackValue.Length > 0)
+                    if (
+                        toolTip.Length > 0
+                        || hRef.Length > 0
+                        || mapAreaAttributes.Length > 0
+                        || postBackValue.Length > 0
+                    )
                     {
-                                MapArea area = new MapArea(
-                                                    toolTip,
-                                                    hRef,
-                                                    mapAreaAttributes,
-                                                    postBackValue,
-                                                    rectArea,
-                                                    ((IChartMapArea)selectedObject).Tag);
-                                area.IsCustom = false;
-                                _common.ChartPicture.MapAreas.Add( area);
+                        MapArea area = new MapArea(
+                            toolTip,
+                            hRef,
+                            mapAreaAttributes,
+                            postBackValue,
+                            rectArea,
+                            ((IChartMapArea)selectedObject).Tag
+                        );
+                        area.IsCustom = false;
+                        _common.ChartPicture.MapAreas.Add(area);
                     }
                 }
             }
 #endif // !Microsoft_CONTROL
 
-            if( ( ProcessChartMode & ProcessMode.HotRegions ) == ProcessMode.HotRegions )
+            if ((ProcessChartMode & ProcessMode.HotRegions) == ProcessMode.HotRegions)
             {
                 HotRegion region = new HotRegion();
-                
+
                 region.BoundingRectangle = rectArea;
                 region.RelativeCoordinates = true;
                 region.Type = type;
                 region.SelectedObject = selectedObject;
-                if(!String.IsNullOrEmpty(series))
+                if (!String.IsNullOrEmpty(series))
                 {
                     region.SeriesName = series;
                 }
-                _regionList.Add( region );
+                _regionList.Add(region);
             }
         }
-
-
 
         /// <summary>
         /// Add Hot region to the collection.
@@ -958,65 +958,83 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="type">AxisName of the object which present hot region</param>
         /// <param name="series">Selected series</param>
         [
-        System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "hRef"), 
-        System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "mapAreaAttributes"), 
-        System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "postBackValue"), 
-        System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "toolTip") 
+            System.Diagnostics.CodeAnalysis.SuppressMessage(
+                "Microsoft.Usage",
+                "CA1801:ReviewUnusedParameters",
+                MessageId = "hRef"
+            ),
+            System.Diagnostics.CodeAnalysis.SuppressMessage(
+                "Microsoft.Usage",
+                "CA1801:ReviewUnusedParameters",
+                MessageId = "mapAreaAttributes"
+            ),
+            System.Diagnostics.CodeAnalysis.SuppressMessage(
+                "Microsoft.Usage",
+                "CA1801:ReviewUnusedParameters",
+                MessageId = "postBackValue"
+            ),
+            System.Diagnostics.CodeAnalysis.SuppressMessage(
+                "Microsoft.Usage",
+                "CA1801:ReviewUnusedParameters",
+                MessageId = "toolTip"
+            )
         ]
-        internal void AddHotRegion( 
-            RectangleF rectArea, 
-            string toolTip, 
-            string hRef, 
-            string mapAreaAttributes, 
+        internal void AddHotRegion(
+            RectangleF rectArea,
+            string toolTip,
+            string hRef,
+            string mapAreaAttributes,
             string postBackValue,
-            object selectedObject, 
-            object selectedSubObject, 
-            ChartElementType type, 
-            string series )
+            object selectedObject,
+            object selectedSubObject,
+            ChartElementType type,
+            string series
+        )
         {
 #if !Microsoft_CONTROL
-            if( ( ProcessChartMode & ProcessMode.ImageMaps ) == ProcessMode.ImageMaps )
+            if ((ProcessChartMode & ProcessMode.ImageMaps) == ProcessMode.ImageMaps)
             {
                 // Add items to the image map collection
                 if (_common.ChartPicture.IsMapEnabled == true)
                 {
-                    if(toolTip.Length > 0 || 
-                        hRef.Length > 0 ||
-                        mapAreaAttributes.Length > 0 ||
-                        postBackValue.Length > 0)
+                    if (
+                        toolTip.Length > 0
+                        || hRef.Length > 0
+                        || mapAreaAttributes.Length > 0
+                        || postBackValue.Length > 0
+                    )
                     {
                         MapArea area = new MapArea(
-                                                    toolTip,
-                                                    hRef,
-                                                    mapAreaAttributes,
-                                                    postBackValue,
-                                                    rectArea,
-                                                    ((IChartMapArea)selectedObject).Tag);
+                            toolTip,
+                            hRef,
+                            mapAreaAttributes,
+                            postBackValue,
+                            rectArea,
+                            ((IChartMapArea)selectedObject).Tag
+                        );
                         area.IsCustom = false;
-                        _common.ChartPicture.MapAreas.Add( area);
+                        _common.ChartPicture.MapAreas.Add(area);
                     }
                 }
             }
 #endif // !Microsoft_CONTROL
 
-            if( ( ProcessChartMode & ProcessMode.HotRegions ) == ProcessMode.HotRegions )
+            if ((ProcessChartMode & ProcessMode.HotRegions) == ProcessMode.HotRegions)
             {
                 HotRegion region = new HotRegion();
-                
+
                 region.BoundingRectangle = rectArea;
                 region.RelativeCoordinates = true;
                 region.Type = type;
                 region.SelectedObject = selectedObject;
                 region.SelectedSubObject = selectedSubObject;
-                if(!String.IsNullOrEmpty(series))
+                if (!String.IsNullOrEmpty(series))
                 {
                     region.SeriesName = series;
                 }
-                _regionList.Add( region );
+                _regionList.Add(region);
             }
         }
-
-
 
         /// <summary>
         /// Add Hot region to the collection.
@@ -1031,53 +1049,82 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="selectedObject">Object which present hot region</param>
         /// <param name="type">AxisName of the object which present hot region</param>
         [
-        System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "graph"),
-        System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "hRef"), 
-        System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "mapAreaAttributes"),
-        System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "postBackValue"),
-        System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "toolTip")
+            System.Diagnostics.CodeAnalysis.SuppressMessage(
+                "Microsoft.Usage",
+                "CA1801:ReviewUnusedParameters",
+                MessageId = "graph"
+            ),
+            System.Diagnostics.CodeAnalysis.SuppressMessage(
+                "Microsoft.Usage",
+                "CA1801:ReviewUnusedParameters",
+                MessageId = "hRef"
+            ),
+            System.Diagnostics.CodeAnalysis.SuppressMessage(
+                "Microsoft.Usage",
+                "CA1801:ReviewUnusedParameters",
+                MessageId = "mapAreaAttributes"
+            ),
+            System.Diagnostics.CodeAnalysis.SuppressMessage(
+                "Microsoft.Usage",
+                "CA1801:ReviewUnusedParameters",
+                MessageId = "postBackValue"
+            ),
+            System.Diagnostics.CodeAnalysis.SuppressMessage(
+                "Microsoft.Usage",
+                "CA1801:ReviewUnusedParameters",
+                MessageId = "toolTip"
+            )
         ]
-        internal void AddHotRegion( ChartGraphics graph, GraphicsPath path, bool relativePath, string toolTip, string hRef, string mapAreaAttributes, string postBackValue, object selectedObject, ChartElementType type )
+        internal void AddHotRegion(
+            ChartGraphics graph,
+            GraphicsPath path,
+            bool relativePath,
+            string toolTip,
+            string hRef,
+            string mapAreaAttributes,
+            string postBackValue,
+            object selectedObject,
+            ChartElementType type
+        )
         {
 #if !Microsoft_CONTROL
-            if( ( ProcessChartMode & ProcessMode.ImageMaps ) == ProcessMode.ImageMaps )
+            if ((ProcessChartMode & ProcessMode.ImageMaps) == ProcessMode.ImageMaps)
             {
                 if (_common.ChartPicture.IsMapEnabled == true)
                 {
-
-                    if(toolTip.Length > 0 || 
-                        hRef.Length > 0 || 
-                        mapAreaAttributes.Length > 0 ||
-                        postBackValue.Length > 0)
+                    if (
+                        toolTip.Length > 0
+                        || hRef.Length > 0
+                        || mapAreaAttributes.Length > 0
+                        || postBackValue.Length > 0
+                    )
                     {
                         _common.ChartPicture.MapAreas.InsertPath(
                             0,
-                            toolTip, 
-                            hRef, 
+                            toolTip,
+                            hRef,
                             mapAreaAttributes,
                             postBackValue,
                             path,
                             !relativePath,
                             graph
-                            );
+                        );
                     }
                 }
             }
 #endif // !Microsoft_CONTROL
 
-            if( ( ProcessChartMode & ProcessMode.HotRegions ) == ProcessMode.HotRegions )
+            if ((ProcessChartMode & ProcessMode.HotRegions) == ProcessMode.HotRegions)
             {
-                        
                 HotRegion region = new HotRegion();
-                        
+
                 region.Type = type;
                 region.Path = (GraphicsPath)path.Clone();
                 region.SelectedObject = selectedObject;
                 region.BoundingRectangle = path.GetBounds();
                 region.RelativeCoordinates = relativePath;
 
-                _regionList.Add( region );
-
+                _regionList.Add(region);
             }
         }
 
@@ -1088,9 +1135,14 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="selectedObject">Object which present hot region</param>
         /// <param name="type">AxisName of the object which present hot region</param>
         /// <param name="relativeCoordinates">Coordinates for rectangle are relative</param>
-        internal void AddHotRegion( RectangleF rectArea, object selectedObject, ChartElementType type, bool relativeCoordinates )
+        internal void AddHotRegion(
+            RectangleF rectArea,
+            object selectedObject,
+            ChartElementType type,
+            bool relativeCoordinates
+        )
         {
-            this.AddHotRegion( rectArea, selectedObject, type, relativeCoordinates, false );
+            this.AddHotRegion(rectArea, selectedObject, type, relativeCoordinates, false);
         }
 
         /// <summary>
@@ -1101,24 +1153,30 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="type">AxisName of the object which present hot region</param>
         /// <param name="relativeCoordinates">Coordinates for rectangle are relative</param>
         /// <param name="insertAtBeginning">Insert the hot region at the beginning of the collection</param>
-        internal void AddHotRegion( RectangleF rectArea, object selectedObject, ChartElementType type, bool relativeCoordinates, bool insertAtBeginning )
+        internal void AddHotRegion(
+            RectangleF rectArea,
+            object selectedObject,
+            ChartElementType type,
+            bool relativeCoordinates,
+            bool insertAtBeginning
+        )
         {
-            if( ( ProcessChartMode & ProcessMode.HotRegions ) == ProcessMode.HotRegions )
+            if ((ProcessChartMode & ProcessMode.HotRegions) == ProcessMode.HotRegions)
             {
                 HotRegion region = new HotRegion();
-                
+
                 region.BoundingRectangle = rectArea;
                 region.RelativeCoordinates = relativeCoordinates;
                 region.Type = type;
                 region.SelectedObject = selectedObject;
-                
-                if( insertAtBeginning )
+
+                if (insertAtBeginning)
                 {
-                    _regionList.Insert( _regionList.Count - 1, region ); 
+                    _regionList.Insert(_regionList.Count - 1, region);
                 }
                 else
                 {
-                    _regionList.Add( region );
+                    _regionList.Add(region);
                 }
             }
         }
@@ -1131,30 +1189,28 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="type">Type of the object which present hot region</param>
         /// <param name="selectedObject">Object which present hot region</param>
         internal void AddHotRegion(
-            GraphicsPath path, 
+            GraphicsPath path,
             bool relativePath,
             ChartElementType type,
             object selectedObject
-            ) 
+        )
         {
-            if( ( ProcessChartMode & ProcessMode.HotRegions ) == ProcessMode.HotRegions )
+            if ((ProcessChartMode & ProcessMode.HotRegions) == ProcessMode.HotRegions)
             {
-                        
                 HotRegion region = new HotRegion();
-                        
+
                 region.SelectedObject = selectedObject;
                 region.Type = type;
                 region.Path = (GraphicsPath)path.Clone();
                 region.BoundingRectangle = path.GetBounds();
                 region.RelativeCoordinates = relativePath;
 
-                _regionList.Add( region );
-
+                _regionList.Add(region);
             }
         }
 
         /// <summary>
-        /// This method search for position in Map Areas which is the first 
+        /// This method search for position in Map Areas which is the first
         /// position after Custom areas.
         /// </summary>
         /// <returns>Insert Index</returns>
@@ -1164,7 +1220,7 @@ namespace System.Web.UI.DataVisualization.Charting
 #if !Microsoft_CONTROL
             foreach (MapArea mapArea in _common.ChartPicture.MapAreas)
             {
-                if(!mapArea.IsCustom)
+                if (!mapArea.IsCustom)
                 {
                     break;
                 }
@@ -1182,7 +1238,7 @@ namespace System.Web.UI.DataVisualization.Charting
         {
             foreach (HotRegion hotRegion in this._regionList)
                 hotRegion.Dispose();
-            
+
             this._regionList.Clear();
         }
 
@@ -1216,15 +1272,20 @@ namespace System.Web.UI.DataVisualization.Charting
             GC.SuppressFinalize(this);
         }
         #endregion
-
     }
 
     /// <summary>
     /// The HitTestResult class contains the result of the hit test function.
     /// </summary>
 #if ASPPERM_35
-    [AspNetHostingPermission(System.Security.Permissions.SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(System.Security.Permissions.SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission(
+        System.Security.Permissions.SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        System.Security.Permissions.SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
 #endif
     public class HitTestResult
     {
@@ -1248,14 +1309,8 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         public Series Series
         {
-            get
-            {
-                return _series;
-            }
-            set
-            {
-                _series = value;
-            }
+            get { return _series; }
+            set { _series = value; }
         }
 
         /// <summary>
@@ -1263,14 +1318,8 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         public int PointIndex
         {
-            get
-            {
-                return _dataPoint;
-            }
-            set
-            {
-                _dataPoint = value;
-            }
+            get { return _dataPoint; }
+            set { _dataPoint = value; }
         }
 
         /// <summary>
@@ -1278,14 +1327,8 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         public ChartArea ChartArea
         {
-            get
-            {
-                return _chartArea;
-            }
-            set
-            {
-                _chartArea = value;
-            }
+            get { return _chartArea; }
+            set { _chartArea = value; }
         }
 
         /// <summary>
@@ -1293,14 +1336,8 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         public Axis Axis
         {
-            get
-            {
-                return _axis;
-            }
-            set
-            {
-                _axis = value;
-            }
+            get { return _axis; }
+            set { _axis = value; }
         }
 
         /// <summary>
@@ -1308,14 +1345,8 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         public ChartElementType ChartElementType
         {
-            get
-            {
-                return _type;
-            }
-            set
-            {
-                _type = value;
-            }
+            get { return _type; }
+            set { _type = value; }
         }
 
         /// <summary>
@@ -1323,47 +1354,38 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         public object Object
         {
-            get
-            {
-                return _obj;
-            }
-            set
-            {
-                _obj = value;
-            }
+            get { return _obj; }
+            set { _obj = value; }
         }
-
-
 
         /// <summary>
         ///  Gets or sets the selected sub object.
         /// </summary>
         public object SubObject
         {
-            get
-            {
-                return _subObject;
-            }
-            set
-            {
-                _subObject = value;
-            }
+            get { return _subObject; }
+            set { _subObject = value; }
         }
 
         #endregion
     }
 
-
     /// <summary>
-    /// This class represents an array of marker points and 
+    /// This class represents an array of marker points and
     /// the outline path used for visual object selection in the chart.
     /// </summary>
     /// <remarks>
     /// <see cref="OutlinePath"/> may be null for complex objects or objects with two points or fewer.
     /// </remarks>
 #if ASPPERM_35
-    [AspNetHostingPermission(System.Security.Permissions.SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(System.Security.Permissions.SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission(
+        System.Security.Permissions.SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        System.Security.Permissions.SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
 #endif
     public class ChartElementOutline : IDisposable
     {
@@ -1372,11 +1394,11 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         internal ChartElementOutline()
         {
-            this.Markers = new ReadOnlyCollection<PointF>( new PointF[] {});
+            this.Markers = new ReadOnlyCollection<PointF>(new PointF[] { });
         }
 
         /// <summary>
-        /// Gets the markers.  
+        /// Gets the markers.
         /// </summary>
         /// <value>The markers.</value>
         public ReadOnlyCollection<PointF> Markers { get; internal set; }
@@ -1386,7 +1408,6 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         /// <value>The outline path.</value>
         public GraphicsPath OutlinePath { get; internal set; }
-
 
         #region IDisposable Members
 
@@ -1410,7 +1431,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
         /// </summary>
-        [SuppressMessage("Microsoft.Security", "CA2123:OverrideLinkDemandsShouldBeIdenticalToBase")]        
+        [SuppressMessage("Microsoft.Security", "CA2123:OverrideLinkDemandsShouldBeIdenticalToBase")]
         public void Dispose()
         {
             Dispose(true);
@@ -1420,13 +1441,13 @@ namespace System.Web.UI.DataVisualization.Charting
         #endregion
     }
 
-
     /// <summary>
     /// This class contains methods used for Windows Forms selection.
     /// </summary>
     internal class Selection : IServiceProvider
 #if Microsoft_CONTROL
-        , IDisposable
+            ,
+            IDisposable
 #endif //Microsoft_CONTROL
     {
         #region Fields
@@ -1454,18 +1475,17 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         private Point _lastMouseMove = new Point(int.MinValue, int.MinValue);
 
-
         // ToolTips enabled or disabled from series or legend
-        private bool                    _toolTipsEnabled = false;
+        private bool _toolTipsEnabled = false;
 
         // Tool tips enabled flag checked
-        internal bool                    enabledChecked = false;
+        internal bool enabledChecked = false;
 
 #endif //Microsoft_CONTROL
         #endregion
 
-        #region Constructors 
-        
+        #region Constructors
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Selection"/> class.
         /// </summary>
@@ -1475,7 +1495,7 @@ namespace System.Web.UI.DataVisualization.Charting
             this._service = service;
             this._chartControl = this.ChartControl;
 #if Microsoft_CONTROL
-            
+
             // Set up the tooltip
             this._toolTip.Active = true;
             this._toolTip.AutoPopDelay = 30000; // maximum delay possible
@@ -1484,7 +1504,6 @@ namespace System.Web.UI.DataVisualization.Charting
             this._toolTip.ShowAlways = true;
             this._toolTip.Active = false;
 #endif //Microsoft_CONTROL
-
         }
 
 #if Microsoft_CONTROL
@@ -1520,6 +1539,7 @@ namespace System.Web.UI.DataVisualization.Charting
         #region Properties
 
         private Chart _chartControl = null;
+
         /// <summary>
         /// Returns the attached chart control
         /// </summary>
@@ -1539,6 +1559,7 @@ namespace System.Web.UI.DataVisualization.Charting
         }
 
         private ChartPicture _chartPicture = null;
+
         /// <summary>
         /// Returns the attached ChartPicture
         /// </summary>
@@ -1548,10 +1569,13 @@ namespace System.Web.UI.DataVisualization.Charting
             {
                 if (this._chartPicture == null)
                 {
-                    this._chartPicture = ((IServiceProvider)this).GetService(typeof(ChartImage)) as ChartPicture;
+                    this._chartPicture =
+                        ((IServiceProvider)this).GetService(typeof(ChartImage)) as ChartPicture;
                     if (this._chartPicture == null)
                     {
-                        this._chartPicture = ((IServiceProvider)this).GetService(typeof(ChartPicture)) as ChartPicture;
+                        this._chartPicture =
+                            ((IServiceProvider)this).GetService(typeof(ChartPicture))
+                            as ChartPicture;
                     }
                 }
                 return this._chartPicture;
@@ -1559,6 +1583,7 @@ namespace System.Web.UI.DataVisualization.Charting
         }
 
         private Data.DataManager _dataManager = null;
+
         /// <summary>
         /// Gets the chart data manager ( for series access )
         /// </summary>
@@ -1568,7 +1593,9 @@ namespace System.Web.UI.DataVisualization.Charting
             {
                 if (this._dataManager == null)
                 {
-                    this._dataManager = ((IServiceProvider)this).GetService(typeof(Data.DataManager)) as Data.DataManager;
+                    this._dataManager =
+                        ((IServiceProvider)this).GetService(typeof(Data.DataManager))
+                        as Data.DataManager;
                 }
                 return this._dataManager;
             }
@@ -1601,23 +1628,20 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <returns>true if tooltips enabled</returns>
         private bool IsToolTipsEnabled()
         {
-            // Enabled checked. Don’t check every time series 
+            // Enabled checked. Donï¿½t check every time series
             // and data points for tooltips.
-            if( enabledChecked )
+            if (enabledChecked)
             {
                 return _toolTipsEnabled;
             }
 
             enabledChecked = true;
 
-
-
-
             // Annotations loop
-            foreach( Annotation annotation in _chartControl.Annotations )
+            foreach (Annotation annotation in _chartControl.Annotations)
             {
                 // ToolTip empty
-                if( annotation.ToolTip.Length > 0 )
+                if (annotation.ToolTip.Length > 0)
                 {
                     // ToolTips enabled
                     _toolTipsEnabled = true;
@@ -1625,40 +1649,41 @@ namespace System.Web.UI.DataVisualization.Charting
                 }
             }
 
-
             // Data series loop
-            foreach( Series series in _chartControl.Series )
+            foreach (Series series in _chartControl.Series)
             {
                 // Check series tooltips
-                if( series.ToolTip.Length > 0 || 
-                    series.LegendToolTip.Length > 0 ||
-                    series.LabelToolTip.Length > 0)
+                if (
+                    series.ToolTip.Length > 0
+                    || series.LegendToolTip.Length > 0
+                    || series.LabelToolTip.Length > 0
+                )
                 {
                     // ToolTips enabled
                     _toolTipsEnabled = true;
                     return true;
                 }
-
 
                 // Check if custom properties (Pie collected slice) that create tooltips are used
-                if(series.IsCustomPropertySet(Utilities.CustomPropertyName.CollectedToolTip))
+                if (series.IsCustomPropertySet(Utilities.CustomPropertyName.CollectedToolTip))
                 {
                     // ToolTips enabled
                     _toolTipsEnabled = true;
                     return true;
                 }
 
-
                 // Check point tooltips only for "non-Fast" chart types
-                if( !series.IsFastChartType() )
+                if (!series.IsFastChartType())
                 {
                     // Data point loop
-                    foreach( DataPoint point in series.Points )
+                    foreach (DataPoint point in series.Points)
                     {
                         // ToolTip empty
-                        if( point.ToolTip.Length > 0 || 
-                            point.LegendToolTip.Length > 0 ||
-                            point.LabelToolTip.Length > 0)
+                        if (
+                            point.ToolTip.Length > 0
+                            || point.LegendToolTip.Length > 0
+                            || point.LabelToolTip.Length > 0
+                        )
                         {
                             // ToolTips enabled
                             _toolTipsEnabled = true;
@@ -1669,49 +1694,45 @@ namespace System.Web.UI.DataVisualization.Charting
             }
 
             // Legend items loop
-            foreach( Legend legend in _chartControl.Legends )
+            foreach (Legend legend in _chartControl.Legends)
             {
                 // Check custom legend items
-                foreach( LegendItem legendItem in legend.CustomItems )
+                foreach (LegendItem legendItem in legend.CustomItems)
                 {
                     // ToolTip empty
-                    if( legendItem.ToolTip.Length > 0 )
+                    if (legendItem.ToolTip.Length > 0)
                     {
                         _toolTipsEnabled = true;
                         return true;
                     }
 
-
                     // Check all custom cells in the legend item
-                    foreach(LegendCell legendCell in legendItem.Cells)
+                    foreach (LegendCell legendCell in legendItem.Cells)
                     {
-                        if(legendCell.ToolTip.Length > 0)
+                        if (legendCell.ToolTip.Length > 0)
                         {
                             _toolTipsEnabled = true;
                             return true;
                         }
                     }
-
                 }
 
-
                 // Iterate through legend columns
-                foreach(LegendCellColumn legendColumn in legend.CellColumns)
+                foreach (LegendCellColumn legendColumn in legend.CellColumns)
                 {
-                    if(legendColumn.ToolTip.Length > 0)
+                    if (legendColumn.ToolTip.Length > 0)
                     {
                         _toolTipsEnabled = true;
                         return true;
                     }
                 }
-
             }
 
             // Title items loop
-            foreach( Title title in _chartControl.Titles )
+            foreach (Title title in _chartControl.Titles)
             {
                 // ToolTip empty
-                if( title.ToolTip.Length > 0 )
+                if (title.ToolTip.Length > 0)
                 {
                     _toolTipsEnabled = true;
                     return true;
@@ -1719,39 +1740,35 @@ namespace System.Web.UI.DataVisualization.Charting
             }
 
             // Chart areas loop
-            foreach( ChartArea area in _chartControl.ChartAreas )
+            foreach (ChartArea area in _chartControl.ChartAreas)
             {
-
                 // Check if chart area is visible
-                if(area.Visible)
-
+                if (area.Visible)
                 {
                     // Axis loop
-                    foreach(Axis axis in area.Axes)
+                    foreach (Axis axis in area.Axes)
                     {
-
                         // Check ToolTip
-                        if( axis.ToolTip.Length > 0 )
+                        if (axis.ToolTip.Length > 0)
                         {
                             _toolTipsEnabled = true;
                             return true;
                         }
 
-
                         // Strip lines loop
-                        foreach(StripLine stripLine in axis.StripLines)
+                        foreach (StripLine stripLine in axis.StripLines)
                         {
                             // Check ToolTip
-                            if( stripLine.ToolTip.Length > 0 )
+                            if (stripLine.ToolTip.Length > 0)
                             {
                                 _toolTipsEnabled = true;
                                 return true;
                             }
                         }
                         // Check custom labels
-                        foreach(CustomLabel customLabel in axis.CustomLabels)
+                        foreach (CustomLabel customLabel in axis.CustomLabels)
                         {
-                            if( customLabel.ToolTip.Length > 0 )
+                            if (customLabel.ToolTip.Length > 0)
                             {
                                 _toolTipsEnabled = true;
                                 return true;
@@ -1766,8 +1783,11 @@ namespace System.Web.UI.DataVisualization.Charting
             return false;
         }
 
-        [SuppressMessage("Microsoft.Performance", "CA1800:DoNotCastUnnecessarily",
-            Justification = "Too large of a code change to justify making this change")]
+        [SuppressMessage(
+            "Microsoft.Performance",
+            "CA1800:DoNotCastUnnecessarily",
+            Justification = "Too large of a code change to justify making this change"
+        )]
         internal string EvaluateToolTip(System.Windows.Forms.MouseEventArgs e)
         {
             object obj;
@@ -1785,16 +1805,21 @@ namespace System.Web.UI.DataVisualization.Charting
             obj = hitTest.Object;
             subObj = hitTest.SubObject;
 
-
             // Get tooltips from data points
             if (type == ChartElementType.DataPoint)
             {
-                if (_chartControl.Series.IndexOf(seriesName) >= 0 &&
-                    dataPointIndex >= 0 &&
-                    dataPointIndex < _chartControl.Series[seriesName].Points.Count)
+                if (
+                    _chartControl.Series.IndexOf(seriesName) >= 0
+                    && dataPointIndex >= 0
+                    && dataPointIndex < _chartControl.Series[seriesName].Points.Count
+                )
                 {
                     // Take tool tip from data point
-                    toolTipText = _chartControl.Series[seriesName].Points[dataPointIndex].ReplaceKeywords(_chartControl.Series[seriesName].Points[dataPointIndex].ToolTip);
+                    toolTipText = _chartControl.Series[seriesName].Points[
+                        dataPointIndex
+                    ].ReplaceKeywords(
+                        _chartControl.Series[seriesName].Points[dataPointIndex].ToolTip
+                    );
                 }
                 else
                 {
@@ -1807,37 +1832,34 @@ namespace System.Web.UI.DataVisualization.Charting
                 }
             }
 
-
-
             // Get tooltips from data points
             if (type == ChartElementType.DataPointLabel)
             {
-                if (_chartControl.Series.IndexOf(seriesName) >= 0 &&
-                    dataPointIndex >= 0 &&
-                    dataPointIndex < _chartControl.Series[seriesName].Points.Count)
+                if (
+                    _chartControl.Series.IndexOf(seriesName) >= 0
+                    && dataPointIndex >= 0
+                    && dataPointIndex < _chartControl.Series[seriesName].Points.Count
+                )
                 {
                     // Take tool tip from data point
-                    toolTipText = _chartControl.Series[seriesName].Points[dataPointIndex].ReplaceKeywords(_chartControl.Series[seriesName].Points[dataPointIndex].LabelToolTip);
+                    toolTipText = _chartControl.Series[seriesName].Points[
+                        dataPointIndex
+                    ].ReplaceKeywords(
+                        _chartControl.Series[seriesName].Points[dataPointIndex].LabelToolTip
+                    );
                 }
             }
 
-
             // Get tooltips from custom label
-            if (type == ChartElementType.AxisLabels &&
-                obj is CustomLabel)
+            if (type == ChartElementType.AxisLabels && obj is CustomLabel)
             {
                 toolTipText = ((CustomLabel)obj).ToolTip;
             }
-
-
-
-
             // Get tooltips from data points
             else if (type == ChartElementType.Annotation && obj != null && obj is Annotation)
             {
                 // Take tool tip from data point
                 toolTipText = ((Annotation)obj).ReplaceKeywords(((Annotation)obj).ToolTip);
-
             }
             // Get tooltips from axis
             else if (type == ChartElementType.Axis && obj != null && obj is Axis)
@@ -1845,28 +1867,23 @@ namespace System.Web.UI.DataVisualization.Charting
                 // Take tool tip from strip line
                 toolTipText = ((Axis)obj).ToolTip;
             }
-
             // Get tooltips from strip lines
             else if (type == ChartElementType.StripLines && obj != null && obj is StripLine)
             {
                 // Take tool tip from strip line
                 toolTipText = ((StripLine)obj).ToolTip;
-
             }
             // Get tooltips from data points
             else if (type == ChartElementType.Title && obj != null && obj is Title)
             {
                 // Take tool tip from data point
                 toolTipText = ((Title)obj).ToolTip;
-
             } // Get tooltips for legend items
-
             // Get tooltips for legend items
             else if (type == ChartElementType.LegendItem)
             {
                 // Take tool tip from legend item
                 toolTipText = ((LegendItem)obj).ToolTip;
-
 
                 // Check if cell has it's own tooltip
                 LegendCell legendCell = subObj as LegendCell;
@@ -1875,11 +1892,12 @@ namespace System.Web.UI.DataVisualization.Charting
                     toolTipText = legendCell.ToolTip;
                 }
 
-
                 // Check if series is associated with legend item
-                if (toolTipText.Length == 0 &&
-                    seriesName.Length > 0 &&
-                    _chartControl.Series.IndexOf(seriesName) >= 0)
+                if (
+                    toolTipText.Length == 0
+                    && seriesName.Length > 0
+                    && _chartControl.Series.IndexOf(seriesName) >= 0
+                )
                 {
                     // Take tool tip from data point
                     if (dataPointIndex == -1)
@@ -1887,16 +1905,26 @@ namespace System.Web.UI.DataVisualization.Charting
                         if (seriesName.Length > 0)
                         {
                             // Take tool tip from series
-                            toolTipText = _chartControl.Series[seriesName].ReplaceKeywords(_chartControl.Series[seriesName].LegendToolTip);
+                            toolTipText = _chartControl.Series[seriesName].ReplaceKeywords(
+                                _chartControl.Series[seriesName].LegendToolTip
+                            );
                         }
                     }
                     else
                     {
-                        if (dataPointIndex >= 0 &&
-                            dataPointIndex < _chartControl.Series[seriesName].Points.Count)
+                        if (
+                            dataPointIndex >= 0
+                            && dataPointIndex < _chartControl.Series[seriesName].Points.Count
+                        )
                         {
                             // Take tool tip from data point
-                            toolTipText = _chartControl.Series[seriesName].Points[dataPointIndex].ReplaceKeywords(_chartControl.Series[seriesName].Points[dataPointIndex].LegendToolTip);
+                            toolTipText = _chartControl.Series[seriesName].Points[
+                                dataPointIndex
+                            ].ReplaceKeywords(
+                                _chartControl.Series[seriesName].Points[
+                                    dataPointIndex
+                                ].LegendToolTip
+                            );
                         }
                     }
                 }
@@ -1909,9 +1937,7 @@ namespace System.Web.UI.DataVisualization.Charting
             _chartControl.OnGetToolTipText(args);
 
             return args.Text.Trim();
-
         }
-
 
         /// <summary>
         /// Mouse move event handler.
@@ -1920,7 +1946,6 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="e">Arguments</param>
         internal void Selection_MouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
         {
-
             // Ignore false calls to OnMouseMove caused by the tootip control.
             if (e.X == this._lastMouseMove.X && e.Y == this._lastMouseMove.Y)
             {
@@ -1970,7 +1995,7 @@ namespace System.Web.UI.DataVisualization.Charting
 
         /// <summary>
         /// Call this method to determine the  chart element,
-        /// if any, that is located at a point defined by the given X and Y 
+        /// if any, that is located at a point defined by the given X and Y
         /// coordinates.
         /// <seealso cref="HitTestResult"/></summary>
         /// <param name="x">The X coordinate for the point in question.
@@ -1980,32 +2005,37 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Often obtained from a parameter in an event
         /// (e.g. the Y parameter value in the MouseDown event).</param>
         /// <param name="requestedElementTypes">
-        /// An array of type which specify the types                  
-        /// to test for, on order to filter the result. If omitted checking for                 
-        /// elementTypes will be ignored and all kind of elementTypes will be 
+        /// An array of type which specify the types
+        /// to test for, on order to filter the result. If omitted checking for
+        /// elementTypes will be ignored and all kind of elementTypes will be
         /// valid.
         ///  </param>
-        /// <param name="ignoreTransparent">Indicates that transparent 
+        /// <param name="ignoreTransparent">Indicates that transparent
         /// elements should be ignored.</param>
         /// <returns>
         /// A array of <see cref="HitTestResult"/> objects,
         /// which provides information concerning the  chart element
         /// (if any) that is at the specified location. Result contains at least
-        /// one element, which could be ChartElementType.Nothing. 
-        /// The objects in the result are sorted in from top to bottom of 
+        /// one element, which could be ChartElementType.Nothing.
+        /// The objects in the result are sorted in from top to bottom of
         /// different layers of control. </returns>
         /// <remarks>Call this method to determine the  gauge element
         /// (if any) that is located at a specified point. Often this method is used in
         /// some mouse-related event (e.g. MouseDown)
         /// to determine what  gauge element the end-user clicked on.
         /// The X and Y mouse coordinates obtained from the
-        /// event parameters are then used for the X and Y parameter              
-        /// values of this method call.   The returned 
+        /// event parameters are then used for the X and Y parameter
+        /// values of this method call.   The returned
         /// <see cref="HitTestResult"/> object's properties
         /// can then be used to determine what  chart element was clicked on,
-        /// and also provides a reference to the actual object selected (if 
+        /// and also provides a reference to the actual object selected (if
         /// any).</remarks>
-        internal HitTestResult[] HitTest(int x, int y, bool ignoreTransparent, params ChartElementType[] requestedElementTypes)
+        internal HitTestResult[] HitTest(
+            int x,
+            int y,
+            bool ignoreTransparent,
+            params ChartElementType[] requestedElementTypes
+        )
         {
             List<HitTestResult> result = new List<HitTestResult>();
             ArrayList regionList = this.ChartPicture.Common.HotRegionsList.List;
@@ -2046,11 +2076,16 @@ namespace System.Web.UI.DataVisualization.Charting
                 HotRegion region = (HotRegion)regionList[index];
 
                 // Check if only looking for specific chart element type
-                if (!String.IsNullOrEmpty(alowedElements) && alowedElements.IndexOf(region.Type.ToString() + ";", StringComparison.Ordinal) == -1)
+                if (
+                    !String.IsNullOrEmpty(alowedElements)
+                    && alowedElements.IndexOf(
+                        region.Type.ToString() + ";",
+                        StringComparison.Ordinal
+                    ) == -1
+                )
                 {
                     continue;
                 }
-
 
                 // Change coordinates if relative path is used
                 if (region.RelativeCoordinates)
@@ -2066,11 +2101,15 @@ namespace System.Web.UI.DataVisualization.Charting
                     newMouseRect = mouseRect;
                 }
 
-
                 // Check if series name and point index are valid
-                if (region.SeriesName.Length > 0 &&
-                   (this.ChartControl.Series.IndexOf(region.SeriesName) < 0 || region.PointIndex >= this.ChartControl.Series[region.SeriesName].Points.Count)
+                if (
+                    region.SeriesName.Length > 0
+                    && (
+                        this.ChartControl.Series.IndexOf(region.SeriesName) < 0
+                        || region.PointIndex
+                            >= this.ChartControl.Series[region.SeriesName].Points.Count
                     )
+                )
                 {
                     continue;
                 }
@@ -2087,7 +2126,7 @@ namespace System.Web.UI.DataVisualization.Charting
 
                     if (region.Path != null)
                     {
-                        // If there is more then one graphical path split them and create 
+                        // If there is more then one graphical path split them and create
                         // image maps for every graphical path separately.
                         GraphicsPathIterator iterator = new GraphicsPathIterator(region.Path);
 
@@ -2104,7 +2143,6 @@ namespace System.Web.UI.DataVisualization.Charting
                                 subPath.Reset();
                             }
                         }
-
                         // There is only one path
                         else if (region.Path.IsVisible(newX, newY))
                         {
@@ -2129,21 +2167,21 @@ namespace System.Web.UI.DataVisualization.Charting
                         );
 
                         int elementIndex = result.FindIndex(
-                                    delegate(HitTestResult test)
-                                    {
-                                        if (
-                                            (test.ChartElementType == hitTestToAdd.ChartElementType) &&
-                                            (test.Object == hitTestToAdd.Object) &&
-                                            (test.SubObject == hitTestToAdd.SubObject) &&
-                                            (test.Series == hitTestToAdd.Series) &&
-                                            (test.PointIndex == hitTestToAdd.PointIndex)
-                                           )
-                                        {
-                                            return true;
-                                        }
-                                        return false;
-                                    }
-                                );
+                            delegate(HitTestResult test)
+                            {
+                                if (
+                                    (test.ChartElementType == hitTestToAdd.ChartElementType)
+                                    && (test.Object == hitTestToAdd.Object)
+                                    && (test.SubObject == hitTestToAdd.SubObject)
+                                    && (test.Series == hitTestToAdd.Series)
+                                    && (test.PointIndex == hitTestToAdd.PointIndex)
+                                )
+                                {
+                                    return true;
+                                }
+                                return false;
+                            }
+                        );
 
                         if (elementIndex == -1)
                         {
@@ -2154,7 +2192,9 @@ namespace System.Web.UI.DataVisualization.Charting
             }
             if (result.Count == 0)
             {
-                result.Add(this.GetHitTestResult(String.Empty, 0, ChartElementType.Nothing, null, null));
+                result.Add(
+                    this.GetHitTestResult(String.Empty, 0, ChartElementType.Nothing, null, null)
+                );
             }
             return result.ToArray();
         }
@@ -2165,11 +2205,14 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="x">X coordinate</param>
         /// <param name="y">Y coordinate</param>
         /// <returns>Hit test result object</returns>
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly",
-            Justification = "X and Y are cartesian coordinates and well understood")]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            Justification = "X and Y are cartesian coordinates and well understood"
+        )]
         internal HitTestResult HitTest(int x, int y)
         {
-            return this.HitTest(x, y, false, new ChartElementType[] {})[0];
+            return this.HitTest(x, y, false, new ChartElementType[] { })[0];
         }
 
         /// <summary>
@@ -2179,8 +2222,11 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="y">Y coordinate</param>
         /// <param name="ignoreTransparent">Indicates that transparent elements should be ignored.</param>
         /// <returns>Hit test result object</returns>
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly",
-            Justification = "X and Y are cartesian coordinates and well understood")]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            Justification = "X and Y are cartesian coordinates and well understood"
+        )]
         public HitTestResult HitTest(int x, int y, bool ignoreTransparent)
         {
             return this.HitTest(x, y, ignoreTransparent, new ChartElementType[] { })[0];
@@ -2193,8 +2239,11 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="y">Y coordinate</param>
         /// <param name="requestedElement">Only this chart element will be hit tested.</param>
         /// <returns>Hit test result object</returns>
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly",
-            Justification = "X and Y are cartesian coordinates and well understood")]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            Justification = "X and Y are cartesian coordinates and well understood"
+        )]
         public HitTestResult HitTest(int x, int y, ChartElementType requestedElement)
         {
             return this.HitTest(x, y, false, requestedElement)[0];
@@ -2216,7 +2265,9 @@ namespace System.Web.UI.DataVisualization.Charting
                     DataPoint dataPoint = region.SelectedObject as DataPoint;
                     if (region.SeriesName.Length > 0)
                     {
-                        dataPoint = this.ChartControl.Series[region.SeriesName].Points[region.PointIndex];
+                        dataPoint = this.ChartControl.Series[region.SeriesName].Points[
+                            region.PointIndex
+                        ];
                     }
                     if (dataPoint != null && dataPoint.Color == Color.Transparent)
                     {
@@ -2269,8 +2320,10 @@ namespace System.Web.UI.DataVisualization.Charting
             else if (region.SelectedObject is Title)
             {
                 Title title = (Title)region.SelectedObject;
-                if ((title.Text.Length == 0 || title.ForeColor == Color.Transparent) &&
-                    (title.BackColor == Color.Transparent || title.BackColor.IsEmpty))
+                if (
+                    (title.Text.Length == 0 || title.ForeColor == Color.Transparent)
+                    && (title.BackColor == Color.Transparent || title.BackColor.IsEmpty)
+                )
                 {
                     isTransparent = true;
                 }
@@ -2288,18 +2341,22 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="obj">Selected object</param>
         /// <param name="subObject">Selected sub object</param>
         /// <returns>Hit test result object</returns>
-        [SuppressMessage("Microsoft.Performance", "CA1800:DoNotCastUnnecessarily",
-            Justification = "Too large of a code change to justify making this change")]
+        [SuppressMessage(
+            "Microsoft.Performance",
+            "CA1800:DoNotCastUnnecessarily",
+            Justification = "Too large of a code change to justify making this change"
+        )]
         internal HitTestResult GetHitTestResult(
             string seriesName,
             int pointIndex,
             ChartElementType type,
             object obj,
-            object subObject)
+            object subObject
+        )
         {
             HitTestResult result = new HitTestResult();
             Chart chart = this.ChartControl;
-            // If data point is selected convert series 
+            // If data point is selected convert series
             // name to series object.
             if (seriesName.Length > 0)
             {
@@ -2329,30 +2386,34 @@ namespace System.Web.UI.DataVisualization.Charting
                     }
                     break;
                 case ChartElementType.DataPoint:
+                {
+                    if (
+                        chart.Series.IndexOf(seriesName) >= 0
+                        && pointIndex < chart.Series[seriesName].Points.Count
+                    )
                     {
-                        if (chart.Series.IndexOf(seriesName) >= 0 &&
-                            pointIndex < chart.Series[seriesName].Points.Count)
-                        {
-                            DataPoint dataPoint = chart.Series[seriesName].Points[pointIndex];
-                            result.Axis = null;
-                            result.ChartArea = chart.ChartAreas[dataPoint.series.ChartArea];
-                            result.Object = dataPoint;
-                        }
-                        break;
+                        DataPoint dataPoint = chart.Series[seriesName].Points[pointIndex];
+                        result.Axis = null;
+                        result.ChartArea = chart.ChartAreas[dataPoint.series.ChartArea];
+                        result.Object = dataPoint;
                     }
+                    break;
+                }
 
                 case ChartElementType.DataPointLabel:
+                {
+                    if (
+                        chart.Series.IndexOf(seriesName) >= 0
+                        && pointIndex < chart.Series[seriesName].Points.Count
+                    )
                     {
-                        if (chart.Series.IndexOf(seriesName) >= 0 &&
-                            pointIndex < chart.Series[seriesName].Points.Count)
-                        {
-                            DataPoint dataPoint = chart.Series[seriesName].Points[pointIndex];
-                            result.Axis = null;
-                            result.ChartArea = chart.ChartAreas[dataPoint.series.ChartArea];
-                            result.Object = dataPoint;
-                        }
-                        break;
+                        DataPoint dataPoint = chart.Series[seriesName].Points[pointIndex];
+                        result.Axis = null;
+                        result.ChartArea = chart.ChartAreas[dataPoint.series.ChartArea];
+                        result.Object = dataPoint;
                     }
+                    break;
+                }
 
                 case ChartElementType.Gridlines:
                     Grid gridLines = (Grid)obj;
@@ -2401,7 +2462,7 @@ namespace System.Web.UI.DataVisualization.Charting
                     {
                         CustomLabel label = (CustomLabel)obj;
                         result.Axis = label.Axis;
-                        result.ChartArea = label.Axis!=null ? label.Axis.ChartArea : null;
+                        result.ChartArea = label.Axis != null ? label.Axis.ChartArea : null;
                     }
                     break;
                 case ChartElementType.AxisLabelImage:
@@ -2409,7 +2470,7 @@ namespace System.Web.UI.DataVisualization.Charting
                     {
                         CustomLabel label = (CustomLabel)obj;
                         result.Axis = label.Axis;
-                        result.ChartArea = label.Axis!=null ? label.Axis.ChartArea : null;
+                        result.ChartArea = label.Axis != null ? label.Axis.ChartArea : null;
                     }
                     break;
                 case ChartElementType.AxisTitle:
@@ -2480,7 +2541,10 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="chartObject">The chart object.</param>
         /// <param name="elementType">Type of the element.</param>
         /// <returns></returns>
-        internal ChartElementOutline GetChartElementOutline(object chartObject, ChartElementType elementType)
+        internal ChartElementOutline GetChartElementOutline(
+            object chartObject,
+            ChartElementType elementType
+        )
         {
             // Check arguments
             if (chartObject == null)
@@ -2506,7 +2570,11 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="chartObject">The chart object.</param>
         /// <param name="elementType">Type of the element.</param>
         /// <returns></returns>
-        private GraphicsPath GetGraphicsPath(IList markers, object chartObject, ChartElementType elementType)
+        private GraphicsPath GetGraphicsPath(
+            IList markers,
+            object chartObject,
+            ChartElementType elementType
+        )
         {
             bool chartArea3D = false;
             ChartArea chartArea = chartObject as ChartArea;
@@ -2514,12 +2582,13 @@ namespace System.Web.UI.DataVisualization.Charting
             {
                 chartArea3D = IsArea3D(chartArea);
             }
-            if (elementType != ChartElementType.DataPoint &&
-                elementType != ChartElementType.Gridlines &&
-                elementType != ChartElementType.StripLines &&
-                elementType != ChartElementType.TickMarks &&
-                !chartArea3D
-                )
+            if (
+                elementType != ChartElementType.DataPoint
+                && elementType != ChartElementType.Gridlines
+                && elementType != ChartElementType.StripLines
+                && elementType != ChartElementType.TickMarks
+                && !chartArea3D
+            )
             {
                 GraphicsPath path = new GraphicsPath();
                 PointF[] points = new PointF[markers.Count];
@@ -2530,7 +2599,12 @@ namespace System.Web.UI.DataVisualization.Charting
                     {
                         for (int i = 0; i < points.Length; i += 4)
                         {
-                            RectangleF rect = RectangleF.FromLTRB(points[i].X, points[i].Y, points[i + 2].X, points[i + 2].Y);
+                            RectangleF rect = RectangleF.FromLTRB(
+                                points[i].X,
+                                points[i].Y,
+                                points[i + 2].X,
+                                points[i + 2].Y
+                            );
                             path.Reset();
                             path.AddRectangle(Rectangle.Round(rect));
                         }
@@ -2565,7 +2639,12 @@ namespace System.Web.UI.DataVisualization.Charting
                 pointIndex = dataPoint.series.Points.IndexOf(dataPoint);
                 if (pointIndex == -1 && dataPoint.IsCustomPropertySet("OriginalPointIndex"))
                 {
-                    if (!Int32.TryParse(dataPoint.GetCustomProperty("OriginalPointIndex"), out pointIndex))
+                    if (
+                        !Int32.TryParse(
+                            dataPoint.GetCustomProperty("OriginalPointIndex"),
+                            out pointIndex
+                        )
+                    )
                         return -1;
                 }
             }
@@ -2659,9 +2738,11 @@ namespace System.Web.UI.DataVisualization.Charting
                                 {
                                     if (label1.Axis == label2.Axis)
                                     {
-                                        if (label1.FromPosition == label2.FromPosition &&
-                                            label1.ToPosition == label2.ToPosition &&
-                                            label1.RowIndex == label2.RowIndex)
+                                        if (
+                                            label1.FromPosition == label2.FromPosition
+                                            && label1.ToPosition == label2.ToPosition
+                                            && label1.RowIndex == label2.RowIndex
+                                        )
                                         {
                                             if (rgn.Path == null)
                                             {
@@ -2671,7 +2752,7 @@ namespace System.Web.UI.DataVisualization.Charting
                                     }
                                 }
                             }
-                            else 
+                            else
                             {
                                 Axis axis = cntxObj as Axis;
                                 if (axis != null)
@@ -2696,14 +2777,18 @@ namespace System.Web.UI.DataVisualization.Charting
                                     dataPointSeries = dataPoint.series.Name;
                                     dataPointIndex = GetDataPointIndex(dataPoint);
                                 }
-                                if (rgn.PointIndex == dataPointIndex && rgn.SeriesName == dataPointSeries)
+                                if (
+                                    rgn.PointIndex == dataPointIndex
+                                    && rgn.SeriesName == dataPointSeries
+                                )
                                 {
                                     result.Add(rgn);
                                 }
                             }
                             else
                             {
-                                DataPointCollection dataPointCollection = cntxObj as DataPointCollection;
+                                DataPointCollection dataPointCollection =
+                                    cntxObj as DataPointCollection;
                                 if (dataPointCollection != null)
                                 {
                                     cntxObj = dataPointCollection.series;
@@ -2711,7 +2796,10 @@ namespace System.Web.UI.DataVisualization.Charting
                                 Series series = cntxObj as Series;
                                 if (series != null)
                                 {
-                                    if (String.IsNullOrEmpty(dataPointSeries) || dataPointIndex == -1)
+                                    if (
+                                        String.IsNullOrEmpty(dataPointSeries)
+                                        || dataPointIndex == -1
+                                    )
                                     {
                                         dataPointSeries = series.Name;
                                     }
@@ -2735,15 +2823,16 @@ namespace System.Web.UI.DataVisualization.Charting
             return (HotRegion[])result.ToArray(typeof(HotRegion));
         }
 
-
-
         /// <summary>
         /// Gets the markers from regions.
         /// </summary>
         /// <param name="chartObject">The chart object.</param>
         /// <param name="elementType">Type of the element.</param>
         /// <returns></returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Maintainability",
+            "CA1502:AvoidExcessiveComplexity"
+        )]
         private ArrayList GetMarkersFromRegions(object chartObject, ChartElementType elementType)
         {
             ArrayList list = new ArrayList();
@@ -2783,8 +2872,10 @@ namespace System.Web.UI.DataVisualization.Charting
                             rect = this.GetHotRegionRectangle(rgn, RectangleF.Empty, elementType);
                             if (grid != null)
                             {
-                                if (grid.GetAxis().AxisPosition == AxisPosition.Bottom ||
-                                    grid.GetAxis().AxisPosition == AxisPosition.Top)
+                                if (
+                                    grid.GetAxis().AxisPosition == AxisPosition.Bottom
+                                    || grid.GetAxis().AxisPosition == AxisPosition.Top
+                                )
                                 {
                                     rect.Offset(rect.Width / 2, 0);
                                     rect.Width = 0;
@@ -2799,15 +2890,21 @@ namespace System.Web.UI.DataVisualization.Charting
                         }
                     }
                     else
-                    {   // 3D
+                    { // 3D
                         PointF[] points = rgn.Path.PathPoints;
                         for (int i = 0; i < points.Length - 3; i = i + 4)
-                        {   //Each gridline has a corresponding set of 4 points in the path
+                        { //Each gridline has a corresponding set of 4 points in the path
                             //One of  the ends of a gridline is in the middle the line between points #0 and #3
                             //Another ends of a gridline is in the middle the line between points #1 and #2
                             //So we find those middles and put a marks to the ends of the gridline.
-                            PointF middleP0P3 = new PointF((points[i].X + points[i + 3].X) / 2f, (points[i].Y + points[i + 3].Y) / 2f);
-                            PointF middleP1P2 = new PointF((points[i + 1].X + points[i + 2].X) / 2f, (points[i + 1].Y + points[i + 2].Y) / 2f);
+                            PointF middleP0P3 = new PointF(
+                                (points[i].X + points[i + 3].X) / 2f,
+                                (points[i].Y + points[i + 3].Y) / 2f
+                            );
+                            PointF middleP1P2 = new PointF(
+                                (points[i + 1].X + points[i + 2].X) / 2f,
+                                (points[i + 1].Y + points[i + 2].Y) / 2f
+                            );
                             list.Add(graph.GetAbsolutePoint(middleP0P3));
                             list.Add(graph.GetAbsolutePoint(middleP1P2));
                         }
@@ -2840,12 +2937,12 @@ namespace System.Web.UI.DataVisualization.Charting
                 foreach (HotRegion rgn in regions)
                 {
                     if (!IsArea3D(axis.ChartArea))
-                    {   // 2D
+                    { // 2D
                         rect = this.GetHotRegionRectangle(rgn, RectangleF.Empty, elementType);
                         list.AddRange(this.GetMarkers(rect, elementType));
                     }
                     else
-                    {   // 3D
+                    { // 3D
                         PointF[] points = rgn.Path.PathPoints;
                         list.AddRange(points);
                     }
@@ -2886,9 +2983,7 @@ namespace System.Web.UI.DataVisualization.Charting
                 list.AddRange(this.GetMarkers(rect, elementType));
             }
             return list;
-
         }
-
 
         /// <summary>
         /// Gets the markers.
@@ -2904,15 +2999,14 @@ namespace System.Web.UI.DataVisualization.Charting
                 return this.GetAreaMarkers(this.Graph, chartArea);
             }
 
-
             Axis axis = chartObject as Axis;
             if (axis != null)
             {
                 if (
-                    elementType == ChartElementType.AxisLabelImage ||
-                    elementType == ChartElementType.AxisLabels ||
-                    elementType == ChartElementType.AxisTitle
-                    )
+                    elementType == ChartElementType.AxisLabelImage
+                    || elementType == ChartElementType.AxisLabels
+                    || elementType == ChartElementType.AxisTitle
+                )
                 {
                     return this.GetMarkersFromRegions(chartObject, elementType);
                 }
@@ -2949,7 +3043,9 @@ namespace System.Web.UI.DataVisualization.Charting
         {
             foreach (object o in area.ChartTypes)
             {
-                ChartTypes.IChartType chartType = area.Common.ChartTypeRegistry.GetChartType(o.ToString());
+                ChartTypes.IChartType chartType = area.Common.ChartTypeRegistry.GetChartType(
+                    o.ToString()
+                );
                 if (chartType != null && (chartType.CircularChartArea || !chartType.RequireAxes))
                 {
                     return true;
@@ -2967,7 +3063,10 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </returns>
         private Boolean IsArea3D(ChartArea area)
         {
-            return area.Area3DStyle.Enable3D && !this.IsChartAreaCircular(area) && area.matrix3D != null && area.matrix3D.IsInitialized();
+            return area.Area3DStyle.Enable3D
+                && !this.IsChartAreaCircular(area)
+                && area.matrix3D != null
+                && area.matrix3D.IsInitialized();
         }
 
         /// <summary>
@@ -2989,7 +3088,6 @@ namespace System.Web.UI.DataVisualization.Charting
 
                 if (ChartPicture.ChartAreas.IndexOf(areaName) != -1 && series.Enabled)
                 {
-
                     ChartArea chartArea = ChartPicture.ChartAreas[areaName];
 
                     if (ChartControl.Series.IndexOf(series.Name) != -1)
@@ -3037,7 +3135,6 @@ namespace System.Web.UI.DataVisualization.Charting
             // Set the position of axis
             switch (axis.AxisPosition)
             {
-
                 case AxisPosition.Left:
 
                     first.X = (float)axis.GetAxisPosition();
@@ -3081,7 +3178,12 @@ namespace System.Web.UI.DataVisualization.Charting
                 second.Y = axis.PlotAreaPosition.Y + axis.PlotAreaPosition.Height / 2f;
             }
 
-            RectangleF rect1 = new RectangleF(first.X, first.Y, second.X - first.X, second.Y - first.Y);
+            RectangleF rect1 = new RectangleF(
+                first.X,
+                first.Y,
+                second.X - first.X,
+                second.Y - first.Y
+            );
 
             SizeF size = graph.GetRelativeSize(new SizeF(3, 3));
             if (axis.AxisPosition == AxisPosition.Top || axis.AxisPosition == AxisPosition.Bottom)
@@ -3096,7 +3198,6 @@ namespace System.Web.UI.DataVisualization.Charting
             ChartArea area = axis.ChartArea;
             if (this.IsArea3D(area))
             {
-
                 Boolean axisOnEdge = false;
                 float zPositon = axis.GetMarksZPosition(out axisOnEdge);
 
@@ -3132,7 +3233,10 @@ namespace System.Web.UI.DataVisualization.Charting
             {
                 return list;
             }
-            IList list1 = this.GetMarkers(area.PlotAreaPosition.ToRectangleF(), ChartElementType.PlottingArea);
+            IList list1 = this.GetMarkers(
+                area.PlotAreaPosition.ToRectangleF(),
+                ChartElementType.PlottingArea
+            );
             if (this.IsChartAreaCircular(area))
             {
                 list1 = this.GetMarkers(area.lastAreaPosition, ChartElementType.PlottingArea);
@@ -3167,7 +3271,10 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <returns>List of PointF</returns>
         private ArrayList GetMarkers(RectangleF rect, ChartElementType elementType)
         {
-            if (elementType.ToString().StartsWith("Legend", StringComparison.Ordinal) || elementType.ToString().StartsWith("Title", StringComparison.Ordinal))
+            if (
+                elementType.ToString().StartsWith("Legend", StringComparison.Ordinal)
+                || elementType.ToString().StartsWith("Title", StringComparison.Ordinal)
+            )
             {
                 rect.Inflate(4f, 4f);
             }
@@ -3177,13 +3284,15 @@ namespace System.Web.UI.DataVisualization.Charting
                 rect.Inflate(relSize.Width, relSize.Height);
             }
 
-            if ((elementType != ChartElementType.Nothing) && (elementType != ChartElementType.PlottingArea))
+            if (
+                (elementType != ChartElementType.Nothing)
+                && (elementType != ChartElementType.PlottingArea)
+            )
             {
                 return this.GetMarkers(rect, false);
             }
             return this.GetMarkers(rect, true);
         }
-
 
         /// <summary>
         /// Builds list of markers (PointF) based on rectangle
@@ -3244,7 +3353,6 @@ namespace System.Web.UI.DataVisualization.Charting
                         list.Add(new PointF(rect.Left, rect.Top + rect.Height / 2));
                     }
                 }
-
                 else if (rect.Width > 0)
                 {
                     list.Add(new PointF(rect.Left, rect.Top));
@@ -3294,10 +3402,7 @@ namespace System.Web.UI.DataVisualization.Charting
                 if (point != null && point.series != null)
                 {
                     float depth = 0f;
-                    chartArea.GetSeriesZPositionAndDepth(
-                        point.series,
-                        out depth,
-                        out positionZ);
+                    chartArea.GetSeriesZPositionAndDepth(point.series, out depth, out positionZ);
                     positionZ += depth / 2f;
                 }
 
@@ -3322,7 +3427,11 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="unionWith">The rectangle to union with.</param>
         /// <param name="elementType">The type of the element.</param>
         /// <returns>Returns the rectangle around the hot region.</returns>
-        private RectangleF GetHotRegionRectangle(HotRegion rgn, RectangleF unionWith, ChartElementType elementType)
+        private RectangleF GetHotRegionRectangle(
+            HotRegion rgn,
+            RectangleF unionWith,
+            ChartElementType elementType
+        )
         {
             RectangleF rect;
             if (rgn.Path != null)
@@ -3366,7 +3475,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         /// <param name="serviceType">An object that specifies the type of service object to get.</param>
         /// <returns>
-        /// A service object of type <paramref name="serviceType"/>.  It returns null 
+        /// A service object of type <paramref name="serviceType"/>.  It returns null
         /// if there is no service object of type <paramref name="serviceType"/>.
         /// </returns>
         object IServiceProvider.GetService(Type serviceType)
@@ -3383,9 +3492,7 @@ namespace System.Web.UI.DataVisualization.Charting
         }
 
         #endregion
-
     }
-
 
 #if Microsoft_CONTROL
     /// <summary>
@@ -3396,15 +3503,15 @@ namespace System.Web.UI.DataVisualization.Charting
     #region Private fields
 
         // Private fields for properties values storage
-        private        int                    x = 0;
-        private        int                    y = 0;
-        private        string                text = "";
-        private        HitTestResult        result = new HitTestResult();
-        
+        private int x = 0;
+        private int y = 0;
+        private string text = "";
+        private HitTestResult result = new HitTestResult();
+
         #endregion
 
     #region Constructors
-                
+
         /// <summary>
         /// ToolTipEventArgs constructor.  Creates ToolTip event arguments.
         /// </summary>
@@ -3412,8 +3519,11 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="y">Y-coordinate of mouse.</param>
         /// <param name="text">Tooltip text.</param>
         /// <param name="result">Hit test result object.</param>
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly",
-            Justification = "X and Y are cartesian coordinates and well understood")]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            Justification = "X and Y are cartesian coordinates and well understood"
+        )]
         public ToolTipEventArgs(int x, int y, string text, HitTestResult result)
         {
             this.x = x;
@@ -3429,66 +3539,51 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Gets the x-coordinate of the mouse.
         /// </summary>
-        [
-        SRDescription("DescriptionAttributeToolTipEventArgs_X"),
-        ]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "X")]
+        [SRDescription("DescriptionAttributeToolTipEventArgs_X"),]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            MessageId = "X"
+        )]
         public int X
         {
-            get
-            {
-                return x;
-            }
+            get { return x; }
         }
 
         /// <summary>
         /// Gets the result of the hit test.
         /// </summary>
-        [
-        SRDescription("DescriptionAttributeToolTipEventArgs_HitTestResult"),
-        ]
+        [SRDescription("DescriptionAttributeToolTipEventArgs_HitTestResult"),]
         public HitTestResult HitTestResult
         {
-            get
-            {
-                return result;
-            }
+            get { return result; }
         }
 
         /// <summary>
         /// Gets the y-coordinate of the mouse.
         /// </summary>
-        [
-        SRDescription("DescriptionAttributeToolTipEventArgs_Y"),
-        ]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Y")]
+        [SRDescription("DescriptionAttributeToolTipEventArgs_Y"),]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            MessageId = "Y"
+        )]
         public int Y
         {
-            get
-            {
-                return y;
-            }
+            get { return y; }
         }
 
         /// <summary>
         /// Gets the text of the tooltip.
         /// </summary>
-        [
-        SRDescription("DescriptionAttributeToolTipEventArgs_Text"),
-        ]
+        [SRDescription("DescriptionAttributeToolTipEventArgs_Text"),]
         public string Text
         {
-            get
-            {
-                return text;
-            }
-            set
-            {
-                text = value;
-            }
+            get { return text; }
+            set { text = value; }
         }
 
-        #endregion    
+        #endregion
     }
 
 #endif // #if Microsoft_CONTROL

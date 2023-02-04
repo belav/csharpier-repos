@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,37 +30,62 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 
-namespace System.Windows.Forms.CarbonInternal {
-    internal class Cursor {
-        internal static CarbonCursor defcur = new CarbonCursor (StdCursor.Default);
+namespace System.Windows.Forms.CarbonInternal
+{
+    internal class Cursor
+    {
+        internal static CarbonCursor defcur = new CarbonCursor(StdCursor.Default);
 
-                internal static Bitmap DefineStdCursorBitmap (StdCursor id) {
+        internal static Bitmap DefineStdCursorBitmap(StdCursor id)
+        {
             // FIXME
-            return new Bitmap (16, 16);
-                }
-                internal static IntPtr DefineCursor (Bitmap bitmap, Bitmap mask, Color cursor_pixel, Color mask_pixel, int xHotSpot, int yHotSpot) {
-            CarbonCursor cc = new CarbonCursor (bitmap, mask, cursor_pixel, mask_pixel, xHotSpot, yHotSpot);
-
-            return (IntPtr) GCHandle.Alloc (cc);
-                }
-        internal static IntPtr DefineStdCursor (StdCursor id) {
-            CarbonCursor cc = new CarbonCursor (id);
-        
-            return (IntPtr) GCHandle.Alloc (cc);
+            return new Bitmap(16, 16);
         }
-        internal static void SetCursor (IntPtr cursor) {
-            if (cursor == IntPtr.Zero) {
-                defcur.SetCursor ();
+
+        internal static IntPtr DefineCursor(
+            Bitmap bitmap,
+            Bitmap mask,
+            Color cursor_pixel,
+            Color mask_pixel,
+            int xHotSpot,
+            int yHotSpot
+        )
+        {
+            CarbonCursor cc = new CarbonCursor(
+                bitmap,
+                mask,
+                cursor_pixel,
+                mask_pixel,
+                xHotSpot,
+                yHotSpot
+            );
+
+            return (IntPtr)GCHandle.Alloc(cc);
+        }
+
+        internal static IntPtr DefineStdCursor(StdCursor id)
+        {
+            CarbonCursor cc = new CarbonCursor(id);
+
+            return (IntPtr)GCHandle.Alloc(cc);
+        }
+
+        internal static void SetCursor(IntPtr cursor)
+        {
+            if (cursor == IntPtr.Zero)
+            {
+                defcur.SetCursor();
                 return;
             }
 
-            CarbonCursor cc = (CarbonCursor) ((GCHandle) cursor).Target;
+            CarbonCursor cc = (CarbonCursor)((GCHandle)cursor).Target;
 
-            cc.SetCursor ();
+            cc.SetCursor();
         }
     }
 
-    internal struct CarbonCursor {
+    internal struct CarbonCursor
+    {
         private Bitmap bmp;
         private Bitmap mask;
         private Color cursor_color;
@@ -70,7 +95,15 @@ namespace System.Windows.Forms.CarbonInternal {
         private StdCursor id;
         private bool standard;
 
-                public CarbonCursor (Bitmap bitmap, Bitmap mask, Color cursor_pixel, Color mask_pixel, int xHotSpot, int yHotSpot) {
+        public CarbonCursor(
+            Bitmap bitmap,
+            Bitmap mask,
+            Color cursor_pixel,
+            Color mask_pixel,
+            int xHotSpot,
+            int yHotSpot
+        )
+        {
             this.id = StdCursor.Default;
             this.bmp = bitmap;
             this.mask = mask;
@@ -81,7 +114,8 @@ namespace System.Windows.Forms.CarbonInternal {
             standard = true;
         }
 
-        public CarbonCursor (StdCursor id) {
+        public CarbonCursor(StdCursor id)
+        {
             this.id = id;
             this.bmp = null;
             this.mask = null;
@@ -92,154 +126,150 @@ namespace System.Windows.Forms.CarbonInternal {
             standard = true;
         }
 
-        public StdCursor StdCursor {
-            get {
-                return id;
-            }
+        public StdCursor StdCursor
+        {
+            get { return id; }
         }
 
-        public Bitmap Bitmap {
-            get { 
-                return bmp;
-            }
+        public Bitmap Bitmap
+        {
+            get { return bmp; }
         }
 
-        public Bitmap Mask {
-            get { 
-                return mask;
-            }
+        public Bitmap Mask
+        {
+            get { return mask; }
         }
 
-        public Color CursorColor {
-            get {
-                return cursor_color;
-            }
+        public Color CursorColor
+        {
+            get { return cursor_color; }
         }
 
-        public Color MaskColor {
-            get {
-                return mask_color;
-            }
+        public Color MaskColor
+        {
+            get { return mask_color; }
         }
 
-        public int HotSpotX {
-            get { 
-                return hot_x;
-            }
+        public int HotSpotX
+        {
+            get { return hot_x; }
         }
 
-        public int HotSpotY {
-            get { 
-                return hot_y;
-            }
+        public int HotSpotY
+        {
+            get { return hot_y; }
         }
 
-        public void SetCursor () {
+        public void SetCursor()
+        {
             if (standard)
-                SetStandardCursor ();
-            else    
-                SetCustomCursor ();
+                SetStandardCursor();
+            else
+                SetCustomCursor();
         }
 
-        public void SetCustomCursor () {
-            throw new NotImplementedException ("We dont support custom cursors yet");
+        public void SetCustomCursor()
+        {
+            throw new NotImplementedException("We dont support custom cursors yet");
         }
 
-        public void SetStandardCursor () {
-            switch (id) {
+        public void SetStandardCursor()
+        {
+            switch (id)
+            {
                 case StdCursor.AppStarting:
-                    SetThemeCursor (ThemeCursor.kThemeSpinningCursor);
+                    SetThemeCursor(ThemeCursor.kThemeSpinningCursor);
                     break;
                 case StdCursor.Arrow:
-                    SetThemeCursor (ThemeCursor.kThemeArrowCursor);
+                    SetThemeCursor(ThemeCursor.kThemeArrowCursor);
                     break;
                 case StdCursor.Cross:
-                    SetThemeCursor (ThemeCursor.kThemeCrossCursor);
+                    SetThemeCursor(ThemeCursor.kThemeCrossCursor);
                     break;
                 case StdCursor.Default:
-                    SetThemeCursor (ThemeCursor.kThemeArrowCursor);
+                    SetThemeCursor(ThemeCursor.kThemeArrowCursor);
                     break;
                 case StdCursor.Hand:
-                    SetThemeCursor (ThemeCursor.kThemeOpenHandCursor);
+                    SetThemeCursor(ThemeCursor.kThemeOpenHandCursor);
                     break;
                 case StdCursor.Help:
-                    SetThemeCursor (ThemeCursor.kThemeArrowCursor);
+                    SetThemeCursor(ThemeCursor.kThemeArrowCursor);
                     break;
                 case StdCursor.HSplit:
-                    SetThemeCursor (ThemeCursor.kThemeResizeLeftRightCursor);
+                    SetThemeCursor(ThemeCursor.kThemeResizeLeftRightCursor);
                     break;
                 case StdCursor.IBeam:
-                    SetThemeCursor (ThemeCursor.kThemeIBeamCursor);
+                    SetThemeCursor(ThemeCursor.kThemeIBeamCursor);
                     break;
                 case StdCursor.No:
-                    SetThemeCursor (ThemeCursor.kThemeNotAllowedCursor);
+                    SetThemeCursor(ThemeCursor.kThemeNotAllowedCursor);
                     break;
                 case StdCursor.NoMove2D:
-                    SetThemeCursor (ThemeCursor.kThemeNotAllowedCursor);
+                    SetThemeCursor(ThemeCursor.kThemeNotAllowedCursor);
                     break;
                 case StdCursor.NoMoveHoriz:
-                    SetThemeCursor (ThemeCursor.kThemeNotAllowedCursor);
+                    SetThemeCursor(ThemeCursor.kThemeNotAllowedCursor);
                     break;
                 case StdCursor.NoMoveVert:
-                    SetThemeCursor (ThemeCursor.kThemeNotAllowedCursor);
+                    SetThemeCursor(ThemeCursor.kThemeNotAllowedCursor);
                     break;
                 case StdCursor.PanEast:
-                    SetThemeCursor (ThemeCursor.kThemeResizeRightCursor);
+                    SetThemeCursor(ThemeCursor.kThemeResizeRightCursor);
                     break;
                 case StdCursor.PanNE:
-                    SetThemeCursor (ThemeCursor.kThemeArrowCursor);
+                    SetThemeCursor(ThemeCursor.kThemeArrowCursor);
                     break;
                 case StdCursor.PanNorth:
-                    SetThemeCursor (ThemeCursor.kThemeArrowCursor);
+                    SetThemeCursor(ThemeCursor.kThemeArrowCursor);
                     break;
                 case StdCursor.PanNW:
-                    SetThemeCursor (ThemeCursor.kThemeArrowCursor);
+                    SetThemeCursor(ThemeCursor.kThemeArrowCursor);
                     break;
                 case StdCursor.PanSE:
-                    SetThemeCursor (ThemeCursor.kThemeArrowCursor);
+                    SetThemeCursor(ThemeCursor.kThemeArrowCursor);
                     break;
                 case StdCursor.PanSouth:
-                    SetThemeCursor (ThemeCursor.kThemeArrowCursor);
+                    SetThemeCursor(ThemeCursor.kThemeArrowCursor);
                     break;
                 case StdCursor.PanSW:
-                    SetThemeCursor (ThemeCursor.kThemeArrowCursor);
+                    SetThemeCursor(ThemeCursor.kThemeArrowCursor);
                     break;
                 case StdCursor.PanWest:
-                    SetThemeCursor (ThemeCursor.kThemeResizeLeftCursor);
+                    SetThemeCursor(ThemeCursor.kThemeResizeLeftCursor);
                     break;
                 case StdCursor.SizeAll:
-                    SetThemeCursor (ThemeCursor.kThemeResizeLeftRightCursor);
+                    SetThemeCursor(ThemeCursor.kThemeResizeLeftRightCursor);
                     break;
                 case StdCursor.SizeNESW:
-                    SetThemeCursor (ThemeCursor.kThemeArrowCursor);
+                    SetThemeCursor(ThemeCursor.kThemeArrowCursor);
                     break;
                 case StdCursor.SizeNS:
-                    SetThemeCursor (ThemeCursor.kThemeArrowCursor);
+                    SetThemeCursor(ThemeCursor.kThemeArrowCursor);
                     break;
                 case StdCursor.SizeNWSE:
-                    SetThemeCursor (ThemeCursor.kThemeArrowCursor);
+                    SetThemeCursor(ThemeCursor.kThemeArrowCursor);
                     break;
                 case StdCursor.SizeWE:
-                    SetThemeCursor (ThemeCursor.kThemeArrowCursor);
+                    SetThemeCursor(ThemeCursor.kThemeArrowCursor);
                     break;
                 case StdCursor.UpArrow:
-                    SetThemeCursor (ThemeCursor.kThemeArrowCursor);
+                    SetThemeCursor(ThemeCursor.kThemeArrowCursor);
                     break;
                 case StdCursor.VSplit:
-                    SetThemeCursor (ThemeCursor.kThemeArrowCursor);
+                    SetThemeCursor(ThemeCursor.kThemeArrowCursor);
                     break;
                 case StdCursor.WaitCursor:
-                    SetThemeCursor (ThemeCursor.kThemeSpinningCursor);
+                    SetThemeCursor(ThemeCursor.kThemeSpinningCursor);
                     break;
                 default:
-                    SetThemeCursor (ThemeCursor.kThemeArrowCursor);
+                    SetThemeCursor(ThemeCursor.kThemeArrowCursor);
                     break;
             }
             return;
         }
 
-        [DllImport ("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-        static extern int SetThemeCursor (ThemeCursor cursor);
-
+        [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
+        static extern int SetThemeCursor(ThemeCursor cursor);
     }
 }

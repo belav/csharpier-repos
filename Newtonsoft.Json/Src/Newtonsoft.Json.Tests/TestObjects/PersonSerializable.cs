@@ -31,9 +31,7 @@ namespace Newtonsoft.Json.Tests.TestObjects
     [Serializable]
     public class PersonSerializable
     {
-        public PersonSerializable()
-        {
-        }
+        public PersonSerializable() { }
 
         private string _name = "";
 

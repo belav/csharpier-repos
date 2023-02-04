@@ -1,10 +1,10 @@
 abstract class A<T>
 {
-    public abstract T getT ();
+    public abstract T getT();
 
     public class B : A<B>
     {
-        public override A<T>.B getT ()
+        public override A<T>.B getT()
         {
             return this;
         }
@@ -13,12 +13,12 @@ abstract class A<T>
 
 class C
 {
-    public static int Main ()
+    public static int Main()
     {
-        var r = new A<short>.B ();
-        if (r.getT () != r)
+        var r = new A<short>.B();
+        if (r.getT() != r)
             return 1;
-        
+
         return 0;
     }
 }

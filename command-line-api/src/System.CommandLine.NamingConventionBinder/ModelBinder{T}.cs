@@ -10,9 +10,8 @@ namespace System.CommandLine.NamingConventionBinder;
 public class ModelBinder<TModel> : ModelBinder
 {
     /// <inheritdoc />
-    public ModelBinder() : base(typeof(TModel))
-    {
-    }
+    public ModelBinder()
+        : base(typeof(TModel)) { }
 
     /// <summary>
     /// Configures a custom binding behavior for the specified property.
@@ -22,13 +21,12 @@ public class ModelBinder<TModel> : ModelBinder
     /// <typeparam name="TValue">The type of the value to be bound.</typeparam>
     public void BindMemberFromValue<TValue>(
         Expression<Func<TModel, TValue>> property,
-        IValueDescriptor valueDescriptor)
+        IValueDescriptor valueDescriptor
+    )
     {
         var (propertyType, propertyName) = property.MemberTypeAndName();
-        var propertyDescriptor = FindModelPropertyDescriptor(
-            propertyType, propertyName);
-        MemberBindingSources[propertyDescriptor] = 
-            new SpecificSymbolValueSource(valueDescriptor);
+        var propertyDescriptor = FindModelPropertyDescriptor(propertyType, propertyName);
+        MemberBindingSources[propertyDescriptor] = new SpecificSymbolValueSource(valueDescriptor);
     }
 
     /// <summary>
@@ -39,12 +37,11 @@ public class ModelBinder<TModel> : ModelBinder
     /// <typeparam name="TValue">The type of the target property.</typeparam>
     public void BindMemberFromValue<TValue>(
         Expression<Func<TModel, TValue>> property,
-        Func<BindingContext?, TValue> getValue)
+        Func<BindingContext?, TValue> getValue
+    )
     {
         var (propertyType, propertyName) = property.MemberTypeAndName();
-        var propertyDescriptor = FindModelPropertyDescriptor(
-            propertyType, propertyName);
-        MemberBindingSources[propertyDescriptor] =
-            new DelegateValueSource(c => getValue(c));
+        var propertyDescriptor = FindModelPropertyDescriptor(propertyType, propertyName);
+        MemberBindingSources[propertyDescriptor] = new DelegateValueSource(c => getValue(c));
     }
 }

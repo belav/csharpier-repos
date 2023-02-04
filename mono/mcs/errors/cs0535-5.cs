@@ -3,13 +3,13 @@
 
 public interface IServerProperty
 {
-    int[] GetChildren (uint timeout);
-    void SetValue (string value, uint timeout);
+    int[] GetChildren(uint timeout);
+    void SetValue(string value, uint timeout);
 }
 
 public class ServerProperty : IServerProperty
 {
-    public int[] GetChildren (uint timeout)
+    public int[] GetChildren(uint timeout)
     {
         return null;
     }

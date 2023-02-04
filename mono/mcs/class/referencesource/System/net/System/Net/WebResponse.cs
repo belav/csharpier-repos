@@ -5,8 +5,8 @@
 //------------------------------------------------------------------------------
 
 
-namespace System.Net {
-
+namespace System.Net
+{
     using System.Collections;
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
@@ -28,7 +28,8 @@ namespace System.Net {
     ///    </para>
     /// </devdoc>
     [Serializable]
-    public abstract class WebResponse : MarshalByRefObject, ISerializable, IDisposable {
+    public abstract class WebResponse : MarshalByRefObject, ISerializable, IDisposable
+    {
         private bool m_IsCacheFresh;
         private bool m_IsFromCache;
 
@@ -37,8 +38,7 @@ namespace System.Net {
         ///       instance of the <see cref='System.Net.WebResponse'/>
         ///       class.</para>
         /// </devdoc>
-        protected WebResponse() {
-        }
+        protected WebResponse() { }
 
         //
         // ISerializable constructor
@@ -46,16 +46,29 @@ namespace System.Net {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        protected WebResponse(SerializationInfo serializationInfo, StreamingContext streamingContext) {
-        }
+        protected WebResponse(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        ) { }
 
         //
         // ISerializable method
         //
         /// <internalonly/>
-        [SuppressMessage("Microsoft.Security", "CA2123:OverrideLinkDemandsShouldBeIdenticalToBase", Justification = "System.dll is still using pre-v4 security model and needs this demand")]
-        [SecurityPermission(SecurityAction.LinkDemand, Flags=SecurityPermissionFlag.SerializationFormatter, SerializationFormatter=true)]
-        void ISerializable.GetObjectData(SerializationInfo serializationInfo, StreamingContext streamingContext)
+        [SuppressMessage(
+            "Microsoft.Security",
+            "CA2123:OverrideLinkDemandsShouldBeIdenticalToBase",
+            Justification = "System.dll is still using pre-v4 security model and needs this demand"
+        )]
+        [SecurityPermission(
+            SecurityAction.LinkDemand,
+            Flags = SecurityPermissionFlag.SerializationFormatter,
+            SerializationFormatter = true
+        )]
+        void ISerializable.GetObjectData(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        )
         {
             GetObjectData(serializationInfo, streamingContext);
         }
@@ -63,11 +76,11 @@ namespace System.Net {
         //
         // FxCop: provide a way for derived classes to access this method even if they reimplement ISerializable.
         //
-        [SecurityPermission(SecurityAction.Demand, SerializationFormatter=true)]
-        protected virtual void GetObjectData(SerializationInfo serializationInfo, StreamingContext streamingContext)
-        {
-        }
-
+        [SecurityPermission(SecurityAction.Demand, SerializationFormatter = true)]
+        protected virtual void GetObjectData(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        ) { }
 
         /*++
 
@@ -77,48 +90,53 @@ namespace System.Net {
 
         --*/
 
-        public virtual void Close() {
-            // We can't throw MethodNotImplementedException here because this is not listed in the 
+        public virtual void Close()
+        {
+            // We can't throw MethodNotImplementedException here because this is not listed in the
             // Portable Libraries subset, so users there cannot override Close.
         }
 
-        public void Dispose() {
+        public void Dispose()
+        {
             Dispose(true);
             GC.SuppressFinalize(this);
         }
 
-        protected virtual void Dispose(bool disposing) {
-            if (!disposing) {
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposing)
+            {
                 return;
             }
-            try {   
+            try
+            {
                 Close();
             }
             catch { }
         }
 
-        public virtual bool IsFromCache {
-            get {return m_IsFromCache;}
+        public virtual bool IsFromCache
+        {
+            get { return m_IsFromCache; }
         }
-        internal bool InternalSetFromCache {
-            set {
-                m_IsFromCache = value;
-            }
-        }
-
-        internal virtual bool IsCacheFresh {
-            get {return m_IsCacheFresh;}
-        }
-        internal bool InternalSetIsCacheFresh {
-            set {
-                m_IsCacheFresh = value;
-            }
+        internal bool InternalSetFromCache
+        {
+            set { m_IsFromCache = value; }
         }
 
-        public virtual bool IsMutuallyAuthenticated {
-            get {return false;}
+        internal virtual bool IsCacheFresh
+        {
+            get { return m_IsCacheFresh; }
+        }
+        internal bool InternalSetIsCacheFresh
+        {
+            set { m_IsCacheFresh = value; }
         }
 
+        public virtual bool IsMutuallyAuthenticated
+        {
+            get { return false; }
+        }
 
         /*++
 
@@ -133,15 +151,11 @@ namespace System.Net {
         ///       sets
         ///       the content length of data being received.</para>
         /// </devdoc>
-        public virtual long ContentLength {
-            get {
-                throw ExceptionHelper.PropertyNotImplementedException;
-            }
-            set {
-                throw ExceptionHelper.PropertyNotImplementedException;
-            }
+        public virtual long ContentLength
+        {
+            get { throw ExceptionHelper.PropertyNotImplementedException; }
+            set { throw ExceptionHelper.PropertyNotImplementedException; }
         }
-
 
         /*++
 
@@ -156,13 +170,10 @@ namespace System.Net {
         ///       gets
         ///       or sets the content type of the data being received.</para>
         /// </devdoc>
-        public virtual string ContentType {
-            get {
-                throw ExceptionHelper.PropertyNotImplementedException;
-            }
-            set {
-                throw ExceptionHelper.PropertyNotImplementedException;
-            }
+        public virtual string ContentType
+        {
+            get { throw ExceptionHelper.PropertyNotImplementedException; }
+            set { throw ExceptionHelper.PropertyNotImplementedException; }
         }
 
         /*++
@@ -184,11 +195,11 @@ namespace System.Net {
         ///    for reading data from the resource referenced in the <see cref='System.Net.WebRequest'/>
         ///    object.</para>
         /// </devdoc>
-        public virtual Stream GetResponseStream() {
+        public virtual Stream GetResponseStream()
+        {
             Contract.Ensures(Contract.Result<Stream>() != null);
             throw ExceptionHelper.MethodNotImplementedException;
         }
-
 
         /*++
 
@@ -209,11 +220,10 @@ namespace System.Net {
         ///    <para>When overridden in a derived class, gets the Uri that
         ///       actually responded to the request.</para>
         /// </devdoc>
-        public virtual Uri ResponseUri {
+        public virtual Uri ResponseUri
+        {
             // read-only
-            get {
-                throw ExceptionHelper.PropertyNotImplementedException;
-            }
+            get { throw ExceptionHelper.PropertyNotImplementedException; }
         }
 
         /*++
@@ -234,9 +244,11 @@ namespace System.Net {
         ///       a collection of header name-value pairs associated with this
         ///       request.</para>
         /// </devdoc>
-        public virtual WebHeaderCollection Headers {
+        public virtual WebHeaderCollection Headers
+        {
             // read-only
-            get {
+            get
+            {
                 Contract.Ensures(Contract.Result<WebHeaderCollection>() != null);
                 throw ExceptionHelper.PropertyNotImplementedException;
             }
@@ -245,13 +257,9 @@ namespace System.Net {
         // For portability only
         // Returning false indicates that the Headers property has not been implemented and should not be used.
         // Derived types with headers should override both Headers and SupportsHeaders.
-        public virtual bool SupportsHeaders {
-            get {
-                return false;
-            }
+        public virtual bool SupportsHeaders
+        {
+            get { return false; }
         }
-
     }; // class WebResponse
-
-
 } // namespace System.Net

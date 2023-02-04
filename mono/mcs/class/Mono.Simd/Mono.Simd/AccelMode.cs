@@ -27,7 +27,6 @@
 
 using System;
 
-
 namespace Mono.Simd
 {
     /*
@@ -37,13 +36,13 @@ namespace Mono.Simd
     [Flags]
     public enum AccelMode
     {
-        None    = 0,
-        SSE1    = 1 << 0,
-        SSE2    = 1 << 1,
-        SSE3    = 1 << 2,
-        SSSE3    = 1 << 3,
-        SSE41    = 1 << 4,
-        SSE42    = 1 << 5,
-        SSE4A    = 1 << 6,
+        None = 0,
+        SSE1 = 1 << 0,
+        SSE2 = 1 << 1,
+        SSE3 = 1 << 2,
+        SSSE3 = 1 << 3,
+        SSE41 = 1 << 4,
+        SSE42 = 1 << 5,
+        SSE4A = 1 << 6,
     }
 }

@@ -1,6 +1,6 @@
-// 
+//
 // Copyright (c) 2006 Mainsoft Co.
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
 // "Software"), to deal in the Software without restriction, including
@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,7 +34,7 @@ using NUnit.Framework;
 namespace MonoTests.System.Data.OleDb
 {
     [TestFixture]
-    public class OleDbDataReader_GetInt32_I : ADONetTesterClass 
+    public class OleDbDataReader_GetInt32_I : ADONetTesterClass
     {
         private Exception exp = null;
         private int testTypesInvocations;
@@ -48,11 +48,11 @@ namespace MonoTests.System.Data.OleDb
                 tc.BeginTest("OleDbDataReader_GetInt32_I");
                 tc.run();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 tc.exp = ex;
             }
-            finally    
+            finally
             {
                 tc.EndTest(tc.exp);
             }
@@ -80,13 +80,18 @@ namespace MonoTests.System.Data.OleDb
                 {
                     //Run over all the columns in the result set row.
                     //For each column, try to read it as a Int32.
-                    for (int i=0; i<row.Count; i++)
+                    for (int i = 0; i < row.Count; i++)
                     {
                         if (row[i].Value.GetType() == typeof(Int32)) //The value in the result set should be a Int32.
                         {
                             try
                             {
-                                BeginCase(string.Format("Calling GetInt32() on a field of dbtype {0}", row[i].DbTypeName));
+                                BeginCase(
+                                    string.Format(
+                                        "Calling GetInt32() on a field of dbtype {0}",
+                                        row[i].DbTypeName
+                                    )
+                                );
                                 Int32 retInt32 = rdr.GetInt32(i);
                                 Compare(row[i].Value, retInt32);
                             }
@@ -104,7 +109,12 @@ namespace MonoTests.System.Data.OleDb
                         {
                             try
                             {
-                                BeginCase(string.Format("Calling GetInt32() on a field of dbtype {0}", row[i].DbTypeName));
+                                BeginCase(
+                                    string.Format(
+                                        "Calling GetInt32() on a field of dbtype {0}",
+                                        row[i].DbTypeName
+                                    )
+                                );
                                 Int32 retInt32 = rdr.GetInt32(i);
                                 ExpectedExceptionNotCaught("InvalidCastException");
                             }
@@ -128,16 +138,15 @@ namespace MonoTests.System.Data.OleDb
             finally
             {
                 row.ExecuteDelete(rowId);
-                if ( (rdr != null) && (!rdr.IsClosed) )
+                if ((rdr != null) && (!rdr.IsClosed))
                 {
                     rdr.Close();
                 }
-                if ( (con != null) && (con.State != ConnectionState.Closed) )
+                if ((con != null) && (con.State != ConnectionState.Closed))
                 {
                     con.Close();
                 }
             }
         }
     }
-    
 }

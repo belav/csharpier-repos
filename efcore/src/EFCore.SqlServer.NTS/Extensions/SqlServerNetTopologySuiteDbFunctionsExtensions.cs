@@ -19,6 +19,6 @@ public static class SqlServerNetTopologySuiteDbFunctionsExtensions
     /// <param name="_">The <see cref="DbFunctions" /> instance.</param>
     /// <param name="geometry">The instance containing circular arc segments.</param>
     /// <returns>The polygonal approximation.</returns>
-    public static Geometry CurveToLine(this DbFunctions _, Geometry geometry)
-        => throw new InvalidOperationException(CoreStrings.FunctionOnClient(nameof(CurveToLine)));
+    public static Geometry CurveToLine(this DbFunctions _, Geometry geometry) =>
+        throw new InvalidOperationException(CoreStrings.FunctionOnClient(nameof(CurveToLine)));
 }

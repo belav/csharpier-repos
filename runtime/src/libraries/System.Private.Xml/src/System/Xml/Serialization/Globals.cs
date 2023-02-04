@@ -6,7 +6,6 @@ using System.Security;
 using System.Reflection;
 using System;
 
-
 namespace System.Xml.Serialization
 {
     internal static class Globals

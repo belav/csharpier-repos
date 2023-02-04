@@ -6,9 +6,12 @@ public abstract class NonGenericBase
 public abstract class GenericBase<T> : NonGenericBase
     where T : GenericBase<T>
 {
-    T Instance { get { return default (T); } }
+    T Instance
+    {
+        get { return default(T); }
+    }
 
-    public void Foo ()
+    public void Foo()
     {
         int i = Instance[10];
     }
@@ -16,5 +19,5 @@ public abstract class GenericBase<T> : NonGenericBase
 
 public class EntryPoint
 {
-    public static void Main () { }
+    public static void Main() { }
 }

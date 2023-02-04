@@ -10,6 +10,6 @@ namespace POS_Server.Models
         public long logId { get; set; }
 
         public string result { get; set; }
-       // public string fileName { get; set; }
+        // public string fileName { get; set; }
     }
 }

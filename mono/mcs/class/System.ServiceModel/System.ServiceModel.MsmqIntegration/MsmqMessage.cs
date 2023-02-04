@@ -12,10 +12,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,95 +36,114 @@ namespace System.ServiceModel.MsmqIntegration
     {
         MsmqIntegrationMessageProperty prop;
 
-        public MsmqMessage (T body)
+        public MsmqMessage(T body)
         {
-            prop = new MsmqIntegrationMessageProperty ();
+            prop = new MsmqIntegrationMessageProperty();
             Body = body;
         }
 
-        public AcknowledgeTypes? AcknowledgeType {
+        public AcknowledgeTypes? AcknowledgeType
+        {
             get { return prop.AcknowledgeType; }
             set { prop.AcknowledgeType = value; }
         }
 
-        public Acknowledgment? Acknowledgment {
+        public Acknowledgment? Acknowledgment
+        {
             get { return prop.Acknowledgment; }
         }
-        
-        public Uri AdministrationQueue {
+
+        public Uri AdministrationQueue
+        {
             get { return prop.AdministrationQueue; }
             set { prop.AdministrationQueue = value; }
         }
 
-        public int? AppSpecific {
+        public int? AppSpecific
+        {
             get { return prop.AppSpecific; }
             set { prop.AppSpecific = value; }
         }
 
-        public DateTime? ArrivedTime {
+        public DateTime? ArrivedTime
+        {
             get { return prop.ArrivedTime; }
         }
 
-        public bool? Authenticated {
+        public bool? Authenticated
+        {
             get { return prop.Authenticated; }
         }
 
-        public T Body {
-            get { return (T) prop.Body; }
+        public T Body
+        {
+            get { return (T)prop.Body; }
             set { prop.Body = value; }
         }
 
-        public int? BodyType {
+        public int? BodyType
+        {
             get { return prop.BodyType; }
             set { prop.BodyType = value; }
         }
 
-        public string CorrelationId {
+        public string CorrelationId
+        {
             get { return prop.CorrelationId; }
             set { prop.CorrelationId = value; }
         }
 
-        public Uri DestinationQueue {
+        public Uri DestinationQueue
+        {
             get { return prop.DestinationQueue; }
         }
 
-        public byte [] Extension {
+        public byte[] Extension
+        {
             get { return prop.Extension; }
             set { prop.Extension = value; }
         }
 
-        public string Id {
+        public string Id
+        {
             get { return prop.Id; }
         }
 
-        public string Label {
+        public string Label
+        {
             get { return prop.Label; }
             set { prop.Label = value; }
         }
 
-        public MessageType? MessageType {
+        public MessageType? MessageType
+        {
             get { return prop.MessageType; }
         }
 
-        public MessagePriority? Priority {
+        public MessagePriority? Priority
+        {
             get { return prop.Priority; }
             set { prop.Priority = value; }
         }
 
-        public Uri ResponseQueue {
+        public Uri ResponseQueue
+        {
             get { return prop.ResponseQueue; }
             set { prop.ResponseQueue = value; }
         }
 
-        public byte [] SenderId {
+        public byte[] SenderId
+        {
             get { return prop.SenderId; }
         }
 
-        public DateTime? SentTime {
+        public DateTime? SentTime
+        {
             get { return prop.SentTime; }
         }
 
-        public TimeSpan? TimeToReachQueue {
+        public TimeSpan? TimeToReachQueue
+        {
             get { return prop.TimeToReachQueue; }
             set { prop.TimeToReachQueue = value; }
         }

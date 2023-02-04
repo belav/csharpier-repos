@@ -34,115 +34,126 @@ namespace System.Net.Http.Headers
     {
         List<NameValueHeaderValue> parameters;
 
-        public NameValueWithParametersHeaderValue (string name)
-            : base (name)
-        {
-        }
+        public NameValueWithParametersHeaderValue(string name)
+            : base(name) { }
 
-        public NameValueWithParametersHeaderValue (string name, string value)
-            : base (name, value)
-        {
-        }
+        public NameValueWithParametersHeaderValue(string name, string value)
+            : base(name, value) { }
 
-        protected NameValueWithParametersHeaderValue (NameValueWithParametersHeaderValue source)
-            : base (source)
+        protected NameValueWithParametersHeaderValue(NameValueWithParametersHeaderValue source)
+            : base(source)
         {
-            if (source.parameters != null) {
+            if (source.parameters != null)
+            {
                 foreach (var item in source.parameters)
-                    Parameters.Add (item);
+                    Parameters.Add(item);
             }
         }
 
-        private NameValueWithParametersHeaderValue ()
-            : base ()
+        private NameValueWithParametersHeaderValue()
+            : base() { }
+
+        public ICollection<NameValueHeaderValue> Parameters
         {
+            get { return parameters ?? (parameters = new List<NameValueHeaderValue>()); }
         }
 
-        public ICollection<NameValueHeaderValue> Parameters {
-            get {
-                return parameters ?? (parameters = new List<NameValueHeaderValue> ());
-            }
-        }
-
-        object ICloneable.Clone ()
+        object ICloneable.Clone()
         {
-            return new NameValueWithParametersHeaderValue (this);
+            return new NameValueWithParametersHeaderValue(this);
         }
 
-        public override bool Equals (object obj)
+        public override bool Equals(object obj)
         {
             var source = obj as NameValueWithParametersHeaderValue;
             if (source == null)
                 return false;
 
-            return base.Equals (obj) && source.parameters.SequenceEqual (parameters);
+            return base.Equals(obj) && source.parameters.SequenceEqual(parameters);
         }
 
-        public override int GetHashCode ()
+        public override int GetHashCode()
         {
-            return base.GetHashCode () ^ HashCodeCalculator.Calculate (parameters);
+            return base.GetHashCode() ^ HashCodeCalculator.Calculate(parameters);
         }
 
-        public static new NameValueWithParametersHeaderValue Parse (string input)
+        public static new NameValueWithParametersHeaderValue Parse(string input)
         {
             NameValueWithParametersHeaderValue value;
-            if (TryParse (input, out value))
+            if (TryParse(input, out value))
                 return value;
 
-            throw new FormatException (input);
+            throw new FormatException(input);
         }
 
-        public override string ToString ()
+        public override string ToString()
         {
             if (parameters == null || parameters.Count == 0)
-                return base.ToString ();
+                return base.ToString();
 
-            return base.ToString () + CollectionExtensions.ToString (parameters);
+            return base.ToString() + CollectionExtensions.ToString(parameters);
         }
 
-        public static bool TryParse (string input, out NameValueWithParametersHeaderValue parsedValue)
+        public static bool TryParse(
+            string input,
+            out NameValueWithParametersHeaderValue parsedValue
+        )
         {
-            var lexer = new Lexer (input);
+            var lexer = new Lexer(input);
             Token token;
-            if (TryParseElement (lexer, out parsedValue, out token) && token == Token.Type.End)
+            if (TryParseElement(lexer, out parsedValue, out token) && token == Token.Type.End)
                 return true;
 
             parsedValue = null;
             return false;
         }
 
-        internal static bool TryParse (string input, int minimalCount, out List<NameValueWithParametersHeaderValue> result)
+        internal static bool TryParse(
+            string input,
+            int minimalCount,
+            out List<NameValueWithParametersHeaderValue> result
+        )
         {
-            return CollectionParser.TryParse (input, minimalCount, TryParseElement, out result);
+            return CollectionParser.TryParse(input, minimalCount, TryParseElement, out result);
         }
 
-        static bool TryParseElement (Lexer lexer, out NameValueWithParametersHeaderValue parsedValue, out Token t)
+        static bool TryParseElement(
+            Lexer lexer,
+            out NameValueWithParametersHeaderValue parsedValue,
+            out Token t
+        )
         {
             parsedValue = null;
 
-            t = lexer.Scan ();
+            t = lexer.Scan();
             if (t != Token.Type.Token)
                 return false;
 
-            parsedValue = new NameValueWithParametersHeaderValue () {
-                Name = lexer.GetStringValue (t),
+            parsedValue = new NameValueWithParametersHeaderValue()
+            {
+                Name = lexer.GetStringValue(t),
             };
 
-            t = lexer.Scan ();
-            if (t == Token.Type.SeparatorEqual) {
-                t = lexer.Scan ();
+            t = lexer.Scan();
+            if (t == Token.Type.SeparatorEqual)
+            {
+                t = lexer.Scan();
 
-                if (t == Token.Type.Token || t == Token.Type.QuotedString) {
-                    parsedValue.value = lexer.GetStringValue (t);
-                    t = lexer.Scan ();
-                } else {
+                if (t == Token.Type.Token || t == Token.Type.QuotedString)
+                {
+                    parsedValue.value = lexer.GetStringValue(t);
+                    t = lexer.Scan();
+                }
+                else
+                {
                     return false;
                 }
             }
 
-            if (t == Token.Type.SeparatorSemicolon) {
+            if (t == Token.Type.SeparatorSemicolon)
+            {
                 List<NameValueHeaderValue> result;
-                if (!TryParseParameters (lexer,  out result, out t))
+                if (!TryParseParameters(lexer, out result, out t))
                     return false;
 
                 parsedValue.parameters = result;

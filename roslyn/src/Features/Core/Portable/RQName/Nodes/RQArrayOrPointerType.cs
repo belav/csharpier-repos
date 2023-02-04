@@ -8,7 +8,6 @@ namespace Microsoft.CodeAnalysis.Features.RQName.Nodes
     {
         public readonly RQType ElementType;
 
-        public RQArrayOrPointerType(RQType elementType)
-            => ElementType = elementType;
+        public RQArrayOrPointerType(RQType elementType) => ElementType = elementType;
     }
 }

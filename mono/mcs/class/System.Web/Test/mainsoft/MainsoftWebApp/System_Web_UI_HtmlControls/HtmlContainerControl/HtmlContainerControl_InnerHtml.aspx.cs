@@ -35,11 +35,10 @@ using System.Web.UI.HtmlControls;
 
 namespace GHTTests.System_Web_dll.System_Web_UI_HtmlControls
 {
-    public class HtmlContainerControl_InnerHtml
-        : GHTBaseWeb 
+    public class HtmlContainerControl_InnerHtml : GHTBaseWeb
     {
         #region Web Form Designer generated code
-        override protected void OnInit(EventArgs e) 
+        override protected void OnInit(EventArgs e)
         {
             //
             // CODEGEN: This call is required by the ASP.NET Web Form Designer.
@@ -47,13 +46,13 @@ namespace GHTTests.System_Web_dll.System_Web_UI_HtmlControls
             InitializeComponent();
             base.OnInit(e);
         }
-        
+
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent() 
-        {    
+        private void InitializeComponent()
+        {
             this.Load += new System.EventHandler(this.Page_Load);
         }
         #endregion
@@ -63,14 +62,14 @@ namespace GHTTests.System_Web_dll.System_Web_UI_HtmlControls
             System.Web.UI.HtmlControls.HtmlContainerControl ctl;
 
             GHTSubTestBegin(TestName);
-            try 
+            try
             {
                 ctl = (HtmlContainerControl)GHTElementClone(HTMLCtlType);
                 GHTActiveSubTest.Controls.Add(ctl);
                 ctl.InnerHtml = html;
                 GHTSubTestAddResult(ctl.InnerHtml);
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
                 ctl = null;
@@ -78,35 +77,99 @@ namespace GHTTests.System_Web_dll.System_Web_UI_HtmlControls
             GHTSubTestEnd();
         }
 
-        private void Page_Load(object sender, System.EventArgs e) 
+        private void Page_Load(object sender, System.EventArgs e)
         {
             //Put user code to initialize the page here
-            try 
+            try
             {
                 System.Web.UI.HtmlControls.HtmlForm frm = (HtmlForm)this.FindControl("Form1");
                 GHTTestBegin(frm);
 
-                TestInnerHTMLControl(typeof(System.Web.UI.HtmlControls.HtmlButton), "HTMLButton_InnerHTML_1", "sample text");
-                TestInnerHTMLControl(typeof(System.Web.UI.HtmlControls.HtmlAnchor), "HTMLAnchor_InnerHTML_1", "sample text");
-                TestInnerHTMLControl(typeof(System.Web.UI.HtmlControls.HtmlTextArea), "HtmlTextArea_InnerHTML_1", "sample text");
-                TestInnerHTMLControl(typeof(System.Web.UI.HtmlControls.HtmlGenericControl), "HtmlGenericControl_InnerHTML_1", "sample text");
+                TestInnerHTMLControl(
+                    typeof(System.Web.UI.HtmlControls.HtmlButton),
+                    "HTMLButton_InnerHTML_1",
+                    "sample text"
+                );
+                TestInnerHTMLControl(
+                    typeof(System.Web.UI.HtmlControls.HtmlAnchor),
+                    "HTMLAnchor_InnerHTML_1",
+                    "sample text"
+                );
+                TestInnerHTMLControl(
+                    typeof(System.Web.UI.HtmlControls.HtmlTextArea),
+                    "HtmlTextArea_InnerHTML_1",
+                    "sample text"
+                );
+                TestInnerHTMLControl(
+                    typeof(System.Web.UI.HtmlControls.HtmlGenericControl),
+                    "HtmlGenericControl_InnerHTML_1",
+                    "sample text"
+                );
 
-                TestInnerHTMLControl(typeof(System.Web.UI.HtmlControls.HtmlButton), "HTMLButton_InnerHTML_2", "other text: ~!@#$%^&*()_+");
-                TestInnerHTMLControl(typeof(System.Web.UI.HtmlControls.HtmlAnchor), "HTMLAnchor_InnerHTML_2", "other text: ~!@#$%^&*()_+");
-                TestInnerHTMLControl(typeof(System.Web.UI.HtmlControls.HtmlTextArea), "HtmlTextArea_InnerHTML_2", "other text: ~!@#$%^&*()_+");
-                TestInnerHTMLControl(typeof(System.Web.UI.HtmlControls.HtmlGenericControl), "HtmlGenericControl_InnerHTML_2", "other text: ~!@#$%^&*()_+");
+                TestInnerHTMLControl(
+                    typeof(System.Web.UI.HtmlControls.HtmlButton),
+                    "HTMLButton_InnerHTML_2",
+                    "other text: ~!@#$%^&*()_+"
+                );
+                TestInnerHTMLControl(
+                    typeof(System.Web.UI.HtmlControls.HtmlAnchor),
+                    "HTMLAnchor_InnerHTML_2",
+                    "other text: ~!@#$%^&*()_+"
+                );
+                TestInnerHTMLControl(
+                    typeof(System.Web.UI.HtmlControls.HtmlTextArea),
+                    "HtmlTextArea_InnerHTML_2",
+                    "other text: ~!@#$%^&*()_+"
+                );
+                TestInnerHTMLControl(
+                    typeof(System.Web.UI.HtmlControls.HtmlGenericControl),
+                    "HtmlGenericControl_InnerHTML_2",
+                    "other text: ~!@#$%^&*()_+"
+                );
 
-                TestInnerHTMLControl(typeof(System.Web.UI.HtmlControls.HtmlButton), "HTMLButton_InnerHTML_3", "<b>Bold</b>");
-                TestInnerHTMLControl(typeof(System.Web.UI.HtmlControls.HtmlAnchor), "HTMLAnchor_InnerHTML_3", "<b>Bold</b>");
-                TestInnerHTMLControl(typeof(System.Web.UI.HtmlControls.HtmlTextArea), "HtmlTextArea_InnerHTML_3", "<b>Bold</b>");
-                TestInnerHTMLControl(typeof(System.Web.UI.HtmlControls.HtmlGenericControl), "HtmlGenericControl_InnerHTML_3", "<b>Bold</b>");
+                TestInnerHTMLControl(
+                    typeof(System.Web.UI.HtmlControls.HtmlButton),
+                    "HTMLButton_InnerHTML_3",
+                    "<b>Bold</b>"
+                );
+                TestInnerHTMLControl(
+                    typeof(System.Web.UI.HtmlControls.HtmlAnchor),
+                    "HTMLAnchor_InnerHTML_3",
+                    "<b>Bold</b>"
+                );
+                TestInnerHTMLControl(
+                    typeof(System.Web.UI.HtmlControls.HtmlTextArea),
+                    "HtmlTextArea_InnerHTML_3",
+                    "<b>Bold</b>"
+                );
+                TestInnerHTMLControl(
+                    typeof(System.Web.UI.HtmlControls.HtmlGenericControl),
+                    "HtmlGenericControl_InnerHTML_3",
+                    "<b>Bold</b>"
+                );
 
-                TestInnerHTMLControl(typeof(System.Web.UI.HtmlControls.HtmlButton), "HTMLButton_InnerHTML_5", "");
-                TestInnerHTMLControl(typeof(System.Web.UI.HtmlControls.HtmlAnchor), "HTMLAnchor_InnerHTML_5", "");
-                TestInnerHTMLControl(typeof(System.Web.UI.HtmlControls.HtmlTextArea), "HtmlTextArea_InnerHTML_5", "");
-                TestInnerHTMLControl(typeof(System.Web.UI.HtmlControls.HtmlGenericControl), "HtmlGenericControl_InnerHTML_5", "");
+                TestInnerHTMLControl(
+                    typeof(System.Web.UI.HtmlControls.HtmlButton),
+                    "HTMLButton_InnerHTML_5",
+                    ""
+                );
+                TestInnerHTMLControl(
+                    typeof(System.Web.UI.HtmlControls.HtmlAnchor),
+                    "HTMLAnchor_InnerHTML_5",
+                    ""
+                );
+                TestInnerHTMLControl(
+                    typeof(System.Web.UI.HtmlControls.HtmlTextArea),
+                    "HtmlTextArea_InnerHTML_5",
+                    ""
+                );
+                TestInnerHTMLControl(
+                    typeof(System.Web.UI.HtmlControls.HtmlGenericControl),
+                    "HtmlGenericControl_InnerHTML_5",
+                    ""
+                );
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }

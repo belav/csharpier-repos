@@ -1,10 +1,9 @@
-interface I<T>
-{
-}
+interface I<T> { }
 
 class A<T>
 {
-    public virtual T M<U> (U u) where U : T
+    public virtual T M<U>(U u)
+        where U : T
     {
         return u;
     }
@@ -12,7 +11,7 @@ class A<T>
 
 class B<W> : A<I<W>>, I<string>
 {
-    public override I<W> M<U> (U u)
+    public override I<W> M<U>(U u)
     {
         return u;
     }
@@ -20,9 +19,9 @@ class B<W> : A<I<W>>, I<string>
 
 class Bug
 {
-    public static void Main ()
+    public static void Main()
     {
-        var b = new B<string> ();
-        b.M (b);
+        var b = new B<string>();
+        b.M(b);
     }
 }

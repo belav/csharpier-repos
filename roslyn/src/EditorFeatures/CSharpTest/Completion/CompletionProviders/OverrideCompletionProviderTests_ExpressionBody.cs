@@ -19,24 +19,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
     // OverrideCompletionProviderTests overrides SetWorkspaceOptions to disable
     // expression-body members. This class does the opposite.
     [Trait(Traits.Feature, Traits.Features.Completion)]
-    public class OverrideCompletionProviderTests_ExpressionBody : AbstractCSharpCompletionProviderTests
+    public class OverrideCompletionProviderTests_ExpressionBody
+        : AbstractCSharpCompletionProviderTests
     {
-        internal override Type GetCompletionProviderType()
-            => typeof(OverrideCompletionProvider);
+        internal override Type GetCompletionProviderType() => typeof(OverrideCompletionProvider);
 
-        internal override OptionsCollection NonCompletionOptions
-            => new(LanguageNames.CSharp)
+        internal override OptionsCollection NonCompletionOptions =>
+            new(LanguageNames.CSharp)
             {
-                { CSharpCodeStyleOptions.PreferExpressionBodiedAccessors, CSharpCodeStyleOptions.WhenPossibleWithSuggestionEnforcement },
-                { CSharpCodeStyleOptions.PreferExpressionBodiedProperties, CSharpCodeStyleOptions.WhenPossibleWithSuggestionEnforcement },
-                { CSharpCodeStyleOptions.PreferExpressionBodiedMethods, CSharpCodeStyleOptions.WhenPossibleWithSuggestionEnforcement }
+                {
+                    CSharpCodeStyleOptions.PreferExpressionBodiedAccessors,
+                    CSharpCodeStyleOptions.WhenPossibleWithSuggestionEnforcement
+                },
+                {
+                    CSharpCodeStyleOptions.PreferExpressionBodiedProperties,
+                    CSharpCodeStyleOptions.WhenPossibleWithSuggestionEnforcement
+                },
+                {
+                    CSharpCodeStyleOptions.PreferExpressionBodiedMethods,
+                    CSharpCodeStyleOptions.WhenPossibleWithSuggestionEnforcement
+                }
             };
 
         [WorkItem(16331, "https://github.com/dotnet/roslyn/issues/16334")]
         [WpfFact]
         public async Task CommitProducesExpressionBodyProperties()
         {
-            var markupBeforeCommit = @"class B
+            var markupBeforeCommit =
+                @"class B
 {
     public virtual int A { get; set; }
     class C : B
@@ -45,7 +55,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
     }
 }";
 
-            var expectedCodeAfterCommit = @"class B
+            var expectedCodeAfterCommit =
+                @"class B
 {
     public virtual int A { get; set; }
     class C : B
@@ -61,7 +72,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [WpfFact]
         public async Task CommitProducesExpressionBodyGetterOnlyProperty()
         {
-            var markupBeforeCommit = @"class B
+            var markupBeforeCommit =
+                @"class B
 {
     public virtual int A { get; }
     class C : B
@@ -70,7 +82,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
     }
 }";
 
-            var expectedCodeAfterCommit = @"class B
+            var expectedCodeAfterCommit =
+                @"class B
 {
     public virtual int A { get; }
     class C : B
@@ -86,7 +99,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [WpfFact]
         public async Task CommitProducesExpressionBodyMethod()
         {
-            var markupBeforeCommit = @"class B
+            var markupBeforeCommit =
+                @"class B
 {
     public virtual int A() => 2;
     class C : B
@@ -95,7 +109,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
     }
 }";
 
-            var expectedCodeAfterCommit = @"class B
+            var expectedCodeAfterCommit =
+                @"class B
 {
     public virtual int A() => 2;
     class C : B
@@ -104,7 +119,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
     }
 }";
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, "A()", expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                "A()",
+                expectedCodeAfterCommit
+            );
         }
     }
 }

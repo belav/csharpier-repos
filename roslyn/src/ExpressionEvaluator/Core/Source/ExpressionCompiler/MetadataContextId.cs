@@ -19,16 +19,18 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             ModuleVersionId = moduleVersionId;
         }
 
-        public bool Equals(MetadataContextId other)
-            => ModuleVersionId.Equals(other.ModuleVersionId);
+        public bool Equals(MetadataContextId other) =>
+            ModuleVersionId.Equals(other.ModuleVersionId);
 
-        public override bool Equals(object obj)
-            => obj is MetadataContextId && Equals((MetadataContextId)obj);
+        public override bool Equals(object obj) =>
+            obj is MetadataContextId && Equals((MetadataContextId)obj);
 
-        public override int GetHashCode()
-            => ModuleVersionId.GetHashCode();
+        public override int GetHashCode() => ModuleVersionId.GetHashCode();
 
-        internal static MetadataContextId GetContextId(Guid moduleVersionId, MakeAssemblyReferencesKind kind)
+        internal static MetadataContextId GetContextId(
+            Guid moduleVersionId,
+            MakeAssemblyReferencesKind kind
+        )
         {
             return kind switch
             {

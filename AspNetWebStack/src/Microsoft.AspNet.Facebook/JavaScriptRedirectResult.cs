@@ -27,7 +27,8 @@ namespace Microsoft.AspNet.Facebook
             Content = String.Format(
                 CultureInfo.InvariantCulture,
                 "<script>window.top.location = '{0}';</script>",
-                HttpUtility.JavaScriptStringEncode(RedirectUrl.AbsoluteUri));
+                HttpUtility.JavaScriptStringEncode(RedirectUrl.AbsoluteUri)
+            );
         }
     }
 }

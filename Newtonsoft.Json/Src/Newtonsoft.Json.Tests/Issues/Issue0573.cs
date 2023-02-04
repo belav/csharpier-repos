@@ -48,13 +48,18 @@ namespace Newtonsoft.Json.Tests.Issues
         {
             string json = "{'Value':'hi'}";
             MemoryTraceWriter traceWriter = new MemoryTraceWriter { LevelFilter = TraceLevel.Info };
-            PrivateSetterTestClass o = JsonConvert.DeserializeObject<PrivateSetterTestClass>(json, new JsonSerializerSettings
-            {
-                TraceWriter = traceWriter
-            });
+            PrivateSetterTestClass o = JsonConvert.DeserializeObject<PrivateSetterTestClass>(
+                json,
+                new JsonSerializerSettings { TraceWriter = traceWriter }
+            );
             List<string> messages = traceWriter.GetTraceMessages().ToList();
 
-            bool hasMessage = messages.Any(message => message.Contains("Info Unable to deserialize value to non-writable property 'Value' on Newtonsoft.Json.Tests.Issues.Issue0573+PrivateSetterTestClass. Path 'Value', line 1, position 13."));
+            bool hasMessage = messages.Any(
+                message =>
+                    message.Contains(
+                        "Info Unable to deserialize value to non-writable property 'Value' on Newtonsoft.Json.Tests.Issues.Issue0573+PrivateSetterTestClass. Path 'Value', line 1, position 13."
+                    )
+            );
             Assert.IsTrue(hasMessage);
         }
 

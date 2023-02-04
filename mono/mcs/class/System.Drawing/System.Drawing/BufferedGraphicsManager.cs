@@ -33,18 +33,16 @@ namespace System.Drawing
     {
         private static BufferedGraphicsContext graphics_context;
 
-        static BufferedGraphicsManager ()
+        static BufferedGraphicsManager()
         {
-            graphics_context = new BufferedGraphicsContext ();
-        }
-        
-        private BufferedGraphicsManager ()
-        {                
+            graphics_context = new BufferedGraphicsContext();
         }
 
-        public static BufferedGraphicsContext Current {
+        private BufferedGraphicsManager() { }
+
+        public static BufferedGraphicsContext Current
+        {
             get { return graphics_context; }
         }
     }
 }
-

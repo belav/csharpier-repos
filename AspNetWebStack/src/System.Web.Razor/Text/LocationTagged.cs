@@ -17,9 +17,7 @@ namespace System.Web.Razor.Text
         }
 
         public LocationTagged(T value, int offset, int line, int col)
-            : this(value, new SourceLocation(offset, line, col))
-        {
-        }
+            : this(value, new SourceLocation(offset, line, col)) { }
 
         public LocationTagged(T value, SourceLocation location)
         {
@@ -38,17 +36,12 @@ namespace System.Web.Razor.Text
         public override bool Equals(object obj)
         {
             LocationTagged<T> other = obj as LocationTagged<T>;
-            return other != null &&
-                   Equals(other.Location, Location) &&
-                   Equals(other.Value, Value);
+            return other != null && Equals(other.Location, Location) && Equals(other.Value, Value);
         }
 
         public override int GetHashCode()
         {
-            return HashCodeCombiner.Start()
-                .Add(Location)
-                .Add(Value)
-                .CombinedHash;
+            return HashCodeCombiner.Start().Add(Location).Add(Value).CombinedHash;
         }
 
         public override string ToString()

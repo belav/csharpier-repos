@@ -56,13 +56,17 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
                 _startingWithChar = startingWithChar;
             }
 
-            protected override IList<JsonProperty> CreateProperties(Type type, MemberSerialization memberSerialization)
+            protected override IList<JsonProperty> CreateProperties(
+                Type type,
+                MemberSerialization memberSerialization
+            )
             {
                 IList<JsonProperty> properties = base.CreateProperties(type, memberSerialization);
 
                 // only serializer properties that start with the specified character
-                properties =
-                    properties.Where(p => p.PropertyName.StartsWith(_startingWithChar.ToString())).ToList();
+                properties = properties
+                    .Where(p => p.PropertyName.StartsWith(_startingWithChar.ToString()))
+                    .ToList();
 
                 return properties;
             }
@@ -84,14 +88,13 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
         public void Example()
         {
             #region Usage
-            Person person = new Person
-            {
-                FirstName = "Dennis",
-                LastName = "Deepwater-Diver"
-            };
+            Person person = new Person { FirstName = "Dennis", LastName = "Deepwater-Diver" };
 
-            string startingWithF = JsonConvert.SerializeObject(person, Formatting.Indented,
-                new JsonSerializerSettings { ContractResolver = new DynamicContractResolver('F') });
+            string startingWithF = JsonConvert.SerializeObject(
+                person,
+                Formatting.Indented,
+                new JsonSerializerSettings { ContractResolver = new DynamicContractResolver('F') }
+            );
 
             Console.WriteLine(startingWithF);
             // {
@@ -99,8 +102,11 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             //   "FullName": "Dennis Deepwater-Diver"
             // }
 
-            string startingWithL = JsonConvert.SerializeObject(person, Formatting.Indented,
-                new JsonSerializerSettings { ContractResolver = new DynamicContractResolver('L') });
+            string startingWithL = JsonConvert.SerializeObject(
+                person,
+                Formatting.Indented,
+                new JsonSerializerSettings { ContractResolver = new DynamicContractResolver('L') }
+            );
 
             Console.WriteLine(startingWithL);
             // {
@@ -108,9 +114,12 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             // }
             #endregion
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""LastName"": ""Deepwater-Diver""
-}", startingWithL);
+}",
+                startingWithL
+            );
         }
     }
 }

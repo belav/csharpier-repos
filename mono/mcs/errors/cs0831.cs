@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 
 class B
 {
-    protected int Core ()
+    protected int Core()
     {
         return 4;
     }
@@ -14,8 +14,8 @@ class B
 
 class C : B
 {
-    public void Test ()
+    public void Test()
     {
-        Expression<Func<int>> e = () => base.Core ();
+        Expression<Func<int>> e = () => base.Core();
     }
 }

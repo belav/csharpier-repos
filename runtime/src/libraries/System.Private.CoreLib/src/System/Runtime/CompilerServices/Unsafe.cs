@@ -64,7 +64,8 @@ namespace System.Runtime.CompilerServices
         [NonVersionable]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [return: NotNullIfNotNull(nameof(o))]
-        public static T As<T>(object? o) where T : class?
+        public static T As<T>(object? o)
+            where T : class?
         {
             throw new PlatformNotSupportedException();
 
@@ -575,7 +576,10 @@ namespace System.Runtime.CompilerServices
             typeof(T).ToString(); // Type token used by the actual method body
             throw new PlatformNotSupportedException();
 #else
-            As<byte, T>(ref destination) = value;
+            As<
+                byte,
+                T
+            >(ref destination) = value;
 #endif
 
             // ldarg .0
@@ -795,7 +799,10 @@ namespace System.Runtime.CompilerServices
             typeof(T).ToString();
             throw new PlatformNotSupportedException();
 #else
-            return ref SubtractByteOffset(ref source, (IntPtr)((nint)elementOffset * (nint)sizeof(T)));
+            return ref SubtractByteOffset(
+                ref source,
+                (IntPtr)((nint)elementOffset * (nint)sizeof(T))
+            );
 #endif
 
             // ldarg .0

@@ -16,8 +16,12 @@ namespace System.Web.Http.Controllers
         private readonly ServicesContainer _services;
         private readonly IActionFilter[] _filters;
 
-        public ActionFilterResult(HttpActionBinding binding, HttpActionContext context, ServicesContainer services,
-            IActionFilter[] filters)
+        public ActionFilterResult(
+            HttpActionBinding binding,
+            HttpActionContext context,
+            ServicesContainer services,
+            IActionFilter[] filters
+        )
         {
             Contract.Assert(binding != null);
             Contract.Assert(context != null);
@@ -44,12 +48,21 @@ namespace System.Web.Http.Controllers
             // Ensure delegate continues to use the C# Compiler static delegate caching optimization
             Func<ActionInvoker, Task<HttpResponseMessage>> invokeCallback = (innerInvoker) =>
                 innerInvoker.InvokeActionAsync();
-            return await InvokeActionWithActionFilters(_context, cancellationToken, _filters, invokeCallback,
-                actionInvoker)();
+            return await InvokeActionWithActionFilters(
+                _context,
+                cancellationToken,
+                _filters,
+                invokeCallback,
+                actionInvoker
+            )();
         }
 
-        public static Func<Task<HttpResponseMessage>> InvokeActionWithActionFilters(HttpActionContext actionContext,
-            CancellationToken cancellationToken, IActionFilter[] filters, Func<Task<HttpResponseMessage>> innerAction)
+        public static Func<Task<HttpResponseMessage>> InvokeActionWithActionFilters(
+            HttpActionContext actionContext,
+            CancellationToken cancellationToken,
+            IActionFilter[] filters,
+            Func<Task<HttpResponseMessage>> innerAction
+        )
         {
             Contract.Assert(actionContext != null);
             Contract.Assert(filters != null);
@@ -61,12 +74,19 @@ namespace System.Web.Http.Controllers
             for (int i = filters.Length - 1; i >= 0; i--)
             {
                 IActionFilter filter = filters[i];
-                Func<Func<Task<HttpResponseMessage>>, IActionFilter, Func<Task<HttpResponseMessage>>>
-                    chainContinuation = (continuation, innerFilter) =>
-                    {
-                        return () => innerFilter.ExecuteActionFilterAsync(actionContext, cancellationToken,
-                            continuation);
-                    };
+                Func<
+                    Func<Task<HttpResponseMessage>>,
+                    IActionFilter,
+                    Func<Task<HttpResponseMessage>>
+                > chainContinuation = (continuation, innerFilter) =>
+                {
+                    return () =>
+                        innerFilter.ExecuteActionFilterAsync(
+                            actionContext,
+                            cancellationToken,
+                            continuation
+                        );
+                };
                 result = chainContinuation(result, filter);
             }
 
@@ -74,10 +94,19 @@ namespace System.Web.Http.Controllers
         }
 
         private static Func<Task<HttpResponseMessage>> InvokeActionWithActionFilters<T>(
-            HttpActionContext actionContext, CancellationToken cancellationToken, IActionFilter[] filters,
-            Func<T, Task<HttpResponseMessage>> innerAction, T state)
+            HttpActionContext actionContext,
+            CancellationToken cancellationToken,
+            IActionFilter[] filters,
+            Func<T, Task<HttpResponseMessage>> innerAction,
+            T state
+        )
         {
-            return InvokeActionWithActionFilters(actionContext, cancellationToken, filters, () => innerAction(state));
+            return InvokeActionWithActionFilters(
+                actionContext,
+                cancellationToken,
+                filters,
+                () => innerAction(state)
+            );
         }
 
         // Keep as struct to avoid allocation
@@ -87,8 +116,11 @@ namespace System.Web.Http.Controllers
             private readonly CancellationToken _cancellationToken;
             private readonly ServicesContainer _controllerServices;
 
-            public ActionInvoker(HttpActionContext context, CancellationToken cancellationToken,
-                ServicesContainer controllerServices)
+            public ActionInvoker(
+                HttpActionContext context,
+                CancellationToken cancellationToken,
+                ServicesContainer controllerServices
+            )
             {
                 Contract.Assert(controllerServices != null);
 
@@ -99,7 +131,9 @@ namespace System.Web.Http.Controllers
 
             public Task<HttpResponseMessage> InvokeActionAsync()
             {
-                return _controllerServices.GetActionInvoker().InvokeActionAsync(_context, _cancellationToken);
+                return _controllerServices
+                    .GetActionInvoker()
+                    .InvokeActionAsync(_context, _cancellationToken);
             }
         }
     }

@@ -4,17 +4,15 @@
 using System;
 using System.Reflection;
 
-[AttributeUsage (AttributeTargets.ReturnValue)]
+[AttributeUsage(AttributeTargets.ReturnValue)]
 public class ReturnAttribute : Attribute
 {
-        public ReturnAttribute ()
-        {
-    }
+    public ReturnAttribute() { }
 }
 
-public class Blah {
-        [return: Return ()]
-        [return: Return ()]
-    public static void Main () { }
+public class Blah
+{
+    [return: Return()]
+    [return: Return()]
+    public static void Main() { }
 }
-

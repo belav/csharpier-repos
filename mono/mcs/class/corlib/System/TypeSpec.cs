@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,56 +32,55 @@ using System.IO;
 using System.Reflection;
 using System.Threading;
 
-namespace System {
-    internal interface ModifierSpec {
-        Type Resolve (Type type);
-        Text.StringBuilder Append (Text.StringBuilder sb);
+namespace System
+{
+    internal interface ModifierSpec
+    {
+        Type Resolve(Type type);
+        Text.StringBuilder Append(Text.StringBuilder sb);
     }
-        internal class ArraySpec : ModifierSpec
+
+    internal class ArraySpec : ModifierSpec
     {
         // dimensions == 1 and bound, or dimensions > 1 and !bound
         int dimensions;
         bool bound;
 
-        internal ArraySpec (int dimensions, bool bound)
+        internal ArraySpec(int dimensions, bool bound)
         {
             this.dimensions = dimensions;
             this.bound = bound;
         }
 
-        public Type Resolve (Type type)
+        public Type Resolve(Type type)
         {
             if (bound)
-                return type.MakeArrayType (1);
+                return type.MakeArrayType(1);
             else if (dimensions == 1)
-                return type.MakeArrayType ();
-            return type.MakeArrayType (dimensions);
+                return type.MakeArrayType();
+            return type.MakeArrayType(dimensions);
         }
 
-        public Text.StringBuilder Append (Text.StringBuilder sb)
+        public Text.StringBuilder Append(Text.StringBuilder sb)
         {
             if (bound)
-                return sb.Append ("[*]");
-            return sb.Append ('[')
-                .Append (',', dimensions - 1)
-                .Append (']');
-            
+                return sb.Append("[*]");
+            return sb.Append('[').Append(',', dimensions - 1).Append(']');
         }
-        public override string ToString ()
+
+        public override string ToString()
         {
-            return Append (new Text.StringBuilder ()).ToString ();
+            return Append(new Text.StringBuilder()).ToString();
         }
 
-        public int Rank {
-            get {
-                return dimensions;
-            }
+        public int Rank
+        {
+            get { return dimensions; }
         }
 
-        public bool IsBound {
-            get {
-                return bound;
-            }
+        public bool IsBound
+        {
+            get { return bound; }
         }
     }
 
@@ -89,25 +88,27 @@ namespace System {
     {
         int pointer_level;
 
-        internal PointerSpec (int pointer_level) {
+        internal PointerSpec(int pointer_level)
+        {
             this.pointer_level = pointer_level;
         }
 
-        public Type Resolve (Type type) {
+        public Type Resolve(Type type)
+        {
             for (int i = 0; i < pointer_level; ++i)
-                type = type.MakePointerType ();
+                type = type.MakePointerType();
             return type;
         }
 
-        public Text.StringBuilder Append (Text.StringBuilder sb)
+        public Text.StringBuilder Append(Text.StringBuilder sb)
         {
-            return sb.Append ('*', pointer_level);
-        }
-        
-        public override string ToString () {
-            return Append (new Text.StringBuilder ()).ToString ();
+            return sb.Append('*', pointer_level);
         }
 
+        public override string ToString()
+        {
+            return Append(new Text.StringBuilder()).ToString();
+        }
     }
 
     internal class TypeSpec
@@ -121,119 +122,136 @@ namespace System {
 
         string display_fullname; // cache
 
-        internal bool HasModifiers {
+        internal bool HasModifiers
+        {
             get { return modifier_spec != null; }
         }
 
-        internal bool IsNested {
+        internal bool IsNested
+        {
             get { return nested != null && nested.Count > 0; }
         }
 
-        internal bool IsByRef {
+        internal bool IsByRef
+        {
             get { return is_byref; }
         }
 
-        internal TypeName Name {
+        internal TypeName Name
+        {
             get { return name; }
         }
 
-        internal IEnumerable<TypeName> Nested {
-            get {
+        internal IEnumerable<TypeName> Nested
+        {
+            get
+            {
                 if (nested != null)
                     return nested;
                 else
-                    return Array.Empty<TypeName> ();
+                    return Array.Empty<TypeName>();
             }
         }
 
-        internal IEnumerable<ModifierSpec> Modifiers {
-            get {
+        internal IEnumerable<ModifierSpec> Modifiers
+        {
+            get
+            {
                 if (modifier_spec != null)
                     return modifier_spec;
                 else
-                    return Array.Empty<ModifierSpec> ();
+                    return Array.Empty<ModifierSpec>();
             }
         }
 
         [Flags]
-        internal enum DisplayNameFormat {
+        internal enum DisplayNameFormat
+        {
             Default = 0x0,
             WANT_ASSEMBLY = 0x1,
             NO_MODIFIERS = 0x2,
         }
+
 #if DEBUG
-        public override string ToString () {
-            return GetDisplayFullName (DisplayNameFormat.WANT_ASSEMBLY);
+        public override string ToString()
+        {
+            return GetDisplayFullName(DisplayNameFormat.WANT_ASSEMBLY);
         }
 #endif
 
-        string GetDisplayFullName (DisplayNameFormat flags)
+        string GetDisplayFullName(DisplayNameFormat flags)
         {
             bool wantAssembly = (flags & DisplayNameFormat.WANT_ASSEMBLY) != 0;
             bool wantModifiers = (flags & DisplayNameFormat.NO_MODIFIERS) == 0;
             var sb = new Text.StringBuilder(name.DisplayName);
-            if (nested != null) {
+            if (nested != null)
+            {
                 foreach (var n in nested)
-                    sb.Append ('+').Append (n.DisplayName);
+                    sb.Append('+').Append(n.DisplayName);
             }
 
-            if (generic_params != null) {
-                sb.Append ('[');
-                for (int i = 0; i < generic_params.Count; ++i) {
+            if (generic_params != null)
+            {
+                sb.Append('[');
+                for (int i = 0; i < generic_params.Count; ++i)
+                {
                     if (i > 0)
-                        sb.Append (", ");
-                    if (generic_params [i].assembly_name != null)
-                        sb.Append ('[').Append (generic_params [i].DisplayFullName).Append (']');
+                        sb.Append(", ");
+                    if (generic_params[i].assembly_name != null)
+                        sb.Append('[').Append(generic_params[i].DisplayFullName).Append(']');
                     else
-                        sb.Append (generic_params [i].DisplayFullName);
+                        sb.Append(generic_params[i].DisplayFullName);
                 }
-                sb.Append (']');
+                sb.Append(']');
             }
 
             if (wantModifiers)
-                GetModifierString (sb);
+                GetModifierString(sb);
 
             if (assembly_name != null && wantAssembly)
-                sb.Append (", ").Append (assembly_name);
+                sb.Append(", ").Append(assembly_name);
 
             return sb.ToString();
         }
 
-        internal string ModifierString ()
+        internal string ModifierString()
         {
-            return GetModifierString (new Text.StringBuilder ()).ToString ();
+            return GetModifierString(new Text.StringBuilder()).ToString();
         }
 
-        private Text.StringBuilder GetModifierString (Text.StringBuilder sb)
+        private Text.StringBuilder GetModifierString(Text.StringBuilder sb)
         {
-            if (modifier_spec != null) {
+            if (modifier_spec != null)
+            {
                 foreach (var md in modifier_spec)
-                    md.Append (sb);
+                    md.Append(sb);
             }
 
             if (is_byref)
-                sb.Append ('&');
+                sb.Append('&');
 
             return sb;
         }
 
-        internal string DisplayFullName {
-            get {
+        internal string DisplayFullName
+        {
+            get
+            {
                 if (display_fullname == null)
-                    display_fullname = GetDisplayFullName (DisplayNameFormat.Default);
+                    display_fullname = GetDisplayFullName(DisplayNameFormat.Default);
                 return display_fullname;
             }
         }
 
-        internal static TypeSpec Parse (string typeName)
+        internal static TypeSpec Parse(string typeName)
         {
             int pos = 0;
             if (typeName == null)
-                throw new ArgumentNullException ("typeName");
+                throw new ArgumentNullException("typeName");
 
-            TypeSpec res = Parse (typeName, ref pos, false, true);
+            TypeSpec res = Parse(typeName, ref pos, false, true);
             if (pos < typeName.Length)
-                throw new ArgumentException ("Count not parse the whole type name", "typeName");
+                throw new ArgumentException("Count not parse the whole type name", "typeName");
             return res;
         }
 
@@ -241,10 +259,11 @@ namespace System {
         {
             // initial capacity = length of internalName.
             // Maybe we won't have to escape anything.
-            var res = new Text.StringBuilder (internalName.Length);
+            var res = new Text.StringBuilder(internalName.Length);
             foreach (char c in internalName)
             {
-                switch (c) {
+                switch (c)
+                {
                     case '+':
                     case ',':
                     case '[':
@@ -252,35 +271,36 @@ namespace System {
                     case '*':
                     case '&':
                     case '\\':
-                        res.Append ('\\').Append (c);
+                        res.Append('\\').Append(c);
                         break;
                     default:
-                        res.Append (c);
+                        res.Append(c);
                         break;
                 }
             }
-            return res.ToString ();
+            return res.ToString();
         }
 
         internal static string UnescapeInternalName(string displayName)
         {
-            var res = new Text.StringBuilder (displayName.Length);
+            var res = new Text.StringBuilder(displayName.Length);
             for (int i = 0; i < displayName.Length; ++i)
             {
                 char c = displayName[i];
                 if (c == '\\')
                     if (++i < displayName.Length)
                         c = displayName[i];
-                res.Append (c);
+                res.Append(c);
             }
-            return res.ToString ();
+            return res.ToString();
         }
 
-        internal static bool NeedsEscaping (string internalName)
+        internal static bool NeedsEscaping(string internalName)
         {
             foreach (char c in internalName)
             {
-                switch (c) {
+                switch (c)
+                {
                     case ',':
                     case '+':
                     case '*':
@@ -296,111 +316,149 @@ namespace System {
             return false;
         }
 
-        internal Type Resolve (Func<AssemblyName,Assembly> assemblyResolver, Func<Assembly,string,bool,Type> typeResolver, bool throwOnError, bool ignoreCase, ref StackCrawlMark stackMark)
+        internal Type Resolve(
+            Func<AssemblyName, Assembly> assemblyResolver,
+            Func<Assembly, string, bool, Type> typeResolver,
+            bool throwOnError,
+            bool ignoreCase,
+            ref StackCrawlMark stackMark
+        )
         {
             Assembly asm = null;
             if (assemblyResolver == null && typeResolver == null)
-                return RuntimeType.GetType (DisplayFullName, throwOnError, ignoreCase, false, ref stackMark);
+                return RuntimeType.GetType(
+                    DisplayFullName,
+                    throwOnError,
+                    ignoreCase,
+                    false,
+                    ref stackMark
+                );
 
-            if (assembly_name != null) {
+            if (assembly_name != null)
+            {
                 if (assemblyResolver != null)
-                    asm = assemblyResolver (new AssemblyName (assembly_name));
+                    asm = assemblyResolver(new AssemblyName(assembly_name));
                 else
-                    asm = Assembly.Load (assembly_name);
+                    asm = Assembly.Load(assembly_name);
 
-                if (asm == null) {
+                if (asm == null)
+                {
                     if (throwOnError)
-                        throw new FileNotFoundException ("Could not resolve assembly '" + assembly_name + "'");
+                        throw new FileNotFoundException(
+                            "Could not resolve assembly '" + assembly_name + "'"
+                        );
                     return null;
                 }
             }
 
             Type type = null;
             if (typeResolver != null)
-                type = typeResolver (asm, name.DisplayName, ignoreCase);
+                type = typeResolver(asm, name.DisplayName, ignoreCase);
             else
-                type = asm.GetType (name.DisplayName, false, ignoreCase);
-            if (type == null) {
+                type = asm.GetType(name.DisplayName, false, ignoreCase);
+            if (type == null)
+            {
                 if (throwOnError)
-                    throw new TypeLoadException ("Could not resolve type '" + name + "'");
+                    throw new TypeLoadException("Could not resolve type '" + name + "'");
                 return null;
             }
 
-            if (nested != null) {
-                foreach (var n in nested) {
-                    var tmp = type.GetNestedType (n.DisplayName, BindingFlags.Public | BindingFlags.NonPublic);
-                    if (tmp == null) {
+            if (nested != null)
+            {
+                foreach (var n in nested)
+                {
+                    var tmp = type.GetNestedType(
+                        n.DisplayName,
+                        BindingFlags.Public | BindingFlags.NonPublic
+                    );
+                    if (tmp == null)
+                    {
                         if (throwOnError)
-                            throw new TypeLoadException ("Could not resolve type '" + n + "'");
+                            throw new TypeLoadException("Could not resolve type '" + n + "'");
                         return null;
                     }
                     type = tmp;
                 }
             }
 
-            if (generic_params != null) {
-                Type[] args = new Type [generic_params.Count];
-                for (int i = 0; i < args.Length; ++i) {
-                    var tmp = generic_params [i].Resolve (assemblyResolver, typeResolver, throwOnError, ignoreCase, ref stackMark);
-                    if (tmp == null) {
+            if (generic_params != null)
+            {
+                Type[] args = new Type[generic_params.Count];
+                for (int i = 0; i < args.Length; ++i)
+                {
+                    var tmp = generic_params[i].Resolve(
+                        assemblyResolver,
+                        typeResolver,
+                        throwOnError,
+                        ignoreCase,
+                        ref stackMark
+                    );
+                    if (tmp == null)
+                    {
                         if (throwOnError)
-                            throw new TypeLoadException ("Could not resolve type '" + generic_params [i].name + "'");
+                            throw new TypeLoadException(
+                                "Could not resolve type '" + generic_params[i].name + "'"
+                            );
                         return null;
                     }
-                    args [i] = tmp;
+                    args[i] = tmp;
                 }
-                type = type.MakeGenericType (args);
+                type = type.MakeGenericType(args);
             }
 
-            if (modifier_spec != null) {
+            if (modifier_spec != null)
+            {
                 foreach (var md in modifier_spec)
-                    type = md.Resolve (type);
+                    type = md.Resolve(type);
             }
 
             if (is_byref)
-                type = type.MakeByRefType ();
+                type = type.MakeByRefType();
 
             return type;
         }
 
-        void AddName (string type_name)
+        void AddName(string type_name)
         {
-            if (name == null) {
+            if (name == null)
+            {
                 name = ParsedTypeIdentifier(type_name);
-            } else {
+            }
+            else
+            {
                 if (nested == null)
-                    nested = new List <TypeIdentifier> ();
-                nested.Add (ParsedTypeIdentifier(type_name));
+                    nested = new List<TypeIdentifier>();
+                nested.Add(ParsedTypeIdentifier(type_name));
             }
         }
 
-        void AddModifier (ModifierSpec md)
+        void AddModifier(ModifierSpec md)
         {
             if (modifier_spec == null)
-                modifier_spec = new List<ModifierSpec> ();
-            modifier_spec.Add (md);
+                modifier_spec = new List<ModifierSpec>();
+            modifier_spec.Add(md);
         }
 
-        static void SkipSpace (string name, ref int pos)
+        static void SkipSpace(string name, ref int pos)
         {
             int p = pos;
-            while (p < name.Length && Char.IsWhiteSpace (name [p]))
+            while (p < name.Length && Char.IsWhiteSpace(name[p]))
                 ++p;
             pos = p;
         }
 
-        static void BoundCheck (int idx, string s)
+        static void BoundCheck(int idx, string s)
         {
             if (idx >= s.Length)
-                throw new ArgumentException ("Invalid generic arguments spec", "typeName");
+                throw new ArgumentException("Invalid generic arguments spec", "typeName");
         }
 
-        static TypeIdentifier ParsedTypeIdentifier (string displayName)
+        static TypeIdentifier ParsedTypeIdentifier(string displayName)
         {
             return TypeIdentifiers.FromDisplay(displayName);
         }
 
-        static TypeSpec Parse (string name, ref int p, bool is_recurse, bool allow_aqn)
+        static TypeSpec Parse(string name, ref int p, bool is_recurse, bool allow_aqn)
         {
             // Invariants:
             //  - On exit p, is updated to pos the current unconsumed character.
@@ -416,163 +474,224 @@ namespace System {
             int pos = p;
             int name_start;
             bool in_modifiers = false;
-            TypeSpec data = new TypeSpec ();
+            TypeSpec data = new TypeSpec();
 
-            SkipSpace (name, ref pos);
+            SkipSpace(name, ref pos);
 
             name_start = pos;
 
-            for (; pos < name.Length; ++pos) {
-                switch (name [pos]) {
-                case '+':
-                    data.AddName (name.Substring (name_start, pos - name_start));
-                    name_start = pos + 1;
-                    break;
-                case ',':
-                case ']':
-                    data.AddName (name.Substring (name_start, pos - name_start));
-                    name_start = pos + 1;
-                    in_modifiers = true;
-                    if (is_recurse && !allow_aqn) {
-                        p = pos;
-                        return data;
-                    }
-                    break;
-                case '&':
-                case '*':
-                case '[':
-                    if (name [pos] != '[' && is_recurse)
-                        throw new ArgumentException ("Generic argument can't be byref or pointer type", "typeName");
-                    data.AddName (name.Substring (name_start, pos - name_start));
-                    name_start = pos + 1;
-                    in_modifiers = true;
-                    break;
-                case '\\':
-                    pos++;
-                    break;
+            for (; pos < name.Length; ++pos)
+            {
+                switch (name[pos])
+                {
+                    case '+':
+                        data.AddName(name.Substring(name_start, pos - name_start));
+                        name_start = pos + 1;
+                        break;
+                    case ',':
+                    case ']':
+                        data.AddName(name.Substring(name_start, pos - name_start));
+                        name_start = pos + 1;
+                        in_modifiers = true;
+                        if (is_recurse && !allow_aqn)
+                        {
+                            p = pos;
+                            return data;
+                        }
+                        break;
+                    case '&':
+                    case '*':
+                    case '[':
+                        if (name[pos] != '[' && is_recurse)
+                            throw new ArgumentException(
+                                "Generic argument can't be byref or pointer type",
+                                "typeName"
+                            );
+                        data.AddName(name.Substring(name_start, pos - name_start));
+                        name_start = pos + 1;
+                        in_modifiers = true;
+                        break;
+                    case '\\':
+                        pos++;
+                        break;
                 }
                 if (in_modifiers)
                     break;
             }
 
             if (name_start < pos)
-                data.AddName (name.Substring (name_start, pos - name_start));
+                data.AddName(name.Substring(name_start, pos - name_start));
             else if (name_start == pos)
-                data.AddName (String.Empty);
+                data.AddName(String.Empty);
 
-            if (in_modifiers) {
-                for (; pos < name.Length; ++pos) {
+            if (in_modifiers)
+            {
+                for (; pos < name.Length; ++pos)
+                {
+                    switch (name[pos])
+                    {
+                        case '&':
+                            if (data.is_byref)
+                                throw new ArgumentException(
+                                    "Can't have a byref of a byref",
+                                    "typeName"
+                                );
 
-                    switch (name [pos]) {
-                    case '&':
-                        if (data.is_byref)
-                            throw new ArgumentException ("Can't have a byref of a byref", "typeName");
-
-                        data.is_byref = true;
-                        break;
-                    case '*':
-                        if (data.is_byref)
-                            throw new ArgumentException ("Can't have a pointer to a byref type", "typeName");
-                        // take subsequent '*'s too
-                        int pointer_level = 1;
-                        while (pos+1 < name.Length && name[pos+1] == '*') {
-                            ++pos;
-                            ++pointer_level;
-                        }
-                        data.AddModifier (new PointerSpec(pointer_level));
-                        break;
-                    case ',':
-                        if (is_recurse && allow_aqn) {
-                            int end = pos;
-                            while (end < name.Length && name [end] != ']')
-                                ++end;
-                            if (end >= name.Length)
-                                throw new ArgumentException ("Unmatched ']' while parsing generic argument assembly name");
-                            data.assembly_name = name.Substring (pos + 1, end - pos - 1).Trim ();
-                            p = end;
-                            return data;                        
-                        }
-                        if (is_recurse) {
-                            p = pos;
-                            return data;
-                        }
-                        if (allow_aqn) {
-                            data.assembly_name = name.Substring (pos + 1).Trim ();
-                            pos = name.Length;
-                        }
-                        break;
-                    case '[':
-                        if (data.is_byref)
-                            throw new ArgumentException ("Byref qualifier must be the last one of a type", "typeName");
-                        ++pos;
-                        if (pos >= name.Length)
-                                throw new ArgumentException ("Invalid array/generic spec", "typeName");
-                        SkipSpace (name, ref pos);
-
-                        if (name [pos] != ',' && name [pos] != '*' && name [pos]  != ']') {//generic args
-                            List<TypeSpec> args = new List <TypeSpec> ();
-                            if (data.HasModifiers)
-                                throw new ArgumentException ("generic args after array spec or pointer type", "typeName");
-
-                            while (pos < name.Length) {
-                                SkipSpace (name, ref pos);
-                                bool aqn = name [pos] == '[';
-                                if (aqn)
-                                    ++pos; //skip '[' to the start of the type
-                                args.Add (Parse (name, ref pos, true, aqn));
-                                BoundCheck (pos, name);
-                                if (aqn) {
-                                    if (name [pos] == ']')
-                                        ++pos;
-                                    else
-                                        throw new ArgumentException ("Unclosed assembly-qualified type name at " + name[pos], "typeName");
-                                    BoundCheck (pos, name);
-}
-
-                                if (name [pos] == ']')
-                                    break;
-                                if (name [pos] == ',')
-                                    ++pos; // skip ',' to the start of the next arg
-                                else
-                                    throw new ArgumentException ("Invalid generic arguments separator " + name [pos], "typeName");
-            
-                            }
-                            if (pos >= name.Length || name [pos] != ']')
-                                throw new ArgumentException ("Error parsing generic params spec", "typeName");
-                            data.generic_params = args;
-                        } else { //array spec
-                            int dimensions = 1;
-                            bool bound = false;
-                            while (pos < name.Length && name [pos] != ']') {
-                                if (name [pos] == '*') {
-                                    if (bound)
-                                        throw new ArgumentException ("Array spec cannot have 2 bound dimensions", "typeName");
-                                    bound = true;
-                                }
-                                else if (name [pos] != ',')
-                                    throw new ArgumentException ("Invalid character in array spec " + name [pos], "typeName");
-                                else
-                                    ++dimensions;
-
+                            data.is_byref = true;
+                            break;
+                        case '*':
+                            if (data.is_byref)
+                                throw new ArgumentException(
+                                    "Can't have a pointer to a byref type",
+                                    "typeName"
+                                );
+                            // take subsequent '*'s too
+                            int pointer_level = 1;
+                            while (pos + 1 < name.Length && name[pos + 1] == '*')
+                            {
                                 ++pos;
-                                SkipSpace (name, ref pos);
+                                ++pointer_level;
                             }
-                            if (pos >= name.Length || name [pos] != ']')
-                                throw new ArgumentException ("Error parsing array spec", "typeName");
-                            if (dimensions > 1 && bound)
-                                throw new ArgumentException ("Invalid array spec, multi-dimensional array cannot be bound", "typeName");
-                            data.AddModifier (new ArraySpec (dimensions, bound));
-                        }
+                            data.AddModifier(new PointerSpec(pointer_level));
+                            break;
+                        case ',':
+                            if (is_recurse && allow_aqn)
+                            {
+                                int end = pos;
+                                while (end < name.Length && name[end] != ']')
+                                    ++end;
+                                if (end >= name.Length)
+                                    throw new ArgumentException(
+                                        "Unmatched ']' while parsing generic argument assembly name"
+                                    );
+                                data.assembly_name = name.Substring(pos + 1, end - pos - 1).Trim();
+                                p = end;
+                                return data;
+                            }
+                            if (is_recurse)
+                            {
+                                p = pos;
+                                return data;
+                            }
+                            if (allow_aqn)
+                            {
+                                data.assembly_name = name.Substring(pos + 1).Trim();
+                                pos = name.Length;
+                            }
+                            break;
+                        case '[':
+                            if (data.is_byref)
+                                throw new ArgumentException(
+                                    "Byref qualifier must be the last one of a type",
+                                    "typeName"
+                                );
+                            ++pos;
+                            if (pos >= name.Length)
+                                throw new ArgumentException(
+                                    "Invalid array/generic spec",
+                                    "typeName"
+                                );
+                            SkipSpace(name, ref pos);
 
-                        break;
-                    case ']':
-                        if (is_recurse) {
-                            p = pos;
-                            return data;
-                        }
-                        throw new ArgumentException ("Unmatched ']'", "typeName");
-                    default:
-                        throw new ArgumentException ("Bad type def, can't handle '" + name [pos]+"'" + " at " + pos, "typeName");
+                            if (name[pos] != ',' && name[pos] != '*' && name[pos] != ']')
+                            { //generic args
+                                List<TypeSpec> args = new List<TypeSpec>();
+                                if (data.HasModifiers)
+                                    throw new ArgumentException(
+                                        "generic args after array spec or pointer type",
+                                        "typeName"
+                                    );
+
+                                while (pos < name.Length)
+                                {
+                                    SkipSpace(name, ref pos);
+                                    bool aqn = name[pos] == '[';
+                                    if (aqn)
+                                        ++pos; //skip '[' to the start of the type
+                                    args.Add(Parse(name, ref pos, true, aqn));
+                                    BoundCheck(pos, name);
+                                    if (aqn)
+                                    {
+                                        if (name[pos] == ']')
+                                            ++pos;
+                                        else
+                                            throw new ArgumentException(
+                                                "Unclosed assembly-qualified type name at "
+                                                    + name[pos],
+                                                "typeName"
+                                            );
+                                        BoundCheck(pos, name);
+                                    }
+
+                                    if (name[pos] == ']')
+                                        break;
+                                    if (name[pos] == ',')
+                                        ++pos; // skip ',' to the start of the next arg
+                                    else
+                                        throw new ArgumentException(
+                                            "Invalid generic arguments separator " + name[pos],
+                                            "typeName"
+                                        );
+                                }
+                                if (pos >= name.Length || name[pos] != ']')
+                                    throw new ArgumentException(
+                                        "Error parsing generic params spec",
+                                        "typeName"
+                                    );
+                                data.generic_params = args;
+                            }
+                            else
+                            { //array spec
+                                int dimensions = 1;
+                                bool bound = false;
+                                while (pos < name.Length && name[pos] != ']')
+                                {
+                                    if (name[pos] == '*')
+                                    {
+                                        if (bound)
+                                            throw new ArgumentException(
+                                                "Array spec cannot have 2 bound dimensions",
+                                                "typeName"
+                                            );
+                                        bound = true;
+                                    }
+                                    else if (name[pos] != ',')
+                                        throw new ArgumentException(
+                                            "Invalid character in array spec " + name[pos],
+                                            "typeName"
+                                        );
+                                    else
+                                        ++dimensions;
+
+                                    ++pos;
+                                    SkipSpace(name, ref pos);
+                                }
+                                if (pos >= name.Length || name[pos] != ']')
+                                    throw new ArgumentException(
+                                        "Error parsing array spec",
+                                        "typeName"
+                                    );
+                                if (dimensions > 1 && bound)
+                                    throw new ArgumentException(
+                                        "Invalid array spec, multi-dimensional array cannot be bound",
+                                        "typeName"
+                                    );
+                                data.AddModifier(new ArraySpec(dimensions, bound));
+                            }
+
+                            break;
+                        case ']':
+                            if (is_recurse)
+                            {
+                                p = pos;
+                                return data;
+                            }
+                            throw new ArgumentException("Unmatched ']'", "typeName");
+                        default:
+                            throw new ArgumentException(
+                                "Bad type def, can't handle '" + name[pos] + "'" + " at " + pos,
+                                "typeName"
+                            );
                     }
                 }
             }
@@ -581,40 +700,42 @@ namespace System {
             return data;
         }
 
-        internal TypeName TypeNameWithoutModifiers ()
+        internal TypeName TypeNameWithoutModifiers()
         {
-            return new TypeSpecTypeName (this, false);
-        }
-        
-        internal TypeName TypeName {
-            get { return new TypeSpecTypeName (this, true); }
+            return new TypeSpecTypeName(this, false);
         }
 
-        private class TypeSpecTypeName : TypeNames.ATypeName, TypeName {
+        internal TypeName TypeName
+        {
+            get { return new TypeSpecTypeName(this, true); }
+        }
+
+        private class TypeSpecTypeName : TypeNames.ATypeName, TypeName
+        {
             TypeSpec ts;
             bool want_modifiers;
 
-            internal TypeSpecTypeName (TypeSpec ts, bool wantModifiers)
+            internal TypeSpecTypeName(TypeSpec ts, bool wantModifiers)
             {
                 this.ts = ts;
                 this.want_modifiers = wantModifiers;
             }
 
-            public override string DisplayName {
-                get {
+            public override string DisplayName
+            {
+                get
+                {
                     if (want_modifiers)
                         return ts.DisplayFullName;
                     else
-                        return ts.GetDisplayFullName (DisplayNameFormat.NO_MODIFIERS);
+                        return ts.GetDisplayFullName(DisplayNameFormat.NO_MODIFIERS);
                 }
             }
 
-            public override TypeName NestedName (TypeIdentifier innerName)
+            public override TypeName NestedName(TypeIdentifier innerName)
             {
                 return TypeNames.FromDisplay(DisplayName + "+" + innerName.DisplayName);
             }
         }
-
     }
 }
-

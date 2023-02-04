@@ -37,10 +37,7 @@ namespace ILCompiler
 
         public override bool IsSingleFileCompilation
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         public override bool ShouldProduceFullVTable(TypeDesc type)
@@ -65,10 +62,7 @@ namespace ILCompiler
 
         public override bool CanHaveReferenceThroughImportTable
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public override bool AllowInstanceMethodOptimization(MethodDesc method)

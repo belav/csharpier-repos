@@ -3,9 +3,9 @@
 //   Erez Lotan       <erezl@mainsoft.com>
 //   Oren Gurfinkel   <oreng@mainsoft.com>
 //   Ofer Borstein
-// 
+//
 // Copyright (c) 2004 Mainsoft Co.
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
 // "Software"), to deal in the Software without restriction, including
@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,24 +35,29 @@ using NUnit.Framework;
 
 namespace tests.system_data_dll.System_Data
 {
-    [TestFixture] public class DataSet_AcceptChanges : GHTBase
+    [TestFixture]
+    public class DataSet_AcceptChanges : GHTBase
     {
         public void SetUp()
         {
             Exception exp = null;
             BeginCase("Setup");
-            try
+            try { }
+            catch (Exception ex)
             {
+                exp = ex;
             }
-            catch(Exception ex)    {exp = ex;}
-            finally    {EndCase(exp); exp = null;}
+            finally
+            {
+                EndCase(exp);
+                exp = null;
+            }
         }
 
-        public void TearDown()
-        {
-        }
+        public void TearDown() { }
 
-        [Test] public void Main()
+        [Test]
+        public void Main()
         {
             DataSet_AcceptChanges tc = new DataSet_AcceptChanges();
             Exception exp = null;
@@ -63,7 +68,7 @@ namespace tests.system_data_dll.System_Data
                 tc.run();
                 tc.TearDown();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 exp = ex;
             }
@@ -75,31 +80,36 @@ namespace tests.system_data_dll.System_Data
 
         public void run()
         {
-
             Exception exp = null;
-    
+
             DataSet ds = new DataSet();
             DataTable dtP = GHTUtils.DataProvider.CreateParentDataTable();
             DataTable dtC = GHTUtils.DataProvider.CreateChildDataTable();
             ds.Tables.Add(dtP);
             ds.Tables.Add(dtC);
-            ds.Relations.Add(new DataRelation("myRelation",dtP.Columns[0],dtC.Columns[0]));
-    
+            ds.Relations.Add(new DataRelation("myRelation", dtP.Columns[0], dtC.Columns[0]));
+
             //create changes
-            dtP.Rows[0][0] = "70"; 
+            dtP.Rows[0][0] = "70";
             dtP.Rows[1].Delete();
-            dtP.Rows.Add(new object[] {9,"string1","string2"});
-                
+            dtP.Rows.Add(new object[] { 9, "string1", "string2" });
+
             try
             {
                 BeginCase("AcceptChanges");
                 ds.AcceptChanges();
-                Compare(dtP.GetChanges(),null);
+                Compare(dtP.GetChanges(), null);
             }
-            catch(Exception ex)    {exp = ex;}
-            finally    {EndCase(exp); exp = null;}
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                EndCase(exp);
+                exp = null;
+            }
 
-        
             //read only exception
             dtP.Columns[0].ReadOnly = true;
             try
@@ -109,12 +119,22 @@ namespace tests.system_data_dll.System_Data
                 {
                     dtP.Rows[0][0] = 99;
                 }
-                catch (ReadOnlyException ex) {exp=ex;}
-                Compare(exp.GetType() ,typeof(ReadOnlyException));
+                catch (ReadOnlyException ex)
+                {
+                    exp = ex;
+                }
+                Compare(exp.GetType(), typeof(ReadOnlyException));
                 exp = null;
             }
-            catch(Exception ex)    {exp = ex;}
-            finally    {EndCase(exp); exp = null;}
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                EndCase(exp);
+                exp = null;
+            }
 
             try
             {
@@ -123,12 +143,22 @@ namespace tests.system_data_dll.System_Data
                 {
                     ds.AcceptChanges();
                 }
-                catch (Exception ex) {exp=ex;}
-                Compare(exp==null,true);
+                catch (Exception ex)
+                {
+                    exp = ex;
+                }
+                Compare(exp == null, true);
                 exp = null;
             }
-            catch(Exception ex)    {exp = ex;}
-            finally    {EndCase(exp); exp = null;}        
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                EndCase(exp);
+                exp = null;
+            }
         }
     }
 }

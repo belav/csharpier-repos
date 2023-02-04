@@ -8,11 +8,12 @@ interface I
     int X { get; set; }
 }
 
-class C<T> where T : struct, I
+class C<T>
+    where T : struct, I
 {
     static readonly T t;
 
-    public static void Foo ()
+    public static void Foo()
     {
         t.X = 42;
     }

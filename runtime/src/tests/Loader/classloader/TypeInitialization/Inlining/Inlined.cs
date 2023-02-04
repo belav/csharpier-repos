@@ -36,65 +36,49 @@ public class Foo
 
 public class NotInlined
 {
-
     static NotInlined()
     {
         Console.WriteLine("Inside NotInlined::.cctor");
         File.WriteAllText("notinlined.txt", "inside .cctor");
     }
 
-    [MethodImpl(MethodImplOptions.NoInlining)] 
-    public static void NotInlinedMeth()
-    {
-    }
+    [MethodImpl(MethodImplOptions.NoInlining)]
+    public static void NotInlinedMeth() { }
 }
-
 
 public class Inlined
 {
-
     static Inlined()
     {
         Console.WriteLine("Inside Inlined::.cctor");
         File.WriteAllText("inlined.txt", "inside .cctor");
     }
 
-    public static void InlinedMeth()
-    {
-    }
+    public static void InlinedMeth() { }
 }
-
 
 public struct NotInlinedVal
 {
-
     static NotInlinedVal()
     {
         Console.WriteLine("Inside NotInlinedVal::.cctor");
         File.WriteAllText("notinlinedval.txt", "inside .cctor");
     }
 
-    [MethodImpl(MethodImplOptions.NoInlining)] 
-    public static void NotInlinedValMeth()
-    {
-    }
+    [MethodImpl(MethodImplOptions.NoInlining)]
+    public static void NotInlinedValMeth() { }
 }
-
 
 public struct InlinedVal
 {
-
     static InlinedVal()
     {
         Console.WriteLine("Inside InlinedVal::.cctor");
         File.WriteAllText("inlinedval.txt", "inside .cctor");
     }
 
-    public static void InlinedValMeth()
-    {
-    }
+    public static void InlinedValMeth() { }
 }
-
 
 public class Test_Inlined
 {
@@ -106,7 +90,12 @@ public class Test_Inlined
         Foo.ValMeth_In();
         Foo.ValMeth_NotIn();
 
-        if (!File.Exists("inlined.txt") || !File.Exists("notinlined.txt") || !File.Exists("inlinedval.txt") || !File.Exists("notinlinedval.txt") )
+        if (
+            !File.Exists("inlined.txt")
+            || !File.Exists("notinlined.txt")
+            || !File.Exists("inlinedval.txt")
+            || !File.Exists("notinlinedval.txt")
+        )
         {
             Console.WriteLine("FAIL: Cctor wasn't called");
             return 101;
@@ -120,6 +109,5 @@ public class Test_Inlined
             File.Delete("notinlinedval.txt");
             return 100;
         }
-        
     }
 }

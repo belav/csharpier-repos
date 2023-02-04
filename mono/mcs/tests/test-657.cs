@@ -7,19 +7,19 @@ namespace TestDebug
 {
     class Program
     {
-        [Conditional ("DEBUG")]
-        public static void Excluded ()
+        [Conditional("DEBUG")]
+        public static void Excluded()
         {
-            throw new ApplicationException ("1");
+            throw new ApplicationException("1");
         }
 
-        public static int Main ()
+        public static int Main()
         {
-            C.Method (); // Only checks that DEBUG is defined in second file
-            
-            Excluded ();
+            C.Method(); // Only checks that DEBUG is defined in second file
+
+            Excluded();
 #if DEBUG
-            throw new ApplicationException ("1");
+            throw new ApplicationException("1");
 #endif
             return 0;
         }

@@ -4,23 +4,21 @@ namespace Mono.Linker.Tests.Cases.Inheritance.Interfaces.OnReferenceType
 {
     class ClassImplemtingInterfaceMethodsThroughBaseClass3
     {
-        public static void Main ()
+        public static void Main()
         {
-            new B ().Foo ();
+            new B().Foo();
         }
 
         interface IFoo
         {
-            void Foo ();
+            void Foo();
         }
 
-        [KeptMember (".ctor()")]
+        [KeptMember(".ctor()")]
         class B
         {
             [Kept]
-            public void Foo ()
-            {
-            }
+            public void Foo() { }
         }
 
         class A : B, IFoo

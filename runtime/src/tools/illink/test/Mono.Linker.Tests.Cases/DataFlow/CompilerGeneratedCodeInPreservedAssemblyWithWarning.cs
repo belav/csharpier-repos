@@ -14,16 +14,19 @@ namespace Mono.Linker.Tests.Cases.DataFlow
     // produced while marking the compiler generated code.
     [SkipKeptItemsValidation]
     [ExpectedNoWarnings]
-    [SetupLinkerArgument ("--enable-opt", "ipconstprop")]
-    [SetupLinkerDescriptorFile ("CompilerGeneratedCodeInPreservedAssembly.xml")]
+    [SetupLinkerArgument("--enable-opt", "ipconstprop")]
+    [SetupLinkerDescriptorFile("CompilerGeneratedCodeInPreservedAssembly.xml")]
     class CompilerGeneratedCodeInPreservedAssemblyWithWarning
     {
-        [ExpectedWarning ("IL2026", "--" + nameof (Inner) + "." + nameof (Inner.WithLocalFunctionInner) + "--")]
-        [ExpectedWarning ("IL2026", "--" + nameof (WithLocalFunction) + "--")]
-        public static void Main ()
+        [ExpectedWarning(
+            "IL2026",
+            "--" + nameof(Inner) + "." + nameof(Inner.WithLocalFunctionInner) + "--"
+        )]
+        [ExpectedWarning("IL2026", "--" + nameof(WithLocalFunction) + "--")]
+        public static void Main()
         {
-            Inner.WithLocalFunctionInner ();
-            WithLocalFunction ();
+            Inner.WithLocalFunctionInner();
+            WithLocalFunction();
         }
 
         // The compiler generated state will see the modified body,
@@ -33,39 +36,47 @@ namespace Mono.Linker.Tests.Cases.DataFlow
 
         class Inner
         {
-            [RequiresUnreferencedCode ("--" + nameof (Inner) + "." + nameof (WithLocalFunctionInner) + "--")]
-            public static void WithLocalFunctionInner ()
+            [RequiresUnreferencedCode(
+                "--" + nameof(Inner) + "." + nameof(WithLocalFunctionInner) + "--"
+            )]
+            public static void WithLocalFunctionInner()
             {
-                if (AlwaysFalse) {
-                    LocalWithWarning<int> ();
+                if (AlwaysFalse)
+                {
+                    LocalWithWarning<int>();
                 }
 
                 // https://github.com/dotnet/linker/issues/2937
-                [ExpectedWarning ("IL2091", ProducedBy = ProducedBy.Trimmer)]
-                void LocalWithWarning<T> ()
+                [ExpectedWarning("IL2091", ProducedBy = ProducedBy.Trimmer)]
+                void LocalWithWarning<T>()
                 {
                     // Warning!
-                    RequiresAllOnT<T> ();
+                    RequiresAllOnT<T>();
                 }
             }
         }
 
-        [RequiresUnreferencedCode ("--" + nameof (WithLocalFunction) + "--")]
-        public static void WithLocalFunction ()
+        [RequiresUnreferencedCode("--" + nameof(WithLocalFunction) + "--")]
+        public static void WithLocalFunction()
         {
-            if (AlwaysFalse) {
-                LocalWithWarning<int> ();
+            if (AlwaysFalse)
+            {
+                LocalWithWarning<int>();
             }
 
             // https://github.com/dotnet/linker/issues/2937
-            [ExpectedWarning ("IL2091", ProducedBy = ProducedBy.Trimmer)]
-            void LocalWithWarning<T> ()
+            [ExpectedWarning("IL2091", ProducedBy = ProducedBy.Trimmer)]
+            void LocalWithWarning<T>()
             {
                 // No warning
-                RequiresAllOnT<T> ();
+                RequiresAllOnT<T>();
             }
         }
+
         public static bool AlwaysFalse => false;
-        static void RequiresAllOnT<[DynamicallyAccessedMembers (DynamicallyAccessedMemberTypes.All)] T> () { }
+
+        static void RequiresAllOnT<
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T
+        >() { }
     }
 }

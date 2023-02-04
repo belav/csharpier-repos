@@ -33,17 +33,17 @@ namespace MonoTests.Microsoft.CSharp
         private CodeDomProvider provider = null;
         protected ICodeGenerator generator = null;
         protected CodeGeneratorOptions options = null;
-    
+
         public void InitBase()
         {
-            provider = new CSharpCodeProvider ();
-            generator = provider.CreateGenerator ();
-            options = new CodeGeneratorOptions ();
+            provider = new CSharpCodeProvider();
+            generator = provider.CreateGenerator();
+            options = new CodeGeneratorOptions();
         }
 
-        protected string Generate ()
+        protected string Generate()
         {
-            return Generate (options);
+            return Generate(options);
         }
 
         protected virtual string NewLine
@@ -51,6 +51,6 @@ namespace MonoTests.Microsoft.CSharp
             get { return "\n"; }
         }
 
-        protected abstract string Generate (CodeGeneratorOptions options);
+        protected abstract string Generate(CodeGeneratorOptions options);
     }
 }

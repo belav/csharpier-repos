@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 public class C<T, U>
 {
-    public C (IEnumerable<T> t)
+    public C(IEnumerable<T> t)
     {
         new List<T>(t).ConvertAll(p => p.Name);
     }

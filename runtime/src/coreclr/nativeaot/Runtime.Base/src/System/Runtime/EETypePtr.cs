@@ -4,6 +4,7 @@
 using System;
 using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
+
 /*============================================================
 **
 ** Class:  EETypePtr
@@ -47,10 +48,7 @@ namespace System
 
         internal unsafe uint BaseSize
         {
-            get
-            {
-                return ToPointer()->BaseSize;
-            }
+            get { return ToPointer()->BaseSize; }
         }
     }
 }

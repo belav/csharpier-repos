@@ -9,8 +9,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics;
 
-internal sealed class DocumentDiagnosticSource
-    : AbstractDocumentDiagnosticSource<Document>
+internal sealed class DocumentDiagnosticSource : AbstractDocumentDiagnosticSource<Document>
 {
     public DiagnosticKind DiagnosticKind { get; }
 
@@ -21,13 +20,22 @@ internal sealed class DocumentDiagnosticSource
     }
 
     public override async Task<ImmutableArray<DiagnosticData>> GetDiagnosticsAsync(
-        IDiagnosticAnalyzerService diagnosticAnalyzerService, RequestContext context, CancellationToken cancellationToken)
+        IDiagnosticAnalyzerService diagnosticAnalyzerService,
+        RequestContext context,
+        CancellationToken cancellationToken
+    )
     {
         // We call GetDiagnosticsForSpanAsync here instead of GetDiagnosticsForIdsAsync as it has faster perf
         // characteristics. GetDiagnosticsForIdsAsync runs analyzers against the entire compilation whereas
         // GetDiagnosticsForSpanAsync will only run analyzers against the request document.
-        var allSpanDiagnostics = await diagnosticAnalyzerService.GetDiagnosticsForSpanAsync(
-            Document, range: null, diagnosticKind: this.DiagnosticKind, cancellationToken: cancellationToken).ConfigureAwait(false);
+        var allSpanDiagnostics = await diagnosticAnalyzerService
+            .GetDiagnosticsForSpanAsync(
+                Document,
+                range: null,
+                diagnosticKind: this.DiagnosticKind,
+                cancellationToken: cancellationToken
+            )
+            .ConfigureAwait(false);
         return allSpanDiagnostics;
     }
 }

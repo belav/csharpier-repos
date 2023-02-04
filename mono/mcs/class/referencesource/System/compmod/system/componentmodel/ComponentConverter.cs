@@ -1,12 +1,13 @@
 //------------------------------------------------------------------------------
 // <copyright file="ComponentConverter.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 /*
  */
-namespace System.ComponentModel {
+namespace System.ComponentModel
+{
     using Microsoft.Win32;
     using System.Collections;
     using System.ComponentModel;
@@ -22,15 +23,15 @@ namespace System.ComponentModel {
     ///       from various other representations.</para>
     /// </devdoc>
     [HostProtection(SharedState = true)]
-    public class ComponentConverter : ReferenceConverter {
-    
+    public class ComponentConverter : ReferenceConverter
+    {
         /// <devdoc>
         ///    <para>
         ///       Initializes a new instance of the <see cref='System.ComponentModel.ComponentConverter'/> class.
         ///    </para>
         /// </devdoc>
-        public ComponentConverter(Type type) : base(type) {
-        }
+        public ComponentConverter(Type type)
+            : base(type) { }
 
         /// <internalonly/>
         /// <devdoc>
@@ -38,18 +39,23 @@ namespace System.ComponentModel {
         ///       specified by the value
         ///       parameter.</para>
         /// </devdoc>
-        public override PropertyDescriptorCollection GetProperties(ITypeDescriptorContext context, object value, Attribute[] attributes) {
+        public override PropertyDescriptorCollection GetProperties(
+            ITypeDescriptorContext context,
+            object value,
+            Attribute[] attributes
+        )
+        {
             return TypeDescriptor.GetProperties(value, attributes);
         }
-        
+
         /// <internalonly/>
         /// <devdoc>
         ///    <para>Gets a value indicating whether this object supports properties using the
         ///       specified context.</para>
         /// </devdoc>
-        public override bool GetPropertiesSupported(ITypeDescriptorContext context) {
+        public override bool GetPropertiesSupported(ITypeDescriptorContext context)
+        {
             return true;
         }
     }
 }
-

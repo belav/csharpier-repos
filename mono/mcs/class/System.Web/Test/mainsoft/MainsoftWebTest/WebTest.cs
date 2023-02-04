@@ -3,10 +3,10 @@
 //   Rafael Mizrahi   <rafim@mainsoft.com>
 //   Erez Lotan       <erezl@mainsoft.com>
 //   Vladimir Krasnov <vladimirk@mainsoft.com>
-//   
-// 
+//
+//
 // Copyright (c) 2002-2005 Mainsoft Corporation.
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
 // "Software"), to deal in the Software without restriction, including
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -48,28 +48,26 @@ namespace MonoTests.stand_alone.WebHarness
         private XmlDocument _xmlIgnoreList = null;
         private string _compareStatus = "";
 
-        public HtmlDiff()
-        {
-        }
+        public HtmlDiff() { }
 
         public string TestsBaseUrl
         {
-            get {return _testsBaseUrl;}
-            set {_testsBaseUrl = value;}
+            get { return _testsBaseUrl; }
+            set { _testsBaseUrl = value; }
         }
         public string IgnoreListFile
         {
-            get {return _ignoreListFile;}
-            set {_ignoreListFile = value;}
+            get { return _ignoreListFile; }
+            set { _ignoreListFile = value; }
         }
         public string CompareStatus
         {
-            get {return _compareStatus.ToString();}
+            get { return _compareStatus.ToString(); }
         }
 
         public override XmlDocument GetTestXml(TestInfo testInfo)
         {
-            return BuildXml( GetSubTests( GetUrl(testInfo.Url) ), testInfo );
+            return BuildXml(GetSubTests(GetUrl(testInfo.Url)), testInfo);
         }
 
         public override bool XmlCompare(XmlDocument d1, XmlDocument d2, bool ignoreAlmost)
@@ -93,8 +91,10 @@ namespace MonoTests.stand_alone.WebHarness
             try
             {
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(_testsBaseUrl + url);
-                request.UserAgent = "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 1.1.4322)";
-                request.Accept = "image/gif, image/x-xbitmap, image/jpeg, image/pjpeg, application/vnd.ms-excel, application/vnd.ms-powerpoint, application/msword, application/x-shockwave-flash, */*";
+                request.UserAgent =
+                    "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 1.1.4322)";
+                request.Accept =
+                    "image/gif, image/x-xbitmap, image/jpeg, image/pjpeg, application/vnd.ms-excel, application/vnd.ms-powerpoint, application/msword, application/x-shockwave-flash, */*";
 
                 HttpWebResponse response = (HttpWebResponse)request.GetResponse();
 
@@ -106,7 +106,7 @@ namespace MonoTests.stand_alone.WebHarness
 
                 return s;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine("Cannot retrieve document from url " + _testsBaseUrl + url);
                 Console.WriteLine(e.Message);
@@ -118,9 +118,9 @@ namespace MonoTests.stand_alone.WebHarness
         private ArrayList GetSubTests(string s)
         {
             ArrayList subTestList = new ArrayList();
-            int startIndex = SkipViewstate (s);
+            int startIndex = SkipViewstate(s);
             string subTest = FindSubTest(s, startIndex);
-            
+
             while (subTest != "")
             {
                 if (subTest.ToLower().IndexOf("ghtsubtest") != -1)
@@ -130,6 +130,7 @@ namespace MonoTests.stand_alone.WebHarness
 
             return subTestList;
         }
+
         #region "Sub Test extraction routines"
         private string FindSubTest(string s, int startIndex)
         {
@@ -138,7 +139,8 @@ namespace MonoTests.stand_alone.WebHarness
             int tagPosition = 0;
 
             tagPosition = GetNextDivPosition(s, stringPosition);
-            if (tagPosition == -1) return "";
+            if (tagPosition == -1)
+                return "";
 
             if (isBeginTag(s, tagPosition))
                 tagBeginCount++;
@@ -151,7 +153,8 @@ namespace MonoTests.stand_alone.WebHarness
             {
                 stringPosition = tagPosition + 1;
                 tagPosition = GetNextDivPosition(s, stringPosition);
-                if (tagPosition == -1) return "";
+                if (tagPosition == -1)
+                    return "";
 
                 if (isBeginTag(s, tagPosition))
                     tagBeginCount++;
@@ -167,7 +170,8 @@ namespace MonoTests.stand_alone.WebHarness
             int tagBeginPos = GetBeginDivPosition(s, startIndex);
             int tagEndPos = GetEndDivPosition(s, startIndex);
 
-            if ((tagBeginPos == -1) && (tagEndPos == -1)) return -1;
+            if ((tagBeginPos == -1) && (tagEndPos == -1))
+                return -1;
             if ((tagBeginPos > 0) && (tagEndPos > 0))
             {
                 if (tagBeginPos < tagEndPos)
@@ -184,12 +188,12 @@ namespace MonoTests.stand_alone.WebHarness
             }
         }
 
-        private int SkipViewstate (string s)
+        private int SkipViewstate(string s)
         {
-            int start = s.IndexOf ("<div id");
-            int startVS = s.IndexOf ("<div>");
-            int vs = s.IndexOf ("VIEWSTATE");
-            int endVS = s.IndexOf ("</div>");
+            int start = s.IndexOf("<div id");
+            int startVS = s.IndexOf("<div>");
+            int vs = s.IndexOf("VIEWSTATE");
+            int endVS = s.IndexOf("</div>");
 
             if (startVS > 0 && startVS < vs && vs < endVS && startVS < start)
                 return endVS + 7;
@@ -211,6 +215,7 @@ namespace MonoTests.stand_alone.WebHarness
         {
             return tag.Substring(pos).StartsWith("<div");
         }
+
         private bool isEndTag(string tag, int pos)
         {
             return tag.Substring(pos).StartsWith("</div");
@@ -221,7 +226,7 @@ namespace MonoTests.stand_alone.WebHarness
         {
             StringBuilder xmltext = new StringBuilder();
             xmltext.Append("<TestResults name=\"" + ti.Name + "\">");
-            foreach(string st in subTests)
+            foreach (string st in subTests)
             {
                 xmltext.Append(st);
             }
@@ -261,9 +266,9 @@ namespace MonoTests.stand_alone.WebHarness
                     if (n.Attributes["style"] != null)
                     {
                         string att = n.Attributes["style"].Value;
-                        string [] style = att.Trim(new char[]{' ', ';'}).Split(';');
+                        string[] style = att.Trim(new char[] { ' ', ';' }).Split(';');
 
-                        for (int styleIndex=0; styleIndex<style.Length; styleIndex++)
+                        for (int styleIndex = 0; styleIndex < style.Length; styleIndex++)
                         {
                             style[styleIndex] = FixStyleNameValue(style[styleIndex]);
                         }
@@ -284,10 +289,10 @@ namespace MonoTests.stand_alone.WebHarness
 
         private string FixStyleNameValue(string nameValue)
         {
-            string [] nv = nameValue.Split(':');
+            string[] nv = nameValue.Split(':');
             // value may contain spaces in case of
             // multiple values for one key
-            string [] nvalue = nv[1].Trim().Split(' ');
+            string[] nvalue = nv[1].Trim().Split(' ');
             Array.Sort(nvalue);
             nv[1] = string.Join(" ", nvalue);
             return nv[0].Trim().ToLower() + ":" + nv[1].Trim().ToLower();
@@ -319,11 +324,14 @@ namespace MonoTests.stand_alone.WebHarness
                     {
                         foreach (XmlAttribute tmpIgnoreAttr in XmlIgnoreNode.Attributes)
                         {
-                            if (tmpXmlElement.Name.ToLower() == XmlIgnoreNode.Name.ToLower()) 
+                            if (tmpXmlElement.Name.ToLower() == XmlIgnoreNode.Name.ToLower())
                             {
-                                if (tmpXmlElement.Attributes[tmpIgnoreAttr.Name] != null )
+                                if (tmpXmlElement.Attributes[tmpIgnoreAttr.Name] != null)
                                 {
-                                    if (tmpXmlElement.Attributes[tmpIgnoreAttr.Name].Value.ToLower() == tmpIgnoreAttr.Value.ToLower())
+                                    if (
+                                        tmpXmlElement.Attributes[tmpIgnoreAttr.Name].Value.ToLower()
+                                        == tmpIgnoreAttr.Value.ToLower()
+                                    )
                                     {
                                         tmpXmlElement.RemoveAllAttributes();
                                     }
@@ -331,7 +339,7 @@ namespace MonoTests.stand_alone.WebHarness
                             }
                         }
                     }
-                }    
+                }
             }
             // remove ignored attributes
             // search for tag and remove it's attributes
@@ -347,7 +355,7 @@ namespace MonoTests.stand_alone.WebHarness
                 {
                     foreach (XmlElement tmpXmlElement in DocNodeList)
                     {
-                        if (tmpXmlElement.Name.ToLower() == XmlIgnoreNode.Name.ToLower()) 
+                        if (tmpXmlElement.Name.ToLower() == XmlIgnoreNode.Name.ToLower())
                         {
                             foreach (XmlAttribute tmpIgnoreAttr in XmlIgnoreNode.Attributes)
                             {
@@ -359,7 +367,9 @@ namespace MonoTests.stand_alone.WebHarness
             }
 
             // clean javascript attribute value
-            xmlIgnoreEnum = _xmlIgnoreList.SelectSingleNode("Almost/CleanJavaScriptValueList").GetEnumerator(); //FirstChild.GetEnumerator
+            xmlIgnoreEnum = _xmlIgnoreList
+                .SelectSingleNode("Almost/CleanJavaScriptValueList")
+                .GetEnumerator(); //FirstChild.GetEnumerator
             while (xmlIgnoreEnum.MoveNext())
             {
                 XmlIgnoreNode = (XmlNode)xmlIgnoreEnum.Current;
@@ -370,15 +380,26 @@ namespace MonoTests.stand_alone.WebHarness
                 {
                     foreach (XmlElement tmpXmlElement in DocNodeList)
                     {
-                        if (tmpXmlElement.Name.ToLower() == XmlIgnoreNode.Name.ToLower()) 
+                        if (tmpXmlElement.Name.ToLower() == XmlIgnoreNode.Name.ToLower())
                         {
                             foreach (XmlAttribute tmpIgnoreAttr in XmlIgnoreNode.Attributes)
                             {
-                                if (tmpXmlElement.Attributes[tmpIgnoreAttr.Name] != null )
+                                if (tmpXmlElement.Attributes[tmpIgnoreAttr.Name] != null)
                                 {
-                                    if ((tmpXmlElement.Attributes [tmpIgnoreAttr.Name].Value.ToLower ().IndexOf ("javascript") >= 0) ||
-                                    (tmpXmlElement.Attributes [tmpIgnoreAttr.Name].Value.ToLower ().IndexOf ("dopostback") >= 0)) {
-                                        tmpXmlElement.SetAttribute (tmpIgnoreAttr.Name, "");
+                                    if (
+                                        (
+                                            tmpXmlElement.Attributes[tmpIgnoreAttr.Name].Value
+                                                .ToLower()
+                                                .IndexOf("javascript") >= 0
+                                        )
+                                        || (
+                                            tmpXmlElement.Attributes[tmpIgnoreAttr.Name].Value
+                                                .ToLower()
+                                                .IndexOf("dopostback") >= 0
+                                        )
+                                    )
+                                    {
+                                        tmpXmlElement.SetAttribute(tmpIgnoreAttr.Name, "");
                                     }
                                 }
                             }
@@ -387,8 +408,8 @@ namespace MonoTests.stand_alone.WebHarness
                 }
             }
             // remove whole tags
-            ArrayList tagsToRemove = new ArrayList ();
-            xmlIgnoreEnum = _xmlIgnoreList.SelectSingleNode ("Almost/RemoveTags").GetEnumerator (); //FirstChild.GetEnumerator
+            ArrayList tagsToRemove = new ArrayList();
+            xmlIgnoreEnum = _xmlIgnoreList.SelectSingleNode("Almost/RemoveTags").GetEnumerator(); //FirstChild.GetEnumerator
             while (xmlIgnoreEnum.MoveNext())
             {
                 XmlIgnoreNode = (XmlNode)xmlIgnoreEnum.Current;
@@ -399,18 +420,21 @@ namespace MonoTests.stand_alone.WebHarness
                 {
                     foreach (XmlElement tmpXmlElement in DocNodeList)
                     {
-                        if (tmpXmlElement.Name.ToLower() == XmlIgnoreNode.Name.ToLower()) 
+                        if (tmpXmlElement.Name.ToLower() == XmlIgnoreNode.Name.ToLower())
                         {
-                            tagsToRemove.Add (tmpXmlElement);
+                            tagsToRemove.Add(tmpXmlElement);
                             //tmpXmlElement.ParentNode.RemoveChild (tmpXmlElement);
                         }
                     }
                 }
             }
-            if (tagsToRemove.Count > 0) {
-                foreach (XmlElement el in tagsToRemove) {
-                    try {
-                        el.ParentNode.RemoveChild (el);
+            if (tagsToRemove.Count > 0)
+            {
+                foreach (XmlElement el in tagsToRemove)
+                {
+                    try
+                    {
+                        el.ParentNode.RemoveChild(el);
                     }
                     catch { }
                 }

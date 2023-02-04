@@ -6,9 +6,7 @@ using System;
 
 static class Foo
 {
-    static void Print (this string s)
-    {
-    }
+    static void Print(this string s) { }
 }
 
 static class Program

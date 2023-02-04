@@ -74,7 +74,11 @@ namespace System.Windows.Forms
 {
     [DefaultProperty("Images")]
     [Designer("System.Windows.Forms.Design.ImageListDesigner, " + Consts.AssemblySystem_Design)]
-    [DesignerSerializer("System.Windows.Forms.Design.ImageListCodeDomSerializer, " + Consts.AssemblySystem_Design, "System.ComponentModel.Design.Serialization.CodeDomSerializer, " + Consts.AssemblySystem_Design)]
+    [DesignerSerializer(
+        "System.Windows.Forms.Design.ImageListCodeDomSerializer, " + Consts.AssemblySystem_Design,
+        "System.ComponentModel.Design.Serialization.CodeDomSerializer, "
+            + Consts.AssemblySystem_Design
+    )]
     [ToolboxItemFilter("System.Windows.Forms")]
     [TypeConverter(typeof(ImageListConverter))]
     public sealed class ImageList : System.ComponentModel.Component
@@ -88,7 +92,10 @@ namespace System.Windows.Forms
         #endregion // Private Fields
 
         #region Sub-classes
-        [Editor("System.Windows.Forms.Design.ImageCollectionEditor, " + Consts.AssemblySystem_Design, typeof(UITypeEditor))]
+        [Editor(
+            "System.Windows.Forms.Design.ImageCollectionEditor, " + Consts.AssemblySystem_Design,
+            typeof(UITypeEditor)
+        )]
         public sealed class ImageCollection : IList, ICollection, IEnumerable
         {
             private const int AlphaMask = unchecked((int)0xFF000000);
@@ -140,7 +147,15 @@ namespace System.Windows.Forms
                     minDistance = int.MaxValue;
 
                     for (index = 0; index < count; index++)
-                        if ((distance = squares[255 + palette[index].R - red] + squares[255 + palette[index].G - green] + squares[255 + palette[index].B - blue]) < minDistance) {
+                        if (
+                            (
+                                distance =
+                                    squares[255 + palette[index].R - red]
+                                    + squares[255 + palette[index].G - green]
+                                    + squares[255 + palette[index].B - blue]
+                            ) < minDistance
+                        )
+                        {
                             nearestColor = palette[index].ToArgb();
                             minDistance = distance;
                         }
@@ -185,13 +200,15 @@ namespace System.Windows.Forms
                     this.Image = value;
                 }
 
-                internal ImageListItem(Image value, Color transparentColor) : this(value)
+                internal ImageListItem(Image value, Color transparentColor)
+                    : this(value)
                 {
                     this.Flags = ItemFlags.UseTransparentColor;
                     this.TransparentColor = transparentColor;
                 }
 
-                internal ImageListItem(Image value, int imageCount) : this(value)
+                internal ImageListItem(Image value, int imageCount)
+                    : this(value)
                 {
                     this.Flags = ItemFlags.ImageStrip;
                     this.ImageCount = imageCount;
@@ -220,16 +237,20 @@ namespace System.Windows.Forms
 
             #region ImageCollection Internal Instance Properties
             // For use in ImageList
-            internal ColorDepth ColorDepth {
-                get {
-                    return this.colorDepth;
-                }
-
-                set {
+            internal ColorDepth ColorDepth
+            {
+                get { return this.colorDepth; }
+                set
+                {
                     if (!Enum.IsDefined(typeof(ColorDepth), value))
-                        throw new InvalidEnumArgumentException("value", (int)value, typeof(ColorDepth));
+                        throw new InvalidEnumArgumentException(
+                            "value",
+                            (int)value,
+                            typeof(ColorDepth)
+                        );
 
-                    if (this.colorDepth != value) {
+                    if (this.colorDepth != value)
+                    {
                         this.colorDepth = value;
                         RecreateHandle();
                     }
@@ -237,31 +258,40 @@ namespace System.Windows.Forms
             }
 
             // For use in ImageList
-            internal IntPtr Handle {
-                get {
+            internal IntPtr Handle
+            {
+                get
+                {
                     CreateHandle();
                     return (IntPtr)(-1);
                 }
             }
 
             // For use in ImageList
-            internal bool HandleCreated {
-                get {
-                    return this.handleCreated;
-                }
+            internal bool HandleCreated
+            {
+                get { return this.handleCreated; }
             }
 
             // For use in ImageList
-            internal Size ImageSize {
-                get {
-                    return this.imageSize;
-                }
+            internal Size ImageSize
+            {
+                get { return this.imageSize; }
+                set
+                {
+                    if (
+                        value.Width < 1
+                        || value.Width > 256
+                        || value.Height < 1
+                        || value.Height > 256
+                    )
+                        throw new ArgumentException(
+                            "ImageSize.Width and Height must be between 1 and 256",
+                            "value"
+                        );
 
-                set {
-                    if (value.Width < 1 || value.Width > 256 || value.Height < 1 || value.Height > 256)
-                        throw new ArgumentException("ImageSize.Width and Height must be between 1 and 256", "value");
-
-                    if (this.imageSize != value) {
+                    if (this.imageSize != value)
+                    {
                         this.imageSize = value;
                         RecreateHandle();
                     }
@@ -269,29 +299,31 @@ namespace System.Windows.Forms
             }
 
             // For use in ImageList
-            internal ImageListStreamer ImageStream {
-                get {
-                    return this.Empty ? null : new ImageListStreamer(this);
-                }
-
-                set {
+            internal ImageListStreamer ImageStream
+            {
+                get { return this.Empty ? null : new ImageListStreamer(this); }
+                set
+                {
                     int index;
                     Image[] streamImages;
 
-                    if (value == null) {
+                    if (value == null)
+                    {
                         if (this.handleCreated)
                             DestroyHandle();
                         else
                             this.Clear();
                     }
                     // Only deserialized ImageListStreamers are used.
-                    else if ((streamImages = value.Images) != null) {
+                    else if ((streamImages = value.Images) != null)
+                    {
                         this.list = new ArrayList(streamImages.Length);
                         this.count = 0;
                         this.handleCreated = true;
                         this.keys = new ArrayList(streamImages.Length);
 
-                        for (index = 0; index < streamImages.Length; index++) {
+                        for (index = 0; index < streamImages.Length; index++)
+                        {
                             list.Add((Image)streamImages[index].Clone());
                             keys.Add(null);
                         }
@@ -308,45 +340,37 @@ namespace System.Windows.Forms
             }
 
             // For use in ImageList
-            internal Color TransparentColor {
-                get {
-                    return this.transparentColor;
-                }
-
-                set {
-                    this.transparentColor = value;
-                }
+            internal Color TransparentColor
+            {
+                get { return this.transparentColor; }
+                set { this.transparentColor = value; }
             }
             #endregion // ImageCollection Internal Instance Properties
 
             #region ImageCollection Public Instance Properties
             [Browsable(false)]
-            public int Count {
-                get {
-                    return this.handleCreated ? list.Count : this.count;
-                }
+            public int Count
+            {
+                get { return this.handleCreated ? list.Count : this.count; }
             }
 
-            public bool Empty {
-                get {
-                    return this.Count == 0;
-                }
+            public bool Empty
+            {
+                get { return this.Count == 0; }
             }
 
-            public bool IsReadOnly {
-                get {
-                    return false;
-                }
+            public bool IsReadOnly
+            {
+                get { return false; }
             }
 
             [Browsable(false)]
             [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-            public Image this[int index] {
-                get {
-                    return (Image)GetImage(index).Clone();
-                }
-
-                set {
+            public Image this[int index]
+            {
+                get { return (Image)GetImage(index).Clone(); }
+                set
+                {
                     Image image;
 
                     if (index < 0 || index >= this.Count)
@@ -364,16 +388,20 @@ namespace System.Windows.Forms
                 }
             }
 
-            public Image this[string key] {
-                get {
+            public Image this[string key]
+            {
+                get
+                {
                     int index;
 
                     return (index = IndexOfKey(key)) == -1 ? null : this[index];
                 }
             }
 
-            public StringCollection Keys {
-                get {
+            public StringCollection Keys
+            {
+                get
+                {
                     int index;
                     string key;
                     StringCollection keyCollection;
@@ -383,7 +411,11 @@ namespace System.Windows.Forms
 
                     keyCollection = new StringCollection();
                     for (index = 0; index < keys.Count; index++)
-                        keyCollection.Add(((key = (string)keys[index]) == null || key.Length == 0) ? string.Empty : key);
+                        keyCollection.Add(
+                            ((key = (string)keys[index]) == null || key.Length == 0)
+                                ? string.Empty
+                                : key
+                        );
 
                     return keyCollection;
                 }
@@ -411,7 +443,8 @@ namespace System.Windows.Forms
 
                 if (this.handleCreated)
                     itemIndex = AddItemInternal(item);
-                else {
+                else
+                {
                     // Image strips are counted as a single item in the return
                     // value of Add and AddStrip until handle is created.
 
@@ -433,25 +466,41 @@ namespace System.Windows.Forms
             private int AddItemInternal(ImageListItem item)
             {
                 if (Changed != null)
-                    Changed (this, EventArgs.Empty);
+                    Changed(this, EventArgs.Empty);
 
-                if (item.Image is Icon) {
+                if (item.Image is Icon)
+                {
                     int imageWidth;
                     int imageHeight;
                     Bitmap bitmap;
                     Graphics graphics;
 
-                    bitmap = new Bitmap(imageWidth = this.imageSize.Width, imageHeight = this.imageSize.Height, PixelFormat.Format32bppArgb);
+                    bitmap = new Bitmap(
+                        imageWidth = this.imageSize.Width,
+                        imageHeight = this.imageSize.Height,
+                        PixelFormat.Format32bppArgb
+                    );
                     graphics = Graphics.FromImage(bitmap);
-                    graphics.DrawIcon((Icon)item.Image, new Rectangle(0, 0, imageWidth, imageHeight));
+                    graphics.DrawIcon(
+                        (Icon)item.Image,
+                        new Rectangle(0, 0, imageWidth, imageHeight)
+                    );
                     graphics.Dispose();
 
                     ReduceColorDepth(bitmap);
                     return list.Add(bitmap);
                 }
                 else if ((item.Flags & ItemFlags.ImageStrip) == 0)
-                    return list.Add(CreateImage((Image)item.Image, (item.Flags & ItemFlags.UseTransparentColor) == 0 ? this.transparentColor : item.TransparentColor));
-                else {
+                    return list.Add(
+                        CreateImage(
+                            (Image)item.Image,
+                            (item.Flags & ItemFlags.UseTransparentColor) == 0
+                                ? this.transparentColor
+                                : item.TransparentColor
+                        )
+                    );
+                else
+                {
                     int imageX;
                     int width;
                     int imageWidth;
@@ -475,25 +524,45 @@ namespace System.Windows.Forms
                     // as handle will be recreated after changing ImageSize
                     // that results in the loss of images added previously.
 
-                    if ((width = (image = (Image)item.Image).Width) == 0 || (width % (imageWidth = this.imageSize.Width)) != 0)
-                        throw new ArgumentException("Width of image strip must be a positive multiple of ImageSize.Width.", "value");
+                    if (
+                        (width = (image = (Image)item.Image).Width) == 0
+                        || (width % (imageWidth = this.imageSize.Width)) != 0
+                    )
+                        throw new ArgumentException(
+                            "Width of image strip must be a positive multiple of ImageSize.Width.",
+                            "value"
+                        );
 
                     if (image.Height != (imageHeight = this.imageSize.Height))
-                        throw new ArgumentException("Height of image strip must be equal to ImageSize.Height.", "value");
+                        throw new ArgumentException(
+                            "Height of image strip must be equal to ImageSize.Height.",
+                            "value"
+                        );
 
                     imageRect = new Rectangle(0, 0, imageWidth, imageHeight);
                     if (this.transparentColor.A == 0)
                         imageAttributes = null;
-                    else {
+                    else
+                    {
                         imageAttributes = new ImageAttributes();
                         imageAttributes.SetColorKey(this.transparentColor, this.transparentColor);
                     }
 
                     index = list.Count;
-                    for (imageX = 0; imageX < width; imageX += imageWidth) {
+                    for (imageX = 0; imageX < width; imageX += imageWidth)
+                    {
                         bitmap = new Bitmap(imageWidth, imageHeight, PixelFormat.Format32bppArgb);
                         graphics = Graphics.FromImage(bitmap);
-                        graphics.DrawImage(image, imageRect, imageX, 0, imageWidth, imageHeight, GraphicsUnit.Pixel, imageAttributes);
+                        graphics.DrawImage(
+                            image,
+                            imageRect,
+                            imageX,
+                            0,
+                            imageWidth,
+                            imageHeight,
+                            GraphicsUnit.Pixel,
+                            imageAttributes
+                        );
                         graphics.Dispose();
 
                         ReduceColorDepth(bitmap);
@@ -512,7 +581,8 @@ namespace System.Windows.Forms
                 int index;
                 ArrayList items;
 
-                if (!this.handleCreated) {
+                if (!this.handleCreated)
+                {
                     items = this.list;
                     this.list = new ArrayList(this.count);
                     this.count = 0;
@@ -531,25 +601,40 @@ namespace System.Windows.Forms
 
                 if (transparentColor.A == 0)
                     imageAttributes = null;
-                else {
+                else
+                {
                     imageAttributes = new ImageAttributes();
-                    imageAttributes.SetColorKey (transparentColor, transparentColor);
+                    imageAttributes.SetColorKey(transparentColor, transparentColor);
                 }
 
-                var bitmap = new Bitmap (imageWidth = this.imageSize.Width, imageHeight = this.imageSize.Height, PixelFormat.Format32bppArgb);
-                using (var graphics = Graphics.FromImage (bitmap))
-                    graphics.DrawImage (value, new Rectangle(0, 0, imageWidth, imageHeight), 0, 0, value.Width, value.Height, GraphicsUnit.Pixel, imageAttributes);
+                var bitmap = new Bitmap(
+                    imageWidth = this.imageSize.Width,
+                    imageHeight = this.imageSize.Height,
+                    PixelFormat.Format32bppArgb
+                );
+                using (var graphics = Graphics.FromImage(bitmap))
+                    graphics.DrawImage(
+                        value,
+                        new Rectangle(0, 0, imageWidth, imageHeight),
+                        0,
+                        0,
+                        value.Width,
+                        value.Height,
+                        GraphicsUnit.Pixel,
+                        imageAttributes
+                    );
 
                 if (imageAttributes != null)
-                    imageAttributes.Dispose ();
+                    imageAttributes.Dispose();
 
-                ReduceColorDepth (bitmap);
+                ReduceColorDepth(bitmap);
                 return bitmap;
             }
 
             private void RecreateHandle()
             {
-                if (this.handleCreated) {
+                if (this.handleCreated)
+                {
                     DestroyHandle();
                     this.handleCreated = true;
                     owner.OnRecreateHandle();
@@ -569,42 +654,71 @@ namespace System.Windows.Forms
                 BitmapData bitmapData;
                 Color[] palette;
 
-                if (this.colorDepth < ColorDepth.Depth32Bit) {
-                    bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadWrite, PixelFormat.Format32bppArgb);
-                    try {
+                if (this.colorDepth < ColorDepth.Depth32Bit)
+                {
+                    bitmapData = bitmap.LockBits(
+                        new Rectangle(0, 0, bitmap.Width, bitmap.Height),
+                        ImageLockMode.ReadWrite,
+                        PixelFormat.Format32bppArgb
+                    );
+                    try
+                    {
                         linePtr = (byte*)bitmapData.Scan0;
                         height = bitmapData.Height;
                         widthBytes = bitmapData.Width << 2;
                         stride = bitmapData.Stride;
 
-                        if (this.colorDepth < ColorDepth.Depth16Bit) {
-                            palette = (this.colorDepth < ColorDepth.Depth8Bit ? IndexedColorDepths.Palette4Bit : IndexedColorDepths.Palette8Bit).Entries;
+                        if (this.colorDepth < ColorDepth.Depth16Bit)
+                        {
+                            palette = (
+                                this.colorDepth < ColorDepth.Depth8Bit
+                                    ? IndexedColorDepths.Palette4Bit
+                                    : IndexedColorDepths.Palette8Bit
+                            ).Entries;
 
-                            for (line = 0; line < height; line++) {
+                            for (line = 0; line < height; line++)
+                            {
                                 lineEndPtr = linePtr + widthBytes;
                                 for (pixelPtr = linePtr; pixelPtr < lineEndPtr; pixelPtr += 4)
-                                    *(int*)pixelPtr = ((pixel = *(int*)pixelPtr) & AlphaMask) == 0 ? 0x00000000 : IndexedColorDepths.GetNearestColor(palette, pixel | AlphaMask);
+                                    *(int*)pixelPtr =
+                                        ((pixel = *(int*)pixelPtr) & AlphaMask) == 0
+                                            ? 0x00000000
+                                            : IndexedColorDepths.GetNearestColor(
+                                                palette,
+                                                pixel | AlphaMask
+                                            );
                                 linePtr += stride;
                             }
                         }
-                        else if (this.colorDepth < ColorDepth.Depth24Bit) {
-                            for (line = 0; line < height; line++) {
+                        else if (this.colorDepth < ColorDepth.Depth24Bit)
+                        {
+                            for (line = 0; line < height; line++)
+                            {
                                 lineEndPtr = linePtr + widthBytes;
                                 for (pixelPtr = linePtr; pixelPtr < lineEndPtr; pixelPtr += 4)
-                                    *(int*)pixelPtr = ((pixel = *(int*)pixelPtr) & AlphaMask) == 0 ? 0x00000000 : (pixel & 0x00F8F8F8) | AlphaMask;
+                                    *(int*)pixelPtr =
+                                        ((pixel = *(int*)pixelPtr) & AlphaMask) == 0
+                                            ? 0x00000000
+                                            : (pixel & 0x00F8F8F8) | AlphaMask;
                                 linePtr += stride;
                             }
                         }
-                        else {
-                            for (line = 0; line < height; line++) {
+                        else
+                        {
+                            for (line = 0; line < height; line++)
+                            {
                                 lineEndPtr = linePtr + widthBytes;
                                 for (pixelPtr = linePtr; pixelPtr < lineEndPtr; pixelPtr += 4)
-                                    *(int*)pixelPtr = ((pixel = *(int*)pixelPtr) & AlphaMask) == 0 ? 0x00000000 : pixel | AlphaMask;
+                                    *(int*)pixelPtr =
+                                        ((pixel = *(int*)pixelPtr) & AlphaMask) == 0
+                                            ? 0x00000000
+                                            : pixel | AlphaMask;
                                 linePtr += stride;
                             }
                         }
                     }
-                    finally {
+                    finally
+                    {
                         bitmap.UnlockBits(bitmapData);
                     }
                 }
@@ -615,7 +729,8 @@ namespace System.Windows.Forms
             // For use in ImageList
             internal void DestroyHandle()
             {
-                if (this.handleCreated) {
+                if (this.handleCreated)
+                {
                     this.list = new ArrayList();
                     this.count = 0;
                     this.handleCreated = false;
@@ -693,11 +808,19 @@ namespace System.Windows.Forms
                 if (value == null)
                     throw new ArgumentNullException("value");
 
-                if ((width = value.Width) == 0 || (width % (imageWidth = this.imageSize.Width)) != 0)
-                    throw new ArgumentException("Width of image strip must be a positive multiple of ImageSize.Width.", "value");
+                if (
+                    (width = value.Width) == 0 || (width % (imageWidth = this.imageSize.Width)) != 0
+                )
+                    throw new ArgumentException(
+                        "Width of image strip must be a positive multiple of ImageSize.Width.",
+                        "value"
+                    );
 
                 if (value.Height != this.imageSize.Height)
-                    throw new ArgumentException("Height of image strip must be equal to ImageSize.Height.", "value");
+                    throw new ArgumentException(
+                        "Height of image strip must be equal to ImageSize.Height.",
+                        "value"
+                    );
 
                 return AddItem(null, new ImageListItem(value, width / imageWidth));
             }
@@ -726,7 +849,8 @@ namespace System.Windows.Forms
                 Image[] images = new Image[this.Count];
                 int index;
 
-                if (images.Length != 0) {
+                if (images.Length != 0)
+                {
                     // Handle is created only when there are images.
                     CreateHandle();
 
@@ -747,13 +871,18 @@ namespace System.Windows.Forms
             {
                 int index;
 
-                if (key != null && key.Length != 0) {
+                if (key != null && key.Length != 0)
+                {
                     // When last IndexOfKey was successful and the same key was
                     // assigned to an image with a lower index than the last
                     // result and the key of the last result equals to key
                     // argument the last result is returned.
 
-                    if (this.lastKeyIndex >= 0 && this.lastKeyIndex < this.Count && CompareKeys((string)keys[this.lastKeyIndex], key))
+                    if (
+                        this.lastKeyIndex >= 0
+                        && this.lastKeyIndex < this.Count
+                        && CompareKeys((string)keys[this.lastKeyIndex], key)
+                    )
                         return this.lastKeyIndex;
 
                     // Duplicate keys are allowed and first match is returned.
@@ -780,7 +909,7 @@ namespace System.Windows.Forms
                 list.RemoveAt(index);
                 keys.RemoveAt(index);
                 if (Changed != null)
-                    Changed (this, EventArgs.Empty);
+                    Changed(this, EventArgs.Empty);
             }
 
             public void RemoveByKey(string key)
@@ -802,12 +931,11 @@ namespace System.Windows.Forms
             #endregion // ImageCollection Public Instance Methods
 
             #region ImageCollection Interface Properties
-            object IList.this[int index] {
-                get {
-                    return this[index];
-                }
-
-                set {
+            object IList.this[int index]
+            {
+                get { return this[index]; }
+                set
+                {
                     if (!(value is Image))
                         throw new ArgumentException("value");
 
@@ -815,22 +943,19 @@ namespace System.Windows.Forms
                 }
             }
 
-            bool IList.IsFixedSize {
-                get {
-                    return false;
-                }
+            bool IList.IsFixedSize
+            {
+                get { return false; }
             }
 
-            bool ICollection.IsSynchronized {
-                get {
-                    return false;
-                }
+            bool ICollection.IsSynchronized
+            {
+                get { return false; }
             }
 
-            object ICollection.SyncRoot {
-                get {
-                    return this;
-                }
+            object ICollection.SyncRoot
+            {
+                get { return this; }
             }
             #endregion // ImageCollection Interface Properties
 
@@ -849,12 +974,12 @@ namespace System.Windows.Forms
 
             bool IList.Contains(object image)
             {
-                return image is Image ? this.Contains ((Image) image) : false;
+                return image is Image ? this.Contains((Image)image) : false;
             }
 
-            int IList.IndexOf (object image)
+            int IList.IndexOf(object image)
             {
-                return image is Image ? this.IndexOf ((Image) image) : -1;
+                return image is Image ? this.IndexOf((Image)image) : -1;
             }
 
             void IList.Insert(int index, object value)
@@ -862,16 +987,16 @@ namespace System.Windows.Forms
                 throw new NotSupportedException();
             }
 
-            void IList.Remove (object image)
+            void IList.Remove(object image)
             {
                 if (image is Image)
-                    this.Remove ((Image) image);
+                    this.Remove((Image)image);
             }
 
             void ICollection.CopyTo(Array dest, int index)
             {
                 for (int imageIndex = 0; imageIndex < this.Count; imageIndex++)
-                    dest.SetValue (this[imageIndex], index++);
+                    dest.SetValue(this[imageIndex], index++);
             }
             #endregion // ImageCollection Interface Methods
         }
@@ -883,7 +1008,8 @@ namespace System.Windows.Forms
             images = new ImageCollection(this);
         }
 
-        public ImageList(System.ComponentModel.IContainer container) : this()
+        public ImageList(System.ComponentModel.IContainer container)
+            : this()
         {
             container.Add(this);
         }
@@ -892,9 +1018,9 @@ namespace System.Windows.Forms
         #region Private Instance Methods
         private void OnRecreateHandle()
         {
-            EventHandler eh = (EventHandler)(Events [RecreateHandleEvent]);
+            EventHandler eh = (EventHandler)(Events[RecreateHandleEvent]);
             if (eh != null)
-                eh (this, EventArgs.Empty);
+                eh(this, EventArgs.Empty);
         }
 
         // MS's TypeDescriptor stuff apparently uses
@@ -904,7 +1030,7 @@ namespace System.Windows.Forms
         // without adding compiler warnings.  so, make then
         // internal instead.
 
-        internal bool ShouldSerializeTransparentColor ()
+        internal bool ShouldSerializeTransparentColor()
         {
             return this.TransparentColor != Color.LightGray;
         }
@@ -914,7 +1040,7 @@ namespace System.Windows.Forms
             // ColorDepth is serialized in ImageStream when non-empty.
             // It is serialized even if it has its default value when empty.
             return images.Empty;
-        }               
+        }
 
         internal bool ShouldSerializeImageSize()
         {
@@ -923,106 +1049,83 @@ namespace System.Windows.Forms
             return images.Empty;
         }
 
-        internal void ResetColorDepth ()
+        internal void ResetColorDepth()
         {
             this.ColorDepth = DefaultColorDepth;
         }
 
-        internal void ResetImageSize ()
+        internal void ResetImageSize()
         {
             this.ImageSize = DefaultImageSize;
         }
 
-        internal void ResetTransparentColor ()
+        internal void ResetTransparentColor()
         {
             this.TransparentColor = Color.LightGray;
         }
         #endregion // Private Instance Methods
 
         #region Public Instance Properties
-        public ColorDepth ColorDepth {
-            get {
-                return images.ColorDepth;
-            }
-
-            set {
-                images.ColorDepth = value;
-            }
+        public ColorDepth ColorDepth
+        {
+            get { return images.ColorDepth; }
+            set { images.ColorDepth = value; }
         }
 
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Advanced)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public IntPtr Handle {
-            get {
-                return images.Handle;
-            }
+        public IntPtr Handle
+        {
+            get { return images.Handle; }
         }
 
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Advanced)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public bool HandleCreated {
-            get {
-                return images.HandleCreated;
-            }
+        public bool HandleCreated
+        {
+            get { return images.HandleCreated; }
         }
 
         [DefaultValue(null)]
         [MergableProperty(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public ImageCollection Images {
-            get {
-                return this.images;
-            }
+        public ImageCollection Images
+        {
+            get { return this.images; }
         }
 
         [Localizable(true)]
-        public Size ImageSize {
-            get {
-                return images.ImageSize;
-            }
-
-            set {
-                images.ImageSize = value;
-            }
+        public Size ImageSize
+        {
+            get { return images.ImageSize; }
+            set { images.ImageSize = value; }
         }
 
         [Browsable(false)]
         [DefaultValue(null)]
         [EditorBrowsable(EditorBrowsableState.Advanced)]
-        public ImageListStreamer ImageStream {
-            get {
-                return images.ImageStream;
-            }
-
-            set {
-                images.ImageStream = value;
-            }
+        public ImageListStreamer ImageStream
+        {
+            get { return images.ImageStream; }
+            set { images.ImageStream = value; }
         }
 
         [Bindable(true)]
         [DefaultValue(null)]
         [Localizable(false)]
         [TypeConverter(typeof(StringConverter))]
-        public object Tag {
-            get {
-                return this.tag;
-            }
-
-            set {
-                this.tag = value;
-            }
+        public object Tag
+        {
+            get { return this.tag; }
+            set { this.tag = value; }
         }
 
-        public Color TransparentColor {
-            get {
-                return images.TransparentColor;
-            }
-
-            set {
-                images.TransparentColor = value;
-            }
+        public Color TransparentColor
+        {
+            get { return images.TransparentColor; }
+            set { images.TransparentColor = value; }
         }
         #endregion // Public Instance Properties
 
@@ -1044,7 +1147,11 @@ namespace System.Windows.Forms
 
         public override string ToString()
         {
-            return base.ToString() + " Images.Count: " + images.Count.ToString() + ", ImageSize: " + this.ImageSize.ToString();
+            return base.ToString()
+                + " Images.Count: "
+                + images.Count.ToString()
+                + ", ImageSize: "
+                + this.ImageSize.ToString();
         }
         #endregion // Public Instance Methods
 
@@ -1059,13 +1166,14 @@ namespace System.Windows.Forms
         #endregion // Protected Instance Methods
 
         #region Events
-        static object RecreateHandleEvent = new object ();
+        static object RecreateHandleEvent = new object();
 
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Advanced)]
-        public event EventHandler RecreateHandle {
-            add { Events.AddHandler (RecreateHandleEvent, value); }
-            remove { Events.RemoveHandler (RecreateHandleEvent, value); }
+        public event EventHandler RecreateHandle
+        {
+            add { Events.AddHandler(RecreateHandleEvent, value); }
+            remove { Events.RemoveHandler(RecreateHandleEvent, value); }
         }
         #endregion // Events
     }

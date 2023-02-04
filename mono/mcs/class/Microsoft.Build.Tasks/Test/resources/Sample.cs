@@ -4,12 +4,8 @@ namespace Mono.Tests
 {
     public class Sample
     {
-        Sample ()
-        {
-        }
+        Sample() { }
     }
 
-    class Another
-    {
-    }
+    class Another { }
 }

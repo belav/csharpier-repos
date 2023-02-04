@@ -5,7 +5,7 @@ using System.Linq;
 
 public class Test
 {
-    public static void Main ()
+    public static void Main()
     {
         var l = from v in "abcd" select (v => v);
     }

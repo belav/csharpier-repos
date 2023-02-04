@@ -72,10 +72,7 @@ namespace System.Reflection.Runtime.EventInfos
 
         public sealed override Module Module
         {
-            get
-            {
-                return DefiningTypeInfo.Module;
-            }
+            get { return DefiningTypeInfo.Module; }
         }
 
         public sealed override string Name
@@ -93,10 +90,7 @@ namespace System.Reflection.Runtime.EventInfos
 
         public sealed override Type ReflectedType
         {
-            get
-            {
-                return ReflectedTypeInfo;
-            }
+            get { return ReflectedTypeInfo; }
         }
 
         public sealed override MethodInfo RaiseMethod
@@ -146,18 +140,12 @@ namespace System.Reflection.Runtime.EventInfos
 
         string ITraceableTypeMember.MemberName
         {
-            get
-            {
-                return MetadataName;
-            }
+            get { return MetadataName; }
         }
 
         Type ITraceableTypeMember.ContainingType
         {
-            get
-            {
-                return ContextTypeInfo;
-            }
+            get { return ContextTypeInfo; }
         }
 
         protected RuntimeEventInfo WithDebugName()
@@ -208,7 +196,6 @@ namespace System.Reflection.Runtime.EventInfos
         /// Return the DefiningTypeInfo as a RuntimeTypeInfo (instead of as a format specific type info)
         /// </summary>
         protected abstract RuntimeTypeInfo DefiningTypeInfo { get; }
-
 
         protected readonly RuntimeTypeInfo ContextTypeInfo;
         protected readonly RuntimeTypeInfo ReflectedTypeInfo;

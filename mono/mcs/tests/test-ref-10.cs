@@ -4,19 +4,18 @@ using System;
 
 ref struct ValueStringBuilder
 {
-    public override string ToString ()
+    public override string ToString()
     {
         return "aaa";
     }
 }
 
-
 class X
 {
-    public static int Main ()
+    public static int Main()
     {
-        var s = new ValueStringBuilder ();
-        if (s.ToString () != "aaa")
+        var s = new ValueStringBuilder();
+        if (s.ToString() != "aaa")
             return 1;
 
         return 0;

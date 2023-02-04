@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -44,32 +44,36 @@ namespace MonoTests.System.Configuration
         private string tempFolder;
 
         [SetUp]
-        public void SetUp ()
+        public void SetUp()
         {
-            originalCurrentDir = Directory.GetCurrentDirectory ();
-            tempFolder = Path.Combine (Path.GetTempPath (), this.GetType ().FullName);
-            if (!Directory.Exists (tempFolder))
-                Directory.CreateDirectory (tempFolder);
+            originalCurrentDir = Directory.GetCurrentDirectory();
+            tempFolder = Path.Combine(Path.GetTempPath(), this.GetType().FullName);
+            if (!Directory.Exists(tempFolder))
+                Directory.CreateDirectory(tempFolder);
         }
 
         [TearDown]
-        public void TearDown ()
+        public void TearDown()
         {
-            Directory.SetCurrentDirectory (originalCurrentDir);
-            if (Directory.Exists (tempFolder))
-                Directory.Delete (tempFolder, true);
+            Directory.SetCurrentDirectory(originalCurrentDir);
+            if (Directory.Exists(tempFolder))
+                Directory.Delete(tempFolder, true);
         }
-        
+
         [Test]
-        public void TestFile ()
+        public void TestFile()
         {
-            Directory.SetCurrentDirectory (tempFolder);
+            Directory.SetCurrentDirectory(tempFolder);
 
             var currentAssembly = TestUtil.ThisApplicationPath;
-            var config = ConfigurationManager.OpenExeConfiguration (currentAssembly);
-            Assert.AreEqual ("System.Configuration-appSettings.config", config.AppSettings.File, "#A01");
-            Assert.AreEqual ("foo", ConfigurationSettings.AppSettings["TestKey1"], "#A02");
-            Assert.AreEqual ("bar", ConfigurationSettings.AppSettings["TestKey2"], "#A03");
+            var config = ConfigurationManager.OpenExeConfiguration(currentAssembly);
+            Assert.AreEqual(
+                "System.Configuration-appSettings.config",
+                config.AppSettings.File,
+                "#A01"
+            );
+            Assert.AreEqual("foo", ConfigurationSettings.AppSettings["TestKey1"], "#A02");
+            Assert.AreEqual("bar", ConfigurationSettings.AppSettings["TestKey2"], "#A03");
         }
     }
 }

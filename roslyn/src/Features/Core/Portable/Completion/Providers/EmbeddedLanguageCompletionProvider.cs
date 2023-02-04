@@ -20,9 +20,22 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
         }
 
         public abstract ImmutableHashSet<char> TriggerCharacters { get; }
-        public abstract bool ShouldTriggerCompletion(SourceText text, int caretPosition, CompletionTrigger trigger);
+        public abstract bool ShouldTriggerCompletion(
+            SourceText text,
+            int caretPosition,
+            CompletionTrigger trigger
+        );
         public abstract Task ProvideCompletionsAsync(CompletionContext context);
-        public abstract Task<CompletionChange> GetChangeAsync(Document document, CompletionItem item, char? commitKey, CancellationToken cancellationToken);
-        public abstract Task<CompletionDescription?> GetDescriptionAsync(Document document, CompletionItem item, CancellationToken cancellationToken);
+        public abstract Task<CompletionChange> GetChangeAsync(
+            Document document,
+            CompletionItem item,
+            char? commitKey,
+            CancellationToken cancellationToken
+        );
+        public abstract Task<CompletionDescription?> GetDescriptionAsync(
+            Document document,
+            CompletionItem item,
+            CancellationToken cancellationToken
+        );
     }
 }

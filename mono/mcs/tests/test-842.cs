@@ -6,23 +6,19 @@ interface IA
     string this[int idx] { get; set; }
 }
 
-[DefaultMember ("Main")]
+[DefaultMember("Main")]
 public class Foo : IA
 {
     string bar;
 
-    public static void Main ()
+    public static void Main()
     {
-        Console.WriteLine ("foo");
+        Console.WriteLine("foo");
     }
 
-    string IA.this[int idx] {
-        get {
-            return "foo";
-        }
-        set {
-            bar = value;
-        }
+    string IA.this[int idx]
+    {
+        get { return "foo"; }
+        set { bar = value; }
     }
 }
-        

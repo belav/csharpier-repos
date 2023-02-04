@@ -12,8 +12,10 @@ namespace System.Net.Quic;
 
 internal static class MsQuicConfiguration
 {
-    private static bool HasPrivateKey(this X509Certificate certificate)
-        => certificate is X509Certificate2 certificate2 && certificate2.Handle != IntPtr.Zero && certificate2.HasPrivateKey;
+    private static bool HasPrivateKey(this X509Certificate certificate) =>
+        certificate is X509Certificate2 certificate2
+        && certificate2.Handle != IntPtr.Zero
+        && certificate2.HasPrivateKey;
 
     public static MsQuicSafeHandle Create(QuicClientConnectionOptions options)
     {
@@ -32,12 +34,14 @@ internal static class MsQuicConfiguration
         X509Certificate? certificate = null;
         if (authenticationOptions.LocalCertificateSelectionCallback != null)
         {
-            X509Certificate selectedCertificate = authenticationOptions.LocalCertificateSelectionCallback(
-                options,
-                authenticationOptions.TargetHost ?? string.Empty,
-                authenticationOptions.ClientCertificates ?? new X509CertificateCollection(),
-                null,
-                Array.Empty<string>());
+            X509Certificate selectedCertificate =
+                authenticationOptions.LocalCertificateSelectionCallback(
+                    options,
+                    authenticationOptions.TargetHost ?? string.Empty,
+                    authenticationOptions.ClientCertificates ?? new X509CertificateCollection(),
+                    null,
+                    Array.Empty<string>()
+                );
             if (selectedCertificate.HasPrivateKey())
             {
                 certificate = selectedCertificate;
@@ -46,7 +50,10 @@ internal static class MsQuicConfiguration
             {
                 if (NetEventSource.Log.IsEnabled())
                 {
-                    NetEventSource.Info(options, $"'{certificate}' not selected because it doesn't have a private key.");
+                    NetEventSource.Info(
+                        options,
+                        $"'{certificate}' not selected because it doesn't have a private key."
+                    );
                 }
             }
         }
@@ -54,7 +61,7 @@ internal static class MsQuicConfiguration
         {
             foreach (X509Certificate clientCertificate in authenticationOptions.ClientCertificates)
             {
-                if( clientCertificate.HasPrivateKey())
+                if (clientCertificate.HasPrivateKey())
                 {
                     certificate = clientCertificate;
                     break;
@@ -63,13 +70,24 @@ internal static class MsQuicConfiguration
                 {
                     if (NetEventSource.Log.IsEnabled())
                     {
-                        NetEventSource.Info(options, $"'{certificate}' not selected because it doesn't have a private key.");
+                        NetEventSource.Info(
+                            options,
+                            $"'{certificate}' not selected because it doesn't have a private key."
+                        );
                     }
                 }
             }
         }
 
-        return Create(options, flags, certificate, intermediates: null, authenticationOptions.ApplicationProtocols, authenticationOptions.CipherSuitesPolicy, authenticationOptions.EncryptionPolicy);
+        return Create(
+            options,
+            flags,
+            certificate,
+            intermediates: null,
+            authenticationOptions.ApplicationProtocols,
+            authenticationOptions.CipherSuitesPolicy,
+            authenticationOptions.EncryptionPolicy
+        );
     }
 
     public static MsQuicSafeHandle Create(QuicServerConnectionOptions options, string? targetHost)
@@ -92,27 +110,64 @@ internal static class MsQuicConfiguration
             intermediates = authenticationOptions.ServerCertificateContext.IntermediateCertificates;
         }
 
-        certificate ??= authenticationOptions.ServerCertificate ?? authenticationOptions.ServerCertificateSelectionCallback?.Invoke(authenticationOptions, targetHost);
+        certificate ??=
+            authenticationOptions.ServerCertificate
+            ?? authenticationOptions.ServerCertificateSelectionCallback?.Invoke(
+                authenticationOptions,
+                targetHost
+            );
         if (certificate is null)
         {
-            throw new ArgumentException(SR.Format(SR.net_quic_not_null_ceritifcate, nameof(SslServerAuthenticationOptions.ServerCertificate), nameof(SslServerAuthenticationOptions.ServerCertificateContext), nameof(SslServerAuthenticationOptions.ServerCertificateSelectionCallback)), nameof(options));
+            throw new ArgumentException(
+                SR.Format(
+                    SR.net_quic_not_null_ceritifcate,
+                    nameof(SslServerAuthenticationOptions.ServerCertificate),
+                    nameof(SslServerAuthenticationOptions.ServerCertificateContext),
+                    nameof(SslServerAuthenticationOptions.ServerCertificateSelectionCallback)
+                ),
+                nameof(options)
+            );
         }
 
-        return Create(options, flags, certificate, intermediates, authenticationOptions.ApplicationProtocols, authenticationOptions.CipherSuitesPolicy, authenticationOptions.EncryptionPolicy);
+        return Create(
+            options,
+            flags,
+            certificate,
+            intermediates,
+            authenticationOptions.ApplicationProtocols,
+            authenticationOptions.CipherSuitesPolicy,
+            authenticationOptions.EncryptionPolicy
+        );
     }
 
-    private static unsafe MsQuicSafeHandle Create(QuicConnectionOptions options, QUIC_CREDENTIAL_FLAGS flags, X509Certificate? certificate, X509Certificate[]? intermediates, List<SslApplicationProtocol>? alpnProtocols, CipherSuitesPolicy? cipherSuitesPolicy, EncryptionPolicy encryptionPolicy)
+    private static unsafe MsQuicSafeHandle Create(
+        QuicConnectionOptions options,
+        QUIC_CREDENTIAL_FLAGS flags,
+        X509Certificate? certificate,
+        X509Certificate[]? intermediates,
+        List<SslApplicationProtocol>? alpnProtocols,
+        CipherSuitesPolicy? cipherSuitesPolicy,
+        EncryptionPolicy encryptionPolicy
+    )
     {
         // Validate options and SSL parameters.
         if (alpnProtocols is null || alpnProtocols.Count <= 0)
         {
-            throw new ArgumentException(SR.Format(SR.net_quic_not_null_not_empty_connection, nameof(SslApplicationProtocol)), nameof(options));
+            throw new ArgumentException(
+                SR.Format(
+                    SR.net_quic_not_null_not_empty_connection,
+                    nameof(SslApplicationProtocol)
+                ),
+                nameof(options)
+            );
         }
 
 #pragma warning disable SYSLIB0040 // NoEncryption and AllowNoEncryption are obsolete
         if (encryptionPolicy == EncryptionPolicy.NoEncryption)
         {
-            throw new PlatformNotSupportedException(SR.Format(SR.net_quic_ssl_option, encryptionPolicy));
+            throw new PlatformNotSupportedException(
+                SR.Format(SR.net_quic_ssl_option, encryptionPolicy)
+            );
         }
 #pragma warning restore SYSLIB0040
 
@@ -124,28 +179,41 @@ internal static class MsQuicConfiguration
         if (options.IdleTimeout != TimeSpan.Zero)
         {
             settings.IsSet.IdleTimeoutMs = 1;
-            settings.IdleTimeoutMs = options.IdleTimeout != Timeout.InfiniteTimeSpan ? (ulong)options.IdleTimeout.TotalMilliseconds : 0;
+            settings.IdleTimeoutMs =
+                options.IdleTimeout != Timeout.InfiniteTimeSpan
+                    ? (ulong)options.IdleTimeout.TotalMilliseconds
+                    : 0;
         }
 
         QUIC_HANDLE* handle;
 
         using MsQuicBuffers msquicBuffers = new MsQuicBuffers();
         msquicBuffers.Initialize(alpnProtocols, alpnProtocol => alpnProtocol.Protocol);
-        ThrowHelper.ThrowIfMsQuicError(MsQuicApi.Api.ConfigurationOpen(
-            MsQuicApi.Api.Registration,
-            msquicBuffers.Buffers,
-            (uint)alpnProtocols.Count,
-            &settings,
-            (uint)sizeof(QUIC_SETTINGS),
-            (void*)IntPtr.Zero,
-            &handle),
-            "ConfigurationOpen failed");
-        MsQuicSafeHandle configurationHandle = new MsQuicSafeHandle(handle, SafeHandleType.Configuration);
+        ThrowHelper.ThrowIfMsQuicError(
+            MsQuicApi.Api.ConfigurationOpen(
+                MsQuicApi.Api.Registration,
+                msquicBuffers.Buffers,
+                (uint)alpnProtocols.Count,
+                &settings,
+                (uint)sizeof(QUIC_SETTINGS),
+                (void*)IntPtr.Zero,
+                &handle
+            ),
+            "ConfigurationOpen failed"
+        );
+        MsQuicSafeHandle configurationHandle = new MsQuicSafeHandle(
+            handle,
+            SafeHandleType.Configuration
+        );
 
         try
         {
             QUIC_CREDENTIAL_CONFIG config = new QUIC_CREDENTIAL_CONFIG { Flags = flags };
-            config.Flags |= (MsQuicApi.UsesSChannelBackend ? QUIC_CREDENTIAL_FLAGS.NONE : QUIC_CREDENTIAL_FLAGS.USE_PORTABLE_CERTIFICATES);
+            config.Flags |= (
+                MsQuicApi.UsesSChannelBackend
+                    ? QUIC_CREDENTIAL_FLAGS.NONE
+                    : QUIC_CREDENTIAL_FLAGS.USE_PORTABLE_CERTIFICATES
+            );
 
             if (cipherSuitesPolicy != null)
             {
@@ -192,13 +260,22 @@ internal static class MsQuicConfiguration
                         PrivateKeyPassword = (sbyte*)IntPtr.Zero
                     };
                     config.CertificatePkcs12 = &pkcs12Certificate;
-                    status = MsQuicApi.Api.ConfigurationLoadCredential(configurationHandle, &config);
+                    status = MsQuicApi.Api.ConfigurationLoadCredential(
+                        configurationHandle,
+                        &config
+                    );
                 }
             }
 
 #if TARGET_WINDOWS
-            if ((Interop.SECURITY_STATUS)status == Interop.SECURITY_STATUS.AlgorithmMismatch &&
-               ((flags & QUIC_CREDENTIAL_FLAGS.CLIENT) == 0 ? MsQuicApi.Tls13ServerMayBeDisabled : MsQuicApi.Tls13ClientMayBeDisabled))
+            if (
+                (Interop.SECURITY_STATUS)status == Interop.SECURITY_STATUS.AlgorithmMismatch
+                && (
+                    (flags & QUIC_CREDENTIAL_FLAGS.CLIENT) == 0
+                        ? MsQuicApi.Tls13ServerMayBeDisabled
+                        : MsQuicApi.Tls13ClientMayBeDisabled
+                )
+            )
             {
                 ThrowHelper.ThrowIfMsQuicError(status, SR.net_quic_tls_version_notsupported);
             }
@@ -215,7 +292,9 @@ internal static class MsQuicConfiguration
         return configurationHandle;
     }
 
-    private static QUIC_ALLOWED_CIPHER_SUITE_FLAGS CipherSuitePolicyToFlags(CipherSuitesPolicy cipherSuitesPolicy)
+    private static QUIC_ALLOWED_CIPHER_SUITE_FLAGS CipherSuitePolicyToFlags(
+        CipherSuitesPolicy cipherSuitesPolicy
+    )
     {
         QUIC_ALLOWED_CIPHER_SUITE_FLAGS flags = QUIC_ALLOWED_CIPHER_SUITE_FLAGS.NONE;
 
@@ -241,7 +320,10 @@ internal static class MsQuicConfiguration
 
         if (flags == QUIC_ALLOWED_CIPHER_SUITE_FLAGS.NONE)
         {
-            throw new ArgumentException(SR.net_quic_empty_cipher_suite, nameof(SslClientAuthenticationOptions.CipherSuitesPolicy));
+            throw new ArgumentException(
+                SR.net_quic_empty_cipher_suite,
+                nameof(SslClientAuthenticationOptions.CipherSuitesPolicy)
+            );
         }
 
         return flags;

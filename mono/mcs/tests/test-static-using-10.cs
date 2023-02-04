@@ -2,10 +2,7 @@ namespace A
 {
     public class T
     {
-        public class N
-        {
-
-        }
+        public class N { }
     }
 }
 
@@ -15,10 +12,10 @@ namespace B
 
     static class Program
     {
-        static void Main ()
+        static void Main()
         {
-            var t = typeof (N);
-            var u = new N ();
+            var t = typeof(N);
+            var u = new N();
         }
     }
 }

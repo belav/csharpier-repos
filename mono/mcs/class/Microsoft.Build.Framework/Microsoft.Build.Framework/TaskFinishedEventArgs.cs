@@ -29,26 +29,27 @@
 
 using System;
 
-namespace Microsoft.Build.Framework {
+namespace Microsoft.Build.Framework
+{
     [Serializable]
-    public class TaskFinishedEventArgs : BuildStatusEventArgs {
-    
-        string    projectFile;
-        string    taskFile;
-        string    taskName;
-        bool    succeeded;
-        
-        protected TaskFinishedEventArgs ()
-        {
-        }
+    public class TaskFinishedEventArgs : BuildStatusEventArgs
+    {
+        string projectFile;
+        string taskFile;
+        string taskName;
+        bool succeeded;
 
-        public TaskFinishedEventArgs (string message,
-                          string helpKeyword,
-                          string projectFile,
-                          string taskFile,
-                          string taskName,
-                          bool succeeded)
-            : base (message, helpKeyword, null)
+        protected TaskFinishedEventArgs() { }
+
+        public TaskFinishedEventArgs(
+            string message,
+            string helpKeyword,
+            string projectFile,
+            string taskFile,
+            string taskName,
+            bool succeeded
+        )
+            : base(message, helpKeyword, null)
         {
             this.projectFile = projectFile;
             this.taskFile = taskFile;
@@ -56,29 +57,24 @@ namespace Microsoft.Build.Framework {
             this.succeeded = succeeded;
         }
 
-        public string ProjectFile {
-            get {
-                return projectFile;
-            }
+        public string ProjectFile
+        {
+            get { return projectFile; }
         }
 
-        public bool Succeeded {
-            get {
-                return succeeded;
-            }
+        public bool Succeeded
+        {
+            get { return succeeded; }
         }
 
-        public string TaskFile {
-            get {
-                return taskFile;
-            }
+        public string TaskFile
+        {
+            get { return taskFile; }
         }
 
-        public string TaskName {
-            get {
-                return taskName;
-            }
+        public string TaskName
+        {
+            get { return taskName; }
         }
     }
 }
-

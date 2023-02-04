@@ -4,9 +4,8 @@
 public class A
 {
     protected bool x = true;
-    
-    public A()
-    {}
+
+    public A() { }
 }
 
 public class B

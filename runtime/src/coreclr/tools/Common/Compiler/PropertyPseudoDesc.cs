@@ -18,11 +18,15 @@ namespace ILCompiler
         private readonly EcmaType _type;
         private readonly PropertyDefinitionHandle _handle;
 
-        private PropertyDefinition Definition => _type.MetadataReader.GetPropertyDefinition(_handle);
+        private PropertyDefinition Definition =>
+            _type.MetadataReader.GetPropertyDefinition(_handle);
 
         public PropertySignature Signature =>
-            new EcmaSignatureParser(_type.EcmaModule, _type.MetadataReader.GetBlobReader(Definition.Signature), NotFoundBehavior.Throw)
-            .ParsePropertySignature();
+            new EcmaSignatureParser(
+                _type.EcmaModule,
+                _type.MetadataReader.GetBlobReader(Definition.Signature),
+                NotFoundBehavior.Throw
+            ).ParsePropertySignature();
 
         public MethodDesc GetMethod
         {
@@ -44,34 +48,22 @@ namespace ILCompiler
 
         public CustomAttributeHandleCollection GetCustomAttributes
         {
-            get
-            {
-                return Definition.GetCustomAttributes();
-            }
+            get { return Definition.GetCustomAttributes(); }
         }
 
         public MetadataType OwningType
         {
-            get
-            {
-                return _type;
-            }
+            get { return _type; }
         }
 
         public string Name
         {
-            get
-            {
-                return _type.MetadataReader.GetString(Definition.Name);
-            }
+            get { return _type.MetadataReader.GetString(Definition.Name); }
         }
 
         public PropertyDefinitionHandle Handle
         {
-            get
-            {
-                return _handle;
-            }
+            get { return _handle; }
         }
 
         public PropertyPseudoDesc(EcmaType type, PropertyDefinitionHandle handle)
@@ -84,9 +76,14 @@ namespace ILCompiler
 
         #region Do not use these
         public override bool Equals(object obj) => throw new NotImplementedException();
+
         public override int GetHashCode() => throw new NotImplementedException();
-        public static bool operator ==(PropertyPseudoDesc a, PropertyPseudoDesc b) => throw new NotImplementedException();
-        public static bool operator !=(PropertyPseudoDesc a, PropertyPseudoDesc b) => throw new NotImplementedException();
+
+        public static bool operator ==(PropertyPseudoDesc a, PropertyPseudoDesc b) =>
+            throw new NotImplementedException();
+
+        public static bool operator !=(PropertyPseudoDesc a, PropertyPseudoDesc b) =>
+            throw new NotImplementedException();
         #endregion
     }
 }

@@ -67,60 +67,66 @@ namespace Mono.Net.Security
         /*
          * APIs in this section are for consumption within System.dll only - do not access via
          * reflection or from friend assemblies.
-         * 
+         *
          */
 
-        internal static MobileTlsProvider GetProviderInternal ()
+        internal static MobileTlsProvider GetProviderInternal()
         {
-            lock (locker) {
-                InitializeInternal ();
+            lock (locker)
+            {
+                InitializeInternal();
                 return defaultProvider;
             }
         }
 
-        internal static void InitializeInternal ()
+        internal static void InitializeInternal()
         {
-            lock (locker) {
+            lock (locker)
+            {
                 if (initialized)
                     return;
 
-                SystemDependencyProvider.Initialize ();
+                SystemDependencyProvider.Initialize();
 
-                InitializeProviderRegistration ();
+                InitializeProviderRegistration();
 
                 MobileTlsProvider provider;
-                try {
-                    provider = CreateDefaultProviderImpl ();
-                } catch (Exception ex) {
-                    throw new NotSupportedException ("TLS Support not available.", ex);
+                try
+                {
+                    provider = CreateDefaultProviderImpl();
+                }
+                catch (Exception ex)
+                {
+                    throw new NotSupportedException("TLS Support not available.", ex);
                 }
 
                 if (provider == null)
-                    throw new NotSupportedException ("TLS Support not available.");
+                    throw new NotSupportedException("TLS Support not available.");
 
-                if (!providerCache.ContainsKey (provider.ID))
-                    providerCache.Add (provider.ID, provider);
+                if (!providerCache.ContainsKey(provider.ID))
+                    providerCache.Add(provider.ID, provider);
 
                 defaultProvider = provider;
                 initialized = true;
             }
         }
 
-        internal static void InitializeInternal (string provider) 
+        internal static void InitializeInternal(string provider)
         {
-            lock (locker) {
+            lock (locker)
+            {
                 if (initialized)
-                    throw new NotSupportedException ("TLS Subsystem already initialized.");
+                    throw new NotSupportedException("TLS Subsystem already initialized.");
 
-                SystemDependencyProvider.Initialize ();
+                SystemDependencyProvider.Initialize();
 
-                defaultProvider = LookupProvider (provider, true);
+                defaultProvider = LookupProvider(provider, true);
 
                 initialized = true;
             }
         }
 
-        static object locker = new object ();
+        static object locker = new object();
         static bool initialized;
 
         static MobileTlsProvider defaultProvider;
@@ -133,100 +139,122 @@ namespace Mono.Net.Security
          * @providerCache maps the provider's Guid to the MobileTlsProvider instance.
          *
          */
-        static Dictionary<string,Tuple<Guid,string>> providerRegistration;
-        static Dictionary<Guid,MobileTlsProvider> providerCache;
+        static Dictionary<string, Tuple<Guid, string>> providerRegistration;
+        static Dictionary<Guid, MobileTlsProvider> providerCache;
 
 #if !ONLY_APPLETLS && !MONOTOUCH && !XAMMAC
-        static Type LookupProviderType (string name, bool throwOnError)
+        static Type LookupProviderType(string name, bool throwOnError)
         {
-            lock (locker) {
-                InitializeProviderRegistration ();
-                Tuple<Guid,string> entry;
-                if (!providerRegistration.TryGetValue (name, out entry)) {
+            lock (locker)
+            {
+                InitializeProviderRegistration();
+                Tuple<Guid, string> entry;
+                if (!providerRegistration.TryGetValue(name, out entry))
+                {
                     if (throwOnError)
-                        throw new NotSupportedException (string.Format ("No such TLS Provider: `{0}'.", name));
+                        throw new NotSupportedException(
+                            string.Format("No such TLS Provider: `{0}'.", name)
+                        );
                     return null;
                 }
-                var type = Type.GetType (entry.Item2, false);
+                var type = Type.GetType(entry.Item2, false);
                 if (type == null && throwOnError)
-                    throw new NotSupportedException (string.Format ("Could not find TLS Provider: `{0}'.", entry.Item2));
+                    throw new NotSupportedException(
+                        string.Format("Could not find TLS Provider: `{0}'.", entry.Item2)
+                    );
                 return type;
             }
         }
 #endif
 
-        static MobileTlsProvider LookupProvider (string name, bool throwOnError)
+        static MobileTlsProvider LookupProvider(string name, bool throwOnError)
         {
-            lock (locker) {
-                InitializeProviderRegistration ();
-                Tuple<Guid,string> entry;
-                if (!providerRegistration.TryGetValue (name, out entry)) {
+            lock (locker)
+            {
+                InitializeProviderRegistration();
+                Tuple<Guid, string> entry;
+                if (!providerRegistration.TryGetValue(name, out entry))
+                {
                     if (throwOnError)
-                        throw new NotSupportedException (string.Format ("No such TLS Provider: `{0}'.", name));
+                        throw new NotSupportedException(
+                            string.Format("No such TLS Provider: `{0}'.", name)
+                        );
                     return null;
                 }
 
                 // Check cache before doing the reflection lookup.
                 MobileTlsProvider provider;
-                if (providerCache.TryGetValue (entry.Item1, out provider))
+                if (providerCache.TryGetValue(entry.Item1, out provider))
                     return provider;
 
 #if !ONLY_APPLETLS && !MONOTOUCH && !XAMMAC
-                var type = Type.GetType (entry.Item2, false);
+                var type = Type.GetType(entry.Item2, false);
                 if (type == null && throwOnError)
-                    throw new NotSupportedException (string.Format ("Could not find TLS Provider: `{0}'.", entry.Item2));
+                    throw new NotSupportedException(
+                        string.Format("Could not find TLS Provider: `{0}'.", entry.Item2)
+                    );
 
-                try {
-                    provider = (MobileTlsProvider)Activator.CreateInstance (type, true);
-                } catch (Exception ex) {
-                    throw new NotSupportedException (string.Format ("Unable to instantiate TLS Provider `{0}'.", type), ex);
+                try
+                {
+                    provider = (MobileTlsProvider)Activator.CreateInstance(type, true);
+                }
+                catch (Exception ex)
+                {
+                    throw new NotSupportedException(
+                        string.Format("Unable to instantiate TLS Provider `{0}'.", type),
+                        ex
+                    );
                 }
 #endif
 
-                if (provider == null) {
+                if (provider == null)
+                {
                     if (throwOnError)
-                        throw new NotSupportedException (string.Format ("No such TLS Provider: `{0}'.", name));
+                        throw new NotSupportedException(
+                            string.Format("No such TLS Provider: `{0}'.", name)
+                        );
                     return null;
                 }
 
-                providerCache.Add (entry.Item1, provider);
+                providerCache.Add(entry.Item1, provider);
                 return provider;
             }
         }
 
         static bool enableDebug;
 
-        [Conditional ("MONO_TLS_DEBUG")]
-        static void InitializeDebug ()
+        [Conditional("MONO_TLS_DEBUG")]
+        static void InitializeDebug()
         {
-            if (Environment.GetEnvironmentVariable ("MONO_TLS_DEBUG") != null)
+            if (Environment.GetEnvironmentVariable("MONO_TLS_DEBUG") != null)
                 enableDebug = true;
         }
 
-        [Conditional ("MONO_TLS_DEBUG")]
-        internal static void Debug (string message, params object[] args)
+        [Conditional("MONO_TLS_DEBUG")]
+        internal static void Debug(string message, params object[] args)
         {
             if (enableDebug)
-                Console.Error.WriteLine (message, args);
+                Console.Error.WriteLine(message, args);
         }
 
 #endregion
 
-        internal static readonly Guid AppleTlsId = new Guid ("981af8af-a3a3-419a-9f01-a518e3a17c1c");
-        internal static readonly Guid BtlsId = new Guid ("432d18c9-9348-4b90-bfbf-9f2a10e1f15b");
+        internal static readonly Guid AppleTlsId = new Guid("981af8af-a3a3-419a-9f01-a518e3a17c1c");
+        internal static readonly Guid BtlsId = new Guid("432d18c9-9348-4b90-bfbf-9f2a10e1f15b");
 
-        static void InitializeProviderRegistration ()
+        static void InitializeProviderRegistration()
         {
-            lock (locker) {
+            lock (locker)
+            {
                 if (providerRegistration != null)
                     return;
 
-                InitializeDebug ();
+                InitializeDebug();
 
-                providerRegistration = new Dictionary<string,Tuple<Guid,string>> ();
-                providerCache = new Dictionary<Guid,MobileTlsProvider> ();
+                providerRegistration = new Dictionary<string, Tuple<Guid, string>>();
+                providerCache = new Dictionary<Guid, MobileTlsProvider>();
 
-                PopulateProviders ();
+                PopulateProviders();
             }
         }
 
@@ -252,10 +280,10 @@ namespace Mono.Net.Security
 #endif
         }
 #else
-        static void PopulateProviders ()
+        static void PopulateProviders()
         {
-            Tuple<Guid,String> appleTlsEntry = null;
-            Tuple<Guid,String> btlsEntry = null;
+            Tuple<Guid, String> appleTlsEntry = null;
+            Tuple<Guid, String> btlsEntry = null;
 
 #if MONO_FEATURE_APPLETLS
             appleTlsEntry = new Tuple<Guid,String> (AppleTlsId, typeof (Mono.AppleTls.AppleTlsProvider).FullName);
@@ -270,20 +298,20 @@ namespace Mono.Net.Security
 #endif
 
             var defaultEntry = appleTlsEntry ?? btlsEntry;
-            if (defaultEntry != null) {
-                providerRegistration.Add ("default", defaultEntry);
-                providerRegistration.Add ("legacy", defaultEntry);
+            if (defaultEntry != null)
+            {
+                providerRegistration.Add("default", defaultEntry);
+                providerRegistration.Add("legacy", defaultEntry);
             }
         }
 #endif
-
 
 #if MONO_FEATURE_BTLS
         [MethodImpl (MethodImplOptions.InternalCall)]
         internal extern static bool IsBtlsSupported ();
 #endif
 
-        static MobileTlsProvider CreateDefaultProviderImpl ()
+        static MobileTlsProvider CreateDefaultProviderImpl()
         {
 #if MONODROID
             var type = Environment.GetEnvironmentVariable ("XA_TLS_PROVIDER");
@@ -304,13 +332,14 @@ namespace Mono.Net.Security
 #elif ONLY_APPLETLS || MONOTOUCH || XAMMAC
             return new AppleTlsProvider ();
 #else
-            var type = Environment.GetEnvironmentVariable ("MONO_TLS_PROVIDER");
-            if (string.IsNullOrEmpty (type))
+            var type = Environment.GetEnvironmentVariable("MONO_TLS_PROVIDER");
+            if (string.IsNullOrEmpty(type))
                 type = "default";
 
-            switch (type) {
-            case "default":
-            case "legacy":
+            switch (type)
+            {
+                case "default":
+                case "legacy":
 #if MONO_FEATURE_APPLETLS
                 if (Platform.IsMacOS)
                     goto case "apple";
@@ -319,7 +348,7 @@ namespace Mono.Net.Security
                 if (IsBtlsSupported ())
                     goto case "btls";
 #endif
-                throw new NotSupportedException ("TLS Support not available.");
+                    throw new NotSupportedException("TLS Support not available.");
 #if MONO_FEATURE_APPLETLS
             case "apple":
                 return new AppleTlsProvider ();
@@ -330,7 +359,7 @@ namespace Mono.Net.Security
 #endif
             }
 
-            return LookupProvider (type, true);
+            return LookupProvider(type, true);
 #endif
         }
 
@@ -338,44 +367,48 @@ namespace Mono.Net.Security
 
         /*
          * "Public" section, intended to be consumed via reflection.
-         * 
+         *
          * Mono.Security.dll provides a public wrapper around these.
          */
 
-        internal static MobileTlsProvider GetProvider ()
+        internal static MobileTlsProvider GetProvider()
         {
-            return GetProviderInternal ();
+            return GetProviderInternal();
         }
 
-        internal static bool IsProviderSupported (string name)
+        internal static bool IsProviderSupported(string name)
         {
-            lock (locker) {
-                InitializeProviderRegistration ();
-                return providerRegistration.ContainsKey (name);
+            lock (locker)
+            {
+                InitializeProviderRegistration();
+                return providerRegistration.ContainsKey(name);
             }
         }
 
-        internal static MobileTlsProvider GetProvider (string name)
+        internal static MobileTlsProvider GetProvider(string name)
         {
-            return LookupProvider (name, false);
+            return LookupProvider(name, false);
         }
 
-        internal static bool IsInitialized {
-            get {
-                lock (locker) {
+        internal static bool IsInitialized
+        {
+            get
+            {
+                lock (locker)
+                {
                     return initialized;
                 }
             }
         }
 
-        internal static void Initialize ()
+        internal static void Initialize()
         {
-            InitializeInternal ();
+            InitializeInternal();
         }
 
-        internal static void Initialize (string provider)
+        internal static void Initialize(string provider)
         {
-            InitializeInternal (provider);
+            InitializeInternal(provider);
         }
 #endregion
     }

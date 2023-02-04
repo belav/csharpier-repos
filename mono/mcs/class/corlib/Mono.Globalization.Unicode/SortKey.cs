@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -37,58 +37,72 @@ using System.Runtime.InteropServices;
 
 namespace System.Globalization
 {
-    [System.Runtime.InteropServices.ComVisible (true)]
+    [System.Runtime.InteropServices.ComVisible(true)]
     [Serializable]
-    [StructLayout (LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential)]
     public class SortKey
     {
         #region Static members
-        public static int Compare (SortKey sortkey1, SortKey sortkey2)
+        public static int Compare(SortKey sortkey1, SortKey sortkey2)
         {
             if (sortkey1 == null)
-                throw new ArgumentNullException ("sortkey1");
+                throw new ArgumentNullException("sortkey1");
             if (sortkey2 == null)
-                throw new ArgumentNullException ("sortkey2");
+                throw new ArgumentNullException("sortkey2");
 
-            if (Object.ReferenceEquals (sortkey1, sortkey2)
-                || Object.ReferenceEquals (sortkey1.OriginalString,
-                sortkey2.OriginalString))
+            if (
+                Object.ReferenceEquals(sortkey1, sortkey2)
+                || Object.ReferenceEquals(sortkey1.OriginalString, sortkey2.OriginalString)
+            )
                 return 0;
 
-            byte [] d1 = sortkey1.KeyData;
-            byte [] d2 = sortkey2.KeyData;
+            byte[] d1 = sortkey1.KeyData;
+            byte[] d2 = sortkey2.KeyData;
 
             int len = d1.Length > d2.Length ? d2.Length : d1.Length;
             for (int i = 0; i < len; i++)
-                if (d1 [i] != d2 [i])
-                    return d1 [i] < d2 [i] ? -1 : 1;
-            return d1.Length == d2.Length ? 0 : d1.Length < d2.Length ? -1 : 1;
+                if (d1[i] != d2[i])
+                    return d1[i] < d2[i] ? -1 : 1;
+            return d1.Length == d2.Length
+                ? 0
+                : d1.Length < d2.Length
+                    ? -1
+                    : 1;
         }
         #endregion
 
         readonly string source;
-        readonly byte [] key;
+        readonly byte[] key;
         readonly CompareOptions options;
         readonly int lcid;
 
         // for legacy unmanaged one
-        internal SortKey (int lcid, string source, CompareOptions opt)
+        internal SortKey(int lcid, string source, CompareOptions opt)
         {
             this.lcid = lcid;
             this.source = source;
             this.options = opt;
             var source_length = source.Length;
-            var k = new byte [source_length];
+            var k = new byte[source_length];
             for (int i = 0; i < source_length; ++i)
-                k [i] = (byte)source [i];
+                k[i] = (byte)source[i];
             this.key = k;
         }
 
-        internal SortKey (int lcid, string source, byte [] buffer, CompareOptions opt,
-            int lv1Length, int lv2Length, int lv3Length,
-            int kanaSmallLength, int markTypeLength,
-            int katakanaLength, int kanaWidthLength,
-            int identLength)
+        internal SortKey(
+            int lcid,
+            string source,
+            byte[] buffer,
+            CompareOptions opt,
+            int lv1Length,
+            int lv2Length,
+            int lv3Length,
+            int kanaSmallLength,
+            int markTypeLength,
+            int katakanaLength,
+            int kanaWidthLength,
+            int identLength
+        )
         {
             this.lcid = lcid;
             this.source = source;
@@ -96,27 +110,33 @@ namespace System.Globalization
             this.options = opt;
         }
 
-        internal SortKey (String localeName, String str, CompareOptions options, byte[] keyData)
+        internal SortKey(String localeName, String str, CompareOptions options, byte[] keyData)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public virtual string OriginalString {
+        public virtual string OriginalString
+        {
             get { return source; }
         }
 
-        public virtual byte [] KeyData {
+        public virtual byte[] KeyData
+        {
             get { return key; }
         }
 
         // copy from original SortKey.cs
-        public override bool Equals (object value)
+        public override bool Equals(object value)
         {
             SortKey other = (value as SortKey);
-            if (other != null) {
-                if ((this.lcid == other.lcid) &&
-                   (this.options == other.options) &&
-                   (Compare (this, other) == 0)) {
+            if (other != null)
+            {
+                if (
+                    (this.lcid == other.lcid)
+                    && (this.options == other.options)
+                    && (Compare(this, other) == 0)
+                )
+                {
                     return true;
                 }
             }
@@ -124,14 +144,14 @@ namespace System.Globalization
             return false;
         }
 
-        public override int GetHashCode ()
+        public override int GetHashCode()
         {
             if (key.Length == 0)
                 return 0; // should not happen though.
-            int val = key [0];
+            int val = key[0];
             for (int i = 1; i < key.Length; i++)
-                val ^= (int) key [i] << (i & 3);
-            return (int) val;
+                val ^= (int)key[i] << (i & 3);
+            return (int)val;
         }
 
         // copy from original SortKey.cs

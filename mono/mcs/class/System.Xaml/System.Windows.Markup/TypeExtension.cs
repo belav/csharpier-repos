@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,53 +28,62 @@ using System.Xaml.Schema;
 
 namespace System.Windows.Markup
 {
-    [MarkupExtensionReturnType (typeof (Type))]
-    [TypeConverter (typeof (TypeExtensionConverter))]
-    [System.Runtime.CompilerServices.TypeForwardedFrom (Consts.AssemblyPresentationFramework_3_5)]
+    [MarkupExtensionReturnType(typeof(Type))]
+    [TypeConverter(typeof(TypeExtensionConverter))]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(Consts.AssemblyPresentationFramework_3_5)]
     public class TypeExtension : MarkupExtension
     {
-        public TypeExtension ()
-        {
-        }
+        public TypeExtension() { }
 
-        public TypeExtension (string typeName)
+        public TypeExtension(string typeName)
         {
             if (typeName == null)
-                throw new ArgumentNullException ("typeName");
+                throw new ArgumentNullException("typeName");
             TypeName = typeName;
         }
 
-        public TypeExtension (Type type)
+        public TypeExtension(Type type)
         {
             if (type == null)
-                throw new ArgumentNullException ("type");
+                throw new ArgumentNullException("type");
             Type = type;
         }
 
-        [ConstructorArgument ("type")]
-        [DefaultValue (null)]
+        [ConstructorArgument("type")]
+        [DefaultValue(null)]
         public Type Type { get; set; }
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string TypeName { get; set; }
 
-        public override object ProvideValue (IServiceProvider serviceProvider)
+        public override object ProvideValue(IServiceProvider serviceProvider)
         {
             if (Type != null)
                 return Type;
 
             if (TypeName == null)
-                throw new InvalidOperationException ("Either TypeName or Type must be filled before calling ProvideValue method");
+                throw new InvalidOperationException(
+                    "Either TypeName or Type must be filled before calling ProvideValue method"
+                );
 
             if (serviceProvider == null) // it can be null when Type is supplied.
-                throw new ArgumentNullException ("serviceProvider");
+                throw new ArgumentNullException("serviceProvider");
 
-            var p = serviceProvider.GetService (typeof (IXamlTypeResolver)) as IXamlTypeResolver;
+            var p = serviceProvider.GetService(typeof(IXamlTypeResolver)) as IXamlTypeResolver;
             if (p == null)
-                throw new InvalidOperationException ("serviceProvider does not provide IXamlTypeResolver service.");
+                throw new InvalidOperationException(
+                    "serviceProvider does not provide IXamlTypeResolver service."
+                );
 
-            var ret = p.Resolve (TypeName);
+            var ret = p.Resolve(TypeName);
             if (ret == null)
-                throw new InvalidOperationException (String.Format ("Type '{0}' is not resolved as a valid type by the type resolver '{1}'.", TypeName, p.GetType ()));
+                throw new InvalidOperationException(
+                    String.Format(
+                        "Type '{0}' is not resolved as a valid type by the type resolver '{1}'.",
+                        TypeName,
+                        p.GetType()
+                    )
+                );
             return ret;
         }
     }

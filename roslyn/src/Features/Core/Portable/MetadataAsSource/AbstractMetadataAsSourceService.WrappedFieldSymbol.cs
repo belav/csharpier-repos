@@ -15,8 +15,15 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
         {
             private readonly IFieldSymbol _symbol;
 
-            public WrappedFieldSymbol(IFieldSymbol fieldSymbol, IDocumentationCommentFormattingService docCommentFormattingService)
-                : base(fieldSymbol, canImplementImplicitly: false, docCommentFormattingService: docCommentFormattingService)
+            public WrappedFieldSymbol(
+                IFieldSymbol fieldSymbol,
+                IDocumentationCommentFormattingService docCommentFormattingService
+            )
+                : base(
+                    fieldSymbol,
+                    canImplementImplicitly: false,
+                    docCommentFormattingService: docCommentFormattingService
+                )
             {
                 _symbol = fieldSymbol;
             }

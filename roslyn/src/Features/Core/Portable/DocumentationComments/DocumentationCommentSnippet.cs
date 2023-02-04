@@ -23,7 +23,11 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
         /// </summary>
         public int CaretOffset { get; }
 
-        internal DocumentationCommentSnippet(TextSpan spanToReplace, string snippetText, int caretOffset)
+        internal DocumentationCommentSnippet(
+            TextSpan spanToReplace,
+            string snippetText,
+            int caretOffset
+        )
         {
             SpanToReplace = spanToReplace;
             SnippetText = snippetText;

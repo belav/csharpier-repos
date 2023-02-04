@@ -4,24 +4,24 @@ namespace System.Runtime.Remoting
     {
 #region Keep this code, it is used by the runtime
 
-        internal static object GetServerObject (string uri)
+        internal static object GetServerObject(string uri)
         {
-            throw new PlatformNotSupportedException ();
+            throw new PlatformNotSupportedException();
         }
 
-        internal static byte[] SerializeCallData (object obj)
+        internal static byte[] SerializeCallData(object obj)
         {
-            throw new PlatformNotSupportedException ();
+            throw new PlatformNotSupportedException();
         }
 
-        internal static object DeserializeCallData (byte[] array)
+        internal static object DeserializeCallData(byte[] array)
         {
-            throw new PlatformNotSupportedException ();
+            throw new PlatformNotSupportedException();
         }
 
-        internal static byte[] SerializeExceptionData (Exception ex)
+        internal static byte[] SerializeExceptionData(Exception ex)
         {
-            throw new PlatformNotSupportedException ();
+            throw new PlatformNotSupportedException();
         }
 
 #endregion

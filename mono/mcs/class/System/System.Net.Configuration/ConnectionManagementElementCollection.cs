@@ -17,10 +17,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,77 +34,80 @@
 
 using System.Configuration;
 
-namespace System.Net.Configuration 
+namespace System.Net.Configuration
 {
-    [ConfigurationCollection (typeof (ConnectionManagementElement), CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap)]
+    [ConfigurationCollection(
+        typeof(ConnectionManagementElement),
+        CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap
+    )]
     public sealed class ConnectionManagementElementCollection : ConfigurationElementCollection
     {
         #region Constructors
 
-        public ConnectionManagementElementCollection ()
-        {
-        }
+        public ConnectionManagementElementCollection() { }
 
         #endregion // Constructors
 
         #region Properties
 
         [MonoTODO]
-        public ConnectionManagementElement this [int index] {
-            get { throw new NotImplementedException (); }
-            set { throw new NotImplementedException (); }
+        public ConnectionManagementElement this[int index]
+        {
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
         }
 
-        public new ConnectionManagementElement this [string name] {
-            get { return (ConnectionManagementElement) base [name]; }
-            set { base [name] = value; }
+        public new ConnectionManagementElement this[string name]
+        {
+            get { return (ConnectionManagementElement)base[name]; }
+            set { base[name] = value; }
         }
 
         #endregion // Properties
 
         #region Methods
 
-        public void Add (ConnectionManagementElement element)
+        public void Add(ConnectionManagementElement element)
         {
-            BaseAdd (element);
+            BaseAdd(element);
         }
 
-        public void Clear ()
+        public void Clear()
         {
-            BaseClear ();
+            BaseClear();
         }
 
-        protected override ConfigurationElement CreateNewElement ()
+        protected override ConfigurationElement CreateNewElement()
         {
-            return new ConnectionManagementElement ();
+            return new ConnectionManagementElement();
         }
 
-        protected override object GetElementKey (ConfigurationElement element)
+        protected override object GetElementKey(ConfigurationElement element)
         {
             if (!(element is ConnectionManagementElement))
-                throw new ArgumentException ("element");
+                throw new ArgumentException("element");
 
             return ((ConnectionManagementElement)element).Address;
         }
 
-        public int IndexOf (ConnectionManagementElement element)
+        public int IndexOf(ConnectionManagementElement element)
         {
-            return BaseIndexOf (element);
+            return BaseIndexOf(element);
         }
 
-        public void Remove (ConnectionManagementElement element)
+        public void Remove(ConnectionManagementElement element)
         {
-            BaseRemove (element);
+            BaseRemove(element);
         }
 
-        public void Remove (string name)
+        public void Remove(string name)
         {
-            BaseRemove (name);
+            BaseRemove(name);
         }
 
-        public void RemoveAt (int index)
+        public void RemoveAt(int index)
         {
-            BaseRemoveAt (index);
+            BaseRemoveAt(index);
         }
 
         #endregion // Methods

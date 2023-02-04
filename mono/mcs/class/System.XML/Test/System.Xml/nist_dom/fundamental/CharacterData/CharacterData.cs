@@ -3,7 +3,7 @@
 //
 //                       National Institute Of Standards and Technology
 //                                     DTS Version 1.0
-//         
+//
 //                                 CharacterData Interface
 //
 // Written by: Carmelo Montanez
@@ -21,35 +21,36 @@ using NUnit.Framework;
 namespace nist_dom.fundamental
 {
     [TestFixture]
-    public class CharacterDataTest//,ITest
+    public class CharacterDataTest //,ITest
     {
         public static int i = 2;
-/*
-        public testResults[] RunTests()
-        {
-            testResults[] tests = new testResults[] {core0001C(), core0002C(), core0003C(),core0004C(),
-                                                        core0005C(), core0006C(), core0007C(), core0008C(),
-                                                        core0009C(), core0010C(), core0011C(), core0012C(),
-                                                        core0013C(), core0014C(), core0015C(),
-                                                        core0016C(), core0017C(), core0018C(), core0019C(),
-                                                        core0020C(), core0021C(), core0022C(), core0023C(),
-                                                        core0024C(), core0025C(), core0026C(), core0027C(),
-                                                        core0028C(), core0029C(), core0030C(), core0031C(),
-                                                        core0032C(), core0033C(), core0034C(), core0035C(),
-                                                        core0036C()};
-  
-            return tests;
-        }
-*/
+
+        /*
+                public testResults[] RunTests()
+                {
+                    testResults[] tests = new testResults[] {core0001C(), core0002C(), core0003C(),core0004C(),
+                                                                core0005C(), core0006C(), core0007C(), core0008C(),
+                                                                core0009C(), core0010C(), core0011C(), core0012C(),
+                                                                core0013C(), core0014C(), core0015C(),
+                                                                core0016C(), core0017C(), core0018C(), core0019C(),
+                                                                core0020C(), core0021C(), core0022C(), core0023C(),
+                                                                core0024C(), core0025C(), core0026C(), core0027C(),
+                                                                core0028C(), core0029C(), core0030C(), core0031C(),
+                                                                core0032C(), core0033C(), core0034C(), core0035C(),
+                                                                core0036C()};
+          
+                    return tests;
+                }
+        */
         //------------------------ test case core-0001C ------------------------
         //
         // Testing feature -  The "data" attribute is the character data that
         //                    implements this interface.
         //
         // Testing approach - Retrieve the character data from the second child of
-        //                    the first employee and invoke its "data" attribute.  The 
+        //                    the first employee and invoke its "data" attribute.  The
         //                    attribute should return the actual data.
-        //                    
+        //
         // Semantic Requirements: 1
         //
         //----------------------------------------------------------------------------
@@ -65,33 +66,34 @@ namespace nist_dom.fundamental
             testResults results = new testResults("Core0001C");
             try
             {
-                results.description = "The \"data\" attribute is the character data that " +
-                    "implements this interface.";
+                results.description =
+                    "The \"data\" attribute is the character data that "
+                    + "implements this interface.";
                 //
                 // Access the targeted data.
                 //
-                testNode = util.nodeObject(util.FIRST,util.SECOND);
-                testNodeData = (System.Xml.XmlCharacterData)testNode.FirstChild; 
+                testNode = util.nodeObject(util.FIRST, util.SECOND);
+                testNodeData = (System.Xml.XmlCharacterData)testNode.FirstChild;
                 computedValue = testNodeData.Data;
             }
-            catch(System.Exception ex)
+            catch (System.Exception ex)
             {
                 computedValue = "Exception " + ex.Message;
             }
             //
-            // Write out results 
+            // Write out results
             //
             results.expected = expectedValue;
             results.actual = computedValue;
 
-            Assert.AreEqual (results.expected, results.actual);
+            Assert.AreEqual(results.expected, results.actual);
         }
 
         //------------------------ End test case core-0001C --------------------------
         //
         //--------------------------- test case core-0002C ---------------------------
         //
-        // Testing feature -  The "length" attribute contains the number of 16-bit 
+        // Testing feature -  The "length" attribute contains the number of 16-bit
         //                    units that are available through the data attribute and
         //                    the substringData method.  Test for the "data" attribute.
         //
@@ -102,7 +104,7 @@ namespace nist_dom.fundamental
         //                    attribute to determine the number of 16 bit units in
         //                    the data.
         //
-        // Semantic Requirements: 2 
+        // Semantic Requirements: 2
         //
         //----------------------------------------------------------------------------
 
@@ -117,17 +119,18 @@ namespace nist_dom.fundamental
             testResults results = new testResults("Core0002C");
             try
             {
-                results.description = "The \"length\" attribute is the number of 16-bit units " +
-                    "that are available through the \"data\" attribute " +
-                    "and the \"substringData\" method (test for \"data\").";
+                results.description =
+                    "The \"length\" attribute is the number of 16-bit units "
+                    + "that are available through the \"data\" attribute "
+                    + "and the \"substringData\" method (test for \"data\").";
                 //
                 // Retrieve the targeted data and invoke its "data" attribute.
                 //
-                testNode = util.nodeObject(util.FIRST,util.SECOND);
+                testNode = util.nodeObject(util.FIRST, util.SECOND);
                 testNodeData = (System.Xml.XmlCharacterData)testNode.FirstChild;
                 computedValue = testNodeData.Length.ToString();
             }
-            catch(System.Exception ex)
+            catch (System.Exception ex)
             {
                 computedValue = "Exception " + ex.Message;
             }
@@ -137,23 +140,23 @@ namespace nist_dom.fundamental
             results.expected = expectedValue;
             results.actual = computedValue;
 
-            Assert.AreEqual (results.expected, results.actual);
+            Assert.AreEqual(results.expected, results.actual);
         }
 
         //------------------------ End test case core-0002C --------------------------
         //
         //--------------------------- test case core-0003C ---------------------------
         //
-        // Testing feature -  The "length" attribute contains the number of 16-bit units 
+        // Testing feature -  The "length" attribute contains the number of 16-bit units
         //                    that are available through the data attribute and the
         //                    substringData method.  Test for the "substringData"
         //                    method.
         //
         // Testing approach - Retrieve the character data of the second child of the
-        //                    first employee and access part of the data by using the 
-        //                    "substringData(offset,count)" method.  Finally the 
-        //                    "length" attribute is used on the character data 
-        //                    returned by the "substringData(offset,count)" method 
+        //                    first employee and access part of the data by using the
+        //                    "substringData(offset,count)" method.  Finally the
+        //                    "length" attribute is used on the character data
+        //                    returned by the "substringData(offset,count)" method
         //                    to determine the number of 16-bit units in the data.
         //
         // Semantic Requirements: 2
@@ -172,18 +175,19 @@ namespace nist_dom.fundamental
             testResults results = new testResults("Core0003C");
             try
             {
-                results.description = "The \"length\" attribute is the number of 16-bit units " +
-                    "that are available through the \"data\" attribute " +
-                    "and the \"substringData\" method (test for \"substringData\").";
+                results.description =
+                    "The \"length\" attribute is the number of 16-bit units "
+                    + "that are available through the \"data\" attribute "
+                    + "and the \"substringData\" method (test for \"substringData\").";
                 //
                 // Retrieve the targeted data and invoke its "substringData" method.
                 //
-                testNode = util.nodeObject(util.FIRST,util.SECOND);
+                testNode = util.nodeObject(util.FIRST, util.SECOND);
                 testNodeData = (System.Xml.XmlCharacterData)testNode.FirstChild;
-                subString = testNodeData.Substring(0,8);
+                subString = testNodeData.Substring(0, 8);
                 computedValue = subString.Length.ToString();
             }
-            catch(System.Exception ex)
+            catch (System.Exception ex)
             {
                 computedValue = "Exception " + ex.Message;
             }
@@ -193,7 +197,7 @@ namespace nist_dom.fundamental
             results.expected = expectedValue;
             results.actual = computedValue;
 
-            Assert.AreEqual (results.expected, results.actual);
+            Assert.AreEqual(results.expected, results.actual);
         }
 
         //------------------------ End test case core-0003C --------------------------
@@ -210,7 +214,7 @@ namespace nist_dom.fundamental
         //                    "offset" and extract "count" characters.  The method
         //                    method should return the string "Margaret".
         //
-        // Semantic Requirements: 3 
+        // Semantic Requirements: 3
         //
         //----------------------------------------------------------------------------
 
@@ -226,16 +230,17 @@ namespace nist_dom.fundamental
             testResults results = new testResults("Core0004C");
             try
             {
-                results.description = "The \"substringData(offset,count)\" method returns the " +
-                    "specified substring.";
+                results.description =
+                    "The \"substringData(offset,count)\" method returns the "
+                    + "specified substring.";
                 //
                 // Retrieve the targeted data and invoke its "substringData" method.
                 //
-                testNode = util.nodeObject(util.FIRST,util.SECOND);
+                testNode = util.nodeObject(util.FIRST, util.SECOND);
                 testNodeData = (System.Xml.XmlCharacterData)testNode.FirstChild;
-                computedValue = testNodeData.Substring(0,8);
+                computedValue = testNodeData.Substring(0, 8);
             }
-            catch(System.Exception ex)
+            catch (System.Exception ex)
             {
                 computedValue = "Exception " + ex.Message;
             }
@@ -245,16 +250,16 @@ namespace nist_dom.fundamental
             results.expected = expectedValue;
             results.actual = computedValue;
 
-            Assert.AreEqual (results.expected, results.actual);
+            Assert.AreEqual(results.expected, results.actual);
         }
 
         //------------------------ End test case core-0004C --------------------------
         //
         //--------------------------- test case core-0005C ---------------------------
         //
-        // Testing feature -  If the sum of "offset" and "count" exceeds "length" then 
-        //                    the substringData(offset,count) method returns all 
-        //                    the 16-bit units to the end of the data. 
+        // Testing feature -  If the sum of "offset" and "count" exceeds "length" then
+        //                    the substringData(offset,count) method returns all
+        //                    the 16-bit units to the end of the data.
         //
         // Testing approach - Retrieve the character data from the second child of the
         //                    first employee and access part of the data by using the
@@ -262,7 +267,7 @@ namespace nist_dom.fundamental
         //                    count = 10.  The method should return the substring
         //                    "Martin" since offset + count > length (19 > 15).
         //
-        // Semantic Requirements: 4 
+        // Semantic Requirements: 4
         //
         //----------------------------------------------------------------------------
 
@@ -277,18 +282,19 @@ namespace nist_dom.fundamental
             testResults results = new testResults("Core0005C");
             try
             {
-                results.description = "If the sum of \"offset\" and \"count\" exceeds " +
-                    "the value of the \"length\" attribute then the " +
-                    "\"substringData(offset,count)\" method returns all " +
-                    "the 16-bit units to the end of the data.";
+                results.description =
+                    "If the sum of \"offset\" and \"count\" exceeds "
+                    + "the value of the \"length\" attribute then the "
+                    + "\"substringData(offset,count)\" method returns all "
+                    + "the 16-bit units to the end of the data.";
                 //
                 // Retrieve the targeted data and invoke its "substringData" method.
                 //
-                testNode = util.nodeObject(util.FIRST,util.SECOND);
+                testNode = util.nodeObject(util.FIRST, util.SECOND);
                 testNodeData = (System.Xml.XmlCharacterData)testNode.FirstChild;
-                computedValue = testNodeData.Substring(9,10);
+                computedValue = testNodeData.Substring(9, 10);
             }
-            catch(System.Exception ex)
+            catch (System.Exception ex)
             {
                 computedValue = "Exception " + ex.Message;
             }
@@ -299,7 +305,7 @@ namespace nist_dom.fundamental
             results.expected = expectedValue;
             results.actual = computedValue;
 
-            Assert.AreEqual (results.expected, results.actual);
+            Assert.AreEqual(results.expected, results.actual);
         }
 
         //------------------------ End test case core-0005C --------------------------
@@ -310,13 +316,13 @@ namespace nist_dom.fundamental
         //                   of the character data of the node.
         //
         // Testing approach - Retrieve the character data from the second child of the
-        //                    first employee.  The "appendData(arg)" method is then 
-        //                    called with arg = ", Esquire".  The method should append 
-        //                    the specified data to the already existing character 
-        //                    data.  The new value of the "length" attribute should 
+        //                    first employee.  The "appendData(arg)" method is then
+        //                    called with arg = ", Esquire".  The method should append
+        //                    the specified data to the already existing character
+        //                    data.  The new value of the "length" attribute should
         //                    be 24.
         //
-        // Semantic Requirements: 5 
+        // Semantic Requirements: 5
         //
         //----------------------------------------------------------------------------
 
@@ -331,17 +337,19 @@ namespace nist_dom.fundamental
             testResults results = new testResults("Core0006C");
             try
             {
-                results.description = "The \"appendData(arg)\" method appends the specified " +
-                    "string to the end of the character data of the node.";
+                results.description =
+                    "The \"appendData(arg)\" method appends the specified "
+                    + "string to the end of the character data of the node.";
                 //
                 // Retrieve targeted data and invoke the "appendData" method.
                 //
-                testNode = util.nodeObject(util.FIRST,util.SECOND); 
+                testNode = util.nodeObject(util.FIRST, util.SECOND);
                 testNodeData = (System.Xml.XmlCharacterData)testNode.FirstChild;
-                testNodeData.AppendData(", Esquire");;
+                testNodeData.AppendData(", Esquire");
+                ;
                 computedValue = testNodeData.Length.ToString();
             }
-            catch(System.Exception ex)
+            catch (System.Exception ex)
             {
                 computedValue = "Exception " + ex.Message;
             }
@@ -353,25 +361,25 @@ namespace nist_dom.fundamental
 
             util.resetData();
 
-            Assert.AreEqual (results.expected, results.actual);
+            Assert.AreEqual(results.expected, results.actual);
         }
 
         //------------------------ End test case core-0006C --------------------------
         //
         //--------------------------- test case core-0007C ---------------------------
         //
-        // Testing feature - Upon successful invocation of the "appendData(arg)" 
+        // Testing feature - Upon successful invocation of the "appendData(arg)"
         //                   method, the "data" attribute provides access to the
         //                   concatenation of data and the specified DOMString.
         //
-        // Testing approach - Retrieve the character data from the second child of 
-        //                    the first employee.  The "appendData(arg)" method is 
-        //                    then called with arg = ", Esquire".  The method should 
-        //                    append the specified data to the already existing 
-        //                    character data.  The new value of the "data" attribute 
+        // Testing approach - Retrieve the character data from the second child of
+        //                    the first employee.  The "appendData(arg)" method is
+        //                    then called with arg = ", Esquire".  The method should
+        //                    append the specified data to the already existing
+        //                    character data.  The new value of the "data" attribute
         //                    should be "Margaret Martin, Esquire".
         //
-        // Semantic Requirements: 6 
+        // Semantic Requirements: 6
         //
         //----------------------------------------------------------------------------
 
@@ -386,18 +394,19 @@ namespace nist_dom.fundamental
             testResults results = new testResults("Core0007C");
             try
             {
-                results.description = "Upon successful invocation of the \"appendData(arg)\" " +
-                    "method ,the \"data\" attribute provides access " +
-                    "to the concatenation of \"data\" and the specified DOMString.";
+                results.description =
+                    "Upon successful invocation of the \"appendData(arg)\" "
+                    + "method ,the \"data\" attribute provides access "
+                    + "to the concatenation of \"data\" and the specified DOMString.";
                 //
                 // Retrieve targeted data and invoke its "appendData" method.
                 //
-                testNode = util.nodeObject(util.FIRST,util.SECOND);
+                testNode = util.nodeObject(util.FIRST, util.SECOND);
                 testNodeData = (System.Xml.XmlCharacterData)testNode.FirstChild;
                 testNodeData.AppendData(", Esquire");
                 computedValue = testNodeData.Data;
             }
-            catch(System.Exception ex)
+            catch (System.Exception ex)
             {
                 computedValue = "Exception " + ex.Message;
             }
@@ -409,7 +418,7 @@ namespace nist_dom.fundamental
 
             util.resetData();
 
-            Assert.AreEqual (results.expected, results.actual);
+            Assert.AreEqual(results.expected, results.actual);
         }
 
         //------------------------ End test case core-0007C --------------------------
@@ -420,14 +429,14 @@ namespace nist_dom.fundamental
         //                   specified 16-bit unit offset.  Insert at the beginning of
         //                   the character data.
         //
-        // Testing approach - Retrieve the character data from the second child of 
-        //                    the first employee.  The "insertData(offset,arg)" 
+        // Testing approach - Retrieve the character data from the second child of
+        //                    the first employee.  The "insertData(offset,arg)"
         //                    method is then called with offset = 0 and arg = "Mss.".
-        //                    The method should insert the string "Mss." at position 
+        //                    The method should insert the string "Mss." at position
         //                    0.  The new value of the character data should be "Mss.
         //                    Margaret Martin".
         //
-        // Semantic Requirements: 7 
+        // Semantic Requirements: 7
         //
         //----------------------------------------------------------------------------
 
@@ -446,12 +455,12 @@ namespace nist_dom.fundamental
                 //
                 // Retrieve the targeted data and invoke its "insertData" method.
                 //
-                testNode = util.nodeObject(util.FIRST,util.SECOND);
+                testNode = util.nodeObject(util.FIRST, util.SECOND);
                 testNodeData = (System.Xml.XmlCharacterData)testNode.FirstChild;
-                testNodeData.InsertData(0,"Mss. ");
+                testNodeData.InsertData(0, "Mss. ");
                 computedValue = testNodeData.Data;
             }
-            catch(System.Exception ex)
+            catch (System.Exception ex)
             {
                 computedValue = "Exception " + ex.Message;
             }
@@ -463,7 +472,7 @@ namespace nist_dom.fundamental
 
             util.resetData();
 
-            Assert.AreEqual (results.expected, results.actual);
+            Assert.AreEqual(results.expected, results.actual);
         }
 
         //------------------------ End test case core-0008C --------------------------
@@ -475,10 +484,10 @@ namespace nist_dom.fundamental
         //                   the character data.
         //
         // Testing approach - Retrieve the character data from the second child of the
-        //                    first employee.  The "insertData(offset,arg)" method is 
-        //                    then called with offset = 9 and arg = "Ann".  The 
-        //                    method should insert the string "Ann" at position 9.  
-        //                    The new value of the character data should be 
+        //                    first employee.  The "insertData(offset,arg)" method is
+        //                    then called with offset = 9 and arg = "Ann".  The
+        //                    method should insert the string "Ann" at position 9.
+        //                    The new value of the character data should be
         //                    "Margaret Ann Martin".
         //
         // Semantic Requirements: 7
@@ -488,7 +497,7 @@ namespace nist_dom.fundamental
         [Test]
         public void core0009C()
         {
-            string computedValue = "";//0;
+            string computedValue = ""; //0;
             string expectedValue = "Margaret Ann Martin";
             System.Xml.XmlNode testNode = null;
             System.Xml.XmlCharacterData testNodeData = null;
@@ -496,16 +505,16 @@ namespace nist_dom.fundamental
             testResults results = new testResults("Core0009C");
             try
             {
-                results.description = "Insert a character string in the middle of character data."; 
+                results.description = "Insert a character string in the middle of character data.";
                 //
                 // Retrieve targeted data and invoke its "insertData" method.
                 //
-                testNode = util.nodeObject(util.FIRST,util.SECOND);
-                testNodeData = (System.Xml.XmlCharacterData)testNode.FirstChild; 
-                testNodeData.InsertData(9,"Ann ");
+                testNode = util.nodeObject(util.FIRST, util.SECOND);
+                testNodeData = (System.Xml.XmlCharacterData)testNode.FirstChild;
+                testNodeData.InsertData(9, "Ann ");
                 computedValue = testNodeData.Data;
             }
-            catch(System.Exception ex)
+            catch (System.Exception ex)
             {
                 computedValue = "Exception " + ex.Message;
             }
@@ -517,7 +526,7 @@ namespace nist_dom.fundamental
 
             util.resetData();
 
-            Assert.AreEqual (results.expected, results.actual);
+            Assert.AreEqual(results.expected, results.actual);
         }
 
         //------------------------ End test case core-0009C --------------------------
@@ -529,10 +538,10 @@ namespace nist_dom.fundamental
         //                   character data.
         //
         // Testing approach - Retrieve the character data from the second child of the
-        //                    first employee.  The "insertData(offset,arg)" method 
-        //                    is then called with offset = 14 and arg = ", Esquire".  
-        //                    The method should insert the string ", Esquire" at 
-        //                    position 14.  The new value of the character data 
+        //                    first employee.  The "insertData(offset,arg)" method
+        //                    is then called with offset = 14 and arg = ", Esquire".
+        //                    The method should insert the string ", Esquire" at
+        //                    position 14.  The new value of the character data
         //                    should be "Margaret Martin, Esquire"
         //
         // Semantic Requirements: 7
@@ -554,12 +563,12 @@ namespace nist_dom.fundamental
                 //
                 // Retrieve the targeted data and invoke its "insertData" method.
                 //
-                testNode = util.nodeObject(util.FIRST,util.SECOND);
-                testNodeData = (System.Xml.XmlCharacterData)testNode.FirstChild; 
-                testNodeData.InsertData(15,", Esquire");
+                testNode = util.nodeObject(util.FIRST, util.SECOND);
+                testNodeData = (System.Xml.XmlCharacterData)testNode.FirstChild;
+                testNodeData.InsertData(15, ", Esquire");
                 computedValue = testNodeData.Data;
             }
-            catch(System.Exception ex)
+            catch (System.Exception ex)
             {
                 computedValue = "Exception " + ex.Message;
             }
@@ -571,7 +580,7 @@ namespace nist_dom.fundamental
 
             util.resetData();
 
-            Assert.AreEqual (results.expected, results.actual);
+            Assert.AreEqual(results.expected, results.actual);
         }
 
         //------------------------ End test case core-0010C --------------------------
@@ -583,13 +592,13 @@ namespace nist_dom.fundamental
         //                   character data.
         //
         // Testing approach - Retrieve the character data from the last child of the
-        //                    first employee.  The "deleteData(offset,count)" 
-        //                    method is then called with offset = 0 and count = 16.  
-        //                    The method should delete the characters from position 0 
-        //                    thru position 16.  The new value of the character data 
+        //                    first employee.  The "deleteData(offset,count)"
+        //                    method is then called with offset = 0 and count = 16.
+        //                    The method should delete the characters from position 0
+        //                    thru position 16.  The new value of the character data
         //                    should be "Dallas, Texas 98551".
         //
-        // Semantic Requirements: 8, 9 
+        // Semantic Requirements: 8, 9
         //
         //----------------------------------------------------------------------------
 
@@ -608,12 +617,12 @@ namespace nist_dom.fundamental
                 //
                 // Retrieve the targeted data and invoke its "deleteData" method..
                 //
-                testNode = util.nodeObject(util.FIRST,util.SIXTH);
+                testNode = util.nodeObject(util.FIRST, util.SIXTH);
                 testNodeData = (System.Xml.XmlCharacterData)testNode.FirstChild;
-                testNodeData.DeleteData(0,16);
+                testNodeData.DeleteData(0, 16);
                 computedValue = testNodeData.Data;
             }
-            catch(System.Exception ex)
+            catch (System.Exception ex)
             {
                 computedValue = "Exception " + ex.Message;
             }
@@ -625,7 +634,7 @@ namespace nist_dom.fundamental
 
             util.resetData();
 
-            Assert.AreEqual (results.expected, results.actual);
+            Assert.AreEqual(results.expected, results.actual);
         }
 
         //------------------------ End test case core-0011C --------------------------
@@ -636,7 +645,7 @@ namespace nist_dom.fundamental
         //                   16-bit units from the node.  Delete in the middle of
         //                   the character data.
         //
-        // Testing approach - Retrieve the character data from the last child of 
+        // Testing approach - Retrieve the character data from the last child of
         //                    the first employee.  The "deleteData(offset,count)"
         //                    method is then called with offset = 16 and count = 8.
         //                    The method should delete the characters from position 16
@@ -662,12 +671,12 @@ namespace nist_dom.fundamental
                 //
                 // Retrieve the targeted data and invoke its "deleteData" method.
                 //
-                testNode = util.nodeObject(util.FIRST,util.SIXTH);
+                testNode = util.nodeObject(util.FIRST, util.SIXTH);
                 testNodeData = (System.Xml.XmlCharacterData)testNode.FirstChild;
-                testNodeData.DeleteData(16,8);
+                testNodeData.DeleteData(16, 8);
                 computedValue = testNodeData.Data;
             }
-            catch(System.Exception ex)
+            catch (System.Exception ex)
             {
                 computedValue = "Exception " + ex.Message;
             }
@@ -679,7 +688,7 @@ namespace nist_dom.fundamental
 
             util.resetData();
 
-            Assert.AreEqual (results.expected, results.actual);
+            Assert.AreEqual(results.expected, results.actual);
         }
 
         //------------------------ End test case core-0012C --------------------------
@@ -690,10 +699,10 @@ namespace nist_dom.fundamental
         //                   16-bit units from the node.  Delete at the end of the
         //                   character data.
         //
-        // Testing approach - Retrieve the character data from the last child of 
+        // Testing approach - Retrieve the character data from the last child of
         //                    the first employee.  The "deleteData(offset,count)"
         //                    method is then called with offset = 30 and count = 5.
-        //                    The method should delete the characters from position 30 
+        //                    The method should delete the characters from position 30
         //                    thru position 35.  The new value of the character data
         //                    should be "1230 North Ave. Dallas, Texas".
         //
@@ -716,12 +725,12 @@ namespace nist_dom.fundamental
                 //
                 // Retrieve the targeted data and invoke its "deleteData" method.
                 //
-                testNode = util.nodeObject(util.FIRST,util.SIXTH);
+                testNode = util.nodeObject(util.FIRST, util.SIXTH);
                 testNodeData = (System.Xml.XmlCharacterData)testNode.FirstChild;
-                testNodeData.DeleteData(30,5);
+                testNodeData.DeleteData(30, 5);
                 computedValue = testNodeData.Data;
             }
-            catch(System.Exception ex)
+            catch (System.Exception ex)
             {
                 computedValue = "Exception " + ex.Message;
             }
@@ -733,26 +742,26 @@ namespace nist_dom.fundamental
 
             util.resetData();
 
-            Assert.AreEqual (results.expected, results.actual);
+            Assert.AreEqual(results.expected, results.actual);
         }
 
         //------------------------ End test case core-0013C --------------------------
         //
         //--------------------------- test case core-0014C ---------------------------
         //
-        // Testing feature - Upon successful invocation of the 
-        //                   "deleteData(offset,count)" method, the data and length 
+        // Testing feature - Upon successful invocation of the
+        //                   "deleteData(offset,count)" method, the data and length
         //                   attributes reflect that change.
         //
         // Testing approach - Retrieve the character data of the last child of the
         //                    first employee.  The "deleteData(offset,count)"
         //                    method is then called with offset = 30 and count = 5.
-        //                    The method should delete the characters from position 30 
+        //                    The method should delete the characters from position 30
         //                    thru position 35.  The new value of the character data
         //                    should be "1230 North Ave. Dallas, Texas" (the data
         //                    attribute) and its length attribute should be 30.  This
         //                    new values should be reflected immediately upon
-        //                    its invocation. 
+        //                    its invocation.
         //
         // Semantic Requirements: 9
         //
@@ -769,22 +778,23 @@ namespace nist_dom.fundamental
             testResults results = new testResults("Core0014C");
             try
             {
-                results.description = "Data and length attributes are updated as a result " +
-                    "of the \"deleteData(offset, count)\" method.";
+                results.description =
+                    "Data and length attributes are updated as a result "
+                    + "of the \"deleteData(offset, count)\" method.";
                 //
                 // Retrieve the targeted data and invoke its "deleteData" attribute.
                 //
-                testNode = util.nodeObject(util.FIRST,util.SIXTH);
+                testNode = util.nodeObject(util.FIRST, util.SIXTH);
                 testNodeData = (System.Xml.XmlCharacterData)testNode.FirstChild;
-                testNodeData.DeleteData(30,5);
+                testNodeData.DeleteData(30, 5);
                 computedValue += testNodeData.Data;
                 computedValue += testNodeData.Length;
             }
-            catch(System.Exception ex)
+            catch (System.Exception ex)
             {
                 computedValue = "Exception " + ex.Message;
             }
- 
+
             //
             // Write out results
             //
@@ -793,7 +803,7 @@ namespace nist_dom.fundamental
 
             util.resetData();
 
-            Assert.AreEqual (results.expected, results.actual);
+            Assert.AreEqual(results.expected, results.actual);
         }
 
         //------------------------ End test case core-0014C --------------------------
@@ -801,8 +811,8 @@ namespace nist_dom.fundamental
         //--------------------------- test case core-0015C ---------------------------
         //
         // Testing feature - If the sum of the offset and count attributes (from the
-        //                   deleteData method) is greater than the length of the 
-        //                   character data then all the 16-bit units from the offset 
+        //                   deleteData method) is greater than the length of the
+        //                   character data then all the 16-bit units from the offset
         //                   to the end of the data are deleted.
         //
         // Testing approach - Retrieve the character data from the last child of the
@@ -810,10 +820,10 @@ namespace nist_dom.fundamental
         //                    method is then called with offset = 4 and count = 50.
         //                    The method should delete the characters from position 4
         //                    to the end of the data since offset + count (50+4) is
-        //                    greater than the length of the character data (35).  
+        //                    greater than the length of the character data (35).
         //                    The new value for the character data should be "1230".
         //
-        // Semantic Requirements: 10 
+        // Semantic Requirements: 10
         //
         //----------------------------------------------------------------------------
 
@@ -828,19 +838,20 @@ namespace nist_dom.fundamental
             testResults results = new testResults("Core0015C");
             try
             {
-                results.description = "If the sum of \"offset\" and \"count\" exceeds the " +
-                    "length of the character data then all the " +
-                    "16-bit units from the offset thru the end of the " +
-                    "data are removed.<br>";
+                results.description =
+                    "If the sum of \"offset\" and \"count\" exceeds the "
+                    + "length of the character data then all the "
+                    + "16-bit units from the offset thru the end of the "
+                    + "data are removed.<br>";
                 //
                 // Retrieve the targeted data and invoke its "deleteData" method.
                 //
-                testNode = util.nodeObject(util.FIRST,util.SIXTH);
+                testNode = util.nodeObject(util.FIRST, util.SIXTH);
                 testNodeData = (System.Xml.XmlCharacterData)testNode.FirstChild;
-                testNodeData.DeleteData(4,50);
+                testNodeData.DeleteData(4, 50);
                 computedValue = testNodeData.Data;
             }
-            catch(System.Exception ex)
+            catch (System.Exception ex)
             {
                 computedValue = "Exception " + ex.Message;
             }
@@ -853,16 +864,16 @@ namespace nist_dom.fundamental
 
             util.resetData();
 
-            Assert.AreEqual (results.expected, results.actual);
+            Assert.AreEqual(results.expected, results.actual);
         }
 
         //------------------------ End test case core-0015C --------------------------
         //
         //--------------------------- test case core-0016C ---------------------------
         //
-        // Testing feature - The "replaceData(offset,count,arg)" method replace the 
+        // Testing feature - The "replaceData(offset,count,arg)" method replace the
         //                   characters starting at the specified 16-bit units with the
-        //                   specified string.  Test for replacement at the 
+        //                   specified string.  Test for replacement at the
         //                   beginning of the data.
         //
         // Testing approach - Retrieve the character data from the last child of the
@@ -871,14 +882,14 @@ namespace nist_dom.fundamental
         //                    arg = "2500".  The method should replace the first four
         //                    characters of the character data with "2500".
         //
-        // Semantic Requirements: 11 
+        // Semantic Requirements: 11
         //
         //----------------------------------------------------------------------------
 
         [Test]
         public void core0016C()
         {
-            string computedValue = "";//0;
+            string computedValue = ""; //0;
             string expectedValue = "2500 North Ave. Dallas, Texas 98551";
             System.Xml.XmlNode testNode = null;
             System.Xml.XmlCharacterData testNodeData = null;
@@ -886,16 +897,17 @@ namespace nist_dom.fundamental
             testResults results = new testResults("Core0016C");
             try
             {
-                results.description = "Replace a character string at the beginning of character data.";
+                results.description =
+                    "Replace a character string at the beginning of character data.";
                 //
                 // Retrieve the targeted data and invoke its "replaceData" method .
                 //
-                testNode = util.nodeObject(util.FIRST,util.SIXTH);
+                testNode = util.nodeObject(util.FIRST, util.SIXTH);
                 testNodeData = (System.Xml.XmlCharacterData)testNode.FirstChild;
-                testNodeData.ReplaceData(0,4,"2500");
+                testNodeData.ReplaceData(0, 4, "2500");
                 computedValue = testNodeData.Data;
             }
-            catch(System.Exception ex)
+            catch (System.Exception ex)
             {
                 computedValue = "Exception " + ex.Message;
             }
@@ -908,7 +920,7 @@ namespace nist_dom.fundamental
 
             util.resetData();
 
-            Assert.AreEqual (results.expected, results.actual);
+            Assert.AreEqual(results.expected, results.actual);
         }
 
         //------------------------ End test case core-0016C --------------------------
@@ -944,12 +956,12 @@ namespace nist_dom.fundamental
                 //
                 // Retrieve the targeted data and invoke its "replaceData" method.
                 //
-                testNode = util.nodeObject(util.FIRST,util.SIXTH);
+                testNode = util.nodeObject(util.FIRST, util.SIXTH);
                 testNodeData = (System.Xml.XmlCharacterData)testNode.FirstChild;
-                testNodeData.ReplaceData(5,5,"South");
+                testNodeData.ReplaceData(5, 5, "South");
                 computedValue = testNodeData.Data;
             }
-            catch(System.Exception ex)
+            catch (System.Exception ex)
             {
                 computedValue = "Exception " + ex.Message;
             }
@@ -962,7 +974,7 @@ namespace nist_dom.fundamental
 
             util.resetData();
 
-            Assert.AreEqual (results.expected, results.actual);
+            Assert.AreEqual(results.expected, results.actual);
         }
 
         //------------------------ End test case core-0017C --------------------------
@@ -987,7 +999,7 @@ namespace nist_dom.fundamental
         [Test]
         public void core0018C()
         {
-            string computedValue = "";//0;
+            string computedValue = ""; //0;
             string expectedValue = "1230 North Ave. Dallas, Texas 98665";
             System.Xml.XmlNode testNode = null;
             System.Xml.XmlCharacterData testNodeData = null;
@@ -999,12 +1011,12 @@ namespace nist_dom.fundamental
                 //
                 // Retrieve the targeted data and invoke its "replaceData" method.
                 //
-                testNode = util.nodeObject(util.FIRST,util.SIXTH);
+                testNode = util.nodeObject(util.FIRST, util.SIXTH);
                 testNodeData = (System.Xml.XmlCharacterData)testNode.FirstChild;
-                testNodeData.ReplaceData(30,5,"98665");
+                testNodeData.ReplaceData(30, 5, "98665");
                 computedValue = testNodeData.Data;
             }
-            catch(System.Exception ex)
+            catch (System.Exception ex)
             {
                 computedValue = "Exception " + ex.Message;
             }
@@ -1017,7 +1029,7 @@ namespace nist_dom.fundamental
 
             util.resetData();
 
-            Assert.AreEqual (results.expected, results.actual);
+            Assert.AreEqual(results.expected, results.actual);
         }
 
         //------------------------ End test case core-0018C --------------------------
@@ -1035,7 +1047,7 @@ namespace nist_dom.fundamental
         //                    arg = "260030".  The method should replace characters
         //                    one thru four with the string "260030".  Note that the
         //                    length of the specified string is greater than the
-        //                    specified offset. 
+        //                    specified offset.
         //
         // Semantic Requirements: 11
         //
@@ -1048,21 +1060,22 @@ namespace nist_dom.fundamental
             string expectedValue = "260030 North Ave. Dallas, Texas 98551";
             System.Xml.XmlNode testNode = null;
             System.Xml.XmlCharacterData testNodeData = null;
-   
+
             testResults results = new testResults("Core0019C");
             try
             {
-                results.description = "Checks \"replaceData(offset,count,arg)\" method when " +
-                    "length of arg > count.";
+                results.description =
+                    "Checks \"replaceData(offset,count,arg)\" method when "
+                    + "length of arg > count.";
                 //
                 // Retrieve targeted data and invoke its "replaceData" method.
                 //
-                testNode = util.nodeObject(util.FIRST,util.SIXTH);
+                testNode = util.nodeObject(util.FIRST, util.SIXTH);
                 testNodeData = (System.Xml.XmlCharacterData)testNode.FirstChild;
-                testNodeData.ReplaceData(0,4,"260030");
+                testNodeData.ReplaceData(0, 4, "260030");
                 computedValue = testNodeData.Data;
             }
-            catch(System.Exception ex)
+            catch (System.Exception ex)
             {
                 computedValue = "Exception " + ex.Message;
             }
@@ -1075,15 +1088,15 @@ namespace nist_dom.fundamental
 
             util.resetData();
 
-            Assert.AreEqual (results.expected, results.actual);
+            Assert.AreEqual(results.expected, results.actual);
         }
 
         //------------------------ End test case core-0019C --------------------------
         //
         //--------------------------- test case core-0020C ---------------------------
         //
-        // Testing feature - If the sum of offset and count exceeds length then all 
-        //                   the 16-bit units to the end of data are replaced. 
+        // Testing feature - If the sum of offset and count exceeds length then all
+        //                   the 16-bit units to the end of data are replaced.
         //
         // Testing approach - Retrieve the character data from the last child of the
         //                    first employee.  The "replaceData(offset,count,arg)"
@@ -1091,7 +1104,7 @@ namespace nist_dom.fundamental
         //                    arg = "2600".  The method should replace all the
         //                    characters in the character data with "2600".  This
         //                    is because the sum of offset and count exceeds the
-        //                    length of the character data. 
+        //                    length of the character data.
         //
         // Semantic Requirements: 12
         //
@@ -1109,18 +1122,19 @@ namespace nist_dom.fundamental
             testResults results = new testResults("Core0020C");
             try
             {
-                results.description = "If the sum of offset and count exceeds the length " +
-                    "of the character data then the \"replaceData(offset,count,arg)\" " +
-                    "method replaces all the 16-bit units to the end of the data.";
+                results.description =
+                    "If the sum of offset and count exceeds the length "
+                    + "of the character data then the \"replaceData(offset,count,arg)\" "
+                    + "method replaces all the 16-bit units to the end of the data.";
                 //
                 // Retrieve the targeted data and invoke its "replaceData" method.
                 //
-                testNode = util.nodeObject(util.FIRST,util.SIXTH);
+                testNode = util.nodeObject(util.FIRST, util.SIXTH);
                 testNodeData = (System.Xml.XmlCharacterData)testNode.FirstChild;
-                testNodeData.ReplaceData(0,50,"2600");
+                testNodeData.ReplaceData(0, 50, "2600");
                 computedValue = testNodeData.Data;
             }
-            catch(System.Exception ex)
+            catch (System.Exception ex)
             {
                 computedValue = "Exception " + ex.Message;
             }
@@ -1133,15 +1147,15 @@ namespace nist_dom.fundamental
 
             util.resetData();
 
-            Assert.AreEqual (results.expected, results.actual);
+            Assert.AreEqual(results.expected, results.actual);
         }
 
         //------------------------ End test case core-0020C --------------------------
         //
         //--------------------------- test case core-0021C ---------------------------
         //
-        // Testing feature - The "data" attribute raises a 
-        //                   NO_MODIFICATION_ALLOWED_ERR Exception when 
+        // Testing feature - The "data" attribute raises a
+        //                   NO_MODIFICATION_ALLOWED_ERR Exception when
         //                   this node is readonly.
         //
         // Testing approach - Retrieve the character data from the first
@@ -1161,31 +1175,32 @@ namespace nist_dom.fundamental
             string computedValue = "";
             System.Xml.XmlNode testNode = null;
             System.Xml.XmlText readOnlyText = null;
-            string expectedValue = "System.ArgumentException";//util.NO_MODIFICATION_ALLOWED_ERR;
+            string expectedValue = "System.ArgumentException"; //util.NO_MODIFICATION_ALLOWED_ERR;
 
             testResults results = new testResults("Core0021C");
             try
             {
-                results.description = "The \"data\" attribute raises a NO_MODIFICATION_ALLOWED_ERR " +
-                    "DOMException when this node is readonly.";
+                results.description =
+                    "The \"data\" attribute raises a NO_MODIFICATION_ALLOWED_ERR "
+                    + "DOMException when this node is readonly.";
                 //
                 // Retrieve targeted data.
                 //
-                testNode = util.nodeObject(util.SECOND,util.SIXTH);
+                testNode = util.nodeObject(util.SECOND, util.SIXTH);
                 readOnlyText = (System.Xml.XmlText)testNode.FirstChild.FirstChild;
                 //
-                // Attempt to modify the "data" attribute should raise exception. 
+                // Attempt to modify the "data" attribute should raise exception.
                 //
-                try 
+                try
                 {
                     readOnlyText.Data = "ABCD";
                 }
-                catch (ArgumentException ex) 
+                catch (ArgumentException ex)
                 {
-                    computedValue = ex.GetType ().FullName; 
+                    computedValue = ex.GetType().FullName;
                 }
             }
-            catch(InvalidOperationException ex)
+            catch (InvalidOperationException ex)
             {
                 computedValue = "Exception " + ex.Message;
             }
@@ -1195,7 +1210,7 @@ namespace nist_dom.fundamental
 
             util.resetData();
 
-            Assert.AreEqual (results.expected, results.actual);
+            Assert.AreEqual(results.expected, results.actual);
         }
 
         //------------------------ End test case core-0021C --------------------------
@@ -1208,8 +1223,8 @@ namespace nist_dom.fundamental
         //
         // Testing approach - Retrieve the textual data from the the first
         //                    EntityReference node of the last child of the
-        //                    second employee and attempt to append data to it.  
-        //                    Descendants of EntityReference nodes are readonly 
+        //                    second employee and attempt to append data to it.
+        //                    Descendants of EntityReference nodes are readonly
         //                    nodes and therefore the desired exception should be
         //                    raised.
         //
@@ -1224,32 +1239,33 @@ namespace nist_dom.fundamental
             string computedValue = "";
             System.Xml.XmlNode testNode = null;
             System.Xml.XmlCharacterData readOnlyNode = null;
-            string expectedValue = "System.ArgumentException";//util.NO_MODIFICATION_ALLOWED_ERR;
+            string expectedValue = "System.ArgumentException"; //util.NO_MODIFICATION_ALLOWED_ERR;
 
             testResults results = new testResults("Core0022C");
             try
             {
-                results.description = "The \"appendData(arg)\" method raises a " +
-                    "NO_MODIFICATION_ALLOWED_ERR Exception when this " +
-                    "node is readonly.";
+                results.description =
+                    "The \"appendData(arg)\" method raises a "
+                    + "NO_MODIFICATION_ALLOWED_ERR Exception when this "
+                    + "node is readonly.";
                 //
                 // Retrieve the targeted data.
                 //
-                testNode = util.nodeObject(util.SECOND,util.SIXTH);
+                testNode = util.nodeObject(util.SECOND, util.SIXTH);
                 readOnlyNode = (System.Xml.XmlCharacterData)testNode.FirstChild.FirstChild;
                 //
-                // Attempt to append data to a readonly node should raise an exception. 
+                // Attempt to append data to a readonly node should raise an exception.
                 //
-                try 
+                try
                 {
                     readOnlyNode.AppendData("002");
                 }
-                catch(ArgumentException ex) 
+                catch (ArgumentException ex)
                 {
-                    computedValue = ex.GetType ().FullName; 
+                    computedValue = ex.GetType().FullName;
                 }
             }
-            catch(System.Exception ex)
+            catch (System.Exception ex)
             {
                 computedValue = "Exception " + ex.Message;
             }
@@ -1259,7 +1275,7 @@ namespace nist_dom.fundamental
 
             util.resetData();
 
-            Assert.AreEqual (results.expected, results.actual);
+            Assert.AreEqual(results.expected, results.actual);
         }
 
         //------------------------ End test case core-0022C --------------------------
@@ -1271,7 +1287,7 @@ namespace nist_dom.fundamental
         //                   this node is readonly.
         //
         // Testing approach - Retrieve the Text data of the first EntityReference
-        //                    node from the last child of the second employee and 
+        //                    node from the last child of the second employee and
         //                    attempt to insert data into it.  Since the descendants
         //                    of EntityReference nodes are readonly, the desired
         //                    exception should be raised.
@@ -1287,32 +1303,33 @@ namespace nist_dom.fundamental
             string computedValue = "";
             System.Xml.XmlNode testNode = null;
             System.Xml.XmlCharacterData readOnlyNode = null;
-            string expectedValue = "System.ArgumentException";//util.NO_MODIFICATION_ALLOWED_ERR;
+            string expectedValue = "System.ArgumentException"; //util.NO_MODIFICATION_ALLOWED_ERR;
 
             testResults results = new testResults("Core0023C");
             try
             {
-                results.description = "The \"insertData(offset,arg)\" method raises a " +
-                    "NO_MODIFICATION_ALLOWED_ERR Exception when this " +
-                    "node is readonly.";
+                results.description =
+                    "The \"insertData(offset,arg)\" method raises a "
+                    + "NO_MODIFICATION_ALLOWED_ERR Exception when this "
+                    + "node is readonly.";
                 //
                 // Retrieve the targeted data
                 //
-                testNode = util.nodeObject(util.SECOND,util.SIXTH);
+                testNode = util.nodeObject(util.SECOND, util.SIXTH);
                 readOnlyNode = (System.Xml.XmlCharacterData)testNode.FirstChild.FirstChild;
                 //
                 // Attempt to insert data into a readonly node should raise an exception.
                 //
-                try 
+                try
                 {
-                    readOnlyNode.InsertData(2,"ABCD");
+                    readOnlyNode.InsertData(2, "ABCD");
                 }
-                catch(ArgumentException ex) 
+                catch (ArgumentException ex)
                 {
-                    computedValue = ex.GetType ().FullName; 
+                    computedValue = ex.GetType().FullName;
                 }
             }
-            catch(System.Exception ex)
+            catch (System.Exception ex)
             {
                 computedValue = "Exception " + ex.Message;
             }
@@ -1322,7 +1339,7 @@ namespace nist_dom.fundamental
 
             util.resetData();
 
-            Assert.AreEqual (results.expected, results.actual);
+            Assert.AreEqual(results.expected, results.actual);
         }
 
         //------------------------ End test case core-0023C --------------------------
@@ -1335,8 +1352,8 @@ namespace nist_dom.fundamental
         //
         // Testing approach - Retrieve the textual data of the the first
         //                    EntityReference node from the last child of the
-        //                    second employee and attempt to delete data from it.  
-        //                    Since the descendants of EntityReference nodes are 
+        //                    second employee and attempt to delete data from it.
+        //                    Since the descendants of EntityReference nodes are
         //                    readonly, the desired exception should be raised.
         //
         // Semantic Requirements: 16
@@ -1350,33 +1367,34 @@ namespace nist_dom.fundamental
             string computedValue = "";
             System.Xml.XmlCharacterData readOnlyNode = null;
             System.Xml.XmlNode testNode = null;
-            string expectedValue = "System.ArgumentException";//util.NO_MODIFICATION_ALLOWED_ERR;
+            string expectedValue = "System.ArgumentException"; //util.NO_MODIFICATION_ALLOWED_ERR;
 
             testResults results = new testResults("Core0024C");
             try
             {
-                results.description = "The \"deleteData(offset,count)\" method raises a " +
-                    "NO_MODIFICATION_ALLOWED_ERR Exception when this " +
-                    "node is readonly.";
+                results.description =
+                    "The \"deleteData(offset,count)\" method raises a "
+                    + "NO_MODIFICATION_ALLOWED_ERR Exception when this "
+                    + "node is readonly.";
                 //
-                // Retrieve the targeted data. 
+                // Retrieve the targeted data.
                 //
-                testNode = util.nodeObject(util.SECOND,util.SIXTH); 
+                testNode = util.nodeObject(util.SECOND, util.SIXTH);
                 readOnlyNode = (System.Xml.XmlCharacterData)testNode.FirstChild.FirstChild;
                 //
                 // Attempt to delete data from a readonly node should raise an
                 // exception.
                 //
-                try 
+                try
                 {
-                    readOnlyNode.DeleteData(2,4);
+                    readOnlyNode.DeleteData(2, 4);
                 }
-                catch(System.Exception ex) 
+                catch (System.Exception ex)
                 {
-                    computedValue = ex.GetType ().FullName; 
+                    computedValue = ex.GetType().FullName;
                 }
             }
-            catch(System.Exception ex)
+            catch (System.Exception ex)
             {
                 computedValue = "Exception " + ex.Message;
             }
@@ -1386,7 +1404,7 @@ namespace nist_dom.fundamental
 
             util.resetData();
 
-            Assert.AreEqual (results.expected, results.actual);
+            Assert.AreEqual(results.expected, results.actual);
         }
 
         //------------------------ End test case core-0024C --------------------------
@@ -1400,7 +1418,7 @@ namespace nist_dom.fundamental
         // Testing approach - Retrieve the textual data of the first EntityReference
         //                    node from the last child of the second employee and
         //                    attempt to replace data from it.  Since the descendants
-        //                    of EntityReference nodes are readonly, the desired 
+        //                    of EntityReference nodes are readonly, the desired
         //                    exception should be raised.
         //
         // Semantic Requirements: 17
@@ -1414,33 +1432,34 @@ namespace nist_dom.fundamental
             string computedValue = "";
             System.Xml.XmlCharacterData readOnlyNode = null;
             System.Xml.XmlNode testNode = null;
-            string expectedValue = "System.ArgumentException";//util.NO_MODIFICATION_ALLOWED_ERR;
+            string expectedValue = "System.ArgumentException"; //util.NO_MODIFICATION_ALLOWED_ERR;
 
             testResults results = new testResults("Core0025C");
             try
             {
-                results.description = "The \"replaceData(offset,count,arg)\" method raises a " +
-                    "NO_MODIFICATION_ALLOWED_ERR Exception " +
-                    "when this node is readonly.";
+                results.description =
+                    "The \"replaceData(offset,count,arg)\" method raises a "
+                    + "NO_MODIFICATION_ALLOWED_ERR Exception "
+                    + "when this node is readonly.";
                 //
                 // Retrieve the targeted data.
                 //
-                testNode = util.nodeObject(util.SECOND,util.SIXTH);
+                testNode = util.nodeObject(util.SECOND, util.SIXTH);
                 readOnlyNode = (System.Xml.XmlCharacterData)testNode.FirstChild.FirstChild;
                 //
                 // Attempt to replace data from a readonly node should raise an
                 // exception.
                 //
-                try 
+                try
                 {
-                    readOnlyNode.ReplaceData(2,4,"ABCD");
+                    readOnlyNode.ReplaceData(2, 4, "ABCD");
                 }
-                catch(System.Exception ex) 
+                catch (System.Exception ex)
                 {
-                    computedValue = ex.GetType ().FullName; 
+                    computedValue = ex.GetType().FullName;
                 }
             }
-            catch(System.Exception ex)
+            catch (System.Exception ex)
             {
                 computedValue = "Exception " + ex.Message;
             }
@@ -1450,19 +1469,19 @@ namespace nist_dom.fundamental
 
             util.resetData();
 
-            Assert.AreEqual (results.expected, results.actual);
+            Assert.AreEqual(results.expected, results.actual);
         }
 
         //------------------------ End test case core-0025C --------------------------
         //
         //--------------------------- test case core-0026C ---------------------------
         //
-        // Testing feature - The "substringData(offset,count)" method raises an 
+        // Testing feature - The "substringData(offset,count)" method raises an
         //                   INDEX_SIZE_ERR Exception if the specified offset is
         //                   negative.
         //
         // Testing approach - Retrieve the character data of the last child of the
-        //                    of the first employee and invoke its 
+        //                    of the first employee and invoke its
         //                    "substringData(offset,count)" method with offset = -5
         //                    count = 3.  It should raise the desired exception since
         //                    the offset is negative.
@@ -1478,32 +1497,33 @@ namespace nist_dom.fundamental
             string returnedValue = "";
             System.Xml.XmlNode testNode = null;
             System.Xml.XmlCharacterData testNodeData = null;
-            string expectedValue = "System.ArgumentOutOfRangeException";//util.INDEX_SIZE_ERR;
+            string expectedValue = "System.ArgumentOutOfRangeException"; //util.INDEX_SIZE_ERR;
 
             testResults results = new testResults("Core0026C");
             try
             {
-                results.description = "The \"substringData(offset,count)\" method raises an " +
-                    "INDEX_SIZE_ERR Exception if the specified " +
-                    "offset is negative.";
+                results.description =
+                    "The \"substringData(offset,count)\" method raises an "
+                    + "INDEX_SIZE_ERR Exception if the specified "
+                    + "offset is negative.";
                 //
                 // Retrieve the targeted data.
                 //
-                testNode = util.nodeObject(util.FIRST,util.SIXTH);
-                testNodeData = (System.Xml.XmlCharacterData)testNode.FirstChild;  
+                testNode = util.nodeObject(util.FIRST, util.SIXTH);
+                testNodeData = (System.Xml.XmlCharacterData)testNode.FirstChild;
                 //
                 // A negative offset value should raise and exception.
                 //
-                try 
+                try
                 {
-                    returnedValue = testNodeData.Substring(-5,3); 
+                    returnedValue = testNodeData.Substring(-5, 3);
                 }
-                catch(System.Exception ex) 
+                catch (System.Exception ex)
                 {
-                    computedValue = ex.GetType ().FullName; 
+                    computedValue = ex.GetType().FullName;
                 }
             }
-            catch(System.Exception ex)
+            catch (System.Exception ex)
             {
                 computedValue = "Exception " + ex.Message;
             }
@@ -1511,7 +1531,7 @@ namespace nist_dom.fundamental
             results.expected = expectedValue;
             results.actual = computedValue;
 
-            Assert.AreEqual (results.expected, results.actual);
+            Assert.AreEqual(results.expected, results.actual);
         }
 
         //------------------------ End test case core-0026C --------------------------
@@ -1521,16 +1541,16 @@ namespace nist_dom.fundamental
         // Testing feature - The "substringData(offset,count)" method raises an
         //                   INDEX_SIZE_ERR Exception if the specified offset is
         //                   greater than the number of 16-bit units in the "data"
-        //                   attribute. 
+        //                   attribute.
         //
         // Testing approach - Retrieve the character data of the last child of the
-        //                    first employee and invoke its 
-        //                    "substringData(offset,count)" method with offset = 40 and 
+        //                    first employee and invoke its
+        //                    "substringData(offset,count)" method with offset = 40 and
         //                    count = 3.  The value of the offset is greater than that
-        //                    one of the "data" attribute, therefore the desired 
+        //                    one of the "data" attribute, therefore the desired
         //                    exception should be raised.
         //
-        // Semantic Requirements: 20 
+        // Semantic Requirements: 20
         //
         //----------------------------------------------------------------------------
 
@@ -1546,36 +1566,37 @@ namespace nist_dom.fundamental
             testResults results = new testResults("Core0027C");
             try
             {
-                results.description = "The \"substringData(offset,count)\" method raises an " +
-                    "ArgumentOutOfRangeException Exception if the specified " +
-                    "offset is greater than the number of 16-bit units " +
-                    "in the \"data\" attribute.";
+                results.description =
+                    "The \"substringData(offset,count)\" method raises an "
+                    + "ArgumentOutOfRangeException Exception if the specified "
+                    + "offset is greater than the number of 16-bit units "
+                    + "in the \"data\" attribute.";
                 //
                 // Retrieve the targeted data.
                 //
-                testNode = util.nodeObject(util.FIRST,util.SIXTH);
+                testNode = util.nodeObject(util.FIRST, util.SIXTH);
                 testNodeData = (System.Xml.XmlCharacterData)testNode.FirstChild;
                 //
                 // Offset greater than number of characters in data should raise an
                 // exception.
                 //
-                try 
+                try
                 {
-                    returnedValue = testNodeData.Substring(40,3);
+                    returnedValue = testNodeData.Substring(40, 3);
                 }
-                catch(System.Exception ex) 
+                catch (System.Exception ex)
                 {
                     computedValue = ex.GetType().ToString();
                 }
             }
-            catch(System.Exception ex)
+            catch (System.Exception ex)
             {
                 computedValue = "Exception " + ex.Message;
             }
             results.expected = expectedValue;
             results.actual = computedValue;
 
-            Assert.AreEqual (results.expected, results.actual);
+            Assert.AreEqual(results.expected, results.actual);
         }
 
         //------------------------ End test case core-0027C --------------------------
@@ -1583,7 +1604,7 @@ namespace nist_dom.fundamental
         //--------------------------- test case core-0028C ---------------------------
         //
         // Testing feature - The "substringData(offset,count)" method raises an
-        //                   INDEX_SIZE_ERR Exception if the count is negative 
+        //                   INDEX_SIZE_ERR Exception if the count is negative
         //
         // Testing approach - Retrieve the character data of the last child of the
         //                    first employee and invoke its
@@ -1591,7 +1612,7 @@ namespace nist_dom.fundamental
         //                    and count = -3.  Since the value of count is negative,
         //                    the desired exception should be raised.
         //
-        // Semantic Requirements: 21 
+        // Semantic Requirements: 21
         //
         //----------------------------------------------------------------------------
 
@@ -1607,33 +1628,34 @@ namespace nist_dom.fundamental
             testResults results = new testResults("Core0028C");
             try
             {
-                results.description = "The \"substringData(offset,count)\" method raises an " +
-                    "INDEX_SIZE_ERR Exception if the count is negative.";
+                results.description =
+                    "The \"substringData(offset,count)\" method raises an "
+                    + "INDEX_SIZE_ERR Exception if the count is negative.";
                 //
                 // Retrieve the targeted data.
                 //
-                testNode = util.nodeObject(util.FIRST,util.SIXTH);
+                testNode = util.nodeObject(util.FIRST, util.SIXTH);
                 testNodeData = (System.Xml.XmlCharacterData)testNode.FirstChild;
                 //
                 // A negative value for "count" should raise an exception.
                 //
-                try 
+                try
                 {
-                    returnedValue = testNodeData.Substring(10,-3);
+                    returnedValue = testNodeData.Substring(10, -3);
                 }
-                catch(System.Exception ex) 
+                catch (System.Exception ex)
                 {
                     computedValue = ex.GetType().ToString();
                 }
             }
-            catch(System.Exception ex)
+            catch (System.Exception ex)
             {
                 computedValue = "Exception " + ex.Message;
             }
             results.expected = expectedValue;
             results.actual = computedValue;
 
-            Assert.AreEqual (results.expected, results.actual);
+            Assert.AreEqual(results.expected, results.actual);
         }
 
         //------------------------ End test case core-0028C --------------------------
@@ -1650,7 +1672,7 @@ namespace nist_dom.fundamental
         //                    offset is negative and therefore the desired exception
         //                    should be raised.
         //
-        // Semantic Requirements: 22 
+        // Semantic Requirements: 22
         //
         //----------------------------------------------------------------------------
 
@@ -1665,28 +1687,29 @@ namespace nist_dom.fundamental
             testResults results = new testResults("Core0029C");
             try
             {
-                results.description = "The \"deleteData(offset,count)\" method raises an " +
-                    "ArgumentOutOfRangeException if the specified " +
-                    "offset is negative.";
+                results.description =
+                    "The \"deleteData(offset,count)\" method raises an "
+                    + "ArgumentOutOfRangeException if the specified "
+                    + "offset is negative.";
                 //
                 // Retrieve the targeted data.
                 //
-                testNode = util.nodeObject(util.FIRST,util.SIXTH);
+                testNode = util.nodeObject(util.FIRST, util.SIXTH);
                 testNodeData = (System.Xml.XmlCharacterData)testNode.FirstChild;
                 //
                 // Invoke "deleteData(offset,count)" method with negative offset should
                 // should raise an excetion.
                 //
-                try 
+                try
                 {
-                    testNodeData.DeleteData(-5,3);
+                    testNodeData.DeleteData(-5, 3);
                 }
-                catch(System.Exception ex) 
+                catch (System.Exception ex)
                 {
                     computedValue = ex.GetType().ToString();
                 }
             }
-            catch(System.Exception ex)
+            catch (System.Exception ex)
             {
                 computedValue = "Exception " + ex.Message;
             }
@@ -1695,7 +1718,7 @@ namespace nist_dom.fundamental
 
             util.resetData();
 
-            Assert.AreEqual (results.expected, results.actual);
+            Assert.AreEqual(results.expected, results.actual);
         }
 
         //------------------------ End test case core-0029C --------------------------
@@ -1711,10 +1734,10 @@ namespace nist_dom.fundamental
         //                    first employee and invoke its "deleteData(offset,count)"
         //                    method with offset = 40 and count = 3.  The value of the
         //                    offset is greater than the number of characters in the
-        //                    "data" attribute (35) and therefore the intended 
+        //                    "data" attribute (35) and therefore the intended
         //                    exception should be raised.
         //
-        // Semantic Requirements: 23 
+        // Semantic Requirements: 23
         //
         //----------------------------------------------------------------------------
 
@@ -1729,29 +1752,30 @@ namespace nist_dom.fundamental
             testResults results = new testResults("Core0030C");
             try
             {
-                results.description = "The \"deleteData(offset,count)\" method raises an " +
-                    "ArgumentOutOfRangeException if the specified " +
-                    "offset is greater than the number of characters " +
-                    "in the \"data\" attribute.";
+                results.description =
+                    "The \"deleteData(offset,count)\" method raises an "
+                    + "ArgumentOutOfRangeException if the specified "
+                    + "offset is greater than the number of characters "
+                    + "in the \"data\" attribute.";
                 //
                 // Retrieve the targeted data.
                 //
-                testNode = util.nodeObject(util.FIRST,util.SIXTH);
+                testNode = util.nodeObject(util.FIRST, util.SIXTH);
                 testNodeData = (System.Xml.XmlCharacterData)testNode.FirstChild;
                 //
                 // Invocation of "deleteData(offset,count)" method with offset > data
                 // attribute should raise and exception.
                 //
-                try 
+                try
                 {
-                    testNodeData.DeleteData(40,3);
+                    testNodeData.DeleteData(40, 3);
                 }
-                catch(System.Exception ex) 
+                catch (System.Exception ex)
                 {
-                    computedValue = ex.GetType().ToString(); 
+                    computedValue = ex.GetType().ToString();
                 }
             }
-            catch(System.Exception ex)
+            catch (System.Exception ex)
             {
                 computedValue = "Exception " + ex.Message;
             }
@@ -1761,7 +1785,7 @@ namespace nist_dom.fundamental
 
             util.resetData();
 
-            Assert.AreEqual (results.expected, results.actual);
+            Assert.AreEqual(results.expected, results.actual);
         }
 
         //------------------------ End test case core-0030C --------------------------
@@ -1773,12 +1797,12 @@ namespace nist_dom.fundamental
         //                   negative.
         //
         // Testing approach - Retrieve the character data of the last child of the
-        //                    first employee and invoke its "deleteData(offset,count)" 
+        //                    first employee and invoke its "deleteData(offset,count)"
         //                    method with offset = 10 and count = -3.  The value
         //                    of the specified count is negative and therefore the
         //                    intended exception should be raised.
         //
-        // Semantic Requirements: 24 
+        // Semantic Requirements: 24
         //
         //----------------------------------------------------------------------------
 
@@ -1793,28 +1817,29 @@ namespace nist_dom.fundamental
             testResults results = new testResults("Core0031C");
             try
             {
-                results.description = "The \"deleteData(offset,count)\" method raises an " +
-                    "ArgumentOutOfRangeException if the specified " +
-                    "count is negative.";
+                results.description =
+                    "The \"deleteData(offset,count)\" method raises an "
+                    + "ArgumentOutOfRangeException if the specified "
+                    + "count is negative.";
                 //
                 // Retrieve the targeted data.
                 //
-                testNode = util.nodeObject(util.FIRST,util.SIXTH);
+                testNode = util.nodeObject(util.FIRST, util.SIXTH);
                 testNodeData = (System.Xml.XmlCharacterData)testNode.FirstChild;
                 //
-                // Invocation of "deleteData(offset,count)" method with count < 0 
-                // should raise and exception. 
+                // Invocation of "deleteData(offset,count)" method with count < 0
+                // should raise and exception.
                 //
-                try 
+                try
                 {
-                    testNodeData.DeleteData(10,-3);
+                    testNodeData.DeleteData(10, -3);
                 }
-                catch(System.Exception ex) 
+                catch (System.Exception ex)
                 {
                     computedValue = ex.GetType().ToString();
                 }
             }
-            catch(System.Exception ex)
+            catch (System.Exception ex)
             {
                 computedValue = "Exception " + ex.Message;
             }
@@ -1824,7 +1849,7 @@ namespace nist_dom.fundamental
 
             util.resetData();
 
-            Assert.AreEqual (results.expected, results.actual);
+            Assert.AreEqual(results.expected, results.actual);
         }
 
         //------------------------ End test case core-0031C --------------------------
@@ -1836,10 +1861,10 @@ namespace nist_dom.fundamental
         //                   negative.
         //
         // Testing approach - Retrieve the character data of the last child of the
-        //                    first employee and invoke its 
-        //                    "replaceData(offset,count,arg)" method with 
-        //                    offset = -5 and count = 3 and arg = "ABC".  The value 
-        //                    of the offset is negative and therefore the desired 
+        //                    first employee and invoke its
+        //                    "replaceData(offset,count,arg)" method with
+        //                    offset = -5 and count = 3 and arg = "ABC".  The value
+        //                    of the offset is negative and therefore the desired
         //                    exception should be raised.
         //
         // Semantic Requirements: 25
@@ -1857,28 +1882,29 @@ namespace nist_dom.fundamental
             testResults results = new testResults("Core0032C");
             try
             {
-                results.description = "The \"replaceData(offset,count,arg)\" method raises an " +
-                    "ArgumentOutOfRangeException if the specified " +
-                    "offset is negative.";
+                results.description =
+                    "The \"replaceData(offset,count,arg)\" method raises an "
+                    + "ArgumentOutOfRangeException if the specified "
+                    + "offset is negative.";
                 //
                 // Retrieve the targeted data.
                 //
-                testNode = util.nodeObject(util.FIRST,util.SIXTH);
+                testNode = util.nodeObject(util.FIRST, util.SIXTH);
                 testNodeData = (System.Xml.XmlCharacterData)testNode.FirstChild;
                 //
                 // Invocation of "replaceData(offset,count,arg)" method offset < 0
                 // should raise an exception.
                 //
-                try 
+                try
                 {
-                    testNodeData.ReplaceData(-5,3,"ABC");
+                    testNodeData.ReplaceData(-5, 3, "ABC");
                 }
-                catch(System.Exception ex) 
+                catch (System.Exception ex)
                 {
                     computedValue = ex.GetType().ToString();
                 }
             }
-            catch(System.Exception ex)
+            catch (System.Exception ex)
             {
                 computedValue = "Exception " + ex.Message;
             }
@@ -1888,7 +1914,7 @@ namespace nist_dom.fundamental
 
             util.resetData();
 
-            Assert.AreEqual (results.expected, results.actual);
+            Assert.AreEqual(results.expected, results.actual);
         }
 
         //------------------------ End test case core-0032C --------------------------
@@ -1901,11 +1927,11 @@ namespace nist_dom.fundamental
         //                   attribute.
         //
         // Testing approach - Retrieve the character data of the last child of the
-        //                    first employee and invoke its 
+        //                    first employee and invoke its
         //                    "replaceData(offset,count,arg)" method with offset = 40,
-        //                    count = 3 and arg = "ABC".  The value of the offset is 
-        //                    greater than the number of characters in the "data" 
-        //                    attribute (35) and therefore the intended exception 
+        //                    count = 3 and arg = "ABC".  The value of the offset is
+        //                    greater than the number of characters in the "data"
+        //                    attribute (35) and therefore the intended exception
         //                    should be raised.
         //
         // Semantic Requirements: 26
@@ -1923,29 +1949,30 @@ namespace nist_dom.fundamental
             testResults results = new testResults("Core0033C");
             try
             {
-                results.description = "The \"replaceData(offset,count,arg)\" method raises an " +
-                    "ArgumentOutOfRangeException if the specified " +
-                    "offset is greater than the number of 16-bit units " +
-                    "in the \"data\" attribute.";
+                results.description =
+                    "The \"replaceData(offset,count,arg)\" method raises an "
+                    + "ArgumentOutOfRangeException if the specified "
+                    + "offset is greater than the number of 16-bit units "
+                    + "in the \"data\" attribute.";
                 //
                 // Retrieve the targeted data.
                 //
-                testNode = util.nodeObject(util.FIRST,util.SIXTH);
+                testNode = util.nodeObject(util.FIRST, util.SIXTH);
                 testNodeData = (System.Xml.XmlCharacterData)testNode.FirstChild;
                 //
-                // Invocation of "replaceData(offset,count,arg)" method with offset > data  
+                // Invocation of "replaceData(offset,count,arg)" method with offset > data
                 // attribute should raise and exception.
                 //
-                try 
+                try
                 {
-                    testNodeData.ReplaceData(40,3,"ABC");
+                    testNodeData.ReplaceData(40, 3, "ABC");
                 }
-                catch(System.Exception ex) 
+                catch (System.Exception ex)
                 {
                     computedValue = ex.GetType().ToString();
                 }
             }
-            catch(System.Exception ex)
+            catch (System.Exception ex)
             {
                 computedValue = "Exception " + ex.Message;
             }
@@ -1955,8 +1982,8 @@ namespace nist_dom.fundamental
 
             util.resetData();
 
-            Assert.AreEqual (results.expected, results.actual);
-        } 
+            Assert.AreEqual(results.expected, results.actual);
+        }
 
         //------------------------ End test case core-0033C --------------------------
         //
@@ -1967,10 +1994,10 @@ namespace nist_dom.fundamental
         //                   negative.
         //
         // Testing approach - Retrieve the character data of the last child of the
-        //                    first employee and invoke its 
+        //                    first employee and invoke its
         //                    "replaceData(offset,count,arg)" method with offset = 10,
-        //                    count = -3 and arg = "ABC".  The value of the specified 
-        //                    count is negative and therefore the intended exception 
+        //                    count = -3 and arg = "ABC".  The value of the specified
+        //                    count is negative and therefore the intended exception
         //                    should be raised.
         //
         // Semantic Requirements: 27
@@ -1988,28 +2015,29 @@ namespace nist_dom.fundamental
             testResults results = new testResults("Core0034C");
             try
             {
-                results.description = "The \"replaceData(offset,count,arg)\" method raises an " +
-                    "ArgumentOutOfRangeException if the specified " +
-                    "count is negative.";
+                results.description =
+                    "The \"replaceData(offset,count,arg)\" method raises an "
+                    + "ArgumentOutOfRangeException if the specified "
+                    + "count is negative.";
                 //
                 // Retrieve the targeted data.
                 //
-                testNode = util.nodeObject(util.FIRST,util.SIXTH);
+                testNode = util.nodeObject(util.FIRST, util.SIXTH);
                 testNodeData = (System.Xml.XmlCharacterData)testNode.FirstChild;
                 //
                 // Invocation of "replaceData(offset,count,arg)" method with count < 0
                 // should raise an exception.
                 //
-                try 
+                try
                 {
-                    testNodeData.ReplaceData(10,-3,"ABC");
+                    testNodeData.ReplaceData(10, -3, "ABC");
                 }
-                catch(System.Exception ex) 
+                catch (System.Exception ex)
                 {
-                    computedValue = ex.GetType().ToString(); 
+                    computedValue = ex.GetType().ToString();
                 }
             }
-            catch(System.Exception ex)
+            catch (System.Exception ex)
             {
                 computedValue = "Exception " + ex.Message;
             }
@@ -2019,7 +2047,7 @@ namespace nist_dom.fundamental
 
             util.resetData();
 
-            Assert.AreEqual (results.expected, results.actual);
+            Assert.AreEqual(results.expected, results.actual);
         }
 
         //------------------------ End test case core-0034C --------------------------
@@ -2031,7 +2059,7 @@ namespace nist_dom.fundamental
         //                   negative.
         //
         // Testing approach - Retrieve the character data from the last child of the
-        //                    first employee and invoke its "insertData(offset,arg)" 
+        //                    first employee and invoke its "insertData(offset,arg)"
         //                    method with offset = -5 arg = "ABC".  The value
         //                    of the offset is negative and therefore the desired
         //                    exception should be raised.
@@ -2051,27 +2079,28 @@ namespace nist_dom.fundamental
             testResults results = new testResults("Core0035C");
             try
             {
-                results.description = "The \"insertData(offset,arg)\" method raises an " +
-                    "ArgumentOutOfRangeException if the specified offset is negative.";
+                results.description =
+                    "The \"insertData(offset,arg)\" method raises an "
+                    + "ArgumentOutOfRangeException if the specified offset is negative.";
                 //
                 // Retrieve the targeted data.
                 //
-                testNode = util.nodeObject(util.FIRST,util.SIXTH);
+                testNode = util.nodeObject(util.FIRST, util.SIXTH);
                 testNodeData = (System.Xml.XmlCharacterData)testNode.FirstChild;
                 //
                 // Invocation of insertData(offset,arg)" method with offset < 0
                 // should raise an exception.
                 //
-                try 
+                try
                 {
-                    testNodeData.InsertData(-5,"ABC");
+                    testNodeData.InsertData(-5, "ABC");
                 }
-                catch(System.Exception ex) 
+                catch (System.Exception ex)
                 {
                     computedValue = ex.GetType().ToString();
                 }
             }
-            catch(System.Exception ex)
+            catch (System.Exception ex)
             {
                 computedValue = "Exception " + ex.Message;
             }
@@ -2081,7 +2110,7 @@ namespace nist_dom.fundamental
 
             util.resetData();
 
-            Assert.AreEqual (results.expected, results.actual);
+            Assert.AreEqual(results.expected, results.actual);
         }
 
         //------------------------ End test case core-0035C --------------------------
@@ -2094,9 +2123,9 @@ namespace nist_dom.fundamental
         //                   attribute.
         //
         // Testing approach - Retrieve the character data from the last child of the
-        //                    first employee and invoke its "insertData(offset,arg)" 
-        //                    method with offset = 40 and arg = "ABC".  The value of 
-        //                    the offset is greater than the number of characters in 
+        //                    first employee and invoke its "insertData(offset,arg)"
+        //                    method with offset = 40 and arg = "ABC".  The value of
+        //                    the offset is greater than the number of characters in
         //                    the "data" attribute(35) and therefore the intended
         //                    exception should be raised.
         //
@@ -2115,29 +2144,30 @@ namespace nist_dom.fundamental
             testResults results = new testResults("Core0036C");
             try
             {
-                results.description = "The \"insertData(offset,arg)\" method raises an " +
-                    "ArgumentOutOfRangeException if the specified " +
-                    "offset is greater than the number of 16-bit units " +
-                    "in the \"data\" attribute.<br>";
+                results.description =
+                    "The \"insertData(offset,arg)\" method raises an "
+                    + "ArgumentOutOfRangeException if the specified "
+                    + "offset is greater than the number of 16-bit units "
+                    + "in the \"data\" attribute.<br>";
                 //
                 // Retrieve the targeted data.
                 //
-                testNode = util.nodeObject(util.FIRST,util.SIXTH);
+                testNode = util.nodeObject(util.FIRST, util.SIXTH);
                 testNodeData = (System.Xml.XmlCharacterData)testNode.FirstChild;
                 //
-                // Invocation of "insertData(offset arg)" method with offset > data 
+                // Invocation of "insertData(offset arg)" method with offset > data
                 // attribute should raise an exception.
                 //
-                try 
+                try
                 {
-                    testNodeData.InsertData(40,"ABC");
+                    testNodeData.InsertData(40, "ABC");
                 }
-                catch(System.Exception ex) 
+                catch (System.Exception ex)
                 {
-                    computedValue = ex.GetType().ToString(); 
+                    computedValue = ex.GetType().ToString();
                 }
             }
-            catch(System.Exception ex)
+            catch (System.Exception ex)
             {
                 computedValue = "Exception " + ex.Message;
             }
@@ -2147,7 +2177,7 @@ namespace nist_dom.fundamental
 
             util.resetData();
 
-            Assert.AreEqual (results.expected, results.actual);
+            Assert.AreEqual(results.expected, results.actual);
         }
 
         //------------------------ End test case core-0036C --------------------------

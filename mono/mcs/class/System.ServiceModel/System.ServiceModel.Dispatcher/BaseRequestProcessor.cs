@@ -14,58 +14,69 @@ namespace System.ServiceModel.Dispatcher
     internal class BaseRequestProcessor
     {
         HandlersChain initialize_handlers_chain = new HandlersChain();
-        HandlersChain process_handlers_chain = new HandlersChain ();
-        HandlersChain error_handlers_chain = new HandlersChain ();
-        HandlersChain finalize_handlers_chain = new HandlersChain ();
+        HandlersChain process_handlers_chain = new HandlersChain();
+        HandlersChain error_handlers_chain = new HandlersChain();
+        HandlersChain finalize_handlers_chain = new HandlersChain();
 
-        protected BaseRequestProcessor () { }
+        protected BaseRequestProcessor() { }
 
-        protected virtual void ProcessRequest (MessageProcessingContext mrc)
+        protected virtual void ProcessRequest(MessageProcessingContext mrc)
         {
-            initialize_handlers_chain.ProcessRequestChain (mrc);
+            initialize_handlers_chain.ProcessRequestChain(mrc);
 
-            using (new OperationContextScope (mrc.OperationContext)) {
-                try {
-                    process_handlers_chain.ProcessRequestChain (mrc);
-                } catch (IOException e) {
+            using (new OperationContextScope(mrc.OperationContext))
+            {
+                try
+                {
+                    process_handlers_chain.ProcessRequestChain(mrc);
+                }
+                catch (IOException e)
+                {
                     // FIXME?: On dropped connection do not
                     // dump a stacktrace, but should be safe
                     // to dump a console message as in
-                    // default exception handler and 
+                    // default exception handler and
                     // call error_handlers_chain
-                    Console.WriteLine ("I/O Error (Dropped Connection?): " + e.Message);
+                    Console.WriteLine("I/O Error (Dropped Connection?): " + e.Message);
                     mrc.ProcessingException = e;
-                    error_handlers_chain.ProcessRequestChain (mrc);
-                } catch (SocketException e) {
+                    error_handlers_chain.ProcessRequestChain(mrc);
+                }
+                catch (SocketException e)
+                {
                     // FIXME?: On dropped connection do not
                     // dump a stacktrace, but should be safe
                     // to dump a console message as in
-                    // default exception handler and 
+                    // default exception handler and
                     // call error_handlers_chain
-                    Console.WriteLine ("SocketExcpetion (Dropped Connection?): " + e.Message);
+                    Console.WriteLine("SocketExcpetion (Dropped Connection?): " + e.Message);
                     mrc.ProcessingException = e;
-                    error_handlers_chain.ProcessRequestChain (mrc);
-                } catch (XmlException e) {
+                    error_handlers_chain.ProcessRequestChain(mrc);
+                }
+                catch (XmlException e)
+                {
                     // FIXME?: On dropped connection do not
                     // dump a stacktrace, but should be safe
                     // to dump a console message as in
-                    // default exception handler and 
+                    // default exception handler and
                     // call error_handlers_chain
-                    Console.WriteLine ("XmlException (Dropped Connection?): " + e.Message);
+                    Console.WriteLine("XmlException (Dropped Connection?): " + e.Message);
                     mrc.ProcessingException = e;
-                    error_handlers_chain.ProcessRequestChain (mrc);                
-                } catch (Exception e) {
+                    error_handlers_chain.ProcessRequestChain(mrc);
+                }
+                catch (Exception e)
+                {
                     // FIXME: this is not really expected use of ChannelDispatcher.ErrorHandlers.
                     // They are now correctly used in process_handler_chain (namely OperationInvokerHandler).
                     // For this kind of "outsider" exceptions are actually left thrown
                     // (and could even cause server loop crash in .NET).
 
-                    Console.WriteLine ("Exception " + e.Message + " " + e.StackTrace);
+                    Console.WriteLine("Exception " + e.Message + " " + e.StackTrace);
                     mrc.ProcessingException = e;
-                    error_handlers_chain.ProcessRequestChain (mrc);
+                    error_handlers_chain.ProcessRequestChain(mrc);
                 }
-                finally {
-                    finalize_handlers_chain.ProcessRequestChain (mrc);
+                finally
+                {
+                    finalize_handlers_chain.ProcessRequestChain(mrc);
                 }
             }
         }
@@ -88,25 +99,27 @@ namespace System.ServiceModel.Dispatcher
         public HandlersChain FinalizationChain
         {
             get { return finalize_handlers_chain; }
-        }        
+        }
     }
 
     internal class HandlersChain
     {
         BaseRequestProcessorHandler chain;
 
-        public void ProcessRequestChain (MessageProcessingContext mrc)
+        public void ProcessRequestChain(MessageProcessingContext mrc)
         {
             if (chain != null)
-                chain.ProcessRequestChain (mrc);
+                chain.ProcessRequestChain(mrc);
         }
 
-        public HandlersChain AddHandler (BaseRequestProcessorHandler handler)
+        public HandlersChain AddHandler(BaseRequestProcessorHandler handler)
         {
-            if (chain == null) {
+            if (chain == null)
+            {
                 chain = handler;
             }
-            else {
+            else
+            {
                 BaseRequestProcessorHandler current = chain;
                 while (current.Next != null)
                     current = current.Next;

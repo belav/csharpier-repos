@@ -28,20 +28,27 @@ namespace AllTypesExample
     public partial class AllTypes : DataContext
     {
         public AllTypes(System.Data.IDbConnection connection)
-        : base(connection, new DbLinq.MySql.MySqlVendor())
-        {
-        }
+            : base(connection, new DbLinq.MySql.MySqlVendor()) { }
 
         public AllTypes(System.Data.IDbConnection connection, DbLinq.Vendor.IVendor vendor)
-        : base(connection, vendor)
+            : base(connection, vendor) { }
+
+        public Table<AllIntTypes> AllIntTypes
         {
+            get { return GetTable<AllIntTypes>(); }
         }
-
-        public Table<AllIntTypes> AllIntTypes { get { return GetTable<AllIntTypes>(); } }
-        public Table<FloatTypes> FloatTypes { get { return GetTable<FloatTypes>(); } }
-        public Table<OtherTypes> OtherTypes { get { return GetTable<OtherTypes>(); } }
-        public Table<ParsingData> ParsingData { get { return GetTable<ParsingData>(); } }
-
+        public Table<FloatTypes> FloatTypes
+        {
+            get { return GetTable<FloatTypes>(); }
+        }
+        public Table<OtherTypes> OtherTypes
+        {
+            get { return GetTable<OtherTypes>(); }
+        }
+        public Table<ParsingData> ParsingData
+        {
+            get { return GetTable<ParsingData>(); }
+        }
     }
 
     [Table(Name = "AllTypes.allinttypes")]
@@ -64,14 +71,18 @@ namespace AllTypesExample
         #region long BigInt
 
         private long bigInt;
+
         [DebuggerNonUserCode]
-        [Column(Storage = "bigInt", Name = "bigInt", DbType = "bigint(20)", CanBeNull = false, Expression = null)]
+        [Column(
+            Storage = "bigInt",
+            Name = "bigInt",
+            DbType = "bigint(20)",
+            CanBeNull = false,
+            Expression = null
+        )]
         public long BigInt
         {
-            get
-            {
-                return bigInt;
-            }
+            get { return bigInt; }
             set
             {
                 if (value != bigInt)
@@ -87,14 +98,12 @@ namespace AllTypesExample
         #region long? BigIntN
 
         private long? bigIntN;
+
         [DebuggerNonUserCode]
         [Column(Storage = "bigIntN", Name = "bigIntN", DbType = "bigint(20)", Expression = null)]
         public long? BigIntN
         {
-            get
-            {
-                return bigIntN;
-            }
+            get { return bigIntN; }
             set
             {
                 if (value != bigIntN)
@@ -110,14 +119,18 @@ namespace AllTypesExample
         #region byte Boolean
 
         private byte boolean;
+
         [DebuggerNonUserCode]
-        [Column(Storage = "boolean", Name = "boolean", DbType = "tinyint(1)", CanBeNull = false, Expression = null)]
+        [Column(
+            Storage = "boolean",
+            Name = "boolean",
+            DbType = "tinyint(1)",
+            CanBeNull = false,
+            Expression = null
+        )]
         public byte Boolean
         {
-            get
-            {
-                return boolean;
-            }
+            get { return boolean; }
             set
             {
                 if (value != boolean)
@@ -133,14 +146,12 @@ namespace AllTypesExample
         #region byte? BoolN
 
         private byte? boolN;
+
         [DebuggerNonUserCode]
         [Column(Storage = "boolN", Name = "boolN", DbType = "tinyint(1)", Expression = null)]
         public byte? BoolN
         {
-            get
-            {
-                return boolN;
-            }
+            get { return boolN; }
             set
             {
                 if (value != boolN)
@@ -156,14 +167,18 @@ namespace AllTypesExample
         #region byte Byte
 
         private byte @byte;
+
         [DebuggerNonUserCode]
-        [Column(Storage = "byte", Name = "byte", DbType = "tinyint(3) unsigned", CanBeNull = false, Expression = null)]
+        [Column(
+            Storage = "byte",
+            Name = "byte",
+            DbType = "tinyint(3) unsigned",
+            CanBeNull = false,
+            Expression = null
+        )]
         public byte Byte
         {
-            get
-            {
-                return @byte;
-            }
+            get { return @byte; }
             set
             {
                 if (value != @byte)
@@ -179,14 +194,17 @@ namespace AllTypesExample
         #region byte? ByteN
 
         private byte? byteN;
+
         [DebuggerNonUserCode]
-        [Column(Storage = "byteN", Name = "byteN", DbType = "tinyint(3) unsigned", Expression = null)]
+        [Column(
+            Storage = "byteN",
+            Name = "byteN",
+            DbType = "tinyint(3) unsigned",
+            Expression = null
+        )]
         public byte? ByteN
         {
-            get
-            {
-                return byteN;
-            }
+            get { return byteN; }
             set
             {
                 if (value != byteN)
@@ -202,14 +220,18 @@ namespace AllTypesExample
         #region ushort DbLinqEnumTest
 
         private ushort dbLinqEnumTest;
+
         [DebuggerNonUserCode]
-        [Column(Storage = "dbLinqEnumTest", Name = "DbLinq_EnumTest", DbType = "smallint(5) unsigned", CanBeNull = false, Expression = null)]
+        [Column(
+            Storage = "dbLinqEnumTest",
+            Name = "DbLinq_EnumTest",
+            DbType = "smallint(5) unsigned",
+            CanBeNull = false,
+            Expression = null
+        )]
         public ushort DbLinqEnumTest
         {
-            get
-            {
-                return dbLinqEnumTest;
-            }
+            get { return dbLinqEnumTest; }
             set
             {
                 if (value != dbLinqEnumTest)
@@ -224,16 +246,22 @@ namespace AllTypesExample
 
         #region uint Int
 
-        
+
         private uint @int;
+
         [DebuggerNonUserCode]
-        [Column(Storage = "int", Name = "`int`", DbType = "int unsigned", IsPrimaryKey = true, IsDbGenerated = true, CanBeNull = false, Expression = null)]
+        [Column(
+            Storage = "int",
+            Name = "`int`",
+            DbType = "int unsigned",
+            IsPrimaryKey = true,
+            IsDbGenerated = true,
+            CanBeNull = false,
+            Expression = null
+        )]
         public uint Int
         {
-            get
-            {
-                return @int;
-            }
+            get { return @int; }
             set
             {
                 if (value != @int)
@@ -249,14 +277,12 @@ namespace AllTypesExample
         #region uint? IntN
 
         private uint? intN;
+
         [DebuggerNonUserCode]
         [Column(Storage = "intN", Name = "intN", DbType = "int unsigned", Expression = null)]
         public uint? IntN
         {
-            get
-            {
-                return intN;
-            }
+            get { return intN; }
             set
             {
                 if (value != intN)
@@ -272,14 +298,18 @@ namespace AllTypesExample
         #region uint Short
 
         private uint @short;
+
         [DebuggerNonUserCode]
-        [Column(Storage = "short", Name = "short", DbType = "mediumint unsigned", CanBeNull = false, Expression = null)]
+        [Column(
+            Storage = "short",
+            Name = "short",
+            DbType = "mediumint unsigned",
+            CanBeNull = false,
+            Expression = null
+        )]
         public uint Short
         {
-            get
-            {
-                return @short;
-            }
+            get { return @short; }
             set
             {
                 if (value != @short)
@@ -295,14 +325,17 @@ namespace AllTypesExample
         #region uint? ShortN
 
         private uint? shortN;
+
         [DebuggerNonUserCode]
-        [Column(Storage = "shortN", Name = "shortN", DbType = "mediumint unsigned", Expression = null)]
+        [Column(
+            Storage = "shortN",
+            Name = "shortN",
+            DbType = "mediumint unsigned",
+            Expression = null
+        )]
         public uint? ShortN
         {
-            get
-            {
-                return shortN;
-            }
+            get { return shortN; }
             set
             {
                 if (value != shortN)
@@ -318,14 +351,18 @@ namespace AllTypesExample
         #region ushort SmallInt
 
         private ushort smallInt;
+
         [DebuggerNonUserCode]
-        [Column(Storage = "smallInt", Name = "`smallInt`", DbType = "smallint(5) unsigned", CanBeNull = false, Expression = null)]
+        [Column(
+            Storage = "smallInt",
+            Name = "`smallInt`",
+            DbType = "smallint(5) unsigned",
+            CanBeNull = false,
+            Expression = null
+        )]
         public ushort SmallInt
         {
-            get
-            {
-                return smallInt;
-            }
+            get { return smallInt; }
             set
             {
                 if (value != smallInt)
@@ -341,14 +378,17 @@ namespace AllTypesExample
         #region ushort? SmallIntN
 
         private ushort? smallIntN;
+
         [DebuggerNonUserCode]
-        [Column(Storage = "smallIntN", Name = "smallIntN", DbType = "smallint(5) unsigned", Expression = null)]
+        [Column(
+            Storage = "smallIntN",
+            Name = "smallIntN",
+            DbType = "smallint(5) unsigned",
+            Expression = null
+        )]
         public ushort? SmallIntN
         {
-            get
-            {
-                return smallIntN;
-            }
+            get { return smallIntN; }
             set
             {
                 if (value != smallIntN)
@@ -364,14 +404,12 @@ namespace AllTypesExample
         #region byte? TinyIntS
 
         private byte? tinyIntS;
+
         [DebuggerNonUserCode]
         [Column(Storage = "tinyIntS", Name = "tinyIntS", DbType = "tinyint(1)", Expression = null)]
         public byte? TinyIntS
         {
-            get
-            {
-                return tinyIntS;
-            }
+            get { return tinyIntS; }
             set
             {
                 if (value != tinyIntS)
@@ -387,14 +425,18 @@ namespace AllTypesExample
         #region byte TinyIntU
 
         private byte tinyIntU;
+
         [DebuggerNonUserCode]
-        [Column(Storage = "tinyIntU", Name = "tinyIntU", DbType = "tinyint(1) unsigned", CanBeNull = false, Expression = null)]
+        [Column(
+            Storage = "tinyIntU",
+            Name = "tinyIntU",
+            DbType = "tinyint(1) unsigned",
+            CanBeNull = false,
+            Expression = null
+        )]
         public byte TinyIntU
         {
-            get
-            {
-                return tinyIntU;
-            }
+            get { return tinyIntU; }
             set
             {
                 if (value != tinyIntU)
@@ -410,14 +452,17 @@ namespace AllTypesExample
         #region byte? TinyIntUn
 
         private byte? tinyIntUn;
+
         [DebuggerNonUserCode]
-        [Column(Storage = "tinyIntUn", Name = "tinyIntUN", DbType = "tinyint(1) unsigned", Expression = null)]
+        [Column(
+            Storage = "tinyIntUn",
+            Name = "tinyIntUN",
+            DbType = "tinyint(1) unsigned",
+            Expression = null
+        )]
         public byte? TinyIntUn
         {
-            get
-            {
-                return tinyIntUn;
-            }
+            get { return tinyIntUn; }
             set
             {
                 if (value != tinyIntUn)
@@ -429,7 +474,6 @@ namespace AllTypesExample
         }
 
         #endregion
-
     }
 
     [Table(Name = "AllTypes.floattypes")]
@@ -452,14 +496,18 @@ namespace AllTypesExample
         #region decimal Decimal
 
         private decimal @decimal;
+
         [DebuggerNonUserCode]
-        [Column(Storage = "decimal", Name = "`decimal`", DbType = "decimal", CanBeNull = false, Expression = null)]
+        [Column(
+            Storage = "decimal",
+            Name = "`decimal`",
+            DbType = "decimal",
+            CanBeNull = false,
+            Expression = null
+        )]
         public decimal Decimal
         {
-            get
-            {
-                return @decimal;
-            }
+            get { return @decimal; }
             set
             {
                 if (value != @decimal)
@@ -475,14 +523,12 @@ namespace AllTypesExample
         #region decimal? DecimalN
 
         private decimal? decimalN;
+
         [DebuggerNonUserCode]
         [Column(Storage = "decimalN", Name = "decimalN", DbType = "decimal", Expression = null)]
         public decimal? DecimalN
         {
-            get
-            {
-                return decimalN;
-            }
+            get { return decimalN; }
             set
             {
                 if (value != decimalN)
@@ -498,14 +544,18 @@ namespace AllTypesExample
         #region double Double
 
         private double @double;
+
         [DebuggerNonUserCode]
-        [Column(Storage = "double", Name = "`double`", DbType = "double", CanBeNull = false, Expression = null)]
+        [Column(
+            Storage = "double",
+            Name = "`double`",
+            DbType = "double",
+            CanBeNull = false,
+            Expression = null
+        )]
         public double Double
         {
-            get
-            {
-                return @double;
-            }
+            get { return @double; }
             set
             {
                 if (value != @double)
@@ -521,14 +571,12 @@ namespace AllTypesExample
         #region double? DoubleN
 
         private double? doubleN;
+
         [DebuggerNonUserCode]
         [Column(Storage = "doubleN", Name = "doubleN", DbType = "double", Expression = null)]
         public double? DoubleN
         {
-            get
-            {
-                return doubleN;
-            }
+            get { return doubleN; }
             set
             {
                 if (value != doubleN)
@@ -544,14 +592,18 @@ namespace AllTypesExample
         #region float Float
 
         private float @float;
+
         [DebuggerNonUserCode]
-        [Column(Storage = "float", Name = "`float`", DbType = "float", CanBeNull = false, Expression = null)]
+        [Column(
+            Storage = "float",
+            Name = "`float`",
+            DbType = "float",
+            CanBeNull = false,
+            Expression = null
+        )]
         public float Float
         {
-            get
-            {
-                return @float;
-            }
+            get { return @float; }
             set
             {
                 if (value != @float)
@@ -567,14 +619,12 @@ namespace AllTypesExample
         #region float? FloatN
 
         private float? floatN;
+
         [DebuggerNonUserCode]
         [Column(Storage = "floatN", Name = "floatN", DbType = "float", Expression = null)]
         public float? FloatN
         {
-            get
-            {
-                return floatN;
-            }
+            get { return floatN; }
             set
             {
                 if (value != floatN)
@@ -589,16 +639,22 @@ namespace AllTypesExample
 
         #region int ID1
 
-        
+
         private int id1;
+
         [DebuggerNonUserCode]
-        [Column(Storage = "id1", Name = "id1", DbType = "int", IsPrimaryKey = true, IsDbGenerated = true, CanBeNull = false, Expression = null)]
+        [Column(
+            Storage = "id1",
+            Name = "id1",
+            DbType = "int",
+            IsPrimaryKey = true,
+            IsDbGenerated = true,
+            CanBeNull = false,
+            Expression = null
+        )]
         public int ID1
         {
-            get
-            {
-                return id1;
-            }
+            get { return id1; }
             set
             {
                 if (value != id1)
@@ -614,14 +670,18 @@ namespace AllTypesExample
         #region decimal Numeric
 
         private decimal numeric;
+
         [DebuggerNonUserCode]
-        [Column(Storage = "numeric", Name = "`numeric`", DbType = "decimal", CanBeNull = false, Expression = null)]
+        [Column(
+            Storage = "numeric",
+            Name = "`numeric`",
+            DbType = "decimal",
+            CanBeNull = false,
+            Expression = null
+        )]
         public decimal Numeric
         {
-            get
-            {
-                return numeric;
-            }
+            get { return numeric; }
             set
             {
                 if (value != numeric)
@@ -637,14 +697,12 @@ namespace AllTypesExample
         #region decimal? NumericN
 
         private decimal? numericN;
+
         [DebuggerNonUserCode]
         [Column(Storage = "numericN", Name = "numericN", DbType = "decimal", Expression = null)]
         public decimal? NumericN
         {
-            get
-            {
-                return numericN;
-            }
+            get { return numericN; }
             set
             {
                 if (value != numericN)
@@ -660,14 +718,18 @@ namespace AllTypesExample
         #region double Real
 
         private double real;
+
         [DebuggerNonUserCode]
-        [Column(Storage = "real", Name = "`real`", DbType = "double", CanBeNull = false, Expression = null)]
+        [Column(
+            Storage = "real",
+            Name = "`real`",
+            DbType = "double",
+            CanBeNull = false,
+            Expression = null
+        )]
         public double Real
         {
-            get
-            {
-                return real;
-            }
+            get { return real; }
             set
             {
                 if (value != real)
@@ -683,14 +745,12 @@ namespace AllTypesExample
         #region double? RealN
 
         private double? realN;
+
         [DebuggerNonUserCode]
         [Column(Storage = "realN", Name = "realN", DbType = "double", Expression = null)]
         public double? RealN
         {
-            get
-            {
-                return realN;
-            }
+            get { return realN; }
             set
             {
                 if (value != realN)
@@ -702,7 +762,6 @@ namespace AllTypesExample
         }
 
         #endregion
-
     }
 
     [Table(Name = "AllTypes.othertypes")]
@@ -736,14 +795,18 @@ namespace AllTypesExample
         #region System.Byte[] Blob
 
         private System.Byte[] blob;
+
         [DebuggerNonUserCode]
-        [Column(Storage = "blob", Name = "`blob`", DbType = "blob", CanBeNull = false, Expression = null)]
+        [Column(
+            Storage = "blob",
+            Name = "`blob`",
+            DbType = "blob",
+            CanBeNull = false,
+            Expression = null
+        )]
         public System.Byte[] Blob
         {
-            get
-            {
-                return blob;
-            }
+            get { return blob; }
             set
             {
                 if (value != blob)
@@ -759,14 +822,12 @@ namespace AllTypesExample
         #region System.Byte[] BlobN
 
         private System.Byte[] blobN;
+
         [DebuggerNonUserCode]
         [Column(Storage = "blobN", Name = "blobN", DbType = "blob", Expression = null)]
         public System.Byte[] BlobN
         {
-            get
-            {
-                return blobN;
-            }
+            get { return blobN; }
             set
             {
                 if (value != blobN)
@@ -782,14 +843,18 @@ namespace AllTypesExample
         #region string Char
 
         private string @char;
+
         [DebuggerNonUserCode]
-        [Column(Storage = "char", Name = "`char`", DbType = "char(1)", CanBeNull = false, Expression = null)]
+        [Column(
+            Storage = "char",
+            Name = "`char`",
+            DbType = "char(1)",
+            CanBeNull = false,
+            Expression = null
+        )]
         public string Char
         {
-            get
-            {
-                return @char;
-            }
+            get { return @char; }
             set
             {
                 if (value != @char)
@@ -805,14 +870,12 @@ namespace AllTypesExample
         #region string CharN
 
         private string charN;
+
         [DebuggerNonUserCode]
         [Column(Storage = "charN", Name = "charN", DbType = "char(1)", Expression = null)]
         public string CharN
         {
-            get
-            {
-                return charN;
-            }
+            get { return charN; }
             set
             {
                 if (value != charN)
@@ -828,14 +891,18 @@ namespace AllTypesExample
         #region System.DateTime DateTime
 
         private System.DateTime dateTime;
+
         [DebuggerNonUserCode]
-        [Column(Storage = "dateTime", Name = "`DateTime`", DbType = "datetime", CanBeNull = false, Expression = null)]
+        [Column(
+            Storage = "dateTime",
+            Name = "`DateTime`",
+            DbType = "datetime",
+            CanBeNull = false,
+            Expression = null
+        )]
         public System.DateTime @DateTime
         {
-            get
-            {
-                return dateTime;
-            }
+            get { return dateTime; }
             set
             {
                 if (value != dateTime)
@@ -851,14 +918,12 @@ namespace AllTypesExample
         #region System.DateTime? DateTimeN
 
         private System.DateTime? dateTimeN;
+
         [DebuggerNonUserCode]
         [Column(Storage = "dateTimeN", Name = "DateTimeN", DbType = "datetime", Expression = null)]
         public System.DateTime? DateTimeN
         {
-            get
-            {
-                return dateTimeN;
-            }
+            get { return dateTimeN; }
             set
             {
                 if (value != dateTimeN)
@@ -874,14 +939,17 @@ namespace AllTypesExample
         #region System.Guid? DbLinqGuidTest
 
         private System.Guid? dbLinqGuidTest;
+
         [DebuggerNonUserCode]
-        [Column(Storage = "dbLinqGuidTest", Name = "DbLinq_guid_test", DbType = "char(36)", Expression = null)]
+        [Column(
+            Storage = "dbLinqGuidTest",
+            Name = "DbLinq_guid_test",
+            DbType = "char(36)",
+            Expression = null
+        )]
         public System.Guid? DbLinqGuidTest
         {
-            get
-            {
-                return dbLinqGuidTest;
-            }
+            get { return dbLinqGuidTest; }
             set
             {
                 if (value != dbLinqGuidTest)
@@ -897,14 +965,18 @@ namespace AllTypesExample
         #region System.Guid DbLinqGuidTest2
 
         private System.Guid dbLinqGuidTest2;
+
         [DebuggerNonUserCode]
-        [Column(Storage = "dbLinqGuidTest2", Name = "DbLinq_guid_test2", DbType = "binary(16)", CanBeNull = false, Expression = null)]
+        [Column(
+            Storage = "dbLinqGuidTest2",
+            Name = "DbLinq_guid_test2",
+            DbType = "binary(16)",
+            CanBeNull = false,
+            Expression = null
+        )]
         public System.Guid DbLinqGuidTest2
         {
-            get
-            {
-                return dbLinqGuidTest2;
-            }
+            get { return dbLinqGuidTest2; }
             set
             {
                 if (value != dbLinqGuidTest2)
@@ -919,16 +991,22 @@ namespace AllTypesExample
 
         #region int ID1
 
-        
+
         private int id1;
+
         [DebuggerNonUserCode]
-        [Column(Storage = "id1", Name = "id1", DbType = "int", IsPrimaryKey = true, IsDbGenerated = true, CanBeNull = false, Expression = null)]
+        [Column(
+            Storage = "id1",
+            Name = "id1",
+            DbType = "int",
+            IsPrimaryKey = true,
+            IsDbGenerated = true,
+            CanBeNull = false,
+            Expression = null
+        )]
         public int ID1
         {
-            get
-            {
-                return id1;
-            }
+            get { return id1; }
             set
             {
                 if (value != id1)
@@ -944,14 +1022,18 @@ namespace AllTypesExample
         #region RainbowType Rainbow
 
         private RainbowType rainbow;
+
         [DebuggerNonUserCode]
-        [Column(Storage = "rainbow", Name = "rainbow", DbType = "enum('red','orange','yellow')", CanBeNull = false, Expression = null)]
+        [Column(
+            Storage = "rainbow",
+            Name = "rainbow",
+            DbType = "enum('red','orange','yellow')",
+            CanBeNull = false,
+            Expression = null
+        )]
         public RainbowType Rainbow
         {
-            get
-            {
-                return rainbow;
-            }
+            get { return rainbow; }
             set
             {
                 if (value != rainbow)
@@ -967,14 +1049,18 @@ namespace AllTypesExample
         #region string Text
 
         private string text;
+
         [DebuggerNonUserCode]
-        [Column(Storage = "text", Name = "`text`", DbType = "text", CanBeNull = false, Expression = null)]
+        [Column(
+            Storage = "text",
+            Name = "`text`",
+            DbType = "text",
+            CanBeNull = false,
+            Expression = null
+        )]
         public string Text
         {
-            get
-            {
-                return text;
-            }
+            get { return text; }
             set
             {
                 if (value != text)
@@ -990,14 +1076,12 @@ namespace AllTypesExample
         #region string TextN
 
         private string textN;
+
         [DebuggerNonUserCode]
         [Column(Storage = "textN", Name = "textN", DbType = "text", Expression = null)]
         public string TextN
         {
-            get
-            {
-                return textN;
-            }
+            get { return textN; }
             set
             {
                 if (value != textN)
@@ -1009,7 +1093,6 @@ namespace AllTypesExample
         }
 
         #endregion
-
     }
 
     [Table(Name = "AllTypes.parsingdata")]
@@ -1032,14 +1115,17 @@ namespace AllTypesExample
         #region string DateTimeStr
 
         private string dateTimeStr;
+
         [DebuggerNonUserCode]
-        [Column(Storage = "dateTimeStr", Name = "dateTimeStr", DbType = "varchar(20)", Expression = null)]
+        [Column(
+            Storage = "dateTimeStr",
+            Name = "dateTimeStr",
+            DbType = "varchar(20)",
+            Expression = null
+        )]
         public string DateTimeStr
         {
-            get
-            {
-                return dateTimeStr;
-            }
+            get { return dateTimeStr; }
             set
             {
                 if (value != dateTimeStr)
@@ -1054,16 +1140,22 @@ namespace AllTypesExample
 
         #region int ID1
 
-        
+
         private int id1;
+
         [DebuggerNonUserCode]
-        [Column(Storage = "id1", Name = "id1", DbType = "int", IsPrimaryKey = true, IsDbGenerated = true, CanBeNull = false, Expression = null)]
+        [Column(
+            Storage = "id1",
+            Name = "id1",
+            DbType = "int",
+            IsPrimaryKey = true,
+            IsDbGenerated = true,
+            CanBeNull = false,
+            Expression = null
+        )]
         public int ID1
         {
-            get
-            {
-                return id1;
-            }
+            get { return id1; }
             set
             {
                 if (value != id1)
@@ -1075,6 +1167,5 @@ namespace AllTypesExample
         }
 
         #endregion
-
     }
 }

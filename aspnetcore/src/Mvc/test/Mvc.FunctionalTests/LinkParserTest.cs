@@ -13,7 +13,9 @@ public class LinkParserTest : IClassFixture<MvcTestFixture<RoutingWebSite.Startu
 {
     public LinkParserTest(MvcTestFixture<RoutingWebSite.StartupForLinkGenerator> fixture)
     {
-        var factory = fixture.Factories.FirstOrDefault() ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
+        var factory =
+            fixture.Factories.FirstOrDefault()
+            ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
         Client = factory.CreateDefaultClient();
     }
 
@@ -47,7 +49,8 @@ public class LinkParserTest : IClassFixture<MvcTestFixture<RoutingWebSite.Startu
             {
                 Assert.Equal("id", p.Name);
                 Assert.Equal("18", p.Value.Value<string>());
-            });
+            }
+        );
     }
 
     [Fact]
@@ -87,6 +90,7 @@ public class LinkParserTest : IClassFixture<MvcTestFixture<RoutingWebSite.Startu
             {
                 Assert.Equal("z", p.Name);
                 Assert.Equal("c", p.Value.Value<string>());
-            });
+            }
+        );
     }
 }

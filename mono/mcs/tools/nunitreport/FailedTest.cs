@@ -9,12 +9,10 @@ namespace TestMonkey
         public string Name;
         public string Message;
         public string StackTrace;
-        
-        public FailedTest ()
-        {
-        }
-        
-        public FailedTest (string name, string message, string stackTrace)
+
+        public FailedTest() { }
+
+        public FailedTest(string name, string message, string stackTrace)
         {
             this.Name = name;
             this.Message = message;

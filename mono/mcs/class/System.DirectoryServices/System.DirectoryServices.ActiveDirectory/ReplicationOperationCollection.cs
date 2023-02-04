@@ -26,31 +26,29 @@ namespace System.DirectoryServices.ActiveDirectory
 {
     public class ReplicationOperationCollection : ReadOnlyCollectionBase
     {
-        public ReplicationOperation this [int index] {
-            get {
-                throw new NotImplementedException ();
-            }
-        }
-
-        public bool Contains (ReplicationOperation operation)
+        public ReplicationOperation this[int index]
         {
-            throw new NotImplementedException ();
+            get { throw new NotImplementedException(); }
         }
 
-        public int IndexOf (ReplicationOperation operation)
+        public bool Contains(ReplicationOperation operation)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public void CopyTo (ReplicationOperation[] operations, int index)
+        public int IndexOf(ReplicationOperation operation)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        private int Add (ReplicationOperation operation)
+        public void CopyTo(ReplicationOperation[] operations, int index)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
+        private int Add(ReplicationOperation operation)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

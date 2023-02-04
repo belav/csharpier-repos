@@ -20,7 +20,8 @@ public interface ICSharpUtilities
     string GenerateCSharpIdentifier(
         string identifier,
         ICollection<string>? existingIdentifiers,
-        Func<string, string>? singularizePluralizer);
+        Func<string, string>? singularizePluralizer
+    );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -32,7 +33,8 @@ public interface ICSharpUtilities
         string identifier,
         ICollection<string>? existingIdentifiers,
         Func<string, string>? singularizePluralizer,
-        Func<string, ICollection<string>?, string> uniquifier);
+        Func<string, ICollection<string>?, string> uniquifier
+    );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

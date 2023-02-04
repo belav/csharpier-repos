@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,108 +30,117 @@ using System.ComponentModel;
 using System.Collections;
 using System.Security.Permissions;
 
-namespace System.Web.UI {
-
+namespace System.Web.UI
+{
     // CAS - no InheritanceDemand here as the class is sealed
-    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
     public sealed class DataBindingCollection : ICollection, IEnumerable
     {
-        static readonly object changedEvent = new object ();
+        static readonly object changedEvent = new object();
         Hashtable list;
         ArrayList removed;
 
-        EventHandlerList events = new EventHandlerList ();
-        
-        public event EventHandler Changed {
-            add { events.AddHandler (changedEvent, value); }
-            remove { events.RemoveHandler (changedEvent, value); }
-        }
-        
-        public DataBindingCollection ()
+        EventHandlerList events = new EventHandlerList();
+
+        public event EventHandler Changed
         {
-            list = new Hashtable ();
-            removed = new ArrayList ();
+            add { events.AddHandler(changedEvent, value); }
+            remove { events.RemoveHandler(changedEvent, value); }
         }
 
-        public int Count {
+        public DataBindingCollection()
+        {
+            list = new Hashtable();
+            removed = new ArrayList();
+        }
+
+        public int Count
+        {
             get { return list.Count; }
         }
 
-        public bool IsReadOnly {
+        public bool IsReadOnly
+        {
             get { return list.IsReadOnly; }
         }
 
-        public bool IsSynchronized {
+        public bool IsSynchronized
+        {
             get { return list.IsSynchronized; }
         }
 
-        public DataBinding this [string propertyName] {
-            get { return list [propertyName] as DataBinding; }
+        public DataBinding this[string propertyName]
+        {
+            get { return list[propertyName] as DataBinding; }
         }
 
-        public string [] RemovedBindings {
-            get { return (string []) removed.ToArray (typeof (string)); }
+        public string[] RemovedBindings
+        {
+            get { return (string[])removed.ToArray(typeof(string)); }
         }
 
-        public object SyncRoot {
+        public object SyncRoot
+        {
             get { return list.SyncRoot; }
         }
 
-        public void Add (DataBinding binding)
+        public void Add(DataBinding binding)
         {
-            list.Add (binding.PropertyName, binding);
-            RaiseChanged ();
+            list.Add(binding.PropertyName, binding);
+            RaiseChanged();
         }
 
-        public void Clear ()
+        public void Clear()
         {
-            list.Clear ();
+            list.Clear();
         }
 
-        public void CopyTo (Array array, int index)
+        public void CopyTo(Array array, int index)
         {
-            list.Values.CopyTo (array, index);
+            list.Values.CopyTo(array, index);
         }
 
-        public IEnumerator GetEnumerator ()
+        public IEnumerator GetEnumerator()
         {
-            return list.GetEnumerator ();
+            return list.GetEnumerator();
         }
 
-        public void Remove (DataBinding binding)
+        public void Remove(DataBinding binding)
         {
             string key = binding.PropertyName;
-            Remove (key);
+            Remove(key);
         }
 
-        public void Remove (string propertyName)
+        public void Remove(string propertyName)
         {
-            removed.Add (propertyName);
-            list.Remove (propertyName);
-            RaiseChanged ();
+            removed.Add(propertyName);
+            list.Remove(propertyName);
+            RaiseChanged();
         }
 
-        public void Remove (string propertyName,
-                    bool addToRemovedList)
+        public void Remove(string propertyName, bool addToRemovedList)
         {
             if (addToRemovedList)
-                removed.Add (String.Empty); // LAMESPEC
+                removed.Add(String.Empty); // LAMESPEC
             else
-                removed.Add (propertyName);
+                removed.Add(propertyName);
 
-            list.Remove (propertyName);
+            list.Remove(propertyName);
         }
 
-        public bool Contains (string propertyName)
+        public bool Contains(string propertyName)
         {
-            return list.Contains (propertyName);
+            return list.Contains(propertyName);
         }
 
-        internal void RaiseChanged ()
+        internal void RaiseChanged()
         {
-            EventHandler eh = events [changedEvent] as EventHandler;
+            EventHandler eh = events[changedEvent] as EventHandler;
             if (eh != null)
-                eh (this, EventArgs.Empty);
+                eh(this, EventArgs.Empty);
         }
     }
 }

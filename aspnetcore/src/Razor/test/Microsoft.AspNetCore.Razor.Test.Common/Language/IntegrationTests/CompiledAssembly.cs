@@ -8,7 +8,11 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests;
 
 public class CompiledAssembly
 {
-    public CompiledAssembly(Compilation compilation, RazorCodeDocument codeDocument, Assembly assembly)
+    public CompiledAssembly(
+        Compilation compilation,
+        RazorCodeDocument codeDocument,
+        Assembly assembly
+    )
     {
         Compilation = compilation;
         CodeDocument = codeDocument;

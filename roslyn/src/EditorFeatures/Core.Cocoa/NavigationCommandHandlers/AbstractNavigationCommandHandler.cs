@@ -17,14 +17,17 @@ using VSCommanding = Microsoft.VisualStudio.Commanding;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationCommandHandlers
 {
-    internal abstract class AbstractNavigationCommandHandler<TCommandArgs> :
-        VSCommanding.ICommandHandler<TCommandArgs> where TCommandArgs : Microsoft.VisualStudio.Text.Editor.Commanding.EditorCommandArgs
+    internal abstract class AbstractNavigationCommandHandler<TCommandArgs>
+        : VSCommanding.ICommandHandler<TCommandArgs>
+        where TCommandArgs : Microsoft.VisualStudio.Text.Editor.Commanding.EditorCommandArgs
     {
         private readonly IEnumerable<Lazy<IStreamingFindUsagesPresenter>> _streamingPresenters;
+
         //private readonly IAsynchronousOperationListener _asyncListener;
 
         internal AbstractNavigationCommandHandler(
-            IEnumerable<Lazy<IStreamingFindUsagesPresenter>> streamingPresenters)
+            IEnumerable<Lazy<IStreamingFindUsagesPresenter>> streamingPresenters
+        )
         {
             Contract.ThrowIfNull(streamingPresenters);
             _streamingPresenters = streamingPresenters;
@@ -37,7 +40,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationCommandHandlers
 
         public bool ExecuteCommand(TCommandArgs args, CommandExecutionContext context)
         {
-            var snapshotSpans = args.TextView.Selection?.GetSnapshotSpansOnBuffer(args.SubjectBuffer);
+            var snapshotSpans = args.TextView.Selection?.GetSnapshotSpansOnBuffer(
+                args.SubjectBuffer
+            );
             if (snapshotSpans == null)
                 return false;
 
@@ -62,7 +67,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationCommandHandlers
             return false;
         }
 
-        protected abstract bool TryExecuteCommand(int caretPosition, Document document, CommandExecutionContext context);
+        protected abstract bool TryExecuteCommand(
+            int caretPosition,
+            Document document,
+            CommandExecutionContext context
+        );
 
         internal IStreamingFindUsagesPresenter GetStreamingPresenter()
         {

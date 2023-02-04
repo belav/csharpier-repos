@@ -26,7 +26,7 @@ namespace POS_Server.Models
         public Nullable<long> createUserId { get; set; }
         public bool isExpired { get; set; }
         public int alertDays { get; set; }
-     
+
         #endregion
 
         #region item attribute

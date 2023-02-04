@@ -6,13 +6,15 @@ using System.ServiceModel.Description;
 
 namespace System.ServiceModel.PeerResolvers
 {
-    [DataContract (Namespace = "http://mono-project.com/ns/2008/07/peer-resolver")]
+    [DataContract(Namespace = "http://mono-project.com/ns/2008/07/peer-resolver")]
     class PeerServiceSettingsInfo
     {
         [DataMember]
         public TimeSpan RefreshInterval { get; set; }
+
         [DataMember]
         public TimeSpan CleanupInterval { get; set; }
+
         [DataMember]
         public bool ControlMeshShape { get; set; }
     }
@@ -21,12 +23,11 @@ namespace System.ServiceModel.PeerResolvers
     interface ICustomPeerResolverContract : IPeerResolverContract
     {
         [OperationContract]
-        PeerServiceSettingsInfo GetCustomServiceSettings ();
+        PeerServiceSettingsInfo GetCustomServiceSettings();
+
         [OperationContract]
-        void SetCustomServiceSettings (PeerServiceSettingsInfo info);
+        void SetCustomServiceSettings(PeerServiceSettingsInfo info);
     }
 
-    interface ICustomPeerResolverClient : ICustomPeerResolverContract, IClientChannel
-    {
-    }
+    interface ICustomPeerResolverClient : ICustomPeerResolverContract, IClientChannel { }
 }

@@ -6,4 +6,9 @@ using System.Collections.Generic;
 
 namespace Microsoft.CodeAnalysis.Remote.ProjectSystem;
 
-internal record WorkspaceProjectCreationInfo(string Language, string DisplayName, string? FilePath, IReadOnlyDictionary<string, string> BuildSystemProperties);
+internal record WorkspaceProjectCreationInfo(
+    string Language,
+    string DisplayName,
+    string? FilePath,
+    IReadOnlyDictionary<string, string> BuildSystemProperties
+);

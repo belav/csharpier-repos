@@ -1,4 +1,4 @@
-// 
+//
 // System.Web.Services.Description.PortCollection.cs
 //
 // Author:
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,35 +28,38 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace System.Web.Services.Description {
-    public sealed class PortCollection : ServiceDescriptionBaseCollection {
-
+namespace System.Web.Services.Description
+{
+    public sealed class PortCollection : ServiceDescriptionBaseCollection
+    {
         #region Constructors
 
-        internal PortCollection (Service service)
-            : base (service)
-        {
-        }
+        internal PortCollection(Service service)
+            : base(service) { }
 
         #endregion
 
         #region Properties
 
-        public Port this [int index] {
-            get { 
+        public Port this[int index]
+        {
+            get
+            {
                 if (index < 0 || index > Count)
-                    throw new ArgumentOutOfRangeException ();
+                    throw new ArgumentOutOfRangeException();
 
-                return (Port) List[index]; 
+                return (Port)List[index];
             }
-                        set { List [index] = value; }
+            set { List[index] = value; }
         }
 
-        public Port this [string name] {
-            get { 
-                int index = IndexOf ((Port) Table[name]);
+        public Port this[string name]
+        {
+            get
+            {
+                int index = IndexOf((Port)Table[name]);
                 if (index >= 0)
-                    return this[index]; 
+                    return this[index];
                 return null;
             }
         }
@@ -65,50 +68,50 @@ namespace System.Web.Services.Description {
 
         #region Methods
 
-        public int Add (Port port) 
+        public int Add(Port port)
         {
-            Insert (Count, port);
+            Insert(Count, port);
             return (Count - 1);
         }
 
-        public bool Contains (Port port)
+        public bool Contains(Port port)
         {
-            return List.Contains (port);
+            return List.Contains(port);
         }
 
-        public void CopyTo (Port[] array, int index) 
+        public void CopyTo(Port[] array, int index)
         {
-            List.CopyTo (array, index);
+            List.CopyTo(array, index);
         }
 
-        protected override string GetKey (object value) 
+        protected override string GetKey(object value)
         {
             if (!(value is Port))
-                throw new InvalidCastException ();
+                throw new InvalidCastException();
 
-            return ((Port) value).Name;
-        }
-
-        public int IndexOf (Port port)
-        {
-            return List.IndexOf (port);
+            return ((Port)value).Name;
         }
 
-        public void Insert (int index, Port port)
+        public int IndexOf(Port port)
         {
-            List.Insert (index, port);
+            return List.IndexOf(port);
         }
-    
-        public void Remove (Port port)
+
+        public void Insert(int index, Port port)
         {
-            List.Remove (port);
+            List.Insert(index, port);
         }
-            
-        protected override void SetParent (object value, object parent)
+
+        public void Remove(Port port)
         {
-            ((Port) value).SetParent ((Service) parent);
+            List.Remove(port);
         }
-            
+
+        protected override void SetParent(object value, object parent)
+        {
+            ((Port)value).SetParent((Service)parent);
+        }
+
         #endregion // Methods
     }
 }

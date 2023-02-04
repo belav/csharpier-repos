@@ -10,10 +10,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,39 +34,37 @@ namespace System.ServiceModel.Discovery
 {
     public class FindRequestContext
     {
-        protected FindRequestContext (FindCriteria criteria)
+        protected FindRequestContext(FindCriteria criteria)
         {
             if (criteria == null)
-                throw new ArgumentNullException ("criteria");
+                throw new ArgumentNullException("criteria");
             Criteria = criteria;
-            Endpoints = new Collection<EndpointDiscoveryMetadata> ();
+            Endpoints = new Collection<EndpointDiscoveryMetadata>();
         }
 
         public FindCriteria Criteria { get; private set; }
 
         internal Collection<EndpointDiscoveryMetadata> Endpoints { get; private set; }
 
-        public void AddMatchingEndpoint (EndpointDiscoveryMetadata matchingEndpoint)
+        public void AddMatchingEndpoint(EndpointDiscoveryMetadata matchingEndpoint)
         {
             if (matchingEndpoint == null)
-                throw new ArgumentNullException ("matchingEndpoint");
-            OnAddMatchingEndpoint (matchingEndpoint);
+                throw new ArgumentNullException("matchingEndpoint");
+            OnAddMatchingEndpoint(matchingEndpoint);
         }
 
-        protected virtual void OnAddMatchingEndpoint (EndpointDiscoveryMetadata matchingEndpoint)
+        protected virtual void OnAddMatchingEndpoint(EndpointDiscoveryMetadata matchingEndpoint)
         {
             if (matchingEndpoint == null)
-                throw new ArgumentNullException ("matchingEndpoint");
-            Endpoints.Add (matchingEndpoint);
+                throw new ArgumentNullException("matchingEndpoint");
+            Endpoints.Add(matchingEndpoint);
         }
     }
-    
+
     // Not sure why it must be derived yet.
     internal class DefaultFindRequestContext : FindRequestContext
     {
-        public DefaultFindRequestContext (FindCriteria criteria)
-            : base (criteria)
-        {
-        }
+        public DefaultFindRequestContext(FindCriteria criteria)
+            : base(criteria) { }
     }
 }

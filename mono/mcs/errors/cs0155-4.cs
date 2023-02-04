@@ -3,10 +3,9 @@
 
 class Test
 {
-    public static void Main ()
+    public static void Main()
     {
-        try {}
-        catch (bool b) {}
+        try { }
+        catch (bool b) { }
     }
 }
-

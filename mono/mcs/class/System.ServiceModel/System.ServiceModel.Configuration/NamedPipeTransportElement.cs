@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -54,42 +54,55 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class NamedPipeTransportElement
-         : ConnectionOrientedTransportElement
+    public sealed partial class NamedPipeTransportElement : ConnectionOrientedTransportElement
     {
         ConfigurationPropertyCollection _properties;
 
-        public NamedPipeTransportElement () {
-        }
-
+        public NamedPipeTransportElement() { }
 
         // Properties
 
-        public override Type BindingElementType {
-            get { return typeof (NamedPipeTransportBindingElement); }
+        public override Type BindingElementType
+        {
+            get { return typeof(NamedPipeTransportBindingElement); }
         }
 
-        [ConfigurationProperty ("connectionPoolSettings",
-             Options = ConfigurationPropertyOptions.None)]
-        public NamedPipeConnectionPoolSettingsElement ConnectionPoolSettings {
-            get { return (NamedPipeConnectionPoolSettingsElement) base ["connectionPoolSettings"]; }
-            set { base ["connectionPoolSettings"] = value; }
+        [ConfigurationProperty(
+            "connectionPoolSettings",
+            Options = ConfigurationPropertyOptions.None
+        )]
+        public NamedPipeConnectionPoolSettingsElement ConnectionPoolSettings
+        {
+            get { return (NamedPipeConnectionPoolSettingsElement)base["connectionPoolSettings"]; }
+            set { base["connectionPoolSettings"] = value; }
         }
 
-        protected override ConfigurationPropertyCollection Properties {
-            get {
-                if (_properties == null) {
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get
+            {
+                if (_properties == null)
+                {
                     _properties = base.Properties;
-                    _properties.Add (new ConfigurationProperty ("connectionPoolSettings", typeof (NamedPipeConnectionPoolSettingsElement), null, null, null, ConfigurationPropertyOptions.None));
+                    _properties.Add(
+                        new ConfigurationProperty(
+                            "connectionPoolSettings",
+                            typeof(NamedPipeConnectionPoolSettingsElement),
+                            null,
+                            null,
+                            null,
+                            ConfigurationPropertyOptions.None
+                        )
+                    );
                 }
                 return _properties;
             }
         }
 
-        public override void ApplyConfiguration (BindingElement bindingElement)
+        public override void ApplyConfiguration(BindingElement bindingElement)
         {
-            var b = (NamedPipeTransportBindingElement) bindingElement;
-            base.ApplyConfiguration (b);
+            var b = (NamedPipeTransportBindingElement)bindingElement;
+            base.ApplyConfiguration(b);
 
             var bs = b.ConnectionPoolSettings;
             var cs = ConnectionPoolSettings;
@@ -98,10 +111,10 @@ namespace System.ServiceModel.Configuration
             bs.MaxOutboundConnectionsPerEndpoint = cs.MaxOutboundConnectionsPerEndpoint;
         }
 
-        public override void CopyFrom (ServiceModelExtensionElement from)
+        public override void CopyFrom(ServiceModelExtensionElement from)
         {
-            var e = (NamedPipeTransportElement) from;
-            base.CopyFrom (from);
+            var e = (NamedPipeTransportElement)from;
+            base.CopyFrom(from);
 
             var es = e.ConnectionPoolSettings;
             var cs = ConnectionPoolSettings;
@@ -110,15 +123,15 @@ namespace System.ServiceModel.Configuration
             cs.MaxOutboundConnectionsPerEndpoint = es.MaxOutboundConnectionsPerEndpoint;
         }
 
-        protected override TransportBindingElement CreateDefaultBindingElement ()
+        protected override TransportBindingElement CreateDefaultBindingElement()
         {
-            return new NamedPipeTransportBindingElement ();
+            return new NamedPipeTransportBindingElement();
         }
 
-        protected internal override void InitializeFrom (BindingElement bindingElement)
+        protected internal override void InitializeFrom(BindingElement bindingElement)
         {
-            var b = (NamedPipeTransportBindingElement) bindingElement;
-            base.InitializeFrom (b);
+            var b = (NamedPipeTransportBindingElement)bindingElement;
+            base.InitializeFrom(b);
 
             var bs = b.ConnectionPoolSettings;
             var cs = ConnectionPoolSettings;
@@ -127,5 +140,4 @@ namespace System.ServiceModel.Configuration
             cs.MaxOutboundConnectionsPerEndpoint = bs.MaxOutboundConnectionsPerEndpoint;
         }
     }
-
 }

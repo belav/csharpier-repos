@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,63 +30,71 @@
 using System.Runtime.InteropServices;
 using System.Security.Permissions;
 
-namespace System.Security.Policy {
-
-    [ComVisible (true)]
-    public sealed class ApplicationSecurityInfo {
-
-//        private ActivationContext _context;
+namespace System.Security.Policy
+{
+    [ComVisible(true)]
+    public sealed class ApplicationSecurityInfo
+    {
+        //        private ActivationContext _context;
         private Evidence _evidence;
         private ApplicationId _appid;
         private PermissionSet _defaultSet;
         private ApplicationId _deployid;
 
-        public ApplicationSecurityInfo (ActivationContext activationContext)
+        public ApplicationSecurityInfo(ActivationContext activationContext)
         {
             if (activationContext == null)
-                throw new ArgumentNullException ("activationContext");
-//            _context = activationContext;
+                throw new ArgumentNullException("activationContext");
+            //            _context = activationContext;
         }
 
-        public Evidence ApplicationEvidence {
+        public Evidence ApplicationEvidence
+        {
             get { return _evidence; }
-            set {
+            set
+            {
                 if (value == null)
-                    throw new ArgumentNullException ("ApplicationEvidence");
+                    throw new ArgumentNullException("ApplicationEvidence");
                 _evidence = value;
             }
         }
 
-        public ApplicationId ApplicationId {
+        public ApplicationId ApplicationId
+        {
             get { return _appid; }
-            set {
+            set
+            {
                 if (value == null)
-                    throw new ArgumentNullException ("ApplicationId");
+                    throw new ArgumentNullException("ApplicationId");
                 _appid = value;
             }
         }
 
-        public PermissionSet DefaultRequestSet {
-            get {
+        public PermissionSet DefaultRequestSet
+        {
+            get
+            {
                 if (_defaultSet == null)
-                    return new PermissionSet (PermissionState.None);
+                    return new PermissionSet(PermissionState.None);
                 return _defaultSet; // FIXME: copy or reference ?
             }
-            set {
+            set
+            {
                 if (value == null)
-                    throw new ArgumentNullException ("DefaultRequestSet");
+                    throw new ArgumentNullException("DefaultRequestSet");
                 _defaultSet = value;
             }
         }
 
-        public ApplicationId DeploymentId {
+        public ApplicationId DeploymentId
+        {
             get { return _deployid; }
-            set {
+            set
+            {
                 if (value == null)
-                    throw new ArgumentNullException ("DeploymentId");
+                    throw new ArgumentNullException("DeploymentId");
                 _deployid = value;
             }
         }
     }
 }
-

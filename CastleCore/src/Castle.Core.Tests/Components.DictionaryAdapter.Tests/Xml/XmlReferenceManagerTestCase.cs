@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -28,31 +28,30 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
         {
             protected override string GetXmlText()
             {
-                return string.Concat
-                (
+                return string.Concat(
                     "<Root xmlns:x='urn:schemas-castle-org:xml-reference'>",
-                        "<A x:id='1'>",
-                            "<Value>a</Value>",
-                        "</A>",
-                        "<D>",  // Put this out of order to exercise deferred reference loading; // TODO: Rename stuff so it's in order
-                            "<Y x:ref='1'/>",
-                            "<Z x:ref='2'/>",
-                        "</D>",
-                        "<B>",
-                            "<X>",
-                                "<Value>b1</Value>",
-                            "</X>",
-                            "<X x:id='2'>",
-                                "<Value>b2</Value>",
-                            "</X>",
-                            "<X>",
-                                "<Value>b3</Value>",
-                            "</X>",
-                        "</B>",
-                        "<C>",
-                            "<Value>c</Value>",
-                        "</C>",
-                        "<E/>",
+                    "<A x:id='1'>",
+                    "<Value>a</Value>",
+                    "</A>",
+                    "<D>", // Put this out of order to exercise deferred reference loading; // TODO: Rename stuff so it's in order
+                    "<Y x:ref='1'/>",
+                    "<Z x:ref='2'/>",
+                    "</D>",
+                    "<B>",
+                    "<X>",
+                    "<Value>b1</Value>",
+                    "</X>",
+                    "<X x:id='2'>",
+                    "<Value>b2</Value>",
+                    "</X>",
+                    "<X>",
+                    "<Value>b3</Value>",
+                    "</X>",
+                    "</B>",
+                    "<C>",
+                    "<Value>c</Value>",
+                    "</C>",
+                    "<E/>",
                     "</Root>"
                 );
             }
@@ -61,8 +60,8 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
             public void Get_IrrelevantNode()
             {
                 var cursorC = SelectChild(Node, "C");
-                var node    = cursorC as IXmlNode;
-                var value   = null    as object;
+                var node = cursorC as IXmlNode;
+                var value = null as object;
                 object token;
 
                 var proceed = Manager.OnGetStarting(ref node, ref value, out token);
@@ -79,8 +78,8 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
             public void Get_ValueType()
             {
                 var cursorA = SelectChild(Node, "A", typeof(int));
-                var node    = cursorA as IXmlNode;
-                var value   = null    as object;
+                var node = cursorA as IXmlNode;
+                var value = null as object;
                 object token;
 
                 var proceed = Manager.OnGetStarting(ref node, ref value, out token);
@@ -95,8 +94,8 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
             public void Get_IdentityNode()
             {
                 var cursorA = SelectChild(Node, "A");
-                var node    = cursorA as IXmlNode;
-                var value   = null    as object;
+                var node = cursorA as IXmlNode;
+                var value = null as object;
                 object token;
 
                 var proceed = Manager.OnGetStarting(ref node, ref value, out token);
@@ -115,8 +114,8 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
                 Get_IdentityNode();
 
                 var cursorA = SelectChild(Node, "A");
-                var node    = cursorA as IXmlNode;
-                var value   = null    as object;
+                var node = cursorA as IXmlNode;
+                var value = null as object;
                 object token;
 
                 var proceed = Manager.OnGetStarting(ref node, ref value, out token);
@@ -128,17 +127,17 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
 
                 // Shouldn't call this!  Here only to exercise the code path.
                 Manager.OnGetCompleted(node, value, token);
-        }
+            }
 
             [Test]
             public void Get_IdentityNode_ThenReferencingNodeOfSameType()
             {
                 Get_IdentityNode();
 
-                var cursorD = SelectChild(Node,    "D");
+                var cursorD = SelectChild(Node, "D");
                 var cursorY = SelectChild(cursorD, "Y");
-                var node    = cursorY as IXmlNode;
-                var value   = null    as object;
+                var node = cursorY as IXmlNode;
+                var value = null as object;
                 object token;
 
                 var proceed = Manager.OnGetStarting(ref node, ref value, out token);
@@ -154,10 +153,10 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
             {
                 Get_IdentityNode();
 
-                var cursorD = SelectChild(Node,    "D");
+                var cursorD = SelectChild(Node, "D");
                 var cursorY = SelectChild(cursorD, "Y", typeof(TY));
-                var node    = cursorY as IXmlNode;
-                var value   = null    as object;
+                var node = cursorY as IXmlNode;
+                var value = null as object;
                 object token;
 
                 var proceed = Manager.OnGetStarting(ref node, ref value, out token);
@@ -175,10 +174,10 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
             {
                 Get_IdentityNode_ThenReferencingNodeOfDifferentType();
 
-                var cursorD = SelectChild(Node,    "D");
+                var cursorD = SelectChild(Node, "D");
                 var cursorY = SelectChild(cursorD, "Y", typeof(TY));
-                var node    = cursorY as IXmlNode;
-                var value   = null    as object;
+                var node = cursorY as IXmlNode;
+                var value = null as object;
                 object token;
 
                 var proceed = Manager.OnGetStarting(ref node, ref value, out token);
@@ -193,8 +192,8 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
             public void Set_ValueType()
             {
                 var cursorC = SelectChild(Node, "C", typeof(int));
-                var node    = cursorC as IXmlNode;
-                var value   = 42 as object;
+                var node = cursorC as IXmlNode;
+                var value = 42 as object;
                 object token;
 
                 var proceed = Manager.OnAssigningValue(node, null, ref value, out token);
@@ -224,7 +223,7 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
             [Test]
             public void Set_Primary_Again_SameValue()
             {
-                SetValue(Node, "A", null,   ValueA, SetResult.ProceedTracked);
+                SetValue(Node, "A", null, ValueA, SetResult.ProceedTracked);
                 SetValue(Node, "A", ValueA, ValueA, SetResult.Return);
 
                 CustomAssert.AreXmlEquivalent(OriginalXml, Document);
@@ -233,7 +232,7 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
             [Test]
             public void Set_Primary_Again_DifferentValue()
             {
-                SetValue(Node, "A", null,   ValueA, SetResult.ProceedTracked);
+                SetValue(Node, "A", null, ValueA, SetResult.ProceedTracked);
                 SetValue(Node, "A", ValueA, OtherA, SetResult.ProceedTracked);
 
                 CustomAssert.AreXmlEquivalent(OriginalXml, Document);
@@ -245,17 +244,23 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
                 SetValue(Node, "A", null, ValueA, SetResult.ProceedTracked);
                 SetValue(Node, "B", null, ValueA, SetResult.Return);
 
-                CustomAssert.AreXmlEquivalent(Xml("<Root $x> <A x:id='1'/> <B x:ref='1'/> <C/> </Root>"), Document);
+                CustomAssert.AreXmlEquivalent(
+                    Xml("<Root $x> <A x:id='1'/> <B x:ref='1'/> <C/> </Root>"),
+                    Document
+                );
             }
 
             [Test]
             public void Set_Reference_Again_SameNode()
             {
-                SetValue(Node, "A", null,   ValueA, SetResult.ProceedTracked);
-                SetValue(Node, "B", null,   ValueA, SetResult.Return);
+                SetValue(Node, "A", null, ValueA, SetResult.ProceedTracked);
+                SetValue(Node, "B", null, ValueA, SetResult.Return);
                 SetValue(Node, "B", ValueA, ValueA, SetResult.Return);
 
-                CustomAssert.AreXmlEquivalent(Xml("<Root $x> <A x:id='1'/> <B x:ref='1'/> <C/> </Root>"), Document);
+                CustomAssert.AreXmlEquivalent(
+                    Xml("<Root $x> <A x:id='1'/> <B x:ref='1'/> <C/> </Root>"),
+                    Document
+                );
             }
 
             [Test]
@@ -265,37 +270,46 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
                 SetValue(Node, "B", null, ValueA, SetResult.Return);
                 SetValue(Node, "C", null, ValueA, SetResult.Return);
 
-                CustomAssert.AreXmlEquivalent(Xml("<Root $x> <A x:id='1'/> <B x:ref='1'/> <C x:ref='1'/> </Root>"), Document);
+                CustomAssert.AreXmlEquivalent(
+                    Xml("<Root $x> <A x:id='1'/> <B x:ref='1'/> <C x:ref='1'/> </Root>"),
+                    Document
+                );
             }
 
             [Test]
             public void Reset_Primary()
             {
-                SetValue(Node, "A", null,   ValueA, SetResult.ProceedTracked);
-                SetValue(Node, "B", null,   ValueA, SetResult.Return);
-                SetValue(Node, "C", null,   ValueA, SetResult.Return);
+                SetValue(Node, "A", null, ValueA, SetResult.ProceedTracked);
+                SetValue(Node, "B", null, ValueA, SetResult.Return);
+                SetValue(Node, "C", null, ValueA, SetResult.Return);
                 SetValue(Node, "A", ValueA, OtherA, SetResult.ProceedTracked);
 
-                CustomAssert.AreXmlEquivalent(Xml("<Root $x> <A/> <B x:id='1'/> <C x:ref='1'/> </Root>"), Document);
+                CustomAssert.AreXmlEquivalent(
+                    Xml("<Root $x> <A/> <B x:id='1'/> <C x:ref='1'/> </Root>"),
+                    Document
+                );
             }
 
             [Test]
             public void Reset_Reference()
             {
-                SetValue(Node, "A", null,   ValueA, SetResult.ProceedTracked);
-                SetValue(Node, "B", null,   ValueA, SetResult.Return);
-                SetValue(Node, "C", null,   ValueA, SetResult.Return);
+                SetValue(Node, "A", null, ValueA, SetResult.ProceedTracked);
+                SetValue(Node, "B", null, ValueA, SetResult.Return);
+                SetValue(Node, "C", null, ValueA, SetResult.Return);
                 SetValue(Node, "B", ValueA, OtherA, SetResult.ProceedTracked);
 
-                CustomAssert.AreXmlEquivalent(Xml("<Root $x> <A x:id='1'/> <B/> <C x:ref='1'/> </Root>"), Document);
+                CustomAssert.AreXmlEquivalent(
+                    Xml("<Root $x> <A x:id='1'/> <B/> <C x:ref='1'/> </Root>"),
+                    Document
+                );
             }
 
             [Test]
             public void Reset_AllButOne()
             {
-                SetValue(Node, "A", null,   ValueA, SetResult.ProceedTracked);
-                SetValue(Node, "B", null,   ValueA, SetResult.Return);
-                SetValue(Node, "C", null,   ValueA, SetResult.Return);
+                SetValue(Node, "A", null, ValueA, SetResult.ProceedTracked);
+                SetValue(Node, "B", null, ValueA, SetResult.Return);
+                SetValue(Node, "C", null, ValueA, SetResult.Return);
                 SetValue(Node, "A", ValueA, OtherA, SetResult.ProceedTracked);
                 SetValue(Node, "B", ValueA, OtherB, SetResult.ProceedTracked);
 
@@ -305,9 +319,9 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
             [Test]
             public void Reset_All()
             {
-                SetValue(Node, "A", null,   ValueA, SetResult.ProceedTracked);
-                SetValue(Node, "B", null,   ValueA, SetResult.Return);
-                SetValue(Node, "C", null,   ValueA, SetResult.Return);
+                SetValue(Node, "A", null, ValueA, SetResult.ProceedTracked);
+                SetValue(Node, "B", null, ValueA, SetResult.Return);
+                SetValue(Node, "C", null, ValueA, SetResult.Return);
                 SetValue(Node, "A", ValueA, OtherA, SetResult.ProceedTracked);
                 SetValue(Node, "B", ValueA, OtherB, SetResult.ProceedTracked);
                 SetValue(Node, "C", ValueA, OtherC, SetResult.ProceedTracked);
@@ -341,23 +355,20 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
         {
             protected override string GetXmlText()
             {
-                return string.Concat
-                (
-                    "<Root $x>",
-                        "<A C='c'> d <E>f</E> g </A>",
-                        "<B/>",
-                    "</Root>"
-                );
+                return string.Concat("<Root $x>", "<A C='c'> d <E>f</E> g </A>", "<B/>", "</Root>");
             }
 
             [Test]
             public void Reset_Primary()
             {
-                SetValue(Node, "A", null,   ValueA, SetResult.ProceedTracked);
-                SetValue(Node, "B", null,   ValueA, SetResult.Return);
+                SetValue(Node, "A", null, ValueA, SetResult.ProceedTracked);
+                SetValue(Node, "B", null, ValueA, SetResult.Return);
                 SetValue(Node, "A", ValueA, OtherA, SetResult.ProceedTracked);
 
-                CustomAssert.AreXmlEquivalent(Xml("<Root $x> <A/> <B C='c'> d <E>f</E> g </B> </Root>"), Document);
+                CustomAssert.AreXmlEquivalent(
+                    Xml("<Root $x> <A/> <B C='c'> d <E>f</E> g </B> </Root>"),
+                    Document
+                );
             }
         }
 
@@ -366,12 +377,11 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
         {
             protected override string GetXmlText()
             {
-                return string.Concat
-                (
+                return string.Concat(
                     "<Root $x>",
-                        "<A C='c'> d <E>f</E> g </A>",
-                        "<B/>",
-                        "<C/>",
+                    "<A C='c'> d <E>f</E> g </A>",
+                    "<B/>",
+                    "<C/>",
                     "</Root>"
                 );
             }
@@ -379,26 +389,30 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
             [Test]
             public void Reset_Primary()
             {
-                SetValue(Node, "A", null,   ValueA, SetResult.ProceedTracked);
-                SetValue(Node, "B", null,   ValueA, SetResult.Return);
-                SetValue(Node, "C", null,   ValueA, SetResult.Return);
+                SetValue(Node, "A", null, ValueA, SetResult.ProceedTracked);
+                SetValue(Node, "B", null, ValueA, SetResult.Return);
+                SetValue(Node, "C", null, ValueA, SetResult.Return);
                 SetValue(Node, "A", ValueA, OtherA, SetResult.ProceedTracked);
 
-                CustomAssert.AreXmlEquivalent(Xml("<Root $x> <A/> <B C='c' x:id='1'> d <E>f</E> g </B> <C x:ref='1'/> </Root>"), Document);
+                CustomAssert.AreXmlEquivalent(
+                    Xml(
+                        "<Root $x> <A/> <B C='c' x:id='1'> d <E>f</E> g </B> <C x:ref='1'/> </Root>"
+                    ),
+                    Document
+                );
             }
         }
 
         public abstract class TestScenario
         {
-            protected abstract string     GetXmlText  ();
-            protected string              OriginalXml { get; private set; }
-            protected XmlDocument         Document    { get; private set; }
-            protected IXmlNamespaceSource Namespaces  { get; private set; }
-            protected IXmlNode            Node        { get; private set; }
-            protected XmlReferenceManager Manager     { get; private set; }
+            protected abstract string GetXmlText();
+            protected string OriginalXml { get; private set; }
+            protected XmlDocument Document { get; private set; }
+            protected IXmlNamespaceSource Namespaces { get; private set; }
+            protected IXmlNode Node { get; private set; }
+            protected XmlReferenceManager Manager { get; private set; }
 
-            protected static readonly object
-                ValueA = new TX(),
+            protected static readonly object ValueA = new TX(),
                 OtherA = new TX(),
                 OtherB = new TX(),
                 OtherC = new TX();
@@ -407,18 +421,24 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
             public void SetUp()
             {
                 OriginalXml = GetXmlText();
-                Document    = Xml(OriginalXml);
+                Document = Xml(OriginalXml);
                 OriginalXml = Document.OuterXml;
-                Namespaces  = new XmlContextBase();
-                Node        = new SysXmlNode(Document.DocumentElement, typeof(object), Namespaces);
-                Manager     = new XmlReferenceManager(Node, DefaultXmlReferenceFormat.Instance);
+                Namespaces = new XmlContextBase();
+                Node = new SysXmlNode(Document.DocumentElement, typeof(object), Namespaces);
+                Manager = new XmlReferenceManager(Node, DefaultXmlReferenceFormat.Instance);
             }
 
-            protected void SetValue(IXmlNode parentNode, string childName, object oldValue, object newValue, SetResult expectedResult)
+            protected void SetValue(
+                IXmlNode parentNode,
+                string childName,
+                object oldValue,
+                object newValue,
+                SetResult expectedResult
+            )
             {
                 var cursor = SelectChild(parentNode, childName);
-                var node   = cursor as IXmlNode;
-                var value  = newValue as object;
+                var node = cursor as IXmlNode;
+                var value = newValue as object;
                 object token;
 
                 var proceed = Manager.OnAssigningValue(node, oldValue, ref value, out token);
@@ -461,7 +481,7 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
             protected IXmlCursor SelectChild(IXmlNode node, string name, Type type)
             {
                 var knownTypes = new XmlKnownTypeSet(type);
-                var knownType  = new XmlKnownType(name, null, null, null, type);
+                var knownType = new XmlKnownType(name, null, null, null, type);
                 knownTypes.Add(knownType, true);
 
                 var cursor = node.SelectChildren(knownTypes, Namespaces, CursorFlags.Elements);
@@ -483,6 +503,7 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
         }
 
         public sealed class TX { }
+
         public sealed class TY { }
     }
 }

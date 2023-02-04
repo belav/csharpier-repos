@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,12 +31,11 @@ using System.IO;
 using System.Text;
 using Mono.Unix;
 
-namespace Mono.Unix {
-
-    public struct UnixPipes
-        : IEquatable <UnixPipes>
+namespace Mono.Unix
+{
+    public struct UnixPipes : IEquatable<UnixPipes>
     {
-        public UnixPipes (UnixStream reading, UnixStream writing)
+        public UnixPipes(UnixStream reading, UnixStream writing)
         {
             Reading = reading;
             Writing = writing;
@@ -45,42 +44,41 @@ namespace Mono.Unix {
         public UnixStream Reading;
         public UnixStream Writing;
 
-        public static UnixPipes CreatePipes ()
+        public static UnixPipes CreatePipes()
         {
-            int reading, writing;
-            int r = Native.Syscall.pipe (out reading, out writing);
-            UnixMarshal.ThrowExceptionForLastErrorIf (r);
-            return new UnixPipes (new UnixStream (reading), new UnixStream (writing));
+            int reading,
+                writing;
+            int r = Native.Syscall.pipe(out reading, out writing);
+            UnixMarshal.ThrowExceptionForLastErrorIf(r);
+            return new UnixPipes(new UnixStream(reading), new UnixStream(writing));
         }
 
-        public override bool Equals (object value)
+        public override bool Equals(object value)
         {
-            if ((value == null) || (value.GetType () != GetType ()))
+            if ((value == null) || (value.GetType() != GetType()))
                 return false;
-            UnixPipes other = (UnixPipes) value;
-            return Reading.Handle == other.Reading.Handle &&
-                Writing.Handle == other.Writing.Handle;
+            UnixPipes other = (UnixPipes)value;
+            return Reading.Handle == other.Reading.Handle && Writing.Handle == other.Writing.Handle;
         }
 
-        public bool Equals (UnixPipes value)
+        public bool Equals(UnixPipes value)
         {
-            return Reading.Handle == value.Reading.Handle &&
-                Writing.Handle == value.Writing.Handle;
+            return Reading.Handle == value.Reading.Handle && Writing.Handle == value.Writing.Handle;
         }
 
-        public override int GetHashCode ()
+        public override int GetHashCode()
         {
-            return Reading.Handle.GetHashCode () ^ Writing.Handle.GetHashCode ();
+            return Reading.Handle.GetHashCode() ^ Writing.Handle.GetHashCode();
         }
 
-        public static bool operator== (UnixPipes lhs, UnixPipes rhs)
+        public static bool operator ==(UnixPipes lhs, UnixPipes rhs)
         {
-            return lhs.Equals (rhs);
+            return lhs.Equals(rhs);
         }
 
-        public static bool operator!= (UnixPipes lhs, UnixPipes rhs)
+        public static bool operator !=(UnixPipes lhs, UnixPipes rhs)
         {
-            return !lhs.Equals (rhs);
+            return !lhs.Equals(rhs);
         }
     }
 }

@@ -5,19 +5,12 @@ namespace Testing
 {
     public class Test
     {
-        public static void Main ()
-        {
-        }
+        public static void Main() { }
 
         /// comment for constructor
-        public Test ()
-        {
-        }
+        public Test() { }
 
         /// comment for destructor
-        ~Test ()
-        {
-        }
+        ~Test() { }
     }
 }
-

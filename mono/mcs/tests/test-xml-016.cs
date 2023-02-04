@@ -5,9 +5,7 @@ namespace Testing
 {
     public class Test
     {
-        public static void Main ()
-        {
-        }
+        public static void Main() { }
 
         /// <summary>
         /// public event EventHandler MyEvent
@@ -18,4 +16,3 @@ namespace Testing
         private event EventHandler MyEvent2;
     }
 }
-

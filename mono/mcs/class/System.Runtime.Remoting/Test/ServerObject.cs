@@ -17,9 +17,7 @@ namespace MonoTests.Remoting
     // A list of ServerObject instances
 
     [ContextHook("x", false)]
-    public class ServerList: 
-        ContextBoundObject, 
-        IDisposable
+    public class ServerList : ContextBoundObject, IDisposable
     {
         ArrayList values = new ArrayList();
         public int NumVal = 0;
@@ -27,97 +25,97 @@ namespace MonoTests.Remoting
 
         public ServerList()
         {
-            Assert.IsTrue (RemotingServices.IsTransparentProxy(this));
-            CallSeq.Add ("List created");
+            Assert.IsTrue(RemotingServices.IsTransparentProxy(this));
+            CallSeq.Add("List created");
         }
 
         public void Dispose()
         {
-            Assert.IsTrue (RemotingServices.IsTransparentProxy(this));
-            CallSeq.Add ("List disposed");
-
+            Assert.IsTrue(RemotingServices.IsTransparentProxy(this));
+            CallSeq.Add("List disposed");
         }
 
-        public void Add (ServerObject v)
+        public void Add(ServerObject v)
         {
-            Assert.IsTrue (RemotingServices.IsTransparentProxy(this));
-            values.Add (v);
-            CallSeq.Add ("Added " + v.Name);
+            Assert.IsTrue(RemotingServices.IsTransparentProxy(this));
+            values.Add(v);
+            CallSeq.Add("Added " + v.Name);
         }
 
-        public void ProcessItems ()
+        public void ProcessItems()
         {
-            Assert.IsTrue (RemotingServices.IsTransparentProxy(this));
-            CallSeq.Add ("Processing");
+            Assert.IsTrue(RemotingServices.IsTransparentProxy(this));
+            CallSeq.Add("Processing");
 
             int total = 0;
             foreach (ServerObject ob in values)
                 total += ob.GetValue();
 
-            CallSeq.Add ("Total: " + total);
+            CallSeq.Add("Total: " + total);
         }
 
         public void Clear()
         {
-            Assert.IsTrue (RemotingServices.IsTransparentProxy(this));
-            CallSeq.Add ("Clearing");
+            Assert.IsTrue(RemotingServices.IsTransparentProxy(this));
+            CallSeq.Add("Clearing");
             values.Clear();
         }
 
-        public void ParameterTest1 (int a, out string b)
+        public void ParameterTest1(int a, out string b)
         {
-            Assert.IsTrue (RemotingServices.IsTransparentProxy(this));
+            Assert.IsTrue(RemotingServices.IsTransparentProxy(this));
             b = "adeu " + a;
         }
-        
-        public void ParameterTest2 (int a, out int b)
+
+        public void ParameterTest2(int a, out int b)
         {
-            Assert.IsTrue (RemotingServices.IsTransparentProxy(this));
-            b = a+1;
+            Assert.IsTrue(RemotingServices.IsTransparentProxy(this));
+            b = a + 1;
         }
-        
+
         public ServerObject NewItem(string name)
         {
-            Assert.IsTrue (RemotingServices.IsTransparentProxy(this));
+            Assert.IsTrue(RemotingServices.IsTransparentProxy(this));
             ServerObject obj = new ServerObject(name);
-            Add (obj);
+            Add(obj);
             return obj;
         }
 
         public ServerObject CreateItem(string name, int val)
         {
-            Assert.IsTrue (RemotingServices.IsTransparentProxy(this));
+            Assert.IsTrue(RemotingServices.IsTransparentProxy(this));
             ServerObject obj = new ServerObject(name);
-            obj.SetValue (val);
+            obj.SetValue(val);
             return obj;
         }
 
-        public ComplexData SetComplexData (ComplexData data)
+        public ComplexData SetComplexData(ComplexData data)
         {
-            Assert.IsTrue (RemotingServices.IsTransparentProxy(this));
-            CallSeq.Add ("Showing content of ComplexData");
-            data.Dump ();
+            Assert.IsTrue(RemotingServices.IsTransparentProxy(this));
+            CallSeq.Add("Showing content of ComplexData");
+            data.Dump();
             return data;
         }
 
-        public override ObjRef CreateObjRef (Type type)
+        public override ObjRef CreateObjRef(Type type)
         {
-            Assert.IsTrue (RemotingServices.IsTransparentProxy(this));
-            CallSeq.Add ("### ServerList.CreateObjRef");
-            return base.CreateObjRef (type);
+            Assert.IsTrue(RemotingServices.IsTransparentProxy(this));
+            CallSeq.Add("### ServerList.CreateObjRef");
+            return base.CreateObjRef(type);
         }
     }
-        
+
     // A remotable object
 
-    public class ServerObject: 
-//        ContextBoundObject
+    public class ServerObject
+        :
+        //        ContextBoundObject
         MarshalByRefObject
     {
         int _value;
         string _name;
 
-        public ServerObject (string name)
+        public ServerObject(string name)
         {
             _name = name;
         }
@@ -127,28 +125,35 @@ namespace MonoTests.Remoting
             get { return _name; }
         }
 
-        public void SetValue (int v)
+        public void SetValue(int v)
         {
-            CallSeq.Add ("ServerObject " + _name + ": setting " + v);
+            CallSeq.Add("ServerObject " + _name + ": setting " + v);
             _value = v;
         }
 
-        public int GetValue ()
+        public int GetValue()
         {
-            CallSeq.Add ("ServerObject " + _name + ": getting " + _value);
+            CallSeq.Add("ServerObject " + _name + ": getting " + _value);
             return _value;
         }
 
-        public override ObjRef CreateObjRef (Type type)
+        public override ObjRef CreateObjRef(Type type)
         {
-            CallSeq.Add ("### ServerObject.CreateObjRef");
-            return base.CreateObjRef (type);
+            CallSeq.Add("### ServerObject.CreateObjRef");
+            return base.CreateObjRef(type);
         }
     }
 
     // Some complex data for testing serialization
 
-    public enum AnEnum { a,b,c,d,e };
+    public enum AnEnum
+    {
+        a,
+        b,
+        c,
+        d,
+        e
+    };
 
     [Serializable]
     public class ComplexData
@@ -157,18 +162,18 @@ namespace MonoTests.Remoting
 
         public object[] Info;
 
-        public ComplexData (AnEnum va, object[] info)
+        public ComplexData(AnEnum va, object[] info)
         {
             Info = info;
             Val = va;
         }
 
-        public void Dump ()
+        public void Dump()
         {
-            CallSeq.Add ("Content:");
-            CallSeq.Add ("Val: " + Val);
+            CallSeq.Add("Content:");
+            CallSeq.Add("Val: " + Val);
             foreach (object ob in Info)
-                CallSeq.Add ("Array item: " + ob);
+                CallSeq.Add("Array item: " + ob);
         }
     }
 }

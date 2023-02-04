@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -44,11 +44,11 @@ namespace System.Runtime.Remoting
         {
             if (type.IsInterface)
             {
-                serverType = typeof (MarshalByRefObject).AssemblyQualifiedName;
+                serverType = typeof(MarshalByRefObject).AssemblyQualifiedName;
                 serverHierarchy = new string[0];
                 Type[] interfaces = type.GetInterfaces();
                 interfacesImplemented = new string[interfaces.Length + 1];
-                for(int n=0; n<interfaces.Length; n++)
+                for (int n = 0; n < interfaces.Length; n++)
                     interfacesImplemented[n] = interfaces[n].AssemblyQualifiedName;
                 interfacesImplemented[interfaces.Length] = type.AssemblyQualifiedName;
             }
@@ -60,7 +60,7 @@ namespace System.Runtime.Remoting
 
                 int baseCount = 0;
                 Type baseType = type.BaseType;
-                while (baseType != typeof (MarshalByRefObject) && baseType != null)
+                while (baseType != typeof(MarshalByRefObject) && baseType != null)
                 {
                     baseType = baseType.BaseType;
                     baseCount++;
@@ -68,7 +68,7 @@ namespace System.Runtime.Remoting
 
                 serverHierarchy = new string[baseCount];
                 baseType = type.BaseType;
-                for (int n=0; n<baseCount; n++) 
+                for (int n = 0; n < baseCount; n++)
                 {
                     serverHierarchy[n] = baseType.AssemblyQualifiedName;
                     baseType = baseType.BaseType;
@@ -78,42 +78,50 @@ namespace System.Runtime.Remoting
 
                 Type[] interfaces = type.GetInterfaces();
                 interfacesImplemented = new string[interfaces.Length];
-                for (int n=0; n<interfaces.Length; n++)
+                for (int n = 0; n < interfaces.Length; n++)
                     interfacesImplemented[n] = interfaces[n].AssemblyQualifiedName;
             }
         }
 
-        public string TypeName 
+        public string TypeName
         {
             get { return serverType; }
             set { serverType = value; }
         }
 
-        public bool CanCastTo (Type fromType, object o)
+        public bool CanCastTo(Type fromType, object o)
         {
-            if (fromType == typeof (object)) return true;
-            if (fromType == typeof (MarshalByRefObject)) return true;
+            if (fromType == typeof(object))
+                return true;
+            if (fromType == typeof(MarshalByRefObject))
+                return true;
 
             string fromName = fromType.AssemblyQualifiedName;
 
             // Find the type comparing the name of the type and the name of the assembly,
             // excluding version and other assembly info
 
-            int i = fromName.IndexOf (',');
-            if (i != -1) i = fromName.IndexOf (',', i+1);
-            if (i != -1) fromName = fromName.Substring (0,i+1);
-            else fromName += ",";
+            int i = fromName.IndexOf(',');
+            if (i != -1)
+                i = fromName.IndexOf(',', i + 1);
+            if (i != -1)
+                fromName = fromName.Substring(0, i + 1);
+            else
+                fromName += ",";
 
-            if ( (serverType + ",").StartsWith (fromName)) return true;
+            if ((serverType + ",").StartsWith(fromName))
+                return true;
 
             if (serverHierarchy != null)
                 foreach (string basec in serverHierarchy)
-                    if ( (basec + ",").StartsWith (fromName)) return true;
+                    if ((basec + ",").StartsWith(fromName))
+                        return true;
 
             if (interfacesImplemented != null)
                 foreach (string basec in interfacesImplemented)
-                    if ( (basec + ",").StartsWith (fromName)) return true;
-            
+                    if ((basec + ",").StartsWith(fromName))
+                        return true;
+
             return false;
         }
     }

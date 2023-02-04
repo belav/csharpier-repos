@@ -12,10 +12,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,8 +34,8 @@ namespace System.Configuration
 {
     public sealed class ConfigurationProperty
     {
-        internal static readonly object NoDefaultValue = new object ();
-        
+        internal static readonly object NoDefaultValue = new object();
+
         string name;
         Type type;
         object default_value;
@@ -44,136 +44,183 @@ namespace System.Configuration
         ConfigurationPropertyOptions flags;
         string description;
         ConfigurationCollectionAttribute collectionAttribute;
-        
-        public ConfigurationProperty (string name, Type type)
-            : this (name, type, NoDefaultValue, TypeDescriptor.GetConverter (type), new DefaultValidator(), ConfigurationPropertyOptions.None, null)
-        { }
 
-        public ConfigurationProperty (string name, Type type, object defaultValue)
-            : this (name, type, defaultValue, TypeDescriptor.GetConverter (type), new DefaultValidator(), ConfigurationPropertyOptions.None, null)
-        { }
+        public ConfigurationProperty(string name, Type type)
+            : this(
+                name,
+                type,
+                NoDefaultValue,
+                TypeDescriptor.GetConverter(type),
+                new DefaultValidator(),
+                ConfigurationPropertyOptions.None,
+                null
+            ) { }
 
-        public ConfigurationProperty (
-                    string name, Type type, object defaultValue,
-                    ConfigurationPropertyOptions options)
-            :this (name, type, defaultValue, TypeDescriptor.GetConverter (type), new DefaultValidator(), options, null)
-        { }
-        
-        public ConfigurationProperty (
-                    string name, Type type, object defaultValue,
-                    TypeConverter typeConverter,
-                    ConfigurationValidatorBase validator,
-                    ConfigurationPropertyOptions options)
-            : this (name, type, defaultValue, typeConverter, validator, options, null)
-        { }
+        public ConfigurationProperty(string name, Type type, object defaultValue)
+            : this(
+                name,
+                type,
+                defaultValue,
+                TypeDescriptor.GetConverter(type),
+                new DefaultValidator(),
+                ConfigurationPropertyOptions.None,
+                null
+            ) { }
 
-        public ConfigurationProperty (
-                    string name, Type type, object defaultValue,
-                    TypeConverter typeConverter,
-                    ConfigurationValidatorBase validator,
-                    ConfigurationPropertyOptions options,
-                    string description)
+        public ConfigurationProperty(
+            string name,
+            Type type,
+            object defaultValue,
+            ConfigurationPropertyOptions options
+        )
+            : this(
+                name,
+                type,
+                defaultValue,
+                TypeDescriptor.GetConverter(type),
+                new DefaultValidator(),
+                options,
+                null
+            ) { }
+
+        public ConfigurationProperty(
+            string name,
+            Type type,
+            object defaultValue,
+            TypeConverter typeConverter,
+            ConfigurationValidatorBase validator,
+            ConfigurationPropertyOptions options
+        )
+            : this(name, type, defaultValue, typeConverter, validator, options, null) { }
+
+        public ConfigurationProperty(
+            string name,
+            Type type,
+            object defaultValue,
+            TypeConverter typeConverter,
+            ConfigurationValidatorBase validator,
+            ConfigurationPropertyOptions options,
+            string description
+        )
         {
             this.name = name;
-            this.converter = typeConverter != null ? typeConverter : TypeDescriptor.GetConverter (type);
-            if (defaultValue != null) {
-                if (defaultValue == NoDefaultValue) {
-                    switch (Type.GetTypeCode (type)) {
-                    case TypeCode.Object:
-                        defaultValue = null;
-                        break;
-                    case TypeCode.String:
-                        defaultValue = String.Empty;
-                        break;
-                    default:
-                        defaultValue = Activator.CreateInstance (type);
-                        break;
+            this.converter =
+                typeConverter != null ? typeConverter : TypeDescriptor.GetConverter(type);
+            if (defaultValue != null)
+            {
+                if (defaultValue == NoDefaultValue)
+                {
+                    switch (Type.GetTypeCode(type))
+                    {
+                        case TypeCode.Object:
+                            defaultValue = null;
+                            break;
+                        case TypeCode.String:
+                            defaultValue = String.Empty;
+                            break;
+                        default:
+                            defaultValue = Activator.CreateInstance(type);
+                            break;
                     }
                 }
-                else
-                    if (!type.IsAssignableFrom (defaultValue.GetType ())) {
-                        if (!this.converter.CanConvertFrom (defaultValue.GetType ()))
-                            throw new ConfigurationErrorsException (String.Format ("The default value for property '{0}' has a different type than the one of the property itself: expected {1} but was {2}",
-                                                       name, type, defaultValue.GetType ()));
+                else if (!type.IsAssignableFrom(defaultValue.GetType()))
+                {
+                    if (!this.converter.CanConvertFrom(defaultValue.GetType()))
+                        throw new ConfigurationErrorsException(
+                            String.Format(
+                                "The default value for property '{0}' has a different type than the one of the property itself: expected {1} but was {2}",
+                                name,
+                                type,
+                                defaultValue.GetType()
+                            )
+                        );
 
-                        defaultValue = this.converter.ConvertFrom (defaultValue);
-                    }
+                    defaultValue = this.converter.ConvertFrom(defaultValue);
+                }
             }
             this.default_value = defaultValue;
             this.flags = options;
             this.type = type;
-            this.validation = validator != null ? validator : new DefaultValidator ();
+            this.validation = validator != null ? validator : new DefaultValidator();
             this.description = description;
         }
 
-        public TypeConverter Converter {
+        public TypeConverter Converter
+        {
             get { return converter; }
         }
 
-        public object DefaultValue {                        
+        public object DefaultValue
+        {
             get { return default_value; }
         }
 
-        public bool IsKey {                        
+        public bool IsKey
+        {
             get { return (flags & ConfigurationPropertyOptions.IsKey) != 0; }
         }
 
-        public bool IsRequired {
+        public bool IsRequired
+        {
             get { return (flags & ConfigurationPropertyOptions.IsRequired) != 0; }
         }
 
-        public bool IsDefaultCollection {
+        public bool IsDefaultCollection
+        {
             get { return (flags & ConfigurationPropertyOptions.IsDefaultCollection) != 0; }
         }
 
-        public string Name {
+        public string Name
+        {
             get { return name; }
         }
 
-        public string Description {
+        public string Description
+        {
             get { return description; }
         }
 
-        public Type Type {
+        public Type Type
+        {
             get { return type; }
         }
 
-        public ConfigurationValidatorBase Validator {
+        public ConfigurationValidatorBase Validator
+        {
             get { return validation; }
         }
 
-        internal object ConvertFromString (string value)
+        internal object ConvertFromString(string value)
         {
             if (converter != null)
-                return converter.ConvertFromInvariantString (value);
+                return converter.ConvertFromInvariantString(value);
             else
-                throw new NotImplementedException ();
+                throw new NotImplementedException();
         }
 
-        internal string ConvertToString (object value)
+        internal string ConvertToString(object value)
         {
             if (converter != null)
-                return converter.ConvertToInvariantString (value);
+                return converter.ConvertToInvariantString(value);
             else
-                throw new NotImplementedException ();
+                throw new NotImplementedException();
         }
-        
-        internal bool IsElement {
-            get {
-                return (typeof(ConfigurationElement).IsAssignableFrom (type));
-            }
+
+        internal bool IsElement
+        {
+            get { return (typeof(ConfigurationElement).IsAssignableFrom(type)); }
         }
-        
-        internal ConfigurationCollectionAttribute CollectionAttribute {
+
+        internal ConfigurationCollectionAttribute CollectionAttribute
+        {
             get { return collectionAttribute; }
             set { collectionAttribute = value; }
         }
 
-        internal void Validate (object value)
+        internal void Validate(object value)
         {
             if (validation != null)
-                validation.Validate (value);
+                validation.Validate(value);
         }
     }
 }
-

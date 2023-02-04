@@ -4,15 +4,14 @@
 // Anonymous method group conversions
 //
 
-class X {
-    delegate void T ();
+class X
+{
+    delegate void T();
     static event T Click;
 
-    static void Method ()
-    {
-    }
+    static void Method() { }
 
-    public static void Main ()
+    public static void Main()
     {
         T t;
 

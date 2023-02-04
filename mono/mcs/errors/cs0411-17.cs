@@ -3,18 +3,19 @@
 
 using System;
 
-interface IB
-{
-}
+interface IB { }
 
 class C
 {
-    public static void Main ()
+    public static void Main()
     {
-        Test (() => { if (true) return (C) null; return (IB) null; });
+        Test(() =>
+        {
+            if (true)
+                return (C)null;
+            return (IB)null;
+        });
     }
-    
-    static void Test<T> (Func<T> f)
-    {
-    }
+
+    static void Test<T>(Func<T> f) { }
 }

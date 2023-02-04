@@ -3,10 +3,9 @@
 
 class X
 {
-    public static void Main ()
+    public static void Main()
     {
         int i = 3;
         i += 999999999999999;
     }
 }
-

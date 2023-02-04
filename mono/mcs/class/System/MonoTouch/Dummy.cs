@@ -6,10 +6,7 @@ namespace MonoTouch
     // which allow using for empty namespace
     sealed class Dummy
     {
-        private Dummy ()
-        {
-
-        }
+        private Dummy() { }
     }
 }
 
