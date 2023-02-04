@@ -83,7 +83,9 @@ public class TextTemplatingModelGeneratorTest
         );
 
         var generator = CreateGenerator();
-        var model = new ModelBuilder().Entity("Entity1", b => { }).FinalizeModel();
+        var model = new ModelBuilder()
+            .Entity("Entity1", b => { })
+            .FinalizeModel();
 
         var result = generator.GenerateModel(
             model,
@@ -120,7 +122,9 @@ public class TextTemplatingModelGeneratorTest
         File.WriteAllText(contextTemplate, "My DbContext template");
 
         var generator = CreateGenerator();
-        var model = new ModelBuilder().Entity("Entity1", b => { }).FinalizeModel();
+        var model = new ModelBuilder()
+            .Entity("Entity1", b => { })
+            .FinalizeModel();
 
         var result = generator.GenerateModel(
             model,
@@ -148,7 +152,9 @@ public class TextTemplatingModelGeneratorTest
         File.WriteAllText(template, "My entity type template");
 
         var generator = CreateGenerator();
-        var model = new ModelBuilder().Entity("Entity1", b => { }).FinalizeModel();
+        var model = new ModelBuilder()
+            .Entity("Entity1", b => { })
+            .FinalizeModel();
 
         var result = generator.GenerateModel(
             model,
@@ -177,7 +183,9 @@ public class TextTemplatingModelGeneratorTest
         File.Create(template).Close();
 
         var generator = CreateGenerator();
-        var model = new ModelBuilder().Entity("Entity1", b => { }).FinalizeModel();
+        var model = new ModelBuilder()
+            .Entity("Entity1", b => { })
+            .FinalizeModel();
 
         var ex = Assert.Throws<OperationException>(
             () =>
@@ -228,7 +236,9 @@ ProjectDefaultNamespace: <#= Session[""ProjectDefaultNamespace""] #>"
         );
 
         var generator = CreateGenerator();
-        var model = new ModelBuilder().Entity("Entity1", b => { }).FinalizeModel();
+        var model = new ModelBuilder()
+            .Entity("Entity1", b => { })
+            .FinalizeModel();
 
         var result = generator.GenerateModel(
             model,
@@ -290,7 +300,9 @@ ProjectDefaultNamespace: RootNamespace",
         );
 
         var generator = CreateGenerator();
-        var model = new ModelBuilder().Entity("Entity1", b => { }).FinalizeModel();
+        var model = new ModelBuilder()
+            .Entity("Entity1", b => { })
+            .FinalizeModel();
 
         var result = generator.GenerateModel(
             model,

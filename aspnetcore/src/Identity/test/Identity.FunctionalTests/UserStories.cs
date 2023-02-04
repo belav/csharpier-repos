@@ -167,7 +167,9 @@ public class UserStories
     {
         var index = await Index.CreateAsync(
             client,
-            new DefaultUIContext().WithSocialLoginEnabled().WithExistingUser()
+            new DefaultUIContext()
+                .WithSocialLoginEnabled()
+                .WithExistingUser()
         );
 
         var login = await index.ClickLoginLinkAsync();
@@ -251,7 +253,10 @@ public class UserStories
         return await ConfirmEmail.Create(
             link,
             client,
-            new DefaultUIContext().WithAuthenticatedUser().WithExistingUser().WithConfirmedEmail()
+            new DefaultUIContext()
+                .WithAuthenticatedUser()
+                .WithExistingUser()
+                .WithConfirmedEmail()
         );
     }
 

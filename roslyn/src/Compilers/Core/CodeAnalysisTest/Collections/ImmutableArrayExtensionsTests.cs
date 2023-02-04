@@ -607,7 +607,12 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             Assert.True(arrayOfD2.Equals(arrayOfD));
 
             // Trying to cast from base to derived. "As" should return null (default)
-            Assert.True(new C[] { new C() }.AsImmutableOrNull().As<D>().IsDefault);
+            Assert.True(
+                new C[] { new C() }
+                    .AsImmutableOrNull()
+                    .As<D>()
+                    .IsDefault
+            );
         }
     }
 }

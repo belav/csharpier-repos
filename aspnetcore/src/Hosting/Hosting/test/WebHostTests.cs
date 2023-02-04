@@ -56,7 +56,9 @@ public partial class WebHostTests
     {
         var data = new Dictionary<string, string> { { "server.urls", "http://localhost:5002" } };
 
-        var config = new ConfigurationBuilder().AddInMemoryCollection(data).Build();
+        var config = new ConfigurationBuilder()
+            .AddInMemoryCollection(data)
+            .Build();
 
         using (var host = CreateBuilder(config).UseFakeServer().Build())
         {
@@ -72,7 +74,9 @@ public partial class WebHostTests
     {
         var data = new Dictionary<string, string> { { "urls", "http://localhost:5003" } };
 
-        var config = new ConfigurationBuilder().AddInMemoryCollection(data).Build();
+        var config = new ConfigurationBuilder()
+            .AddInMemoryCollection(data)
+            .Build();
 
         using (var host = CreateBuilder(config).UseFakeServer().Build())
         {
@@ -92,7 +96,9 @@ public partial class WebHostTests
             { "urls", "http://localhost:5009" }
         };
 
-        var config = new ConfigurationBuilder().AddInMemoryCollection(data).Build();
+        var config = new ConfigurationBuilder()
+            .AddInMemoryCollection(data)
+            .Build();
 
         using (var host = CreateBuilder(config).UseFakeServer().Build())
         {
@@ -120,7 +126,9 @@ public partial class WebHostTests
     {
         var data = new Dictionary<string, string> { { "urls", "http://localhost:5003" } };
 
-        var config = new ConfigurationBuilder().AddInMemoryCollection(data).Build();
+        var config = new ConfigurationBuilder()
+            .AddInMemoryCollection(data)
+            .Build();
 
         using (var host = CreateBuilder(config).UseFakeServer().PreferHostingUrls(true).Build())
         {
@@ -196,7 +204,9 @@ public partial class WebHostTests
     {
         var data = new Dictionary<string, string> { { WebHostDefaults.ShutdownTimeoutKey, "1" } };
 
-        var config = new ConfigurationBuilder().AddInMemoryCollection(data).Build();
+        var config = new ConfigurationBuilder()
+            .AddInMemoryCollection(data)
+            .Build();
 
         var server = new Mock<IServer>();
         server
@@ -235,7 +245,9 @@ public partial class WebHostTests
     {
         var data = new Dictionary<string, string> { { WebHostDefaults.ShutdownTimeoutKey, "1" } };
 
-        var config = new ConfigurationBuilder().AddInMemoryCollection(data).Build();
+        var config = new ConfigurationBuilder()
+            .AddInMemoryCollection(data)
+            .Build();
 
         var server = new Mock<IServer>();
         server
@@ -271,7 +283,9 @@ public partial class WebHostTests
     {
         var data = new Dictionary<string, string> { { WebHostDefaults.ShutdownTimeoutKey, "10" } };
 
-        var config = new ConfigurationBuilder().AddInMemoryCollection(data).Build();
+        var config = new ConfigurationBuilder()
+            .AddInMemoryCollection(data)
+            .Build();
 
         var server = new Mock<IServer>();
         server

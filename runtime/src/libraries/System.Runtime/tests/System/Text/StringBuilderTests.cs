@@ -2854,12 +2854,42 @@ namespace System.Text.Tests
             var stringValues = Array.ConvertAll(values, _ => _?.ToString());
             var enumerable = values.Select(_ => _);
 
-            Assert.Equal(expected, new StringBuilder().AppendJoin('|', values).ToString());
-            Assert.Equal(expected, new StringBuilder().AppendJoin('|', enumerable).ToString());
-            Assert.Equal(expected, new StringBuilder().AppendJoin('|', stringValues).ToString());
-            Assert.Equal(expected, new StringBuilder().AppendJoin("|", values).ToString());
-            Assert.Equal(expected, new StringBuilder().AppendJoin("|", enumerable).ToString());
-            Assert.Equal(expected, new StringBuilder().AppendJoin("|", stringValues).ToString());
+            Assert.Equal(
+                expected,
+                new StringBuilder()
+                    .AppendJoin('|', values)
+                    .ToString()
+            );
+            Assert.Equal(
+                expected,
+                new StringBuilder()
+                    .AppendJoin('|', enumerable)
+                    .ToString()
+            );
+            Assert.Equal(
+                expected,
+                new StringBuilder()
+                    .AppendJoin('|', stringValues)
+                    .ToString()
+            );
+            Assert.Equal(
+                expected,
+                new StringBuilder()
+                    .AppendJoin("|", values)
+                    .ToString()
+            );
+            Assert.Equal(
+                expected,
+                new StringBuilder()
+                    .AppendJoin("|", enumerable)
+                    .ToString()
+            );
+            Assert.Equal(
+                expected,
+                new StringBuilder()
+                    .AppendJoin("|", stringValues)
+                    .ToString()
+            );
         }
 
         [Fact]
@@ -2886,15 +2916,21 @@ namespace System.Text.Tests
         {
             Assert.Equal(
                 expected,
-                new StringBuilder().AppendJoin(separator, new object[] { 1, 2, 3 }).ToString()
+                new StringBuilder()
+                    .AppendJoin(separator, new object[] { 1, 2, 3 })
+                    .ToString()
             );
             Assert.Equal(
                 expected,
-                new StringBuilder().AppendJoin(separator, Enumerable.Range(1, 3)).ToString()
+                new StringBuilder()
+                    .AppendJoin(separator, Enumerable.Range(1, 3))
+                    .ToString()
             );
             Assert.Equal(
                 expected,
-                new StringBuilder().AppendJoin(separator, new string[] { "1", "2", "3" }).ToString()
+                new StringBuilder()
+                    .AppendJoin(separator, new string[] { "1", "2", "3" })
+                    .ToString()
             );
         }
 
@@ -3366,10 +3402,16 @@ namespace System.Text.Tests
             Assert.Throws<ArgumentNullException>(() => sb.Append((StringBuilder)null, 2, 2));
             Assert.Throws<ArgumentNullException>(() => sb.Append((StringBuilder)null, 2, 3));
             Assert.Throws<ArgumentOutOfRangeException>(
-                () => new StringBuilder(3, 6).Append("Hello").Append(sb)
+                () =>
+                    new StringBuilder(3, 6)
+                        .Append("Hello")
+                        .Append(sb)
             );
             Assert.Throws<ArgumentOutOfRangeException>(
-                () => new StringBuilder(3, 6).Append("Hello").Append("Hello")
+                () =>
+                    new StringBuilder(3, 6)
+                        .Append("Hello")
+                        .Append("Hello")
             );
 
             Assert.Throws<ArgumentOutOfRangeException>(() => sb.Append(sb));

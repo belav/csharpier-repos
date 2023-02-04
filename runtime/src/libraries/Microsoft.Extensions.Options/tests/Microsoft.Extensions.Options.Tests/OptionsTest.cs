@@ -37,7 +37,9 @@ namespace Microsoft.Extensions.Options.Tests
             };
             var services = new ServiceCollection();
             services.Configure<ComplexOptions>(
-                new ConfigurationBuilder().AddInMemoryCollection(dic).Build()
+                new ConfigurationBuilder()
+                    .AddInMemoryCollection(dic)
+                    .Build()
             );
             var sp = services.BuildServiceProvider();
             var options = sp.GetRequiredService<IOptions<ComplexOptions>>().Value;
@@ -58,7 +60,9 @@ namespace Microsoft.Extensions.Options.Tests
             };
             var services = new ServiceCollection();
             services.Configure<DerivedOptions>(
-                new ConfigurationBuilder().AddInMemoryCollection(dic).Build()
+                new ConfigurationBuilder()
+                    .AddInMemoryCollection(dic)
+                    .Build()
             );
             var sp = services.BuildServiceProvider();
             var options = sp.GetRequiredService<IOptions<DerivedOptions>>().Value;
@@ -74,7 +78,9 @@ namespace Microsoft.Extensions.Options.Tests
             var dic = new Dictionary<string, string> { { "StaticProperty", "stuff" }, };
             var services = new ServiceCollection();
             services.Configure<ComplexOptions>(
-                new ConfigurationBuilder().AddInMemoryCollection(dic).Build()
+                new ConfigurationBuilder()
+                    .AddInMemoryCollection(dic)
+                    .Build()
             );
             var sp = services.BuildServiceProvider();
             var options = sp.GetRequiredService<IOptions<ComplexOptions>>().Value;
@@ -91,7 +97,9 @@ namespace Microsoft.Extensions.Options.Tests
             var dic = new Dictionary<string, string> { { property, "stuff" }, };
             var services = new ServiceCollection();
             services.Configure<ComplexOptions>(
-                new ConfigurationBuilder().AddInMemoryCollection(dic).Build()
+                new ConfigurationBuilder()
+                    .AddInMemoryCollection(dic)
+                    .Build()
             );
             var sp = services.BuildServiceProvider();
             var options = sp.GetRequiredService<IOptions<ComplexOptions>>().Value;
@@ -107,7 +115,9 @@ namespace Microsoft.Extensions.Options.Tests
             var dic = new Dictionary<string, string> { { property, "stuff" }, };
             var services = new ServiceCollection();
             services.Configure<ComplexOptions>(
-                new ConfigurationBuilder().AddInMemoryCollection(dic).Build(),
+                new ConfigurationBuilder()
+                    .AddInMemoryCollection(dic)
+                    .Build(),
                 o => o.BindNonPublicProperties = true
             );
             var sp = services.BuildServiceProvider();
@@ -125,7 +135,9 @@ namespace Microsoft.Extensions.Options.Tests
             var services = new ServiceCollection();
             services.Configure<ComplexOptions>(
                 "named",
-                new ConfigurationBuilder().AddInMemoryCollection(dic).Build(),
+                new ConfigurationBuilder()
+                    .AddInMemoryCollection(dic)
+                    .Build(),
                 o => o.BindNonPublicProperties = true
             );
             var sp = services.BuildServiceProvider();

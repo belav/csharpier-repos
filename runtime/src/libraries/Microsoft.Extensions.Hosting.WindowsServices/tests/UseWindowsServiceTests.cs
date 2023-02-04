@@ -22,7 +22,9 @@ namespace Microsoft.Extensions.Hosting
         [Fact]
         public void DefaultsToOffOutsideOfService()
         {
-            using IHost host = new HostBuilder().UseWindowsService().Build();
+            using IHost host = new HostBuilder()
+                .UseWindowsService()
+                .Build();
 
             var lifetime = host.Services.GetRequiredService<IHostLifetime>();
             Assert.IsType<ConsoleLifetime>(lifetime);

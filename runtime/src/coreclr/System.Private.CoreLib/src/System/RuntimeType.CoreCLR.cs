@@ -2228,7 +2228,9 @@ namespace System
         internal static MethodBase? GetMethodBase(RuntimeModule scope, int typeMetadataToken)
         {
             return GetMethodBase(
-                new ModuleHandle(scope).ResolveMethodHandle(typeMetadataToken).GetMethodInfo()
+                new ModuleHandle(scope)
+                    .ResolveMethodHandle(typeMetadataToken)
+                    .GetMethodInfo()
             );
         }
 

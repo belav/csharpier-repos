@@ -150,7 +150,9 @@ public class WebViewManagerTests
 
     private static IServiceCollection RegisterTestServices()
     {
-        return new ServiceCollection().AddSingleton<SingletonService>().AddScoped<ScopedService>();
+        return new ServiceCollection()
+            .AddSingleton<SingletonService>()
+            .AddScoped<ScopedService>();
     }
 
     private class MyComponent : IComponent

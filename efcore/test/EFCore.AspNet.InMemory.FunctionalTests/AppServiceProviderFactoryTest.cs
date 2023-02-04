@@ -96,7 +96,9 @@ public class AppServiceProviderFactoryTest
     }
 
     private static ServiceProvider BuildTestServiceProvider() =>
-        new ServiceCollection().AddScoped<TestService>().BuildServiceProvider(validateScopes: true);
+        new ServiceCollection()
+            .AddScoped<TestService>()
+            .BuildServiceProvider(validateScopes: true);
 
     private class TestService { }
 

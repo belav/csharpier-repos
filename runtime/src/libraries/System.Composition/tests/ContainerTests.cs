@@ -16,7 +16,9 @@ namespace System.Composition.UnitTests
     {
         protected static CompositionContext CreateContainer(params Type[] types)
         {
-            return new ContainerConfiguration().WithParts(types).CreateContainer();
+            return new ContainerConfiguration()
+                .WithParts(types)
+                .CreateContainer();
         }
 
         protected static CompositionContext CreateContainer(

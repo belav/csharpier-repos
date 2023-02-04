@@ -137,7 +137,12 @@ namespace MonoTests.System.ServiceModel.Description
         [Test]
         public void ServiceCertificate()
         {
-            Assert.IsNull(new ServiceCredentials().ServiceCertificate.Certificate, "#1");
+            Assert.IsNull(
+                new ServiceCredentials()
+                    .ServiceCertificate
+                    .Certificate,
+                "#1"
+            );
         }
 
         [Test]

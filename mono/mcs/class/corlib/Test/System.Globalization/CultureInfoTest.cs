@@ -632,7 +632,12 @@ namespace MonoTests.System.Globalization
             Assert.AreEqual(31748, new CultureInfo("zh-Hant").LCID);
             Assert.AreEqual(31748, CultureInfo.GetCultureInfo("zh-Hant").LCID);
             Assert.AreEqual(31748, new CultureInfo("zh-CHT").LCID);
-            Assert.AreEqual(31748, new CultureInfo("zh-CHT").Parent.LCID);
+            Assert.AreEqual(
+                31748,
+                new CultureInfo("zh-CHT")
+                    .Parent
+                    .LCID
+            );
         }
 
         [Test]
@@ -641,7 +646,12 @@ namespace MonoTests.System.Globalization
             Assert.AreEqual(4, new CultureInfo("zh-Hans").LCID);
             Assert.AreEqual(4, CultureInfo.GetCultureInfo("zh-Hans").LCID);
             Assert.AreEqual(4, new CultureInfo("zh-CHS").LCID);
-            Assert.AreEqual(4, new CultureInfo("zh-CHS").Parent.LCID);
+            Assert.AreEqual(
+                4,
+                new CultureInfo("zh-CHS")
+                    .Parent
+                    .LCID
+            );
         }
 
         [Test]

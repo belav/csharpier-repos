@@ -378,8 +378,20 @@ namespace MonoTests.System
             TimeSpan t1;
             bool exception;
 
-            Assert.AreEqual("-00:00:00.0012345", new TimeSpan(12345).Negate().ToString(), "A1");
-            Assert.AreEqual("00:00:00.0012345", new TimeSpan(-12345).Duration().ToString(), "A2");
+            Assert.AreEqual(
+                "-00:00:00.0012345",
+                new TimeSpan(12345)
+                    .Negate()
+                    .ToString(),
+                "A1"
+            );
+            Assert.AreEqual(
+                "00:00:00.0012345",
+                new TimeSpan(-12345)
+                    .Duration()
+                    .ToString(),
+                "A2"
+            );
 
             try
             {

@@ -1621,7 +1621,10 @@ namespace System.Net.Http
             {
                 // See comments in WaitAsync.
                 Debug.Assert(!_waitSource.RunContinuationsAsynchronously);
-                new ValueTask(this, _waitSource.Version).AsTask().GetAwaiter().GetResult();
+                new ValueTask(this, _waitSource.Version)
+                    .AsTask()
+                    .GetAwaiter()
+                    .GetResult();
             }
 
             private ValueTask WaitForDataAsync(CancellationToken cancellationToken)

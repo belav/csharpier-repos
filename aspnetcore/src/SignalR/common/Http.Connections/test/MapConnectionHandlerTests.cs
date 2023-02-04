@@ -33,7 +33,9 @@ public class MapConnectionHandlerTests
     public void MapConnectionHandlerFindsMetadataPolicyOnEndPoint()
     {
         var authCount = 0;
-        var policy1 = new AuthorizationPolicyBuilder().RequireAssertion(_ => true).Build();
+        var policy1 = new AuthorizationPolicyBuilder()
+            .RequireAssertion(_ => true)
+            .Build();
         var req = new TestRequirement();
         using (
             var host = BuildWebHost<AuthConnectionHandler>(

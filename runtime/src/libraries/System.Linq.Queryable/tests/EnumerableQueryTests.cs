@@ -220,7 +220,12 @@ namespace System.Linq.Tests
         [Fact]
         public void ToStringFromEnumerable()
         {
-            Assert.Equal(new int[0].ToString(), new int[0].AsQueryable().ToString());
+            Assert.Equal(
+                new int[0].ToString(),
+                new int[0]
+                    .AsQueryable()
+                    .ToString()
+            );
         }
 
         [Fact]

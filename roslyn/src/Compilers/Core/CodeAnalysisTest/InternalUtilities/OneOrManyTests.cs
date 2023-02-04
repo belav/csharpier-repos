@@ -64,7 +64,11 @@ namespace Microsoft.CodeAnalysis.UnitTests.InternalUtilities
             Verify(new OneOrMany<int>(ImmutableArray.Create(1, 2, 3)).Add(4), 1, 2, 3, 4);
             Verify(new OneOrMany<int>(ImmutableArray.Create(1, 2, 3, 4)), 1, 2, 3, 4);
             Verify(
-                new OneOrMany<int>(ImmutableArray<int>.Empty).Add(1).Add(2).Add(3).Add(4),
+                new OneOrMany<int>(ImmutableArray<int>.Empty)
+                    .Add(1)
+                    .Add(2)
+                    .Add(3)
+                    .Add(4),
                 1,
                 2,
                 3,

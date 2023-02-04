@@ -7,7 +7,9 @@ public static class Program
 {
     public static Task Main(string[] args)
     {
-        var config = new ConfigurationBuilder().AddCommandLine(args).Build();
+        var config = new ConfigurationBuilder()
+            .AddCommandLine(args)
+            .Build();
 
         var host = new HostBuilder()
             .ConfigureWebHost(webHostBuilder =>

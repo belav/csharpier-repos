@@ -45,7 +45,9 @@ namespace System.CommandLine
 
             if (root.ImplicitInvocationParser is not { } parser)
             {
-                parser = new CommandLineBuilder(root).UseDefaults().Build();
+                parser = new CommandLineBuilder(root)
+                    .UseDefaults()
+                    .Build();
                 root.ImplicitInvocationParser = parser;
             }
 

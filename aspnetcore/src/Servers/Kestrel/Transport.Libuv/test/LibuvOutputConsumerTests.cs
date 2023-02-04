@@ -32,7 +32,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Tests
         public static TheoryData<long?> MaxResponseBufferSizeData =>
             new TheoryData<long?>
             {
-                new KestrelServerOptions().Limits.MaxResponseBufferSize,
+                new KestrelServerOptions()
+                    .Limits
+                    .MaxResponseBufferSize,
                 0,
                 1024,
                 1024 * 1024,
@@ -42,7 +44,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Tests
         public static TheoryData<int> PositiveMaxResponseBufferSizeData =>
             new TheoryData<int>
             {
-                (int)new KestrelServerOptions().Limits.MaxResponseBufferSize,
+                (int)
+                    new KestrelServerOptions()
+                        .Limits
+                        .MaxResponseBufferSize,
                 1024,
                 (1024 * 1024) + 1
             };

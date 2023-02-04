@@ -58,7 +58,9 @@ public class AuthorizationPolicyFacts
 
         var policies = new[]
         {
-            new AuthorizationPolicyBuilder().RequireAssertion(_ => true).Build()
+            new AuthorizationPolicyBuilder()
+                .RequireAssertion(_ => true)
+                .Build()
         };
 
         var options = new AuthorizationOptions();

@@ -36,10 +36,31 @@ namespace Test_sizeof64
             public static unsafe int TestEntryPoint()
             {
                 long l = (sbyte)sizeof(RefComplexStruct);
-                l += sizeof(RefComplexStruct) + new RefComplexStruct().ss1.m_sbyte;
-                l -= 128L - new RefComplexStruct().ss2.m_ushort - sizeof(RefComplexStruct);
-                l *= sizeof(RefComplexStruct) * (new RefComplexStruct().ss1.m_uint + 1);
-                l /= sizeof(RefComplexStruct) / (int)(new RefComplexStruct().ss2.m_ulong + 1);
+                l +=
+                    sizeof(RefComplexStruct)
+                    + new RefComplexStruct()
+                        .ss1
+                        .m_sbyte;
+                l -=
+                    128L
+                    - new RefComplexStruct()
+                        .ss2
+                        .m_ushort
+                    - sizeof(RefComplexStruct);
+                l *=
+                    sizeof(RefComplexStruct)
+                    * (
+                        new RefComplexStruct()
+                            .ss1
+                            .m_uint + 1
+                    );
+                l /=
+                    sizeof(RefComplexStruct)
+                    / (int)(
+                        new RefComplexStruct()
+                            .ss2
+                            .m_ulong + 1
+                    );
                 l = (sizeof(RefComplexStruct) ^ 64) | l;
                 l = (sizeof(RefComplexStruct) ^ (~64)) & l;
                 return (int)(l + 36L);

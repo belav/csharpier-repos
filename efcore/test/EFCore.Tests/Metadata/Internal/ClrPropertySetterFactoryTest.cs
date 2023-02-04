@@ -108,7 +108,9 @@ public class ClrPropertySetterFactoryTest
 
         var customer = new Customer { Id = 7 };
 
-        new ClrPropertySetterFactory().Create((IProperty)idProperty).SetClrValue(customer, 77);
+        new ClrPropertySetterFactory()
+            .Create((IProperty)idProperty)
+            .SetClrValue(customer, 77);
 
         Assert.Equal(77, customer.Id);
     }
@@ -133,7 +135,9 @@ public class ClrPropertySetterFactoryTest
 
         var customer = new Customer { Id = 7 };
 
-        new ClrPropertySetterFactory().Create((IProperty)idProperty).SetClrValue(customer, 1);
+        new ClrPropertySetterFactory()
+            .Create((IProperty)idProperty)
+            .SetClrValue(customer, 1);
 
         Assert.Equal(1, customer.Id);
     }
@@ -161,7 +165,9 @@ public class ClrPropertySetterFactoryTest
 
         var customer = new Customer { Id = 7 };
 
-        new ClrPropertySetterFactory().Create((IProperty)idProperty).SetClrValue(customer, 3);
+        new ClrPropertySetterFactory()
+            .Create((IProperty)idProperty)
+            .SetClrValue(customer, 3);
 
         Assert.Equal(3, customer.OptionalInt);
     }
@@ -174,7 +180,9 @@ public class ClrPropertySetterFactoryTest
 
         var customer = new Customer { Id = 7 };
 
-        new ClrPropertySetterFactory().Create((IProperty)idProperty).SetClrValue(customer, null);
+        new ClrPropertySetterFactory()
+            .Create((IProperty)idProperty)
+            .SetClrValue(customer, null);
 
         Assert.Null(customer.OptionalInt);
     }
@@ -220,7 +228,9 @@ public class ClrPropertySetterFactoryTest
         );
         var entity = new ConcreteEntity1();
 
-        new ClrPropertySetterFactory().Create((IProperty)property).SetClrValue(entity, 100);
+        new ClrPropertySetterFactory()
+            .Create((IProperty)property)
+            .SetClrValue(entity, 100);
         Assert.Equal(100, entity.VirtualPrivateProperty_Override);
     }
 
@@ -235,7 +245,9 @@ public class ClrPropertySetterFactoryTest
         );
         var entity = new ConcreteEntity2();
 
-        new ClrPropertySetterFactory().Create((IProperty)property).SetClrValue(entity, 100);
+        new ClrPropertySetterFactory()
+            .Create((IProperty)property)
+            .SetClrValue(entity, 100);
         Assert.Equal(100, entity.VirtualPrivateProperty_Override);
     }
 
@@ -250,7 +262,9 @@ public class ClrPropertySetterFactoryTest
         );
         var entity = new ConcreteEntity1();
 
-        new ClrPropertySetterFactory().Create((IProperty)property).SetClrValue(entity, 100);
+        new ClrPropertySetterFactory()
+            .Create((IProperty)property)
+            .SetClrValue(entity, 100);
         Assert.Equal(100, entity.VirtualPrivateProperty_NoOverride);
     }
 
@@ -265,7 +279,9 @@ public class ClrPropertySetterFactoryTest
         );
         var entity = new ConcreteEntity2();
 
-        new ClrPropertySetterFactory().Create((IProperty)property).SetClrValue(entity, 100);
+        new ClrPropertySetterFactory()
+            .Create((IProperty)property)
+            .SetClrValue(entity, 100);
         Assert.Equal(100, entity.VirtualPrivateProperty_NoOverride);
     }
 
@@ -278,7 +294,9 @@ public class ClrPropertySetterFactoryTest
         );
         var entity = new ConcreteEntity1();
 
-        new ClrPropertySetterFactory().Create((IProperty)property).SetClrValue(entity, 100);
+        new ClrPropertySetterFactory()
+            .Create((IProperty)property)
+            .SetClrValue(entity, 100);
         Assert.Equal(100, entity.PrivateProperty);
     }
 
@@ -291,7 +309,9 @@ public class ClrPropertySetterFactoryTest
         );
         var entity = new ConcreteEntity2();
 
-        new ClrPropertySetterFactory().Create((IProperty)property).SetClrValue(entity, 100);
+        new ClrPropertySetterFactory()
+            .Create((IProperty)property)
+            .SetClrValue(entity, 100);
         Assert.Equal(100, entity.PrivateProperty);
     }
 
@@ -332,7 +352,9 @@ public class ClrPropertySetterFactoryTest
         new ClrPropertySetterFactory()
             .Create((IProperty)propertyA)
             .SetClrValue(indexedClass, "UpdatedValue");
-        new ClrPropertySetterFactory().Create((IProperty)propertyB).SetClrValue(indexedClass, 42);
+        new ClrPropertySetterFactory()
+            .Create((IProperty)propertyB)
+            .SetClrValue(indexedClass, 42);
 
         Assert.Equal("UpdatedValue", indexedClass["PropertyA"]);
         Assert.Equal(42, indexedClass["PropertyB"]);

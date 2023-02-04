@@ -625,7 +625,9 @@ namespace System.Data.Linq.Mapping
             }
             else
             {
-                this.inheritanceTypes = new MetaType[] { this }.ToList().AsReadOnly();
+                this.inheritanceTypes = new MetaType[] { this }
+                    .ToList()
+                    .AsReadOnly();
             }
             this.Validate();
         }

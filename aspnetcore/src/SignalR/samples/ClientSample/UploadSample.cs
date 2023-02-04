@@ -30,7 +30,9 @@ internal class UploadSample
 
     public static async Task<int> ExecuteAsync(string baseUrl)
     {
-        var connection = new HubConnectionBuilder().WithUrl(baseUrl).Build();
+        var connection = new HubConnectionBuilder()
+            .WithUrl(baseUrl)
+            .Build();
         await connection.StartAsync();
 
         //await BasicInvoke(connection);

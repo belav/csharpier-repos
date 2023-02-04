@@ -252,7 +252,13 @@ public class FileLoggerProcessorTests
                     .DefaultTimeout();
             }
 
-            Assert.Equal(10000, new DirectoryInfo(path).GetFiles().ToArray().Length);
+            Assert.Equal(
+                10000,
+                new DirectoryInfo(path)
+                    .GetFiles()
+                    .ToArray()
+                    .Length
+            );
 
             // restarting the logger should do nothing since the folder is still full
             var testSink2 = new TestSink();

@@ -221,7 +221,9 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
                 ArrayBuilder<string> lines
             )
             {
-                var indent = new StringBuilder().Append(' ', s_indentSize * 2).ToString();
+                var indent = new StringBuilder()
+                    .Append(' ', s_indentSize * 2)
+                    .ToString();
 
                 var words = line.Split(' ');
                 var firstInLine = true;

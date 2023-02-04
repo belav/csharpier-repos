@@ -74,8 +74,9 @@ namespace Microsoft.CodeAnalysis
                     GetType(),
                     _ =>
                         new StrongBox<bool>(
-                            new Func<Stream, Workspace, SourceText>(CreateText).Method.DeclaringType
-                                != typeof(FileTextLoader)
+                            new Func<Stream, Workspace, SourceText>(CreateText)
+                                .Method
+                                .DeclaringType != typeof(FileTextLoader)
                         )
                 )
                 .Value;

@@ -58,7 +58,9 @@ namespace Castle
             string testAssemblyPath = Uri.UnescapeDataString(testUri.Path);
             string testContainingDirectory = Path.GetDirectoryName(testAssemblyPath);
 
-            string configuration = new DirectoryInfo(testContainingDirectory).Parent.Name;
+            string configuration = new DirectoryInfo(testContainingDirectory)
+                .Parent
+                .Name;
             string rootDir = Path.GetFullPath(
                 Path.Combine(testContainingDirectory, "../../../../..")
             );

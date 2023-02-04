@@ -15,7 +15,9 @@ public class GlobalDatabaseTest
     {
         using (
             var context = new BooFooContext(
-                new DbContextOptionsBuilder().UseInMemoryDatabase(nameof(BooFooContext)).Options
+                new DbContextOptionsBuilder()
+                    .UseInMemoryDatabase(nameof(BooFooContext))
+                    .Options
             )
         )
         {
@@ -41,7 +43,9 @@ public class GlobalDatabaseTest
     {
         using (
             var context = new BooFooContext(
-                new DbContextOptionsBuilder().UseInMemoryDatabase(nameof(BooFooContext)).Options
+                new DbContextOptionsBuilder()
+                    .UseInMemoryDatabase(nameof(BooFooContext))
+                    .Options
             )
         )
         {

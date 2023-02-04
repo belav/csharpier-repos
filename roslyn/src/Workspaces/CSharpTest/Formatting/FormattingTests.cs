@@ -8863,7 +8863,9 @@ class Program
             var block = SyntaxFactory.Block();
             Formatter.Format(
                 block,
-                new AdhocWorkspace().Services.SolutionServices,
+                new AdhocWorkspace()
+                    .Services
+                    .SolutionServices,
                 CSharpSyntaxFormattingOptions.Default,
                 CancellationToken.None
             );

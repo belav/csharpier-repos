@@ -85,7 +85,9 @@ namespace System.Composition.TypedParts.Tests
 
         private static CompositionContext CreateContainer(params Type[] types)
         {
-            return new ContainerConfiguration().WithParts(types).CreateContainer();
+            return new ContainerConfiguration()
+                .WithParts(types)
+                .CreateContainer();
         }
 
         public interface IA { }

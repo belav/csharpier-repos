@@ -81,25 +81,46 @@ namespace System.SpanTests
         {
             int[] a = { 90, 91, 92, 93, 94, 95, 96, 97, 98, 99 };
             Assert.Throws<ArgumentOutOfRangeException>(
-                () => new ReadOnlySpan<int>(a).Slice(-1).DontBox()
+                () =>
+                    new ReadOnlySpan<int>(a)
+                        .Slice(-1)
+                        .DontBox()
             );
             Assert.Throws<ArgumentOutOfRangeException>(
-                () => new ReadOnlySpan<int>(a).Slice(a.Length + 1).DontBox()
+                () =>
+                    new ReadOnlySpan<int>(a)
+                        .Slice(a.Length + 1)
+                        .DontBox()
             );
             Assert.Throws<ArgumentOutOfRangeException>(
-                () => new ReadOnlySpan<int>(a).Slice(-1, 0).DontBox()
+                () =>
+                    new ReadOnlySpan<int>(a)
+                        .Slice(-1, 0)
+                        .DontBox()
             );
             Assert.Throws<ArgumentOutOfRangeException>(
-                () => new ReadOnlySpan<int>(a).Slice(0, a.Length + 1).DontBox()
+                () =>
+                    new ReadOnlySpan<int>(a)
+                        .Slice(0, a.Length + 1)
+                        .DontBox()
             );
             Assert.Throws<ArgumentOutOfRangeException>(
-                () => new ReadOnlySpan<int>(a).Slice(2, a.Length + 1 - 2).DontBox()
+                () =>
+                    new ReadOnlySpan<int>(a)
+                        .Slice(2, a.Length + 1 - 2)
+                        .DontBox()
             );
             Assert.Throws<ArgumentOutOfRangeException>(
-                () => new ReadOnlySpan<int>(a).Slice(a.Length + 1, 0).DontBox()
+                () =>
+                    new ReadOnlySpan<int>(a)
+                        .Slice(a.Length + 1, 0)
+                        .DontBox()
             );
             Assert.Throws<ArgumentOutOfRangeException>(
-                () => new ReadOnlySpan<int>(a).Slice(a.Length, 1).DontBox()
+                () =>
+                    new ReadOnlySpan<int>(a)
+                        .Slice(a.Length, 1)
+                        .DontBox()
             );
         }
     }

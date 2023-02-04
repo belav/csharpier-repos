@@ -94,7 +94,9 @@ public class TestServerTests
     [Fact]
     public void CreateWithDelegate_DI()
     {
-        var builder = new WebHostBuilder().Configure(app => { }).UseTestServer();
+        var builder = new WebHostBuilder()
+            .Configure(app => { })
+            .UseTestServer();
 
         using var host = builder.Build();
         host.Start();
@@ -755,7 +757,9 @@ public class TestServerTests
     [Fact]
     public async Task CanCreateViaStartupTypeAndSpecifyEnv()
     {
-        var builder = new WebHostBuilder().UseStartup<TestStartup>().UseEnvironment("Foo");
+        var builder = new WebHostBuilder()
+            .UseStartup<TestStartup>()
+            .UseEnvironment("Foo");
         var server = new TestServer(builder);
 
         HttpResponseMessage result = await server.CreateClient().GetAsync("/");

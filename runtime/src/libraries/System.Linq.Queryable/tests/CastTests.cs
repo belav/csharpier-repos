@@ -221,7 +221,10 @@ namespace System.Linq.Tests
         [Fact]
         public void Cast()
         {
-            var count = new object[] { 0, 1, 2 }.AsQueryable().Cast<int>().Count();
+            var count = new object[] { 0, 1, 2 }
+                .AsQueryable()
+                .Cast<int>()
+                .Count();
             Assert.Equal(3, count);
         }
     }

@@ -34,7 +34,9 @@ public class StartupBlockingOnStart : StartupBase
     // Entry point for the application.
     public static async Task Main(string[] args)
     {
-        var config = new ConfigurationBuilder().AddCommandLine(args).Build();
+        var config = new ConfigurationBuilder()
+            .AddCommandLine(args)
+            .Build();
 
         var host = new HostBuilder()
             .ConfigureWebHost(webHostBuilder =>

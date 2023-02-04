@@ -64,7 +64,12 @@ namespace System.ConfigurationTests
         [Fact]
         public void EmptyAllKeys()
         {
-            Assert.Equal(0, new KeyValueConfigurationCollection().AllKeys.Length);
+            Assert.Equal(
+                0,
+                new KeyValueConfigurationCollection()
+                    .AllKeys
+                    .Length
+            );
         }
 
         [Fact]

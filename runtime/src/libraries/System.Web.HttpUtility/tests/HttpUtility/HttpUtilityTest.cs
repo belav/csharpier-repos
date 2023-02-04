@@ -607,7 +607,12 @@ namespace System.Web.Tests
 
         public static IEnumerable<object[]> ParseQueryStringDataQ =>
             ParseQueryStringData
-                .Select(a => new object[] { "?" + (string)a[0] }.Concat(a.Skip(1)).ToArray())
+                .Select(
+                    a =>
+                        new object[] { "?" + (string)a[0] }
+                            .Concat(a.Skip(1))
+                            .ToArray()
+                )
                 .Concat(
                     new[]
                     {

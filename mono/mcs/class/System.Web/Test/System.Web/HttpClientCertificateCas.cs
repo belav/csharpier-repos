@@ -46,7 +46,9 @@ namespace MonoCasTests.System.Web
         public void FixtureSetUp()
         {
             HttpWorkerRequest hwr = new MonoTests.System.Web.MyHttpWorkerRequest();
-            hcc = new HttpContext(hwr).Request.ClientCertificate;
+            hcc = new HttpContext(hwr)
+                .Request
+                .ClientCertificate;
         }
 
         [Test]

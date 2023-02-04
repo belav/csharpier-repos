@@ -1324,7 +1324,10 @@ public abstract class CustomConvertersTestBase<TFixture> : BuiltInDataTypesTestB
             {
                 b.Property(e => e.Id)
                     .HasConversion(
-                        v => new byte[] { 4, 2, 0 }.Concat(v).ToArray(),
+                        v =>
+                            new byte[] { 4, 2, 0 }
+                                .Concat(v)
+                                .ToArray(),
                         v => v.Skip(3).ToArray()
                     );
             });

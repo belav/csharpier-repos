@@ -1104,7 +1104,9 @@ namespace System.CommandLine.Tests.Help
         [Fact]
         public void Help_option_is_shown_in_help()
         {
-            var parser = new CommandLineBuilder().UseHelp().Build();
+            var parser = new CommandLineBuilder()
+                .UseHelp()
+                .Build();
 
             _helpBuilder.Write(parser.Configuration.RootCommand, _console);
 

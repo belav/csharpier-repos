@@ -42,7 +42,9 @@ public class OwinExtensionTests
                     return Task.FromResult(0);
                 });
             },
-            new ServiceCollection().AddSingleton(new FakeService()).BuildServiceProvider()
+            new ServiceCollection()
+                .AddSingleton(new FakeService())
+                .BuildServiceProvider()
         );
 
         list.Reverse();

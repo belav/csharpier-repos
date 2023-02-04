@@ -31,7 +31,10 @@ class Test
         if (i() != 4)
             return 20;
 
-        var em = new IEnumerable[] { new int[] { 1 } }.Select(l => l.Cast<int>()).First().First();
+        var em = new IEnumerable[] { new int[] { 1 } }
+            .Select(l => l.Cast<int>())
+            .First()
+            .First();
         if (em != 1)
             return 30;
 

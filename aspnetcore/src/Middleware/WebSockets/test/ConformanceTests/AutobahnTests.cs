@@ -47,7 +47,9 @@ public class AutobahnTests : LoggedTest
             outDir = outDir.Replace("\\", "\\\\");
 
             // 9.* is Limits/Performance which is VERY SLOW; 12.*/13.* are compression which we don't implement
-            var spec = new AutobahnSpec(outDir).IncludeCase("*").ExcludeCase("9.*", "12.*", "13.*");
+            var spec = new AutobahnSpec(outDir)
+                .IncludeCase("*")
+                .ExcludeCase("9.*", "12.*", "13.*");
 
             var cts = new CancellationTokenSource();
             cts.CancelAfter(TestTimeout); // These tests generally complete in just over 1 minute.

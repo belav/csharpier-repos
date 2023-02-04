@@ -20,7 +20,9 @@ namespace System.Diagnostics.Tests
             // it causes overflow during Id generation, and new root Id is generated for the new Activity
             var parentId = '|' + new string('a', 1022) + '.';
 
-            var activity = new Activity("activity").SetParentId(parentId).Start();
+            var activity = new Activity("activity")
+                .SetParentId(parentId)
+                .Start();
 
             Assert.Equal(parentId, activity.ParentId);
 

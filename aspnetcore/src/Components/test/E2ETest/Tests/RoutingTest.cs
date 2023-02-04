@@ -174,7 +174,11 @@ public class RoutingTest : ServerTestBase<ToggleExecutionModeServerFixture<Progr
             var app = Browser.MountTestComponent<TestRouter>();
             var button = app.FindElement(By.LinkText("Other"));
 
-            new Actions(Browser).KeyDown(key).Click(button).Build().Perform();
+            new Actions(Browser)
+                .KeyDown(key)
+                .Click(button)
+                .Build()
+                .Perform();
 
             Browser.Equal(2, () => Browser.WindowHandles.Count);
         }

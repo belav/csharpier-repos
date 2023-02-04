@@ -145,7 +145,9 @@ namespace System.Reflection
                     System.Reflection.Assembly.GetCallingAssembly();
                 if (callingAssembly != null && !callingAssembly.IsProfileAssembly)
                 {
-                    string caller = new System.Diagnostics.StackFrame(1).GetMethod().FullName;
+                    string caller = new System.Diagnostics.StackFrame(1)
+                        .GetMethod()
+                        .FullName;
                     string callee = System.Reflection.MethodBase.GetCurrentMethod().FullName;
                     throw new MethodAccessException(
                         String.Format(

@@ -95,7 +95,9 @@ namespace System.Security
             //    The security annotation fxcop rule that flags all methods with a Demand() has logic
             //    which checks for methods named Demand in types that implement IPermission or IStackWalk.
             Contract.Assert(
-                new StackFrame().GetMethod().Name.Equals("Demand"),
+                new StackFrame()
+                    .GetMethod()
+                    .Name.Equals("Demand"),
                 "This method needs to be named Demand"
             );
 
@@ -125,7 +127,9 @@ namespace System.Security
             //    The security annotation fxcop rule that flags all methods with an Assert() has logic
             //    which checks for methods named Assert in types that implement IPermission or IStackWalk.
             Contract.Assert(
-                new StackFrame().GetMethod().Name.Equals("Assert"),
+                new StackFrame()
+                    .GetMethod()
+                    .Name.Equals("Assert"),
                 "This method needs to be named Assert"
             );
 

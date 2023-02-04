@@ -123,7 +123,9 @@ namespace Microsoft.Extensions.Configuration.Test
 
             var config = configurationBuilder.Build();
 
-            var chained = new ConfigurationBuilder().AddConfiguration(config).Build();
+            var chained = new ConfigurationBuilder()
+                .AddConfiguration(config)
+                .Build();
             var memVal1 = chained["mem1:keyinmem1"];
             var memVal2 = chained["Mem2:KeyInMem2"];
             var memVal3 = chained["MEM3:KEYINMEM3"];

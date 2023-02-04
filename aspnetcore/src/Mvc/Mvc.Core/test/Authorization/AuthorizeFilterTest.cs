@@ -94,7 +94,9 @@ public class AuthorizeFilterTest
     {
         // Arrange
         var authorizeFilter = new AuthorizeFilter(
-            new AuthorizationPolicyBuilder().RequireAssertion(_ => true).Build()
+            new AuthorizationPolicyBuilder()
+                .RequireAssertion(_ => true)
+                .Build()
         );
         var authorizationContext = GetAuthorizationContext(anonymous: true);
         authorizationContext.HttpContext.User = new ClaimsPrincipal();
@@ -114,7 +116,11 @@ public class AuthorizeFilterTest
         var getPolicyCount = 0;
         policyProvider
             .Setup(p => p.GetPolicyAsync(It.IsAny<string>()))
-            .ReturnsAsync(new AuthorizationPolicyBuilder().RequireAssertion(_ => true).Build())
+            .ReturnsAsync(
+                new AuthorizationPolicyBuilder()
+                    .RequireAssertion(_ => true)
+                    .Build()
+            )
             .Callback(() => getPolicyCount++);
         var authorizeFilter = new AuthorizeFilter(
             policyProvider.Object,
@@ -145,7 +151,9 @@ public class AuthorizeFilterTest
     {
         // Arrange
         var authorizeFilter = new AuthorizeFilter(
-            new AuthorizationPolicyBuilder().RequireAssertion(_ => true).Build()
+            new AuthorizationPolicyBuilder()
+                .RequireAssertion(_ => true)
+                .Build()
         );
         var authorizationContext = GetAuthorizationContext(anonymous: true);
 
@@ -161,7 +169,9 @@ public class AuthorizeFilterTest
     {
         // Arrange
         var authorizeFilter = new AuthorizeFilter(
-            new AuthorizationPolicyBuilder().RequireClaim("Permission", "CanViewPage").Build()
+            new AuthorizationPolicyBuilder()
+                .RequireClaim("Permission", "CanViewPage")
+                .Build()
         );
         var authorizationContext = GetAuthorizationContext();
 
@@ -177,7 +187,9 @@ public class AuthorizeFilterTest
     {
         // Arrange
         var authorizeFilter = new AuthorizeFilter(
-            new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build()
+            new AuthorizationPolicyBuilder()
+                .RequireAuthenticatedUser()
+                .Build()
         );
         var authorizationContext = GetAuthorizationContext(anonymous: true);
         authorizationContext.Filters.Add(authorizeFilter);
@@ -194,7 +206,9 @@ public class AuthorizeFilterTest
     {
         // Arrange
         var authorizeFilter = new AuthorizeFilter(
-            new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build()
+            new AuthorizationPolicyBuilder()
+                .RequireAuthenticatedUser()
+                .Build()
         );
         var authorizationContext = GetAuthorizationContext(anonymous: true);
 
@@ -212,7 +226,9 @@ public class AuthorizeFilterTest
     {
         // Arrange
         var authorizeFilter = new AuthorizeFilter(
-            new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build()
+            new AuthorizationPolicyBuilder()
+                .RequireAuthenticatedUser()
+                .Build()
         );
         var authorizationContext = GetAuthorizationContext();
 
@@ -228,7 +244,9 @@ public class AuthorizeFilterTest
     {
         // Arrange
         var authorizeFilter = new AuthorizeFilter(
-            new AuthorizationPolicyBuilder("Fails").RequireAuthenticatedUser().Build()
+            new AuthorizationPolicyBuilder("Fails")
+                .RequireAuthenticatedUser()
+                .Build()
         );
         var authorizationContext = GetAuthorizationContext();
 
@@ -296,7 +314,9 @@ public class AuthorizeFilterTest
         // Effective policy should fail, if both are combined
         authorizationContext.Filters.Add(authorizeFilter);
         var secondFilter = new AuthorizeFilter(
-            new AuthorizationPolicyBuilder().RequireAssertion(a => true).Build()
+            new AuthorizationPolicyBuilder()
+                .RequireAssertion(a => true)
+                .Build()
         );
         authorizationContext.Filters.Add(secondFilter);
 
@@ -325,7 +345,9 @@ public class AuthorizeFilterTest
         // Effective policy should fail, if both are combined
         authorizationContext.Filters.Add(authorizeFilter);
         var secondFilter = new AuthorizeFilter(
-            new AuthorizationPolicyBuilder().RequireAssertion(a => true).Build()
+            new AuthorizationPolicyBuilder()
+                .RequireAssertion(a => true)
+                .Build()
         );
         authorizationContext.Filters.Add(secondFilter);
         var thirdFilter = new AuthorizeFilter(
@@ -356,13 +378,17 @@ public class AuthorizeFilterTest
     {
         // Arrange
         var authorizeFilter = new AuthorizeFilter(
-            new AuthorizationPolicyBuilder().RequireAssertion(a => false).Build()
+            new AuthorizationPolicyBuilder()
+                .RequireAssertion(a => false)
+                .Build()
         );
         var authorizationContext = GetAuthorizationContext(anonymous: false);
         // Effective policy should fail, if both are combined
         authorizationContext.Filters.Add(authorizeFilter);
         var secondFilter = new AuthorizeFilter(
-            new AuthorizationPolicyBuilder().RequireAssertion(a => true).Build()
+            new AuthorizationPolicyBuilder()
+                .RequireAssertion(a => true)
+                .Build()
         );
         authorizationContext.Filters.Add(secondFilter);
 
@@ -378,13 +404,17 @@ public class AuthorizeFilterTest
     {
         // Arrange
         var authorizeFilter = new AuthorizeFilter(
-            new AuthorizationPolicyBuilder().RequireAssertion(a => false).Build()
+            new AuthorizationPolicyBuilder()
+                .RequireAssertion(a => false)
+                .Build()
         );
         var authorizationContext = GetAuthorizationContext(anonymous: false);
         // Effective policy should fail, if both are combined
         authorizationContext.Filters.Add(authorizeFilter);
         var secondFilter = new AuthorizeFilter(
-            new AuthorizationPolicyBuilder().RequireAssertion(a => false).Build()
+            new AuthorizationPolicyBuilder()
+                .RequireAssertion(a => false)
+                .Build()
         );
         authorizationContext.Filters.Add(secondFilter);
 
@@ -400,7 +430,9 @@ public class AuthorizeFilterTest
     {
         // Arrange
         var authorizeFilter = new AuthorizeFilter(
-            new AuthorizationPolicyBuilder().RequireAssertion(a => true).Build()
+            new AuthorizationPolicyBuilder()
+                .RequireAssertion(a => true)
+                .Build()
         );
         var authorizationContext = GetAuthorizationContext(anonymous: false);
         // Effective policy should fail, if both are combined
@@ -420,7 +452,11 @@ public class AuthorizeFilterTest
     public class DerivedAuthorizeFilter : AuthorizeFilter
     {
         public DerivedAuthorizeFilter()
-            : base(new AuthorizationPolicyBuilder().RequireAssertion(a => false).Build()) { }
+            : base(
+                new AuthorizationPolicyBuilder()
+                    .RequireAssertion(a => false)
+                    .Build()
+            ) { }
     }
 
     [Fact]
@@ -446,7 +482,9 @@ public class AuthorizeFilterTest
     {
         // Arrange
         var authorizeFilter = new AuthorizeFilter(
-            new AuthorizationPolicyBuilder().RequireRole("Wut").Build()
+            new AuthorizationPolicyBuilder()
+                .RequireRole("Wut")
+                .Build()
         );
         var authorizationContext = GetAuthorizationContext();
         authorizationContext.Filters.Add(authorizeFilter);
@@ -463,7 +501,9 @@ public class AuthorizeFilterTest
     {
         // Arrange
         var authorizeFilter = new AuthorizeFilter(
-            new AuthorizationPolicyBuilder().RequireClaim("Permission", "CanViewComment").Build()
+            new AuthorizationPolicyBuilder()
+                .RequireClaim("Permission", "CanViewComment")
+                .Build()
         );
         var authorizationContext = GetAuthorizationContext();
         authorizationContext.Filters.Add(authorizeFilter);
@@ -480,7 +520,9 @@ public class AuthorizeFilterTest
     {
         // Arrange
         var authorizeFilter = new AuthorizeFilter(
-            new AuthorizationPolicyBuilder().RequireAssertion(_ => true).Build()
+            new AuthorizationPolicyBuilder()
+                .RequireAssertion(_ => true)
+                .Build()
         );
         var factory = (IFilterFactory)authorizeFilter;
 
@@ -496,7 +538,9 @@ public class AuthorizeFilterTest
     {
         // Arrange
         var authorizeFilter = new AuthorizeFilter(
-            new AuthorizationPolicyBuilder().RequireAssertion(_ => true).Build()
+            new AuthorizationPolicyBuilder()
+                .RequireAssertion(_ => true)
+                .Build()
         );
         var factory = (IFilterFactory)authorizeFilter;
 
@@ -531,7 +575,9 @@ public class AuthorizeFilterTest
             .AddOptions()
             .AddAuthorization(options =>
             {
-                var policy = new AuthorizationPolicyBuilder().RequireAssertion(_ => true).Build();
+                var policy = new AuthorizationPolicyBuilder()
+                    .RequireAssertion(_ => true)
+                    .Build();
                 options.AddPolicy("some-policy", policy);
             })
             .BuildServiceProvider();
@@ -571,9 +617,13 @@ public class AuthorizeFilterTest
     public async Task GetEffectivePolicyAsync_CombinesPoliciesFromAuthFilters()
     {
         // Arrange
-        var policy1 = new AuthorizationPolicyBuilder().RequireClaim("Claim1").Build();
+        var policy1 = new AuthorizationPolicyBuilder()
+            .RequireClaim("Claim1")
+            .Build();
 
-        var policy2 = new AuthorizationPolicyBuilder().RequireClaim("Claim2").Build();
+        var policy2 = new AuthorizationPolicyBuilder()
+            .RequireClaim("Claim2")
+            .Build();
         var filter1 = new AuthorizeFilter(policy1);
         var filter2 = new AuthorizeFilter(policy2);
 
@@ -597,9 +647,13 @@ public class AuthorizeFilterTest
     public async Task GetEffectivePolicyAsync_CombinesPoliciesFromEndpoint()
     {
         // Arrange
-        var policy1 = new AuthorizationPolicyBuilder().RequireClaim("Claim1").Build();
+        var policy1 = new AuthorizationPolicyBuilder()
+            .RequireClaim("Claim1")
+            .Build();
 
-        var policy2 = new AuthorizationPolicyBuilder().RequireClaim("Claim2").Build();
+        var policy2 = new AuthorizationPolicyBuilder()
+            .RequireClaim("Claim2")
+            .Build();
 
         var filter = new AuthorizeFilter(policy1);
         var options = new AuthorizationOptions();

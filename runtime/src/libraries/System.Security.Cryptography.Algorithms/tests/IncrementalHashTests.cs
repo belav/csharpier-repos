@@ -491,7 +491,9 @@ namespace System.Security.Cryptography.Algorithms.Tests
             Assert.Equal(referenceHashLength, bytesWritten);
             Assert.Equal<byte>(
                 new Span<byte>(referenceHash, 0, referenceHashLength).ToArray(),
-                new Span<byte>(incrementalA).Slice(0, bytesWritten).ToArray()
+                new Span<byte>(incrementalA)
+                    .Slice(0, bytesWritten)
+                    .ToArray()
             );
 
             // Now try again, verifying both immune to step size behaviors, and that GetHashAndReset resets.

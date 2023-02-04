@@ -15,7 +15,11 @@ public class QueryFilterRewritingConventionTest
     public virtual void QueryFilter_containing_db_set_with_not_included_type()
     {
         var modelBuilder = new InternalModelBuilder(new Model());
-        Expression<Func<Blog, bool>> lambda = e => new MyContext().Set<Post>().Single().Id == e.Id;
+        Expression<Func<Blog, bool>> lambda = e =>
+            new MyContext()
+                .Set<Post>()
+                .Single()
+                .Id == e.Id;
         modelBuilder
             .Entity(typeof(Blog), ConfigurationSource.Explicit)
             .HasQueryFilter(lambda, ConfigurationSource.Explicit);
@@ -31,7 +35,11 @@ public class QueryFilterRewritingConventionTest
     {
         var modelBuilder = new InternalModelBuilder(new Model());
         modelBuilder.SharedTypeEntity("Post1", typeof(Post), ConfigurationSource.Explicit);
-        Expression<Func<Blog, bool>> lambda = e => new MyContext().Set<Post>().Single().Id == e.Id;
+        Expression<Func<Blog, bool>> lambda = e =>
+            new MyContext()
+                .Set<Post>()
+                .Single()
+                .Id == e.Id;
         modelBuilder
             .Entity(typeof(Blog), ConfigurationSource.Explicit)
             .HasQueryFilter(lambda, ConfigurationSource.Explicit);
@@ -48,7 +56,10 @@ public class QueryFilterRewritingConventionTest
         var modelBuilder = new InternalModelBuilder(new Model());
         modelBuilder.SharedTypeEntity("Post1", typeof(Post), ConfigurationSource.Explicit);
         Expression<Func<Blog, bool>> lambda = e =>
-            new MyContext().Set<Blog>("Post1").Single().Id == e.Id;
+            new MyContext()
+                .Set<Blog>("Post1")
+                .Single()
+                .Id == e.Id;
         modelBuilder
             .Entity(typeof(Blog), ConfigurationSource.Explicit)
             .HasQueryFilter(lambda, ConfigurationSource.Explicit);
@@ -71,7 +82,11 @@ public class QueryFilterRewritingConventionTest
             .Entity(typeof(Owner), ConfigurationSource.Explicit)
             .HasOwnership(typeof(Blog), "Blog", ConfigurationSource.Explicit);
 
-        Expression<Func<Owner, bool>> lambda = e => new MyContext().Set<Blog>().Single().Id == e.Id;
+        Expression<Func<Owner, bool>> lambda = e =>
+            new MyContext()
+                .Set<Blog>()
+                .Single()
+                .Id == e.Id;
         modelBuilder
             .Entity(typeof(Owner), ConfigurationSource.Explicit)
             .HasQueryFilter(lambda, ConfigurationSource.Explicit);

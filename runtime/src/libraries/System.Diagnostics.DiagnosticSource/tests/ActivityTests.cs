@@ -294,7 +294,9 @@ namespace System.Diagnostics.Tests
             while (parentId.Length < 1022)
                 parentId.Append("1.");
 
-            var activity = new Activity("activity").SetParentId(parentId.ToString()).Start();
+            var activity = new Activity("activity")
+                .SetParentId(parentId.ToString())
+                .Start();
 
             Assert.Equal(
                 parentId.ToString().Substring(0, parentId.Length - 8),
@@ -308,7 +310,9 @@ namespace System.Diagnostics.Tests
                 parentId.Append("1.");
             parentId.Append("012345678.");
 
-            activity = new Activity("activity").SetParentId(parentId.ToString()).Start();
+            activity = new Activity("activity")
+                .SetParentId(parentId.ToString())
+                .Start();
 
             //last .012345678 will be replaced with #overflow_suffix 8 bytes long
             Assert.Equal(
@@ -1103,7 +1107,9 @@ namespace System.Diagnostics.Tests
                 .SetIdFormat(ActivityIdFormat.Hierarchical)
                 .Start();
 
-            Activity child = new Activity("child").SetIdFormat(ActivityIdFormat.W3C).Start();
+            Activity child = new Activity("child")
+                .SetIdFormat(ActivityIdFormat.W3C)
+                .Start();
 
             Assert.Equal(ActivityIdFormat.W3C, child.IdFormat);
         }
@@ -1111,7 +1117,9 @@ namespace System.Diagnostics.Tests
         [Fact]
         public void SetIdFormat_OverridesParentW3CFormat()
         {
-            Activity parent = new Activity("parent").SetIdFormat(ActivityIdFormat.W3C).Start();
+            Activity parent = new Activity("parent")
+                .SetIdFormat(ActivityIdFormat.W3C)
+                .Start();
 
             Activity child = new Activity("child")
                 .SetIdFormat(ActivityIdFormat.Hierarchical)

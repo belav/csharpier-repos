@@ -361,7 +361,10 @@ namespace System.IO
             public void Wait()
             {
                 _waitSource.RunContinuationsAsynchronously = false;
-                new ValueTask(this, _waitSource.Version).AsTask().GetAwaiter().GetResult();
+                new ValueTask(this, _waitSource.Version)
+                    .AsTask()
+                    .GetAwaiter()
+                    .GetResult();
             }
 
             public ValueTask WaitAsync(CancellationToken cancellationToken)

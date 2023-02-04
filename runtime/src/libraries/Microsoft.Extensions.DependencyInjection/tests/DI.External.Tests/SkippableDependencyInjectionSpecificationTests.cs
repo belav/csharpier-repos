@@ -16,7 +16,11 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
             IServiceCollection serviceCollection
         )
         {
-            foreach (var stackFrame in new StackTrace(1).GetFrames().Take(2))
+            foreach (
+                var stackFrame in new StackTrace(1)
+                    .GetFrames()
+                    .Take(2)
+            )
             {
                 if (SkippedTests.Contains(stackFrame.GetMethod().Name))
                 {

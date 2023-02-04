@@ -212,7 +212,9 @@ public class OutputCachePolicyBuilderTests
         var context2 = TestUtils.CreateUninitializedContext();
         var context3 = TestUtils.CreateUninitializedContext();
 
-        var policy1 = new OutputCachePolicyBuilder().SetCacheKeyPrefix("tenant1").Build();
+        var policy1 = new OutputCachePolicyBuilder()
+            .SetCacheKeyPrefix("tenant1")
+            .Build();
         var policy2 = new OutputCachePolicyBuilder()
             .SetCacheKeyPrefix(context => "tenant2")
             .Build();

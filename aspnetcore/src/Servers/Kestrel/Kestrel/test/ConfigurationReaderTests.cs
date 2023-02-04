@@ -19,7 +19,9 @@ public class ConfigurationReaderTests
     [Fact]
     public void ReadCertificatesWhenNoCertificatesSection_ReturnsEmptyCollection()
     {
-        var config = new ConfigurationBuilder().AddInMemoryCollection().Build();
+        var config = new ConfigurationBuilder()
+            .AddInMemoryCollection()
+            .Build();
         var reader = new ConfigurationReader(config);
         var certificates = reader.Certificates;
         Assert.NotNull(certificates);
@@ -144,7 +146,9 @@ public class ConfigurationReaderTests
     [Fact]
     public void ReadEndpointsWhenNoEndpointsSection_ReturnsEmptyCollection()
     {
-        var config = new ConfigurationBuilder().AddInMemoryCollection().Build();
+        var config = new ConfigurationBuilder()
+            .AddInMemoryCollection()
+            .Build();
         var reader = new ConfigurationReader(config);
         var endpoints = reader.Endpoints;
         Assert.NotNull(endpoints);

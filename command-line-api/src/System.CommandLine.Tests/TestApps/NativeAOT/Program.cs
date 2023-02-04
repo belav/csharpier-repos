@@ -17,7 +17,9 @@ public class Program
 
         command.SetHandler(Run);
 
-        return new CommandLineBuilder(command).Build().Invoke(args);
+        return new CommandLineBuilder(command)
+            .Build()
+            .Invoke(args);
 
         void Run(InvocationContext context)
         {

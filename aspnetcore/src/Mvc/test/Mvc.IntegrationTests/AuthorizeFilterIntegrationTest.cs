@@ -62,7 +62,9 @@ public class AuthorizeFilterIntegrationTest
         // Arrange
         var applicationModelProviderContext = GetProviderContext(typeof(AuthorizeController));
 
-        var policy = new AuthorizationPolicyBuilder().RequireAssertion(_ => true).Build();
+        var policy = new AuthorizationPolicyBuilder()
+            .RequireAssertion(_ => true)
+            .Build();
         var policyProvider = new Mock<DefaultAuthorizationPolicyProvider>(
             Options.Create<AuthorizationOptions>(new AuthorizationOptions())
         );
@@ -105,7 +107,9 @@ public class AuthorizeFilterIntegrationTest
         // Arrange
         var applicationModelProviderContext = GetProviderContext(typeof(AuthorizeController));
 
-        var policy = new AuthorizationPolicyBuilder().RequireAssertion(_ => true).Build();
+        var policy = new AuthorizationPolicyBuilder()
+            .RequireAssertion(_ => true)
+            .Build();
         var policyProvider = new Mock<DefaultAuthorizationPolicyProvider>(
             Options.Create<AuthorizationOptions>(new AuthorizationOptions())
         );
@@ -134,7 +138,9 @@ public class AuthorizeFilterIntegrationTest
         authorizationFilterContext.Filters.Add(authorizeFilter);
 
         var secondFilter = new AuthorizeFilter(
-            new AuthorizationPolicyBuilder().RequireAssertion(a => true).Build()
+            new AuthorizationPolicyBuilder()
+                .RequireAssertion(a => true)
+                .Build()
         );
         authorizationFilterContext.Filters.Add(secondFilter);
 
@@ -179,7 +185,9 @@ public class AuthorizeFilterIntegrationTest
         authorizationFilterContext.Filters.Add(authorizeFilter);
 
         var secondFilter = new AuthorizeFilter(
-            new AuthorizationPolicyBuilder().RequireAssertion(a => true).Build()
+            new AuthorizationPolicyBuilder()
+                .RequireAssertion(a => true)
+                .Build()
         );
         authorizationFilterContext.Filters.Add(secondFilter);
 

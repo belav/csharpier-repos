@@ -95,7 +95,9 @@ namespace Castle.Components.DictionaryAdapter
             return GetAdapter(
                 type,
                 new Hashtable(),
-                new PropertyDescriptor().AddBehavior(XmlMetadataBehavior.Default).AddBehavior(xml)
+                new PropertyDescriptor()
+                    .AddBehavior(XmlMetadataBehavior.Default)
+                    .AddBehavior(xml)
             );
         }
 

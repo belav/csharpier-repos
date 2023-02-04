@@ -387,7 +387,10 @@ namespace Microsoft.Extensions.Hosting.Tests
         {
             var notDefaultTimeoutSeconds = 99;
             Assert.True(
-                notDefaultTimeoutSeconds != new HostOptions().ShutdownTimeout.TotalSeconds,
+                notDefaultTimeoutSeconds
+                    != new HostOptions()
+                        .ShutdownTimeout
+                        .TotalSeconds,
                 "Test value must be not equal to default"
             );
             var host = Host.CreateDefaultBuilder()

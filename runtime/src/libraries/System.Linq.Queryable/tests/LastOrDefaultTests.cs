@@ -110,7 +110,9 @@ namespace System.Linq.Tests.LegacyTests
         public void LastOrDefault_OverloadResolution_Regression()
         {
             // Regression test for https://github.com/dotnet/runtime/issues/65419
-            object? result = new object[] { 1, "" }.AsQueryable().LastOrDefault(x => x is int);
+            object? result = new object[] { 1, "" }
+                .AsQueryable()
+                .LastOrDefault(x => x is int);
             Assert.IsType<int>(result);
 
             result = Array.Empty<object>().AsQueryable().LastOrDefault(1);

@@ -310,10 +310,17 @@ public class KestrelServerLimitsTests
     public void MinRequestBodyDataRateDefault()
     {
         Assert.NotNull(new KestrelServerLimits().MinRequestBodyDataRate);
-        Assert.Equal(240, new KestrelServerLimits().MinRequestBodyDataRate.BytesPerSecond);
+        Assert.Equal(
+            240,
+            new KestrelServerLimits()
+                .MinRequestBodyDataRate
+                .BytesPerSecond
+        );
         Assert.Equal(
             TimeSpan.FromSeconds(5),
-            new KestrelServerLimits().MinRequestBodyDataRate.GracePeriod
+            new KestrelServerLimits()
+                .MinRequestBodyDataRate
+                .GracePeriod
         );
     }
 
@@ -321,17 +328,29 @@ public class KestrelServerLimitsTests
     public void MinResponseBodyDataRateDefault()
     {
         Assert.NotNull(new KestrelServerLimits().MinResponseDataRate);
-        Assert.Equal(240, new KestrelServerLimits().MinResponseDataRate.BytesPerSecond);
+        Assert.Equal(
+            240,
+            new KestrelServerLimits()
+                .MinResponseDataRate
+                .BytesPerSecond
+        );
         Assert.Equal(
             TimeSpan.FromSeconds(5),
-            new KestrelServerLimits().MinResponseDataRate.GracePeriod
+            new KestrelServerLimits()
+                .MinResponseDataRate
+                .GracePeriod
         );
     }
 
     [Fact]
     public void Http2MaxFrameSizeDefault()
     {
-        Assert.Equal(1 << 14, new KestrelServerLimits().Http2.MaxFrameSize);
+        Assert.Equal(
+            1 << 14,
+            new KestrelServerLimits()
+                .Http2
+                .MaxFrameSize
+        );
     }
 
     [Theory]
@@ -341,7 +360,10 @@ public class KestrelServerLimitsTests
     public void Http2MaxFrameSizeInvalid(int value)
     {
         var ex = Assert.Throws<ArgumentOutOfRangeException>(
-            () => new KestrelServerLimits().Http2.MaxFrameSize = value
+            () =>
+                new KestrelServerLimits()
+                    .Http2
+                    .MaxFrameSize = value
         );
         Assert.Contains("A value between", ex.Message);
     }
@@ -349,7 +371,12 @@ public class KestrelServerLimitsTests
     [Fact]
     public void Http2HeaderTableSizeDefault()
     {
-        Assert.Equal(4096, new KestrelServerLimits().Http2.HeaderTableSize);
+        Assert.Equal(
+            4096,
+            new KestrelServerLimits()
+                .Http2
+                .HeaderTableSize
+        );
     }
 
     [Theory]
@@ -358,7 +385,10 @@ public class KestrelServerLimitsTests
     public void Http2HeaderTableSizeInvalid(int value)
     {
         var ex = Assert.Throws<ArgumentOutOfRangeException>(
-            () => new KestrelServerLimits().Http2.HeaderTableSize = value
+            () =>
+                new KestrelServerLimits()
+                    .Http2
+                    .HeaderTableSize = value
         );
         Assert.StartsWith(CoreStrings.GreaterThanOrEqualToZeroRequired, ex.Message);
     }
@@ -366,7 +396,12 @@ public class KestrelServerLimitsTests
     [Fact]
     public void Http2MaxRequestHeaderFieldSizeDefault()
     {
-        Assert.Equal(32 * 1024, new KestrelServerLimits().Http2.MaxRequestHeaderFieldSize);
+        Assert.Equal(
+            32 * 1024,
+            new KestrelServerLimits()
+                .Http2
+                .MaxRequestHeaderFieldSize
+        );
     }
 
     [Theory]
@@ -376,7 +411,10 @@ public class KestrelServerLimitsTests
     public void Http2MaxRequestHeaderFieldSizeInvalid(int value)
     {
         var ex = Assert.Throws<ArgumentOutOfRangeException>(
-            () => new KestrelServerLimits().Http2.MaxRequestHeaderFieldSize = value
+            () =>
+                new KestrelServerLimits()
+                    .Http2
+                    .MaxRequestHeaderFieldSize = value
         );
         Assert.StartsWith(CoreStrings.GreaterThanZeroRequired, ex.Message);
     }

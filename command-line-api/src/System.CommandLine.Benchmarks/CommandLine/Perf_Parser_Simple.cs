@@ -17,11 +17,16 @@ namespace System.CommandLine.Benchmarks.CommandLine
         public Task<int> DefaultsAsync() => BuildCommand().InvokeAsync(Args);
 
         [Benchmark]
-        public int MinimalSync() => new CommandLineBuilder(BuildCommand()).Build().Invoke(Args);
+        public int MinimalSync() =>
+            new CommandLineBuilder(BuildCommand())
+                .Build()
+                .Invoke(Args);
 
         [Benchmark]
         public Task<int> MinimalAsync() =>
-            new CommandLineBuilder(BuildCommand()).Build().InvokeAsync(Args);
+            new CommandLineBuilder(BuildCommand())
+                .Build()
+                .InvokeAsync(Args);
 
         private static RootCommand BuildCommand()
         {

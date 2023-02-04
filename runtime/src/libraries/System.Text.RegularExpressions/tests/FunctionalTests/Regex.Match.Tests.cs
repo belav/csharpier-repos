@@ -5261,7 +5261,12 @@ namespace System.Text.RegularExpressions.Tests
         [InlineData("abc", "abc", "abc", "abc")]
         public void Result(string pattern, string input, string replacement, string expected)
         {
-            Assert.Equal(expected, new Regex(pattern).Match(input).Result(replacement));
+            Assert.Equal(
+                expected,
+                new Regex(pattern)
+                    .Match(input)
+                    .Result(replacement)
+            );
         }
 
         [Fact]

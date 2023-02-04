@@ -58,7 +58,9 @@ namespace System.Net.Http.Tests
                 KnownHeaders.ContentType,
                 KnownHeaders.ContentRange,
                 KnownHeaders.Trailer
-            }.Select(h => new object[] { h.Name }).ToArray();
+            }
+                .Select(h => new object[] { h.Name })
+                .ToArray();
         }
 
         public static IEnumerable<object[]> AllowedTrailingHeaders()

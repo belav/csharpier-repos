@@ -74,7 +74,9 @@ public class EventTest : ServerTestBase<ToggleExecutionModeServerFixture<Program
         var other = Browser.Exists(By.Id("other"));
 
         // Mouse over the button and then back off
-        var actions = new Actions(Browser).MoveToElement(input).MoveToElement(other);
+        var actions = new Actions(Browser)
+            .MoveToElement(input)
+            .MoveToElement(other);
 
         actions.Perform();
         Browser.Equal("mouseover,mouseout,", () => output.Text);
@@ -137,7 +139,9 @@ public class EventTest : ServerTestBase<ToggleExecutionModeServerFixture<Program
         Assert.Equal(string.Empty, output.Text);
 
         // Move a little bit
-        var actions = new Actions(Browser).MoveToElement(input).MoveToElement(input, 10, 10);
+        var actions = new Actions(Browser)
+            .MoveToElement(input)
+            .MoveToElement(input, 10, 10);
 
         actions.Perform();
         Browser.Contains("mousemove,", () => output.Text);
@@ -401,7 +405,9 @@ public class EventTest : ServerTestBase<ToggleExecutionModeServerFixture<Program
 
         // We can trigger a drag event and receive a DragEventArgs *on the same handler delegate*
         Browser.FindElement(By.Id("clear_event_log")).Click();
-        new Actions(Browser).DragAndDrop(elem, Browser.FindElement(By.Id("other"))).Perform();
+        new Actions(Browser)
+            .DragAndDrop(elem, Browser.FindElement(By.Id("other")))
+            .Perform();
         Browser.Equal("Microsoft.AspNetCore.Components.Web.DragEventArgs:1", () => output.Text);
     }
 

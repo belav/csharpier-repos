@@ -41,8 +41,12 @@ namespace System.Linq.Tests
                 emptySourceArray.ToList().Select(i => i).ToArray()
             );
             Assert.Same(
-                new Collection<int>(emptySourceArray).Select(i => i).ToArray(),
-                new Collection<int>(emptySourceArray).Select(i => i).ToArray()
+                new Collection<int>(emptySourceArray)
+                    .Select(i => i)
+                    .ToArray(),
+                new Collection<int>(emptySourceArray)
+                    .Select(i => i)
+                    .ToArray()
             );
             Assert.Same(
                 emptySourceArray.OrderBy(i => i).ToArray(),

@@ -153,7 +153,9 @@ namespace System.Linq.Tests
         public void FirstOrDefault_OverloadResolution_Regression()
         {
             // Regression test for https://github.com/dotnet/runtime/issues/65419
-            object? result = new object[] { 1, "" }.AsQueryable().FirstOrDefault(x => x is string);
+            object? result = new object[] { 1, "" }
+                .AsQueryable()
+                .FirstOrDefault(x => x is string);
             Assert.IsType<string>(result);
 
             result = Array.Empty<object>().AsQueryable().FirstOrDefault(1);

@@ -31,7 +31,9 @@ public class AuthorizationOptions
     /// The default policy used when evaluating <see cref="IAuthorizeData"/> with no policy name specified.
     /// </remarks>
     public AuthorizationPolicy DefaultPolicy { get; set; } =
-        new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+        new AuthorizationPolicyBuilder()
+            .RequireAuthenticatedUser()
+            .Build();
 
     /// <summary>
     /// Gets or sets the fallback authorization policy used by <see cref="AuthorizationPolicy.CombineAsync(IAuthorizationPolicyProvider, IEnumerable{IAuthorizeData})"/>

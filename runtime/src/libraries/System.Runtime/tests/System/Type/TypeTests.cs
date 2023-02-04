@@ -61,7 +61,9 @@ namespace System.Tests
                 typeof(Outside),
                 typeof(Outside<int>),
                 typeof(Outside<>).GetTypeInfo().GenericTypeParameters[0],
-                new object().GetType().GetType()
+                new object()
+                    .GetType()
+                    .GetType()
             };
 
             if (PlatformDetection.IsWindows)

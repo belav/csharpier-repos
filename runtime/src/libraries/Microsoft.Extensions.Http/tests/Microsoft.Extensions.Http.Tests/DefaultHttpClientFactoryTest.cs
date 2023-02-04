@@ -21,7 +21,9 @@ namespace Microsoft.Extensions.Http
     {
         public DefaultHttpClientFactoryTest()
         {
-            Services = new ServiceCollection().AddHttpClient().BuildServiceProvider();
+            Services = new ServiceCollection()
+                .AddHttpClient()
+                .BuildServiceProvider();
             ScopeFactory = Services.GetRequiredService<IServiceScopeFactory>();
             Options = Services.GetRequiredService<IOptionsMonitor<HttpClientFactoryOptions>>();
         }

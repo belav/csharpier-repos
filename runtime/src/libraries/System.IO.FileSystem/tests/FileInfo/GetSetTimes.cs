@@ -261,7 +261,9 @@ namespace System.IO.Tests
             // When enumerating we populate the state as we already have it.
             string filePath = GetTestFilePath();
             File.Create(filePath).Dispose();
-            FileInfo info = new DirectoryInfo(TestDirectory).EnumerateFiles().First();
+            FileInfo info = new DirectoryInfo(TestDirectory)
+                .EnumerateFiles()
+                .First();
 
             info.Delete();
             Assert.Equal(DateTime.FromFileTimeUtc(0), info.LastAccessTimeUtc);

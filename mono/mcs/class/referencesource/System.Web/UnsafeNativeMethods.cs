@@ -720,6 +720,7 @@ namespace System.Web
             ISAPIAsyncCompletionCallback asyncCompletionCallback
         );
 #endif // !FEATURE_PAL
+
         [DllImport(ModName.ENGINE_FULL_NAME)]
         internal static extern int EcbIsClientConnected(IntPtr pECB);
 

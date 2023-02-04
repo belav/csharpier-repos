@@ -160,7 +160,10 @@ namespace System.Linq.Tests.LegacyTests
             Expression<Func<StringWithIntArray, IEnumerable<int>>> selector = null;
             AssertExtensions.Throws<ArgumentNullException>(
                 "selector",
-                () => new StringWithIntArray[0].AsQueryable().SelectMany(selector)
+                () =>
+                    new StringWithIntArray[0]
+                        .AsQueryable()
+                        .SelectMany(selector)
             );
         }
 
@@ -170,7 +173,10 @@ namespace System.Linq.Tests.LegacyTests
             Expression<Func<StringWithIntArray, int, IEnumerable<int>>> selector = null;
             AssertExtensions.Throws<ArgumentNullException>(
                 "selector",
-                () => new StringWithIntArray[0].AsQueryable().SelectMany(selector)
+                () =>
+                    new StringWithIntArray[0]
+                        .AsQueryable()
+                        .SelectMany(selector)
             );
         }
 

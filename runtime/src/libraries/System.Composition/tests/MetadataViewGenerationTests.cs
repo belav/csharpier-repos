@@ -26,7 +26,9 @@ namespace System.Composition.Lightweight.UnitTests
         [Fact]
         public void AConcreteTypeWithWritablePropertiesIsAMetadataView()
         {
-            var cc = new ContainerConfiguration().WithPart<HasNameA>().CreateContainer();
+            var cc = new ContainerConfiguration()
+                .WithPart<HasNameA>()
+                .CreateContainer();
 
             var hn = cc.GetExport<Lazy<HasNameA, Named>>();
 
@@ -45,7 +47,9 @@ namespace System.Composition.Lightweight.UnitTests
         [Fact]
         public void MetadataViewsCanCarryDefaultValues()
         {
-            var cc = new ContainerConfiguration().WithPart<HasNoName>().CreateContainer();
+            var cc = new ContainerConfiguration()
+                .WithPart<HasNoName>()
+                .CreateContainer();
 
             var hn = cc.GetExport<Lazy<HasNoName, OptionallyNamed>>();
 
@@ -65,7 +69,9 @@ namespace System.Composition.Lightweight.UnitTests
         [Fact]
         public void AConcreteTypeWithDictionaryConstructorIsAMetadataView()
         {
-            var cc = new ContainerConfiguration().WithPart<HasNameA>().CreateContainer();
+            var cc = new ContainerConfiguration()
+                .WithPart<HasNameA>()
+                .CreateContainer();
 
             var hn = cc.GetExport<Lazy<HasNameA, DictionaryName>>();
 
@@ -80,7 +86,9 @@ namespace System.Composition.Lightweight.UnitTests
         [Fact]
         public void AConcreteTypeWithUnsupportedConstructorsCannotBeUsedAsAMetadataView()
         {
-            var cc = new ContainerConfiguration().WithPart<HasNameA>().CreateContainer();
+            var cc = new ContainerConfiguration()
+                .WithPart<HasNameA>()
+                .CreateContainer();
 
             var x = Assert.Throws<CompositionFailedException>(
                 () => cc.GetExport<Lazy<HasNoName, InvalidConcreteView>>()
@@ -137,7 +145,9 @@ namespace System.Composition.Lightweight.UnitTests
         [Fact]
         public void ReadOnlyPropertiesOnMetadataViewsAreIgnored()
         {
-            var c = new ContainerConfiguration().WithPart<HasOrder>().CreateContainer();
+            var c = new ContainerConfiguration()
+                .WithPart<HasOrder>()
+                .CreateContainer();
 
             var l = c.GetExport<Lazy<HasOrder, ReadonlyNameOrderMetadata>>();
             Assert.Equal(1, l.Metadata.Order);

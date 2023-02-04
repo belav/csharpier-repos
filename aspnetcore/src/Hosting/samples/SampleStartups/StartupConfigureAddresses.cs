@@ -27,7 +27,9 @@ public class StartupConfigureAddresses : StartupBase
     // Entry point for the application.
     public static Task Main(string[] args)
     {
-        var config = new ConfigurationBuilder().AddCommandLine(args).Build();
+        var config = new ConfigurationBuilder()
+            .AddCommandLine(args)
+            .Build();
 
         var host = new HostBuilder()
             .ConfigureWebHost(webHostBuilder =>

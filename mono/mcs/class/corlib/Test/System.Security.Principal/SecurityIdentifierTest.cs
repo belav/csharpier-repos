@@ -390,15 +390,21 @@ namespace MonoTests.System.Security.Principal
         {
             Assert.AreEqual(
                 "S-1-5-21-125-3215-342",
-                new SecurityIdentifier("S-1-5-21-125-3215-342-324-1000").AccountDomainSid.Value
+                new SecurityIdentifier("S-1-5-21-125-3215-342-324-1000")
+                    .AccountDomainSid
+                    .Value
             );
             Assert.AreEqual(
                 "S-1-5-21-125-3215-342",
-                new SecurityIdentifier("S-1-5-21-125-3215-342-1000").AccountDomainSid.Value
+                new SecurityIdentifier("S-1-5-21-125-3215-342-1000")
+                    .AccountDomainSid
+                    .Value
             );
             Assert.AreEqual(
                 "S-1-5-21-125-3215-1",
-                new SecurityIdentifier("S-1-5-21-125-3215-1").AccountDomainSid.Value
+                new SecurityIdentifier("S-1-5-21-125-3215-1")
+                    .AccountDomainSid
+                    .Value
             );
             Assert.IsNull(new SecurityIdentifier("S-1-5-21-125-1").AccountDomainSid);
             Assert.IsNull(new SecurityIdentifier("S-1-0-0").AccountDomainSid);

@@ -10564,7 +10564,10 @@ namespace System.Tests
             AssertExtensions.Throws<ArgumentNullException>("str", () => string.IsInterned(null));
 
             string s1 = "MyTest";
-            string s2 = new StringBuilder().Append("My").Append("Test").ToString();
+            string s2 = new StringBuilder()
+                .Append("My")
+                .Append("Test")
+                .ToString();
             string s3 = string.Intern(s2);
 
             Assert.Equal(s1, s2);

@@ -857,7 +857,9 @@ public class Class1
                 TestCode = initialMarkup,
                 FixedState = { Sources = { expectedResult1, (newFileName, expectedResult2) } },
                 LanguageVersion = CodeAnalysis.CSharp.LanguageVersion.CSharp10
-            }.RunAsync().ConfigureAwait(false);
+            }
+                .RunAsync()
+                .ConfigureAwait(false);
         }
 
         [Fact]
@@ -1985,7 +1987,9 @@ namespace TestNs2
                 // the test parser thinks "TestNs1.Class1Helpers" is a member access expression
                 // but we made a qualified name. The text should still be the same
                 CodeActionValidationMode = Testing.CodeActionValidationMode.None
-            }.RunAsync().ConfigureAwait(false);
+            }
+                .RunAsync()
+                .ConfigureAwait(false);
         }
 
         [Fact]
@@ -3987,7 +3991,9 @@ using System;
                 FixedCode = initialMarkup,
                 LanguageVersion = CodeAnalysis.CSharp.LanguageVersion.CSharp10,
                 TestState = { OutputKind = OutputKind.ConsoleApplication },
-            }.RunAsync().ConfigureAwait(false);
+            }
+                .RunAsync()
+                .ConfigureAwait(false);
         }
 
         [Fact]
@@ -4006,7 +4012,9 @@ using System;
                 FixedCode = initialMarkup,
                 LanguageVersion = CodeAnalysis.CSharp.LanguageVersion.CSharp10,
                 TestState = { OutputKind = OutputKind.ConsoleApplication },
-            }.RunAsync().ConfigureAwait(false);
+            }
+                .RunAsync()
+                .ConfigureAwait(false);
         }
 
         [Fact]
@@ -4028,7 +4036,9 @@ static int Do[||]Something()
                 FixedCode = initialMarkup,
                 LanguageVersion = CodeAnalysis.CSharp.LanguageVersion.CSharp10,
                 TestState = { OutputKind = OutputKind.ConsoleApplication },
-            }.RunAsync().ConfigureAwait(false);
+            }
+                .RunAsync()
+                .ConfigureAwait(false);
         }
         #endregion
 

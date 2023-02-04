@@ -35,10 +35,18 @@ namespace DebuggerTests
         {
             foreach (var data in InstanceMethodsTestData(type_name))
             {
-                yield return new object[] { "", 0 }.Concat(data).ToArray();
-                yield return new object[] { "this.", 0 }.Concat(data).ToArray();
-                yield return new object[] { "NewInstance.", 3 }.Concat(data).ToArray();
-                yield return new object[] { "this.NewInstance.", 3 }.Concat(data).ToArray();
+                yield return new object[] { "", 0 }
+                    .Concat(data)
+                    .ToArray();
+                yield return new object[] { "this.", 0 }
+                    .Concat(data)
+                    .ToArray();
+                yield return new object[] { "NewInstance.", 3 }
+                    .Concat(data)
+                    .ToArray();
+                yield return new object[] { "this.NewInstance.", 3 }
+                    .Concat(data)
+                    .ToArray();
             }
         }
 

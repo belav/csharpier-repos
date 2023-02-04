@@ -14,7 +14,11 @@ public static class Program
     public static void Main(string[] args)
     {
         var builder = new WebHostBuilder()
-            .UseConfiguration(new ConfigurationBuilder().AddCommandLine(args).Build())
+            .UseConfiguration(
+                new ConfigurationBuilder()
+                    .AddCommandLine(args)
+                    .Build()
+            )
             .ConfigureLogging(
                 (_, factory) =>
                 {

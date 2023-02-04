@@ -1104,9 +1104,16 @@ namespace System.Linq.Tests
         )]
         public void LazySkipAllTakenForLargeNumbers(int largeNumber)
         {
-            Assert.Empty(new FastInfiniteEnumerator<int>().Take(largeNumber).Skip(largeNumber));
             Assert.Empty(
-                new FastInfiniteEnumerator<int>().Take(largeNumber).Skip(largeNumber).Skip(42)
+                new FastInfiniteEnumerator<int>()
+                    .Take(largeNumber)
+                    .Skip(largeNumber)
+            );
+            Assert.Empty(
+                new FastInfiniteEnumerator<int>()
+                    .Take(largeNumber)
+                    .Skip(largeNumber)
+                    .Skip(42)
             );
             Assert.Empty(
                 new FastInfiniteEnumerator<int>()
@@ -1115,9 +1122,16 @@ namespace System.Linq.Tests
                     .Skip(largeNumber / 2 + 1)
             );
 
-            Assert.Empty(new FastInfiniteEnumerator<int>().Take(0..largeNumber).Skip(largeNumber));
             Assert.Empty(
-                new FastInfiniteEnumerator<int>().Take(0..largeNumber).Skip(largeNumber).Skip(42)
+                new FastInfiniteEnumerator<int>()
+                    .Take(0..largeNumber)
+                    .Skip(largeNumber)
+            );
+            Assert.Empty(
+                new FastInfiniteEnumerator<int>()
+                    .Take(0..largeNumber)
+                    .Skip(largeNumber)
+                    .Skip(42)
             );
             Assert.Empty(
                 new FastInfiniteEnumerator<int>()

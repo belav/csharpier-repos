@@ -17,6 +17,8 @@ class X
 
     public static void Main()
     {
-        new X().ReturnsTaskOfTaskAsync().Wait();
+        new X()
+            .ReturnsTaskOfTaskAsync()
+            .Wait();
     }
 }

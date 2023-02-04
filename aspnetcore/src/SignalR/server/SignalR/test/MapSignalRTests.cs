@@ -119,7 +119,9 @@ public class MapSignalRTests
     public void MapHubFindsMetadataPolicyOnHub()
     {
         var authCount = 0;
-        var policy1 = new AuthorizationPolicyBuilder().RequireAssertion(_ => true).Build();
+        var policy1 = new AuthorizationPolicyBuilder()
+            .RequireAssertion(_ => true)
+            .Build();
         var req = new TestRequirement();
         using (
             var host = BuildWebHost(

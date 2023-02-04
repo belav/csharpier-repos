@@ -31,7 +31,9 @@ public class CollectionWhere : AutoMapperSpecBase
         _destination = new Destination()
         {
             Id = 2,
-            ListProperty = new List<int>() { 4, 5, 6 }.Where(a => true).ToArray()
+            ListProperty = new List<int>() { 4, 5, 6 }
+                .Where(a => true)
+                .ToArray()
         };
         _destination = Mapper.Map<Source, Destination>(source, _destination);
     }

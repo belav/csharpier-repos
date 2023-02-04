@@ -1545,7 +1545,11 @@ public class ForeignKeyPropertyDiscoveryConventionTest
     {
         ListLoggerFactory.Clear();
         var options = new LoggingOptions();
-        options.Initialize(new DbContextOptionsBuilder().EnableSensitiveDataLogging(false).Options);
+        options.Initialize(
+            new DbContextOptionsBuilder()
+                .EnableSensitiveDataLogging(false)
+                .Options
+        );
         return new ForeignKeyPropertyDiscoveryConvention(CreateDependencies());
     }
 
@@ -1561,7 +1565,11 @@ public class ForeignKeyPropertyDiscoveryConventionTest
     {
         ListLoggerFactory.Clear();
         var options = new LoggingOptions();
-        options.Initialize(new DbContextOptionsBuilder().EnableSensitiveDataLogging(false).Options);
+        options.Initialize(
+            new DbContextOptionsBuilder()
+                .EnableSensitiveDataLogging(false)
+                .Options
+        );
         var modelLogger = new DiagnosticsLogger<DbLoggerCategory.Model>(
             ListLoggerFactory,
             options,

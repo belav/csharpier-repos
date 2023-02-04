@@ -226,7 +226,9 @@ namespace Microsoft.Extensions.Hosting.Tests
                 { HostDefaults.EnvironmentKey, "EnvA" }
             };
 
-            var config = new ConfigurationBuilder().AddInMemoryCollection(settings).Build();
+            var config = new ConfigurationBuilder()
+                .AddInMemoryCollection(settings)
+                .Build();
 
             var overrideSettings = new Dictionary<string, string>
             {
@@ -333,7 +335,11 @@ namespace Microsoft.Extensions.Hosting.Tests
         [Fact]
         public void RelativeContentRootIsResolved()
         {
-            using (var host = new HostBuilder().UseContentRoot("testroot").Build())
+            using (
+                var host = new HostBuilder()
+                    .UseContentRoot("testroot")
+                    .Build()
+            )
             {
                 var basePath = host.Services.GetRequiredService<IHostEnvironment>().ContentRootPath;
                 Assert.True(Path.IsPathRooted(basePath));

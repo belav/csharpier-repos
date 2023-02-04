@@ -57,7 +57,10 @@ public static class Program
             case "HangOnStop":
 
                 {
-                    var host = new WebHostBuilder().UseIIS().UseStartup<Startup>().Build();
+                    var host = new WebHostBuilder()
+                        .UseIIS()
+                        .UseStartup<Startup>()
+                        .Build();
                     host.Run();
 
                     Thread.Sleep(Timeout.Infinite);

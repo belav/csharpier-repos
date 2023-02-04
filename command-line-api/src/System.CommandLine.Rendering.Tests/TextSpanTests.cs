@@ -12,7 +12,9 @@ namespace System.CommandLine.Rendering.Tests
         [Fact]
         public void Content_span_length_is_the_same_as_the_contained_string_length()
         {
-            new ContentSpan("the content").ContentLength.Should().Be("the content".Length);
+            new ContentSpan("the content").ContentLength
+                .Should()
+                .Be("the content".Length);
         }
 
         [Fact]

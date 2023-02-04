@@ -6946,7 +6946,9 @@ public class Http2ConnectionTests : Http2TestBase
 
             // Literal Header Field without Indexing - Indexed Name - :authority: 127.0.0.1
             data.Add(
-                new byte[] { 0x01, 0x09 }.Concat(Encoding.ASCII.GetBytes("127.0.0.1")).ToArray(),
+                new byte[] { 0x01, 0x09 }
+                    .Concat(Encoding.ASCII.GetBytes("127.0.0.1"))
+                    .ToArray(),
                 CoreStrings.HttpErrorTrailersContainPseudoHeaderField
             );
 

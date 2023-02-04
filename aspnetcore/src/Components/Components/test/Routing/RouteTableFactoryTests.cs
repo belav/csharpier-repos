@@ -106,7 +106,9 @@ public class RouteTableFactoryTests
     public void CanMatchRootTemplate()
     {
         // Arrange
-        var routeTable = new TestRouteTableBuilder().AddRoute("/").Build();
+        var routeTable = new TestRouteTableBuilder()
+            .AddRoute("/")
+            .Build();
         var context = new RouteContext("/");
 
         // Act
@@ -120,7 +122,9 @@ public class RouteTableFactoryTests
     public void CanMatchLiteralTemplate()
     {
         // Arrange
-        var routeTable = new TestRouteTableBuilder().AddRoute("/literal").Build();
+        var routeTable = new TestRouteTableBuilder()
+            .AddRoute("/literal")
+            .Build();
         var context = new RouteContext("/literal/");
 
         // Act
@@ -134,7 +138,9 @@ public class RouteTableFactoryTests
     public void CanMatchTemplateWithMultipleLiterals()
     {
         // Arrange
-        var routeTable = new TestRouteTableBuilder().AddRoute("/some/awesome/route/").Build();
+        var routeTable = new TestRouteTableBuilder()
+            .AddRoute("/some/awesome/route/")
+            .Build();
         var context = new RouteContext("/some/awesome/route");
 
         // Act
@@ -148,7 +154,9 @@ public class RouteTableFactoryTests
     public void RouteMatchingIsCaseInsensitive()
     {
         // Arrange
-        var routeTable = new TestRouteTableBuilder().AddRoute("/some/AWESOME/route/").Build();
+        var routeTable = new TestRouteTableBuilder()
+            .AddRoute("/some/AWESOME/route/")
+            .Build();
         var context = new RouteContext("/Some/awesome/RouTe");
 
         // Act
@@ -162,7 +170,9 @@ public class RouteTableFactoryTests
     public void CanMatchEncodedSegments()
     {
         // Arrange
-        var routeTable = new TestRouteTableBuilder().AddRoute("/some/ünicõdē/🛣/").Build();
+        var routeTable = new TestRouteTableBuilder()
+            .AddRoute("/some/ünicõdē/🛣/")
+            .Build();
         var context = new RouteContext("/some/%C3%BCnic%C3%B5d%C4%93/%F0%9F%9B%A3");
 
         // Act
@@ -176,7 +186,9 @@ public class RouteTableFactoryTests
     public void DoesNotMatchIfSegmentsDontMatch()
     {
         // Arrange
-        var routeTable = new TestRouteTableBuilder().AddRoute("/some/AWESOME/route/").Build();
+        var routeTable = new TestRouteTableBuilder()
+            .AddRoute("/some/AWESOME/route/")
+            .Build();
         var context = new RouteContext("/some/brilliant/route");
 
         // Act
@@ -198,7 +210,9 @@ public class RouteTableFactoryTests
     public void DoesNotMatchIfConstraintDoesNotMatch(string template, string contextUrl)
     {
         // Arrange
-        var routeTable = new TestRouteTableBuilder().AddRoute(template).Build();
+        var routeTable = new TestRouteTableBuilder()
+            .AddRoute(template)
+            .Build();
         var context = new RouteContext(contextUrl);
 
         // Act
@@ -214,7 +228,9 @@ public class RouteTableFactoryTests
     public void DoesNotMatchIfDifferentNumberOfSegments(string path)
     {
         // Arrange
-        var routeTable = new TestRouteTableBuilder().AddRoute("/some/awesome/route/").Build();
+        var routeTable = new TestRouteTableBuilder()
+            .AddRoute("/some/awesome/route/")
+            .Build();
         var context = new RouteContext(path);
 
         // Act
@@ -233,7 +249,9 @@ public class RouteTableFactoryTests
     public void CanMatchParameterTemplate(string path, string expectedValue)
     {
         // Arrange
-        var routeTable = new TestRouteTableBuilder().AddRoute("/{parameter}").Build();
+        var routeTable = new TestRouteTableBuilder()
+            .AddRoute("/{parameter}")
+            .Build();
         var context = new RouteContext(path);
 
         // Act
@@ -253,7 +271,9 @@ public class RouteTableFactoryTests
     public void CanMatchCatchAllParameterTemplate(string path, string expectedValue)
     {
         // Arrange
-        var routeTable = new TestRouteTableBuilder().AddRoute("/blog/{*parameter}").Build();
+        var routeTable = new TestRouteTableBuilder()
+            .AddRoute("/blog/{*parameter}")
+            .Build();
         var context = new RouteContext(path);
 
         // Act
@@ -271,7 +291,9 @@ public class RouteTableFactoryTests
     public void CanMatchTemplateWithMultipleParameters()
     {
         // Arrange
-        var routeTable = new TestRouteTableBuilder().AddRoute("/{some}/awesome/{route}/").Build();
+        var routeTable = new TestRouteTableBuilder()
+            .AddRoute("/{some}/awesome/{route}/")
+            .Build();
         var context = new RouteContext("/an/awesome/path");
 
         var expectedParameters = new Dictionary<string, object>
@@ -342,7 +364,9 @@ public class RouteTableFactoryTests
     )
     {
         // Arrange
-        var routeTable = new TestRouteTableBuilder().AddRoute(template).Build();
+        var routeTable = new TestRouteTableBuilder()
+            .AddRoute(template)
+            .Build();
         var context = new RouteContext(contextUrl);
 
         // Act
@@ -462,7 +486,9 @@ public class RouteTableFactoryTests
         // Arrange
 
         // Routes are added in reverse precedence order
-        var table = new TestRouteTableBuilder().AddRoute(template).Build();
+        var table = new TestRouteTableBuilder()
+            .AddRoute(template)
+            .Build();
 
         var context = new RouteContext(path);
 
@@ -480,7 +506,9 @@ public class RouteTableFactoryTests
         // Arrange
 
         // Routes are added in reverse precedence order
-        var table = new TestRouteTableBuilder().AddRoute("{*catchall}").Build();
+        var table = new TestRouteTableBuilder()
+            .AddRoute("{*catchall}")
+            .Build();
 
         var context = new RouteContext("/");
 
@@ -498,7 +526,9 @@ public class RouteTableFactoryTests
         // Arrange
 
         // Routes are added in reverse precedence order
-        var table = new TestRouteTableBuilder().AddRoute("{parameter?}").Build();
+        var table = new TestRouteTableBuilder()
+            .AddRoute("{parameter?}")
+            .Build();
 
         var context = new RouteContext("/");
 
@@ -520,7 +550,9 @@ public class RouteTableFactoryTests
         // Arrange
 
         // Routes are added in reverse precedence order
-        var table = new TestRouteTableBuilder().AddRoute("{param1?}/{param2?}/{param3?}").Build();
+        var table = new TestRouteTableBuilder()
+            .AddRoute("{param1?}/{param2?}/{param3?}")
+            .Build();
 
         var context = new RouteContext(path);
 
@@ -595,7 +627,9 @@ public class RouteTableFactoryTests
         // Arrange
 
         // Routes are added in reverse precedence order
-        var table = new TestRouteTableBuilder().AddRoute(template).Build();
+        var table = new TestRouteTableBuilder()
+            .AddRoute(template)
+            .Build();
 
         var context = new RouteContext(path);
 
@@ -615,7 +649,9 @@ public class RouteTableFactoryTests
         // Arrange
 
         // Routes are added in reverse precedence order
-        var table = new TestRouteTableBuilder().AddRoute("/values/{*values:int}").Build();
+        var table = new TestRouteTableBuilder()
+            .AddRoute("/values/{*values:int}")
+            .Build();
 
         var context = new RouteContext("values/1/2/3/4/5/A");
 
@@ -634,7 +670,9 @@ public class RouteTableFactoryTests
         var contextUrl = "/optional/";
         string convertedValue = null;
 
-        var routeTable = new TestRouteTableBuilder().AddRoute(template).Build();
+        var routeTable = new TestRouteTableBuilder()
+            .AddRoute(template)
+            .Build();
         var context = new RouteContext(contextUrl);
 
         // Act
@@ -669,7 +707,9 @@ public class RouteTableFactoryTests
     )
     {
         // Arrange
-        var routeTable = new TestRouteTableBuilder().AddRoute(template).Build();
+        var routeTable = new TestRouteTableBuilder()
+            .AddRoute(template)
+            .Build();
         var context = new RouteContext(contextUrl);
 
         // Act
@@ -695,7 +735,9 @@ public class RouteTableFactoryTests
         var contextUrl = "/optional//";
         object convertedValue = null;
 
-        var routeTable = new TestRouteTableBuilder().AddRoute(template).Build();
+        var routeTable = new TestRouteTableBuilder()
+            .AddRoute(template)
+            .Build();
         var context = new RouteContext(contextUrl);
 
         // Act
@@ -733,7 +775,9 @@ public class RouteTableFactoryTests
     )
     {
         // Arrange
-        var routeTable = new TestRouteTableBuilder().AddRoute(template).Build();
+        var routeTable = new TestRouteTableBuilder()
+            .AddRoute(template)
+            .Build();
         var context = new RouteContext(contextUrl);
 
         // Act
@@ -808,7 +852,10 @@ public class RouteTableFactoryTests
     {
         // Arrange, act & assert
         Assert.Throws<InvalidOperationException>(
-            () => new TestRouteTableBuilder().AddRoute(template).Build()
+            () =>
+                new TestRouteTableBuilder()
+                    .AddRoute(template)
+                    .Build()
         );
     }
 
@@ -823,7 +870,10 @@ public class RouteTableFactoryTests
     {
         // Arrange, act & assert
         Assert.Throws<InvalidOperationException>(
-            () => new TestRouteTableBuilder().AddRoute(template).Build()
+            () =>
+                new TestRouteTableBuilder()
+                    .AddRoute(template)
+                    .Build()
         );
     }
 
@@ -902,7 +952,10 @@ public class RouteTableFactoryTests
     {
         // Arrange, act & assert
         Assert.Throws<InvalidOperationException>(
-            () => new TestRouteTableBuilder().AddRoute("literal?").Build()
+            () =>
+                new TestRouteTableBuilder()
+                    .AddRoute("literal?")
+                    .Build()
         );
     }
 
@@ -1041,7 +1094,11 @@ public class RouteTableFactoryTests
 ";
         // Act
         var exception = Assert.Throws<InvalidOperationException>(
-            () => new TestRouteTableBuilder().AddRoute(left).AddRoute(right).Build()
+            () =>
+                new TestRouteTableBuilder()
+                    .AddRoute(left)
+                    .AddRoute(right)
+                    .Build()
         );
 
         Assert.Equal(expectedMessage, exception.Message);

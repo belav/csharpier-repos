@@ -289,7 +289,46 @@ namespace System.Activities.Debugger
                         Type = "System.Activities.ActivityInstance",
                         Value = activityInstance
                     }
-                }.Concat(allVariables.Select(variable => new LocalInfo { Name = variable.Name, Location = variable.InternalGetLocation(activityInstance.Environment) }).Concat(allArguments.Select(argument => new LocalInfo { Name = argument.Name, Location = argument.InternalGetLocation(activityInstance.Environment) })).Concat(allDelegateArguments.Select(argument => new LocalInfo { Name = argument.Name, Location = argument.InternalGetLocation(activityInstance.Environment) })).OrderBy(info => info.Name)).ToArray();
+                }
+                    .Concat(
+                        allVariables
+                            .Select(
+                                variable =>
+                                    new LocalInfo
+                                    {
+                                        Name = variable.Name,
+                                        Location = variable.InternalGetLocation(
+                                            activityInstance.Environment
+                                        )
+                                    }
+                            )
+                            .Concat(
+                                allArguments.Select(
+                                    argument =>
+                                        new LocalInfo
+                                        {
+                                            Name = argument.Name,
+                                            Location = argument.InternalGetLocation(
+                                                activityInstance.Environment
+                                            )
+                                        }
+                                )
+                            )
+                            .Concat(
+                                allDelegateArguments.Select(
+                                    argument =>
+                                        new LocalInfo
+                                        {
+                                            Name = argument.Name,
+                                            Location = argument.InternalGetLocation(
+                                                activityInstance.Environment
+                                            )
+                                        }
+                                )
+                            )
+                            .OrderBy(info => info.Name)
+                    )
+                    .ToArray();
 
                 if (this.locals.Length > 0)
                 {

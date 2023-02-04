@@ -1167,11 +1167,16 @@ public abstract class NorthwindAggregateOperatorsQueryTestBase<TFixture> : Query
             async,
             ss =>
                 ss.Set<Customer>()
-                    .Where(c => new List<Customer>
+                    .Where(
+                        c =>
+                            new List<Customer>
                             {
                                 new() { CustomerID = "ABCDE" },
                                 new() { CustomerID = id }
-                            }.Select(i => i.CustomerID).Contains(c.CustomerID)),
+                            }
+                                .Select(i => i.CustomerID)
+                                .Contains(c.CustomerID)
+                    ),
             entryCount: 1
         );
 
@@ -1181,11 +1186,16 @@ public abstract class NorthwindAggregateOperatorsQueryTestBase<TFixture> : Query
             async,
             ss =>
                 ss.Set<Customer>()
-                    .Where(c => new List<Customer>
+                    .Where(
+                        c =>
+                            new List<Customer>
                             {
                                 new() { CustomerID = "ABCDE" },
                                 new() { CustomerID = id }
-                            }.Select(i => i.CustomerID).Contains(c.CustomerID)),
+                            }
+                                .Select(i => i.CustomerID)
+                                .Contains(c.CustomerID)
+                    ),
             entryCount: 1
         );
     }

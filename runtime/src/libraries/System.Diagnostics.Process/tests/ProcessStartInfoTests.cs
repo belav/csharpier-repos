@@ -41,7 +41,13 @@ namespace System.Diagnostics.Tests
                 && !PlatformDetection.IsMacCatalyst
             )
             {
-                Assert.NotEqual(0, new Process().StartInfo.Environment.Count);
+                Assert.NotEqual(
+                    0,
+                    new Process()
+                        .StartInfo
+                        .Environment
+                        .Count
+                );
             }
 
             ProcessStartInfo psi = new ProcessStartInfo();

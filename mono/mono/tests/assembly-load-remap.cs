@@ -41,7 +41,12 @@ public class Tests
         var mono_path = Environment.GetEnvironmentVariable("MONO_PATH");
         if (!String.IsNullOrEmpty(mono_path))
         {
-            var xbuild = Path.Combine(new DirectoryInfo(mono_path).Parent.FullName, "xbuild_14");
+            var xbuild = Path.Combine(
+                new DirectoryInfo(mono_path)
+                    .Parent
+                    .FullName,
+                "xbuild_14"
+            );
             mono_path = xbuild + Path.PathSeparator + mono_path;
             Console.WriteLine("Setting Mono assemblies path to " + mono_path);
             mono_set_assemblies_path(mono_path);

@@ -22,7 +22,9 @@ public class Program
 
     static int Main()
     {
-        var res = new Program().Foo().Result;
+        var res = new Program()
+            .Foo()
+            .Result;
         if (res.value != 1)
             return 1;
 

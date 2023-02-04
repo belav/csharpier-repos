@@ -10,7 +10,13 @@ namespace System.IO.Tests
     {
         public override string[] GetEntries(string path)
         {
-            return ((new DirectoryInfo(path).GetDirectories().Select(x => x.FullName)).ToArray());
+            return (
+                (
+                    new DirectoryInfo(path)
+                        .GetDirectories()
+                        .Select(x => x.FullName)
+                ).ToArray()
+            );
         }
     }
 
@@ -19,7 +25,11 @@ namespace System.IO.Tests
         public override string[] GetEntries(string path)
         {
             return (
-                (new DirectoryInfo(path).GetDirectories("*").Select(x => x.FullName)).ToArray()
+                (
+                    new DirectoryInfo(path)
+                        .GetDirectories("*")
+                        .Select(x => x.FullName)
+                ).ToArray()
             );
         }
 
@@ -27,7 +37,9 @@ namespace System.IO.Tests
         {
             return (
                 (
-                    new DirectoryInfo(path).GetDirectories(searchPattern).Select(x => x.FullName)
+                    new DirectoryInfo(path)
+                        .GetDirectories(searchPattern)
+                        .Select(x => x.FullName)
                 ).ToArray()
             );
         }

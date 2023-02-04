@@ -126,7 +126,9 @@ namespace System.Web.WebPages.Administration.Test
             var stream = new MemoryStream();
             document.Save(stream);
             stream = new MemoryStream(stream.ToArray());
-            string xml = new StreamReader(stream).ReadToEnd().TrimEnd('\0');
+            string xml = new StreamReader(stream)
+                .ReadToEnd()
+                .TrimEnd('\0');
 
             // Act
             var result = PackageSourceFile.ReadFeeds(
@@ -156,7 +158,9 @@ namespace System.Web.WebPages.Administration.Test
             // Act
             PackageSourceFile.WriteFeeds(packagesSources, () => stream);
             stream = new MemoryStream(stream.ToArray());
-            string result = new StreamReader(stream).ReadToEnd().TrimEnd('\0');
+            string result = new StreamReader(stream)
+                .ReadToEnd()
+                .TrimEnd('\0');
 
             // Assert
             var document = XDocument.Parse(result);

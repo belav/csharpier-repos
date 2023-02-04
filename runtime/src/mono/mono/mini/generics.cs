@@ -496,7 +496,11 @@ class Tests
 
     public static int test_0_ldloca_initobj_opt()
     {
-        if (new Foo<S>(new S()).get_default().i != 0)
+        if (
+            new Foo<S>(new S())
+                .get_default()
+                .i != 0
+        )
             return 1;
         if (new Foo<object>(null).get_default() != null)
             return 2;

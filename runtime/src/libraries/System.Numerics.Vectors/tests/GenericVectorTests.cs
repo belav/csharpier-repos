@@ -178,7 +178,9 @@ namespace System.Numerics.Tests
             Assert.Throws<NullReferenceException>(() => new Vector<T>((T[])null, 0));
 
             int offsetAmount = Util.GenerateSingleValue<int>(2, 250);
-            T[] values = new T[offsetAmount].Concat(GenerateRandomValuesForVector<T>()).ToArray();
+            T[] values = new T[offsetAmount]
+                .Concat(GenerateRandomValuesForVector<T>())
+                .ToArray();
             var vector = new Vector<T>(values, offsetAmount);
             ValidateVector(
                 vector,

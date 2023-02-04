@@ -35,7 +35,10 @@ namespace System.Linq.Tests
         [Fact]
         public void OfType()
         {
-            var count = new object[] { 0, (long)1, 2 }.AsQueryable().OfType<int>().Count();
+            var count = new object[] { 0, (long)1, 2 }
+                .AsQueryable()
+                .OfType<int>()
+                .Count();
             Assert.Equal(2, count);
         }
     }

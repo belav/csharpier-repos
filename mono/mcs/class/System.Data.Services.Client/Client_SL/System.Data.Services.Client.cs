@@ -401,6 +401,7 @@ namespace System.Data.Services.Client
             get { return GetLoader().resources; }
         }
 #endif
+
         public static string GetString(string name, params object[] args)
         {
             TextRes sys = GetLoader();

@@ -46,7 +46,10 @@ namespace MonoTests.System.ComponentModel.DataAnnotations
         {
             Assert.AreEqual(
                 2,
-                new UIHintAttribute("", "", "a", 1, "b", 2).ControlParameters.Keys.Count
+                new UIHintAttribute("", "", "a", 1, "b", 2)
+                    .ControlParameters
+                    .Keys
+                    .Count
             );
         }
 
@@ -55,14 +58,32 @@ namespace MonoTests.System.ComponentModel.DataAnnotations
         {
             Assert.AreEqual(
                 0,
-                new UIHintAttribute("", "", new object[0]).ControlParameters.Keys.Count
+                new UIHintAttribute("", "", new object[0])
+                    .ControlParameters
+                    .Keys
+                    .Count
             );
             Assert.AreEqual(
                 0,
-                new UIHintAttribute("", "", (object[])null).ControlParameters.Keys.Count
+                new UIHintAttribute("", "", (object[])null)
+                    .ControlParameters
+                    .Keys
+                    .Count
             );
-            Assert.AreEqual(0, new UIHintAttribute("", "").ControlParameters.Keys.Count);
-            Assert.AreEqual(0, new UIHintAttribute("").ControlParameters.Keys.Count);
+            Assert.AreEqual(
+                0,
+                new UIHintAttribute("", "")
+                    .ControlParameters
+                    .Keys
+                    .Count
+            );
+            Assert.AreEqual(
+                0,
+                new UIHintAttribute("")
+                    .ControlParameters
+                    .Keys
+                    .Count
+            );
         }
 
         [Test]

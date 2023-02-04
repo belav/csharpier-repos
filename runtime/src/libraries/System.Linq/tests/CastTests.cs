@@ -241,7 +241,9 @@ namespace System.Linq.Tests
         [Fact]
         public void ForcedToEnumeratorDoesntEnumerate()
         {
-            var iterator = new object[0].Where(i => i != null).Cast<string>();
+            var iterator = new object[0]
+                .Where(i => i != null)
+                .Cast<string>();
             // Don't insist on this behaviour, but check it's correct if it happens
             var en = iterator as IEnumerator<string>;
             Assert.False(en != null && en.MoveNext());

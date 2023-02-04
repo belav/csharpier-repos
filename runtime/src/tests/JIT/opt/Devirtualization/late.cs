@@ -50,7 +50,9 @@ public class Z
         //
         // Unfortunately we lose track of that context, because when
         // we import the call to F, it is not an inline candidate.
-        string s = new Bx().Get().F();
+        string s = new Bx()
+            .Get()
+            .F();
         return (int)s[0] + 32;
     }
 }

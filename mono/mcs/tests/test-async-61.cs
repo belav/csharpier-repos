@@ -5,7 +5,9 @@ class X
 {
     public static void Main()
     {
-        new X().Foo().Wait();
+        new X()
+            .Foo()
+            .Wait();
     }
 
     async Task Foo()

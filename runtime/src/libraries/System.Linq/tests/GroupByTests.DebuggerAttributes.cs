@@ -68,8 +68,20 @@ namespace System.Linq.Tests
                 "{00:00:01}"
             };
 
-            yield return new object[] { new string[] { null }.GroupBy(x => x).Single(), "null" };
-            yield return new object[] { new int?[] { null }.GroupBy(x => x).Single(), "null" };
+            yield return new object[]
+            {
+                new string[] { null }
+                    .GroupBy(x => x)
+                    .Single(),
+                "null"
+            };
+            yield return new object[]
+            {
+                new int?[] { null }
+                    .GroupBy(x => x)
+                    .Single(),
+                "null"
+            };
         }
     }
 }

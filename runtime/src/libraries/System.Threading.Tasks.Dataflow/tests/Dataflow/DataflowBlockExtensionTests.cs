@@ -200,7 +200,10 @@ namespace System.Threading.Tasks.Dataflow.Tests
             Assert.Throws<ArgumentNullException>(() => ((ISourceBlock<int>)null).AsObservable());
             Assert.Throws<ArgumentNullException>(() => ((ITargetBlock<int>)null).AsObserver());
             Assert.Throws<ArgumentNullException>(
-                () => new BufferBlock<int>().AsObservable().Subscribe(null)
+                () =>
+                    new BufferBlock<int>()
+                        .AsObservable()
+                        .Subscribe(null)
             );
         }
 

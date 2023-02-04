@@ -224,14 +224,26 @@ namespace JitBench
                 new BenchmarkConfiguration(),
                 new BenchmarkConfiguration().WithoutTiering(),
                 minOptsConfig,
-                new BenchmarkConfiguration().WithMinOpts().WithoutTiering(),
-                new BenchmarkConfiguration().WithoutTiering().WithMinOpts(),
+                new BenchmarkConfiguration()
+                    .WithMinOpts()
+                    .WithoutTiering(),
+                new BenchmarkConfiguration()
+                    .WithoutTiering()
+                    .WithMinOpts(),
                 new BenchmarkConfiguration().WithNoR2R(),
-                new BenchmarkConfiguration().WithNoR2R().WithoutTiering(),
-                new BenchmarkConfiguration().WithoutTiering().WithNoR2R(),
+                new BenchmarkConfiguration()
+                    .WithNoR2R()
+                    .WithoutTiering(),
+                new BenchmarkConfiguration()
+                    .WithoutTiering()
+                    .WithNoR2R(),
                 new BenchmarkConfiguration().WithNoNgen(),
-                new BenchmarkConfiguration().WithNoNgen().WithoutTiering(),
-                new BenchmarkConfiguration().WithoutTiering().WithNoNgen()
+                new BenchmarkConfiguration()
+                    .WithNoNgen()
+                    .WithoutTiering(),
+                new BenchmarkConfiguration()
+                    .WithoutTiering()
+                    .WithNoNgen()
             };
             foreach (string configName in configNames)
             {

@@ -79,7 +79,9 @@ namespace Microsoft.Extensions.Options.ConfigurationExtensions.Tests
             };
             var services = new ServiceCollection();
             services.AddSingleton<IConfiguration>(
-                new ConfigurationBuilder().AddInMemoryCollection(configEntries).Build()
+                new ConfigurationBuilder()
+                    .AddInMemoryCollection(configEntries)
+                    .Build()
             );
             OptionsBuilder<FakeOptions> optionsBuilder = services.AddOptions<FakeOptions>();
 
@@ -101,7 +103,9 @@ namespace Microsoft.Extensions.Options.ConfigurationExtensions.Tests
             };
             var services = new ServiceCollection();
             services.AddSingleton<IConfiguration>(
-                new ConfigurationBuilder().AddInMemoryCollection(configEntries).Build()
+                new ConfigurationBuilder()
+                    .AddInMemoryCollection(configEntries)
+                    .Build()
             );
             OptionsBuilder<FakeOptions> optionsBuilder = services.AddOptions<FakeOptions>();
 
@@ -130,7 +134,9 @@ namespace Microsoft.Extensions.Options.ConfigurationExtensions.Tests
 
             var services = new ServiceCollection();
             services.AddSingleton<IConfiguration>(
-                new ConfigurationBuilder().Add(configSource).Build()
+                new ConfigurationBuilder()
+                    .Add(configSource)
+                    .Build()
             );
             OptionsBuilder<FakeOptions> optionsBuilder = services.AddOptions<FakeOptions>();
             _ = optionsBuilder.BindConfiguration(configSectionPath: "");
@@ -173,7 +179,9 @@ namespace Microsoft.Extensions.Options.ConfigurationExtensions.Tests
 
             var services = new ServiceCollection();
             services.AddSingleton<IConfiguration>(
-                new ConfigurationBuilder().Add(configSource).Build()
+                new ConfigurationBuilder()
+                    .Add(configSource)
+                    .Build()
             );
             OptionsBuilder<FakeOptions> optionsBuilder = services.AddOptions<FakeOptions>();
             _ = optionsBuilder.BindConfiguration(configSectionName);

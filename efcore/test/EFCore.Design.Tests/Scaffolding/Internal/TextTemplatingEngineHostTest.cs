@@ -21,7 +21,9 @@ public class TextTemplatingEngineHostTest
     public void Service_works()
     {
         var host = new TextTemplatingEngineHost(
-            new ServiceCollection().AddSingleton("Hello, Services!").BuildServiceProvider()
+            new ServiceCollection()
+                .AddSingleton("Hello, Services!")
+                .BuildServiceProvider()
         );
 
         var result = _engine.ProcessTemplate(

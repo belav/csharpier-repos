@@ -99,7 +99,9 @@ namespace System.Linq.Tests
         public void SingleOrDefault_OverloadResolution_Regression()
         {
             // Regression test for https://github.com/dotnet/runtime/issues/65419
-            object? result = new object[] { 1, "" }.AsQueryable().SingleOrDefault(x => x is string);
+            object? result = new object[] { 1, "" }
+                .AsQueryable()
+                .SingleOrDefault(x => x is string);
             Assert.IsType<string>(result);
 
             result = Array.Empty<object>().AsQueryable().SingleOrDefault(1);

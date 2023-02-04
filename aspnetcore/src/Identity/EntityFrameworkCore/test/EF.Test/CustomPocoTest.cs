@@ -29,7 +29,9 @@ public class CustomPocoTest
     {
         using (
             var db = new CustomDbContext<Guid>(
-                new DbContextOptionsBuilder().UseSqlite($"DataSource=D{Guid.NewGuid()}.db").Options
+                new DbContextOptionsBuilder()
+                    .UseSqlite($"DataSource=D{Guid.NewGuid()}.db")
+                    .Options
             )
         )
         {
@@ -54,7 +56,9 @@ public class CustomPocoTest
     {
         using (
             var db = new CustomDbContext<string>(
-                new DbContextOptionsBuilder().UseSqlite($"DataSource=D{Guid.NewGuid()}.db").Options
+                new DbContextOptionsBuilder()
+                    .UseSqlite($"DataSource=D{Guid.NewGuid()}.db")
+                    .Options
             )
         )
         {
@@ -79,7 +83,9 @@ public class CustomPocoTest
     {
         using (
             var db = new CustomDbContext<int>(
-                new DbContextOptionsBuilder().UseSqlite($"DataSource=D{Guid.NewGuid()}.db").Options
+                new DbContextOptionsBuilder()
+                    .UseSqlite($"DataSource=D{Guid.NewGuid()}.db")
+                    .Options
             )
         )
         {
@@ -102,7 +108,9 @@ public class CustomPocoTest
     {
         using (
             var db = new CustomDbContext<int>(
-                new DbContextOptionsBuilder().UseSqlite($"DataSource=D{Guid.NewGuid()}.db").Options
+                new DbContextOptionsBuilder()
+                    .UseSqlite($"DataSource=D{Guid.NewGuid()}.db")
+                    .Options
             )
         )
         {
@@ -126,7 +134,9 @@ public class CustomPocoTest
     {
         using (
             var db = new CustomDbContext<int>(
-                new DbContextOptionsBuilder().UseSqlite($"DataSource=D{Guid.NewGuid()}.db").Options
+                new DbContextOptionsBuilder()
+                    .UseSqlite($"DataSource=D{Guid.NewGuid()}.db")
+                    .Options
             )
         )
         {
@@ -151,7 +161,9 @@ public class CustomPocoTest
     {
         using (
             var db = new CustomDbContext<int>(
-                new DbContextOptionsBuilder().UseSqlite($"DataSource=D{Guid.NewGuid()}.db").Options
+                new DbContextOptionsBuilder()
+                    .UseSqlite($"DataSource=D{Guid.NewGuid()}.db")
+                    .Options
             )
         )
         {

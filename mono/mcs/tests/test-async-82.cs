@@ -5,10 +5,18 @@ class X
 {
     public static int Main()
     {
-        if (new X().Test(false).Result != true)
+        if (
+            new X()
+                .Test(false)
+                .Result != true
+        )
             return 1;
 
-        if (new X().Test(true).Result != true)
+        if (
+            new X()
+                .Test(true)
+                .Result != true
+        )
             return 2;
 
         return 0;

@@ -155,7 +155,12 @@ namespace System.Web.WebPages.Test
                 Assert.False("0".IsDateTime());
                 Assert.True(DateTime.MaxValue.ToString().IsDateTime());
                 Assert.True(DateTime.MinValue.ToString().IsDateTime());
-                Assert.True(new DateTime(2010, 12, 21).ToUniversalTime().ToString().IsDateTime());
+                Assert.True(
+                    new DateTime(2010, 12, 21)
+                        .ToUniversalTime()
+                        .ToString()
+                        .IsDateTime()
+                );
                 Assert.False("gooblygook".IsDateTime());
                 Assert.False(((string)null).IsDateTime());
             }
@@ -167,8 +172,16 @@ namespace System.Web.WebPages.Test
         {
             using (new CultureReplacer(culture: "en-gb"))
             {
-                Assert.True(new DateTime(2010, 12, 21).ToString().IsDateTime());
-                Assert.True(new DateTime(2010, 12, 11).ToString().IsDateTime());
+                Assert.True(
+                    new DateTime(2010, 12, 21)
+                        .ToString()
+                        .IsDateTime()
+                );
+                Assert.True(
+                    new DateTime(2010, 12, 11)
+                        .ToString()
+                        .IsDateTime()
+                );
                 Assert.True("2010/01/01".IsDateTime());
                 Assert.True("12/01/2010".IsDateTime());
                 Assert.True("12/12/2010".IsDateTime());

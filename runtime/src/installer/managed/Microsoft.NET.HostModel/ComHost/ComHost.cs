@@ -31,7 +31,9 @@ namespace Microsoft.NET.HostModel.ComHost
             IReadOnlyDictionary<int, string> typeLibraries = null
         )
         {
-            var destinationDirectory = new FileInfo(comHostDestinationFilePath).Directory.FullName;
+            var destinationDirectory = new FileInfo(comHostDestinationFilePath)
+                .Directory
+                .FullName;
             if (!Directory.Exists(destinationDirectory))
             {
                 Directory.CreateDirectory(destinationDirectory);

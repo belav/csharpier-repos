@@ -12,7 +12,9 @@ namespace Microsoft.Extensions.Hosting
         [Fact]
         public void DefaultsToOffOutsideOfService()
         {
-            var host = new HostBuilder().UseWindowsService().Build();
+            var host = new HostBuilder()
+                .UseWindowsService()
+                .Build();
 
             using (host)
             {

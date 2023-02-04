@@ -126,17 +126,26 @@ CommonKey3:CommonKey4=IniValue6";
         public void MissingFileIncludesAbsolutePathIfPhysicalFileProvider()
         {
             var error = Assert.Throws<FileNotFoundException>(
-                () => new ConfigurationBuilder().AddIniFile("missing.ini").Build()
+                () =>
+                    new ConfigurationBuilder()
+                        .AddIniFile("missing.ini")
+                        .Build()
             );
             Assert.True(error.Message.Contains(_basePath), error.Message);
 
             error = Assert.Throws<FileNotFoundException>(
-                () => new ConfigurationBuilder().AddJsonFile("missing.json").Build()
+                () =>
+                    new ConfigurationBuilder()
+                        .AddJsonFile("missing.json")
+                        .Build()
             );
             Assert.True(error.Message.Contains(_basePath), error.Message);
 
             error = Assert.Throws<FileNotFoundException>(
-                () => new ConfigurationBuilder().AddXmlFile("missing.xml").Build()
+                () =>
+                    new ConfigurationBuilder()
+                        .AddXmlFile("missing.xml")
+                        .Build()
             );
             Assert.True(error.Message.Contains(_basePath), error.Message);
         }

@@ -12,6 +12,8 @@ public class Test1
 
     static void Main()
     {
-        new Test1()?.test2.E += null;
+        new Test1()
+            ?.test2
+            .E += null;
     }
 }

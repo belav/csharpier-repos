@@ -23,7 +23,9 @@ namespace System.CommandLine.Tests
         [Fact]
         public async Task When_the_version_option_is_specified_then_the_version_is_written_to_standard_out()
         {
-            var parser = new CommandLineBuilder().UseVersionOption().Build();
+            var parser = new CommandLineBuilder()
+                .UseVersionOption()
+                .Build();
 
             var console = new TestConsole();
 
@@ -39,7 +41,9 @@ namespace System.CommandLine.Tests
             var rootCommand = new RootCommand();
             rootCommand.SetHandler(() => wasCalled = true);
 
-            var parser = new CommandLineBuilder(rootCommand).UseVersionOption().Build();
+            var parser = new CommandLineBuilder(rootCommand)
+                .UseVersionOption()
+                .Build();
 
             var console = new TestConsole();
 
@@ -51,7 +55,10 @@ namespace System.CommandLine.Tests
         [Fact]
         public async Task Version_option_appears_in_help()
         {
-            var parser = new CommandLineBuilder().UseHelp().UseVersionOption().Build();
+            var parser = new CommandLineBuilder()
+                .UseHelp()
+                .UseVersionOption()
+                .Build();
 
             var console = new TestConsole();
 
@@ -66,7 +73,9 @@ namespace System.CommandLine.Tests
             var rootCommand = new RootCommand { new Option<bool>("-x") };
             rootCommand.SetHandler(() => { });
 
-            var parser = new CommandLineBuilder(rootCommand).UseVersionOption().Build();
+            var parser = new CommandLineBuilder(rootCommand)
+                .UseVersionOption()
+                .Build();
 
             var console = new TestConsole();
 
@@ -84,7 +93,9 @@ namespace System.CommandLine.Tests
             };
             rootCommand.SetHandler(() => { });
 
-            var parser = new CommandLineBuilder(rootCommand).UseVersionOption().Build();
+            var parser = new CommandLineBuilder(rootCommand)
+                .UseVersionOption()
+                .Build();
 
             var console = new TestConsole();
 
@@ -103,7 +114,9 @@ namespace System.CommandLine.Tests
             var rootCommand = new RootCommand { subcommand, new Option<bool>("-x") };
             rootCommand.SetHandler(() => { });
 
-            var parser = new CommandLineBuilder(rootCommand).UseVersionOption().Build();
+            var parser = new CommandLineBuilder(rootCommand)
+                .UseVersionOption()
+                .Build();
 
             var console = new TestConsole();
 
@@ -128,7 +141,9 @@ namespace System.CommandLine.Tests
             var rootCommand = new RootCommand { childCommand, };
             rootCommand.SetHandler(() => { });
 
-            var parser = new CommandLineBuilder(rootCommand).UseVersionOption().Build();
+            var parser = new CommandLineBuilder(rootCommand)
+                .UseVersionOption()
+                .Build();
 
             parser.Configuration.RootCommand.Subcommands
                 .Single(c => c.Name == "subcommand")
@@ -143,7 +158,10 @@ namespace System.CommandLine.Tests
             // real world scenarios - invocation can be invoked twice
             // or the author may have their own version switch but
             // still want other defaults.
-            var parser = new CommandLineBuilder().UseVersionOption().UseVersionOption().Build();
+            var parser = new CommandLineBuilder()
+                .UseVersionOption()
+                .UseVersionOption()
+                .Build();
 
             var console = new TestConsole();
 
@@ -155,7 +173,9 @@ namespace System.CommandLine.Tests
         [Fact]
         public async Task Version_can_specify_additional_alias()
         {
-            var parser = new CommandLineBuilder().UseVersionOption("-v", "-version").Build();
+            var parser = new CommandLineBuilder()
+                .UseVersionOption("-v", "-version")
+                .Build();
 
             var console = new TestConsole();
             await parser.InvokeAsync("-v", console);
@@ -174,7 +194,9 @@ namespace System.CommandLine.Tests
             var rootCommand = new RootCommand { childCommand };
             rootCommand.SetHandler(() => { });
 
-            var parser = new CommandLineBuilder(rootCommand).UseVersionOption("-v").Build();
+            var parser = new CommandLineBuilder(rootCommand)
+                .UseVersionOption("-v")
+                .Build();
 
             var console = new TestConsole();
 

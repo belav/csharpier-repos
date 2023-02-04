@@ -767,7 +767,9 @@ namespace SoDBench
                     AdditionalNewLineAfterOption = false,
                     Heading = "SoDBench",
                     MaximumDisplayWidth = 80,
-                }.AddOptions(parser.ParseArguments<SoDBenchOptions>(new string[] { "--help" })).ToString();
+                }
+                    .AddOptions(parser.ParseArguments<SoDBenchOptions>(new string[] { "--help" }))
+                    .ToString();
                 return helpTextString;
             }
 

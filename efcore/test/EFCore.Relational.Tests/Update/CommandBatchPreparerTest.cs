@@ -908,7 +908,9 @@ FakeEntity [Deleted]" + CoreStrings.SensitiveDataDisabled;
         }
         else
         {
-            new EntityEntry<FakeEntity>(firstEntry).Property(e => e.RelatedId).OriginalValue = 1;
+            new EntityEntry<FakeEntity>(firstEntry)
+                .Property(e => e.RelatedId)
+                .OriginalValue = 1;
             new EntityEntry<RelatedFakeEntity>(secondEntry)
                 .Property(e => e.RelatedId)
                 .OriginalValue = 2;
@@ -1226,7 +1228,9 @@ FakeEntity [Deleted]" + CoreStrings.SensitiveDataDisabled;
         if (sensitiveLogging)
         {
             loggingOptions.Initialize(
-                new DbContextOptionsBuilder<DbContext>().EnableSensitiveDataLogging().Options
+                new DbContextOptionsBuilder<DbContext>()
+                    .EnableSensitiveDataLogging()
+                    .Options
             );
         }
 

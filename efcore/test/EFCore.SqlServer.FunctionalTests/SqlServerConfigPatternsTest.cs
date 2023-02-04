@@ -272,7 +272,10 @@ public class SqlServerConfigPatternsTest
                 .AddTransient<NorthwindContext>()
                 .AddTransient<MyController>()
                 .AddSingleton(
-                    p => new DbContextOptionsBuilder().UseInternalServiceProvider(p).Options
+                    p =>
+                        new DbContextOptionsBuilder()
+                            .UseInternalServiceProvider(p)
+                            .Options
                 )
                 .BuildServiceProvider(validateScopes: true);
 

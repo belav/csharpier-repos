@@ -14,7 +14,9 @@ namespace System.CommandLine.Tests
         {
             var option = new Option<string>("-x", () => "default");
 
-            var result = new RootCommand { option }.Parse("-x").FindResultFor(option);
+            var result = new RootCommand { option }
+                .Parse("-x")
+                .FindResultFor(option);
 
             result.Tokens.Should().BeEmpty();
         }

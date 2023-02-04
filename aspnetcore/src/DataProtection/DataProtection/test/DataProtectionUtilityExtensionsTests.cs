@@ -121,7 +121,9 @@ public class DataProtectionUtilityExtensionsTests
     public void GetApplicationUniqueIdentifier_NoHostingEnvironment_ReturnsNull()
     {
         // arrange
-        var services = new ServiceCollection().AddDataProtection().Services.BuildServiceProvider();
+        var services = new ServiceCollection()
+            .AddDataProtection()
+            .Services.BuildServiceProvider();
 
         // act & assert
         Assert.Null(services.GetApplicationUniqueIdentifier());

@@ -16,7 +16,9 @@ namespace Microsoft.WebAssembly.Diagnostics
     {
         public static async Task Main(string[] args)
         {
-            IConfigurationRoot config = new ConfigurationBuilder().AddCommandLine(args).Build();
+            IConfigurationRoot config = new ConfigurationBuilder()
+                .AddCommandLine(args)
+                .Build();
             ProxyOptions options = new();
             config.Bind(options);
             options.RunningForBlazor = true;

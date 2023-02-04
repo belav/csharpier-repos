@@ -103,7 +103,7 @@ namespace System.Configuration
         /*
                 bool IsUserSetting (SettingsProperty prop)
                 {
-        #if CONFIGURATION_DEP
+#if CONFIGURATION_DEP
                     if (prop.Attributes.ContainsKey (typeof (UserScopedSettingAttribute)))
                         return true;
                     else if (prop.Attributes.ContainsKey (typeof (ApplicationScopedSettingAttribute)))
@@ -112,9 +112,9 @@ namespace System.Configuration
                         throw new ConfigurationErrorsException (
                                     String.Format ("The setting '{0}' does not have either an ApplicationScopedSettingAttribute or UserScopedSettingAttribute.",
                                                prop.Name));
-        #else
+#else
                     return false;
-        #endif
+#endif
                 }
         */
     }

@@ -555,7 +555,9 @@ namespace System.Linq.Tests
             // so that it does not overflow to a negative number and enumeration does not
             // stop prematurely.
 
-            var iterator = new FastInfiniteEnumerator<int>().Skip(1).GetEnumerator();
+            var iterator = new FastInfiniteEnumerator<int>()
+                .Skip(1)
+                .GetEnumerator();
             iterator.MoveNext(); // Make sure the underlying enumerator has been initialized.
 
             FieldInfo state = iterator

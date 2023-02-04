@@ -675,7 +675,9 @@ namespace Mono.Linker.Tests.Cases.Reflection
             [ExpectedWarning("IL2075", "GetMethod")]
             public static void Test()
             {
-                new Derived().GetType().GetMethod("Method");
+                new Derived()
+                    .GetType()
+                    .GetMethod("Method");
             }
         }
 

@@ -515,7 +515,9 @@ namespace MonoTests.System.Reflection.Emit
         [Category("NotWorking")]
         public void InvalidUnicodeName()
         {
-            var name = new StringBuilder().Append('\udf45').Append('\ud808');
+            var name = new StringBuilder()
+                .Append('\udf45')
+                .Append('\ud808');
             var method = new DynamicMethod(name.ToString(), typeof(bool), new Type[0]);
             var il = method.GetILGenerator();
             il.Emit(OpCodes.Ldc_I4_1);

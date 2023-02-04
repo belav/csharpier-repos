@@ -309,7 +309,9 @@ class SchemaDef
                 ),
             }
         )
-    }.OrderBy(record => record.Name, StringComparer.Ordinal).ToArray();
+    }
+        .OrderBy(record => record.Name, StringComparer.Ordinal)
+        .ToArray();
 
     //
     //  Record schema definition

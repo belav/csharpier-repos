@@ -22,7 +22,9 @@ namespace MonoTests.System.Text.RegularExpressions
         public void BugXamarin3866()
         {
             Assert.AreEqual(
-                new Regex(@"(?<A>a)+(?<-A>b)+(?(A)(?!))b").Match("aaaaaabbb").ToString(),
+                new Regex(@"(?<A>a)+(?<-A>b)+(?(A)(?!))b")
+                    .Match("aaaaaabbb")
+                    .ToString(),
                 "aabbb"
             );
         }
@@ -37,7 +39,12 @@ namespace MonoTests.System.Text.RegularExpressions
         [Test]
         public void BugXamarin4523()
         {
-            Assert.AreEqual(new Regex("A(?i)b(?-i)C").Match("ABC").ToString(), "ABC");
+            Assert.AreEqual(
+                new Regex("A(?i)b(?-i)C")
+                    .Match("ABC")
+                    .ToString(),
+                "ABC"
+            );
         }
 
         [Test]

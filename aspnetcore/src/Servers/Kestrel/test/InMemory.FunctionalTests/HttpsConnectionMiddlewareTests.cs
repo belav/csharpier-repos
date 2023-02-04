@@ -88,7 +88,9 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
         var env = new Mock<IHostEnvironment>();
         env.SetupGet(e => e.ContentRootPath).Returns(Directory.GetCurrentDirectory());
 
-        var serviceProvider = new ServiceCollection().AddLogging().BuildServiceProvider();
+        var serviceProvider = new ServiceCollection()
+            .AddLogging()
+            .BuildServiceProvider();
         options.ApplicationServices = serviceProvider;
 
         var logger = serviceProvider.GetRequiredService<ILogger<KestrelServer>>();

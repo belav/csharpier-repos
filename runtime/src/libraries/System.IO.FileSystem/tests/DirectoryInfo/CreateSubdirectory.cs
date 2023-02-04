@@ -63,7 +63,9 @@ namespace System.IO.Tests
                 testDir.Attributes = attributes;
                 Assert.Equal(
                     testDir.FullName,
-                    new DirectoryInfo(TestDirectory).CreateSubdirectory(path).FullName
+                    new DirectoryInfo(TestDirectory)
+                        .CreateSubdirectory(path)
+                        .FullName
                 );
             }
             finally

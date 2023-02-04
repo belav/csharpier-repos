@@ -593,7 +593,9 @@ namespace System.Data.Linq.Mapping
             }
             else
             {
-                this.inheritanceTypes = new MetaType[] { this }.ToList().AsReadOnly();
+                this.inheritanceTypes = new MetaType[] { this }
+                    .ToList()
+                    .AsReadOnly();
             }
 
             this.Validate();
@@ -2235,7 +2237,9 @@ namespace System.Data.Linq.Mapping
                     {
                         if (this.inheritanceTypes == null)
                         {
-                            this.inheritanceTypes = new MetaType[] { this }.ToList().AsReadOnly();
+                            this.inheritanceTypes = new MetaType[] { this }
+                                .ToList()
+                                .AsReadOnly();
                         }
                     }
                 }

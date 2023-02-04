@@ -25,7 +25,9 @@ namespace System.CommandLine.Tests
             var subcommand = new Command("subcommand");
             command.Subcommands.Add(subcommand);
 
-            var parser = new CommandLineBuilder(new RootCommand { command }).UseHelp().Build();
+            var parser = new CommandLineBuilder(new RootCommand { command })
+                .UseHelp()
+                .Build();
 
             var result = parser.Parse("command subcommand --help");
 
@@ -46,7 +48,9 @@ namespace System.CommandLine.Tests
             subcommand.SetHandler(() => wasCalled = true);
             command.Subcommands.Add(subcommand);
 
-            var parser = new CommandLineBuilder(new RootCommand { command }).UseHelp().Build();
+            var parser = new CommandLineBuilder(new RootCommand { command })
+                .UseHelp()
+                .Build();
 
             await parser.InvokeAsync("command subcommand --help", _console);
 
@@ -75,7 +79,9 @@ namespace System.CommandLine.Tests
             var command = new Command("command");
             command.Options.Add(new Option<bool>("-h"));
 
-            var parser = new CommandLineBuilder(new RootCommand { command }).UseHelp().Build();
+            var parser = new CommandLineBuilder(new RootCommand { command })
+                .UseHelp()
+                .Build();
 
             var result = parser.Parse("command -h");
 
@@ -87,7 +93,9 @@ namespace System.CommandLine.Tests
         [Fact]
         public void There_are_no_parse_errors_when_help_is_invoked_on_root_command()
         {
-            var parser = new CommandLineBuilder().UseHelp().Build();
+            var parser = new CommandLineBuilder()
+                .UseHelp()
+                .Build();
 
             var result = parser.Parse("-h");
 
@@ -99,7 +107,9 @@ namespace System.CommandLine.Tests
         {
             var root = new RootCommand { new Command("subcommand") };
 
-            var parser = new CommandLineBuilder(root).UseHelp().Build();
+            var parser = new CommandLineBuilder(root)
+                .UseHelp()
+                .Build();
 
             var result = parser.Parse("subcommand -h");
 
@@ -111,7 +121,9 @@ namespace System.CommandLine.Tests
         {
             var root = new RootCommand { new Command("subcommand") };
 
-            var parser = new CommandLineBuilder(root).UseHelp().Build();
+            var parser = new CommandLineBuilder(root)
+                .UseHelp()
+                .Build();
 
             var result = parser.Parse("-h");
 
@@ -123,7 +135,10 @@ namespace System.CommandLine.Tests
         {
             var command = new RootCommand { new Option<string>("-x") { IsRequired = true }, };
 
-            var result = new CommandLineBuilder(command).UseHelp().Build().Parse("-h");
+            var result = new CommandLineBuilder(command)
+                .UseHelp()
+                .Build()
+                .Parse("-h");
 
             result.Errors.Should().BeEmpty();
         }
@@ -137,7 +152,10 @@ namespace System.CommandLine.Tests
         {
             var root = new RootCommand { new Command("inner") };
 
-            var parser = new CommandLineBuilder(root).UseHelp().UseHelp().Build();
+            var parser = new CommandLineBuilder(root)
+                .UseHelp()
+                .UseHelp()
+                .Build();
 
             parser.Invoke(commandline, _console);
 
@@ -153,7 +171,9 @@ namespace System.CommandLine.Tests
         {
             var root = new RootCommand { new Command("inner") };
 
-            var parser = new CommandLineBuilder(root).UseHelp().Build();
+            var parser = new CommandLineBuilder(root)
+                .UseHelp()
+                .Build();
 
             var console1 = new TestConsole();
 
@@ -161,7 +181,9 @@ namespace System.CommandLine.Tests
 
             console1.Should().ShowHelp();
 
-            var parser2 = new CommandLineBuilder(root).UseHelp().Build();
+            var parser2 = new CommandLineBuilder(root)
+                .UseHelp()
+                .Build();
             var console2 = new TestConsole();
 
             parser2.Invoke(commandline, console2);
@@ -174,7 +196,9 @@ namespace System.CommandLine.Tests
         [InlineData("--confused")]
         public async Task UseHelp_with_custom_aliases_uses_aliases(string helpAlias)
         {
-            var parser = new CommandLineBuilder().UseHelp("/lost", "--confused").Build();
+            var parser = new CommandLineBuilder()
+                .UseHelp("/lost", "--confused")
+                .Build();
 
             await parser.InvokeAsync(helpAlias, _console);
 
@@ -189,7 +213,9 @@ namespace System.CommandLine.Tests
         [InlineData("/?")]
         public async Task UseHelp_with_custom_aliases_default_aliases_replaced(string helpAlias)
         {
-            var parser = new CommandLineBuilder().UseHelp("--confused").Build();
+            var parser = new CommandLineBuilder()
+                .UseHelp("--confused")
+                .Build();
 
             await parser.InvokeAsync(helpAlias, _console);
 
@@ -332,7 +358,9 @@ namespace System.CommandLine.Tests
         {
             Command command = new("test") { new Option<string>("--option", "option description") };
 
-            var parser = new CommandLineBuilder(command).UseHelp(maxWidth: 30).Build();
+            var parser = new CommandLineBuilder(command)
+                .UseHelp(maxWidth: 30)
+                .Build();
 
             var console = new TestConsole();
             parser.Invoke("test -h", console);
@@ -383,7 +411,9 @@ namespace System.CommandLine.Tests
         {
             var console = new TestConsole();
 
-            var parser = new CommandLineBuilder(command).UseHelp().Build();
+            var parser = new CommandLineBuilder(command)
+                .UseHelp()
+                .Build();
 
             parser.Invoke("-h", console);
 

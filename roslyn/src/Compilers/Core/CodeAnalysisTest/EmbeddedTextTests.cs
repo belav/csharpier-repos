@@ -227,7 +227,10 @@ class Program
         public void FromBytes_SmallSpan()
         {
             var bytes = Encoding.UTF8.GetBytes(SmallSource);
-            var paddedBytes = new byte[] { 0 }.Concat(bytes).Concat(new byte[] { 0 }).ToArray();
+            var paddedBytes = new byte[] { 0 }
+                .Concat(bytes)
+                .Concat(new byte[] { 0 })
+                .ToArray();
             var checksum = SourceText.CalculateChecksum(
                 bytes,
                 0,
@@ -289,7 +292,10 @@ class Program
         public void FromBytes_LargeSpan()
         {
             var bytes = Encoding.Unicode.GetBytes(LargeSource);
-            var paddedBytes = new byte[] { 0 }.Concat(bytes).Concat(new byte[] { 0 }).ToArray();
+            var paddedBytes = new byte[] { 0 }
+                .Concat(bytes)
+                .Concat(new byte[] { 0 })
+                .ToArray();
             var checksum = SourceText.CalculateChecksum(
                 bytes,
                 0,
